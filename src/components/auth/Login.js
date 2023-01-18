@@ -25,51 +25,50 @@ const Login = () => {
   );
 
   useEffect(() => {
-    if (!isValid) {
-      return console.log('invalid');
+    if (isValid) {
+      const userInput = {
+        email,
+        password,
+      };
+      const options = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(userInput),
+      };
+      fetch(`${api.serverURL}/api/users/login`, options)
+        .then((res) => {
+          if (res.ok) {
+            return res.json();
+          }
+
+          return res.text().then((text) => {
+            throw new Error(text);
+          });
+        })
+        .then((data) => {
+          console.log(data.data);
+          const user = {
+            auth: true,
+            token: data.token,
+            name: data.data.name,
+            email: data.data.email,
+            country: data.data.country,
+            id: data.data._id,
+            cards: data.data.cards,
+            date: data.data.date,
+            messages: data.data.messages,
+          };
+          setUser(user);
+
+          localStorage.setItem('user', JSON.stringify(user));
+          history.push({
+            pathname: '/me',
+          });
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     }
-    const userInput = {
-      email,
-      password,
-    };
-    const options = {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(userInput),
-    };
-    fetch(`${api.serverURL}/api/users/login`, options)
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        }
-
-        return res.text().then((text) => {
-          throw new Error(text);
-        });
-      })
-      .then((data) => {
-        console.log(data.data);
-        const user = {
-          auth: true,
-          token: data.token,
-          name: data.data.name,
-          email: data.data.email,
-          country: data.data.country,
-          id: data.data._id,
-          cards: data.data.cards,
-          date: data.data.date,
-          messages: data.data.messages,
-        };
-        setUser(user);
-
-        localStorage.setItem('user', JSON.stringify(user));
-        history.push({
-          pathname: '/me',
-        });
-      })
-      .catch((error) => {
-        console.log(error);
-      });
   }, [isValid]);
 
   return (

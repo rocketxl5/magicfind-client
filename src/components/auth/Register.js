@@ -38,29 +38,27 @@ const Register = () => {
   };
 
   useEffect(() => {
-    if (!isValid) {
-      return console.log('invalid');
+    if (isValid) {
+      const newUser = {
+        name,
+        email,
+        country,
+        password,
+      };
+      const options = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(newUser),
+      };
+      fetch(`${api.serverURL}/api/users`, options)
+        .then((res) => res.json())
+        .then((data) => {
+          console.log('data', data);
+
+          history.push('/login');
+        })
+        .catch((error) => console.log(error));
     }
-
-    const newUser = {
-      name,
-      email,
-      country,
-      password,
-    };
-    const options = {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(newUser),
-    };
-    fetch(`${api.serverURL}/api/users`, options)
-      .then((res) => res.json())
-      .then((data) => {
-        console.log('data', data);
-
-        history.push('/login');
-      })
-      .catch((error) => console.log(error));
   }, [isValid]);
 
   return (
