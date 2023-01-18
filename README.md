@@ -5,6 +5,7 @@ path -> src/components/auth
 Login, 
 Register, 
 path -> src/components/views
+AddCard,
 CartItem, 
 CatalogItem, 
 ModifyCard, 
