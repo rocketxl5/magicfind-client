@@ -78,7 +78,7 @@ const Message = () => {
       }),
     };
 
-    fetch('/api/messages', options)
+    fetch(`${api.serverURL}/api/messages`, options)
       .then((res) => res.json())
       .then((data) => {
         // Reinitialize states
