@@ -3,7 +3,7 @@ import React, {
   Fragment,
   useState,
   useEffect,
-  useRef
+  useRef,
 } from 'react';
 import { useLocation, useHistory, useParams } from 'react-router-dom';
 import StoreItem from './StoreItem';
@@ -14,6 +14,7 @@ import { UserContext } from '../../contexts/UserContext';
 import { SearchContext } from '../../contexts/SearchContext';
 import { PathContext } from '../../contexts/PathContext';
 import { CardContext } from '../../contexts/CardContext';
+import { api } from '../../api/resources';
 import styled from 'styled-components';
 
 const SearchStore = () => {
@@ -146,7 +147,7 @@ const SearchStore = () => {
     headers.append('auth-token', user.token);
     const options = {
       method: 'GET',
-      headers: headers
+      headers: headers,
     };
 
     fetch(`/api/cards/${search}/${user.id}`, options)
@@ -176,7 +177,7 @@ const SearchStore = () => {
     headers.append('auth-token', user.token);
     const options = {
       method: 'GET',
-      headers: headers
+      headers: headers,
     };
     fetch(`/api/cards/${user.id}`, options)
       .then((res) => res.json())

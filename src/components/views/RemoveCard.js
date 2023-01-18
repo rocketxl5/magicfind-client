@@ -3,6 +3,7 @@ import { Link, useLocation, useHistory } from 'react-router-dom';
 import { FiArrowLeftCircle } from 'react-icons/fi';
 import { UserContext } from '../../contexts/UserContext';
 import { CardContext } from '../../contexts/CardContext';
+import { api } from '../../api/resources';
 import styled from 'styled-components';
 
 const Remove = () => {
@@ -20,12 +21,12 @@ const Remove = () => {
     headers.append('auth-token', token);
     const input = {
       cardID: card._id,
-      userID: user.id
+      userID: user.id,
     };
     const options = {
       method: 'DELETE',
       headers: headers,
-      body: JSON.stringify(input)
+      body: JSON.stringify(input),
     };
     fetch(`/api/cards/`, options)
       .then((res) => res.json())
@@ -35,8 +36,8 @@ const Remove = () => {
         history.push({
           pathname: '/store',
           state: {
-            message: 'Card successfully deleted'
-          }
+            message: 'Card successfully deleted',
+          },
         });
       })
       .catch((error) => console.log('error', error));

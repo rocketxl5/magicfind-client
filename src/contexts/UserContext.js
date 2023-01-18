@@ -1,4 +1,5 @@
 import React, { createContext, useState, useEffect } from 'react';
+import { api } from '../api/resources';
 
 export const UserContext = createContext(null);
 
@@ -20,7 +21,7 @@ export const UserProvider = ({ children }) => {
 
       const options = {
         method: 'GET',
-        headers: headers
+        headers: headers,
       };
 
       fetch(`/api/messages/unread/${user.id}`, options)

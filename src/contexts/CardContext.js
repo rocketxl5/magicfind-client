@@ -2,6 +2,8 @@ import React, { createContext, useContext, useState, useEffect } from 'react';
 import { UserContext } from './UserContext';
 import { SearchContext } from './SearchContext';
 import { PathContext } from './PathContext';
+import { api } from '../api/resources';
+
 export const CardContext = createContext(null);
 // Prevents access to add-card component if a card  hasen't been selected
 // previously. This means a search has been done in the search-api view
@@ -42,7 +44,7 @@ export const CardProvider = ({ children }) => {
       headers.append('auth-token', token);
       const options = {
         method: 'GET',
-        headers: headers
+        headers: headers,
       };
       fetch(`/api/cards/${id}`, options)
         .then((res) => res.json())
@@ -66,7 +68,7 @@ export const CardProvider = ({ children }) => {
         loading,
         setLoading,
         tracker,
-        setTracker
+        setTracker,
       }}
     >
       {children}

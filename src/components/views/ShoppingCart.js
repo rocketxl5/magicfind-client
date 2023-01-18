@@ -4,6 +4,7 @@ import { FiPlusCircle, FiMinusCircle, FiTrash2 } from 'react-icons/fi';
 import CartItem from './CartItem';
 import { UserContext } from '../../contexts/UserContext';
 import { ShoppingCartContext } from '../../contexts/ShoppingCartContext';
+import { api } from '../../api/resources';
 import styled from 'styled-components';
 
 function ShoppingCart() {
@@ -35,15 +36,15 @@ function ShoppingCart() {
     } else {
       const input = {
         userID: user.id,
-        cartItems: cartItems
+        cartItems: cartItems,
       };
       const options = {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
-          'auth-token': user.token
+          'auth-token': user.token,
         },
-        body: JSON.stringify(input)
+        body: JSON.stringify(input),
       };
 
       fetch(`/api/cart/`, options)

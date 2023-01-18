@@ -3,6 +3,7 @@ import { useLocation, useHistory } from 'react-router-dom';
 import CardListing from './CardListing';
 import { UserContext } from '../../contexts/UserContext';
 import { CardContext } from '../../contexts/CardContext';
+import { api } from '../../api/resources';
 
 const Modify = () => {
   const history = useHistory();
@@ -26,7 +27,7 @@ const Modify = () => {
         price: parseFloat(card.price),
         comment: card.comment,
         userID: card.user_id,
-        cardID: card._id
+        cardID: card._id,
       };
       const headers = new Headers();
       headers.append('Content-Type', 'application/json');
@@ -34,7 +35,7 @@ const Modify = () => {
       const options = {
         method: 'PATCH',
         headers: headers,
-        body: JSON.stringify(updates)
+        body: JSON.stringify(updates),
       };
       fetch(`/api/cards/modify`, options)
         .then((res) => res.json())
@@ -44,8 +45,8 @@ const Modify = () => {
           history.push({
             pathname: '/store',
             state: {
-              message: 'Card successfully updated'
-            }
+              message: 'Card successfully updated',
+            },
           });
         })
         .catch((error) => console.log('error', error));

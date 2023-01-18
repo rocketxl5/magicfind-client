@@ -2,6 +2,7 @@ import React, { Fragment, useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import useRegister from '../hooks/useRegister';
 import validate from '../utilities/validateRegister';
+import { api } from '../../api/resources';
 import styled from 'styled-components';
 
 const Register = () => {
@@ -45,12 +46,12 @@ const Register = () => {
       name,
       email,
       country,
-      password
+      password,
     };
     const options = {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(newUser)
+      body: JSON.stringify(newUser),
     };
     fetch('/api/users', options)
       .then((res) => res.json())

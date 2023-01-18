@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom';
 import useLogin from '../hooks/useLogin';
 import validate from '../utilities/validateLogin';
 import { UserContext } from '../../contexts/UserContext';
+import { api } from '../../api/resources';
 import styled from 'styled-components';
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -29,12 +30,12 @@ const Login = () => {
     }
     const userInput = {
       email,
-      password
+      password,
     };
     const options = {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(userInput)
+      body: JSON.stringify(userInput),
     };
     fetch('/api/users/login', options)
       .then((res) => {
@@ -57,13 +58,13 @@ const Login = () => {
           id: data.data._id,
           cards: data.data.cards,
           date: data.data.date,
-          messages: data.data.messages
+          messages: data.data.messages,
         };
         setUser(user);
 
         localStorage.setItem('user', JSON.stringify(user));
         history.push({
-          pathname: '/me'
+          pathname: '/me',
         });
       })
       .catch((error) => {

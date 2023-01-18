@@ -9,7 +9,7 @@ import Message from './Message';
 import getPath from '../../utilities/getPath';
 import { PathContext } from '../../../contexts/PathContext';
 import { UserContext } from '../../../contexts/UserContext';
-
+import { api } from '../../../api/resources';
 import styled from 'styled-components';
 
 const MailBox = () => {
@@ -50,7 +50,7 @@ const MailBox = () => {
 
       const options = {
         method: 'GET',
-        headers: headers
+        headers: headers,
       };
 
       fetch(`/api/messages/${path}/${user.id}`, options)

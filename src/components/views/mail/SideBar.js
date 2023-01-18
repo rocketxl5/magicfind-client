@@ -3,6 +3,7 @@ import { Link, useLocation, useHistory } from 'react-router-dom';
 import { FiTrash } from 'react-icons/fi';
 import getPath from '../../utilities/getPath';
 import { PathContext } from '../../../contexts/PathContext';
+import { api } from '../../../api/resources';
 import styled from 'styled-components';
 
 const SideBar = ({
@@ -11,7 +12,7 @@ const SideBar = ({
   setMessages,
   setLoading,
   messages,
-  user
+  user,
 }) => {
   const location = useLocation();
   const history = useHistory();
@@ -48,7 +49,7 @@ const SideBar = ({
     const updates = {
       userID: user.id,
       trashed: trashed,
-      path: path
+      path: path,
     };
     const headers = new Headers();
     headers.append('Content-type', 'application/json');
@@ -57,7 +58,7 @@ const SideBar = ({
     const options = {
       method: 'PATCH',
       headers: headers,
-      body: JSON.stringify(updates)
+      body: JSON.stringify(updates),
     };
 
     fetch(`/api/messages/`, options)
@@ -84,7 +85,7 @@ const SideBar = ({
 
     const updates = {
       userID: user.id,
-      toBeDeleted: deleted
+      toBeDeleted: deleted,
     };
     const headers = new Headers();
     headers.append('Content-type', 'application/json');
@@ -93,7 +94,7 @@ const SideBar = ({
     const options = {
       method: 'DELETE',
       headers: headers,
-      body: JSON.stringify(updates)
+      body: JSON.stringify(updates),
     };
 
     fetch(`/api/messages/delete`, options)
@@ -138,7 +139,7 @@ const SideBar = ({
             <Link
               style={{
                 border:
-                  location.pathname.includes('inbox') && '1px solid #e1e8ed'
+                  location.pathname.includes('inbox') && '1px solid #e1e8ed',
               }}
               to="/mail/inbox"
             >
@@ -149,7 +150,7 @@ const SideBar = ({
             <Link
               style={{
                 border:
-                  location.pathname.includes('unread') && '1px solid #e1e8ed'
+                  location.pathname.includes('unread') && '1px solid #e1e8ed',
               }}
               to="/mail/unread"
             >
@@ -160,7 +161,7 @@ const SideBar = ({
             <Link
               style={{
                 border:
-                  location.pathname.includes('sent') && '1px solid #e1e8ed'
+                  location.pathname.includes('sent') && '1px solid #e1e8ed',
               }}
               to="/mail/sent"
             >
@@ -171,7 +172,7 @@ const SideBar = ({
             <Link
               style={{
                 border:
-                  location.pathname.includes('trash') && '1px solid #e1e8ed'
+                  location.pathname.includes('trash') && '1px solid #e1e8ed',
               }}
               to="/mail/trash"
             >

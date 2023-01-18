@@ -5,7 +5,7 @@ import timestampConverter from '../../utilities/timestampConverter';
 import getPath from '../../utilities/getPath';
 import { PathContext } from '../../../contexts/PathContext';
 import { UserContext } from '../../../contexts/UserContext';
-
+import { api } from '../../../api/resources';
 import styled from 'styled-components';
 
 const Message = ({ currentMessage, setMessages, setLoading }) => {
@@ -30,7 +30,7 @@ const Message = ({ currentMessage, setMessages, setLoading }) => {
     const updates = {
       userID: user.id,
       messageID: currentMessage._id,
-      isReadStatus: status
+      isReadStatus: status,
     };
     const headers = new Headers();
     headers.append('Content-type', 'application/json');
@@ -39,7 +39,7 @@ const Message = ({ currentMessage, setMessages, setLoading }) => {
     const options = {
       method: 'PATCH',
       headers: headers,
-      body: JSON.stringify(updates)
+      body: JSON.stringify(updates),
     };
     fetch(`/api/messages/read`, options)
       .then((res) => res.json())
@@ -66,7 +66,7 @@ const Message = ({ currentMessage, setMessages, setLoading }) => {
       userID: user.id,
       messageID: currentMessage._id,
       isSentMessage: currentMessage.isSent,
-      isTrashStatus: status
+      isTrashStatus: status,
     };
     const headers = new Headers();
     headers.append('Content-type', 'application/json');
@@ -75,7 +75,7 @@ const Message = ({ currentMessage, setMessages, setLoading }) => {
     const options = {
       method: 'PATCH',
       headers: headers,
-      body: JSON.stringify(updates)
+      body: JSON.stringify(updates),
     };
     fetch(`/api/messages/trash`, options)
       .then((res) => res.json())
@@ -95,7 +95,7 @@ const Message = ({ currentMessage, setMessages, setLoading }) => {
 
     const updates = {
       userID: user.id,
-      toBeDeleted: deleted
+      toBeDeleted: deleted,
     };
     const headers = new Headers();
     headers.append('Content-type', 'application/json');
@@ -104,7 +104,7 @@ const Message = ({ currentMessage, setMessages, setLoading }) => {
     const options = {
       method: 'DELETE',
       headers: headers,
-      body: JSON.stringify(updates)
+      body: JSON.stringify(updates),
     };
 
     fetch(`/api/messages/delete`, options)

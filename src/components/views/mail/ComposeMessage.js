@@ -5,6 +5,7 @@ import { UserContext } from '../../../contexts/UserContext';
 import validate from '../../utilities/validateMessage';
 import getPath from '../../utilities/getPath';
 import useMessage from '../../hooks/useMessage';
+import { api } from '../../../api/resources';
 import styled from 'styled-components';
 
 const Message = () => {
@@ -73,8 +74,8 @@ const Message = () => {
         text,
         isReply,
         messageID,
-        threadID
-      })
+        threadID,
+      }),
     };
 
     fetch('/api/messages', options)

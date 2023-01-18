@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import styled from 'styled-components';
 import { ShoppingCartContext } from '../../contexts/ShoppingCartContext';
+import { api } from '../../api/resources';
 
 const CartItem = ({ item, setIsUpdating }) => {
   const [loading, setLoading] = useState(false);
@@ -19,7 +20,7 @@ const CartItem = ({ item, setIsUpdating }) => {
       setIsUpdating(true);
       const options = {
         method: 'GET',
-        header: { 'Content-Type': 'application/json' }
+        header: { 'Content-Type': 'application/json' },
       };
 
       fetch(
