@@ -5,6 +5,7 @@ import CardListing from './CardListing';
 import { UserContext } from '../../contexts/UserContext';
 import { CardContext } from '../../contexts/CardContext';
 import { PathContext } from '../../contexts/PathContext';
+import { api } from '../../api/resources';
 import styled from 'styled-components';
 
 const AddCard = () => {
@@ -51,7 +52,7 @@ const AddCard = () => {
         headers: headers,
         body: JSON.stringify(newCard),
       };
-      fetch('/api/cards', options)
+      fetch(`${api.serverURL}/api/cards`, options)
         .then((res) => res.json())
         .then((data) => {
           console.log(data);

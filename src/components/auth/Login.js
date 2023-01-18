@@ -37,7 +37,7 @@ const Login = () => {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(userInput),
     };
-    fetch('/api/users/login', options)
+    fetch(`${api.serverURL}/api/users/login`, options)
       .then((res) => {
         if (res.ok) {
           return res.json();

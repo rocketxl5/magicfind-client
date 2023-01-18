@@ -28,7 +28,7 @@ const Remove = () => {
       headers: headers,
       body: JSON.stringify(input),
     };
-    fetch(`/api/cards/`, options)
+    fetch(`${api.serverURL}/api/cards/`, options)
       .then((res) => res.json())
       .then((data) => {
         console.log(data);

@@ -3,7 +3,7 @@ import React, {
   useContext,
   useState,
   useEffect,
-  useRef
+  useRef,
 } from 'react';
 import { useLocation } from 'react-router-dom';
 import Card from './Card';
@@ -13,6 +13,7 @@ import { FiXCircle } from 'react-icons/fi';
 import { SearchContext } from '../../contexts/SearchContext';
 import { PathContext } from '../../contexts/PathContext';
 import { CardContext } from '../../contexts/CardContext';
+import { api } from '../../api/resources';
 import styled from 'styled-components';
 
 const Search = () => {
@@ -104,7 +105,7 @@ const Search = () => {
     // console.log(sanitizeString(searchTerm));
     const headers = { method: 'GET' };
     fetch(
-      `https://api.scryfall.com/cards/named?exact=${sanitizeString(searching)}`,
+      `${api.skryfallURL}/cards/named?exact=${sanitizeString(searching)}`,
       headers
     )
       // https://api.scryfall.com/cards/search?order=released&q=oracleid%3A0c2841bb-038c-4fbf-8360-bc0a1522b58d&unique=prints
@@ -198,7 +199,7 @@ const Search = () => {
 
       const headers = { method: 'GET' };
       fetch(
-        `https://api.scryfall.com/cards/search?order=released&q=oracleid%3A${oracleID}&unique=prints`,
+        `${api.skryfallURL}/cards/search?order=released&q=oracleid%3A${oracleID}&unique=prints`,
         headers
       )
         .then((res) => res.json())

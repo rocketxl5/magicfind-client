@@ -64,7 +64,7 @@ const CatalogItem = ({ card }) => {
       },
     };
     fetch(
-      `/api/catalog/${card.name}/${card._id}/${card.quantity_selected}`,
+      `${api.serverURL}/api/catalog/${card.name}/${card._id}/${card.quantity_selected}`,
       options
     )
       .then((res) => res.json())

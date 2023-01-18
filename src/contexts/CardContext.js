@@ -24,7 +24,7 @@ export const CardProvider = ({ children }) => {
       // setLoading(true);
 
       const headers = { method: 'GET' };
-      fetch(`https://api.scryfall.com/catalog/card-names`, headers)
+      fetch(`${api.skryfallURL}/catalog/card-names`, headers)
         .then((res) => res.json())
         .then((data) => {
           setApiCardNames(data.data);
@@ -46,7 +46,7 @@ export const CardProvider = ({ children }) => {
         method: 'GET',
         headers: headers,
       };
-      fetch(`/api/cards/${id}`, options)
+      fetch(`${api.serverURL}/api/cards/${id}`, options)
         .then((res) => res.json())
         .then((data) => {
           setUserStoreContent(data.data);

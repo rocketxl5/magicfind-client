@@ -47,7 +47,7 @@ function ShoppingCart() {
         body: JSON.stringify(input),
       };
 
-      fetch(`/api/cart/`, options)
+      fetch(`${api.serverURL}/api/cart/`, options)
         .then((res) => res.json())
         .then((data) => {
           // setLoading(false);

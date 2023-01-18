@@ -24,7 +24,7 @@ export const UserProvider = ({ children }) => {
         headers: headers,
       };
 
-      fetch(`/api/messages/unread/${user.id}`, options)
+      fetch(`${api.serverURL}/api/messages/unread/${user.id}`, options)
         .then((res) => res.json())
         .then((data) => {
           if (data.data) {

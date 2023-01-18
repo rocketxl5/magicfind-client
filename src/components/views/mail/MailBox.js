@@ -53,7 +53,7 @@ const MailBox = () => {
         headers: headers,
       };
 
-      fetch(`/api/messages/${path}/${user.id}`, options)
+      fetch(`${api.serverURL}/api/messages/${path}/${user.id}`, options)
         .then((res) => res.json())
         .then((data) => {
           if (data.data) {

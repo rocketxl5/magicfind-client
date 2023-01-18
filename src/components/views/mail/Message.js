@@ -41,7 +41,7 @@ const Message = ({ currentMessage, setMessages, setLoading }) => {
       headers: headers,
       body: JSON.stringify(updates),
     };
-    fetch(`/api/messages/read`, options)
+    fetch(`${api.serverURL}/api/messages/read`, options)
       .then((res) => res.json())
       .then((data) => {
         // Update path value to trigger useEffect in MailBox component to show updated list
@@ -77,7 +77,7 @@ const Message = ({ currentMessage, setMessages, setLoading }) => {
       headers: headers,
       body: JSON.stringify(updates),
     };
-    fetch(`/api/messages/trash`, options)
+    fetch(`${api.serverURL}/api/messages/trash`, options)
       .then((res) => res.json())
       .then((data) => {
         setLoading(false);
@@ -107,7 +107,7 @@ const Message = ({ currentMessage, setMessages, setLoading }) => {
       body: JSON.stringify(updates),
     };
 
-    fetch(`/api/messages/delete`, options)
+    fetch(`${api.serverURL}/api/messages/delete`, options)
       .then((res) => res.json())
       .then((data) => {
         console.log(data);

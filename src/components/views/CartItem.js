@@ -24,7 +24,7 @@ const CartItem = ({ item, setIsUpdating }) => {
       };
 
       fetch(
-        `/api/catalog/${item.name}/${item._id}/${item.quantity_selected}`,
+        `${api.serverURL}/api/catalog/${item.name}/${item._id}/${item.quantity_selected}`,
         options
       )
         .then((res) => res.json())

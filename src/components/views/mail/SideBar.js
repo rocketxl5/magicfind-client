@@ -61,7 +61,7 @@ const SideBar = ({
       body: JSON.stringify(updates),
     };
 
-    fetch(`/api/messages/`, options)
+    fetch(`${api.serverURL}/api/messages/`, options)
       .then((res) => res.json())
       .then((data) => {
         setLoading(false);
@@ -97,7 +97,7 @@ const SideBar = ({
       body: JSON.stringify(updates),
     };
 
-    fetch(`/api/messages/delete`, options)
+    fetch(`${api.serverURL}/api/messages/delete`, options)
       .then((res) => res.json())
       .then((data) => {
         // console.log(data);

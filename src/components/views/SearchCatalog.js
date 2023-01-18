@@ -96,7 +96,7 @@ const SearchCatalog = () => {
         method: 'GET',
         headers: headers,
       };
-      fetch(`/api/catalog`, options)
+      fetch(`${api.serverURL}/api/catalog`, options)
         .then((res) => res.json())
         .then((data) => {
           setResults(data.data);
@@ -160,7 +160,7 @@ const SearchCatalog = () => {
       headers: headers,
     };
 
-    fetch(`/api/catalog/${search}`, options)
+    fetch(`${api.serverURL}/api/catalog/${search}`, options)
       .then((res) => res.json())
       .then((data) => {
         // localStorage.setItem('searchCatalog', search);
