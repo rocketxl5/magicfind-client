@@ -5,11 +5,14 @@ import validate from '../utilities/validateLogin';
 import { UserContext } from '../../contexts/UserContext';
 import { api } from '../../api/resources';
 import styled from 'styled-components';
+
+import Spinner from '../layout/Spinner'
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isValid, setIsValid] = useState(false);
   const { setUser } = useContext(UserContext);
+  const [loading, setLoading] = useState(false)
 
   const history = useHistory();
 
@@ -25,7 +28,10 @@ const Login = () => {
   );
 
   useEffect(() => {
+    console.log(loading)
     if (isValid) {
+      setLoading(true);
+
       const userInput = {
         email,
         password,
@@ -42,11 +48,13 @@ const Login = () => {
           }
 
           return res.text().then((text) => {
+            setLoading(false)
             throw new Error(text);
           });
         })
         .then((data) => {
-          console.log(data.data);
+          // console.log(data.data);
+          setLoading(false)
           const user = {
             auth: true,
             token: data.token,
@@ -66,6 +74,7 @@ const Login = () => {
           });
         })
         .catch((error) => {
+          setLoading(false)
           console.log(error);
         });
     }
@@ -73,6 +82,10 @@ const Login = () => {
 
   return (
     <div className="form-container">
+      {loading ?
+        (
+          <Spinner />
+        ) : (
       <form className="form">
         <h2 className="page-title">Login</h2>
         <Error></Error>
@@ -114,6 +127,7 @@ const Login = () => {
           </div>
         </div>
       </form>
+        )}
     </div>
   );
 };
