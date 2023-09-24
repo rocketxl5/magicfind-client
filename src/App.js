@@ -27,6 +27,8 @@ import ModifyCard from './components/views/ModifyCard';
 import MailBox from './components/views/mail/MailBox';
 import { UserContext } from './contexts/UserContext';
 import { CardContext } from './contexts/CardContext';
+import './css/reset.css';
+import './css/utilities.css';
 import './App.css';
 
 const App = () => {

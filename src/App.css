@@ -1,11 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto');
 
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
 body {
   font-family: 'Roboto', sans-serif;
   font-size: 1rem;
@@ -16,15 +10,17 @@ body {
   margin: 0 auto;
 }
 
-#root {
-  /* margin-top: 7em; */
-}
-
 .container {
   width: 100%;
   margin-top: 3.5em;
   padding: 5em 1em;
   min-height: 91vh;
+}
+
+.spinner {
+  display: block;
+  width: 200px;
+  margin-inline: auto;
 }
 
 h2 {
