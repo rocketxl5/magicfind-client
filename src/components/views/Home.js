@@ -9,12 +9,12 @@ const Home = () => {
   console.log(user);
   return (
     <section className="section col-12 home-page">
-      <div className="section-title center">
-        <h2>Welcome to Magic Find</h2>
-      </div>
+
+      <h2 className="section-title">Welcome to Magic Find</h2>
+
       <div className="section-content">
         <div className="article">
-          <h2 className="article-title center">What it is</h2>
+          <h2 className="article-title">What it is</h2>
           <div className="article-body">
             <p>
               Magic Find is the only dedicated place where you can buy and sell
@@ -75,6 +75,9 @@ const Home = () => {
             <p>
               The Front End is built with <strong>React</strong>. It uses hooks and contexts to maintain
               and manage components state. All features are fully <strong>responsive</strong>.
+            </p>
+            <br />
+            <p>
               The Back End is built with <strong>Express.js</strong>. Requests are made to a no SQL <strong>mongoDB Atlas</strong> data base.
               Populating a store is made through a series of requests to the <a to="https://scryfall.com/docs/api" target="_blank" title="scryfall api docs"><strong>scryfall api</strong></a>.
             </p>
