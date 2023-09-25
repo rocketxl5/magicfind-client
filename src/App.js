@@ -28,10 +28,10 @@ import MailBox from './components/views/mail/MailBox';
 import { UserContext } from './contexts/UserContext';
 import { CardContext } from './contexts/CardContext';
 import './css/reset.css';
-import './css/utilities.css';
-import './css/form.css';
 import './App.css';
+import './css/utilities.css';
 import './css/style.css';
+import './css/form.css';
 
 const App = () => {
   const { user } = useContext(UserContext);

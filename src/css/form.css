@@ -14,12 +14,6 @@ input:-webkit-autofill:active{
     margin-block-start: 5rem;
 }
 
-.form-logo {
-    /* background-color: var(--clr-bg-header); */
-    /* border-top-left-radius: 5px; 
-    border-top-right-radius: 5px;  */
-}
-
 .form-logo h1 * {
     color: var(--clr-body);
     line-height: 1;
