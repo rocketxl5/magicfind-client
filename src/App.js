@@ -29,7 +29,9 @@ import { UserContext } from './contexts/UserContext';
 import { CardContext } from './contexts/CardContext';
 import './css/reset.css';
 import './css/utilities.css';
+import './css/form.css';
 import './App.css';
+import './css/style.css';
 
 const App = () => {
   const { user } = useContext(UserContext);
@@ -38,7 +40,7 @@ const App = () => {
   return (
     <Router>
       <Header />
-      <section className="container">
+      <main className="wrapper">
         <Switch>
           <Route exact path="/">
             {!user ? <Home /> : <Redirect to="/me" />}
@@ -110,7 +112,7 @@ const App = () => {
             <NotFound />
           </Route>
         </Switch>
-      </section>
+      </main>
       <Footer />
     </Router>
   );
