@@ -1,31 +1,50 @@
 import React, { useState, useContext, useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
-import useLogin from '../hooks/useLogin';
-import validate from '../utilities/validateLogin';
+import { Link, useHistory } from 'react-router-dom';
+import inputValidation from '../utilities/validateLogin';
+import baseURL from '../utilities/baseURL';
+import useFormValidation from '../hooks/useFormValidation'
 import { UserContext } from '../../contexts/UserContext';
 import { api } from '../../api/resources';
-import styled from 'styled-components';
+import Spinner from '../layout/Spinner';
 
-import Spinner from '../layout/Spinner'
 const Login = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [input, setInput] = useState({});
+  const [loading, setLoading] = useState(false);
   const [isValid, setIsValid] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
+
+
   const { setUser } = useContext(UserContext);
-  const [loading, setLoading] = useState(false)
 
   const history = useHistory();
 
   const callback = (values) => {
-    setEmail(values.email);
-    setPassword(values.password);
-    setIsValid(true);
-  };
+    // console.log('values', values)
+    // console.log('isValid', isValid)
+    setInput(values)
+    setIsValid(true)
+  }
 
-  const { handleChange, values, handleClick, errors } = useLogin(
+  const { handleChange, handleFocus, handleBlur, handleSubmit, setValues, values, errors } = useFormValidation(
     callback,
-    validate
-  );
+    inputValidation,
+    {
+      email: '',
+      password: ''
+    }
+  )
+
+  const handleClick = (e) => {
+    // Prevents firing form
+    e.preventDefault()
+    !showPassword ? setShowPassword(true) : setShowPassword(false)
+  }
+
+  // Show/hide password
+  useEffect(() => {
+    document.querySelector('#password').type = showPassword ? 'text' : 'password'
+  }, [showPassword])
 
   useEffect(() => {
     console.log(loading)
@@ -33,9 +52,9 @@ const Login = () => {
       setLoading(true);
 
       const userInput = {
-        email,
-        password,
-      };
+        email: input.email,
+        password: input.password
+      }
       const options = {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -75,65 +94,70 @@ const Login = () => {
         })
         .catch((error) => {
           setLoading(false)
+          setValues({
+            email: '',
+            password: ''
+          })
           console.log(error);
         });
     }
   }, [isValid]);
 
   return (
-    <div className="form-container">
+    <div className="container flex justify-center">
       {loading ?
         (
           <Spinner />
         ) : (
-      <form className="form">
-        <h2 className="page-title">Login</h2>
-        <Error></Error>
-        <div className="form-element">
-          {errors.email ? (
-            <p className="error">{errors.email}</p>
-          ) : (
-            <label htmlFor="email">Email:</label>
-          )}
-          <input
-            className={errors.email && 'empty-field'}
-            id="email"
-            type="text"
-            name="email"
-            value={values.email}
-            onChange={handleChange}
-            placeholder="Email"
-          />
-        </div>
-        <div className="form-element">
-          {errors.password ? (
-            <p className="error">{errors.password}</p>
-          ) : (
-            <label htmlFor="password">Password:</label>
-          )}
-          <input
-            className={errors.password && 'empty-field'}
-            id="password"
-            type="password"
-            name="password"
-            value={values.password}
-            onChange={handleChange}
-            placeholder="Password"
-          />
-          <div className="item-buttons push-right">
-            <button className="item-button success" onClick={handleClick}>
-              Log In
-            </button>
+          <div className="form-content">
+            <form className="form login-form" onSubmit={handleSubmit}>
+              <h2 className="page-title">Log in to your account</h2>
+              <p className={errorMessage ? 'show-error-message' : 'hide'}></p>
+              <div className="form-element">
+                <label htmlFor="name">Email</label>
+                <input
+                  className={errors.email && 'input-error'}
+                  type="email"
+                  name="email"
+                  id="email"
+                  value={values.email}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  onFocus={handleFocus}
+                  placeholder={errors.email ? errors.email : "Email"} />
+              </div>
+              <div className="form-element">
+                <label htmlFor="password">Password</label>
+                <div className={`login-password center content-height flex ${errors.password && 'input-error'}`}>
+                  <input
+                    className={errors.password && 'input-error'}
+                    type="password"
+                    name="password"
+                    id="password"
+                    value={values.password}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    onFocus={handleFocus}
+                    placeholder={errors.password ? errors.password : "Password"}
+                  />
+                  <button className="password-btn flex align-center justify-center" onClick={handleClick}>
+                    <i className={!showPassword ? "fa-solid fa-eye" : "fa-solid fa-eye-slash"}></i>
+                  </button>
+                </div>
+              </div>
+              <div className="form-element flex justify-end">
+                <Link className="reset-password center" to="/reset-password">Forgot password?</Link>
+              </div>
+              <div className="form-element">
+                <Link className="link" to="/signup">Create account</Link>
+                <button className="login-btn btn" type="submit">Login</button>
+              </div>
+            </form>
           </div>
-        </div>
-      </form>
         )}
     </div>
-  );
-};
+  )
+}
 
-const Error = styled.div`
-  display: none;
-`;
 
 export default Login;

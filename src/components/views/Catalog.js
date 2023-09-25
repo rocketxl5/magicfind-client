@@ -1,7 +1,7 @@
 import React, { useContext, Fragment, useState, useEffect } from 'react';
 import { useParams, useLocation } from 'react-router-dom';
 import CatalogItem from './CatalogItem';
-import Spinner from '../layout/Spinner.js';
+import Spinner from '../layout/Spinner_old.js';
 import { FiXCircle } from 'react-icons/fi';
 
 import styled from 'styled-components';

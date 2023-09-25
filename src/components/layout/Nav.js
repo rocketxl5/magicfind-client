@@ -130,7 +130,7 @@ const Buttons = styled.div`
     margin-right: 1em;
     padding: 0.6em 0;
     color: #fff;
-    font-size: 1rem;
+   
     border: none;
   }
 `;

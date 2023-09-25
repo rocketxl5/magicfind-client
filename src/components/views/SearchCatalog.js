@@ -8,7 +8,7 @@ import React, {
 import { useLocation, useHistory } from 'react-router-dom';
 import StoreItem from './StoreItem';
 import SearchField from './SearchField';
-import Spinner from '../layout/Spinner.js';
+import Spinner from '../layout/Spinner_old.js';
 import { FiXCircle } from 'react-icons/fi';
 import { SearchContext } from '../../contexts/SearchContext';
 import { PathContext } from '../../contexts/PathContext';

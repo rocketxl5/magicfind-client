@@ -4,7 +4,7 @@ import SideBar from './SideBar';
 import MailHeader from './MailHeader';
 import Mail from './Mail';
 import ComposeMessage from './ComposeMessage';
-import Spinner from '../../layout/Spinner';
+import Spinner from '../../layout/Spinner_old';
 import Message from './Message';
 import getPath from '../../utilities/getPath';
 import { PathContext } from '../../../contexts/PathContext';
