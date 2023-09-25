@@ -52,20 +52,9 @@ li {
 
 /* Navigation styles */
 
-.header-mobile {
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 100;
-  width: 100%;
-  padding: 0.5em 1em;
-  background-color: var(--background);
-  display: flex;
-  align-items: center;
-  min-width: 300px;
-}
 
-.header {
+
+/* .header {
   position: fixed;
   min-height: 3.5em;
   top: 0;
@@ -73,9 +62,8 @@ li {
   z-index: 100;
   width: 100%;
   padding: 0.2em 1em;
-  /* margin-bottom: 50px; */
   background-color: var(--background);
-}
+} */
 
 /* Logo styles */
 .section--logo {
