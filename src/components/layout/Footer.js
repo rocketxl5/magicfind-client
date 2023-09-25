@@ -3,9 +3,9 @@ import React from 'react';
 const Footer = () => {
   return (
     <footer className="footer">
-      <div>
+      <p>
         Magic Find &bull; Copyright &copy; 2022 &bull; All Rights Reserved
-      </div>
+      </p>
     </footer>
   );
 };

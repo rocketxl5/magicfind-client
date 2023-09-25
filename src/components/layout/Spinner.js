@@ -1,19 +1,13 @@
-import React, { Fragment } from 'react';
-import spinner from './spinner.gif';
+import React from 'react';
 
 const Spinner = () => {
-  return (
-    <div className="container flex flex-column align-center col-12">
-      <div className="col-12 center">
-        <img
-          className="spinner"
-          src={spinner}
-          alt="Spinner"
-        />
-        <p>Retrieving your data...</p>
-      </div>
-    </div>
-  );
-};
+    return (
+        <div className="spinner">
+            <i className="fa fa-spinner fa-pulse fa-4x fa-fw spinner-icon"></i>
+            <p className="spinner-message">Please hold while we retrieve your data...</p>
+        </div>
+
+    )
+}
 
 export default Spinner;
