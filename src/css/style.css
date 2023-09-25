@@ -85,6 +85,7 @@ body {
 
 .article {
   margin-inline: auto;
+  flex-basis: 100%;
 }
 
 .article-title {
@@ -93,9 +94,40 @@ body {
 }
 
 .article-body {
+    min-height: 50vh;
     padding-block-start: 4rem;
     border-top: 1px solid var(--clr-light) 
 }
+
+/* Home page styles */
+.home-page .article-body {
+    position: relative;
+    display: block;
+}
+/* 
+.home-page .article-body::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 300px;
+    opacity: 0.05;
+    z-index: -1;
+} */
+
+/* .home-page .article:nth-of-type(1) .article-body::after {
+    background-image: url('../img/exclamation.png');
+}
+.home-page .article:nth-of-type(2) .article-body::after {
+    background-image: url('../img/bulb.png');
+}
+.home-page .article:nth-of-type(3) .article-body::after {
+    background-image: url('../img/cog.png');
+} */
 
 /* Footer styles */
 .footer {
