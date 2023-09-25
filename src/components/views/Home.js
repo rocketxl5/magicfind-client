@@ -71,9 +71,9 @@ const Home = () => {
               This gives members the power to add, update or delete the content of their virtual store.
               The same is true for their mailbox.
               The Front End is built with <strong>React</strong>. It uses hooks and contexts to maintain
-              and manage components state. Is is fully <strong>responsive</strong><div className=""></div>
+              and manage components state. All features are fully <strong>responsive</strong>.
               The Back End is built with <strong>Express.js</strong>. Requests are made to a no SQL <strong>mongoDB Atlas</strong> data base.
-              Populating a store is made through a series of requests to the <a href="https://scryfall.com/docs/api" target="_blank" title="scryfall api docs"><strong>scryfall api</strong></a>.
+              Populating a store is made through a series of requests to the <a to="https://scryfall.com/docs/api" target="_blank" title="scryfall api docs"><strong>scryfall api</strong></a>.
             </p>
           </div>
         </div>
