@@ -70,6 +70,9 @@ const Home = () => {
               Magic Find is a <strong>REST api</strong> with complete <strong>CRUD</strong> operations.
               This gives members the power to add, update or delete the content of their virtual store.
               The same is true for their mailbox.
+            </p>
+            <br />
+            <p>
               The Front End is built with <strong>React</strong>. It uses hooks and contexts to maintain
               and manage components state. All features are fully <strong>responsive</strong>.
               The Back End is built with <strong>Express.js</strong>. Requests are made to a no SQL <strong>mongoDB Atlas</strong> data base.

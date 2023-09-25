@@ -10,7 +10,7 @@
     --clr-success: rgb(34, 170, 68);
 
     /* font sizes */
-    --fs-xl: clamp(2rem, 1vw + 2rem, 2.5rem);
+    --fs-xl: clamp(2rem, calc(1vw + 2rem), 2.5rem);
     --fs-600: 2rem;
     --fs-500: 1.75rem;
     --fs-400: 1.5rem;
