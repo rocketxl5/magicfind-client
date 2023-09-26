@@ -21,28 +21,28 @@ const useForm = (callback, inputValidation, state) => {
             e.target.placeholder = `${name.charAt(0, 1).toUpperCase()}${name.substring(1)} is required`
         }
         // Check if username and/or email already exists in database
-        if (name === 'username' && value || name === 'email' && value) {
+        // if (name === 'username' && value || name === 'email' && value) {
 
-            const input = name === 'username' ? { username: value } : { email: value }
-            console.log(name)
+        //     const input = name === 'username' ? { username: value } : { email: value }
+        //     console.log(name)
 
-            const options = {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(input),
-            }
+        //     const options = {
+        //         method: 'POST',
+        //         headers: { 'Content-Type': 'application/json' },
+        //         body: JSON.stringify(input),
+        //     }
 
-            try {
-                fetch(`${baseURL()}/api/users/${name}`, options)
-                    .then((res) => res.json())
-                    .then((data) => console.log(data))
-                    .catch(error => {
-                        console.log(error)
-                    })
-            } catch (error) {
-                console.log(error)
-            }
-        }
+        //     try {
+        //         fetch(`${baseURL()}/api/users/${name}`, options)
+        //             .then((res) => res.json())
+        //             .then((data) => console.log(data))
+        //             .catch(error => {
+        //                 console.log(error)
+        //             })
+        //     } catch (error) {
+        //         console.log(error)
+        //     }
+        // }
     }
 
     const handleChange = (e) => {

@@ -5,7 +5,7 @@ const baseURL = () => {
         return 'https://reach-server.onrender.com'
     }
 
-    return ''
+    return 'https://reach-server.onrender.com'
 }
 
 export default baseURL

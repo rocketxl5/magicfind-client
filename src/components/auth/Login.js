@@ -1,7 +1,6 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import inputValidation from '../utilities/validateLogin';
-import baseURL from '../utilities/baseURL';
 import useFormValidation from '../hooks/useFormValidation'
 import { UserContext } from '../../contexts/UserContext';
 import { api } from '../../api/resources';
@@ -47,61 +46,78 @@ const Login = () => {
   }, [showPassword])
 
   useEffect(() => {
-    console.log(loading)
     if (isValid) {
       setLoading(true);
+
+      // if errorMessage already containes a message
+      // change errorMessage to empty string
+      if (errorMessage) {
+        setErrorMessage('')
+      }
 
       const userInput = {
         email: input.email,
         password: input.password
       }
+
+      console.log(userInput)
       const options = {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(userInput),
       };
-      fetch(`${api.serverURL}/api/users/login`, options)
+      try {
+        fetch(`${api.serverURL}/api/users/login`, options)
         .then((res) => {
           if (res.ok) {
             return res.json();
           }
 
-          return res.text().then((text) => {
+          // return res.text().then((text) => {
+          //   setLoading(false)
+          //   throw new Error(text);
+          // });
+          return res.json().then((data) => {
             setLoading(false)
-            throw new Error(text);
-          });
+            throw new Error(JSON.stringify(data))
+          })
         })
-        .then((data) => {
-          // console.log(data.data);
-          setLoading(false)
-          const user = {
-            auth: true,
-            token: data.token,
-            name: data.data.name,
-            email: data.data.email,
-            country: data.data.country,
-            id: data.data._id,
-            cards: data.data.cards,
-            date: data.data.date,
-            messages: data.data.messages,
-          };
-          setUser(user);
+          .then((data) => {
 
-          localStorage.setItem('user', JSON.stringify(user));
-          history.push({
-            pathname: '/me',
-          });
+            const user = {
+              ...data.user,
+              token: data.token
+            }
+
+            setLoading(false)
+            setUser(user);
+            localStorage.setItem('user', JSON.stringify(user));
+            history.push({
+              pathname: '/me',
+            });
         })
         .catch((error) => {
-          setLoading(false)
+          setErrorMessage(error.message)
           setValues({
             email: '',
             password: ''
           })
+          setIsValid(false)
+          setLoading(false)
           console.log(error);
         });
+      } catch (error) {
+        console.log(error)
+      }
     }
   }, [isValid]);
+
+  // error message handler
+  useEffect(() => {
+    if (errorMessage) {
+      document.querySelector('.show-error-message').innerHTML = errorMessage.replaceAll('"', '')
+    }
+  }, [errorMessage])
 
   return (
     <div className="container flex justify-center">
