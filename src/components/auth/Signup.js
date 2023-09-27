@@ -142,7 +142,7 @@ const Signup = () => {
                   id="password"
                   type="password"
                   name="password"
-                  value={!errors.matching_passwords ? values.password : ''}
+                  value={!errors.matching_passwords ? values.password : values.password}
                   onChange={handleChange}
                   onBlur={handleBlur}
                   onFocus={handleFocus}
@@ -156,7 +156,7 @@ const Signup = () => {
                   id="repeat_password"
                   type="text"
                   name="repeat_password"
-                  value={!errors.matching_passwords ? values.repeat_password : ''}
+                  value={!errors.matching_passwords ? values.repeat_password : values.repeat_password}
                   onChange={handleChange}
                   onBlur={handleBlur}
                   onFocus={handleFocus}
