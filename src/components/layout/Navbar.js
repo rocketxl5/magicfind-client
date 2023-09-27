@@ -1,24 +1,16 @@
-import React, { useState, useEffect, useContext } from 'react'
+import React from 'react'
 import { Link } from 'react-router-dom'
 import toggleClass from '../utilities/toggleClass'
-import animateMenu from '../utilities/animateMenu'
-import useSetBrowser from '../hooks/useSetBrowser'
 
-function Navbar() {
 
-    const { firefox, crios, target } = useSetBrowser()
+function Navbar({ isFirefox }) {
 
     return (
         <div className="navbar">
-            <input type="checkbox" id="mobile-nav" onChange={(e) => {
-                if (firefox) { toggleClass(target, 'checked') }
-                if (crios) {
-                    animateMenu(e, target)
-                }
-            }} />    
+            <input type="checkbox" id="mobile-nav" onChange={() => isFirefox && toggleClass(document.querySelector('header'), 'checked')} />   
             <nav>
                 <section className="left-side">
-                    <h1 className="logo">Reach</h1>
+                    <h1 className="logo">Magic</h1>
                     <ul>
                         <li><Link className="nav-link" to="#"><span>Home</span></Link></li>
                         <li><Link className="nav-link" to="#"><span>Team</span></Link></li>

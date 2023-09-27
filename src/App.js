@@ -33,6 +33,7 @@ import './css/reset.css';
 import './App.css';
 import './css/utilities.css';
 import './css/style.css';
+import './css/navbar.css';
 import './css/form.css';
 
 const App = () => {

@@ -43,7 +43,7 @@ body {
   background-color: var(--clr-bg-body);
 }
 
-.header-mobile {
+/* .header-mobile {
     position: fixed;
     top: 0;
     left: 0;
@@ -55,17 +55,17 @@ body {
     display: flex;
     align-items: center;
     min-width: 300px;
-  }
+  } */
 
-.header {
+.main-header {
   position: fixed;
-  min-height: 3.5em;
+  min-height: 4em;
   top: 0;
   left: 0;
   z-index: 100;
   width: 100%;
   padding: 0.2em 1em;
-  background-color: var(--background);
+  background-color: var(--clr-bg-body);
 }
 
 /* #root {
