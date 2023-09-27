@@ -19,8 +19,6 @@ const Login = () => {
   const history = useHistory();
 
   const callback = (values) => {
-    // console.log('values', values)
-    // console.log('isValid', isValid)
     setInput(values)
     setIsValid(true)
   }
@@ -97,16 +95,18 @@ const Login = () => {
             });
         })
         .catch((error) => {
+          setLoading(false)
           setErrorMessage(error.message)
           setValues({
             email: '',
             password: ''
           })
           setIsValid(false)
-          setLoading(false)
           console.log(error);
         });
       } catch (error) {
+        setLoading(false)
+        setErrorMessage(error.message);
         console.log(error)
       }
     }

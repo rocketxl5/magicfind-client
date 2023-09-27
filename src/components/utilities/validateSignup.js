@@ -1,4 +1,4 @@
-const validateRegister = (values) => {
+const validateSignup = (values) => {
   let errors = {};
 
   // Check for name
@@ -22,19 +22,18 @@ const validateRegister = (values) => {
   }
 
   // Check for password
-  if (!values.password2) {
-    errors.password2 = 'Password is Required';
+  if (!values.repeat_password) {
+    errors.repeat_password = 'Password is Required';
   }
 
   // Check if passwords match
-  if (values.password && values.password2) {
-    if (values.password !== values.password2) {
-      errors.password = "Passwords don't match";
-      errors.password2 = "Passwords don't match";
+  if (values.password && values.repeat_password) {
+    if (values.password !== values.repeat_password) {
+      errors.matching_passwords = 'Passwords do not match';
     }
   }
 
   return errors;
 };
 
-export default validateRegister;
+export default validateSignup;

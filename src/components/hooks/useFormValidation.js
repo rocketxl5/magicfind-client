@@ -1,11 +1,9 @@
 import { useState, useEffect } from 'react'
-import baseURL from '../utilities/baseURL'
 
 const useForm = (callback, inputValidation, state) => {
     const [values, setValues] = useState(state)
     const [errors, setErrors] = useState({})
     const [isSubmit, setIsSubmit] = useState(false)
-    const [isMatch, setIsMatch] = useState(false)
 
     const handleFocus = (e) => {
         if (e.target.classList.contains('input-error')) {
@@ -47,7 +45,6 @@ const useForm = (callback, inputValidation, state) => {
 
     const handleChange = (e) => {
         const { name, value } = e.target
-
         setValues({
             ...values,
             [name]: value
@@ -55,25 +52,26 @@ const useForm = (callback, inputValidation, state) => {
     }
 
     const handleSubmit = (e) => {
+        console.log(values)
         e.preventDefault()
         // Remove focus on input if any 
         // @ Enter key
         if (document.activeElement) {
             document.activeElement.blur()
         }
-        setIsMatch(values.password === values.repeat_password)
+
         setErrors(inputValidation(values))
         setIsSubmit(true)
     }
 
     useEffect(() => {
-
+        console.log(errors)
         if (Object.keys(errors).length === 0 && isSubmit) {
             callback(values)
         }
     }, [errors])
 
-    return { handleChange, handleFocus, handleBlur, handleSubmit, setValues, setIsSubmit, isMatch, values, errors }
+    return { handleChange, handleFocus, handleBlur, handleSubmit, setValues, setIsSubmit, values, errors }
 }
 
 export default useForm
