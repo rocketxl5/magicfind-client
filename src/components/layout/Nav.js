@@ -43,7 +43,7 @@ const Navbar = ({ innerWidth }) => {
               <Link to="/login">
                 <Login>Login</Login>
               </Link>
-              <Link to="/register">
+              <Link to="/signup">
                 <Register>Register</Register>
               </Link>
             </Buttons>

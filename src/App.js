@@ -6,7 +6,7 @@ import {
   Redirect
 } from 'react-router-dom';
 import Login from './components/auth/Login';
-import Register from './components/auth/Register';
+import Signup from './components/auth/Signup';
 import Settings from './components/auth/Settings';
 import Header from './components/layout/Header';
 import Footer from './components/layout/Footer';
@@ -54,8 +54,8 @@ const App = () => {
           <Route exact path="/login">
             {!user ? <Login /> : <Redirect to="/me" />}
           </Route>
-          <Route exact path="/register">
-            <Register />
+          <Route exact path="/signup">
+            <Signup />
           </Route>
           <Route exact path="/settings">
             {user ? <Settings /> : <Redirect to="/login" />}
