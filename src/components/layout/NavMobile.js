@@ -53,7 +53,7 @@ const Navbar = ({ navCheckBox, searchCheckbox }) => {
                 <Link to="/login">Login</Link>
               </li>
               <li>
-                <Link to="/register">Register</Link>
+                <Link to="/signup">Register</Link>
               </li>
               <li>
                 <Link to="/about">About</Link>
