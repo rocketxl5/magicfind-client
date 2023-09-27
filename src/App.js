@@ -8,6 +8,8 @@ import {
 import Login from './components/auth/Login';
 import Signup from './components/auth/Signup';
 import Settings from './components/auth/Settings';
+import ResetPassword from './components/auth/ResetPassword';
+import Success from './components/auth/Success';
 import Header from './components/layout/Header';
 import Footer from './components/layout/Footer';
 import Home from './components/views/Home';
@@ -53,6 +55,12 @@ const App = () => {
           </Route>
           <Route exact path="/login">
             {!user ? <Login /> : <Redirect to="/me" />}
+          </Route>
+          <Route exact path="/success">
+            <Success />
+          </Route>
+          <Route exact path="/reset-password">
+            <ResetPassword />
           </Route>
           <Route exact path="/signup">
             <Signup />

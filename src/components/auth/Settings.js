@@ -1,6 +1,6 @@
 import React from 'react';
 
-function Settings() {
+const Settings = () => {
   return <h2 className="page-title">Settings</h2>;
 }
 
