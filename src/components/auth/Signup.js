@@ -88,11 +88,11 @@ const Signup = () => {
           <Spinner />
         ) : (
           <div className="form-content">
-            <form className="form" onSubmit={handleSubmit}>
               <div className="form-title">
                 <h2>Create your account</h2>
               </div>
               <p className={errorMessage ? 'show-error-message' : 'hide'}></p>
+            <form className="form" onSubmit={handleSubmit}>
               <div className="form-element">
                 <label htmlFor="name">Username</label>
                 <input
