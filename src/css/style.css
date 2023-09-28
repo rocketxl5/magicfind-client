@@ -59,12 +59,13 @@ body {
 
 .main-header {
   position: fixed;
+  display: flex;
   min-height: 4em;
-  top: 0;
-  left: 0;
+  /* top: 0;
+  left: 0; */
   z-index: 100;
   width: 100%;
-  padding: 0.2em 1em;
+  padding-inline: 1em;
   background-color: var(--clr-bg-body);
 }
 
@@ -73,9 +74,12 @@ body {
 } */
 
 .wrapper {
+  position: relative;
   width: 100%;
-  padding-block-start: 3.5em;
-  min-height: calc(100vh - 3.5em);
+  /* padding-block-start: 4.5em; */
+  /*  */
+  /* min-height: calc(100vh - 4.5em); */
+  min-height: 100vh;
 }
 
 .container {
@@ -154,8 +158,9 @@ text-align: center;
 }
 
 @media screen and (width >= 1600px) {
-    body {
-        min-width: 20em;
+    .wrapper {
+        width: 80vw;
+        margin-inline: auto;
         font-size: var(--fs-400);
     }
 
