@@ -1,8 +1,9 @@
 import React, { useState, useContext, useEffect } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { Link, useHistory, useLocation } from 'react-router-dom';
 import inputValidation from '../utilities/validateLogin';
 import useFormValidation from '../hooks/useFormValidation'
 import { UserContext } from '../../contexts/UserContext';
+import { PathContext } from '../../contexts/PathContext';
 import { api } from '../../api/resources';
 import Spinner from '../layout/Spinner';
 
@@ -14,9 +15,14 @@ const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
 
 
+  const { setPath } = useContext(PathContext);
   const { setUser } = useContext(UserContext);
 
+  const location = useLocation();
   const history = useHistory();
+
+  // Setting path with component url pathname
+  setPath(location.pathname);
 
   const callback = (values) => {
     setInput(values)

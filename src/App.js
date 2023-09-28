@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useEffect, useContext } from 'react';
 import {
   BrowserRouter as Router,
   Route,
@@ -29,6 +29,7 @@ import ModifyCard from './components/views/ModifyCard';
 import MailBox from './components/views/mail/MailBox';
 import { UserContext } from './contexts/UserContext';
 import { CardContext } from './contexts/CardContext';
+import { PathContext } from './contexts/PathContext';
 import './css/reset.css';
 import './App.css';
 import './css/utilities.css';
@@ -37,12 +38,18 @@ import './css/navbar.css';
 import './css/form.css';
 
 const App = () => {
+
   const { user } = useContext(UserContext);
   const { cardContext } = useContext(CardContext);
+  const { path } = useContext(PathContext);
+
+  useEffect(() => {
+    console.log(path)
+  }, [path])
 
   return (
     <Router>
-      <Header />
+      {(path !== '/login' && path !== '/signup') && <Header />}
       <main className="wrapper">
         <Switch>
           <Route exact path="/">
