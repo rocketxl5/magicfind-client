@@ -94,6 +94,9 @@ const Signup = () => {
           <Spinner />
         ) : (
           <div className="form-content">
+            <div className="form-logo">
+              <Link to="/"><h1>Magic Find</h1></Link>
+            </div>
               <div className="form-title">
                 <h2>Create your account</h2>
               </div>

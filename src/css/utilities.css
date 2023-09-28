@@ -1,17 +1,27 @@
-.padding-1-inline {
+.padding-inline-1 {
     padding-inline: var(--size-1);
 }
 
-.padding-2-inline {
+.padding-inline-2 {
     padding-inline: var(--size-2);
 }
 
-.padding-2-block {
+.padding-block-2 {
     padding-block: var(--size-2);
 }
 
-.padding-3-block {
+.padding-block-3 {
     padding-block: var(--size-3);
+}
+
+.margin-block-start-1 {
+    margin-block-start: var(--size-1);
+}
+.margin-block-start-2 {
+    margin-block-start: var(--size-2);
+}
+.margin-block-start-3 {
+    margin-block-start: var(--size-3);
 }
 
 .red-border {

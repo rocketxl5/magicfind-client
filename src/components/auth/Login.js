@@ -132,11 +132,14 @@ const Login = () => {
           <Spinner />
         ) : (
           <div className="form-content">
-            <form className="form login-form" onSubmit={handleSubmit}>
-              <div className="form-title">
+            <div className="form-logo">
+              <Link to="/"><h1>Magic Find</h1></Link>
+            </div>
+            <div className="form-title">
                 <h2>Log in to your account</h2>
               </div>
               <p className={errorMessage ? 'show-error-message' : 'hide'}></p>
+            <form className="form" onSubmit={handleSubmit}>
               <div className="form-element">
                 <label htmlFor="name">Email</label>
                 <input
@@ -169,7 +172,7 @@ const Login = () => {
                   </button>
                 </div>
               </div>
-              <div className="form-element flex justify-end">
+              <div className="form-element flex justify-end margin-block-start-2">
                 <Link className="reset-password center" to="/reset-password">Forgot password?</Link>
               </div>
               <div className="form-element">

@@ -10,20 +10,34 @@ input:-webkit-autofill:active{
 
 .form-content {
     height: fit-content;
-    min-width: min(100%, 31em);
+    /* min-width: min(100%, 30em); */
+    min-width: 100%;
     margin-block-start: 5rem;
 }
 
-.form-logo h1 * {
-    color: var(--clr-body);
-    line-height: 1;
-    font-size: min(2rem + 2vw, 3rem);
+.form-logo {
+    width: fit-content;
+    margin-inline: auto;
+    margin-block-end: 3em;
+}
+
+.form-logo:hover {
+    opacity: 0.8;
+}
+
+.form-logo h1 {
+    padding-inline: 1em;
+    padding-block: 0.5em;
+    font-size: var(--fs-600);
     font-weight: 500;
+    color: var(--clr-body);
+    border: 1px solid var(--clr-header);
+    border-radius: 5px;
 }
 
 .form {
-    padding-inline: 2rem;
-    padding-block: 2rem;
+    padding-inline: 3rem;
+    padding-block: 3rem;
 }
 
 .form-title h2 {
@@ -50,7 +64,7 @@ form input {
 }
 
 .form-element input::placeholder {
-    color: var( --clr-bg-body);
+    color: var( --clr-header);
 }
 
 .form-element input:focus::placeholder {
@@ -107,6 +121,7 @@ form.search-catalog {
 .form-element:last-of-type {
     display: flex;
     gap: 2rem;
+    margin-block-start: 2em;
 }
 
 .form-element .btn {
@@ -114,13 +129,13 @@ form.search-catalog {
     padding-block: 1rem;
     font-size: var(--fs-500);
     font-weight: 500;
-    color: var(--clr-header);
+    color: var(--clr-bg-body);
     background-color: var(--clr-primary);
     border-radius: 5px;
     cursor: pointer;
 }
 
-.login-btn:hover {
+.btn:hover {
     opacity: 0.9;
 }
 
@@ -154,12 +169,12 @@ form.search-catalog {
 @media screen and (width >= 25em) {
     .form-element label,
     .form-element .link {
-        font-size: var(--fs-500);
+        /* font-size: var(--fs-500); */
     }
 
     .form-element input,
-    .form-element .login-btn {
-        font-size: var(--fs-600);
+    .form-element .btn {
+        /* font-size: var(--fs-600); */
     }
 
     .login-password i {

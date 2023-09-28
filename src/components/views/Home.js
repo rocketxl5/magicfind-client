@@ -1,16 +1,21 @@
-import React, { useContext } from 'react'
-import { Link } from 'react-router-dom'
+import React, { useEffect, useContext } from 'react'
+import { Link, useLocation } from 'react-router-dom'
 import { UserContext } from '../../contexts/UserContext'
+import { PathContext } from '../../contexts/PathContext';
 
 
 const Home = () => {
   const { user } = useContext(UserContext);
+  const { setPath } = useContext(PathContext);
+  const location = useLocation();
+
+  useEffect(() => {
+    setPath(location.pathname);
+  }, []);
 
   return (
     <section className="section col-12 home-page">
-
       <h2 className="section-title">Welcome to Magic Find</h2>
-
       <div className="section-content">
         <div className="article">
           <h2 className="article-title">What it is</h2>
