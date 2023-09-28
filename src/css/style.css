@@ -75,8 +75,9 @@ body {
 
 .wrapper {
   position: relative;
-  width: 100%;
-  min-height: 100vh;
+  min-width: 300px;
+  max-width: 100%;
+  min-height: calc(100vh - 3.5em);
 }
 
 .container {

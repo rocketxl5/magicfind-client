@@ -11,8 +11,8 @@ input:-webkit-autofill:active{
 .form-content {
     height: fit-content;
     /* min-width: min(100%, 30em); */
-    min-width: 100%;
-    margin-block-start: 5rem;
+    width: 100%;
+    padding-block-start: 5rem;
 }
 
 .form-logo {
@@ -36,7 +36,7 @@ input:-webkit-autofill:active{
 }
 
 .form {
-    padding-inline: 3rem;
+    padding-inline: 4rem;
     padding-block: 3rem;
 }
 
@@ -77,9 +77,11 @@ form.search-catalog {
     top: 4em;
     left: 0;
     width: 100%;
+    min-height: 4em;
     margin: 0 auto;
     padding-inline: 1em;
-    border-radius: 5px;
+    border-bottom: 1px solid var(--clr-header);
+    background-color: var(--clr-bg-body);
   }
 
 /* Login form-element*/
@@ -114,19 +116,18 @@ form.search-catalog {
     color: #c9c9c9;
 }
 
-.reset-password {
-    flex-basis: calc(50% - 1rem);
-}
 
 .form-element:last-of-type {
     display: flex;
-    gap: 2rem;
-    margin-block-start: 2em;
+    justify-content: space-between;
+    margin-block-start: 1rem;
 }
 
 .form-element .btn {
-    flex-basis: 100%;
+    width: 40%;
+    /* flex-basis: 100%; */
     padding-block: 1rem;
+    /* padding-inline: 2rem; */
     font-size: var(--fs-500);
     font-weight: 500;
     color: var(--clr-bg-body);
@@ -140,10 +141,10 @@ form.search-catalog {
 }
 
 .form-element .link {
-    flex-basis: 100%;
+    /* flex-basis: 100%; */
     align-self: center;
-    font-size: var(--fs-400);
-    padding-block: 5px;
+    font-size: var(--fs-300);
+    margin-inline-start: 1rem;
     text-align: center;
 }
 
@@ -166,7 +167,10 @@ form.search-catalog {
     color: var(--clr-danger) !important;
 }
 
-@media screen and (width >= 25em) {
+@media screen and (width >= 400px) {
+    .form-content {
+        width: 380px;
+    }
     .form-element label,
     .form-element .link {
         /* font-size: var(--fs-500); */
@@ -182,12 +186,12 @@ form.search-catalog {
     }
 }
 
-@media screen and (width >= 35em) {
+@media screen and (width >= 600px) {
+    form.search-catalog {
+        position:static;
+        border-bottom: none;
+    }
 
-    /* .form-content {
-        border-radius: 5px;
-        border: 1px solid var( --clr-bg-body);
-    } */
 }
 
 

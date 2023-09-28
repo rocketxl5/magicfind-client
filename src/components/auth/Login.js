@@ -172,8 +172,8 @@ const Login = () => {
                   </button>
                 </div>
               </div>
-              <div className="form-element flex justify-end margin-block-start-2">
-                <Link className="reset-password center" to="/reset-password">Forgot password?</Link>
+              <div className="form-element flex margin-block-start-2">
+                <Link className="link" to="/reset-password">Forgot password?</Link>
               </div>
               <div className="form-element">
                 <Link className="link" to="/signup">Create account</Link>

@@ -1,10 +1,14 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { UserContext } from '../../contexts/UserContext';
 import toggleClass from '../utilities/toggleClass';
-import { FiShoppingCart } from 'react-icons/fi';
+import MailBtn from './navbar/MailBtn';
+import SignupBtn from './navbar/SignupBtn';
+import SigninBtn from './navbar/SigninBtn';
+import ShoppingCartBtn from './navbar/ShoppingCartBtn';
 
 function Navbar({ isFirefox }) {
-
+    const { user } = useContext(UserContext)
     return (
         <div className="navbar">
             <input type="checkbox" id="mobile-nav" onChange={() => isFirefox && toggleClass(document.querySelector('header'), 'checked')} />   
@@ -19,11 +23,9 @@ function Navbar({ isFirefox }) {
                     </ul>
                 </section>
                 <section className="right-side">
-                    <Link className="btn-small" to="/login">Sign in</Link>
-                    <Link className="btn-small" to="/signup">Sign up</Link>
-                    <Link to="/shopping-cart" >
-                        <FiShoppingCart size={25} title="Shopping Cart" />
-                    </Link>
+                    {user ? (<MailBtn />) : (<><SigninBtn /> <SignupBtn /></>)}
+                    <ShoppingCartBtn />
+
                     <label htmlFor="mobile-nav" className="mobile-nav-label">
                         <span></span>
                     </label>

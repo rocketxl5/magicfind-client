@@ -176,6 +176,8 @@ import Logo from './Logo';
 const Header = () => {
   const [isFirefox, setIsFirefox] = useState(false);
 
+
+
   useEffect(() => {
     setIsFirefox(window.navigator.userAgent.includes('Firefox'));
   }, []);

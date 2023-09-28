@@ -1,4 +1,4 @@
-import React, { Fragment, useState, useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
 
 import AuthMenu from './AuthMenu';
@@ -28,7 +28,7 @@ const Navbar = ({ navCheckBox, searchCheckbox }) => {
   };
 
   return (
-    <Fragment>
+    <>
       <input
         type="checkbox"
         id="nav-toggle"
@@ -48,7 +48,7 @@ const Navbar = ({ navCheckBox, searchCheckbox }) => {
           onClick={(e) => handleClick(e)}
         >
           {!user ? (
-            <Fragment>
+            <>
               <li>
                 <Link to="/login">Login</Link>
               </li>
@@ -61,19 +61,19 @@ const Navbar = ({ navCheckBox, searchCheckbox }) => {
               <li>
                 <Link to="/contact">Contact</Link>
               </li>
-            </Fragment>
+            </>
           ) : (
-            <Fragment>
+              <>
               {display ? (
                 <AuthMenu setDisplay={setDisplay} setUser={setUser} />
               ) : (
                 ''
               )}
-            </Fragment>
+              </>
           )}
         </ul>
       </nav>
-    </Fragment>
+    </>
   );
 };
 
