@@ -32,7 +32,7 @@ input:-webkit-autofill:active{
 }
 
 .form-element {
-    padding-block-start: 3rem;
+    padding-block-start: 1rem;
 }
 
 .form-element label {
@@ -40,13 +40,13 @@ input:-webkit-autofill:active{
     padding-block-end: 0.5em;
 }
 
-.form-element input {
+form input {
     width: 100%;
-    padding: 1.25rem;
+    padding: 1rem;
     font-size: var(--fs-400);
     background-color: #fff;
     border-radius: 5px;
-    border: 1px solid var(--clr-bg-body);
+    border: 1px solid var(--clr-header);
 }
 
 .form-element input::placeholder {
@@ -57,10 +57,21 @@ input:-webkit-autofill:active{
     opacity: 0;
 }
 
-/* login form-element*/
+/* SearchCatalog form style */
+form.search-catalog {
+    position: absolute;
+    top: 4em;
+    left: 0;
+    width: 100%;
+    margin: 0 auto;
+    padding-inline: 1em;
+    border-radius: 5px;
+  }
+
+/* Login form-element*/
 .login-password {
     background-color: #fff;
-    border: 1px solid var(--clr-bg-body);
+    border: 1px solid var(--clr-header);
     border-radius: 5px;
 }
 
@@ -158,10 +169,10 @@ input:-webkit-autofill:active{
 
 @media screen and (width >= 35em) {
 
-    .form-content {
+    /* .form-content {
         border-radius: 5px;
         border: 1px solid var( --clr-bg-body);
-    }
+    } */
 }
 
 

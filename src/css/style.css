@@ -58,7 +58,7 @@ body {
   } */
 
 .main-header {
-  position: fixed;
+  position: relative;
   display: flex;
   min-height: 4em;
   /* top: 0;
@@ -76,9 +76,6 @@ body {
 .wrapper {
   position: relative;
   width: 100%;
-  /* padding-block-start: 4.5em; */
-  /*  */
-  /* min-height: calc(100vh - 4.5em); */
   min-height: 100vh;
 }
 

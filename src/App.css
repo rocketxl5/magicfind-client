@@ -311,10 +311,6 @@ input[type='email'] {
   border-width: 1px;
 } */
 
-input.search-field {
-  border: none;
-}
-
 .text-field:focus {
   /* border-color: #17a2bb;
   outline-color: #17a2bb; */
@@ -373,12 +369,11 @@ ul.search-result {
   cursor: pointer;
 }
 
-form.search-catalog {
+/* form.search-catalog {
   width: 100%;
   margin: 0 auto;
-  /* border: 1px solid #fff; */
   background: #fff;
-}
+} */
 
 /* User Page section blocks */
 main.user-page {

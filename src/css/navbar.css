@@ -59,7 +59,7 @@ nav .left-side .nav-link {
 nav .right-side {
     display: flex;
     align-items: center;
-    gap: 2rem;
+    gap: 1rem;
 }
 
 nav .right-side a:nth-of-type(2) {
@@ -74,7 +74,7 @@ nav .right-side a:nth-of-type(2) {
     position: relative;
     display: flex;
     align-items: center;
-    width: 3rem;
+    width: 2.5rem;
     height: 2em;
     padding-block: 1em;
     cursor: pointer;

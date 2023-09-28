@@ -75,7 +75,7 @@ const App = () => {
           <Route exact path="/add-card/:cardName">
             {cardContext ? <AddCard /> : <Redirect to="/search-api" />}
           </Route>
-          <Route exact path="/cart">
+          <Route exact path="/shopping-cart">
             <ShoppingCart />
           </Route>
           <Route exaxt path="/confirmation">

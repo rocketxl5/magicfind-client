@@ -169,16 +169,20 @@
 
 // export default Header;
 import React, { useState, useEffect } from 'react';
+import SearchCatalog from '../views/SearchCatalog';
 import Navbar from './Navbar';
+import Logo from './Logo';
 
 const Header = () => {
-  const [isFirefox, setIsFirefox] = useState(false)
+  const [isFirefox, setIsFirefox] = useState(false);
 
   useEffect(() => {
-    setIsFirefox(window.navigator.userAgent.includes('Firefox'))
-  }, [])
+    setIsFirefox(window.navigator.userAgent.includes('Firefox'));
+  }, []);
   return (
     <header className="main-header">
+      <Logo />
+      <SearchCatalog />
       <Navbar isFirefox={isFirefox} />
     </header>
   )
