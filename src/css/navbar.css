@@ -21,11 +21,14 @@
     display: flex;
 }
 
-.logo h1 {
+.logo a {
     align-self: center;
-    line-height: 1;
-    letter-spacing: .1rem;
-    font-size: min(2rem + 1vw, 3rem);
+}
+
+.logo h1 {
+        /* line-height: 1; */
+        letter-spacing: .1rem;
+        font-size: min(2rem + 1vw, 3rem);
 }
 
 nav {

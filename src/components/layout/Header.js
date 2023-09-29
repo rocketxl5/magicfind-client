@@ -176,11 +176,11 @@ import Logo from './Logo';
 const Header = () => {
   const [isFirefox, setIsFirefox] = useState(false);
 
-
-
+  // Check if browser is firefox
   useEffect(() => {
     setIsFirefox(window.navigator.userAgent.includes('Firefox'));
   }, []);
+
   return (
     <header className="main-header">
       <Logo />

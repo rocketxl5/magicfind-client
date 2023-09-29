@@ -26,7 +26,7 @@ const Mail = styled.div`
 
   a svg {
     display: block;
-    color: #fff;
+    color: #333;
   }
 `;
 

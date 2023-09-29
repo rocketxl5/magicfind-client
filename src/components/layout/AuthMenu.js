@@ -1,44 +1,52 @@
 // Dropdown menu available after successfull singin
-import React, { Fragment, useContext } from 'react';
+import React, { useContext } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { UserContext } from '../../contexts/UserContext';
 import { ShoppingCartContext } from '../../contexts/ShoppingCartContext';
-function AuthMenu({ setDisplay, setUser }) {
+import toggleClass from '../utilities/toggleClass';
+
+function AuthMenu({ user, setUser }) {
   const history = useHistory();
   const { setUnreadMail } = useContext(UserContext);
   const { setCartItems, setItemsCount } = useContext(ShoppingCartContext);
 
-  const singout = () => {
+  // Sign out user
+  const handleClick = () => {
     localStorage.clear();
     setUser(null);
     setUnreadMail(0);
     setCartItems([]);
-    setItemsCount(0);
+    setItemsCount(0);   
     history.push('/');
   };
   return (
-    <Fragment>
-      <li>
-        <Link onClick={(e) => setDisplay(false)} to="/store">
+    <ul>
+      <li >
+        <Link className="nav-link" to="/store">
           Store
         </Link>
       </li>
       <li>
-        <Link onClick={(e) => setDisplay(false)} to="/profile">
+        <Link className="nav-link" to="/profile">
           Profile
         </Link>
       </li>
       <li>
-        <Link onClick={(e) => setDisplay(false)} to="/settings">
+        <Link className="nav-link" to="/settings">
           Settings
         </Link>
       </li>
       <li>
-        <div className="signout" onClick={() => singout()}>
+        <div className="nav-link signout" onClick={handleClick}>
           Logout
         </div>
       </li>
-    </Fragment>
+      <li>
+        <Link className="nav-link" to="/signup">
+          Create Account
+        </Link>
+      </li>
+    </ul>
   );
 }
 

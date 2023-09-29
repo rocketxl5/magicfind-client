@@ -189,10 +189,13 @@ form.search-catalog {
 @media screen and (width >= 600px) {
     form.search-catalog {
         position:static;
+        align-self: center;
+        min-height: 0;
+        padding-inline: 0;  
         border-bottom: none;
     }
-
 }
+
 
 
 
