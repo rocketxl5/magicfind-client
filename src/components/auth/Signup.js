@@ -16,7 +16,10 @@ const Signup = () => {
   const location = useLocation();
   const history = useHistory();
 
-  setPath(location.pathname);
+  // Setting path with component url pathname onload
+  useEffect(() => {
+    setPath(location.pathname);
+  }, [])
 
   const callback = (values) => {
     setInput(values)

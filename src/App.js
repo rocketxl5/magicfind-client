@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from 'react';
+import React, { useContext } from 'react';
 import {
   BrowserRouter as Router,
   Route,
@@ -36,16 +36,13 @@ import './css/utilities.css';
 import './css/style.css';
 import './css/navbar.css';
 import './css/form.css';
+import './css/media-queries.css';
 
 const App = () => {
 
   const { user } = useContext(UserContext);
   const { cardContext } = useContext(CardContext);
   const { path } = useContext(PathContext);
-
-  useEffect(() => {
-    console.log(path)
-  }, [path])
 
   return (
     <Router>

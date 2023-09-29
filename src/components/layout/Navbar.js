@@ -1,9 +1,10 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { UserContext } from '../../contexts/UserContext';
 import toggleClass from '../utilities/toggleClass';
 import Menu from './Menu';
 import AuthMenu from './AuthMenu';
 import MailBtn from './navbar/MailBtn';
+import UserBtn from './navbar/UserBtn';
 import SignupBtn from './navbar/SignupBtn';
 import SigninBtn from './navbar/SigninBtn';
 import ShoppingCartBtn from './navbar/ShoppingCartBtn';
@@ -12,21 +13,29 @@ function Navbar({ isFirefox }) {
     const [display, setDisplay] = useState(true);
     const { user, setUser } = useContext(UserContext)
 
-    const handleChange = (e) => {
-        toggleClass(document.querySelector('header'), 'checked')
+    // Handle hamburger animation for firefox (has() css function not supported)
+    const handleChange = () => {
+        if (isFirefox) {
+            // Add/remove 'checked class name from main header
+            toggleClass(document.querySelector('.main-header'), 'checked');
+        }
     }
 
     const handleClick = (e) => {
-        console.log(e.target)
         if (e.target.classList.contains('nav-link')) {
+            // Uncheck checkbox to close mobile menu
             document.querySelector('.mobile-nav').checked = false;
+            if (isFirefox) {
+                // Remove 'checked' class from main header
+                toggleClass(document.querySelector('.main-header'), 'checked');
+            }
         }
     }
 
     return (
-        <div className="navbar" onClick={handleClick}>
-            <input type="checkbox" id="mobile-nav" className="mobile-nav" onChange={isFirefox && handleChange} />   
-            <nav>
+        <div className="navbar">
+            <input type="checkbox" id="mobile-nav" className="mobile-nav" onChange={handleChange} />
+            <nav onClick={handleClick}>
                 <section className="left-side">
                     {user ? (
                         <AuthMenu
@@ -39,14 +48,18 @@ function Navbar({ isFirefox }) {
                 </section>
                 <section className="right-side">
                     {user ? (
-                        <MailBtn />
+                        <>
+                            <MailBtn />
+                            <UserBtn />
+                            <ShoppingCartBtn />
+                        </>
                     ) : (
                         <>
                             <SigninBtn />
                             <SignupBtn />
                         </>
                     )}
-                    <ShoppingCartBtn />
+
                     <label htmlFor="mobile-nav" className="mobile-nav-label">
                         <span></span>
                     </label>

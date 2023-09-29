@@ -150,55 +150,6 @@ text-align: center;
     display: block;
 }
 
-@media screen and (width >= 600px) {
-
-    .wrapper {
-        padding-block-start: 0;
-    }
-}
-
-@media screen and (width >= 750px) {
-
-    .section-content { 
-        flex-direction: row;
-        align-items: flex-start;
-    }
-}
-
-@media screen and (width >= 1600px) {
-    .wrapper {
-        width: 80vw;
-        margin-inline: auto;
-        font-size: var(--fs-400);
-    }
-
-    .section {
-        margin-block-start: 5rem;
-        padding-block: 3rem;
-    }
-
-    .section-content {
-        display: flex;
-        gap: 10rem;
-        margin-block-start: 5rem;
-    }
-
-    .article-title {
-        padding-block: 2rem;
-    }
-
-    .article {
-        padding-inline: 0;
-    }
-
-    .article-body {
-        min-height: 50vh;
-        padding-block-start: 4rem;
-    }
-
-       
-}
-
 /* Footer styles */
 .footer {
     display: flex;

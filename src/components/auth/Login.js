@@ -21,8 +21,10 @@ const Login = () => {
   const location = useLocation();
   const history = useHistory();
 
-  // Setting path with component url pathname
-  setPath(location.pathname);
+  // Setting path with component url pathname onload
+  useEffect(() => {
+    setPath(location.pathname);
+  }, []);
 
   const callback = (values) => {
     setInput(values)
@@ -64,7 +66,6 @@ const Login = () => {
         password: input.password
       }
 
-      console.log(userInput)
       const options = {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -101,19 +102,17 @@ const Login = () => {
             });
         })
         .catch((error) => {
-          setLoading(false)
-          setErrorMessage(error.message)
+          setLoading(false);
+          setErrorMessage(error.message);
           setValues({
             email: '',
             password: ''
           })
-          setIsValid(false)
-          console.log(error);
+          setIsValid(false);
         });
       } catch (error) {
-        setLoading(false)
+        setLoading(false);
         setErrorMessage(error.message);
-        console.log(error)
       }
     }
   }, [isValid]);

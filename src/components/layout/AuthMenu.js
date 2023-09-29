@@ -3,7 +3,6 @@ import React, { useContext } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { UserContext } from '../../contexts/UserContext';
 import { ShoppingCartContext } from '../../contexts/ShoppingCartContext';
-import toggleClass from '../utilities/toggleClass';
 
 function AuthMenu({ user, setUser }) {
   const history = useHistory();
@@ -40,11 +39,6 @@ function AuthMenu({ user, setUser }) {
         <div className="nav-link signout" onClick={handleClick}>
           Logout
         </div>
-      </li>
-      <li>
-        <Link className="nav-link" to="/signup">
-          Create Account
-        </Link>
       </li>
     </ul>
   );

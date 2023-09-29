@@ -167,34 +167,6 @@ form.search-catalog {
     color: var(--clr-danger) !important;
 }
 
-@media screen and (width >= 400px) {
-    .form-content {
-        width: 380px;
-    }
-    .form-element label,
-    .form-element .link {
-        /* font-size: var(--fs-500); */
-    }
-
-    .form-element input,
-    .form-element .btn {
-        /* font-size: var(--fs-600); */
-    }
-
-    .login-password i {
-        font-size: var(--fs-500);
-    }
-}
-
-@media screen and (width >= 600px) {
-    form.search-catalog {
-        position:static;
-        align-self: center;
-        min-height: 0;
-        padding-inline: 0;  
-        border-bottom: none;
-    }
-}
 
 
 

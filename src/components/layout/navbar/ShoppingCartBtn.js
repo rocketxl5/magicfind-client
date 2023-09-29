@@ -8,14 +8,12 @@ const ShoppingCartBtn = () => {
   const { itemsCount } = useContext(ShoppingCartContext);
   return (
     <Cart to="/shopping-cart">
-      <Link to="/shopping-cart">
         {itemsCount > 0 && (
           <CountContainer>
             <Count>{itemsCount}</Count>
           </CountContainer>
         )}
-        <FiShoppingCart size={27} title="Shopping Cart" />
-      </Link>
+      <FiShoppingCart size={27} title="Shopping Cart" />
     </Cart>
   )
 }
