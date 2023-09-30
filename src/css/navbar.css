@@ -15,8 +15,8 @@ nav {
 
 nav .left-side {
     height: 100%;
-    /* display: flex;
-    align-items: center; */
+    display: flex;
+    /* align-items: center; */
     /* display: flex; */
     /* justify-content: space-between; */
 }
@@ -27,10 +27,10 @@ nav .left-side ul {
     inset: var(--header-height) 0 0 100%;
     display: flex;
     flex-direction: column;
-    min-height: calc(100vh - 5em);
+    min-height: calc(100vh - var(--header-height));
     overflow-y: hidden;
     transition: 0.2s ease;
-    border-top: 1px solid var(--clr-grey);
+    /* border-top: 1px solid var(--clr-grey); */
     background-color: var(--clr-light);
 }
 
@@ -120,6 +120,6 @@ header.checked nav ul {
 /* Prevent header scrolling when menu is open on mobile */
 header:has(input:checked),
 header.checked {
-    position: sticky;
+    /* position: sticky; */
 }
 
