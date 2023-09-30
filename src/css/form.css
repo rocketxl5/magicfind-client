@@ -81,14 +81,15 @@ form input {
 .search-catalog {
     width: 100%;
     margin: 0 auto;
-    height: fit-content;
+
+    align-self: center;
     background-color: var(--clr-light);
     border-radius: 5px;
   }
 
 .search-catalog input[type=text] {
     border: none;
-    align-self: center;
+    min-height: 3.5rem;
     padding: 0.5rem;
 }
 

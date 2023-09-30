@@ -171,7 +171,8 @@
 import React, { useState, useEffect } from 'react';
 import SearchCatalog from '../views/SearchCatalog';
 import Navbar from './Navbar';
-import Logo from './Logo';
+// import Logo from './Logo';
+import LogoBtn from './navbar/LogoBtn';
 
 const Header = () => {
   const [isFirefox, setIsFirefox] = useState(false);
@@ -183,7 +184,7 @@ const Header = () => {
 
   return (
     <header className="main-header">
-      <Logo />
+      <LogoBtn />
       <SearchCatalog />
       <Navbar isFirefox={isFirefox} />
     </header>

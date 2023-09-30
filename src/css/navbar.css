@@ -7,20 +7,6 @@
     height: 100%;
 }
 
-.logo {
-    display: flex;
-}
-
-.logo a {
-    align-self: center;
-}
-
-.logo h1 {
-        /* line-height: 1; */
-        letter-spacing: .1rem;
-        font-size: var(--fs-250);
-}
-
 nav {
     display: flex;
     justify-content: space-between;
