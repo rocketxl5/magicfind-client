@@ -7,14 +7,14 @@
     }
 
     .mobile-nav-label {
-        display: none;
+        /* display: none; */
     }
 
-    .main-header {
+    /* .main-header {
         padding: 0 min(4vw, 2rem);
-    }
+    } */
 
-    nav {
+    /* nav {
         display: flex;
         justify-content: space-between;
         height: 100%;
@@ -42,23 +42,21 @@
         flex-basis: 100%;
         height: 100%;
         border: none;
-    }
+    } */
 
     /* Remove Create account link from list */
     nav .left-side li:last-child {
         display: none;
     }
 
-    nav .left-side .nav-link {
+    /* nav .left-side .nav-link {
         display: flex;
         align-items: center;
         height: 100%;
-        /* width: 100%; */
         padding:0;
         border: none;
-        /* font-size: clamp(1rem, .5rem + 1.5vw, 1.5rem); */
-    }
-
+    } */
+/* 
     nav .left-side span {
         position: relative;
         display: flex;
@@ -66,10 +64,9 @@
         height: 100%;
         padding-inline: 0.5rem;
         margin-inline: auto;
-        /* width: 100%; */
-    }
+    } */
 
-    nav .left-side span::after {
+    /* nav .left-side span::after {
         content: '';
         position: absolute;
         bottom: 0;
@@ -86,11 +83,11 @@
 
     nav .right-side {
         margin-inline-start: calc(1rem + 1vw);
-    }
+    } */
 
     nav .right-side a:nth-of-type(2) {
         display: inline-block;
-    }
+    } 
 }
 
 /* 960px */
@@ -128,7 +125,7 @@
 @media screen and (width >= 600px) {
     /* login and signup page */
     .wrapper {
-        /* padding-block-start: 0; */
+        padding-block-start: 0;
     }
 }
 
