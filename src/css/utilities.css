@@ -112,17 +112,12 @@
     margin-inline: auto;
 }
 
-
-.btn {
-    
-}
-
 .btn-small {
     display: inline-block;
     min-width: 5em;
     text-align: center;
     padding-block: 0.5rem;
-    color: var(--clr-body);
-    border: 1px solid var(--clr-header);
+    color: var(--clr-dark);
+    border: 1px solid var(--clr-grey);
     border-radius: 5px;
 }

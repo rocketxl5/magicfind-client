@@ -77,7 +77,7 @@
         left: 0;
         width: 0;
         height: 2px;
-        background-color: var(--clr-body);
+        background-color: var(--clr-dark);
         transition: width 0.1s;
     }
 
@@ -111,7 +111,7 @@
     }
 
     .login-password i {
-        font-size: var(--fs-500);
+        font-size: var(--fs-175);
     }
 }
 
@@ -121,7 +121,7 @@
     }
 
     .main-header {
-        border-bottom: 1px solid var(--clr-header);
+        border-bottom: 1px solid var(--clr-grey);
     }
 
     form.search-catalog {
@@ -156,7 +156,7 @@
     .wrapper {
         width: 80vw;
         margin-inline: auto;
-        font-size: var(--fs-400);
+        font-size: var(--fs-150);
     }
 
     .section {

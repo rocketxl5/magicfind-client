@@ -79,8 +79,8 @@ const Home = () => {
             </p>
             <br />
             <p>
-              The Back End is built with <strong>Express.js</strong>. Requests are made to a no SQL <strong>mongoDB Atlas</strong> data base.
-              Populating a store is made through a series of requests to the <a to="https://scryfall.com/docs/api" target="_blank" title="scryfall api docs"><strong>scryfall api</strong></a>.
+              The Back End is built with <strong><a href="https://expressjs.com/" target="_blank" title="Express website">Express</a></strong>. Requests are made to a no SQL <strong>mongoDB Atlas</strong> data base.
+              Populating a store is made through a series of requests to the <a href="https://scryfall.com/docs/api" target="_blank" title="scryfall api docs"><strong>scryfall api</strong></a>.
             </p>
           </div>
         </div>

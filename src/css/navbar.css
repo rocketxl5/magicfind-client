@@ -18,7 +18,7 @@
 .logo h1 {
         /* line-height: 1; */
         letter-spacing: .1rem;
-        font-size: 2.5rem;
+        font-size: var(--fs-250);
 }
 
 nav {
@@ -38,23 +38,23 @@ nav .left-side {
 /* Navigation */
 nav .left-side ul {
     position: fixed;
-    inset: 4em 0 0 100%;
+    inset: var(--header-height) 0 0 100%;
     display: flex;
     flex-direction: column;
     min-height: calc(100vh - 5em);
     overflow-y: hidden;
     transition: 0.2s ease;
-    border-top: 1px solid var(--clr-header);
-    background-color: var(--clr-bg-body);
+    border-top: 1px solid var(--clr-grey);
+    background-color: var(--clr-light);
 }
 
 nav .left-side .nav-link {
     display:block;
     padding: 1.5rem;
     width: 100%;
-    font-size: var(--fs-500);
-    color: var(--clr-body);
-    border-bottom: 1px solid var(--clr-header);
+    font-size: var(--fs-175);
+    color: var(--clr-dark);
+    border-bottom: 1px solid var(--clr-grey);
 }
 
 nav .right-side {
@@ -87,7 +87,7 @@ nav .right-side a:nth-of-type(2) {
     width: 100%;
     height: 3px;
     border-radius: 5px;
-    background-color: var(--clr-body);
+    background-color: var(--clr-grey);
     transition: 0.2s ease;
     z-index: 999;
 }

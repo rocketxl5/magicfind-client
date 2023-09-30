@@ -8,17 +8,17 @@ input:-webkit-autofill:active{
     
 }
 
+/* container for login and signup */
 .form-container {
-    min-height: calc(100vh - 8em);
+    min-height: calc(100vh - var(--header-height));
+    /* min-height: calc(100vh - 8em); */
     /* height: max-content; */
     /* height: inherit; */
 }
 
 .form-content {
-    height: fit-content;
-    /* min-width: min(100%, 30em); */
     width: 100%;
-    /* padding-block-start: 3rem; */
+    padding-block-start: var(--header-height);
 }
 
 .form-logo {
@@ -34,10 +34,10 @@ input:-webkit-autofill:active{
 .form-logo h1 {
     padding-inline: 1em;
     padding-block: 0.5em;
-    font-size: var(--fs-600);
+    font-size: var(--fs-200);
     font-weight: 500;
-    color: var(--clr-body);
-    border: 1px solid var(--clr-header);
+    color: var(--clr-light);
+    background-color: var(--clr-blue);
     border-radius: 5px;
 }
 
@@ -63,14 +63,14 @@ input:-webkit-autofill:active{
 form input {
     width: 100%;
     padding: 1rem;
-    font-size: var(--fs-400);
+    font-size: var(--fs-150);
     background-color: #fff;
     border-radius: 5px;
-    border: 1px solid var(--clr-header);
+    border: 1px solid var(--clr-grey);
 }
 
 .form-element input::placeholder {
-    color: var( --clr-header);
+    color: var( --clr-grey);
 }
 
 .form-element input:focus::placeholder {
@@ -78,22 +78,28 @@ form input {
 }
 
 /* SearchCatalog form style */
-form.search-catalog {
-    position: absolute;
-    top: 4em;
-    left: 0;
+.search-catalog {
     width: 100%;
-    min-height: 4em;
     margin: 0 auto;
-    padding-inline: 1em;
-    border-bottom: 1px solid var(--clr-header);
-    background-color: var(--clr-bg-body);
+    height: fit-content;
+    background-color: var(--clr-light);
+    border-radius: 5px;
   }
+
+.search-catalog input[type=text] {
+    border: none;
+    align-self: center;
+    padding: 0.5rem;
+}
+
+.search-catalog input[type=text]::placeholder {
+    font-size: var(--fs-125);
+}
 
 /* Login form-element*/
 .login-password {
     background-color: #fff;
-    border: 1px solid var(--clr-header);
+    border: 1px solid var(--clr-grey);
     border-radius: 5px;
 }
 
@@ -118,7 +124,7 @@ form.search-catalog {
 }
 
 .login-password i {
-    font-size: var(--fs-500);
+    font-size: var(--fs-175);
     color: #c9c9c9;
 }
 
@@ -134,10 +140,10 @@ form.search-catalog {
     /* flex-basis: 100%; */
     padding-block: 1rem;
     /* padding-inline: 2rem; */
-    font-size: var(--fs-500);
+    font-size: var(--fs-175);
     font-weight: 500;
-    color: var(--clr-bg-body);
-    background-color: var(--clr-primary);
+    color: var(--clr-light);
+    background-color: var(--clr-green);
     border-radius: 5px;
     cursor: pointer;
 }
@@ -149,7 +155,7 @@ form.search-catalog {
 .form-element .link {
     /* flex-basis: 100%; */
     align-self: center;
-    font-size: var(--fs-300);
+    font-size: var(--fs-125);
     margin-inline-start: 1rem;
     text-align: center;
 }
