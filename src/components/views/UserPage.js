@@ -25,7 +25,7 @@ const UserPage = () => {
   useEffect(() => { setPath(location.pathname) }, []);
 
   return (
-    <main className="user-page-container">
+    <main className="container user-page-container">
       <section className="user-page-section to-store">
         <Link to="/store">
           <h2>Manage Your Store</h2>

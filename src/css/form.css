@@ -8,11 +8,17 @@ input:-webkit-autofill:active{
     
 }
 
+.form-container {
+    min-height: calc(100vh - 8em);
+    /* height: max-content; */
+    /* height: inherit; */
+}
+
 .form-content {
     height: fit-content;
     /* min-width: min(100%, 30em); */
     width: 100%;
-    padding-block-start: 5rem;
+    /* padding-block-start: 3rem; */
 }
 
 .form-logo {

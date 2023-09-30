@@ -125,7 +125,7 @@ const Login = () => {
   }, [errorMessage])
 
   return (
-    <div className="container flex justify-center">
+    <div className="form-container flex justify-center">
       {loading ?
         (
           <Spinner />

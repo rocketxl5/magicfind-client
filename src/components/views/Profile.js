@@ -6,7 +6,7 @@ const Profile = () => {
 
   console.log(user);
   return (
-    <div>
+    <div className="container">
       <h2 className="page-title">Profile</h2>
       <div>{user.name}</div>
       <div>{user.country}</div>
