@@ -29,19 +29,24 @@ import ModifyCard from './components/views/ModifyCard';
 import MailBox from './components/views/mail/MailBox';
 import { UserContext } from './contexts/UserContext';
 import { CardContext } from './contexts/CardContext';
+import { PathContext } from './contexts/PathContext';
 import './css/reset.css';
 import './App.css';
 import './css/utilities.css';
 import './css/style.css';
+import './css/navbar.css';
 import './css/form.css';
+import './css/media-queries.css';
 
 const App = () => {
+
   const { user } = useContext(UserContext);
   const { cardContext } = useContext(CardContext);
+  const { path } = useContext(PathContext);
 
   return (
     <Router>
-      <Header />
+      {(path !== '/login' && path !== '/signup') && <Header />}
       <main className="wrapper">
         <Switch>
           <Route exact path="/">
@@ -74,7 +79,7 @@ const App = () => {
           <Route exact path="/add-card/:cardName">
             {cardContext ? <AddCard /> : <Redirect to="/search-api" />}
           </Route>
-          <Route exact path="/cart">
+          <Route exact path="/shopping-cart">
             <ShoppingCart />
           </Route>
           <Route exaxt path="/confirmation">

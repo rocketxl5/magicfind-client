@@ -98,19 +98,6 @@ li {
   color: #fff;
 }
 
-.navbar {
-  position: absolute;
-  background-color: var(--background);
-  width: 100%;
-  top: 100%;
-  left: 0;
-  /* display: none; */
-  /* width: 100%; */
-  transform: scale(1, 0);
-  transform-origin: top;
-  transition: transform 110ms ease-in-out;
-  border-top: 1px solid #fff;
-}
 
 .searchbar {
   position: absolute;
@@ -126,36 +113,7 @@ li {
   transition: transform 120ms ease-in-out;
 }
 
-.navbar ul {
-  display: flex;
-  flex-direction: column;
-  margin: 0;
-  padding: 0;
-  list-style: 0;
-}
 
-.navbar a {
-  display: block;
-  width: 100%;
-  color: #fff;
-  opacity: 0;
-  margin: 2px 0;
-  padding-left: 1em;
-  transition: opacity 20ms ease-in-out;
-  font-size: 1rem;
-  /* text-align: center; */
-}
-
-.navbar a:hover {
-  opacity: 0.8;
-}
-
-.navbar li {
-  display: inline-block;
-  /* font-size: 1rem; */
-  padding: 0.4em 0;
-  border-bottom: 1px solid #fff;
-}
 
 .signout {
   color: #fff;
@@ -185,62 +143,7 @@ li {
   align-items: center;
 }
 
-/* Hamburger */
-.nav-toggle {
-  display: none;
-}
 
-.nav-toggle:checked ~ nav {
-  /* display: block; */
-  transform: scale(1, 1);
-}
-
-.nav-toggle:checked ~ nav a {
-  opacity: 1;
-  transition: opacity 200ms ease-in-out 20ms;
-}
-
-.nav-toggle-label {
-  position: absolute;
-  top: 0;
-  left: 0;
-  margin-left: 1em;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  color: #fff;
-}
-
-.nav-toggle-label:hover,
-.search-toggle-label:hover {
-  cursor: pointer;
-}
-
-.nav-toggle-label span,
-.nav-toggle-label span::before,
-.nav-toggle-label span::after {
-  display: block;
-  background: white;
-  height: 2px;
-  width: 2em;
-  border-radius: 0.5em;
-}
-
-.nav-toggle-label span::before,
-.nav-toggle-label span::after {
-  content: '';
-  position: relative;
-}
-
-.nav-toggle-label span::before {
-  /* bottom: 21px; */
-  bottom: 9px;
-}
-
-.nav-toggle-label span::after {
-  /* top: 21px; */
-  top: 7px;
-}
 
 /* Mail icon container */
 
@@ -382,14 +285,14 @@ ul.auth-dropdown-content li .signout {
 /* Site wide Form Styling Rules  */
 /* *************************** */
 .form {
-  margin: 0 auto;
+  /* margin: 0 auto;
   width: 100%;
-  padding: 1em;
+  padding: 1em; */
   /* border: 1px solid var(--light-color); */
 }
 
 div.form-element {
-  margin: 1em 0;
+  /* margin: 1em 0; */
   /* padding: 0 1em; */
 }
 
@@ -407,10 +310,6 @@ input[type='email'] {
   border-style: solid;
   border-width: 1px;
 } */
-
-input.search-field {
-  border: none;
-}
 
 .text-field:focus {
   /* border-color: #17a2bb;
@@ -470,12 +369,11 @@ ul.search-result {
   cursor: pointer;
 }
 
-form.search-catalog {
+/* form.search-catalog {
   width: 100%;
   margin: 0 auto;
-  /* border: 1px solid #fff; */
   background: #fff;
-}
+} */
 
 /* User Page section blocks */
 main.user-page {
@@ -1021,7 +919,7 @@ button.compose-message {
 
 /* Media queries */
 @media (min-width: 500px) {
-  .form-container {
+  /* .form-container {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -1029,7 +927,7 @@ button.compose-message {
 
   .form {
     max-width: 30em;
-  }
+  } */
   .mail-message {
     border-left: 0.2em solid #f5f8fa;
   }

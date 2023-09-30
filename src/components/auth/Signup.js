@@ -1,16 +1,25 @@
-import React, { useState, useEffect } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import React, { useState, useEffect, useContext } from 'react';
+import { Link, useHistory, useLocation } from 'react-router-dom';
 import useFormValidation from '../hooks/useFormValidation';
 import inputValidation from '../utilities/validateSignup';
+import { PathContext } from '../../contexts/PathContext';
 import { api } from '../../api/resources';
 import Spinner from '../layout/Spinner';
 
 const Signup = () => {
   const [loading, setLoading] = useState(false);
-  const [input, setInput] = useState({})
-  const [isValid, setIsValid] = useState(false)
-  const [errorMessage, setErrorMessage] = useState('')
+  const [input, setInput] = useState({});
+  const [isValid, setIsValid] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
+  const { setPath } = useContext(PathContext);
+
+  const location = useLocation();
   const history = useHistory();
+
+  // Setting path with component url pathname onload
+  useEffect(() => {
+    setPath(location.pathname);
+  }, [])
 
   const callback = (values) => {
     setInput(values)
@@ -88,6 +97,9 @@ const Signup = () => {
           <Spinner />
         ) : (
           <div className="form-content">
+            <div className="form-logo">
+              <Link to="/"><h1>Magic Find</h1></Link>
+            </div>
               <div className="form-title">
                 <h2>Create your account</h2>
               </div>

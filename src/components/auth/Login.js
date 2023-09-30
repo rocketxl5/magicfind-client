@@ -1,8 +1,9 @@
 import React, { useState, useContext, useEffect } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { Link, useHistory, useLocation } from 'react-router-dom';
 import inputValidation from '../utilities/validateLogin';
 import useFormValidation from '../hooks/useFormValidation'
 import { UserContext } from '../../contexts/UserContext';
+import { PathContext } from '../../contexts/PathContext';
 import { api } from '../../api/resources';
 import Spinner from '../layout/Spinner';
 
@@ -14,9 +15,16 @@ const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
 
 
+  const { setPath } = useContext(PathContext);
   const { setUser } = useContext(UserContext);
 
+  const location = useLocation();
   const history = useHistory();
+
+  // Setting path with component url pathname onload
+  useEffect(() => {
+    setPath(location.pathname);
+  }, []);
 
   const callback = (values) => {
     setInput(values)
@@ -58,7 +66,6 @@ const Login = () => {
         password: input.password
       }
 
-      console.log(userInput)
       const options = {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -95,19 +102,17 @@ const Login = () => {
             });
         })
         .catch((error) => {
-          setLoading(false)
-          setErrorMessage(error.message)
+          setLoading(false);
+          setErrorMessage(error.message);
           setValues({
             email: '',
             password: ''
           })
-          setIsValid(false)
-          console.log(error);
+          setIsValid(false);
         });
       } catch (error) {
-        setLoading(false)
+        setLoading(false);
         setErrorMessage(error.message);
-        console.log(error)
       }
     }
   }, [isValid]);
@@ -126,11 +131,14 @@ const Login = () => {
           <Spinner />
         ) : (
           <div className="form-content">
-            <form className="form login-form" onSubmit={handleSubmit}>
-              <div className="form-title">
+            <div className="form-logo">
+              <Link to="/"><h1>Magic Find</h1></Link>
+            </div>
+            <div className="form-title">
                 <h2>Log in to your account</h2>
               </div>
               <p className={errorMessage ? 'show-error-message' : 'hide'}></p>
+            <form className="form" onSubmit={handleSubmit}>
               <div className="form-element">
                 <label htmlFor="name">Email</label>
                 <input
@@ -163,8 +171,8 @@ const Login = () => {
                   </button>
                 </div>
               </div>
-              <div className="form-element flex justify-end">
-                <Link className="reset-password center" to="/reset-password">Forgot password?</Link>
+              <div className="form-element flex margin-block-start-2">
+                <Link className="link" to="/reset-password">Forgot password?</Link>
               </div>
               <div className="form-element">
                 <Link className="link" to="/signup">Create account</Link>

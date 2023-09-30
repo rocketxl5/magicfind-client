@@ -1,40 +1,41 @@
-import React, { useContext } from 'react'
-import { Link } from 'react-router-dom'
-import { UserContext } from '../../contexts/UserContext'
+import React, { useEffect, useContext } from 'react';
+import { Link, useLocation } from 'react-router-dom';
+import { PathContext } from '../../contexts/PathContext';
 
 
 const Home = () => {
-  const { user } = useContext(UserContext);
+  const { setPath } = useContext(PathContext);
+  const location = useLocation();
 
-  console.log(user);
+  // Setting path with component url pathname onload
+  useEffect(() => {
+    setPath(location.pathname);
+  }, []);
+
   return (
     <section className="section col-12 home-page">
-
       <h2 className="section-title">Welcome to Magic Find</h2>
-
       <div className="section-content">
         <div className="article">
           <h2 className="article-title">What it is</h2>
           <div className="article-body">
             <p>
-              Magic Find is the only dedicated place where you can buy and sell
-              Magic the Gathering cards without going through a third party. By
-              registering to Magic Find you get access to a large community.
+              Magic Find is an interactive environment where you can buy and sell
+              Magic the Gathering cards directly from and to other members of the Magic Find community
+              from around the world.
             </p>
             <br />
             <p>
               The goal of Magic Find is to give you the opportunity to sell your
-              cards to other members of the Magic Find community wherever you are
-              without having to settle for a third party purchase price list for
-              your precious cards. In other words, you get to fix the price for the
-              cards you sell. If you wish to buy cards from other members, you have
-              the opportunity to do so too.
+              cards without having to settle for a third party purchase price list.
+              In other words, you get to fix the price for the
+              cards you sell. The same is true for the cards you buy.
             </p>
             <br />
             <p>
               Magic Find's philosophy revolves around the belief that by cutting
               through intermediaries, you get to pay less for the cards you buy, and
-              you get more bucks in your pocket for the ones you sell.
+              you get more dollars for the ones you sell. 
             </p>
           </div>
         </div>

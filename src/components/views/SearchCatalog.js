@@ -1,6 +1,5 @@
 import React, {
   useContext,
-  Fragment,
   useState,
   useEffect,
   useRef,
@@ -202,7 +201,7 @@ const SearchCatalog = () => {
   //   console.log();
   // }, [path]);
   return (
-    <Fragment>
+
       <form
         id="search-catalog"
         className="search-catalog"
@@ -221,10 +220,10 @@ const SearchCatalog = () => {
             form={form}
           />
         ) : (
-          <SearchField form={form} />
+          <SearchField />
         )}
       </form>
-    </Fragment>
+
   );
 };
 

@@ -52,7 +52,6 @@ const useForm = (callback, inputValidation, state) => {
     }
 
     const handleSubmit = (e) => {
-        console.log(values)
         e.preventDefault()
         // Remove focus on input if any 
         // @ Enter key
@@ -65,7 +64,6 @@ const useForm = (callback, inputValidation, state) => {
     }
 
     useEffect(() => {
-        console.log(errors)
         if (Object.keys(errors).length === 0 && isSubmit) {
             callback(values)
         }

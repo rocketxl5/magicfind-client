@@ -221,11 +221,9 @@ const SearchField = ({
   };
 
   return (
-    <Wrapper>
-      <Search>
-        <Input
-          type="text"
-          className="search-field"
+    <div className="search-field">
+      <input
+        type="text"
           value={isOn ? searchTerm : ''}
           onChange={(e) => handleChange(e)}
           onFocus={(e) => handleFocus(e)}
@@ -241,11 +239,7 @@ const SearchField = ({
               : 'Search Your Store')
           }
           ref={searchInput}
-        />
-        <SearchIcon onClick={() => {}}>
-          <FiSearch size={20} />
-        </SearchIcon>
-      </Search>
+      />
 
       {
         <ul
@@ -273,35 +267,21 @@ const SearchField = ({
             })}
         </ul>
       }
-    </Wrapper>
+    </div>
   );
 };
-const Wrapper = styled.div`
-  position: relative;
-`;
-const Search = styled.div`
-  border: 1px solid #333;
-  display: flex;
-`;
-const Input = styled.input`
-  display: inline-block;
-  padding: 10px;
-  font-size: 1em;
-  width: 100%;
-  &:focus {
-    outline: none;
-    box-shadow: 0;
-  }
-`;
-
-const SearchIcon = styled.span`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 50px;
-
-  &:hover {
-  }
-`;
+// const Search = styled.div`
+//   border: 1px solid #333;
+//   display: flex;
+// `;
+// const Input = styled.input`
+//   display: inline-block;
+//   padding: 10px;
+//   font-size: 1em;
+//   width: 100%;
+//   &:focus {
+//     outline: none;
+//     box-shadow: 0;
+//   }
+// `;
 export default SearchField;
