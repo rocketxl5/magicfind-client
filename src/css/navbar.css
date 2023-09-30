@@ -141,3 +141,8 @@ header.checked nav ul {
     left: 0;
 }
 
+header:has(input:checked),
+header.checked {
+    position: sticky;
+}
+
