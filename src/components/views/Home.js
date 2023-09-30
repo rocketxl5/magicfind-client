@@ -13,7 +13,8 @@ const Home = () => {
   }, []);
 
   return (
-    <section className="section col-12 home-page">
+
+    <section className="section home-page">
       <h2 className="section-title">Welcome to Magic Find</h2>
       <div className="section-content">
         <div className="article">

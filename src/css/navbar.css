@@ -117,6 +117,7 @@ header.checked nav ul {
     left: 0;
 }
 
+/* Prevent header scrolling when menu is open on mobile */
 header:has(input:checked),
 header.checked {
     position: sticky;

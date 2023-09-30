@@ -8,7 +8,7 @@ const LogoBtn = () => {
     <Logo >
       <Anchor to="/" title="Magic Find logo">
         <SVG>
-          <GiHypersonicBolt size={38} />
+          <GiHypersonicBolt />
         </SVG>
         <Title>
           <Text>Magic</Text>
@@ -20,35 +20,50 @@ const LogoBtn = () => {
 }
 
 const Logo = styled.div`
-align-self:center;
-  padding-inline: 1rem;
-  align-items: center;
-`;
-const Anchor = styled(Link)`
-
+height: inherit;
 display: flex;
 align-items: center;
+@media (width >= 725px) {
+  // min-height: 4rem;
+}
+
+`;
+const Anchor = styled(Link)`
+display: flex;
+align-items: center;
+ height: inherit;
 `;
 
 
 const SVG = styled.div`
 display: inline-block;
 svg {
+  font-size: 3.4rem;
   display: block;
   color: #d8d6d3;
 }
 `
 
 const Title = styled.div`
-    display: inline-block;
-    margin-inline-start: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    @media (width >= 725px) {
+      flex-direction: row;
+      align-items: center;
+    }
 `;
 
-const Text = styled.span`
-  display: block;
+const Text = styled.div`
   font-family: 'Young Serif', serif;
-  font-size: 2rem;
-  line-height: 1.2;
+  font-size: 1.8rem;
+  line-height: 1;
+  margin-inline-start: 5px;
+
+  @media (width >= 725px) {
+    font-size: 2.8rem;
+  }
 `;
 
 
