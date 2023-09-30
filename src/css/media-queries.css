@@ -6,6 +6,10 @@
         height: 4.5em;
     }
 
+    nav .left-side ul {
+        inset: 4.5em 0 0 100%;
+    }
+
     .mobile-nav-label {
         /* display: none; */
     }
@@ -112,6 +116,14 @@
 }
 
 @media screen and (width >= 600px) {
+    .wrapper {
+        padding-block-start: 0;
+    }
+
+    .main-header {
+        border-bottom: 1px solid var(--clr-header);
+    }
+
     form.search-catalog {
         position:static;
         align-self: center;
@@ -119,14 +131,16 @@
         padding-inline: 0;  
         border-bottom: none;
     }
+
+    nav .left-side ul {
+        border-top: none;
+    }
 }
 
 /* style.css */
 @media screen and (width >= 600px) {
     /* login and signup page */
-    .wrapper {
-        padding-block-start: 0;
-    }
+
 }
 
 @media screen and (width >= 720px) {
