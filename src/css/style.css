@@ -1,27 +1,40 @@
 :root {
     /* site colors */
     --clr-primary: #ee6352;
-    --clr-header: #dfd9d9;
-    --clr-body: #333;
-    --clr-bg-body: rgb(243, 242, 242);
-    --clr-bg-header: #252525;
-    --clr-light: rgba(163, 163, 163, 0.4); 
     --clr-danger: rgb(220, 53, 69);
     --clr-success: rgb(34, 170, 68);
 
+    --clr-blue: #1B2F41;
+    --clr-light-blue: #90C2E7;
+    --clr-grey: #d8d6d3;
+    --clr-red: #a31621;
+    --clr-light: #fcfcfc;
+    --clr-dark: #252525;
+    --clr-green: #33BD7D;
+    --clr-yellow: #FFB834;
+
+
     /* font sizes */
-    --fs-xl: clamp(2rem, calc(1vw + 2rem), 2.5rem);
-    --fs-700: 2.5rem;
-    --fs-600: 2rem;
-    --fs-500: 1.75rem;
-    --fs-400: 1.5rem;
-    --fs-300: 1.25rem;
+    --fs-300: 3rem;
+    --fs-275: 2.75rem;
+    --fs-250: 2.5rem;
+    --fs-225: 2.25rem;
+    --fs-200: 2rem;
+    --fs-175: 1.75rem;
+    --fs-150: 1.5rem;
+    --fs-125: 1.25rem;
     --fs-100: 1rem;
+    --fs-075: 0.75rem;
+    --fs-050: 0.5rem;
     
     /* size */
     --size-1: 1em;
     --size-2: 2em;
     --size-3: 3em;
+
+    /* header heights */
+    --header-height: 5rem;
+    --header-height-wide: 6rem;
 }
 
 .check-icon {
@@ -38,52 +51,45 @@ body {
   min-height: 100vh;
   margin-inline: auto;
   font-family: 'Poppins', sans-serif;
-  font-size: var(--fs-300);
+  font-size: var(--fs-125);
   line-height: 1.5;
-  color: var(--clr-body);
-  background-color: var(--clr-bg-body);
+  color: var(--clr-dark);
+  background-color: var(--clr-light);
+  overflow-x: hidden;
 }
 
-/* .header-mobile {
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 100;
-    width: 100%;
-    min-height: 3.5em;
-    padding: 0.5em 1em;
-    background-color: var(--background);
-    display: flex;
-    align-items: center;
-    min-width: 300px;
-  } */
+a {
+    color: var(--clr-blue)
+}
 
 .main-header {
-  position: relative;
+  position: fixed;
   display: flex;
-  min-height: 4em;
+  align-items: center;
+  min-height: var(--header-height);
   min-width: 300px;
-  top: 0;
-  left: 0;
-  z-index: 100;
   width: 100%;
   padding-inline: 1em;
-  background-color: var(--clr-bg-body);
+  color: var(--clr-grey);
+  background-color: var(--clr-blue);
+  z-index: 1000;
 }
 
-/* #root {
-    min-height: 100vh;
-} */
+.main-header a {
+    color: var(--clr-grey);
+}
 
 .wrapper {
   position: relative;
   min-width: 300px;
-  max-width: 100%;
-  min-height: calc(100vh - 8em);
-  padding-block-start: 4em;
+  height: auto;
+  padding-block-start: var(--header-height);
+  /* max-width: 100vw; */
+  min-height: calc(100vh - (2 * var(--header-height)));
 }
 
 .container {
+  min-height: inherit;
   margin-inline: auto;
   padding: 2em;
 }
@@ -94,19 +100,18 @@ body {
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    min-height: calc(100vh - 4em);
+    min-height: fit-content;
 }
 
 .spinner p {
-    margin-block-start: 5rem;
+    padding-block-start: 5rem;
 }
 /* end spinner */
 
 
 
 .section {
-    /* margin-block-start: 5rem; */
-     /* padding-block: 3rem; */
+    
      padding-block: 3rem;
      padding-inline: 2rem;
 }
@@ -115,7 +120,7 @@ body {
 .section-title {
     padding-block-end: 2rem;
     text-align: center;
-    font-size: var(--fs-700);
+    font-size: var(--fs-250);
     font-weight: 300;
 }
 
@@ -123,13 +128,10 @@ body {
     display: flex;
     align-items: center;
     flex-direction: column;
-    /* gap: 10rem; */
-    /* margin-block-start: 5rem; */
 }
 
 .article {
   margin-inline: auto;
-  /* padding-inline: 3rem; */
   flex-basis: 100%;
 }
 
@@ -142,13 +144,12 @@ text-align: center;
 .article-body {
     padding-block: 3rem;
     margin-inline: 2rem;
-    border-top: 1px solid var(--clr-light) 
+    border-top: 1px solid var(--clr-grey); 
 }
 
 /* Home page */
 .home-page .article-body {
-    position: relative;
-    display: block;
+ 
 }
 
 /* Footer styles */
@@ -156,8 +157,8 @@ text-align: center;
     display: flex;
     justify-content: center;
     min-width: 300px;
-    min-height: 4em;
-    font-size: var(--fs-200);
+    min-height: var(--header-height);
+    font-size: var(--fs-100);
   }
 
   .footer p {
