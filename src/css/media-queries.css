@@ -12,6 +12,7 @@
 
 @media screen and (width >= 725px) {
     .wrapper {
+        padding-block-start: 0;
         min-height: calc(100vh - (2 * var(--header-height-wide)));
     }
 
@@ -21,6 +22,7 @@
 
     .main-header {
         min-height: var(--header-height-wide);
+        position: relative;
     }
 
     .search-catalog input[type=text] {
