@@ -4,22 +4,23 @@ import styled from 'styled-components';
 
 const SearchBtn = () => {
     return (
-        <Search className="nav-icon">
-            <Label htmlFor="mobile-nav" className="search-nav-label">
-                <FiSearch size={30} />
+        <Search>
+            <Label htmlFor="mobile-nav" className="search-nav-label nav-icon">
+                <FiSearch size={28} />
             </Label>
         </Search>
     )
 }
 
 const Search = styled.div`
-   
+    
     @media (width >= 725px) {
         display: none;
     }
 `;
 
 const Label = styled.label`
+    
     svg {
         display: block;
     }

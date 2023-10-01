@@ -6,6 +6,7 @@ import AuthMenu from './AuthMenu';
 import SearchBtn from './navbar/SearchBtn';
 import MailBtn from './navbar/MailBtn';
 import AuthBtn from './navbar/AuthBtn';
+import HamburgerBtn from './navbar/HamburgerBtn';
 import SearchCatalog from '../views/SearchCatalog';
 // import SignupBtn from './navbar/SignupBtn';
 // import SigninBtn from './navbar/SigninBtn';
@@ -49,7 +50,10 @@ function Navbar({ isFirefox }) {
                     )}
                 </section>
                 <section className="left-side-nav">
-                    {/* Search icon mobile only @ screen < 725px */}
+                    {/************************************************* 
+                     /*  SearchBtn icon mobile only @ screen < 725px 
+                     /*  Has a label linked to mobile-nav checkbox 
+                     *************************************************/}
                     <SearchBtn />
                     {user && (
                         <>
@@ -58,10 +62,11 @@ function Navbar({ isFirefox }) {
                             <AuthBtn />
                         </>
                     )}
-
-                    <label htmlFor="mobile-nav" className="mobile-nav-label">
-                        <span></span>
-                    </label>
+                    {/************************************************* 
+                     /*  Hamburger 
+                     /*  Has a label linked to mobile-nav checkbox 
+                     *************************************************/}
+                    <HamburgerBtn />
                 </section>
             </nav>
         </div>
