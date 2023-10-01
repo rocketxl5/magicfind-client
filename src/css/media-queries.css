@@ -12,8 +12,8 @@
 
 @media screen and (width >= 725px) {
     .wrapper {
-        padding-block-start: 0;
-        min-height: calc(100vh - (2 * var(--header-height-wide)));
+        padding-block-start: var(--header-height-wide);
+        min-height: calc(100vh - var(--header-height-wide));
     }
 
     .container {
@@ -70,10 +70,6 @@
 
     form.search-catalog input[type=text]::placeholder {
         font-size: var(--fs-150);
-    }
-
-    .search-icon {
-        display: none;
     }
 
     .search-nav-label {

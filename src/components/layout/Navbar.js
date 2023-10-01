@@ -6,6 +6,7 @@ import AuthMenu from './AuthMenu';
 import SearchBtn from './navbar/SearchBtn';
 import MailBtn from './navbar/MailBtn';
 import AuthBtn from './navbar/AuthBtn';
+import SearchCatalog from '../views/SearchCatalog';
 // import SignupBtn from './navbar/SignupBtn';
 // import SigninBtn from './navbar/SigninBtn';
 import ShoppingCartBtn from './navbar/ShoppingCartBtn';
@@ -55,6 +56,7 @@ function Navbar({ isFirefox }) {
                             <ShoppingCartBtn />
                         </>
                     )}
+                    {/* Search icon mobile only @ screen < 725px */}
                     <SearchBtn />
                     <label htmlFor="mobile-nav" className="mobile-nav-label">
                         <span></span>

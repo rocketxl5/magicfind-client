@@ -171,7 +171,6 @@
 import React, { useState, useEffect } from 'react';
 import SearchCatalog from '../views/SearchCatalog';
 import Navbar from './Navbar';
-// import Logo from './Logo';
 import LogoBtn from './navbar/LogoBtn';
 
 const Header = () => {

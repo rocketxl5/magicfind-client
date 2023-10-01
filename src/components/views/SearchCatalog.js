@@ -14,6 +14,7 @@ import { PathContext } from '../../contexts/PathContext';
 import { CardContext } from '../../contexts/CardContext';
 import { UserContext } from '../../contexts/UserContext';
 import { api } from '../../api/resources';
+
 import styled from 'styled-components';
 
 const SearchCatalog = () => {

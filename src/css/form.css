@@ -83,7 +83,7 @@ form input {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    top: var(--header-height);
+    top: calc(-2 * var(--header-height));
     left: 0;
     width: 100%;
     padding-inline: var(--size-1);

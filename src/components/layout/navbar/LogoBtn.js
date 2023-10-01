@@ -24,9 +24,6 @@ const Logo = styled.div`
 height: inherit;
 display: flex;
 align-items: center;
-@media (width >= 725px) {
-  // min-height: 4rem;
-}
 
 `;
 const Anchor = styled(Link)`
