@@ -78,22 +78,36 @@ form input {
 }
 
 /* SearchCatalog form style */
-.search-catalog {
+.search-catalog-content {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    top: var(--header-height);
+    left: 0;
     width: 100%;
-    margin: 0 auto;
+    padding-inline: var(--size-1);
+    min-height: var(--header-height);
+    background-color: rgba(144, 194, 231, 0.6);
+    z-index: 2000;
+}
+
+form.search-catalog {
+    width: calc(100vw - 8rem );
+   
 
     align-self: center;
     background-color: var(--clr-light);
     border-radius: 5px;
   }
 
-.search-catalog input[type=text] {
+form.search-catalog input[type=text] {
     border: none;
     min-height: 3.5rem;
     padding: 0.5rem;
 }
 
-.search-catalog input[type=text]::placeholder {
+form.search-catalog input[type=text]::placeholder {
     font-size: var(--fs-125);
 }
 

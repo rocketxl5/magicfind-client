@@ -5,7 +5,7 @@
     --clr-success: rgb(34, 170, 68);
 
     --clr-blue: #1B2F41;
-    --clr-light-blue: #90C2E7;
+    --clr-light-blue: rgb(144, 194, 231);
     --clr-grey: #d8d6d3;
     --clr-red: #a31621;
     --clr-light: #fcfcfc;
@@ -28,9 +28,12 @@
     --fs-050: 0.5rem;
     
     /* size */
-    --size-1: 1em;
-    --size-2: 2em;
-    --size-3: 3em;
+    --size-1: 1rem;
+    --size-2: 2rem;
+    --size-3: 3rem;
+    --size-4: 4rem;
+    --size-5: 5rem;
+    --size-6: 6rem;
 
     /* header heights */
     --header-height: 5rem;

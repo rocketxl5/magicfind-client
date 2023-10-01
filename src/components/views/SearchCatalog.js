@@ -18,6 +18,7 @@ import styled from 'styled-components';
 
 const SearchCatalog = () => {
   const [loading, setLoading] = useState(false);
+  const [checked, setChecked] = useState(false);
 
   const [searchTerm, setSearchTerm] = useState('');
   const [cardName, setCardName] = useState('');
@@ -182,7 +183,16 @@ const SearchCatalog = () => {
       .catch((error) => console.log(error));
   };
 
-  // console.log(path);
+  const handleChange = () => {
+    setChecked(!checked);
+  }
+
+  useEffect(() => {
+    if (checked) {
+
+    }
+  }, [checked])
+
   useEffect(() => {
     if (sentForm === 'search-catalog') {
       setIsOn(true);
@@ -201,7 +211,8 @@ const SearchCatalog = () => {
   //   console.log();
   // }, [path]);
   return (
-
+    <div className="search-catalog-content">
+      <input type="checkbox" id="search-nav" className="search-nav" onChange={handleChange} />
       <form
         id="search-catalog"
         className="search-catalog"
@@ -223,7 +234,10 @@ const SearchCatalog = () => {
           <SearchField />
         )}
       </form>
-
+      <label htmlFor="search-nav" className="search-nav-label">
+        <span></span>
+      </label>
+    </div>
   );
 };
 

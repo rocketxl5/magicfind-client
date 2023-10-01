@@ -20,6 +20,11 @@ const Menu = () => {
                 </Link>
             </li>
             <li>
+                <Link className="nav-link" to="/login">
+                    Sign In
+                </Link>
+            </li>
+            <li>
                 <Link className="nav-link" to="/signup">
                     Create Account
                 </Link>

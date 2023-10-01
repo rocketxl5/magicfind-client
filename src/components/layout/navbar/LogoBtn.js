@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
 import { GiHypersonicBolt } from 'react-icons/gi';
+import { GiWaterBolt } from 'react-icons/gi';
 import styled from 'styled-components';
 
 const LogoBtn = () => {
@@ -8,7 +9,7 @@ const LogoBtn = () => {
     <Logo >
       <Anchor to="/" title="Magic Find logo">
         <SVG>
-          <GiHypersonicBolt />
+          <GiWaterBolt />
         </SVG>
         <Title>
           <Text>Magic</Text>

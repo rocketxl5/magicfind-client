@@ -3,7 +3,7 @@
     display: flex;
     align-self: center;
 
-    width: 100%;
+    /* width: 100%; */
     height: 100%;
 }
 
@@ -13,7 +13,7 @@ nav {
     width: 100%;
 }
 
-nav .left-side {
+nav .right-side-nav {
     height: 100%;
     display: flex;
     /* align-items: center; */
@@ -22,7 +22,7 @@ nav .left-side {
 }
 
 /* Navigation */
-nav .left-side ul {
+nav .right-side-nav ul {
     position: fixed;
     inset: var(--header-height) 0 0 100%;
     display: flex;
@@ -34,7 +34,7 @@ nav .left-side ul {
     background-color: var(--clr-light);
 }
 
-nav .left-side .nav-link {
+nav .right-side-nav .nav-link {
     display:block;
     padding: 1.5rem;
     width: 100%;
@@ -43,30 +43,55 @@ nav .left-side .nav-link {
     border-bottom: 1px solid var(--clr-grey);
 }
 
-nav .right-side {
+nav .left-side-nav {
     display: flex;
     align-items: center;
     gap: 1rem;
 }
 
-nav .right-side a:nth-of-type(2) {
+nav .left-side-nav a:nth-of-type(2) {
     display: none;
 }
 
-#mobile-nav {
+#mobile-nav,
+#search-nav {
     display: none;
 }
 
-.mobile-nav-label {
+.mobile-nav-label,
+.search-nav-label {
     position: relative;
     display: flex;
     align-items: center;
-    width: 2.5rem;
+    width: var(--size-3);
     height: 2em;
     padding-block: 1em;
     cursor: pointer;
 }
 
+/* Search Form Animation */
+.search-nav-label span,
+.search-nav-label::before,
+.search-nav-label::after {
+    width: 100%;
+    height: 4px;
+    border-radius: 5px;
+    background-color: var(--clr-blue);
+    transition: 0.2s ease;
+    z-index: 3000;
+}
+
+.search-nav-label span {
+    opacity: 0;
+}
+
+.search-nav-label::before,
+.search-nav-label::after {
+    content: '';
+    position: absolute;
+}
+
+/* Hamburger */
 .mobile-nav-label span,
 .mobile-nav-label::before,
 .mobile-nav-label::after {
@@ -92,8 +117,8 @@ nav .right-side a:nth-of-type(2) {
     bottom: 2px;
 }
 
-/* hamburger animation */
-/* 'checked' class name option for Firebox browser added to header @ main.js */
+/* Hamburger animation */
+/* 'checked' className option for Firebox browser added to header @ main.js */
 header:has(input:checked) .mobile-nav-label::before,
 header.checked .mobile-nav-label::before {
     rotate: -45deg;

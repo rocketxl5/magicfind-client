@@ -3,10 +3,11 @@ import { UserContext } from '../../contexts/UserContext';
 import toggleClass from '../utilities/toggleClass';
 import Menu from './Menu';
 import AuthMenu from './AuthMenu';
+import SearchBtn from './navbar/SearchBtn';
 import MailBtn from './navbar/MailBtn';
-import UserBtn from './navbar/UserBtn';
-import SignupBtn from './navbar/SignupBtn';
-import SigninBtn from './navbar/SigninBtn';
+import AuthBtn from './navbar/AuthBtn';
+// import SignupBtn from './navbar/SignupBtn';
+// import SigninBtn from './navbar/SigninBtn';
 import ShoppingCartBtn from './navbar/ShoppingCartBtn';
 
 function Navbar({ isFirefox }) {
@@ -36,7 +37,7 @@ function Navbar({ isFirefox }) {
         <div className="navbar">
             <input type="checkbox" id="mobile-nav" className="mobile-nav" onChange={handleChange} />
             <nav onClick={handleClick}>
-                <section className="left-side">
+                <section className="right-side-nav">
                     {user ? (
                         <AuthMenu
                             user={user}
@@ -46,20 +47,15 @@ function Navbar({ isFirefox }) {
                         <Menu />
                     )}
                 </section>
-                <section className="right-side">
-                    {user ? (
+                <section className="left-side-nav">
+                    {user && (
                         <>
                             <MailBtn />
-                            <UserBtn />
+                            <AuthBtn />
                             <ShoppingCartBtn />
                         </>
-                    ) : (
-                        <>
-                            <SigninBtn />
-                            <SignupBtn />
-                        </>
                     )}
-
+                    <SearchBtn />
                     <label htmlFor="mobile-nav" className="mobile-nav-label">
                         <span></span>
                     </label>
