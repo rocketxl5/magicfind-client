@@ -49,15 +49,16 @@ function Navbar({ isFirefox }) {
                     )}
                 </section>
                 <section className="left-side-nav">
+                    {/* Search icon mobile only @ screen < 725px */}
+                    <SearchBtn />
                     {user && (
                         <>
                             <MailBtn />
-                            <AuthBtn />
                             <ShoppingCartBtn />
+                            <AuthBtn />
                         </>
                     )}
-                    {/* Search icon mobile only @ screen < 725px */}
-                    <SearchBtn />
+
                     <label htmlFor="mobile-nav" className="mobile-nav-label">
                         <span></span>
                     </label>

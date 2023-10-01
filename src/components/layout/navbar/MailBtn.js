@@ -7,7 +7,7 @@ import styled from 'styled-components';
 const MailIcon = () => {
     const { unreadMail } = useContext(UserContext);
     return (
-        <Mail>
+      <Mail className="nav-icon">
             <Link to="/mail/inbox" title="Mailbox">
                 {unreadMail > 0 && (
                     <UnreadContainer>
@@ -26,7 +26,6 @@ const Mail = styled.div`
 
   a svg {
     display: block;
-    color: #333;
   }
 `;
 

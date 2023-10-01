@@ -1,12 +1,11 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
-import { GiHypersonicBolt } from 'react-icons/gi';
 import { GiWaterBolt } from 'react-icons/gi';
 import styled from 'styled-components';
 
 const LogoBtn = () => {
   return (
-    <Logo >
+    <Logo className="nav-icon logo-icon">
       <Anchor to="/" title="Magic Find logo">
         <SVG>
           <GiWaterBolt />

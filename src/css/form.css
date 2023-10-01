@@ -18,7 +18,6 @@ input:-webkit-autofill:active{
 
 .form-content {
     width: 100%;
-    padding-block-start: var(--header-height);
 }
 
 .form-logo {
@@ -83,7 +82,7 @@ form input {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    top: calc(-2 * var(--header-height));
+    top: calc(1 * var(--header-height));
     left: 0;
     width: 100%;
     padding-inline: var(--size-1);

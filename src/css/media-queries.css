@@ -59,6 +59,10 @@
         z-index: 2000;
     }
 
+    .form-content {
+        padding-block-start: var(--header-height);
+    }
+
     form.search-catalog {
        width: 75%;
     }

@@ -4,8 +4,8 @@ import styled from 'styled-components';
 
 const SearchBtn = () => {
     return (
-        <Search className="search-icon">
-            <Label htmlFor="search-toggle" className="search-toggle-label">
+        <Search className="nav-icon">
+            <Label htmlFor="mobile-nav" className="search-nav-label">
                 <FiSearch size={30} />
             </Label>
         </Search>
@@ -13,16 +13,15 @@ const SearchBtn = () => {
 }
 
 const Search = styled.div`
+   
     @media (width >= 725px) {
         display: none;
-  }
+    }
 `;
 
 const Label = styled.label`
     svg {
-        font-size: 3rem;
         display: block;
-        color: #d8d6d3;
     }
 `;
 export default SearchBtn;
