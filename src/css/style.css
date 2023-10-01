@@ -69,6 +69,7 @@ a {
   position: fixed;
   display: flex;
   align-items: center;
+  justify-content: space-between;
   min-height: var(--header-height);
   min-width: 300px;
   width: 100%;
