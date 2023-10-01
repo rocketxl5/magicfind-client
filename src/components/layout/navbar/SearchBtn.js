@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 const SearchBtn = () => {
     return (
-        <div className="nav-icon">
+        <div className="search-icon">
             <Label htmlFor="search-toggle" className="search-toggle-label">
                 <FiSearch size={30} />
             </Label>

@@ -22,7 +22,7 @@
 
     .main-header {
         min-height: var(--header-height-wide);
-        position: relative;
+        position: fixed;
     }
 
     .search-catalog input[type=text] {
@@ -70,6 +70,10 @@
 
     form.search-catalog input[type=text]::placeholder {
         font-size: var(--fs-150);
+    }
+
+    .search-icon {
+        display: none;
     }
 
     .search-nav-label {
