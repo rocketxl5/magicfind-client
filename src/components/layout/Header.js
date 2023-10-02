@@ -191,6 +191,7 @@ const Header = () => {
       // Uncheck checkbox to close mobile menu
       document.querySelector('.mobile-nav').checked = false;
       document.querySelector('.menu').style.setProperty('left', '100%');
+      document.querySelector('#search-btn').style.setProperty('display', 'block');
       if (isFirefox) {
         // Remove 'checked' class from main header
         toggleClass(document.querySelector('.main-header'), 'checked');
