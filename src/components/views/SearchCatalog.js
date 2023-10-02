@@ -184,10 +184,6 @@ const SearchCatalog = () => {
       .catch((error) => console.log(error));
   };
 
-  const handleChange = () => {
-    setChecked(!checked);
-  }
-
   useEffect(() => {
     if (checked) {
 
@@ -213,7 +209,7 @@ const SearchCatalog = () => {
   // }, [path]);
   return (
     <div className="search-catalog-content">
-      <input type="checkbox" id="search-nav" className="search-nav" onChange={handleChange} />
+      {/* <input type="checkbox" id="search-nav" className="search-nav" onChange={handleChange} /> */}
       <form
         id="search-catalog"
         className="search-catalog"
@@ -235,9 +231,6 @@ const SearchCatalog = () => {
           <SearchField />
         )}
       </form>
-      <label htmlFor="search-nav" className="search-nav-label">
-        <span></span>
-      </label>
     </div>
   );
 };

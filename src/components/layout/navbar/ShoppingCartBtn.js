@@ -7,25 +7,26 @@ import styled from 'styled-components';
 const ShoppingCartBtn = () => {
   const { itemsCount } = useContext(ShoppingCartContext);
   return (
-    <Cart to="/shopping-cart">
+    <Cart className="nav-icon">
+      <Link to="/shopping-cart">
         {itemsCount > 0 && (
           <CountContainer>
             <Count>{itemsCount}</Count>
           </CountContainer>
         )}
       <FiShoppingCart size={27} title="Shopping Cart" />
+      </Link>
     </Cart>
   )
 }
 
-const Cart = styled(Link)`
+const Cart = styled.div`
   position: relative;
   display: flex;
   text-align: center;
 
   a svg {
     display: block;
-    color: #333;
   }
 `;
 
