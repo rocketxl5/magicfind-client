@@ -13,6 +13,7 @@ import ShoppingCartBtn from './navbar/ShoppingCartBtn';
 
 function Navbar({ isFirefox }) {
 
+    const [action, setAction] = useState('')
     const { user, setUser } = useContext(UserContext)
 
     // Handle hamburger animation for firefox (has() css function not supported)
@@ -23,26 +24,12 @@ function Navbar({ isFirefox }) {
         }
     }
 
-    const handleClick = (e) => {
-        console.log(e.target)
-        if (e.target.classList.contains('nav-link')) {
-            // Uncheck checkbox to close mobile menu
-            document.querySelector('.mobile-nav').checked = false;
-            if (isFirefox) {
-                // Remove 'checked' class from main header
-                toggleClass(document.querySelector('.main-header'), 'checked');
-            }
-        }
-        if (e.target.classList.contains('search-btn')) {
-            document.querySelector('.search-catalog').style.setProperty('width', 'calc(100% - 4rem)');
-            document.querySelector('.search-field').style.setProperty('display', 'block');
-        }
-    }
+
 
     return (
         <div className="navbar">
             <input type="checkbox" id="mobile-nav" className="mobile-nav" onChange={handleChange} />
-            <nav onClick={handleClick}>
+            <nav>
                 <section className="left-side-nav">
                     {/************************************************* 
                      /*  SearchBtn icon mobile only @ screen < 725px 

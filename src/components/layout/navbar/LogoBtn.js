@@ -5,7 +5,7 @@ import styled from 'styled-components';
 
 const LogoBtn = () => {
   return (
-    <Logo className="nav-btn">
+    <Logo className="nav-btn logo-btn">
       <Anchor to="/" title="Magic Find logo">
         <SVG>
           <GiWaterBolt />
@@ -23,7 +23,11 @@ const Logo = styled.div`
 height: inherit;
 display: flex;
 align-items: center;
+width: 100%;
 
+&:hover {
+  cursor: pointer;
+}
 `;
 const Anchor = styled(Link)`
 display: flex;

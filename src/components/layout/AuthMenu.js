@@ -19,7 +19,7 @@ function AuthMenu({ user, setUser }) {
     history.push('/');
   };
   return (
-    <ul>
+    <ul className='menu main-menu'>
       <li >
         <Link className="nav-link" to="/store">
           Store
