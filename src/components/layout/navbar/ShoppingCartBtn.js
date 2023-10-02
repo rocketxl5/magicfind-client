@@ -7,14 +7,14 @@ import styled from 'styled-components';
 const ShoppingCartBtn = () => {
   const { itemsCount } = useContext(ShoppingCartContext);
   return (
-    <Cart className="nav-icon">
+    <Cart className="nav-btn cart-btn">
       <Link to="/shopping-cart">
         {itemsCount > 0 && (
           <CountContainer>
             <Count>{itemsCount}</Count>
           </CountContainer>
         )}
-      <FiShoppingCart size={27} title="Shopping Cart" />
+        <FiShoppingCart className="nav-icon" size={27} title="To Shopping Cart" />
       </Link>
     </Cart>
   )

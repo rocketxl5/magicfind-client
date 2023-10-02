@@ -7,13 +7,12 @@ import SearchBtn from './navbar/SearchBtn';
 import MailBtn from './navbar/MailBtn';
 import AuthBtn from './navbar/AuthBtn';
 import HamburgerBtn from './navbar/HamburgerBtn';
-import SearchCatalog from '../views/SearchCatalog';
 // import SignupBtn from './navbar/SignupBtn';
 // import SigninBtn from './navbar/SigninBtn';
 import ShoppingCartBtn from './navbar/ShoppingCartBtn';
 
 function Navbar({ isFirefox }) {
-    const [display, setDisplay] = useState(true);
+
     const { user, setUser } = useContext(UserContext)
 
     // Handle hamburger animation for firefox (has() css function not supported)
@@ -25,6 +24,7 @@ function Navbar({ isFirefox }) {
     }
 
     const handleClick = (e) => {
+        console.log(e.target)
         if (e.target.classList.contains('nav-link')) {
             // Uncheck checkbox to close mobile menu
             document.querySelector('.mobile-nav').checked = false;
@@ -33,22 +33,16 @@ function Navbar({ isFirefox }) {
                 toggleClass(document.querySelector('.main-header'), 'checked');
             }
         }
+        if (e.target.classList.contains('search-btn')) {
+            document.querySelector('.search-catalog').style.setProperty('width', 'calc(100% - 4rem)');
+            document.querySelector('.search-field').style.setProperty('display', 'block');
+        }
     }
 
     return (
         <div className="navbar">
             <input type="checkbox" id="mobile-nav" className="mobile-nav" onChange={handleChange} />
             <nav onClick={handleClick}>
-                <section className="right-side-nav">
-                    {user ? (
-                        <AuthMenu
-                            user={user}
-                            setUser={setUser}
-                        />
-                    ) : (
-                        <Menu />
-                    )}
-                </section>
                 <section className="left-side-nav">
                     {/************************************************* 
                      /*  SearchBtn icon mobile only @ screen < 725px 
@@ -67,6 +61,16 @@ function Navbar({ isFirefox }) {
                      /*  Has a label linked to mobile-nav checkbox 
                      *************************************************/}
                     <HamburgerBtn />
+                </section>
+                <section className="right-side-nav">
+                    {user ? (
+                        <AuthMenu
+                            user={user}
+                            setUser={setUser}
+                        />
+                    ) : (
+                        <Menu />
+                    )}
                 </section>
             </nav>
         </div>

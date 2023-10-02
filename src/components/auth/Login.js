@@ -138,7 +138,7 @@ const Login = () => {
                 <h2>Log in to your account</h2>
               </div>
               <p className={errorMessage ? 'show-error-message' : 'hide'}></p>
-            <form className="form" onSubmit={handleSubmit}>
+            <form className="auth-form" onSubmit={handleSubmit}>
               <div className="form-element">
                 <label htmlFor="name">Email</label>
                 <input

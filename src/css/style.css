@@ -167,5 +167,5 @@ text-align: center;
 
   .footer p {
     align-self: flex-end;
-    padding-block: 1rem;
+    padding-block: var(--size-1);
   }

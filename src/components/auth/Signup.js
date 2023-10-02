@@ -104,7 +104,7 @@ const Signup = () => {
                 <h2>Create your account</h2>
               </div>
               <p className={errorMessage ? 'show-error-message' : 'hide'}></p>
-            <form className="form" onSubmit={handleSubmit}>
+            <form className="auth-form" onSubmit={handleSubmit}>
               <div className="form-element">
                 <label htmlFor="name">Username</label>
                 <input

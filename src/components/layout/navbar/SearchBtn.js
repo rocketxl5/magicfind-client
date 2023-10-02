@@ -4,9 +4,9 @@ import styled from 'styled-components';
 
 const SearchBtn = () => {
     return (
-        <Search>
-            <Label htmlFor="mobile-nav" className="search-nav-label nav-icon">
-                <FiSearch size={28} />
+        <Search className='search-btn'>
+            <Label htmlFor="mobile-nav" className="nav-btn">
+                <FiSearch className="nav-icon" size={28} title="Search Catalog" />
             </Label>
         </Search>
     )

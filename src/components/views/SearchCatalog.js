@@ -208,8 +208,6 @@ const SearchCatalog = () => {
   //   console.log();
   // }, [path]);
   return (
-    <div className="search-catalog-content">
-      {/* <input type="checkbox" id="search-nav" className="search-nav" onChange={handleChange} /> */}
       <form
         id="search-catalog"
         className="search-catalog"
@@ -231,7 +229,7 @@ const SearchCatalog = () => {
           <SearchField />
         )}
       </form>
-    </div>
+
   );
 };
 
