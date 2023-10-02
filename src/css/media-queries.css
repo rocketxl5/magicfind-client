@@ -13,7 +13,7 @@
 @media screen and (width >= 725px) {
     .wrapper {
         padding-block-start: var(--header-height-wide);
-        min-height: calc(100vh - var(--header-height-wide));
+        min-height: calc(100vh - (2 * var(--header-height-wide)));
     }
 
     .container {
@@ -25,20 +25,22 @@
         position: fixed;
     }
 
-    .search-catalog input[type=text] {
+
+    /* .search-catalog .search-field {
         border: none;
         min-height: 4rem;
         padding: 0.8rem;
     }
     
-    .search-catalog input[type=text]::placeholder {
+    .search-catalog .search-field::placeholder {
         font-size: var(--fs-150);
-    }
+    } */
     
     .section-content { 
         flex-direction: row;
         align-items: flex-start;
     }
+
     nav .right-side-nav ul {
         inset: var(--header-height-wide) 0 0 100%;
     }
@@ -49,30 +51,31 @@
     nav .right-side a:nth-of-type(2) {
         display: inline-block;
     } 
-
-    .search-catalog-content {
+/* 
+    .search-catalog {
         position: static;
         justify-content:flex-end;
         width: 100%;
         min-height: var(--header-height);
         background-color: var(--clr-blue);
         z-index: 2000;
-    }
+    } */
 
-    .form-content {
+    /* .form-content {
         padding-block-start: var(--header-height);
-    }
+    } */
 
     form.search-catalog {
-       width: 75%;
+        position: static;
+        max-width: 50rem;
     }
      
-    form.search-catalog input[type=text] {
+    .search-catalog .search-field {
         min-height: 4rem;
         padding: 1rem;
     }
 
-    form.search-catalog input[type=text]::placeholder {
+    .search-catalog .search-field::placeholder {
         font-size: var(--fs-150);
     }
 
@@ -86,15 +89,15 @@
 
 
     .footer {
-        min-height: var(--header-height-wide);
+        min-height: var(--header-height--wide);
     }
 }
 
-@media screen and (width >= 1000px) {
+/* @media screen and (width >= 1000px) {
     form.search-catalog { 
         width: 50rem;
     }
-}
+} */
 
 @media screen and (width >= 1600px) {
     /* landing page */

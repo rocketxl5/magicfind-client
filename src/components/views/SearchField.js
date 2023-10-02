@@ -221,24 +221,25 @@ const SearchField = ({
   };
 
   return (
-    <div className="search-field">
+    <>
       <input
+        className="search-field"
         type="text"
-          value={isOn ? searchTerm : ''}
-          onChange={(e) => handleChange(e)}
-          onFocus={(e) => handleFocus(e)}
-          onBlur={(e) => {
-            handleBlur(e);
-          }}
-          placeholder={
-            form.current &&
-            (form.current.id === 'search-catalog'
-              ? 'Search Magic Find'
-              : form.current.id === 'search-api'
+        value={isOn ? searchTerm : ''}
+        onChange={(e) => handleChange(e)}
+        onFocus={(e) => handleFocus(e)}
+        onBlur={(e) => {
+          handleBlur(e);
+        }}
+        placeholder={
+          form.current &&
+          (form.current.id === 'search-catalog'
+            ? 'Search Magic Find'
+            : form.current.id === 'search-api'
               ? 'Search Skryfall API'
               : 'Search Your Store')
-          }
-          ref={searchInput}
+        }
+        ref={searchInput}
       />
 
       {
@@ -267,7 +268,7 @@ const SearchField = ({
             })}
         </ul>
       }
-    </div>
+    </>
   );
 };
 // const Search = styled.div`

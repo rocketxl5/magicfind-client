@@ -7,14 +7,14 @@ import styled from 'styled-components';
 const MailIcon = () => {
     const { unreadMail } = useContext(UserContext);
     return (
-      <Mail className="nav-icon">
+      <Mail className="nav-btn main-btn">
             <Link to="/mail/inbox" title="Mailbox">
                 {unreadMail > 0 && (
                     <UnreadContainer>
                         <Unread>{unreadMail}</Unread>
                     </UnreadContainer>
                 )}
-                <FiMail size={27} />
+          <FiMail className="nav-icon" size={27} />
             </Link>
         </Mail>
     )

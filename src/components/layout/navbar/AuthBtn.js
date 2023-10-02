@@ -4,8 +4,8 @@ import styled from 'styled-components';
 
 const AuthBtn = () => {
     return (
-        <Auth className="nav-icon">
-            <FaUserCircle size={27} />
+        <Auth className="nav-btn auth-btn">
+            <FaUserCircle className="nav-icon" size={27} />
         </Auth>
     )
 }
