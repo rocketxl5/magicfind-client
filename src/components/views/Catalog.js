@@ -1,15 +1,10 @@
-import React, { useContext, Fragment, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams, useLocation } from 'react-router-dom';
 import CatalogItem from './CatalogItem';
-import Spinner from '../layout/Spinner_old.js';
-import { FiXCircle } from 'react-icons/fi';
 
-import styled from 'styled-components';
 
 const Catalog = () => {
   const [isOn, setIsOn] = useState(false);
-  const [quantity, setQuantity] = useState(1);
-  const [isSelectedItem, setIsSelectedItem] = useState(false);
   const location = useLocation();
   const { search } = useParams();
   const result = location.state.result;
@@ -24,7 +19,7 @@ const Catalog = () => {
   return (
     <div>
       {isOn ? (
-        <Fragment>
+        <>
           <h2 className="page-title">Search Results</h2>
           <div className="search-header">
             <span>
@@ -41,7 +36,7 @@ const Catalog = () => {
               return <CatalogItem key={index} card={card} />;
             })}
           </div>
-        </Fragment>
+        </>
       ) : (
         ''
       )}

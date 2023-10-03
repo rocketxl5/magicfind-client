@@ -1,13 +1,10 @@
 import React, {
   useContext,
   useEffect,
-  useRef,
-  useState,
-  useReducer
+  useState
 } from 'react';
-import { v4 as uuidv4 } from 'uuid';
 import Suggestions from './Suggestions';
-import { FiSearch } from 'react-icons/fi';
+
 import { SearchContext } from '../../contexts/SearchContext';
 import { CardContext } from '../../contexts/CardContext';
 import { PathContext } from '../../contexts/PathContext';
@@ -51,7 +48,6 @@ const SearchField = ({
     // are triggered with arrowup and arrowdown keypress.
     if (power) {
       setPower(false);
-      console.log(hoverTarget);
       if (!hoverTarget && listItems) {
         if (currentListItem && previousListItem) {
           currentListItem.style['background'] = '#efefef';

@@ -97,10 +97,10 @@ const SearchCatalog = () => {
         method: 'GET',
         headers: headers,
       };
-      fetch(`${api.serverURL}/api/catalog`, options)
+      fetch(`/api/catalog`, options)
         .then((res) => res.json())
         .then((data) => {
-          setResults(data.data);
+          setResults(data);
           setLoading(false);
         })
         .catch((error) => console.log(error));

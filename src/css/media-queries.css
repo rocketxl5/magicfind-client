@@ -54,27 +54,21 @@
         width: 100%;
         gap: var(--size-2);
     }
-
-    .search-catalog-content {
-        display: flex;
-        width: 100%;
-    }
-
-    .search-catalog {
-        position: static;
-        min-width: clamp(20rem, 60rem, 100%);
-      
-        min-height: var(--header-height);
-        background-color: var(--clr-blue);
-        margin-left: auto;
     
-    }
-    
-   /*************************/
+    /*************************/
     /*************************/
     /* Search Bar Form Style */
     /*************************/
     /*************************/
+    
+    .search-catalog {
+        position: static;
+        min-width: clamp(15rem, 60rem, 75%);
+        min-height: var(--header-height);
+        background-color: var(--clr-blue);
+        margin-left: auto;
+    }
+
     .search-catalog .search-field {
         display: block !important;
         align-self: center;
