@@ -1,14 +1,32 @@
 import React, { useEffect, useContext } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { PathContext } from '../../contexts/PathContext';
-
+import { CardContext } from '../../contexts/CardContext';
+import { api } from '../../api/resources';
 
 const Home = () => {
   const { setPath } = useContext(PathContext);
+  const { setApiCardNames } = useContext(CardContext);
   const location = useLocation();
 
-  // Setting path with component url pathname onload
+
   useEffect(() => {
+
+    const updateCardNames = () => {
+      const headers = { method: 'GET' };
+      // Get all cardnames from server
+      fetch(`${api.serverURL}/api/catalog/cardnames`, headers)
+        .then((res) => res.json())
+        .then((data) => {
+          // console.log(data)
+          // Set api cardNames state with parsed result
+          setApiCardNames(data);
+        })
+        .catch((error) => console.log(error));
+    }
+
+    updateCardNames();
+    // Setting path with component url pathname onload
     setPath(location.pathname);
   }, []);
 

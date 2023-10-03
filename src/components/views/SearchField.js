@@ -226,11 +226,9 @@ const SearchField = ({
         className="search-field"
         type="text"
         value={isOn ? searchTerm : ''}
-        onChange={(e) => handleChange(e)}
-        onFocus={(e) => handleFocus(e)}
-        onBlur={(e) => {
-          handleBlur(e);
-        }}
+        onChange={handleChange}
+        onFocus={handleFocus}
+        onBlur={handleBlur}
         placeholder={
           form.current &&
           (form.current.id === 'search-catalog'
