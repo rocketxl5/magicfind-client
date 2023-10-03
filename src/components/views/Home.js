@@ -20,7 +20,7 @@ const Home = () => {
         .then((data) => {
           console.log(data)
           // Set api cardNames state with parsed result
-          // setApiCardNames(data);
+          setApiCardNames(data);
         })
         .catch((error) => console.log(error));
     }
