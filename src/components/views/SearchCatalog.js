@@ -208,9 +208,10 @@ const SearchCatalog = () => {
   //   console.log();
   // }, [path]);
   return (
+    <div className='search-catalog-content'>
       <form
-        id="search-catalog"
         className="search-catalog"
+        id="search-catalog"
         onSubmit={(e) => fetchSingleCard(e)}
         ref={form}
       >
@@ -229,7 +230,7 @@ const SearchCatalog = () => {
           <SearchField />
         )}
       </form>
-
+    </div>
   );
 };
 

@@ -7,6 +7,7 @@ import SearchBtn from './navbar/SearchBtn';
 import MailBtn from './navbar/MailBtn';
 import AuthBtn from './navbar/AuthBtn';
 import HamburgerBtn from './navbar/HamburgerBtn';
+import SearchCatalog from '../views/SearchCatalog';
 // import SignupBtn from './navbar/SignupBtn';
 // import SigninBtn from './navbar/SigninBtn';
 import ShoppingCartBtn from './navbar/ShoppingCartBtn';
@@ -31,6 +32,7 @@ function Navbar({ isFirefox }) {
             <input type="checkbox" id="mobile-nav" className="mobile-nav" onChange={handleChange} />
             <nav>
                 <section className="left-side-nav">
+                    <SearchCatalog />
                     {/************************************************* 
                      /*  SearchBtn icon mobile only @ screen < 725px 
                      /*  Has a label linked to mobile-nav checkbox 
