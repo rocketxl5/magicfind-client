@@ -18,9 +18,9 @@ const Home = () => {
       fetch(`${api.serverURL}/api/catalog/cardnames`, headers)
         .then((res) => res.json())
         .then((data) => {
-          // console.log(data)
+          console.log(data)
           // Set api cardNames state with parsed result
-          setApiCardNames(data);
+          // setApiCardNames(data);
         })
         .catch((error) => console.log(error));
     }
