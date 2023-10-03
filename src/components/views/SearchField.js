@@ -187,8 +187,7 @@ const SearchField = ({
   };
 
   const handleFocus = (e) => {
-    console.log(form.current.id);
-    console.log(sentForm);
+
     // Clear search if input focus changes
     if (sentForm) {
       if (sentForm !== form.current.id) {
