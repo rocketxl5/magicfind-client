@@ -76,8 +76,14 @@ input:-webkit-autofill:active{
     opacity: 0;
 }
 
-/* SearchCatalog form style */
-form.search-catalog {
+
+/*************************/
+/*************************/
+/* Search Bar Form Style */
+/*************************/
+/*************************/
+
+.search-catalog {
     position: absolute;
     display: flex;
     top: 0;
@@ -97,12 +103,21 @@ form.search-catalog {
     align-self: center;
     margin-inline: auto;
     min-height: 3.5rem;
-    padding-inline: 0.5rem;
+    padding-inline: 0.75rem;
     border-radius: 5px;
-    font-size: var(--fs-125);
+    font-size: var(--fs-150);
 }
 
-/* Login form-element*/
+.search-field::placeholder { 
+    font-size: var(--fs-150);
+}
+
+
+/*************************/
+/*************************/
+/* Login Form Style ******/
+/*************************/
+/*************************/
 .login-password {
     background-color: #fff;
     border: 1px solid var(--clr-grey);
