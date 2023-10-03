@@ -84,32 +84,34 @@ input:-webkit-autofill:active{
 /*************************/
 
 .search-catalog {
-    position: absolute;
+    position: fixed;
     display: flex;
     top: 0;
-    right: var(--size-4);
+    right: var(--size-5);
     width: 0;
     /* width: calc(100% - var(--size-4)); */
     min-height: var(--header-height);
     background-color: var(--clr-blue);
     z-index: 2000;
     transition: 0.2s ease-in;
+    /* background-color: red; */
 }
 
 .search-field {
     /* display: none; */
     /* width: 50%; */
+
     width: 0;
     border: none;
-    margin-inline-end: 1rem;
+    margin-inline-end: 0;
     align-self: center;
     margin-inline-start: auto;
-    min-height: 3.5rem;
+    min-height: 3.75rem;
     padding-inline: 0;
     border-radius: 5px;
     color: var(--clr-dark);
     font-size: var(--fs-150);
-    transition: 0.1s ease-in;
+    /* transition: 0.1s ease-in; */
 }
 
 .search-field::placeholder { 

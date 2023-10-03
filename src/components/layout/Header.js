@@ -29,8 +29,8 @@ const Header = () => {
       }
     }
     if (e.target.classList.contains('search-btn')) {
-      document.querySelector('.search-catalog').style.setProperty('width', 'calc(100% - 4rem)');
-      document.querySelector('.search-field').style.setProperty('width', 'calc(100% - 2rem)');
+      document.querySelector('.search-catalog').style.setProperty('width', 'calc(100% - 5rem)');
+      document.querySelector('.search-field').style.setProperty('width', 'calc(100% - 1rem)');
       document.querySelector('.search-field').style.setProperty('padding-inline', '1rem');
       document.querySelector('.search-field').focus();
       // document.querySelector('#search-btn').style.setProperty('display', 'none');
