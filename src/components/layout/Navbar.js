@@ -3,14 +3,14 @@ import { UserContext } from '../../contexts/UserContext';
 import toggleClass from '../utilities/toggleClass';
 import Menu from './Menu';
 import AuthMenu from './AuthMenu';
-import SearchBtn from './navbar/SearchBtn';
-import MailBtn from './navbar/MailBtn';
-import AuthBtn from './navbar/AuthBtn';
-import HamburgerBtn from './navbar/HamburgerBtn';
+import SearchBtn from './navbtn/SearchBtn';
+import MailBtn from './navbtn/MailBtn';
+import AuthBtn from './navbtn/AuthBtn';
+import HamburgerBtn from './navbtn/HamburgerBtn';
 import SearchCatalog from '../views/SearchCatalog';
 // import SignupBtn from './navbar/SignupBtn';
 // import SigninBtn from './navbar/SigninBtn';
-import ShoppingCartBtn from './navbar/ShoppingCartBtn';
+import ShoppingCartBtn from './navbtn/ShoppingCartBtn';
 
 function Navbar({ isFirefox }) {
 

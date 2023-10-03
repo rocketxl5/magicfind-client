@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Navbar from './Navbar';
-import LogoBtn from './navbar/LogoBtn';
+import LogoBtn from './navbtn/LogoBtn';
 import toggleClass from '../utilities/toggleClass';
 
 const Header = () => {
@@ -31,6 +31,7 @@ const Header = () => {
     if (e.target.classList.contains('search-btn')) {
       document.querySelector('.search-catalog').style.setProperty('width', 'calc(100% - 4rem)');
       document.querySelector('.search-field').style.setProperty('display', 'block');
+      document.querySelector('.search-field').focus();
       // document.querySelector('#search-btn').style.setProperty('display', 'none');
       setAction('display-search')
     }
