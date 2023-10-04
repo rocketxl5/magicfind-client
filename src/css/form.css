@@ -93,7 +93,7 @@ input:-webkit-autofill:active{
     min-height: var(--header-height);
     background-color: var(--clr-blue);
     z-index: 2000;
-    transition: 0.2s ease-in;
+    transition: 0.1s ease-in;
     /* background-color: red; */
 }
 
@@ -108,21 +108,12 @@ input:-webkit-autofill:active{
 }
 
 .search-field {
-    /* display: none; */
-    /* width: 50%; */
-    /* align-self: center; */
     width: calc(100% - 1rem);
-    
-    margin-inline-start: 1rem;
-    
-    
+    margin-inline-start: 1rem; 
     min-height: 3.5rem;
-    /* padding-inline: 0;  */
     border-radius: 5px;
-    
     color: var(--clr-dark);
     font-size: var(--fs-150);
-    transition: 0.2s ease-in;
 }
 
 .search-field::placeholder { 
