@@ -5,7 +5,6 @@ import toggleClass from '../utilities/toggleClass';
 
 const Header = () => {
   const [isFirefox, setIsFirefox] = useState(false);
-  const [innerWidth, setInnerWidth] = useState(0);
   const [action, setAction] = useState('')
 
   // Check if browser is firefox
@@ -16,11 +15,12 @@ const Header = () => {
 
   // Handle search bar and menu animation for mobile @ width < 725px
   const handleClick = (e) => {  
-
+    document.querySelector('.search-catalog').style.transition = "all 0.1s ease";
     // Close menu when click on nav links or logo
     if (e.target.classList.contains('nav-link') || e.target.classList.contains('logo-btn')) {
       // Uncheck checkbox to close mobile menu
       document.querySelector('.mobile-nav').checked = false;
+
       document.querySelector('.menu').style.setProperty('left', '100%');
       document.querySelector('.search-btn').style.setProperty('display', 'block');
       if (isFirefox) {
