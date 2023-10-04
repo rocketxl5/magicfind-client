@@ -31,7 +31,7 @@ const Header = () => {
     if (e.target.classList.contains('search-btn')) {
       document.querySelector('.search-catalog').style.setProperty('width', 'calc(100% - 5rem)');
       document.querySelector('.search-field').style.setProperty('width', 'calc(100% - 1rem)');
-      document.querySelector('.search-field').style.setProperty('padding-inline', '1rem');
+      // document.querySelector('.search-field').style.setProperty('padding-inline', '1rem');
       document.querySelector('.search-field').focus();
       // document.querySelector('#search-btn').style.setProperty('display', 'none');
       setAction('display-search')
@@ -40,7 +40,7 @@ const Header = () => {
       if (action === 'display-search' && document.querySelector('.mobile-nav').checked) {
         document.querySelector('.search-catalog').style.setProperty('width', '0');
         document.querySelector('.search-field').style.setProperty('width', '0');
-        document.querySelector('.search-field').style.setProperty('padding-inline', '0');
+        // document.querySelector('.search-field').style.setProperty('padding-inline', '0');
         // document.querySelector('#search-btn').style.setProperty('display', 'block');
         setAction('');
       } else if (!document.querySelector('.mobile-nav').checked) {

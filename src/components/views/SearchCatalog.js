@@ -211,7 +211,7 @@ const SearchCatalog = () => {
       <form
       id="search-catalog"
       className="search-catalog"
-        onSubmit={(e) => fetchSingleCard(e)}
+      onSubmit={fetchSingleCard}
         ref={form}
       >
         {!sentForm || sentForm === 'search-catalog' ? (
