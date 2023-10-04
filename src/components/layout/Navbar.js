@@ -31,7 +31,6 @@ function Navbar({ isFirefox }) {
             <input type="checkbox" id="mobile-nav" className="mobile-nav" onChange={handleChange} />
             <nav>
                 <section className="left-side-nav">
-                    <SearchBar />
                     {/************************************************* 
                      /*  SearchBtn icon mobile only @ screen < 725px 
                      /*  Has a label linked to mobile-nav checkbox 

@@ -1,9 +1,10 @@
 /* Navigation */
-.navbar {
-    /* position: relative; */
-    /* display: flex;
-    align-self: center; */
+.logo-btn * {
+    color: var(--clr-grey);
+}
 
+.nav-btn {
+    cursor: pointer;
 }
 
 .nav-btn * {
@@ -53,12 +54,8 @@ nav .right-side-nav .nav-link {
 }
 
 
-.nav-btn {
+.nav-btn * {
     color: var(--clr-grey);
-}
-
-.nav-btn:hover {
-    cursor: pointer;
 }
 
 #mobile-nav {
@@ -71,7 +68,6 @@ nav .right-side-nav .nav-link {
     align-items: center;
     width: var(--size-3);
     min-height: 2em;
-    /* padding-block: 1em; */
     cursor: pointer;
 }
 

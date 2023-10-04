@@ -105,7 +105,6 @@ input:-webkit-autofill:active{
     width: calc(100% - var(--size-1));
     margin-left: auto;
     border-radius: 5px;
-    
     color: var(--clr-dark);
     font-size: var(--fs-150);
     /* transition: 0.2s ease-in; */

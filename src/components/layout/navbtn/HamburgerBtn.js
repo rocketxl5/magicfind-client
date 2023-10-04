@@ -2,11 +2,11 @@ import React from 'react';
 
 const HamburgerBtn = () => {
     return (
-        <div>
-            <label htmlFor="mobile-nav" className="mobile-nav-label nav-btn hamburger-btn">
-                <span></span>
-            </label>
-        </div>
+
+        <label htmlFor="mobile-nav" className="nav-btn hamburger-btn mobile-nav-label ">
+            <span></span>
+        </label>
+
     )
 }
 

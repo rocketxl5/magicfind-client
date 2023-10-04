@@ -11,12 +11,11 @@ const Header = () => {
   // Check if browser is firefox
   useEffect(() => {
     setIsFirefox(window.navigator.userAgent.includes('Firefox'));
-    // setInnerWidth(window.innerWidth);
   }, []);
 
   // Handle search bar and menu animation for mobile @ width < 725px
   const handleClick = (e) => {
-    // document.querySelector('.search-bar').style.transition = "all 0.1s ease";
+
     // Close menu when click on nav links or logo
     if (e.target.classList.contains('nav-link') || e.target.classList.contains('logo-btn')) {
       // Uncheck checkbox to close mobile menu
