@@ -357,12 +357,6 @@ ul.search-result {
   cursor: pointer;
 }
 
-/* form.search-catalog {
-  width: 100%;
-  margin: 0 auto;
-  background: #fff;
-} */
-
 /* User Page section blocks */
 main.user-page {
   display: flex;

@@ -191,7 +191,7 @@ const SearchBar = () => {
   }, [checked])
 
   useEffect(() => {
-    if (sentForm === 'search-catalog') {
+    if (sentForm === 'search-form') {
       setIsOn(true);
     } else {
       setIsOn(false);
@@ -199,22 +199,15 @@ const SearchBar = () => {
     }
   }, [sentForm]);
 
-  // Clear search input on page change
-  // useEffect(() => {
-  //   console.log(path);
-  //   // if (path !== 'search-catalog') {
-  //   searchInput.current.value = '';
-  //   // }
-  //   console.log();
-  // }, [path]);
   return (
+    <div className="search-bar">
     <form
-      id="search-catalog"
-      className="search-catalog"
+        id="search-form"
+        className="search-form"
       onSubmit={(e) => fetchSingleCard(e)}
       ref={form}
     >
-      {!sentForm || sentForm === 'search-catalog' ? (
+        {!sentForm || sentForm === 'search-form' ? (
         <SearchField
           searchTerm={searchTerm}
           setSearchTerm={setSearchTerm}
@@ -229,7 +222,7 @@ const SearchBar = () => {
         <SearchField />
       )}
     </form>
-
+    </div>
   );
 };
 

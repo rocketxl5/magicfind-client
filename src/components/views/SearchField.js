@@ -233,7 +233,7 @@ const SearchField = ({
         }}
         placeholder={
           form.current &&
-          (form.current.id === 'search-catalog'
+          (form.current.id === 'search-form'
             ? 'Search Magic Find'
             : form.current.id === 'search-api'
               ? 'Search Skryfall API'
