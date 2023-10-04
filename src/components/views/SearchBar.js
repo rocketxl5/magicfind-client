@@ -208,28 +208,29 @@ const SearchBar = () => {
   //   console.log();
   // }, [path]);
   return (
-    <form
-      id="search-catalog"
-      className="search-catalog"
-      onSubmit={(e) => fetchSingleCard(e)}
-      ref={form}
-    >
-      {!sentForm || sentForm === 'search-catalog' ? (
-        <SearchField
-          searchTerm={searchTerm}
-          setSearchTerm={setSearchTerm}
-          setRequestSent={setRequestSent}
-          cardNames={cardNames}
-          listItems={listItems}
-          searchInput={searchInput}
-          isOn={isOn}
-          form={form}
-        />
-      ) : (
-        <SearchField />
-      )}
-    </form>
-
+    <div className="search-bar">
+      <form
+        id="search-catalog"
+        className="search-form"
+        onSubmit={(e) => fetchSingleCard(e)}
+        ref={form}
+      >
+        {!sentForm || sentForm === 'search-catalog' ? (
+          <SearchField
+            searchTerm={searchTerm}
+            setSearchTerm={setSearchTerm}
+            setRequestSent={setRequestSent}
+            cardNames={cardNames}
+            listItems={listItems}
+            searchInput={searchInput}
+            isOn={isOn}
+            form={form}
+          />
+        ) : (
+          <SearchField />
+        )}
+      </form>
+    </div>
   );
 };
 

@@ -216,7 +216,7 @@ const SearchField = ({
   };
 
   return (
-    <div className="field-container">
+    <>
       <input
         className="search-field"
         type="text"
@@ -260,7 +260,7 @@ const SearchField = ({
             })}
         </ul>
       }
-    </div>
+    </>
   );
 };
 // const Search = styled.div`
