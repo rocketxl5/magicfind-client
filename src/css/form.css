@@ -93,7 +93,7 @@ input:-webkit-autofill:active{
     min-height: var(--header-height);
     background-color: var(--clr-blue);
     z-index: 2000;
-    transition: 0.1s ease-in;
+    transition: 0.2s ease-in;
     /* background-color: red; */
 }
 
@@ -112,8 +112,10 @@ input:-webkit-autofill:active{
     margin-inline-start: 1rem; 
     min-height: 3.5rem;
     border-radius: 5px;
+    
     color: var(--clr-dark);
     font-size: var(--fs-150);
+    /* transition: 0.2s ease-in; */
 }
 
 .search-field::placeholder { 

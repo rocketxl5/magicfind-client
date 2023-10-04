@@ -14,7 +14,6 @@ import ShoppingCartBtn from './navbtn/ShoppingCartBtn';
 
 function Navbar({ isFirefox }) {
 
-    const [action, setAction] = useState('')
     const { user, setUser } = useContext(UserContext)
 
     // Handle hamburger animation for firefox (has() css function not supported)
