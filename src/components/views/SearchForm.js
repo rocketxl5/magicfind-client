@@ -15,9 +15,9 @@ import { CardContext } from '../../contexts/CardContext';
 import { UserContext } from '../../contexts/UserContext';
 import { api } from '../../api/resources';
 
-import styled from 'styled-components';
 
-const SearchBar = () => {
+
+const SearchForm = () => {
   const [loading, setLoading] = useState(false);
   const [checked, setChecked] = useState(false);
 
@@ -185,13 +185,7 @@ const SearchBar = () => {
   };
 
   useEffect(() => {
-    if (checked) {
-
-    }
-  }, [checked])
-
-  useEffect(() => {
-    if (sentForm === 'search-catalog') {
+    if (sentForm === 'search-form') {
       setIsOn(true);
     } else {
       setIsOn(false);
@@ -199,22 +193,15 @@ const SearchBar = () => {
     }
   }, [sentForm]);
 
-  // Clear search input on page change
-  // useEffect(() => {
-  //   console.log(path);
-  //   // if (path !== 'search-catalog') {
-  //   searchInput.current.value = '';
-  //   // }
-  //   console.log();
-  // }, [path]);
   return (
+    <div className="search-bar">
     <form
-      id="search-catalog"
-      className="search-catalog"
-      onSubmit={(e) => fetchSingleCard(e)}
+        id="search-form"
+        className="search-form"
+      onSubmit={fetchSingleCard}
       ref={form}
     >
-      {!sentForm || sentForm === 'search-catalog' ? (
+        {!sentForm || sentForm === 'search-form' ? (
         <SearchField
           searchTerm={searchTerm}
           setSearchTerm={setSearchTerm}
@@ -229,8 +216,8 @@ const SearchBar = () => {
         <SearchField />
       )}
     </form>
-
+    </div>
   );
 };
 
-export default SearchBar;
+export default SearchForm;

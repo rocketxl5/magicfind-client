@@ -7,7 +7,7 @@
 }
 
 .nav-btn * {
-    pointer-events: none
+    pointer-events: none;
 }
 
 nav {
@@ -32,7 +32,7 @@ nav .right-side-nav {
 
 nav .right-side-nav ul {
     position: fixed;
-    inset: var(--header-height) 0 0 100%;
+    inset: 5rem 0 0 100%;
     display: flex;
     flex-direction: column;
     min-height: calc(100vh - var(--header-height));
@@ -52,11 +52,11 @@ nav .right-side-nav .nav-link {
 }
 
 
-.nav-icon {
+.nav-btn {
     color: var(--clr-grey);
 }
 
-.nav-icon:hover {
+.nav-btn:hover {
     cursor: pointer;
 }
 
@@ -69,8 +69,8 @@ nav .right-side-nav .nav-link {
     display: flex;
     align-items: center;
     width: var(--size-3);
-    height: 2em;
-    padding-block: 1em;
+    min-height: 2em;
+    /* padding-block: 1em; */
     cursor: pointer;
 }
 

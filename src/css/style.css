@@ -80,7 +80,7 @@ a {
 }
 
 .main-header a {
-    color: var(--clr-grey);
+    /* color: var(--clr-grey); */
 }
 
 .wrapper {
