@@ -5,7 +5,7 @@ export const SearchContext = createContext(null);
 export const SearchProvider = ({ children }) => {
   const [searchResult, setSearchResult] = useState([]);
   const [isValidLength, setIsValidLength] = useState(false);
-  // SearchBar & SearchStore only
+  // SearchForm & SearchStore only
   const [showSuggestions, setShowSuggestions] = useState(true);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [sentForm, setSentForm] = useState(null);

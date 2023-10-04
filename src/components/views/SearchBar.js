@@ -17,7 +17,7 @@ import { api } from '../../api/resources';
 
 import styled from 'styled-components';
 
-const SearchCatalog = () => {
+const SearchBar = () => {
   const [loading, setLoading] = useState(false);
   const [checked, setChecked] = useState(false);
 
@@ -97,10 +97,10 @@ const SearchCatalog = () => {
         method: 'GET',
         headers: headers,
       };
-      fetch(`/api/catalog`, options)
+      fetch(`${api.serverURL}/api/catalog`, options)
         .then((res) => res.json())
         .then((data) => {
-          setResults(data);
+          setResults(data.data);
           setLoading(false);
         })
         .catch((error) => console.log(error));
@@ -208,29 +208,29 @@ const SearchCatalog = () => {
   //   console.log();
   // }, [path]);
   return (
-      <form
+    <form
       id="search-catalog"
       className="search-catalog"
-      onSubmit={fetchSingleCard}
-        ref={form}
-      >
-        {!sentForm || sentForm === 'search-catalog' ? (
-          <SearchField
-            searchTerm={searchTerm}
-            setSearchTerm={setSearchTerm}
-            setRequestSent={setRequestSent}
-            cardNames={cardNames}
-            listItems={listItems}
-            searchInput={searchInput}
-            isOn={isOn}
-            form={form}
-          />
-        ) : (
-          <SearchField />
-        )}
-      </form>
+      onSubmit={(e) => fetchSingleCard(e)}
+      ref={form}
+    >
+      {!sentForm || sentForm === 'search-catalog' ? (
+        <SearchField
+          searchTerm={searchTerm}
+          setSearchTerm={setSearchTerm}
+          setRequestSent={setRequestSent}
+          cardNames={cardNames}
+          listItems={listItems}
+          searchInput={searchInput}
+          isOn={isOn}
+          form={form}
+        />
+      ) : (
+        <SearchField />
+      )}
+    </form>
 
   );
 };
 
-export default SearchCatalog;
+export default SearchBar;

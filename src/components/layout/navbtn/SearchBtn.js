@@ -13,9 +13,7 @@ const SearchBtn = () => {
 }
 
 const Search = styled.div`
-    @media (width >= 725px) {
-        display: none;
-    }
+   
 `;
 
 const Label = styled.label`

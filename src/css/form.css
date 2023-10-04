@@ -76,44 +76,37 @@ input:-webkit-autofill:active{
     opacity: 0;
 }
 
-
-/*************************/
-/*************************/
-/* Search Bar Form Style */
-/*************************/
-/*************************/
-
-.search-catalog {
-    position: fixed;
+/* SearchCatalog form style */
+.search-bar {
+    position: absolute;
     display: flex;
-
-    right: var(--size-6);
+    top: 0;
+    right: var(--size-5);
     width: 0;
     /* width: calc(100% - var(--size-4)); */
     min-height: var(--header-height);
     background-color: var(--clr-blue);
     z-index: 2000;
-    transition: all 0.1s ease;
-    background-color: red;
+    transition: 0.1s ease-in-out;
 }
 
-.field-container {
-    width: calc(100% - 1rem);
+.search-form {
+    display: flex;
+    width: calc(100% - var(--size-1));
+    min-height: var(--size-4);
+    margin-block: 0.5rem;
+    margin-left: auto;
     background-color: #fff;
-    align-self: center;
-    min-height: 3.5rem;
-    margin-inline-start: auto;
     border-radius: 5px;
-
 }
 
 .search-field {
-    width: calc(100% - 1rem);
-    margin-inline-start: 1rem; 
-    min-height: 3.5rem;
+    border: none;
+    width: calc(100% - var(--size-1));
+    margin-left: auto;
     border-radius: 5px;
-    color: var(--clr-dark);
-    font-size: var(--fs-150);
+    font-size: var(--fs-125);
+    
 }
 
 .search-field::placeholder { 

@@ -8,7 +8,6 @@
 
 .nav-btn * {
     pointer-events: none;
-    /* width: var(--size-4); */
 }
 
 nav {
@@ -34,7 +33,7 @@ nav .right-side-nav {
 
 nav .right-side-nav ul {
     position: fixed;
-    inset: var(--header-height) 0 0 100%;
+    inset: 5rem 0 0 100%;
     display: flex;
     flex-direction: column;
     min-height: calc(100vh - var(--header-height));
@@ -54,11 +53,11 @@ nav .right-side-nav .nav-link {
 }
 
 
-.nav-icon {
+.nav-btn {
     color: var(--clr-grey);
 }
 
-.nav-icon:hover {
+.nav-btn:hover {
     cursor: pointer;
 }
 
@@ -71,8 +70,8 @@ nav .right-side-nav .nav-link {
     display: flex;
     align-items: center;
     width: var(--size-3);
-    height: 2em;
-    padding-block: 1em;
+    min-height: 2em;
+    /* padding-block: 1em; */
     cursor: pointer;
 }
 
@@ -120,16 +119,5 @@ header.checked .mobile-nav-label::after {
 header:has(input:checked) .mobile-nav-label span,
 header.checked .mobile-nav-label span {
     opacity: 0;
-}
-
-/* header:has(input:checked) nav ul,
-header.checked nav ul {
-    left: 0;
-}  */
-
-/* Prevent header scrolling when menu is open on mobile */
-header:has(input:checked),
-header.checked {
-    /* position: sticky; */
 }
 
