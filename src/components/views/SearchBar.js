@@ -17,7 +17,7 @@ import { api } from '../../api/resources';
 
 import styled from 'styled-components';
 
-const SearchCatalog = () => {
+const SearchBar = () => {
   const [loading, setLoading] = useState(false);
   const [checked, setChecked] = useState(false);
 
@@ -208,29 +208,29 @@ const SearchCatalog = () => {
   //   console.log();
   // }, [path]);
   return (
-      <form
-        id="search-catalog"
-        className="search-catalog"
-        onSubmit={(e) => fetchSingleCard(e)}
-        ref={form}
-      >
-        {!sentForm || sentForm === 'search-catalog' ? (
-          <SearchField
-            searchTerm={searchTerm}
-            setSearchTerm={setSearchTerm}
-            setRequestSent={setRequestSent}
-            cardNames={cardNames}
-            listItems={listItems}
-            searchInput={searchInput}
-            isOn={isOn}
-            form={form}
-          />
-        ) : (
-          <SearchField />
-        )}
-      </form>
+    <form
+      id="search-catalog"
+      className="search-catalog"
+      onSubmit={(e) => fetchSingleCard(e)}
+      ref={form}
+    >
+      {!sentForm || sentForm === 'search-catalog' ? (
+        <SearchField
+          searchTerm={searchTerm}
+          setSearchTerm={setSearchTerm}
+          setRequestSent={setRequestSent}
+          cardNames={cardNames}
+          listItems={listItems}
+          searchInput={searchInput}
+          isOn={isOn}
+          form={form}
+        />
+      ) : (
+        <SearchField />
+      )}
+    </form>
 
   );
 };
 
-export default SearchCatalog;
+export default SearchBar;
