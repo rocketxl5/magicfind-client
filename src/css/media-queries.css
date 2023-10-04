@@ -69,11 +69,20 @@
         margin-left: auto;
     }
 
+    .field-container {
+        min-width: 100%;
+
+       
+        border-radius: 5px;
+    
+    }
+
     .search-catalog .search-field {
-        display: block !important;
+       
         align-self: center;
-        max-width: 100%;
+        min-width: 100%;
         min-height: 4rem;
+        margin-inline: 0;
         font-size: var(--fs-175);
         padding-inline: var(--size-1);
       
