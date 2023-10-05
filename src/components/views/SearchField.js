@@ -226,7 +226,7 @@ const SearchField = ({
         onBlur={handleBlur}
         placeholder={
           form.current &&
-          (form.current.id === 'search-form'
+          (form.current.id === 'search-catalog'
             ? 'Search Magic Find'
             : form.current.id === 'search-api'
               ? 'Search Skryfall API'
