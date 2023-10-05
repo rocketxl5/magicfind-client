@@ -8,7 +8,6 @@ import Suggestions from './Suggestions';
 import { SearchContext } from '../../contexts/SearchContext';
 import { CardContext } from '../../contexts/CardContext';
 import { PathContext } from '../../contexts/PathContext';
-import styled from 'styled-components';
 
 const SearchField = ({
   searchTerm,
@@ -29,18 +28,11 @@ const SearchField = ({
   const { isValidLength, setIsValidLength } = useContext(SearchContext);
   const { text, setText } = useContext(SearchContext);
   const { sentForm, setSentForm } = useContext(SearchContext);
-  // const { searchTerm, setSearchTerm } = useContext(SearchContext);
   const { setIsSubmitted } = useContext(SearchContext);
   const { tracker, setTracker } = useContext(CardContext);
   const { path } = useContext(PathContext);
 
-  // Testing searchTerm changes
-  // useEffect(() => {
-  //   if (searchTerm) {
-  //     console.log(searchTerm);
-  //   }
-  // }, [searchTerm]);
-  // console.log(form);
+
   // Rendering and styling of a Suggestions list item single component
   // Is triggered on currentListItem state change and hoverList state change
   useEffect(() => {
@@ -263,18 +255,5 @@ const SearchField = ({
     </>
   );
 };
-// const Search = styled.div`
-//   border: 1px solid #333;
-//   display: flex;
-// `;
-// const Input = styled.input`
-//   display: inline-block;
-//   padding: 10px;
-//   font-size: 1em;
-//   width: 100%;
-//   &:focus {
-//     outline: none;
-//     box-shadow: 0;
-//   }
-// `;
+
 export default SearchField;
