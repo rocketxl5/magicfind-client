@@ -7,26 +7,28 @@ import styled from 'styled-components';
 const MailIcon = () => {
     const { unreadMail } = useContext(UserContext);
     return (
-      <Mail className="nav-btn main-btn">
-            <Link to="/mail/inbox" title="Mailbox">
-                {unreadMail > 0 && (
-                    <UnreadContainer>
-                        <Unread>{unreadMail}</Unread>
-                    </UnreadContainer>
-                )}
+      <Div>
+        <Mail className="nav-btn mail-btn" to="/mail/inbox" title=" To Mailbox">
+          {unreadMail > 0 && (
+            <UnreadContainer>
+              <Unread>{unreadMail}</Unread>
+            </UnreadContainer>
+          )}
           <FiMail className="nav-icon" size={27} />
-            </Link>
         </Mail>
+      </Div>
     )
 }
 
-const Mail = styled.div`
+
+
+const Div = styled.div`
   position: relative;
   display: flex;
+`;
 
-  a svg {
-    display: block;
-  }
+const Mail = styled(Link)`
+   color: var(--clr-grey);
 `;
 
 const UnreadContainer = styled.div`

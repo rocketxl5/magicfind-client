@@ -4,7 +4,12 @@
 }
 
 .nav-btn {
+    display: block;
     cursor: pointer;
+}
+
+.nav-btn svg {
+    display: block;
 }
 
 .nav-btn * {
@@ -51,11 +56,6 @@ nav .right-side-nav .nav-link {
     font-size: var(--fs-175);
     color: var(--clr-dark);
     border-bottom: 1px solid var(--clr-grey);
-}
-
-
-.nav-btn * {
-    color: var(--clr-grey);
 }
 
 #mobile-nav {

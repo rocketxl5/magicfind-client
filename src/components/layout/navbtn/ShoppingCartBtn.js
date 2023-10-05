@@ -7,28 +7,29 @@ import styled from 'styled-components';
 const ShoppingCartBtn = () => {
   const { itemsCount } = useContext(ShoppingCartContext);
   return (
-    <Cart className="nav-btn cart-btn">
-      <Link to="/shopping-cart">
+    <Div>
+      <Cart to="/shopping-cart" className="nav-btn cart-btn">
         {itemsCount > 0 && (
           <CountContainer>
             <Count>{itemsCount}</Count>
           </CountContainer>
         )}
         <FiShoppingCart className="nav-icon" size={27} title="To Shopping Cart" />
-      </Link>
-    </Cart>
+      </Cart>
+    </Div>
   )
 }
 
-const Cart = styled.div`
+
+
+const Div = styled.div`
   position: relative;
   display: flex;
-  text-align: center;
-
-  a svg {
-    display: block;
-  }
 `;
+
+const Cart = styled(Link)`
+  color: var(--clr-grey);
+`
 
 const CountContainer = styled.div`
   position: absolute;

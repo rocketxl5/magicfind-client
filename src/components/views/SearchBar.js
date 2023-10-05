@@ -210,7 +210,7 @@ const SearchBar = () => {
   return (
     <div className="search-bar">
       <form
-        id="search-catalog"
+        id="search-form"
         className="search-form"
         onSubmit={(e) => fetchSingleCard(e)}
         ref={form}

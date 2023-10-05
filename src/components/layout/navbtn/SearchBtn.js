@@ -15,8 +15,8 @@ const Label = styled.label`
 }
 svg {
     display: block;
-    
-    @media (width >= 725px) {
+
+    @media (width >= 775px) {
         display: none;
     }
 }
