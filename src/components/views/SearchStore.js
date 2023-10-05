@@ -26,8 +26,7 @@ const SearchStore = () => {
   const [cardName, setCardName] = useState('');
   const [cardNames, setCardNames] = useState([]);
   const [requestSent, setRequestSent] = useState(false);
-  const [isOn, setIsOn] = useState(false);
-  const { setIsValidLength } = useContext(SearchContext);
+  const { setIsValidLength, setCallToAction } = useContext(SearchContext);
 
   const { user } = useContext(UserContext);
   const { isSubmitted, setIsSubmitted } = useContext(SearchContext);
@@ -46,7 +45,7 @@ const SearchStore = () => {
   // input text for search term
   const searchInput = useRef(null);
   // form
-  const form = useRef(null);
+  const currentForm = useRef(null);
 
   const params = useParams();
 
@@ -211,9 +210,9 @@ const SearchStore = () => {
   };
   useEffect(() => {
     if (sentForm === 'search-store') {
-      setIsOn(true);
+      setCallToAction(true);
     } else {
-      setIsOn(false);
+      setCallToAction(false);
       setSearchTerm('');
     }
   }, [sentForm]);
@@ -222,7 +221,7 @@ const SearchStore = () => {
     <Fragment>
       <h2 className="page-title">Enter A Card Name</h2>
 
-      <form id="search-store" onSubmit={(e) => fetchSingleCard(e)} ref={form}>
+      <form id="search-store" onSubmit={(e) => fetchSingleCard(e)} ref={currentForm}>
         {!sentForm || sentForm === 'search-store' ? (
           <SearchField
             searchTerm={searchTerm}
@@ -231,11 +230,10 @@ const SearchStore = () => {
             cardNames={cardNames}
             listItems={listItems}
             searchInput={searchInput}
-            isOn={isOn}
-            form={form}
+            currentForm={currentForm}
           />
         ) : (
-          <SearchField form={form} />
+            <SearchField currentForm={currentForm} />
         )}
       </form>
       <Buttons>

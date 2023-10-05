@@ -23,12 +23,11 @@ const Search = () => {
   const [requestSent, setRequestSent] = useState(false);
   const [cardName, setCardName] = useState('');
   const [cardNames, setCardNames] = useState([]);
-  const [isOn, setIsOn] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
   // const { searchTerm, setSearchTerm } = useContext(SearchContext);
   const [cards, setCards] = useState([]);
   const { isSubmitted, setIsSubmitted } = useContext(SearchContext);
-  const { setIsValidLength } = useContext(SearchContext);
+  const { setIsValidLength, setCallToAction } = useContext(SearchContext);
   const { setText } = useContext(SearchContext);
   const { sentForm } = useContext(SearchContext);
   const { apiCardNames } = useContext(CardContext);
@@ -42,7 +41,7 @@ const Search = () => {
   // input text for search term
   const searchInput = useRef(null);
   // form
-  const form = useRef(null);
+  const currentForm = useRef(null);
 
   // Format name to fit scryfall api's requisite (word+word)
   const sanitizeString = (string) => {
@@ -55,7 +54,7 @@ const Search = () => {
   const fetchSingleCard = (e) => {
     // bounce back if sent form does not match current form's id
     // This block other forms in the view to process the request down below
-    if (sentForm !== form.current.id) {
+    if (sentForm !== currentForm.current.id) {
       return;
     }
 
@@ -227,9 +226,9 @@ const Search = () => {
 
   useEffect(() => {
     if (sentForm === 'search-api') {
-      setIsOn(true);
+      setCallToAction(true);
     } else {
-      setIsOn(false);
+      setCallToAction(false);
       setSearchTerm('');
     }
   }, [sentForm]);
@@ -237,7 +236,7 @@ const Search = () => {
     <Fragment>
       <h2 className="page-title">Enter A Card Name</h2>
 
-      <form id="search-api" onSubmit={(e) => fetchSingleCard(e)} ref={form}>
+      <form id="search-api" onSubmit={(e) => fetchSingleCard(e)} ref={currentForm}>
         {!sentForm || sentForm === 'search-api' ? (
           <SearchField
             searchTerm={searchTerm}
@@ -246,12 +245,11 @@ const Search = () => {
             searchInput={searchInput}
             setRequestSent={setRequestSent}
             requestSent={requestSent}
-            isOn={isOn}
-            form={form}
+            currentForm={currentForm}
             cardNames={cardNames}
           />
         ) : (
-          <SearchField form={form} />
+            <SearchField currentForm={currentForm} />
         )}
       </form>
       <div>

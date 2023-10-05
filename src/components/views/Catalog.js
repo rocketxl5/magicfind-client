@@ -4,21 +4,21 @@ import CatalogItem from './CatalogItem';
 
 
 const Catalog = () => {
-  const [isOn, setIsOn] = useState(false);
+  const [isValid, setIsValid] = useState(false);
   const location = useLocation();
   const { search } = useParams();
   const result = location.state.result;
 
   useEffect(() => {
-    setIsOn(true);
+    setIsValid(true);
   }, [location]);
 
-  const clearSearch = () => {
-    setIsOn(false);
+  const handleClick = () => {
+    setIsValid(false);
   };
   return (
     <div>
-      {isOn ? (
+      {isValid ? (
         <>
           <h2 className="page-title">Search Results</h2>
           <div className="search-header">
@@ -28,7 +28,7 @@ const Catalog = () => {
                 .toLowerCase()} ${result.length} 
               ` + (result.length > 1 ? 'Results' : 'Result')}
             </span>
-            <div className="clear-search" onClick={() => clearSearch()}></div>
+            <div className="clear-search" onClick={handleClick}></div>
           </div>
 
           <div className="catalog-items">
