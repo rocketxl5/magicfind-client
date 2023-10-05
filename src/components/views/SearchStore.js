@@ -46,7 +46,7 @@ const SearchStore = () => {
   // input text for search term
   const searchInput = useRef(null);
   // form
-  const form = useRef(null);
+  const currentForm = useRef(null);
 
   const params = useParams();
 
@@ -222,7 +222,7 @@ const SearchStore = () => {
     <Fragment>
       <h2 className="page-title">Enter A Card Name</h2>
 
-      <form id="search-store" onSubmit={(e) => fetchSingleCard(e)} ref={form}>
+      <form id="search-store" onSubmit={(e) => fetchSingleCard(e)} ref={currentForm}>
         {!sentForm || sentForm === 'search-store' ? (
           <SearchField
             searchTerm={searchTerm}
@@ -232,10 +232,10 @@ const SearchStore = () => {
             listItems={listItems}
             searchInput={searchInput}
             isOn={isOn}
-            form={form}
+            currentForm={currentForm}
           />
         ) : (
-          <SearchField form={form} />
+            <SearchField currentForm={currentForm} />
         )}
       </form>
       <Buttons>

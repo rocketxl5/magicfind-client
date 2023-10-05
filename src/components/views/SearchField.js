@@ -17,7 +17,7 @@ const SearchField = ({
   listItems,
   searchInput,
   isOn,
-  form
+  currentForm
 }) => {
   const [currentListItem, setCurrentListItem] = useState(null);
   const [previousListItem, setPreviousListItem] = useState(null);
@@ -178,7 +178,7 @@ const SearchField = ({
 
     // Clear search if input focus changes
     if (sentForm) {
-      if (sentForm !== form.current.id) {
+      if (sentForm !== currentForm.current.id) {
         if (setSearchTerm) {
           setSearchTerm('');
         }
@@ -186,7 +186,7 @@ const SearchField = ({
       }
     }
     setTracker(0);
-    setSentForm(form.current.id);
+    setSentForm(currentForm.current.id);
     if (text.length > 2) {
       setIsValidLength(true);
       setHoverList(false);
@@ -217,10 +217,10 @@ const SearchField = ({
         onFocus={handleFocus}
         onBlur={handleBlur}
         placeholder={
-          form.current &&
-          (form.current.id === 'search-catalog'
+          currentForm.current &&
+          (currentForm.current.id === 'search-catalog'
             ? 'Search Magic Find'
-            : form.current.id === 'search-api'
+            : currentForm.current.id === 'search-api'
               ? 'Search Skryfall API'
               : 'Search Your Store')
         }

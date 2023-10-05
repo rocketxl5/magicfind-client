@@ -18,11 +18,11 @@ const SearchBar = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [cardName, setCardName] = useState('');
   const [cardNames, setCardNames] = useState([]);
-  const [requestSent, setRequestSent] = useState(false);
   const [isOn, setIsOn] = useState(false);
   const [results, setResults] = useState([]);
-  const { setIsValidLength } = useContext(SearchContext);
+  const [requestSent, setRequestSent] = useState(false);
 
+  const { setIsValidLength } = useContext(SearchContext);
   const { isSubmitted, setIsSubmitted } = useContext(SearchContext);
   const { showSuggestions, setShowSuggestions } = useContext(SearchContext);
   const { setText } = useContext(SearchContext);
@@ -30,13 +30,12 @@ const SearchBar = () => {
   const { setTracker } = useContext(CardContext);
   const { path, setPath } = useContext(PathContext);
   const history = useHistory();
-
   // ul with card names in autocomplete list
   const listItems = useRef(null);
   // input text for search term
   const searchInput = useRef(null);
-  // form
-  const form = useRef(null);
+
+  const currentForm = useRef(null);
 
   useEffect(() => {
     if (localStorage.getItem('catalogCardName')) {
@@ -121,7 +120,7 @@ const SearchBar = () => {
 
   // Submit search request to backend
   const fetchSingleCard = (e) => {
-    if (sentForm !== form.current.id) {
+    if (sentForm !== currentForm.current.id) {
       return;
     }
 
@@ -192,7 +191,7 @@ const SearchBar = () => {
         id="search-catalog"
         className="search-form"
         onSubmit={(e) => fetchSingleCard(e)}
-        ref={form}
+        ref={currentForm}
       >
         {!sentForm || sentForm === 'search-catalog' ? (
           <SearchField
@@ -203,7 +202,7 @@ const SearchBar = () => {
             listItems={listItems}
             searchInput={searchInput}
             isOn={isOn}
-            form={form}
+            currentForm={currentForm}
           />
         ) : (
           <SearchField />
