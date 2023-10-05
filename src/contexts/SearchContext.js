@@ -1,4 +1,4 @@
-import React, { useContext, createContext, useState, useEffect } from 'react';
+import React, { createContext, useState } from 'react';
 
 export const SearchContext = createContext(null);
 
@@ -10,8 +10,8 @@ export const SearchProvider = ({ children }) => {
 
   const [showSuggestions, setShowSuggestions] = useState(true);
   const [isSubmitted, setIsSubmitted] = useState(false);
-  // setSendForm stores the form id from the current form (useRef()) passed to the SearchField component
-  // from one the three search forms : Search catalog, Search API, Search Store. 
+  // setSentForm stores the form id from the current form (useRef()) passed to the SearchField component
+  // from one of the three search forms : Search catalog, Search API, Search Store. 
   // It is set once in the SearchField component whem the input field has focus.
   // This prevents conflict between search form since they all use the same SearchField component.
   // It informs the SearchField instance which form it is linked to. It returns in case of conflict
@@ -19,13 +19,10 @@ export const SearchProvider = ({ children }) => {
   const [hasFocus, setHasFocus] = useState(false);
   const [text, setText] = useState('');
   const [searchTerm, setSearchTerm] = useState('');
-  // 
 
   return (
     <SearchContext.Provider
       value={{
-        sentForm,
-        setSentForm,
         searchTerm,
         setSearchTerm,
         searchResult,
@@ -36,6 +33,8 @@ export const SearchProvider = ({ children }) => {
         setShowSuggestions,
         isSubmitted,
         setIsSubmitted,
+        sentForm,
+        setSentForm,
         hasFocus,
         setHasFocus,
         text,
