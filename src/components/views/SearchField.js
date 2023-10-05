@@ -8,7 +8,6 @@ import Suggestions from './Suggestions';
 import { SearchContext } from '../../contexts/SearchContext';
 import { CardContext } from '../../contexts/CardContext';
 import { PathContext } from '../../contexts/PathContext';
-import styled from 'styled-components';
 
 const SearchField = ({
   searchTerm,
@@ -226,7 +225,7 @@ const SearchField = ({
         onBlur={handleBlur}
         placeholder={
           form.current &&
-          (form.current.id === 'search-form'
+          (form.current.id === 'search-catalog'
             ? 'Search Magic Find'
             : form.current.id === 'search-api'
               ? 'Search Skryfall API'

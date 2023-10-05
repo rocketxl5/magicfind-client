@@ -31,10 +31,10 @@ const SearchStore = () => {
 
   const { user } = useContext(UserContext);
   const { isSubmitted, setIsSubmitted } = useContext(SearchContext);
+  const { currentForm } = useContext(SearchContext);
   const { showSuggestions, setShowSuggestions } = useContext(SearchContext);
   const { setText } = useContext(SearchContext);
   // const { searchTerm, setSearchTerm } = useContext(SearchContext);
-  const { sentForm } = useContext(SearchContext);
   const { userStoreContent } = useContext(CardContext);
   const { setTracker } = useContext(CardContext);
   const { setPath } = useContext(PathContext);
@@ -210,20 +210,20 @@ const SearchStore = () => {
     localStorage.removeItem('storeCardName');
   };
   useEffect(() => {
-    if (sentForm === 'search-store') {
+    if (currentForm === 'search-store') {
       setIsOn(true);
     } else {
       setIsOn(false);
       setSearchTerm('');
     }
-  }, [sentForm]);
+  }, [currentForm]);
 
   return (
     <Fragment>
       <h2 className="page-title">Enter A Card Name</h2>
 
       <form id="search-store" onSubmit={(e) => fetchSingleCard(e)} ref={form}>
-        {!sentForm || sentForm === 'search-store' ? (
+        {!currentForm || currentForm === 'search-store' ? (
           <SearchField
             searchTerm={searchTerm}
             setSearchTerm={setSearchTerm}

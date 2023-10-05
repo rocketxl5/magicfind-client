@@ -100,7 +100,7 @@ const SearchBar = () => {
       fetch(`${api.serverURL}/api/catalog`, options)
         .then((res) => res.json())
         .then((data) => {
-          setResults(data.data);
+          setResults(data);
           setLoading(false);
         })
         .catch((error) => console.log(error));
@@ -210,7 +210,7 @@ const SearchBar = () => {
   return (
     <div className="search-bar">
       <form
-        id="search-form"
+        id="search-catalog"
         className="search-form"
         onSubmit={(e) => fetchSingleCard(e)}
         ref={form}
