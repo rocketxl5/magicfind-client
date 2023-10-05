@@ -18,7 +18,6 @@ const SearchBar = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [cardName, setCardName] = useState('');
   const [cardNames, setCardNames] = useState([]);
-  const [isOn, setIsOn] = useState(false);
   const [results, setResults] = useState([]);
   const [requestSent, setRequestSent] = useState(false);
 
@@ -26,9 +25,10 @@ const SearchBar = () => {
   const { isSubmitted, setIsSubmitted } = useContext(SearchContext);
   const { showSuggestions, setShowSuggestions } = useContext(SearchContext);
   const { setText } = useContext(SearchContext);
+  const { setCallToAction } = useContext(SearchContext);
   const { sentForm } = useContext(SearchContext);
   const { setTracker } = useContext(CardContext);
-  const { path, setPath } = useContext(PathContext);
+  const { path } = useContext(PathContext);
   const history = useHistory();
   // ul with card names in autocomplete list
   const listItems = useRef(null);
@@ -36,6 +36,16 @@ const SearchBar = () => {
   const searchInput = useRef(null);
 
   const currentForm = useRef(null);
+
+  useEffect(() => {
+    if (sentForm === currentForm.current.id) {
+      setCallToAction(true);
+    } else {
+      setCallToAction(false);
+      setSearchTerm('');
+    }
+
+  }, [sentForm]);
 
   useEffect(() => {
     if (localStorage.getItem('catalogCardName')) {
@@ -170,21 +180,6 @@ const SearchBar = () => {
       .catch((error) => console.log(error));
   };
 
-  useEffect(() => {
-    if (checked) {
-
-    }
-  }, [checked])
-
-  useEffect(() => {
-    if (sentForm === 'search-catalog') {
-      setIsOn(true);
-    } else {
-      setIsOn(false);
-      setSearchTerm('');
-    }
-  }, [sentForm]);
-
   return (
     <div className="search-bar">
       <form
@@ -201,7 +196,6 @@ const SearchBar = () => {
             cardNames={cardNames}
             listItems={listItems}
             searchInput={searchInput}
-            isOn={isOn}
             currentForm={currentForm}
           />
         ) : (

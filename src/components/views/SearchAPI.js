@@ -23,12 +23,11 @@ const Search = () => {
   const [requestSent, setRequestSent] = useState(false);
   const [cardName, setCardName] = useState('');
   const [cardNames, setCardNames] = useState([]);
-  const [isOn, setIsOn] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
   // const { searchTerm, setSearchTerm } = useContext(SearchContext);
   const [cards, setCards] = useState([]);
   const { isSubmitted, setIsSubmitted } = useContext(SearchContext);
-  const { setIsValidLength } = useContext(SearchContext);
+  const { setIsValidLength, setCallToAction } = useContext(SearchContext);
   const { setText } = useContext(SearchContext);
   const { sentForm } = useContext(SearchContext);
   const { apiCardNames } = useContext(CardContext);
@@ -227,9 +226,9 @@ const Search = () => {
 
   useEffect(() => {
     if (sentForm === 'search-api') {
-      setIsOn(true);
+      setCallToAction(true);
     } else {
-      setIsOn(false);
+      setCallToAction(false);
       setSearchTerm('');
     }
   }, [sentForm]);
@@ -246,7 +245,6 @@ const Search = () => {
             searchInput={searchInput}
             setRequestSent={setRequestSent}
             requestSent={requestSent}
-            isOn={isOn}
             currentForm={currentForm}
             cardNames={cardNames}
           />

@@ -26,8 +26,7 @@ const SearchStore = () => {
   const [cardName, setCardName] = useState('');
   const [cardNames, setCardNames] = useState([]);
   const [requestSent, setRequestSent] = useState(false);
-  const [isOn, setIsOn] = useState(false);
-  const { setIsValidLength } = useContext(SearchContext);
+  const { setIsValidLength, setCallToAction } = useContext(SearchContext);
 
   const { user } = useContext(UserContext);
   const { isSubmitted, setIsSubmitted } = useContext(SearchContext);
@@ -211,9 +210,9 @@ const SearchStore = () => {
   };
   useEffect(() => {
     if (sentForm === 'search-store') {
-      setIsOn(true);
+      setCallToAction(true);
     } else {
-      setIsOn(false);
+      setCallToAction(false);
       setSearchTerm('');
     }
   }, [sentForm]);
@@ -231,7 +230,6 @@ const SearchStore = () => {
             cardNames={cardNames}
             listItems={listItems}
             searchInput={searchInput}
-            isOn={isOn}
             currentForm={currentForm}
           />
         ) : (
