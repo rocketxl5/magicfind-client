@@ -27,7 +27,7 @@ const Search = () => {
   // const { searchTerm, setSearchTerm } = useContext(SearchContext);
   const [cards, setCards] = useState([]);
   const { isSubmitted, setIsSubmitted } = useContext(SearchContext);
-  const { setIsValidLength, setCallToAction } = useContext(SearchContext);
+  const { setIsValidLength } = useContext(SearchContext);
   const { setText } = useContext(SearchContext);
   const { sentForm } = useContext(SearchContext);
   const { apiCardNames } = useContext(CardContext);
@@ -225,10 +225,7 @@ const Search = () => {
   };
 
   useEffect(() => {
-    if (sentForm === 'search-api') {
-      setCallToAction(true);
-    } else {
-      setCallToAction(false);
+    if (sentForm !== currentForm.current.id) {
       setSearchTerm('');
     }
   }, [sentForm]);

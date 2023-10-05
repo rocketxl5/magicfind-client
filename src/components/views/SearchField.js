@@ -27,7 +27,7 @@ const SearchField = ({
   const { isValidLength, setIsValidLength } = useContext(SearchContext);
   const { text, setText } = useContext(SearchContext);
   const { sentForm, setSentForm } = useContext(SearchContext);
-  const { setIsSubmitted, callToAction } = useContext(SearchContext);
+  const { setIsSubmitted } = useContext(SearchContext);
   const { tracker, setTracker } = useContext(CardContext);
   const { path } = useContext(PathContext);
 
@@ -211,7 +211,7 @@ const SearchField = ({
       <input
         className="search-field"
         type="text"
-        value={callToAction ? searchTerm : ''}
+        value={sentForm ? searchTerm : sentForm}
         onChange={handleChange}
         onFocus={handleFocus}
         onBlur={handleBlur}

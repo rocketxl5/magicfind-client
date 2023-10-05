@@ -26,7 +26,7 @@ const SearchStore = () => {
   const [cardName, setCardName] = useState('');
   const [cardNames, setCardNames] = useState([]);
   const [requestSent, setRequestSent] = useState(false);
-  const { setIsValidLength, setCallToAction } = useContext(SearchContext);
+  const { setIsValidLength } = useContext(SearchContext);
 
   const { user } = useContext(UserContext);
   const { isSubmitted, setIsSubmitted } = useContext(SearchContext);
@@ -209,10 +209,7 @@ const SearchStore = () => {
     localStorage.removeItem('storeCardName');
   };
   useEffect(() => {
-    if (sentForm === 'search-store') {
-      setCallToAction(true);
-    } else {
-      setCallToAction(false);
+    if (sentForm !== currentForm.current.id) {
       setSearchTerm('');
     }
   }, [sentForm]);

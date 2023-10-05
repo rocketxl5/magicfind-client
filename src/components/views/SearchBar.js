@@ -25,7 +25,6 @@ const SearchBar = () => {
   const { isSubmitted, setIsSubmitted } = useContext(SearchContext);
   const { showSuggestions, setShowSuggestions } = useContext(SearchContext);
   const { setText } = useContext(SearchContext);
-  const { setCallToAction } = useContext(SearchContext);
   const { sentForm } = useContext(SearchContext);
   const { setTracker } = useContext(CardContext);
   const { path } = useContext(PathContext);
@@ -38,10 +37,7 @@ const SearchBar = () => {
   const currentForm = useRef(null);
 
   useEffect(() => {
-    if (sentForm === currentForm.current.id) {
-      setCallToAction(true);
-    } else {
-      setCallToAction(false);
+    if (sentForm !== currentForm.current.id) {
       setSearchTerm('');
     }
 

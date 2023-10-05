@@ -16,10 +16,6 @@ export const SearchProvider = ({ children }) => {
   // This prevents conflict between search form since they all use the same SearchField component.
   // It informs the SearchField instance which form it is linked to. It returns in case of conflict
   const [sentForm, setSentForm] = useState('');
-  // This sentForm value is passed to the dependency array of a useEffect
-  // in each Forms to compare the value with the current form id.
-
-  const [callToAction, setCallToAction] = useState(false);
   const [hasFocus, setHasFocus] = useState(false);
   const [text, setText] = useState('');
   const [searchTerm, setSearchTerm] = useState('');
@@ -28,8 +24,6 @@ export const SearchProvider = ({ children }) => {
   return (
     <SearchContext.Provider
       value={{
-        callToAction,
-        setCallToAction,
         sentForm,
         setSentForm,
         searchTerm,
