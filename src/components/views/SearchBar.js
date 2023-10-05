@@ -4,18 +4,12 @@ import React, {
   useEffect,
   useRef,
 } from 'react';
-import { useLocation, useHistory } from 'react-router-dom';
-import StoreItem from './StoreItem';
+import { useHistory } from 'react-router-dom';
 import SearchField from './SearchField';
-import Spinner from '../layout/Spinner_old.js';
-import { FiXCircle } from 'react-icons/fi';
 import { SearchContext } from '../../contexts/SearchContext';
 import { PathContext } from '../../contexts/PathContext';
 import { CardContext } from '../../contexts/CardContext';
-import { UserContext } from '../../contexts/UserContext';
 import { api } from '../../api/resources';
-
-import styled from 'styled-components';
 
 const SearchBar = () => {
   const [loading, setLoading] = useState(false);
@@ -31,11 +25,8 @@ const SearchBar = () => {
 
   const { isSubmitted, setIsSubmitted } = useContext(SearchContext);
   const { showSuggestions, setShowSuggestions } = useContext(SearchContext);
-  const { searchResult, setSearchResult } = useContext(SearchContext);
   const { setText } = useContext(SearchContext);
   const { sentForm } = useContext(SearchContext);
-  // const { searchTerm, setSearchTerm } = useContext(SearchContext);
-  const { userStoreContent } = useContext(CardContext);
   const { setTracker } = useContext(CardContext);
   const { path, setPath } = useContext(PathContext);
   const history = useHistory();
@@ -59,7 +50,6 @@ const SearchBar = () => {
         fetchSingleCard();
       }
     }
-    // setPath(location.pathname.split('/')[1]);
   }, []);
 
   // Format name to fit scryfall api's requisite (word+word)
@@ -156,7 +146,6 @@ const SearchBar = () => {
 
     const headers = new Headers();
     headers.append('Content-Type', 'application/json');
-    // headers.append('auth-token', token);
     const options = {
       method: 'GET',
       headers: headers,
@@ -165,9 +154,6 @@ const SearchBar = () => {
     fetch(`${api.serverURL}/api/catalog/${search}`, options)
       .then((res) => res.json())
       .then((data) => {
-        // localStorage.setItem('searchCatalog', search);
-        // localStorage.removeItem('catalogCards');
-        // setSearchResult(data.data);
         setLoading(false);
         setSearchTerm('');
         setIsValidLength(false);
@@ -200,14 +186,6 @@ const SearchBar = () => {
     }
   }, [sentForm]);
 
-  // Clear search input on page change
-  // useEffect(() => {
-  //   console.log(path);
-  //   // if (path !== 'search-catalog') {
-  //   searchInput.current.value = '';
-  //   // }
-  //   console.log();
-  // }, [path]);
   return (
     <div className="search-bar">
       <form
