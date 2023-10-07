@@ -4,48 +4,48 @@ import React, {
   useEffect,
   useRef,
 } from 'react';
-import { useLocation, useHistory } from 'react-router-dom';
-import StoreItem from './StoreItem';
+import { useHistory } from 'react-router-dom';
 import SearchField from './SearchField';
-import Spinner from '../layout/Spinner_old.js';
-import { FiXCircle } from 'react-icons/fi';
 import { SearchContext } from '../../contexts/SearchContext';
 import { PathContext } from '../../contexts/PathContext';
 import { CardContext } from '../../contexts/CardContext';
-import { UserContext } from '../../contexts/UserContext';
 import { api } from '../../api/resources';
 
-import styled from 'styled-components';
-
-const SearchCatalog = () => {
+const SearchBar = () => {
   const [loading, setLoading] = useState(false);
   const [checked, setChecked] = useState(false);
 
   const [searchTerm, setSearchTerm] = useState('');
   const [cardName, setCardName] = useState('');
   const [cardNames, setCardNames] = useState([]);
-  const [requestSent, setRequestSent] = useState(false);
-  const [isOn, setIsOn] = useState(false);
   const [results, setResults] = useState([]);
-  const { setIsValidLength } = useContext(SearchContext);
+  const [requestSent, setRequestSent] = useState(false);
 
+  const { setIsValidLength } = useContext(SearchContext);
   const { isSubmitted, setIsSubmitted } = useContext(SearchContext);
   const { showSuggestions, setShowSuggestions } = useContext(SearchContext);
-  const { searchResult, setSearchResult } = useContext(SearchContext);
   const { setText } = useContext(SearchContext);
+  const { setCallToAction } = useContext(SearchContext);
   const { sentForm } = useContext(SearchContext);
-  // const { searchTerm, setSearchTerm } = useContext(SearchContext);
-  const { userStoreContent } = useContext(CardContext);
   const { setTracker } = useContext(CardContext);
-  const { path, setPath } = useContext(PathContext);
+  const { path } = useContext(PathContext);
   const history = useHistory();
-
   // ul with card names in autocomplete list
   const listItems = useRef(null);
   // input text for search term
   const searchInput = useRef(null);
-  // form
-  const form = useRef(null);
+
+  const currentForm = useRef(null);
+
+  useEffect(() => {
+    if (sentForm === currentForm.current.id) {
+      setCallToAction(true);
+    } else {
+      setCallToAction(false);
+      setSearchTerm('');
+    }
+
+  }, [sentForm]);
 
   useEffect(() => {
     if (localStorage.getItem('catalogCardName')) {
@@ -59,7 +59,6 @@ const SearchCatalog = () => {
         fetchSingleCard();
       }
     }
-    // setPath(location.pathname.split('/')[1]);
   }, []);
 
   // Format name to fit scryfall api's requisite (word+word)
@@ -97,9 +96,10 @@ const SearchCatalog = () => {
         method: 'GET',
         headers: headers,
       };
-      fetch(`/api/catalog`, options)
+      fetch(`${api.serverURL}/api/catalog`, options)
         .then((res) => res.json())
         .then((data) => {
+          console.log(typeof data)
           setResults(data);
           setLoading(false);
         })
@@ -130,7 +130,7 @@ const SearchCatalog = () => {
 
   // Submit search request to backend
   const fetchSingleCard = (e) => {
-    if (sentForm !== form.current.id) {
+    if (sentForm !== currentForm.current.id) {
       return;
     }
 
@@ -155,7 +155,6 @@ const SearchCatalog = () => {
 
     const headers = new Headers();
     headers.append('Content-Type', 'application/json');
-    // headers.append('auth-token', token);
     const options = {
       method: 'GET',
       headers: headers,
@@ -164,9 +163,6 @@ const SearchCatalog = () => {
     fetch(`${api.serverURL}/api/catalog/${search}`, options)
       .then((res) => res.json())
       .then((data) => {
-        // localStorage.setItem('searchCatalog', search);
-        // localStorage.removeItem('catalogCards');
-        // setSearchResult(data.data);
         setLoading(false);
         setSearchTerm('');
         setIsValidLength(false);
@@ -184,35 +180,13 @@ const SearchCatalog = () => {
       .catch((error) => console.log(error));
   };
 
-  useEffect(() => {
-    if (checked) {
-
-    }
-  }, [checked])
-
-  useEffect(() => {
-    if (sentForm === 'search-catalog') {
-      setIsOn(true);
-    } else {
-      setIsOn(false);
-      setSearchTerm('');
-    }
-  }, [sentForm]);
-
-  // Clear search input on page change
-  // useEffect(() => {
-  //   console.log(path);
-  //   // if (path !== 'search-catalog') {
-  //   searchInput.current.value = '';
-  //   // }
-  //   console.log();
-  // }, [path]);
   return (
+    <div className="search-bar">
       <form
-      id="search-catalog"
-      className="search-catalog"
-      onSubmit={fetchSingleCard}
-        ref={form}
+        id="search-catalog"
+        className="search-form"
+        onSubmit={(e) => fetchSingleCard(e)}
+        ref={currentForm}
       >
         {!sentForm || sentForm === 'search-catalog' ? (
           <SearchField
@@ -222,15 +196,14 @@ const SearchCatalog = () => {
             cardNames={cardNames}
             listItems={listItems}
             searchInput={searchInput}
-            isOn={isOn}
-            form={form}
+            currentForm={currentForm}
           />
         ) : (
           <SearchField />
         )}
       </form>
-
+    </div>
   );
 };
 
-export default SearchCatalog;
+export default SearchBar;

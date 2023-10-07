@@ -8,7 +8,6 @@ import Suggestions from './Suggestions';
 import { SearchContext } from '../../contexts/SearchContext';
 import { CardContext } from '../../contexts/CardContext';
 import { PathContext } from '../../contexts/PathContext';
-import styled from 'styled-components';
 
 const SearchField = ({
   searchTerm,
@@ -17,8 +16,7 @@ const SearchField = ({
   cardNames,
   listItems,
   searchInput,
-  isOn,
-  form
+  currentForm
 }) => {
   const [currentListItem, setCurrentListItem] = useState(null);
   const [previousListItem, setPreviousListItem] = useState(null);
@@ -29,18 +27,11 @@ const SearchField = ({
   const { isValidLength, setIsValidLength } = useContext(SearchContext);
   const { text, setText } = useContext(SearchContext);
   const { sentForm, setSentForm } = useContext(SearchContext);
-  // const { searchTerm, setSearchTerm } = useContext(SearchContext);
-  const { setIsSubmitted } = useContext(SearchContext);
+  const { setIsSubmitted, callToAction } = useContext(SearchContext);
   const { tracker, setTracker } = useContext(CardContext);
   const { path } = useContext(PathContext);
 
-  // Testing searchTerm changes
-  // useEffect(() => {
-  //   if (searchTerm) {
-  //     console.log(searchTerm);
-  //   }
-  // }, [searchTerm]);
-  // console.log(form);
+
   // Rendering and styling of a Suggestions list item single component
   // Is triggered on currentListItem state change and hoverList state change
   useEffect(() => {
@@ -186,7 +177,7 @@ const SearchField = ({
 
     // Clear search if input focus changes
     if (sentForm) {
-      if (sentForm !== form.current.id) {
+      if (sentForm !== currentForm.current.id) {
         if (setSearchTerm) {
           setSearchTerm('');
         }
@@ -194,7 +185,7 @@ const SearchField = ({
       }
     }
     setTracker(0);
-    setSentForm(form.current.id);
+    setSentForm(currentForm.current.id);
     if (text.length > 2) {
       setIsValidLength(true);
       setHoverList(false);
@@ -216,19 +207,19 @@ const SearchField = ({
   };
 
   return (
-    <div className="field-container">
+    <>
       <input
         className="search-field"
         type="text"
-        value={isOn ? searchTerm : ''}
+        value={callToAction ? searchTerm : ''}
         onChange={handleChange}
         onFocus={handleFocus}
         onBlur={handleBlur}
         placeholder={
-          form.current &&
-          (form.current.id === 'search-catalog'
+          currentForm.current &&
+          (currentForm.current.id === 'search-catalog'
             ? 'Search Magic Find'
-            : form.current.id === 'search-api'
+            : currentForm.current.id === 'search-api'
               ? 'Search Skryfall API'
               : 'Search Your Store')
         }
@@ -260,21 +251,8 @@ const SearchField = ({
             })}
         </ul>
       }
-    </div>
+    </>
   );
 };
-// const Search = styled.div`
-//   border: 1px solid #333;
-//   display: flex;
-// `;
-// const Input = styled.input`
-//   display: inline-block;
-//   padding: 10px;
-//   font-size: 1em;
-//   width: 100%;
-//   &:focus {
-//     outline: none;
-//     box-shadow: 0;
-//   }
-// `;
+
 export default SearchField;

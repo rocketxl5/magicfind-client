@@ -5,17 +5,33 @@ export const SearchContext = createContext(null);
 export const SearchProvider = ({ children }) => {
   const [searchResult, setSearchResult] = useState([]);
   const [isValidLength, setIsValidLength] = useState(false);
-  // SearchBar & SearchStore only
+
+  // SearchForm & SearchStore only
+
   const [showSuggestions, setShowSuggestions] = useState(true);
   const [isSubmitted, setIsSubmitted] = useState(false);
-  const [sentForm, setSentForm] = useState(null);
+  // setSendForm stores the form id from the current form (useRef()) passed to the SearchField component
+  // from one the three search forms : Search catalog, Search API, Search Store. 
+  // It is set once in the SearchField component whem the input field has focus.
+  // This prevents conflict between search form since they all use the same SearchField component.
+  // It informs the SearchField instance which form it is linked to. It returns in case of conflict
+  const [sentForm, setSentForm] = useState('');
+  // This sentForm value is passed to the dependency array of a useEffect
+  // in each Forms to compare the value with the current form id.
+
+  const [callToAction, setCallToAction] = useState(false);
   const [hasFocus, setHasFocus] = useState(false);
   const [text, setText] = useState('');
   const [searchTerm, setSearchTerm] = useState('');
+  // 
 
   return (
     <SearchContext.Provider
       value={{
+        callToAction,
+        setCallToAction,
+        sentForm,
+        setSentForm,
         searchTerm,
         setSearchTerm,
         searchResult,
@@ -26,8 +42,6 @@ export const SearchProvider = ({ children }) => {
         setShowSuggestions,
         isSubmitted,
         setIsSubmitted,
-        sentForm,
-        setSentForm,
         hasFocus,
         setHasFocus,
         text,
