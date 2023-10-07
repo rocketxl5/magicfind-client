@@ -87,7 +87,7 @@ input:-webkit-autofill:active{
     position: fixed;
     display: flex;
 
-    right: var(--size-6);
+    right: var(--size-5);
     width: 0;
     /* width: calc(100% - var(--size-4)); */
     min-height: var(--header-height);
