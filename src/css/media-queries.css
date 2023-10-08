@@ -9,6 +9,12 @@
     }
 }
 
+@media screen and (width >= 500px) { 
+
+    nav .left-side-nav {
+        gap: var(--size-2);
+    }
+}
 
 @media screen and (width >= 775px) {
     .spinner {
@@ -86,12 +92,7 @@
     }
 
 
-    nav .left-side-nav {
-        /* min-width: 5rem; */
-        justify-content: space-between;
 
-        /* gap: 2rem; */
-    }
 
     nav .right-side-nav ul {
         inset: var(--header-height-wide) 0 0 100%;
