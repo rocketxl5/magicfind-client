@@ -7,8 +7,8 @@ import styled from 'styled-components';
 const MailIcon = () => {
     const { unreadMail } = useContext(UserContext);
     return (
-      <Div>
-        <Mail className="nav-btn mail-btn" to="/mail/inbox" title=" To Mailbox">
+      <Div className="nav-btn">
+        <Mail className="mail-btn" to="/mail/inbox" title=" To Mailbox">
           {unreadMail > 0 && (
             <UnreadContainer>
               <Unread>{unreadMail}</Unread>

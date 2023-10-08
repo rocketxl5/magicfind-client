@@ -80,11 +80,7 @@ input:-webkit-autofill:active{
 .search-bar {
     position: absolute;
     display: flex;
-<<<<<<< HEAD
-
-=======
     top: 0;
->>>>>>> 5bb93419d09b07b26bd1890ae9d975f7d8d95a73
     right: var(--size-5);
     width: 0;
     /* width: calc(100% - var(--size-4)); */

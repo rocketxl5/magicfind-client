@@ -7,8 +7,8 @@ import styled from 'styled-components';
 const ShoppingCartBtn = () => {
   const { itemsCount } = useContext(ShoppingCartContext);
   return (
-    <Div>
-      <Cart to="/shopping-cart" className="nav-btn cart-btn">
+    <Div className="nav-btn">
+      <Cart to="/shopping-cart" className="cart-btn">
         {itemsCount > 0 && (
           <CountContainer>
             <Count>{itemsCount}</Count>
