@@ -101,7 +101,6 @@ input:-webkit-autofill:active{
 }
 
 .search-field {
-    border: none;
     width: calc(100% - var(--size-1));
     margin-left: auto;
     border-radius: 5px;
@@ -219,6 +218,18 @@ ul.search-result {
 .input-error::placeholder {
     color: var(--clr-danger) !important;
 }
+
+/*************************/
+/*************************/
+/* Search API &     ******/
+/* Search Catalog   ******/
+/*************************/
+/*************************/
+form#search-api .search-field,
+form#search-store .search-field {
+    border: 1px solid var(--clr-grey);
+}
+
 
 
 
