@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useContext } from 'react';
 import { UserContext } from '../../contexts/UserContext';
 import toggleClass from '../utilities/toggleClass';
 import Menu from './Menu';
@@ -7,7 +7,6 @@ import SearchBtn from './navbtn/SearchBtn';
 import MailBtn from './navbtn/MailBtn';
 import AuthBtn from './navbtn/AuthBtn';
 import HamburgerBtn from './navbtn/HamburgerBtn';
-import SearchBar from '../views/SearchBar';
 // import SignupBtn from './navbar/SignupBtn';
 // import SigninBtn from './navbar/SigninBtn';
 import ShoppingCartBtn from './navbtn/ShoppingCartBtn';
@@ -23,8 +22,6 @@ function Navbar({ isFirefox }) {
             toggleClass(document.querySelector('.main-header'), 'checked');
         }
     }
-
-
 
     return (
         <div className="navbar">

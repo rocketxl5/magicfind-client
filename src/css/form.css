@@ -125,7 +125,6 @@ ul.search-result {
     max-height: 40vh;
     top: 5rem;
     left: var(--size-1);
-  
     overflow-y: scroll;
     overflow-x: hidden;
     background: #fff;
