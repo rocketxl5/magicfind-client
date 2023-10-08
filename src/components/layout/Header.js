@@ -15,7 +15,7 @@ const Header = () => {
     setBrowserWidth(document.body.clientWidth);
   }, []);
 
-  // Handle search bar and menu animation for mobile @ width < 725px
+  // Handle search bar (@ width < 725px) and menu animation 
   const handleClick = (e) => {
     // If target is menu link (i.e mobile menu is displayed) or if target is header log
     if (e.target.classList.contains('nav-link') || e.target.classList.contains('logo-btn')) {

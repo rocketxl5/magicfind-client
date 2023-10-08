@@ -40,7 +40,7 @@
     .search-bar {
         position: static;
         min-height: var(--header-height-wide);
-         width: clamp(20rem, 60rem, 100%) !important;
+         width: clamp(15rem, 45rem, 100%) !important;
         /* width: 100%; */
         margin-left: auto;
     }

@@ -114,6 +114,25 @@ input:-webkit-autofill:active{
     font-size: var(--fs-150);
 }
 
+/* Search result ul */
+/* Seachbar Style */
+ul.search-result {
+    /* @ views/SearchField.js */
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    width: calc(100% - var(--size-1));
+    max-height: 40vh;
+    top: 5rem;
+    left: var(--size-1);
+  
+    overflow-y: scroll;
+    overflow-x: hidden;
+    background: #fff;
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
+    z-index: 5;
+  }
+
 
 /*************************/
 /*************************/

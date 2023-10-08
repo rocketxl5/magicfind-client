@@ -1,4 +1,8 @@
 /* Navigation */
+.logo-btn {
+    min-width: 5rem;
+}
+
 .logo-btn * {
     color: var(--clr-grey);
 }
