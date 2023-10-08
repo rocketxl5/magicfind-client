@@ -8,7 +8,7 @@ import React, {
 import { useLocation } from 'react-router-dom';
 import Card from './Card';
 import SearchField from './SearchField';
-import Spinner from '../layout/Spinner_old';
+import Spinner from '../layout/Spinner';
 import { FiXCircle } from 'react-icons/fi';
 import { SearchContext } from '../../contexts/SearchContext';
 import { PathContext } from '../../contexts/PathContext';
@@ -23,11 +23,11 @@ const Search = () => {
   const [requestSent, setRequestSent] = useState(false);
   const [cardName, setCardName] = useState('');
   const [cardNames, setCardNames] = useState([]);
+  const [isOn, setIsOn] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
-  // const { searchTerm, setSearchTerm } = useContext(SearchContext);
   const [cards, setCards] = useState([]);
   const { isSubmitted, setIsSubmitted } = useContext(SearchContext);
-  const { setIsValidLength, setCallToAction } = useContext(SearchContext);
+  const { setIsValidLength } = useContext(SearchContext);
   const { setText } = useContext(SearchContext);
   const { sentForm } = useContext(SearchContext);
   const { apiCardNames } = useContext(CardContext);
@@ -41,7 +41,7 @@ const Search = () => {
   // input text for search term
   const searchInput = useRef(null);
   // form
-  const currentForm = useRef(null);
+  const form = useRef(null);
 
   // Format name to fit scryfall api's requisite (word+word)
   const sanitizeString = (string) => {
@@ -54,7 +54,7 @@ const Search = () => {
   const fetchSingleCard = (e) => {
     // bounce back if sent form does not match current form's id
     // This block other forms in the view to process the request down below
-    if (sentForm !== currentForm.current.id) {
+    if (sentForm !== form.current.id) {
       return;
     }
 
@@ -74,7 +74,7 @@ const Search = () => {
     // Or an incomplete field value
     if (e) {
       e.preventDefault();
-
+      setLoading(true);
       // Check if searchTerm is an existing card
       // If searchTerm is written by user
       let foundName = apiCardNames.filter((name) => {
@@ -122,7 +122,7 @@ const Search = () => {
         setIsSubmitted(false);
         setTracker(0);
         setText('');
-        // setLoading(false);
+        setLoading(false);
       })
       .catch((error) => console.log(error));
   };
@@ -226,17 +226,18 @@ const Search = () => {
 
   useEffect(() => {
     if (sentForm === 'search-api') {
-      setCallToAction(true);
+      setIsOn(true);
     } else {
-      setCallToAction(false);
+      setIsOn(false);
       setSearchTerm('');
     }
   }, [sentForm]);
+
   return (
     <Fragment>
       <h2 className="page-title">Enter A Card Name</h2>
 
-      <form id="search-api" onSubmit={(e) => fetchSingleCard(e)} ref={currentForm}>
+      <form id="search-api" onSubmit={(e) => fetchSingleCard(e)} ref={form}>
         {!sentForm || sentForm === 'search-api' ? (
           <SearchField
             searchTerm={searchTerm}
@@ -245,11 +246,12 @@ const Search = () => {
             searchInput={searchInput}
             setRequestSent={setRequestSent}
             requestSent={requestSent}
-            currentForm={currentForm}
+            isOn={isOn}
+            form={form}
             cardNames={cardNames}
           />
         ) : (
-            <SearchField currentForm={currentForm} />
+            <SearchField form={form} />
         )}
       </form>
       <div>
@@ -296,5 +298,4 @@ const Icon = styled.div`
     opacity: 0.8;
   }
 `;
-const SearchResults = styled.div``;
 export default Search;
