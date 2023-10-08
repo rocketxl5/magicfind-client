@@ -6,16 +6,17 @@ import toggleClass from '../utilities/toggleClass';
 
 const Header = () => {
   const [isFirefox, setIsFirefox] = useState(false);
+  const [browserWidth, setBrowserWidth] = useState(0);
   const [action, setAction] = useState('')
 
   // Check if browser is firefox
   useEffect(() => {
     setIsFirefox(window.navigator.userAgent.includes('Firefox'));
+    setBrowserWidth(document.body.clientWidth);
   }, []);
 
   // Handle search bar and menu animation for mobile @ width < 725px
   const handleClick = (e) => {
-    console.log(typeof document.body.clientWidth)
     // If target is menu link (i.e mobile menu is displayed) or if target is header log
     if (e.target.classList.contains('nav-link') || e.target.classList.contains('logo-btn')) {
       // Uncheck checkbox to initiate hamburger animation (from cross to hamburger)
@@ -56,7 +57,7 @@ const Header = () => {
           // Show Menu
           document.querySelector('.menu').style.setProperty('left', '0');
           // Hide Search button
-          if (document.body.clientWidth < 775) {
+          if (browserWidth < 775) {
 
             document.querySelector('.search-btn').style.setProperty('display', 'none');
           } 
@@ -64,7 +65,7 @@ const Header = () => {
           // Hide menu
           document.querySelector('.menu').style.setProperty('left', '100%');
           // Show menu
-          if (document.body.clientWidth < 775) {
+          if (browserWidth < 775) {
 
             document.querySelector('.search-btn').style.setProperty('display', 'block');
           }

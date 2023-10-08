@@ -31,7 +31,7 @@ nav .left-side-nav {
     display: flex;
     width: 100%;
     align-items: center;
-    gap: var(--size-2);
+    gap: var(--size-1);
 }
 
 nav .left-side-nav a:nth-of-type(2) {
