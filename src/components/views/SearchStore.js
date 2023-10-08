@@ -7,9 +7,9 @@ import React, {
 } from 'react';
 import { useLocation, useHistory, useParams } from 'react-router-dom';
 import StoreItem from './StoreItem';
-import SearchField from './SearchField';
-import Spinner from '../layout/Spinner_old.js';
 import { FiXCircle, FiChevronRight, FiChevronDown } from 'react-icons/fi';
+import SearchField from './SearchField';
+import Spinner from '../layout/Spinner.js';
 import { UserContext } from '../../contexts/UserContext';
 import { SearchContext } from '../../contexts/SearchContext';
 import { PathContext } from '../../contexts/PathContext';
@@ -26,13 +26,13 @@ const SearchStore = () => {
   const [cardName, setCardName] = useState('');
   const [cardNames, setCardNames] = useState([]);
   const [requestSent, setRequestSent] = useState(false);
-  const { setIsValidLength, setCallToAction } = useContext(SearchContext);
+  const [isOn, setIsOn] = useState(false);
+  const { setIsValidLength } = useContext(SearchContext);
 
   const { user } = useContext(UserContext);
   const { isSubmitted, setIsSubmitted } = useContext(SearchContext);
   const { showSuggestions, setShowSuggestions } = useContext(SearchContext);
   const { setText } = useContext(SearchContext);
-  // const { searchTerm, setSearchTerm } = useContext(SearchContext);
   const { sentForm } = useContext(SearchContext);
   const { userStoreContent } = useContext(CardContext);
   const { setTracker } = useContext(CardContext);
@@ -45,7 +45,7 @@ const SearchStore = () => {
   // input text for search term
   const searchInput = useRef(null);
   // form
-  const currentForm = useRef(null);
+  const form = useRef(null);
 
   const params = useParams();
 
@@ -208,11 +208,12 @@ const SearchStore = () => {
     localStorage.removeItem('storeCards');
     localStorage.removeItem('storeCardName');
   };
+
   useEffect(() => {
     if (sentForm === 'search-store') {
-      setCallToAction(true);
+      setIsOn(true);
     } else {
-      setCallToAction(false);
+      setIsOn(false);
       setSearchTerm('');
     }
   }, [sentForm]);
@@ -221,7 +222,7 @@ const SearchStore = () => {
     <Fragment>
       <h2 className="page-title">Enter A Card Name</h2>
 
-      <form id="search-store" onSubmit={(e) => fetchSingleCard(e)} ref={currentForm}>
+      <form id="search-store" onSubmit={(e) => fetchSingleCard(e)} ref={form}>
         {!sentForm || sentForm === 'search-store' ? (
           <SearchField
             searchTerm={searchTerm}
@@ -230,10 +231,11 @@ const SearchStore = () => {
             cardNames={cardNames}
             listItems={listItems}
             searchInput={searchInput}
-            currentForm={currentForm}
+            isOn={isOn}
+            form={form}
           />
         ) : (
-            <SearchField currentForm={currentForm} />
+            <SearchField form={form} />
         )}
       </form>
       <Buttons>

@@ -1,13 +1,16 @@
 import React, {
-  useContext,
+  useState,
   useEffect,
-  useState
+  useRef,
+  useContext
 } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 import Suggestions from './Suggestions';
-
+import { FiSearch } from 'react-icons/fi';
 import { SearchContext } from '../../contexts/SearchContext';
 import { CardContext } from '../../contexts/CardContext';
 import { PathContext } from '../../contexts/PathContext';
+import styled from 'styled-components';
 
 const SearchField = ({
   searchTerm,
@@ -16,7 +19,8 @@ const SearchField = ({
   cardNames,
   listItems,
   searchInput,
-  currentForm
+  isOn,
+  form
 }) => {
   const [currentListItem, setCurrentListItem] = useState(null);
   const [previousListItem, setPreviousListItem] = useState(null);
@@ -31,6 +35,13 @@ const SearchField = ({
   const { tracker, setTracker } = useContext(CardContext);
   const { path } = useContext(PathContext);
 
+  // Testing searchTerm changes
+  // useEffect(() => {
+  //   if (searchTerm) {
+  //     console.log(searchTerm);
+  //   }
+  // }, [searchTerm]);
+  // console.log(form);
 
   // Rendering and styling of a Suggestions list item single component
   // Is triggered on currentListItem state change and hoverList state change
@@ -177,7 +188,7 @@ const SearchField = ({
 
     // Clear search if input focus changes
     if (sentForm) {
-      if (sentForm !== currentForm.current.id) {
+      if (sentForm !== form.current.id) {
         if (setSearchTerm) {
           setSearchTerm('');
         }
@@ -185,7 +196,7 @@ const SearchField = ({
       }
     }
     setTracker(0);
-    setSentForm(currentForm.current.id);
+    setSentForm(form.current.id);
     if (text.length > 2) {
       setIsValidLength(true);
       setHoverList(false);
@@ -209,17 +220,20 @@ const SearchField = ({
   return (
     <>
       <input
-        className="search-field"
         type="text"
-        value={callToAction ? searchTerm : ''}
-        onChange={handleChange}
-        onFocus={handleFocus}
-        onBlur={handleBlur}
+        className="search-field"
+        value={isOn ? searchTerm : ''}
+        onChange={(e) => handleChange(e)}
+        onFocus={(e) => handleFocus(e)}
+        onBlur={(e) => {
+          handleBlur(e);
+        }}
         placeholder={
-          currentForm.current &&
-          (currentForm.current.id === 'search-catalog'
+          form &&
+          form.current &&
+          (form.current.id === 'search-catalog' 
             ? 'Search Magic Find'
-            : currentForm.current.id === 'search-api'
+            : form.current.id === 'search-api'
               ? 'Search Skryfall API'
               : 'Search Your Store')
         }
