@@ -328,9 +328,9 @@ input#price {
 }
 
 /* Seachbar Style */
-ul.search-result {
+/* ul.search-result { */
   /* @ views/SearchField.js */
-  position: absolute;
+  /* position: absolute;
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -343,7 +343,7 @@ ul.search-result {
   background: #fff;
   box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
   z-index: 5;
-}
+} */
 
 .suggestion {
   /* @ views/Suggestions.js */

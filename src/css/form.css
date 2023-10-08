@@ -80,11 +80,7 @@ input:-webkit-autofill:active{
 .search-bar {
     position: absolute;
     display: flex;
-<<<<<<< HEAD
-
-=======
     top: 0;
->>>>>>> 5bb93419d09b07b26bd1890ae9d975f7d8d95a73
     right: var(--size-5);
     width: 0;
     /* width: calc(100% - var(--size-4)); */
@@ -117,6 +113,25 @@ input:-webkit-autofill:active{
 .search-field::placeholder { 
     font-size: var(--fs-150);
 }
+
+/* Search result ul */
+/* Seachbar Style */
+ul.search-result {
+    /* @ views/SearchField.js */
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    width: calc(100% - var(--size-1));
+    max-height: 40vh;
+    top: 5rem;
+    left: var(--size-1);
+  
+    overflow-y: scroll;
+    overflow-x: hidden;
+    background: #fff;
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
+    z-index: 5;
+  }
 
 
 /*************************/

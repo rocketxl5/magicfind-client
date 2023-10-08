@@ -6,6 +6,7 @@ import React, {
 } from 'react';
 import { useHistory } from 'react-router-dom';
 import SearchField from './SearchField';
+import Spinner from '../layout/Spinner';
 import { SearchContext } from '../../contexts/SearchContext';
 import { PathContext } from '../../contexts/PathContext';
 import { CardContext } from '../../contexts/CardContext';
@@ -84,7 +85,7 @@ const SearchBar = () => {
 
     if (searchTerm.length < 3) {
       setIsValidLength(false);
-    } else if (searchTerm.length > 2) {
+    } else if (searchTerm.length >= 3) {
       setIsValidLength(true);
       setCardNames([]);
       setLoading(true);
@@ -99,7 +100,6 @@ const SearchBar = () => {
       fetch(`${api.serverURL}/api/catalog`, options)
         .then((res) => res.json())
         .then((data) => {
-          console.log(typeof data)
           setResults(data);
           setLoading(false);
         })
