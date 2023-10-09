@@ -21,6 +21,7 @@ input:-webkit-autofill:active{
 }
 
 .form-logo {
+    font-family: 'Young Serif', serif;
     width: fit-content;
     margin-inline: auto;
     margin-block-end: 3em;
