@@ -258,11 +258,11 @@ const SearchStore = () => {
         ) : (
             <>
             {cardName && (
-              <header className="search-header">
+                <header className="result-header">
                 <span>
                   {`${cardName.charAt(0).toUpperCase()}${cardName
                     .substring(1)
-                    .toLowerCase()} ${cards.length} 
+                      .toLowerCase()}: ${cards.length}
               ` + (cards.length > 1 ? 'Results' : 'Result')}
                 </span>
                 <div
@@ -271,7 +271,7 @@ const SearchStore = () => {
                 ></div>
               </header>
             )}
-            <div className="catalog-items">
+              <div className="search-items">
               {cards.map((card) => {
                 return (
                   <StoreItem
@@ -312,7 +312,7 @@ const Button = styled.button`
   }
 
   &:hover {
-    border: 1px solid #333;
+    opacity: 0.8;
   }
 
   @media (max-width: 320px) {
