@@ -293,7 +293,7 @@ form#search-store .search-field {
     display: flex;
     justify-content: space-between;
     margin-block-start: var(--size-2);
-    padding: var(--size-1);
+    padding: calc(var(--size-1) / 2);
     border: 1px solid var(--clr-grey);
     border-radius: 0.5em; 
   }
@@ -303,8 +303,9 @@ form#search-store .search-field {
   }
 
   .item-image img {
+    display: block;
+    align-self: center;
     border-radius: 8px;
-    
   }
 
   .item-info {
@@ -313,16 +314,17 @@ form#search-store .search-field {
   }
 
   .item-btns {
-    min-width: 27%;
+    min-width: 32%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    padding-block: var(--size-2);
+    padding-block: 0.75rem;
+    padding-inline-end: 0.5rem;
   }
 
   .item-btn {
     width: 100%;
-    padding-block: calc(var(--size-1) / 1.4);
+    padding-block: calc(var(--size-1) / 2);
     color: var(--clr-light);
     font-size: var(--fs-150);
     font-weight: 400;
