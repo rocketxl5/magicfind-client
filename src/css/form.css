@@ -76,60 +76,6 @@ input:-webkit-autofill:active{
     opacity: 0;
 }
 
-/* SearchCatalog form style */
-.search-bar {
-    position: absolute;
-    display: flex;
-    top: 0;
-    right: var(--size-5);
-    width: 0;
-    /* width: calc(100% - var(--size-4)); */
-    min-height: var(--header-height);
-    background-color: var(--clr-blue);
-    z-index: 2000;
-    transition: 0.1s ease-in-out;
-}
-
-.search-form {
-    display: flex;
-    width: calc(100% - var(--size-1));
-    min-height: var(--size-4);
-    margin-block: 0.5rem;
-    margin-left: auto;
-    background-color: #fff;
-    border-radius: 5px;
-}
-
-.search-field {
-    width: calc(100% - var(--size-1));
-    margin-left: auto;
-    border-radius: 5px;
-    color: var(--clr-dark);
-    font-size: var(--fs-150);
-    /* transition: 0.2s ease-in; */
-}
-
-.search-field::placeholder { 
-    font-size: var(--fs-150);
-}
-
-/* Search result ul */
-/* Seachbar Style */
-.search-result {
-    /* @ views/SearchField.js */
-    position: absolute;
-    display: flex;
-    flex-direction: column;
-    width: calc(100% - var(--size-1));
-    max-height: 40vh;
-    top: 5rem;
-    left: var(--size-1);
-    overflow-y: scroll;
-    overflow-x: hidden;
-    background: #fff;
-    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
-    z-index: 5;
-  }
 
 
 /*************************/
@@ -222,6 +168,7 @@ input:-webkit-autofill:active{
 /*************************/
 /*************************/
 /* Search API &     ******/
+/* Search Store     ******/
 /* Search Catalog   ******/
 /*************************/
 /*************************/
@@ -248,8 +195,56 @@ form#search-store .search-field {
     margin-inline: auto;
 }
 
-form#search-api .search-result,
-form#search-store .search-result {
+.result-header {
+    margin-block-start: var(--size-4);
+    font-size: var(--size-2);
+}
+
+.search-items {
+    margin-block-start: var(--size-2);
+}
+
+/* SearchCatalog form style */
+.search-bar {
+    position: absolute;
+    display: flex;
+    top: 0;
+    right: var(--size-5);
+    width: 0;
+    /* width: calc(100% - var(--size-4)); */
+    min-height: var(--header-height);
+    background-color: var(--clr-blue);
+    z-index: 2000;
+    transition: 0.1s ease-in-out;
+}
+
+.search-form {
+    display: flex;
+    width: calc(100% - var(--size-1));
+    min-height: var(--size-4);
+    margin-block: 0.5rem;
+    margin-left: auto;
+    background-color: #fff;
+    border-radius: 5px;
+}
+
+.search-field {
+    width: calc(100% - var(--size-1));
+    margin-left: auto;
+    border-radius: 5px;
+    color: var(--clr-dark);
+    font-size: var(--fs-150);
+    /* transition: 0.2s ease-in; */
+}
+
+.search-field::placeholder { 
+    font-size: var(--fs-150);
+}
+
+/* Search result ul */
+/* Seachbar Style */
+.search-result {
+    /* @ views/SearchField.js */
     position: absolute;
     display: flex;
     flex-direction: column;
@@ -262,16 +257,7 @@ form#search-store .search-result {
     background: #fff;
     box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
     z-index: 5;
-}
-
-.result-header {
-    margin-block-start: var(--size-4);
-    font-size: var(--size-2);
-}
-
-.search-items {
-    margin-block-start: var(--size-2);
-}
+  }
 
 
 
