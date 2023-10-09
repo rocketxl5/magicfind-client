@@ -32,11 +32,11 @@ import { CardContext } from './contexts/CardContext';
 import { PathContext } from './contexts/PathContext';
 import './css/reset.css';
 import './App.css';
+import './css/utilities.css';
 import './css/style.css';
 import './css/navbar.css';
 import './css/form.css';
 import './css/media-queries.css';
-import './css/utilities.css';
 
 const App = () => {
 
