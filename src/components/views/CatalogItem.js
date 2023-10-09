@@ -64,7 +64,7 @@ const CatalogItem = ({ card }) => {
       },
     };
     fetch(
-      `/api/catalog/${card.name}/${card._id}/${card.quantity_selected}`,
+      `${api.serverURL}/api/catalog/${card.name}/${card._id}/${card.quantity_selected}`,
       options
     )
       .then((res) => res.json())
@@ -129,7 +129,12 @@ const CatalogItem = ({ card }) => {
       <Fragment>
         <div className="item-info">
           <div className="item-image">
-            <img id="item-image" src={card.image_uris && card.image_uris.png} />
+            <img
+              id="item-image"
+              sizes="20vw"
+              src={card.image_uris && card.image_uris.png}
+              srcset={`${card.image_uris.small} 500w, ${card.image_uris.normal} 775w, ${card.image_uris.large} 1600w`}
+            />
           </div>
 
           <div className="item-details">

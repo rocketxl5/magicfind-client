@@ -239,7 +239,7 @@ const SearchField = ({
       />
       {
         <ul
-          onClick={(e) => handleClick(e)}
+          onClick={handleClick}
           onMouseLeave={(e) => setHoverList(false)}
           id="search-result"
           className="search-result"
