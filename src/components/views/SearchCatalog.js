@@ -4,49 +4,41 @@ import React, {
   useEffect,
   useRef,
 } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useLocation, useHistory } from 'react-router-dom';
 import SearchField from './SearchField';
 import Spinner from '../layout/Spinner';
+import { FiXCircle } from 'react-icons/fi';
 import { SearchContext } from '../../contexts/SearchContext';
 import { PathContext } from '../../contexts/PathContext';
 import { CardContext } from '../../contexts/CardContext';
 import { api } from '../../api/resources';
 
-const SearchBar = () => {
+const SearchCatalog = () => {
   const [loading, setLoading] = useState(false);
-  const [checked, setChecked] = useState(false);
 
   const [searchTerm, setSearchTerm] = useState('');
   const [cardName, setCardName] = useState('');
   const [cardNames, setCardNames] = useState([]);
-  const [results, setResults] = useState([]);
   const [requestSent, setRequestSent] = useState(false);
-
+  const [isOn, setIsOn] = useState(false);
+  const [results, setResults] = useState([]);
   const { setIsValidLength } = useContext(SearchContext);
+
   const { isSubmitted, setIsSubmitted } = useContext(SearchContext);
   const { showSuggestions, setShowSuggestions } = useContext(SearchContext);
+  const { searchResult, setSearchResult } = useContext(SearchContext);
   const { setText } = useContext(SearchContext);
-  const { setCallToAction } = useContext(SearchContext);
   const { sentForm } = useContext(SearchContext);
+  const { userStoreContent } = useContext(CardContext);
   const { setTracker } = useContext(CardContext);
-  const { path } = useContext(PathContext);
+  const { path, setPath } = useContext(PathContext);
   const history = useHistory();
   // ul with card names in autocomplete list
   const listItems = useRef(null);
   // input text for search term
   const searchInput = useRef(null);
 
-  const currentForm = useRef(null);
-
-  useEffect(() => {
-    if (sentForm === currentForm.current.id) {
-      setCallToAction(true);
-    } else {
-      setCallToAction(false);
-      setSearchTerm('');
-    }
-
-  }, [sentForm]);
+  const form = useRef(null);
 
   useEffect(() => {
     if (localStorage.getItem('catalogCardName')) {
@@ -56,10 +48,10 @@ const SearchBar = () => {
         // setCards(JSON.parse(localStorage.getItem('storeCards')));
         setCardName(localStorage.getItem('catalogCardName'));
         // console.log('in card name', localStorage.getItem('storeCardName'));
-
         fetchSingleCard();
       }
     }
+    // setPath(location.pathname.split('/')[1]);
   }, []);
 
   // Format name to fit scryfall api's requisite (word+word)
@@ -97,7 +89,7 @@ const SearchBar = () => {
         method: 'GET',
         headers: headers,
       };
-      fetch(`${api.serverURL}/api/catalog`, options)
+      fetch(`/api/catalog`, options)
         .then((res) => res.json())
         .then((data) => {
           setResults(data);
@@ -130,7 +122,7 @@ const SearchBar = () => {
 
   // Submit search request to backend
   const fetchSingleCard = (e) => {
-    if (sentForm !== currentForm.current.id) {
+    if (sentForm !== form.current.id) {
       return;
     }
 
@@ -155,6 +147,7 @@ const SearchBar = () => {
 
     const headers = new Headers();
     headers.append('Content-Type', 'application/json');
+    // headers.append('auth-token', token);
     const options = {
       method: 'GET',
       headers: headers,
@@ -163,6 +156,9 @@ const SearchBar = () => {
     fetch(`${api.serverURL}/api/catalog/${search}`, options)
       .then((res) => res.json())
       .then((data) => {
+        // localStorage.setItem('searchCatalog', search);
+        // localStorage.removeItem('catalogCards');
+        // setSearchResult(data.data);
         setLoading(false);
         setSearchTerm('');
         setIsValidLength(false);
@@ -180,13 +176,22 @@ const SearchBar = () => {
       .catch((error) => console.log(error));
   };
 
+  useEffect(() => {
+    if (sentForm === 'search-catalog') {
+      setIsOn(true);
+    } else {
+      setIsOn(false);
+      setSearchTerm('');
+    }
+  }, [sentForm]);
+
   return (
     <div className="search-bar">
       <form
         id="search-catalog"
         className="search-form"
         onSubmit={(e) => fetchSingleCard(e)}
-        ref={currentForm}
+        ref={form}
       >
         {!sentForm || sentForm === 'search-catalog' ? (
           <SearchField
@@ -196,14 +201,15 @@ const SearchBar = () => {
             cardNames={cardNames}
             listItems={listItems}
             searchInput={searchInput}
-            currentForm={currentForm}
+            isOn={isOn}
+            form={form}
           />
         ) : (
-          <SearchField />
+          <SearchField form={form} />
         )}
       </form>
     </div>
   );
 };
 
-export default SearchBar;
+export default SearchCatalog;

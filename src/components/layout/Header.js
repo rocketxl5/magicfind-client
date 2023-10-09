@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import SearchBar from '../views/SearchBar';
+import SearchCatalog from '../views/SearchCatalog';
 import Navbar from './Navbar';
 import LogoBtn from './navbtn/LogoBtn';
 import toggleClass from '../utilities/toggleClass';
@@ -77,7 +77,7 @@ const Header = () => {
   return (
     <header className="main-header" onClick={handleClick}>
       <LogoBtn />
-      <SearchBar />
+      <SearchCatalog />
       <Navbar isFirefox={isFirefox} />
     </header>
   )

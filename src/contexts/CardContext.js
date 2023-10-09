@@ -19,6 +19,20 @@ export const CardProvider = ({ children }) => {
   const [userStoreContent, setUserStoreContent] = useState([]);
   const [loading, setLoading] = useState(false);
 
+  useEffect(() => {
+    if (true) {
+      // setLoading(true);
+
+      const headers = { method: 'GET' };
+      fetch(`${api.skryfallURL}/catalog/card-names`, headers)
+        .then((res) => res.json())
+        .then((data) => {
+          setApiCardNames(data.data);
+          // setLoading(false);
+        })
+        .catch((error) => console.log(error));
+    }
+  }, []);
 
   useEffect(() => {
     if (user && path === 'store') {

@@ -88,6 +88,8 @@ const Login = () => {
           })
         })
           .then((data) => {
+            data.user.id = data.user._id;
+            delete data.user._id;
 
             const user = {
               ...data.user,
