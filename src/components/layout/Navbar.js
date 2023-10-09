@@ -37,7 +37,6 @@ function Navbar({ isFirefox }) {
                         <>
                             <MailBtn />
                             <ShoppingCartBtn />
-                            <AuthBtn />
                         </>
                     )}
                     {/************************************************* 

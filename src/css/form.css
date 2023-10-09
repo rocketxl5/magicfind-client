@@ -200,8 +200,43 @@ form#search-store .search-field {
     font-size: var(--size-2);
 }
 
+.result-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-inline: var(--size-1);
+    padding-block-end: var(--size-1);
+    font-weight: 400;
+    font-size: var(--fs-200);
+    border-bottom: 1px solid var(--clr-grey);
+}
+
+.result-details {
+    display: flex;
+    width: calc(100% - var(--size-5));
+    justify-content: space-between;
+    align-items: center;
+}
+
+.result-details * {
+    display: block;
+}
+
+.result-title svg {
+    display: block;
+    font-weight: 300;
+    font-size: var(--fs-150);
+    color: var(--clr-red);
+}
+
+.clear-search {
+    width: fit-content;
+    display: block;
+    text-align: right;
+}
+
 .search-items {
-    margin-block-start: var(--size-2);
+    margin-block-start: var(--size-3);
 }
 
 /* SearchCatalog form style */
@@ -211,7 +246,6 @@ form#search-store .search-field {
     top: 0;
     right: var(--size-5);
     width: 0;
-    /* width: calc(100% - var(--size-4)); */
     min-height: var(--header-height);
     background-color: var(--clr-blue);
     z-index: 2000;
@@ -234,17 +268,13 @@ form#search-store .search-field {
     border-radius: 5px;
     color: var(--clr-dark);
     font-size: var(--fs-150);
-    /* transition: 0.2s ease-in; */
 }
 
 .search-field::placeholder { 
     font-size: var(--fs-150);
 }
 
-/* Search result ul */
-/* Seachbar Style */
 .search-result {
-    /* @ views/SearchField.js */
     position: absolute;
     display: flex;
     flex-direction: column;
@@ -258,6 +288,51 @@ form#search-store .search-field {
     box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
     z-index: 5;
   }
+
+  .item-container {
+    display: flex;
+    justify-content: space-between;
+    margin-block-start: var(--size-2);
+    padding: var(--size-1);
+    border: 1px solid var(--clr-grey);
+    border-radius: 0.5em; 
+  }
+
+  .item-image {
+    width: 25%;
+  }
+
+  .item-image img {
+    border-radius: 8px;
+    
+  }
+
+  .item-info {
+    min-width: 40%;
+    padding: var(--size-1);
+  }
+
+  .item-btns {
+    min-width: 27%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-block: var(--size-2);
+  }
+
+  .item-btn {
+    width: 100%;
+    padding-block: calc(var(--size-1) / 1.4);
+    color: var(--clr-light);
+    font-size: var(--fs-150);
+    font-weight: 400;
+    border-radius: 5px;
+  }
+  
+  .item-btn:hover {
+    opacity: 0.8;
+  }
+
 
 
 

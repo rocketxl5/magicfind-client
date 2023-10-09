@@ -36,11 +36,11 @@ const StoreItem = ({ card, setRemoveCard, setModifyCard }) => {
 
   return (
     <div className="item-container">
-      <div className="item-info">
+
         <div className="item-image">
           <Image card={card} />
         </div>
-        <div className="item-details">
+      <div className="item-info">
           <p>{card.set_name}</p>
 
           <p>
@@ -55,15 +55,15 @@ const StoreItem = ({ card, setRemoveCard, setModifyCard }) => {
           <p>
             Price: <strong>{card.price}</strong>
           </p>
-        </div>
       </div>
 
-      <div className="item-buttons">
-        <button className="item-button success" onClick={setModification}>
+
+      <div className="item-btns">
+        <button className="item-btn bg-green" onClick={setModification}>
           Modify
         </button>
 
-        <button className="item-button danger" onClick={setRemoval}>
+        <button className="item-btn bg-red" onClick={setRemoval}>
           Delete
         </button>
       </div>

@@ -130,6 +130,10 @@
     background: var(--clr-yellow);
 }
 
+.bg-red {
+    background: var(--clr-red);
+}
+
 .bg-teal {
     background: var(--clr-teal);
 }

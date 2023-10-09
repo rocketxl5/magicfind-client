@@ -226,10 +226,11 @@ const SearchStore = () => {
           <SearchField
             searchTerm={searchTerm}
             setSearchTerm={setSearchTerm}
-            setRequestSent={setRequestSent}
-            cardNames={cardNames}
             listItems={listItems}
             searchInput={searchInput}
+            setRequestSent={setRequestSent}
+            requestSent={requestSent}
+            cardNames={cardNames}
             isOn={isOn}
             form={form}
           />
@@ -259,17 +260,23 @@ const SearchStore = () => {
             <>
             {cardName && (
                 <header className="result-header">
-                <span>
-                  {`${cardName.charAt(0).toUpperCase()}${cardName
-                    .substring(1)
-                      .toLowerCase()}: ${cards.length}
-              ` + (cards.length > 1 ? 'Results' : 'Result')}
-                </span>
-                <div
-                  className="clear-search"
-                    onClick={clearSearch}
-                ></div>
-              </header>
+                  <h3 className="result-title">
+                    <div className="result-details">
+                      <span>
+                        {`${cardName.charAt(0).toUpperCase()}${cardName
+                          .substring(1)
+                          .toLowerCase()}`}
+                      </span>
+                      <span>
+                        {`${cards.length} 
+                               ` + (cards.length > 1 ? 'Results' : 'Result')}
+                      </span>
+                    </div>
+                    <span className="clear-search" onClick={clearSearch}>
+                      <FiXCircle size={20} />
+                    </span>
+                  </h3>
+                </header>
             )}
               <div className="search-items">
               {cards.map((card) => {
