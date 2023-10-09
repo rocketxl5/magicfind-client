@@ -185,7 +185,8 @@ const SearchField = ({
   };
 
   const handleFocus = (e) => {
-
+    console.log(sentForm)
+    console.log(form && form.current.id)
     // Clear search if input focus changes
     if (sentForm) {
       if (sentForm !== form.current.id) {
@@ -223,13 +224,10 @@ const SearchField = ({
         type="text"
         className="search-field"
         value={isOn ? searchTerm : ''}
-        onChange={(e) => handleChange(e)}
-        onFocus={(e) => handleFocus(e)}
-        onBlur={(e) => {
-          handleBlur(e);
-        }}
+        onChange={handleChange}
+        onFocus={handleFocus}
+        onBlur={handleBlur}
         placeholder={
-          form &&
           form.current &&
           (form.current.id === 'search-catalog' 
             ? 'Search Magic Find'

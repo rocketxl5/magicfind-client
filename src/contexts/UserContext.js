@@ -24,22 +24,22 @@ export const UserProvider = ({ children }) => {
         headers: headers,
       };
 
-      fetch(`${api.serverURL}/api/messages/unread/${user.id}`, options)
-        .then((res) => res.json())
-        .then((data) => {
-          if (data.data) {
-            // console.log(data.data);
-            if (data.data) {
-              // console.log(data.data);
-              const unreadMail = data.data.filter((message) => {
-                return !message.isRead && !message.isTrash;
-              });
+      // fetch(`${api.serverURL}/api/messages/unread/${user.id}`, options)
+      //   .then((res) => res.json())
+      //   .then((data) => {
+      //     if (data.data) {
+      //       // console.log(data.data);
+      //       if (data.data) {
+      //         // console.log(data.data);
+      //         const unreadMail = data.data.filter((message) => {
+      //           return !message.isRead && !message.isTrash;
+      //         });
 
-              setUnreadMail(unreadMail.length);
-            }
-          }
-        })
-        .catch((error) => console.log(error));
+      //         setUnreadMail(unreadMail.length);
+      //       }
+      //     }
+      //   })
+      //   .catch((error) => console.log(error));
     }
   }, [user]);
 

@@ -13,7 +13,7 @@ import { PathContext } from '../../contexts/PathContext';
 import { CardContext } from '../../contexts/CardContext';
 import { api } from '../../api/resources';
 
-const SearchBar = () => {
+const SearchCatalog = () => {
   const [loading, setLoading] = useState(false);
 
   const [searchTerm, setSearchTerm] = useState('');
@@ -89,7 +89,7 @@ const SearchBar = () => {
         method: 'GET',
         headers: headers,
       };
-      fetch(`${api.serverURL}/api/catalog`, options)
+      fetch(`/api/catalog`, options)
         .then((res) => res.json())
         .then((data) => {
           setResults(data);
@@ -205,11 +205,11 @@ const SearchBar = () => {
             form={form}
           />
         ) : (
-          <SearchField />
+          <SearchField form={form} />
         )}
       </form>
     </div>
   );
 };
 
-export default SearchBar;
+export default SearchCatalog;
