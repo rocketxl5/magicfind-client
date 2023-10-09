@@ -89,7 +89,7 @@ const SearchCatalog = () => {
         method: 'GET',
         headers: headers,
       };
-      fetch(`/api/catalog`, options)
+      fetch(`${api.serverURL}/api/catalog`, options)
         .then((res) => res.json())
         .then((data) => {
           setResults(data);
