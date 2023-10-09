@@ -1,6 +1,5 @@
 import React, {
   useContext,
-  Fragment,
   useState,
   useEffect,
   useRef,
@@ -219,10 +218,10 @@ const SearchStore = () => {
   }, [sentForm]);
 
   return (
-    <Fragment>
+    <div className="search-content">
       <h2 className="page-title">Enter A Card Name</h2>
 
-      <form id="search-store" onSubmit={(e) => fetchSingleCard(e)} ref={form}>
+      <form id="search-store" onSubmit={fetchSingleCard} ref={form}>
         {!sentForm || sentForm === 'search-store' ? (
           <SearchField
             searchTerm={searchTerm}
@@ -240,18 +239,16 @@ const SearchStore = () => {
       </form>
       <Buttons>
         <Button
-          onClick={(e) => {
-            handleClick(e);
-          }}
+          onClick={handleClick}
+          className="bg-green"
         >
-          Add Cards To Store
+          Add New Card
         </Button>
         <Button
-          onClick={(e) => {
-            fetchAllCards();
-          }}
+          onClick={fetchAllCards}
+          className="bg-teal"
         >
-          Show Cards In Store
+          Show All Cards
         </Button>
       </Buttons>
 
@@ -259,7 +256,7 @@ const SearchStore = () => {
         {loading || !cards ? (
           <Spinner />
         ) : (
-          <Fragment>
+            <>
             {cardName && (
               <header className="search-header">
                 <span>
@@ -270,7 +267,7 @@ const SearchStore = () => {
                 </span>
                 <div
                   className="clear-search"
-                  onClick={() => clearSearch()}
+                    onClick={clearSearch}
                 ></div>
               </header>
             )}
@@ -286,28 +283,26 @@ const SearchStore = () => {
                 );
               })}
             </div>
-          </Fragment>
+            </>
         )}
       </div>
-    </Fragment>
+    </div>
   );
 };
 
 const Buttons = styled.div`
+  margin-block-start: 4rem;
   display: flex;
-  flex-direction: column;
   justify-content: space-between;
   width: 100%;
+  gap: 1rem;
 `;
 const Button = styled.button`
-  width: 100%;
-  margin-top: 1em;
-  border: 1px solid #e4e4e4;
-  background: #fff;
-  color: #333;
-  font-size: 1rem;
-  padding: 1em 0;
-  border-radius: 0.5em;
+  min-width: 45%;
+  color: var(--clr-light);
+  font-size: 1.5rem;
+  padding: 1rem 2rem;
+  border-radius: 5px;
 
   svg {
     display: block;

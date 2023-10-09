@@ -121,3 +121,15 @@
     border: 1px solid var(--clr-grey);
     border-radius: 5px;
 }
+
+.bg-green {
+    background: var(--clr-green);
+}
+
+.bg-yellow {
+    background: var(--clr-yellow);
+}
+
+.bg-teal {
+    background: var(--clr-teal);
+}
