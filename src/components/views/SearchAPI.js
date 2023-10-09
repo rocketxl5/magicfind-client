@@ -233,7 +233,7 @@ const Search = () => {
   }, [sentForm]);
 
   return (
-    <>
+    <div className="search-content">
       <h2 className="page-title">Enter A Card Name</h2>
 
       <form id="search-api" onSubmit={(e) => fetchSingleCard(e)} ref={form}>
@@ -259,19 +259,26 @@ const Search = () => {
         ) : (
             <>
             {oracleID && (
-              <header className="search-header">
-                <span>
-                  {`${cardName.charAt(0).toUpperCase()}${cardName
-                    .substring(1)
-                    .toLowerCase()} ${cards.length} 
-              ` + (cards.length > 1 ? 'Results' : 'Result')}
-                </span>
-                <div className="clear-search" onClick={() => clearSearch()}>
-                  <FiXCircle size={22} />
-                </div>
-              </header>
+                <header className="result-header">
+                  <h3 className="result-title">
+                    <div className="result-details">
+                      <span>
+                        {`${cardName.charAt(0).toUpperCase()}${cardName
+                          .substring(1)
+                          .toLowerCase()}`}
+                      </span>
+                      <span>
+                        {`${cards.length} 
+                               ` + (cards.length > 1 ? 'Results' : 'Result')}
+                      </span>
+                    </div>
+                    <span className="clear-search" onClick={clearSearch}>
+                      <FiXCircle size={20} />
+                    </span>
+                  </h3>
+                </header>
             )}
-            <div className="catalog-items">
+              <div className="search-items">
               {cards.map((card, index) => {
                 return <SkryfallItem key={index} card={card} />;
               })}
@@ -279,7 +286,7 @@ const Search = () => {
             </>
         )}
       </div>
-    </>
+    </div>
   );
 };
 const Header = styled.div`
