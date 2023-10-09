@@ -2,6 +2,7 @@ import React, { useContext, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { UserContext } from '../../contexts/UserContext';
 import { CardContext } from '../../contexts/CardContext';
+import Image from './Image';
 import styled from 'styled-components';
 
 const StoreItem = ({ card, setRemoveCard, setModifyCard }) => {
@@ -37,7 +38,7 @@ const StoreItem = ({ card, setRemoveCard, setModifyCard }) => {
     <div className="item-container">
       <div className="item-info">
         <div className="item-image">
-          <img id="item-image" src={card.image_uris && card.image_uris.png} />
+          <Image card={card} />
         </div>
 
         <div className="item-details">

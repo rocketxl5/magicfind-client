@@ -1,5 +1,4 @@
 import React, {
-  Fragment,
   useContext,
   useState,
   useEffect,
@@ -9,6 +8,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { FiPlusCircle, FiMinusCircle, FiTrash2 } from 'react-icons/fi';
 import { ShoppingCartContext } from '../../contexts/ShoppingCartContext';
 import { UserContext } from '../../contexts/UserContext';
+import Image from './Image';
 import { api } from '../../api/resources';
 import styled from 'styled-components';
 
@@ -126,15 +126,10 @@ const CatalogItem = ({ card }) => {
 
   return (
     <div className={loading ? 'item-container loading' : 'item-container'}>
-      <Fragment>
+      <>
         <div className="item-info">
           <div className="item-image">
-            <img
-              id="item-image"
-              sizes="20vw"
-              src={card.image_uris && card.image_uris.png}
-              srcset={`${card.image_uris.small} 500w, ${card.image_uris.normal} 775w, ${card.image_uris.large} 1600w`}
-            />
+            <Image card={card} />
           </div>
 
           <div className="item-details">
@@ -175,7 +170,7 @@ const CatalogItem = ({ card }) => {
               }}
             >
               {isSelectedItem && isSelected(card) && (
-                <Fragment>
+                <>
                   <p>{card.quantity_selected} in Cart</p>
 
                   <FiTrash2
@@ -185,7 +180,7 @@ const CatalogItem = ({ card }) => {
                     size={20}
                     title="Remove Item"
                   />
-                </Fragment>
+                </>
               )}
             </Selected>
           </div>
@@ -221,7 +216,7 @@ const CatalogItem = ({ card }) => {
             {isSelectedItem ? 'Update Cart' : 'Add To Cart'}
           </button>
         </div>
-      </Fragment>
+      </>
     </div>
   );
 };
