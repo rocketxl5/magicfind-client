@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import { CardContext } from '../../contexts/CardContext';
 import { PathContext } from '../../contexts/PathContext';
+import Image from './Image';
 import styled from 'styled-components';
 
 const Card = ({ card }) => {
@@ -22,7 +23,7 @@ const Card = ({ card }) => {
     <div className="item-container">
       <div className="item-info">
         <div className="item-image">
-          <img id="item-image" src={card.image_uris && card.image_uris.png} />
+          <Image card={card} />
         </div>
 
         <div className="item-details">

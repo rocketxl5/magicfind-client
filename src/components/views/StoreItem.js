@@ -40,7 +40,6 @@ const StoreItem = ({ card, setRemoveCard, setModifyCard }) => {
         <div className="item-image">
           <Image card={card} />
         </div>
-
         <div className="item-details">
           <p>{card.set_name}</p>
 

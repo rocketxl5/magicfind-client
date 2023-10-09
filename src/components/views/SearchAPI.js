@@ -1,12 +1,11 @@
 import React, {
-  Fragment,
   useContext,
   useState,
   useEffect,
   useRef,
 } from 'react';
 import { useLocation } from 'react-router-dom';
-import Card from './Card';
+import SkryfallItem from './SkryfallItem';
 import SearchField from './SearchField';
 import Spinner from '../layout/Spinner';
 import { FiXCircle } from 'react-icons/fi';
@@ -234,7 +233,7 @@ const Search = () => {
   }, [sentForm]);
 
   return (
-    <Fragment>
+    <>
       <h2 className="page-title">Enter A Card Name</h2>
 
       <form id="search-api" onSubmit={(e) => fetchSingleCard(e)} ref={form}>
@@ -258,7 +257,7 @@ const Search = () => {
         {loading || !cards ? (
           <Spinner />
         ) : (
-          <Fragment>
+            <>
             {oracleID && (
               <header className="search-header">
                 <span>
@@ -274,13 +273,13 @@ const Search = () => {
             )}
             <div className="catalog-items">
               {cards.map((card, index) => {
-                return <Card key={index} card={card} />;
+                return <SkryfallItem key={index} card={card} />;
               })}
             </div>
-          </Fragment>
+            </>
         )}
       </div>
-    </Fragment>
+    </>
   );
 };
 const Header = styled.div`

@@ -5,7 +5,7 @@ export const UserContext = createContext(null);
 
 export const UserProvider = ({ children }) => {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem('user')));
-  const [unreadMail, setUnreadMail] = useState(0);
+  const [unreadMail, setUnreadMail] = useState(null);
 
   useEffect(() => {
     if (localStorage.getItem('user')) {
@@ -24,22 +24,21 @@ export const UserProvider = ({ children }) => {
         headers: headers,
       };
 
-      // fetch(`${api.serverURL}/api/messages/unread/${user.id}`, options)
-      //   .then((res) => res.json())
-      //   .then((data) => {
-      //     if (data.data) {
-      //       // console.log(data.data);
-      //       if (data.data) {
-      //         // console.log(data.data);
-      //         const unreadMail = data.data.filter((message) => {
-      //           return !message.isRead && !message.isTrash;
-      //         });
+      fetch(`${api.serverURL}/api/messages/unread/${user.id}`, options)
+        .then((res) => res.json())
+        .then((data) => {
 
-      //         setUnreadMail(unreadMail.length);
-      //       }
-      //     }
-      //   })
-      //   .catch((error) => console.log(error));
+          if (data.data) {
+            // console.log(data.data);
+            const unreadMail = data.data.filter((message) => {
+              return !message.isRead && !message.isTrash;
+            });
+            // If unreadMail
+            setUnreadMail(unreadMail && unreadMail.length);
+          }
+
+        })
+        .catch((error) => console.log(error));
     }
   }, [user]);
 
