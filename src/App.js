@@ -77,7 +77,13 @@ const App = () => {
             {user ? <UserPage /> : <Redirect to="/" />}
           </Route>
           <Route exact path="/add-card/:cardName">
-            {cardContext ? <AddCard /> : <Redirect to="/search-api" />}
+            {cardContext ? <AddCard /> : <Redirect to="/store" />}
+          </Route>
+          <Route exact path="/remove-card">
+            {cardContext ? <RemoveCard /> : <Redirect to="/store" />}
+          </Route>
+          <Route exact path="/modify-card">
+            {cardContext ? <ModifyCard /> : <Redirect to="/store" />}
           </Route>
           <Route exact path="/shopping-cart">
             <ShoppingCart />
@@ -96,12 +102,6 @@ const App = () => {
           </Route>
           <Route exact path="/catalog/:search">
             <Catalog />
-          </Route>
-          <Route exact path="/remove-card">
-            {cardContext ? <RemoveCard /> : <Redirect to="/store" />}
-          </Route>
-          <Route exact path="/modify-card">
-            {cardContext ? <ModifyCard /> : <Redirect to="/store" />}
           </Route>
           <Route exact path="/mail/inbox">
             {user ? <MailBox /> : <Redirect to="/" />}

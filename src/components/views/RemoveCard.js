@@ -1,8 +1,10 @@
-import React, { Fragment, useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 import { Link, useLocation, useHistory } from 'react-router-dom';
 import { FiArrowLeftCircle } from 'react-icons/fi';
 import { UserContext } from '../../contexts/UserContext';
 import { CardContext } from '../../contexts/CardContext';
+import capitalizeString from '../utilities/capitalizeString';
+import Image from './Image';
 import { api } from '../../api/resources';
 import styled from 'styled-components';
 
@@ -14,8 +16,9 @@ const Remove = () => {
   const card = location.state.data;
   const token = user.token;
 
+
   //   Remove card from use store
-  const removeCard = () => {
+  const handleClick = () => {
     const headers = new Headers();
     headers.append('Content-Type', 'application/json');
     headers.append('auth-token', token);
@@ -43,12 +46,8 @@ const Remove = () => {
       .catch((error) => console.log('error', error));
   };
 
-  const capitalize = (string) => {
-    return string.charAt(0).toUpperCase() + string.slice(1);
-  };
-
   return (
-    <Fragment>
+    <>
       <h2>Delete Product</h2>
       <header className="search-header">
         <GoBack to={'/store'} title="Back To Store">
@@ -59,15 +58,13 @@ const Remove = () => {
         </GoBack>
 
         <span>
-          {`${card.name.charAt(0).toUpperCase()}${card.name
-            .substring(1)
-            .toLowerCase()}`}
+          {capitalizeString(card.name)}
         </span>
       </header>
       <div className="item-container">
         <div className="item-info">
           <div className="item-image">
-            <img id="item-image" src={card.image_uris && card.image_uris.png} />
+            <Image className="item-image" card={card} />
           </div>
 
           <div className="item-details">
@@ -97,15 +94,13 @@ const Remove = () => {
         <div className="item-buttons push-right">
           <button
             className="item-button danger full-width"
-            onClick={() => {
-              removeCard();
-            }}
+            onClick={handleClick}
           >
             Delete Permanently
           </button>
         </div>
       </div>
-    </Fragment>
+    </>
   );
 };
 
@@ -161,9 +156,6 @@ const CardImage = styled.div`
   width: 50%;
 `;
 
-const Image = styled.img`
-  width: 100%;
-`;
 const CardDetails = styled.div`
   display: flex;
   flex-direction: column;

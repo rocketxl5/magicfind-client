@@ -1,34 +1,31 @@
 import React, { useState, useContext, useEffect } from 'react';
-import { Link, useLocation, useHistory } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import CardListing from './CardListing';
-
 import { UserContext } from '../../contexts/UserContext';
 import { CardContext } from '../../contexts/CardContext';
-import { PathContext } from '../../contexts/PathContext';
 import { api } from '../../api/resources';
-import styled from 'styled-components';
+import capitalizeString from '../utilities/capitalizeString';
 
 const AddCard = () => {
   const location = useLocation();
-  const history = useHistory();
   const [isSent, setIsSent] = useState(false);
-  const [card, setCard] = useState(location.state.detail);
 
   const { user } = useContext(UserContext);
   const { setCardContext } = useContext(CardContext);
+  const card = location.state.data;
 
-  const capitalize = (string) => {
-    return string.charAt(0).toUpperCase() + string.slice(1);
-  };
+
   // Add a cord to user store
   useEffect(() => {
+    console.log('add card')
+    console.log('isSent', isSent)
     if (isSent) {
       const newCard = {
         skryfallID: card.id,
         name: card.name,
         type_line: card.type_line,
         set_name: card.set_name,
-        rarity: capitalize(card.rarity),
+        rarity: capitalizeString(card.rarity),
         image_uris: card.image_uris,
         artist: card.artist,
         frame: card.frame,
@@ -41,6 +38,8 @@ const AddCard = () => {
         userName: user.name,
         userCountry: user.country,
         userID: user.id,
+        isPublished: card.isPublished,
+        datePublished: card.datePublished
       };
 
       const headers = new Headers();
@@ -57,7 +56,7 @@ const AddCard = () => {
         .then((data) => {
           console.log(data);
           setCardContext(false);
-          history.push('/search-api');
+          setIsSent(false);
         })
         .catch((error) => console.log(error));
     }

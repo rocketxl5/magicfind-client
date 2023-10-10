@@ -15,7 +15,7 @@ const Card = ({ card }) => {
 
     history.push({
       pathname: `/add-card/${card.name.toLowerCase()}`,
-      state: { detail: card },
+      state: { data: card },
     });
   };
 
@@ -49,7 +49,7 @@ const Card = ({ card }) => {
         </div>
       </div>
       <div className="item-buttons push-right">
-        <button className="item-button success" onClick={() => handleClick()}>
+        <button className="item-button success" onClick={handleClick}>
           Select Card
         </button>
       </div>
