@@ -7,6 +7,7 @@ import React, {
 import { useLocation } from 'react-router-dom';
 import SkryfallItem from './SkryfallItem';
 import SearchField from './SearchField';
+import SearchResultHeader from './search/SearchResultHeader';
 import Spinner from '../layout/Spinner';
 import { FiXCircle } from 'react-icons/fi';
 import { SearchContext } from '../../contexts/SearchContext';
@@ -109,12 +110,13 @@ const Search = () => {
       // https://api.scryfall.com/cards/search?order=released&q=oracleid%3A0c2841bb-038c-4fbf-8360-bc0a1522b58d&unique=prints
       .then((res) => res.json())
       .then((data) => {
-        localStorage.setItem('oracle', data.oracle_id);
-        localStorage.setItem('apiCardName', data.name);
+        const { name, oracle_id } = data;
+        localStorage.setItem('oracle', oracle_id);
+        localStorage.setItem('apiCardName', name);
         // Reset cardNames state to empty array
         setCardNames([]);
-        setCardName(data.name);
-        setOracleID(data.oracle_id);
+        setCardName(name);
+        setOracleID(oracle_id);
 
         setSearchTerm('');
         setIsValidLength(false);
@@ -259,28 +261,14 @@ const Search = () => {
         ) : (
             <>
             {oracleID && (
-                <header className="result-header">
-                  <h3 className="result-title">
-                    <div className="result-details">
-                      <span>
-                        {`${cardName.charAt(0).toUpperCase()}${cardName
-                          .substring(1)
-                          .toLowerCase()}`}
-                      </span>
-                      <span>
-                        {`${cards.length} 
-                               ` + (cards.length > 1 ? 'Results' : 'Result')}
-                      </span>
-                    </div>
-                    <span className="clear-search" onClick={clearSearch}>
-                      <FiXCircle size={20} />
-                    </span>
-                  </h3>
-                </header>
+                <SearchResultHeader cardName={cardName} cards={cards} clearSearch={clearSearch} />
             )}
               <div className="search-items">
               {cards.map((card, index) => {
-                return <SkryfallItem key={index} card={card} />;
+                return (<SkryfallItem
+                  key={card._id}
+                  card={card}
+                />);
               })}
             </div>
             </>
