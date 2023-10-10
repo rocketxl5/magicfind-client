@@ -79,10 +79,10 @@ const App = () => {
           <Route exact path="/add-card/:cardName">
             {cardContext ? <AddCard /> : <Redirect to="/store" />}
           </Route>
-          <Route exact path="/remove-card">
+          <Route exact path="/remove-card/:cardName">
             {cardContext ? <RemoveCard /> : <Redirect to="/store" />}
           </Route>
-          <Route exact path="/modify-card">
+          <Route exact path="/modify-card/:cardName">
             {cardContext ? <ModifyCard /> : <Redirect to="/store" />}
           </Route>
           <Route exact path="/shopping-cart">

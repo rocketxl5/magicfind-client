@@ -173,7 +173,7 @@ const SearchStore = () => {
       method: 'GET',
       headers: headers,
     };
-    fetch(`/api/cards/${user.id}`, options)
+    fetch(`${api.serverURL}/api/cards/${user.id}`, options)
       .then((res) => res.json())
       .then((data) => {
         // localStorage.setItem('storeCards', JSON.stringify(data.data));

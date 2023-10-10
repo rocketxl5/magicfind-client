@@ -13,7 +13,7 @@ const StoreItem = ({ card }) => {
   const handleClick = (e) => {
     setCardContext(true);
     history.push({
-      pathname: e.target.id,
+      pathname: `${e.target.id}/${card.name}`,
       state: {
         data: card
       }
