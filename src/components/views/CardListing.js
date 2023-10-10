@@ -50,6 +50,7 @@ const CardListing = ({ card, setIsSent }) => {
 
   const handleSubmit = (e) => {
     e.prenventDefault();
+    console.log()
     card.condition = condition;
     card.language = language;
     card.quantity = quantity;
@@ -208,7 +209,7 @@ const CardListing = ({ card, setIsSent }) => {
             <Select
               id="quantity"
               name="quantity"
-              value={quantity}
+              value={parseInt(quantity)}
               onChange={handleChange}
             >
               <option value="1">1</option>
@@ -227,11 +228,13 @@ const CardListing = ({ card, setIsSent }) => {
             <label htmlFor="price">Asking Price</label>
             <Price>
           <input
-            type="text"
+                type="number"
             id="price"
             name="price"
                 value={price}
                 onChange={handleChange}
+                min="1"
+                max="1000"
           />
             </Price>
         </div>
