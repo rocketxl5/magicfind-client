@@ -135,10 +135,6 @@ input:-webkit-autofill:active{
     cursor: pointer;
 }
 
-.btn:hover {
-    opacity: 0.9;
-}
-
 .form-element .link {
     /* flex-basis: 100%; */
     align-self: center;

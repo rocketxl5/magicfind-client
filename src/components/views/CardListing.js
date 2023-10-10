@@ -1,18 +1,19 @@
-import React, { Fragment, useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Link, useLocation, useHistory } from 'react-router-dom';
 import { FiPlusCircle, FiMinusCircle, FiArrowLeftCircle } from 'react-icons/fi';
-
+import capitalizeString from '../utilities/capitalizeString';
 import { CardContext } from '../../contexts/CardContext';
 import { PathContext } from '../../contexts/PathContext';
 import styled from 'styled-components';
 
 const CardListing = ({ card, setIsSent }) => {
   const location = useLocation();
-  const [cardCondition, setCardCondition] = useState('nm');
-  const [cardLanguage, setCardLanguage] = useState('en');
+  const [condition, setCondition] = useState('nm');
+  const [language, setLanguage] = useState('en');
   const [quantity, setQuantity] = useState(1);
-  const [cardPrice, setCardPrice] = useState(0);
+  const [price, setPrice] = useState(0);
   const [comment, setComment] = useState('');
+  const [isPublished, setIsPublished] = useState(false);
   const { setCardContext } = useContext(CardContext);
   const { path, setPath } = useContext(PathContext);
 
@@ -20,41 +21,69 @@ const CardListing = ({ card, setIsSent }) => {
     setPath(location.pathname.split('/')[1]);
   }, []);
 
-  const capitalize = (string) => {
-    return string.charAt(0).toUpperCase() + string.slice(1);
+  const handleClick = (e) => {
+    setIsPublished(!isPublished);
   };
 
-  const handleClick = (e) => {
-    if (e.currentTarget.id === 'add') {
-      setQuantity(parseInt(quantity) + 1);
-    } else if (e.currentTarget.id === 'remove' && quantity > 1) {
-      setQuantity(quantity - 1);
+  const handleChange = (e) => {
+    switch (e.target.id) {
+      case 'condition':
+        setCondition(e.target.value)
+        break;
+      case 'language':
+        setLanguage(e.target.value)
+        break;
+      case 'quantity':
+        setQuantity(e.target.value);
+        break;
+      case 'price':
+        setPrice(parseInt(e.target.value));
+        break;
+      case 'comment':
+        setComment(e.target.value);
+        break;
+      default:
+        setIsPublished(!isPublished);
+        break;
     }
-  };
+  }
+
+  const handleSubmit = (e) => {
+    e.prenventDefault();
+    card.condition = condition;
+    card.language = language;
+    card.quantity = quantity;
+    card.price = price;
+    card.comment = comment;
+    card.isPublished = isPublished;
+    setIsSent(true);
+  }
 
   const clearFields = () => {
-    setCardCondition('');
-    setCardLanguage('');
+    setCondition('');
+    setLanguage('');
     setQuantity('');
-    setCardPrice('');
+    setPrice('');
     setComment('');
+    setIsPublished(false);
   };
 
   // If current view is modify-card
   useEffect(() => {
     if (path === 'modify-card') {
-      setCardCondition(card.condition);
-      setCardLanguage(card.language);
+      setCondition(card.condition);
+      setLanguage(card.language);
       setQuantity(card.quantity);
-      setCardPrice(card.price);
+      setPrice(card.price);
       setComment(card.comment);
+      setIsPublished(card.isPublished);
     }
   }, [path]);
 
   return (
-    <Fragment>
-      <h2>Product Details</h2>
+    <>
       <header className="search-header">
+        <h2>Product Details</h2>
         {path === 'add-card' ? (
           <GoBack to={'/search-api'} title="Back To Search">
             <BackIcon>
@@ -72,9 +101,7 @@ const CardListing = ({ card, setIsSent }) => {
         )}
 
         <span>
-          {`${card.name.charAt(0).toUpperCase()}${card.name
-            .substring(1)
-            .toLowerCase()}`}
+          {capitalizeString(card.name)}
         </span>
       </header>
 
@@ -86,7 +113,7 @@ const CardListing = ({ card, setIsSent }) => {
 
           <div className="item-details">
             {path === 'add-card' ? (
-              <Fragment>
+              <>
                 <p>
                   <strong>Name</strong>: {card.name}
                 </p>
@@ -103,14 +130,14 @@ const CardListing = ({ card, setIsSent }) => {
                   <strong>Set</strong>: {card.set_name}
                 </p>
                 <p>
-                  <strong>Rarity</strong>: {capitalize(card.rarity)}
+                  <strong>Rarity</strong>: {capitalizeString(card.rarity)}
                 </p>
                 <p>
                   <strong>Year</strong>: {card.frame}
                 </p>
-              </Fragment>
+              </>
             ) : (
-              <Fragment>
+                <>
                 <p>
                   <strong>Name</strong>: {card.name}
                 </p>
@@ -132,19 +159,20 @@ const CardListing = ({ card, setIsSent }) => {
                 <p>
                   <strong>Year</strong>: {card.frame}
                 </p>
-              </Fragment>
+                </>
             )}
           </div>
         </div>
       </div>
       <div className="add-card-form">
+        <form className="cardlist-form" onSubmit={handleSubmit}>
         <div className="form-element">
           <label htmlFor="condition">Pick a condition: </label>
           <Select
             id="condition"
             name="condition"
-            value={cardCondition}
-            onChange={(e) => setCardCondition(e.target.value)}
+              value={condition}
+              onChange={handleChange}
           >
             <option value="nm">Near Mint</option>
             <option value="sp">Slightly Played</option>
@@ -158,8 +186,8 @@ const CardListing = ({ card, setIsSent }) => {
           <Select
             id="condition"
             name="condition"
-            value={cardLanguage}
-            onChange={(e) => setCardLanguage(e.target.value)}
+              value={language}
+              onChange={handleChange}
           >
             <option value="en">English</option>
             <option value="es">Spanish</option>
@@ -174,86 +202,70 @@ const CardListing = ({ card, setIsSent }) => {
             <option value="zht">Traditional Chinese</option>
             <option value="ph">Phyrexian</option>
           </Select>
-        </div>
-
+          </div>
         <div className="form-element">
           <label htmlFor="quantity">Quantity:</label>
-          <Quantity>
-            <Circles
-              id="remove"
-              onClick={(e) => {
-                handleClick(e);
-              }}
-            >
-              <FiMinusCircle size={23} />
-            </Circles>
-            <input
-              type="text"
+            <Select
               id="quantity"
               name="quantity"
               value={quantity}
-              onChange={(e) => {
-                setQuantity(e.target.value);
-              }}
-            />{' '}
-            <Circles
-              id="add"
-              onClick={(e) => {
-                handleClick(e);
-              }}
+              onChange={handleChange}
             >
-              <FiPlusCircle size={23} />
-            </Circles>
-          </Quantity>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+              <option value="7">7</option>
+              <option value="8">8</option>
+              <option value="9">9</option>
+              <option value="10">10</option>
+            </Select>
         </div>
         <div className="form-element">
-          <label htmlFor="negotiable">Asking Price</label>
+            <label htmlFor="price">Asking Price</label>
+            <Price>
           <input
             type="text"
             id="price"
             name="price"
-            value={cardPrice}
-            onChange={(e) => {
-              setCardPrice(e.target.value);
-            }}
+                value={price}
+                onChange={handleChange}
           />
+            </Price>
         </div>
         <div className="form-element">
           <label htmlFor="comment">Comments: </label>
           <Comment
             id="comment"
-            name="information"
+              name="comment"
             value={comment}
-            onChange={(e) => {
-              setComment(e.target.value);
-            }}
+              onChange={handleChange}
             placeholder="Additionnal information"
           ></Comment>
+          </div>
+          <div className="form-element">
+            <input type="checkbox" name="published" id="published" className="d-none" onChange={handleChange} />
+            <p>Card Status:</p>
+            <label htmlFor="publish">
+              <button type="button" onClick={handleClick}>
+                {isPublished ? 'Unpublished' : 'Published'}
+              </button>
+            </label>
+          </div>
+          <div className="form-element">
           <div className="item-buttons push-right">
-            <button
-              className="item-button success"
-              onClick={(e) => {
-                e.preventDefault();
-                card.condition = cardCondition;
-                card.language = cardLanguage;
-                card.quantity = quantity;
-                card.price = cardPrice;
-                card.comment = comment;
-                setIsSent(true);
-              }}
-            >
+              <button type="submit" className="item-button success">
               {path === 'add-card' ? 'Add To Store' : 'Save Changes'}
             </button>
           </div>
         </div>
+        </form>
       </div>
-    </Fragment>
+    </>
   );
 };
-
-const Container = styled.div`
-  height: 80vh;
-`;
 
 const GoBack = styled(Link)`
   display: flex;
@@ -285,6 +297,10 @@ const Comment = styled.textarea`
   height: 15vh;
   font-size: 0.9em;
   font-family: sans-serif;
+`;
+
+const Price = styled.div`
+  width: 100%;
 `;
 
 const Quantity = styled.div`

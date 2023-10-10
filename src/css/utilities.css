@@ -36,10 +36,6 @@
     background-color: var(--clr-danger);
 }
 
-.hide {
-    display: none;
-}
-
 .flex-row {
     flex-direction: row;
 }
@@ -82,6 +78,10 @@
 
 .d-block {
     display: block;
+}
+
+.d-none {
+    display: none;
 }
 
 .content-height {
