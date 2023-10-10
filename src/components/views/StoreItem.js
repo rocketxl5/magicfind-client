@@ -5,7 +5,7 @@ import { CardContext } from '../../contexts/CardContext';
 import Image from './Image';
 import styled from 'styled-components';
 
-const StoreItem = ({ card, setRemoveCard, setModifyCard }) => {
+const StoreItem = ({ card }) => {
   const { user } = useContext(UserContext);
   const { setCardContext } = useContext(CardContext);
   const token = user.token;
