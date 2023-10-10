@@ -1,9 +1,10 @@
-import React, { useState, useEffect, useContext } from 'react';
-import { Link, useLocation, useHistory } from 'react-router-dom';
+import React, { useState, useEffect, useContext, useRef } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import { FiPlusCircle, FiMinusCircle, FiArrowLeftCircle } from 'react-icons/fi';
-import capitalizeString from '../utilities/capitalizeString';
-import { CardContext } from '../../contexts/CardContext';
+import Image from './Image';
+import { SearchContext } from '../../contexts/SearchContext';
 import { PathContext } from '../../contexts/PathContext';
+import capitalizeString from '../utilities/capitalizeString';
 import styled from 'styled-components';
 
 const CardListing = ({ card, setIsSent }) => {
@@ -14,16 +15,14 @@ const CardListing = ({ card, setIsSent }) => {
   const [price, setPrice] = useState(0);
   const [comment, setComment] = useState('');
   const [isPublished, setIsPublished] = useState(false);
-  const { setCardContext } = useContext(CardContext);
+  const { setSentForm } = useContext(SearchContext);
   const { path, setPath } = useContext(PathContext);
+
+  const form = useRef(null);
 
   useEffect(() => {
     setPath(location.pathname.split('/')[1]);
   }, []);
-
-  const handleClick = (e) => {
-    setIsPublished(!isPublished);
-  };
 
   const handleChange = (e) => {
     switch (e.target.id) {
@@ -37,7 +36,7 @@ const CardListing = ({ card, setIsSent }) => {
         setQuantity(e.target.value);
         break;
       case 'price':
-        setPrice(parseInt(e.target.value));
+        setPrice(e.target.value);
         break;
       case 'comment':
         setComment(e.target.value);
@@ -49,24 +48,19 @@ const CardListing = ({ card, setIsSent }) => {
   }
 
   const handleSubmit = (e) => {
-    e.prenventDefault();
+    e.preventDefault();
+    setSentForm(form.current.id);
     card.condition = condition;
     card.language = language;
     card.quantity = quantity;
     card.price = price;
     card.comment = comment;
     card.isPublished = isPublished;
+    card.datePublished = isPublished ? Date.now() : '';
+    console.log(card)
     setIsSent(true);
   }
 
-  const clearFields = () => {
-    setCondition('');
-    setLanguage('');
-    setQuantity('');
-    setPrice('');
-    setComment('');
-    setIsPublished(false);
-  };
 
   // If current view is modify-card
   useEffect(() => {
@@ -108,7 +102,7 @@ const CardListing = ({ card, setIsSent }) => {
       <div className="item-container">
         <div className="item-info">
           <div className="item-image">
-            <img id="item-image" src={card.image_uris && card.image_uris.png} />
+            <Image card={card} />
           </div>
 
           <div className="item-details">
@@ -165,7 +159,7 @@ const CardListing = ({ card, setIsSent }) => {
         </div>
       </div>
       <div className="add-card-form">
-        <form className="cardlist-form" onSubmit={handleSubmit}>
+        <form id="add-update" className="cardlist-form" onSubmit={handleSubmit} ref={form}>
         <div className="form-element">
           <label htmlFor="condition">Pick a condition: </label>
           <Select
@@ -227,11 +221,13 @@ const CardListing = ({ card, setIsSent }) => {
             <label htmlFor="price">Asking Price</label>
             <Price>
           <input
-            type="text"
+                type="number"
             id="price"
             name="price"
                 value={price}
                 onChange={handleChange}
+                min="1"
+                max="1000"
           />
             </Price>
         </div>
@@ -248,10 +244,8 @@ const CardListing = ({ card, setIsSent }) => {
           <div className="form-element">
             <input type="checkbox" name="published" id="published" className="d-none" onChange={handleChange} />
             <p>Card Status:</p>
-            <label htmlFor="publish">
-              <button type="button" onClick={handleClick}>
-                {isPublished ? 'Unpublished' : 'Published'}
-              </button>
+            <label htmlFor="published">
+              {isPublished ? 'Unpublished' : 'Published'}
             </label>
           </div>
           <div className="form-element">

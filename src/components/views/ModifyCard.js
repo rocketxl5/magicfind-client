@@ -1,19 +1,18 @@
 import React, { useState, useContext, useEffect } from 'react';
-import { useLocation, useHistory } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import CardListing from './CardListing';
 import { UserContext } from '../../contexts/UserContext';
 import { CardContext } from '../../contexts/CardContext';
 import { api } from '../../api/resources';
 
 const Modify = () => {
-  const history = useHistory();
-  const location = useLocation();
   const [isSent, setIsSent] = useState(false);
-  const [card, setCard] = useState(location.state.data);
   const { user } = useContext(UserContext);
   const { setCardContext } = useContext(CardContext);
-
+  const location = useLocation();
+  const card = location.state.data;
   useEffect(() => {
+
     if (isSent) {
       // object of relevant key/values:
       // skyfallID, userEmail, userID are used
@@ -44,19 +43,13 @@ const Modify = () => {
         .then((data) => {
           // console.log(data);
           setCardContext(false);
-          history.push({
-            pathname: '/store',
-            state: {
-              message: 'Card successfully updated',
-            },
-          });
+          setIsSent(false);
         })
         .catch((error) => console.log('error', error));
     }
   }, [isSent]);
 
   return <CardListing card={card} setIsSent={setIsSent} />;
-  //   return <div>Card</div>;
 };
 
 export default Modify;

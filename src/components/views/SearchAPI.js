@@ -264,9 +264,9 @@ const Search = () => {
                 <SearchResultHeader cardName={cardName} cards={cards} clearSearch={clearSearch} />
             )}
               <div className="search-items">
-              {cards.map((card, index) => {
+                {cards.map((card, index) => {
                 return (<SkryfallItem
-                  key={card._id}
+                  key={index}
                   card={card}
                 />);
               })}

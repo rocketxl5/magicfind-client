@@ -1,38 +1,24 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import { useHistory } from 'react-router-dom';
-import { UserContext } from '../../contexts/UserContext';
 import { CardContext } from '../../contexts/CardContext';
 import Image from './Image';
-import styled from 'styled-components';
 
 const StoreItem = ({ card }) => {
-  const { user } = useContext(UserContext);
   const { setCardContext } = useContext(CardContext);
-  const token = user.token;
-  const userEmail = user.email;
   const history = useHistory();
 
   // Remove card from user store
   // Should also remove user from card uers array in database
-  const setRemoval = () => {
-    setCardContext(true);
-    history.push({
-      pathname: '/remove-card',
-      state: {
-        data: card
-      }
-    });
-  };
 
-  const setModification = () => {
+  const handleClick = (e) => {
     setCardContext(true);
     history.push({
-      pathname: '/modify-card',
+      pathname: e.target.id,
       state: {
         data: card
       }
     });
-  };
+  }
 
   return (
     <div className="item-container">
@@ -59,11 +45,11 @@ const StoreItem = ({ card }) => {
 
 
       <div className="item-btns">
-        <button className="item-btn bg-green" onClick={setModification}>
+        <button id="modify-card" className="item-btn bg-green" onClick={handleClick}>
           Modify
         </button>
 
-        <button className="item-btn bg-red" onClick={setRemoval}>
+        <button id="remove-card" className="item-btn bg-red" onClick={handleClick}>
           Delete
         </button>
       </div>
