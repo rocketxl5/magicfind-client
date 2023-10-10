@@ -26,6 +26,8 @@ const Modify = () => {
         quantity: parseInt(card.quantity),
         price: parseFloat(card.price),
         comment: card.comment,
+        isPublished: card.isPublished,
+        datePublished: card.datePublished,
         userID: card.user_id,
         cardID: card._id,
       };
