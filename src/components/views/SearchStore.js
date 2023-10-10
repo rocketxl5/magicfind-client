@@ -15,6 +15,7 @@ import { PathContext } from '../../contexts/PathContext';
 import { CardContext } from '../../contexts/CardContext';
 import { api } from '../../api/resources';
 import styled from 'styled-components';
+import capitalizeString from '../utilities/capitalizeString';
 
 const SearchStore = () => {
   const [cards, setCards] = useState([]);
@@ -38,7 +39,7 @@ const SearchStore = () => {
   const { setPath } = useContext(PathContext);
   const history = useHistory();
   const location = useLocation();
-
+  console.log(loading)
   // ul with card names in autocomplete list
   const listItems = useRef(null);
   // input text for search term
@@ -46,12 +47,11 @@ const SearchStore = () => {
   // form
   const form = useRef(null);
 
-  const params = useParams();
-
   useEffect(() => {
     if (localStorage.getItem('storeCardName')) {
       if (localStorage.getItem('storeCardName') === 'all') {
-        fetchAllCards();
+        // fetchAllCards();
+        console.log('all cards')
       } else {
         // setCards(JSON.parse(localStorage.getItem('storeCards')));
         setCardName(localStorage.getItem('storeCardName'));
@@ -105,10 +105,6 @@ const SearchStore = () => {
       // console.log(filteredCardNames);
     }
   }, [searchTerm]);
-
-  const capitalize = (string) => {
-    return string.charAt(0).toUpperCase() + string.substring(1);
-  };
 
   // Instore single card request search field with
   // cardname (searchTerm) and user id
@@ -177,7 +173,7 @@ const SearchStore = () => {
       method: 'GET',
       headers: headers,
     };
-    fetch(`${api.serverURL}/api/cards/${user.id}`, options)
+    fetch(`/api/cards/${user.id}`, options)
       .then((res) => res.json())
       .then((data) => {
         // localStorage.setItem('storeCards', JSON.stringify(data.data));
@@ -263,9 +259,7 @@ const SearchStore = () => {
                   <h3 className="result-title">
                     <div className="result-details">
                       <span>
-                        {`${cardName.charAt(0).toUpperCase()}${cardName
-                          .substring(1)
-                          .toLowerCase()}`}
+                        {capitalizeString(cardName)}
                       </span>
                       <span>
                         {`${cards.length} 
