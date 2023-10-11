@@ -17,6 +17,4 @@ const capitalizeString = (string) => {
     return join(capitalize(split(string)));
 }
 
-
-
 export default capitalizeString;
