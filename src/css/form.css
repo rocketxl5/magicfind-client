@@ -192,27 +192,25 @@ form#search-store .search-field {
     margin-inline: auto;
 }
 
-.result-header {
+.search-result-header {
     margin-block-start: var(--size-4);
-    font-size: var(--size-2);
-}
-
-.result-title {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding-inline: var(--size-1);
     padding-block-end: var(--size-1);
-    font-weight: 400;
-    font-size: var(--fs-200);
     border-bottom: 1px solid var(--clr-grey);
 }
 
-.result-details {
+.search-result-bottom {
     display: flex;
-    width: calc(100% - var(--size-5));
     justify-content: space-between;
-    align-items: center;
+}
+
+.card-title {
+    font-weight: 400;
+    font-size: var(--fs-150);
+   
+}
+
+.card-quantity {
+    font-size: var(--fs-150);
 }
 
 .result-details * {
@@ -271,7 +269,8 @@ form#search-store .search-field {
     font-size: var(--fs-150);
 }
 
-.search-result {
+
+ul.search-result {
     position: absolute;
     display: flex;
     flex-direction: column;
