@@ -1,13 +1,12 @@
 import React, {
-  useContext,
   useState,
   useEffect,
-  useRef,
+  useContext
 } from 'react';
-import { useLocation, useHistory, useParams } from 'react-router-dom';
+import { useLocation, useHistory } from 'react-router-dom';
 import StoreItem from './StoreItem';
-import { FiXCircle, FiChevronRight, FiChevronDown } from 'react-icons/fi';
-import SearchField from './SearchField';
+import SearchResultHeader from './search/SearchResultHeader';
+import SearchForm from './search/SearchForm';
 import Spinner from '../layout/Spinner.js';
 import { UserContext } from '../../contexts/UserContext';
 import { SearchContext } from '../../contexts/SearchContext';
@@ -15,7 +14,6 @@ import { PathContext } from '../../contexts/PathContext';
 import { CardContext } from '../../contexts/CardContext';
 import { api } from '../../api/resources';
 import styled from 'styled-components';
-import capitalizeString from '../utilities/capitalizeString';
 
 const SearchStore = () => {
   const [cards, setCards] = useState([]);
@@ -29,23 +27,23 @@ const SearchStore = () => {
   const [isOn, setIsOn] = useState(false);
   const { setIsValidLength } = useContext(SearchContext);
 
-  const { user } = useContext(UserContext);
-  const { isSubmitted, setIsSubmitted } = useContext(SearchContext);
-  const { showSuggestions, setShowSuggestions } = useContext(SearchContext);
-  const { setText } = useContext(SearchContext);
-  const { sentForm } = useContext(SearchContext);
-  const { userStoreContent } = useContext(CardContext);
+
+  const {
+    currentForm,
+    previousFormID,
+    setPreviousFormID,
+    searchInput,
+    showSuggestions,
+    setShowSuggestions,
+    isSubmitted,
+    setIsSubmitted,
+    setText
+  } = useContext(SearchContext);
+  const { user, userStoreContent } = useContext(UserContext);
   const { setTracker } = useContext(CardContext);
   const { setPath } = useContext(PathContext);
   const history = useHistory();
   const location = useLocation();
-  console.log(loading)
-  // ul with card names in autocomplete list
-  const listItems = useRef(null);
-  // input text for search term
-  const searchInput = useRef(null);
-  // form
-  const form = useRef(null);
 
   useEffect(() => {
     if (localStorage.getItem('storeCardName')) {
@@ -64,12 +62,12 @@ const SearchStore = () => {
   }, []);
 
   useEffect(() => {
-    if (searchInput.current) {
+    if (searchInput) {
       if (isSubmitted && showSuggestions) {
         // Call request function to fetch resulst from card name
         fetchSingleCard();
         // Set the focus on input search field
-        searchInput.current.focus();
+        searchInput.focus();
         setShowSuggestions(false);
       } else {
         setShowSuggestions(true);
@@ -111,14 +109,13 @@ const SearchStore = () => {
   const fetchSingleCard = (e) => {
     // bounce back if sent form does not match current form's id
     // This block other forms in the view to process the request down below
-    // if (sentForm !== form.current.id) {
+    // if (previousForm !== form.current.id) {
     //   return console.log('wrong form');
     // }
 
     // if (!searchTerm || searchTerm.length < 3) {
     //   return console.log('Search term is incomplete');
     // }
-
     let search = '';
 
     if (e) {
@@ -126,7 +123,7 @@ const SearchStore = () => {
       e.preventDefault();
       setShowSuggestions(false);
       setIsSubmitted(true);
-      search = searchInput.current.value;
+      search = searchInput.value;
     } else if (searchTerm) {
       search = searchTerm;
     } else {
@@ -150,6 +147,7 @@ const SearchStore = () => {
         // localStorage.setItem('storeCards', JSON.stringify(data.data));
         search && localStorage.setItem('storeCardName', search);
         setCards(data.data);
+        setPreviousFormID(currentForm.id);
         setCardNames([]);
         setCardName(search);
         setLoading(false);
@@ -205,35 +203,25 @@ const SearchStore = () => {
   };
 
   useEffect(() => {
-    if (sentForm === 'search-store') {
+    if (previousFormID === 'search-store') {
       setIsOn(true);
     } else {
       setIsOn(false);
       setSearchTerm('');
     }
-  }, [sentForm]);
+  }, [previousFormID]);
 
   return (
     <div className="search-content">
       <h2 className="page-title">Enter A Card Name</h2>
 
-      <form id="search-store" onSubmit={fetchSingleCard} ref={form}>
-        {!sentForm || sentForm === 'search-store' ? (
-          <SearchField
-            searchTerm={searchTerm}
-            setSearchTerm={setSearchTerm}
-            listItems={listItems}
-            searchInput={searchInput}
-            setRequestSent={setRequestSent}
-            requestSent={requestSent}
-            cardNames={cardNames}
-            isOn={isOn}
-            form={form}
-          />
-        ) : (
-            <SearchField form={form} />
-        )}
-      </form>
+      <SearchForm
+        handleClick={fetchSingleCard}
+        setRequestSent={setRequestSent}
+        requestSent={requestSent}
+        cardNames={cardNames}
+        isOn={isOn}
+      />
       <Buttons>
         <Button
           onClick={handleClick}
@@ -255,22 +243,7 @@ const SearchStore = () => {
         ) : (
             <>
             {cardName && (
-                <header className="result-header">
-                  <h3 className="result-title">
-                    <div className="result-details">
-                      <span>
-                        {capitalizeString(cardName)}
-                      </span>
-                      <span>
-                        {`${cards.length} 
-                               ` + (cards.length > 1 ? 'Results' : 'Result')}
-                      </span>
-                    </div>
-                    <span className="clear-search" onClick={clearSearch}>
-                      <FiXCircle size={20} />
-                    </span>
-                  </h3>
-                </header>
+                <SearchResultHeader cardName={cardName} cards={cards} clearSearch={clearSearch} />
             )}
               <div className="search-items">
               {cards.map((card) => {

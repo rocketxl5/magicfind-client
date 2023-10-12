@@ -1,11 +1,11 @@
 import React, {
+  useRef,
   useState,
   useEffect,
-  useRef,
-  useContext
+  useContext,
 } from 'react';
 import { v4 as uuidv4 } from 'uuid';
-import Suggestions from './Suggestions';
+import Predictions from './search/Predictions';
 import { FiSearch } from 'react-icons/fi';
 import { SearchContext } from '../../contexts/SearchContext';
 import { CardContext } from '../../contexts/CardContext';
@@ -13,28 +13,34 @@ import { PathContext } from '../../contexts/PathContext';
 import styled from 'styled-components';
 
 const SearchField = ({
-  searchTerm,
-  setSearchTerm,
   setRequestSent,
   cardNames,
-  listItems,
-  searchInput,
   isOn,
   form
 }) => {
+
   const [currentListItem, setCurrentListItem] = useState(null);
   const [previousListItem, setPreviousListItem] = useState(null);
+
   const [hoverTarget, setHoverTarget] = useState(null);
   const [hoverList, setHoverList] = useState(false);
   const [power, setPower] = useState(false);
-
-  const { isValidLength, setIsValidLength } = useContext(SearchContext);
   const { text, setText } = useContext(SearchContext);
-  const { sentForm, setSentForm } = useContext(SearchContext);
-  const { setIsSubmitted, callToAction } = useContext(SearchContext);
+  const {
+    previousFormID,
+    setPreviousFormID,
+    searchInput,
+    setSearchInput,
+    searchTerm,
+    setSearchTerm,
+    isValidLength,
+    setIsValidLength,
+    setIsSubmitted
+  } = useContext(SearchContext);
   const { tracker, setTracker } = useContext(CardContext);
   const { path } = useContext(PathContext);
 
+  const listItems = useRef(null);
   // Testing searchTerm changes
   // useEffect(() => {
   //   if (searchTerm) {
@@ -93,9 +99,9 @@ const SearchField = ({
   // Clear search field on url change
   useEffect(() => {
     if (searchInput) {
-      searchInput.current.value = '';
+      searchInput.value = '';
     }
-    if (setSearchTerm) {
+    if (searchTerm) {
       setSearchTerm('');
     }
   }, [path]);
@@ -130,7 +136,7 @@ const SearchField = ({
         setTracker(tracker + 1);
 
         if (listItem) {
-          searchInput.current.value = listItem.textContent;
+          searchInput.value = listItem.textContent;
         }
       }
       if (e.key === 'ArrowUp') {
@@ -154,7 +160,7 @@ const SearchField = ({
         }
         setTracker(tracker - 1);
         if (listItem) {
-          searchInput.current.value = listItem.textContent;
+          searchInput.value = listItem.textContent;
         }
       }
     }
@@ -176,28 +182,27 @@ const SearchField = ({
     // Reset currentListItem and previousListItem
     // on loosing focus of the search text field
     setCurrentListItem(null);
-    setPreviousListItem(null);
-    // console.log('lost focus');
-
     if (!hoverList) {
       setIsValidLength(false);
     }
   };
 
+
   const handleFocus = (e) => {
-    console.log(sentForm)
-    console.log(form && form.current.id)
-    // Clear search if input focus changes
-    if (sentForm) {
-      if (sentForm !== form.current.id) {
-        if (setSearchTerm) {
+    setSearchInput(e.target)
+
+    if (previousFormID) {
+      if (previousFormID !== form.id) {
+        // if searchTerm not empty
+        if (searchTerm) {
+    // empty it
           setSearchTerm('');
         }
-        // setSearchTerm('');
       }
     }
+
     setTracker(0);
-    setSentForm(form.current.id);
+    setPreviousFormID(form.id);
     if (text.length > 2) {
       setIsValidLength(true);
       setHoverList(false);
@@ -227,15 +232,15 @@ const SearchField = ({
         onChange={handleChange}
         onFocus={handleFocus}
         onBlur={handleBlur}
-        placeholder={
-          form.current &&
-          (form.current.id === 'search-catalog' 
-            ? 'Search Magic Find'
-            : form.current.id === 'search-api'
-              ? 'Search Skryfall API'
-              : 'Search Your Store')
-        }
-        ref={searchInput}
+        // placeholder={
+        //   form.current &&
+        //   (form.current.id === 'search-catalog' 
+        //     ? 'Search Magic Find'
+        //     : form.current.id === 'search-api'
+        //       ? 'Search Skryfall API'
+        //       : 'Search Your Store')
+        // }
+
       />
       {
         <ul
@@ -249,7 +254,7 @@ const SearchField = ({
             cardNames.map((cardName, index) => {
               return (
                 isValidLength && (
-                  <Suggestions
+                  <Predictions
                     key={cardName}
                     searchTerm={searchTerm}
                     setPower={setPower}

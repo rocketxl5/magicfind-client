@@ -1,8 +1,8 @@
 import React, {
-  useContext,
+  useRef,
   useState,
   useEffect,
-  useRef,
+  useContext
 } from 'react';
 import { useLocation, useHistory } from 'react-router-dom';
 import SearchField from './SearchField';
@@ -22,21 +22,19 @@ const SearchCatalog = () => {
   const [requestSent, setRequestSent] = useState(false);
   const [isOn, setIsOn] = useState(false);
   const [results, setResults] = useState([]);
-  const { setIsValidLength } = useContext(SearchContext);
+  const {
+    previousForm,
+    setPreviousForm,
+    searchInput,
+    setIsValidLength
+  } = useContext(SearchContext);
 
   const { isSubmitted, setIsSubmitted } = useContext(SearchContext);
   const { showSuggestions, setShowSuggestions } = useContext(SearchContext);
-  const { searchResult, setSearchResult } = useContext(SearchContext);
   const { setText } = useContext(SearchContext);
-  const { sentForm } = useContext(SearchContext);
-  const { userStoreContent } = useContext(CardContext);
   const { setTracker } = useContext(CardContext);
   const { path, setPath } = useContext(PathContext);
   const history = useHistory();
-  // ul with card names in autocomplete list
-  const listItems = useRef(null);
-  // input text for search term
-  const searchInput = useRef(null);
 
   const form = useRef(null);
 
@@ -94,6 +92,7 @@ const SearchCatalog = () => {
         .then((data) => {
           setResults(data);
           setLoading(false);
+          setPreviousForm(form);
         })
         .catch((error) => console.log(error));
     }
@@ -122,9 +121,9 @@ const SearchCatalog = () => {
 
   // Submit search request to backend
   const fetchSingleCard = (e) => {
-    if (sentForm !== form.current.id) {
-      return;
-    }
+    // if (previousForm.id !== form.id) {
+    //   return;
+    // }
 
     if (!searchTerm) {
       return console.log('Field is empty');
@@ -158,14 +157,13 @@ const SearchCatalog = () => {
       .then((data) => {
         // localStorage.setItem('searchCatalog', search);
         // localStorage.removeItem('catalogCards');
-        // setSearchResult(data.data);
         setLoading(false);
         setSearchTerm('');
         setIsValidLength(false);
         setIsSubmitted(false);
         setText('');
         setTracker(0);
-
+        setPreviousForm(form);
         if (path !== 'catalog') {
           history.push({
             pathname: `/catalog/${search}`,
@@ -176,14 +174,14 @@ const SearchCatalog = () => {
       .catch((error) => console.log(error));
   };
 
-  useEffect(() => {
-    if (sentForm === 'search-catalog') {
-      setIsOn(true);
-    } else {
-      setIsOn(false);
-      setSearchTerm('');
-    }
-  }, [sentForm]);
+  // useEffect(() => {
+  //   if (previousForm.id === 'search-catalog') {
+  //     setIsOn(true);
+  //   } else {
+  //     setIsOn(false);
+  //     setSearchTerm('');
+  //   }
+  // }, [previousForm]);
 
   return (
     <div className="search-bar">
@@ -191,21 +189,16 @@ const SearchCatalog = () => {
         id="search-catalog"
         className="search-form"
         onSubmit={(e) => fetchSingleCard(e)}
-        ref={form}
       >
-        {!sentForm || sentForm === 'search-catalog' ? (
+        {!previousForm || previousForm === 'search-catalog' ? (
           <SearchField
-            searchTerm={searchTerm}
-            setSearchTerm={setSearchTerm}
             setRequestSent={setRequestSent}
             cardNames={cardNames}
-            listItems={listItems}
             searchInput={searchInput}
             isOn={isOn}
-            form={form}
           />
         ) : (
-          <SearchField form={form} />
+            <SearchField />
         )}
       </form>
     </div>

@@ -29,7 +29,7 @@ const Home = () => {
     // Setting path with component url pathname onload
     setPath(location.pathname);
   }, []);
-
+  console.log(api.serverURL)
   return (
 
     <section className="section home-page">

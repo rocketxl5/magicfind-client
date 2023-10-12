@@ -79,14 +79,14 @@ const CardListing = ({ card, setIsSent }) => {
       <header className="search-header">
         <h2>Product Details</h2>
         {path === 'add-card' ? (
-          <GoBack to={'/search-api'} title="Back To Search">
+          <GoBack to={'/search-api'} title="Back To API">
             <BackIcon>
               <FiArrowLeftCircle size={26} />
             </BackIcon>
             <BackText>Back to Search</BackText>
           </GoBack>
         ) : (
-          <GoBack to={'/store'} title="Back To Store">
+            <GoBack to={'/search-store'} title="Back To Store">
             <BackIcon>
               <FiArrowLeftCircle size={26} />
             </BackIcon>

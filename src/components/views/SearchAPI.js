@@ -1,15 +1,13 @@
 import React, {
-  useContext,
   useState,
   useEffect,
-  useRef,
+  useContext
 } from 'react';
 import { useLocation } from 'react-router-dom';
 import SkryfallItem from './SkryfallItem';
-import SearchField from './SearchField';
 import SearchResultHeader from './search/SearchResultHeader';
+import SearchForm from './search/SearchForm';
 import Spinner from '../layout/Spinner';
-import { FiXCircle } from 'react-icons/fi';
 import { SearchContext } from '../../contexts/SearchContext';
 import { PathContext } from '../../contexts/PathContext';
 import { CardContext } from '../../contexts/CardContext';
@@ -24,24 +22,26 @@ const Search = () => {
   const [cardName, setCardName] = useState('');
   const [cardNames, setCardNames] = useState([]);
   const [isOn, setIsOn] = useState(false);
-  const [searchTerm, setSearchTerm] = useState('');
   const [cards, setCards] = useState([]);
-  const { isSubmitted, setIsSubmitted } = useContext(SearchContext);
-  const { setIsValidLength } = useContext(SearchContext);
-  const { setText } = useContext(SearchContext);
-  const { sentForm } = useContext(SearchContext);
-  const { apiCardNames } = useContext(CardContext);
-  const { setTracker } = useContext(CardContext);
-
+  const {
+    currentForm,
+    searchInput,
+    previousFormID,
+    setpreviousFormID,
+    searchTerm,
+    setSearchTerm,
+    isSubmitted,
+    setIsValidLength,
+    setIsSubmitted,
+    setText
+  } = useContext(SearchContext);
+  const {
+    apiCardNames,
+    setTracker
+  } = useContext(CardContext);
   const { path, setPath } = useContext(PathContext);
   const location = useLocation();
 
-  // ul with card names in autocomplete list
-  const listItems = useRef(null);
-  // input text for search term
-  const searchInput = useRef(null);
-  // form
-  const form = useRef(null);
 
   // Format name to fit scryfall api's requisite (word+word)
   const sanitizeString = (string) => {
@@ -54,9 +54,9 @@ const Search = () => {
   const fetchSingleCard = (e) => {
     // bounce back if sent form does not match current form's id
     // This block other forms in the view to process the request down below
-    if (sentForm !== form.current.id) {
-      return;
-    }
+    // if (previousFormID !== form.current.id) {
+    //   return;
+    // }
 
     let searching = '';
     setOracleID('');
@@ -97,7 +97,7 @@ const Search = () => {
         // searchTerm is incomplete in this case.
         // searchInput should contain the autocompleted result
       } else {
-        searching = searchInput.current.value;
+        searching = searchInput.value;
       }
     }
     // setLoading(true);
@@ -114,10 +114,10 @@ const Search = () => {
         localStorage.setItem('oracle', oracle_id);
         localStorage.setItem('apiCardName', name);
         // Reset cardNames state to empty array
+        setpreviousFormID(currentForm.id);
         setCardNames([]);
         setCardName(name);
         setOracleID(oracle_id);
-
         setSearchTerm('');
         setIsValidLength(false);
         setIsSubmitted(false);
@@ -155,8 +155,8 @@ const Search = () => {
       setOracleID('');
       setCardName('');
     }
-    if (searchInput.current) {
-      searchInput.current.value = '';
+    if (searchInput) {
+      searchInput.value = '';
     }
     setPath(location.pathname.split('/')[1]);
   }, [path]);
@@ -186,8 +186,8 @@ const Search = () => {
       // Call request function to fetch resulst from card name
       fetchSingleCard();
       // Set the focus on input search field
-      if (searchInput.current) {
-        searchInput.current.focus();
+      if (searchInput) {
+        searchInput.focus();
       }
     }
   }, [isSubmitted]);
@@ -225,36 +225,26 @@ const Search = () => {
     localStorage.removeItem('apiCards');
   };
 
-  useEffect(() => {
-    if (sentForm === 'search-api') {
-      setIsOn(true);
-    } else {
-      setIsOn(false);
-      setSearchTerm('');
-    }
-  }, [sentForm]);
+  // useEffect(() => {
+  //   if (previousForm === 'search-api') {
+  //     setIsOn(true);
+  //   } else {
+  //     setIsOn(false);
+  //     setSearchTerm('');
+  //   }
+  // }, [previousForm]);
+
 
   return (
     <div className="search-content">
       <h2 className="page-title">Enter A Card Name</h2>
-
-      <form id="search-api" onSubmit={(e) => fetchSingleCard(e)} ref={form}>
-        {!sentForm || sentForm === 'search-api' ? (
-          <SearchField
-            searchTerm={searchTerm}
-            setSearchTerm={setSearchTerm}
-            listItems={listItems}
-            searchInput={searchInput}
-            setRequestSent={setRequestSent}
-            requestSent={requestSent}
-            isOn={isOn}
-            form={form}
-            cardNames={cardNames}
-          />
-        ) : (
-            <SearchField form={form} />
-        )}
-      </form>
+      <SearchForm
+        handleClick={fetchSingleCard}
+        setRequestSent={setRequestSent}
+        requestSent={requestSent}
+        cardNames={cardNames}
+        isOn={isOn}
+      />
       <div>
         {loading || !cards ? (
           <Spinner />

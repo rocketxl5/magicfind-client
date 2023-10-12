@@ -35,7 +35,7 @@ export const CardProvider = ({ children }) => {
   }, []);
 
   useEffect(() => {
-    if (user && path === 'store') {
+    if (user && path === 'search-store') {
       const token = user.token;
       const id = user.id;
 

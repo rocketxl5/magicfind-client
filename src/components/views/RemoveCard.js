@@ -37,7 +37,7 @@ const Remove = () => {
         console.log(data);
         setCardContext(false);
         history.push({
-          pathname: '/store',
+          pathname: '/search-store',
           state: {
             message: 'Card successfully deleted',
           },
@@ -50,7 +50,7 @@ const Remove = () => {
     <>
       <h2>Delete Product</h2>
       <header className="search-header">
-        <GoBack to={'/store'} title="Back To Store">
+        <GoBack to={'/search-store'} title="Back To Store">
           <BackIcon>
             <FiArrowLeftCircle size={26} />
           </BackIcon>

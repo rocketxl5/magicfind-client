@@ -15,22 +15,30 @@ export const SearchProvider = ({ children }) => {
   // It is set once in the SearchField component whem the input field has focus.
   // This prevents conflict between search form since they all use the same SearchField component.
   // It informs the SearchField instance which form it is linked to. It returns in case of conflict
-  const [sentForm, setSentForm] = useState('');
+
   // This sentForm value is passed to the dependency array of a useEffect
   // in each Forms to compare the value with the current form id.
-
+  const [currentForm, setCurrentForm] = useState(null);
+  const [previousFormID, setPreviousFormID] = useState(null);
+  const [searchInput, setSearchInput] = useState(null);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [cardName, setCardName] = useState('');
   const [hasFocus, setHasFocus] = useState(false);
   const [text, setText] = useState('');
-  const [searchTerm, setSearchTerm] = useState('');
-  // 
 
   return (
     <SearchContext.Provider
       value={{
-        sentForm,
-        setSentForm,
+        currentForm,
+        setCurrentForm,
+        previousFormID,
+        setPreviousFormID,
+        searchInput,
+        setSearchInput,
         searchTerm,
         setSearchTerm,
+        cardName,
+        setCardName,
         searchResult,
         setSearchResult,
         isValidLength,

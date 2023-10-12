@@ -1,8 +1,8 @@
 import React, { useContext, useState, useEffect } from 'react';
-import { CardContext } from '../../contexts/CardContext';
+import { CardContext } from '../../../contexts/CardContext';
 import styled from 'styled-components';
 
-const Suggestions = ({
+const Predictions = ({
   searchTerm,
   setPower,
   setHoverTarget,
@@ -55,4 +55,4 @@ const Suggestions = ({
   );
 };
 
-export default Suggestions;
+export default Predictions;
