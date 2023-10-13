@@ -6,13 +6,12 @@ import React, {
 } from 'react';
 import { useHistory } from 'react-router-dom';
 import SearchForm from './search/SearchForm';
-import SearchResultHeader from './search/SearchResultHeader';
-import CatalogItem from './CatalogItem';
 import Spinner from '../layout/Spinner';
 import { SearchContext } from '../../contexts/SearchContext';
 import { PathContext } from '../../contexts/PathContext';
 import { CardContext } from '../../contexts/CardContext';
 import { api } from '../../api/resources';
+import SearchResult from './search/SearchResult';
 
 const SearchCatalog = () => {
   const [loading, setLoading] = useState(false);
@@ -47,9 +46,6 @@ const SearchCatalog = () => {
       setIsActive(false);
       setSearchTerm('');
     }
-  }, []);
-
-  useEffect(() => {
 
     if (localStorage.getItem('catalogCardName')) {
       if (localStorage.getItem('catalogCardName') === 'all') {
@@ -61,11 +57,9 @@ const SearchCatalog = () => {
         fetchSingleCard();
       }
     }
+
     // setPath(location.pathname.split('/')[1]);
-
-  }, [])
-
-
+  }, []);
 
 
   useEffect(() => {
@@ -79,7 +73,7 @@ const SearchCatalog = () => {
 
   }, [isSubmitted]);
 
-  // 
+  // AUTOCOMPLETE
   useEffect(() => {
     if (searchTerm.length < 3) {
       setIsValidLength(false);
@@ -106,6 +100,7 @@ const SearchCatalog = () => {
 
   }, [searchTerm]);
 
+
   useEffect(() => {
     if (results.length > 0) {
       console.log(results);
@@ -131,7 +126,7 @@ const SearchCatalog = () => {
   const fetchSingleCard = (e) => {
 
     if (!searchTerm) {
-      throw new Error('Search is unknow or incomplete');
+      throw new Error('Search is unknown or incomplete');
     }
 
     let search = '';
@@ -165,7 +160,6 @@ const SearchCatalog = () => {
         console.log(data)
         setCards(data.results);
         setCardName(data.cardName);
-
         setLoading(false);
         setSearchTerm('');
         setIsValidLength(false);
@@ -173,17 +167,16 @@ const SearchCatalog = () => {
         setText('');
         setTracker(0);
 
-        // history.push({
-        //   pathname: `/catalog/${search}`,
-        //   state: { data: data, loading },
-        // });
+        history.push({
+          pathname: `/search-result/${activeForm.current.id.split('-')[1]}/${search}`,
+          state: { cards, cardName, formName: activeForm.current.id, loading },
+        });
 
       })
       .catch((error) => console.log(error));
   };
 
   return (
-    <>
       <div className="search-catalog">
         <SearchForm
           handleSubmit={fetchSingleCard}
@@ -197,29 +190,7 @@ const SearchCatalog = () => {
           activeForm={activeForm}
           searchInput={searchInput}
         />
-      </div>
-      <div className="">
-        {loading || !cards ? (
-          <Spinner />
-        ) : (
-            <>
-              {cardName && (
-                <SearchResultHeader cardName={cardName} cards={cards} />
-              )}
-              <div className="search-items">
-                {cards && cards.map((card, index) => {
-                  return (
-                    <CatalogItem
-                      key={card._id}
-                      card={card}
-                    />
-                  );
-                })}
-              </div>
-          </>
-        )}
-      </div>
-    </>
+    </div>
   );
 };
 

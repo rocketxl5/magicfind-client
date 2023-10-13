@@ -6,10 +6,10 @@ import React, {
 } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { FiPlusCircle, FiMinusCircle, FiTrash2 } from 'react-icons/fi';
-import { ShoppingCartContext } from '../../contexts/ShoppingCartContext';
-import { UserContext } from '../../contexts/UserContext';
-import Image from './Image';
-import { api } from '../../api/resources';
+import { ShoppingCartContext } from '../../../contexts/ShoppingCartContext';
+import { UserContext } from '../../../contexts/UserContext';
+import Image from '../Image';
+import { api } from '../../../api/resources';
 import styled from 'styled-components';
 
 const CatalogItem = ({ card }) => {

@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
-import { CardContext } from '../../contexts/CardContext';
-import { PathContext } from '../../contexts/PathContext';
-import Image from './Image';
+import { CardContext } from '../../../contexts/CardContext';
+import { PathContext } from '../../../contexts/PathContext';
+import Image from '../Image';
 import styled from 'styled-components';
 
 const Card = ({ card }) => {

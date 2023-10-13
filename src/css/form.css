@@ -271,7 +271,7 @@ form#search-store .search-field {
     font-size: var(--fs-150);
 }
 
-.search-result {
+ul.autocomplete-list {
     position: absolute;
     display: flex;
     flex-direction: column;

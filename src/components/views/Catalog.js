@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useLocation } from 'react-router-dom';
-import CatalogItem from './CatalogItem';
+import CatalogItem from './search/CatalogItem';
 import Spinner from '../layout/Spinner';
 import SearchResultHeader from './search/SearchResultHeader';
 

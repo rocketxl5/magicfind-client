@@ -5,7 +5,7 @@ import React, {
   useContext
 } from 'react';
 import { useLocation } from 'react-router-dom';
-import SkryfallItem from './SkryfallItem';
+import SkryfallItem from './search/SkryfallItem';
 import SearchResultHeader from './search/SearchResultHeader';
 import SearchForm from './search/SearchForm';
 import Spinner from '../layout/Spinner';

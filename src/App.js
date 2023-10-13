@@ -19,7 +19,7 @@ import Profile from './components/views/Profile';
 import UserPage from './components/views/UserPage';
 import SearchStore from './components/views/SearchStore';
 import SearchAPI from './components/views/SearchAPI';
-import Catalog from './components/views/Catalog';
+import SearchResult from './components/views/search/SearchResult';
 import AddCard from './components/views/AddCard';
 import NotFound from './components/views/NotFound';
 import ShoppingCart from './components/views/ShoppingCart';
@@ -100,8 +100,8 @@ const App = () => {
           <Route exact path="/search-api">
             {user ? <SearchAPI /> : <Redirect to="/" />}
           </Route>
-          <Route exact path="/catalog/:search">
-            <Catalog />
+          <Route exact path="/search-result/:searchType/:cardName">
+            <SearchResult />
           </Route>
           <Route exact path="/mail/inbox">
             {user ? <MailBox /> : <Redirect to="/" />}

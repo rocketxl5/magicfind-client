@@ -5,7 +5,7 @@ import React, {
   useContext
 } from 'react';
 import { useLocation, useHistory } from 'react-router-dom';
-import StoreItem from './StoreItem';
+import StoreItem from './search/StoreItem';
 import SearchResultHeader from './search/SearchResultHeader';
 import SearchForm from './search/SearchForm';
 import Spinner from '../layout/Spinner.js';

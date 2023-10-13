@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { useHistory } from 'react-router-dom';
-import { CardContext } from '../../contexts/CardContext';
-import Image from './Image';
+import { CardContext } from '../../../contexts/CardContext';
+import Image from '../Image';
 
 const StoreItem = ({ card }) => {
   const { setCardContext } = useContext(CardContext);
@@ -23,24 +23,24 @@ const StoreItem = ({ card }) => {
   return (
     <div className="item-container">
 
-        <div className="item-image">
-          <Image card={card} />
-        </div>
+      <div className="item-image">
+        <Image card={card} />
+      </div>
       <div className="item-info">
-          <p>{card.set_name}</p>
+        <p>{card.set_name}</p>
 
-          <p>
-            Condition: <strong>{card.condition.toUpperCase()}</strong>
-          </p>
-          <p>
-            Quantity: <strong>{card.quantity}</strong>
-          </p>
-          <p>
-            Language: <strong>{card.language.toUpperCase()}</strong>
-          </p>
-          <p>
-            Price: <strong>{card.price}</strong>
-          </p>
+        <p>
+          Condition: <strong>{card.condition.toUpperCase()}</strong>
+        </p>
+        <p>
+          Quantity: <strong>{card.quantity}</strong>
+        </p>
+        <p>
+          Language: <strong>{card.language.toUpperCase()}</strong>
+        </p>
+        <p>
+          Price: <strong>{card.price}</strong>
+        </p>
       </div>
 
 

@@ -247,8 +247,8 @@ const SearchField = forwardRef(function SearchField(props, ref) {
         <ul
           onClick={handleClick}
           onMouseLeave={(e) => setHoverList(false)}
-          id="search-result"
-          className="search-result"
+          id="autocomplete-list"
+          className="autocomplete-list"
           ref={listItems}
         >
           {cardNames &&
