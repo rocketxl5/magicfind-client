@@ -1,4 +1,5 @@
 import React, {
+  useRef,
   useState,
   useEffect,
   useContext
@@ -16,19 +17,20 @@ import { api } from '../../api/resources';
 import styled from 'styled-components';
 
 const SearchStore = () => {
-  const [cards, setCards] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [isActive, setIsActive] = useState(false);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [cards, setCards] = useState([]);
+
   const [setRemoveCard] = useState(false);
   const [setModifyCard] = useState(false);
-  const [searchTerm, setSearchTerm] = useState('');
   const [cardName, setCardName] = useState('');
   const [cardNames, setCardNames] = useState([]);
   const [requestSent, setRequestSent] = useState(false);
-  const [isOn, setIsOn] = useState(false);
-  const { setIsValidLength } = useContext(SearchContext);
 
 
   const {
+    currentInput,
     currentForm,
     previousFormID,
     setPreviousFormID,
@@ -37,13 +39,25 @@ const SearchStore = () => {
     setShowSuggestions,
     isSubmitted,
     setIsSubmitted,
+    setIsValidLength,
     setText
   } = useContext(SearchContext);
   const { user, userStoreContent } = useContext(UserContext);
+
   const { setTracker } = useContext(CardContext);
   const { setPath } = useContext(PathContext);
   const history = useHistory();
   const location = useLocation();
+  const activeForm = useRef(null);
+
+  useEffect(() => {
+    if (activeForm.current.id === 'search-store') {
+      setIsActive(true);
+    } else {
+      setIsActive(false);
+      setSearchTerm('');
+    }
+  }, [currentInput]);
 
   useEffect(() => {
     if (localStorage.getItem('storeCardName')) {
@@ -58,8 +72,10 @@ const SearchStore = () => {
         fetchSingleCard();
       }
     }
+
     setPath(location.pathname.split('/')[1]);
   }, []);
+
 
   useEffect(() => {
     if (searchInput) {
@@ -202,25 +218,20 @@ const SearchStore = () => {
     localStorage.removeItem('storeCardName');
   };
 
-  useEffect(() => {
-    if (previousFormID === 'search-store') {
-      setIsOn(true);
-    } else {
-      setIsOn(false);
-      setSearchTerm('');
-    }
-  }, [previousFormID]);
-
   return (
+    <>
     <div className="search-content">
-      <h2 className="page-title">Enter A Card Name</h2>
-
+        <h2 className="page-title">Enter A Card Name</h2>
       <SearchForm
-        handleClick={fetchSingleCard}
+          handleSubmit={fetchSingleCard}
+          searchTermHandler={(input) => setSearchTerm(input)}
+          formId={'search-store'}
         setRequestSent={setRequestSent}
         requestSent={requestSent}
         cardNames={cardNames}
-        isOn={isOn}
+          searchTerm={searchTerm}
+          isActive={isActive}
+          activeForm={activeForm}
       />
       <Buttons>
         <Button
@@ -236,8 +247,8 @@ const SearchStore = () => {
           Show All Cards
         </Button>
       </Buttons>
-
-      <div className="store-search-results">
+      </div>
+      <div className="">
         {loading || !cards ? (
           <Spinner />
         ) : (
@@ -260,7 +271,7 @@ const SearchStore = () => {
             </>
         )}
       </div>
-    </div>
+    </>
   );
 };
 

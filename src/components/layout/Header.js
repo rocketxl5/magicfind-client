@@ -33,7 +33,7 @@ const Header = () => {
     // If Search button (magnifier icon)
     if (e.target.classList.contains('search-btn')) {
       // Show Search bar 
-      document.querySelector('.search-bar').style.setProperty('width', 'calc(100% - 5rem)');
+      document.querySelector('.search-catalog').style.setProperty('width', 'calc(100% - 5rem)');
       // Hide Search button
       document.querySelector('.search-btn').style.setProperty('display', 'none');
       setAction('display-search')
@@ -43,7 +43,7 @@ const Header = () => {
       // Handle Search bar
       if (action === 'display-search') {
       // Hide Search bar
-        document.querySelector('.search-bar').style.setProperty('width', '0');
+        document.querySelector('.search-catalog').style.setProperty('width', '0');
         // Show Search button icon
         document.querySelector('.search-btn').style.setProperty('display', 'block');
         // Clear Search fied

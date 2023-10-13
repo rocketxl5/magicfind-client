@@ -4,10 +4,11 @@ import React, {
   useEffect,
   useContext
 } from 'react';
-import { useLocation, useHistory } from 'react-router-dom';
-import SearchField from './SearchField';
+import { useHistory } from 'react-router-dom';
+import SearchForm from './search/SearchForm';
+import SearchResultHeader from './search/SearchResultHeader';
+import CatalogItem from './CatalogItem';
 import Spinner from '../layout/Spinner';
-import { FiXCircle } from 'react-icons/fi';
 import { SearchContext } from '../../contexts/SearchContext';
 import { PathContext } from '../../contexts/PathContext';
 import { CardContext } from '../../contexts/CardContext';
@@ -15,30 +16,41 @@ import { api } from '../../api/resources';
 
 const SearchCatalog = () => {
   const [loading, setLoading] = useState(false);
-
+  const [isActive, setIsActive] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
+  const [cards, setCards] = useState([]);
   const [cardName, setCardName] = useState('');
+
   const [cardNames, setCardNames] = useState([]);
   const [requestSent, setRequestSent] = useState(false);
-  const [isOn, setIsOn] = useState(false);
   const [results, setResults] = useState([]);
   const {
-    previousForm,
     setPreviousForm,
-    searchInput,
-    setIsValidLength
+    setIsValidLength,
+    isSubmitted,
+    setIsSubmitted,
+    showSuggestions,
+    setShowSuggestions,
+    setText
   } = useContext(SearchContext);
 
-  const { isSubmitted, setIsSubmitted } = useContext(SearchContext);
-  const { showSuggestions, setShowSuggestions } = useContext(SearchContext);
-  const { setText } = useContext(SearchContext);
   const { setTracker } = useContext(CardContext);
-  const { path, setPath } = useContext(PathContext);
+  const { path } = useContext(PathContext);
   const history = useHistory();
-
-  const form = useRef(null);
+  const searchInput = useRef(null);
+  const activeForm = useRef(null);
 
   useEffect(() => {
+    if (activeForm.current.id === 'search-catalog') {
+      setIsActive(true);
+    } else {
+      setIsActive(false);
+      setSearchTerm('');
+    }
+  }, []);
+
+  useEffect(() => {
+
     if (localStorage.getItem('catalogCardName')) {
       if (localStorage.getItem('catalogCardName') === 'all') {
         // fetchAllCards();
@@ -50,29 +62,25 @@ const SearchCatalog = () => {
       }
     }
     // setPath(location.pathname.split('/')[1]);
-  }, []);
 
-  // Format name to fit scryfall api's requisite (word+word)
-  const sanitizeString = (string) => {
-    let sanitized = string.trim();
-    sanitized = sanitized.split(' ').join('+');
-    // console.log(sanitized);
-    return sanitized;
-  };
+  }, [])
+
+
+
 
   useEffect(() => {
+
     if (isSubmitted && showSuggestions) {
       fetchSingleCard();
       setShowSuggestions(false);
     } else {
       setShowSuggestions(true);
     }
+
   }, [isSubmitted]);
 
-  // AUTOCOMPLETE
+  // 
   useEffect(() => {
-    // console.log(searchTerm);
-
     if (searchTerm.length < 3) {
       setIsValidLength(false);
     } else if (searchTerm.length >= 3) {
@@ -92,10 +100,10 @@ const SearchCatalog = () => {
         .then((data) => {
           setResults(data);
           setLoading(false);
-          setPreviousForm(form);
         })
         .catch((error) => console.log(error));
     }
+
   }, [searchTerm]);
 
   useEffect(() => {
@@ -121,12 +129,9 @@ const SearchCatalog = () => {
 
   // Submit search request to backend
   const fetchSingleCard = (e) => {
-    // if (previousForm.id !== form.id) {
-    //   return;
-    // }
 
     if (!searchTerm) {
-      return console.log('Field is empty');
+      throw new Error('Search is unknow or incomplete');
     }
 
     let search = '';
@@ -157,51 +162,64 @@ const SearchCatalog = () => {
       .then((data) => {
         // localStorage.setItem('searchCatalog', search);
         // localStorage.removeItem('catalogCards');
+        console.log(data)
+        setCards(data.results);
+        setCardName(data.cardName);
+
         setLoading(false);
         setSearchTerm('');
         setIsValidLength(false);
         setIsSubmitted(false);
         setText('');
         setTracker(0);
-        setPreviousForm(form);
-        if (path !== 'catalog') {
-          history.push({
-            pathname: `/catalog/${search}`,
-            state: { result: data.data },
-          });
-        }
+
+        // history.push({
+        //   pathname: `/catalog/${search}`,
+        //   state: { data: data, loading },
+        // });
+
       })
       .catch((error) => console.log(error));
   };
 
-  // useEffect(() => {
-  //   if (previousForm.id === 'search-catalog') {
-  //     setIsOn(true);
-  //   } else {
-  //     setIsOn(false);
-  //     setSearchTerm('');
-  //   }
-  // }, [previousForm]);
-
   return (
-    <div className="search-bar">
-      <form
-        id="search-catalog"
-        className="search-form"
-        onSubmit={(e) => fetchSingleCard(e)}
-      >
-        {!previousForm || previousForm === 'search-catalog' ? (
-          <SearchField
-            setRequestSent={setRequestSent}
-            cardNames={cardNames}
-            searchInput={searchInput}
-            isOn={isOn}
-          />
+    <>
+      <div className="search-catalog">
+        <SearchForm
+          handleSubmit={fetchSingleCard}
+          searchTermHandler={(input) => setSearchTerm(input)}
+          formId={'search-catalog'}
+          setRequestSent={setRequestSent}
+          requestSent={requestSent}
+          cardNames={cardNames}
+          searchTerm={searchTerm}
+          isActive={isActive}
+          activeForm={activeForm}
+          searchInput={searchInput}
+        />
+      </div>
+      <div className="">
+        {loading || !cards ? (
+          <Spinner />
         ) : (
-            <SearchField />
+            <>
+              {cardName && (
+                <SearchResultHeader cardName={cardName} cards={cards} />
+              )}
+              <div className="search-items">
+                {cards && cards.map((card, index) => {
+                  return (
+                    <CatalogItem
+                      key={card._id}
+                      card={card}
+                    />
+                  );
+                })}
+              </div>
+          </>
         )}
-      </form>
-    </div>
+      </div>
+    </>
   );
 };
 

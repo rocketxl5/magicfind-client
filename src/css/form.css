@@ -237,7 +237,7 @@ form#search-store .search-field {
 }
 
 /* SearchCatalog form style */
-.search-bar {
+.search-catalog {
     position: absolute;
     display: flex;
     top: 0;
@@ -249,7 +249,7 @@ form#search-store .search-field {
     transition: 0.1s ease-in-out;
 }
 
-.search-form {
+.search-catalog form {
     display: flex;
     width: calc(100% - var(--size-1));
     min-height: var(--size-4);

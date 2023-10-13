@@ -1,36 +1,25 @@
-import React, { useRef, useContext } from 'react';
+import React, { useContext, forwardRef } from 'react';
 import { SearchContext } from '../../../contexts/SearchContext';
-import SearchField from '../SearchField';
+import SearchField from './SearchField';
 
-const SearchForm = ({
-    handleClick,
-    setRequestSent,
-    requestSent,
-    cardNames,
-    isOn
-}) => {
-    // Remove slash bar form pathname
-    const pathname = window.location.pathname.replace(/\//, '');
+const SearchForm = forwardRef(function SearchForm(props, ref) {
+    const { formId, handleSubmit, activeForm } = props;
     const { previousFormID } = useContext(SearchContext);
-    // setForm saves form ref to SearchContext
-    // for respective parent search component (Catalog, Store, API)
-    const form = useRef(null);
 
     return (
-        <form id={pathname} onSubmit={handleClick} ref={form} >
-            {!previousFormID || previousFormID === pathname ? (
-                <SearchField
-                    setRequestSent={setRequestSent}
-                    requestSent={requestSent}
-                    cardNames={cardNames}
-                    isOn={isOn}
-                    form={form}
-                />
-            ) : (
-                <SearchField form={form} />
-            )}
+        <form id={formId} onSubmit={handleSubmit} ref={activeForm} >
+            {
+                (!previousFormID || previousFormID === formId) ? (
+                    <SearchField {...props} />
+                ) : (
+                    <SearchField formId={formId} />
+                )
+            }
         </form>
     )
-}
+});
 
 export default SearchForm;
+
+
+

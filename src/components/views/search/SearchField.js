@@ -2,52 +2,52 @@ import React, {
   useRef,
   useState,
   useEffect,
+  forwardRef,
   useContext,
 } from 'react';
 import { v4 as uuidv4 } from 'uuid';
-import Predictions from './search/Predictions';
-import { FiSearch } from 'react-icons/fi';
-import { SearchContext } from '../../contexts/SearchContext';
-import { CardContext } from '../../contexts/CardContext';
-import { PathContext } from '../../contexts/PathContext';
+import Predictions from './Predictions';
+import { SearchContext } from '../../../contexts/SearchContext';
+import { CardContext } from '../../../contexts/CardContext';
+import { PathContext } from '../../../contexts/PathContext';
 import styled from 'styled-components';
 
-const SearchField = ({
-  setRequestSent,
-  cardNames,
-  isOn,
-  form
-}) => {
+const SearchField = forwardRef(function SearchField(props, ref) {
+  console.log(props)
+  const {
+    searchTermHandler,
+    formId,
+    setRequestSent,
+    cardNames,
+    searchTerm,
+    isActive,
+    searchInput,
+  } = props;
 
+  console.log(formId)
   const [currentListItem, setCurrentListItem] = useState(null);
   const [previousListItem, setPreviousListItem] = useState(null);
-
   const [hoverTarget, setHoverTarget] = useState(null);
   const [hoverList, setHoverList] = useState(false);
   const [power, setPower] = useState(false);
-  const { text, setText } = useContext(SearchContext);
+
   const {
     previousFormID,
     setPreviousFormID,
-    searchInput,
-    setSearchInput,
-    searchTerm,
-    setSearchTerm,
     isValidLength,
     setIsValidLength,
-    setIsSubmitted
+    setIsSubmitted,
+    text,
+    setText
   } = useContext(SearchContext);
+
   const { tracker, setTracker } = useContext(CardContext);
   const { path } = useContext(PathContext);
 
   const listItems = useRef(null);
-  // Testing searchTerm changes
-  // useEffect(() => {
-  //   if (searchTerm) {
-  //     console.log(searchTerm);
-  //   }
-  // }, [searchTerm]);
-  // console.log(form);
+
+
+
 
   // Rendering and styling of a Suggestions list item single component
   // Is triggered on currentListItem state change and hoverList state change
@@ -97,14 +97,14 @@ const SearchField = ({
   }, [currentListItem, hoverTarget]);
 
   // Clear search field on url change
-  useEffect(() => {
-    if (searchInput) {
-      searchInput.value = '';
-    }
-    if (searchTerm) {
-      setSearchTerm('');
-    }
-  }, [path]);
+  // useEffect(() => {
+  //   if (searchInput.current) {
+  //     searchInput.value = '';
+  //   }
+  //   if (searchTerm) {
+  //     searchTermHandler('');
+  //   }
+  // }, [path]);
 
   // Keyboard arrow up and down autocomplete list searching function
   const handleKeyDown = (e) => {
@@ -175,7 +175,7 @@ const SearchField = ({
   const handleChange = (e) => {
     // console.log(e.target.value);
     setText(e.target.value);
-    setSearchTerm(e.target.value);
+    searchTermHandler(e.target.value);
   };
 
   const handleBlur = (e) => {
@@ -189,20 +189,22 @@ const SearchField = ({
 
 
   const handleFocus = (e) => {
-    setSearchInput(e.target)
+    // Sets activeForm with form id string
+    console.log(formId)
+
 
     if (previousFormID) {
-      if (previousFormID !== form.id) {
+      if (previousFormID !== formId) {
         // if searchTerm not empty
         if (searchTerm) {
-    // empty it
-          setSearchTerm('');
+          // empty it
+          searchTermHandler('');
         }
       }
     }
 
     setTracker(0);
-    setPreviousFormID(form.id);
+    setPreviousFormID(formId);
     if (text.length > 2) {
       setIsValidLength(true);
       setHoverList(false);
@@ -218,7 +220,7 @@ const SearchField = ({
     } else if (e.target.nodeName === 'STRONG') {
       content = e.target.parentNode.textContent;
     }
-    setSearchTerm(content.toLowerCase());
+    searchTermHandler(content.toLowerCase());
     setIsSubmitted(true);
     // localStorage.setItem('searchTerm', JSON.stringify(content));
   };
@@ -228,19 +230,18 @@ const SearchField = ({
       <input
         type="text"
         className="search-field"
-        value={isOn ? searchTerm : ''}
+        value={isActive ? searchTerm : ''}
         onChange={handleChange}
         onFocus={handleFocus}
         onBlur={handleBlur}
-        // placeholder={
-        //   form.current &&
-        //   (form.current.id === 'search-catalog' 
-        //     ? 'Search Magic Find'
-        //     : form.current.id === 'search-api'
-        //       ? 'Search Skryfall API'
-        //       : 'Search Your Store')
-        // }
-
+        ref={searchInput}
+        placeholder={
+          formId === 'search-catalog'
+            ? 'Search Magic Find'
+            : formId === 'search-api'
+              ? 'Search Skryfall API'
+              : 'Search Your Store'
+        }
       />
       {
         <ul
@@ -270,6 +271,6 @@ const SearchField = ({
       }
     </>
   );
-};
+});
 
 export default SearchField;

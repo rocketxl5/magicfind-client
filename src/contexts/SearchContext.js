@@ -20,11 +20,10 @@ export const SearchProvider = ({ children }) => {
   // in each Forms to compare the value with the current form id.
   const [currentForm, setCurrentForm] = useState(null);
   const [previousFormID, setPreviousFormID] = useState(null);
-  const [searchInput, setSearchInput] = useState(null);
-  const [searchTerm, setSearchTerm] = useState('');
   const [cardName, setCardName] = useState('');
-  const [hasFocus, setHasFocus] = useState(false);
+  const [hasFocus, setHasFocus] = useState('');
   const [text, setText] = useState('');
+  const [currentInput, setCurrentInput] = useState('');
 
   return (
     <SearchContext.Provider
@@ -33,10 +32,6 @@ export const SearchProvider = ({ children }) => {
         setCurrentForm,
         previousFormID,
         setPreviousFormID,
-        searchInput,
-        setSearchInput,
-        searchTerm,
-        setSearchTerm,
         cardName,
         setCardName,
         searchResult,
