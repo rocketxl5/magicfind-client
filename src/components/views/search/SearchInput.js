@@ -8,46 +8,38 @@ import React, {
 import { v4 as uuidv4 } from 'uuid';
 import Predictions from './Predictions';
 import { SearchContext } from '../../../contexts/SearchContext';
-import { CardContext } from '../../../contexts/CardContext';
-import { PathContext } from '../../../contexts/PathContext';
-import styled from 'styled-components';
 
-const SearchField = forwardRef(function SearchField(props, ref) {
-  console.log(props)
+const SearchInput = forwardRef(function SearchInput(props, ref) {
   const {
-    searchTermHandler,
     formId,
-    setRequestSent,
     cardNames,
-    searchTerm,
-    isActive,
-    searchInput,
+    isActive
   } = props;
+  // console.log(ref)
+  // const { inputRef } = ref;
+  const inputRef = ref && ref.inputRef;
 
-  console.log(formId)
+
+  const [tracker, setTracker] = useState(0);
   const [currentListItem, setCurrentListItem] = useState(null);
   const [previousListItem, setPreviousListItem] = useState(null);
   const [hoverTarget, setHoverTarget] = useState(null);
   const [hoverList, setHoverList] = useState(false);
   const [power, setPower] = useState(false);
-
   const {
-    previousFormID,
-    setPreviousFormID,
+    searchInput,
+    setSearchInput,
+    searchTerm,
+    setSearchTerm,
     isValidLength,
+    previousFormID,
     setIsValidLength,
     setIsSubmitted,
     text,
     setText
   } = useContext(SearchContext);
 
-  const { tracker, setTracker } = useContext(CardContext);
-  const { path } = useContext(PathContext);
-
   const listItems = useRef(null);
-
-
-
 
   // Rendering and styling of a Suggestions list item single component
   // Is triggered on currentListItem state change and hoverList state change
@@ -96,15 +88,6 @@ const SearchField = forwardRef(function SearchField(props, ref) {
     }
   }, [currentListItem, hoverTarget]);
 
-  // Clear search field on url change
-  // useEffect(() => {
-  //   if (searchInput.current) {
-  //     searchInput.value = '';
-  //   }
-  //   if (searchTerm) {
-  //     searchTermHandler('');
-  //   }
-  // }, [path]);
 
   // Keyboard arrow up and down autocomplete list searching function
   const handleKeyDown = (e) => {
@@ -116,14 +99,13 @@ const SearchField = forwardRef(function SearchField(props, ref) {
         setPower(true);
         let listItem = '';
         if (tracker === listItems.current.childNodes.length) {
-          // console.log(currentListItem.tabIndex);
+          console.log(currentListItem.tabIndex);
           return console.log('cant go any higher');
         }
         if (tracker === 0) {
           listItem = listItems.current.firstChild;
           setCurrentListItem(listItem);
           setPreviousListItem(null);
-          setRequestSent(false);
         } else if (!currentListItem && previousListItem) {
           listItem = previousListItem;
           setPreviousListItem(null);
@@ -136,6 +118,8 @@ const SearchField = forwardRef(function SearchField(props, ref) {
         setTracker(tracker + 1);
 
         if (listItem) {
+          console.log(listItem.textContent)
+          // setSearchTerm(listItem.textContent)
           searchInput.value = listItem.textContent;
         }
       }
@@ -160,6 +144,7 @@ const SearchField = forwardRef(function SearchField(props, ref) {
         }
         setTracker(tracker - 1);
         if (listItem) {
+          console.log(listItem.textContent)
           searchInput.value = listItem.textContent;
         }
       }
@@ -173,9 +158,9 @@ const SearchField = forwardRef(function SearchField(props, ref) {
   });
 
   const handleChange = (e) => {
-    // console.log(e.target.value);
+    console.log(e.target.value);
     setText(e.target.value);
-    searchTermHandler(e.target.value);
+    setSearchTerm(e.target.value)
   };
 
   const handleBlur = (e) => {
@@ -189,25 +174,34 @@ const SearchField = forwardRef(function SearchField(props, ref) {
 
 
   const handleFocus = (e) => {
-    // Sets activeForm with form id string
-    console.log(formId)
-
-
-    if (previousFormID) {
+    setSearchInput(e.target);
+    console.log(searchInput)
+    if (searchInput !== e.target) {
       if (previousFormID !== formId) {
         // if searchTerm not empty
         if (searchTerm) {
           // empty it
-          searchTermHandler('');
+          setSearchTerm('');
         }
       }
     }
 
     setTracker(0);
-    setPreviousFormID(formId);
+    // setPreviousFormID(formId);
     if (text.length > 2) {
       setIsValidLength(true);
       setHoverList(false);
+    }
+
+    // Handle closing of Search catatalog search bar in mobile
+    // If search field is not catalog and checkbox (#mobile-nav) is checked (search is displayed)
+    if (e.target.id !== 'search-catalog-input' && document.querySelector('#mobile-nav').checked) {
+      // Click label attached to checkbox to check it
+      document.querySelector('.mobile-nav-label').click();
+      // Clear search catalog search bar
+      document.querySelector('.search-catalog').style.width = 0;
+      // Display search icon (magnifier)
+      document.querySelector('.search-btn').style.setProperty('display', 'block');
     }
   };
 
@@ -220,7 +214,7 @@ const SearchField = forwardRef(function SearchField(props, ref) {
     } else if (e.target.nodeName === 'STRONG') {
       content = e.target.parentNode.textContent;
     }
-    searchTermHandler(content.toLowerCase());
+    ;
     setIsSubmitted(true);
     // localStorage.setItem('searchTerm', JSON.stringify(content));
   };
@@ -228,13 +222,14 @@ const SearchField = forwardRef(function SearchField(props, ref) {
   return (
     <>
       <input
+        id={`search-${formId.split('-')[1]}-input`}
         type="text"
         className="search-field"
-        value={isActive ? searchTerm : ''}
+        value={isActive ? inputRef.current.value : ''}
         onChange={handleChange}
         onFocus={handleFocus}
         onBlur={handleBlur}
-        ref={searchInput}
+        ref={inputRef}
         placeholder={
           formId === 'search-catalog'
             ? 'Search Magic Find'
@@ -256,6 +251,7 @@ const SearchField = forwardRef(function SearchField(props, ref) {
               return (
                 isValidLength && (
                   <Predictions
+                    setTrackerHandler={(state) => setTracker(state)}
                     key={cardName}
                     searchTerm={searchTerm}
                     setPower={setPower}
@@ -273,4 +269,4 @@ const SearchField = forwardRef(function SearchField(props, ref) {
   );
 });
 
-export default SearchField;
+export default SearchInput;

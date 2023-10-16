@@ -14,8 +14,6 @@ export const CardProvider = ({ children }) => {
   const { path } = useContext(PathContext);
   const [cardContext, setCardContext] = useState(false);
   const [apiCardNames, setApiCardNames] = useState([]);
-  // tracker following currentListItem index
-  const [tracker, setTracker] = useState(0);
   const [userStoreContent, setUserStoreContent] = useState([]);
   const [loading, setLoading] = useState(false);
 
@@ -67,8 +65,7 @@ export const CardProvider = ({ children }) => {
         setUserStoreContent,
         loading,
         setLoading,
-        tracker,
-        setTracker,
+
       }}
     >
       {children}

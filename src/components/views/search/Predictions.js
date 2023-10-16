@@ -3,6 +3,7 @@ import { CardContext } from '../../../contexts/CardContext';
 import styled from 'styled-components';
 
 const Predictions = ({
+  setTrackerHandler,
   searchTerm,
   setPower,
   setHoverTarget,
@@ -13,7 +14,6 @@ const Predictions = ({
   const [firstTier, setFirstTier] = useState('');
   const [secondTier, setSecondTier] = useState('');
   const [thirdTier, setThirdTier] = useState('');
-  const { tracker, setTracker } = useContext(CardContext);
   // const { setIsSubmitted } = useContext(SearchContext);
   // console.log(cardName);
   // Builds card name string segments when searchTerm changes
@@ -33,7 +33,7 @@ const Predictions = ({
 
     setHoverList(true);
     setHoverTarget(e.target);
-    setTracker(e.target.tabIndex + 1);
+    setTrackerHandler(e.target.tabIndex + 1);
     setPower(true);
   };
 

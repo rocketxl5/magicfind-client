@@ -18,18 +18,20 @@ export const SearchProvider = ({ children }) => {
 
   // This sentForm value is passed to the dependency array of a useEffect
   // in each Forms to compare the value with the current form id.
-  const [currentForm, setCurrentForm] = useState(null);
+  const [searchInput, setSearchInput] = useState(null);
   const [previousFormID, setPreviousFormID] = useState(null);
   const [cardName, setCardName] = useState('');
   const [hasFocus, setHasFocus] = useState('');
   const [text, setText] = useState('');
-  const [currentInput, setCurrentInput] = useState('');
+  // const [tracker, setTracker] = useState(0);
+  let [searchTerm, setSearchTerm] = useState('');
 
   return (
     <SearchContext.Provider
       value={{
-        currentForm,
-        setCurrentForm,
+        searchInput, setSearchInput,
+        searchTerm,
+        setSearchTerm,
         previousFormID,
         setPreviousFormID,
         cardName,
@@ -45,7 +47,9 @@ export const SearchProvider = ({ children }) => {
         hasFocus,
         setHasFocus,
         text,
-        setText
+        setText,
+        // tracker,
+        // setTracker
       }}
     >
       {children}

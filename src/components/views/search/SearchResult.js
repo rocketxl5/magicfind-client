@@ -9,8 +9,9 @@ import SkryfallItem from './SkryfallItem';
 const SearchResult = (props) => {
     const location = useLocation();
     const { cards, cardName, formName, loading } = location.state;
-
-    console.log(cards)
+    console.log(location.state)
+    // console.log(cards)
+    // console.log(cardName)
     return (
         <>
             {loading ? (
@@ -21,18 +22,29 @@ const SearchResult = (props) => {
                         <>
                             <SearchResultHeader cardName={cardName} cards={cards} />
                             <div className="search-items">
-                                {cards && cards.map((card, index) => {
+
+                                {cards.map((card, index) => {
                                     return (
-                                        formName === 'catalog' ? (
+                                        formName === 'search-catalog' ? (
+
                                             <CatalogItem
                                                 key={index}
                                                 card={card}
                                             />
-                                        ) : (
-                                            ''
-                                        )
-                                    )
+                                        ) :
+                                            formName === 'search-store' ? (
+                                                <StoreItem
+                                                    key={index}
+                                                    card={card}
+                                                />
+                                            ) : (
+                                                    <SkryfallItem
+                                                        key={index}
+                                                        card={card}
+                                                    />
 
+                                                )
+                                    )
                                 })}
                             </div>
                         </>

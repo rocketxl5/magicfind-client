@@ -6,25 +6,26 @@ import React, {
 } from 'react';
 import { useHistory } from 'react-router-dom';
 import SearchForm from './search/SearchForm';
-import Spinner from '../layout/Spinner';
+
 import { SearchContext } from '../../contexts/SearchContext';
-import { PathContext } from '../../contexts/PathContext';
 import { CardContext } from '../../contexts/CardContext';
 import { api } from '../../api/resources';
-import SearchResult from './search/SearchResult';
+
 
 const SearchCatalog = () => {
   const [loading, setLoading] = useState(false);
   const [isActive, setIsActive] = useState(false);
-  const [searchTerm, setSearchTerm] = useState('');
+  // const [searchTerm, setSearchTerm] = useState('');
   const [cards, setCards] = useState([]);
   const [cardName, setCardName] = useState('');
 
   const [cardNames, setCardNames] = useState([]);
-  const [requestSent, setRequestSent] = useState(false);
   const [results, setResults] = useState([]);
   const {
-    setPreviousForm,
+    searchInput,
+    setSearchInput,
+    searchTerm,
+    setSearchTerm,
     setIsValidLength,
     isSubmitted,
     setIsSubmitted,
@@ -33,19 +34,29 @@ const SearchCatalog = () => {
     setText
   } = useContext(SearchContext);
 
-  const { setTracker } = useContext(CardContext);
-  const { path } = useContext(PathContext);
+
   const history = useHistory();
-  const searchInput = useRef(null);
-  const activeForm = useRef(null);
+  const currentInput = useRef(null);
+  const currentForm = useRef(null);
 
   useEffect(() => {
-    if (activeForm.current.id === 'search-catalog') {
-      setIsActive(true);
-    } else {
-      setIsActive(false);
-      setSearchTerm('');
+    if (searchInput) {
+      // console.log('in catalog')
+      if (searchInput.id === currentInput.current.id) {
+        setSearchInput(currentInput.current)
+        // console.log('search catalog is', isActive)
+        setIsActive(true);
+      } else {
+        setIsActive(false);
+        setSearchTerm('');
+      }
     }
+
+  }, [searchInput]);
+
+
+  useEffect(() => {
+
 
     if (localStorage.getItem('catalogCardName')) {
       if (localStorage.getItem('catalogCardName') === 'all') {
@@ -75,7 +86,8 @@ const SearchCatalog = () => {
 
   // AUTOCOMPLETE
   useEffect(() => {
-    if (searchTerm.length < 3) {
+    if (isActive) {
+      if (searchInput.value.length < 3) {
       setIsValidLength(false);
     } else if (searchTerm.length >= 3) {
       setIsValidLength(true);
@@ -96,6 +108,7 @@ const SearchCatalog = () => {
           setLoading(false);
         })
         .catch((error) => console.log(error));
+    }
     }
 
   }, [searchTerm]);
@@ -135,7 +148,7 @@ const SearchCatalog = () => {
       e.preventDefault();
       setShowSuggestions(false);
       setIsSubmitted(true);
-      search = searchInput.current.value;
+      search = searchInput.value;
     } else if (searchTerm) {
       search = searchTerm;
     } else {
@@ -165,11 +178,16 @@ const SearchCatalog = () => {
         setIsValidLength(false);
         setIsSubmitted(false);
         setText('');
-        setTracker(0);
+        setSearchInput(null)
+        // setTracker(0);
+        // Remove active state to clear search input
+        setIsActive(false);
+        // Remove search input focus
+        searchInput.blur();
 
         history.push({
-          pathname: `/search-result/${activeForm.current.id.split('-')[1]}/${search}`,
-          state: { cards, cardName, formName: activeForm.current.id, loading },
+          pathname: `/search-result/${currentForm.current.id.split('-')[1]}/${search}`,
+          state: { cards: data.results, cardName: data.cardName, formName: currentForm.current.id, loading },
         });
 
       })
@@ -181,14 +199,14 @@ const SearchCatalog = () => {
         <SearchForm
           handleSubmit={fetchSingleCard}
           searchTermHandler={(input) => setSearchTerm(input)}
-          formId={'search-catalog'}
-          setRequestSent={setRequestSent}
-          requestSent={requestSent}
+        formId={'search-catalog'}
           cardNames={cardNames}
           searchTerm={searchTerm}
           isActive={isActive}
-          activeForm={activeForm}
-          searchInput={searchInput}
+        ref={{
+          formRef: currentForm,
+          inputRef: currentInput
+        }}
         />
     </div>
   );

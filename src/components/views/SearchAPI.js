@@ -5,10 +5,7 @@ import React, {
   useContext
 } from 'react';
 import { useLocation } from 'react-router-dom';
-import SkryfallItem from './search/SkryfallItem';
-import SearchResultHeader from './search/SearchResultHeader';
 import SearchForm from './search/SearchForm';
-import Spinner from '../layout/Spinner';
 import sanitizeString from '../utilities/sanitizeString';
 import { SearchContext } from '../../contexts/SearchContext';
 import { PathContext } from '../../contexts/PathContext';
@@ -19,19 +16,15 @@ import styled from 'styled-components';
 const Search = () => {
   // const [cardName, setCardName] = useState('');
   const [loading, setLoading] = useState(false);
-  const [isActive, setIsActive] = useState(true);
+  const [isActive, setIsActive] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
 
   const [oracleID, setOracleID] = useState('');
-  const [requestSent, setRequestSent] = useState(false);
   const [cardName, setCardName] = useState('');
   const [cardNames, setCardNames] = useState([]);
   const [cards, setCards] = useState([]);
   const {
-    currentInput,
-    currentForm,
     searchInput,
-    previousFormID,
     setpreviousFormID,
     isSubmitted,
     setIsValidLength,
@@ -44,17 +37,22 @@ const Search = () => {
   } = useContext(CardContext);
   const { path, setPath } = useContext(PathContext);
   const location = useLocation()
+  const apiInput = useRef(null);
   const activeForm = useRef(null);
 
   useEffect(() => {
-    // console.log(currentForm)
-    if (activeForm.current.id === 'search-api') {
-      setIsActive(true);
-    } else {
-      setIsActive(false);
-      setSearchTerm('');
+    if (searchInput) {
+      console.log('in store')
+      if (searchInput.id === 'search-api-input') {
+        setIsActive(true);
+        console.log('search store is', isActive)
+      } else {
+        setIsActive(false);
+        setSearchTerm('');
+      }
     }
-  }, []);
+
+  }, [searchInput]);
 
 
   const fetchSingleCard = (e) => {
@@ -78,7 +76,7 @@ const Search = () => {
     // Value sent can come from a complete card name entered by the user
     // Or a complete card name send with autocomplete
     // Or an incomplete field value
-    if (e) {
+    if (isActive) {
       e.preventDefault();
       setLoading(true);
       // Check if searchTerm is an existing card
@@ -120,7 +118,6 @@ const Search = () => {
         localStorage.setItem('oracle', oracle_id);
         localStorage.setItem('apiCardName', name);
         // Reset cardNames state to empty array
-        setpreviousFormID(currentForm.id);
         setCardNames([]);
         setCardName(name);
         setOracleID(oracle_id);
@@ -211,8 +208,6 @@ const Search = () => {
         .then((data) => {
           // Filter data to remove online versions of searched card
           setCards(filterData(data.data));
-
-          setRequestSent(true);
           // console.log(data.data);
           localStorage.setItem('apiCards', JSON.stringify(data.data));
           setLoading(false);
@@ -237,32 +232,14 @@ const Search = () => {
         handleSubmit={fetchSingleCard}
         searchTermHandler={(input) => setSearchTerm(input)}
         formId={'search-api'}
-        setRequestSent={setRequestSent}
-        requestSent={requestSent}
         cardNames={cardNames}
         searchTerm={searchTerm}
         isActive={isActive}
-        activeForm={activeForm}
+        ref={{
+          formRef: activeForm,
+          inputRef: apiInput
+        }}
       />
-      <div>
-        {loading || !cards ? (
-          <Spinner />
-        ) : (
-            <>
-            {oracleID && (
-                <SearchResultHeader cardName={cardName} cards={cards} clearSearch={clearSearch} />
-            )}
-              <div className="search-items">
-                {cards.map((card, index) => {
-                return (<SkryfallItem
-                  key={index}
-                  card={card}
-                />);
-              })}
-            </div>
-            </>
-        )}
-      </div>
     </div>
   );
 };

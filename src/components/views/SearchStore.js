@@ -5,13 +5,9 @@ import React, {
   useContext
 } from 'react';
 import { useLocation, useHistory } from 'react-router-dom';
-import StoreItem from './search/StoreItem';
-import SearchResultHeader from './search/SearchResultHeader';
 import SearchForm from './search/SearchForm';
-import Spinner from '../layout/Spinner.js';
 import { UserContext } from '../../contexts/UserContext';
 import { SearchContext } from '../../contexts/SearchContext';
-import { PathContext } from '../../contexts/PathContext';
 import { CardContext } from '../../contexts/CardContext';
 import { api } from '../../api/resources';
 import styled from 'styled-components';
@@ -19,22 +15,19 @@ import styled from 'styled-components';
 const SearchStore = () => {
   const [loading, setLoading] = useState(false);
   const [isActive, setIsActive] = useState(false);
-  const [searchTerm, setSearchTerm] = useState('');
+  // const [searchTerm, setSearchTerm] = useState('');
   const [cards, setCards] = useState([]);
 
   const [setRemoveCard] = useState(false);
   const [setModifyCard] = useState(false);
   const [cardName, setCardName] = useState('');
   const [cardNames, setCardNames] = useState([]);
-  const [requestSent, setRequestSent] = useState(false);
-
 
   const {
-    currentInput,
-    currentForm,
-    previousFormID,
-    setPreviousFormID,
     searchInput,
+    currentForm,
+    searchTerm,
+    setSearchTerm,
     showSuggestions,
     setShowSuggestions,
     isSubmitted,
@@ -45,19 +38,26 @@ const SearchStore = () => {
   const { user, userStoreContent } = useContext(UserContext);
 
   const { setTracker } = useContext(CardContext);
-  const { setPath } = useContext(PathContext);
+
   const history = useHistory();
   const location = useLocation();
+  const storeInput = useRef(null);
   const activeForm = useRef(null);
 
   useEffect(() => {
-    if (activeForm.current.id === 'search-store') {
-      setIsActive(true);
-    } else {
-      setIsActive(false);
-      setSearchTerm('');
+    if (searchInput) {
+      console.log('in store')
+      if (searchInput.id === 'search-store-input') {
+        // setSearchInput())
+        setIsActive(true);
+        console.log('search store is', isActive)
+      } else {
+        setIsActive(false);
+        setSearchTerm('');
+      }
     }
-  }, [currentInput]);
+
+  }, [searchInput]);
 
   useEffect(() => {
     if (localStorage.getItem('storeCardName')) {
@@ -72,8 +72,6 @@ const SearchStore = () => {
         fetchSingleCard();
       }
     }
-
-    setPath(location.pathname.split('/')[1]);
   }, []);
 
 
@@ -163,7 +161,6 @@ const SearchStore = () => {
         // localStorage.setItem('storeCards', JSON.stringify(data.data));
         search && localStorage.setItem('storeCardName', search);
         setCards(data.data);
-        setPreviousFormID(currentForm.id);
         setCardNames([]);
         setCardName(search);
         setLoading(false);
@@ -226,12 +223,14 @@ const SearchStore = () => {
           handleSubmit={fetchSingleCard}
           searchTermHandler={(input) => setSearchTerm(input)}
           formId={'search-store'}
-        setRequestSent={setRequestSent}
-        requestSent={requestSent}
-        cardNames={cardNames}
+          cardNames={cardNames}
           searchTerm={searchTerm}
           isActive={isActive}
-          activeForm={activeForm}
+          ref={{
+            formRef: activeForm,
+            inputRef: storeInput
+
+          }}
       />
       <Buttons>
         <Button
@@ -247,29 +246,6 @@ const SearchStore = () => {
           Show All Cards
         </Button>
       </Buttons>
-      </div>
-      <div className="">
-        {loading || !cards ? (
-          <Spinner />
-        ) : (
-            <>
-            {cardName && (
-                <SearchResultHeader cardName={cardName} cards={cards} clearSearch={clearSearch} />
-            )}
-              <div className="search-items">
-              {cards.map((card) => {
-                return (
-                  <StoreItem
-                    key={card._id}
-                    card={card}
-                    setRemoveCard={setRemoveCard}
-                    setModifyCard={setModifyCard}
-                  />
-                );
-              })}
-            </div>
-            </>
-        )}
       </div>
     </>
   );
