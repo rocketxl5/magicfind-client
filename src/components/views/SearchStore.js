@@ -15,19 +15,19 @@ import styled from 'styled-components';
 const SearchStore = () => {
   const [loading, setLoading] = useState(false);
   const [isActive, setIsActive] = useState(false);
-  // const [searchTerm, setSearchTerm] = useState('');
   const [cards, setCards] = useState([]);
 
   const [setRemoveCard] = useState(false);
   const [setModifyCard] = useState(false);
-  const [cardName, setCardName] = useState('');
   const [cardNames, setCardNames] = useState([]);
 
   const {
     searchInput,
-    currentForm,
+    setSearchInput,
     searchTerm,
     setSearchTerm,
+    cardName,
+    setCardName,
     showSuggestions,
     setShowSuggestions,
     isSubmitted,
@@ -41,14 +41,13 @@ const SearchStore = () => {
 
   const history = useHistory();
   const location = useLocation();
-  const storeInput = useRef(null);
-  const activeForm = useRef(null);
+  const currentInput = useRef(null);
+  const currentForm = useRef(null);
 
   useEffect(() => {
     if (searchInput) {
-      console.log('in store')
-      if (searchInput.id === 'search-store-input') {
-        // setSearchInput())
+      if (searchInput.id === currentInput.current.id) {
+        setSearchInput(currentInput.current);
         setIsActive(true);
         console.log('search store is', isActive)
       } else {
@@ -91,7 +90,7 @@ const SearchStore = () => {
 
   // AUTOCOMPLETE
   useEffect(() => {
-    // console.log(searchTerm);
+    if (isActive) {
 
     if (searchTerm.length < 3) {
       setIsValidLength(false);
@@ -116,6 +115,7 @@ const SearchStore = () => {
       setCardNames(filteredCardNames);
       // console.log(filteredCardNames);
     }
+    }
   }, [searchTerm]);
 
   // Instore single card request search field with
@@ -130,23 +130,29 @@ const SearchStore = () => {
     // if (!searchTerm || searchTerm.length < 3) {
     //   return console.log('Search term is incomplete');
     // }
-    let search = '';
+
+    // Assign cardName state to search input value
+    searchInput.value = cardName;
+
+
+    if (!searchTerm) {
+      throw new Error('Field is empty. Please provide a suggestion');
+    }
 
     if (e) {
       // console.log('in submit');
       e.preventDefault();
       setShowSuggestions(false);
       setIsSubmitted(true);
-      search = searchInput.value;
-    } else if (searchTerm) {
-      search = searchTerm;
-    } else {
-      search = localStorage.getItem('storeCardName');
-    }
+    } 
+    // else if (searchTerm) {
+    //   search = searchTerm;
+    // } else {
+    //   search = localStorage.getItem('storeCardName');
+    // }
 
     setLoading(true);
 
-    // Set request headers
     const headers = new Headers();
     headers.append('Content-Type', 'application/json');
     headers.append('auth-token', user.token);
@@ -155,21 +161,20 @@ const SearchStore = () => {
       headers: headers,
     };
 
-    fetch(`${api.serverURL}/api/cards/${search}/${user.id}`, options)
+    fetch(`${api.serverURL}/api/cards/${cardName}/${user.id}`, options)
       .then((res) => res.json())
       .then((data) => {
         // localStorage.setItem('storeCards', JSON.stringify(data.data));
-        search && localStorage.setItem('storeCardName', search);
-        setCards(data.data);
-        setCardNames([]);
-        setCardName(search);
+        localStorage.setItem('storeCardName', cardName);
         setLoading(false);
+        setCards(data.result);
+        setCardNames();
+        setCardName('');
         setSearchTerm('');
         setIsValidLength(false);
         setIsSubmitted(false);
         setText('');
         setTracker(0);
-        search = '';
       })
       .catch((error) => console.log(error));
   };
@@ -189,9 +194,9 @@ const SearchStore = () => {
       .then((data) => {
         // localStorage.setItem('storeCards', JSON.stringify(data.data));
         localStorage.setItem('storeCardName', 'all');
-        setCards(data.data);
-        setCardName('Store Cards:');
         setLoading(false);
+        setCards(data.result);
+        setCardName('Store Cards:');
       })
       .catch((error) => console.log(error));
   };
@@ -227,8 +232,8 @@ const SearchStore = () => {
           searchTerm={searchTerm}
           isActive={isActive}
           ref={{
-            formRef: activeForm,
-            inputRef: storeInput
+            formRef: currentForm,
+            inputRef: currentInput
 
           }}
       />

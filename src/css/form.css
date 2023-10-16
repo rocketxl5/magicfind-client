@@ -273,6 +273,8 @@ form#search-store .search-field {
 
 .search-result {}
 
+
+/* AUTOCOMPLETE */
 ul.autocomplete-list {
     position: absolute;
     display: flex;
@@ -286,6 +288,14 @@ ul.autocomplete-list {
     background: #fff;
     box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
     z-index: 5;
+  }
+
+  .suggestion * {
+    pointer-events: none;
+  }
+
+  .suggestion:hover {
+    cursor: pointer;
   }
 
   .item-container {

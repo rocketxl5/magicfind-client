@@ -12,7 +12,7 @@ export const SearchProvider = ({ children }) => {
   const [isSubmitted, setIsSubmitted] = useState(false);
   // setSendForm stores the form id from the current form (useRef()) passed to the SearchField component
   // from one the three search forms : Search catalog, Search API, Search Store. 
-  // It is set once in the SearchField component whem the input field has focus.
+  // It is set oncesearchTerm in the SearchField component whem the input field has focus.
   // This prevents conflict between search form since they all use the same SearchField component.
   // It informs the SearchField instance which form it is linked to. It returns in case of conflict
 
@@ -21,15 +21,14 @@ export const SearchProvider = ({ children }) => {
   const [searchInput, setSearchInput] = useState(null);
   const [previousFormID, setPreviousFormID] = useState(null);
   const [cardName, setCardName] = useState('');
-  const [hasFocus, setHasFocus] = useState('');
   const [text, setText] = useState('');
-  // const [tracker, setTracker] = useState(0);
   let [searchTerm, setSearchTerm] = useState('');
 
   return (
     <SearchContext.Provider
       value={{
-        searchInput, setSearchInput,
+        searchInput, 
+        setSearchInput,
         searchTerm,
         setSearchTerm,
         previousFormID,
@@ -44,12 +43,8 @@ export const SearchProvider = ({ children }) => {
         setShowSuggestions,
         isSubmitted,
         setIsSubmitted,
-        hasFocus,
-        setHasFocus,
         text,
         setText,
-        // tracker,
-        // setTracker
       }}
     >
       {children}

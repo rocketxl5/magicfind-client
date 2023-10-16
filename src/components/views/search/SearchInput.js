@@ -26,11 +26,13 @@ const SearchInput = forwardRef(function SearchInput(props, ref) {
   const [hoverTarget, setHoverTarget] = useState(null);
   const [hoverList, setHoverList] = useState(false);
   const [power, setPower] = useState(false);
+  const [autocompleteList, setAutocompleteList] = useState(null);
   const {
     searchInput,
     setSearchInput,
     searchTerm,
     setSearchTerm,
+    setCardName,
     isValidLength,
     previousFormID,
     setIsValidLength,
@@ -44,11 +46,11 @@ const SearchInput = forwardRef(function SearchInput(props, ref) {
   // Rendering and styling of a Suggestions list item single component
   // Is triggered on currentListItem state change and hoverList state change
   useEffect(() => {
-    // If listItems is defined (ul is populated) and Suggestions change
+    // If autocompleteList is defined (ul is populated) and Suggestions change
     // are triggered with arrowup and arrowdown keypress.
     if (power) {
       setPower(false);
-      if (!hoverTarget && listItems) {
+      if (!hoverTarget && autocompleteList) {
         if (currentListItem && previousListItem) {
           currentListItem.style['background'] = '#efefef';
           previousListItem.style['background'] = '#fff';
@@ -65,13 +67,13 @@ const SearchInput = forwardRef(function SearchInput(props, ref) {
         if (
           !currentListItem &&
           !previousListItem &&
-          listItems.current.firstChild
+          autocompleteList.firstChild
         ) {
-          listItems.current.firstChild.style['background'] = '#fff';
+          autocompleteList.firstChild.style['background'] = '#fff';
         }
-        // Else if listItems is defined (ul is populated) and Suggestions change
+        // Else if autocompleteList is defined (ul is populated) and Suggestions change
         // are triggered with the mouse hover
-      } else if (hoverTarget && listItems) {
+      } else if (hoverTarget && autocompleteList) {
         // console.log(hoverTarget);
         // if currentListItem is defined (mot null)
         if (currentListItem) {
@@ -91,19 +93,19 @@ const SearchInput = forwardRef(function SearchInput(props, ref) {
 
   // Keyboard arrow up and down autocomplete list searching function
   const handleKeyDown = (e) => {
-    if (listItems) {
+    if (autocompleteList) {
       // Sets hover state to false for useEffect hook above
       setHoverTarget(false);
 
       if (e.key === 'ArrowDown') {
         setPower(true);
         let listItem = '';
-        if (tracker === listItems.current.childNodes.length) {
-          console.log(currentListItem.tabIndex);
+        if (tracker === autocompleteList.childNodes.length) {
+        // console.log(currentListItem.tabIndex);
           return console.log('cant go any higher');
         }
         if (tracker === 0) {
-          listItem = listItems.current.firstChild;
+          listItem = autocompleteList.firstChild;
           setCurrentListItem(listItem);
           setPreviousListItem(null);
         } else if (!currentListItem && previousListItem) {
@@ -116,11 +118,10 @@ const SearchInput = forwardRef(function SearchInput(props, ref) {
           setCurrentListItem(currentListItem.nextSibling);
         }
         setTracker(tracker + 1);
-
+        setCardName(listItem.textContent);
         if (listItem) {
           console.log(listItem.textContent)
-          // setSearchTerm(listItem.textContent)
-          searchInput.value = listItem.textContent;
+          // searchInput.value = listItem.textContent;
         }
       }
       if (e.key === 'ArrowUp') {
@@ -145,7 +146,8 @@ const SearchInput = forwardRef(function SearchInput(props, ref) {
         setTracker(tracker - 1);
         if (listItem) {
           console.log(listItem.textContent)
-          searchInput.value = listItem.textContent;
+          setCardName(listItem.textContent);
+          // searchInput.value = listItem.textContent;
         }
       }
     }
@@ -167,6 +169,7 @@ const SearchInput = forwardRef(function SearchInput(props, ref) {
     // Reset currentListItem and previousListItem
     // on loosing focus of the search text field
     setCurrentListItem(null);
+    setAutocompleteList(null);
     if (!hoverList) {
       setIsValidLength(false);
     }
@@ -174,6 +177,8 @@ const SearchInput = forwardRef(function SearchInput(props, ref) {
 
 
   const handleFocus = (e) => {
+    setAutocompleteList(listItems.current);
+    console.log(listItems)
     setSearchInput(e.target);
     console.log(searchInput)
     if (searchInput !== e.target) {
@@ -207,14 +212,11 @@ const SearchInput = forwardRef(function SearchInput(props, ref) {
 
   // Click event manager function on list of suggestions
   const handleClick = (e) => {
-    let content = '';
 
     if (e.target.nodeName === 'LI') {
-      content = e.target.textContent;
-    } else if (e.target.nodeName === 'STRONG') {
-      content = e.target.parentNode.textContent;
-    }
-    ;
+      setCardName(e.target.textContent);
+    } 
+
     setIsSubmitted(true);
     // localStorage.setItem('searchTerm', JSON.stringify(content));
   };

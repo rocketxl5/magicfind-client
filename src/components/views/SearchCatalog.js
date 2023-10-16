@@ -6,26 +6,26 @@ import React, {
 } from 'react';
 import { useHistory } from 'react-router-dom';
 import SearchForm from './search/SearchForm';
-
 import { SearchContext } from '../../contexts/SearchContext';
-import { CardContext } from '../../contexts/CardContext';
+import { UserContext } from '../../contexts/UserContext';
 import { api } from '../../api/resources';
 
 
 const SearchCatalog = () => {
   const [loading, setLoading] = useState(false);
   const [isActive, setIsActive] = useState(false);
-  // const [searchTerm, setSearchTerm] = useState('');
   const [cards, setCards] = useState([]);
-  const [cardName, setCardName] = useState('');
 
   const [cardNames, setCardNames] = useState([]);
   const [results, setResults] = useState([]);
+  const { user } = useContext(UserContext);
   const {
     searchInput,
     setSearchInput,
     searchTerm,
     setSearchTerm,
+    cardName,
+    setCardName, 
     setIsValidLength,
     isSubmitted,
     setIsSubmitted,
@@ -84,7 +84,7 @@ const SearchCatalog = () => {
 
   }, [isSubmitted]);
 
-  // AUTOCOMPLETE
+  // AUTOCOMPLETE query for results
   useEffect(() => {
     if (isActive) {
       if (searchInput.value.length < 3) {
@@ -113,7 +113,7 @@ const SearchCatalog = () => {
 
   }, [searchTerm]);
 
-
+  // AUTOCOMPLETE processing results
   useEffect(() => {
     if (results.length > 0) {
       console.log(results);
@@ -135,48 +135,54 @@ const SearchCatalog = () => {
     }
   }, [results]);
 
-  // Submit search request to backend
+  // Handle submit form
   const fetchSingleCard = (e) => {
 
+    console.log(cardName)
+
+    // Assign cardName state to search input value
+    searchInput.value = cardName;
+
     if (!searchTerm) {
-      throw new Error('Search is unknown or incomplete');
+      throw new Error('Field is empty. Please provide a suggestion');
     }
 
-    let search = '';
-
+    // If fetch was called from SearchForm (pressing enter)
+    // Else fetch was called from click event in Predictions component
     if (e) {
       e.preventDefault();
       setShowSuggestions(false);
       setIsSubmitted(true);
-      search = searchInput.value;
-    } else if (searchTerm) {
-      search = searchTerm;
-    } else {
-      search = localStorage.getItem('searchCatalog');
-    }
+    } 
+    // else if (searchTerm) {
+    //   search = searchTerm;
+    // } else {
+    //   search = localStorage.getItem('searchCatalog');
+    // }
 
     setLoading(true);
-
     const headers = new Headers();
     headers.append('Content-Type', 'application/json');
+    user && headers.append('Authorization', user.token)
     // headers.append('auth-token', token);
     const options = {
       method: 'GET',
       headers: headers,
+
     };
 
-    fetch(`${api.serverURL}/api/catalog/${search}`, options)
+    fetch(`${api.serverURL}/api/catalog/${cardName}`, options)
       .then((res) => res.json())
       .then((data) => {
         // localStorage.setItem('searchCatalog', search);
         // localStorage.removeItem('catalogCards');
         console.log(data)
-        setCards(data.results);
-        setCardName(data.cardName);
         setLoading(false);
+        setCards(data.results);
         setSearchTerm('');
         setIsValidLength(false);
         setIsSubmitted(false);
+        setCardName('')
         setText('');
         setSearchInput(null)
         // setTracker(0);
@@ -186,7 +192,7 @@ const SearchCatalog = () => {
         searchInput.blur();
 
         history.push({
-          pathname: `/search-result/${currentForm.current.id.split('-')[1]}/${search}`,
+          pathname: `/search-result/${currentForm.current.id.split('-')[1]}/${cardName}`,
           state: { cards: data.results, cardName: data.cardName, formName: currentForm.current.id, loading },
         });
 

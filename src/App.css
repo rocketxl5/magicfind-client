@@ -353,9 +353,7 @@ input#price {
   color: #000;
 }
 
-.suggestion:hover {
-  cursor: pointer;
-}
+
 
 /* form.search-catalog {
   width: 100%;

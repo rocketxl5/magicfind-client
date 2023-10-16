@@ -20,12 +20,11 @@ const Search = () => {
   const [searchTerm, setSearchTerm] = useState('');
 
   const [oracleID, setOracleID] = useState('');
-  const [cardName, setCardName] = useState('');
   const [cardNames, setCardNames] = useState([]);
   const [cards, setCards] = useState([]);
   const {
     searchInput,
-    setpreviousFormID,
+    setCardName,
     isSubmitted,
     setIsValidLength,
     setIsSubmitted,
