@@ -9,16 +9,19 @@ import SearchForm from './search/SearchForm';
 import { SearchContext } from '../../contexts/SearchContext';
 import { UserContext } from '../../contexts/UserContext';
 import { api } from '../../api/resources';
-
+import getBrowserWidth from '../utilities/getBrowserWidth';
+import hideSearchBar from '../utilities/hideSearchBar';
+import handleSearchBar from '../utilities/handleSearchBar';
 
 const SearchCatalog = () => {
+  const [browserWidth, setBrowserWidth] = useState(0);
+
   const [loading, setLoading] = useState(false);
   const [isActive, setIsActive] = useState(false);
   const [cards, setCards] = useState([]);
-
   const [cardNames, setCardNames] = useState([]);
   const [results, setResults] = useState([]);
-  const { user } = useContext(UserContext);
+
   const {
     searchInput,
     setSearchInput,
@@ -33,31 +36,45 @@ const SearchCatalog = () => {
     setShowSuggestions,
     setText
   } = useContext(SearchContext);
+  const { user } = useContext(UserContext);
 
 
   const history = useHistory();
-  const currentInput = useRef(null);
+  const inputRef = useRef(null);
   const currentForm = useRef(null);
 
   useEffect(() => {
+    setBrowserWidth(getBrowserWidth())
+  }, []);
+
+  useEffect(() => {
+
     if (searchInput) {
       // console.log('in catalog')
-      if (searchInput.id === currentInput.current.id) {
-        setSearchInput(currentInput.current)
-        // console.log('search catalog is', isActive)
+      if (searchInput.id !== inputRef.current.id) {
+        searchInput.value = '';
+      }
+      if (searchInput.id === inputRef.current.id) {
+        setSearchInput(inputRef.current)
         setIsActive(true);
       } else {
+
         setIsActive(false);
         setSearchTerm('');
+        // Handle closing of Search catatalog search bar in mobile
+        // If search field is not catalog and checkbox (#mobile-nav) is checked (search is displayed)
+        if (browserWidth <= 775 && document.querySelector('#mobile-nav').checked) {
+          // hideSearchBar();
+          handleSearchBar(document.querySelector('.hamburger-btn'), (state) => { setSearchTerm(state) }, true);
       }
+      }
+
     }
 
   }, [searchInput]);
 
 
   useEffect(() => {
-
-
     if (localStorage.getItem('catalogCardName')) {
       if (localStorage.getItem('catalogCardName') === 'all') {
         // fetchAllCards();
@@ -65,7 +82,7 @@ const SearchCatalog = () => {
         // setCards(JSON.parse(localStorage.getItem('storeCards')));
         setCardName(localStorage.getItem('catalogCardName'));
         // console.log('in card name', localStorage.getItem('storeCardName'));
-        fetchSingleCard();
+        // fetchSingleCard();
       }
     }
 
@@ -73,11 +90,12 @@ const SearchCatalog = () => {
   }, []);
 
 
+  // Triggers on 
   useEffect(() => {
 
     if (isSubmitted && showSuggestions) {
-      fetchSingleCard();
       setShowSuggestions(false);
+      fetchSingleCard();
     } else {
       setShowSuggestions(true);
     }
@@ -88,50 +106,49 @@ const SearchCatalog = () => {
   useEffect(() => {
     if (isActive) {
       if (searchInput.value.length < 3) {
-      setIsValidLength(false);
-    } else if (searchTerm.length >= 3) {
-      setIsValidLength(true);
-      setCardNames([]);
-      setLoading(true);
+        setCardNames([]);
+        setIsValidLength(false);
+      } else if (searchTerm.length >= 3) {
+        setIsValidLength(true);
+        setCardNames([]);
 
-      const headers = new Headers();
-      headers.append('Content-Type', 'application/json');
 
-      const options = {
-        method: 'GET',
-        headers: headers,
-      };
-      fetch(`${api.serverURL}/api/catalog`, options)
-        .then((res) => res.json())
-        .then((data) => {
-          setResults(data);
-          setLoading(false);
-        })
-        .catch((error) => console.log(error));
+        const headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+
+        const options = {
+          method: 'GET',
+          headers: headers,
+        };
+        fetch(`${api.serverURL}/api/catalog`, options)
+          .then((res) => res.json())
+          .then((data) => {
+            setResults(data);
+          })
+          .catch((error) => console.log(error));
+      }
     }
-    }
-
   }, [searchTerm]);
 
   // AUTOCOMPLETE processing results
   useEffect(() => {
-    if (results.length > 0) {
-      console.log(results);
-      const filteredCardNames = [];
-
-      results.forEach((result) => {
-        // Check for a match in name
-        // Check for repetition of name: if there's multiple cards in store
-        // with the same name, show the name only once in autocomplete list
-        if (
-          result.name.toLowerCase().includes(searchTerm.toLowerCase()) &&
-          !filteredCardNames.includes(result.name)
-        ) {
-          filteredCardNames.push(result.name);
-        }
-      });
-
-      setCardNames(filteredCardNames);
+    // If input field is not empty string
+    if (inputRef.current.value) {
+      if (results.length > 0) {
+        const filteredCardNames = [];
+        results.forEach((result) => {
+          // Check for a match in name
+          // Check for repetition of name: if there's multiple cards in store
+          // with the same name, show the name only once in autocomplete list
+          if (
+            result.name.toLowerCase().includes(searchTerm.toLowerCase()) &&
+            !filteredCardNames.includes(result.name)
+          ) {
+            filteredCardNames.push(result.name);
+          }
+        });
+        setCardNames(filteredCardNames);
+      }
     }
   }, [results]);
 
@@ -184,13 +201,13 @@ const SearchCatalog = () => {
         setIsSubmitted(false);
         setCardName('')
         setText('');
-        setSearchInput(null)
-        // setTracker(0);
+        setSearchInput(null);
         // Remove active state to clear search input
         setIsActive(false);
         // Remove search input focus
         searchInput.blur();
-
+        // Hide search bar on mobile
+        hideSearchBar();
         history.push({
           pathname: `/search-result/${currentForm.current.id.split('-')[1]}/${cardName}`,
           state: { cards: data.results, cardName: data.cardName, formName: currentForm.current.id, loading },
@@ -211,7 +228,7 @@ const SearchCatalog = () => {
           isActive={isActive}
         ref={{
           formRef: currentForm,
-          inputRef: currentInput
+          inputRef: inputRef
         }}
         />
     </div>

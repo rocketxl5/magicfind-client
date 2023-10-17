@@ -34,7 +34,7 @@ const SearchInput = forwardRef(function SearchInput(props, ref) {
     } = useContext(SearchContext);
 
 
-    const listItems = useRef(null);
+    const autocompleteList = useRef(null);
 
 
 

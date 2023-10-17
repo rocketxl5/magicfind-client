@@ -28,6 +28,7 @@ const Search = () => {
     isSubmitted,
     setIsValidLength,
     setIsSubmitted,
+    setShowSuggestions,
     setText
   } = useContext(SearchContext);
   const {
@@ -185,6 +186,7 @@ const Search = () => {
   useEffect(() => {
     if (isSubmitted) {
       // Call request function to fetch resulst from card name
+      setShowSuggestions(false)
       fetchSingleCard();
       // Set the focus on input search field
       if (searchInput) {

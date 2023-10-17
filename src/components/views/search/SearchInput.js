@@ -34,14 +34,13 @@ const SearchInput = forwardRef(function SearchInput(props, ref) {
     setSearchTerm,
     setCardName,
     isValidLength,
-    previousFormID,
     setIsValidLength,
     setIsSubmitted,
     text,
     setText
   } = useContext(SearchContext);
 
-  const listItems = useRef(null);
+  const ulRef = useRef(null);
 
   // Rendering and styling of a Suggestions list item single component
   // Is triggered on currentListItem state change and hoverList state change
@@ -177,36 +176,19 @@ const SearchInput = forwardRef(function SearchInput(props, ref) {
 
 
   const handleFocus = (e) => {
-    setAutocompleteList(listItems.current);
-    console.log(listItems)
-    setSearchInput(e.target);
-    console.log(searchInput)
+    setAutocompleteList(ulRef.current);
     if (searchInput !== e.target) {
-      if (previousFormID !== formId) {
-        // if searchTerm not empty
-        if (searchTerm) {
-          // empty it
-          setSearchTerm('');
-        }
+      setSearchInput(e.target);
+      if (searchTerm) {
+        // empty it
+        setSearchTerm('');
       }
     }
 
     setTracker(0);
-    // setPreviousFormID(formId);
     if (text.length > 2) {
       setIsValidLength(true);
       setHoverList(false);
-    }
-
-    // Handle closing of Search catatalog search bar in mobile
-    // If search field is not catalog and checkbox (#mobile-nav) is checked (search is displayed)
-    if (e.target.id !== 'search-catalog-input' && document.querySelector('#mobile-nav').checked) {
-      // Click label attached to checkbox to check it
-      document.querySelector('.mobile-nav-label').click();
-      // Clear search catalog search bar
-      document.querySelector('.search-catalog').style.width = 0;
-      // Display search icon (magnifier)
-      document.querySelector('.search-btn').style.setProperty('display', 'block');
     }
   };
 
@@ -216,7 +198,6 @@ const SearchInput = forwardRef(function SearchInput(props, ref) {
     if (e.target.nodeName === 'LI') {
       setCardName(e.target.textContent);
     } 
-
     setIsSubmitted(true);
     // localStorage.setItem('searchTerm', JSON.stringify(content));
   };
@@ -246,7 +227,7 @@ const SearchInput = forwardRef(function SearchInput(props, ref) {
           onMouseLeave={(e) => setHoverList(false)}
           id="autocomplete-list"
           className="autocomplete-list"
-          ref={listItems}
+          ref={ulRef}
         >
           {cardNames &&
             cardNames.map((cardName, index) => {

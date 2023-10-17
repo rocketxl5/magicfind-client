@@ -16,9 +16,6 @@ const SearchStore = () => {
   const [loading, setLoading] = useState(false);
   const [isActive, setIsActive] = useState(false);
   const [cards, setCards] = useState([]);
-
-  const [setRemoveCard] = useState(false);
-  const [setModifyCard] = useState(false);
   const [cardNames, setCardNames] = useState([]);
 
   const {
@@ -37,19 +34,18 @@ const SearchStore = () => {
   } = useContext(SearchContext);
   const { user, userStoreContent } = useContext(UserContext);
 
-  const { setTracker } = useContext(CardContext);
-
   const history = useHistory();
-  const location = useLocation();
-  const currentInput = useRef(null);
+  const inputRef = useRef(null);
   const currentForm = useRef(null);
 
   useEffect(() => {
     if (searchInput) {
-      if (searchInput.id === currentInput.current.id) {
-        setSearchInput(currentInput.current);
+      if (searchInput.id !== inputRef.current.id) {
+        searchInput.value = '';
+      }
+      if (searchInput.id === inputRef.current.id) {
+        setSearchInput(inputRef.current);
         setIsActive(true);
-        console.log('search store is', isActive)
       } else {
         setIsActive(false);
         setSearchTerm('');
@@ -68,7 +64,7 @@ const SearchStore = () => {
         setCardName(localStorage.getItem('storeCardName'));
         console.log('in card name', localStorage.getItem('storeCardName'));
 
-        fetchSingleCard();
+        // fetchSingleCard();
       }
     }
   }, []);
@@ -77,10 +73,10 @@ const SearchStore = () => {
   useEffect(() => {
     if (searchInput) {
       if (isSubmitted && showSuggestions) {
-        // Call request function to fetch resulst from card name
+        setShowSuggestions(false);
         fetchSingleCard();
         // Set the focus on input search field
-        searchInput.focus();
+        // searchInput.focus();
         setShowSuggestions(false);
       } else {
         setShowSuggestions(true);
@@ -94,9 +90,9 @@ const SearchStore = () => {
 
     if (searchTerm.length < 3) {
       setIsValidLength(false);
-    } else if (searchTerm.length > 2) {
+    } else if (searchTerm.length >= 3) {
       setIsValidLength(true);
-
+      setLoading(true)
       const filteredCardNames = [];
       if (userStoreContent) {
         userStoreContent.forEach((item) => {
@@ -123,14 +119,6 @@ const SearchStore = () => {
   const fetchSingleCard = (e) => {
     // bounce back if sent form does not match current form's id
     // This block other forms in the view to process the request down below
-    // if (previousForm !== form.current.id) {
-    //   return console.log('wrong form');
-    // }
-
-    // if (!searchTerm || searchTerm.length < 3) {
-    //   return console.log('Search term is incomplete');
-    // }
-
     // Assign cardName state to search input value
     searchInput.value = cardName;
 
@@ -140,7 +128,6 @@ const SearchStore = () => {
     }
 
     if (e) {
-      // console.log('in submit');
       e.preventDefault();
       setShowSuggestions(false);
       setIsSubmitted(true);
@@ -174,7 +161,6 @@ const SearchStore = () => {
         setIsValidLength(false);
         setIsSubmitted(false);
         setText('');
-        setTracker(0);
       })
       .catch((error) => console.log(error));
   };
@@ -233,7 +219,7 @@ const SearchStore = () => {
           isActive={isActive}
           ref={{
             formRef: currentForm,
-            inputRef: currentInput
+            inputRef: inputRef
 
           }}
       />

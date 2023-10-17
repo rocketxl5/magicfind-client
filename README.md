@@ -1,8 +1,8 @@
 files with import api/resources.js @fetch path -> src/components/auth Login, Register, path -> src/components/views AddCard, CartItem, CatalogItem, ModifyCard, RemoveCard, SearchCatalog, SearchStore, ShoppingCart, path -> src/components/views/mail ComposeMessage, Mailbox, Message, Sidebar, path -> src/contexts CardContext, UserContext
 
-###############################
-#### Search Card processes ####
-###############################
+##############################
+#### Search Card processe ####
+##############################
 
 ******* Main Components **********
 
@@ -45,8 +45,21 @@ isActive state is passed as prop to SearchInput component and is set as a condit
 
 SearchComponent[Catalog || Store || API] => SearchForm[formRef]=> SearchInput[inputRef] => AutoComplete[ul] => Predictions[li]
 
+######################
+#### AUTOCOMPLETE ####
+######################
+
+SearchCatalog => 
+[1] useEffect with searchTerm dependency array: fetch predictions data (setPredictionResults) from catalog route @ data/cardcatalog.jsos. Triggers an updata data on each keypress. 
+[2] useEffect with predictionResults dependency array: filters results from previous fetch
 
 
+
+###########################
+#### States definition ####
+###########################
+
+searchTerm, setSearchTerm => 
 
 
 

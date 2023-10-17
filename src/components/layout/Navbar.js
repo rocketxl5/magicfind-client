@@ -1,6 +1,5 @@
 import React, { useContext } from 'react';
 import { UserContext } from '../../contexts/UserContext';
-import toggleClass from '../utilities/toggleClass';
 import Menu from './Menu';
 import AuthMenu from './AuthMenu';
 import SearchBtn from './navbtn/SearchBtn';
@@ -11,21 +10,13 @@ import HamburgerBtn from './navbtn/HamburgerBtn';
 // import SigninBtn from './navbar/SigninBtn';
 import ShoppingCartBtn from './navbtn/ShoppingCartBtn';
 
-function Navbar({ isFirefox }) {
 
-    const { user, setUser } = useContext(UserContext)
-
-    // Handle hamburger animation for firefox (has() css function not supported)
-    const handleChange = () => {
-        if (isFirefox) {
-            // Add/remove 'checked class name from main header
-            toggleClass(document.querySelector('.main-header'), 'checked');
-        }
-    }
+function Navbar() {
+    const { user, setUser } = useContext(UserContext);
 
     return (
         <div className="navbar">
-            <input type="checkbox" id="mobile-nav" className="mobile-nav" onChange={handleChange} />
+            <input type="checkbox" id="mobile-nav" className="mobile-nav" />
             <nav>
                 <section className="left-side-nav">
                     {/************************************************* 
