@@ -1,7 +1,7 @@
-files with import api/resources.js @fetch path -> src/components/auth Login, Register, path -> src/components/views AddCard, CartItem, CatalogItem, ModifyCard, RemoveCard, SearchCatalog, SearchStore, ShoppingCart, path -> src/components/views/mail ComposeMessage, Mailbox, Message, Sidebar, path -> src/contexts CardContext, UserContext
+files with import api/resources.js @fetch path -> src/components/auth Login, Register, path -> src/components/views AddCard, CartItem, CatalogItem, ModifyCard, RemoveCard, SearchCatalog, SearchCollection, ShoppingCart, path -> src/components/views/mail ComposeMessage, Mailbox, Message, Sidebar, path -> src/contexts CardContext, UserContext
 
 ##############################
-#### Search Card processe ####
+#### Search Card process ####
 ##############################
 
 ******* Main Components **********
@@ -16,7 +16,7 @@ Shared logic:
 activeForm -> useRef assigned to all three components for designated form
 
 catalogInput -> useRef assigned to SearchCatalog component search input
-storeInput -> useRef assigned to SearchStore component search input
+storeInput -> useRef assigned to SearchCollection component search input
 apiInput -> useRef assigned to SearchAPI component search input
 
 SearchForm and SearchInput passes ref form and input to parent Search component through 

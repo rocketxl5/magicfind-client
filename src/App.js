@@ -17,7 +17,7 @@ import Contact from './components/views/Contact';
 import About from './components/views/About';
 import Profile from './components/views/Profile';
 import UserPage from './components/views/UserPage';
-import SearchStore from './components/views/SearchStore';
+import SearchCollection from './components/views/SearchCollection';
 import SearchAPI from './components/views/SearchAPI';
 import SearchResult from './components/views/search/SearchResult';
 import AddCard from './components/views/AddCard';
@@ -95,7 +95,7 @@ const App = () => {
             {user ? <Profile /> : <Redirect to="/login" />}
           </Route>
           <Route exact path="/search-store">
-            {user ? <SearchStore /> : <Redirect to="/" />}
+            {user ? <SearchCollection /> : <Redirect to="/" />}
           </Route>
           <Route exact path="/search-api">
             {user ? <SearchAPI /> : <Redirect to="/" />}

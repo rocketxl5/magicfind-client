@@ -12,7 +12,7 @@ import { CardContext } from '../../contexts/CardContext';
 import { api } from '../../api/resources';
 import styled from 'styled-components';
 
-const SearchStore = () => {
+const SearchCollection = () => {
   const [loading, setLoading] = useState(false);
   const [isActive, setIsActive] = useState(false);
   const [cards, setCards] = useState([]);
@@ -273,4 +273,4 @@ const Button = styled.button`
   }
 `;
 
-export default SearchStore;
+export default SearchCollection;
