@@ -86,7 +86,7 @@ const CardListing = ({ card, setIsSent }) => {
             <BackText>Back to Search</BackText>
           </GoBack>
         ) : (
-            <GoBack to={'/search-store'} title="Back To Store">
+            <GoBack to={'/search-collection'} title="Back To Collection">
             <BackIcon>
               <FiArrowLeftCircle size={26} />
             </BackIcon>

@@ -4,54 +4,63 @@ import React, {
   useEffect,
   useContext
 } from 'react';
-import { useLocation } from 'react-router-dom';
-import SearchForm from './search/SearchForm';
-import sanitizeString from '../utilities/sanitizeString';
+import { useLocation, useHistory } from 'react-router-dom';
 import { SearchContext } from '../../contexts/SearchContext';
 import { PathContext } from '../../contexts/PathContext';
 import { CardContext } from '../../contexts/CardContext';
+import SearchInput from './search/SearchInput';
 import { api } from '../../api/resources';
+import sanitizeString from '../utilities/sanitizeString';
 import styled from 'styled-components';
 
 const Search = () => {
   // const [cardName, setCardName] = useState('');
   const [loading, setLoading] = useState(false);
   const [isActive, setIsActive] = useState(false);
-  const [searchTerm, setSearchTerm] = useState('');
-
   const [oracleID, setOracleID] = useState('');
   const [cardNames, setCardNames] = useState([]);
   const [cards, setCards] = useState([]);
+
   const {
     searchInput,
-    setCardName,
-    isSubmitted,
+    setSearchInput,
+    searchTerm,
+    setSearchTerm,
+    setCardName, 
     setIsValidLength,
+    isSubmitted,
     setIsSubmitted,
-    setShowSuggestions,
+    setShowPredictions,
     setText
   } = useContext(SearchContext);
+
   const {
     apiCardNames,
     setTracker
   } = useContext(CardContext);
+
   const { path, setPath } = useContext(PathContext);
+
   const location = useLocation()
-  const apiInput = useRef(null);
-  const activeForm = useRef(null);
+  const history = useHistory();
+
+  const inputRef = useRef(null);
+  const formRef = useRef(null);
 
   useEffect(() => {
     if (searchInput) {
-      console.log('in store')
-      if (searchInput.id === 'search-api-input') {
+      // console.log('in catalog')
+      if (searchInput.id !== inputRef.current.id) {
+        searchInput.value = '';
+      }
+      if (searchInput.id === inputRef.current.id) {
+        setSearchInput(inputRef.current)
         setIsActive(true);
-        console.log('search store is', isActive)
       } else {
         setIsActive(false);
         setSearchTerm('');
       }
     }
-
   }, [searchInput]);
 
 
@@ -186,7 +195,7 @@ const Search = () => {
   useEffect(() => {
     if (isSubmitted) {
       // Call request function to fetch resulst from card name
-      setShowSuggestions(false)
+      setShowPredictions(false)
       fetchSingleCard();
       // Set the focus on input search field
       if (searchInput) {
@@ -227,20 +236,12 @@ const Search = () => {
   };
 
   return (
-    <div className="search-content">
+    <div className="search-card">
       <h2 className="page-title">Enter A Card Name</h2>
-      <SearchForm
-        handleSubmit={fetchSingleCard}
-        searchTermHandler={(input) => setSearchTerm(input)}
-        formId={'search-api'}
-        cardNames={cardNames}
-        searchTerm={searchTerm}
-        isActive={isActive}
-        ref={{
-          formRef: activeForm,
-          inputRef: apiInput
-        }}
-      />
+      <form id="search-api-form" className="search-form" onSubmit={fetchSingleCard} ref={formRef} >
+        <SearchInput cardNames={cardNames}
+          isActive={isActive} ref={inputRef} />
+      </form>
     </div>
   );
 };

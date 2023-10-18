@@ -1,20 +1,19 @@
-import React, { useContext, useState, useEffect } from 'react';
-import { CardContext } from '../../../contexts/CardContext';
-import styled from 'styled-components';
+import React, { useState, useEffect, useContext } from 'react';
+import { SearchContext } from '../../../contexts/SearchContext';
 
-const Predictions = ({
-  setTrackerHandler,
-  searchTerm,
-  setPower,
-  setHoverTarget,
-  setHoverList,
-  cardName,
-  index
-}) => {
+const Predictions = (props) => {
+  const {
+    setHoverTarget,
+    cardName,
+    index
+  } = props;
+
+  const { searchTerm, setTracker, setCardName } = useContext(SearchContext);
+
   const [firstTier, setFirstTier] = useState('');
   const [secondTier, setSecondTier] = useState('');
   const [thirdTier, setThirdTier] = useState('');
-  // const { setIsSubmitted } = useContext(SearchContext);
+
   // console.log(cardName);
   // Builds card name string segments when searchTerm changes
   // Boldens the part of card name matching the search text
@@ -30,16 +29,16 @@ const Predictions = ({
 
   const handleMouseEnter = (e) => {
     // setIsActiveMouse(true);
-
-    setHoverList(true);
+    console.log(e.target)
     setHoverTarget(e.target);
-    setTrackerHandler(e.target.tabIndex + 1);
-    setPower(true);
+    setTracker(e.target.tabIndex + 1);
+    setCardName(e.target.textContent)
+    // setPower(true);
   };
 
   const handleMouseOut = () => {
     // setHoverTarget(null);
-    setHoverList(false);
+
   };
   return (
     <li

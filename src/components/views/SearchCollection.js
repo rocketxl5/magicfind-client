@@ -5,7 +5,7 @@ import React, {
   useContext
 } from 'react';
 import { useLocation, useHistory } from 'react-router-dom';
-import SearchForm from './search/SearchForm';
+import SearchInput from './search/SearchInput';
 import { UserContext } from '../../contexts/UserContext';
 import { SearchContext } from '../../contexts/SearchContext';
 import { CardContext } from '../../contexts/CardContext';
@@ -19,14 +19,15 @@ const SearchCollection = () => {
   const [cardNames, setCardNames] = useState([]);
 
   const {
+    setSearchType,
     searchInput,
     setSearchInput,
     searchTerm,
     setSearchTerm,
     cardName,
     setCardName,
-    showSuggestions,
-    setShowSuggestions,
+    showPredictions,
+    setShowPredictions,
     isSubmitted,
     setIsSubmitted,
     setIsValidLength,
@@ -36,7 +37,7 @@ const SearchCollection = () => {
 
   const history = useHistory();
   const inputRef = useRef(null);
-  const currentForm = useRef(null);
+  const formRef = useRef(null);
 
   useEffect(() => {
     if (searchInput) {
@@ -72,14 +73,14 @@ const SearchCollection = () => {
 
   useEffect(() => {
     if (searchInput) {
-      if (isSubmitted && showSuggestions) {
-        setShowSuggestions(false);
+      if (isSubmitted && showPredictions) {
+        setShowPredictions(false);
         fetchSingleCard();
         // Set the focus on input search field
         // searchInput.focus();
-        setShowSuggestions(false);
+        setShowPredictions(false);
       } else {
-        setShowSuggestions(true);
+        setShowPredictions(true);
       }
     }
   }, [isSubmitted]);
@@ -88,29 +89,29 @@ const SearchCollection = () => {
   useEffect(() => {
     if (isActive) {
 
-    if (searchTerm.length < 3) {
-      setIsValidLength(false);
-    } else if (searchTerm.length >= 3) {
-      setIsValidLength(true);
-      setLoading(true)
-      const filteredCardNames = [];
-      if (userStoreContent) {
-        userStoreContent.forEach((item) => {
-          // Check for a match in name
-          // Check for repetition of name: if there's multiple cards in store
-          // with the same name, show the name only once in autocomplete list
-          if (
-            item.name.toLowerCase().includes(searchTerm.toLowerCase()) &&
-            !filteredCardNames.includes(item.name)
-          ) {
-            filteredCardNames.push(item.name);
-          }
-        });
-      }
+      if (searchTerm.length < 3) {
+        setIsValidLength(false);
+      } else if (searchTerm.length >= 3) {
+        setIsValidLength(true);
+        setLoading(true)
+        const filteredCardNames = [];
+        if (userStoreContent) {
+          userStoreContent.forEach((item) => {
+            // Check for a match in name
+            // Check for repetition of name: if there's multiple cards in store
+            // with the same name, show the name only once in autocomplete list
+            if (
+              item.name.toLowerCase().includes(searchTerm.toLowerCase()) &&
+              !filteredCardNames.includes(item.name)
+            ) {
+              filteredCardNames.push(item.name);
+            }
+          });
+        }
 
-      setCardNames(filteredCardNames);
-      // console.log(filteredCardNames);
-    }
+        setCardNames(filteredCardNames);
+        // console.log(filteredCardNames);
+      }
     }
   }, [searchTerm]);
 
@@ -129,9 +130,9 @@ const SearchCollection = () => {
 
     if (e) {
       e.preventDefault();
-      setShowSuggestions(false);
+      setShowPredictions(false);
       setIsSubmitted(true);
-    } 
+    }
     // else if (searchTerm) {
     //   search = searchTerm;
     // } else {
@@ -208,35 +209,27 @@ const SearchCollection = () => {
 
   return (
     <>
-    <div className="search-content">
+      <div className="search-card">
         <h2 className="page-title">Enter A Card Name</h2>
-      <SearchForm
-          handleSubmit={fetchSingleCard}
-          searchTermHandler={(input) => setSearchTerm(input)}
-          formId={'search-store'}
-          cardNames={cardNames}
-          searchTerm={searchTerm}
-          isActive={isActive}
-          ref={{
-            formRef: currentForm,
-            inputRef: inputRef
+        <form id="search-collection-form" className="search-form" onSubmit={fetchSingleCard} ref={formRef} >
+          <SearchInput cardNames={cardNames}
+            isActive={isActive} ref={inputRef} />
+        </form>
 
-          }}
-      />
-      <Buttons>
-        <Button
-          onClick={handleClick}
-          className="bg-green"
-        >
-          Add New Card
-        </Button>
-        <Button
-          onClick={fetchAllCards}
-          className="bg-teal"
-        >
-          Show All Cards
-        </Button>
-      </Buttons>
+        <Buttons>
+          <Button
+            onClick={handleClick}
+            className="bg-green"
+          >
+            Add New Card
+          </Button>
+          <Button
+            onClick={fetchAllCards}
+            className="bg-teal"
+          >
+            Show All Cards
+          </Button>
+        </Buttons>
       </div>
     </>
   );

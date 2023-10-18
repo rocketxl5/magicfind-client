@@ -5,24 +5,23 @@ import React, {
   useContext
 } from 'react';
 import { useHistory } from 'react-router-dom';
-import SearchForm from './search/SearchForm';
+import SearchInput from './search/SearchInput';
 import { SearchContext } from '../../contexts/SearchContext';
 import { UserContext } from '../../contexts/UserContext';
 import { api } from '../../api/resources';
-import getBrowserWidth from '../utilities/getBrowserWidth';
 import hideSearchBar from '../utilities/hideSearchBar';
 import handleSearchBar from '../utilities/handleSearchBar';
+import getBrowserWidth from '../utilities/getBrowserWidth';
 
 const SearchCatalog = () => {
-  const [browserWidth, setBrowserWidth] = useState(0);
-
   const [loading, setLoading] = useState(false);
   const [isActive, setIsActive] = useState(false);
-  const [cards, setCards] = useState([]);
-  const [cardNames, setCardNames] = useState([]);
-  const [results, setResults] = useState([]);
+  const browserWidth = getBrowserWidth();
 
   const {
+
+    setSearchType,
+    cardTitles,
     searchInput,
     setSearchInput,
     searchTerm,
@@ -32,46 +31,46 @@ const SearchCatalog = () => {
     setIsValidLength,
     isSubmitted,
     setIsSubmitted,
-    showSuggestions,
-    setShowSuggestions,
-    setText
+    showPredictions,
+    setShowPredictions,
   } = useContext(SearchContext);
   const { user } = useContext(UserContext);
 
 
   const history = useHistory();
   const inputRef = useRef(null);
-  const currentForm = useRef(null);
 
-  useEffect(() => {
-    setBrowserWidth(getBrowserWidth())
-  }, []);
+
 
   useEffect(() => {
 
     if (searchInput) {
-      // console.log('in catalog')
-      if (searchInput.id !== inputRef.current.id) {
-        searchInput.value = '';
-      }
-      if (searchInput.id === inputRef.current.id) {
-        setSearchInput(inputRef.current)
+      /*
+       * New code
+       */
+        
+      // setSearchInput(inputRef.current);
         setIsActive(true);
       } else {
 
-        setIsActive(false);
-        setSearchTerm('');
+      setIsActive(false);
+      setSearchInput(null);
         // Handle closing of Search catatalog search bar in mobile
         // If search field is not catalog and checkbox (#mobile-nav) is checked (search is displayed)
         if (browserWidth <= 775 && document.querySelector('#mobile-nav').checked) {
           // hideSearchBar();
           handleSearchBar(document.querySelector('.hamburger-btn'), (state) => { setSearchTerm(state) }, true);
       }
-      }
-
     }
-
   }, [searchInput]);
+
+
+  useEffect(() => {
+
+    if (searchTerm.length >= 3) {
+      console.log(cardTitles);
+    }
+  }, [searchTerm]);
 
 
   useEffect(() => {
@@ -90,67 +89,68 @@ const SearchCatalog = () => {
   }, []);
 
 
-  // Triggers on 
+  // Triggers when isSubmitted is set to true @ AutoCompleteList
   useEffect(() => {
 
-    if (isSubmitted && showSuggestions) {
-      setShowSuggestions(false);
+    if (isSubmitted && showPredictions) {
+      console.log(cardName)
+      setShowPredictions(false);
       fetchSingleCard();
     } else {
-      setShowSuggestions(true);
+      setShowPredictions(true);
     }
 
   }, [isSubmitted]);
 
   // AUTOCOMPLETE query for results
-  useEffect(() => {
-    if (isActive) {
-      if (searchInput.value.length < 3) {
-        setCardNames([]);
-        setIsValidLength(false);
-      } else if (searchTerm.length >= 3) {
-        setIsValidLength(true);
-        setCardNames([]);
+  // useEffect(() => {
+  //   if (isActive) {
+  //     if (searchInput.value.length < 3) {
+  //       setCardNames([]);
+  //       setIsValidLength(false);
+  //     } else if (searchTerm.length >= 3) {
+  //       setIsValidLength(true);
+  //       setCardNames([]);
 
 
-        const headers = new Headers();
-        headers.append('Content-Type', 'application/json');
+  //       const headers = new Headers();
+  //       headers.append('Content-Type', 'application/json');
 
-        const options = {
-          method: 'GET',
-          headers: headers,
-        };
-        fetch(`${api.serverURL}/api/catalog`, options)
-          .then((res) => res.json())
-          .then((data) => {
-            setResults(data);
-          })
-          .catch((error) => console.log(error));
-      }
-    }
-  }, [searchTerm]);
+  //       const options = {
+  //         method: 'GET',
+  //         headers: headers,
+  //       };
+  //       fetch(`${api.serverURL}/api/catalog`, options)
+  //         .then((res) => res.json())
+  //         .then((data) => {
+  //           setResults(data);
+  //         })
+  //         .catch((error) => console.log(error));
+  //     }
+  //   }
+  // }, [searchTerm]);
 
   // AUTOCOMPLETE processing results
-  useEffect(() => {
-    // If input field is not empty string
-    if (inputRef.current.value) {
-      if (results.length > 0) {
-        const filteredCardNames = [];
-        results.forEach((result) => {
-          // Check for a match in name
-          // Check for repetition of name: if there's multiple cards in store
-          // with the same name, show the name only once in autocomplete list
-          if (
-            result.name.toLowerCase().includes(searchTerm.toLowerCase()) &&
-            !filteredCardNames.includes(result.name)
-          ) {
-            filteredCardNames.push(result.name);
-          }
-        });
-        setCardNames(filteredCardNames);
-      }
-    }
-  }, [results]);
+  // useEffect(() => {
+  //   // If input field is not empty string
+  //   if (inputRef.current.value) {
+  //     if (results.length > 0) {
+  //       const filteredCardNames = [];
+  //       results.forEach((result) => {
+  //         // Check for a match in name
+  //         // Check for repetition of name: if there's multiple cards in store
+  //         // with the same name, show the name only once in autocomplete list
+  //         if (
+  //           result.name.toLowerCase().includes(searchTerm.toLowerCase()) &&
+  //           !filteredCardNames.includes(result.name)
+  //         ) {
+  //           filteredCardNames.push(result.name);
+  //         }
+  //       });
+  //       setCardNames(filteredCardNames);
+  //     }
+  //   }
+  // }, [results]);
 
   // Handle submit form
   const fetchSingleCard = (e) => {
@@ -167,8 +167,10 @@ const SearchCatalog = () => {
     // If fetch was called from SearchForm (pressing enter)
     // Else fetch was called from click event in Predictions component
     if (e) {
+      console.log(e)
+      console.log(e.target)
       e.preventDefault();
-      setShowSuggestions(false);
+      setShowPredictions(false);
       setIsSubmitted(true);
     } 
     // else if (searchTerm) {
@@ -195,22 +197,16 @@ const SearchCatalog = () => {
         // localStorage.removeItem('catalogCards');
         console.log(data)
         setLoading(false);
-        setCards(data.results);
         setSearchTerm('');
         setIsValidLength(false);
         setIsSubmitted(false);
         setCardName('')
-        setText('');
         setSearchInput(null);
-        // Remove active state to clear search input
-        setIsActive(false);
-        // Remove search input focus
-        searchInput.blur();
         // Hide search bar on mobile
         hideSearchBar();
         history.push({
-          pathname: `/search-result/${currentForm.current.id.split('-')[1]}/${cardName}`,
-          state: { cards: data.results, cardName: data.cardName, formName: currentForm.current.id, loading },
+          pathname: `/search-result/${cardName.toLowerCase()}`,
+          state: { cards: data.results, cardName: data.cardName, loading },
         });
 
       })
@@ -218,19 +214,10 @@ const SearchCatalog = () => {
   };
 
   return (
-      <div className="search-catalog">
-        <SearchForm
-          handleSubmit={fetchSingleCard}
-          searchTermHandler={(input) => setSearchTerm(input)}
-        formId={'search-catalog'}
-          cardNames={cardNames}
-          searchTerm={searchTerm}
-          isActive={isActive}
-        ref={{
-          formRef: currentForm,
-          inputRef: inputRef
-        }}
-        />
+    <div id="search-catalog-container">
+      <form id="search-catalog-form" className="search-form" onSubmit={fetchSingleCard} >
+        <SearchInput isActive={isActive} id={'search-catalog'} ref={inputRef} />
+      </form>
     </div>
   );
 };

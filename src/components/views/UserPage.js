@@ -27,7 +27,7 @@ const UserPage = () => {
   return (
     <main className="container user-page-container">
       <section className="user-page-section to-store">
-        <Link to="/search-store">
+        <Link to="/search-collection">
           <h2>Manage Your Store</h2>
           <article>
             <p>Go to your to your store to modify it's content.</p>

@@ -94,13 +94,13 @@ const App = () => {
           <Route exact path="/profile">
             {user ? <Profile /> : <Redirect to="/login" />}
           </Route>
-          <Route exact path="/search-store">
+          <Route exact path="/search-collection">
             {user ? <SearchCollection /> : <Redirect to="/" />}
           </Route>
           <Route exact path="/search-api">
             {user ? <SearchAPI /> : <Redirect to="/" />}
           </Route>
-          <Route exact path="/search-result/:searchType/:cardName">
+          <Route exact path="/search-result/:cardName">
             <SearchResult />
           </Route>
           <Route exact path="/mail/inbox">

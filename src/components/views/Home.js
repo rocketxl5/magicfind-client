@@ -9,27 +9,6 @@ const Home = () => {
   const { setApiCardNames } = useContext(CardContext);
   const location = useLocation();
 
-
-  useEffect(() => {
-
-    // const updateCardNames = () => {
-    //   const headers = { method: 'GET' };
-    //   // Get all cardnames from server
-    //   fetch(`/api/catalog/cardnames`, headers)
-    //     .then((res) => res.json())
-    //     .then((data) => {
-    //       console.log(data)
-    //       // Set api cardNames state with parsed result
-    //       setApiCardNames(data);
-    //     })
-    //     .catch((error) => console.log(error));
-    // }
-
-    // updateCardNames();
-    // Setting path with component url pathname onload
-    setPath(location.pathname);
-  }, []);
-  console.log(api.serverURL)
   return (
 
     <section className="section home-page">

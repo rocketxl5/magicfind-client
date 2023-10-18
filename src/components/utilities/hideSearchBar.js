@@ -8,8 +8,8 @@ const hideSearchBar = (state) => {
 
     // Click label attached to checkbox to check it
     document.querySelector('.mobile-nav-label').click();
-    // Clear search catalog search bar
-    document.querySelector('.search-catalog').style.width = 0;
+    // Hide search catalog search bar
+    document.querySelector('#search-catalog-container').style.width = 0;
     // Display search icon (magnifier)
     document.querySelector('.search-btn').style.setProperty('display', 'block');
 

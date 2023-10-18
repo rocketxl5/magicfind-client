@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useLocation } from 'react-router-dom/cjs/react-router-dom';
+import { SearchContext } from '../../../contexts/SearchContext';
 import SearchResultHeader from './SearchResultHeader';
 import Spinner from '../../layout/Spinner';
 import CatalogItem from './CatalogItem';
@@ -7,8 +8,9 @@ import StoreItem from './StoreItem';
 import SkryfallItem from './SkryfallItem';
 
 const SearchResult = (props) => {
+    const { searchType } = useContext(SearchContext);
     const location = useLocation();
-    const { cards, cardName, formName, loading } = location.state;
+    const { cards, cardName, loading } = location.state;
     console.log(location.state)
     // console.log(cards)
     // console.log(cardName)
@@ -25,14 +27,14 @@ const SearchResult = (props) => {
 
                                 {cards.map((card, index) => {
                                     return (
-                                        formName === 'search-catalog' ? (
+                                        searchType === 'search-catalog' ? (
 
                                             <CatalogItem
                                                 key={index}
                                                 card={card}
                                             />
                                         ) :
-                                            formName === 'search-store' ? (
+                                            searchType === 'search-collection' ? (
                                                 <StoreItem
                                                     key={index}
                                                     card={card}
