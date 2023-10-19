@@ -15,7 +15,7 @@ const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
 
 
-  const { setPath } = useContext(PathContext);
+  const { setPathname } = useContext(PathContext);
   const { setUser } = useContext(UserContext);
 
   const location = useLocation();
@@ -23,7 +23,7 @@ const Login = () => {
 
   // Setting path with component url pathname onload
   useEffect(() => {
-    setPath(location.pathname);
+    setPathname(location.pathname);
   }, []);
 
   const callback = (values) => {

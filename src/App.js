@@ -3,7 +3,8 @@ import {
   BrowserRouter as Router,
   Route,
   Switch,
-  Redirect
+  Redirect,
+  useLocation
 } from 'react-router-dom';
 import Login from './components/auth/Login';
 import Signup from './components/auth/Signup';
@@ -42,11 +43,11 @@ const App = () => {
 
   const { user } = useContext(UserContext);
   const { cardContext } = useContext(CardContext);
-  const { path } = useContext(PathContext);
+  const { pathname } = useContext(PathContext);
 
   return (
     <Router>
-      {(path !== '/login' && path !== '/signup') && <Header />}
+      {(pathname !== '/login' && pathname !== '/signup') && <Header />}
       <main className="wrapper">
         <Switch>
           <Route exact path="/">

@@ -1,13 +1,15 @@
 import React, { useEffect, useContext } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { PathContext } from '../../contexts/PathContext';
-import { CardContext } from '../../contexts/CardContext';
-import { api } from '../../api/resources';
 
 const Home = () => {
-  const { setPath } = useContext(PathContext);
-  const { setApiCardNames } = useContext(CardContext);
+  const { setPathname } = useContext(PathContext);
   const location = useLocation();
+
+  // Setting path with component url pathname onload
+  useEffect(() => {
+    setPathname(location.pathname);
+  }, []);
 
   return (
 

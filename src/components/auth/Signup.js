@@ -11,14 +11,14 @@ const Signup = () => {
   const [input, setInput] = useState({});
   const [isValid, setIsValid] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
-  const { setPath } = useContext(PathContext);
+  const { setPathname } = useContext(PathContext);
 
   const location = useLocation();
   const history = useHistory();
 
   // Setting path with component url pathname onload
   useEffect(() => {
-    setPath(location.pathname);
+    setPathname(location.pathname);
   }, [])
 
   const callback = (values) => {

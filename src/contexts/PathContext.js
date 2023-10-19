@@ -4,10 +4,10 @@ export const PathContext = createContext(null);
 
 export const PathProvider = ({ children }) => {
   // Set path to home url pathname
-  const [path, setPath] = useState('');
+  const [pathname, setPathname] = useState('');
 
   return (
-    <PathContext.Provider value={{ path, setPath }}>
+    <PathContext.Provider value={{ pathname, setPathname }}>
       {children}
     </PathContext.Provider>
   );

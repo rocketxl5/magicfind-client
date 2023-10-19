@@ -19,9 +19,6 @@ const SearchCatalog = () => {
   const browserWidth = getBrowserWidth();
 
   const {
-
-    setSearchType,
-    cardTitles,
     searchInput,
     setSearchInput,
     searchTerm,
@@ -36,22 +33,15 @@ const SearchCatalog = () => {
   } = useContext(SearchContext);
   const { user } = useContext(UserContext);
 
-
   const history = useHistory();
   const inputRef = useRef(null);
 
-
-
   useEffect(() => {
-
     if (searchInput) {
-      /*
-       * New code
-       */
-        
-      // setSearchInput(inputRef.current);
-        setIsActive(true);
-      } else {
+
+      searchInput.id === 'search-catalog' && setIsActive(true);
+    }
+    else {
 
       setIsActive(false);
       setSearchInput(null);
@@ -63,14 +53,6 @@ const SearchCatalog = () => {
       }
     }
   }, [searchInput]);
-
-
-  useEffect(() => {
-
-    if (searchTerm.length >= 3) {
-      console.log(cardTitles);
-    }
-  }, [searchTerm]);
 
 
   useEffect(() => {
@@ -102,56 +84,6 @@ const SearchCatalog = () => {
 
   }, [isSubmitted]);
 
-  // AUTOCOMPLETE query for results
-  // useEffect(() => {
-  //   if (isActive) {
-  //     if (searchInput.value.length < 3) {
-  //       setCardNames([]);
-  //       setIsValidLength(false);
-  //     } else if (searchTerm.length >= 3) {
-  //       setIsValidLength(true);
-  //       setCardNames([]);
-
-
-  //       const headers = new Headers();
-  //       headers.append('Content-Type', 'application/json');
-
-  //       const options = {
-  //         method: 'GET',
-  //         headers: headers,
-  //       };
-  //       fetch(`${api.serverURL}/api/catalog`, options)
-  //         .then((res) => res.json())
-  //         .then((data) => {
-  //           setResults(data);
-  //         })
-  //         .catch((error) => console.log(error));
-  //     }
-  //   }
-  // }, [searchTerm]);
-
-  // AUTOCOMPLETE processing results
-  // useEffect(() => {
-  //   // If input field is not empty string
-  //   if (inputRef.current.value) {
-  //     if (results.length > 0) {
-  //       const filteredCardNames = [];
-  //       results.forEach((result) => {
-  //         // Check for a match in name
-  //         // Check for repetition of name: if there's multiple cards in store
-  //         // with the same name, show the name only once in autocomplete list
-  //         if (
-  //           result.name.toLowerCase().includes(searchTerm.toLowerCase()) &&
-  //           !filteredCardNames.includes(result.name)
-  //         ) {
-  //           filteredCardNames.push(result.name);
-  //         }
-  //       });
-  //       setCardNames(filteredCardNames);
-  //     }
-  //   }
-  // }, [results]);
-
   // Handle submit form
   const fetchSingleCard = (e) => {
 
@@ -167,8 +99,6 @@ const SearchCatalog = () => {
     // If fetch was called from SearchForm (pressing enter)
     // Else fetch was called from click event in Predictions component
     if (e) {
-      console.log(e)
-      console.log(e.target)
       e.preventDefault();
       setShowPredictions(false);
       setIsSubmitted(true);
@@ -197,12 +127,12 @@ const SearchCatalog = () => {
         // localStorage.removeItem('catalogCards');
         console.log(data)
         setLoading(false);
-        setSearchTerm('');
+        setSearchTerm(undefined);
         setIsValidLength(false);
         setIsSubmitted(false);
         setCardName('')
         setSearchInput(null);
-        // Hide search bar on mobile
+
         hideSearchBar();
         history.push({
           pathname: `/search-result/${cardName.toLowerCase()}`,

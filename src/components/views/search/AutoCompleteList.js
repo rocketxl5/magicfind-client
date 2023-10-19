@@ -155,14 +155,14 @@ const AutoComplete = forwardRef(function AutoComplete(props, ref) {
             className="autocomplete-list"
             ref={ulRef}
         >
-            {isValidLength &&
-                cardNames.map((cardName, index) => {
+            {predictionList &&
+                predictionList.map((prediction, index) => {
                     return (
                         isValidLength && (
                             <Predictions
-                                key={cardName}
+                                key={index}
                                 setHoverTarget={setHoverTarget}
-                                cardName={cardName}
+                                cardName={prediction}
                                 index={index}
                             />
                         )
