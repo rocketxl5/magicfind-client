@@ -3,12 +3,13 @@ import Predictions from './Predictions';
 import { SearchContext } from '../../../contexts/SearchContext';
 
 const AutoComplete = (props) => {
-    const { predictions } = props;
+    const { predictions, handleSubmit } = props;
     const {
         marker,
         setMarker,
         showPredictions,
         setIsSubmitted,
+        setCardName
     } = useContext(SearchContext);
 
     // keydown event listener calls handleKeyDown function
@@ -35,12 +36,10 @@ const AutoComplete = (props) => {
 
     // Click event manager function on list of suggestions
     const handleClick = (e) => {
-        console.log(e.target)
-        if (e.target.nodeName === 'LI') {
-            // setCardName(e.target.textContent);
-            setIsSubmitted(true);
-        }
-
+        setCardName(e.target.textContent);
+        handleSubmit();
+        // Triggers fetchSingleCard function @Search[searchType] component
+        // setIsSubmitted(true);
         // localStorage.setItem('searchTerm', JSON.stringify(content));
     };
 

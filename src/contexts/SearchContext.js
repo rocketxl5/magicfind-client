@@ -4,14 +4,10 @@ import { api } from '../api/resources';
 export const SearchContext = createContext(null);
 
 export const SearchProvider = ({ children }) => {
-  const [isSubmitted, setIsSubmitted] = useState(false);
   const [searchInput, setSearchInput] = useState(null);
   const [cardName, setCardName] = useState('');
   const [searchTerm, setSearchTerm] = useState('');
   const [cards, setCards] = useState('');
-
-
-
   const { user } = useContext(UserContext);
   const [searchType, setSearchType] = useState(undefined);
   const [showPredictions, setShowPredictions] = useState(false);
@@ -134,9 +130,7 @@ export const SearchProvider = ({ children }) => {
         cardName,
         setCardName,
         showPredictions,
-        setShowPredictions,
-        isSubmitted,
-        setIsSubmitted,
+        setShowPredictions
       }}
     >
       {children}

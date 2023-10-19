@@ -137,3 +137,7 @@
 .bg-teal {
     background: var(--clr-teal);
 }
+
+.bg-grey {
+    background: var(--clr-grey);
+}

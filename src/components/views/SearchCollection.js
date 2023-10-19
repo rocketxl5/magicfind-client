@@ -8,7 +8,6 @@ import { useLocation, useHistory } from 'react-router-dom';
 import SearchInput from './search/SearchInput';
 import { UserContext } from '../../contexts/UserContext';
 import { SearchContext } from '../../contexts/SearchContext';
-import { CardContext } from '../../contexts/CardContext';
 import { api } from '../../api/resources';
 import styled from 'styled-components';
 
@@ -26,17 +25,12 @@ const SearchCollection = () => {
     setSearchTerm,
     cardName,
     setCardName,
-    showPredictions,
     setShowPredictions,
-    isSubmitted,
-    setIsSubmitted,
-    setText
   } = useContext(SearchContext);
   const { user, userStoreContent } = useContext(UserContext);
 
   const history = useHistory();
   const inputRef = useRef(null);
-  const formRef = useRef(null);
 
   useEffect(() => {
     if (searchInput) {
@@ -70,53 +64,9 @@ const SearchCollection = () => {
   }, []);
 
 
-  useEffect(() => {
-    if (searchInput) {
-      if (isSubmitted && showPredictions) {
-        setShowPredictions(false);
-        fetchSingleCard();
-        // Set the focus on input search field
-        // searchInput.focus();
-        setShowPredictions(false);
-      } else {
-        setShowPredictions(true);
-      }
-    }
-  }, [isSubmitted]);
-
-  // AUTOCOMPLETE
-  useEffect(() => {
-    if (isActive) {
-
-      if (searchTerm.length < 3) {
-        setShowPredictions(false);
-      } else if (searchTerm.length >= 3) {
-        setShowPredictions(true);
-        setLoading(true)
-        const filteredCardNames = [];
-        if (userStoreContent) {
-          userStoreContent.forEach((item) => {
-            // Check for a match in name
-            // Check for repetition of name: if there's multiple cards in store
-            // with the same name, show the name only once in autocomplete list
-            if (
-              item.name.toLowerCase().includes(searchTerm.toLowerCase()) &&
-              !filteredCardNames.includes(item.name)
-            ) {
-              filteredCardNames.push(item.name);
-            }
-          });
-        }
-
-        setCardNames(filteredCardNames);
-        // console.log(filteredCardNames);
-      }
-    }
-  }, [searchTerm]);
-
   // Instore single card request search field with
   // cardname (searchTerm) and user id
-  const fetchSingleCard = (e) => {
+  const handleSubmit = (e) => {
     // bounce back if sent form does not match current form's id
     // This block other forms in the view to process the request down below
     // Assign cardName state to search input value
@@ -129,8 +79,6 @@ const SearchCollection = () => {
 
     if (e) {
       e.preventDefault();
-      setShowPredictions(false);
-      setIsSubmitted(true);
     }
     // else if (searchTerm) {
     //   search = searchTerm;
@@ -159,8 +107,6 @@ const SearchCollection = () => {
         setCardName('');
         setSearchTerm('');
         setShowPredictions(false);
-        setIsSubmitted(false);
-        setText('');
       })
       .catch((error) => console.log(error));
   };
@@ -210,7 +156,7 @@ const SearchCollection = () => {
     <>
       <div className="search-card">
         <h2 className="page-title">Enter A Card Name</h2>
-        <form id="search-collection-form" className="search-form" onSubmit={fetchSingleCard} ref={formRef} >
+        <form id="search-collection-form" className="search-form" onSubmit={handleSubmit} >
           <SearchInput cardNames={cardNames}
             isActive={isActive} ref={inputRef} />
         </form>

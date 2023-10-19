@@ -12,7 +12,6 @@ const Predictions = (props) => {
   const [firstTier, setFirstTier] = useState('');
   const [secondTier, setSecondTier] = useState('');
   const [thirdTier, setThirdTier] = useState('');
-  console.log(prediction)
 
   // Builds card name string segments when searchTerm changes
   // Boldens the part of card name matching the search text
@@ -27,19 +26,21 @@ const Predictions = (props) => {
   }, [searchTerm]);
 
   const handleMouseEnter = (e) => {
-    setCardName(e.target.textContent);
+    // !isHover && setIsHover(true);
+    e.target.classList.add('bg-grey');
+    setCardName(prediction);
   };
 
-  const handleMouseOut = () => {
+  const handleMouseOut = (e) => {
+    e.target.classList.remove('bg-grey');
     setCardName(undefined);
-
   };
   return (
     <li
       className="suggestion"
-      style={{ backgroundColor: index + 1 === marker && '#e4e4e4' }}
+      style={{ backgroundColor: (index + 1 === marker) ? '#d8d6d3' : '' }}
       onMouseEnter={(e) => handleMouseEnter(e)}
-      onMouseOut={() => handleMouseOut()}
+      onMouseOut={(e) => handleMouseOut(e)}
     >
       {firstTier}
       <strong>{secondTier}</strong>

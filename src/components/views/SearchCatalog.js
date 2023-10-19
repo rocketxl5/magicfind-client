@@ -25,9 +25,6 @@ const SearchCatalog = () => {
     setSearchTerm,
     cardName,
     setCardName, 
-    isSubmitted,
-    setIsSubmitted,
-    showPredictions,
     setShowPredictions,
   } = useContext(SearchContext);
   const { user } = useContext(UserContext);
@@ -70,82 +67,59 @@ const SearchCatalog = () => {
   }, []);
 
 
-  // Triggers when isSubmitted is set to true @ AutoCompleteList
-  useEffect(() => {
 
-    if (isSubmitted && showPredictions) {
-      console.log(cardName)
-      setShowPredictions(false);
-      fetchSingleCard();
-    } else {
-      setShowPredictions(true);
-    }
-
-  }, [isSubmitted]);
 
   // Handle submit form
-  const fetchSingleCard = (e) => {
-
-    console.log(cardName)
-
-    // Assign cardName state to search input value
-    searchInput.value = cardName;
+  const handleSubmit = (e) => {
 
     if (!searchTerm) {
       throw new Error('Field is empty. Please provide a suggestion');
     }
-
+    console.log(cardName)
     // If fetch was called from SearchForm (pressing enter)
     // Else fetch was called from click event in Predictions component
     if (e) {
       e.preventDefault();
-      setShowPredictions(false);
-      setIsSubmitted(true);
     } 
-    // else if (searchTerm) {
-    //   search = searchTerm;
-    // } else {
-    //   search = localStorage.getItem('searchCatalog');
-    // }
 
     setLoading(true);
-    const headers = new Headers();
-    headers.append('Content-Type', 'application/json');
-    user && headers.append('Authorization', user.token)
-    // headers.append('auth-token', token);
-    const options = {
-      method: 'GET',
-      headers: headers,
+    // const headers = new Headers();
+    // headers.append('Content-Type', 'application/json');
+    // user && headers.append('Authorization', user.token)
+    // // headers.append('auth-token', token);
+    // const options = {
+    //   method: 'GET',
+    //   headers: headers,
 
-    };
+    // };
 
-    fetch(`${api.serverURL}/api/catalog/${cardName}`, options)
-      .then((res) => res.json())
-      .then((data) => {
-        // localStorage.setItem('searchCatalog', search);
-        // localStorage.removeItem('catalogCards');
-        console.log(data)
-        setLoading(false);
-        setSearchTerm(undefined);
-        setShowPredictions(false);
-        setIsSubmitted(false);
-        setCardName('')
-        setSearchInput(null);
+    // fetch(`${api.serverURL}/api/catalog/${cardName}`, options)
+    //   .then((res) => res.json())
+    //   .then((data) => {
+    //     // localStorage.setItem('searchCatalog', search);
+    //     // localStorage.removeItem('catalogCards');
+    //     console.log(data)
+    //     setLoading(false);
+    //     setSearchTerm(undefined);
+    //     setShowPredictions(false);
+    //     setIsSubmitted(false);
+    //     setCardName('')
+    //     setSearchInput(null);
 
-        hideSearchBar();
-        history.push({
-          pathname: `/search-result/${cardName.toLowerCase()}`,
-          state: { cards: data.results, cardName: data.cardName, loading },
-        });
+    //     hideSearchBar();
+    //     history.push({
+    //       pathname: `/search-result/${cardName.toLowerCase()}`,
+    //       state: { cards: data.results, cardName: data.cardName, loading },
+    //     });
 
-      })
-      .catch((error) => console.log(error));
+    //   })
+    //   .catch((error) => console.log(error));
   };
 
   return (
     <div id="search-catalog-container">
-      <form id="search-catalog-form" className="search-form" onSubmit={fetchSingleCard} >
-        <SearchInput isActive={isActive} id={'search-catalog'} ref={inputRef} />
+      <form id="search-catalog-form" className="search-form" onSubmit={handleSubmit} >
+        <SearchInput isActive={isActive} id={'search-catalog'} handleSubmit={handleSubmit} ref={inputRef} />
       </form>
     </div>
   );

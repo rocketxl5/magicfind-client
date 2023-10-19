@@ -27,10 +27,7 @@ const Search = () => {
     searchTerm,
     setSearchTerm,
     setCardName,
-    isSubmitted,
-    setIsSubmitted,
     setShowPredictions,
-    setText
   } = useContext(SearchContext);
 
   const {
@@ -63,7 +60,7 @@ const Search = () => {
   }, [searchInput]);
 
 
-  const fetchSingleCard = (e) => {
+  const handleSubmit = (e) => {
     // bounce back if sent form does not match current form's id
     // This block other forms in the view to process the request down below
     // if (previousFormID !== form.current.id) {
@@ -101,7 +98,6 @@ const Search = () => {
         //   'search',
         //   `${searchTerm.charAt(0).toUpperCase()}${searchTerm.substring(1)}`
         // );
-        setIsSubmitted(true);
         searching = searchTerm;
 
         // Else request is sent with autofill result
@@ -131,9 +127,7 @@ const Search = () => {
         setOracleID(oracle_id);
         setSearchTerm('');
         setShowPredictions(false);
-        setIsSubmitted(false);
-        setTracker(0);
-        setText('');
+
         setLoading(false);
       })
       .catch((error) => console.log(error));
@@ -189,20 +183,6 @@ const Search = () => {
     }
   }, [searchTerm]);
 
-  // isSubmitted is set in Suggesions Component
-  // on click of li element
-  useEffect(() => {
-    if (isSubmitted) {
-      // Call request function to fetch resulst from card name
-      setShowPredictions(false)
-      fetchSingleCard();
-      // Set the focus on input search field
-      if (searchInput) {
-        searchInput.focus();
-      }
-    }
-  }, [isSubmitted]);
-
   // Fetch call triggered when oracleID state changes in fetchSingleCard function
   useEffect(() => {
     if (oracleID) {
@@ -237,7 +217,7 @@ const Search = () => {
   return (
     <div className="search-card">
       <h2 className="page-title">Enter A Card Name</h2>
-      <form id="search-api-form" className="search-form" onSubmit={fetchSingleCard} ref={formRef} >
+      <form id="search-api-form" className="search-form" onSubmit={handleSubmit} ref={formRef} >
         <SearchInput cardNames={cardNames}
           isActive={isActive} ref={inputRef} />
       </form>

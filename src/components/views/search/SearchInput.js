@@ -9,8 +9,8 @@ import { SearchContext } from '../../../contexts/SearchContext';
 
 const SearchInput = forwardRef(function SearchInput(props, ref) {
   const {
-    isActive,
-    id
+    id,
+    isActive
   } = props;
   const inputRef = ref && ref.inputRef;
   const [predictions, setPredictions] = useState([]);
@@ -42,16 +42,18 @@ const SearchInput = forwardRef(function SearchInput(props, ref) {
   }, [predictions])
 
   useEffect(() => {
-    // If card title is set
-    if (cardTitles.length > 0) {
-      if (searchTerm.length < 3) {
-        // Hide prediction list
-        setMarker(0);
-        setShowPredictions(false);
+    if (searchTerm) {
+      // If card title is set
+      if (cardTitles.length > 0) {
+        if (searchTerm.length < 3) {
+          // Hide prediction list
+          setMarker(0);
+          setShowPredictions(false);
+        }
+        else {
+          filterCardTitles(cardTitles, searchTerm)
+        }
       }
-      else {
-        filterCardTitles(cardTitles, searchTerm)
-      } 
     }
   }, [searchTerm]);
 
@@ -60,12 +62,11 @@ const SearchInput = forwardRef(function SearchInput(props, ref) {
   };
 
   const handleBlur = (e) => {
-    e.target.value = '';
     setMarker(0);
-    setSearchTerm('');
-    setPredictions([]);
-    setShowPredictions(false);
     setSearchType(undefined);
+    // setSearchTerm('');
+    // setPredictions([]);
+    // setShowPredictions(false);
   };
 
 
@@ -97,7 +98,7 @@ const SearchInput = forwardRef(function SearchInput(props, ref) {
               : 'Search Skryfall API'
         }
       />
-      <AutoCompleteList predictions={predictions} />
+      <AutoCompleteList predictions={predictions} handleSubmit={props.handleSubmit} />
     </>
   );
 });
