@@ -30,7 +30,6 @@ const SearchCollection = () => {
     setShowPredictions,
     isSubmitted,
     setIsSubmitted,
-    setIsValidLength,
     setText
   } = useContext(SearchContext);
   const { user, userStoreContent } = useContext(UserContext);
@@ -90,9 +89,9 @@ const SearchCollection = () => {
     if (isActive) {
 
       if (searchTerm.length < 3) {
-        setIsValidLength(false);
+        setShowPredictions(false);
       } else if (searchTerm.length >= 3) {
-        setIsValidLength(true);
+        setShowPredictions(true);
         setLoading(true)
         const filteredCardNames = [];
         if (userStoreContent) {
@@ -159,7 +158,7 @@ const SearchCollection = () => {
         setCardNames();
         setCardName('');
         setSearchTerm('');
-        setIsValidLength(false);
+        setShowPredictions(false);
         setIsSubmitted(false);
         setText('');
       })

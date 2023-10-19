@@ -3,47 +3,41 @@ import { SearchContext } from '../../../contexts/SearchContext';
 
 const Predictions = (props) => {
   const {
-    setHoverTarget,
-    cardName,
+    prediction,
     index
   } = props;
 
-  const { searchTerm, setTracker, setCardName } = useContext(SearchContext);
+  const { marker, searchTerm, setCardName } = useContext(SearchContext);
 
   const [firstTier, setFirstTier] = useState('');
   const [secondTier, setSecondTier] = useState('');
   const [thirdTier, setThirdTier] = useState('');
+  console.log(prediction)
 
-  // console.log(cardName);
   // Builds card name string segments when searchTerm changes
   // Boldens the part of card name matching the search text
   useEffect(() => {
     // Gets the index of the first letter matching searchTerm in name string
-    const firstIndex = cardName.toLowerCase().indexOf(searchTerm.toLowerCase());
+    const firstIndex = prediction.toLowerCase().indexOf(searchTerm.toLowerCase());
     // Gets the index of the last letter matching searchTerm in name string
     const lastIndex = firstIndex + searchTerm.length;
-    setFirstTier(cardName.substring(0, firstIndex));
-    setSecondTier(cardName.substring(firstIndex, lastIndex));
-    setThirdTier(cardName.substring(lastIndex, cardName.length));
+    setFirstTier(prediction.substring(0, firstIndex));
+    setSecondTier(prediction.substring(firstIndex, lastIndex));
+    setThirdTier(prediction.substring(lastIndex, prediction.length));
   }, [searchTerm]);
 
   const handleMouseEnter = (e) => {
-    // setIsActiveMouse(true);
-    console.log(e.target)
-    setHoverTarget(e.target);
-    setTracker(e.target.tabIndex + 1);
-    setCardName(e.target.textContent)
-    // setPower(true);
+    setCardName(e.target.textContent);
   };
 
   const handleMouseOut = () => {
-    // setHoverTarget(null);
+    setCardName(undefined);
 
   };
   return (
     <li
       className="suggestion"
-      tabIndex={index}
+      style={{ backgroundColor: index + 1 === marker && '#e4e4e4' }}
       onMouseEnter={(e) => handleMouseEnter(e)}
       onMouseOut={() => handleMouseOut()}
     >

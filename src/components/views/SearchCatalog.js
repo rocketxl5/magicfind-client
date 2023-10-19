@@ -25,7 +25,6 @@ const SearchCatalog = () => {
     setSearchTerm,
     cardName,
     setCardName, 
-    setIsValidLength,
     isSubmitted,
     setIsSubmitted,
     showPredictions,
@@ -128,7 +127,7 @@ const SearchCatalog = () => {
         console.log(data)
         setLoading(false);
         setSearchTerm(undefined);
-        setIsValidLength(false);
+        setShowPredictions(false);
         setIsSubmitted(false);
         setCardName('')
         setSearchInput(null);

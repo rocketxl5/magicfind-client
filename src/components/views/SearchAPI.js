@@ -26,8 +26,7 @@ const Search = () => {
     setSearchInput,
     searchTerm,
     setSearchTerm,
-    setCardName, 
-    setIsValidLength,
+    setCardName,
     isSubmitted,
     setIsSubmitted,
     setShowPredictions,
@@ -131,7 +130,7 @@ const Search = () => {
         setCardName(name);
         setOracleID(oracle_id);
         setSearchTerm('');
-        setIsValidLength(false);
+        setShowPredictions(false);
         setIsSubmitted(false);
         setTracker(0);
         setText('');
@@ -179,14 +178,14 @@ const Search = () => {
   // Card names array gets populated with filtered results.
   useEffect(() => {
     if (searchTerm.length > 2) {
-      setIsValidLength(true);
+      setShowPredictions(true);
       setCardNames([]);
       const filteredNames = apiCardNames.filter((name) => {
         return name.toLowerCase().includes(searchTerm.toLowerCase());
       });
       setCardNames(filteredNames);
     } else if (searchTerm.length < 3) {
-      setIsValidLength(false);
+      setShowPredictions(false);
     }
   }, [searchTerm]);
 

@@ -1,11 +1,9 @@
 import React, {
-  useRef,
   useState,
   useEffect,
   forwardRef,
   useContext,
 } from 'react';
-import { v4 as uuidv4 } from 'uuid';
 import AutoCompleteList from './AutoCompleteList';
 import { SearchContext } from '../../../contexts/SearchContext';
 
@@ -15,18 +13,17 @@ const SearchInput = forwardRef(function SearchInput(props, ref) {
     id
   } = props;
   const inputRef = ref && ref.inputRef;
-  const [predictionList, setPredictionList] = useState(null);
+  const [predictions, setPredictions] = useState([]);
 
   const {
+    setMarker,
     setSearchType,
     cardTitles,
     setSearchInput,
     searchTerm,
     setSearchTerm,
-    setTracker,
-    setIsValidLength
+    setShowPredictions
   } = useContext(SearchContext);
-  const ulRef = useRef(null);
 
   // Find match with card title & searchTerm
   const filterCardTitles = (cardTitles, searchTerm) => {
@@ -36,16 +33,25 @@ const SearchInput = forwardRef(function SearchInput(props, ref) {
       title.toLowerCase().includes(searchTerm) && filteredTitles.push(title);
     });
 
-    filteredTitles.length && setPredictionList(filteredTitles);
+    filteredTitles.length && setPredictions(filteredTitles);
   }
 
   useEffect(() => {
-    console.log(predictionList);
-  }, [predictionList])
+    predictions.length > 0 && setShowPredictions(true);
+    console.log(predictions);
+  }, [predictions])
 
   useEffect(() => {
-    if (searchTerm.length >= 3) {
-      filterCardTitles(cardTitles, searchTerm)
+    // If card title is set
+    if (cardTitles.length > 0) {
+      if (searchTerm.length < 3) {
+        // Hide prediction list
+        setMarker(0);
+        setShowPredictions(false);
+      }
+      else {
+        filterCardTitles(cardTitles, searchTerm)
+      } 
     }
   }, [searchTerm]);
 
@@ -54,19 +60,16 @@ const SearchInput = forwardRef(function SearchInput(props, ref) {
   };
 
   const handleBlur = (e) => {
-
     e.target.value = '';
-    // setSearchInput(null);
+    setMarker(0);
     setSearchTerm('');
-    setPredictionList(null);
-    setIsValidLength(false);
+    setPredictions([]);
+    setShowPredictions(false);
     setSearchType(undefined);
-    setTracker(0);
   };
 
 
   const handleFocus = (e) => {
-    // setPredictionList(ulRef.current);
     setSearchInput(e.target);
     setSearchType(e.target.id);
     if (searchTerm) {
@@ -94,7 +97,7 @@ const SearchInput = forwardRef(function SearchInput(props, ref) {
               : 'Search Skryfall API'
         }
       />
-      {/* <AutoCompleteList predictionList={predictionList} ref={ulRef} /> */}
+      <AutoCompleteList predictions={predictions} />
     </>
   );
 });

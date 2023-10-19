@@ -4,15 +4,9 @@ import { api } from '../api/resources';
 export const SearchContext = createContext(null);
 
 export const SearchProvider = ({ children }) => {
-  const [searchResult, setSearchResult] = useState([]);
-  const [isValidLength, setIsValidLength] = useState(false);
-  const [showPredictions, setShowPredictions] = useState(true);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [searchInput, setSearchInput] = useState(null);
-  const [previousFormID, setPreviousFormID] = useState(null);
   const [cardName, setCardName] = useState('');
-  const [text, setText] = useState('');
-  const [tracker, setTracker] = useState(0);
   const [searchTerm, setSearchTerm] = useState('');
   const [cards, setCards] = useState('');
 
@@ -20,7 +14,9 @@ export const SearchProvider = ({ children }) => {
 
   const { user } = useContext(UserContext);
   const [searchType, setSearchType] = useState(undefined);
-  const [cardTitles, setCardTitles] = useState(null);
+  const [showPredictions, setShowPredictions] = useState(false);
+  const [cardTitles, setCardTitles] = useState([]);
+  const [marker, setMarker] = useState(0);
 
   const getCardTitles = (cards) => {
     let filteredData = [];
@@ -125,6 +121,8 @@ export const SearchProvider = ({ children }) => {
   return (
     <SearchContext.Provider
       value={{
+        marker,
+        setMarker,
         setSearchType,
         cardTitles,
         cards,
@@ -133,22 +131,12 @@ export const SearchProvider = ({ children }) => {
         setSearchInput,
         searchTerm,
         setSearchTerm,
-        previousFormID,
-        setPreviousFormID,
         cardName,
         setCardName,
-        searchResult,
-        setSearchResult,
-        isValidLength,
-        setIsValidLength,
         showPredictions,
         setShowPredictions,
         isSubmitted,
         setIsSubmitted,
-        text,
-        setText,
-        tracker,
-        setTracker
       }}
     >
       {children}
