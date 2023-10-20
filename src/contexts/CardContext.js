@@ -11,7 +11,7 @@ export const CardContext = createContext(null);
 export const CardProvider = ({ children }) => {
   const { user } = useContext(UserContext);
   const { isValidLength } = useContext(SearchContext);
-  const { path } = useContext(PathContext);
+  const { pathname } = useContext(PathContext);
   const [cardContext, setCardContext] = useState(false);
   const [apiCardNames, setApiCardNames] = useState([]);
   const [userStoreContent, setUserStoreContent] = useState([]);
@@ -33,7 +33,7 @@ export const CardProvider = ({ children }) => {
   }, []);
 
   useEffect(() => {
-    if (user && path === 'search-collection') {
+    if (user && pathname === 'search-collection') {
       const token = user.token;
       const id = user.id;
 
@@ -52,7 +52,7 @@ export const CardProvider = ({ children }) => {
         })
         .catch((error) => console.log(error));
     }
-  }, [path]);
+  }, [pathname]);
 
   return (
     <CardContext.Provider

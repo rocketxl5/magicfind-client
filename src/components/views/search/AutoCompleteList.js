@@ -7,9 +7,8 @@ const AutoComplete = (props) => {
     const {
         marker,
         setMarker,
-        showPredictions,
-        setIsSubmitted,
-        setCardName
+        setCardName,
+        showPredictions
     } = useContext(SearchContext);
 
     // keydown event listener calls handleKeyDown function
@@ -32,22 +31,18 @@ const AutoComplete = (props) => {
                 marker > 0 && setMarker(marker - 1);
             }
         }
+        setCardName(predictions[marker])
     };
 
     // Click event manager function on list of suggestions
-    const handleClick = (e) => {
-        setCardName(e.target.textContent);
+    const handleOnMouseDown = (e) => {
         handleSubmit();
-        // Triggers fetchSingleCard function @Search[searchType] component
-        // setIsSubmitted(true);
         // localStorage.setItem('searchTerm', JSON.stringify(content));
     };
 
-
-
     return (
         <ul
-            onClick={handleClick}
+            onMouseDown={handleOnMouseDown}
             id="autocomplete-list"
             className="autocomplete-list"
         >

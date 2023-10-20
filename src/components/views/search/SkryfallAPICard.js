@@ -1,11 +1,15 @@
+/***************************/
+/**** Skryfall API Card ****/
+/***************************/
+
 import React, { useState, useEffect, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import { CardContext } from '../../../contexts/CardContext';
 import { PathContext } from '../../../contexts/PathContext';
-import Image from '../Image';
+import CardImage from './CardImage';
 import styled from 'styled-components';
 
-const Card = ({ card }) => {
+const SkryfallAPICard = ({ card }) => {
   const { setCardContext } = useContext(CardContext);
   const history = useHistory();
 
@@ -23,7 +27,7 @@ const Card = ({ card }) => {
     <div className="item-container">
       <div className="item-info">
         <div className="item-image">
-          <Image card={card} />
+          <CardImage card={card} />
         </div>
 
         <div className="item-details">
@@ -57,4 +61,4 @@ const Card = ({ card }) => {
   );
 };
 
-export default Card;
+export default SkryfallAPICard;

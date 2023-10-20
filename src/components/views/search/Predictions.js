@@ -26,19 +26,18 @@ const Predictions = (props) => {
   }, [searchTerm]);
 
   const handleMouseEnter = (e) => {
-    // !isHover && setIsHover(true);
+    console.log(e.target)
     e.target.classList.add('bg-grey');
     setCardName(prediction);
   };
 
   const handleMouseOut = (e) => {
     e.target.classList.remove('bg-grey');
-    setCardName(undefined);
+    setCardName('')
   };
   return (
     <li
-      className="suggestion"
-      style={{ backgroundColor: (index + 1 === marker) ? '#d8d6d3' : '' }}
+      className={index === marker ? 'suggestion bg-grey' : 'suggestion'}
       onMouseEnter={(e) => handleMouseEnter(e)}
       onMouseOut={(e) => handleMouseOut(e)}
     >

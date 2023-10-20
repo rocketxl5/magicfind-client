@@ -4,7 +4,7 @@ import { FiArrowLeftCircle } from 'react-icons/fi';
 import { UserContext } from '../../contexts/UserContext';
 import { CardContext } from '../../contexts/CardContext';
 import capitalizeString from '../utilities/capitalizeString';
-import Image from './Image';
+import Image from './search/CardImage';
 import { api } from '../../api/resources';
 import styled from 'styled-components';
 

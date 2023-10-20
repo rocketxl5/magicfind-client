@@ -35,7 +35,7 @@ const Search = () => {
     setTracker
   } = useContext(CardContext);
 
-  const { path, setPath } = useContext(PathContext);
+  const { path, setPathname } = useContext(PathContext);
 
   const location = useLocation()
   const history = useHistory();
@@ -163,7 +163,7 @@ const Search = () => {
     if (searchInput) {
       searchInput.value = '';
     }
-    setPath(location.pathname.split('/')[1]);
+    setPathname(location.pathname.split('/')[1]);
   }, [path]);
 
   // On searchTerm state change,

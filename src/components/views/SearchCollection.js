@@ -4,29 +4,32 @@ import React, {
   useEffect,
   useContext
 } from 'react';
-import { useLocation, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import SearchInput from './search/SearchInput';
 import { UserContext } from '../../contexts/UserContext';
 import { SearchContext } from '../../contexts/SearchContext';
 import { api } from '../../api/resources';
 import styled from 'styled-components';
+import hideSearchBar from '../utilities/hideSearchBar';
+import handleSearchBar from '../utilities/handleSearchBar';
+import getBrowserWidth from '../utilities/getBrowserWidth';
 
 const SearchCollection = () => {
   const [loading, setLoading] = useState(false);
   const [isActive, setIsActive] = useState(false);
   const [cards, setCards] = useState([]);
   const [cardNames, setCardNames] = useState([]);
+  const browserWidth = getBrowserWidth();
 
   const {
-    setSearchType,
     searchInput,
     setSearchInput,
     searchTerm,
     setSearchTerm,
     cardName,
-    setCardName,
-    setShowPredictions,
+    setCardName, 
   } = useContext(SearchContext);
+
   const { user, userStoreContent } = useContext(UserContext);
 
   const history = useHistory();
@@ -34,59 +37,46 @@ const SearchCollection = () => {
 
   useEffect(() => {
     if (searchInput) {
-      if (searchInput.id !== inputRef.current.id) {
-        searchInput.value = '';
-      }
-      if (searchInput.id === inputRef.current.id) {
-        setSearchInput(inputRef.current);
-        setIsActive(true);
-      } else {
-        setIsActive(false);
-        setSearchTerm('');
+      searchInput.id === 'search-collection' && setIsActive(true);
+    }
+    else {
+      setIsActive(false);
+      setSearchInput(null);
+      // Handle closing of Search catatalog search bar in mobile
+      // If search field is not catalog and checkbox (#mobile-nav) is checked (search is displayed)
+      if (browserWidth <= 775 && document.querySelector('#mobile-nav').checked) {
+        // hideSearchBar();
+        handleSearchBar(document.querySelector('.hamburger-btn'), (state) => { setSearchTerm(state) }, true);
       }
     }
-
   }, [searchInput]);
 
-  useEffect(() => {
-    if (localStorage.getItem('storeCardName')) {
-      if (localStorage.getItem('storeCardName') === 'all') {
-        // fetchAllCards();
-        console.log('all cards')
-      } else {
-        // setCards(JSON.parse(localStorage.getItem('storeCards')));
-        setCardName(localStorage.getItem('storeCardName'));
-        console.log('in card name', localStorage.getItem('storeCardName'));
+  // useEffect(() => {
+  //   if (localStorage.getItem('storeCardName')) {
+  //     if (localStorage.getItem('storeCardName') === 'all') {
+  //       // fetchAllCards();
+  //       console.log('all cards')
+  //     } else {
+  //       // setCards(JSON.parse(localStorage.getItem('storeCards')));
+  //       setCardName(localStorage.getItem('storeCardName'));
+  //       console.log('in card name', localStorage.getItem('storeCardName'));
 
-        // fetchSingleCard();
-      }
-    }
-  }, []);
+  //       // fetchSingleCard();
+  //     }
+  //   }
+  // }, []);
 
 
   // Instore single card request search field with
   // cardname (searchTerm) and user id
   const handleSubmit = (e) => {
-    // bounce back if sent form does not match current form's id
-    // This block other forms in the view to process the request down below
-    // Assign cardName state to search input value
-    searchInput.value = cardName;
-
-
     if (!searchTerm) {
       throw new Error('Field is empty. Please provide a suggestion');
     }
 
-    if (e) {
-      e.preventDefault();
-    }
-    // else if (searchTerm) {
-    //   search = searchTerm;
-    // } else {
-    //   search = localStorage.getItem('storeCardName');
-    // }
-
+    e && e.preventDefault();
     setLoading(true);
+    inputRef.current.blur();
 
     const headers = new Headers();
     headers.append('Content-Type', 'application/json');
@@ -100,13 +90,18 @@ const SearchCollection = () => {
       .then((res) => res.json())
       .then((data) => {
         // localStorage.setItem('storeCards', JSON.stringify(data.data));
-        localStorage.setItem('storeCardName', cardName);
+        // localStorage.setItem('storeCardName', cardName);
+        console.log(data)
         setLoading(false);
-        setCards(data.result);
-        setCardNames();
-        setCardName('');
-        setSearchTerm('');
-        setShowPredictions(false);
+        setCardName('')
+        setSearchInput(null);
+        if (browserWidth <= 775 && document.querySelector('#mobile-nav').checked) {
+          hideSearchBar();
+        }
+        history.push({
+          pathname: `/search-result/${cardName.toLowerCase()}`,
+          state: { cards: data.results, cardName: data.cardName, type: inputRef.current.id, loading: loading },
+        });
       })
       .catch((error) => console.log(error));
   };
@@ -145,20 +140,19 @@ const SearchCollection = () => {
     }
   };
 
-  const clearSearch = () => {
-    setCards([]);
-    setCardName('');
-    localStorage.removeItem('storeCards');
-    localStorage.removeItem('storeCardName');
-  };
+  // const clearSearch = () => {
+  //   setCards([]);
+  //   setCardName('');
+  //   localStorage.removeItem('storeCards');
+  //   localStorage.removeItem('storeCardName');
+  // };
 
   return (
     <>
-      <div className="search-card">
+      <div className="search-collection-container">
         <h2 className="page-title">Enter A Card Name</h2>
         <form id="search-collection-form" className="search-form" onSubmit={handleSubmit} >
-          <SearchInput cardNames={cardNames}
-            isActive={isActive} ref={inputRef} />
+          <SearchInput isActive={isActive} id={'search-collection'} handleSubmit={handleSubmit} ref={inputRef} />
         </form>
 
         <Buttons>

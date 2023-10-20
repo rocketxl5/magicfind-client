@@ -12,9 +12,9 @@ export const SearchProvider = ({ children }) => {
   const [searchType, setSearchType] = useState(undefined);
   const [showPredictions, setShowPredictions] = useState(false);
   const [cardTitles, setCardTitles] = useState([]);
-  const [marker, setMarker] = useState(0);
+  const [marker, setMarker] = useState(-1);
 
-  const getCardTitles = (cards) => {
+  const getCardNames = (cards) => {
     let filteredData = [];
 
     cards.forEach(card => {
@@ -35,9 +35,7 @@ export const SearchProvider = ({ children }) => {
     return filteredData;
   }
 
-
-
-  const fetchCatalogCardTitles = () => {
+  const fetchCatalogCards = () => {
     console.log('fectching from catalog')
     const headers = new Headers();
     headers.append('Content-Type', 'application/json');
@@ -52,34 +50,32 @@ export const SearchProvider = ({ children }) => {
         console.log('raw data', data)
         const catalogCards = user ? removeUserCards(data, user.id) : data;
         // setCards(cards);
-        // setSearchType(undefined);
-        setCardTitles(getCardTitles(catalogCards));
+        setCardTitles(getCardNames(catalogCards));
+        setSearchType(undefined);
       })
       .catch((error) => console.log(error));
   }
 
-  const fetchCollectionCardTitles = () => {
+  const fetchCollectionCards = () => {
     console.log('fectching from collection')
-    if (user) {
-      const headers = new Headers();
-      headers.append('Content-Type', 'application/json');
-      headers.append('user-token', user.token);
-      const options = {
-        method: 'GET',
-        headers: headers,
-      };
-
-      fetch(`${api.serverURL}/api/cards/${user.id}`, options)
-        .then((res) => res.json())
-        .then((data) => {
-          setCardTitles(data.data);
-          setSearchType(undefined);
-        })
-        .catch((error) => console.log(error));
+    const headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    headers.append('auth-token', user.token);
+    const options = {
+      method: 'GET',
+      headers: headers,
     }
+    fetch(`${api.serverURL}/api/cards/${user.id}`, options)
+      .then((res) => res.json())
+      .then((data) => {
+        const collectionCards = data;
+        setCardTitles(getCardNames(collectionCards));
+        setSearchType(undefined);
+      })
+      .catch((error) => console.log(error));
   }
 
-  const fetchApiCardTitles = () => {
+  const fetchApiCards = () => {
     console.log('fectching from api')
     const headers = new Headers();
     headers.append('Content-Type', 'application/json');
@@ -102,13 +98,13 @@ export const SearchProvider = ({ children }) => {
     if (searchType) {
       switch (searchType) {
         case 'search-catalog':
-          fetchCatalogCardTitles();
+          fetchCatalogCards();
           break;
         case 'search-collection':
-          fetchCollectionCardTitles();
+          fetchCollectionCards();
           break;
         default:
-          fetchApiCardTitles();
+          fetchApiCards();
           break;
       }
     }

@@ -13,7 +13,7 @@ const Message = () => {
   const history = useHistory();
   const location = useLocation();
   const { user } = useContext(UserContext);
-  const { setPath } = useContext(PathContext);
+  const { setPathname } = useContext(PathContext);
   // When writing to a seller set recipient name to seller name
   const [recipientName, setRecipientName] = useState(
     location.state ? location.state.sender : ''
@@ -53,7 +53,7 @@ const Message = () => {
   );
 
   useEffect(() => {
-    setPath(getPath(location.pathname));
+    setPathname(getPath(location.pathname));
   });
 
   useEffect(() => {

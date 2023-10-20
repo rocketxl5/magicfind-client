@@ -1,18 +1,12 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useEffect, useContext } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 // import { FiArrowRightCircle } from 'react-icons/fi';
 // import { UserContext } from '../../contexts/UserContext';
 import { PathContext } from '../../contexts/PathContext';
 
 const UserPage = () => {
-  // const [storeView, setStoreView] = useState(false);
-  // const [cardsView, setCardsView] = useState(false);
-
-  const { setPath } = useContext(PathContext);
-
+  const { setPathname } = useContext(PathContext);
   const location = useLocation();
-
-
   // const toggleView = (view) => {
   //   if (view === 'store') {
   //     cardsView && setCardsView(false);
@@ -22,7 +16,7 @@ const UserPage = () => {
   //     setCardsView(true);
   //   }
   // };
-  useEffect(() => { setPath(location.pathname) }, []);
+  useEffect(() => { setPathname(location.pathname) }, []);
 
   return (
     <main className="container user-page-container">

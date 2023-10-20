@@ -1,3 +1,7 @@
+/*********************************/
+/**** Magic Find Catalog Card ****/
+/*********************************/
+
 import React, {
   useContext,
   useState,
@@ -8,11 +12,11 @@ import { Link, useLocation } from 'react-router-dom';
 import { FiPlusCircle, FiMinusCircle, FiTrash2 } from 'react-icons/fi';
 import { ShoppingCartContext } from '../../../contexts/ShoppingCartContext';
 import { UserContext } from '../../../contexts/UserContext';
-import Image from '../Image';
+import CardImage from './CardImage';
 import { api } from '../../../api/resources';
 import styled from 'styled-components';
 
-const CatalogItem = ({ card }) => {
+const CatalogCard = ({ card }) => {
   const [quantity, setQuantity] = useState(1 || card.quantity_selected);
   const [isSelectedItem, setIsSelectedItem] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -129,7 +133,7 @@ const CatalogItem = ({ card }) => {
       <>
         <div className="item-info">
           <div className="item-image">
-            <Image card={card} />
+            <CardImage card={card} />
           </div>
 
           <div className="item-details">
@@ -248,4 +252,4 @@ const Contact = styled(Link)`
   border: 1px solid #e4e4e4;
 `;
 
-export default CatalogItem;
+export default CatalogCard;

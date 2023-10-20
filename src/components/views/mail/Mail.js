@@ -11,7 +11,7 @@ const Mail = ({
   message,
   index
 }) => {
-  const { path } = useContext(PathContext);
+  const { pathname } = useContext(PathContext);
 
   return (
     <div
@@ -41,14 +41,14 @@ const Mail = ({
         style={{
           backgroundColor: message.isRead ? '#e3e3e3' : ''
         }}
-        to={`/mail/${path}/${message._id}`}
+        to={`/mail/${pathname}/${message._id}`}
         id={index}
       >
         <div className="mailbox-section-1">
           <div className="row-from">
-            {path === 'inbox' || path === 'unread'
+            {pathname === 'inbox' || pathname === 'unread'
               ? message.sender
-              : path === 'sent'
+              : pathname === 'sent'
               ? message.recipient
               : ''}
           </div>

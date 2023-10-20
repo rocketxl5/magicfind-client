@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { FiPlusCircle, FiMinusCircle, FiArrowLeftCircle } from 'react-icons/fi';
-import Image from './Image';
+import Image from './search/CardImage';
 import { SearchContext } from '../../contexts/SearchContext';
 import { PathContext } from '../../contexts/PathContext';
 import capitalizeString from '../utilities/capitalizeString';
@@ -16,12 +16,12 @@ const CardListing = ({ card, setIsSent }) => {
   const [comment, setComment] = useState('');
   const [isPublished, setIsPublished] = useState(false);
   const { setSentForm } = useContext(SearchContext);
-  const { path, setPath } = useContext(PathContext);
+  const { path, setPathname } = useContext(PathContext);
 
   const form = useRef(null);
 
   useEffect(() => {
-    setPath(location.pathname.split('/')[1]);
+    setPathname(location.pathname.split('/')[1]);
   }, []);
 
   const handleChange = (e) => {

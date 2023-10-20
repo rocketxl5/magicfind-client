@@ -25,7 +25,6 @@ const SearchCatalog = () => {
     setSearchTerm,
     cardName,
     setCardName, 
-    setShowPredictions,
   } = useContext(SearchContext);
   const { user } = useContext(UserContext);
 
@@ -34,11 +33,9 @@ const SearchCatalog = () => {
 
   useEffect(() => {
     if (searchInput) {
-
       searchInput.id === 'search-catalog' && setIsActive(true);
     }
     else {
-
       setIsActive(false);
       setSearchInput(null);
         // Handle closing of Search catatalog search bar in mobile
@@ -46,74 +43,69 @@ const SearchCatalog = () => {
         if (browserWidth <= 775 && document.querySelector('#mobile-nav').checked) {
           // hideSearchBar();
           handleSearchBar(document.querySelector('.hamburger-btn'), (state) => { setSearchTerm(state) }, true);
-      }
+        }
     }
   }, [searchInput]);
 
 
-  useEffect(() => {
-    if (localStorage.getItem('catalogCardName')) {
-      if (localStorage.getItem('catalogCardName') === 'all') {
-        // fetchAllCards();
-      } else {
-        // setCards(JSON.parse(localStorage.getItem('storeCards')));
-        setCardName(localStorage.getItem('catalogCardName'));
-        // console.log('in card name', localStorage.getItem('storeCardName'));
-        // fetchSingleCard();
-      }
-    }
+  // useEffect(() => {
+  //   if (localStorage.getItem('catalogCardName')) {
+  //     if (localStorage.getItem('catalogCardName') === 'all') {
+  //       // fetchAllCards();
+  //     } else {
+  //       // setCards(JSON.parse(localStorage.getItem('storeCards')));
+  //       setCardName(localStorage.getItem('catalogCardName'));
+  //       // console.log('in card name', localStorage.getItem('storeCardName'));
+  //       // fetchSingleCard();
+  //     }
+  //   }
 
-    // setPath(location.pathname.split('/')[1]);
-  }, []);
+  //   // setPathname(location.pathname.split('/')[1]);
+  // }, []);
 
 
 
 
   // Handle submit form
   const handleSubmit = (e) => {
-
     if (!searchTerm) {
       throw new Error('Field is empty. Please provide a suggestion');
     }
-    console.log(cardName)
+
     // If fetch was called from SearchForm (pressing enter)
     // Else fetch was called from click event in Predictions component
-    if (e) {
-      e.preventDefault();
-    } 
 
+    e && e.preventDefault();
     setLoading(true);
-    // const headers = new Headers();
-    // headers.append('Content-Type', 'application/json');
-    // user && headers.append('Authorization', user.token)
-    // // headers.append('auth-token', token);
-    // const options = {
-    //   method: 'GET',
-    //   headers: headers,
+    inputRef.current.blur();
 
-    // };
+    const headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    user && headers.append('auth-token', user.token)
+    const options = {
+      method: 'GET',
+      headers: headers,
 
-    // fetch(`${api.serverURL}/api/catalog/${cardName}`, options)
-    //   .then((res) => res.json())
-    //   .then((data) => {
-    //     // localStorage.setItem('searchCatalog', search);
-    //     // localStorage.removeItem('catalogCards');
-    //     console.log(data)
-    //     setLoading(false);
-    //     setSearchTerm(undefined);
-    //     setShowPredictions(false);
-    //     setIsSubmitted(false);
-    //     setCardName('')
-    //     setSearchInput(null);
+    };
 
-    //     hideSearchBar();
-    //     history.push({
-    //       pathname: `/search-result/${cardName.toLowerCase()}`,
-    //       state: { cards: data.results, cardName: data.cardName, loading },
-    //     });
-
-    //   })
-    //   .catch((error) => console.log(error));
+    fetch(`${api.serverURL}/api/catalog/${cardName}`, options)
+      .then((res) => res.json())
+      .then((data) => {
+        // localStorage.setItem('searchCatalog', search);
+        // localStorage.removeItem('catalogCards');
+        console.log(data)
+        setLoading(false);
+        setCardName('')
+        setSearchInput(null);
+        if (browserWidth <= 775 && document.querySelector('#mobile-nav').checked) {
+          hideSearchBar();
+        }
+        history.push({
+          pathname: `/search-result/${cardName.toLowerCase()}`,
+          state: { cards: data.results, cardName: data.cardName, type: inputRef.current.id, loading: loading },
+        });
+      })
+      .catch((error) => console.log(error));
   };
 
   return (

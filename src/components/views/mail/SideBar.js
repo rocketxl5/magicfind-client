@@ -16,16 +16,16 @@ const SideBar = ({
 }) => {
   const location = useLocation();
   const history = useHistory();
-  const { path, setPath } = useContext(PathContext);
+  const { pathname, setPathname } = useContext(PathContext);
 
   // Set path on location change
   useEffect(() => {
     // console.log('path', path);
     // console.log('location.pathname', getPath(location.pathname));
-    if (path !== getPath(location.pathname)) {
+    if (pathname !== getPath(location.pathname)) {
       localStorage.removeItem('message');
     }
-    setPath(getPath(location.pathname));
+    setPathname(getPath(location.pathname));
     // localStorage.removeItem('message');
   }, [location]);
 
@@ -49,7 +49,7 @@ const SideBar = ({
     const updates = {
       userID: user.id,
       trashed: trashed,
-      path: path,
+      pathname: pathname,
     };
     const headers = new Headers();
     headers.append('Content-type', 'application/json');
@@ -67,8 +67,8 @@ const SideBar = ({
         setLoading(false);
         localStorage.removeItem('message');
         setMessages(data.data);
-        setPath(getPath(location.pathname));
-        history.push(`/mail/${path}`);
+        setPathname(getPath(location.pathname));
+        history.push(`/mail/${pathname}`);
       });
   };
 
@@ -103,8 +103,8 @@ const SideBar = ({
         // console.log(data);
         localStorage.removeItem('message');
         setMessages(data.data.length > 0 ? data.data : []);
-        setPath(getPath(location.pathname));
-        history.push(`/mail/${path}`);
+        setPathname(getPath(location.pathname));
+        history.push(`/mail/${pathname}`);
       });
   };
 
@@ -115,7 +115,7 @@ const SideBar = ({
           <button
             className="compose-message"
             onClick={() => {
-              setPath('message');
+              setPathname('message');
               history.push('/mail/message');
             }}
           >

@@ -1,19 +1,15 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { useLocation } from 'react-router-dom/cjs/react-router-dom';
-import { SearchContext } from '../../../contexts/SearchContext';
 import SearchResultHeader from './SearchResultHeader';
 import Spinner from '../../layout/Spinner';
-import CatalogItem from './CatalogItem';
-import StoreItem from './StoreItem';
-import SkryfallItem from './SkryfallItem';
+import CatalogCard from './CatalogCard';
+import SkryfallAPICard from './SkryfallAPICard';
+import CollectionCard from './CollectionCard';
 
-const SearchResult = (props) => {
-    const { searchType } = useContext(SearchContext);
+const SearchResult = () => {
     const location = useLocation();
-    const { cards, cardName, loading } = location.state;
+    const { cards, cardName, type, loading } = location.state;
     console.log(location.state)
-    // console.log(cards)
-    // console.log(cardName)
     return (
         <>
             {loading ? (
@@ -27,20 +23,20 @@ const SearchResult = (props) => {
 
                                 {cards.map((card, index) => {
                                     return (
-                                        searchType === 'search-catalog' ? (
+                                        type === 'search-catalog' ? (
 
-                                            <CatalogItem
+                                            <CatalogCard
                                                 key={index}
                                                 card={card}
                                             />
                                         ) :
-                                            searchType === 'search-collection' ? (
-                                                <StoreItem
+                                            type === 'search-collection' ? (
+                                                <CollectionCard
                                                     key={index}
                                                     card={card}
                                                 />
                                             ) : (
-                                                    <SkryfallItem
+                                                    <SkryfallAPICard
                                                         key={index}
                                                         card={card}
                                                     />

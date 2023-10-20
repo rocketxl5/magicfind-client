@@ -12,7 +12,7 @@ const SearchInput = forwardRef(function SearchInput(props, ref) {
     id,
     isActive
   } = props;
-  const inputRef = ref && ref.inputRef;
+  const inputRef = ref;
   const [predictions, setPredictions] = useState([]);
 
   const {
@@ -37,7 +37,7 @@ const SearchInput = forwardRef(function SearchInput(props, ref) {
   }
 
   useEffect(() => {
-    predictions.length > 0 && setShowPredictions(true);
+    predictions.length && setShowPredictions(true);
     console.log(predictions);
   }, [predictions])
 
@@ -47,7 +47,7 @@ const SearchInput = forwardRef(function SearchInput(props, ref) {
       if (cardTitles.length > 0) {
         if (searchTerm.length < 3) {
           // Hide prediction list
-          setMarker(0);
+          setMarker(-1);
           setShowPredictions(false);
         }
         else {
@@ -62,13 +62,13 @@ const SearchInput = forwardRef(function SearchInput(props, ref) {
   };
 
   const handleBlur = (e) => {
-    setMarker(0);
-    setSearchType(undefined);
-    // setSearchTerm('');
-    // setPredictions([]);
-    // setShowPredictions(false);
+    e.preventDefault();
+    setMarker(-1);
+    // setSearchType(undefined);
+    setSearchTerm('');
+    setPredictions([]);
+    setShowPredictions(false);
   };
-
 
   const handleFocus = (e) => {
     setSearchInput(e.target);
@@ -76,7 +76,6 @@ const SearchInput = forwardRef(function SearchInput(props, ref) {
     if (searchTerm) {
       setSearchTerm('');
     }
-
   }
 
   return (
@@ -98,7 +97,9 @@ const SearchInput = forwardRef(function SearchInput(props, ref) {
               : 'Search Skryfall API'
         }
       />
-      <AutoCompleteList predictions={predictions} handleSubmit={props.handleSubmit} />
+      {isActive &&
+        <AutoCompleteList predictions={predictions} handleSubmit={props.handleSubmit} />
+      }
     </>
   );
 });

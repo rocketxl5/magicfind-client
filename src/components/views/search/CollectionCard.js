@@ -1,9 +1,14 @@
+/******************************/
+/**** User Collection Card ****/
+/******************************/
+
+
 import React, { useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import { CardContext } from '../../../contexts/CardContext';
-import Image from '../Image';
+import CardImage from './CardImage';
 
-const StoreItem = ({ card }) => {
+const CollectionCard = ({ card }) => {
   const { setCardContext } = useContext(CardContext);
   const history = useHistory();
 
@@ -24,7 +29,7 @@ const StoreItem = ({ card }) => {
     <div className="item-container">
 
       <div className="item-image">
-        <Image card={card} />
+        <CardImage card={card} />
       </div>
       <div className="item-info">
         <p>{card.set_name}</p>
@@ -57,4 +62,4 @@ const StoreItem = ({ card }) => {
   );
 };
 
-export default StoreItem;
+export default CollectionCard;
