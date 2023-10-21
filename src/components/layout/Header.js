@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import SearchCatalog from '../views/SearchCatalog';
 import Navbar from './Navbar';
 import LogoBtn from './navbtn/LogoBtn';
@@ -8,13 +8,24 @@ import handleSearchBar from '../utilities/handleSearchBar';
 const Header = () => {
   const { setSearchTerm } = useContext(SearchContext);
 
-  // Handle search bar and menu animation 
+  // Handle search bar and menu animation
   const handleClick = (e) => {
-    handleSearchBar(e.target, (state) => { setSearchTerm(state) });
+    handleSearchBar(e, (state) => { setSearchTerm(state) });
   }
+
+  // keydown event listener calls handleKeyDown function
+  // useEffect(() => {
+  //   document.querySelector('.main-header').addEventListener('click', handleClick);
+  //   return () => document.querySelector('.main-header').removeEventListener('click', handleClick);
+  // });
+
+  // const handleClick = (e) => {
+  //   handleSearchBar(e, (state) => { setSearchTerm(state) });
+  // }
 
   return (
     <header className="main-header" onClick={handleClick}>
+      {/* // <header className="main-header"> */}
       <LogoBtn />
       <SearchCatalog />
       <Navbar />

@@ -8,6 +8,7 @@ import { useHistory } from 'react-router-dom';
 import SearchInput from './search/SearchInput';
 import { SearchContext } from '../../contexts/SearchContext';
 import { UserContext } from '../../contexts/UserContext';
+import { PathContext } from '../../contexts/PathContext';
 import { api } from '../../api/resources';
 import hideSearchBar from '../utilities/hideSearchBar';
 import handleSearchBar from '../utilities/handleSearchBar';
@@ -27,23 +28,29 @@ const SearchCatalog = () => {
     setCardName, 
   } = useContext(SearchContext);
   const { user } = useContext(UserContext);
+  const { pathname } = useContext(PathContext);
 
   const history = useHistory();
   const inputRef = useRef(null);
 
   useEffect(() => {
+    console.log(pathname)
+    if (browserWidth <= 775 && document.querySelector('#mobile-nav').checked) {
+      hideSearchBar();
+    }
+  }, [pathname])
+
+  useEffect(() => {
     if (searchInput) {
-      searchInput.id === 'search-catalog' && setIsActive(true);
+      if (searchInput.id === 'search-catalog') {
+        setIsActive(true);
     }
     else {
       setIsActive(false);
       setSearchInput(null);
         // Handle closing of Search catatalog search bar in mobile
         // If search field is not catalog and checkbox (#mobile-nav) is checked (search is displayed)
-        if (browserWidth <= 775 && document.querySelector('#mobile-nav').checked) {
-          // hideSearchBar();
-          handleSearchBar(document.querySelector('.hamburger-btn'), (state) => { setSearchTerm(state) }, true);
-        }
+      }
     }
   }, [searchInput]);
 

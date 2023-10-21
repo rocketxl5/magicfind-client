@@ -5,8 +5,8 @@ import styled from 'styled-components';
 
 const LogoBtn = () => {
   return (
-    <Logo className="logo-btn">
-      <Anchor to="/" title="Magic Find logo">
+    <Logo >
+      <Anchor className="logo-btn" to="/" title="Magic Find logo">
         <SVG>
           <GiWaterBolt />
         </SVG>

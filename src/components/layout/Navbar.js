@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useEffect, useContext } from 'react';
 import { UserContext } from '../../contexts/UserContext';
 import Menu from './Menu';
 import AuthMenu from './AuthMenu';
@@ -9,10 +9,23 @@ import HamburgerBtn from './navbtn/HamburgerBtn';
 // import SignupBtn from './navbar/SignupBtn';
 // import SigninBtn from './navbar/SigninBtn';
 import ShoppingCartBtn from './navbtn/ShoppingCartBtn';
+import { SearchContext } from '../../contexts/SearchContext';
+import handleSearchBar from '../utilities/handleSearchBar';
 
 
 function Navbar() {
     const { user, setUser } = useContext(UserContext);
+    const { setSearchTerm } = useContext(SearchContext);
+
+    // useEffect(() => {
+    //     document.querySelector('.navbar').addEventListener('click', handleClick);
+    //     return () => document.querySelector('.navbar').removeEventListener('click', handleClick);
+    // }, []);
+
+    // const handleClick = (e) => {
+    //     handleSearchBar(e.target, (state) => { setSearchTerm(state) });
+    //     console.log(e.target)
+    // }
 
     return (
         <div className="navbar">

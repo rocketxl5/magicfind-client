@@ -4,10 +4,11 @@ import React, {
   useEffect,
   useContext
 } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useLocation, useHistory } from 'react-router-dom';
 import SearchInput from './search/SearchInput';
 import { UserContext } from '../../contexts/UserContext';
 import { SearchContext } from '../../contexts/SearchContext';
+import { PathContext } from '../../contexts/PathContext';
 import { api } from '../../api/resources';
 import styled from 'styled-components';
 import hideSearchBar from '../utilities/hideSearchBar';
@@ -31,22 +32,32 @@ const SearchCollection = () => {
   } = useContext(SearchContext);
 
   const { user, userStoreContent } = useContext(UserContext);
+  const { setPathname } = useContext(PathContext);
 
   const history = useHistory();
+  const location = useLocation();
   const inputRef = useRef(null);
 
   useEffect(() => {
+    setPathname(location.pathname);
+  }, [])
+
+  useEffect(() => {
     if (searchInput) {
-      searchInput.id === 'search-collection' && setIsActive(true);
-    }
-    else {
-      setIsActive(false);
-      setSearchInput(null);
+      if (searchInput.id === 'search-collection') {
+        setIsActive(true);
+        if (browserWidth <= 775 && document.querySelector('#mobile-nav').checked) {
+          hideSearchBar();
+          // handleSearchBar(document.querySelector('.hamburger-btn'), (state) => { setSearchTerm(state) }, true);
+          // document.querySelector('.mobile-nav-label').click();
+        }
+      }
+      else {
+        setIsActive(false);
+        setSearchInput(null);
       // Handle closing of Search catatalog search bar in mobile
       // If search field is not catalog and checkbox (#mobile-nav) is checked (search is displayed)
-      if (browserWidth <= 775 && document.querySelector('#mobile-nav').checked) {
-        // hideSearchBar();
-        handleSearchBar(document.querySelector('.hamburger-btn'), (state) => { setSearchTerm(state) }, true);
+
       }
     }
   }, [searchInput]);
@@ -73,7 +84,6 @@ const SearchCollection = () => {
     if (!searchTerm) {
       throw new Error('Field is empty. Please provide a suggestion');
     }
-
     e && e.preventDefault();
     setLoading(true);
     inputRef.current.blur();
