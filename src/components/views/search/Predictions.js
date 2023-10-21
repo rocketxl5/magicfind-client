@@ -9,9 +9,9 @@ const Predictions = (props) => {
 
   const { marker, searchTerm, setCardName } = useContext(SearchContext);
 
-  const [firstTier, setFirstTier] = useState('');
-  const [secondTier, setSecondTier] = useState('');
-  const [thirdTier, setThirdTier] = useState('');
+  const [head, setHead] = useState('');
+  const [body, setBody] = useState('');
+  const [tail, setTail] = useState('');
 
   // Builds card name string segments when searchTerm changes
   // Boldens the part of card name matching the search text
@@ -20,9 +20,9 @@ const Predictions = (props) => {
     const firstIndex = prediction.toLowerCase().indexOf(searchTerm.toLowerCase());
     // Gets the index of the last letter matching searchTerm in name string
     const lastIndex = firstIndex + searchTerm.length;
-    setFirstTier(prediction.substring(0, firstIndex));
-    setSecondTier(prediction.substring(firstIndex, lastIndex));
-    setThirdTier(prediction.substring(lastIndex, prediction.length));
+    setHead(prediction.substring(0, firstIndex));
+    setBody(prediction.substring(firstIndex, lastIndex));
+    setTail(prediction.substring(lastIndex, prediction.length))
   }, [searchTerm]);
 
   const handleMouseEnter = (e) => {
@@ -41,11 +41,17 @@ const Predictions = (props) => {
       onMouseEnter={(e) => handleMouseEnter(e)}
       onMouseOut={(e) => handleMouseOut(e)}
     >
-      {firstTier}
-      <strong>{secondTier}</strong>
-      {thirdTier}
+      {head}
+      <strong>{body}</strong>
+      {tail}
     </li>
   );
 };
 
 export default Predictions;
+// const [head, setHead] = useState('');
+// const [body, setBody] = useState('');
+// const [tail, setTail] = useState('');
+// setHead(prediction.substring(0, firstIndex));
+// setBody(prediction.substring(firstIndex, lastIndex));
+// setTail(prediction.substring(lastIndex, prediction.length))

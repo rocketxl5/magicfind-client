@@ -19,14 +19,11 @@ const SearchCollection = () => {
   const [loading, setLoading] = useState(false);
   const [isActive, setIsActive] = useState(false);
   const [cards, setCards] = useState([]);
-  const [cardNames, setCardNames] = useState([]);
-  const browserWidth = getBrowserWidth();
 
   const {
     searchInput,
     setSearchInput,
     searchTerm,
-    setSearchTerm,
     cardName,
     setCardName, 
   } = useContext(SearchContext);
@@ -37,7 +34,9 @@ const SearchCollection = () => {
   const history = useHistory();
   const location = useLocation();
   const inputRef = useRef(null);
+  const browserWidth = getBrowserWidth();
 
+  // Set pathname
   useEffect(() => {
     setPathname(location.pathname);
   }, [])
@@ -101,16 +100,15 @@ const SearchCollection = () => {
       .then((data) => {
         // localStorage.setItem('storeCards', JSON.stringify(data.data));
         // localStorage.setItem('storeCardName', cardName);
-        console.log(data)
         setLoading(false);
         setCardName('')
         setSearchInput(null);
-        if (browserWidth <= 775 && document.querySelector('#mobile-nav').checked) {
-          hideSearchBar();
-        }
+        // if (browserWidth <= 775 && document.querySelector('#mobile-nav').checked) {
+        //   hideSearchBar();
+        // }
         history.push({
           pathname: `/search-result/${cardName.toLowerCase()}`,
-          state: { cards: data.results, cardName: data.cardName, type: inputRef.current.id, loading: loading },
+          state: { cards: data.results, cardName: data.cardName, type: inputRef.current.id },
         });
       })
       .catch((error) => console.log(error));
@@ -159,7 +157,7 @@ const SearchCollection = () => {
 
   return (
     <>
-      <div className="search-collection-container">
+      <div className="search-card">
         <h2 className="page-title">Enter A Card Name</h2>
         <form id="search-collection-form" className="search-form" onSubmit={handleSubmit} >
           <SearchInput isActive={isActive} id={'search-collection'} handleSubmit={handleSubmit} ref={inputRef} />

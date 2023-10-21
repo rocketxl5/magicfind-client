@@ -17,10 +17,6 @@ const AutoComplete = (props) => {
         return () => document.removeEventListener('keydown', handleKeyDown);
     });
 
-    useEffect(() => {
-        console.log(marker)
-    }, [marker])
-
     // Keyboard arrow up and down autocomplete list searching function
     const handleKeyDown = (e) => {
         if (predictions) {
@@ -46,10 +42,10 @@ const AutoComplete = (props) => {
             id="autocomplete-list"
             className="autocomplete-list"
         >
-            {
+            {showPredictions &&
                 predictions.map((prediction, index) => {
                     return (
-                        showPredictions && (
+                        (
                             <Predictions
                                 key={index}
                                 marker={marker}

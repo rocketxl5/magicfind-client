@@ -23,7 +23,6 @@ const SearchCatalog = () => {
     searchInput,
     setSearchInput,
     searchTerm,
-    setSearchTerm,
     cardName,
     setCardName, 
   } = useContext(SearchContext);
@@ -47,9 +46,7 @@ const SearchCatalog = () => {
     }
     else {
       setIsActive(false);
-      setSearchInput(null);
-        // Handle closing of Search catatalog search bar in mobile
-        // If search field is not catalog and checkbox (#mobile-nav) is checked (search is displayed)
+        setSearchInput(null);
       }
     }
   }, [searchInput]);
@@ -69,18 +66,10 @@ const SearchCatalog = () => {
 
   //   // setPathname(location.pathname.split('/')[1]);
   // }, []);
-
-
-
-
-  // Handle submit form
   const handleSubmit = (e) => {
     if (!searchTerm) {
       throw new Error('Field is empty. Please provide a suggestion');
     }
-
-    // If fetch was called from SearchForm (pressing enter)
-    // Else fetch was called from click event in Predictions component
 
     e && e.preventDefault();
     setLoading(true);
@@ -92,7 +81,6 @@ const SearchCatalog = () => {
     const options = {
       method: 'GET',
       headers: headers,
-
     };
 
     fetch(`${api.serverURL}/api/catalog/${cardName}`, options)
@@ -109,7 +97,7 @@ const SearchCatalog = () => {
         }
         history.push({
           pathname: `/search-result/${cardName.toLowerCase()}`,
-          state: { cards: data.results, cardName: data.cardName, type: inputRef.current.id, loading: loading },
+          state: { cards: data.results, cardName: data.cardName, type: inputRef.current.id },
         });
       })
       .catch((error) => console.log(error));

@@ -20,7 +20,7 @@ export const SearchProvider = ({ children }) => {
     cards.forEach(card => {
       !filteredData.includes(card.name) && filteredData.push(card.name);
     })
-    console.log('card titles', filteredData)
+    // console.log('card titles', filteredData)
     return filteredData;
   }
 
@@ -30,13 +30,12 @@ export const SearchProvider = ({ children }) => {
     cards.forEach(card => {
       card.userID !== user.id && filteredData.push(card);
     })
-
-    console.log('removed user cards', filteredData)
+    // console.log('removed user cards', filteredData)
     return filteredData;
   }
 
   const fetchCatalogCards = () => {
-    console.log('fectching from catalog')
+    // console.log('fectching from catalog')
     const headers = new Headers();
     headers.append('Content-Type', 'application/json');
     const options = {
@@ -47,7 +46,7 @@ export const SearchProvider = ({ children }) => {
     fetch(`${api.serverURL}/api/catalog`, options)
       .then((res) => res.json())
       .then((data) => {
-        console.log('raw data', data)
+        // console.log('raw data', data)
         const catalogCards = user ? removeUserCards(data, user.id) : data;
         // setCards(cards);
         setCardTitles(getCardNames(catalogCards));
@@ -57,7 +56,7 @@ export const SearchProvider = ({ children }) => {
   }
 
   const fetchCollectionCards = () => {
-    console.log('fectching from collection')
+    // console.log('fectching from collection')
     const headers = new Headers();
     headers.append('Content-Type', 'application/json');
     headers.append('auth-token', user.token);
@@ -76,7 +75,7 @@ export const SearchProvider = ({ children }) => {
   }
 
   const fetchApiCards = () => {
-    console.log('fectching from api')
+    // console.log('fectching from api')
     const headers = new Headers();
     headers.append('Content-Type', 'application/json');
     const options = {
@@ -87,6 +86,7 @@ export const SearchProvider = ({ children }) => {
     fetch(`${api.serverURL}/api/cards/api-card-titles`, options)
       .then((res) => res.json())
       .then((data) => {
+        // console.log(data); 
         setCardTitles(data);
         setSearchType(undefined);
       })
@@ -94,7 +94,6 @@ export const SearchProvider = ({ children }) => {
   }
 
   useEffect(() => {
-    // If searchType is defined
     if (searchType) {
       switch (searchType) {
         case 'search-catalog':

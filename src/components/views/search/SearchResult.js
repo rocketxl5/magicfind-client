@@ -8,49 +8,42 @@ import CollectionCard from './CollectionCard';
 
 const SearchResult = () => {
     const location = useLocation();
-    const { cards, cardName, type, loading } = location.state;
+    const { cards, cardName, type } = location.state;
     console.log(location.state)
     return (
-        <>
-            {loading ? (
-                <Spinner />
-            ) : (
-                <div className="section search-result">
-                    {cards &&
-                        <>
-                            <SearchResultHeader cardName={cardName} cards={cards} />
-                            <div className="search-items">
+        <div className="section search-result">
+            {cards &&
+                <>
+                    <SearchResultHeader cardName={cardName} cards={cards} />
+                    <div className="search-items">
 
-                                {cards.map((card, index) => {
-                                    return (
-                                        type === 'search-catalog' ? (
+                    {cards.map((card, index) => {
+                        return (
+                            type === 'search-catalog' ? (
 
-                                            <CatalogCard
-                                                key={index}
-                                                card={card}
-                                            />
-                                        ) :
-                                            type === 'search-collection' ? (
-                                                <CollectionCard
-                                                    key={index}
-                                                    card={card}
-                                                />
-                                            ) : (
-                                                    <SkryfallAPICard
-                                                        key={index}
-                                                        card={card}
-                                                    />
+                                <CatalogCard
+                                    key={index}
+                                    card={card}
+                                />
+                            ) :
+                                type === 'search-collection' ? (
+                                    <CollectionCard
+                                        key={index}
+                                        card={card}
+                                    />
+                                ) : (
+                                    <SkryfallAPICard
+                                        key={index}
+                                        card={card}
+                                    />
 
-                                                )
-                                    )
-                                })}
-                            </div>
-                        </>
-                    }
-                </div>
-            )
+                                )
+                        )
+                    })}
+                    </div>
+                </>
             }
-        </>
+        </div>
     )
 }
 

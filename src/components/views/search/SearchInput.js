@@ -4,7 +4,7 @@ import React, {
   forwardRef,
   useContext,
 } from 'react';
-import AutoCompleteList from './AutoCompleteList';
+import AutoComplete from './AutoComplete';
 import { SearchContext } from '../../../contexts/SearchContext';
 
 const SearchInput = forwardRef(function SearchInput(props, ref) {
@@ -26,32 +26,32 @@ const SearchInput = forwardRef(function SearchInput(props, ref) {
   } = useContext(SearchContext);
 
   // Find match with card title & searchTerm
-  const filterCardTitles = (cardTitles, searchTerm) => {
-    const filteredTitles = [];
+  // const filterCardTitles = (cardTitles, searchTerm) => {
+  //   const filteredTitles = [];
 
-    cardTitles.forEach(title => {
-      title.toLowerCase().includes(searchTerm) && filteredTitles.push(title);
-    });
-
-    filteredTitles.length && setPredictions(filteredTitles);
-  }
+  //   cardTitles.forEach(title => {
+  //     title.toLowerCase().match(searchTerm) && filteredTitles.push(title);
+  //   });
+  //   console.log(filteredTitles)
+  //   filteredTitles.length && setPredictions(filteredTitles);
+  // }
 
   useEffect(() => {
     predictions.length && setShowPredictions(true);
-    console.log(predictions);
   }, [predictions])
 
   useEffect(() => {
     if (searchTerm) {
       // If card title is set
       if (cardTitles.length > 0) {
-        if (searchTerm.length < 3) {
+        if (searchTerm.length >= 3) {
           // Hide prediction list
           setMarker(-1);
           setShowPredictions(false);
-        }
-        else {
-          filterCardTitles(cardTitles, searchTerm)
+          const filteredCardTitles = cardTitles.filter((title) => {
+            return title.toLowerCase().includes(searchTerm.toLowerCase());
+          });
+          setPredictions(filteredCardTitles);
         }
       }
     }
@@ -93,12 +93,12 @@ const SearchInput = forwardRef(function SearchInput(props, ref) {
           id === 'search-catalog'
             ? 'Search Magic Find'
             : id === 'search-collection'
-              ? 'Search Your Store'
+              ? 'Search Your Collection'
               : 'Search Skryfall API'
         }
       />
       {isActive &&
-        <AutoCompleteList predictions={predictions} handleSubmit={props.handleSubmit} />
+        <AutoComplete predictions={predictions} handleSubmit={props.handleSubmit} />
       }
     </>
   );
