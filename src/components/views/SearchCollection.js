@@ -47,19 +47,19 @@ const SearchCollection = () => {
         setIsActive(true);
         if (browserWidth <= 775 && document.querySelector('#mobile-nav').checked) {
           hideSearchBar();
-          // handleSearchBar(document.querySelector('.hamburger-btn'), (state) => { setSearchTerm(state) }, true);
-          // document.querySelector('.mobile-nav-label').click();
         }
       }
       else {
         setIsActive(false);
         setSearchInput(null);
-      // Handle closing of Search catatalog search bar in mobile
-      // If search field is not catalog and checkbox (#mobile-nav) is checked (search is displayed)
-
       }
     }
   }, [searchInput]);
+
+  // On submit, check if cardName is set
+  useEffect(() => {
+    !cardName && setCardName(searchTerm)
+  }, [loading])
 
   // useEffect(() => {
   //   if (localStorage.getItem('storeCardName')) {
@@ -83,6 +83,7 @@ const SearchCollection = () => {
     if (!searchTerm) {
       throw new Error('Field is empty. Please provide a suggestion');
     }
+
     e && e.preventDefault();
     setLoading(true);
     inputRef.current.blur();
@@ -95,7 +96,7 @@ const SearchCollection = () => {
       headers: headers,
     };
 
-    fetch(`${api.serverURL}/api/cards/${cardName}/${user.id}`, options)
+    fetch(`${api.serverURL}/api/cards/${searchTerm}/${user.id}`, options)
       .then((res) => res.json())
       .then((data) => {
         // localStorage.setItem('storeCards', JSON.stringify(data.data));
@@ -107,7 +108,7 @@ const SearchCollection = () => {
         //   hideSearchBar();
         // }
         history.push({
-          pathname: `/search-result/${cardName.toLowerCase()}`,
+          pathname: `/search-result/${searchTerm.toLowerCase()}`,
           state: { cards: data.results, cardName: data.cardName, type: inputRef.current.id },
         });
       })

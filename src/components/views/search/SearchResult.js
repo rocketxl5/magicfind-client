@@ -1,40 +1,16 @@
-import React, { useState, useEffect, useReducer } from 'react';
-import { useLocation, useHistory } from 'react-router-dom/cjs/react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom/cjs/react-router-dom';
 import SearchResultHeader from './SearchResultHeader';
 import CatalogCard from './CatalogCard';
 import SkryfallAPICard from './SkryfallAPICard';
 import CollectionCard from './CollectionCard';
-import handleSearchBar from '../../utilities/handleSearchBar';
-import styled from 'styled-components';
 
-const reducer = (state, action) => {
-    switch (action) {
-        case 'remove-card':
-            action.target.classList.add('selected')
-            break;
-        case 'add-card':
-            action.target.classList.remove('selected')
-            break;
-
-        default:
-            break;
-    }
-
-}
 const SearchResult = () => {
     const location = useLocation();
-    const history = useHistory();
     const { cards, cardName, type } = location.state;
     const [selectedCards, setSelectedCards] = useState([]);
-    const [state, dispatch] = useReducer(reducer, { selection: [] })
-
 
     const handleMouseDown = (e, index, card) => {
-        console.log('target', e.target)
-        // if (!selectedCards.lenght === 0) {
-        //     setSelectedCards([card, ...selectedCards]);
-        // }
-        let type = '';
         const found = selectedCards.find(cardSelected => {
             return cardSelected.id === card.id
         })
@@ -42,18 +18,16 @@ const SearchResult = () => {
         console.log('found card', card)
 
         if (found) {
-            // type = 'remove-card';
+
             setSelectedCards(selectedCards.filter(cardSelected => {
                 return cardSelected.id !== card.id;
             }))
         } else {
-            // type = 'add-card';
+
             setSelectedCards([card, ...selectedCards]);
         }
 
         e.target.classList.toggle('selected');
-
-        // dispatch({ type: type, target: e.target })
     }
 
     const handleClick = (e) => {

@@ -51,6 +51,11 @@ const SearchCatalog = () => {
     }
   }, [searchInput]);
 
+  // On submit, check if cardName is set
+  useEffect(() => {
+    !cardName && setCardName(searchTerm)
+  }, [loading])
+
 
   // useEffect(() => {
   //   if (localStorage.getItem('catalogCardName')) {

@@ -22,6 +22,7 @@ const SearchInput = forwardRef(function SearchInput(props, ref) {
     setSearchInput,
     searchTerm,
     setSearchTerm,
+    setCardName,
     setShowPredictions
   } = useContext(SearchContext);
 
@@ -62,9 +63,9 @@ const SearchInput = forwardRef(function SearchInput(props, ref) {
   const handleFocus = (e) => {
     setSearchInput(e.target);
     setSearchType(e.target.id);
-    if (searchTerm) {
-      setSearchTerm('');
-    }
+    // if (searchTerm) {
+    //   setSearchTerm('');
+    // }
   }
 
   return (

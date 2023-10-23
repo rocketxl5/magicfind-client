@@ -12,7 +12,6 @@ import SearchInput from './search/SearchInput';
 import { api } from '../../api/resources';
 import sanitizeString from '../utilities/sanitizeString';
 import hideSearchBar from '../utilities/hideSearchBar';
-import handleSearchBar from '../utilities/handleSearchBar';
 import getBrowserWidth from '../utilities/getBrowserWidth';
 
 const Search = () => {
@@ -59,6 +58,10 @@ const Search = () => {
     }
   }, [searchInput]);
 
+  // On submit, check if cardName is set
+  useEffect(() => {
+    !cardName && setCardName(searchTerm)
+  }, [loading])
 
   const handleSubmit = (e) => {
 
