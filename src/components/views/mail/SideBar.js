@@ -114,6 +114,7 @@ const SideBar = ({
         <div className="mailbox-sidebar-header">
           <button
             className="compose-message"
+            type="button"
             onClick={() => {
               setPathname('message');
               history.push('/mail/message');
@@ -122,11 +123,11 @@ const SideBar = ({
             Compose
           </button>
           {isTrash && location.pathname.includes('trash') ? (
-            <button className="remove-message" onClick={handleDeleteClick}>
+            <button className="remove-message" type="button" onClick={handleDeleteClick}>
               Delete
             </button>
           ) : isTrash ? (
-            <button className="remove-message" onClick={handleTrashClick}>
+              <button className="remove-message" type="button" onClick={handleTrashClick}>
               Trash
             </button>
           ) : (

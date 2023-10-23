@@ -50,19 +50,19 @@ const CollectionCard = ({ card }) => {
 
       </div>
       <div className="card-btns">
-        <button id="modify-card" className="card-btn bg-teal" onClick={handleClick}>
+        <button id="modify-card" className="card-btn bg-teal" type="button" onClick={handleClick}>
           Edit
         </button>
 
         {!card.isPublishd ? (
 
-          <button id="publish-card" className="card-btn bg-green" onClick={handleClick}>Publish</button>
+          <button id="publish-card" className="card-btn bg-green" type="button" onClick={handleClick}>Publish</button>
         ) : (
-          <button id="unpublish-card" className="card-btn bg-yellow" onClick={handleClick}>Unpublish</button>
+            <button id="unpublish-card" className="card-btn bg-yellow" type="button" onClick={handleClick}>Unpublish</button>
 
         )}
 
-        < button id="remove-card" className="card-btn bg-red" onClick={handleClick}>
+        < button id="remove-card" className="card-btn bg-red" type="button" onClick={handleClick}>
           Delete
         </button>
       </div>

@@ -52,11 +52,12 @@ const useForm = (callback, inputValidation, state) => {
     }
 
     const handleSubmit = (e) => {
-        e.preventDefault()
+        e.preventDefault();
+        console.log(e.target)
         // Remove focus on input if any 
         // @ Enter key
         if (document.activeElement) {
-            document.activeElement.blur()
+            document.activeElement.blur();
         }
 
         setErrors(inputValidation(values))

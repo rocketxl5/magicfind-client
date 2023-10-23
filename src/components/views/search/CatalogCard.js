@@ -189,8 +189,16 @@ const CatalogCard = ({ card }) => {
             </Selected>
           </div>
         </div>
-
         <div className="item-buttons">
+          <button
+            className="item-button success"
+            type="button"
+            onClick={() => updateCart(card)}
+          >
+            {isSelectedItem ? 'Update Cart' : 'Add To Cart'}
+          </button>
+        </div>
+        {/* <div className="item-buttons">
           <div className="item-quantity">
             <div
               className="add-remove-button"
@@ -212,14 +220,7 @@ const CatalogCard = ({ card }) => {
               <FiPlusCircle size={23} />
             </div>
           </div>
-
-          <button
-            className="item-button success"
-            onClick={() => updateCart(card)}
-          >
-            {isSelectedItem ? 'Update Cart' : 'Add To Cart'}
-          </button>
-        </div>
+        </div> */}
       </>
     </div>
   );

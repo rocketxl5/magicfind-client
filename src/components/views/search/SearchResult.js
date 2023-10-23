@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useLocation } from 'react-router-dom/cjs/react-router-dom';
 import SearchResultHeader from './SearchResultHeader';
+import { SearchContext } from '../../../contexts/SearchContext';
 import CatalogCard from './CatalogCard';
 import SkryfallAPICard from './SkryfallAPICard';
 import CollectionCard from './CollectionCard';
@@ -10,24 +11,20 @@ const SearchResult = () => {
     const { cards, cardName, type } = location.state;
     const [selectedCards, setSelectedCards] = useState([]);
 
-    const handleMouseDown = (e, index, card) => {
+    const handleMouseDown = (e, card) => {
         const found = selectedCards.find(cardSelected => {
             return cardSelected.id === card.id
         })
 
-        console.log('found card', card)
-
         if (found) {
-
             setSelectedCards(selectedCards.filter(cardSelected => {
                 return cardSelected.id !== card.id;
             }))
-        } else {
-
+        }
+        else {
             setSelectedCards([card, ...selectedCards]);
         }
-
-        e.target.classList.toggle('selected');
+        e.target.classList.toggle('selected-card');
     }
 
     const handleClick = (e) => {
@@ -40,7 +37,7 @@ const SearchResult = () => {
 
     return (
         <div className="section search-result">
-            {(type === 'search-api' && selectedCards.length > 0) && <button className="select-btn" onClick={handleClick}> Add Cards To Collection</button>}
+            {selectedCards.length > 0 && <button className="select-btn" type="button" onClick={handleClick}> Add Cards To Collection</button>}
             {cards &&
                 <>
                     <SearchResultHeader cardName={cardName} cards={cards} />
@@ -61,12 +58,15 @@ const SearchResult = () => {
                                         card={card}
                                     />
                                 ) : (
-                                    <SkryfallAPICard
-                                        key={index}
-                                            index={index}
-                                        card={card}
-                                            handleMouseDown={handleMouseDown}
-                                    />
+                                        <>
+
+                                            <SkryfallAPICard
+                                                key={index}
+                                                index={index}
+                                                card={card}
+                                                handleMouseDown={handleMouseDown}
+                                            />
+                                        </>
 
                                 )
                         )

@@ -12,7 +12,7 @@ import styled from 'styled-components';
 const SkryfallAPICard = ({ index, card, handleMouseDown }) => {
 
   return (
-    <div id={index} className="card-container" onMouseDown={(e) => handleMouseDown(e, index, card)}>
+    <div id={index} className="card-container" onMouseDown={(e) => handleMouseDown(e, card)}>
       <div className="card">
         <div className="card-image">
           <CardImage card={card} />

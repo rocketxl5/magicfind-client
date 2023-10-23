@@ -6,13 +6,13 @@ import React, {
 } from 'react';
 import { useLocation, useHistory } from 'react-router-dom';
 import SearchInput from './search/SearchInput';
+import Spinner from '../layout/Spinner';
 import { UserContext } from '../../contexts/UserContext';
 import { SearchContext } from '../../contexts/SearchContext';
 import { PathContext } from '../../contexts/PathContext';
 import { api } from '../../api/resources';
 import styled from 'styled-components';
 import hideSearchBar from '../utilities/hideSearchBar';
-import handleSearchBar from '../utilities/handleSearchBar';
 import getBrowserWidth from '../utilities/getBrowserWidth';
 
 const SearchCollection = () => {
@@ -158,27 +158,35 @@ const SearchCollection = () => {
 
   return (
     <>
-      <div className="search-card">
-        <h2 className="page-title">Enter A Card Name</h2>
-        <form id="search-collection-form" className="search-form" onSubmit={handleSubmit} >
-          <SearchInput isActive={isActive} id={'search-collection'} handleSubmit={handleSubmit} ref={inputRef} />
-        </form>
+      {
+        loading ? (
+          <Spinner />
+        ) : (
+            <div className="search-card">
+              <h2 className="page-title">Enter A Card Name</h2>
+              <form id="search-collection-form" className="search-form" onSubmit={handleSubmit} >
+                <SearchInput isActive={isActive} id={'search-collection'} handleSubmit={handleSubmit} ref={inputRef} />
+              </form>
 
-        <Buttons>
-          <Button
-            onClick={handleClick}
-            className="bg-green"
-          >
-            Add New Card
-          </Button>
-          <Button
-            onClick={fetchAllCards}
-            className="bg-teal"
-          >
-            Show All Cards
-          </Button>
-        </Buttons>
-      </div>
+              <Buttons>
+                <Button
+                  className="bg-green"
+                  type="button"
+                  onClick={handleClick}
+                >
+                  Add New Card
+                </Button>
+                <Button
+                  className="bg-teal"
+                  type="button"
+                  onClick={fetchAllCards}
+                >
+                  Show All Cards
+                </Button>
+              </Buttons>
+            </div>
+        )
+      }
     </>
   );
 };

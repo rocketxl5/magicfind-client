@@ -162,7 +162,7 @@ const Message = () => {
                   <span style={{ color: color }}> {count} </span>
                   <span> / {MAXCHARS}</span>
                 </span>
-                <button className="item-button success" onClick={handleClick}>
+                <button className="item-button success" type="button" onClick={handleClick}>
                   Send
                 </button>
               </footer>

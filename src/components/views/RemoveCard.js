@@ -94,6 +94,7 @@ const Remove = () => {
         <div className="item-buttons push-right">
           <button
             className="item-button danger full-width"
+            type="button"
             onClick={handleClick}
           >
             Delete Permanently

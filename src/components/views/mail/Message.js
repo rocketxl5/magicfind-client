@@ -164,6 +164,7 @@ const Message = ({ currentMessage, setMessages, setLoading }) => {
       <div className="item-buttons column">
         <button
           className="item-button row-3 success"
+          type="button"
           onClick={() => {
             history.push({ pathname: '/mail/message', state: currentMessage });
           }}
@@ -175,6 +176,7 @@ const Message = ({ currentMessage, setMessages, setLoading }) => {
           !currentMessage.isSent ? (
             <button
               className="item-button row-3 primary"
+              type="button"
               onClick={() => {
                 localStorage.removeItem('message');
                 setIsTrashStatus(false);
@@ -185,6 +187,7 @@ const Message = ({ currentMessage, setMessages, setLoading }) => {
           ) : (
             <button
               className="item-button row-3 primary"
+                type="button"
               onClick={() => {
                 localStorage.removeItem('message');
                 setIsTrashStatus(false);
@@ -196,6 +199,7 @@ const Message = ({ currentMessage, setMessages, setLoading }) => {
         ) : pathname === 'inbox' ? (
           <button
             className="item-button row-3 primary"
+              type="button"
             onClick={() => {
               // localStorage.removeItem('message');
               setIsReadStatus(false);
@@ -214,6 +218,7 @@ const Message = ({ currentMessage, setMessages, setLoading }) => {
         {pathname !== 'trash' ? (
           <button
             className="item-button row-3 danger"
+            type="button"
             onClick={() => {
               setIsTrashStatus(true);
             }}
@@ -223,6 +228,7 @@ const Message = ({ currentMessage, setMessages, setLoading }) => {
         ) : (
           <button
             className="item-button row-3 danger"
+              type="button"
             onClick={() => {
               handleDeleteClick(currentMessage);
             }}

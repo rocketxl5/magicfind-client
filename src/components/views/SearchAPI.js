@@ -5,17 +5,17 @@ import React, {
   useContext
 } from 'react';
 import { useLocation, useHistory } from 'react-router-dom';
+import SearchInput from './search/SearchInput';
+import Spinner from '../layout/Spinner';
 import { SearchContext } from '../../contexts/SearchContext';
 import { PathContext } from '../../contexts/PathContext';
 import { CardContext } from '../../contexts/CardContext';
-import SearchInput from './search/SearchInput';
 import { api } from '../../api/resources';
 import sanitizeString from '../utilities/sanitizeString';
 import hideSearchBar from '../utilities/hideSearchBar';
 import getBrowserWidth from '../utilities/getBrowserWidth';
 
 const Search = () => {
-  // const [cardName, setCardName] = useState('');
   const [loading, setLoading] = useState(false);
   const [isActive, setIsActive] = useState(false);
   const [oracleID, setOracleID] = useState('');
@@ -183,22 +183,21 @@ const Search = () => {
     }
   }, [oracleID]);
 
-  const clearSearch = () => {
-    setCards([]);
-    setCardName('');
-    setOracleID('');
-    localStorage.removeItem('oracle');
-    localStorage.removeItem('apiCardName');
-    localStorage.removeItem('apiCards');
-  };
-
   return (
-    <div className="search-card">
-      <h2 className="page-title">Enter A Card Name</h2>
-      <form id="search-api-form" className="search-form" onSubmit={handleSubmit}>
-        <SearchInput isActive={isActive} id={'search-api'} handleSubmit={handleSubmit} ref={inputRef} />
-      </form>
-    </div>
+    <>
+      {
+        loading ? (
+          <Spinner />
+        ) : (
+            <div className="search-card">
+              <h2 className="page-title">Enter A Card Name</h2>
+              <form id="search-api-form" className="search-form" onSubmit={handleSubmit}>
+                <SearchInput isActive={isActive} id={'search-api'} handleSubmit={handleSubmit} ref={inputRef} />
+              </form>
+            </div>
+        )
+      }
+    </>
   );
 };
 export default Search;

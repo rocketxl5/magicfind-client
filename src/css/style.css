@@ -5,8 +5,9 @@
     --clr-success: rgb(34, 170, 68);
 
     --clr-blue: #1B2F41;
-    --clr-light-blue: rgb(144, 194, 231);
+    --clr-light-blue: rgb(219, 236, 250);
     --clr-grey: #d8d6d3;
+    --clr-light-grey: #F7F7F7;
     --clr-red: #a31621;
     --clr-light: #fcfcfc;
     --clr-dark: #252525;
@@ -100,6 +101,12 @@ a {
 }
 
 /* spinner */
+.spinner-container {
+  position: fixed;
+  min-height: 100vh;
+  top: var(--size-5);
+  left: 0;
+}
 .spinner {
     display: flex;
     justify-content: center;

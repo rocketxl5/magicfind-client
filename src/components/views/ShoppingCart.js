@@ -93,6 +93,7 @@ function ShoppingCart() {
             )}
 
             <CheckoutButton
+              type="button"
               onClick={() => {
                 handleCheckout();
               }}

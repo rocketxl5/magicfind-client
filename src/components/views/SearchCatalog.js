@@ -11,8 +11,8 @@ import { UserContext } from '../../contexts/UserContext';
 import { PathContext } from '../../contexts/PathContext';
 import { api } from '../../api/resources';
 import hideSearchBar from '../utilities/hideSearchBar';
-import handleSearchBar from '../utilities/handleSearchBar';
 import getBrowserWidth from '../utilities/getBrowserWidth';
+import Spinner from '../layout/Spinner';
 
 const SearchCatalog = () => {
   const [loading, setLoading] = useState(false);
@@ -53,7 +53,9 @@ const SearchCatalog = () => {
 
   // On submit, check if cardName is set
   useEffect(() => {
-    !cardName && setCardName(searchTerm)
+    if (loading) {
+      !cardName && setCardName(searchTerm)
+    }
   }, [loading])
 
 
@@ -78,6 +80,7 @@ const SearchCatalog = () => {
 
     e && e.preventDefault();
     setLoading(true);
+
     inputRef.current.blur();
 
     const headers = new Headers();
@@ -93,7 +96,7 @@ const SearchCatalog = () => {
       .then((data) => {
         // localStorage.setItem('searchCatalog', search);
         // localStorage.removeItem('catalogCards');
-        console.log(data)
+        // console.log(data)
         setLoading(false);
         setCardName('')
         setSearchInput(null);
@@ -109,11 +112,19 @@ const SearchCatalog = () => {
   };
 
   return (
-    <div id="search-catalog-container">
-      <form id="search-catalog-form" className="search-form" onSubmit={handleSubmit} >
-        <SearchInput isActive={isActive} id={'search-catalog'} handleSubmit={handleSubmit} ref={inputRef} />
-      </form>
-    </div>
+    <>
+      {
+        loading ? (
+          <Spinner />
+        ) : (
+            <div id="search-catalog-container">
+              <form id="search-catalog-form" className="search-form" onSubmit={handleSubmit} >
+                <SearchInput isActive={isActive} id={'search-catalog'} handleSubmit={handleSubmit} ref={inputRef} />
+              </form>
+            </div>
+        )
+      }
+    </>
   );
 };
 
