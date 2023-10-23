@@ -26,12 +26,12 @@ const CollectionCard = ({ card }) => {
   }
 
   return (
-    <div className="item-container">
-
-      <div className="item-image">
+    <div className="card-container">
+      <div className="card">
+        <div className="card-image">
         <CardImage card={card} />
       </div>
-      <div className="item-info">
+        <div className="card-specs">
         <p>{card.set_name}</p>
 
         <p>
@@ -48,13 +48,21 @@ const CollectionCard = ({ card }) => {
         </p>
       </div>
 
-
-      <div className="item-btns">
-        <button id="modify-card" className="item-btn bg-green" onClick={handleClick}>
-          Modify
+      </div>
+      <div className="card-btns">
+        <button id="modify-card" className="card-btn bg-teal" onClick={handleClick}>
+          Edit
         </button>
 
-        <button id="remove-card" className="item-btn bg-red" onClick={handleClick}>
+        {!card.isPublishd ? (
+
+          <button id="publish-card" className="card-btn bg-green" onClick={handleClick}>Publish</button>
+        ) : (
+          <button id="unpublish-card" className="card-btn bg-yellow" onClick={handleClick}>Unpublish</button>
+
+        )}
+
+        < button id="remove-card" className="card-btn bg-red" onClick={handleClick}>
           Delete
         </button>
       </div>

@@ -68,6 +68,7 @@ export const SearchProvider = ({ children }) => {
       .then((res) => res.json())
       .then((data) => {
         const collectionCards = data;
+        console.log(data)
         setCardTitles(getCardNames(collectionCards));
         setSearchType(undefined);
       })

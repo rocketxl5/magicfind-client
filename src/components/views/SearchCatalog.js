@@ -33,7 +33,7 @@ const SearchCatalog = () => {
   const inputRef = useRef(null);
 
   useEffect(() => {
-    console.log(pathname)
+    // console.log(pathname)
     if (browserWidth <= 775 && document.querySelector('#mobile-nav').checked) {
       hideSearchBar();
     }

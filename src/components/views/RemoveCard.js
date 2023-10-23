@@ -61,13 +61,13 @@ const Remove = () => {
           {capitalizeString(card.name)}
         </span>
       </header>
-      <div className="item-container">
-        <div className="item-info">
-          <div className="item-image">
-            <Image className="item-image" card={card} />
+      <div className="card-container">
+        <div className="card">
+          <div className="card-image">
+            <Image className="card-image" card={card} />
           </div>
 
-          <div className="item-details">
+          <div className="card-specs">
             <p>
               <strong>Name</strong>: {card.name}
             </p>

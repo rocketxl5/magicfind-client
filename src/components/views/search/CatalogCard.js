@@ -129,14 +129,14 @@ const CatalogCard = ({ card }) => {
   }, [location]);
 
   return (
-    <div className={loading ? 'item-container loading' : 'item-container'}>
+    <div className="card-container">
       <>
-        <div className="item-info">
-          <div className="item-image">
+        <div className="card">
+          <div className="card-image">
             <CardImage card={card} />
           </div>
 
-          <div className="item-details">
+          <div className="card-details">
             <p>
               <strong>{card.set_name}</strong>
             </p>

@@ -2,35 +2,23 @@
 /**** Skryfall API Card ****/
 /***************************/
 
-import React, { useState, useEffect, useContext } from 'react';
-import { useHistory } from 'react-router-dom';
-import { CardContext } from '../../../contexts/CardContext';
-import { PathContext } from '../../../contexts/PathContext';
+import React from 'react';
+// import { useHistory } from 'react-router-dom';
+// import { CardContext } from '../../../contexts/CardContext';
+// import { PathContext } from '../../../contexts/PathContext';
 import CardImage from './CardImage';
 import styled from 'styled-components';
 
-const SkryfallAPICard = ({ card }) => {
-  const { setCardContext } = useContext(CardContext);
-  const history = useHistory();
-
-  const handleClick = () => {
-    setCardContext(true);
-    // localStorage.setItem('card', true);
-
-    history.push({
-      pathname: `/add-card/${card.name.toLowerCase()}`,
-      state: { data: card },
-    });
-  };
+const SkryfallAPICard = ({ index, card, handleMouseDown }) => {
 
   return (
-    <div className="item-container">
-      <div className="item-info">
-        <div className="item-image">
+    <div id={index} className="card-container" onMouseDown={(e) => handleMouseDown(e, index, card)}>
+      <div className="card">
+        <div className="card-image">
           <CardImage card={card} />
         </div>
 
-        <div className="item-details">
+        <div className="card-specs">
           <p>
             <strong>{card.set_name}</strong>
           </p>
@@ -51,11 +39,6 @@ const SkryfallAPICard = ({ card }) => {
             <p>Market Price: Unavailable</p>
           )}
         </div>
-      </div>
-      <div className="item-buttons push-right">
-        <button className="item-button success" onClick={handleClick}>
-          Select Card
-        </button>
       </div>
     </div>
   );

@@ -25,27 +25,16 @@ const SearchInput = forwardRef(function SearchInput(props, ref) {
     setShowPredictions
   } = useContext(SearchContext);
 
-  // Find match with card title & searchTerm
-  // const filterCardTitles = (cardTitles, searchTerm) => {
-  //   const filteredTitles = [];
-
-  //   cardTitles.forEach(title => {
-  //     title.toLowerCase().match(searchTerm) && filteredTitles.push(title);
-  //   });
-  //   console.log(filteredTitles)
-  //   filteredTitles.length && setPredictions(filteredTitles);
-  // }
-
   useEffect(() => {
     predictions.length && setShowPredictions(true);
   }, [predictions])
 
   useEffect(() => {
     if (searchTerm) {
-      // If card title is set
+      // If card titles is set
       if (cardTitles.length > 0) {
         if (searchTerm.length >= 3) {
-          // Hide prediction list
+          // Reset Marker to initial value
           setMarker(-1);
           setShowPredictions(false);
           const filteredCardTitles = cardTitles.filter((title) => {

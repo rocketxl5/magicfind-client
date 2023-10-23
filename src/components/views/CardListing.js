@@ -99,13 +99,13 @@ const CardListing = ({ card, setIsSent }) => {
         </span>
       </header>
 
-      <div className="item-container">
-        <div className="item-info">
-          <div className="item-image">
+      <div className="card-container">
+        <div className="card">
+          <div className="card-image">
             <Image card={card} />
           </div>
 
-          <div className="item-details">
+          <div className="card-specs">
             {path === 'add-card' ? (
               <>
                 <p>

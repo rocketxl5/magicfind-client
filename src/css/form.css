@@ -296,31 +296,51 @@ ul.autocomplete-list {
     cursor: pointer;
   }
 
-  .item-container {
+  .card-container {
     display: flex;
     justify-content: space-between;
+    width: 100%;
     margin-block-start: var(--size-2);
     padding: calc(var(--size-1) / 2);
     border: 1px solid var(--clr-grey);
     border-radius: 0.5em; 
+    background: none;
   }
 
-  .item-image {
+  .card-container:hover {
+    cursor: pointer;
+    background: #F7F7F7;
+  }
+
+  .card-container * {
+    pointer-events: none;
+  }
+
+  .card-image {
     width: 25%;
   }
 
-  .item-image img {
+  .card-image img {
     display: block;
     align-self: center;
     border-radius: 8px;
   }
 
-  .item-info {
+  .card {
     min-width: 40%;
     padding: var(--size-1);
   }
 
-  .item-btns {
+  .card-specs {
+    width: 48%;
+    display: flex;
+    flex-direction: column;
+    padding: 0.5em;
+    font-size: 0.9em;
+    line-height: 1.5;
+  }
+
+  .card-btns {
     min-width: 32%;
     display: flex;
     flex-direction: column;
@@ -329,7 +349,7 @@ ul.autocomplete-list {
     padding-inline-end: 0.5rem;
   }
 
-  .item-btn {
+  .card-btn {
     width: 100%;
     padding-block: calc(var(--size-1) / 2);
     color: var(--clr-light);
@@ -338,7 +358,7 @@ ul.autocomplete-list {
     border-radius: 5px;
   }
   
-  .item-btn:hover {
+  .card-btn:hover {
     opacity: 0.8;
   }
 

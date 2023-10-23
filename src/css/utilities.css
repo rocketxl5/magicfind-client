@@ -141,3 +141,8 @@
 .bg-grey {
     background: var(--clr-grey);
 }
+
+.selected {
+    padding: calc((var(--size-1) / 2) - 1px) !important;
+    border: 2px solid var(--clr-green) !important;
+}

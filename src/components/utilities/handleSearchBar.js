@@ -10,7 +10,7 @@ const handleSearchBar = (e, callback, isOutsideEvent = false) => {
     const browserWidth = getBrowserWidth();
     const target = e.target;
 
-    console.log('target', target)
+    // console.log('target', target)
     if (target) {
         // If target is menu link (i.e mobile menu is displayed) or if target is header log
         if (target.classList.contains('nav-link')) {
