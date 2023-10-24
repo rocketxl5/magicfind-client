@@ -17,7 +17,6 @@ import Spinner from '../layout/Spinner';
 const SearchCatalog = () => {
   const [loading, setLoading] = useState(false);
   const [isActive, setIsActive] = useState(false);
-  const browserWidth = getBrowserWidth();
 
   const {
     searchInput,
@@ -31,6 +30,7 @@ const SearchCatalog = () => {
 
   const history = useHistory();
   const inputRef = useRef(null);
+  const browserWidth = getBrowserWidth();
 
   useEffect(() => {
     // console.log(pathname)

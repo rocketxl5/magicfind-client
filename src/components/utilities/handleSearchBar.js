@@ -60,8 +60,6 @@ const handleSearchBar = (e, callback, isOutsideEvent = false) => {
             // Handle Search bar
             if (document.querySelector('#mobile-nav').checked) {
                 if (browserWidth <= 775) {
-                    console.log('hamburger-btn', target)
-
                     // If Search bar is displayed
                     if (document.querySelector('#search-catalog-container').style.width === 'calc(100% - 5rem)') {
                         // Hide Search bar

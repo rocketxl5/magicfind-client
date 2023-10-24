@@ -27,7 +27,6 @@ const SearchCollection = () => {
     cardName,
     setCardName, 
   } = useContext(SearchContext);
-
   const { user, userStoreContent } = useContext(UserContext);
   const { setPathname } = useContext(PathContext);
 
@@ -58,7 +57,9 @@ const SearchCollection = () => {
 
   // On submit, check if cardName is set
   useEffect(() => {
-    !cardName && setCardName(searchTerm)
+    if (loading) {
+      !cardName && setCardName(searchTerm)
+    }
   }, [loading])
 
   // useEffect(() => {
@@ -83,7 +84,7 @@ const SearchCollection = () => {
     if (!searchTerm) {
       throw new Error('Field is empty. Please provide a suggestion');
     }
-
+    console.log(cardName)
     e && e.preventDefault();
     setLoading(true);
     inputRef.current.blur();
@@ -96,7 +97,7 @@ const SearchCollection = () => {
       headers: headers,
     };
 
-    fetch(`${api.serverURL}/api/cards/${searchTerm}/${user.id}`, options)
+    fetch(`${api.serverURL}/api/cards/${cardName}/${user.id}`, options)
       .then((res) => res.json())
       .then((data) => {
         // localStorage.setItem('storeCards', JSON.stringify(data.data));
@@ -104,11 +105,8 @@ const SearchCollection = () => {
         setLoading(false);
         setCardName('')
         setSearchInput(null);
-        // if (browserWidth <= 775 && document.querySelector('#mobile-nav').checked) {
-        //   hideSearchBar();
-        // }
         history.push({
-          pathname: `/search-result/${searchTerm.toLowerCase()}`,
+          pathname: `/search-result/${cardName.toLowerCase()}`,
           state: { cards: data.results, cardName: data.cardName, type: inputRef.current.id },
         });
       })
