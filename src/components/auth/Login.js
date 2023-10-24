@@ -15,7 +15,7 @@ const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
 
 
-  const { setPath } = useContext(PathContext);
+  const { setPathname } = useContext(PathContext);
   const { setUser } = useContext(UserContext);
 
   const location = useLocation();
@@ -23,7 +23,7 @@ const Login = () => {
 
   // Setting path with component url pathname onload
   useEffect(() => {
-    setPath(location.pathname);
+    setPathname(location.pathname);
   }, []);
 
   const callback = (values) => {
@@ -39,11 +39,11 @@ const Login = () => {
       password: ''
     }
   )
-
-  const handleClick = (e) => {
+  // Show passsword button handler
+  const handleMouseDown = (e) => {
     // Prevents firing form
-    e.preventDefault()
-    !showPassword ? setShowPassword(true) : setShowPassword(false)
+    e.preventDefault();
+    !showPassword ? setShowPassword(true) : setShowPassword(false);
   }
 
   // Show/hide password
@@ -78,10 +78,6 @@ const Login = () => {
             return res.json();
           }
 
-          // return res.text().then((text) => {
-          //   setLoading(false)
-          //   throw new Error(text);
-          // });
           return res.json().then((data) => {
             setLoading(false)
             throw new Error(JSON.stringify(data))
@@ -168,7 +164,7 @@ const Login = () => {
                     onFocus={handleFocus}
                     placeholder={errors.password ? errors.password : "Password"}
                   />
-                  <button className="password-btn flex align-center justify-center" onClick={handleClick}>
+                  <button className="password-btn flex align-center justify-center" type="button" onMouseDown={handleMouseDown}>
                     <i className={!showPassword ? "fa-solid fa-eye" : "fa-solid fa-eye-slash"}></i>
                   </button>
                 </div>

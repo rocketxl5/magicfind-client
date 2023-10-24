@@ -11,7 +11,7 @@ import styled from 'styled-components';
 const Message = ({ currentMessage, setMessages, setLoading }) => {
   const history = useHistory();
   const location = useLocation();
-  const { path, setPath } = useContext(PathContext);
+  const { pathname, setPathname } = useContext(PathContext);
   const { user } = useContext(UserContext);
 
   useEffect(() => {
@@ -25,7 +25,7 @@ const Message = ({ currentMessage, setMessages, setLoading }) => {
   const setIsReadStatus = (status) => {
     // Reset path value
     // if (!loading) {
-    setPath(null);
+    setPathname(null);
     setLoading(true);
     const updates = {
       userID: user.id,
@@ -48,9 +48,9 @@ const Message = ({ currentMessage, setMessages, setLoading }) => {
         // of current view
 
         setLoading(false);
-        setPath(getPath(location.pathname));
+        setPathname(getPath(location.pathname));
         if (currentMessage.isRead) {
-          history.push(`/mail/${path}`);
+          history.push(`/mail/${pathname}`);
         }
       })
       .catch((error) => console.log(error));
@@ -58,7 +58,7 @@ const Message = ({ currentMessage, setMessages, setLoading }) => {
 
   // Set isTrash status in database for current message
   const setIsTrashStatus = (status) => {
-    setPath(null);
+    setPathname(null);
 
     setLoading(true);
 
@@ -82,8 +82,8 @@ const Message = ({ currentMessage, setMessages, setLoading }) => {
       .then((data) => {
         setLoading(false);
         localStorage.removeItem('message');
-        setPath(getPath(location.pathname));
-        history.push(`/mail/${path}`);
+        setPathname(getPath(location.pathname));
+        history.push(`/mail/${pathname}`);
       })
       .catch((error) => console.log(error));
   };
@@ -111,10 +111,10 @@ const Message = ({ currentMessage, setMessages, setLoading }) => {
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
-        setPath(getPath(location.pathname));
+        setPathname(getPath(location.pathname));
         setMessages(data.data.length > 0 ? data.data : []);
         localStorage.removeItem('message');
-        history.push(`/mail/${path}`);
+        history.push(`/mail/${pathname}`);
       });
   };
 
@@ -132,16 +132,16 @@ const Message = ({ currentMessage, setMessages, setLoading }) => {
           className="go-back"
           onClick={() => {
             localStorage.removeItem('message');
-            history.push(`/mail/${path}`);
+            history.push(`/mail/${pathname}`);
           }}
         >
           <FiArrowLeftCircle />{' '}
           <p>
-            Back To {path && path.charAt(0).toUpperCase() + path.substring(1)}
+            Back To {pathname && pathname.charAt(0).toUpperCase() + pathname.substring(1)}
           </p>
         </div>
         <div className="message-details">
-          {path === 'inbox' ? (
+          {pathname === 'inbox' ? (
             <Detail>
               From: <strong>{currentMessage.sender}</strong>
             </Detail>
@@ -164,6 +164,7 @@ const Message = ({ currentMessage, setMessages, setLoading }) => {
       <div className="item-buttons column">
         <button
           className="item-button row-3 success"
+          type="button"
           onClick={() => {
             history.push({ pathname: '/mail/message', state: currentMessage });
           }}
@@ -171,10 +172,11 @@ const Message = ({ currentMessage, setMessages, setLoading }) => {
           Reply
         </button>
 
-        {path === 'trash' ? (
+        {pathname === 'trash' ? (
           !currentMessage.isSent ? (
             <button
               className="item-button row-3 primary"
+              type="button"
               onClick={() => {
                 localStorage.removeItem('message');
                 setIsTrashStatus(false);
@@ -185,6 +187,7 @@ const Message = ({ currentMessage, setMessages, setLoading }) => {
           ) : (
             <button
               className="item-button row-3 primary"
+                type="button"
               onClick={() => {
                 localStorage.removeItem('message');
                 setIsTrashStatus(false);
@@ -193,9 +196,10 @@ const Message = ({ currentMessage, setMessages, setLoading }) => {
               Move to Sent
             </button>
           )
-        ) : path === 'inbox' ? (
+        ) : pathname === 'inbox' ? (
           <button
             className="item-button row-3 primary"
+              type="button"
             onClick={() => {
               // localStorage.removeItem('message');
               setIsReadStatus(false);
@@ -211,9 +215,10 @@ const Message = ({ currentMessage, setMessages, setLoading }) => {
         ) : (
           ''
         )}
-        {path !== 'trash' ? (
+        {pathname !== 'trash' ? (
           <button
             className="item-button row-3 danger"
+            type="button"
             onClick={() => {
               setIsTrashStatus(true);
             }}
@@ -223,6 +228,7 @@ const Message = ({ currentMessage, setMessages, setLoading }) => {
         ) : (
           <button
             className="item-button row-3 danger"
+              type="button"
             onClick={() => {
               handleDeleteClick(currentMessage);
             }}

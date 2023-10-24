@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { FiPlusCircle, FiMinusCircle, FiArrowLeftCircle } from 'react-icons/fi';
-import Image from './Image';
+import Image from './search/CardImage';
 import { SearchContext } from '../../contexts/SearchContext';
 import { PathContext } from '../../contexts/PathContext';
 import capitalizeString from '../utilities/capitalizeString';
@@ -16,12 +16,12 @@ const CardListing = ({ card, setIsSent }) => {
   const [comment, setComment] = useState('');
   const [isPublished, setIsPublished] = useState(false);
   const { setSentForm } = useContext(SearchContext);
-  const { path, setPath } = useContext(PathContext);
+  const { path, setPathname } = useContext(PathContext);
 
   const form = useRef(null);
 
   useEffect(() => {
-    setPath(location.pathname.split('/')[1]);
+    setPathname(location.pathname.split('/')[1]);
   }, []);
 
   const handleChange = (e) => {
@@ -79,14 +79,14 @@ const CardListing = ({ card, setIsSent }) => {
       <header className="search-header">
         <h2>Product Details</h2>
         {path === 'add-card' ? (
-          <GoBack to={'/search-api'} title="Back To Search">
+          <GoBack to={'/search-api'} title="Back To API">
             <BackIcon>
               <FiArrowLeftCircle size={26} />
             </BackIcon>
             <BackText>Back to Search</BackText>
           </GoBack>
         ) : (
-          <GoBack to={'/store'} title="Back To Store">
+            <GoBack to={'/search-collection'} title="Back To Collection">
             <BackIcon>
               <FiArrowLeftCircle size={26} />
             </BackIcon>
@@ -99,13 +99,13 @@ const CardListing = ({ card, setIsSent }) => {
         </span>
       </header>
 
-      <div className="item-container">
-        <div className="item-info">
-          <div className="item-image">
+      <div className="card-container">
+        <div className="card">
+          <div className="card-image">
             <Image card={card} />
           </div>
 
-          <div className="item-details">
+          <div className="card-specs">
             {path === 'add-card' ? (
               <>
                 <p>

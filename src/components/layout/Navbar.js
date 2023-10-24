@@ -1,6 +1,5 @@
-import React, { useContext } from 'react';
+import React, { useEffect, useContext } from 'react';
 import { UserContext } from '../../contexts/UserContext';
-import toggleClass from '../utilities/toggleClass';
 import Menu from './Menu';
 import AuthMenu from './AuthMenu';
 import SearchBtn from './navbtn/SearchBtn';
@@ -10,22 +9,27 @@ import HamburgerBtn from './navbtn/HamburgerBtn';
 // import SignupBtn from './navbar/SignupBtn';
 // import SigninBtn from './navbar/SigninBtn';
 import ShoppingCartBtn from './navbtn/ShoppingCartBtn';
+import { SearchContext } from '../../contexts/SearchContext';
+import handleSearchBar from '../utilities/handleSearchBar';
 
-function Navbar({ isFirefox }) {
 
-    const { user, setUser } = useContext(UserContext)
+function Navbar() {
+    const { user, setUser } = useContext(UserContext);
+    const { setSearchTerm } = useContext(SearchContext);
 
-    // Handle hamburger animation for firefox (has() css function not supported)
-    const handleChange = () => {
-        if (isFirefox) {
-            // Add/remove 'checked class name from main header
-            toggleClass(document.querySelector('.main-header'), 'checked');
-        }
-    }
+    // useEffect(() => {
+    //     document.querySelector('.navbar').addEventListener('click', handleClick);
+    //     return () => document.querySelector('.navbar').removeEventListener('click', handleClick);
+    // }, []);
+
+    // const handleClick = (e) => {
+    //     handleSearchBar(e.target, (state) => { setSearchTerm(state) });
+    //     console.log(e.target)
+    // }
 
     return (
         <div className="navbar">
-            <input type="checkbox" id="mobile-nav" className="mobile-nav" onChange={handleChange} />
+            <input type="checkbox" id="mobile-nav" className="mobile-nav" />
             <nav>
                 <section className="left-side-nav">
                     {/************************************************* 

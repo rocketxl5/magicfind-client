@@ -4,6 +4,7 @@
 }
 
 .logo-btn * {
+    pointer-events: none;
     color: var(--clr-grey);
 }
 

@@ -1,46 +1,43 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useLocation } from 'react-router-dom';
-import CatalogItem from './CatalogItem';
+import CatalogItem from './search/CatalogItem';
+import Spinner from '../layout/Spinner';
+import SearchResultHeader from './search/SearchResultHeader';
 
 
 const Catalog = () => {
-  const [isValid, setIsValid] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [cards, setCards] = useState(null);
+  const [cardName, setCardName] = useState('');
   const location = useLocation();
   const { search } = useParams();
-  const result = location.state.result;
+
+  // console.log(location.state);
 
   useEffect(() => {
-    setIsValid(true);
-  }, [location]);
-
-  const handleClick = () => {
-    setIsValid(false);
-  };
+    setCards(location.state.data);
+    setLoading(location.state.loading)
+  }, []);
   return (
-    <div>
-      {isValid ? (
-        <>
-          <h2 className="page-title">Search Results</h2>
-          <div className="search-header">
-            <span>
-              {`${search.charAt(0).toUpperCase()}${search
-                .substring(1)
-                .toLowerCase()} ${result.length} 
-              ` + (result.length > 1 ? 'Results' : 'Result')}
-            </span>
-            <div className="clear-search" onClick={handleClick}></div>
-          </div>
-
-          <div className="catalog-items">
-            {result.map((card, index) => {
-              return <CatalogItem key={index} card={card} />;
-            })}
-          </div>
-        </>
+    <>
+      {loading ? (
+        <Spinner />
       ) : (
-        ''
+        <>
+          <div className="search-header">
+              <h2 className="page-title">Search Results</h2>
+              <SearchResultHeader cardName={cardName} cards={cards} />
+            </div>
+            <div className="catalog-items">
+              {cards &&
+                cards.map((card, index) => {
+                  return (<CatalogItem key={index} card={card} />)
+                })
+              }
+            </div>
+          </>
       )}
-    </div>
+    </>
   );
 };
 

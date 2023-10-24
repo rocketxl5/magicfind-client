@@ -4,7 +4,7 @@ import SideBar from './SideBar';
 import MailHeader from './MailHeader';
 import Mail from './Mail';
 import ComposeMessage from './ComposeMessage';
-import Spinner from '../../layout/Spinner_old';
+import Spinner from '../../layout/Spinner';
 import Message from './Message';
 import getPath from '../../utilities/getPath';
 import { PathContext } from '../../../contexts/PathContext';
@@ -14,7 +14,7 @@ import styled from 'styled-components';
 
 const MailBox = () => {
   const { user, setUnreadMail } = useContext(UserContext);
-  const { path, setPath } = useContext(PathContext);
+  const { pathname, setPathname } = useContext(PathContext);
 
   const location = useLocation();
   const history = useHistory();
@@ -33,12 +33,12 @@ const MailBox = () => {
   // Set path on page load
   useEffect(() => {
     // console.log(path);
-    setPath(getPath(location.pathname));
+    setPathname(getPath(location.pathname));
   }, []);
 
   useEffect(() => {
     // console.log('path', path);
-    if (path !== 'message' && path) {
+    if (pathname !== 'message' && pathname) {
       // console.log(path);
       setLoading(true);
       // setPath(location.pathname.split('/')[2]);
@@ -53,12 +53,12 @@ const MailBox = () => {
         headers: headers,
       };
 
-      fetch(`${api.serverURL}/api/messages/${path}/${user.id}`, options)
+      fetch(`${api.serverURL}/api/messages/${pathname}/${user.id}`, options)
         .then((res) => res.json())
         .then((data) => {
           if (data.data) {
             // console.log(data.data);
-            if (path === 'inbox' || path === 'unread') {
+            if (pathname === 'inbox' || pathname === 'unread') {
               const unreadMail = data.data.filter((message) => {
                 return !message.isRead && !message.isTrash;
               });
@@ -74,7 +74,7 @@ const MailBox = () => {
         })
         .catch((error) => console.log(error));
     }
-  }, [path]);
+  }, [pathname]);
 
   // Populate checkedState on page reload/refresh
   useEffect(() => {
@@ -152,7 +152,7 @@ const MailBox = () => {
             <MailHeader
               handleChange={handleChange}
               checked={checked}
-              path={path}
+                pathname={pathname}
               checkedState={checkedState}
               messages={messages}
             />
@@ -176,7 +176,7 @@ const MailBox = () => {
               )}
             </Messages>
           </Fragment>
-        ) : path === 'message' ? (
+        ) : pathname === 'message' ? (
           <ComposeMessage />
         ) : (
           <Message

@@ -2,7 +2,7 @@ import React from 'react';
 
 import styled from 'styled-components';
 
-const MailHeader = ({ checked, handleChange, path }) => {
+const MailHeader = ({ checked, handleChange, pathname }) => {
   return (
     <header className="mailbox-header">
       <input
@@ -13,9 +13,9 @@ const MailHeader = ({ checked, handleChange, path }) => {
         onChange={handleChange}
       />
       <div className="mailbox-section-1">
-        {path === 'sent' ? (
+        {pathname === 'sent' ? (
           <h2 className="row-to">To</h2>
-        ) : path === 'trash' ? (
+        ) : pathname === 'trash' ? (
           <h2></h2>
         ) : (
           <h2 className="row-from">From</h2>

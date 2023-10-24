@@ -3,7 +3,8 @@ import {
   BrowserRouter as Router,
   Route,
   Switch,
-  Redirect
+  Redirect,
+  useLocation
 } from 'react-router-dom';
 import Login from './components/auth/Login';
 import Signup from './components/auth/Signup';
@@ -17,9 +18,9 @@ import Contact from './components/views/Contact';
 import About from './components/views/About';
 import Profile from './components/views/Profile';
 import UserPage from './components/views/UserPage';
-import SearchStore from './components/views/SearchStore';
+import SearchCollection from './components/views/SearchCollection';
 import SearchAPI from './components/views/SearchAPI';
-import Catalog from './components/views/Catalog';
+import SearchResult from './components/views/search/SearchResult';
 import AddCard from './components/views/AddCard';
 import NotFound from './components/views/NotFound';
 import ShoppingCart from './components/views/ShoppingCart';
@@ -42,11 +43,11 @@ const App = () => {
 
   const { user } = useContext(UserContext);
   const { cardContext } = useContext(CardContext);
-  const { path } = useContext(PathContext);
+  const { pathname } = useContext(PathContext);
 
   return (
     <Router>
-      {(path !== '/login' && path !== '/signup') && <Header />}
+      {(pathname !== '/login' && pathname !== '/signup') && <Header />}
       <main className="wrapper">
         <Switch>
           <Route exact path="/">
@@ -77,13 +78,13 @@ const App = () => {
             {user ? <UserPage /> : <Redirect to="/" />}
           </Route>
           <Route exact path="/add-card/:cardName">
-            {cardContext ? <AddCard /> : <Redirect to="/store" />}
+            {cardContext ? <AddCard /> : <Redirect to="/me" />}
           </Route>
           <Route exact path="/remove-card/:cardName">
-            {cardContext ? <RemoveCard /> : <Redirect to="/store" />}
+            {cardContext ? <RemoveCard /> : <Redirect to="/me" />}
           </Route>
           <Route exact path="/modify-card/:cardName">
-            {cardContext ? <ModifyCard /> : <Redirect to="/store" />}
+            {cardContext ? <ModifyCard /> : <Redirect to="/me" />}
           </Route>
           <Route exact path="/shopping-cart">
             <ShoppingCart />
@@ -94,14 +95,14 @@ const App = () => {
           <Route exact path="/profile">
             {user ? <Profile /> : <Redirect to="/login" />}
           </Route>
-          <Route exact path="/store">
-            {user ? <SearchStore /> : <Redirect to="/" />}
+          <Route exact path="/search-collection">
+            {user ? <SearchCollection /> : <Redirect to="/" />}
           </Route>
           <Route exact path="/search-api">
             {user ? <SearchAPI /> : <Redirect to="/" />}
           </Route>
-          <Route exact path="/catalog/:search">
-            <Catalog />
+          <Route exact path="/search-result/:cardName">
+            <SearchResult />
           </Route>
           <Route exact path="/mail/inbox">
             {user ? <MailBox /> : <Redirect to="/" />}

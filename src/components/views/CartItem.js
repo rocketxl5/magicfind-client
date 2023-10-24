@@ -87,7 +87,7 @@ const CartItem = ({ item, setIsUpdating }) => {
               })}
             </select>
 
-            <button onClick={() => handleClick(item)}>Delete</button>
+            <button type="button" onClick={() => handleClick(item)}>Delete</button>
           </Selector>
         </Details>
         <DetailsFooter>

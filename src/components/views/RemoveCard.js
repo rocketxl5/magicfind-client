@@ -4,7 +4,7 @@ import { FiArrowLeftCircle } from 'react-icons/fi';
 import { UserContext } from '../../contexts/UserContext';
 import { CardContext } from '../../contexts/CardContext';
 import capitalizeString from '../utilities/capitalizeString';
-import Image from './Image';
+import Image from './search/CardImage';
 import { api } from '../../api/resources';
 import styled from 'styled-components';
 
@@ -37,7 +37,7 @@ const Remove = () => {
         console.log(data);
         setCardContext(false);
         history.push({
-          pathname: '/store',
+          pathname: '/search-collection',
           state: {
             message: 'Card successfully deleted',
           },
@@ -50,7 +50,7 @@ const Remove = () => {
     <>
       <h2>Delete Product</h2>
       <header className="search-header">
-        <GoBack to={'/store'} title="Back To Store">
+        <GoBack to={'/search-collection'} title="Back To Collection">
           <BackIcon>
             <FiArrowLeftCircle size={26} />
           </BackIcon>
@@ -61,13 +61,13 @@ const Remove = () => {
           {capitalizeString(card.name)}
         </span>
       </header>
-      <div className="item-container">
-        <div className="item-info">
-          <div className="item-image">
-            <Image className="item-image" card={card} />
+      <div className="card-container">
+        <div className="card">
+          <div className="card-image">
+            <Image className="card-image" card={card} />
           </div>
 
-          <div className="item-details">
+          <div className="card-specs">
             <p>
               <strong>Name</strong>: {card.name}
             </p>
@@ -94,6 +94,7 @@ const Remove = () => {
         <div className="item-buttons push-right">
           <button
             className="item-button danger full-width"
+            type="button"
             onClick={handleClick}
           >
             Delete Permanently

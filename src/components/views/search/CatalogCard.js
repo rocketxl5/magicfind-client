@@ -1,3 +1,7 @@
+/*********************************/
+/**** Magic Find Catalog Card ****/
+/*********************************/
+
 import React, {
   useContext,
   useState,
@@ -6,13 +10,13 @@ import React, {
 } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { FiPlusCircle, FiMinusCircle, FiTrash2 } from 'react-icons/fi';
-import { ShoppingCartContext } from '../../contexts/ShoppingCartContext';
-import { UserContext } from '../../contexts/UserContext';
-import Image from './Image';
-import { api } from '../../api/resources';
+import { ShoppingCartContext } from '../../../contexts/ShoppingCartContext';
+import { UserContext } from '../../../contexts/UserContext';
+import CardImage from './CardImage';
+import { api } from '../../../api/resources';
 import styled from 'styled-components';
 
-const CatalogItem = ({ card }) => {
+const CatalogCard = ({ card }) => {
   const [quantity, setQuantity] = useState(1 || card.quantity_selected);
   const [isSelectedItem, setIsSelectedItem] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -125,14 +129,14 @@ const CatalogItem = ({ card }) => {
   }, [location]);
 
   return (
-    <div className={loading ? 'item-container loading' : 'item-container'}>
+    <div className="card-container">
       <>
-        <div className="item-info">
-          <div className="item-image">
-            <Image card={card} />
+        <div className="card">
+          <div className="card-image">
+            <CardImage card={card} />
           </div>
 
-          <div className="item-details">
+          <div className="card-details">
             <p>
               <strong>{card.set_name}</strong>
             </p>
@@ -185,8 +189,16 @@ const CatalogItem = ({ card }) => {
             </Selected>
           </div>
         </div>
-
         <div className="item-buttons">
+          <button
+            className="item-button success"
+            type="button"
+            onClick={() => updateCart(card)}
+          >
+            {isSelectedItem ? 'Update Cart' : 'Add To Cart'}
+          </button>
+        </div>
+        {/* <div className="item-buttons">
           <div className="item-quantity">
             <div
               className="add-remove-button"
@@ -208,14 +220,7 @@ const CatalogItem = ({ card }) => {
               <FiPlusCircle size={23} />
             </div>
           </div>
-
-          <button
-            className="item-button success"
-            onClick={() => updateCart(card)}
-          >
-            {isSelectedItem ? 'Update Cart' : 'Add To Cart'}
-          </button>
-        </div>
+        </div> */}
       </>
     </div>
   );
@@ -248,4 +253,4 @@ const Contact = styled(Link)`
   border: 1px solid #e4e4e4;
 `;
 
-export default CatalogItem;
+export default CatalogCard;

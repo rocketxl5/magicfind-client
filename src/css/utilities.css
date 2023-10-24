@@ -137,3 +137,13 @@
 .bg-teal {
     background: var(--clr-teal);
 }
+
+.bg-grey {
+    background: var(--clr-grey);
+}
+
+.selected-card {
+    padding: calc((var(--size-1) / 2) - 2px) !important;
+    border: 3px solid var(--clr-grey) !important;
+    background: var(--clr-light-grey) !important;
+}

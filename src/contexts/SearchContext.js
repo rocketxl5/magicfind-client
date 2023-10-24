@@ -1,48 +1,132 @@
-import React, { createContext, useState } from 'react';
-
+import React, { useState, useEffect, useContext, useReducer, createContext } from 'react';
+import { UserContext } from './UserContext';
+import { api } from '../api/resources';
 export const SearchContext = createContext(null);
 
 export const SearchProvider = ({ children }) => {
-  const [searchResult, setSearchResult] = useState([]);
-  const [isValidLength, setIsValidLength] = useState(false);
-
-  // SearchForm & SearchStore only
-
-  const [showSuggestions, setShowSuggestions] = useState(true);
-  const [isSubmitted, setIsSubmitted] = useState(false);
-  // setSendForm stores the form id from the current form (useRef()) passed to the SearchField component
-  // from one the three search forms : Search catalog, Search API, Search Store. 
-  // It is set once in the SearchField component whem the input field has focus.
-  // This prevents conflict between search form since they all use the same SearchField component.
-  // It informs the SearchField instance which form it is linked to. It returns in case of conflict
-  const [sentForm, setSentForm] = useState('');
-  // This sentForm value is passed to the dependency array of a useEffect
-  // in each Forms to compare the value with the current form id.
-
-  const [hasFocus, setHasFocus] = useState(false);
-  const [text, setText] = useState('');
+  const [searchInput, setSearchInput] = useState(null);
+  const [cardName, setCardName] = useState('');
   const [searchTerm, setSearchTerm] = useState('');
-  // 
+  const [cards, setCards] = useState('');
+  const { user } = useContext(UserContext);
+  const [searchType, setSearchType] = useState(undefined);
+  const [showPredictions, setShowPredictions] = useState(false);
+  const [cardTitles, setCardTitles] = useState([]);
+  const [marker, setMarker] = useState(-1);
+
+  const getCardNames = (cards) => {
+    let filteredData = [];
+
+    cards.forEach(card => {
+      !filteredData.includes(card.name) && filteredData.push(card.name);
+    })
+    // console.log('card titles', filteredData)
+    return filteredData;
+  }
+
+  const removeUserCards = (cards) => {
+    let filteredData = [];
+
+    cards.forEach(card => {
+      card.userID !== user.id && filteredData.push(card);
+    })
+    // console.log('removed user cards', filteredData)
+    return filteredData;
+  }
+
+  const fetchCatalogCards = () => {
+    // console.log('fectching from catalog')
+    const headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    const options = {
+      method: 'GET',
+      headers: headers,
+    };
+
+    fetch(`${api.serverURL}/api/catalog`, options)
+      .then((res) => res.json())
+      .then((data) => {
+        // console.log('raw data', data)
+        const catalogCards = user ? removeUserCards(data, user.id) : data;
+        // setCards(cards);
+        setCardTitles(getCardNames(catalogCards));
+        setSearchType(undefined);
+      })
+      .catch((error) => console.log(error));
+  }
+
+  const fetchCollectionCards = () => {
+    // console.log('fectching from collection')
+    const headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    headers.append('auth-token', user.token);
+    const options = {
+      method: 'GET',
+      headers: headers,
+    }
+    fetch(`${api.serverURL}/api/cards/${user.id}`, options)
+      .then((res) => res.json())
+      .then((data) => {
+        const collectionCards = data;
+        console.log(data)
+        setCardTitles(getCardNames(collectionCards));
+        setSearchType(undefined);
+      })
+      .catch((error) => console.log(error));
+  }
+
+  const fetchApiCards = () => {
+    // console.log('fectching from api')
+    const headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    const options = {
+      method: 'GET',
+      headers: headers,
+    };
+
+    fetch(`${api.serverURL}/api/cards/api-card-titles`, options)
+      .then((res) => res.json())
+      .then((data) => {
+        // console.log(data); 
+        setCardTitles(data);
+        setSearchType(undefined);
+      })
+      .catch((error) => console.log(error));
+  }
+
+  useEffect(() => {
+    if (searchType) {
+      switch (searchType) {
+        case 'search-catalog':
+          fetchCatalogCards();
+          break;
+        case 'search-collection':
+          fetchCollectionCards();
+          break;
+        default:
+          fetchApiCards();
+          break;
+      }
+    }
+  }, [searchType])
 
   return (
     <SearchContext.Provider
       value={{
-        sentForm,
-        setSentForm,
+        marker,
+        setMarker,
+        setSearchType,
+        cardTitles,
+        cards,
+        setCards,
+        searchInput, 
+        setSearchInput,
         searchTerm,
         setSearchTerm,
-        searchResult,
-        setSearchResult,
-        isValidLength,
-        setIsValidLength,
-        showSuggestions,
-        setShowSuggestions,
-        isSubmitted,
-        setIsSubmitted,
-        hasFocus,
-        setHasFocus,
-        text,
-        setText
+        cardName,
+        setCardName,
+        showPredictions,
+        setShowPredictions
       }}
     >
       {children}
