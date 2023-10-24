@@ -1,5 +1,5 @@
 const capitalizeString = (string) => {
-    console.log(string)
+
     function join(strings) {
         return strings.join('');
     }

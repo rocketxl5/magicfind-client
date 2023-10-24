@@ -1,7 +1,6 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState } from 'react';
 import { useLocation } from 'react-router-dom/cjs/react-router-dom';
 import SearchResultHeader from './SearchResultHeader';
-import { SearchContext } from '../../../contexts/SearchContext';
 import CatalogCard from './CatalogCard';
 import SkryfallAPICard from './SkryfallAPICard';
 import CollectionCard from './CollectionCard';
@@ -30,10 +29,6 @@ const SearchResult = () => {
     const handleClick = (e) => {
 
     }
-
-    useEffect(() => {
-        console.log(selectedCards)
-    }, [selectedCards])
 
     return (
         <div className="section search-result">

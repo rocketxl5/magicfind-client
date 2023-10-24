@@ -309,7 +309,7 @@ ul.autocomplete-list {
 
   .card-container:hover {
     cursor: pointer;
-    background: var(--clr-light-blue);
+    /* background: var(--clr-light-blue); */
   }
 
   .card-container * {
