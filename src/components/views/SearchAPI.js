@@ -47,8 +47,6 @@ const Search = () => {
         setIsActive(true);
         if (browserWidth <= 775 && document.querySelector('#mobile-nav').checked) {
           hideSearchBar();
-          // handleSearchBar(document.querySelector('.hamburger-btn'), (state) => { setSearchTerm(state) }, true);
-          // document.querySelector('.mobile-nav-label').click();
         }
       }
       else {
@@ -72,24 +70,6 @@ const Search = () => {
     e && e.preventDefault();
     setLoading(true);
     inputRef.current.blur();
-
-      // When searchTerm was typed by user
-    // if (foundName.length > 0) {
-    //   // setSearching(foundName[0]);
-    //   // Set search card name to local storage
-    //   // localStorage.setItem(
-    //   //   'search',
-    //   //   `${searchTerm.charAt(0).toUpperCase()}${searchTerm.substring(1)}`
-    //   // );
-    //   searching = searchTerm;
-
-    //   // Else request is sent with autofill result
-    //   // from arrow up or/and down feature.
-    //   // searchTerm is incomplete in this case.
-    //   // searchInput should contain the autocompleted result
-    // } else {
-    //   searching = searchInput.value;
-    // }
     const headers = { method: 'GET' };
     fetch(
       `${api.skryfallURL}/cards/named?exact=${sanitizeString(cardName)}`,
@@ -109,46 +89,6 @@ const Search = () => {
       .catch((error) => console.log(error));
   };
 
-  // Get all cards name for autocomplete feature @ components/views/SearchField
-  // useEffect(() => {
-  //   // if coming from add-card view
-  //   if (
-  //     path === 'add-card' ||
-  //     location.pathname.split('/')[1] === 'search-api'
-  //   ) {
-  //     // set oracleID and cardName to repopulate search-api view
-  //     // with matching card prints
-  //     // Oracle id is needed for skryfall search api
-  //     // setCardName(localStorage.getItem('card-name'));
-  //     setOracleID(localStorage.getItem('oracle'));
-  //     setCardName(localStorage.getItem('apiCardName'));
-  //     // setLoading(false);
-  //   } else {
-  //     setOracleID('');
-  //     setCardName('');
-  //   }
-  //   if (searchInput) {
-  //     searchInput.value = '';
-  //   }
-  //   setPathname(location.pathname.split('/')[1]);
-  // }, [path]);
-
-  // On searchTerm state change,
-  // Check if length of searchTerm is 3 or more.
-  // If so, isValidLeangth becomes true & filter cardNames to match searcTerm
-  // Card names array gets populated with filtered results.
-  // useEffect(() => {
-  //   if (searchTerm.length > 2) {
-  //     setShowPredictions(true);
-  //     setCardNames([]);
-  //     const filteredNames = apiCardNames.filter((name) => {
-  //       return name.toLowerCase().includes(searchTerm.toLowerCase());
-  //     });
-  //     setCardNames(filteredNames);
-  //   } else if (searchTerm.length < 3) {
-  //     setShowPredictions(false);
-  //   }
-  // }, [searchTerm]);
 
   // Fetch call triggered when oracleID state changes in fetchSingleCard function
   const filterData = (cards) => {
