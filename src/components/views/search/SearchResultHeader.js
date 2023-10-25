@@ -1,11 +1,19 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import capitalizeString from '../../utilities/capitalizeString';
 
-const SearchResultHeader = ({ cardName, cards }) => {
-
+const SearchResultHeader = (props) => {
+    const { cardName, cards, selectedCards, type } = props;
+    console.log(selectedCards)
     return (
         <header className="result-header">
-            <h3 className="result-title">
+            <div className="result-header-top">
+                <Link to='/search-api'>Back to {capitalizeString(type)}</Link>
+                {selectedCards.length > 0 &&
+                    <span>Selected: {selectedCards.length}</span>
+                }
+            </div>
+            <h3 className="result-header-bottom">
                     <span>
                         {capitalizeString(cardName)}
                     </span>

@@ -46,7 +46,7 @@ const SkryfallCard = (props) => {
           </div>
         </div>
         <div className="card-btns">
-          <button id="cart-card" className="card-btn bg-green" type="button" onClick={(e) => handleClick(e, card, index)}>{!card.selected ? 'Select Card' : 'Selected'}</button>
+          <button id="cart-card" className="card-btn bg-green" type="button" onClick={(e) => handleClick(e, card, index)}>{!card.selected ? 'Select' : 'Selected'}</button>
         </div>
       </div>
     </div>

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useLocation } from 'react-router-dom/cjs/react-router-dom';
 import SearchResultHeader from './SearchResultHeader';
 import CatalogCard from './CatalogCard';
@@ -8,47 +8,9 @@ import CollectionCard from './CollectionCard';
 const SearchResult = () => {
     const location = useLocation();
     // 
-    const { cardsFound, cardName, type } = location.state;
-    const [cards, setCards] = useState(null);
+    const { cards, cardName, type } = location.state;
     const [selectedCards, setSelectedCards] = useState([]);
-
-    useEffect(() => {
-        switch (type) {
-            case 'search-catalog':
-                setCards(cardsFound);
-                break;
-            case 'search-collection':
-                setCards(cardsFound);
-                break;
-            default:
-                setCards(getCardFinishes(cardsFound));
-                break;
-        }
-    }, []);
-
-    // Adds to cardsFound array foil or other versions of cards if any 
-    const getCardFinishes = (cardsFound) => {
-
-        const duplicate = (cardsFound, card, index) => {
-            // Save finishes array from api card
-            const finishes = card.finishes;
-            finishes.forEach(finish => {
-                // Replace card finishes array value with single finish  
-                card.finishes = [finish];
-                card.selected = false;
-                // Add updated card to cardsFound array at index
-                cardsFound.splice(index, 0, { ...card });
-            })
-        }
-        cardsFound.forEach((card, index) => {
-            if (card.finishes.length > 1) {
-                cardsFound.splice(index, 1);
-                duplicate(cardsFound, card, index);
-            }
-        });
-        return cardsFound;
-    }
-
+    console.log(type)
     const handleClick = (e, card, index) => {
         const found = selectedCards.find(cardSelected => {
             return cardSelected.id === card.id
@@ -69,11 +31,11 @@ const SearchResult = () => {
 
     return (
         <div className="section search-result">
-            {cards &&
+            {cards !== null ? (
                 <>
-                    <SearchResultHeader cardName={cardName} cards={cards} />
-                <div className="search-items">
-                    {cards.map((card, index) => {
+                    <SearchResultHeader cardName={cardName} cards={cards} selectedCards={selectedCards} type={type} />
+                    <div className="search-items">
+                        {cards.map((card, index) => {
                         return (
                             type === 'search-catalog' ? (
                                 <CatalogCard
@@ -101,6 +63,10 @@ const SearchResult = () => {
                     })}
                     </div>
                 </>
+            ) : (
+                ''
+            )
+
             }
         </div>
     )

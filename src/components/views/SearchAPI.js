@@ -19,7 +19,7 @@ const Search = () => {
   const [loading, setLoading] = useState(false);
   const [isActive, setIsActive] = useState(false);
   const [oracleID, setOracleID] = useState('');
-  const [cards, setCards] = useState([]);
+  const [data, setData] = useState(null);
 
   const {
     searchInput,
@@ -58,7 +58,7 @@ const Search = () => {
 
   // On submit, check if cardName is set
   useEffect(() => {
-    !cardName && setCardName(searchTerm)
+    (loading && !cardName) && setCardName(searchTerm)
   }, [loading])
 
   const handleSubmit = (e) => {
@@ -90,13 +90,9 @@ const Search = () => {
   };
 
 
+
   // Fetch call triggered when oracleID state changes in fetchSingleCard function
-  const filterData = (cards) => {
-    let word = 'online';
-    return cards.filter((card) => {
-      return !card.set_name.toLowerCase().includes(word);
-    });
-  };
+
   useEffect(() => {
     if (oracleID) {
 
@@ -107,21 +103,59 @@ const Search = () => {
       )
         .then((res) => res.json())
         .then((data) => {
-          setLoading(false);
-          // Filter data to remove online versions of searched card
-          // setCards();
-          const filteredData = filterData(data.data);
-          history.push({
-            pathname: `/search-result/${cardName.toLowerCase()}`,
-            state: { cardsFound: filteredData, cardName: cardName, type: inputRef.current.id },
-          });
-          setCardName('')
-          setSearchInput(null);
+          setData(data.data);
           // localStorage.setItem('apiCards', JSON.stringify(data.data));
         })
         .catch((error) => console.log(error));
     }
   }, [oracleID]);
+
+
+  // 
+  useEffect(() => {
+    if (data) {
+      const filterOnlineVersions = (cards) => {
+        return cards.filter((card) => {
+          return !card.set_name.toLowerCase().includes('online');
+        });
+      };
+
+      const duplicate = (cardsClone, card, index) => {
+        // Save finishes array from api card
+        const finishes = card.finishes;
+        finishes.forEach(finish => {
+          // Replace card finishes array value with single finish  
+          card.finishes = [finish];
+          card.selected = false;
+          // Add updated card to cardsFound array at index
+          cardsClone.splice(index, 0, { ...card });
+        })
+      }
+
+      const filteredCards = filterOnlineVersions(data);
+      const cards = [...filteredCards];
+
+      filteredCards.forEach((card, index) => {
+        if (card.finishes.length > 1) {
+          console.log(index)
+          cards.splice(index, 1);
+          duplicate(cards, card, index);
+        }
+      });
+
+      setLoading(false);
+
+      console.log(cards)
+
+      history.push({
+        pathname: `/search-result/${cardName.toLowerCase()}`,
+        state: { cards: cards, cardName: cardName, type: 'search-api' },
+      });
+
+      setCardName('');
+      setSearchInput(null);
+    }
+  }, [data])
 
   return (
     <>

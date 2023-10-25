@@ -57,9 +57,7 @@ const SearchCollection = () => {
 
   // On submit, check if cardName is set
   useEffect(() => {
-    if (loading) {
-      !cardName && setCardName(searchTerm)
-    }
+    (loading && !cardName) && setCardName(searchTerm);
   }, [loading])
 
   // useEffect(() => {
@@ -107,7 +105,7 @@ const SearchCollection = () => {
         setSearchInput(null);
         history.push({
           pathname: `/search-result/${cardName.toLowerCase()}`,
-          state: { cardsFound: data.results, cardName: data.cardName, type: inputRef.current.id },
+          state: { cards: data.results, cardName: data.cardName, type: inputRef.current.id },
         });
       })
       .catch((error) => console.log(error));
