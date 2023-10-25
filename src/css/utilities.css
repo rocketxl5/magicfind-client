@@ -142,8 +142,8 @@
     background: var(--clr-grey);
 }
 
-.selected-card {
-    padding: calc((var(--size-1) / 2) - 2px) !important;
-    border: 3px solid var(--clr-grey) !important;
+.card-selected {
+    padding: calc((var(--size-1)) - 3px) !important;
+    border: 4px solid var(--clr-green) !important;
     background: var(--clr-light-grey) !important;
 }

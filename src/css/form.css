@@ -204,15 +204,8 @@ input#search-collection {
     padding-inline: var(--size-1);
     padding-block-end: var(--size-1);
     font-weight: 400;
-    font-size: var(--fs-200);
+    font-size: var(--fs-150);
     border-bottom: 1px solid var(--clr-grey);
-}
-
-.result-details {
-    display: flex;
-    width: calc(100% - var(--size-5));
-    justify-content: space-between;
-    align-items: center;
 }
 
 .result-details * {
@@ -299,58 +292,57 @@ ul.autocomplete-list {
   .card-container {
     display: flex;
     justify-content: space-between;
-    width: 100%;
+    gap: 1rem;
     margin-block-start: var(--size-2);
-    padding: calc(var(--size-1) / 2);
+    padding: var(--size-1);
     border: 1px solid var(--clr-grey);
     border-radius: 0.5em; 
     background: none;
   }
 
-  .card-container:hover {
-    cursor: pointer;
-    /* background: var(--clr-light-blue); */
+  .card-section {
+    min-width: 48%;
   }
 
-  .card-container * {
-    pointer-events: none;
+  .card-section:nth-of-type(2) {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
   }
 
-  .card-image {
-    width: 25%;
+  .card {
+    width: 100%;
   }
 
-  .card-image img {
+  .card img {
+    width: 100%;
     display: block;
     align-self: center;
     border-radius: 8px;
   }
 
-  .card {
-    min-width: 40%;
-    padding: var(--size-1);
-  }
-
   .card-specs {
-    width: 48%;
-    display: flex;
-    flex-direction: column;
-    padding: 0.5em;
+    padding-inline: 0.5em;
     font-size: 0.9em;
     line-height: 1.5;
   }
 
+
+  .card-name {
+    font-size: 1.3rem;
+    font-weight: 300;
+  }
+  .card-set {
+    font-size: 1.22rem;
+    font-weight: 300;
+  }
+
   .card-btns {
-    min-width: 32%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    padding-block: 0.75rem;
-    padding-inline-end: 0.5rem;
+    margin-inline: auto;
   }
 
   .card-btn {
-    width: 100%;
+    width: calc(3 * var(--size-4));
     padding-block: calc(var(--size-1) / 2);
     color: var(--clr-light);
     font-size: var(--fs-150);

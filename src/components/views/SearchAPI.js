@@ -113,7 +113,7 @@ const Search = () => {
           const filteredData = filterData(data.data);
           history.push({
             pathname: `/search-result/${cardName.toLowerCase()}`,
-            state: { cards: filteredData, cardName: cardName, type: inputRef.current.id },
+            state: { cardsFound: filteredData, cardName: cardName, type: inputRef.current.id },
           });
           setCardName('')
           setSearchInput(null);

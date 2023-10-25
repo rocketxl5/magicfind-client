@@ -105,7 +105,7 @@ const SearchCatalog = () => {
         }
         history.push({
           pathname: `/search-result/${cardName.toLowerCase()}`,
-          state: { cards: data.results, cardName: data.cardName, type: inputRef.current.id },
+          state: { cardsFound: data.results, cardName: data.cardName, type: inputRef.current.id },
         });
       })
       .catch((error) => console.log(error));
