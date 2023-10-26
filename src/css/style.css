@@ -6,7 +6,7 @@
 
     --clr-blue: #1B2F41;
     --clr-light-blue: rgb(219, 236, 250);
-    --clr-grey: #d8d6d3;
+    --clr-grey: rgb(216, 214, 211);
     --clr-light-grey: #F7F7F7;
     --clr-red: #a31621;
     --clr-light: #fcfcfc;
@@ -125,7 +125,7 @@ a {
 .section {
     
      padding-block: 3rem;
-     padding-inline: 2rem;
+     padding: 2rem;
 }
 
 

@@ -193,21 +193,102 @@ input#search-collection {
 }
 
 .result-header {
-    /* margin-block-start: var(--size-4); */
-    padding: var(--size-1);
+    position: sticky;
+    top: 4.9rem;
+    width: 100%;
+    /* min-height: 6rem; */
+    padding-inline: 1.5rem;
+    padding-block: 0.75rem;
+    color: var(--clr-light);
+    background: var(--clr-dark);
     font-size: var(--fs-150);
-    background: var(--clr-light-grey);
-    border-bottom: 1px solid var(--clr-grey);
-    box-shadow: 0 1px 3px var(--clr-grey);
+    /* z-index: 5000; */
 }
 
-.result-header-bottom, .result-header-top {
+.save-to-collection, .search-result-info {
     display: flex;
     justify-content: space-between;
     align-items: center;
+
+}
+
+.save-to-collection span {
+    font-size: 1.3rem;
+}
+
+.search-result-info h3,
+.search-result-info span {
     font-weight: 400;
+    font-size: 1.3rem; 
+}
+
+.search-result-info {
+    padding-block: 1rem;
+    padding-inline: 1.5rem;
+    /* border: 1px solid var(--clr-grey); */
+    background-color: var(--clr-light-grey);
+ 
+    /* min-height: 3rem; */
+   
+}
+
+
+
+
+.result-header-btn {
+    /* width: calc(3 * var(--size-4)); */
+    /* padding-block: calc(var(--size-1) / 2); */
+    padding-inline: 1.3rem;
+    /* padding-block: 0.5rem; */
+    height: 3.5rem;
+    line-height: 1.5;
+    color: var(--clr-dark);
+    font-size: var(--fs-150);
+    font-weight: 500;
+    border-radius: 5px;
+}
+
+
+.selected-count {
     font-size: var(--fs-125);
-  
+}
+
+/* .result-header-top a  {
+    display: flex;
+    padding-inline-end: 0.5rem;
+    padding-block: 0.5rem;
+    align-items: center;
+    border: 1px solid var(--clr-grey);
+    border-radius: 2px;
+} */
+
+/* .result-header-top a svg {
+    width: 2rem;
+    height: 2rem;
+    padding: 2px 0;
+} */
+.back-link {
+   width: 100%;
+   padding-inline: 1rem;
+   padding-block-start: 1rem;
+   background-color: var(--clr-light-grey);
+}
+
+.back-link > a  {
+    display: flex;
+    width: 15rem;
+    /* padding-inline-end: 0.5rem; */
+    padding-block: 0.5rem;
+    align-items: center;
+    background: var(--clr-light);
+    border: 1px solid var(--clr-grey);
+    border-radius: 2px;
+}
+
+.back-link > a svg {
+    width: 2rem;
+    height: 2rem;
+    padding: 2px 0;
 }
 
 .result-details * {
@@ -229,6 +310,7 @@ input#search-collection {
 
 .search-items {
     margin-block-start: var(--size-3);
+    padding-inline: var(--size-1);
 }
 
 /* SearchCatalog form style */
@@ -353,7 +435,7 @@ ul.autocomplete-list {
   }
   
   .card-btn:hover {
-    opacity: 0.8;
+    /* opacity: 0.8; */
   }
 
 

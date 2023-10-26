@@ -147,3 +147,7 @@
     border: 4px solid var(--clr-green) !important;
     background: var(--clr-light-grey) !important;
 }
+
+.hide {
+    visibility: hidden;
+}

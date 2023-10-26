@@ -57,6 +57,7 @@ nav .right-side-nav ul {
     transition: 0.2s ease;
     /* border-top: 1px solid var(--clr-grey); */
     background-color: var(--clr-light);
+    z-index: 9000;
 }
 
 nav .right-side-nav .nav-link {

@@ -206,7 +206,7 @@ button.secondary {
   background: var(--secondary-color);
 }
 
-button:hover,
+/* button:hover, */
 div.section--mail:hover,
 div.section--cart:hover {
   cursor: pointer;
@@ -878,27 +878,27 @@ button.compose-message {
 
 .go-back {
   /* @ views/mail/Message */
-  display: flex;
+  /* display: flex;
   align-items: center;
   padding: 1em;
 
-  width: 50%;
-}
+  width: 50%;*/
+} 
 
 .go-back:hover {
   /* @ views/mail/Message */
-  cursor: pointer;
+  /* cursor: pointer; */
 }
 
 .go-back svg {
   /* @ views/mail/Message */
-  width: 2em;
-  height: 2em;
+  /* width: 2em;
+  height: 2em; */
 }
 
 .go-back p {
   /* @ views/mail/Message */
-  margin-left: 1em;
+  /* margin-left: 1em; */
 }
 
 /* Media queries */

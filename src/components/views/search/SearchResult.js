@@ -1,16 +1,18 @@
 import React, { useState } from 'react';
 import { useLocation } from 'react-router-dom/cjs/react-router-dom';
 import SearchResultHeader from './SearchResultHeader';
+import { Link } from 'react-router-dom';
+import { FiChevronLeft } from 'react-icons/fi';
 import CatalogCard from './CatalogCard';
 import SkryfallCard from './SkryfallCard';
 import CollectionCard from './CollectionCard';
+import capitalizeString from '../../utilities/capitalizeString';
+
 
 const SearchResult = () => {
     const location = useLocation();
-    // 
     const { cards, cardName, type } = location.state;
     const [selectedCards, setSelectedCards] = useState([]);
-    console.log(type)
     const handleClick = (e, card, index) => {
         const found = selectedCards.find(cardSelected => {
             return cardSelected.id === card.id
@@ -30,7 +32,22 @@ const SearchResult = () => {
     }
 
     return (
-        <div className="section search-result">
+        <div className="search-result">
+            <header className="top-header">
+                <div className="back-link">
+                    <Link to='/search-api'>{<FiChevronLeft />} Back to {capitalizeString(type)}</Link>
+                </div>
+                <div className="search-result-info">
+                    <h3>
+
+                        {capitalizeString(cardName)}
+
+                    </h3>
+                    <span>
+                        {`${cards.length} ${cards.length > 1 ? 'Results' : 'Result'}`}
+                    </span>
+                </div>
+            </header>
             {cards !== null ? (
                 <>
                     <SearchResultHeader cardName={cardName} cards={cards} selectedCards={selectedCards} type={type} />
@@ -51,7 +68,7 @@ const SearchResult = () => {
                                 ) : (
 
                                         <SkryfallCard
-                                            key={index}
+                                            key={card.id}
                                             index={index}
                                             card={card}
                                             handleClick={handleClick}

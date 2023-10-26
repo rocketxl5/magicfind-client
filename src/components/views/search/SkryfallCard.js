@@ -11,15 +11,10 @@ import capitalizeWord from '../../utilities/capitalizeWord';
 
 const SkryfallCard = (props) => {
   const { index, card, handleClick } = props;
-
-  const handleMouseDown = (e) => {
-
-  }
-
   return (
     <div id={`card-${index}`} key={index} className="card-container">
       <div className="card-section">
-        <div className="card" onMouseDown={handleMouseDown}>
+        <div className="card" >
           <CardImage card={card} />
         </div>
       </div>

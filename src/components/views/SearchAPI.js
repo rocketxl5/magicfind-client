@@ -114,6 +114,7 @@ const Search = () => {
   // 
   useEffect(() => {
     if (data) {
+
       const filterOnlineVersions = (cards) => {
         return cards.filter((card) => {
           return !card.set_name.toLowerCase().includes('online');
@@ -135,6 +136,7 @@ const Search = () => {
       const filteredCards = filterOnlineVersions(data);
       const cards = [...filteredCards];
 
+
       filteredCards.forEach((card, index) => {
         if (card.finishes.length > 1) {
           console.log(index)
@@ -142,6 +144,9 @@ const Search = () => {
           duplicate(cards, card, index);
         }
       });
+
+      // Customize cards id to remove repetition
+      cards.forEach(card => card.id = crypto.randomUUID());
 
       setLoading(false);
 
