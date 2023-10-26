@@ -4,7 +4,7 @@ import SearchResultHeader from './SearchResultHeader';
 import { Link } from 'react-router-dom';
 import { FiChevronLeft } from 'react-icons/fi';
 import CatalogCard from './CatalogCard';
-import SkryfallCard from './SkryfallCard';
+import APICard from './APICard';
 import CollectionCard from './CollectionCard';
 import capitalizeString from '../../utilities/capitalizeString';
 
@@ -13,6 +13,10 @@ const SearchResult = () => {
     const location = useLocation();
     const { cards, cardName, type } = location.state;
     const [selectedCards, setSelectedCards] = useState([]);
+    console.log(cards);
+    // Handle for API card search //
+    // Adds card to selectedCards array 
+    // Toggles card-selected css class on parent container
     const handleClick = (e, card, index) => {
         const found = selectedCards.find(cardSelected => {
             return cardSelected.id === card.id
@@ -35,7 +39,7 @@ const SearchResult = () => {
         <div className="search-result">
             <header className="top-header">
                 <div className="back-link">
-                    <Link to='/search-api'>{<FiChevronLeft />} Back to {capitalizeString(type)}</Link>
+                    <Link to='/search-api'>{<FiChevronLeft />} Back to Search</Link>
                 </div>
                 <div className="search-result-info">
                     <h3>
@@ -67,7 +71,7 @@ const SearchResult = () => {
                                     />
                                 ) : (
 
-                                        <SkryfallCard
+                                        <APICard
                                             key={card.id}
                                             index={index}
                                             card={card}

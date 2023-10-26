@@ -199,8 +199,8 @@ input#search-collection {
     /* min-height: 6rem; */
     padding-inline: 1.5rem;
     padding-block: 0.75rem;
-    color: var(--clr-light);
-    background: var(--clr-dark);
+    color: var(--clr-light-grey);
+    background: var(--clr-blue);
     font-size: var(--fs-150);
     /* z-index: 5000; */
 }
@@ -209,7 +209,6 @@ input#search-collection {
     display: flex;
     justify-content: space-between;
     align-items: center;
-
 }
 
 .save-to-collection span {
@@ -220,13 +219,16 @@ input#search-collection {
 .search-result-info span {
     font-weight: 400;
     font-size: 1.3rem; 
+    color: var(--clr-light-grey);
 }
 
 .search-result-info {
-    padding-block: 1rem;
+    padding-block-start: 1rem;
+    padding-block-end: 0.5rem;
     padding-inline: 1.5rem;
+    background: var(--clr-blue);
     /* border: 1px solid var(--clr-grey); */
-    background-color: var(--clr-light-grey);
+    /* background-color: var(--clr-light-grey); */
  
     /* min-height: 3rem; */
    
@@ -269,8 +271,8 @@ input#search-collection {
 } */
 .back-link {
    width: 100%;
-   padding-inline: 1rem;
-   padding-block-start: 1rem;
+   padding: 0.5rem;
+   font-size: 1.3rem;
    background-color: var(--clr-light-grey);
 }
 
@@ -281,7 +283,7 @@ input#search-collection {
     padding-block: 0.5rem;
     align-items: center;
     background: var(--clr-light);
-    border: 1px solid var(--clr-grey);
+    /* border: 1px solid var(--clr-grey); */
     border-radius: 2px;
 }
 
@@ -309,8 +311,7 @@ input#search-collection {
 }
 
 .search-items {
-    margin-block-start: var(--size-3);
-    padding-inline: var(--size-1);
+    padding-inline: 2rem;
 }
 
 /* SearchCatalog form style */
@@ -374,14 +375,19 @@ ul.autocomplete-list {
   }
 
   .card-container {
-    display: flex;
-    justify-content: space-between;
-    gap: 1rem;
     margin-block-start: var(--size-2);
-    padding: var(--size-1);
+    padding: var(--size-2);
     border: 1px solid var(--clr-grey);
     border-radius: 0.5em; 
     background: none;
+  }
+
+  .card-body {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    border-radius: 0.5em; 
+
   }
 
   .card-section {
@@ -394,7 +400,7 @@ ul.autocomplete-list {
     justify-content: space-between;
   }
 
-  .card {
+  .card-image {
     width: 100%;
   }
 
