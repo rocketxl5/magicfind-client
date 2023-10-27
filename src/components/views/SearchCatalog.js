@@ -22,6 +22,7 @@ const SearchCatalog = () => {
     searchInput,
     setSearchInput,
     searchTerm,
+    setSearchTerm,
     cardName,
     setCardName, 
   } = useContext(SearchContext);
@@ -84,7 +85,7 @@ const SearchCatalog = () => {
 
     e && e.preventDefault();
     setLoading(true);
-
+    setSearchTerm(cardName);
     inputRef.current.blur();
 
     const headers = new Headers();

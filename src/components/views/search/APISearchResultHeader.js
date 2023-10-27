@@ -3,7 +3,7 @@ import React from 'react';
 // import { FiChevronLeft } from 'react-icons/fi';
 import capitalizeString from '../../utilities/capitalizeString';
 
-const SearchResultHeader = (props) => {
+const APISearchResultHeader = (props) => {
     const { cardName, cards, selectedCards } = props;
     console.log(selectedCards)
     const handleClick = (e) => {
@@ -25,4 +25,4 @@ const SearchResultHeader = (props) => {
     )
 }
 
-export default SearchResultHeader;
+export default APISearchResultHeader;

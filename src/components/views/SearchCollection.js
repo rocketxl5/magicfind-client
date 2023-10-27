@@ -24,6 +24,7 @@ const SearchCollection = () => {
     searchInput,
     setSearchInput,
     searchTerm,
+    setSearchTerm,
     cardName,
     setCardName, 
   } = useContext(SearchContext);
@@ -82,9 +83,10 @@ const SearchCollection = () => {
     if (!searchTerm) {
       throw new Error('Field is empty. Please provide a suggestion');
     }
-    console.log(cardName)
+
     e && e.preventDefault();
     setLoading(true);
+    setSearchTerm(cardName);
     inputRef.current.blur();
 
     const headers = new Headers();

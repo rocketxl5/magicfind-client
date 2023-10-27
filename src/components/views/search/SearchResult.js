@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { useLocation } from 'react-router-dom/cjs/react-router-dom';
-import SearchResultHeader from './SearchResultHeader';
 import { Link } from 'react-router-dom';
 import { FiChevronLeft } from 'react-icons/fi';
+import APISearchResultHeader from './APISearchResultHeader';
 import CatalogCard from './CatalogCard';
 import APICard from './APICard';
 import CollectionCard from './CollectionCard';
@@ -79,7 +79,7 @@ const SearchResult = () => {
                                 </div>
                             ) : (
                                     <>
-                                        <SearchResultHeader cardName={cardName} cards={cards} selectedCards={selectedCards} type={type} />
+                                        <APISearchResultHeader cardName={cardName} cards={cards} selectedCards={selectedCards} type={type} />
                                         <div className="search-items">
                                             {cards.map((card, index) => {
                                                 return (

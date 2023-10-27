@@ -25,6 +25,7 @@ const Search = () => {
     searchInput,
     setSearchInput,
     searchTerm,
+    setSearchTerm,
     cardName,
     setCardName,
   } = useContext(SearchContext);
@@ -69,7 +70,9 @@ const Search = () => {
 
     e && e.preventDefault();
     setLoading(true);
+    setSearchTerm(cardName);
     inputRef.current.blur();
+
     const headers = { method: 'GET' };
     fetch(
       `${api.skryfallURL}/cards/named?exact=${sanitizeString(cardName)}`,
@@ -79,6 +82,7 @@ const Search = () => {
       .then((res) => res.json())
       .then((data) => {
         const { name, oracle_id } = data;
+        console.log(data);
         localStorage.setItem('oracle', oracle_id);
         localStorage.setItem('apiCardName', name);
         // console.log('oracle id', oracle_id)
@@ -103,6 +107,7 @@ const Search = () => {
       )
         .then((res) => res.json())
         .then((data) => {
+          console.log(data)
           setData(data.data);
           // localStorage.setItem('apiCards', JSON.stringify(data.data));
         })
