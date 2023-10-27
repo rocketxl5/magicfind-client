@@ -2,8 +2,8 @@ const validateSignup = (values) => {
   let errors = {};
 
   // Check for name
-  if (!values.name) {
-    errors.name = 'Name is required';
+  if (!values.username) {
+    errors.username = 'Username is required';
   }
 
   // Check for email
