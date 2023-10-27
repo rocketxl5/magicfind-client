@@ -4,13 +4,12 @@ import toggleClass from './toggleClass';
 
 // Handles Header Search bar and mobile menu behaviour
 // [target] node element, [callback] stateSetter (searchTerm), [isOutsideEvent: bool] optional flag for extra Header events
-const handleSearchBar = (e, callback, isOutsideEvent = false) => {
+const handleSearchBar = (e, isOutsideEvent = false) => {
 // e.stopPropagation();
     const userAgent = getUserAgent();
     const browserWidth = getBrowserWidth();
     const target = e.target;
 
-    // console.log('target', target)
     if (target) {
         // If target is menu link (i.e mobile menu is displayed) or if target is header log
         if (target.classList.contains('nav-link')) {
@@ -66,8 +65,8 @@ const handleSearchBar = (e, callback, isOutsideEvent = false) => {
                         document.querySelector('#search-catalog-container').style.setProperty('width', '0');
                         // Show Search button icon
                         document.querySelector('.search-btn').style.setProperty('display', 'block');
-                        // Clear Search filed
-                        callback('');
+                        // Reset field state
+                        document.querySelector('#search-catalog').blur();
                         // Empty search input
                         document.querySelector('#search-catalog').value = '';
                     }

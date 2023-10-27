@@ -1,256 +1,99 @@
-/*********************************/
-/**** Magic Find Catalog Card ****/
-/*********************************/
+/***************************/
+/**** Site Catalog Card ****/
+/***************************/
 
-import React, {
-  useContext,
-  useState,
-  useEffect,
-  useReducer,
-} from 'react';
+import React, { useContext } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { FiPlusCircle, FiMinusCircle, FiTrash2 } from 'react-icons/fi';
-import { ShoppingCartContext } from '../../../contexts/ShoppingCartContext';
+// import { CardContext } from '../../../contexts/CardContext';
+// import { PathContext } from '../../../contexts/PathContext';
 import { UserContext } from '../../../contexts/UserContext';
 import CardImage from './CardImage';
-import { api } from '../../../api/resources';
 import styled from 'styled-components';
 
-const CatalogCard = ({ card }) => {
-  const [quantity, setQuantity] = useState(1 || card.quantity_selected);
-  const [isSelectedItem, setIsSelectedItem] = useState(false);
-  const [loading, setLoading] = useState(false);
+const CatalogCard = (props) => {
+  const { index, card, handleClick } = props;
   const { user } = useContext(UserContext);
-  const { cartItems, setCartItems, itemsCount, setItemsCount } =
-    useContext(ShoppingCartContext);
-  const location = useLocation();
-  const handleClick = (e) => {
-    if (e.currentTarget.id === 'add') {
-      if (quantity < card.quantity) {
-        setQuantity(parseInt(quantity) + 1);
-      }
-    } else if (e.currentTarget.id === 'remove' && quantity > 1) {
-      setQuantity(quantity - 1);
-    }
-  };
-
-  const trashItem = (card) => {
-    setIsSelectedItem(false);
-    setQuantity(1);
-    card.quantity_selected = 0;
-
-    const items = [...cartItems];
-
-    items.forEach((item, index) => {
-      if (item._id === card._id) {
-        items.splice(index, 1);
-      }
-    });
-    setCartItems(items);
-    localStorage.setItem('shopping-cart', JSON.stringify(items));
-  };
-
-  // Add & Update items in cart
-  const updateCart = (card) => {
-    if (card.quantity_selected === quantity) {
-      return console.log('no change in quantity');
-    }
-    const foundItem = cartItems.find((item) => {
-      return item._id === card._id;
-    });
-
-    setLoading(true);
-
-    const options = {
-      method: 'GET',
-      header: {
-        'Content-Type': 'application/json',
-      },
-    };
-    fetch(
-      `${api.serverURL}/api/catalog/${card.name}/${card._id}/${card.quantity_selected}`,
-      options
-    )
-      .then((res) => res.json())
-      .then((data) => {
-        setLoading(false);
-        console.log(data);
-        if (!data.data.isQuantityAvailable) {
-          card.quantity = data.card.quantity;
-          foundItem.quantity = data.card.quantity;
-          card.quantity = data.card.quantity;
-          const items = [...cartItems];
-          setCartItems(items);
-          // Send error message
-        } else {
-          if (!foundItem) {
-            card.quantity_selected = quantity;
-            setCartItems((cartItems) => [...cartItems, card]);
-          } else {
-            const selectedItem = cartItems.find((item) => {
-              return item._id === card._id;
-            });
-
-            selectedItem.quantity_selected = quantity;
-
-            const items = [...cartItems];
-            setCartItems(items);
-          }
-        }
-      });
-
-    setIsSelectedItem(true);
-  };
-
-  const isSelected = (item) => {
-    let selected = false;
-
-    const itemFound = cartItems.find((cartItem) => {
-      return cartItem._id === item._id;
-    });
-
-    if (itemFound) {
-      card.quantity_selected = itemFound.quantity_selected;
-      selected = true;
-    }
-    return selected;
-  };
-
-  useEffect(() => {
-    const foundItem = cartItems.find((item) => {
-      return item._id === card._id;
-    });
-
-    if (foundItem) {
-      console.log('foundItem', foundItem);
-      setIsSelectedItem(true);
-      setQuantity(foundItem.quantity_selected);
-    }
-  }, [location]);
 
   return (
-    <div className="card-container">
-      <>
-        <div className="card">
-          <div className="card-image">
+    <div id={`card-${index}`} key={card.id} className="card-container">
+      <div className="card-body">
+        <div className="card-section">
+          <div className="card-image" >
             <CardImage card={card} />
           </div>
-
-          <div className="card-details">
-            <p>
-              <strong>{card.set_name}</strong>
-            </p>
-            <p>
-              Condition: <strong>{card.condition.toUpperCase()}</strong>
-            </p>
-
-            <p>
-              Seller: <strong>{card.userName}</strong>
-            </p>
-            <p>
-              Ships From: <strong>{card.userCountry}</strong>
-            </p>
-            <p>
-              {' '}
-              Price: <strong>${card.price}</strong>
-            </p>
-            <p>
-              Available: <strong>{card.quantity}</strong>
-            </p>
-            {user && (
-              <Contact
-                to={{
-                  pathname: '/mail/message',
-                  state: { sender: card.userName, subject: card.name },
-                }}
-              >
-                Contact Seller
-              </Contact>
-            )}
-            <Selected
-              className="item-cart"
-              style={{
-                border: card.quantity_selected ? '1px solid #e4e4e4' : '',
-              }}
-            >
-              {isSelectedItem && isSelected(card) && (
-                <>
-                  <p>{card.quantity_selected} in Cart</p>
-
-                  <FiTrash2
-                    onClick={() => {
-                      trashItem(card);
+        </div>
+        <div className="card-section">
+          <div className="card-wrapper">
+            <div className="card-name">
+              <p><span>{card.name}</span></p>
+            </div>
+            <div className="card-info">
+              <div className="card-seller">
+                <p>Seller:  <span>{card.userName}</span></p>
+              </div>
+              <div className="card-condition">
+                <p>Condition: <span>{card.condition.toUpperCase()}</span></p>
+              </div>
+              <div className="card-shipping">
+                <p>Ships From:  <span>{card.userCountry}</span></p>
+              </div>
+              <div className="card-price">
+                <p>Price:  <span>{parseFloat(card.price)}</span></p>
+              </div>
+              {card.quantity > 0 &&
+                <div className="card-quantity">
+                  <p>Quantity:  <span>{card.quantity}</span></p>
+                </div>
+              }
+              {user && (
+                <div className="contact-user">
+                  <Contact
+                    to={{
+                      pathname: '/mail/message',
+                      state: { sender: card.userName, subject: card.name },
                     }}
-                    size={20}
-                    title="Remove Item"
-                  />
-                </>
+                  >
+                    Contact Seller
+                  </Contact>
+                </div>
               )}
-            </Selected>
-          </div>
-        </div>
-        <div className="item-buttons">
-          <button
-            className="item-button success"
-            type="button"
-            onClick={() => updateCart(card)}
-          >
-            {isSelectedItem ? 'Update Cart' : 'Add To Cart'}
-          </button>
-        </div>
-        {/* <div className="item-buttons">
-          <div className="item-quantity">
-            <div
-              className="add-remove-button"
-              id="remove"
-              onClick={(e) => {
-                handleClick(e);
-              }}
-            >
-              <FiMinusCircle size={23} />
-            </div>
-            <input type="text" id="quantity" name="quantity" value={quantity} />
-            <div
-              className="add-remove-button"
-              id="add"
-              onClick={(e) => {
-                handleClick(e);
-              }}
-            >
-              <FiPlusCircle size={23} />
-            </div>
-          </div>
-        </div> */}
-      </>
-    </div>
-  );
-};
 
-const SpinnerContainer = styled.div``;
+
+            </div> 
+          </div>
+          <div className="card-btn-container">
+            <button id="cart-card" className="card-btn bg-yellow color-dark" type="button" >Add to Cart</button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  )
+}
 
 const Selected = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  height: 4vh;
-  padding: 0 0.5em;
-  margin-top: 0.5em;
-  font-size: 0.9rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 4vh;
+    padding: 0 0.5em;
+    margin-top: 0.5em;
+    font-size: 0.9rem;
 
-  svg {
-    width: 1.5em;
-    heigth: 1.5em;
-    &:hover {
-      cursor: pointer;
+    svg {
+      width: 1.5em;
+      heigth: 1.5em;
+      &:hover {
+        cursor: pointer;
+      }
     }
-  }
-`;
+  `;
 
 const Contact = styled(Link)`
-  padding: 0.5em;
-  margin-top: 0.5em;
-  color: red;
-  border: 1px solid #e4e4e4;
-`;
+    padding: 0.5em;
+    margin-top: 0.5em;
+    color: red;
+    border: 1px solid #e4e4e4;
+  `;
 
 export default CatalogCard;

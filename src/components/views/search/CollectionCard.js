@@ -31,7 +31,7 @@ const CollectionCard = ({ card }) => {
         <div className="card-image">
           <CardImage card={card} />
         </div>
-        <div className="card-specs">
+        <div className="card-info">
           <p>{card.set_name}</p>
           <p>
             Condition: <strong>{card.condition.toUpperCase()}</strong>

@@ -67,7 +67,7 @@ const Remove = () => {
             <Image className="card-image" card={card} />
           </div>
 
-          <div className="card-specs">
+          <div className="card-info">
             <p>
               <strong>Name</strong>: {card.name}
             </p>

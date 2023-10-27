@@ -19,6 +19,7 @@ const SearchInput = forwardRef(function SearchInput(props, ref) {
     setMarker,
     setSearchType,
     cardTitles,
+    setCardTitles,
     setSearchInput,
     searchTerm,
     setSearchTerm,
@@ -58,14 +59,12 @@ const SearchInput = forwardRef(function SearchInput(props, ref) {
     setSearchTerm('');
     setPredictions([]);
     setShowPredictions(false);
+    setCardTitles([]);
   };
 
   const handleFocus = (e) => {
     setSearchInput(e.target);
     setSearchType(e.target.id);
-    // if (searchTerm) {
-    //   setSearchTerm('');
-    // }
   }
 
   return (
@@ -87,7 +86,7 @@ const SearchInput = forwardRef(function SearchInput(props, ref) {
               : 'Search Skryfall API'
         }
       />
-      {isActive &&
+      {(isActive && searchTerm) &&
         <AutoComplete predictions={predictions} handleSubmit={props.handleSubmit} />
       }
     </>

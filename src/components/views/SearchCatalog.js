@@ -40,6 +40,7 @@ const SearchCatalog = () => {
   }, [pathname])
 
   useEffect(() => {
+    console.log(searchInput)
     if (searchInput) {
       if (searchInput.id === 'search-catalog') {
         setIsActive(true);
@@ -53,6 +54,8 @@ const SearchCatalog = () => {
 
   // On submit, check if cardName is set
   useEffect(() => {
+    console.log(searchTerm)
+    console.log(cardName)
     if (loading) {
       !cardName && setCardName(searchTerm)
     }
@@ -74,6 +77,7 @@ const SearchCatalog = () => {
   //   // setPathname(location.pathname.split('/')[1]);
   // }, []);
   const handleSubmit = (e) => {
+
     if (!searchTerm) {
       throw new Error('Field is empty. Please provide a suggestion');
     }

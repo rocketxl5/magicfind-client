@@ -105,7 +105,7 @@ const CardListing = ({ card, setIsSent }) => {
             <Image card={card} />
           </div>
 
-          <div className="card-specs">
+          <div className="card-info">
             {path === 'add-card' ? (
               <>
                 <p>

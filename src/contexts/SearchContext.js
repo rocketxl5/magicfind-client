@@ -35,7 +35,7 @@ export const SearchProvider = ({ children }) => {
   }
 
   const fetchCatalogCards = () => {
-    // console.log('fectching from catalog')
+    console.log('fectching from catalog')
     const headers = new Headers();
     headers.append('Content-Type', 'application/json');
     const options = {
@@ -117,6 +117,7 @@ export const SearchProvider = ({ children }) => {
         setMarker,
         setSearchType,
         cardTitles,
+        setCardTitles,
         cards,
         setCards,
         searchInput, 

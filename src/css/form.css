@@ -196,13 +196,12 @@ input#search-collection {
     position: sticky;
     top: 4.9rem;
     width: 100%;
-    /* min-height: 6rem; */
     padding-inline: 1.5rem;
     padding-block: 0.75rem;
     color: var(--clr-light-grey);
-    background: var(--clr-blue);
     font-size: var(--fs-150);
-    /* z-index: 5000; */
+    background: var(--clr-blue);
+    border-top: 1px solid rgba(216, 214, 211, 0.3);
 }
 
 .save-to-collection, .search-result-info {
@@ -223,15 +222,10 @@ input#search-collection {
 }
 
 .search-result-info {
-    padding-block-start: 1rem;
-    padding-block-end: 0.5rem;
+    padding-block: 1rem;
     padding-inline: 1.5rem;
     background: var(--clr-blue);
-    /* border: 1px solid var(--clr-grey); */
-    /* background-color: var(--clr-light-grey); */
- 
-    /* min-height: 3rem; */
-   
+    border-top: 1px solid rgba(216, 214, 211, 0.3);
 }
 
 
@@ -249,7 +243,6 @@ input#search-collection {
     font-weight: 500;
     border-radius: 5px;
 }
-
 
 .selected-count {
     font-size: var(--fs-125);
@@ -376,18 +369,18 @@ ul.autocomplete-list {
 
   .card-container {
     margin-block-start: var(--size-2);
-    padding: var(--size-2);
     border: 1px solid var(--clr-grey);
-    border-radius: 0.5em; 
-    background: none;
+    border-radius: var(--size-1); 
+    background: var(--clr-light);
+    padding: 0.5rem;
   }
 
   .card-body {
     display: flex;
     justify-content: space-between;
     gap: 1rem;
-    border-radius: 0.5em; 
-
+    padding: 1.5rem;
+    background: var(--clr-light);
   }
 
   .card-section {
@@ -400,49 +393,69 @@ ul.autocomplete-list {
     justify-content: space-between;
   }
 
+  .card-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+
   .card-image {
     width: 100%;
   }
 
-  .card img {
+  .card-image img {
     width: 100%;
     display: block;
     align-self: center;
-    border-radius: 8px;
+    border-radius: 5px;
   }
-
-  .card-specs {
-    padding-inline: 0.5em;
-    font-size: 0.9em;
-    line-height: 1.5;
-  }
-
 
   .card-name {
+    font-family: 'Young Serif', serif;
     font-size: 1.3rem;
-    font-weight: 300;
-  }
-  .card-set {
-    font-size: 1.22rem;
-    font-weight: 300;
+    text-align: center;
   }
 
-  .card-btns {
-    margin-inline: auto;
+  .card-info {
+    display: flex;
+    flex-direction: column;
+    padding-inline-start: 1rem;
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+
+  .card-btn-container {
+    width: 100%;
+    text-align: center;
   }
 
   .card-btn {
-    width: calc(3 * var(--size-4));
+    width: 90%;
     padding-block: calc(var(--size-1) / 2);
-    color: var(--clr-light);
     font-size: var(--fs-150);
-    font-weight: 400;
+    font-weight: 500;
     border-radius: 5px;
   }
+
+  .card-selected {
+    border: 0.6rem solid var(--clr-blue) !important;
+    background: var(--clr-light-grey) !important;
+}
+
+.card-selected .card-body {
+    border-radius: 5px !important;
+    background: var(--clr-light-grey) !important;
+    padding: 1rem;
+}
+
+.foil-finish {
+    padding-inline: 0.5rem;
+    color: var(--clr-light-grey);
+    background: var(--clr-teal);
+    border-radius: 2px;
+}
   
-  .card-btn:hover {
-    /* opacity: 0.8; */
-  }
 
 
 

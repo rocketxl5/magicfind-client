@@ -38,9 +38,11 @@ const SearchResult = () => {
     return (
         <div className="search-result">
             <header className="top-header">
-                <div className="back-link">
-                    <Link to='/search-api'>{<FiChevronLeft />} Back to Search</Link>
-                </div>
+                {type !== 'search-catalog' &&
+                    <div className="back-link">
+                        <Link to='/search-api'>{<FiChevronLeft />} Back to Search</Link>
+                    </div>
+                }
                 <div className="search-result-info">
                     <h3>
 
@@ -52,43 +54,48 @@ const SearchResult = () => {
                     </span>
                 </div>
             </header>
-            {cards !== null ? (
+            {cards !== null && (
                 <>
-                    <SearchResultHeader cardName={cardName} cards={cards} selectedCards={selectedCards} type={type} />
-                    <div className="search-items">
-                        {cards.map((card, index) => {
-                        return (
-                            type === 'search-catalog' ? (
-                                <CatalogCard
-                                    key={card.id}
-                                    card={card}
-                                />
-                            ) :
-                                type === 'search-collection' ? (
-                                    <CollectionCard
-                                        key={card.id}
-                                        card={card}
-                                    />
-                                ) : (
-
-                                        <APICard
+                    {
+                        type === 'search-catalog' ? (
+                            <div className="search-items">
+                                {cards.map((card, index) => {
+                                    return (
+                                        <CatalogCard
+                                            key={card.id}
+                                            card={card}
+                                        />)
+                                })}
+                            </div>
+                        ) : type === 'search-collection' ? (
+                            <div className="search-items">
+                                {cards.map((card, index) => {
+                                    return (
+                                        <CollectionCard
+                                            key={card.id}
+                                            card={card}
+                                        />)
+                                })}
+                                </div>
+                            ) : (
+                                    <>
+                                        <SearchResultHeader cardName={cardName} cards={cards} selectedCards={selectedCards} type={type} />
+                                        <div className="search-items">
+                                            {cards.map((card, index) => {
+                                                return (
+                                                    <APICard
                                             key={card.id}
                                             index={index}
                                             card={card}
                                             handleClick={handleClick}
-                                        />
-
-
+                                                    />)
+                                            })}
+                                        </div>
+                                    </>
                                 )
-                        )
-                    })}
-                    </div>
+                    }
                 </>
-            ) : (
-                ''
-            )
-
-            }
+            )}  
         </div>
     )
 }

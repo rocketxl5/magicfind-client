@@ -4,7 +4,7 @@ import React from 'react';
 import capitalizeString from '../../utilities/capitalizeString';
 
 const SearchResultHeader = (props) => {
-    const { cardName, cards, selectedCards, type } = props;
+    const { cardName, cards, selectedCards } = props;
     console.log(selectedCards)
     const handleClick = (e) => {
 
@@ -16,7 +16,7 @@ const SearchResultHeader = (props) => {
                 {/* <Link to='/search-api'>{<FiChevronLeft />} Back to {capitalizeString(type)}</Link> */}
                 {
                     <>
-                        <span className="selected-count"> Cards Selected: {selectedCards.length}</span>
+                        <span className="selected-count"> {selectedCards.length > 0 ? ` Cards Selected: ${selectedCards.length}` : 'Select a Card'}</span>
                         <button id="cart-card" className={`result-header-btn bg-yellow ${selectedCards.length === 0 && 'hide'}`} type="button" onClick={handleClick}>Save to Collection</button>
                     </>
                 }

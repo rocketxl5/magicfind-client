@@ -8,6 +8,7 @@ const AutoComplete = (props) => {
         marker,
         setMarker,
         setCardName,
+        cardName,
         showPredictions
     } = useContext(SearchContext);
 
@@ -17,17 +18,31 @@ const AutoComplete = (props) => {
         return () => document.removeEventListener('keydown', handleKeyDown);
     });
 
+    useEffect(() => {
+        console.log(marker)
+        console.log(predictions);
+        console.log(predictions[marker])
+        setCardName(predictions[marker]);
+    }, [marker])
+
     // Keyboard arrow up and down autocomplete list searching function
     const handleKeyDown = (e) => {
         if (predictions) {
+
             if (e.key === 'ArrowDown') {
-                marker < predictions.length && setMarker(marker + 1);
-            }
+                // console.log(marker)
+                if (marker < predictions.length - 1) {
+                    setMarker(marker + 1);
+                }
+            } 
             if (e.key === 'ArrowUp') {
-                marker > 0 && setMarker(marker - 1);
+                console.log(marker)
+                if (marker === predictions.length - 1 || marker >= 0) {
+                    setMarker(marker - 1);
+                }
             }
+
         }
-        setCardName(predictions[marker])
     };
 
     // Click event manager function on list of suggestions
@@ -48,9 +63,9 @@ const AutoComplete = (props) => {
                         (
                             <Predictions
                                 key={index}
+                                index={index}
                                 marker={marker}
                                 prediction={prediction}
-                                index={index}
                             />
                         )
                     );

@@ -126,6 +126,10 @@
     background: var(--clr-green);
 }
 
+.bg-blue {
+    background: var(--clr-blue);
+}
+
 .bg-yellow {
     background: var(--clr-yellow);
 }
@@ -142,10 +146,12 @@
     background: var(--clr-grey);
 }
 
-.card-selected {
-    padding: 1.5rem !important;
-    border: 0.6rem solid var(--clr-green) !important;
-    background: var(--clr-light-grey) !important;
+.color-lg-grey {
+    color: var(--clr-light-grey);
+}
+
+.color-dark {
+    color: var(--clr-dark);
 }
 
 .hide {
