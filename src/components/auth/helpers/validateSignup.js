@@ -2,17 +2,17 @@ const validateSignup = (values) => {
   let errors = {};
 
   // Check for name
-  if (!values.name) {
-    errors.name = 'Name is required';
+  if (!values.username.trim()) {
+    errors.username = 'Username is required';
   }
 
   // Check for email
-  if (!values.email) {
+  if (!values.email.trim()) {
     errors.email = 'Email is required';
   }
 
   // Check for country
-  if (!values.country) {
+  if (!values.country.trim()) {
     errors.country = 'Country is Required';
   }
 
@@ -29,7 +29,7 @@ const validateSignup = (values) => {
   // Check if passwords match
   if (values.password && values.repeat_password) {
     if (values.password !== values.repeat_password) {
-      errors.matching_passwords = 'Passwords do not match';
+      errors.matching_passwords = true;
     }
   }
 

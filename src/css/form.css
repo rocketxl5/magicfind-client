@@ -144,14 +144,25 @@ input:-webkit-autofill:active{
 }
 
 .show-error-message {
-    max-width: 99%;
-    margin-inline: auto;
+    /* max-width: 99%; */
+    margin-inline: 4rem;
     margin-block-start: 2rem;
     padding: 1rem;
     border: 1px solid var(--clr-danger);
     border-radius: 5px;
     color: var(--clr-danger);
     background-color: rgba(220, 53, 69, 0.1);
+}
+
+.show-success-message {
+    /* max-width: 99%; */
+    margin-inline: 4rem;
+    margin-block-start: 2rem;
+    padding: 1rem;
+    border: 1px solid var(--clr-success);
+    border-radius: 5px;
+    color: var(--clr-blue);
+    background-color: rgba(34, 170, 68, 0.1);;
 }
 
 .input-error {

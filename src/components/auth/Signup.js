@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { Link, useHistory, useLocation } from 'react-router-dom';
+import inputValidation from './helpers/validateSignup';
 import useFormValidation from '../hooks/useFormValidation';
-import inputValidation from '../utilities/validateSignup';
 import { PathContext } from '../../contexts/PathContext';
 import { api } from '../../api/resources';
 import Spinner from '../layout/Spinner';
@@ -11,40 +11,51 @@ const Signup = () => {
   const [input, setInput] = useState({});
   const [isValid, setIsValid] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
+
   const { setPathname } = useContext(PathContext);
 
   const location = useLocation();
   const history = useHistory();
+
+  const callback = (values) => {
+    setInput(values);
+    setIsValid(true);
+  }
+
+  const {
+    handleChange,
+    handleFocus,
+    handleBlur,
+    handleSubmit,
+    values,
+    errors
+  } = useFormValidation(
+    callback, 
+    inputValidation,
+    {
+      username: '',
+      email: '',
+      country: '',
+      password: '',
+      repeat_password: '',
+      matching_passwords: '',
+    },
+    (message) => { setErrorMessage(message) });
 
   // Setting path with component url pathname onload
   useEffect(() => {
     setPathname(location.pathname);
   }, [])
 
-  const callback = (values) => {
-    setInput(values)
-    setIsValid(true)
-  }
-
-  const { handleChange, handleFocus, handleBlur, handleSubmit, values, errors } = useFormValidation(
-    callback,
-    inputValidation,
-    {
-      name: '',
-      email: '',
-      country: '',
-      password: '',
-      repeat_password: '',
-      matching_passwords: '',
-    }
-  )
-
+  // Submit post request to backend
   useEffect(() => {
     if (isValid) {
+      setLoading(true);
+      console.log(input)
       const userInput = {
-        name: input.name,
-        email: input.email,
-        country: input.country,
+        name: input.username.trim(),
+        email: input.email.trim(),
+        country: input.country.trim(),
         password: input.password,
       }
 
@@ -69,7 +80,8 @@ const Signup = () => {
             })
           })
           .then(data => {
-            history.push('/login');
+            console.log(data);
+            history.push({ pathname: '/login', state: { message: data.message } });
           })
           .catch(error => {
             setLoading(false);
@@ -90,6 +102,8 @@ const Signup = () => {
     }
   }, [errorMessage])
 
+  useEffect(() => { }, [errors])
+
   return (
     <div className="form-container flex justify-center">
       {loading ?
@@ -106,17 +120,17 @@ const Signup = () => {
               <p className={errorMessage ? 'show-error-message' : 'hide'}></p>
             <form className="auth-form" onSubmit={handleSubmit}>
               <div className="form-element">
-                <label htmlFor="name">Username</label>
+                <label htmlFor="username">Username</label>
                 <input
-                  className={errors.name && 'input-error'}
-                  id="name"
+                  className={errors.username && 'input-error'}
+                  id="username"
                   type="text"
-                  name="name"
-                  value={values.name}
+                  name="username"
+                  value={values.username}
                   onChange={handleChange}
                   onBlur={handleBlur}
                   onFocus={handleFocus}
-                  placeholder={errors.name ? errors.name : "Username"}
+                  placeholder={errors.username ? errors.username : "Username"}
                 />
               </div>
               <div className="form-element">
@@ -154,25 +168,25 @@ const Signup = () => {
                   id="password"
                   type="password"
                   name="password"
-                  value={!errors.matching_passwords ? values.password : values.password}
+                  value={values.password}
                   onChange={handleChange}
                   onBlur={handleBlur}
                   onFocus={handleFocus}
-                  placeholder={errors.password ? errors.password : errors.matching_passwords ? errors.matching_passwords : "Password"}
+                  placeholder={errors.password ? errors.password : "Password"}
                 />
               </div>
               <div className="form-element">
-                <label htmlFor="password_repeat">Repeat password</label>
+                <label htmlFor="repeat_password">Repeat password</label>
                 <input
                   className={(errors.password || errors.matching_passwords) && 'input-error'}
                   id="repeat_password"
-                  type="text"
+                  type="password"
                   name="repeat_password"
-                  value={!errors.matching_passwords ? values.repeat_password : values.repeat_password}
+                  value={values.repeat_password}
                   onChange={handleChange}
                   onBlur={handleBlur}
                   onFocus={handleFocus}
-                  placeholder={errors.password ? errors.password : errors.matching_passwords ? errors.matching_passwords : "Password"}
+                  placeholder={errors.repeat_password ? errors.password : "Repeat Password"}
                 />
               </div>
               <div className="form-element">

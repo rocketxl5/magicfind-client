@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react'
 
-const useForm = (callback, inputValidation, state) => {
+// Optional setErrorMessage callback function for Singup form validation
+// Sets error message if passwords dont match
+const useForm = (callback, inputValidation, state, setErrorMessage) => {
     const [values, setValues] = useState(state)
     const [errors, setErrors] = useState({})
     const [isSubmit, setIsSubmit] = useState(false)
@@ -13,10 +15,10 @@ const useForm = (callback, inputValidation, state) => {
 
     const handleBlur = (e) => {
         let { name, value } = e.target
-        name = (name === 'repeat_password') ? 'password' : name
+        name = (name === 'repeat_password') ? 'password' : name;
         if (!value && isSubmit) {
-            e.target.classList.add('input-error')
-            e.target.placeholder = `${name.charAt(0, 1).toUpperCase()}${name.substring(1)} is required`
+            e.target.classList.add('input-error');
+            e.target.placeholder = `${name.charAt(0, 1).toUpperCase()}${name.substring(1)} is required`;
         }
         // Check if username and/or email already exists in database
         // if (name === 'username' && value || name === 'email' && value) {
@@ -44,7 +46,7 @@ const useForm = (callback, inputValidation, state) => {
     }
 
     const handleChange = (e) => {
-        const { name, value } = e.target
+        const { name, value } = e.target;
         setValues({
             ...values,
             [name]: value
@@ -53,24 +55,31 @@ const useForm = (callback, inputValidation, state) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(e.target)
+        console.log(values)
         // Remove focus on input if any 
         // @ Enter key
         if (document.activeElement) {
             document.activeElement.blur();
         }
 
-        setErrors(inputValidation(values))
-        setIsSubmit(true)
+        // if(errors.matching_passwords) {
+        //     delete errors.matching_passwords
+        // }
+
+        setErrors(inputValidation(values));
+        setIsSubmit(true);
     }
 
     useEffect(() => {
+        // Error check for Singup form
+        errors.matching_passwords && setErrorMessage('Passwords do not match');
+        // console.log(errors)
         if (Object.keys(errors).length === 0 && isSubmit) {
-            callback(values)
+            callback(values);
         }
     }, [errors])
 
-    return { handleChange, handleFocus, handleBlur, handleSubmit, setValues, setIsSubmit, values, errors }
+    return { handleChange, handleFocus, handleBlur, handleSubmit, setIsSubmit, values, errors }
 }
 
-export default useForm
+export default useForm;

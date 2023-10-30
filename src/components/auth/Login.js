@@ -1,6 +1,6 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { Link, useHistory, useLocation } from 'react-router-dom';
-import inputValidation from '../utilities/validateLogin';
+import inputValidation from './helpers/validateLogin';
 import useFormValidation from '../hooks/useFormValidation'
 import { UserContext } from '../../contexts/UserContext';
 import { PathContext } from '../../contexts/PathContext';
@@ -12,8 +12,8 @@ const Login = () => {
   const [loading, setLoading] = useState(false);
   const [isValid, setIsValid] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
+  const [succesMessage, setSuccessMessage] = useState('');
   const [showPassword, setShowPassword] = useState(false);
-
 
   const { setPathname } = useContext(PathContext);
   const { setUser } = useContext(UserContext);
@@ -21,30 +21,43 @@ const Login = () => {
   const location = useLocation();
   const history = useHistory();
 
-  // Setting path with component url pathname onload
-  useEffect(() => {
-    setPathname(location.pathname);
-  }, []);
-
   const callback = (values) => {
     setInput(values)
     setIsValid(true)
   }
 
-  const { handleChange, handleFocus, handleBlur, handleSubmit, setValues, values, errors } = useFormValidation(
+  const {
+    handleChange,
+    handleFocus,
+    handleBlur,
+    handleSubmit,
+    values,
+    errors
+  } = useFormValidation(
     callback,
     inputValidation,
     {
       email: '',
       password: ''
     }
-  )
+    );
+
   // Show passsword button handler
   const handleMouseDown = (e) => {
     // Prevents firing form
     e.preventDefault();
     !showPassword ? setShowPassword(true) : setShowPassword(false);
   }
+
+  // Setting path with component url pathname onload
+  useEffect(() => {
+    if (location.state) {
+      if (location.state.message) {
+        setSuccessMessage(location.state.message);
+      }
+    }
+    setPathname(location.pathname);
+  }, []);
 
   // Show/hide password
   useEffect(() => {
@@ -57,9 +70,9 @@ const Login = () => {
 
       // if errorMessage already containes a message
       // change errorMessage to empty string
-      if (errorMessage) {
-        setErrorMessage('')
-      }
+      // if (errorMessage) {
+      //   setErrorMessage('')
+      // }
 
       const userInput = {
         email: input.email,
@@ -102,10 +115,6 @@ const Login = () => {
         .catch((error) => {
           setLoading(false);
           setErrorMessage(error.message);
-          setValues({
-            email: '',
-            password: ''
-          })
           setIsValid(false);
         });
       } catch (error) {
@@ -120,7 +129,11 @@ const Login = () => {
     if (errorMessage) {
       document.querySelector('.show-error-message').innerHTML = errorMessage.replaceAll('"', '')
     }
-  }, [errorMessage])
+
+    if (succesMessage) {
+      document.querySelector('.show-success-message').innerHTML = succesMessage.replaceAll('"', '')
+    }
+  }, [errorMessage, succesMessage])
 
   return (
     <div className="form-container flex justify-center">
@@ -135,7 +148,7 @@ const Login = () => {
             <div className="form-title">
                 <h2>Log in to your account</h2>
               </div>
-              <p className={errorMessage ? 'show-error-message' : 'hide'}></p>
+            <p className={errorMessage ? 'show-error-message' : succesMessage ? 'show-success-message' : 'hide'}></p>
             <form className="auth-form" onSubmit={handleSubmit}>
               <div className="form-element">
                 <label htmlFor="name">Email</label>
