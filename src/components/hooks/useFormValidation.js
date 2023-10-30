@@ -62,14 +62,18 @@ const useForm = (callback, inputValidation, state, setErrorMessage) => {
             document.activeElement.blur();
         }
 
+        // if(errors.matching_passwords) {
+        //     delete errors.matching_passwords
+        // }
+
         setErrors(inputValidation(values));
         setIsSubmit(true);
     }
 
     useEffect(() => {
         // Error check for Singup form
-        errors.matching_passwords && setErrorMessage(errors.matching_passwords);
-        console.log(errors)
+        errors.matching_passwords && setErrorMessage('Passwords do not match');
+        // console.log(errors)
         if (Object.keys(errors).length === 0 && isSubmit) {
             callback(values);
         }

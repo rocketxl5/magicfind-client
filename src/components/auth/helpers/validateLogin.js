@@ -1,8 +1,9 @@
 const validateLogin = (values) => {
+
   let errors = {};
 
   // Check for email
-  if (!values.email.trim()) {
+  if (!values.email) {
     errors.email = 'Email is required';
   }
 

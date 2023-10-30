@@ -1,6 +1,6 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { Link, useHistory, useLocation } from 'react-router-dom';
-import inputValidation from '../utilities/validateLogin';
+import inputValidation from './helpers/validateLogin';
 import useFormValidation from '../hooks/useFormValidation'
 import { UserContext } from '../../contexts/UserContext';
 import { PathContext } from '../../contexts/PathContext';
@@ -14,7 +14,6 @@ const Login = () => {
   const [errorMessage, setErrorMessage] = useState('');
   const [succesMessage, setSuccessMessage] = useState('');
   const [showPassword, setShowPassword] = useState(false);
-
 
   const { setPathname } = useContext(PathContext);
   const { setUser } = useContext(UserContext);

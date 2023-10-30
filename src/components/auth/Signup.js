@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { Link, useHistory, useLocation } from 'react-router-dom';
-import inputValidation from '../utilities/validateSignup';
+import inputValidation from './helpers/validateSignup';
 import useFormValidation from '../hooks/useFormValidation';
 import { PathContext } from '../../contexts/PathContext';
 import { api } from '../../api/resources';
@@ -53,9 +53,9 @@ const Signup = () => {
       setLoading(true);
       console.log(input)
       const userInput = {
-        name: input.username,
-        email: input.email,
-        country: input.country,
+        name: input.username.trim(),
+        email: input.email.trim(),
+        country: input.country.trim(),
         password: input.password,
       }
 
@@ -101,6 +101,8 @@ const Signup = () => {
       document.querySelector('.show-error-message').innerHTML = errorMessage
     }
   }, [errorMessage])
+
+  useEffect(() => { }, [errors])
 
   return (
     <div className="form-container flex justify-center">
