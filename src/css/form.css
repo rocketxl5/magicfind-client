@@ -81,7 +81,7 @@ input:-webkit-autofill:active{
 
 /*************************/
 /*************************/
-/* Login Form Style ******/
+/* Auth Form Style ******/
 /*************************/
 /*************************/
 .login-password {
@@ -162,16 +162,35 @@ input:-webkit-autofill:active{
     border: 1px solid var(--clr-success);
     border-radius: 5px;
     color: var(--clr-blue);
-    background-color: rgba(34, 170, 68, 0.1);;
+    background-color: rgba(34, 170, 68, 0.1);
 }
 
 .input-error {
     border-color: var(--clr-danger) !important; 
 }
 
-.input-error::placeholder {
-    color: var(--clr-danger) !important;
+.empty-field {
+    color: var(--clr-danger);
 }
+
+.auth-form span {
+    color: var(--clr-danger);
+    display: none;
+}
+
+input:invalid[focused="true"] ~ span {
+    display: block;
+}
+
+/* .input-error::placeholder {
+    color: var(--clr-danger) !important;
+} */
+
+.form-error {
+
+}
+
+
 
 /*************************/
 /*************************/

@@ -14,6 +14,8 @@ const Login = () => {
   const [errorMessage, setErrorMessage] = useState('');
   const [succesMessage, setSuccessMessage] = useState('');
   const [showPassword, setShowPassword] = useState(false);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
   const { setPathname } = useContext(PathContext);
   const { setUser } = useContext(UserContext);
@@ -27,11 +29,9 @@ const Login = () => {
   }
 
   const {
-    handleChange,
     handleFocus,
     handleBlur,
     handleSubmit,
-    values,
     errors
   } = useFormValidation(
     callback,
@@ -157,8 +157,8 @@ const Login = () => {
                   type="email"
                   name="email"
                   id="email"
-                  value={values.email}
-                  onChange={handleChange}
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                   onBlur={handleBlur}
                   onFocus={handleFocus}
                   placeholder={errors.email ? errors.email : "Email"} />
@@ -171,8 +171,8 @@ const Login = () => {
                     type="password"
                     name="password"
                     id="password"
-                    value={values.password}
-                    onChange={handleChange}
+                    value={password}
+                    onChange={(e) => { setPassword(e.target.value) }}
                     onBlur={handleBlur}
                     onFocus={handleFocus}
                     placeholder={errors.password ? errors.password : "Password"}

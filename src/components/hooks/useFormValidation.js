@@ -2,21 +2,35 @@ import { useState, useEffect } from 'react'
 
 // Optional setErrorMessage callback function for Singup form validation
 // Sets error message if passwords dont match
-const useForm = (callback, inputValidation, state, setErrorMessage) => {
-    const [values, setValues] = useState(state)
+const useForm = (callback, inputValidation, setErrorMessage) => {
+    const [values, setValues] = useState({})
     const [errors, setErrors] = useState({})
     const [isSubmit, setIsSubmit] = useState(false)
 
     const handleFocus = (e) => {
         if (e.target.classList.contains('input-error')) {
             e.target.classList.remove('input-error')
+
         }
     }
 
     const handleBlur = (e) => {
         let { name, value } = e.target
-        name = (name === 'repeat_password') ? 'password' : name;
+
+        // !value && setErrors({ ...errors, name: value })
+        // Trim values if its not password related
+        // value = (e.target.type !== 'password' && value) ? value.trim() : value;
+
+
+
+        setValues({
+            ...values,
+            [name]: value
+        })
+
         if (!value && isSubmit) {
+            name = (name === 'repeatPassword') ? 'password' : name;
+            // if (!value && isSubmit) {
             e.target.classList.add('input-error');
             e.target.placeholder = `${name.charAt(0, 1).toUpperCase()}${name.substring(1)} is required`;
         }
@@ -45,26 +59,22 @@ const useForm = (callback, inputValidation, state, setErrorMessage) => {
         // }
     }
 
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        setValues({
-            ...values,
-            [name]: value
-        })
-    }
+    // const handleChange = (e) => {
+    //     const { name, value } = e.target;
+    //     setValues({
+    //         ...values,
+    //         [name]: value
+    //     })
+    // }
 
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log(values)
-        // Remove focus on input if any 
+        // Remove focus on input if any
         // @ Enter key
         if (document.activeElement) {
             document.activeElement.blur();
         }
-
-        // if(errors.matching_passwords) {
-        //     delete errors.matching_passwords
-        // }
 
         setErrors(inputValidation(values));
         setIsSubmit(true);
@@ -72,14 +82,15 @@ const useForm = (callback, inputValidation, state, setErrorMessage) => {
 
     useEffect(() => {
         // Error check for Singup form
-        errors.matching_passwords && setErrorMessage('Passwords do not match');
-        // console.log(errors)
+        // errors.matchingPasswords && setErrorMessage(errors.matchingPasswords);
+        console.log(errors)
+        errors.matchingPasswords && setErrorMessage('Passwords do not match');
         if (Object.keys(errors).length === 0 && isSubmit) {
             callback(values);
         }
     }, [errors])
 
-    return { handleChange, handleFocus, handleBlur, handleSubmit, setIsSubmit, values, errors }
+    return { handleFocus, handleBlur, handleSubmit, setIsSubmit, values, errors }
 }
 
 export default useForm;
