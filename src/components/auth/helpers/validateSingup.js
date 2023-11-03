@@ -1,52 +1,74 @@
 import capitalizeWord from '../../utilities/capitalizeWord';
 import inputValidationParams from './inputValidationParams';
 
-const validateSignup = (values, target) => {
-    let errors = {};
+const validateSignup = (values, refs, event) => {
+    const validationParams = inputValidationParams(values)
+// console.log(validationParams)
+// console.log(values)
+// console.log(refs)
 
 
-    const validateInputValue = (key, values) => {
-        const params = inputValidationParams(key, values)
+    const keys = getKeys(refs);
 
-        // If input value does not meet criteria
-        if (values[key] && !params.pattern.test(values[key].trim())) {
-            errors[key] = params.error;
-            // Assign password error
-            if (key === 'confirmPassword') {
-                errors['password'] = params.error;
+    // console.log(event.type)
+
+    dispatchInputHandler(refs, keys, event, validationParams)
+
+
+    // const value = refs[keys].value;
+
+    // if (validationParams[keys].pattern.test(value)) {
+    //     refs[keys].classList.add('input-success')
+    // }
+
+
+
+    function getKeys(obj) { return Object.keys(obj) }
+    function dispatchInputHandler(refs, keys, event, validationParams) {
+
+        const inputCount = keys.length;
+        const key = inputCount === 1 && keys[0];
+        const params = inputCount === 1 && getValidationParams(key, validationParams);
+        // console.log(validationParams)
+
+        switch (event.type) {
+            case 'change':
+                handleInputChange(refs[key], params)
+                break;
+            case 'focus':
+                handleInputFocus(refs[key], params)
+                break;
+            case 'blur':
+                handleInputBlur(refs[key], params)
+                break;
+            // submit
+            default:
+                handleInputSubmit(refs, validationParams)
+                break;
+        }
+
+        function getValidationParams(key, validationParams) {
+            // console.log(key)
+            // console.log(validationParams)
+            return {
+                pattern: validationParams[key].pattern,
+                errorMessage: validationParams[key].errorMessage
             }
         }
-    }
+        function handleInputChange(ref, params) {
 
+        }
+        function handleInputFocus(ref, params) {
+            console.log(ref)
+            console.log(params)
+        }
+        function handleInputBlur(ref, params) {
+            console.log(ref)
+            console.log(params)
+        }
+        function handleInputSubmit(refs, validationParams) {
 
-    // If target is form => validation called on form submit
-    // Check for empty fields. If found populate errors object with 
-    // with proper error message
-    if (target.nodeName.toLowerCase() === 'form') {
-        const keys = Object.keys(values);
-        keys.forEach(key => {
-            // If empty string
-            if (!values[key]) {
-                // Set error prop with error message
-                errors[key] = `${capitalizeWord(key === 'confirmPassword' ? 'password' : key)} is required`
-            }
-            // Else value is set 
-            else {
-                // validate value
-                validateInputValue(key, values)
-            }
-        })
-        // validation called on input blur event
-    } else {
-        if (target.name === 'confirmPassword') {
-            console.log('not ready')
-        } else {
-
-            validateInputValue(target.name, values)
         }
     }
-
-    return errors;
-};
-
+}
 export default validateSignup;

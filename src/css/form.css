@@ -169,6 +169,10 @@ input:-webkit-autofill:active{
     border-color: var(--clr-danger) !important; 
 }
 
+.input-success {
+    border-color: var(--clr-success) !important;
+}
+
 .empty-field {
     color: var(--clr-danger);
 }

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useRef, useState, useEffect, useContext } from 'react';
 import { Link, useHistory, useLocation } from 'react-router-dom';
 
 import FormInput from './FormInput';
@@ -9,6 +9,7 @@ import inputValidation from './helpers/validateSingup';
 // import useFormValidation from '../hooks/useFormValidation';
 import { PathContext } from '../../contexts/PathContext';
 import { api } from '../../api/resources';
+import validateLogin from './helpers/validateLogin';
 
 const Signup = () => {
 
@@ -47,12 +48,26 @@ const Signup = () => {
     }
   }
 
+  const usernameRef = useRef(null);
+  const emailRef = useRef(null);
+  const countryRef = useRef(null);
+  const passwordRef = useRef(null);
+  const confirmPasswordRef = useRef(null);
+
+  const refs = {
+    username: usernameRef.current,
+    email: emailRef.current,
+    country: countryRef.current,
+    password: passwordRef.current,
+    confirmPassword: confirmPasswordRef.current
+  }
+
   const inputs = [
-    { id: 1, name: 'username', type: 'text', value: values.username, placeholder: 'Username', label: 'Username' },
-    { id: 2, name: 'email', type: 'text', value: values.email, placeholder: 'Email', label: 'Email' },
-    { id: 3, name: 'country', type: 'text', value: values.country, placeholder: 'Country', label: 'Country' },
-    { id: 4, name: 'password', type: 'password', value: values.password, placeholder: 'Password', label: 'Password' },
-    { id: 5, name: 'confirmPassword', type: 'password', value: values.confirmPassword, placeholder: 'Confirm Password', label: 'Confirm Password' },
+    { id: 1, name: 'username', type: 'text', value: values.username, placeholder: 'Username', label: 'Username', ref: usernameRef },
+    { id: 2, name: 'email', type: 'text', value: values.email, placeholder: 'Email', label: 'Email', ref: emailRef },
+    { id: 3, name: 'country', type: 'text', value: values.country, placeholder: 'Country', label: 'Country', ref: countryRef },
+    { id: 4, name: 'password', type: 'password', value: values.password, placeholder: 'Password', label: 'Password', ref: passwordRef },
+    { id: 5, name: 'confirmPassword', type: 'password', value: values.confirmPassword, placeholder: 'Confirm Password', label: 'Confirm Password', ref: confirmPasswordRef },
   ];
   const { setPathname } = useContext(PathContext);
 
@@ -107,16 +122,27 @@ const Signup = () => {
     }
   }, [errorMessage])
 
-  const onChange = (e) => {
+  const handleChange = (e) => {
     setValues({ ...values, [e.target.name]: e.target.value })
+
+    inputValidation(values, { [e.target.name]: refs[e.target.name] }, e);
+  }
+
+  const handleBlur = (e) => {
+    inputValidation(values, { [e.target.name]: refs[e.target.name] }, e)
+  }
+
+  const handleFocus = (e) => {
+
+    inputValidation(values, { [e.target.name]: refs[e.target.name] }, e)
   }
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    const inputErrors = inputValidation(values, e.target);
+    // inputValidation(values, refs);
+    // const inputErrors = inputValidation(values, e.target);
     // If at least 1 error, update errors state
-    Object.keys(inputErrors).length && setErrors(inputErrors)
+    // Object.keys(inputErrors).length && setErrors(inputErrors)
   }
 
 
@@ -141,7 +167,7 @@ const Signup = () => {
             <form className="auth-form" name="signupForm" onSubmit={handleSubmit}>
               {
                 inputs.map((input) => {
-                  return <FormInput key={input.id} values={values} param={params[input.name]} {...input} errors={errors} setErrors={(state) => setErrors(state)} onChange={onChange} />
+                  return <FormInput key={input.id} {...input} errors={errors} onChange={handleChange} onFocus={handleFocus} onBlur={handleBlur} ref={input.ref} />
                 })
               }
               <div className="form-element">
