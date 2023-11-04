@@ -180,19 +180,19 @@ input:-webkit-autofill:active{
 }
 
 .form-element input + .input-message {
-    margin-block-start: var(--size-1);
+   
     max-height: 0; 
     overflow: hidden;
-    margin-bottom: 1rem;
-   transition: all 0.5s ease-out;
+   transition: all 0.3s ease-out;
 }
 
 .form-element input:invalid + .input-message {
     max-height: 10rem;
-    transition: all 0.2s ease-in 0.3s;
+    transition: all 0.3s ease-in 0.3s;
 }
 
 .form-element input + .input-message .input-message-inner {
+    margin-block: var(--size-1);
     border: 1px solid rgba(220, 53, 69, 1);
     line-height: 1.4;
     color: var(--clr-danger); 
@@ -202,11 +202,11 @@ input:-webkit-autofill:active{
 
 .form-element input + .input-message p {
     opacity: 0;
-    transition: all 0.2s ease-out; 
+    transition: opacity 0.1s ease-out; 
 }
 .form-element input:invalid + .input-message p {
     opacity: 1;
-    transition: all 0.2s ease-in 0.5s;
+    transition: opacity 0.1s ease-in 0.5s;
 }
 
 .empty-field {

@@ -1,12 +1,18 @@
-import React, { forwardRef } from 'react';
+import React, { useState, useEffect, forwardRef } from 'react';
 import ErrorMessage from './ErrorMessage';
 
 const FormInput = forwardRef((props, ref) => {
     const { id, name, onChange, onFocus, onBlur, message, errors, label, ...inputProps } = props;
-    const inputref = ref;
-    // console.log(errors[name])
-    // console.log(ref)
-    // console.log(name)
+    const inputRef = ref;
+
+    useEffect(() => {
+        if (errors[name]) {
+            inputRef.current.setCustomValidity(errors[name])
+        } else {
+            inputRef.current.setCustomValidity('')
+        }
+    }, [errors[name]])
+
     return (
         <div className="form-element">
 
@@ -18,9 +24,11 @@ const FormInput = forwardRef((props, ref) => {
                 onChange={onChange}
                 onFocus={onFocus}
                 onBlur={onBlur}
-                ref={inputref}
+                ref={inputRef}
             />
-            <ErrorMessage message={message} error={errors[name]} />
+            {
+                <ErrorMessage message={message} />
+            }
         </div>
     )
 })

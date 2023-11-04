@@ -3,25 +3,10 @@ import inputValidationParams from './inputValidationParams';
 
 const validateSignup = (values, refs, event, errors, setErrors) => {
     const validationParams = inputValidationParams(values);
-
-// console.log(validationParams)
-// console.log(values)
-// console.log(refs)
-
-
     const keys = getKeys(refs);
-
-    // console.log(event.type)
 
     dispatchInputHandler(refs, keys, event, validationParams)
 
-
-    // const value = refs[keys].value;
-
-    // if (validationParams[keys].pattern.test(value)) {
-    //     refs[keys].classList.add('input-success')
-    // }
-    // 
     function getKeys(obj) { return Object.keys(obj) }
     function dispatchInputHandler(refs, keys, event, validationParams) {
 
@@ -32,70 +17,56 @@ const validateSignup = (values, refs, event, errors, setErrors) => {
 
         switch (event.type) {
             case 'change':
-                handleInputChange(refs[key], params)
+                handleInputChange(refs[key], params, setErrors, errors)
                 break;
             case 'focus':
-                handleInputFocus(refs[key], params)
+                handleInputFocus(refs[key], params, setErrors, errors)
                 break;
             case 'blur':
-                handleInputBlur(refs[key], params)
+                handleInputBlur(refs[key], params, setErrors, errors)
                 break;
             // submit
             default:
-                handleInputSubmit(refs, validationParams)
+                handleInputSubmit(refs, validationParams, setErrors, errors)
                 break;
         }
+    }
 
-        function getValidationParams(key, validationParams) {
-            // console.log(key)
-            // console.log(validationParams)
-            return {
-                pattern: validationParams[key].pattern,
-                errorMessage: validationParams[key].errorMessage
-            }
+    function getValidationParams(key, validationParams) {
+        // console.log(key)
+        // console.log(validationParams)
+        return {
+            pattern: validationParams[key].pattern,
+            errorMessage: validationParams[key].errorMessage
         }
-        function handleInputChange(ref, params) {
-            const value = ref.value;
-            const pattern = params.pattern;
-            console.log(pattern)
-            console.log(value)
-            if (pattern.test(value)) {
-                ref.setCustomValidity('');
-                const clone = { ...errors }
-                delete clone[ref.name]
-                setErrors(clone)
-            }
-        }
-        function handleInputFocus(ref, params) {
-            const value = ref.value;
-            const errorMessage = params.errorMessage;
+    }
+    function handleInputChange(ref, params, setErrors, errors) {
+        const value = ref.value;
+        const pattern = params.pattern;
 
-            if (!value) {
-                ref.setCustomValidity('invalid');
-                setErrors({ ...errors, [ref.name]: errorMessage })
-            }
+        if (pattern.test(value)) {
+            ref.setCustomValidity('');
+            // setTimeout(() => {
+            //     updateErrors(ref)
+            // }, 500)
         }
-        function handleInputBlur(ref, params) {
-            const value = ref.value;
+    }
+    function handleInputFocus(ref, params, setErrors, errors) {
+        const value = ref.value;
 
-            if (!value) {
-                ref.setCustomValidity('');
-                const clone = { ...errors }
-                delete clone[ref.name]
-                setErrors(clone)
-            }
+        if (!value) {
+            setErrors({ [ref.name]: true })
+        }
+    }
+    function handleInputBlur(ref, setErrors) {
+        const value = ref.value;
 
+        if (!value) {
+            setErrors({ [ref.name]: false })
         }
-        function handleInputSubmit(refs, validationParams) {
+    }
+    function handleInputSubmit(refs, validationParams, setErrors, errors) {
 
-        }
-
-        function addClassName(ref, className) {
-            ref.classList.add(className);
-        }
-        function removeClassName(ref, className) {
-            ref.classList.remove(className);
-        }
     }
 }
 export default validateSignup;

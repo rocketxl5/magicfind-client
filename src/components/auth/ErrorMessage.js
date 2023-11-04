@@ -1,7 +1,7 @@
 import React from 'react'
 
-const ErrorMessage = (props) => {
-    const { message, error } = props;
+const ErrorMessage = ({ message }) => {
+// console.log(message)
     return (
         <div className="input-message">
             <div className="input-message-inner">

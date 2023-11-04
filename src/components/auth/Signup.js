@@ -41,7 +41,7 @@ const Signup = () => {
 
   const inputs = [
     { id: 1, name: 'username', type: 'text', value: values.username, placeholder: 'Username', label: 'Username', ref: usernameRef },
-    { id: 2, name: 'email', type: 'text', value: values.email, placeholder: 'Email', label: 'Email', ref: emailRef, message: 'Invalid email. Plese provide a valid email address.' },
+    { id: 2, name: 'email', type: 'text', value: values.email, placeholder: 'Email', label: 'Email', ref: emailRef, message: 'Invalid email. Please provide a valid email address.' },
     { id: 3, name: 'country', type: 'text', value: values.country, placeholder: 'Country', label: 'Country', ref: countryRef },
     { id: 4, name: 'password', type: 'password', value: values.password, placeholder: 'Password', label: 'Password', ref: passwordRef, message: 'Password should be:\n8 to 16 characters long\nIt should contain:\n1 capital letter\n1 number\n1 special character (!@#$%^&*).' },
     { id: 5, name: 'confirmPassword', type: 'password', value: values.confirmPassword, placeholder: 'Confirm Password', label: 'Confirm Password', ref: confirmPasswordRef },
