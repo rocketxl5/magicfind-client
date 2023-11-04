@@ -25,29 +25,6 @@ const Signup = () => {
   const [errorMessage, setErrorMessage] = useState('');
   const [errors, setErrors] = useState({});
 
-  const params = {
-    username: {
-      pattern: /^(?=.*[a-z])[a-z0-9]{3,12}$/,
-      error: 'Must be 3 to 12 characters long. Lowercase letters and numbers only.'
-    },
-    email: {
-      pattern: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
-      error: 'Please provide a valid email address'
-    },
-    country: {
-      pattern: /^[a-zA-Z]+$/,
-      error: 'Must only be letters'
-    },
-    password: {
-      pattern: /^(?=.*[0-9])(?=.*[A-Z])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,12}$/,
-      error: 'Must be 6 to 12 characters long. With at least 1 capital letter, 1 number, 1 special character'
-    },
-    confirmPassword: {
-      pattern: new RegExp(values.password),
-      error: 'Passwords don\'t match'
-    }
-  }
-
   const usernameRef = useRef(null);
   const emailRef = useRef(null);
   const countryRef = useRef(null);
@@ -64,9 +41,9 @@ const Signup = () => {
 
   const inputs = [
     { id: 1, name: 'username', type: 'text', value: values.username, placeholder: 'Username', label: 'Username', ref: usernameRef },
-    { id: 2, name: 'email', type: 'text', value: values.email, placeholder: 'Email', label: 'Email', ref: emailRef },
+    { id: 2, name: 'email', type: 'text', value: values.email, placeholder: 'Email', label: 'Email', ref: emailRef, message: 'Invalid email. Plese provide a valid email address.' },
     { id: 3, name: 'country', type: 'text', value: values.country, placeholder: 'Country', label: 'Country', ref: countryRef },
-    { id: 4, name: 'password', type: 'password', value: values.password, placeholder: 'Password', label: 'Password', ref: passwordRef },
+    { id: 4, name: 'password', type: 'password', value: values.password, placeholder: 'Password', label: 'Password', ref: passwordRef, message: 'Password should be:\n8 to 16 characters long\nIt should contain:\n1 capital letter\n1 number\n1 special character (!@#$%^&*).' },
     { id: 5, name: 'confirmPassword', type: 'password', value: values.confirmPassword, placeholder: 'Confirm Password', label: 'Confirm Password', ref: confirmPasswordRef },
   ];
   const { setPathname } = useContext(PathContext);
@@ -125,24 +102,21 @@ const Signup = () => {
   const handleChange = (e) => {
     setValues({ ...values, [e.target.name]: e.target.value })
 
-    inputValidation(values, { [e.target.name]: refs[e.target.name] }, e);
+    inputValidation(values, { [e.target.name]: refs[e.target.name] }, e, errors, (errors) => setErrors(errors));
   }
 
   const handleBlur = (e) => {
-    inputValidation(values, { [e.target.name]: refs[e.target.name] }, e)
+    inputValidation(values, { [e.target.name]: refs[e.target.name] }, e, errors, (errors) => setErrors(errors))
   }
 
   const handleFocus = (e) => {
 
-    inputValidation(values, { [e.target.name]: refs[e.target.name] }, e)
+    inputValidation(values, { [e.target.name]: refs[e.target.name] }, e, errors, (errors) => setErrors(errors))
   }
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // inputValidation(values, refs);
-    // const inputErrors = inputValidation(values, e.target);
-    // If at least 1 error, update errors state
-    // Object.keys(inputErrors).length && setErrors(inputErrors)
+    inputValidation(values, refs, e, errors, (errors) => setErrors(errors))
   }
 
 

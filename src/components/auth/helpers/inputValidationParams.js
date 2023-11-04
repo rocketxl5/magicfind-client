@@ -10,11 +10,11 @@ const inputValidationParams = (values) => {
         },
         country: {
             pattern: /^[a-zA-Z]+$/,
-            errorMessage: 'Country must only be letters.'
+            errorMessage: ``
         },
         password: {
-            pattern: /^(?=.*[0-9])(?=.*[A-Z])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,12}$/,
-            errorMessage: 'Password must be 6 to 12 characters long and contain at least 1 capital letter, 1 number and 1 special character (!@#$%^&*).'
+            pattern: /^(?=.*[0-9])(?=.*[A-Z])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,16}$/,
+            errorMessage: 'Password should be:\n8 to 16 characters long\nIt should contain:\n1 capital letter\n1 number\n1 special character (!@#$%^&*).'
         },
         confirmPassword: {
             pattern: new RegExp(values.password),
