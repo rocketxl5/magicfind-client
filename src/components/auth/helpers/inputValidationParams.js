@@ -14,7 +14,7 @@ const inputValidationParams = (values) => {
         },
         password: {
             pattern: /^(?=.*[0-9])(?=.*[A-Z])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,16}$/,
-            errorMessage: 'Password should be:\n8 to 16 characters long\nIt should contain:\n1 capital letter\n1 number\n1 special character (!@#$%^&*).'
+            errorMessage: 'Criteria should be:\n8 to 16 characters long\nIt should contain:\n1 capital letter\n1 number\n1 special character (!@#$%^&*).'
         },
         confirmPassword: {
             pattern: new RegExp(values.password),

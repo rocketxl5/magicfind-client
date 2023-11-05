@@ -40,25 +40,25 @@ const validateSignup = (values, refs, event, errors, setErrors) => {
             errorMessage: validationParams[key].errorMessage
         }
     }
-    function handleInputChange(ref, params, setErrors, errors) {
+    function handleInputChange(ref, params) {
         const value = ref.value;
         const pattern = params.pattern;
-
+        console.log(pattern)
         if (pattern.test(value)) {
-            ref.setCustomValidity('');
+            // ref.setCustomValidity('');
             // setTimeout(() => {
             //     updateErrors(ref)
             // }, 500)
         }
     }
-    function handleInputFocus(ref, params, setErrors, errors) {
+    function handleInputFocus(ref, params, errors) {
         const value = ref.value;
-
+        console.log(ref)
         if (!value) {
             setErrors({ [ref.name]: true })
         }
     }
-    function handleInputBlur(ref, setErrors) {
+    function handleInputBlur(ref) {
         const value = ref.value;
 
         if (!value) {

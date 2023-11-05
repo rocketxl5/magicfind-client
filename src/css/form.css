@@ -41,6 +41,13 @@ input:-webkit-autofill:active{
     border-radius: 5px;
 }
 
+
+/*************************/
+/*************************/
+/* Auth Form Style ******/
+/*************************/
+/*************************/
+
 .auth-form {
     padding-inline: 4rem;
     padding-block: 3rem;
@@ -77,13 +84,6 @@ input:-webkit-autofill:active{
     opacity: 0;
 }
 
-
-
-/*************************/
-/*************************/
-/* Auth Form Style ******/
-/*************************/
-/*************************/
 .login-password {
     background-color: #fff;
     border: 1px solid var(--clr-grey);
@@ -176,59 +176,61 @@ input:-webkit-autofill:active{
 .form-element input:focus {
     /* clr-blue-steel */
     padding: calc(var(--size-1) - 1px) !important;
-    border: 2px solid var(--clr-blue-steel)!important;
+    border: 2px solid rgb(103, 152, 180, 0.7) !important;
 }
 
-.form-element input + .input-message {
+.form-element input + .validation-container {
    
     max-height: 0; 
     overflow: hidden;
    transition: all 0.3s ease-out;
 }
 
-.form-element input:invalid + .input-message {
-    max-height: 10rem;
+.form-element input:invalid + .validation-container {
+    max-height: 15rem;
     transition: all 0.3s ease-in 0.3s;
 }
 
-.form-element input + .input-message .input-message-inner {
-    margin-block: var(--size-1);
-    border: 1px solid rgba(220, 53, 69, 1);
-    line-height: 1.4;
-    color: var(--clr-danger); 
-    padding: 0.5rem;
+.form-element input + .validation-container .validation-wrapper {
+    margin-block: var(--size-2);
+    border: 1px solid var(--clr-grey);
+    background-color: rgba(224, 203, 205, 0.1);
+    color: rgb(27, 47, 65, 0.7);
+    padding-inline: 1rem;
+    padding-block: 0.8rem;
     border-radius: 5px;
 }
 
-.form-element input + .input-message p {
+.form-element input + .validation-container .validation-message {
+    font-family: sans-serif;
     opacity: 0;
     transition: opacity 0.1s ease-out; 
 }
-.form-element input:invalid + .input-message p {
+.form-element input:invalid + .validation-container .validation-message {
     opacity: 1;
     transition: opacity 0.1s ease-in 0.5s;
 }
+
+.validation-message p {
+    line-height: 1.8;
+    display: flex;
+    align-items: center;
+}
+
 
 .empty-field {
     color: var(--clr-danger);
 }
 
-.auth-form span {
+/* .auth-form span {
     color: var(--clr-danger);
     display: none;
-}
-
-input:invalid[focused="true"] ~ span {
-    display: block;
-}
+} */
 
 /* .input-error::placeholder {
     color: var(--clr-danger) !important;
 } */
 
-.form-error {
-
-}
 
 
 

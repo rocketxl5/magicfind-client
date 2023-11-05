@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect, useContext } from 'react';
+import React, { useRef, useState, useEffect, useContext, useReducer } from 'react';
 import { Link, useHistory, useLocation } from 'react-router-dom';
 
 import FormInput from './FormInput';
@@ -40,11 +40,64 @@ const Signup = () => {
   }
 
   const inputs = [
-    { id: 1, name: 'username', type: 'text', value: values.username, placeholder: 'Username', label: 'Username', ref: usernameRef },
-    { id: 2, name: 'email', type: 'text', value: values.email, placeholder: 'Email', label: 'Email', ref: emailRef, message: 'Invalid email. Please provide a valid email address.' },
-    { id: 3, name: 'country', type: 'text', value: values.country, placeholder: 'Country', label: 'Country', ref: countryRef },
-    { id: 4, name: 'password', type: 'password', value: values.password, placeholder: 'Password', label: 'Password', ref: passwordRef, message: 'Password should be:\n8 to 16 characters long\nIt should contain:\n1 capital letter\n1 number\n1 special character (!@#$%^&*).' },
-    { id: 5, name: 'confirmPassword', type: 'password', value: values.confirmPassword, placeholder: 'Confirm Password', label: 'Confirm Password', ref: confirmPasswordRef },
+    {
+      id: 1,
+      name: 'username',
+      type: 'text',
+      value: values.username,
+      placeholder: 'Username',
+      label: 'Username',
+      ref: usernameRef,
+      requirements: [
+        { text: '3 to 12 characters', pattern: /^[a-z0-9]{3,12}$/ },
+        { text: 'Must begin with a letter', pattern: /^[a-z][a-z0-9]*$/ },
+        { text: 'Lowercase letters and numbers (optional)', pattern: /^[a-z0-9]$/ }
+      ]
+    },
+    {
+      id: 2,
+      name: 'email',
+      type: 'text',
+      value: values.email,
+      placeholder: 'Email',
+      label: 'Email',
+      ref: emailRef,
+      requirements: [{ text: 'Email should be a valid email' }]
+    },
+    {
+      id: 3,
+      name: 'country',
+      type: 'text',
+      value: values.country,
+      placeholder: 'Country',
+      label: 'Country',
+      ref: countryRef
+    },
+    {
+      id: 4,
+      name: 'password',
+      type: 'password',
+      value: values.password,
+      placeholder: 'Password',
+      label: 'Password',
+      ref: passwordRef,
+      requirements: [
+        { text: '8 to 16 characters long', pattern: /^.{8,16}$/ },
+        { text: '1 capital letter', pattern: /[A-Z]/ },
+        { text: '1 number', pattern: /[0-9]/ },
+        { text: '1 special character: ! @ # $ % ^ & *', pattern: /[!@#$%^&*]/ }
+      ]
+    },
+    {
+      id: 5,
+      name: 'confirmPassword',
+      type: 'password',
+      value: values.confirmPassword,
+      placeholder: 'Confirm Password',
+      label: 'Confirm Password',
+      ref: confirmPasswordRef,
+      requirements: [{ text: 'Passwords don\'t match', pattern: values.password }]
+    }
   ];
   const { setPathname } = useContext(PathContext);
 

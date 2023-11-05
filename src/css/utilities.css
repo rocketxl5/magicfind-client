@@ -24,6 +24,16 @@
     margin-block-start: var(--size-3);
 }
 
+.margin-inline-end-1 {
+    margin-inline-end: var(--size-1);
+}
+.margin-inline-end-2 {
+    margin-inline-end: var(--size-2);
+}
+.margin-inline-end-3 {
+    margin-inline-end: var(--size-3);
+}
+
 .red-border {
     border-color: var(--clr-danger) !important; 
 }
@@ -152,6 +162,14 @@
 
 .color-dark {
     color: var(--clr-dark);
+}
+
+.danger {
+    color: var(--clr-danger);
+}
+
+.success {
+    color: var(--clr-success);
 }
 
 .hide {
