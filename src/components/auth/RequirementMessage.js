@@ -1,21 +1,8 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 
-const RequirementMessage = (props) => {
-    const { requirement, value, input } = props;
-    const [fullfiled, setFullfiled] = useState(false);
-
-    useEffect(() => {
-
-
-        if (document.activeElement === input.current && requirement.pattern) {
-
-            requirement.pattern.test(value) && setFullfiled(true);
-            // console.log(/lard/.test(value))
-        }
-
-    }, [value])
+const RequirementMessage = ({ requirement }) => {
     return (
-        <p><i className={`${!fullfiled ? 'fa-regular fa-circle-xmark danger' : 'fa-solid fa-check success'} margin-inline-end-1`}></i>{requirement.text}</p>
+        <p><i className={`${!requirement.fullfiled ? 'fa-regular fa-circle-xmark danger' : 'fa-solid fa-check success'} margin-inline-end-1`}></i>{requirement.text}</p>
     )
 }
 

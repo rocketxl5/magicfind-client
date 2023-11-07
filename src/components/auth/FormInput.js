@@ -1,19 +1,9 @@
-import React, { useEffect, forwardRef } from 'react';
+import React, { forwardRef } from 'react';
 import Requirements from './Requirements';
 
 const FormInput = forwardRef((props, ref) => {
-    const { id, name, value, onChange, onFocus, onBlur, requirements, errors, label, ...inputProps } = props;
+    const { id, name, inputState, onChange, onFocus, onBlur, label, ...inputProps } = props;
     const inputRef = ref;
-
-    useEffect(() => {
-        console.log(errors)
-        if (errors[name]) {
-            inputRef.current.setCustomValidity(errors[name])
-        } else {
-            inputRef.current.setCustomValidity('')
-        }
-    }, [errors[name]])
-
     return (
         <div className="form-element">
 
@@ -28,7 +18,8 @@ const FormInput = forwardRef((props, ref) => {
                 ref={inputRef}
             />
             {
-                <Requirements requirements={requirements} value={value} input={inputRef} />
+
+                <Requirements inputState={inputState} />
             }
         </div>
     )

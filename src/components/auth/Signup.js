@@ -1,18 +1,12 @@
 import React, { useRef, useState, useEffect, useContext, useReducer } from 'react';
 import { Link, useHistory, useLocation } from 'react-router-dom';
-
 import FormInput from './FormInput';
-
-
 import Spinner from '../layout/Spinner';
-import inputValidation from './helpers/validateSingup';
-// import useFormValidation from '../hooks/useFormValidation';
+import reducer from './reducer/inputReducer';
 import { PathContext } from '../../contexts/PathContext';
 import { api } from '../../api/resources';
-import validateLogin from './helpers/validateLogin';
 
 const Signup = () => {
-
   const [values, setValues] = useState({
     username: '',
     email: '',
@@ -20,11 +14,10 @@ const Signup = () => {
     password: '',
     confirmPassword: ''
   });
-  const [loading, setLoading] = useState(false);
-  const [isValid, setIsValid] = useState(false);
-  const [errorMessage, setErrorMessage] = useState('');
-  const [errors, setErrors] = useState({});
 
+  const [loading, setLoading] = useState(false);
+  const [isValidForm, setIsValidForm] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
   const usernameRef = useRef(null);
   const emailRef = useRef(null);
   const countryRef = useRef(null);
@@ -41,71 +34,81 @@ const Signup = () => {
 
   const inputs = [
     {
-      id: 1,
       name: 'username',
       type: 'text',
       value: values.username,
       placeholder: 'Username',
       label: 'Username',
       ref: usernameRef,
+      pattern: '(?=.*[a-z])[a-z0-9]{3,12}',
       requirements: [
-        { text: '3 to 12 characters', pattern: /^[a-z0-9]{3,12}$/ },
-        { text: 'Must begin with a letter', pattern: /^[a-z][a-z0-9]*$/ },
-        { text: 'Lowercase letters and numbers (optional)', pattern: /^[a-z0-9]$/ }
+        { text: '3 to 12 characters', pattern: /^[a-z0-9]{3,12}$/, fullfiled: false },
+        { text: 'Must begin with a letter', pattern: /^[a-z][a-z0-9]*$/, fullfiled: false },
+        { text: 'Lowercase letters and optional numbers', pattern: /^[a-z0-9]{3,}$/, fullfiled: false }
       ]
     },
     {
-      id: 2,
       name: 'email',
-      type: 'text',
+      type: 'email',
       value: values.email,
       placeholder: 'Email',
       label: 'Email',
       ref: emailRef,
-      requirements: [{ text: 'Email should be a valid email' }]
+      pattern: '[^@]+@[^@]+\.[a-zA-Z]{2,}',
+      requirements: [
+        { text: 'Enter a valid email address', pattern: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, fullfiled: false }
+      ]
     },
     {
-      id: 3,
       name: 'country',
       type: 'text',
       value: values.country,
       placeholder: 'Country',
       label: 'Country',
-      ref: countryRef
+      ref: countryRef,
+      pattern: '[a-zA-Z]{3,}',
+      requirements: [
+        { text: 'The country you currently live in', pattern: /^[a-zA-Z]{3,40}$/, fullfiled: false }
+      ]
     },
     {
-      id: 4,
       name: 'password',
       type: 'password',
       value: values.password,
       placeholder: 'Password',
       label: 'Password',
       ref: passwordRef,
+      pattern: '(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,16}',
       requirements: [
-        { text: '8 to 16 characters long', pattern: /^.{8,16}$/ },
-        { text: '1 capital letter', pattern: /[A-Z]/ },
-        { text: '1 number', pattern: /[0-9]/ },
-        { text: '1 special character: ! @ # $ % ^ & *', pattern: /[!@#$%^&*]/ }
+        { text: '8 to 16 characters long', pattern: /^.{8,16}$/, fullfiled: false },
+        { text: 'Must begin with a letter', pattern: /^[a-zA-Z]+/, fullfiled: false },
+        { text: 'One capital letter', pattern: /[A-Z]+/, fullfiled: false },
+        { text: 'One number', pattern: /^(?=.*[a-zA-Z]).*[0-9].*$/, fullfiled: false },
+        { text: 'One special character: [! @ # $ % ^ & *]', pattern: /^(?=.*[a-zA-Z]).*[!@#$%^&*].*$/, fullfiled: false }
       ]
     },
     {
-      id: 5,
       name: 'confirmPassword',
       type: 'password',
       value: values.confirmPassword,
       placeholder: 'Confirm Password',
       label: 'Confirm Password',
       ref: confirmPasswordRef,
-      requirements: [{ text: 'Passwords don\'t match', pattern: values.password }]
+      pattern: `${values.password}`,
+      requirements: [
+        { text: 'Passwords must match', pattern: new RegExp(values.password), fullfiled: false }
+      ],
     }
   ];
+  const [inputStates, dispatch] = useReducer(reducer, [])
+
   const { setPathname } = useContext(PathContext);
 
   const location = useLocation();
   const history = useHistory();
 
   useEffect(() => {
-    if (isValid) {
+    if (isValidForm) {
       setLoading(true);
 
       const options = {
@@ -135,14 +138,14 @@ const Signup = () => {
           .catch(error => {
             setLoading(false);
             setErrorMessage(error.message)
-            setIsValid(false)
+            setIsValidForm(false)
           })
       } catch (error) {
         setLoading(false);
         setErrorMessage(error.message);
       }
     }
-  }, [isValid]);
+  }, [isValidForm]);
 
 
   // Server error message handler
@@ -154,26 +157,46 @@ const Signup = () => {
 
   const handleChange = (e) => {
     setValues({ ...values, [e.target.name]: e.target.value })
-
-    inputValidation(values, { [e.target.name]: refs[e.target.name] }, e, errors, (errors) => setErrors(errors));
-  }
-
-  const handleBlur = (e) => {
-    inputValidation(values, { [e.target.name]: refs[e.target.name] }, e, errors, (errors) => setErrors(errors))
+    dispatch({
+      type: e.type,
+      payload: {
+        values: values,
+        input: refs[e.target.name],
+        requirements: inputs[e.target.id].requirements,
+      }
+    })
   }
 
   const handleFocus = (e) => {
+    dispatch({
+      type: e.type,
+      payload: {
+        input: refs[e.target.name],
+        value: values[e.target.name],
+        requirements: inputs[e.target.id].requirements,
+      }
+    })
+  }
 
-    inputValidation(values, { [e.target.name]: refs[e.target.name] }, e, errors, (errors) => setErrors(errors))
+  const handleBlur = (e) => {
+    dispatch({
+      type: e.type,
+      payload: {
+        input: refs[e.target.name],
+        value: values[e.target.name],
+        requirements: inputs[e.target.id].requirements,
+      }
+    })
   }
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    inputValidation(values, refs, e, errors, (errors) => setErrors(errors))
+    dispatch({ type: e.type })
   }
 
 
   useEffect(() => {
+    // Set path name
     setPathname(location.pathname);
   }, []);
 
@@ -193,8 +216,16 @@ const Signup = () => {
               <p className={errorMessage ? 'show-error-message' : 'hide'}></p>
             <form className="auth-form" name="signupForm" onSubmit={handleSubmit}>
               {
-                inputs.map((input) => {
-                  return <FormInput key={input.id} {...input} errors={errors} onChange={handleChange} onFocus={handleFocus} onBlur={handleBlur} ref={input.ref} />
+                inputs.map((input, index) => {
+                  return <FormInput
+                    key={index + 1}
+                    id={index}
+                    {...input}
+                    inputState={inputStates[index]}
+                    onChange={handleChange}
+                    onFocus={handleFocus}
+                    onBlur={handleBlur}
+                    ref={input.ref} />
                 })
               }
               <div className="form-element">

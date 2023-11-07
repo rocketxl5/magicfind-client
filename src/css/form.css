@@ -179,19 +179,19 @@ input:-webkit-autofill:active{
     border: 2px solid rgb(103, 152, 180, 0.7) !important;
 }
 
-.form-element input + .validation-container {
+.form-element input + .requirements-container {
    
     max-height: 0; 
     overflow: hidden;
    transition: all 0.3s ease-out;
 }
 
-.form-element input:invalid + .validation-container {
-    max-height: 15rem;
+.form-element input:invalid + .requirements-container {
+    max-height: 20rem;
     transition: all 0.3s ease-in 0.3s;
 }
 
-.form-element input + .validation-container .validation-wrapper {
+.form-element input:invalid + .requirements-container .requirements-wrapper {
     margin-block: var(--size-2);
     border: 1px solid var(--clr-grey);
     background-color: rgba(224, 203, 205, 0.1);
@@ -201,17 +201,17 @@ input:-webkit-autofill:active{
     border-radius: 5px;
 }
 
-.form-element input + .validation-container .validation-message {
+.form-element input + .requirements-container .requirements-message {
     font-family: sans-serif;
     opacity: 0;
     transition: opacity 0.1s ease-out; 
 }
-.form-element input:invalid + .validation-container .validation-message {
+.form-element input:invalid + .requirements-container .requirements-message {
     opacity: 1;
     transition: opacity 0.1s ease-in 0.5s;
 }
 
-.validation-message p {
+.requirements-message p {
     line-height: 1.8;
     display: flex;
     align-items: center;

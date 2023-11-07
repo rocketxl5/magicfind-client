@@ -1,21 +1,23 @@
 import React from 'react'
 import RequirementMessage from './RequirementMessage'
 
-const Requirements = (props) => {
-    const { requirements } = props
-    // console.log(value)
-    // console.log(requirements)
+const Requirements = ({ inputState }) => {
+
+// console.log(inputState)
     return (
-        <div className="validation-container">
-            <div className="validation-wrapper">
-                <div className="validation-message">
+        <div className="requirements-container">
+            <div className="requirements-wrapper">
+
+
+                <div className="requirements-message">
                     {
-                        requirements &&
-                        requirements.map((requirement, index) => {
-                            return <RequirementMessage key={index} requirement={requirement} {...props} />
+                        inputState &&
+                        inputState.requirements.map((requirement, index) => {
+                            return <RequirementMessage key={index} requirement={requirement} />
                         })
                     }
                 </div>
+
             </div>
         </div>
     )
