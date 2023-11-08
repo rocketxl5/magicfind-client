@@ -15,8 +15,7 @@ const inputReducer = (inputStates, action) => {
       break;
     // submit
     case ACTIONS.INPUT_SUBMIT:
-      console.log('action.type', action.type)
-      console.log('action.payload', action.payload)
+      submitHandler(action.payload)
       break;
     default:
       console.log('No action provided')
@@ -63,7 +62,9 @@ const inputReducer = (inputStates, action) => {
   }
 
   function submitHandler(payload) {
-
+    console.log(payload.values)
+    console.log(payload.inputs)
+    console.log(payload.requirements)
   }
 
   function handleRequirements(requirements, value) {

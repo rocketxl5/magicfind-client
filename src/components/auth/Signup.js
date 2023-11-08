@@ -42,9 +42,9 @@ const Signup = () => {
       ref: usernameRef,
       pattern: '(?=.*[a-z])[a-z0-9]{3,12}',
       requirements: [
-        { text: '3 to 12 characters', pattern: /^[a-z0-9]{3,12}$/, fullfiled: false },
         { text: 'Must begin with a letter', pattern: /^[a-z][a-z0-9]*$/, fullfiled: false },
-        { text: 'Lowercase letters & numbers', pattern: /^[a-z0-9]{3,}$/, fullfiled: false }
+        { text: 'Lowercase letters & numbers', pattern: /^[a-z0-9]{3,}$/, fullfiled: false },
+        { text: '3 to 12 characters', pattern: /^[a-z0-9]{3,12}$/, fullfiled: false },
       ]
     },
     {
@@ -80,11 +80,11 @@ const Signup = () => {
       ref: passwordRef,
       pattern: '(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,16}',
       requirements: [
-        { text: '8 to 16 characters long', pattern: /^.{8,16}$/, fullfiled: false },
         { text: 'Must begin with a letter', pattern: /^[a-zA-Z]+/, fullfiled: false },
         { text: 'One capital letter', pattern: /[A-Z]+/, fullfiled: false },
         { text: 'One number', pattern: /^(?=.*[a-zA-Z]).*[0-9].*$/, fullfiled: false },
-        { text: 'One special character: [! @ # $ % ^ & *]', pattern: /^(?=.*[a-zA-Z]).*[!@#$%^&*].*$/, fullfiled: false }
+        { text: 'One special character: [! @ # $ % ^ & *]', pattern: /^(?=.*[a-zA-Z]).*[!@#$%^&*].*$/, fullfiled: false },
+        { text: '8 to 16 characters long', pattern: /^.{8,16}$/, fullfiled: false },
       ]
     },
     {
@@ -100,12 +100,41 @@ const Signup = () => {
       ],
     }
   ];
-  const [inputStates, dispatch] = useReducer(reducer, [])
 
+  // Form inputs Reducer hook
+  const [inputStates, dispatch] = useReducer(reducer, [])
+  // Setting current path name
   const { setPathname } = useContext(PathContext);
 
   const location = useLocation();
   const history = useHistory();
+
+  // Sets useReducer dispatch action object
+  const getDispatchAction = (e) => {
+    // Submit event 
+    if (e.type === 'submit') {
+      return {
+        type: e.type,
+        payload: {
+          values: values,
+          inputs: refs,
+          requirements: inputs.map(input => {
+            return { [input.name]: input.requirements }
+          })
+        }
+      }
+    }
+    // Change, Focus, Blur events
+    return {
+      type: e.type,
+      payload: {
+        values: values,
+        input: refs[e.target.name],
+        requirements: inputs[e.target.id].requirements,
+      }
+    }
+  }
+
 
   useEffect(() => {
     if (isValidForm) {
@@ -147,7 +176,6 @@ const Signup = () => {
     }
   }, [isValidForm]);
 
-
   // Server error message handler
   useEffect(() => {
     if (errorMessage) {
@@ -157,50 +185,28 @@ const Signup = () => {
 
   const handleChange = (e) => {
     setValues({ ...values, [e.target.name]: e.target.value })
-
-    dispatch({
-      type: e.type,
-      payload: {
-        values: values,
-        input: refs[e.target.name],
-        requirements: inputs[e.target.id].requirements
-      }
-    })
+    dispatch(getDispatchAction(e))
   }
 
   const handleFocus = (e) => {
-    console.log(refs[e.target.name])
-    dispatch({
-      type: e.type,
-      payload: {
-        values: values,
-        input: refs[e.target.name],
-        requirements: inputs[e.target.id].requirements,
-      }
-    })
+    dispatch(getDispatchAction(e))
   }
 
   const handleBlur = (e) => {
-    dispatch({
-      type: e.type,
-      payload: {
-        input: refs[e.target.name],
-        values: values,
-        requirements: inputs[e.target.id].requirements,
-      }
-    })
+    dispatch(getDispatchAction(e))
   }
 
   const handleSubmit = (e) => {
+
     e.preventDefault();
-    dispatch({ type: e.type })
+    dispatch(getDispatchAction(e))
   }
 
   // Set path name
   useEffect(() => {
     setPathname(location.pathname);
   }, []);
-  console.log(inputStates)
+
   return (
     <div className="form-container flex justify-center">
       {loading ?
