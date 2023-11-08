@@ -24,30 +24,38 @@ const inputReducer = (inputStates, action) => {
   }
 
   function changeHandler(payload) {
-    const handle = parseInt(payload.input.id)
-    const requirementState = handleRequirements(payload.requirements, payload.input.value)
-    const requirementsFullfiled = getFullfiledCount(requirementState)
+    const handle = payload.input.name
+
+    let requirementState = handleRequirements(payload.requirements, payload.input.value)
     inputStates[handle] = { requirements: requirementState }
 
-    if (requirementsFullfiled === payload.requirements.length) {
-
-      inputStates[handle] = { requirements: requirementState }
-    }
-    else {
-      inputStates[handle] = { requirements: requirementState }
+    /**
+     * 
+     * Condition block updating confirmPasswords requirement fullfiled status before sumbitting form.
+     * 
+     * */
+    // If current input is password and confirm password inputState is set
+    if (handle === 'password' && inputStates['confirmPassword']) {
+      // If confirm password value is different than password value
+      if (payload.values['confirmPassword'] !== payload.input.value) {
+        // Get updated requirements fullfiled status
+        requirementState = handleRequirements(inputStates['confirmPassword'].requirements, payload.input.value)
+        // Update confirmPassword inputState object
+        inputStates['confirmPassword'] = { requirements: requirementState }
+      }
     }
   }
 
   function focusHandler(payload) {
-    const handle = parseInt(payload.input.id)
+    const handle = payload.input.name
 
     if (!payload.input.value) {
       inputStates[handle] = { requirements: payload.requirements }
+
     }
   }
 
   function blurHandler(payload) {
-    const handle = parseInt(payload.input.id)
 
     if (!payload.input.value) {
 
@@ -63,14 +71,6 @@ const inputReducer = (inputStates, action) => {
       requirement.fullfiled = requirement.pattern.test(value) ? true : false;
       return requirement
     })
-  }
-
-  function getFullfiledCount(requirements) {
-    const fullfiled = requirements.filter(requirement => {
-      return requirement.fullfiled
-    })
-
-    return fullfiled.length
   }
 
   return inputStates;

@@ -180,18 +180,20 @@ input:-webkit-autofill:active{
 }
 
 .form-element input + .requirements-container {
-   
     max-height: 0; 
     overflow: hidden;
-   transition: all 0.3s ease-out;
+    transition: max-height 0.4s ease-out;
+    transition-delay: 0.1s;
 }
 
 .form-element input:invalid + .requirements-container {
     max-height: 20rem;
-    transition: all 0.3s ease-in 0.3s;
+    transition:max-height 0.3s ease-in;
+    transition-delay:  0.2s;
+    
 }
 
-.form-element input:invalid + .requirements-container .requirements-wrapper {
+.form-element input + .requirements-container .requirements-wrapper {
     margin-block: var(--size-2);
     border: 1px solid var(--clr-grey);
     background-color: rgba(224, 203, 205, 0.1);
@@ -199,16 +201,6 @@ input:-webkit-autofill:active{
     padding-inline: 1rem;
     padding-block: 0.8rem;
     border-radius: 5px;
-}
-
-.form-element input + .requirements-container .requirements-message {
-    font-family: sans-serif;
-    opacity: 0;
-    transition: opacity 0.1s ease-out; 
-}
-.form-element input:invalid + .requirements-container .requirements-message {
-    opacity: 1;
-    transition: opacity 0.1s ease-in 0.5s;
 }
 
 .requirements-message p {
@@ -221,17 +213,6 @@ input:-webkit-autofill:active{
 .empty-field {
     color: var(--clr-danger);
 }
-
-/* .auth-form span {
-    color: var(--clr-danger);
-    display: none;
-} */
-
-/* .input-error::placeholder {
-    color: var(--clr-danger) !important;
-} */
-
-
 
 
 /*************************/

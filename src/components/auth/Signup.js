@@ -44,7 +44,7 @@ const Signup = () => {
       requirements: [
         { text: '3 to 12 characters', pattern: /^[a-z0-9]{3,12}$/, fullfiled: false },
         { text: 'Must begin with a letter', pattern: /^[a-z][a-z0-9]*$/, fullfiled: false },
-        { text: 'Lowercase letters and optional numbers', pattern: /^[a-z0-9]{3,}$/, fullfiled: false }
+        { text: 'Lowercase letters & numbers', pattern: /^[a-z0-9]{3,}$/, fullfiled: false }
       ]
     },
     {
@@ -54,9 +54,9 @@ const Signup = () => {
       placeholder: 'Email',
       label: 'Email',
       ref: emailRef,
-      pattern: '[^@]+@[^@]+\.[a-zA-Z]{2,}',
+      pattern: '[a-z0-9._%+\\-]+@[a-z0-9.\\-]+\\.[a-z]{2,}',
       requirements: [
-        { text: 'Enter a valid email address', pattern: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, fullfiled: false }
+        { text: 'Enter a valid email address', pattern: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,})+$/, fullfiled: false }
       ]
     },
     {
@@ -157,6 +157,19 @@ const Signup = () => {
 
   const handleChange = (e) => {
     setValues({ ...values, [e.target.name]: e.target.value })
+
+    dispatch({
+      type: e.type,
+      payload: {
+        values: values,
+        input: refs[e.target.name],
+        requirements: inputs[e.target.id].requirements
+      }
+    })
+  }
+
+  const handleFocus = (e) => {
+    console.log(refs[e.target.name])
     dispatch({
       type: e.type,
       payload: {
@@ -167,23 +180,12 @@ const Signup = () => {
     })
   }
 
-  const handleFocus = (e) => {
-    dispatch({
-      type: e.type,
-      payload: {
-        input: refs[e.target.name],
-        value: values[e.target.name],
-        requirements: inputs[e.target.id].requirements,
-      }
-    })
-  }
-
   const handleBlur = (e) => {
     dispatch({
       type: e.type,
       payload: {
         input: refs[e.target.name],
-        value: values[e.target.name],
+        values: values,
         requirements: inputs[e.target.id].requirements,
       }
     })
@@ -194,12 +196,11 @@ const Signup = () => {
     dispatch({ type: e.type })
   }
 
-
+  // Set path name
   useEffect(() => {
-    // Set path name
     setPathname(location.pathname);
   }, []);
-
+  console.log(inputStates)
   return (
     <div className="form-container flex justify-center">
       {loading ?
@@ -218,10 +219,10 @@ const Signup = () => {
               {
                 inputs.map((input, index) => {
                   return <FormInput
-                    key={index + 1}
+                    key={index}
                     id={index}
                     {...input}
-                    inputState={inputStates[index]}
+                    inputState={inputStates[input.name]}
                     onChange={handleChange}
                     onFocus={handleFocus}
                     onBlur={handleBlur}
