@@ -66,11 +66,9 @@ const inputReducer = (inputStates, action) => {
   }
 
   function updateRequirements(requirements, value, flag = false) {
-    // console.log(value)
     let update = ``
     let pattern = /``/
     if (flag) {
-      console.log(requirements)
       update = `^${requirements[0].pattern}$`
       pattern = new RegExp(`${update}`)
       requirements[0].fullfiled = pattern.test(value)

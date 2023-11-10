@@ -122,8 +122,9 @@ const Signup = () => {
   const history = useHistory();
 
   useEffect(() => {
-    console.log(values)
+
     if (validForm) {
+      console.log(values)
       setLoading(true);
 
       const inputValues = {
@@ -136,10 +137,7 @@ const Signup = () => {
 
       const options = {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json'
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(inputValues)
       }
 
@@ -151,7 +149,8 @@ const Signup = () => {
             }
 
             return res.json().then((data) => {
-              throw new Error(data)
+              setLoading(false)
+              throw new Error(JSON.stringify(data))
             })
           })
           .then(data => {
@@ -192,11 +191,6 @@ const Signup = () => {
 
   const handleFocus = (e) => {
     // Remove submit error prop if any
-    if (errors[e.target.name]) {
-      const newErrors = { ...errors }
-      delete newErrors[e.target.name]
-      setErrors(newErrors)
-    }
 
     dispatch({
       type: e.type,
@@ -209,6 +203,14 @@ const Signup = () => {
   }
 
   const handleBlur = (e) => {
+    if (!errors[e.target.name] && values[e.target.name]) {
+      const newErrors = { ...errors }
+      delete newErrors[e.target.name]
+      setErrors(newErrors)
+    }
+
+    console.log(errors)
+
     dispatch({
       type: e.type,
       payload: {
@@ -222,8 +224,11 @@ const Signup = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const inputErrors = (errorHandler(values, refs))
-    setErrors(prev => prev = inputErrors)
+    setErrors(inputErrors)
+
     if (!Object.keys(errors).length) {
+      console.log(errors)
+      console.log(Object.keys(errors).length)
       setValidForm(true)
     }
 

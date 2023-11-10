@@ -3,7 +3,6 @@ import capitalizeWord from '../../../utilities/capitalizeWord'
 const errorHandler = (values, inputs) => {
     const handles = Object.keys(values)
     let errors = {}
-    console.log(inputs)
     handles.forEach(handle => {
         // If empty input: required input
         if (!values[handle]) {
