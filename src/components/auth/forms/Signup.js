@@ -122,9 +122,7 @@ const Signup = () => {
   const history = useHistory();
 
   useEffect(() => {
-
     if (validForm) {
-      console.log(values)
       setLoading(true);
 
       const inputValues = {
@@ -143,18 +141,9 @@ const Signup = () => {
 
       try {
         fetch(`${api.serverURL}/api/users/signup`, options)
-          .then((res) => {
-            if (res.ok) {
-              return res.json()
-            }
-
-            return res.json().then((data) => {
-              setLoading(false)
-              throw new Error(JSON.stringify(data))
-            })
-          })
+          .then((res) => res.json())
           .then(data => {
-            console.log(data);
+
             history.push({ pathname: '/login', state: { message: data.message } });
           })
           .catch(error => {
@@ -165,6 +154,7 @@ const Signup = () => {
       } catch (error) {
         setLoading(false);
         setErrorMessage(error.message);
+        setValidForm(false)
       }
     }
   }, [validForm]);
@@ -233,10 +223,6 @@ const Signup = () => {
     }
 
   }
-
-  // useEffect(() => {
-    
-  // }, [errors])
 
   // Set path name
   useEffect(() => {
