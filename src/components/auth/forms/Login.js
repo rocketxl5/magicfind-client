@@ -1,16 +1,21 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { Link, useHistory, useLocation } from 'react-router-dom';
-import inputValidation from './helpers/validateLogin';
-import useFormValidation from '../hooks/useFormValidation'
-import { UserContext } from '../../contexts/UserContext';
-import { PathContext } from '../../contexts/PathContext';
-import { api } from '../../api/resources';
-import Spinner from '../layout/Spinner';
+import Spinner from '../../layout/Spinner';
+import FormInput from './FormInput';
+import errorHandler from './helpers/errorHandler';
+import { UserContext } from '../../../contexts/UserContext';
+import { PathContext } from '../../../contexts/PathContext';
+import { api } from '../../../api/resources';
 
 const Login = () => {
-  const [input, setInput] = useState({});
+  const init = {
+    email: '',
+    password: '',
+  }
+  const [values, setValues] = useState(init);
+  const [errors, setErrors] = useState(init);
   const [loading, setLoading] = useState(false);
-  const [isValid, setIsValid] = useState(false);
+  const [validForm, setValidForm] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
   const [succesMessage, setSuccessMessage] = useState('');
   const [showPassword, setShowPassword] = useState(false);
@@ -18,29 +23,14 @@ const Login = () => {
   const { setPathname } = useContext(PathContext);
   const { setUser } = useContext(UserContext);
 
+  const inputs = {
+    email: document.querySelector('#email'),
+    password: document.querySelector('#password'),
+  }
+
   const location = useLocation();
   const history = useHistory();
 
-  const callback = (values) => {
-    setInput(values)
-    setIsValid(true)
-  }
-
-  const {
-    handleChange,
-    handleFocus,
-    handleBlur,
-    handleSubmit,
-    values,
-    errors
-  } = useFormValidation(
-    callback,
-    inputValidation,
-    {
-      email: '',
-      password: ''
-    }
-    );
 
   // Show passsword button handler
   const handleMouseDown = (e) => {
@@ -65,18 +55,12 @@ const Login = () => {
   }, [showPassword])
 
   useEffect(() => {
-    if (isValid) {
+    if (validForm) {
       setLoading(true);
 
-      // if errorMessage already containes a message
-      // change errorMessage to empty string
-      // if (errorMessage) {
-      //   setErrorMessage('')
-      // }
-
       const userInput = {
-        email: input.email,
-        password: input.password
+        email: values.email.trim(),
+        password: values.password
       }
 
       const options = {
@@ -86,16 +70,16 @@ const Login = () => {
       };
       try {
         fetch(`${api.serverURL}/api/users/login`, options)
-        .then((res) => {
-          if (res.ok) {
-            return res.json();
-          }
+          .then((res) => {
+            if (res.ok) {
+              return res.json();
+            }
 
-          return res.json().then((data) => {
-            setLoading(false)
-            throw new Error(JSON.stringify(data))
+            return res.json().then((data) => {
+              setLoading(false)
+              throw new Error(JSON.stringify(data))
+            })
           })
-        })
           .then((data) => {
             data.user.id = data.user._id;
             delete data.user._id;
@@ -111,18 +95,19 @@ const Login = () => {
             history.push({
               pathname: '/me',
             });
-        })
-        .catch((error) => {
-          setLoading(false);
-          setErrorMessage(error.message);
-          setIsValid(false);
-        });
+          })
+          .catch((error) => {
+            setLoading(false);
+            console.log(error.message)
+            setErrorMessage(error.message);
+            setValidForm(false);
+          });
       } catch (error) {
         setLoading(false);
         setErrorMessage(error.message);
       }
     }
-  }, [isValid]);
+  }, [validForm]);
 
   // error message handler
   useEffect(() => {
@@ -135,47 +120,83 @@ const Login = () => {
     }
   }, [errorMessage, succesMessage])
 
+  const handleChange = (e) => {
+    setValues({ ...values, [e.target.name]: e.target.value })
+  }
+
+  const handleFocus = (e) => {
+    // Remove submit error prop if present
+    if (errors[e.target.name]) {
+      const newErrors = { ...errors }
+      delete newErrors[e.target.name]
+      setErrors(newErrors)
+    }
+
+  }
+
+  const handleBlur = (e) => {
+
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const inputErrors = (errorHandler(values, inputs))
+    setErrors(prev => prev = inputErrors)
+  }
+
+  useEffect(() => {
+    if (!Object.keys(errors).length) {
+      setValidForm(true)
+    }
+  }, [errors])
+
+
   return (
     <div className="form-container flex justify-center">
-      {loading ?
-        (
-          <Spinner />
-        ) : (
-          <div className="form-content">
+      {
+
+        loading ?
+          (
+            <Spinner />
+          ) : (
+
+            <div className="form-content">
             <div className="form-logo">
               <Link to="/"><h1>Magic Find</h1></Link>
             </div>
             <div className="form-title">
-                <h2>Log in to your account</h2>
-              </div>
+              <h2>Log in to your account</h2>
+            </div>
             <p className={errorMessage ? 'show-error-message' : succesMessage ? 'show-success-message' : 'hide'}></p>
-            <form className="auth-form" onSubmit={handleSubmit}>
+              <form className="auth-form" id="signin-form" name="signin-form" onSubmit={handleSubmit} noValidate>
               <div className="form-element">
-                <label htmlFor="name">Email</label>
-                <input
-                  className={errors.email && 'input-error'}
-                  type="email"
-                  name="email"
-                  id="email"
-                  value={values.email}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  onFocus={handleFocus}
-                  placeholder={errors.email ? errors.email : "Email"} />
-              </div>
-              <div className="form-element">
-                <label htmlFor="password">Password</label>
-                <div className={`login-password center content-height flex ${errors.password && 'input-error'}`}>
+                  <label htmlFor="email" className={errors.email && 'danger-color'}>{errors.email ? errors.email : 'Email'}</label>
                   <input
-                    className={errors.password && 'input-error'}
-                    type="password"
-                    name="password"
-                    id="password"
-                    value={values.password}
+                    className={errors.email && 'danger-border danger-padding'}
+                    id="email"
+                    type="email"
+                    name="email"
+                    value={values.email}
                     onChange={handleChange}
                     onBlur={handleBlur}
                     onFocus={handleFocus}
-                    placeholder={errors.password ? errors.password : "Password"}
+                    pattern="^(?!Enter Code$).*"
+                    placeholder="Email"
+                  />
+              </div>
+              <div className="form-element">
+                  <label htmlFor="password" className={errors.password && 'danger-color'}>{errors.password ? errors.password : 'Password'}</label>
+                  <div className={`login-password-wrapper center content-height flex ${errors.password && 'danger-border'}`}>
+                  <input
+                      id="password"
+                      type="password"
+                      name="password"
+                      value={values.password}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      onFocus={handleFocus}
+                      pattern="^(?!Enter Code$).*"
+                      placeholder='Password'
                   />
                   <button className="password-btn flex align-center justify-center" type="button" onMouseDown={handleMouseDown}>
                     <i className={!showPassword ? "fa-solid fa-eye" : "fa-solid fa-eye-slash"}></i>
@@ -191,7 +212,9 @@ const Login = () => {
               </div>
             </form>
           </div>
-        )}
+          )
+
+      }
     </div>
   )
 }

@@ -6,8 +6,8 @@ import {
   Redirect,
   useLocation
 } from 'react-router-dom';
-import Login from './components/auth/Login';
-import Signup from './components/auth/Signup';
+import Login from './components/auth/forms/Login';
+import Signup from './components/auth/forms/Signup';
 import Settings from './components/auth/Settings';
 import ResetPassword from './components/auth/ResetPassword';
 import Success from './components/auth/Success';
