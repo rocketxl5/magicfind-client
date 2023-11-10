@@ -25,34 +25,36 @@ const inputReducer = (inputStates, action) => {
     const value = payload.input.value
     let requirements = []
 
-    // change occurs in password input
+    // change in password 
     if (handle === 'password') {
 
-      // confirmPassword value is defined && password and confirmPassword are different
-      if (payload.values.confirmPassword && payload.values.confirmPassword !== value) {
+      // Update confirm password state if confirm password has value
+      if (payload.values.confirmPassword) {
 
-        requirements = updateRequirements(inputStates['confirmPassword'].requirements, value, true)
-        inputStates['confirmPassword'] = { requirements: requirements }
+        requirements = updateRequirements(inputStates.confirmPassword.requirements, value, true)
+        inputStates.confirmPassword = { requirements: requirements }
       }
+      // Update password state
       requirements = updateRequirements(payload.requirements, value)
       return inputStates[handle] = { requirements: requirements }
     }
+    // Change in confirm password
     if (handle === 'confirmPassword') {
 
       requirements = updateRequirements(payload.requirements, value, true)
-      return inputStates['confirmPassword'] = { requirements: requirements }
+      return inputStates.confirmPassword = { requirements: requirements }
 
     }
+    // Change in other inputs
     requirements = updateRequirements(payload.requirements, value)
     inputStates[handle] = { requirements: requirements }
   }
 
+
   function focusHandler(payload) {
     const handle = payload.input.name
-
     if (!payload.input.value) {
       inputStates[handle] = { requirements: payload.requirements }
-
     }
   }
 
@@ -64,9 +66,11 @@ const inputReducer = (inputStates, action) => {
   }
 
   function updateRequirements(requirements, value, flag = false) {
+    // console.log(value)
     let update = ``
     let pattern = /``/
     if (flag) {
+      console.log(requirements)
       update = `^${requirements[0].pattern}$`
       pattern = new RegExp(`${update}`)
       requirements[0].fullfiled = pattern.test(value)
@@ -75,7 +79,6 @@ const inputReducer = (inputStates, action) => {
     else {
       return requirements.map((requirement) => {
         pattern = requirement.pattern
-        // console.log(pattern)
         requirement.fullfiled = pattern.test(value) ? true : false;
         return requirement
       })

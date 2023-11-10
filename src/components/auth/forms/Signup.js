@@ -1,26 +1,27 @@
 import React, { useRef, useState, useEffect, useContext, useReducer } from 'react';
 import { Link, useHistory, useLocation } from 'react-router-dom';
-import FormInput from './FormInput';
 import Spinner from '../../layout/Spinner';
+import FormInput from './FormInput';
 import reducer from './reducer/inputReducer';
-import handleErrors from './helpers/handleErrors';
+import errorHandler from './helpers/errorHandler';
 import { PathContext } from '../../../contexts/PathContext';
 import { api } from '../../../api/resources';
 
 const Signup = () => {
-  const [values, setValues] = useState({
+  const init = {
     username: '',
     email: '',
     country: '',
     password: '',
     confirmPassword: ''
-  });
-  const [errors, setErrors] = useState({});
+  }
+  const [values, setValues] = useState(init);
+  const [errors, setErrors] = useState(init);
   const [loading, setLoading] = useState(false);
-  const [isValidForm, setIsValidForm] = useState(false);
+  const [validForm, setValidForm] = useState(false);
   // On submit error object for empty or invalid inputs
   // Sever side error message if username or email already taken
-  const [requestError, setRequestError] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
 
   // Input refs 
   const usernameRef = useRef(null);
@@ -83,14 +84,15 @@ const Signup = () => {
       placeholder: 'Password',
       label: 'Password',
       ref: passwordRef,
-      pattern: '^[a-zA-Z]+(?=.*[0-9])(?=.*[!@#$%^&*])(?=.*[A-Z])[a-zA-Z0-9!@#$%^&*]{7,16}$',
+      pattern: '^[a-zA-Z](?=.*\\d)(?=.*[!@#$%^&*])(?=.*[A-Z])(?=.*[a-z])[a-zA-Z0-9!@#$%^&*]{7,16}$',
       requirements: [
         { text: 'Must begin with a letter', pattern: /^[a-zA-Z]+/, fullfiled: false },
-        { text: 'One capital letter', pattern: /^(?=.*[a-zA-Z]).*[A-Z].*$/, fullfiled: false },
-        { text: 'One number', pattern: /^[a-zA-Z].*(?=.*[0-9]).*$/, fullfiled: false },
-        { text: 'One special character: [! @ # $ % ^ & *]', pattern: /^[a-zA-Z].*(?=.*[!@#$%^&*]).*$/, fullfiled: false },
+        { text: 'One lowercase letter', pattern: /^(?=.*[a-zA-Z]).*[a-z].*$/, fullfiled: false },
+        { text: 'One uppercase letter', pattern: /^(?=.*[a-zA-Z]).*[A-Z].*$/, fullfiled: false },
+        { text: 'One number', pattern: /^.+(?=.*[0-9]).*$/, fullfiled: false },
+        { text: 'One special character: !@#$%^&*', pattern: /^.+(?=.*[!@#$%^&*]).*$/, fullfiled: false },
         { text: '8 to 16 characters long', pattern: /^.{8,16}$/, fullfiled: false },
-        { text: 'Valid character', pattern: /^[a-zA-Z0-9!@#$%^&*]*$/, fullfiled: false },
+        { text: 'Character is valid', pattern: /^[a-zA-Z0-9!@#$%^&*]*$/, fullfiled: false },
       ]
     },
     {
@@ -120,11 +122,12 @@ const Signup = () => {
   const history = useHistory();
 
   useEffect(() => {
-    if (isValidForm) {
+    console.log(values)
+    if (validForm) {
       setLoading(true);
 
       const inputValues = {
-        username: values.username.trim(),
+        name: values.username.trim(),
         email: values.email.trim(),
         country: values.country.trim(),
         password: values.password,
@@ -157,22 +160,22 @@ const Signup = () => {
           })
           .catch(error => {
             setLoading(false);
-            setRequestError(error.message)
-            setIsValidForm(false)
+            setErrorMessage(error.message)
+            setValidForm(false)
           })
       } catch (error) {
         setLoading(false);
-        setRequestError(error.message);
+        setErrorMessage(error.message);
       }
     }
-  }, [isValidForm]);
+  }, [validForm]);
 
   // Server error message handler
   useEffect(() => {
-    if (requestError) {
-      document.querySelector('.show-error-message').innerHTML = requestError
+    if (errorMessage) {
+      document.querySelector('.show-error-message').innerHTML = errorMessage
     }
-  }, [requestError])
+  }, [errorMessage])
 
   const handleChange = (e) => {
     setValues({ ...values, [e.target.name]: e.target.value })
@@ -218,14 +221,17 @@ const Signup = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setErrors(handleErrors(values, refs))
+    const inputErrors = (errorHandler(values, refs))
+    setErrors(prev => prev = inputErrors)
+    if (!Object.keys(errors).length) {
+      setValidForm(true)
+    }
 
   }
 
-  useEffect(() => {
-    // Object.keys(errors).length === 0 && setIsValidForm(true)
-    // console.log(errors)
-  }, [errors])
+  // useEffect(() => {
+    
+  // }, [errors])
 
   // Set path name
   useEffect(() => {
@@ -245,8 +251,8 @@ const Signup = () => {
             <div className="form-title">
               <h2>Create your account</h2>
             </div>
-            <p className={requestError ? 'show-error-message' : 'hide'}></p>
-            <form className="auth-form" name="signupForm" onSubmit={handleSubmit} noValidate>
+            <p className={errorMessage ? 'show-error-message' : 'hide'}></p>
+            <form className="auth-form" id="singup-form" name="singup-form" onSubmit={handleSubmit} noValidate>
               {
                 inputs.map((input, index) => {
                   return <FormInput

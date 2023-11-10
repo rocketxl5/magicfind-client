@@ -1,14 +1,21 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { Link, useHistory, useLocation } from 'react-router-dom';
 import Spinner from '../../layout/Spinner';
+import FormInput from './FormInput';
+import errorHandler from './helpers/errorHandler';
 import { UserContext } from '../../../contexts/UserContext';
 import { PathContext } from '../../../contexts/PathContext';
 import { api } from '../../../api/resources';
 
 const Login = () => {
-  const [input, setInput] = useState({});
+  const init = {
+    email: '',
+    password: '',
+  }
+  const [values, setValues] = useState(init);
+  const [errors, setErrors] = useState(init);
   const [loading, setLoading] = useState(false);
-  const [isValid, setIsValid] = useState(false);
+  const [validForm, setValidForm] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
   const [succesMessage, setSuccessMessage] = useState('');
   const [showPassword, setShowPassword] = useState(false);
@@ -16,10 +23,13 @@ const Login = () => {
   const { setPathname } = useContext(PathContext);
   const { setUser } = useContext(UserContext);
 
+  const inputs = {
+    email: document.querySelector('#email'),
+    password: document.querySelector('#password'),
+  }
+
   const location = useLocation();
   const history = useHistory();
-
-
 
 
   // Show passsword button handler
@@ -45,12 +55,12 @@ const Login = () => {
   }, [showPassword])
 
   useEffect(() => {
-    if (isValid) {
+    if (validForm) {
       setLoading(true);
 
       const userInput = {
-        email: input.email,
-        password: input.password
+        email: values.email.trim(),
+        password: values.password
       }
 
       const options = {
@@ -88,15 +98,16 @@ const Login = () => {
           })
           .catch((error) => {
             setLoading(false);
+            console.log(error.message)
             setErrorMessage(error.message);
-            setIsValid(false);
+            setValidForm(false);
           });
       } catch (error) {
         setLoading(false);
         setErrorMessage(error.message);
       }
     }
-  }, [isValid]);
+  }, [validForm]);
 
   // error message handler
   useEffect(() => {
@@ -109,13 +120,47 @@ const Login = () => {
     }
   }, [errorMessage, succesMessage])
 
+  const handleChange = (e) => {
+    setValues({ ...values, [e.target.name]: e.target.value })
+  }
+
+  const handleFocus = (e) => {
+    // Remove submit error prop if present
+    if (errors[e.target.name]) {
+      const newErrors = { ...errors }
+      delete newErrors[e.target.name]
+      setErrors(newErrors)
+    }
+
+  }
+
+  const handleBlur = (e) => {
+
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const inputErrors = (errorHandler(values, inputs))
+    setErrors(prev => prev = inputErrors)
+  }
+
+  useEffect(() => {
+    if (!Object.keys(errors).length) {
+      setValidForm(true)
+    }
+  }, [errors])
+
+
   return (
     <div className="form-container flex justify-center">
-      {/* {loading ?
-        (
-          <Spinner />
-        ) : (
-          <div className="form-content">
+      {
+
+        loading ?
+          (
+            <Spinner />
+          ) : (
+
+            <div className="form-content">
             <div className="form-logo">
               <Link to="/"><h1>Magic Find</h1></Link>
             </div>
@@ -123,33 +168,35 @@ const Login = () => {
               <h2>Log in to your account</h2>
             </div>
             <p className={errorMessage ? 'show-error-message' : succesMessage ? 'show-success-message' : 'hide'}></p>
-            <form className="auth-form" onSubmit={handleSubmit}>
+              <form className="auth-form" id="signin-form" name="signin-form" onSubmit={handleSubmit} noValidate>
               <div className="form-element">
-                <label htmlFor="name">Email</label>
-                <input
-                  className={errors.email && 'input-error'}
-                  type="email"
-                  name="email"
-                  id="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  onBlur={handleBlur}
-                  onFocus={handleFocus}
-                  placeholder={errors.email ? errors.email : "Email"} />
-              </div>
-              <div className="form-element">
-                <label htmlFor="password">Password</label>
-                <div className={`login-password center content-height flex ${errors.password && 'input-error'}`}>
+                  <label htmlFor="email" className={errors.email && 'danger-color'}>{errors.email ? errors.email : 'Email'}</label>
                   <input
-                    className={errors.password && 'input-error'}
-                    type="password"
-                    name="password"
-                    id="password"
-                    value={password}
-                    onChange={(e) => { setPassword(e.target.value) }}
+                    className={errors.email && 'danger-border danger-padding'}
+                    id="email"
+                    type="email"
+                    name="email"
+                    value={values.email}
+                    onChange={handleChange}
                     onBlur={handleBlur}
                     onFocus={handleFocus}
-                    placeholder={errors.password ? errors.password : "Password"}
+                    pattern="^(?!Enter Code$).*"
+                    placeholder="Email"
+                  />
+              </div>
+              <div className="form-element">
+                  <label htmlFor="password" className={errors.password && 'danger-color'}>{errors.password ? errors.password : 'Password'}</label>
+                  <div className={`login-password-wrapper center content-height flex ${errors.password && 'danger-border'}`}>
+                  <input
+                      id="password"
+                      type="password"
+                      name="password"
+                      value={values.password}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      onFocus={handleFocus}
+                      pattern="^(?!Enter Code$).*"
+                      placeholder='Password'
                   />
                   <button className="password-btn flex align-center justify-center" type="button" onMouseDown={handleMouseDown}>
                     <i className={!showPassword ? "fa-solid fa-eye" : "fa-solid fa-eye-slash"}></i>
@@ -165,7 +212,9 @@ const Login = () => {
               </div>
             </form>
           </div>
-        )} */}
+          )
+
+      }
     </div>
   )
 }

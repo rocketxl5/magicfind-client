@@ -84,20 +84,34 @@ input:-webkit-autofill:active{
     opacity: 0;
 }
 
-.login-password {
+.login-password-wrapper  {
     background-color: #fff;
     border: 1px solid var(--clr-grey);
     border-radius: 5px;
 }
 
-.login-password input {
+.login-password-wrapper:focus-within {
+  
+    border: 2px solid rgb(103, 152, 180, 0.7) !important;
+}
+
+.login-password-wrapper #password  {
     border: none;
     border-radius: none;
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;
 }
 
-.login-password .password-btn {
+/* Login password error handling */
+.login-password-wrapper #password:focus { 
+    border: none !important;
+}
+
+.login-password-wrapper.danger-border #password {
+    padding: calc(var(--size-1) - 1px) !important;
+}
+
+.login-password-wrapper .password-btn {
     width: 15%;
     margin: 2px;
     background-color: #fff;
@@ -106,11 +120,11 @@ input:-webkit-autofill:active{
     cursor: pointer;
 }
 
-.login-password .password-btn:active {
+.login-password-wrapper .password-btn:active {
     -webkit-tap-highlight-color: rgba(0,0,0,0);
 }
 
-.login-password i {
+.login-password-wrapper i {
     font-size: var(--fs-175);
     color: #c9c9c9;
 }
@@ -165,16 +179,7 @@ input:-webkit-autofill:active{
     background-color: rgba(34, 170, 68, 0.1);
 }
 
-.input-error {
-    border-color: var(--clr-danger) !important; 
-}
-
-.input-success {
-    border-color: var(--clr-success) !important;
-}
-
 .form-element input:focus {
-    /* clr-blue-steel */
     padding: calc(var(--size-1) - 1px) !important;
     border: 2px solid rgb(103, 152, 180, 0.7) !important;
 }
