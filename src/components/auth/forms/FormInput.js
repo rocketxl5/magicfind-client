@@ -2,13 +2,19 @@ import React, { forwardRef } from 'react';
 import Requirements from './Requirements';
 
 const FormInput = forwardRef((props, ref) => {
-    const { id, name, inputState, onChange, onFocus, onBlur, label, ...inputProps } = props;
+    const { id, name, inputState, onChange, onFocus, errors, onBlur, label, ...inputProps } = props;
     const inputRef = ref;
     return (
         <div className="form-element">
-
-            <label htmlFor={id} >{label}</label>
+            {
+                !errors[name] ? (
+                    <label htmlFor={id} >{label}</label>
+                ) : (
+                    <label className="danger" htmlFor={id} >{errors[name]}</label>
+                )
+            }
             <input
+                className={errors[name] && 'danger-border'}
                 id={id}
                 name={name}
                 {...inputProps}
@@ -18,7 +24,6 @@ const FormInput = forwardRef((props, ref) => {
                 ref={inputRef}
             />
             {
-
                 <Requirements inputState={inputState} />
             }
         </div>

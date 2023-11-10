@@ -34,7 +34,7 @@
     margin-inline-end: var(--size-3);
 }
 
-.red-border {
+.danger-border {
     border-color: var(--clr-danger) !important; 
 }
 

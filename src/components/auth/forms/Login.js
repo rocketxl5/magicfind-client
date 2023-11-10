@@ -1,11 +1,9 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { Link, useHistory, useLocation } from 'react-router-dom';
-import inputValidation from './helpers/validateLogin';
-import useFormValidation from '../hooks/useFormValidation'
-import { UserContext } from '../../contexts/UserContext';
-import { PathContext } from '../../contexts/PathContext';
-import { api } from '../../api/resources';
-import Spinner from '../layout/Spinner';
+import Spinner from '../../layout/Spinner';
+import { UserContext } from '../../../contexts/UserContext';
+import { PathContext } from '../../../contexts/PathContext';
+import { api } from '../../../api/resources';
 
 const Login = () => {
   const [input, setInput] = useState({});
@@ -14,8 +12,6 @@ const Login = () => {
   const [errorMessage, setErrorMessage] = useState('');
   const [succesMessage, setSuccessMessage] = useState('');
   const [showPassword, setShowPassword] = useState(false);
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
 
   const { setPathname } = useContext(PathContext);
   const { setUser } = useContext(UserContext);
@@ -23,24 +19,8 @@ const Login = () => {
   const location = useLocation();
   const history = useHistory();
 
-  const callback = (values) => {
-    setInput(values)
-    setIsValid(true)
-  }
 
-  const {
-    handleFocus,
-    handleBlur,
-    handleSubmit,
-    errors
-  } = useFormValidation(
-    callback,
-    inputValidation,
-    {
-      email: '',
-      password: ''
-    }
-    );
+
 
   // Show passsword button handler
   const handleMouseDown = (e) => {
@@ -68,12 +48,6 @@ const Login = () => {
     if (isValid) {
       setLoading(true);
 
-      // if errorMessage already containes a message
-      // change errorMessage to empty string
-      // if (errorMessage) {
-      //   setErrorMessage('')
-      // }
-
       const userInput = {
         email: input.email,
         password: input.password
@@ -86,16 +60,16 @@ const Login = () => {
       };
       try {
         fetch(`${api.serverURL}/api/users/login`, options)
-        .then((res) => {
-          if (res.ok) {
-            return res.json();
-          }
+          .then((res) => {
+            if (res.ok) {
+              return res.json();
+            }
 
-          return res.json().then((data) => {
-            setLoading(false)
-            throw new Error(JSON.stringify(data))
+            return res.json().then((data) => {
+              setLoading(false)
+              throw new Error(JSON.stringify(data))
+            })
           })
-        })
           .then((data) => {
             data.user.id = data.user._id;
             delete data.user._id;
@@ -111,12 +85,12 @@ const Login = () => {
             history.push({
               pathname: '/me',
             });
-        })
-        .catch((error) => {
-          setLoading(false);
-          setErrorMessage(error.message);
-          setIsValid(false);
-        });
+          })
+          .catch((error) => {
+            setLoading(false);
+            setErrorMessage(error.message);
+            setIsValid(false);
+          });
       } catch (error) {
         setLoading(false);
         setErrorMessage(error.message);
@@ -137,7 +111,7 @@ const Login = () => {
 
   return (
     <div className="form-container flex justify-center">
-      {loading ?
+      {/* {loading ?
         (
           <Spinner />
         ) : (
@@ -146,8 +120,8 @@ const Login = () => {
               <Link to="/"><h1>Magic Find</h1></Link>
             </div>
             <div className="form-title">
-                <h2>Log in to your account</h2>
-              </div>
+              <h2>Log in to your account</h2>
+            </div>
             <p className={errorMessage ? 'show-error-message' : succesMessage ? 'show-success-message' : 'hide'}></p>
             <form className="auth-form" onSubmit={handleSubmit}>
               <div className="form-element">
@@ -191,7 +165,7 @@ const Login = () => {
               </div>
             </form>
           </div>
-        )}
+        )} */}
     </div>
   )
 }

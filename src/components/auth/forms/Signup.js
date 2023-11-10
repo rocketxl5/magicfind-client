@@ -1,10 +1,11 @@
 import React, { useRef, useState, useEffect, useContext, useReducer } from 'react';
 import { Link, useHistory, useLocation } from 'react-router-dom';
 import FormInput from './FormInput';
-import Spinner from '../layout/Spinner';
+import Spinner from '../../layout/Spinner';
 import reducer from './reducer/inputReducer';
-import { PathContext } from '../../contexts/PathContext';
-import { api } from '../../api/resources';
+import handleErrors from './helpers/handleErrors';
+import { PathContext } from '../../../contexts/PathContext';
+import { api } from '../../../api/resources';
 
 const Signup = () => {
   const [values, setValues] = useState({
@@ -14,10 +15,14 @@ const Signup = () => {
     password: '',
     confirmPassword: ''
   });
-
+  const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
   const [isValidForm, setIsValidForm] = useState(false);
-  const [errorMessage, setErrorMessage] = useState('');
+  // On submit error object for empty or invalid inputs
+  // Sever side error message if username or email already taken
+  const [requestError, setRequestError] = useState('');
+
+  // Input refs 
   const usernameRef = useRef(null);
   const emailRef = useRef(null);
   const countryRef = useRef(null);
@@ -42,9 +47,9 @@ const Signup = () => {
       ref: usernameRef,
       pattern: '(?=.*[a-z])[a-z0-9]{3,12}',
       requirements: [
-        { text: 'Must begin with a letter', pattern: /^[a-z][a-z0-9]*$/, fullfiled: false },
-        { text: 'Lowercase letters & numbers', pattern: /^[a-z0-9]{3,}$/, fullfiled: false },
-        { text: '3 to 12 characters', pattern: /^[a-z0-9]{3,12}$/, fullfiled: false },
+        { text: 'Must begin with a letter', pattern: /^[a-z]+.*$/, fullfiled: false },
+        { text: 'Lowercase letters & numbers', pattern: /^(?=.*[a-z])[a-z0-9]{2,}$/, fullfiled: false },
+        { text: '5 to 12 characters', pattern: /^.{3,12}$/, fullfiled: false },
       ]
     },
     {
@@ -54,9 +59,9 @@ const Signup = () => {
       placeholder: 'Email',
       label: 'Email',
       ref: emailRef,
-      pattern: '[a-z0-9._%+\\-]+@[a-z0-9.\\-]+\\.[a-z]{2,}',
+      pattern: '[a-zA-Z0-9._%+\\-]{3,}@[a-zA-Z0-9.\\-]+\\.[a-zA-Z]{2,}',
       requirements: [
-        { text: 'Enter a valid email address', pattern: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,})+$/, fullfiled: false }
+        { text: 'Enter a valid email address', pattern: /^\w+([\.-]?\w+){3,}@\w+([\.-]?\w+)*(\.\w{2,})+$/, fullfiled: false }
       ]
     },
     {
@@ -78,13 +83,14 @@ const Signup = () => {
       placeholder: 'Password',
       label: 'Password',
       ref: passwordRef,
-      pattern: '(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,16}',
+      pattern: '^[a-zA-Z]+(?=.*[0-9])(?=.*[!@#$%^&*])(?=.*[A-Z])[a-zA-Z0-9!@#$%^&*]{7,16}$',
       requirements: [
         { text: 'Must begin with a letter', pattern: /^[a-zA-Z]+/, fullfiled: false },
-        { text: 'One capital letter', pattern: /[A-Z]+/, fullfiled: false },
-        { text: 'One number', pattern: /^(?=.*[a-zA-Z]).*[0-9].*$/, fullfiled: false },
-        { text: 'One special character: [! @ # $ % ^ & *]', pattern: /^(?=.*[a-zA-Z]).*[!@#$%^&*].*$/, fullfiled: false },
+        { text: 'One capital letter', pattern: /^(?=.*[a-zA-Z]).*[A-Z].*$/, fullfiled: false },
+        { text: 'One number', pattern: /^[a-zA-Z].*(?=.*[0-9]).*$/, fullfiled: false },
+        { text: 'One special character: [! @ # $ % ^ & *]', pattern: /^[a-zA-Z].*(?=.*[!@#$%^&*]).*$/, fullfiled: false },
         { text: '8 to 16 characters long', pattern: /^.{8,16}$/, fullfiled: false },
+        { text: 'Valid character', pattern: /^[a-zA-Z0-9!@#$%^&*]*$/, fullfiled: false },
       ]
     },
     {
@@ -94,10 +100,14 @@ const Signup = () => {
       placeholder: 'Confirm Password',
       label: 'Confirm Password',
       ref: confirmPasswordRef,
-      pattern: `${values.password}`,
+      pattern: values.password,
       requirements: [
-        { text: 'Passwords must match', pattern: new RegExp(values.password), fullfiled: false }
-      ],
+        {
+          text: 'Passwords must match',
+          pattern: values.password,
+          fullfiled: false
+        }
+      ]
     }
   ];
 
@@ -109,36 +119,17 @@ const Signup = () => {
   const location = useLocation();
   const history = useHistory();
 
-  // Sets useReducer dispatch action object
-  const getDispatchAction = (e) => {
-    // Submit event 
-    if (e.type === 'submit') {
-      return {
-        type: e.type,
-        payload: {
-          values: values,
-          inputs: refs,
-          requirements: inputs.map(input => {
-            return { [input.name]: input.requirements }
-          })
-        }
-      }
-    }
-    // Change, Focus, Blur events
-    return {
-      type: e.type,
-      payload: {
-        values: values,
-        input: refs[e.target.name],
-        requirements: inputs[e.target.id].requirements,
-      }
-    }
-  }
-
-
   useEffect(() => {
     if (isValidForm) {
       setLoading(true);
+
+      const inputValues = {
+        username: values.username.trim(),
+        email: values.email.trim(),
+        country: values.country.trim(),
+        password: values.password,
+        confirmPassword: values.confirmPassword
+      }
 
       const options = {
         method: 'POST',
@@ -146,7 +137,7 @@ const Signup = () => {
           'Content-Type': 'application/json',
           'Accept': 'application/json'
         },
-        body: JSON.stringify(values)
+        body: JSON.stringify(inputValues)
       }
 
       try {
@@ -166,41 +157,75 @@ const Signup = () => {
           })
           .catch(error => {
             setLoading(false);
-            setErrorMessage(error.message)
+            setRequestError(error.message)
             setIsValidForm(false)
           })
       } catch (error) {
         setLoading(false);
-        setErrorMessage(error.message);
+        setRequestError(error.message);
       }
     }
   }, [isValidForm]);
 
   // Server error message handler
   useEffect(() => {
-    if (errorMessage) {
-      document.querySelector('.show-error-message').innerHTML = errorMessage
+    if (requestError) {
+      document.querySelector('.show-error-message').innerHTML = requestError
     }
-  }, [errorMessage])
+  }, [requestError])
 
   const handleChange = (e) => {
     setValues({ ...values, [e.target.name]: e.target.value })
-    dispatch(getDispatchAction(e))
+
+    dispatch({
+      type: e.type,
+      payload: {
+        values: values,
+        input: refs[e.target.name],
+        requirements: inputs[e.target.id].requirements,
+      }
+    })
   }
 
   const handleFocus = (e) => {
-    dispatch(getDispatchAction(e))
+    // Remove submit error prop if any
+    if (errors[e.target.name]) {
+      const newErrors = { ...errors }
+      delete newErrors[e.target.name]
+      setErrors(newErrors)
+    }
+
+    dispatch({
+      type: e.type,
+      payload: {
+        values: values,
+        input: refs[e.target.name],
+        requirements: inputs[e.target.id].requirements,
+      }
+    })
   }
 
   const handleBlur = (e) => {
-    dispatch(getDispatchAction(e))
+    dispatch({
+      type: e.type,
+      payload: {
+        values: values,
+        input: refs[e.target.name],
+        requirements: inputs[e.target.id].requirements,
+      }
+    })
   }
 
   const handleSubmit = (e) => {
-
     e.preventDefault();
-    dispatch(getDispatchAction(e))
+    setErrors(handleErrors(values, refs))
+
   }
+
+  useEffect(() => {
+    // Object.keys(errors).length === 0 && setIsValidForm(true)
+    // console.log(errors)
+  }, [errors])
 
   // Set path name
   useEffect(() => {
@@ -217,11 +242,11 @@ const Signup = () => {
             <div className="form-logo">
               <Link to="/"><h1>Magic Find</h1></Link>
             </div>
-              <div className="form-title">
-                <h2>Create your account</h2>
-              </div>
-              <p className={errorMessage ? 'show-error-message' : 'hide'}></p>
-            <form className="auth-form" name="signupForm" onSubmit={handleSubmit}>
+            <div className="form-title">
+              <h2>Create your account</h2>
+            </div>
+            <p className={requestError ? 'show-error-message' : 'hide'}></p>
+            <form className="auth-form" name="signupForm" onSubmit={handleSubmit} noValidate>
               {
                 inputs.map((input, index) => {
                   return <FormInput
@@ -232,6 +257,7 @@ const Signup = () => {
                     onChange={handleChange}
                     onFocus={handleFocus}
                     onBlur={handleBlur}
+                    errors={errors}
                     ref={input.ref} />
                 })
               }
