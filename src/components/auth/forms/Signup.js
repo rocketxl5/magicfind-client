@@ -84,7 +84,7 @@ const Signup = () => {
       placeholder: 'Password',
       label: 'Password',
       ref: passwordRef,
-      pattern: '^(?=[a-zA-Z])(?=.*\\d)(?=.*[!@#$%^&*])(?=.*[A-Z])(?=.*[a-z])[a-zA-Z0-9!@#$%^&*]{7,16}$',
+      pattern: '^(?=[a-zA-Z])(?=.*\\d)(?=.*[!@#$%^&*])(?=.*[A-Z])(?=.*[a-z])[a-zA-Z0-9!@#$%^&*]{8,16}$',
       requirements: [
         { text: 'Must begin with a letter', pattern: /^[a-zA-Z]+/, fullfiled: false },
         { text: 'One lowercase letter', pattern: /^(?=.*[a-zA-Z]).*[a-z].*$/, fullfiled: false },
@@ -150,9 +150,18 @@ const Signup = () => {
 
       try {
         fetch(`${api.serverURL}/api/users/signup`, options)
-          .then((res) => res.json())
-          .then(data => {
+          .then((res) => {
+            if (res.ok) {
+              return res.json()
+            }
 
+            return res.json().then((data) => {
+              setLoading(false)
+              throw new Error(JSON.stringify(data))
+            })
+          })
+          .then(data => {
+            console.log(data)
             history.push({ pathname: '/login', state: { message: data.message } });
           })
           .catch(error => {
@@ -178,7 +187,7 @@ const Signup = () => {
   const handleChange = (e) => {
     // Set input state values
     setValues({ ...values, [e.target.name]: e.target.value })
-    console.log(e.target.checkValidity())
+
     // Set input validity prop value to valid
     if (!e.target.checkValidity()) {
       e.target.setCustomValidity('')
@@ -188,25 +197,26 @@ const Signup = () => {
       e.target.setCustomValidity('invalid')
     }
 
-    if (e.target.name === 'confirmPassword' && !e.target.value) {
-      console.log(e.target)
-      console.log(e.target.checkValidity())
+    if (!e.target.value) {
+      e.target.setCustomValidity('')
     }
-
 
     const payload = e.target.name !== 'password' ?
       {
         name: e.target.name,
-        value: e.target.value,
-        values: values,
-        requirements: inputs[e.target.id].requirements
+        values: { input: e.target.value },
+        requirements: { input: inputs[e.target.id].requirements }
       } : {
         name: e.target.name,
-        value: e.target.value,
-        values: values,
-        requirements: { password: inputs[e.target.id].requirements, confirmPassword: inputs[inputs.length - 1].requirements },
+        values: {
+          password: e.target.value,
+          confirmPassword: refs.confirmPassword.value,
+        },
+        requirements: {
+          password: inputs[e.target.id].requirements,
+          confirmPassword: inputs[inputs.length - 1].requirements
+        },
       }
-
     // Call dispatch reducer function
     dispatch({
       type: e.type,
@@ -230,6 +240,7 @@ const Signup = () => {
       }
     })
 
+    // Remove input error 
     if (errors[e.target.name]) {
       const newErrors = { ...errors }
       delete newErrors[e.target.name]
@@ -238,36 +249,18 @@ const Signup = () => {
   }
 
   const handleBlur = (e) => {
-    // Set input validity prop value to valid
+    // Set input validity prop value to valid on empty value
     (!e.target.value) && e.target.setCustomValidity('')
-
-    if (!errors[e.target.name] && values[e.target.name]) {
-      const newErrors = { ...errors }
-      delete newErrors[e.target.name]
-      setErrors(newErrors)
-    }
-
-    // dispatch({
-    //   type: e.type,
-    //   payload: {
-    //     values: values,
-    //     input: refs[e.target.name],
-    //     requirements: inputs[e.target.id].requirements,
-    //   }
-    // })
   }
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const inputErrors = (errorHandler(values, refs))
     setErrors(inputErrors)
-
-    if (!Object.keys(errors).length) {
-      console.log(errors)
-      console.log(Object.keys(errors).length)
+    console.log(errors)
+    if (Object.keys(errors).length === 0) {
       setValidForm(true)
     }
-
   }
 
   // Set path name
