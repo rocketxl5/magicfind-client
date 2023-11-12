@@ -62,7 +62,7 @@ const Signup = () => {
       ref: emailRef,
       pattern: '[a-zA-Z0-9._%+\\-]{3,}@[a-zA-Z0-9.\\-]+\\.[a-zA-Z]{2,}',
       requirements: [
-        { text: 'Enter a valid email address', pattern: /^\w+([\.-]?\w+){3,}@\w+([\.-]?\w+)*(\.\w{2,})+$/, fullfiled: false }
+        { text: 'Enter a valid email address', pattern: /^[a-zA-Z0-9._%+\-]{3,}@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}$/, fullfiled: false }
       ]
     },
     {
@@ -84,7 +84,7 @@ const Signup = () => {
       placeholder: 'Password',
       label: 'Password',
       ref: passwordRef,
-      pattern: '^[a-zA-Z](?=.*\\d)(?=.*[!@#$%^&*])(?=.*[A-Z])(?=.*[a-z])[a-zA-Z0-9!@#$%^&*]{7,16}$',
+      pattern: '^(?=[a-zA-Z])(?=.*\\d)(?=.*[!@#$%^&*])(?=.*[A-Z])(?=.*[a-z])[a-zA-Z0-9!@#$%^&*]{7,16}$',
       requirements: [
         { text: 'Must begin with a letter', pattern: /^[a-zA-Z]+/, fullfiled: false },
         { text: 'One lowercase letter', pattern: /^(?=.*[a-zA-Z]).*[a-z].*$/, fullfiled: false },
@@ -106,15 +106,24 @@ const Signup = () => {
       requirements: [
         {
           text: 'Passwords must match',
-          pattern: values.password,
+          pattern: `^${values.password}$`,
           fullfiled: false
         }
       ]
     }
   ];
+  // Set useReducer hook
+  const [inputStates, dispatch] = useReducer(
+    reducer,
+    (function () {
+      let state = {}
+      for (const prop in init) {
+        state = { ...state, [prop]: [] }
+      }
+      return state
+    })(init)
+  )
 
-  // Form inputs Reducer hook
-  const [inputStates, dispatch] = useReducer(reducer, [])
   // Setting current path name
   const { setPathname } = useContext(PathContext);
 
@@ -167,48 +176,85 @@ const Signup = () => {
   }, [errorMessage])
 
   const handleChange = (e) => {
+    // Set input state values
     setValues({ ...values, [e.target.name]: e.target.value })
+    console.log(e.target.checkValidity())
+    // Set input validity prop value to valid
+    if (!e.target.checkValidity()) {
+      e.target.setCustomValidity('')
+    }
+    // Set input validity prop value to invalid
+    if (e.target.checkValidity() && !e.target.value) {
+      e.target.setCustomValidity('invalid')
+    }
 
+    if (e.target.name === 'confirmPassword' && !e.target.value) {
+      console.log(e.target)
+      console.log(e.target.checkValidity())
+    }
+
+
+    const payload = e.target.name !== 'password' ?
+      {
+        name: e.target.name,
+        value: e.target.value,
+        values: values,
+        requirements: inputs[e.target.id].requirements
+      } : {
+        name: e.target.name,
+        value: e.target.value,
+        values: values,
+        requirements: { password: inputs[e.target.id].requirements, confirmPassword: inputs[inputs.length - 1].requirements },
+      }
+
+    // Call dispatch reducer function
     dispatch({
       type: e.type,
-      payload: {
-        values: values,
-        input: refs[e.target.name],
-        requirements: inputs[e.target.id].requirements,
-      }
+      payload: { ...payload }
     })
   }
 
   const handleFocus = (e) => {
-    // Remove submit error prop if any
+    // Set input validity prop value to invalid
+    if (!e.target.value && e.target.name !== 'confirmPassword') {
+      e.target.setCustomValidity('invalid')
+    }
 
+    // Call dispatch reducer function
     dispatch({
       type: e.type,
       payload: {
-        values: values,
-        input: refs[e.target.name],
+        name: e.target.name,
+        value: e.target.value,
         requirements: inputs[e.target.id].requirements,
       }
     })
+
+    if (errors[e.target.name]) {
+      const newErrors = { ...errors }
+      delete newErrors[e.target.name]
+      setErrors(newErrors)
+    }
   }
 
   const handleBlur = (e) => {
+    // Set input validity prop value to valid
+    (!e.target.value) && e.target.setCustomValidity('')
+
     if (!errors[e.target.name] && values[e.target.name]) {
       const newErrors = { ...errors }
       delete newErrors[e.target.name]
       setErrors(newErrors)
     }
 
-    console.log(errors)
-
-    dispatch({
-      type: e.type,
-      payload: {
-        values: values,
-        input: refs[e.target.name],
-        requirements: inputs[e.target.id].requirements,
-      }
-    })
+    // dispatch({
+    //   type: e.type,
+    //   payload: {
+    //     values: values,
+    //     input: refs[e.target.name],
+    //     requirements: inputs[e.target.id].requirements,
+    //   }
+    // })
   }
 
   const handleSubmit = (e) => {
