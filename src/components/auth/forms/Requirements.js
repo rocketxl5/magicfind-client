@@ -3,7 +3,7 @@ import RequirementMessage from './RequirementMessage'
 
 const Requirements = ({ inputState }) => {
 
-    // console.log(inputState)
+    console.log(inputState)
     return (
         <div className="requirements-container">
             <div className="requirements-wrapper">
@@ -12,7 +12,7 @@ const Requirements = ({ inputState }) => {
                 <div className="requirements-message">
                     {
                         inputState &&
-                        inputState.requirements.map((requirement, index) => {
+                        inputState.map((requirement, index) => {
                             return <RequirementMessage key={index} requirement={requirement} />
                         })
                     }
