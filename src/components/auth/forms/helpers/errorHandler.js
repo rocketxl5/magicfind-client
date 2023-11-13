@@ -4,19 +4,20 @@ const errorHandler = (values, inputs) => {
     const handles = Object.keys(values)
     let errors = {}
     handles.forEach((handle, index) => {
-        // If empty input: required input
+        // Empty input: required input
         if (!values[handle]) {
-            console.log(handle)
             errors = { ...errors, [handle]: (handle === 'confirmPassword') ? `${capitalizeWord('password')} is required` : `${capitalizeWord(handle)} is required` }
             inputs[handle].blur()
         }
-        // If requirements unfullfiled: invalid input 
+            // Requirements unfullfiled: invalid input 
         else if (inputs[handle].validity.patternMismatch) {
-            console.log(handle)
             errors = { ...errors, [handle]: (handle === 'confirmPassword') ? 'Password doesn\'t match' : `Invalid ${capitalizeWord(handle)}` }
             inputs[handle].blur()
         }
-
+        // Invalid credentials from server
+        else if (!inputs[handle].checkValidity()) {
+            errors = { ...errors, [handle]: `Invalid ${capitalizeWord(handle)}` }
+        }
     })
     return errors
 }

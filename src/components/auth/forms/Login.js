@@ -16,9 +16,8 @@ const Login = () => {
   const [loading, setLoading] = useState(false);
   const [isValidForm, setIsValidForm] = useState(false);
   const [isSubmit, setIsSubmit] = useState(false);
-  const [message, setMessage] = useState({});
+  const [message, setMessage] = useState(null);
   const [showPassword, setShowPassword] = useState(false);
-
   const { setPathname } = useContext(PathContext);
   const { setUser } = useContext(UserContext);
 
@@ -35,7 +34,7 @@ const Login = () => {
   ***********************/
 
   // On component load
-  useEffect(() => {
+  useEffect(() => { 
     if (location.state) {
       if (location.state.message) {
         setMessage({ ...location.state.message });
@@ -103,22 +102,21 @@ const Login = () => {
           .catch((error) => {
             const errorMessage = JSON.parse(error.message)
             setMessage({ ...errorMessage });
-            setValues({ ...values, email: "", password: "" })
-            setErrors(values, inputs)
-            // setValues({ email: '', password: '' })
-
+            inputs.email.setCustomValidity('invalid')
+            inputs.password.setCustomValidity('invalid')
+            setErrors(errorHandler(values, inputs))
+            // setValues({ ...values, email: "", password: "" })
             setLoading(false);
             setIsValidForm(false);
           });
       } catch (error) {
-        setMessage({ ...error.message });
+        const errorMessage = JSON.parse(error.message)
+        setMessage({ ...errorMessage });
         setLoading(false);
         setIsValidForm(false);
       }
     }
   }, [isValidForm]);
-
-  useEffect(() => { console.log(message) }, [message])
 
   /**********************
    *** Event handlers ***
@@ -140,11 +138,6 @@ const Login = () => {
   }
 
   const handleBlur = (e) => {
-    // if (errors[e.target.name]) {
-    //   const cloneErrors = { ...errors }
-    //   delete cloneErrors[e.target.name]
-    //   setErrors(cloneErrors)
-    // }
   }
 
   // Submit handler
@@ -161,7 +154,7 @@ const Login = () => {
     e.preventDefault();
     !showPassword ? setShowPassword(true) : setShowPassword(false);
   }
-  useEffect(() => { console.log(inputs) }, [values])
+
   return (
     <div className="form-container flex justify-center">
       {
@@ -174,13 +167,20 @@ const Login = () => {
             <div className="form-logo">
               <Link to="/"><h1>Magic Find</h1></Link>
             </div>
-            <div className="form-title">
+
+              {message ? (
+                <div className={message.type === 'error' ? 'show-error-message' : message.type === 'success' ? 'show-success-message' : 'hide'}>
+
+                  <h4 className="auth-message-title">{message.name ? <>{message.title} <strong>{message.name}</strong>!</> : message.title}</h4>
+
+                  <p className="auth-message-body">{message.body}</p>
+                </div>
+              ) : (
+                  <div className="form-title">
                 <h2>Log in to your account</h2>
             </div>
-              <div className={message.type === 'error' ? 'show-error-message' : message.type === 'success' ? 'show-success-message' : 'hide'}>
-                <h4 className="auth-message-title">{message.title}</h4>
-                <p>{message.body}</p>
-              </div>
+              )
+              } 
               <form className="auth-form" id="signin-form" name="signin-form" onSubmit={handleSubmit} noValidate>
               <div className="form-element">
                   <label htmlFor="email" className={errors.email && 'danger-color'}>{errors.email ? errors.email : 'Email'}</label>

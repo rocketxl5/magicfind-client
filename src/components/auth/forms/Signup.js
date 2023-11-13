@@ -22,7 +22,7 @@ const Signup = () => {
   const [isSubmit, setIsSubmit] = useState(false)
   // On submit error object for empty or invalid inputs
   // Sever side error message if username or email already taken
-  const [errorMessage, setErrorMessage] = useState('');
+  const [message, setMessage] = useState('');
 
   // Input refs 
   const usernameRef = useRef(null);
@@ -176,24 +176,22 @@ const Signup = () => {
             if (res.ok) {
               return res.json()
             }
-
             return res.json().then((data) => {
               setLoading(false)
               throw new Error(JSON.stringify(data))
             })
           })
           .then(data => {
-            console.log(data)
             history.push({ pathname: '/login', state: { message: data.message } });
           })
           .catch(error => {
-            setLoading(false);
-            setErrorMessage(error.message)
+            setMessage(error.message)
             setIsValidForm(false)
+            setLoading(false);
           })
       } catch (error) {
         setLoading(false);
-        setErrorMessage(error.message);
+        setMessage(error.message);
         setIsValidForm(false)
       }
     }
@@ -298,7 +296,9 @@ const Signup = () => {
             <div className="form-title">
               <h2>Create your account</h2>
             </div>
-            <p className={errorMessage ? 'show-error-message' : 'hide'}></p>
+            <div className={message ? 'show-error-message' : 'hide'}>
+              <p>{message.replace(/['"]+/g, '')}</p>
+            </div>
             <form className="auth-form" id="singup-form" name="singup-form" onSubmit={handleSubmit} noValidate>
               {
                 inputs.map((input, index) => {
