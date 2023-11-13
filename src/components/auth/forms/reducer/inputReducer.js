@@ -27,12 +27,7 @@ const inputReducer = (inputStates, action) => {
     if (handle === 'password') {
       // Update confirm password state
       if (values.confirmPassword) {
-        // console.log(value)
-        // console.log(payload.requirements.confirmPassword)
-
         updatedRequirements = updateRequirements(requirements.confirmPassword, values.password, true)
-        // console.log(updatedRequirements)
-        // console.log(values.password)
         inputStates = { ...inputStates, confirmPassword: updatedRequirements }
       }
       // Update password state
@@ -52,7 +47,6 @@ const inputReducer = (inputStates, action) => {
     }
   }
 
-
   function focusHandler(payload) {
     const isConfirmPassword = payload.name === 'confirmPassword' ? true : false
     const requirements = updateRequirements(payload.requirements, payload.value, isConfirmPassword)
@@ -60,22 +54,15 @@ const inputReducer = (inputStates, action) => {
   }
 
   function blurHandler(payload) {
-
-    if (!payload.value) {
-
-    }
   }
 
   function updateRequirements(requirements, value, isConfirmPassword = false) {
-    console.log(isConfirmPassword)
       return requirements.map((requirement) => {
         const pattern = !isConfirmPassword ? requirement.pattern : new RegExp(requirement.pattern)
         requirement = { ...requirement, fullfiled: pattern.test(value) ? true : false }
         return requirement
       })
-
   }
-
 }
 
 export default inputReducer;

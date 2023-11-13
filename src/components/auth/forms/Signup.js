@@ -18,7 +18,8 @@ const Signup = () => {
   const [values, setValues] = useState(init);
   const [errors, setErrors] = useState(init);
   const [loading, setLoading] = useState(false);
-  const [validForm, setValidForm] = useState(false);
+  const [isValidForm, setIsValidForm] = useState(false);
+  const [isSubmit, setIsSubmit] = useState(false)
   // On submit error object for empty or invalid inputs
   // Sever side error message if username or email already taken
   const [errorMessage, setErrorMessage] = useState('');
@@ -37,7 +38,6 @@ const Signup = () => {
     password: passwordRef.current,
     confirmPassword: confirmPasswordRef.current
   }
-
   const inputs = [
     {
       name: 'username',
@@ -50,7 +50,7 @@ const Signup = () => {
       requirements: [
         { text: 'Must begin with a letter', pattern: /^[a-z]+.*$/, fullfiled: false },
         { text: 'Lowercase letters & numbers', pattern: /^(?=.*[a-z])[a-z0-9]{2,}$/, fullfiled: false },
-        { text: '5 to 12 characters', pattern: /^.{3,12}$/, fullfiled: false },
+        { text: '3 to 12 characters', pattern: /^.{3,12}$/, fullfiled: false },
       ]
     },
     {
@@ -130,8 +130,30 @@ const Signup = () => {
   const location = useLocation();
   const history = useHistory();
 
+
+  /**********************
+  ***** useEffects  *****
+  ***********************/
+
+  // On component load
   useEffect(() => {
-    if (validForm) {
+    // Prevents Header component load
+    setPathname(location.pathname);
+  }, []);
+
+  // Error handler
+  useEffect(() => {
+    if (Object.keys(errors).length === 0 && isSubmit) {
+      // Triggers Form request handler
+      setIsValidForm(true)
+    } else {
+      setIsSubmit(false)
+    }
+  }, [errors])
+
+  // Form request handler 
+  useEffect(() => {
+    if (isValidForm) {
       setLoading(true);
 
       const inputValues = {
@@ -167,23 +189,22 @@ const Signup = () => {
           .catch(error => {
             setLoading(false);
             setErrorMessage(error.message)
-            setValidForm(false)
+            setIsValidForm(false)
           })
       } catch (error) {
         setLoading(false);
         setErrorMessage(error.message);
-        setValidForm(false)
+        setIsValidForm(false)
       }
     }
-  }, [validForm]);
+  }, [isValidForm]);
 
-  // Server error message handler
-  useEffect(() => {
-    if (errorMessage) {
-      document.querySelector('.show-error-message').innerHTML = errorMessage
-    }
-  }, [errorMessage])
 
+  /**********************
+   *** Event handlers ***
+   **********************/
+
+  // Change handler
   const handleChange = (e) => {
     // Set input state values
     setValues({ ...values, [e.target.name]: e.target.value })
@@ -201,6 +222,7 @@ const Signup = () => {
       e.target.setCustomValidity('')
     }
 
+    // Generate dispatch payload object
     const payload = e.target.name !== 'password' ?
       {
         name: e.target.name,
@@ -224,9 +246,17 @@ const Signup = () => {
     })
   }
 
+  // Focus handler
   const handleFocus = (e) => {
-    // Set input validity prop value to invalid
-    if (!e.target.value && e.target.name !== 'confirmPassword') {
+    // Remove input error if any
+    if (errors[e.target.name]) {
+      const cloneErrors = { ...errors }
+      delete cloneErrors[e.target.name]
+      setErrors(cloneErrors)
+    }
+
+    // Set input validity to display requirements message 
+    if (!e.target.value) {
       e.target.setCustomValidity('invalid')
     }
 
@@ -239,34 +269,21 @@ const Signup = () => {
         requirements: inputs[e.target.id].requirements,
       }
     })
-
-    // Remove input error 
-    if (errors[e.target.name]) {
-      const newErrors = { ...errors }
-      delete newErrors[e.target.name]
-      setErrors(newErrors)
-    }
   }
 
+  // Blur handler
   const handleBlur = (e) => {
-    // Set input validity prop value to valid on empty value
-    (!e.target.value) && e.target.setCustomValidity('')
+    // Set input validity to hide requirements message
+    !e.target.value && e.target.setCustomValidity('')
   }
 
+  // Submit handler
   const handleSubmit = (e) => {
     e.preventDefault();
     const inputErrors = (errorHandler(values, refs))
+    setIsSubmit(true)
     setErrors(inputErrors)
-    console.log(errors)
-    if (Object.keys(errors).length === 0) {
-      setValidForm(true)
-    }
   }
-
-  // Set path name
-  useEffect(() => {
-    setPathname(location.pathname);
-  }, []);
 
   return (
     <div className="form-container flex justify-center">
