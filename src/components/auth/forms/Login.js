@@ -105,7 +105,7 @@ const Login = () => {
             inputs.email.setCustomValidity('invalid')
             inputs.password.setCustomValidity('invalid')
             setErrors(errorHandler(values, inputs))
-            // setValues({ ...values, email: "", password: "" })
+            setValues({ ...values, email: "", password: "" })
             setLoading(false);
             setIsValidForm(false);
           });
