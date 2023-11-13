@@ -175,7 +175,7 @@ const Login = () => {
               <Link to="/"><h1>Magic Find</h1></Link>
             </div>
             <div className="form-title">
-                {/* <h2>Log in to your account</h2> */}
+                <h2>Log in to your account</h2>
             </div>
               <div className={message.type === 'error' ? 'show-error-message' : message.type === 'success' ? 'show-success-message' : 'hide'}>
                 <h4 className="auth-message-title">{message.title}</h4>
