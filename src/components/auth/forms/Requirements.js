@@ -3,12 +3,9 @@ import RequirementMessage from './RequirementMessage'
 
 const Requirements = ({ inputState }) => {
 
-    console.log(inputState)
     return (
         <div className="requirements-container">
             <div className="requirements-wrapper">
-
-
                 <div className="requirements-message">
                     {
                         inputState &&

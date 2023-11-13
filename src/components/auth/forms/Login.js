@@ -1,7 +1,6 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { Link, useHistory, useLocation } from 'react-router-dom';
 import Spinner from '../../layout/Spinner';
-import FormInput from './FormInput';
 import errorHandler from './helpers/errorHandler';
 import { UserContext } from '../../../contexts/UserContext';
 import { PathContext } from '../../../contexts/PathContext';
@@ -15,9 +14,9 @@ const Login = () => {
   const [values, setValues] = useState(init);
   const [errors, setErrors] = useState(init);
   const [loading, setLoading] = useState(false);
-  const [validForm, setValidForm] = useState(false);
-  const [errorMessage, setErrorMessage] = useState('');
-  const [succesMessage, setSuccessMessage] = useState('');
+  const [isValidForm, setIsValidForm] = useState(false);
+  const [isSubmit, setIsSubmit] = useState(false);
+  const [message, setMessage] = useState({});
   const [showPassword, setShowPassword] = useState(false);
 
   const { setPathname } = useContext(PathContext);
@@ -31,31 +30,39 @@ const Login = () => {
   const location = useLocation();
   const history = useHistory();
 
+  /**********************
+  ***** useEffects  *****
+  ***********************/
 
-  // Show passsword button handler
-  const handleMouseDown = (e) => {
-    // Prevents firing form
-    e.preventDefault();
-    !showPassword ? setShowPassword(true) : setShowPassword(false);
-  }
-
-  // Setting path with component url pathname onload
+  // On component load
   useEffect(() => {
     if (location.state) {
       if (location.state.message) {
-        setSuccessMessage(location.state.message);
+        setMessage({ ...location.state.message });
       }
     }
+    // Prevents Header component load
     setPathname(location.pathname);
   }, []);
+
+  // Error handler 
+  useEffect(() => {
+    if (Object.keys(errors).length === 0 && isSubmit) {
+      // Trigger Form request handler
+      setIsValidForm(true)
+    } else {
+      setIsSubmit(false)
+    }
+  }, [errors])
 
   // Show/hide password
   useEffect(() => {
     document.querySelector('#password').type = showPassword ? 'text' : 'password'
   }, [showPassword])
 
+  // Form request handler 
   useEffect(() => {
-    if (validForm) {
+    if (isValidForm) {
       setLoading(true);
 
       const userInput = {
@@ -72,9 +79,8 @@ const Login = () => {
         fetch(`${api.serverURL}/api/users/login`, options)
           .then((res) => {
             if (res.ok) {
-              return res.json();
+              return res.json()
             }
-
             return res.json().then((data) => {
               setLoading(false)
               throw new Error(JSON.stringify(data))
@@ -83,12 +89,10 @@ const Login = () => {
           .then((data) => {
             data.user.id = data.user._id;
             delete data.user._id;
-
             const user = {
               ...data.user,
               token: data.token
             }
-
             setLoading(false)
             setUser(user);
             localStorage.setItem('user', JSON.stringify(user));
@@ -97,64 +101,70 @@ const Login = () => {
             });
           })
           .catch((error) => {
+            const errorMessage = JSON.parse(error.message)
+            setMessage({ ...errorMessage });
+            setValues({ ...values, email: "", password: "" })
+            setErrors(values, inputs)
+            // setValues({ email: '', password: '' })
+
             setLoading(false);
-            console.log(error.message)
-            setErrorMessage(error.message);
-            setValidForm(false);
+            setIsValidForm(false);
           });
       } catch (error) {
+        setMessage({ ...error.message });
         setLoading(false);
-        setErrorMessage(error.message);
+        setIsValidForm(false);
       }
     }
-  }, [validForm]);
+  }, [isValidForm]);
 
-  // error message handler
-  useEffect(() => {
-    if (errorMessage) {
-      document.querySelector('.show-error-message').innerHTML = errorMessage.replaceAll('"', '')
-    }
+  useEffect(() => { console.log(message) }, [message])
 
-    if (succesMessage) {
-      document.querySelector('.show-success-message').innerHTML = succesMessage.replaceAll('"', '')
-    }
-  }, [errorMessage, succesMessage])
+  /**********************
+   *** Event handlers ***
+  **********************/
 
+  // Change handler
   const handleChange = (e) => {
     setValues({ ...values, [e.target.name]: e.target.value })
   }
 
+  // Focus handler
   const handleFocus = (e) => {
     // Remove submit error prop if present
     if (errors[e.target.name]) {
-      const newErrors = { ...errors }
-      delete newErrors[e.target.name]
-      setErrors(newErrors)
+      const cloneErrors = { ...errors }
+      delete cloneErrors[e.target.name]
+      setErrors(cloneErrors)
     }
-
   }
 
   const handleBlur = (e) => {
-
+    // if (errors[e.target.name]) {
+    //   const cloneErrors = { ...errors }
+    //   delete cloneErrors[e.target.name]
+    //   setErrors(cloneErrors)
+    // }
   }
 
+  // Submit handler
   const handleSubmit = (e) => {
     e.preventDefault();
     const inputErrors = (errorHandler(values, inputs))
-    setErrors(prev => prev = inputErrors)
+    setIsSubmit(true)
+    setErrors(inputErrors)
   }
 
-  useEffect(() => {
-    if (!Object.keys(errors).length) {
-      setValidForm(true)
-    }
-  }, [errors])
-
-
+  // Show passsword button handler
+  const handleMouseDown = (e) => {
+    // Prevents firing form
+    e.preventDefault();
+    !showPassword ? setShowPassword(true) : setShowPassword(false);
+  }
+  useEffect(() => { console.log(inputs) }, [values])
   return (
     <div className="form-container flex justify-center">
       {
-
         loading ?
           (
             <Spinner />
@@ -165,9 +175,12 @@ const Login = () => {
               <Link to="/"><h1>Magic Find</h1></Link>
             </div>
             <div className="form-title">
-              <h2>Log in to your account</h2>
+                {/* <h2>Log in to your account</h2> */}
             </div>
-            <p className={errorMessage ? 'show-error-message' : succesMessage ? 'show-success-message' : 'hide'}></p>
+              <div className={message.type === 'error' ? 'show-error-message' : message.type === 'success' ? 'show-success-message' : 'hide'}>
+                <h4 className="auth-message-title">{message.title}</h4>
+                <p>{message.body}</p>
+              </div>
               <form className="auth-form" id="signin-form" name="signin-form" onSubmit={handleSubmit} noValidate>
               <div className="form-element">
                   <label htmlFor="email" className={errors.email && 'danger-color'}>{errors.email ? errors.email : 'Email'}</label>
@@ -178,9 +191,9 @@ const Login = () => {
                     name="email"
                     value={values.email}
                     onChange={handleChange}
-                    onBlur={handleBlur}
                     onFocus={handleFocus}
-                    pattern="^(?!Enter Code$).*"
+                    onBlur={handleBlur}
+                    pattern="[a-zA-Z0-9._%+\-]{3,}@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}"
                     placeholder="Email"
                   />
               </div>
@@ -193,8 +206,8 @@ const Login = () => {
                       name="password"
                       value={values.password}
                       onChange={handleChange}
-                      onBlur={handleBlur}
                       onFocus={handleFocus}
+                      onBlur={handleBlur}
                       pattern="^(?!Enter Code$).*"
                       placeholder='Password'
                   />

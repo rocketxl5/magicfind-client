@@ -19,43 +19,33 @@ const inputReducer = (inputStates, action) => {
   return inputStates
 
   function changeHandler(payload) {
-    console.log(payload)
     const values = payload.values
+    const requirements = payload.requirements
     const handle = payload.name
-    const value = payload.value
-    let requirements = []
+    let updatedRequirements = []
 
     if (handle === 'password') {
-      console.log('password')
-      console.log(payload.requirements.confirmPassword)
-
-      // Update confirm password state if confirm password has value
+      // Update confirm password state
       if (values.confirmPassword) {
-        console.log('confirm password in password')
-        // console.log(inputStates.confirmPassword.requirements)
-        requirements = updateRequirements(payload.requirements.confirmPassword, values.confirmPassword, true)
-        inputStates = { ...inputStates, confirmPassword: requirements }
+        updatedRequirements = updateRequirements(requirements.confirmPassword, values.password, true)
+        inputStates = { ...inputStates, confirmPassword: updatedRequirements }
       }
       // Update password state
-      requirements = updateRequirements(payload.requirements.password, value)
-      inputStates = { ...inputStates, [handle]: requirements }
+      updatedRequirements = updateRequirements(requirements.password, values.password)
+      inputStates = { ...inputStates, [handle]: updatedRequirements }
     }
     // Change in confirm password
     else if (handle === 'confirmPassword') {
-      console.log('confirm password')
 
-      requirements = updateRequirements(payload.requirements, value, true)
-      inputStates = { ...inputStates, confirmPassword: requirements }
+      updatedRequirements = updateRequirements(requirements.input, values.input, true)
+      inputStates = { ...inputStates, confirmPassword: updatedRequirements }
     }
     else {
-      console.log('other inputs')
-
       // Change in other inputs
-      requirements = updateRequirements(payload.requirements, value)
-      inputStates = { ...inputStates, [handle]: requirements }
+      updatedRequirements = updateRequirements(requirements.input, values.input)
+      inputStates = { ...inputStates, [handle]: updatedRequirements }
     }
   }
-
 
   function focusHandler(payload) {
     const isConfirmPassword = payload.name === 'confirmPassword' ? true : false
@@ -64,24 +54,15 @@ const inputReducer = (inputStates, action) => {
   }
 
   function blurHandler(payload) {
-
-    if (!payload.value) {
-
-    }
   }
 
   function updateRequirements(requirements, value, isConfirmPassword = false) {
-    console.log(requirements)
       return requirements.map((requirement) => {
         const pattern = !isConfirmPassword ? requirement.pattern : new RegExp(requirement.pattern)
-        console.log(pattern.test(value))
         requirement = { ...requirement, fullfiled: pattern.test(value) ? true : false }
-        console.log(requirement)
         return requirement
       })
-
   }
-
 }
 
 export default inputReducer;

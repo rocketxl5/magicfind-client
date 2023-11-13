@@ -18,7 +18,8 @@ const Signup = () => {
   const [values, setValues] = useState(init);
   const [errors, setErrors] = useState(init);
   const [loading, setLoading] = useState(false);
-  const [validForm, setValidForm] = useState(false);
+  const [isValidForm, setIsValidForm] = useState(false);
+  const [isSubmit, setIsSubmit] = useState(false)
   // On submit error object for empty or invalid inputs
   // Sever side error message if username or email already taken
   const [errorMessage, setErrorMessage] = useState('');
@@ -37,7 +38,6 @@ const Signup = () => {
     password: passwordRef.current,
     confirmPassword: confirmPasswordRef.current
   }
-
   const inputs = [
     {
       name: 'username',
@@ -50,7 +50,7 @@ const Signup = () => {
       requirements: [
         { text: 'Must begin with a letter', pattern: /^[a-z]+.*$/, fullfiled: false },
         { text: 'Lowercase letters & numbers', pattern: /^(?=.*[a-z])[a-z0-9]{2,}$/, fullfiled: false },
-        { text: '5 to 12 characters', pattern: /^.{3,12}$/, fullfiled: false },
+        { text: '3 to 12 characters', pattern: /^.{3,12}$/, fullfiled: false },
       ]
     },
     {
@@ -84,7 +84,7 @@ const Signup = () => {
       placeholder: 'Password',
       label: 'Password',
       ref: passwordRef,
-      pattern: '^(?=[a-zA-Z])(?=.*\\d)(?=.*[!@#$%^&*])(?=.*[A-Z])(?=.*[a-z])[a-zA-Z0-9!@#$%^&*]{7,16}$',
+      pattern: '^(?=[a-zA-Z])(?=.*\\d)(?=.*[!@#$%^&*])(?=.*[A-Z])(?=.*[a-z])[a-zA-Z0-9!@#$%^&*]{8,16}$',
       requirements: [
         { text: 'Must begin with a letter', pattern: /^[a-zA-Z]+/, fullfiled: false },
         { text: 'One lowercase letter', pattern: /^(?=.*[a-zA-Z]).*[a-z].*$/, fullfiled: false },
@@ -130,8 +130,30 @@ const Signup = () => {
   const location = useLocation();
   const history = useHistory();
 
+
+  /**********************
+  ***** useEffects  *****
+  ***********************/
+
+  // On component load
   useEffect(() => {
-    if (validForm) {
+    // Prevents Header component load
+    setPathname(location.pathname);
+  }, []);
+
+  // Error handler
+  useEffect(() => {
+    if (Object.keys(errors).length === 0 && isSubmit) {
+      // Triggers Form request handler
+      setIsValidForm(true)
+    } else {
+      setIsSubmit(false)
+    }
+  }, [errors])
+
+  // Form request handler 
+  useEffect(() => {
+    if (isValidForm) {
       setLoading(true);
 
       const inputValues = {
@@ -150,35 +172,43 @@ const Signup = () => {
 
       try {
         fetch(`${api.serverURL}/api/users/signup`, options)
-          .then((res) => res.json())
-          .then(data => {
+          .then((res) => {
+            if (res.ok) {
+              return res.json()
+            }
 
+            return res.json().then((data) => {
+              setLoading(false)
+              throw new Error(JSON.stringify(data))
+            })
+          })
+          .then(data => {
+            console.log(data)
             history.push({ pathname: '/login', state: { message: data.message } });
           })
           .catch(error => {
             setLoading(false);
             setErrorMessage(error.message)
-            setValidForm(false)
+            setIsValidForm(false)
           })
       } catch (error) {
         setLoading(false);
         setErrorMessage(error.message);
-        setValidForm(false)
+        setIsValidForm(false)
       }
     }
-  }, [validForm]);
+  }, [isValidForm]);
 
-  // Server error message handler
-  useEffect(() => {
-    if (errorMessage) {
-      document.querySelector('.show-error-message').innerHTML = errorMessage
-    }
-  }, [errorMessage])
 
+  /**********************
+   *** Event handlers ***
+   **********************/
+
+  // Change handler
   const handleChange = (e) => {
     // Set input state values
     setValues({ ...values, [e.target.name]: e.target.value })
-    console.log(e.target.checkValidity())
+
     // Set input validity prop value to valid
     if (!e.target.checkValidity()) {
       e.target.setCustomValidity('')
@@ -188,25 +218,27 @@ const Signup = () => {
       e.target.setCustomValidity('invalid')
     }
 
-    if (e.target.name === 'confirmPassword' && !e.target.value) {
-      console.log(e.target)
-      console.log(e.target.checkValidity())
+    if (!e.target.value) {
+      e.target.setCustomValidity('')
     }
 
-
+    // Generate dispatch payload object
     const payload = e.target.name !== 'password' ?
       {
         name: e.target.name,
-        value: e.target.value,
-        values: values,
-        requirements: inputs[e.target.id].requirements
+        values: { input: e.target.value },
+        requirements: { input: inputs[e.target.id].requirements }
       } : {
         name: e.target.name,
-        value: e.target.value,
-        values: values,
-        requirements: { password: inputs[e.target.id].requirements, confirmPassword: inputs[inputs.length - 1].requirements },
+        values: {
+          password: e.target.value,
+          confirmPassword: refs.confirmPassword.value,
+        },
+        requirements: {
+          password: inputs[e.target.id].requirements,
+          confirmPassword: inputs[inputs.length - 1].requirements
+        },
       }
-
     // Call dispatch reducer function
     dispatch({
       type: e.type,
@@ -214,9 +246,17 @@ const Signup = () => {
     })
   }
 
+  // Focus handler
   const handleFocus = (e) => {
-    // Set input validity prop value to invalid
-    if (!e.target.value && e.target.name !== 'confirmPassword') {
+    // Remove input error if any
+    if (errors[e.target.name]) {
+      const cloneErrors = { ...errors }
+      delete cloneErrors[e.target.name]
+      setErrors(cloneErrors)
+    }
+
+    // Set input validity to display requirements message 
+    if (!e.target.value) {
       e.target.setCustomValidity('invalid')
     }
 
@@ -229,51 +269,21 @@ const Signup = () => {
         requirements: inputs[e.target.id].requirements,
       }
     })
-
-    if (errors[e.target.name]) {
-      const newErrors = { ...errors }
-      delete newErrors[e.target.name]
-      setErrors(newErrors)
-    }
   }
 
+  // Blur handler
   const handleBlur = (e) => {
-    // Set input validity prop value to valid
-    (!e.target.value) && e.target.setCustomValidity('')
-
-    if (!errors[e.target.name] && values[e.target.name]) {
-      const newErrors = { ...errors }
-      delete newErrors[e.target.name]
-      setErrors(newErrors)
-    }
-
-    // dispatch({
-    //   type: e.type,
-    //   payload: {
-    //     values: values,
-    //     input: refs[e.target.name],
-    //     requirements: inputs[e.target.id].requirements,
-    //   }
-    // })
+    // Set input validity to hide requirements message
+    !e.target.value && e.target.setCustomValidity('')
   }
 
+  // Submit handler
   const handleSubmit = (e) => {
     e.preventDefault();
     const inputErrors = (errorHandler(values, refs))
+    setIsSubmit(true)
     setErrors(inputErrors)
-
-    if (!Object.keys(errors).length) {
-      console.log(errors)
-      console.log(Object.keys(errors).length)
-      setValidForm(true)
-    }
-
   }
-
-  // Set path name
-  useEffect(() => {
-    setPathname(location.pathname);
-  }, []);
 
   return (
     <div className="form-container flex justify-center">
