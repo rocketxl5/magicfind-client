@@ -2,7 +2,7 @@ import React, { Fragment, useEffect, useContext, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { FiPlusCircle, FiMinusCircle, FiTrash2 } from 'react-icons/fi';
 import CartItem from './CartItem';
-import { UserContext } from '../../contexts/UserContext';
+import { AuthContext } from '../../contexts/AuthContext';
 import { ShoppingCartContext } from '../../contexts/ShoppingCartContext';
 import { api } from '../../api/resources';
 import styled from 'styled-components';
@@ -12,7 +12,7 @@ function ShoppingCart() {
   const [subTotal, setSubTotal] = useState(0);
   const [loading, setLoading] = useState(false);
   const [isUpdating, setIsUpdating] = useState(false);
-  const { user } = useContext(UserContext);
+  const { user } = useContext(AuthContext);
   const { cartItems, setCartItems } = useContext(ShoppingCartContext);
   const history = useHistory();
 

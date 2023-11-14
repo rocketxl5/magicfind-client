@@ -1,7 +1,7 @@
 import React, { createContext, useState, useEffect } from 'react';
 import { api } from '../api/resources';
 
-export const UserContext = createContext(null);
+export const AuthContext = createContext(null);
 
 export const UserProvider = ({ children }) => {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem('user')));
@@ -43,8 +43,8 @@ export const UserProvider = ({ children }) => {
   }, [user]);
 
   return (
-    <UserContext.Provider value={{ user, setUser, unreadMail, setUnreadMail }}>
+    <AuthContext.Provider value={{ user, setUser, unreadMail, setUnreadMail }}>
       {children}
-    </UserContext.Provider>
+    </AuthContext.Provider>
   );
 };

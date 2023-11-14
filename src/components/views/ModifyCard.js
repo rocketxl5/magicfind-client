@@ -1,13 +1,13 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import CardListing from './CardListing';
-import { UserContext } from '../../contexts/UserContext';
+import { AuthContext } from '../../contexts/AuthContext';
 import { CardContext } from '../../contexts/CardContext';
 import { api } from '../../api/resources';
 
 const Modify = () => {
   const [isSent, setIsSent] = useState(false);
-  const { user } = useContext(UserContext);
+  const { user } = useContext(AuthContext);
   const { setCardContext } = useContext(CardContext);
   const location = useLocation();
   const card = location.state.data;

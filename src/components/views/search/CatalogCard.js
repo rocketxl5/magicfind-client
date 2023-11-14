@@ -6,13 +6,13 @@ import React, { useContext } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 // import { CardContext } from '../../../contexts/CardContext';
 // import { PathContext } from '../../../contexts/PathContext';
-import { UserContext } from '../../../contexts/UserContext';
+import { AuthContext } from '../../../contexts/AuthContext';
 import CardImage from './CardImage';
 import styled from 'styled-components';
 
 const CatalogCard = (props) => {
   const { index, card, handleClick } = props;
-  const { user } = useContext(UserContext);
+  const { user } = useContext(AuthContext);
 
   return (
     <div id={`card-${index}`} key={card.id} className="card-container">

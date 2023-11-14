@@ -7,7 +7,7 @@ import React, {
 import { useHistory } from 'react-router-dom';
 import SearchInput from './search/SearchInput';
 import { SearchContext } from '../../contexts/SearchContext';
-import { UserContext } from '../../contexts/UserContext';
+import { AuthContext } from '../../contexts/AuthContext';
 import { PathContext } from '../../contexts/PathContext';
 import { api } from '../../api/resources';
 import hideSearchBar from '../utilities/hideSearchBar';
@@ -26,7 +26,7 @@ const SearchCatalog = () => {
     cardName,
     setCardName, 
   } = useContext(SearchContext);
-  const { user } = useContext(UserContext);
+  const { user } = useContext(AuthContext);
   const { pathname } = useContext(PathContext);
 
   const history = useHistory();

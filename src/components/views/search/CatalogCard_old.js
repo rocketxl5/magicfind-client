@@ -11,7 +11,7 @@ import React, {
 import { Link, useLocation } from 'react-router-dom';
 import { FiPlusCircle, FiMinusCircle, FiTrash2 } from 'react-icons/fi';
 import { ShoppingCartContext } from '../../../contexts/ShoppingCartContext';
-import { UserContext } from '../../../contexts/UserContext';
+import { AuthContext } from '../../../contexts/AuthContext';
 import CardImage from './CardImage';
 import { api } from '../../../api/resources';
 import styled from 'styled-components';
@@ -20,7 +20,7 @@ const CatalogCard = ({ card }) => {
     const [quantity, setQuantity] = useState(1 || card.quantity_selected);
     const [isSelectedItem, setIsSelectedItem] = useState(false);
     const [loading, setLoading] = useState(false);
-    const { user } = useContext(UserContext);
+    const { user } = useContext(AuthContext);
     const { cartItems, setCartItems, itemsCount, setItemsCount } =
         useContext(ShoppingCartContext);
     const location = useLocation();

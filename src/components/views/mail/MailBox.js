@@ -8,12 +8,12 @@ import Spinner from '../../layout/Spinner';
 import Message from './Message';
 import getPath from '../../utilities/getPath';
 import { PathContext } from '../../../contexts/PathContext';
-import { UserContext } from '../../../contexts/UserContext';
+import { AuthContext } from '../../../contexts/AuthContext';
 import { api } from '../../../api/resources';
 import styled from 'styled-components';
 
 const MailBox = () => {
-  const { user, setUnreadMail } = useContext(UserContext);
+  const { user, setUnreadMail } = useContext(AuthContext);
   const { pathname, setPathname } = useContext(PathContext);
 
   const location = useLocation();

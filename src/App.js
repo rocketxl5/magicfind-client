@@ -3,21 +3,21 @@ import {
   BrowserRouter as Router,
   Route,
   Switch,
-  Redirect,
-  useLocation
+  Redirect
 } from 'react-router-dom';
+import ProtectedRoute from './components/auth/ProtectedRoute';
+import AuthPage from './components/views/AuthPage';
 import Login from './components/auth/forms/Login';
 import Signup from './components/auth/forms/Signup';
 import Settings from './components/auth/Settings';
 import ResetPassword from './components/auth/ResetPassword';
-import Success from './components/auth/Success';
 import Header from './components/layout/Header';
 import Footer from './components/layout/Footer';
 import Home from './components/views/Home';
 import Contact from './components/views/Contact';
 import About from './components/views/About';
 import Profile from './components/views/Profile';
-import UserPage from './components/views/UserPage';
+import UserPage from './components/views/AuthPage';
 import SearchCollection from './components/views/SearchCollection';
 import SearchAPI from './components/views/SearchAPI';
 import SearchResult from './components/views/search/SearchResult';
@@ -28,7 +28,7 @@ import Confirmation from './components/views/Confirmation';
 import RemoveCard from './components/views/RemoveCard';
 import ModifyCard from './components/views/ModifyCard';
 import MailBox from './components/views/mail/MailBox';
-import { UserContext } from './contexts/UserContext';
+import { AuthContext } from './contexts/AuthContext';
 import { CardContext } from './contexts/CardContext';
 import { PathContext } from './contexts/PathContext';
 import './css/reset.css';
@@ -41,7 +41,7 @@ import './css/media-queries.css';
 
 const App = () => {
 
-  const { user } = useContext(UserContext);
+  const { user } = useContext(AuthContext);
   const { cardContext } = useContext(CardContext);
   const { pathname } = useContext(PathContext);
 
@@ -50,76 +50,60 @@ const App = () => {
       {(pathname !== '/login' && pathname !== '/signup') && <Header />}
       <main className="wrapper">
         <Switch>
-          <Route exact path="/">
-            {!user ? <Home /> : <Redirect to="/me" />}
-          </Route>
-          <Route exact path="/about">
-            <About />
-          </Route>
-          <Route exact path="/contact">
-            <Contact />
-          </Route>
-          <Route exact path="/login">
-            {!user ? <Login /> : <Redirect to="/me" />}
-          </Route>
-          <Route exact path="/success">
-            <Success />
-          </Route>
-          <Route exact path="/reset-password">
-            <ResetPassword />
-          </Route>
-          <Route exact path="/signup">
-            <Signup />
-          </Route>
-          <Route exact path="/settings">
-            {user ? <Settings /> : <Redirect to="/login" />}
-          </Route>
-          <Route exact path="/me">
-            {user ? <UserPage /> : <Redirect to="/" />}
-          </Route>
-          <Route exact path="/add-card/:cardName">
+          {/* Public routes */}
+          <Route exact path="/" component={Home} />
+          <Route path="/about" component={About} />
+          <Route path="/contact" component={Contact} />
+          <Route path="/login" component={Login} />
+          <Route path="/signup" component={Signup} />
+          <Route path="/shopping-cart" component={ShoppingCart} />
+
+          {/* Auth routes */}
+          <ProtectedRoute path="/me" component={AuthPage} />
+          <ProtectedRoute path="/reset-password" component={ResetPassword} />
+          <ProtectedRoute path="/settings" component={Settings} />
+          <ProtectedRoute path="/profile" component={Profile} />
+
+
+
+          <Route path="/add-card/:cardName">
             {cardContext ? <AddCard /> : <Redirect to="/me" />}
           </Route>
-          <Route exact path="/remove-card/:cardName">
+          <Route path="/remove-card/:cardName">
             {cardContext ? <RemoveCard /> : <Redirect to="/me" />}
           </Route>
-          <Route exact path="/modify-card/:cardName">
+          <Route path="/modify-card/:cardName">
             {cardContext ? <ModifyCard /> : <Redirect to="/me" />}
-          </Route>
-          <Route exact path="/shopping-cart">
-            <ShoppingCart />
           </Route>
           <Route exaxt path="/confirmation">
             {user ? <Confirmation /> : <Redirect to="/" />}
           </Route>
-          <Route exact path="/profile">
-            {user ? <Profile /> : <Redirect to="/login" />}
-          </Route>
-          <Route exact path="/search-collection">
+
+          <Route path="/search-collection">
             {user ? <SearchCollection /> : <Redirect to="/" />}
           </Route>
-          <Route exact path="/search-api">
+          <Route path="/search-api">
             {user ? <SearchAPI /> : <Redirect to="/" />}
           </Route>
-          <Route exact path="/search-result/:cardName">
+          <Route path="/search-result/:cardName">
             <SearchResult />
           </Route>
-          <Route exact path="/mail/inbox">
+          <Route path="/mail/inbox">
             {user ? <MailBox /> : <Redirect to="/" />}
           </Route>
-          <Route exact path="/mail/:handle/:handle">
+          <Route path="/mail/:handle/:handle">
             {user ? <MailBox /> : <Redirect to="/" />}
           </Route>
-          <Route exact path="/mail/unread">
+          <Route path="/mail/unread">
+            {user ? <MailBox /> : <Redirect from="/mail/unread" to="/" />}
+          </Route>
+          <Route path="/mail/sent">
             {user ? <MailBox /> : <Redirect to="/" />}
           </Route>
-          <Route exact path="/mail/sent">
+          <Route path="/mail/trash">
             {user ? <MailBox /> : <Redirect to="/" />}
           </Route>
-          <Route exact path="/mail/trash">
-            {user ? <MailBox /> : <Redirect to="/" />}
-          </Route>
-          <Route exact path="/mail/message">
+          <Route path="/mail/message">
             {user ? <MailBox /> : <Redirect to="/" />}
           </Route>
           <Route>

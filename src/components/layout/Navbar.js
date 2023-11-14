@@ -1,5 +1,5 @@
 import React, { useEffect, useContext } from 'react';
-import { UserContext } from '../../contexts/UserContext';
+import { AuthContext } from '../../contexts/AuthContext';
 import Menu from './Menu';
 import AuthMenu from './AuthMenu';
 import SearchBtn from './navbtn/SearchBtn';
@@ -14,7 +14,7 @@ import handleSearchBar from '../utilities/handleSearchBar';
 
 
 function Navbar() {
-    const { user, setUser } = useContext(UserContext);
+    const { user, setUser } = useContext(AuthContext);
     const { setSearchTerm } = useContext(SearchContext);
 
     // useEffect(() => {

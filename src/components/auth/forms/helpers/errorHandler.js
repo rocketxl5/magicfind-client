@@ -3,7 +3,7 @@ import capitalizeWord from '../../../utilities/capitalizeWord'
 const errorHandler = (values, inputs) => {
     const handles = Object.keys(values)
     let errors = {}
-    handles.forEach((handle, index) => {
+    handles.forEach((handle) => {
         // Empty input: required input
         if (!values[handle]) {
             errors = { ...errors, [handle]: (handle === 'confirmPassword') ? `${capitalizeWord('password')} is required` : `${capitalizeWord(handle)} is required` }
@@ -14,7 +14,7 @@ const errorHandler = (values, inputs) => {
             errors = { ...errors, [handle]: (handle === 'confirmPassword') ? 'Password doesn\'t match' : `Invalid ${capitalizeWord(handle)}` }
             inputs[handle].blur()
         }
-        // Invalid credentials from server
+            // Invalid credentials
         else if (!inputs[handle].checkValidity()) {
             errors = { ...errors, [handle]: `Invalid ${capitalizeWord(handle)}` }
         }

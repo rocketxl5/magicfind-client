@@ -1,10 +1,10 @@
 import React, { useEffect, useContext } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 // import { FiArrowRightCircle } from 'react-icons/fi';
-// import { UserContext } from '../../contexts/UserContext';
+// import { AuthContext } from '../../contexts/AuthContext';
 import { PathContext } from '../../contexts/PathContext';
 
-const UserPage = () => {
+const AuthPage = () => {
   const { setPathname } = useContext(PathContext);
   const location = useLocation();
   // const toggleView = (view) => {
@@ -60,4 +60,4 @@ const UserPage = () => {
   );
 };
 
-export default UserPage;
+export default AuthPage;

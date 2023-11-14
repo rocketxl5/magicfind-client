@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { RouteProvider } from './contexts/RouteContext';
 import { PathProvider } from './contexts/PathContext';
-import { UserProvider } from './contexts/UserContext';
+import { UserProvider } from './contexts/AuthContext';
 import { MailProvider } from './contexts/MailContext';
 import { SearchProvider } from './contexts/SearchContext';
 import { CardProvider } from './contexts/CardContext';

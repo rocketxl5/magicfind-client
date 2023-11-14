@@ -1,12 +1,12 @@
 // Dropdown menu available after successfull singin
 import React, { useContext } from 'react';
 import { Link, useHistory } from 'react-router-dom';
-import { UserContext } from '../../contexts/UserContext';
+import { AuthContext } from '../../contexts/AuthContext';
 import { ShoppingCartContext } from '../../contexts/ShoppingCartContext';
 
 function AuthMenu({ user, setUser }) {
   const history = useHistory();
-  const { setUnreadMail } = useContext(UserContext);
+  const { setUnreadMail } = useContext(AuthContext);
   const { setCartItems, setItemsCount } = useContext(ShoppingCartContext);
 
   // Sign out user
