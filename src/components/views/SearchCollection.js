@@ -140,7 +140,7 @@ const SearchCollection = () => {
   }, [cards]);
 
   const handleClick = (e) => {
-    navigate.push('search-api');
+    navigate('search-api');
     if (localStorage.getItem('apiCardName')) {
       localStorage.removeItem('apiCardName');
       localStorage.removeItem('oracle');
