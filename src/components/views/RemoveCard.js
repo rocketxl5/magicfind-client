@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Link, useLocation, useHistory } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { FiArrowLeftCircle } from 'react-icons/fi';
 import { AuthContext } from '../../contexts/AuthContext';
 import { CardContext } from '../../contexts/CardContext';
@@ -11,7 +11,7 @@ import styled from 'styled-components';
 const Remove = () => {
   const { user } = useContext(AuthContext);
   const { setCardContext } = useContext(CardContext);
-  const history = useHistory();
+  const navigate = useNavigate();
   const location = useLocation();
   const card = location.state.data;
   const token = user.token;
@@ -34,11 +34,10 @@ const Remove = () => {
     fetch(`${api.serverURL}/api/cards/`, options)
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         setCardContext(false);
-        history.push({
-          pathname: '/search-collection',
-          state: {
+        navigate('/search-collection',
+          {
+            state: {
             message: 'Card successfully deleted',
           },
         });

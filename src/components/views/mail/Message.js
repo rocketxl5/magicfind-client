@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { Link, useHistory, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { FiArrowLeftCircle } from 'react-icons/fi';
 import timestampConverter from '../../utilities/timestampConverter';
 import getPath from '../../utilities/getPath';
@@ -9,7 +9,7 @@ import { api } from '../../../api/resources';
 import styled from 'styled-components';
 
 const Message = ({ currentMessage, setMessages, setLoading }) => {
-  const history = useHistory();
+  const navigate = useNavigate();
   const location = useLocation();
   const { pathname, setPathname } = useContext(PathContext);
   const { user } = useContext(AuthContext);
@@ -50,7 +50,7 @@ const Message = ({ currentMessage, setMessages, setLoading }) => {
         setLoading(false);
         setPathname(getPath(location.pathname));
         if (currentMessage.isRead) {
-          history.push(`/mail/${pathname}`);
+          navigate(`/mail/${pathname}`);
         }
       })
       .catch((error) => console.log(error));
@@ -83,7 +83,7 @@ const Message = ({ currentMessage, setMessages, setLoading }) => {
         setLoading(false);
         localStorage.removeItem('message');
         setPathname(getPath(location.pathname));
-        history.push(`/mail/${pathname}`);
+        navigate(`/mail/${pathname}`);
       })
       .catch((error) => console.log(error));
   };
@@ -114,7 +114,7 @@ const Message = ({ currentMessage, setMessages, setLoading }) => {
         setPathname(getPath(location.pathname));
         setMessages(data.data.length > 0 ? data.data : []);
         localStorage.removeItem('message');
-        history.push(`/mail/${pathname}`);
+        navigate(`/mail/${pathname}`);
       });
   };
 
@@ -132,7 +132,7 @@ const Message = ({ currentMessage, setMessages, setLoading }) => {
           className="go-back"
           onClick={() => {
             localStorage.removeItem('message');
-            history.push(`/mail/${pathname}`);
+            navigate(`/mail/${pathname}`);
           }}
         >
           <FiArrowLeftCircle />{' '}
@@ -166,7 +166,7 @@ const Message = ({ currentMessage, setMessages, setLoading }) => {
           className="item-button row-3 success"
           type="button"
           onClick={() => {
-            history.push({ pathname: '/mail/message', state: currentMessage });
+            navigate({ pathname: '/mail/message', state: currentMessage });
           }}
         >
           Reply
@@ -204,7 +204,7 @@ const Message = ({ currentMessage, setMessages, setLoading }) => {
               // localStorage.removeItem('message');
               setIsReadStatus(false);
               if (!currentMessage.isRead) {
-                history.push('/mail/inbox');
+                navigate('/mail/inbox');
               } else {
                 localStorage.removeItem('message');
               }

@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect, useRef } from 'react';
-import { useHistory, useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { PathContext } from '../../../contexts/PathContext';
 import { AuthContext } from '../../../contexts/AuthContext';
 import validate from '../../utilities/validateMessage';
@@ -10,7 +10,7 @@ import styled from 'styled-components';
 
 const Message = () => {
   const MAXCHARS = 500;
-  const history = useHistory();
+  const navigate = useNavigate();
   const location = useLocation();
   const { user } = useContext(AuthContext);
   const { setPathname } = useContext(PathContext);
@@ -84,7 +84,7 @@ const Message = () => {
         // Reinitialize states
         setText('');
         setCount(0);
-        history.push('/mail/inbox');
+        navigate('/mail/inbox');
       })
       .catch((error) => console.log(error));
   }, [isValid]);

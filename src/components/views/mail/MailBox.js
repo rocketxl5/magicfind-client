@@ -1,5 +1,5 @@
 import React, { Fragment, useContext, useState, useEffect } from 'react';
-import { useLocation, useHistory } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import SideBar from './SideBar';
 import MailHeader from './MailHeader';
 import Mail from './Mail';
@@ -17,7 +17,7 @@ const MailBox = () => {
   const { pathname, setPathname } = useContext(PathContext);
 
   const location = useLocation();
-  const history = useHistory();
+  const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [messages, setMessages] = useState([]);
   // Message selected on click by user. Passed to Conversation. Set in Mail
@@ -126,7 +126,7 @@ const MailBox = () => {
 
       setCheckedState(newCheckedState);
       localStorage.setItem('checkedState', JSON.stringify(newCheckedState));
-      history.push(`/mail/${location.pathname.split('/')[2]}`);
+      navigate(`/mail/${location.pathname.split('/')[2]}`);
     }
   };
   // console.log(path);

@@ -4,22 +4,22 @@
 
 
 import React, { useContext } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { CardContext } from '../../../contexts/CardContext';
 import CardImage from './CardImage';
 
 const CollectionCard = ({ card }) => {
   const { setCardContext } = useContext(CardContext);
-  const history = useHistory();
+  const navigate = useNavigate();
 
   // Remove card from user store
   // Should also remove user from card uers array in database
 
   const handleClick = (e) => {
     setCardContext(true);
-    history.push({
-      pathname: `${e.target.id}/${card.name}`,
-      state: {
+    navigate(`${e.target.id}/${card.name}`,
+      {
+        state: {
         data: card
       }
     });

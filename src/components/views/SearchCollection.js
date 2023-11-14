@@ -4,7 +4,7 @@ import React, {
   useEffect,
   useContext
 } from 'react';
-import { useLocation, useHistory } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import SearchInput from './search/SearchInput';
 import Spinner from '../layout/Spinner';
 import { AuthContext } from '../../contexts/AuthContext';
@@ -31,7 +31,7 @@ const SearchCollection = () => {
   const { user, userStoreContent } = useContext(AuthContext);
   const { setPathname } = useContext(PathContext);
 
-  const history = useHistory();
+  const navigate = useNavigate();
   const location = useLocation();
   const inputRef = useRef(null);
   const browserWidth = getBrowserWidth();
@@ -105,9 +105,9 @@ const SearchCollection = () => {
         setLoading(false);
         setCardName('')
         setSearchInput(null);
-        history.push({
-          pathname: `/search-result/${cardName.toLowerCase()}`,
-          state: { cards: data.results, cardName: data.cardName, type: inputRef.current.id },
+        navigate(`/search-result/${cardName.toLowerCase()}`,
+          {
+            state: { cards: data.results, cardName: data.cardName, type: inputRef.current.id },
         });
       })
       .catch((error) => console.log(error));
@@ -140,7 +140,7 @@ const SearchCollection = () => {
   }, [cards]);
 
   const handleClick = (e) => {
-    history.push('search-api');
+    navigate.push('search-api');
     if (localStorage.getItem('apiCardName')) {
       localStorage.removeItem('apiCardName');
       localStorage.removeItem('oracle');

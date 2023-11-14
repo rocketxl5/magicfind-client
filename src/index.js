@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { RouteProvider } from './contexts/RouteContext';
 import { PathProvider } from './contexts/PathContext';
 import { UserProvider } from './contexts/AuthContext';
@@ -11,6 +12,7 @@ import App from './App';
 
 ReactDOM.render(
   <React.StrictMode>
+    <BrowserRouter>    
     <RouteProvider>
       <PathProvider>
         <UserProvider>
@@ -18,7 +20,9 @@ ReactDOM.render(
             <SearchProvider>
               <CardProvider>
                 <ShoppingCartProvider>
-                  <App />
+                    <Routes>
+                      <Route path="/*" element={<App />} />
+                    </Routes>
                 </ShoppingCartProvider>
               </CardProvider>
             </SearchProvider>
@@ -26,6 +30,7 @@ ReactDOM.render(
         </UserProvider>
       </PathProvider>
     </RouteProvider>
+    </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root')
 );

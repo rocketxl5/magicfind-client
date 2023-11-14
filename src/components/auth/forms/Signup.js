@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect, useContext, useReducer } from 'react';
-import { Link, useHistory, useLocation } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import Spinner from '../../layout/Spinner';
 import FormInput from './FormInput';
 import reducer from './reducer/inputReducer';
@@ -128,7 +128,7 @@ const Signup = () => {
   const { setPathname } = useContext(PathContext);
 
   const location = useLocation();
-  const history = useHistory();
+  const navigate = useNavigate();
 
 
   /**********************
@@ -182,7 +182,7 @@ const Signup = () => {
             })
           })
           .then(data => {
-            history.push({ pathname: '/login', state: { message: data.message } });
+            navigate('/login', { state: { message: data.message } });
           })
           .catch(error => {
             setMessage(error.message)

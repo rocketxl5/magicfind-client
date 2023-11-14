@@ -1,5 +1,5 @@
 import React from 'react';
-import { Redirect, Route, useLocation } from 'react-router-dom';
+import { Navigate, Route, useLocation } from 'react-router-dom';
 import useAuth from '../../hooks/useAuth';
 
 const ProtectedRoute = (props) => {
@@ -10,7 +10,7 @@ const ProtectedRoute = (props) => {
   // const storage = JSON.parse(localStorage.getItem('user'));
 
   if (!user) {
-    return <Redirect to="/" />
+    return <Navigate to="/" />
   }
   return <Route {...props} />
 };

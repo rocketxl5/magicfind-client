@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useLocation } from 'react-router-dom/cjs/react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { FiChevronLeft } from 'react-icons/fi';
 import APISearchResultHeader from './APISearchResultHeader';
