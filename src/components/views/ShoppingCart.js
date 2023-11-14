@@ -1,8 +1,8 @@
-import React, { Fragment, useEffect, useContext, useState } from 'react';
-import { useHistory } from 'react-router-dom';
-import { FiPlusCircle, FiMinusCircle, FiTrash2 } from 'react-icons/fi';
+import React, { useEffect, useContext, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+// import { FiPlusCircle, FiMinusCircle, FiTrash2 } from 'react-icons/fi';
 import CartItem from './CartItem';
-import { UserContext } from '../../contexts/UserContext';
+import useAuth from '../../hooks/useAuth';
 import { ShoppingCartContext } from '../../contexts/ShoppingCartContext';
 import { api } from '../../api/resources';
 import styled from 'styled-components';
@@ -12,9 +12,9 @@ function ShoppingCart() {
   const [subTotal, setSubTotal] = useState(0);
   const [loading, setLoading] = useState(false);
   const [isUpdating, setIsUpdating] = useState(false);
-  const { user } = useContext(UserContext);
+  const { user } = useAuth();
   const { cartItems, setCartItems } = useContext(ShoppingCartContext);
-  const history = useHistory();
+  const navigate = useNavigate();
 
   // This is where the amount or items in the cart is set & the subtotal of off all items in the cart
   useEffect(() => {
@@ -32,7 +32,7 @@ function ShoppingCart() {
   const handleCheckout = () => {
     // setLoading(true);
     if (!user) {
-      history.push('/login');
+      navigate('/login');
     } else {
       const input = {
         userID: user.id,
@@ -52,7 +52,7 @@ function ShoppingCart() {
         .then((data) => {
           // setLoading(false);
           // setCartItems([]);
-          // history.push('/confirmation');
+          // navigate('/confirmation');
           console.log(data);
         })
         .catch((error) => console.log('error', error));

@@ -37,20 +37,21 @@ const handleSearchBar = (e, isOutsideEvent = false) => {
 
         // If Logo
         if (target.classList.contains('logo-btn')) {
-            if (browserWidth <= 775) {
-                // If mobile menu is displayed
-                if (document.querySelector('#mobile-nav').checked) {
-                    // Uncheck checkbox to initiate hamburger animation (from cross to hamburger)
-                    document.querySelector('#mobile-nav').click();
-                    // Hide mobile menu
-                    document.querySelector('.menu').style.setProperty('left', '100%');
+            console.log('logo')
+            // If mobile menu is displayed
+            if (document.querySelector('#mobile-nav').checked) {
+                // Uncheck checkbox to initiate hamburger animation (from cross to hamburger)
+                document.querySelector('#mobile-nav').click();
+                // Hide mobile menu
+                document.querySelector('.menu').style.setProperty('left', '100%');
+                if (browserWidth <= 775) {
                     // Display search button (maginifier icon)
                     document.querySelector('.search-btn').style.setProperty('display', 'block');
+                }
                     if (userAgent.toLocaleLowerCase().includes.firefox) {
                         // Remove 'checked' class from main header
                         toggleClass(document.querySelector('.main-header'), 'checked');
                     }
-                }
             }
         }
 

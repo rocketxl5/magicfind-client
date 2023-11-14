@@ -4,10 +4,10 @@ import React, {
   useEffect,
   useContext
 } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import SearchInput from './search/SearchInput';
 import { SearchContext } from '../../contexts/SearchContext';
-import { UserContext } from '../../contexts/UserContext';
+import useAuth from '../../hooks/useAuth';
 import { PathContext } from '../../contexts/PathContext';
 import { api } from '../../api/resources';
 import hideSearchBar from '../utilities/hideSearchBar';
@@ -26,10 +26,10 @@ const SearchCatalog = () => {
     cardName,
     setCardName, 
   } = useContext(SearchContext);
-  const { user } = useContext(UserContext);
+  const { user } = useAuth();
   const { pathname } = useContext(PathContext);
 
-  const history = useHistory();
+  const navigate = useNavigate();
   const inputRef = useRef(null);
   const browserWidth = getBrowserWidth();
 
@@ -41,7 +41,6 @@ const SearchCatalog = () => {
   }, [pathname])
 
   useEffect(() => {
-    console.log(searchInput)
     if (searchInput) {
       if (searchInput.id === 'search-catalog') {
         setIsActive(true);
@@ -108,9 +107,9 @@ const SearchCatalog = () => {
         if (browserWidth <= 775 && document.querySelector('#mobile-nav').checked) {
           hideSearchBar();
         }
-        history.push({
-          pathname: `/search-result/${cardName.toLowerCase()}`,
-          state: { cards: data.results, cardName: data.cardName, type: inputRef.current.id },
+        navigate(`/search-result/${cardName.toLowerCase()}`,
+          {
+            state: { cards: data.results, cardName: data.cardName, type: inputRef.current.id },
         });
       })
       .catch((error) => console.log(error));

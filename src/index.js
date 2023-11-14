@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { RouteProvider } from './contexts/RouteContext';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { PathProvider } from './contexts/PathContext';
-import { UserProvider } from './contexts/UserContext';
+import { AuthProvider } from './contexts/AuthContext';
 import { MailProvider } from './contexts/MailContext';
 import { SearchProvider } from './contexts/SearchContext';
 import { CardProvider } from './contexts/CardContext';
@@ -11,21 +11,23 @@ import App from './App';
 
 ReactDOM.render(
   <React.StrictMode>
-    <RouteProvider>
+    <BrowserRouter>    
       <PathProvider>
-        <UserProvider>
+        <AuthProvider>
           <MailProvider>
             <SearchProvider>
               <CardProvider>
                 <ShoppingCartProvider>
-                  <App />
+                    <Routes>
+                      <Route path="/*" element={<App />} />
+                    </Routes>
                 </ShoppingCartProvider>
               </CardProvider>
             </SearchProvider>
           </MailProvider>
-        </UserProvider>
+        </AuthProvider>
       </PathProvider>
-    </RouteProvider>
+    </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root')
 );

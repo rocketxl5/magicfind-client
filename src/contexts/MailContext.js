@@ -1,11 +1,11 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
-import { UserContext } from './UserContext';
+import { AuthContext } from './AuthContext';
 export const MailContext = createContext(null);
 // Prevents access to add-card component if a card  hasen't been selected
 // previously. This means a search has been done in the search-api view
 // and a card was selected to be added to the user store
 export const MailProvider = ({ children }) => {
-  const { user } = useContext(UserContext);
+  const { user } = useContext(AuthContext);
   const [sentMessages, setSentMessages] = useState([]);
   const [receivedMessages, setReceivedMessages] = useState([]);
 
@@ -13,8 +13,8 @@ export const MailProvider = ({ children }) => {
   // Populates messages in every rendering (reload of page, etc.)
   useEffect(() => {
     if (user) {
-      setSentMessages(user.messages.sent);
-      setReceivedMessages(user.messages.received);
+      setSentMessages(user.messages?.sent);
+      setReceivedMessages(user.messages?.received);
     }
   }, [user]);
 

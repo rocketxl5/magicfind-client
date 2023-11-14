@@ -4,12 +4,11 @@ import React, {
   useEffect,
   useContext
 } from 'react';
-import { useLocation, useHistory } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import SearchInput from './search/SearchInput';
 import Spinner from '../layout/Spinner';
 import { SearchContext } from '../../contexts/SearchContext';
 import { PathContext } from '../../contexts/PathContext';
-import { CardContext } from '../../contexts/CardContext';
 import { api } from '../../api/resources';
 import sanitizeString from '../utilities/sanitizeString';
 import hideSearchBar from '../utilities/hideSearchBar';
@@ -33,7 +32,7 @@ const Search = () => {
   const { setPathname } = useContext(PathContext);
 
   const location = useLocation()
-  const history = useHistory();
+  const navigate = useNavigate();
   const inputRef = useRef(null);
   const browserWidth = getBrowserWidth();
 
@@ -82,7 +81,6 @@ const Search = () => {
       .then((res) => res.json())
       .then((data) => {
         const { name, oracle_id } = data;
-        console.log(data);
         localStorage.setItem('oracle', oracle_id);
         localStorage.setItem('apiCardName', name);
         // console.log('oracle id', oracle_id)
@@ -107,7 +105,6 @@ const Search = () => {
       )
         .then((res) => res.json())
         .then((data) => {
-          console.log(data)
           setData(data.data);
           // localStorage.setItem('apiCards', JSON.stringify(data.data));
         })
@@ -154,12 +151,9 @@ const Search = () => {
       cards.forEach(card => card.id = crypto.randomUUID());
 
       setLoading(false);
-
-      console.log(cards)
-
-      history.push({
-        pathname: `/search-result/${cardName.toLowerCase()}`,
-        state: { cards: cards, cardName: cardName, type: 'search-api' },
+      navigate(`/search-result/${cardName.toLowerCase()}`,
+        {
+          state: { cards: cards, cardName: cardName, type: 'search-api' },
       });
 
       setCardName('');

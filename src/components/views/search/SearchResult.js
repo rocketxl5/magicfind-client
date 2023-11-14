@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useLocation } from 'react-router-dom/cjs/react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { FiChevronLeft } from 'react-icons/fi';
 import APISearchResultHeader from './APISearchResultHeader';
@@ -62,7 +62,7 @@ const SearchResult = () => {
                                 {cards.map((card, index) => {
                                     return (
                                         <CatalogCard
-                                            key={card.id}
+                                            key={index}
                                             card={card}
                                         />)
                                 })}
@@ -72,7 +72,7 @@ const SearchResult = () => {
                                 {cards.map((card, index) => {
                                     return (
                                         <CollectionCard
-                                            key={card.id}
+                                            key={index}
                                             card={card}
                                         />)
                                 })}
@@ -84,7 +84,7 @@ const SearchResult = () => {
                                             {cards.map((card, index) => {
                                                 return (
                                                     <APICard
-                                            key={card.id}
+                                                        key={index}
                                             index={index}
                                             card={card}
                                             handleClick={handleClick}

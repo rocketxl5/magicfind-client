@@ -1,14 +1,18 @@
 import React from 'react';
-import { Redirect, Route, useLocation } from 'react-router-dom';
-import UserPage from '../views/UserPage';
+import { Navigate, Route, useLocation } from 'react-router-dom';
+import useAuth from '../../hooks/useAuth';
 
-const ProtectedRoute = () => {
-  const location = useLocation();
-  const data = location.state;
-  const storage = JSON.parse(localStorage.getItem('user'));
-  console.log(location.state);
-  console.log(storage);
-  return <Route>{data ? <UserPage /> : <Redirect to="/" />}</Route>;
+const ProtectedRoute = (props) => {
+  const { user } = useAuth();
+  const location = useLocation(); 
+  console.log(location)
+  // const data = location.state;
+  // const storage = JSON.parse(localStorage.getItem('user'));
+
+  if (!user) {
+    return <Navigate to="/" />
+  }
+  return <Route {...props} />
 };
 
 export default ProtectedRoute;

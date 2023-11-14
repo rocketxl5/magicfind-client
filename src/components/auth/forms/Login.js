@@ -1,8 +1,8 @@
 import React, { useState, useContext, useEffect } from 'react';
-import { Link, useHistory, useLocation } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
+import useAuth from '../../../hooks/useAuth';
 import Spinner from '../../layout/Spinner';
 import errorHandler from './helpers/errorHandler';
-import { UserContext } from '../../../contexts/UserContext';
 import { PathContext } from '../../../contexts/PathContext';
 import { api } from '../../../api/resources';
 
@@ -19,7 +19,7 @@ const Login = () => {
   const [message, setMessage] = useState(null);
   const [showPassword, setShowPassword] = useState(false);
   const { setPathname } = useContext(PathContext);
-  const { setUser } = useContext(UserContext);
+  const { setUser } = useAuth();
 
   const inputs = {
     email: document.querySelector('#email'),
@@ -27,7 +27,7 @@ const Login = () => {
   }
 
   const location = useLocation();
-  const history = useHistory();
+  const navigate = useNavigate();
 
   /**********************
   ***** useEffects  *****
@@ -95,9 +95,7 @@ const Login = () => {
             setLoading(false)
             setUser(user);
             localStorage.setItem('user', JSON.stringify(user));
-            history.push({
-              pathname: '/me',
-            });
+            navigate('/me');
           })
           .catch((error) => {
             const errorMessage = JSON.parse(error.message)

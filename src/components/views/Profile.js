@@ -1,10 +1,8 @@
-import React, { useContext } from 'react';
-import { UserContext } from '../../contexts/UserContext';
+import useAuth from '../../hooks/useAuth';
 
 const Profile = () => {
-  const { user } = useContext(UserContext);
+  const { user } = useAuth();
 
-  console.log(user);
   return (
     <div className="container">
       <h2 className="page-title">Profile</h2>

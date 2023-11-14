@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from 'react';
-import { Link, useLocation, useHistory } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { FiTrash } from 'react-icons/fi';
 import getPath from '../../utilities/getPath';
 import { PathContext } from '../../../contexts/PathContext';
@@ -15,7 +15,7 @@ const SideBar = ({
   user,
 }) => {
   const location = useLocation();
-  const history = useHistory();
+  const navigate = useNavigate();
   const { pathname, setPathname } = useContext(PathContext);
 
   // Set path on location change
@@ -68,7 +68,7 @@ const SideBar = ({
         localStorage.removeItem('message');
         setMessages(data.data);
         setPathname(getPath(location.pathname));
-        history.push(`/mail/${pathname}`);
+        navigate(`/mail/${pathname}`);
       });
   };
 
@@ -104,7 +104,7 @@ const SideBar = ({
         localStorage.removeItem('message');
         setMessages(data.data.length > 0 ? data.data : []);
         setPathname(getPath(location.pathname));
-        history.push(`/mail/${pathname}`);
+        navigate(`/mail/${pathname}`);
       });
   };
 
@@ -117,7 +117,7 @@ const SideBar = ({
             type="button"
             onClick={() => {
               setPathname('message');
-              history.push('/mail/message');
+              navigate('/mail/message');
             }}
           >
             Compose

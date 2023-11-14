@@ -1,18 +1,17 @@
 import React, { useContext, useState, useEffect, useRef } from 'react';
-import { useHistory, useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { PathContext } from '../../../contexts/PathContext';
-import { UserContext } from '../../../contexts/UserContext';
+import useAuth from '../../../hooks/useAuth';
 import validate from '../../utilities/validateMessage';
 import getPath from '../../utilities/getPath';
-import useMessage from '../../hooks/useMessage';
+import useMessage from '../../../hooks/useMessage';
 import { api } from '../../../api/resources';
-import styled from 'styled-components';
 
 const Message = () => {
   const MAXCHARS = 500;
-  const history = useHistory();
+  const navigate = useNavigate();
   const location = useLocation();
-  const { user } = useContext(UserContext);
+  const { user } = useAuth();
   const { setPathname } = useContext(PathContext);
   // When writing to a seller set recipient name to seller name
   const [recipientName, setRecipientName] = useState(
@@ -84,7 +83,7 @@ const Message = () => {
         // Reinitialize states
         setText('');
         setCount(0);
-        history.push('/mail/inbox');
+        navigate('/mail/inbox');
       })
       .catch((error) => console.log(error));
   }, [isValid]);

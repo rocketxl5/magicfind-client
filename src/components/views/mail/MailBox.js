@@ -1,23 +1,23 @@
 import React, { Fragment, useContext, useState, useEffect } from 'react';
-import { useLocation, useHistory } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import SideBar from './SideBar';
 import MailHeader from './MailHeader';
 import Mail from './Mail';
 import ComposeMessage from './ComposeMessage';
 import Spinner from '../../layout/Spinner';
 import Message from './Message';
+import useAuth from '../../../hooks/useAuth';
 import getPath from '../../utilities/getPath';
 import { PathContext } from '../../../contexts/PathContext';
-import { UserContext } from '../../../contexts/UserContext';
 import { api } from '../../../api/resources';
 import styled from 'styled-components';
 
 const MailBox = () => {
-  const { user, setUnreadMail } = useContext(UserContext);
+  const { user, setUnreadMail } = useAuth();
   const { pathname, setPathname } = useContext(PathContext);
 
   const location = useLocation();
-  const history = useHistory();
+  const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [messages, setMessages] = useState([]);
   // Message selected on click by user. Passed to Conversation. Set in Mail
@@ -126,7 +126,7 @@ const MailBox = () => {
 
       setCheckedState(newCheckedState);
       localStorage.setItem('checkedState', JSON.stringify(newCheckedState));
-      history.push(`/mail/${location.pathname.split('/')[2]}`);
+      navigate(`/mail/${location.pathname.split('/')[2]}`);
     }
   };
   // console.log(path);

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext, useReducer, createContext } from 'react';
-import { UserContext } from './UserContext';
+import { AuthContext } from './AuthContext';
 import { api } from '../api/resources';
 export const SearchContext = createContext(null);
 
@@ -8,7 +8,7 @@ export const SearchProvider = ({ children }) => {
   const [cardName, setCardName] = useState('');
   const [searchTerm, setSearchTerm] = useState('');
   const [cards, setCards] = useState('');
-  const { user } = useContext(UserContext);
+  const { user } = useContext(AuthContext);
   const [searchType, setSearchType] = useState(undefined);
   const [showPredictions, setShowPredictions] = useState(false);
   const [cardTitles, setCardTitles] = useState([]);
