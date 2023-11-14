@@ -13,8 +13,8 @@ export const MailProvider = ({ children }) => {
   // Populates messages in every rendering (reload of page, etc.)
   useEffect(() => {
     if (user) {
-      setSentMessages(user.messages.sent);
-      setReceivedMessages(user.messages.received);
+      setSentMessages(user.messages?.sent);
+      setReceivedMessages(user.messages?.received);
     }
   }, [user]);
 

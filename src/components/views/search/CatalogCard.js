@@ -1,18 +1,16 @@
 /***************************/
 /**** Site Catalog Card ****/
 /***************************/
-
-import React, { useContext } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 // import { CardContext } from '../../../contexts/CardContext';
 // import { PathContext } from '../../../contexts/PathContext';
-import { AuthContext } from '../../../contexts/AuthContext';
+import useAuth from '../../../hooks/useAuth';
 import CardImage from './CardImage';
 import styled from 'styled-components';
 
 const CatalogCard = (props) => {
   const { index, card, handleClick } = props;
-  const { user } = useContext(AuthContext);
+  const { user } = useAuth();
 
   return (
     <div id={`card-${index}`} key={card.id} className="card-container">

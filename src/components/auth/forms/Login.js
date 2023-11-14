@@ -19,7 +19,7 @@ const Login = () => {
   const [message, setMessage] = useState(null);
   const [showPassword, setShowPassword] = useState(false);
   const { setPathname } = useContext(PathContext);
-  const { setUser } = useAuth;
+  const { setUser } = useAuth();
 
   const inputs = {
     email: document.querySelector('#email'),

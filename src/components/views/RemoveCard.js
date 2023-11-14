@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { FiArrowLeftCircle } from 'react-icons/fi';
-import { AuthContext } from '../../contexts/AuthContext';
+import useAuth from '../../hooks/useAuth';
 import { CardContext } from '../../contexts/CardContext';
 import capitalizeString from '../utilities/capitalizeString';
 import Image from './search/CardImage';
@@ -9,7 +9,7 @@ import { api } from '../../api/resources';
 import styled from 'styled-components';
 
 const Remove = () => {
-  const { user } = useContext(AuthContext);
+  const { user } = useAuth();
   const { setCardContext } = useContext(CardContext);
   const navigate = useNavigate();
   const location = useLocation();

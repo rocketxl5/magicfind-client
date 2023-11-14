@@ -1,11 +1,11 @@
 import React, { useContext } from 'react';
-import { AuthContext } from '../../../contexts/AuthContext';
 import { Link } from 'react-router-dom';
+import useAuth from '../../../hooks/useAuth';
 import { FiMail } from 'react-icons/fi';
 import styled from 'styled-components';
 
 const MailIcon = () => {
-  const { unreadMail } = useContext(AuthContext);
+  const { unreadMail } = useAuth();
     return (
       <Div className="nav-btn">
         <Mail className="mail-btn" to="/mail/inbox" title=" To Mailbox">

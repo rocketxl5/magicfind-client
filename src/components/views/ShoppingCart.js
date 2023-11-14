@@ -1,8 +1,8 @@
 import React, { useEffect, useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { FiPlusCircle, FiMinusCircle, FiTrash2 } from 'react-icons/fi';
+// import { FiPlusCircle, FiMinusCircle, FiTrash2 } from 'react-icons/fi';
 import CartItem from './CartItem';
-import { AuthContext } from '../../contexts/AuthContext';
+import useAuth from '../../hooks/useAuth';
 import { ShoppingCartContext } from '../../contexts/ShoppingCartContext';
 import { api } from '../../api/resources';
 import styled from 'styled-components';
@@ -12,7 +12,7 @@ function ShoppingCart() {
   const [subTotal, setSubTotal] = useState(0);
   const [loading, setLoading] = useState(false);
   const [isUpdating, setIsUpdating] = useState(false);
-  const { user } = useContext(AuthContext);
+  const { user } = useAuth();
   const { cartItems, setCartItems } = useContext(ShoppingCartContext);
   const navigate = useNavigate();
 

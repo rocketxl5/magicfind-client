@@ -33,8 +33,8 @@ import './css/media-queries.css';
 const App = () => {
   return (
     <Routes>
-
       <Route path="/" element={<Layout />} >
+
         {/* Public routes */}
         <Route exact path="/" element={<Home />} />
         <Route path="about" element={<About />} />
@@ -64,7 +64,7 @@ const App = () => {
           </Route>
 
         {/* Catch all */}
-        <Route path="*" element={NotFound} />
+        <Route path="*" element={<NotFound />} />
       </Route>
     </Routes >
   );

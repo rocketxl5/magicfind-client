@@ -1,10 +1,10 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { FiArrowLeftCircle } from 'react-icons/fi';
 import timestampConverter from '../../utilities/timestampConverter';
 import getPath from '../../utilities/getPath';
 import { PathContext } from '../../../contexts/PathContext';
-import { AuthContext } from '../../../contexts/AuthContext';
+import useAuth from '../../../hooks/useAuth';
 import { api } from '../../../api/resources';
 import styled from 'styled-components';
 
@@ -12,7 +12,7 @@ const Message = ({ currentMessage, setMessages, setLoading }) => {
   const navigate = useNavigate();
   const location = useLocation();
   const { pathname, setPathname } = useContext(PathContext);
-  const { user } = useContext(AuthContext);
+  const { user } = useAuth();
 
   useEffect(() => {
     if (!currentMessage) {

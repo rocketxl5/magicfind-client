@@ -7,7 +7,7 @@ import React, {
 import { useLocation, useNavigate } from 'react-router-dom';
 import SearchInput from './search/SearchInput';
 import Spinner from '../layout/Spinner';
-import { AuthContext } from '../../contexts/AuthContext';
+import useAuth from '../../hooks/useAuth';
 import { SearchContext } from '../../contexts/SearchContext';
 import { PathContext } from '../../contexts/PathContext';
 import { api } from '../../api/resources';
@@ -28,7 +28,7 @@ const SearchCollection = () => {
     cardName,
     setCardName, 
   } = useContext(SearchContext);
-  const { user, userStoreContent } = useContext(AuthContext);
+  const { user } = useAuth;
   const { setPathname } = useContext(PathContext);
 
   const navigate = useNavigate();

@@ -1,7 +1,7 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import CardListing from './CardListing';
-import { AuthContext } from '../../contexts/AuthContext';
+import useAuth from '../../hooks/useAuth';
 import { CardContext } from '../../contexts/CardContext';
 import { api } from '../../api/resources';
 import capitalizeString from '../utilities/capitalizeString';
@@ -10,7 +10,7 @@ const AddCard = () => {
   const location = useLocation();
   const [isSent, setIsSent] = useState(false);
 
-  const { user } = useContext(AuthContext);
+  const { user } = useAuth;
   const { setCardContext } = useContext(CardContext);
   const card = location.state.data;
 

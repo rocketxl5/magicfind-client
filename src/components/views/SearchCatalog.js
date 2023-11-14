@@ -7,7 +7,7 @@ import React, {
 import { useNavigate } from 'react-router-dom';
 import SearchInput from './search/SearchInput';
 import { SearchContext } from '../../contexts/SearchContext';
-import { AuthContext } from '../../contexts/AuthContext';
+import useAuth from '../../hooks/useAuth';
 import { PathContext } from '../../contexts/PathContext';
 import { api } from '../../api/resources';
 import hideSearchBar from '../utilities/hideSearchBar';
@@ -26,7 +26,7 @@ const SearchCatalog = () => {
     cardName,
     setCardName, 
   } = useContext(SearchContext);
-  const { user } = useContext(AuthContext);
+  const { user } = useAuth();
   const { pathname } = useContext(PathContext);
 
   const navigate = useNavigate();

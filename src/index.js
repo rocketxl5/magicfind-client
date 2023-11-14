@@ -1,9 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { RouteProvider } from './contexts/RouteContext';
 import { PathProvider } from './contexts/PathContext';
-import { UserProvider } from './contexts/AuthContext';
+import { AuthProvider } from './contexts/AuthContext';
 import { MailProvider } from './contexts/MailContext';
 import { SearchProvider } from './contexts/SearchContext';
 import { CardProvider } from './contexts/CardContext';
@@ -13,9 +12,8 @@ import App from './App';
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>    
-    <RouteProvider>
       <PathProvider>
-        <UserProvider>
+        <AuthProvider>
           <MailProvider>
             <SearchProvider>
               <CardProvider>
@@ -27,9 +25,8 @@ ReactDOM.render(
               </CardProvider>
             </SearchProvider>
           </MailProvider>
-        </UserProvider>
+        </AuthProvider>
       </PathProvider>
-    </RouteProvider>
     </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root')

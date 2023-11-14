@@ -1,7 +1,6 @@
 import React, { useEffect, useContext } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 // import { FiArrowRightCircle } from 'react-icons/fi';
-// import { AuthContext } from '../../contexts/AuthContext';
 import { PathContext } from '../../contexts/PathContext';
 
 const AuthPage = () => {

@@ -3,7 +3,7 @@ import { api } from '../api/resources';
 
 export const AuthContext = createContext(null);
 
-export const UserProvider = ({ children }) => {
+export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(JSON.parse(localStorage.getItem('user')));
   const [unreadMail, setUnreadMail] = useState(null);
 
@@ -15,6 +15,7 @@ export const UserProvider = ({ children }) => {
 
   useEffect(() => {
     if (user) {
+      console.log(user)
       const headers = new Headers();
       headers.append('Content-type', 'application/json');
       headers.append('auth-token', user.token);
