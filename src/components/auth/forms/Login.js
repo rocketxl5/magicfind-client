@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useRef, useContext, useEffect } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import useAuth from '../../../hooks/useAuth';
 import Spinner from '../../layout/Spinner';
@@ -25,6 +25,8 @@ const Login = () => {
     email: document.querySelector('#email'),
     password: document.querySelector('#password'),
   }
+  const emailRef = useRef(null)
+  const passwordRef = useRef(null)
 
   const location = useLocation();
   const navigate = useNavigate();
@@ -42,6 +44,9 @@ const Login = () => {
     }
     // Prevents Header component load
     setPathname(location.pathname);
+
+    // Set focus on email input
+    emailRef.current.focus();
   }, []);
 
   // Error handler 
@@ -93,7 +98,7 @@ const Login = () => {
               token: data.token
             }
             setLoading(false)
-            setUser(user);
+            setUser({ ...user });
             localStorage.setItem('user', JSON.stringify(user));
             navigate('/me');
           })
@@ -193,6 +198,7 @@ const Login = () => {
                     onBlur={handleBlur}
                     pattern="[a-zA-Z0-9._%+\-]{3,}@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}"
                     placeholder="Email"
+                    ref={emailRef}
                   />
               </div>
               <div className="form-element">
@@ -208,6 +214,7 @@ const Login = () => {
                       onBlur={handleBlur}
                       pattern="^(?!Enter Code$).*"
                       placeholder='Password'
+                      ref={passwordRef}
                   />
                   <button className="password-btn flex align-center justify-center" type="button" onMouseDown={handleMouseDown}>
                     <i className={!showPassword ? "fa-solid fa-eye" : "fa-solid fa-eye-slash"}></i>

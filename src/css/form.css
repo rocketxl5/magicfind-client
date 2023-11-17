@@ -474,7 +474,7 @@ ul.autocomplete-list {
     width: 100%;
     display: block;
     align-self: center;
-    border-radius: 5px;
+    border-radius: 7px;
   }
 
   .card-name {
@@ -498,7 +498,7 @@ ul.autocomplete-list {
 
   .card-btn {
     width: 90%;
-    padding-block: calc(var(--size-1) / 2);
+    padding-block: 0.5rem;
     font-size: var(--fs-150);
     font-weight: 500;
     border-radius: 5px;
@@ -521,6 +521,18 @@ ul.autocomplete-list {
     background: var(--clr-teal);
     border-radius: 2px;
 }
+
+.collection-btn button {
+    color: var(--clr-light);
+    margin-block-start: 0.5rem;
+    font-weight: 400;
+}
+
+
+
+
+
+
   
 
 

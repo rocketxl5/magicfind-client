@@ -10,8 +10,8 @@ import { SearchContext } from '../../contexts/SearchContext';
 import useAuth from '../../hooks/useAuth';
 import { PathContext } from '../../contexts/PathContext';
 import { api } from '../../api/resources';
-import hideSearchBar from '../utilities/hideSearchBar';
-import getBrowserWidth from '../utilities/getBrowserWidth';
+import hideSearchBar from '../../utilities/hideSearchBar';
+import getBrowserWidth from '../../utilities/getBrowserWidth';
 import Spinner from '../layout/Spinner';
 
 const SearchCatalog = () => {
@@ -53,13 +53,13 @@ const SearchCatalog = () => {
   }, [searchInput]);
 
   // On submit, check if cardName is set
-  useEffect(() => {
-    console.log(searchTerm)
-    console.log(cardName)
-    if (loading) {
-      !cardName && setCardName(searchTerm)
-    }
-  }, [loading])
+  // useEffect(() => {
+  //   console.log(searchTerm)
+  //   console.log(cardName)
+  //   if (loading) {
+  //     !cardName && setCardName(searchTerm)
+  //   }
+  // }, [loading])
 
 
   // useEffect(() => {
@@ -77,15 +77,13 @@ const SearchCatalog = () => {
   //   // setPathname(location.pathname.split('/')[1]);
   // }, []);
   const handleSubmit = (e) => {
+    e?.preventDefault();
 
-    if (!searchTerm) {
-      throw new Error('Field is empty. Please provide a suggestion');
-    }
+    if (searchTerm) {
 
-    e && e.preventDefault();
-    setLoading(true);
-    setSearchTerm(cardName);
-    inputRef.current.blur();
+      setLoading(true);
+
+      inputRef.current?.blur();
 
     const headers = new Headers();
     headers.append('Content-Type', 'application/json');
@@ -100,10 +98,11 @@ const SearchCatalog = () => {
       .then((data) => {
         // localStorage.setItem('searchCatalog', search);
         // localStorage.removeItem('catalogCards');
-        // console.log(data)
+        console.log(data)
         setLoading(false);
-        setCardName('')
         setSearchInput(null);
+        setSearchTerm('');
+        setCardName('');
         if (browserWidth <= 775 && document.querySelector('#mobile-nav').checked) {
           hideSearchBar();
         }
@@ -113,6 +112,7 @@ const SearchCatalog = () => {
         });
       })
       .catch((error) => console.log(error));
+    }
   };
 
   return (

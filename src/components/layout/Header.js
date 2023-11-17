@@ -2,7 +2,7 @@ import React from 'react';
 import SearchCatalog from '../views/SearchCatalog';
 import Navbar from './Navbar';
 import LogoBtn from './navbtn/LogoBtn';
-import handleSearchBar from '../utilities/handleSearchBar';
+import handleSearchBar from '../../utilities/handleSearchBar';
 
 const Header = () => {
 

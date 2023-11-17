@@ -4,7 +4,7 @@ import CardListing from './CardListing';
 import useAuth from '../../hooks/useAuth';
 import { CardContext } from '../../contexts/CardContext';
 import { api } from '../../api/resources';
-import capitalizeString from '../utilities/capitalizeString';
+import capitalizeString from '../../utilities/capitalizeString';
 
 const AddCard = () => {
   const location = useLocation();

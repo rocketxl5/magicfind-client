@@ -4,7 +4,7 @@ import { FiPlusCircle, FiMinusCircle, FiArrowLeftCircle } from 'react-icons/fi';
 import Image from './search/CardImage';
 import { SearchContext } from '../../contexts/SearchContext';
 import { PathContext } from '../../contexts/PathContext';
-import capitalizeString from '../utilities/capitalizeString';
+import capitalizeString from '../../utilities/capitalizeString';
 import styled from 'styled-components';
 
 const CardListing = ({ card, setIsSent }) => {

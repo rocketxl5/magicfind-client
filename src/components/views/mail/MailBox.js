@@ -7,7 +7,7 @@ import ComposeMessage from './ComposeMessage';
 import Spinner from '../../layout/Spinner';
 import Message from './Message';
 import useAuth from '../../../hooks/useAuth';
-import getPath from '../../utilities/getPath';
+import getPath from '../../../utilities/getPath';
 import { PathContext } from '../../../contexts/PathContext';
 import { api } from '../../../api/resources';
 import styled from 'styled-components';

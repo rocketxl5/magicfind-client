@@ -6,7 +6,7 @@ import APISearchResultHeader from './APISearchResultHeader';
 import CatalogCard from './CatalogCard';
 import APICard from './APICard';
 import CollectionCard from './CollectionCard';
-import capitalizeString from '../../utilities/capitalizeString';
+import capitalizeString from '../../../utilities/capitalizeString';
 
 
 const SearchResult = () => {
@@ -85,9 +85,9 @@ const SearchResult = () => {
                                                 return (
                                                     <APICard
                                                         key={index}
-                                            index={index}
-                                            card={card}
-                                            handleClick={handleClick}
+                                                        index={index}
+                                                        card={card}
+                                                        handleClick={handleClick}
                                                     />)
                                             })}
                                         </div>

@@ -86,9 +86,13 @@ export const SearchProvider = ({ children }) => {
 
     fetch(`${api.serverURL}/api/cards/api-card-titles`, options)
       .then((res) => res.json())
-      .then((data) => {
-        // console.log(data); 
-        setCardTitles(data);
+      .then((cards) => {
+        // Filter arena edition cards
+        const filteredCards = cards.filter(card => {
+          card.arena_id && console.log(card.arena_id)
+          return !card.arena_id
+        })
+        setCardTitles(filteredCards);
         setSearchType(undefined);
       })
       .catch((error) => console.log(error));

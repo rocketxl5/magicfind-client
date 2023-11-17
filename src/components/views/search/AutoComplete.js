@@ -8,7 +8,6 @@ const AutoComplete = (props) => {
         marker,
         setMarker,
         setCardName,
-        cardName,
         showPredictions
     } = useContext(SearchContext);
 
@@ -18,10 +17,15 @@ const AutoComplete = (props) => {
         return () => document.removeEventListener('keydown', handleKeyDown);
     });
 
+    // Sets the value of cardName state if prediction === 1
+    // 
     useEffect(() => {
-        console.log(marker)
-        console.log(predictions);
-        console.log(predictions[marker])
+        if (predictions.length === 1) {
+            setCardName(predictions[predictions.length - 1])
+        }
+    }, [predictions])
+
+    useEffect(() => {
         setCardName(predictions[marker]);
     }, [marker])
 
@@ -42,6 +46,13 @@ const AutoComplete = (props) => {
                 }
             }
 
+            // if (e.key === 'Enter') {
+            //     if (predictions.length === 1 && predictions[predictions.length - 1]) {
+            //         console.log(predictions[predictions.length - 1])
+            //         setCardName(predictions[predictions.length - 1])
+            //         handleSubmit()
+            //     }
+            // }
         }
     };
 

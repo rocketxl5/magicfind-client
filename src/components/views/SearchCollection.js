@@ -7,15 +7,14 @@ import React, {
 import { useLocation, useNavigate } from 'react-router-dom';
 import SearchInput from './search/SearchInput';
 import Spinner from '../layout/Spinner';
-import useAuth from '../../hooks/useAuth';
 import { SearchContext } from '../../contexts/SearchContext';
 import { PathContext } from '../../contexts/PathContext';
 import { api } from '../../api/resources';
 import styled from 'styled-components';
-import hideSearchBar from '../utilities/hideSearchBar';
-import getBrowserWidth from '../utilities/getBrowserWidth';
+import hideSearchBar from '../../utilities/hideSearchBar';
+import getBrowserWidth from '../../utilities/getBrowserWidth';
 
-const SearchCollection = () => {
+const SearchCollection = ({ user }) => {
   const [loading, setLoading] = useState(false);
   const [isActive, setIsActive] = useState(false);
   const [cards, setCards] = useState([]);
@@ -28,7 +27,7 @@ const SearchCollection = () => {
     cardName,
     setCardName, 
   } = useContext(SearchContext);
-  const { user } = useAuth;
+
   const { setPathname } = useContext(PathContext);
 
   const navigate = useNavigate();
@@ -40,6 +39,10 @@ const SearchCollection = () => {
   useEffect(() => {
     setPathname(location.pathname);
   }, [])
+
+  useEffect(() => {
+    console.log(user)
+  }, [user])
 
   useEffect(() => {
     if (searchInput) {
@@ -88,7 +91,7 @@ const SearchCollection = () => {
     setLoading(true);
     setSearchTerm(cardName);
     inputRef.current.blur();
-
+    console.log(user)
     const headers = new Headers();
     headers.append('Content-Type', 'application/json');
     headers.append('auth-token', user.token);
@@ -139,14 +142,6 @@ const SearchCollection = () => {
     setLoading(false);
   }, [cards]);
 
-  const handleClick = (e) => {
-    navigate('search-api');
-    if (localStorage.getItem('apiCardName')) {
-      localStorage.removeItem('apiCardName');
-      localStorage.removeItem('oracle');
-    }
-  };
-
   // const clearSearch = () => {
   //   setCards([]);
   //   setCardName('');
@@ -170,7 +165,7 @@ const SearchCollection = () => {
                 <Button
                   className="bg-green"
                   type="button"
-                  onClick={handleClick}
+                  onClick={() => navigate('/search-api')}
                 >
                   Add New Card
                 </Button>

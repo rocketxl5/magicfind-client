@@ -3,7 +3,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { FiArrowLeftCircle } from 'react-icons/fi';
 import useAuth from '../../hooks/useAuth';
 import { CardContext } from '../../contexts/CardContext';
-import capitalizeString from '../utilities/capitalizeString';
+import capitalizeString from '../../utilities/capitalizeString';
 import Image from './search/CardImage';
 import { api } from '../../api/resources';
 import styled from 'styled-components';
