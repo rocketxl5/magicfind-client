@@ -52,12 +52,12 @@ const CollectionCard = ({ card }) => {
               </p>
             </div>
           </div>
-          <div className="card-btn-container collection-btn">
+          <div className="collection-btn">
 
 
             {!card.isPublishd ? (
 
-              <button id="publish-card" className="card-btn bg-green" type="button" onClick={handleClick}>Publish</button>
+              <button id="publish-card" className="card-btn bg-blue" type="button" onClick={handleClick}>Publish</button>
             ) : (
               <button id="unpublish-card" className="card-btn bg-yellow" type="button" onClick={handleClick}>Unpublish</button>
             )}

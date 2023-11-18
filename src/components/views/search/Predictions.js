@@ -3,6 +3,7 @@ import { SearchContext } from '../../../contexts/SearchContext';
 
 const Predictions = (props) => {
   const {
+    handleSubmit,
     prediction,
     index
   } = props;
@@ -26,7 +27,6 @@ const Predictions = (props) => {
   }, [searchTerm]);
 
   const handleMouseEnter = (e) => {
-    console.log(e.target)
     e.target.classList.add('bg-grey');
     setCardName(prediction);
   };
@@ -35,6 +35,7 @@ const Predictions = (props) => {
     e.target.classList.remove('bg-grey');
     setCardName('')
   };
+
   return (
     <li
       className={index === marker ? 'suggestion bg-grey' : 'suggestion'}

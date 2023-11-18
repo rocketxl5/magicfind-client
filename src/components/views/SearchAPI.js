@@ -140,13 +140,13 @@ const Search = () => {
 
       filteredCards.forEach((card, index) => {
         if (card.finishes.length > 1) {
-          console.log(index)
+          // console.log(index)
           cards.splice(index, 1);
           duplicate(cards, card, index);
         }
       });
 
-      // Customize cards id to remove repetition
+      // Customize cards id to prevent redundancy.
       cards.forEach(card => card.id = crypto.randomUUID());
 
       setLoading(false);

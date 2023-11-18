@@ -41,10 +41,6 @@ const SearchCollection = ({ user }) => {
   }, [])
 
   useEffect(() => {
-    console.log(user)
-  }, [user])
-
-  useEffect(() => {
     if (searchInput) {
       if (searchInput.id === 'search-collection') {
         setIsActive(true);

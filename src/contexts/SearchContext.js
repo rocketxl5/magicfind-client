@@ -10,8 +10,8 @@ export const SearchProvider = ({ children }) => {
   const [cards, setCards] = useState('');
   const { user } = useContext(AuthContext);
   const [searchType, setSearchType] = useState(undefined);
-  const [showPredictions, setShowPredictions] = useState(false);
-  const [cardTitles, setCardTitles] = useState([]);
+  const [displayAutcomplete, setDisplayAutocomplete] = useState(false);
+  const [cardNames, setCardNames] = useState([]);
   const [marker, setMarker] = useState(-1);
 
   const getCardNames = (cards) => {
@@ -49,7 +49,7 @@ export const SearchProvider = ({ children }) => {
         // console.log('raw data', data)
         const catalogCards = user ? removeUserCards(data, user.id) : data;
         // setCards(cards);
-        setCardTitles(getCardNames(catalogCards));
+        setCardNames(getCardNames(catalogCards));
         setSearchType(undefined);
       })
       .catch((error) => console.log(error));
@@ -69,7 +69,7 @@ export const SearchProvider = ({ children }) => {
       .then((data) => {
         const collectionCards = data;
         console.log(data)
-        setCardTitles(getCardNames(collectionCards));
+        setCardNames(getCardNames(collectionCards));
         setSearchType(undefined);
       })
       .catch((error) => console.log(error));
@@ -92,7 +92,7 @@ export const SearchProvider = ({ children }) => {
           card.arena_id && console.log(card.arena_id)
           return !card.arena_id
         })
-        setCardTitles(filteredCards);
+        setCardNames(filteredCards);
         setSearchType(undefined);
       })
       .catch((error) => console.log(error));
@@ -120,8 +120,8 @@ export const SearchProvider = ({ children }) => {
         marker,
         setMarker,
         setSearchType,
-        cardTitles,
-        setCardTitles,
+        cardNames,
+        setCardNames,
         cards,
         setCards,
         searchInput, 
@@ -130,8 +130,8 @@ export const SearchProvider = ({ children }) => {
         setSearchTerm,
         cardName,
         setCardName,
-        showPredictions,
-        setShowPredictions
+        displayAutcomplete,
+        setDisplayAutocomplete
       }}
     >
       {children}

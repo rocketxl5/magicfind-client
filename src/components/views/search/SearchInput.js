@@ -18,28 +18,30 @@ const SearchInput = forwardRef(function SearchInput(props, ref) {
   const {
     setMarker,
     setSearchType,
-    cardTitles,
-    setCardTitles,
+    cardNames,
+    setCardNames,
     setSearchInput,
     searchTerm,
     setSearchTerm,
-    setCardName,
-    setShowPredictions
+    setDisplayAutocomplete
   } = useContext(SearchContext);
 
+  // Trigger
   useEffect(() => {
-    predictions.length && setShowPredictions(true);
+    predictions.length && setDisplayAutocomplete(true);
   }, [predictions])
+
 
   useEffect(() => {
     if (searchTerm) {
       // If card titles is set
-      if (cardTitles.length > 0) {
+      if (cardNames.length > 0) {
+      // If searchterm string length is equal or greater than 3
         if (searchTerm.length >= 3) {
           // Reset Marker to initial value
           setMarker(-1);
-          setShowPredictions(false);
-          const filteredCardTitles = cardTitles.filter((title) => {
+          setDisplayAutocomplete(false);
+          const filteredCardTitles = cardNames.filter((title) => {
             return title.toLowerCase().includes(searchTerm.toLowerCase());
           });
           setPredictions(filteredCardTitles);
@@ -58,8 +60,8 @@ const SearchInput = forwardRef(function SearchInput(props, ref) {
     // setSearchType(undefined);
     setSearchTerm('');
     setPredictions([]);
-    setShowPredictions(false);
-    setCardTitles([]);
+    setDisplayAutocomplete(false);
+    setCardNames([]);
   };
 
   const handleFocus = (e) => {
@@ -87,7 +89,7 @@ const SearchInput = forwardRef(function SearchInput(props, ref) {
         }
       />
       {(isActive && searchTerm) &&
-        <AutoComplete predictions={predictions} handleSubmit={props.handleSubmit} />
+        <AutoComplete predictions={predictions} handleSubmit={props.handleSubmit} inputRef={inputRef} />
       }
     </>
   );

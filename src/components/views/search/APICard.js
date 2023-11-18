@@ -12,7 +12,7 @@ const APICard = (props) => {
   const { index, card, handleClick } = props;
   return (
     <div id={`card-${index}`} key={card.id} className="card-container">
-      <div className="card-body">
+      <div className="card-body api-card">
         <div className="card-section">
           <div className="card-image" >
             <CardImage card={card} />
