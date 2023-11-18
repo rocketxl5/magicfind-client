@@ -59,7 +59,7 @@ function ShoppingCart() {
     }
   };
   return (
-    <div>
+    <div className="container">
       <h2 className="page-title">Shopping Cart</h2>
       <Container>
         {cartItems.length > 0 ? (

@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { FiTrash } from 'react-icons/fi';
-import getPath from '../../utilities/getPath';
+import getPath from '../../../utilities/getPath';
 import { PathContext } from '../../../contexts/PathContext';
 import { api } from '../../../api/resources';
 import styled from 'styled-components';

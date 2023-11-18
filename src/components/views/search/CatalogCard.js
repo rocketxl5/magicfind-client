@@ -36,7 +36,8 @@ const CatalogCard = (props) => {
                 <p>Ships From:  <span>{card.userCountry}</span></p>
               </div>
               <div className="card-price">
-                <p>Price:  <span>{parseFloat(card.price)}</span></p>
+                {/* <p>Price:  <span>{parseFloat(card.price)}</span></p> */}
+                <p>Price:  <span>{card.price}</span></p>
               </div>
               {card.quantity > 0 &&
                 <div className="card-quantity">
@@ -88,10 +89,15 @@ const Selected = styled.div`
   `;
 
 const Contact = styled(Link)`
-    padding: 0.5em;
+    display: block;
+    text-align: center;
+    margin-inline-end: 1rem;
+    padding-block: 0.5em;
     margin-top: 0.5em;
-    color: red;
+    font-size: var(--fs-125);
+    color: var(--clr-blue);
     border: 1px solid #e4e4e4;
+    border-radius: 5px;
   `;
 
 export default CatalogCard;

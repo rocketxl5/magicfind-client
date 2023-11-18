@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { FiSearch } from 'react-icons/fi';
 import styled from 'styled-components';
 import { SearchContext } from '../../../contexts/SearchContext';
-import handleSearchBar from '../../utilities/handleSearchBar';
+import handleSearchBar from '../../../utilities/handleSearchBar';
 
 const SearchBtn = () => {
     // const { setSearchTerm } = useContext(SearchContext);

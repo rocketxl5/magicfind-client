@@ -3,17 +3,16 @@
 /***************************/
 
 import React from 'react';
-// import { useHistory } from 'react-router-dom';
 // import { CardContext } from '../../../contexts/CardContext';
 // import { PathContext } from '../../../contexts/PathContext';
 import CardImage from './CardImage';
-import capitalizeWord from '../../utilities/capitalizeWord';
+import capitalizeWord from '../../../utilities/capitalizeWord';
 
 const APICard = (props) => {
   const { index, card, handleClick } = props;
   return (
     <div id={`card-${index}`} key={card.id} className="card-container">
-      <div className="card-body">
+      <div className="card-body api-card">
         <div className="card-section">
           <div className="card-image" >
             <CardImage card={card} />

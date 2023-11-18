@@ -1,8 +1,9 @@
-import capitalizeWord from '../../../utilities/capitalizeWord'
+import capitalizeWord from '../../../../utilities/capitalizeWord'
 // Sets and return error message object 
 const errorHandler = (values, inputs) => {
     const handles = Object.keys(values)
     let errors = {}
+    console.log(inputs)
     handles.forEach((handle) => {
         // Empty input: required input
         if (!values[handle]) {

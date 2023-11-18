@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { SearchContext } from '../../../contexts/SearchContext';
-import handleSearchBar from '../../utilities/handleSearchBar';
+import handleSearchBar from '../../../utilities/handleSearchBar';
 
 const HamburgerBtn = () => {
     // const { setSearchTerm } = useContext(SearchContext);

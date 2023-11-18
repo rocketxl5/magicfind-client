@@ -10,9 +10,9 @@ import Spinner from '../layout/Spinner';
 import { SearchContext } from '../../contexts/SearchContext';
 import { PathContext } from '../../contexts/PathContext';
 import { api } from '../../api/resources';
-import sanitizeString from '../utilities/sanitizeString';
-import hideSearchBar from '../utilities/hideSearchBar';
-import getBrowserWidth from '../utilities/getBrowserWidth';
+import sanitizeString from '../../utilities/sanitizeString';
+import hideSearchBar from '../../utilities/hideSearchBar';
+import getBrowserWidth from '../../utilities/getBrowserWidth';
 
 const Search = () => {
   const [loading, setLoading] = useState(false);
@@ -73,6 +73,7 @@ const Search = () => {
     inputRef.current.blur();
 
     const headers = { method: 'GET' };
+
     fetch(
       `${api.skryfallURL}/cards/named?exact=${sanitizeString(cardName)}`,
       headers
@@ -83,8 +84,6 @@ const Search = () => {
         const { name, oracle_id } = data;
         localStorage.setItem('oracle', oracle_id);
         localStorage.setItem('apiCardName', name);
-        // console.log('oracle id', oracle_id)
-        // console.log('name', name)
         setOracleID(oracle_id);
         setCardName(name);
       })
@@ -141,13 +140,13 @@ const Search = () => {
 
       filteredCards.forEach((card, index) => {
         if (card.finishes.length > 1) {
-          console.log(index)
+          // console.log(index)
           cards.splice(index, 1);
           duplicate(cards, card, index);
         }
       });
 
-      // Customize cards id to remove repetition
+      // Customize cards id to prevent redundancy.
       cards.forEach(card => card.id = crypto.randomUUID());
 
       setLoading(false);
