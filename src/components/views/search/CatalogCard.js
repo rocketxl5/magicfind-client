@@ -4,20 +4,28 @@
 import { Link } from 'react-router-dom';
 // import { CardContext } from '../../../contexts/CardContext';
 // import { PathContext } from '../../../contexts/PathContext';
+
 import useAuth from '../../../hooks/useAuth';
 import CardImage from './CardImage';
 import styled from 'styled-components';
 
 const CatalogCard = (props) => {
-  const { index, card, handleClick } = props;
+  const { index, card } = props;
   const { user } = useAuth();
+
+  const image = {
+    className: 'card-image',
+    sizes: '80vw',
+    src: card.image_uris && card.image_uris.png,
+    srcSet: `${card.image_uris.small} 500w, ${card.image_uris.normal} 775w, ${card.image_uris.large} 1600w`
+  }
 
   return (
     <div id={`card-${index}`} key={card.id} className="card-container">
       <div className="card-body">
         <div className="card-section">
-          <div className="card-image" >
-            <CardImage card={card} />
+          <div className="card-image">
+            <CardImage image={image} />
           </div>
         </div>
         <div className="card-section">

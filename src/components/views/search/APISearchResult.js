@@ -5,9 +5,8 @@ import useAuth from '../../../hooks/useAuth';
 import { api } from '../../../api/resources';
 // import { Link } from 'react-router-dom';
 // import { FiChevronLeft } from 'react-icons/fi';
-import capitalizeString from '../../../utilities/capitalizeString';
 
-const APISearchResultHeader = (props) => {
+const APISearchResult = (props) => {
     const { cards, selectedCards } = props;
     const navigate = useNavigate();
     const { user } = useAuth();
@@ -90,23 +89,23 @@ const APISearchResultHeader = (props) => {
                 loading ? (
                     <Spinner />
                 ) : (
-                        <header className="result-header">
+                    <div className="api-result">
 
-                            <div className="save-to-collection">
-                                {/* <Link to='/search-api'>{<FiChevronLeft />} Back to {capitalizeString(type)}</Link> */}
-                                {
-                                    <>
-                                        <span className="selected-count"> {selectedCards.length > 0 ? ` Card Selected: ${selectedCards.length}` : 'Select a Card'}</span>
-                                        {/* Conditionnaly rendering post button when cards are selected */}
-                                        <button id="cart-card" className={`result-header-btn bg-yellow ${selectedCards.length === 0 && 'hide'}`} type="button" onClick={handleClick}>Save to Collection</button>
-                                    </>
-                                }
-                            </div>
-                        </header>
+                        <div className="save-to-collection">
+                            {/* <Link to='/search-api'>{<FiChevronLeft />} Back to {capitalizeString(type)}</Link> */}
+                            {
+                                <>
+                                    <span className="selected-count"> {selectedCards.length > 0 ? ` Card Selected: ${selectedCards.length}` : 'Select a Card'}</span>
+                                    {/* Conditionnaly rendering post button when cards are selected */}
+                                    <button id="cart-card" className={`api-result-btn bg-yellow ${selectedCards.length === 0 && 'hide'}`} type="button" onClick={handleClick}>Save to Collection</button>
+                                </>
+                            }
+                        </div>
+                    </div>
                 )
             }
         </>
     )
 }
 
-export default APISearchResultHeader;
+export default APISearchResult;

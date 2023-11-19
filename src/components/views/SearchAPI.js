@@ -122,6 +122,7 @@ const Search = () => {
         });
       };
 
+      // Generates Multiple finish version of single card
       const duplicate = (cardsClone, card, index) => {
         // Save finishes array from api card
         const finishes = card.finishes;
@@ -145,6 +146,8 @@ const Search = () => {
           duplicate(cards, card, index);
         }
       });
+
+
 
       // Customize cards id to prevent redundancy.
       cards.forEach(card => card.id = crypto.randomUUID());

@@ -8,7 +8,8 @@ import { useNavigate } from 'react-router-dom';
 import { CardContext } from '../../../contexts/CardContext';
 import CardImage from './CardImage';
 
-const CollectionCard = ({ card }) => {
+const CollectionCard = (props) => {
+  const { card } = props;
   const { setCardContext } = useContext(CardContext);
   const navigate = useNavigate();
 

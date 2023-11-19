@@ -131,7 +131,7 @@ const CatalogCard = ({ card }) => {
         <div className="card-container">
             <>
                 <div className="card">
-                    <div className="card-image">
+                    <div className="card-image" >
                         <CardImage card={card} />
                     </div>
 
