@@ -118,7 +118,7 @@ const Search = () => {
 
       const filterOnlineVersions = (cards) => {
         return cards.filter((card) => {
-          return !card.set_name.toLowerCase().includes('online');
+          return !card.set_name.toLowerCase().includes('online') && !card.oversized;
         });
       };
 
