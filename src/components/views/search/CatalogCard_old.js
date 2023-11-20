@@ -23,6 +23,13 @@ const CatalogCard = ({ card }) => {
     const { cartItems, setCartItems, itemsCount, setItemsCount } =
         useContext(ShoppingCartContext);
     const location = useLocation();
+
+    const image = {
+        className: 'card-image',
+        sizes: '80vw',
+        src: card.image_uris && card.image_uris.png,
+        srcSet: `${card.image_uris.small} 500w, ${card.image_uris.normal} 775w, ${card.image_uris.large} 1600w`
+    }
     // const handleClick = (e) => {
     //     if (e.currentTarget.id === 'add') {
     //         if (quantity < card.quantity) {
@@ -131,7 +138,7 @@ const CatalogCard = ({ card }) => {
         <div className="card-container">
             <>
                 <div className="card">
-                    <div className="card-image">
+                    <div className="card-image" >
                         <CardImage card={card} />
                     </div>
 

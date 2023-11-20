@@ -1,102 +1,44 @@
-import React, { useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { FiChevronLeft } from 'react-icons/fi';
-import APISearchResultHeader from './APISearchResultHeader';
-import CatalogCard from './CatalogCard';
-import APICard from './APICard';
-import CollectionCard from './CollectionCard';
+import Card from './Card';
 import capitalizeString from '../../../utilities/capitalizeString';
 
 
 const SearchResult = () => {
     const location = useLocation();
     const { cards, cardName, type } = location.state;
-    const [selectedCards, setSelectedCards] = useState([]);
-    console.log(cards);
-    // Handle for API card search //
-    // Adds card to selectedCards array 
-    // Toggles card-selected css class on parent container
-    const handleClick = (e, card, index) => {
-        const found = selectedCards.find(cardSelected => {
-            return cardSelected.id === card.id
-        })
-
-        if (found) {
-            setSelectedCards(selectedCards.filter(cardSelected => {
-                return cardSelected.id !== card.id;
-            }))
-        }
-        else {
-            setSelectedCards([card, ...selectedCards]);
-        }
-
-        card.selected = !card.selected;
-        document.querySelector(`#card-${index}`).classList.toggle('card-selected');
-    }
 
     return (
+
         <div className="search-result">
-            <header className="top-header">
+            <header className="search-result-header">
                 {type !== 'search-catalog' &&
                     <div className="back-link">
                         <Link to='/search-api'>{<FiChevronLeft />} Back to Search</Link>
                     </div>
                 }
                 <div className="search-result-info">
-                    <h3>
-
-                        {capitalizeString(cardName)}
-
-                    </h3>
+                    <h3>{capitalizeString(cardName)}</h3>
                     <span>
                         {`${cards.length} ${cards.length > 1 ? 'Results' : 'Result'}`}
                     </span>
                 </div>
             </header>
-            {cards !== null && (
-                <>
-                    {
-                        type === 'search-catalog' ? (
-                            <div className="search-items">
-                                {cards.map((card, index) => {
-                                    return (
-                                        <CatalogCard
-                                            key={index}
-                                            card={card}
-                                        />)
-                                })}
-                            </div>
-                        ) : type === 'search-collection' ? (
-                            <div className="search-items">
-                                {cards.map((card, index) => {
-                                    return (
-                                        <CollectionCard
-                                            key={index}
-                                            card={card}
-                                        />)
-                                })}
-                                </div>
-                            ) : (
-                                    <>
-                                        <APISearchResultHeader cardName={cardName} cards={cards} selectedCards={selectedCards} type={type} />
-                                        <div className="search-items">
-                                            {cards.map((card, index) => {
-                                                return (
-                                                    <APICard
-                                                        key={index}
-                                                        index={index}
-                                                        card={card}
-                                                        handleClick={handleClick}
-                                                    />)
-                                            })}
-                                        </div>
-                                    </>
-                                )
-                    }
-                </>
-            )}  
+            <div className="cards">
+                {cards &&
+                    cards.map((card, index) => {
+                        return (
+                            <Card
+                                key={index}
+                                card={card}
+                                searchType={type}
+                            />)
+                    })
+                }
+            </div>  
         </div>
+
     )
 }
 

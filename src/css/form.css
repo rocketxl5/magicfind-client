@@ -235,6 +235,35 @@ input:-webkit-autofill:active{
 /* Search Catalog   ******/
 /*************************/
 /*************************/
+
+
+div.expanded-image-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: none;
+    height: 100vh;
+    width: 100vw;
+    padding: 2rem;
+    align-items: center;
+    /* margin-block-start: 5rem; */
+    background-color: rgba(216, 214, 211, 0.8);
+    z-index: 3000;
+}
+
+.expanded-image-container * { 
+    pointer-events: none;
+}
+
+div.expanded-image {
+    border-radius: 20px;
+    box-shadow: rgba(0, 0, 0, 0.6) 0px 5px 15px;
+}
+
+div.expanded-image img {
+    border-radius: 20px;
+}
+
 .search-card {
     margin-block-start: var(--size-4);
     padding-inline: var(--size-2);
@@ -258,7 +287,7 @@ input#search-collection {
     margin-inline: auto;
 }
 
-.result-header {
+.api-result {
     position: sticky;
     top: 4.9rem;
     width: 100%;
@@ -268,6 +297,7 @@ input#search-collection {
     font-size: var(--fs-150);
     background: var(--clr-blue);
     border-top: 1px solid rgba(216, 214, 211, 0.3);
+    z-index: 100;
 }
 
 .save-to-collection, .search-result-info {
@@ -295,9 +325,11 @@ input#search-collection {
 }
 
 
+.search-result-header {
+    z-index: 100;
+}
 
-
-.result-header-btn {
+.api-result-btn {
     /* width: calc(3 * var(--size-4)); */
     /* padding-block: calc(var(--size-1) / 2); */
     padding-inline: 1.3rem;
@@ -369,7 +401,7 @@ input#search-collection {
     text-align: right;
 }
 
-.search-items {
+div.cards {
     padding-inline: 2rem;
 }
 
@@ -453,6 +485,7 @@ ul.autocomplete-list {
   }
 
   .card-section {
+    position: relative;
     min-width: 48%;
   }
 
@@ -462,22 +495,44 @@ ul.autocomplete-list {
     justify-content: space-between;
   }
 
-  .card-wrapper {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-  }
 
-
-  .card-image {
+  .card-image-container {
     width: 100%;
   }
 
-  .card-image img {
+  .expand-icon-container {
+    position: absolute;
+    bottom: 1rem;
+    right: 1rem;
+    background-color: rgba(252, 252, 252, 0.5);
+    padding: 0.5rem;
+    border-radius: 50px;
+    /* z-index: 10; */
+  }
+
+ .expand-icon {
+     display: block;
+     color: rgba(38, 38, 38, 1);
+    height: 2rem;
+    width: 2rem;
+    
+  }
+
+  .card-image {
     width: 100%;
     display: block;
     align-self: center;
     border-radius: 7px;
+    z-index: 0;
+  }
+
+  
+  .card-image:hover {
+    cursor: pointer;
+  }
+
+  .card-image {
+    pointer-events: none;
   }
 
   .card-name {

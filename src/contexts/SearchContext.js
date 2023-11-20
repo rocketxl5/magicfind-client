@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useContext, useReducer, createContext } from 'react';
-import { AuthContext } from './AuthContext';
+import React, { useState, useEffect, createContext } from 'react';
+import useAuth from '../hooks/useAuth';
 import { api } from '../api/resources';
 export const SearchContext = createContext(null);
 
@@ -8,12 +8,11 @@ export const SearchProvider = ({ children }) => {
   const [cardName, setCardName] = useState('');
   const [searchTerm, setSearchTerm] = useState('');
   const [cards, setCards] = useState('');
-  const { user } = useContext(AuthContext);
   const [searchType, setSearchType] = useState(undefined);
   const [displayAutcomplete, setDisplayAutocomplete] = useState(false);
   const [cardNames, setCardNames] = useState([]);
   const [marker, setMarker] = useState(-1);
-
+  const { user } = useAuth();
   const getCardNames = (cards) => {
     let filteredData = [];
 

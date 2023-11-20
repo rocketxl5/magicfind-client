@@ -1,6 +1,6 @@
 :root {
     /* site colors */
-    --clr-primary: rgb(238, 99, 82);
+    --clr-primary: #ee6352;
     --clr-danger: rgb(220, 53, 69);
     --clr-success: rgb(34, 170, 68);
 
@@ -9,8 +9,8 @@
     --clr-grey: rgb(216, 214, 211);
     --clr-light-grey: #F7F7F7;
     --clr-red: #a31621;
-    --clr-light: #fcfcfc;
-    --clr-dark: #252525;
+    --clr-light: rgb(252, 252, 252);
+    --clr-dark: hwb(0 15% 85%);
     --clr-green: #49A078;
     --clr-yellow: #FFB834;
     --clr-teal: #3598d1;
@@ -117,6 +117,10 @@ a {
     flex-direction: column;
     color: var(--clr-blue);
     min-height: calc(100vh - var(--header-height));
+}
+
+.loading {
+  display: block;
 }
 
 .spinner p {
