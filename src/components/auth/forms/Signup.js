@@ -182,7 +182,7 @@ const Signup = () => {
             })
           })
           .then(data => {
-            navigate('/login', { state: { message: data.message } });
+            navigate('/login', { state: { message: data.message } }, { replace: true });
           })
           .catch(error => {
             setMessage(error.message)

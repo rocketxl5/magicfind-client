@@ -4,30 +4,6 @@ import Loading from '../../layout/Loading';
 import useAuth from '../../../hooks/useAuth';
 import { api } from '../../../api/resources';
 import capitalizeWord from '../../../utilities/capitalizeWord';
-const props = [
-    'artist',
-    'booster',
-    'border_color',
-    'collector_number',
-    'colors',
-    'finishes',
-    'frame',
-    'id',
-    'image_uris',
-    'lang',
-    'legalities',
-    'mana_cost',
-    'name',
-    'oracle_text',
-    'oversized',
-    'prices',
-    'promo',
-    'rarity',
-    'released_at',
-    'set_name',
-    'set_type',
-    'type_line',
-];
 
 const ApiCardDetail = ({ card }) => {
     const [loading, setLoading] = useState(false);
@@ -48,9 +24,9 @@ const ApiCardDetail = ({ card }) => {
             const options = {
                 method: 'POST',
                 headers: headers,
-                body: JSON.stringify({ card: selectedCard, userID: user.id }),
+                body: JSON.stringify(selectedCard),
             };
-            fetch(`${api.serverURL}/api/cards/add`, options)
+            fetch(`${api.serverURL}/api/cards/add/${user.id}/${selectedCard.id}`, options)
                 .then((res) => res.json())
                 .then((data) => {
                     console.log(data);
@@ -59,24 +35,15 @@ const ApiCardDetail = ({ card }) => {
                     navigate('/search-api');
                 })
                 .catch((error) => {
-                    console.log(error)
+                    console.log(error.message)
                     setLoading(false)
                 });
         }
     }, [selectedCard])
 
 
-    const handleClick = (card, props) => {
-        console.log(card)
-        const filterCard = (card, props) => {
-            let filteredCard = {}
-            props.forEach(prop => {
-                filteredCard = { ...filteredCard, [prop]: card[prop] }
-            })
-
-            return filteredCard;
-        }
-        setSelectedCard(filterCard(card, props))
+    const handleClick = (card) => {
+        setSelectedCard(card)
     }
 
     return (
@@ -119,7 +86,7 @@ const ApiCardDetail = ({ card }) => {
                                 </div>
                             </div>
                             <div className="card-btn-container">
-                                <button id="cart-card" className="card-btn bg-blue color-lg-grey" type="button" onClick={() => handleClick(card, props)}>{!selectedCard ? 'Select' : 'Selected'}</button>
+                                <button id="cart-card" className="card-btn bg-blue color-lg-grey" type="button" onClick={() => handleClick(card)}>{!selectedCard ? 'Select' : 'Selected'}</button>
                             </div>
 
                         </>

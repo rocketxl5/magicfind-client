@@ -1,7 +1,7 @@
-import React from 'react'
+import { TbRotate360 } from "react-icons/tb";
 
 const ExpandedImage = (props) => {
-    const { attributes, display, setDisplay } = props;
+    const { attributes, layout, display, setDisplay } = props;
 
     const handleClick = () => {
         setDisplay(false);

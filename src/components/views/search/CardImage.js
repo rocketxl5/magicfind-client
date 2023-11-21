@@ -1,12 +1,9 @@
 const CardImage = ({ attributes }) => {
+
     return (
-        <>
-            <div className="card-image-container" >
-                <img
-                    {...attributes}
-                />
-            </div>
-        </>
+        <div className="card-image-container" >
+            <img {...attributes} />
+        </div>
     )
 }
 

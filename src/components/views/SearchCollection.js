@@ -79,11 +79,9 @@ const SearchCollection = ({ user }) => {
   // Instore single card request search field with
   // cardname (searchTerm) and user id
   const handleSubmit = (e) => {
-    if (!searchTerm) {
-      throw new Error('Field is empty. Please provide a suggestion');
-    }
+    e?.preventDefault();
 
-    e && e.preventDefault();
+    if (searchTerm) {   
     setLoading(true);
     setSearchTerm(cardName);
     inputRef.current.blur();
@@ -106,10 +104,11 @@ const SearchCollection = ({ user }) => {
         setSearchInput(null);
         navigate(`/search-result/${cardName.toLowerCase()}`,
           {
-            state: { cards: data.results, cardName: data.cardName, type: inputRef.current.id },
+            state: { cards: data.results, cardName: data.cardName, type: inputRef.current.id, previousLocation: location.pathname },
         });
       })
       .catch((error) => console.log(error));
+    }
   };
 
   // Get all cards from user store
