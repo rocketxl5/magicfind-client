@@ -1,9 +1,9 @@
 import ApiCardDetail from './ApiCardDetail';
 import CatalogCardDetail from './CatalogCardDetail';
 import CollectionCardDetail from './CollectionCardDetail';
+
 const CardDetailSection = (props) => {
     const { card, searchType } = props;
-
 
     return (
         <section className="card-section">

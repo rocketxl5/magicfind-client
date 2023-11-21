@@ -10,7 +10,8 @@ import Spinner from '../layout/Spinner';
 import { SearchContext } from '../../contexts/SearchContext';
 import { PathContext } from '../../contexts/PathContext';
 import { api } from '../../api/resources';
-import sanitizeString from '../../utilities/sanitizeString';
+import setSearchString from '../../utilities/setSearchString';
+import setString from '../../utilities/setString';
 import hideSearchBar from '../../utilities/hideSearchBar';
 import getBrowserWidth from '../../utilities/getBrowserWidth';
 
@@ -62,38 +63,48 @@ const Search = () => {
   }, [loading])
 
   const handleSubmit = (e) => {
-
-    if (!searchTerm) {
-      throw new Error('Field is empty. Please provide a suggestion');
-    }
-
     e && e.preventDefault();
+
+    if (searchTerm.length < 3) { return }
+
+
     setLoading(true);
     setSearchTerm(cardName);
     inputRef.current.blur();
 
     const headers = { method: 'GET' };
 
+    const searchString = setSearchString(searchTerm, cardName);
+
     fetch(
-      `${api.skryfallURL}/cards/named?exact=${sanitizeString(cardName)}`,
+      `${api.skryfallURL}${searchString}}`,
       headers
     )
       // https://api.scryfall.com/cards/search?order=released&q=oracleid%3A0c2841bb-038c-4fbf-8360-bc0a1522b58d&unique=prints
       .then((res) => res.json())
       .then((data) => {
-        const { name, oracle_id } = data;
-        localStorage.setItem('oracle', oracle_id);
-        localStorage.setItem('apiCardName', name);
-        setOracleID(oracle_id);
-        setCardName(name);
+        console.log(data)
+        if (data.object === 'error') {
+          navigate(`/search-result/${setString(searchTerm, '-')}`,
+            {
+              state: { cards: undefined, cardName: searchTerm, type: 'not-found', previousLocation: location.pathname },
+            });
+        } else {
+          const { name, oracle_id } = data;
+          localStorage.setItem('oracle', oracle_id);
+          localStorage.setItem('apiCardName', name);
+          setOracleID(oracle_id);
+          setCardName(name);
+        }
+
       })
-      .catch((error) => console.log(error));
+      .catch((error) => {
+        console.log(error)
+      });
+
   };
 
-
-
   // Fetch call triggered when oracleID state changes in fetchSingleCard function
-
   useEffect(() => {
     if (oracleID) {
 
@@ -111,8 +122,6 @@ const Search = () => {
     }
   }, [oracleID]);
 
-
-  // 
   useEffect(() => {
     if (data) {
 
@@ -138,7 +147,6 @@ const Search = () => {
       const filteredCards = filterOnlineVersions(data);
       const cards = [...filteredCards];
 
-
       filteredCards.forEach((card, index) => {
         if (card.finishes.length > 1) {
           // console.log(index)
@@ -147,17 +155,14 @@ const Search = () => {
         }
       });
 
-
-
       // Customize cards id to prevent redundancy.
       cards.forEach(card => card.id = crypto.randomUUID());
 
       setLoading(false);
-      navigate(`/search-result/${cardName.toLowerCase()}`,
+      navigate(`/search-result/${setString(cardName, '-')}`,
         {
-          state: { cards: cards, cardName: cardName, type: 'search-api' },
-      });
-
+          state: { cards: cards, cardName: cardName, type: 'search-api', previousLocation: location.pathname },
+        });
       setCardName('');
       setSearchInput(null);
     }
@@ -180,4 +185,5 @@ const Search = () => {
     </>
   );
 };
+
 export default Search;

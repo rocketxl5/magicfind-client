@@ -23,30 +23,26 @@ const SearchInput = forwardRef(function SearchInput(props, ref) {
     setSearchInput,
     searchTerm,
     setSearchTerm,
+    displayAutoComple,
     setDisplayAutocomplete
   } = useContext(SearchContext);
 
-  // Trigger
   useEffect(() => {
-    predictions.length && setDisplayAutocomplete(true);
-  }, [predictions])
+    // If searchterm string length is equal or greater than 3
+    if (searchTerm.length >= 3) {
+      // Reset Marker to initial value
+      setMarker(-1);
+      // setDisplayAutocomplete(false);
+      const filteredCardTitles = cardNames.filter((title) => {
+        return title.toLowerCase().includes(searchTerm.toLowerCase());
+      });
 
-
-  useEffect(() => {
-    if (searchTerm) {
-      // If card titles is set
-      if (cardNames.length > 0) {
-      // If searchterm string length is equal or greater than 3
-        if (searchTerm.length >= 3) {
-          // Reset Marker to initial value
-          setMarker(-1);
-          setDisplayAutocomplete(false);
-          const filteredCardTitles = cardNames.filter((title) => {
-            return title.toLowerCase().includes(searchTerm.toLowerCase());
-          });
-          setPredictions(filteredCardTitles);
-        }
-      }
+      !displayAutoComple && setDisplayAutocomplete(true)
+      // Triggers useEffect above
+      setPredictions(filteredCardTitles);
+    }
+    else {
+      setDisplayAutocomplete(false);
     }
   }, [searchTerm]);
 

@@ -4,7 +4,7 @@ import React, {
   useEffect,
   useContext
 } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import SearchInput from './search/SearchInput';
 import { SearchContext } from '../../contexts/SearchContext';
 import useAuth from '../../hooks/useAuth';
@@ -30,6 +30,7 @@ const SearchCatalog = () => {
   const { pathname } = useContext(PathContext);
 
   const navigate = useNavigate();
+  const location = useLocation();
   const inputRef = useRef(null);
   const browserWidth = getBrowserWidth();
 
@@ -108,7 +109,7 @@ const SearchCatalog = () => {
         }
         navigate(`/search-result/${cardName.toLowerCase()}`,
           {
-            state: { cards: data.results, cardName: data.cardName, type: inputRef.current.id },
+            state: { cards: data.results, cardName: data.cardName, type: inputRef.current.id, previousLocation: location.pathname },
         });
       })
       .catch((error) => console.log(error));

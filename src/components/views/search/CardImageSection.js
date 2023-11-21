@@ -5,7 +5,6 @@ const CardImageSection = (props) => {
   const { attributes, setDisplay } = props;
 
   const handleClick = (e) => {
-    console.log(e.target)
     setDisplay(true);
   }
 

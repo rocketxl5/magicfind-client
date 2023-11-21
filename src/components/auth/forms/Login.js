@@ -37,6 +37,7 @@ const Login = () => {
 
   // On component load
   useEffect(() => { 
+    console.log(location)
     if (location.state) {
       if (location.state.message) {
         setMessage({ ...location.state.message });
@@ -100,7 +101,8 @@ const Login = () => {
             setLoading(false)
             setUser({ ...user });
             localStorage.setItem('user', JSON.stringify(user));
-            navigate('/me');
+            const destination = location.state ? location.state.from.pathname : '/me';
+            navigate(destination, { replace: true });
           })
           .catch((error) => {
             const errorMessage = JSON.parse(error.message)
