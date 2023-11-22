@@ -32,11 +32,12 @@ const SearchCollection = ({ user }) => {
 
   const navigate = useNavigate();
   const location = useLocation();
-  const inputRef = useRef(null);
+  const collectionInputRef = useRef(null);
   const browserWidth = getBrowserWidth();
 
   // Set pathname
   useEffect(() => {
+    collectionInputRef?.current.focus();
     setPathname(location.pathname);
   }, [])
 
@@ -84,7 +85,7 @@ const SearchCollection = ({ user }) => {
     if (searchTerm) {   
     setLoading(true);
     setSearchTerm(cardName);
-    inputRef.current.blur();
+      collectionInputRef.current.blur();
     console.log(user)
     const headers = new Headers();
     headers.append('Content-Type', 'application/json');
@@ -104,7 +105,7 @@ const SearchCollection = ({ user }) => {
         setSearchInput(null);
         navigate(`/search-result/${cardName.toLowerCase()}`,
           {
-            state: { cards: data.results, cardName: data.cardName, type: inputRef.current.id, previousLocation: location.pathname },
+            state: { cards: data.results, cardName: data.cardName, type: collectionInputRef.current.id, search: location.pathname },
         });
       })
       .catch((error) => console.log(error));
@@ -153,7 +154,7 @@ const SearchCollection = ({ user }) => {
             <div className="search-card">
               <h2 className="page-title">Enter A Card Name</h2>
               <form id="search-collection-form" className="search-form" onSubmit={handleSubmit} >
-                <SearchInput isActive={isActive} id={'search-collection'} handleSubmit={handleSubmit} ref={inputRef} />
+                <SearchInput isActive={isActive} id={'search-collection'} handleSubmit={handleSubmit} ref={collectionInputRef} />
               </form>
 
               <Buttons>

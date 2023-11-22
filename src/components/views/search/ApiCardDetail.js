@@ -12,11 +12,10 @@ const ApiCardDetail = ({ card }) => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        console.log(selectedCard)
+
         if (selectedCard) {
 
             setLoading(true)
-            // console.log(user.token)
             const headers = new Headers();
             headers.append('Content-Type', 'application/json');
             headers.append('auth-token', user.token);
@@ -29,7 +28,6 @@ const ApiCardDetail = ({ card }) => {
             fetch(`${api.serverURL}/api/cards/add/${user.id}/${selectedCard.id}`, options)
                 .then((res) => res.json())
                 .then((data) => {
-                    console.log(data);
                     // setCardContext(false);
                     setLoading(false)
                     navigate('/search-api');
@@ -41,21 +39,18 @@ const ApiCardDetail = ({ card }) => {
         }
     }, [selectedCard])
 
-
     const handleClick = (card) => {
         setSelectedCard(card)
     }
 
     return (
         <>
-
             {
                 loading ?
                     (
                         <Loading />
                     ) : (
                         <>
-
                             <div className="card-name">
                                 <p><span>{card.name}</span></p>
                             </div>
@@ -88,12 +83,9 @@ const ApiCardDetail = ({ card }) => {
                             <div className="card-btn-container">
                                 <button id="cart-card" className="card-btn bg-blue color-lg-grey" type="button" onClick={() => handleClick(card)}>{!selectedCard ? 'Select' : 'Selected'}</button>
                             </div>
-
                         </>
                     )
             }
-
-
         </>
     )
 }

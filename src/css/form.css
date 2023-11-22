@@ -436,6 +436,12 @@ div.cards {
     font-size: var(--fs-150);
 }
 
+input#search-collection:focus,
+input#search-api:focus {
+    padding: calc(var(--size-1) - 1px) !important;
+    border: 2px solid rgb(103, 152, 180, 0.7) !important;
+}
+
 .search-field::placeholder { 
     font-size: var(--fs-150);
 }

@@ -10,7 +10,6 @@ import Spinner from '../layout/Spinner';
 import { SearchContext } from '../../contexts/SearchContext';
 import { PathContext } from '../../contexts/PathContext';
 import { api } from '../../api/resources';
-import setSearchString from '../../utilities/setSearchString';
 import setString from '../../utilities/setString';
 import hideSearchBar from '../../utilities/hideSearchBar';
 import getBrowserWidth from '../../utilities/getBrowserWidth';
@@ -34,11 +33,12 @@ const Search = () => {
 
   const location = useLocation()
   const navigate = useNavigate();
-  const inputRef = useRef(null);
+  const apiInputRef = useRef(null);
   const browserWidth = getBrowserWidth();
 
   // Set pathname
   useEffect(() => {
+    apiInputRef?.current.focus();
     setPathname(location.pathname);
   }, [])
 
@@ -57,27 +57,21 @@ const Search = () => {
     }
   }, [searchInput]);
 
-  // On submit, check if cardName is set
-  useEffect(() => {
-    (loading && !cardName) && setCardName(searchTerm)
-  }, [loading])
 
   const handleSubmit = (e) => {
     e && e.preventDefault();
 
     if (searchTerm.length < 3) { return }
 
-
     setLoading(true);
-    setSearchTerm(cardName);
-    inputRef.current.blur();
+    // setSearchTerm(cardName);
+    apiInputRef.current.blur();
 
     const headers = { method: 'GET' };
 
-    const searchString = setSearchString(searchTerm, cardName);
-
+    const query = !cardName ? searchTerm : cardName;
     fetch(
-      `${api.skryfallURL}${searchString}}`,
+      `${api.skryfallURL}/cards/named?fuzzy=${query}`,
       headers
     )
       // https://api.scryfall.com/cards/search?order=released&q=oracleid%3A0c2841bb-038c-4fbf-8360-bc0a1522b58d&unique=prints
@@ -87,7 +81,7 @@ const Search = () => {
         if (data.object === 'error') {
           navigate(`/search-result/${setString(searchTerm, '-')}`,
             {
-              state: { cards: undefined, cardName: searchTerm, type: 'not-found', previousLocation: location.pathname },
+              state: { cards: undefined, cardName: searchTerm, type: 'not-found', search: location.pathname },
             });
         } else {
           const { name, oracle_id } = data;
@@ -95,6 +89,7 @@ const Search = () => {
           localStorage.setItem('apiCardName', name);
           setOracleID(oracle_id);
           setCardName(name);
+          console.log(oracle_id)
         }
 
       })
@@ -127,7 +122,8 @@ const Search = () => {
 
       const filterOnlineVersions = (cards) => {
         return cards.filter((card) => {
-          return !card.set_name.toLowerCase().includes('online') && !card.oversized;
+          return !card.digital && !card.oversized;
+          // return !card.set_name.toLowerCase().includes('online') && !card.oversized;
         });
       };
 
@@ -161,7 +157,7 @@ const Search = () => {
       setLoading(false);
       navigate(`/search-result/${setString(cardName, '-')}`,
         {
-          state: { cards: cards, cardName: cardName, type: 'search-api', previousLocation: location.pathname },
+          state: { cards: cards, cardName: cardName, type: 'search-api', search: location.pathname },
         });
       setCardName('');
       setSearchInput(null);
@@ -177,7 +173,7 @@ const Search = () => {
             <div className="search-card">
               <h2 className="page-title">Enter A Card Name</h2>
               <form id="search-api-form" className="search-form" onSubmit={handleSubmit}>
-                <SearchInput isActive={isActive} id={'search-api'} handleSubmit={handleSubmit} ref={inputRef} />
+                <SearchInput isActive={isActive} id={'search-api'} handleSubmit={handleSubmit} ref={apiInputRef} />
               </form>
             </div>
         )

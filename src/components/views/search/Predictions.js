@@ -28,19 +28,32 @@ const Predictions = (props) => {
 
   const handleMouseEnter = (e) => {
     e.target.classList.add('bg-grey');
+    console.log(prediction)
     setCardName(prediction);
   };
 
   const handleMouseOut = (e) => {
     e.target.classList.remove('bg-grey');
+    console.log(e.target)
     setCardName('')
+  };
+
+  // mouseDown event has priority over blur event.
+  // Allows for selected list item value to be query without
+  // triggering onBlur event in searchInput component
+  const handleMouseDown = (e) => {
+    // console.log(prediction)
+    setCardName(prediction)
+    handleSubmit(e);
+    // localStorage.setItem('searchTerm', JSON.stringify(content));
   };
 
   return (
     <li
       className={index === marker ? 'suggestion bg-grey' : 'suggestion'}
-      onMouseEnter={(e) => handleMouseEnter(e)}
-      onMouseOut={(e) => handleMouseOut(e)}
+      onMouseEnter={handleMouseEnter}
+      onMouseOut={handleMouseOut}
+      onMouseDown={handleMouseDown}
     >
       {head}
       <strong>{body}</strong>
