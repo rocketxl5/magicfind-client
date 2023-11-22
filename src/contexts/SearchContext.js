@@ -4,22 +4,31 @@ import { api } from '../api/resources';
 export const SearchContext = createContext(null);
 
 export const SearchProvider = ({ children }) => {
+  const [timeLapse, setTimeLapse] = useState(0);
   const [searchInput, setSearchInput] = useState(null);
   const [cardName, setCardName] = useState('');
   const [searchTerm, setSearchTerm] = useState('');
   const [cards, setCards] = useState('');
   const [searchType, setSearchType] = useState(undefined);
   const [displayAutcomplete, setDisplayAutocomplete] = useState(false);
+  const [apiCardNames, setApiCardNames] = useState(null);
   const [cardNames, setCardNames] = useState([]);
   const [marker, setMarker] = useState(-1);
   const { user } = useAuth();
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setTimeLapse(timeLapse + 1);
+    }, 1000)
+    return () => clearInterval(timer)
+  })
+
   const getCardNames = (cards) => {
     let filteredData = [];
 
     cards.forEach(card => {
       !filteredData.includes(card.name) && filteredData.push(card.name);
     })
-    // console.log('card titles', filteredData)
     return filteredData;
   }
 
@@ -29,7 +38,6 @@ export const SearchProvider = ({ children }) => {
     cards.forEach(card => {
       card.userID !== user.id && filteredData.push(card);
     })
-    // console.log('removed user cards', filteredData)
     return filteredData;
   }
 
@@ -75,7 +83,10 @@ export const SearchProvider = ({ children }) => {
   }
 
   const fetchApiCards = () => {
-    // console.log('fectching from api')
+    if (apiCardNames) {
+      console.log(apiCardNames);
+      setCardNames(apiCardNames);
+    }
     const headers = new Headers();
     headers.append('Content-Type', 'application/json');
     const options = {
@@ -83,19 +94,18 @@ export const SearchProvider = ({ children }) => {
       headers: headers,
     };
 
-    fetch(`${api.serverURL}/api/cards/api-card-titles`, options)
+    fetch(`${api.serverURL}/api/cards/api-cardnames`, options)
       .then((res) => res.json())
-      .then((cards) => {
-        // Filter arena edition cards
-        const filteredCards = cards.filter(card => {
-          card.arena_id && console.log(card.arena_id)
-          return !card.arena_id
-        })
-        setCardNames(filteredCards);
+      .then((data) => {
+        setApiCardNames(data);
         setSearchType(undefined);
       })
       .catch((error) => console.log(error));
   }
+
+  useEffect(() => {
+    setCardNames(apiCardNames)
+  }, [apiCardNames])
 
   useEffect(() => {
     if (searchType) {

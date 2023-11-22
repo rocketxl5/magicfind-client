@@ -77,19 +77,10 @@ const AutoComplete = (props) => {
         }
     };
 
-    // mouseDown event has priority over blur event.
-    // Allows for selected list item value to be query without
-    // triggering onBlur event in searchInput component
-    const handleMouseDown = (e) => {
-        handleSubmit();
-        // localStorage.setItem('searchTerm', JSON.stringify(content));
-    };
-
     return (
         <ul
             id="autocomplete-list"
             className="autocomplete-list"
-            onMouseDown={handleMouseDown}
             ref={ulRef}
         >
             {displayAutcomplete &&

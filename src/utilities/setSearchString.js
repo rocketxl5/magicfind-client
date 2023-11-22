@@ -2,7 +2,10 @@ import setString from './setString';
 
 const setSearchString = (searchTerm, cardName) => {
 
+
+
     if (cardName) {
+
         return `/cards/named?exact=${setString(cardName, '+')}`;
     }
     else {

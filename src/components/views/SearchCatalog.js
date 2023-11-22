@@ -31,8 +31,9 @@ const SearchCatalog = () => {
 
   const navigate = useNavigate();
   const location = useLocation();
-  const inputRef = useRef(null);
+  const catalogInputRef = useRef(null);
   const browserWidth = getBrowserWidth();
+
 
   useEffect(() => {
     // console.log(pathname)
@@ -84,7 +85,7 @@ const SearchCatalog = () => {
 
       setLoading(true);
 
-      inputRef.current?.blur();
+      catalogInputRef.current?.blur();
 
     const headers = new Headers();
     headers.append('Content-Type', 'application/json');
@@ -109,7 +110,7 @@ const SearchCatalog = () => {
         }
         navigate(`/search-result/${cardName.toLowerCase()}`,
           {
-            state: { cards: data.results, cardName: data.cardName, type: inputRef.current.id, previousLocation: location.pathname },
+            state: { cards: data.results, cardName: data.cardName, type: catalogInputRef.current.id, search: location.pathname },
         });
       })
       .catch((error) => console.log(error));
@@ -124,7 +125,7 @@ const SearchCatalog = () => {
         ) : (
             <div id="search-catalog-container">
               <form id="search-catalog-form" className="search-form" onSubmit={handleSubmit} >
-                <SearchInput isActive={isActive} id={'search-catalog'} handleSubmit={handleSubmit} ref={inputRef} />
+                <SearchInput isActive={isActive} id={'search-catalog'} handleSubmit={handleSubmit} ref={catalogInputRef} />
               </form>
             </div>
         )

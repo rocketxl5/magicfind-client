@@ -31,8 +31,6 @@ import './css/navbar.css';
 import './css/form.css';
 import './css/media-queries.css';
 
-
-
 const App = () => {
   const { user } = useAuth();
   return (

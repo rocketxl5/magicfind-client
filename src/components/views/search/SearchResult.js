@@ -7,7 +7,7 @@ import capitalizeString from '../../../utilities/capitalizeString';
 
 const SearchResult = () => {
     const location = useLocation();
-    const { cards, cardName, type } = location.state;
+    const { cards, cardName, type, search } = location.state;
 
     return (
         <>
@@ -16,7 +16,7 @@ const SearchResult = () => {
                 <header className="search-result-header">
                     {type !== 'search-catalog' &&
                         <div className="back-link">
-                            <Link to='/search-api'>{<FiChevronLeft />} Back to Search</Link>
+                            <Link to={search}>{<FiChevronLeft />} Back to Search</Link>
                         </div>
                     }
                     <div className="search-result-info">
