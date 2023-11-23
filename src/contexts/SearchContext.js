@@ -16,12 +16,12 @@ export const SearchProvider = ({ children }) => {
   const [marker, setMarker] = useState(-1);
   const { user } = useAuth();
 
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setTimeLapse(timeLapse + 1);
-    }, 1000)
-    return () => clearInterval(timer)
-  })
+  // useEffect(() => {
+  //   const timer = setInterval(() => {
+  //     setTimeLapse(timeLapse + 1);
+  //   }, 1000)
+  //   return () => clearInterval(timer)
+  // })
 
   const getCardNames = (cards) => {
     let filteredData = [];
@@ -55,9 +55,10 @@ export const SearchProvider = ({ children }) => {
       .then((data) => {
         // console.log('raw data', data)
         const catalogCards = user ? removeUserCards(data, user.id) : data;
-        // setCards(cards);
         setCardNames(getCardNames(catalogCards));
         setSearchType(undefined);
+        localStorage.setItem('catalogCards', JSON.stringify(catalogCards));
+        localStorage.setItem('cardNames', JSON.stringify(getCardNames(catalogCards)));
       })
       .catch((error) => console.log(error));
   }

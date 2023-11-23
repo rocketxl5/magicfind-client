@@ -1,5 +1,6 @@
 import React, {
   useState,
+  useEffect,
   forwardRef,
   useContext,
 } from 'react';
@@ -18,8 +19,8 @@ const SearchInput = forwardRef(function SearchInput(props, ref) {
     setMarker,
     setSearchType,
     cardNames,
-    setCardNames,
     setCardName,
+    setCardNames,
     setSearchInput,
     searchTerm,
     setSearchTerm,
@@ -27,8 +28,28 @@ const SearchInput = forwardRef(function SearchInput(props, ref) {
     setDisplayAutocomplete
   } = useContext(SearchContext);
 
+  // useEffect(() => {
+  //   // If searchterm string length is equal or greater than 3
+  //   if (searchTerm.length >= 3) {
+  //     // Reset Marker to initial value
+  //     setMarker(-1);
+  //     // setDisplayAutocomplete(false);
+  //     const filteredCardTitles = cardNames.filter((title) => {
+  //       return title.toLowerCase().includes(searchTerm.toLowerCase());
+  //     });
+
+  //     !displayAutoComple && setDisplayAutocomplete(true)
+  //     // Triggers useEffect above
+  //     setPredictions(filteredCardTitles);
+  //   }
+  //   else {
+  //     setDisplayAutocomplete(false);
+  //   }
+  // }, [searchTerm]);
+
   const handleChange = (e) => {
     if (e.target.value.length >= 3) {
+      console.log(cardNames)
       // Reset Marker to initial value
       setMarker(-1);
       // setDisplayAutocomplete(false);

@@ -1,10 +1,14 @@
 import React from 'react'
 
 const NotFound = (props) => {
-    const { searchTerm } = props;
+    const { cardName } = props;
     return (
-        <div>
-            <h1>No result found form {searchTerm}</h1>
+        <div className="not-found">
+            <header>
+
+            </header>
+            <h2>Ooops! No results were found for "{cardName}"</h2>
+            <p>Check your spelling or search the autocomple list.</p>
         </div>
     )
 }

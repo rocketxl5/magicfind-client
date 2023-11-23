@@ -17,7 +17,6 @@ import Spinner from '../layout/Spinner';
 const SearchCatalog = () => {
   const [loading, setLoading] = useState(false);
   const [isActive, setIsActive] = useState(false);
-
   const {
     searchInput,
     setSearchInput,
@@ -25,7 +24,9 @@ const SearchCatalog = () => {
     setSearchTerm,
     cardName,
     setCardName, 
+    setCardNames
   } = useContext(SearchContext);
+
   const { user } = useAuth();
   const { pathname } = useContext(PathContext);
 
@@ -46,6 +47,9 @@ const SearchCatalog = () => {
     if (searchInput) {
       if (searchInput.id === 'search-catalog') {
         setIsActive(true);
+        if (localStorage.getItem('cardNames')) {
+          setCardNames(JSON.parse(localStorage.getItem('cardNames')))
+        }
     }
     else {
       setIsActive(false);

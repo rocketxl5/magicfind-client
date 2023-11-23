@@ -28,9 +28,10 @@ const ApiCardDetail = ({ card }) => {
             fetch(`${api.serverURL}/api/cards/add/${user.id}/${selectedCard.id}`, options)
                 .then((res) => res.json())
                 .then((data) => {
+                    console.log(data)
                     // setCardContext(false);
                     setLoading(false)
-                    navigate('/search-api');
+                    // navigate('/search-api');
                 })
                 .catch((error) => {
                     console.log(error.message)
