@@ -17,15 +17,18 @@ import getBrowserWidth from '../../utilities/getBrowserWidth';
 const SearchCollection = ({ user }) => {
   const [loading, setLoading] = useState(false);
   const [isActive, setIsActive] = useState(false);
-  const [cards, setCards] = useState([]);
 
   const {
     searchInput,
     setSearchInput,
     searchTerm,
     setSearchTerm,
+    setCards,
     cardName,
     setCardName, 
+    setCardNames,
+    predictions,
+    getCardNames
   } = useContext(SearchContext);
 
   const { setPathname } = useContext(PathContext);
@@ -39,19 +42,39 @@ const SearchCollection = ({ user }) => {
   useEffect(() => {
     collectionInputRef?.current?.focus();
     setPathname(location.pathname);
+    if (browserWidth <= 775 && document.querySelector('#mobile-nav').checked) {
+      hideSearchBar();
+    }
   }, [])
 
   useEffect(() => {
     if (searchInput) {
       if (searchInput.id === 'search-collection') {
         setIsActive(true);
-        if (browserWidth <= 775 && document.querySelector('#mobile-nav').checked) {
-          hideSearchBar();
+        const fetchCollectionCards = () => {
+          console.log('fectching from collection')
+          const headers = new Headers();
+          headers.append('Content-Type', 'application/json');
+          headers.append('auth-token', user.token);
+          const options = {
+            method: 'GET',
+            headers: headers,
+          }
+          fetch(`${api.serverURL}/api/cards/${user.id}`, options)
+            .then((res) => res.json())
+            .then((data) => {
+              const collectionCards = data;
+              console.log(data)
+              setCards(collectionCards);
+              setCardNames(getCardNames(collectionCards));
+            })
+            .catch((error) => console.log(error));
         }
+
+        fetchCollectionCards()
       }
       else {
         setIsActive(false);
-        setSearchInput(null);
       }
     }
   }, [searchInput]);
@@ -95,7 +118,9 @@ const SearchCollection = ({ user }) => {
         headers: headers,
       };
 
-      fetch(`${api.serverURL}/api/cards/${cardName}/${user.id}`, options)
+      const query = !cardName ? searchTerm : predictions.length === 1 ? predictions[0] : cardName;
+
+      fetch(`${api.serverURL}/api/cards/${query}/${user.id}`, options)
         .then((res) => res.json())
         .then((data) => {
           // localStorage.setItem('storeCards', JSON.stringify(data.data));
@@ -133,10 +158,6 @@ const SearchCollection = ({ user }) => {
       })
       .catch((error) => console.log(error));
   };
-
-  useEffect(() => {
-    setLoading(false);
-  }, [cards]);
 
   // const clearSearch = () => {
   //   setCards([]);

@@ -47,7 +47,7 @@ const Login = () => {
     setPathname(location.pathname);
 
     // Set focus on email input
-    emailRef.current.focus();
+    emailRef?.current.focus();
   }, []);
 
   // Error handler 

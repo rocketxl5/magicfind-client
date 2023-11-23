@@ -27,15 +27,6 @@ const AutoComplete = (props) => {
         setPosition(INIT)
     }, [searchTerm])
 
-    // Update cardname state to the last prediction left in array predictions array.
-    // Allows user to submit a valid request for this result on enter key.
-    useEffect(() => {
-
-        if (predictions.length === 1) {
-            setCardName(predictions[predictions.length - 1])
-        }
-    }, [predictions])
-
     // Update cardname state on marker change.
     // Updates scroll position of autocomplete list (ul).
     // Marker's value updates on arrow key events (up or down).
@@ -84,7 +75,7 @@ const AutoComplete = (props) => {
             ref={ulRef}
         >
             {displayAutcomplete &&
-                predictions.map((prediction, index) => {
+                predictions?.map((prediction, index) => {
                     return (
                         (
                             <Predictions

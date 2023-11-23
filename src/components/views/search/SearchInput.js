@@ -1,8 +1,7 @@
 import React, {
-  useState,
-  useEffect,
   forwardRef,
   useContext,
+  useEffect,
 } from 'react';
 import AutoComplete from './AutoComplete';
 import { SearchContext } from '../../../contexts/SearchContext';
@@ -13,7 +12,7 @@ const SearchInput = forwardRef(function SearchInput(props, ref) {
     isActive
   } = props;
   const inputRef = ref;
-  const [predictions, setPredictions] = useState([]);
+
 
   const {
     setMarker,
@@ -24,6 +23,8 @@ const SearchInput = forwardRef(function SearchInput(props, ref) {
     setSearchInput,
     searchTerm,
     setSearchTerm,
+    predictions,
+    setPredictions,
     displayAutoComple,
     setDisplayAutocomplete
   } = useContext(SearchContext);
@@ -47,18 +48,21 @@ const SearchInput = forwardRef(function SearchInput(props, ref) {
   //   }
   // }, [searchTerm]);
 
+  useEffect(() => {
+    console.log(cardNames)
+  }, [cardNames])
+
   const handleChange = (e) => {
     if (e.target.value.length >= 3) {
 
       // Reset Marker to initial value
       setMarker(-1);
 
-      const filteredCardTitles = cardNames.filter((title) => {
+      const filteredCardTitles = cardNames?.filter((title) => {
         return title.toLowerCase().includes(e.target.value.toLowerCase());
       });
 
       !displayAutoComple && setDisplayAutocomplete(true)
-
       setPredictions(filteredCardTitles);
       setCardName(e.target.value);
     }
