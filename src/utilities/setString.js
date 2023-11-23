@@ -1,7 +1,6 @@
 const setString = (string, separator) => {
-    return string.toLowerCase().split(' ').filter(element => {
-        return /^[a-zA-Z]+$/.test(element)
-    }).join(separator);
+
+    return string.toLowerCase().replaceAll('/', '').replaceAll('"', '').replace('  ', ' ').split(' ').join(separator);;
 }
 
 export default setString;
