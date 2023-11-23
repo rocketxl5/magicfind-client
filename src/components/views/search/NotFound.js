@@ -8,7 +8,7 @@ const NotFound = (props) => {
 
             </header>
             <h2>Ooops! No results were found for "{cardName}"</h2>
-            <p>Check your spelling or search the autocomple list.</p>
+            <p>Check your spelling or search the autocomplete list.</p>
         </div>
     )
 }

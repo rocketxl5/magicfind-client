@@ -38,7 +38,7 @@ const Search = () => {
 
   // Set pathname
   useEffect(() => {
-    apiInputRef?.current.focus();
+    apiInputRef?.current?.focus();
     setPathname(location.pathname);
   }, [])
 
@@ -89,7 +89,6 @@ const Search = () => {
           localStorage.setItem('apiCardName', name);
           setOracleID(oracle_id);
           setCardName(name);
-          console.log(oracle_id)
         }
 
       })
