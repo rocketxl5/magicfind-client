@@ -37,7 +37,7 @@ const SearchCollection = ({ user }) => {
 
   // Set pathname
   useEffect(() => {
-    collectionInputRef?.current.focus();
+    collectionInputRef?.current?.focus();
     setPathname(location.pathname);
   }, [])
 
@@ -83,32 +83,32 @@ const SearchCollection = ({ user }) => {
     e?.preventDefault();
 
     if (searchTerm) {   
-    setLoading(true);
-    setSearchTerm(cardName);
+      setLoading(true);
+      setSearchTerm(cardName);
       collectionInputRef.current.blur();
-    console.log(user)
-    const headers = new Headers();
-    headers.append('Content-Type', 'application/json');
-    headers.append('auth-token', user.token);
-    const options = {
-      method: 'GET',
-      headers: headers,
-    };
 
-    fetch(`${api.serverURL}/api/cards/${cardName}/${user.id}`, options)
-      .then((res) => res.json())
-      .then((data) => {
-        // localStorage.setItem('storeCards', JSON.stringify(data.data));
-        // localStorage.setItem('storeCardName', cardName);
-        setLoading(false);
-        setCardName('')
-        setSearchInput(null);
-        navigate(`/search-result/${cardName.toLowerCase()}`,
-          {
-            state: { cards: data.results, cardName: data.cardName, type: collectionInputRef.current.id, search: location.pathname },
-        });
-      })
-      .catch((error) => console.log(error));
+      const headers = new Headers();
+      headers.append('Content-Type', 'application/json');
+      headers.append('auth-token', user.token);
+      const options = {
+        method: 'GET',
+        headers: headers,
+      };
+
+      fetch(`${api.serverURL}/api/cards/${cardName}/${user.id}`, options)
+        .then((res) => res.json())
+        .then((data) => {
+          // localStorage.setItem('storeCards', JSON.stringify(data.data));
+          // localStorage.setItem('storeCardName', cardName);
+          setLoading(false);
+          setCardName('')
+          setSearchInput(null);
+          navigate(`/search-result/${cardName.toLowerCase()}`,
+            {
+              state: { cards: data.results, cardName: data.cardName, type: collectionInputRef.current.id, search: location.pathname },
+            });
+        })
+        .catch((error) => console.log(error));
     }
   };
 

@@ -49,16 +49,16 @@ const SearchInput = forwardRef(function SearchInput(props, ref) {
 
   const handleChange = (e) => {
     if (e.target.value.length >= 3) {
-      console.log(cardNames)
+
       // Reset Marker to initial value
       setMarker(-1);
-      // setDisplayAutocomplete(false);
+
       const filteredCardTitles = cardNames.filter((title) => {
         return title.toLowerCase().includes(e.target.value.toLowerCase());
       });
 
       !displayAutoComple && setDisplayAutocomplete(true)
-      // Triggers useEffect above
+
       setPredictions(filteredCardTitles);
       setCardName(e.target.value);
     }

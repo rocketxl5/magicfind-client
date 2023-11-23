@@ -28,13 +28,11 @@ const Predictions = (props) => {
 
   const handleMouseEnter = (e) => {
     e.target.classList.add('bg-grey');
-    console.log(prediction)
     setCardName(prediction);
   };
 
   const handleMouseOut = (e) => {
     e.target.classList.remove('bg-grey');
-    console.log(e.target)
     setCardName('')
   };
 

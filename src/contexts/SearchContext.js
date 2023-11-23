@@ -16,12 +16,12 @@ export const SearchProvider = ({ children }) => {
   const [marker, setMarker] = useState(-1);
   const { user } = useAuth();
 
-  // useEffect(() => {
-  //   const timer = setInterval(() => {
-  //     setTimeLapse(timeLapse + 1);
-  //   }, 1000)
-  //   return () => clearInterval(timer)
-  // })
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setTimeLapse(timeLapse + 1);
+    }, 1000)
+    return () => clearInterval(timer)
+  })
 
   const getCardNames = (cards) => {
     let filteredData = [];
