@@ -8,11 +8,11 @@ export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [unreadMail, setUnreadMail] = useState(null);
 
-  // useEffect(() => {
-  //   if (localStorage.getItem('user')) {
-  //     setUser(JSON.parse(localStorage.getItem('user')));
-  //   }
-  // }, []);
+  useEffect(() => {
+    if (localStorage.getItem('user')) {
+      setUser(JSON.parse(localStorage.getItem('user')));
+    }
+  }, []);
 
   useEffect(() => {
     if (user) {

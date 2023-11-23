@@ -24,9 +24,10 @@ const Search = () => {
     searchInput,
     setSearchInput,
     searchTerm,
-    setSearchTerm,
+    predictions,
     cardName,
     setCardName,
+    setCardNames
   } = useContext(SearchContext);
 
   const { setPathname } = useContext(PathContext);
@@ -40,19 +41,37 @@ const Search = () => {
   useEffect(() => {
     apiInputRef?.current?.focus();
     setPathname(location.pathname);
+
+    if (browserWidth <= 775 && document.querySelector('#mobile-nav')?.checked) {
+      hideSearchBar();
+    }
   }, [])
 
   useEffect(() => {
     if (searchInput) {
       if (searchInput.id === 'search-api') {
         setIsActive(true);
-        if (browserWidth <= 775 && document.querySelector('#mobile-nav').checked) {
-          hideSearchBar();
+
+        const fetchApiCards = () => {
+          const headers = new Headers();
+
+          headers.append('Content-Type', 'application/json');
+          const options = {
+            method: 'GET',
+            headers: headers,
+          };
+
+          fetch(`${api.serverURL}/api/cards/api-cardnames`, options)
+            .then((res) => res.json())
+            .then((data) => {
+              setCardNames(data);
+            })
+            .catch((error) => console.log(error));
         }
+        fetchApiCards()
       }
       else {
         setIsActive(false);
-        setSearchInput(null);
       }
     }
   }, [searchInput]);
@@ -64,12 +83,12 @@ const Search = () => {
     if (searchTerm.length < 3) { return }
 
     setLoading(true);
-    // setSearchTerm(cardName);
+
     apiInputRef.current.blur();
 
     const headers = { method: 'GET' };
 
-    const query = !cardName ? searchTerm : cardName;
+    const query = !cardName ? searchTerm : predictions.length === 1 ? predictions[0] : cardName;
     fetch(
       `${api.skryfallURL}/cards/named?fuzzy=${query}`,
       headers

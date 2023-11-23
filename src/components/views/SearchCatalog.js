@@ -23,8 +23,12 @@ const SearchCatalog = () => {
     searchTerm,
     setSearchTerm,
     cardName,
+    setCards,
     setCardName, 
-    setCardNames
+    setCardNames,
+    predictions,
+    getCardNames,
+    removeUserCards
   } = useContext(SearchContext);
 
   const { user } = useAuth();
@@ -35,25 +39,50 @@ const SearchCatalog = () => {
   const catalogInputRef = useRef(null);
   const browserWidth = getBrowserWidth();
 
-
-  useEffect(() => {
-    // console.log(pathname)
-    if (browserWidth <= 775 && document.querySelector('#mobile-nav').checked) {
-      hideSearchBar();
-    }
-  }, [pathname])
+  // useEffect(() => {
+  //   // console.log(pathname)
+  //   // if (browserWidth <= 775 && document.querySelector('#mobile-nav').checked) {
+  //     hideSearchBar();
+  //   catalogInputRef.current.blur();
+  //   // }
+  // }, [pathname])
 
   useEffect(() => {
     if (searchInput) {
+
       if (searchInput.id === 'search-catalog') {
         setIsActive(true);
-        if (localStorage.getItem('cardNames')) {
-          setCardNames(JSON.parse(localStorage.getItem('cardNames')))
+        const fetchCatalogCards = () => {
+          console.log('fectching from catalog')
+          const headers = new Headers();
+          headers.append('Content-Type', 'application/json');
+          const options = {
+            method: 'GET',
+            headers: headers,
+          };
+
+          fetch(`${api.serverURL}/api/catalog`, options)
+            .then((res) => res.json())
+            .then((data) => {
+              // console.log('raw data', data)
+              const catalogCards = user ? removeUserCards(data, user.id) : data;
+              console.log(catalogCards)
+              setCards(catalogCards);
+              setCardNames(getCardNames(catalogCards));
+              // setSearchType(undefined);
+              localStorage.setItem('catalogCards', JSON.stringify(catalogCards));
+              localStorage.setItem('cardNames', JSON.stringify(getCardNames(catalogCards)));
+            })
+            .catch((error) => console.log(error));
         }
+
+        fetchCatalogCards()
+        // if (localStorage.getItem('cardNames')) {
+        //   setCardNames(JSON.parse(localStorage.getItem('cardNames')))
+        // }
     }
     else {
-      setIsActive(false);
-        setSearchInput(null);
+        setIsActive(false);
       }
     }
   }, [searchInput]);
@@ -99,7 +128,9 @@ const SearchCatalog = () => {
       headers: headers,
     };
 
-    fetch(`${api.serverURL}/api/catalog/${cardName}`, options)
+      const query = !cardName ? searchTerm : predictions.length === 1 ? predictions[0] : cardName;
+
+      fetch(`${api.serverURL}/api/catalog/${query}`, options)
       .then((res) => res.json())
       .then((data) => {
         // localStorage.setItem('searchCatalog', search);

@@ -11,6 +11,7 @@ const Header = () => {
     handleSearchBar(e);
   }
 
+
   return (
     <header className="main-header" onClick={handleClick}>
       {/* // <header className="main-header"> */}
