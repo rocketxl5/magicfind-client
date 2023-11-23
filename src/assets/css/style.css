@@ -172,6 +172,29 @@ text-align: center;
  
 }
 
+.not-found header {
+  width: 100%;
+  min-height: 20rem;
+  background-image: url('../img/frantic-search.jpg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: var(--clr-blue);
+}
+
+.not-found h2 {
+  margin-block: 2rem;
+  padding-inline: 1rem;
+  line-height: 1.8;
+  text-align: center;
+}
+
+.not-found p {
+  padding: 2rem;
+  font-weight: 500;
+  font-size: var(--fs-150);
+  text-align: center;
+}
+
 /* Footer styles */
 .footer {
     display: flex;

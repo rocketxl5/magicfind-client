@@ -71,7 +71,7 @@ const Login = () => {
       setLoading(true);
 
       const userInput = {
-        email: values.email.trim(),
+        email: values.email.toLowerCase().trim(),
         password: values.password
       }
 

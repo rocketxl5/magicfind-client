@@ -23,13 +23,13 @@ import RemoveCard from './components/views/RemoveCard';
 import ModifyCard from './components/views/ModifyCard';
 import MailBox from './components/views/mail/MailBox';
 import useAuth from './hooks/useAuth';
-import './css/reset.css';
+import './assets/css/reset.css';
 import './App.css';
-import './css/utilities.css';
-import './css/style.css';
-import './css/navbar.css';
-import './css/form.css';
-import './css/media-queries.css';
+import './assets/css/utilities.css';
+import './assets/css/style.css';
+import './assets/css/navbar.css';
+import './assets/css/form.css';
+import './assets/css/media-queries.css';
 
 const App = () => {
   const { user } = useAuth();

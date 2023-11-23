@@ -33,7 +33,7 @@ const SearchResult = () => {
                 {
                     type === 'not-found' ?
                         (
-                            <NotFound searchTerm={cardName} />
+                            <NotFound cardName={cardName} />
                         ) : (
                             <div className="cards">
                                 {cards &&
