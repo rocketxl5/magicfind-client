@@ -12,7 +12,10 @@ const Home = () => {
   }, []);
 
   return (
+    <>
+      <section className="banner">
 
+      </section>
     <section className="section home-page">
       <h2 className="section-title">Welcome to Magic Find 2</h2>
       <div className="section-content">
@@ -86,6 +89,7 @@ const Home = () => {
         </div>
       </div>
     </section>
+    </>
   );
 };
 
