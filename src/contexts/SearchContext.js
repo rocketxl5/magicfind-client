@@ -1,9 +1,8 @@
-import React, { useState, useEffect, createContext } from 'react';
+import React, { useState, createContext } from 'react';
 import useAuth from '../hooks/useAuth';
 export const SearchContext = createContext(null);
 
 export const SearchProvider = ({ children }) => {
-  const [timeLapse, setTimeLapse] = useState(0);
   const [searchInput, setSearchInput] = useState(null);
   const [cardName, setCardName] = useState('');
   const [searchTerm, setSearchTerm] = useState('');
@@ -14,13 +13,6 @@ export const SearchProvider = ({ children }) => {
   const [cardNames, setCardNames] = useState([]);
   const [marker, setMarker] = useState(-1);
   const { user } = useAuth();
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setTimeLapse(timeLapse + 1);
-    }, 1000)
-    return () => clearInterval(timer)
-  })
 
   const getCardNames = (cards) => {
     let filteredData = [];

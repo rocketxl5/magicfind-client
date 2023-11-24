@@ -1,65 +1,62 @@
 import { useState, useContext } from 'react'
 import { useNavigate } from 'react-router-dom';
 import Loading from '../../layout/Loading';
+import capitalizeWord from '../../../utilities/capitalizeWord';
 import { CardContext } from '../../../contexts/CardContext';
-const CollectionCardDetail = (props) => {
-    const { card } = props;
+const CollectionCardDetail = ({ card }) => {
     const [loading, setLoading] = useState(false);
     const { setCardContext } = useContext(CardContext);
     const navigate = useNavigate();
 
-    // Remove card from user store
-    // Should also remove user from card uers array in database
-    const handleClick = (e) => {
-        setCardContext(true);
-
-        navigate(`${e.target.id}/${card.name}`,
-            {
-                state: {
-                    data: card
-                }
-            });
+    const publishHandler = () => {
     }
+    const unpublishHandler = () => {
+    }
+    const deleteHandler = () => {
+    }
+
     return (
         <>
-            {
-                loading ?
-                    (
-                        <Loading />
-                    ) : (
-                        <>
-                            <div className="card-name">
-                                <p>{card.set_name}</p>
-                            </div>
-                            <div className="card-info">
-                                <p>
-                                    Condition: <strong>{card.condition.toUpperCase()}</strong>
-                                </p>
-                                <p>
-                                    Quantity: <strong>{card.quantity}</strong>
-                                </p>
-                                <p>
-                                    Language: <strong>{card.language.toUpperCase()}</strong>
-                                </p>
-                                <p>
-                                    Price: <strong>{card.price}</strong>
-                                </p>
-                            </div>
+            <div className="card-name">
+                <p><span>{card.name}</span></p>
+            </div>
+            <div className="card-info">
+                <div className="card-set">
+                    <p>Set: <span>{card.set_name}</span></p>
+                </div>
+                <div className="card-release">
+                    <p>Year:  <span>{card.released_at.split('-')[0]}</span></p>
+                </div>
+                <div className="card-rarity">
+                    <p>Rarity:  <span>{capitalizeWord(card.rarity)}</span></p>
+                </div>
+                {
+                    card.finishes[0] !== 'nonfoil' &&
+                    <div className="card-finish">
+                        <p>Finish:  <span className={card.finishes[0].toLowerCase() === 'foil' ? 'foil-finish' : ''}>{capitalizeWord(card.finishes[0])}</span></p>
+                    </div>
+                }
+                <div className="card-frame">
+                    <p>Frame:  <span>{card.frame}</span></p>
+                </div>
+                <div className="card-collector">
+                    <p>Collector #:  <span>{card.collector_number}</span></p>
+                </div>
+                <div className="card-artist">
+                    <p>Artist:  <span>{card.artist.split(',')[0]}</span></p>
+                </div>
+            </div>
+            <div className="collection-btn">
+                {!card.isPublishd ? (
 
-                            <div className="collection-btn">
-                                {!card.isPublishd ? (
-
-                                    <button id="publish-card" className="card-btn bg-blue" type="button" onClick={handleClick}>Publish</button>
-                                ) : (
-                                    <button id="unpublish-card" className="card-btn bg-yellow" type="button" onClick={handleClick}>Unpublish</button>
-                                )}
-                                < button id="remove-card" className="card-btn bg-red" type="button" onClick={handleClick}>
-                                    Delete
-                                </button>
-                            </div>
-                        </>
-                    )
-            }
+                    <button id="publish-card" className="card-btn bg-blue" type="button" onClick={publishHandler}>Publish</button>
+                ) : (
+                    <button id="unpublish-card" className="card-btn bg-yellow" type="button" onClick={unpublishHandler}>Unpublish</button>
+                )}
+                < button id="remove-card" className="card-btn bg-red" type="button" onClick={deleteHandler}>
+                    Delete
+                </button>
+            </div>
         </>
     )
 }

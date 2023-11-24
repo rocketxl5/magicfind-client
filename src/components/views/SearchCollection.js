@@ -42,7 +42,7 @@ const SearchCollection = ({ user }) => {
   useEffect(() => {
     collectionInputRef?.current?.focus();
     setPathname(location.pathname);
-    if (browserWidth <= 775 && document.querySelector('#mobile-nav').checked) {
+    if (browserWidth <= 775 && document.querySelector('#mobile-nav')?.checked) {
       hideSearchBar();
     }
   }, [])

@@ -91,7 +91,7 @@ a {
   min-width: 300px;
   height: auto;
   padding-block-start: var(--header-height);
-  /* max-width: 100vw; */
+  max-width: 1170px;
   min-height: calc(100vh - (2 * var(--header-height)));
 }
 
@@ -193,6 +193,15 @@ text-align: center;
   font-weight: 500;
   font-size: var(--fs-150);
   text-align: center;
+}
+
+section.banner {
+  width: 100%;
+  min-height: 20rem;
+  background-image: url('../img/free-from-flesh_small.jpg');
+  background-repeat: no-repeat;
+  background-position: 50% 15%;
+  background-color: var(--clr-blue);
 }
 
 /* Footer styles */
