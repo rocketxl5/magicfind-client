@@ -3,24 +3,21 @@ import CatalogCardDetail from './CatalogCardDetail';
 import CollectionCardDetail from './CollectionCardDetail';
 
 const CardDetailSection = (props) => {
-    const { card, searchType } = props;
+    const { searchType } = props;
 
     return (
         <section className="card-section">
-            {
-                searchType === 'search-api' ?
-                    (
-                        <ApiCardDetail card={card} />
-                    ) :
-                    searchType === 'search-catalog' ?
-                        (
-                            <CatalogCardDetail card={card} />
-                        ) : (
-                            <CollectionCardDetail card={card} />
+            {searchType === 'search-catalog' ? (
+                <CatalogCardDetail {...props} />
+            ) :
+                searchType === 'search-collection' ? (
+                    <CollectionCardDetail {...props} />
+                ) : (
+                        <ApiCardDetail {...props} />
                         )
             }
         </section>
     )
 }
 
-export default CardDetailSection
+export default CardDetailSection;

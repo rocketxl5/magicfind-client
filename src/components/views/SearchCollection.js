@@ -24,6 +24,7 @@ const SearchCollection = ({ user }) => {
     searchTerm,
     setSearchTerm,
     setCards,
+    cards,
     cardName,
     setCardName, 
     setCardNames,
@@ -49,6 +50,7 @@ const SearchCollection = ({ user }) => {
 
   useEffect(() => {
     if (searchInput) {
+      console.log('all cards')
       if (searchInput.id === 'search-collection') {
         setIsActive(true);
         const fetchCollectionCards = () => {
@@ -63,8 +65,7 @@ const SearchCollection = ({ user }) => {
           fetch(`${api.serverURL}/api/cards/${user.id}`, options)
             .then((res) => res.json())
             .then((data) => {
-              const collectionCards = data;
-              console.log(data)
+              const collectionCards = data.unpublished;
               setCards(collectionCards);
               setCardNames(getCardNames(collectionCards));
             })
@@ -80,9 +81,9 @@ const SearchCollection = ({ user }) => {
   }, [searchInput]);
 
   // On submit, check if cardName is set
-  useEffect(() => {
-    (loading && !cardName) && setCardName(searchTerm);
-  }, [loading])
+  // useEffect(() => {
+  //   (loading && !cardName) && setCardName(searchTerm);
+  // }, [loading])
 
   // useEffect(() => {
   //   if (localStorage.getItem('storeCardName')) {
@@ -117,7 +118,7 @@ const SearchCollection = ({ user }) => {
         method: 'GET',
         headers: headers,
       };
-
+      console.log(cardName)
       const query = !cardName ? searchTerm : predictions.length === 1 ? predictions[0] : cardName;
 
       fetch(`${api.serverURL}/api/cards/${query}/${user.id}`, options)
@@ -138,25 +139,36 @@ const SearchCollection = ({ user }) => {
   };
 
   // Get all cards from user store
-  const fetchAllCards = () => {
-    setLoading(true);
-    const headers = new Headers();
-    headers.append('Content-Type', 'application/json');
-    headers.append('auth-token', user.token);
-    const options = {
-      method: 'GET',
-      headers: headers,
-    };
-    fetch(`${api.serverURL}/api/cards/${user.id}`, options)
-      .then((res) => res.json())
-      .then((data) => {
-        // localStorage.setItem('storeCards', JSON.stringify(data.data));
-        localStorage.setItem('storeCardName', 'all');
-        setLoading(false);
-        setCards(data.result);
-        setCardName('Store Cards:');
-      })
-      .catch((error) => console.log(error));
+  const handleClick = () => {
+    if (cards) {
+      navigate(`/search-result/all-cards`,
+        {
+          state: { cards: cards, type: collectionInputRef.current.id, search: location.pathname },
+        });
+    }
+  // setLoading(true);
+  // const headers = new Headers();
+  // headers.append('Content-Type', 'application/json');
+  // headers.append('auth-token', user.token);
+  // const options = {
+  //   method: 'GET',
+  //   headers: headers,
+  // };
+  // fetch(`${api.serverURL}/api/cards/${user.id}`, options)
+  //   .then((res) => res.json())
+  //   .then((data) => {
+  //     // localStorage.setItem('storeCards', JSON.stringify(data.data));
+  //     // localStorage.setItem('storeCardName', 'all');
+  //     setLoading(false);
+  //     setCardName('');
+  //     navigate(`/search-result/all-cards`,
+  //       {
+  //         state: { cards: data.results, type: collectionInputRef.current.id, search: location.pathname },
+  //       });
+  //     // setCards(data.result);
+  //     // setCardName('Store Cards:');
+  //   })
+  //   .catch((error) => console.log(error));
   };
 
   // const clearSearch = () => {
@@ -189,7 +201,7 @@ const SearchCollection = ({ user }) => {
                 <Button
                   className="bg-teal"
                   type="button"
-                  onClick={fetchAllCards}
+                  onClick={handleClick}
                 >
                   Show All Cards
                 </Button>
