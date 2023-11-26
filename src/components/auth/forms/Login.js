@@ -88,6 +88,7 @@ const Login = () => {
             }
             return res.json().then((data) => {
               setLoading(false)
+              console.log(data)
               throw new Error(JSON.stringify(data))
             })
           })
@@ -101,11 +102,14 @@ const Login = () => {
             setLoading(false)
             setUser({ ...user });
             localStorage.setItem('user', JSON.stringify(user));
-            const destination = location.state ? location.state.from.pathname : '/me';
+            // console.log(location?.state)
+            const destination = location.state?.from ? location.state.from.pathname : '/me';
+            console.log(destination)
             navigate(destination, { replace: true });
           })
           .catch((error) => {
-            const errorMessage = JSON.parse(error.message)
+            console.log(error)
+            const errorMessage = error && JSON.parse(error.message)
             setMessage({ ...errorMessage });
             inputs.email.setCustomValidity('invalid')
             inputs.password.setCustomValidity('invalid')

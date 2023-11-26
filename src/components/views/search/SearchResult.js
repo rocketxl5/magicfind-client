@@ -8,7 +8,7 @@ import capitalizeString from '../../../utilities/capitalizeString';
 const SearchResult = () => {
     const location = useLocation();
     const { cards, cardName, type, search } = location.state;
-
+    console.log(cards)
     return (
         <>
 
@@ -20,11 +20,11 @@ const SearchResult = () => {
                         </div>
                     }
                     <div className="search-result-info">
-                        <h3>{capitalizeString(cardName)}</h3>
+                        <h3>{cardName ? capitalizeString(cardName) : 'Search Results'}</h3>
                         <span>
                             {
                                 cards ?
-                                    `${cards.length} ${cards.length > 1 ? 'Results' : 'Result'}` :
+                                    `${cards.length} ${cards.length > 1 ? 'Cards' : 'Card'}` :
                                     'No results'
                             }
                         </span>

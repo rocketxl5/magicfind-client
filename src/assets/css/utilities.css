@@ -50,6 +50,10 @@
     background-color: var(--clr-danger);
 }
 
+.height-fit-content {
+    min-height: fit-content !important;
+}
+
 .flex-row {
     flex-direction: row;
 }
@@ -170,6 +174,10 @@
 
 .color-dark {
     color: var(--clr-dark);
+}
+
+.color-light {
+    color: var(--clr-light-grey)
 }
 
 .danger-color {
