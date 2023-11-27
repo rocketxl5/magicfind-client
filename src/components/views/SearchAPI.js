@@ -136,46 +136,33 @@ const Search = () => {
   }, [oracleID]);
 
   useEffect(() => {
+    // console.log(data)
     if (data) {
-
-      const filterOnlineVersions = (cards) => {
-        return cards.filter((card) => {
-          return !card.digital && !card.oversized;
-          // return !card.set_name.toLowerCase().includes('online') && !card.oversized;
-        });
-      };
-
-      // Generates Multiple finish version of single card
-      const duplicate = (cardsClone, card, index) => {
-        // Save finishes array from api card
-        const finishes = card.finishes;
-        finishes.forEach(finish => {
-          // Replace card finishes array value with single finish  
-          card.finishes = [finish];
-          card.selected = false;
-          // Add updated card to cardsFound array at index
-          cardsClone.splice(index, 0, { ...card });
-        })
-      }
-
-      const filteredCards = filterOnlineVersions(data);
-      const cards = [...filteredCards];
+      const apiCards = [];
+      const filteredCards = filterCards(data);
 
       filteredCards.forEach((card, index) => {
-        if (card.finishes.length > 1) {
-          // console.log(index)
-          cards.splice(index, 1);
-          duplicate(cards, card, index);
+        if (card.finishes.length === 1) {
+          apiCards.push(filteredCards.splice(index, 1).pop());
         }
       });
-
+      filteredCards.forEach(card => {
+        card.finishes.forEach(finish => {
+          apiCards.push({ ...card, finishes: [finish], id: `${card.id}_${finish}` });
+        })
+      });
       // Customize cards id to prevent redundancy.
-      cards.forEach(card => card.id = crypto.randomUUID());
-
+      // cards.forEach(card => card.id = crypto.randomUUID());
+      // Remove online and oversized cards
+      function filterCards(cards) {
+        return cards.filter((card) => {
+          return !card.digital && !card.oversized;
+              });
+      };
       setLoading(false);
       navigate(`/search-result/${setString(cardName, '-')}`,
         {
-          state: { cards: cards, cardName: cardName, type: 'search-api', search: location.pathname },
+          state: { cards: apiCards, cardName: cardName, type: 'search-api', search: location.pathname },
         });
       setCardName('');
       setSearchInput(null);

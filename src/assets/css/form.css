@@ -1,19 +1,15 @@
-/* Removing broser preset for input tags */
+/* Removing browser preset for input tags */
 input:-webkit-autofill,
 input:-webkit-autofill:hover, 
 input:-webkit-autofill:focus, 
 input:-webkit-autofill:active{
     -webkit-background-clip: text;
     -webkit-box-shadow: 0 0 0 30px white inset !important;
-    
 }
 
 /* container for login and signup */
 .form-container {
     min-height: calc(100vh - 2 * var(--header-height));
-    /* min-height: calc(100vh - 8em); */
-    /* height: max-content; */
-    /* height: inherit; */
 }
 
 .form-content {
@@ -40,7 +36,6 @@ input:-webkit-autofill:active{
     background-color: var(--clr-blue);
     border-radius: 5px;
 }
-
 
 /*************************/
 /*************************/
@@ -107,7 +102,7 @@ input:-webkit-autofill:active{
     border: none !important;
 }
 
-.login-password-wrapper.danger-border #password {
+.login-password-wrapper.border-danger #password {
     padding: calc(var(--size-1) - 1px) !important;
 }
 
@@ -222,7 +217,6 @@ input:-webkit-autofill:active{
     align-items: center;
 }
 
-
 .empty-field {
     color: var(--clr-danger);
 }
@@ -287,29 +281,8 @@ input#search-collection {
     margin-inline: auto;
 }
 
-.api-result {
-    /* position: sticky;
-    top: 4.9rem;
-    width: 100%;
-    padding-inline: 1.5rem;
-    padding-block: 0.75rem;
-    color: var(--clr-light-grey);
-    font-size: var(--fs-150);
-    background: var(--clr-blue);
-    border-top: 1px solid rgba(216, 214, 211, 0.3);
-    z-index: 100; */
-}
-
 .search-result {
     position: relative;
-}
-
-.search-result-info {
-    /* position: sticky;
-    top: 5rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center; */
 }
 
 .save-to-collection span {
@@ -324,7 +297,6 @@ input#search-collection {
 }
 
 .search-result-info {
-   
     display: flex;
     justify-content: space-between;
     align-items: center; 
@@ -336,7 +308,6 @@ input#search-collection {
   
 }
 
-
 .search-result-header {
     /* position: relative; */
     position: sticky;
@@ -344,18 +315,6 @@ input#search-collection {
     left: 0;
     z-index: 100;
 }
-
-
-
-/* 
-.collection-btn button {
-    width: calc(100% - 0.5rem);
-    margin-inline-start: 0.5rem;
-    margin-block-start: 0.5rem;
-    font-weight: 400;
-    color: var(--clr-light);
-} */
-
 
 .back-link {
    width: 100%;
@@ -367,11 +326,9 @@ input#search-collection {
 .back-link > a  {
     display: flex;
     width: 15rem;
-    /* padding-inline-end: 0.5rem; */
     padding-block: 0.5rem;
     align-items: center;
     background: var(--clr-light);
-    /* border: 1px solid var(--clr-grey); */
     border-radius: 2px;
 }
 
@@ -443,12 +400,9 @@ input#search-api:focus {
     font-size: var(--fs-150);
 }
 
-
 /* AUTOCOMPLETE */
 ul.autocomplete-list {
     position: absolute;
-    /* display: flex;
-    flex-direction: column; */
     width: calc(100% - var(--size-1));
     max-height: 40vh;
     top: 5rem;
@@ -478,12 +432,10 @@ ul.autocomplete-list {
   .card-body {
     height: fit-content;
     display: flex;
- 
     gap: 1rem;
     padding-top: 1rem;
     background: var(--clr-light);
   }
-
 
   .card-section {
     position: relative;
@@ -497,7 +449,6 @@ ul.autocomplete-list {
     flex-direction: column;
     justify-content: space-between;
   }
-
 
   .card-image-container {
     width: 100%;
@@ -518,7 +469,6 @@ ul.autocomplete-list {
      color: rgba(38, 38, 38, 1);
     height: 2rem;
     width: 2rem;
-    
   }
 
   .card-image {
@@ -529,7 +479,6 @@ ul.autocomplete-list {
     z-index: 0;
   }
 
-  
   .card-image:hover {
     cursor: pointer;
   }
@@ -550,7 +499,7 @@ ul.autocomplete-list {
 
   .card-header .card-name {
     font-family: 'Young Serif', serif;
-    font-size: var(--fs-125);
+    font-size: var(--fs-150);
     font-weight: 400;
     line-height: 1;
     text-align: center;
@@ -588,20 +537,15 @@ ul.autocomplete-list {
     border-radius: 2px;
 }
 
-
 .card-footer {
     margin-block-start: var(--size-1);
-    padding: 0.5rem;
-    /* border: 1px solid var(--clr-grey); */
     border-radius: 5px;
-    
 }
 
 .card-btns-wrapper {
     width: 100%;
     display: flex;
     gap: var(--size-2);
-   
 }
 
 .btn-container {
@@ -609,9 +553,10 @@ ul.autocomplete-list {
     flex-basis: 0;
     flex-grow: 1;
 }
-  .card-btn {
-   width: 100%;
-    padding-block: 0.75rem;
+
+.card-btn {
+    width: 100%;
+    padding-block: 0.6rem;
     font-size: var(--fs-150);
     font-weight: 500;
     text-align: center;

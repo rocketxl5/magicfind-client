@@ -10,11 +10,11 @@ const FormInput = forwardRef((props, ref) => {
                 !errors[name] ? (
                     <label htmlFor={id} >{label}</label>
                 ) : (
-                        <label className="danger-color" htmlFor={id} >{errors[name]}</label>
+                        <label className="color-danger" htmlFor={id} >{errors[name]}</label>
                 )
             }
             <input
-                className={errors[name] && 'danger-border danger-padding'}
+                className={errors[name] && 'border-danger danger-padding'}
                 id={id}
                 name={name}
                 {...inputProps}

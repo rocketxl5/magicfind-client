@@ -20,7 +20,6 @@ const Card = (props) => {
         alt: `${card.name} card image`
     }
 
-
     // setAttributes builds ExpandedImage component for each card 
     useEffect(() => {
         setAttributes({ ...imgAttributes });

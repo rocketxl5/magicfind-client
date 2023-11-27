@@ -87,8 +87,6 @@ const Login = () => {
               return res.json()
             }
             return res.json().then((data) => {
-              setLoading(false)
-              console.log(data)
               throw new Error(JSON.stringify(data))
             })
           })
@@ -192,9 +190,9 @@ const Login = () => {
               } 
               <form className="auth-form" id="signin-form" name="signin-form" onSubmit={handleSubmit} noValidate>
               <div className="form-element">
-                  <label htmlFor="email" className={errors.email && 'danger-color'}>{errors.email ? errors.email : 'Email'}</label>
+                  <label htmlFor="email" className={errors.email && 'color-danger'}>{errors.email ? errors.email : 'Email'}</label>
                   <input
-                    className={errors.email && 'danger-border danger-padding'}
+                    className={errors.email && 'border-danger danger-padding'}
                     id="email"
                     type="email"
                     name="email"
@@ -208,8 +206,8 @@ const Login = () => {
                   />
               </div>
               <div className="form-element">
-                  <label htmlFor="password" className={errors.password && 'danger-color'}>{errors.password ? errors.password : 'Password'}</label>
-                  <div className={`login-password-wrapper center content-height flex ${errors.password && 'danger-border'}`}>
+                  <label htmlFor="password" className={errors.password && 'color-danger'}>{errors.password ? errors.password : 'Password'}</label>
+                  <div className={`login-password-wrapper center content-height flex ${errors.password && 'border-danger'}`}>
                   <input
                       id="password"
                       type="password"
