@@ -8,7 +8,8 @@ const ApiCardFooter = (props) => {
     const [attributes, setAttributes] = useState({
         style: 'card-btn bg-blue color-light border-blue',
         type: 'button',
-        value: 'Add To Collection'
+        value: 'Add To Collection',
+        statue: false
     });
     const [selectedCard, setSelectedCard] = useState(null);
     const { user } = useAuth();
@@ -18,16 +19,16 @@ const ApiCardFooter = (props) => {
         let attr = { type: 'button', value: message.body, style: '' }
         switch (message.type) {
             case 'card_added':
-                attr = { ...attr, style: 'card-btn bg-light color-success border-success' };
+                attr = { ...attr, style: 'card-btn bg-light color-success border-success disabled' };
                 break;
             case 'card_exist':
-                attr = { ...attr, style: 'card-btn bg-light color-primary border-primary' };
+                attr = { ...attr, style: 'card-btn bg-light color-primary border-primary disabled' };
                 break;
             case 'not_found' || 'server':
-                attr = { ...attr, style: 'card-btn bg-light color-danger border-danger' };
+                attr = { ...attr, style: 'card-btn bg-light color-danger border-danger disabled' };
                 break;
             default:
-                attr = { ...attr, style: 'card-btn bg-blue color-light border-blue', value: 'Add To Collection' };
+                attr = { ...attr, style: 'card-btn bg-blue color-light border-blue', value: 'Add To Collection', status: true };
                 break;
         }
         return attr;

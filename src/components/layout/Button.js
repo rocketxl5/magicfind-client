@@ -1,11 +1,9 @@
-import React from 'react'
-
 const Button = (props) => {
     const { attributes, eventHandler } = props;
-    const { style, type, value } = attributes;
-    console.log(attributes)
+    const { style, type, value, status } = attributes;
+
     return (
-        <button className={style} type={type} onClick={eventHandler}>{value}</button>
+        <button className={style} type={type} onClick={eventHandler} disabled={status}>{value}</button>
     )
 }
 

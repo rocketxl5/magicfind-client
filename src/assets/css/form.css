@@ -464,6 +464,10 @@ ul.autocomplete-list {
     /* z-index: 10; */
   }
 
+  .expand-icon-container:hover { 
+    cursor: pointer;
+  }
+
  .expand-icon {
      display: block;
      color: rgba(38, 38, 38, 1);
@@ -483,9 +487,9 @@ ul.autocomplete-list {
     cursor: pointer;
   }
 
-  .card-image {
+  /* .card-image * {
     pointer-events: none;
-  }
+  } */
 
   .card-header {
     display: flex;

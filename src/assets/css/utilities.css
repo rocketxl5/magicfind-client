@@ -215,3 +215,7 @@
 .hide {
     visibility: hidden;
 }
+
+.disabled {
+    pointer-events: none;
+}

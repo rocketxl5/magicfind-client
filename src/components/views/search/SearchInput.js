@@ -1,7 +1,6 @@
 import React, {
   forwardRef,
-  useContext,
-  useEffect,
+  useContext
 } from 'react';
 import AutoComplete from './AutoComplete';
 import { SearchContext } from '../../../contexts/SearchContext';
@@ -12,7 +11,6 @@ const SearchInput = forwardRef(function SearchInput(props, ref) {
     isActive
   } = props;
   const inputRef = ref;
-
 
   const {
     setMarker,
@@ -47,10 +45,6 @@ const SearchInput = forwardRef(function SearchInput(props, ref) {
   //     setDisplayAutocomplete(false);
   //   }
   // }, [searchTerm]);
-
-  useEffect(() => {
-    console.log(cardNames)
-  }, [cardNames])
 
   const handleChange = (e) => {
     if (e.target.value.length >= 3) {
