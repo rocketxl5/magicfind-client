@@ -1,10 +1,8 @@
 import Loading from '../../layout/Loading';
 import capitalizeWord from '../../../utilities/capitalizeWord';
-import { useEffect } from 'react';
 
 const ApiCardDetail = (props) => {
     const { card, loading } = props;
-    useEffect(() => { console.log(loading) }, [loading])
     return (
         <>
             {

@@ -82,9 +82,6 @@ a {
   z-index: 1000;
 }
 
-.main-header a {
-    /* color: var(--clr-grey); */
-}
 
 .wrapper {
   position: relative;
@@ -99,6 +96,10 @@ a {
   min-height: inherit;
   margin-inline: auto;
   padding: 2em;
+}
+
+button:hover {
+  cursor: pointer;
 }
 
 /* spinner */

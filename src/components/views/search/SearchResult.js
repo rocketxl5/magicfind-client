@@ -8,7 +8,6 @@ import capitalizeString from '../../../utilities/capitalizeString';
 const SearchResult = () => {
     const location = useLocation();
     const { cards, cardName, type, search } = location.state;
-    console.log(cards)
     return (
         <>
 
