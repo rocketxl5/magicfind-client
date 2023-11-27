@@ -27,7 +27,7 @@ h2 {
 
 /* Global Styles */
 :root {
-  --primary-color: #007bff;
+  /* --primary-color: #007bff;
   --secondary-color: #aabbc2;
   --dark-color: #333333;
   --extra-light-color: #f5f8fa;
@@ -35,7 +35,7 @@ h2 {
   --danger-color: #dc3545;
   --success-color: #28a745;
   --warning-color: #ffc107;
-  --background: rgba(51, 51, 51);
+  --background: rgba(51, 51, 51); */
 }
 
 .page-title {
@@ -162,7 +162,7 @@ h2 {
 }
 
 .login a {
-  background: var(--success-color);
+  background: var(--color-success);
 }
 
 .register a {
@@ -192,7 +192,7 @@ button.primary {
 }
 
 button.success {
-  background: var(--success-color);
+  background: var(--color-success);
 }
 
 button.warning {
@@ -450,7 +450,7 @@ section.message-form footer {
   justify-content: space-between;
 }
 
-div.error-msg {
+/* div.error-msg {
   height: 2vh;
   color: var(--danger-color);
   font-size: 1.1rem;
@@ -461,7 +461,7 @@ div.error-msg {
 }
 .error {
   color: var(--danger-color);
-}
+} */
 
 .search-header {
   display: flex;
@@ -664,7 +664,7 @@ div.error-msg {
 /* API card styles */
 .add-button {
   width: 100%;
-  background-color: var(--success-color);
+  background-color: var(--color-success);
 }
 
 .add-card-form {

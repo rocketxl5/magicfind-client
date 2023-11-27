@@ -172,7 +172,7 @@ const Buttons = styled.div`
 `;
 const Button = styled.button`
   color: var(--extra-light-color);
-  background: var(--danger-color);
+  background: var(--color-danger);
   width: 100%;
   padding: 15px 0;
 
