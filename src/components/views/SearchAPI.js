@@ -27,7 +27,9 @@ const Search = () => {
     predictions,
     cardName,
     setCardName,
-    setCardNames
+    setCardNames,
+    apiCards,
+    setApiCards
   } = useContext(SearchContext);
 
   const { setPathname } = useContext(PathContext);
@@ -37,10 +39,39 @@ const Search = () => {
   const apiInputRef = useRef(null);
   const browserWidth = getBrowserWidth();
 
-  // Set pathname
+  const fetchApiCards = () => {
+    setLoading(true);
+    const headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    const options = {
+      method: 'GET',
+      headers: headers,
+    };
+
+    fetch(`${api.serverURL}/api/cards/api-cardnames`, options)
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data)
+        setApiCards(data);
+        setLoading(false);
+        apiInputRef.current.focus();
+      })
+      .catch((error) => {
+        setLoading(false);
+        console.log(error)
+      });
+  }
+
+
   useEffect(() => {
+    console.log(location.pathname)
     apiInputRef?.current?.focus();
     setPathname(location.pathname);
+
+    // If apiCards is undefined
+    if (!apiCards) {
+      fetchApiCards()
+    }
 
     if (browserWidth <= 775 && document.querySelector('#mobile-nav')?.checked) {
       hideSearchBar();
@@ -48,33 +79,13 @@ const Search = () => {
   }, [])
 
   useEffect(() => {
-    if (searchInput) {
-      if (searchInput.id === 'search-api') {
-        setIsActive(true);
-
-        const fetchApiCards = () => {
-          const headers = new Headers();
-
-          headers.append('Content-Type', 'application/json');
-          const options = {
-            method: 'GET',
-            headers: headers,
-          };
-
-          fetch(`${api.serverURL}/api/cards/api-cardnames`, options)
-            .then((res) => res.json())
-            .then((data) => {
-              setCardNames(data);
-            })
-            .catch((error) => console.log(error));
-        }
-        fetchApiCards()
-      }
-      else {
-        setIsActive(false);
-      }
+    if (searchInput?.id === 'search-api') {
+      setIsActive(true);
+      setCardNames(apiCards);
+    } else {
+      setIsActive(false);
     }
-  }, [searchInput]);
+  }, [searchInput])
 
 
   const handleSubmit = (e) => {
@@ -176,7 +187,8 @@ const Search = () => {
           <Spinner />
         ) : (
             <div className="search-card">
-              <h2 className="page-title">Enter A Card Name</h2>
+              <h2 className="page-title">Add Card Page</h2>
+
               <form id="search-api-form" className="search-form" onSubmit={handleSubmit}>
                 <SearchInput isActive={isActive} id={'search-api'} handleSubmit={handleSubmit} ref={apiInputRef} />
               </form>

@@ -92,7 +92,7 @@ const Signup = () => {
         { text: 'One number', pattern: /^.+(?=.*[0-9]).*$/, fullfiled: false },
         { text: 'One special character: !@#$%^&*', pattern: /^.+(?=.*[!@#$%^&*]).*$/, fullfiled: false },
         { text: '8 to 16 characters long', pattern: /^.{8,16}$/, fullfiled: false },
-        { text: 'Character is valid', pattern: /^[a-zA-Z0-9!@#$%^&*]*$/, fullfiled: false },
+        { text: 'Valid character', pattern: /^[a-zA-Z]+[a-zA-Z0-9!@#$%^&*]*$/, fullfiled: false },
       ]
     },
     {

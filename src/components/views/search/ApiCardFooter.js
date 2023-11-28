@@ -17,7 +17,7 @@ const ApiCardFooter = (props) => {
 
     const attributesHandler = (message) => {
         let attr = { type: 'button', value: message.body, style: '' }
-        switch (message.type) {
+        switch (message.title) {
             case 'card_added':
                 attr = { ...attr, style: 'card-btn bg-light color-success border-success disabled' };
                 break;
@@ -51,24 +51,22 @@ const ApiCardFooter = (props) => {
             fetch(`${api.serverURL}/api/cards/add/${user.id}/${selectedCard.id}`, options)
                 .then((res) => {
                     if (res.ok) {
-                        return res.json()
+                        return res.json();
                     }
                     return res.json().then((data) => {
-                        setLoading(false)
+                        setLoading(false);
                         setAttributes(attributesHandler(data));
-                        // throw new Error(data.message)
-                    })
+                    });
                 })
                 .then((data) => {
-                    console.log(data)
-                    setAttributes(attributesHandler(data))
-                    setLoading(false)
+                    console.log(data);
+                    setAttributes(attributesHandler(data));
+                    setLoading(false);
                     // navigate('/search-api');
                 })
                 .catch((error) => {
-                    // console.log(JSON.stringify(error))
-                    // setMessage(error)
-                    setLoading(false)
+                    console.log(error);
+                    setLoading(false);
                 });
         }
     }, [selectedCard])

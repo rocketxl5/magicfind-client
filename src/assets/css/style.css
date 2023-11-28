@@ -198,10 +198,7 @@ text-align: center;
     border-top: 1px solid var(--clr-grey); 
 }
 
-/* Home page */
-.home-page .article-body {
- 
-}
+/* Not found search page */
 
 .not-found header {
   width: 100%;
@@ -233,6 +230,40 @@ section.banner {
   background-repeat: no-repeat;
   background-position: 50% 15%;
   background-color: var(--clr-blue);
+}
+
+/* No card collection page */
+.message-section {
+  margin-block-start: var(--size-2);
+  /* padding-inline: var(--size-1); */
+}
+
+.message-body p {
+  font-weight: 400;
+  font-size: var(--fs-150);
+  line-height: 1.6;
+  margin-block-end: 1rem;
+}
+
+
+.message-link {
+  font-size: var(--fs-150);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  text-align: center;
+  color: var(--clr-light);
+  background-color: var(--clr-blue);
+  border: 1px solid var(--clr-grey);
+  border-radius: 5px;
+}
+
+.message-link svg {
+
+  margin-inline-start: 1rem;
+  width: 2rem;
+  height: 2rem;
 }
 
 /* Footer styles */
