@@ -6,8 +6,9 @@ export const SearchProvider = ({ children }) => {
   const [searchInput, setSearchInput] = useState(null);
   const [cardName, setCardName] = useState('');
   const [searchTerm, setSearchTerm] = useState('');
+  const [apiCards, setApiCards] = useState(undefined);
+  const [collectionCards, setCollectionCards] = useState(undefined);
   const [cards, setCards] = useState([]);
-  const [searchType, setSearchType] = useState(undefined);
   const [displayAutcomplete, setDisplayAutocomplete] = useState(false);
   const [predictions, setPredictions] = useState([]);
   const [cardNames, setCardNames] = useState([]);
@@ -16,7 +17,6 @@ export const SearchProvider = ({ children }) => {
 
   const getCardNames = (cards) => {
     let filteredData = [];
-    console.log(cards)
     cards.forEach(card => {
       !filteredData.includes(card.name) && filteredData.push(card.name);
     })
@@ -37,12 +37,14 @@ export const SearchProvider = ({ children }) => {
       value={{
         marker,
         setMarker,
-        searchType,
-        setSearchType,
         cardNames,
         setCardNames,
         cards,
         setCards,
+        apiCards,
+        setApiCards,
+        collectionCards,
+        setCollectionCards,
         searchInput, 
         setSearchInput,
         searchTerm,

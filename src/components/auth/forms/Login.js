@@ -87,6 +87,8 @@ const Login = () => {
               return res.json()
             }
             return res.json().then((data) => {
+              // setLoading(false)
+              console.log(data)
               throw new Error(JSON.stringify(data))
             })
           })

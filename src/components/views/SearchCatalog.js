@@ -32,6 +32,7 @@ const SearchCatalog = () => {
   } = useContext(SearchContext);
 
   const { user } = useAuth();
+
   const { pathname } = useContext(PathContext);
 
   const navigate = useNavigate();
@@ -64,22 +65,17 @@ const SearchCatalog = () => {
           fetch(`${api.serverURL}/api/catalog`, options)
             .then((res) => res.json())
             .then((data) => {
-              // console.log('raw data', data)
               const catalogCards = user ? removeUserCards(data, user.id) : data;
               console.log(catalogCards)
               setCards(catalogCards);
               setCardNames(getCardNames(catalogCards));
-              // setSearchType(undefined);
               localStorage.setItem('catalogCards', JSON.stringify(catalogCards));
               localStorage.setItem('cardNames', JSON.stringify(getCardNames(catalogCards)));
             })
             .catch((error) => console.log(error));
         }
 
-        fetchCatalogCards()
-        // if (localStorage.getItem('cardNames')) {
-        //   setCardNames(JSON.parse(localStorage.getItem('cardNames')))
-        // }
+        fetchCatalogCards();
     }
     else {
         setIsActive(false);

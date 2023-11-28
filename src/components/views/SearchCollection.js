@@ -4,7 +4,8 @@ import React, {
   useEffect,
   useContext
 } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { FiArrowRightCircle } from "react-icons/fi"
 import SearchInput from './search/SearchInput';
 import Spinner from '../layout/Spinner';
 import { SearchContext } from '../../contexts/SearchContext';
@@ -17,19 +18,19 @@ import getBrowserWidth from '../../utilities/getBrowserWidth';
 const SearchCollection = ({ user }) => {
   const [loading, setLoading] = useState(false);
   const [isActive, setIsActive] = useState(false);
+  const [message, setMessage] = useState(null);
 
   const {
     searchInput,
     setSearchInput,
     searchTerm,
     setSearchTerm,
-    setCards,
-    cards,
     cardName,
+    cards,
+    setCards,
     setCardName, 
     setCardNames,
-    predictions,
-    getCardNames
+    predictions
   } = useContext(SearchContext);
 
   const { setPathname } = useContext(PathContext);
@@ -39,70 +40,60 @@ const SearchCollection = ({ user }) => {
   const collectionInputRef = useRef(null);
   const browserWidth = getBrowserWidth();
 
-  // Set pathname
+  const fetchCollectionCards = () => {
+    setLoading(true);
+    const headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    headers.append('auth-token', user.token);
+    const options = {
+      method: 'GET',
+      headers: headers,
+    }
+    fetch(`${api.serverURL}/api/cards/${user?.id}`, options)
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        }
+
+        return res.json().then((data) => {
+          setLoading(false);
+          console.log(data);
+          throw new Error(JSON.stringify(data));
+        })
+      })
+      .then((data) => {
+        // console.log(data);
+        setLoading(false);
+        setCardNames(data.names);
+        setCards(data.cards);
+        collectionInputRef?.current?.focus();
+      })
+      .catch((error) => {
+        // console.log(error)
+        const errorMessage = JSON.parse(error.message);
+        setMessage({ ...errorMessage });
+      });
+  }
   useEffect(() => {
+    console.log(user)
     collectionInputRef?.current?.focus();
     setPathname(location.pathname);
+
+    fetchCollectionCards()
     if (browserWidth <= 775 && document.querySelector('#mobile-nav')?.checked) {
       hideSearchBar();
     }
-  }, [])
+  }, []);
 
   useEffect(() => {
-    if (searchInput) {
-      console.log('all cards')
-      if (searchInput.id === 'search-collection') {
-        setIsActive(true);
-        const fetchCollectionCards = () => {
-          console.log('fectching from collection')
-          const headers = new Headers();
-          headers.append('Content-Type', 'application/json');
-          headers.append('auth-token', user.token);
-          const options = {
-            method: 'GET',
-            headers: headers,
-          }
-          fetch(`${api.serverURL}/api/cards/${user.id}`, options)
-            .then((res) => res.json())
-            .then((data) => {
-              const collectionCards = data.unpublished;
-              setCards(collectionCards);
-              setCardNames(getCardNames(collectionCards));
-            })
-            .catch((error) => console.log(error));
-        }
-
-        fetchCollectionCards()
-      }
-      else {
-        setIsActive(false);
-      }
+    if (searchInput?.id === 'search-collection') {
+      setIsActive(true);
+    } else {
+      setIsActive(false);
     }
   }, [searchInput]);
 
-  // On submit, check if cardName is set
-  // useEffect(() => {
-  //   (loading && !cardName) && setCardName(searchTerm);
-  // }, [loading])
-
-  // useEffect(() => {
-  //   if (localStorage.getItem('storeCardName')) {
-  //     if (localStorage.getItem('storeCardName') === 'all') {
-  //       // fetchAllCards();
-  //       console.log('all cards')
-  //     } else {
-  //       // setCards(JSON.parse(localStorage.getItem('storeCards')));
-  //       setCardName(localStorage.getItem('storeCardName'));
-  //       console.log('in card name', localStorage.getItem('storeCardName'));
-
-  //       // fetchSingleCard();
-  //     }
-  //   }
-  // }, []);
-
-
   // Instore single card request search field with
-  // cardname (searchTerm) and user id
   const handleSubmit = (e) => {
     e?.preventDefault();
 
@@ -140,43 +131,15 @@ const SearchCollection = ({ user }) => {
 
   // Get all cards from user store
   const handleClick = () => {
+    console.log(cards)
     if (cards) {
+      console.log(cards)
       navigate(`/search-result/all-cards`,
         {
           state: { cards: cards, type: collectionInputRef.current.id, search: location.pathname },
         });
     }
-  // setLoading(true);
-  // const headers = new Headers();
-  // headers.append('Content-Type', 'application/json');
-  // headers.append('auth-token', user.token);
-  // const options = {
-  //   method: 'GET',
-  //   headers: headers,
-  // };
-  // fetch(`${api.serverURL}/api/cards/${user.id}`, options)
-  //   .then((res) => res.json())
-  //   .then((data) => {
-  //     // localStorage.setItem('storeCards', JSON.stringify(data.data));
-  //     // localStorage.setItem('storeCardName', 'all');
-  //     setLoading(false);
-  //     setCardName('');
-  //     navigate(`/search-result/all-cards`,
-  //       {
-  //         state: { cards: data.results, type: collectionInputRef.current.id, search: location.pathname },
-  //       });
-  //     // setCards(data.result);
-  //     // setCardName('Store Cards:');
-  //   })
-  //   .catch((error) => console.log(error));
   };
-
-  // const clearSearch = () => {
-  //   setCards([]);
-  //   setCardName('');
-  //   localStorage.removeItem('storeCards');
-  //   localStorage.removeItem('storeCardName');
-  // };
 
   return (
     <>
@@ -185,7 +148,32 @@ const SearchCollection = ({ user }) => {
           <Spinner />
         ) : (
             <div className="search-card">
-              <h2 className="page-title">Enter A Card Name</h2>
+              <header>
+                <h1 className="page-title">Collection Page</h1>
+
+              </header>
+              {
+                message?.title === 'no_cards' ? (
+
+                  <div className="message">
+                    <section className="message-section">
+                      <div className="message-body">
+                        {
+                          message.body?.map((part, index) => {
+                            return <p key={index}>{part}</p>
+                          })
+                        }
+                      </div>
+                    </section>
+                    <section className="message-section">
+                      <Link className="message-link" to={'/search-api'}> Go To The Add Card Page <FiArrowRightCircle /></Link>
+                    </section>
+                  </div>
+                ) : (
+
+                  <section className="main-collection">
+
+
               <form id="search-collection-form" className="search-form" onSubmit={handleSubmit} >
                 <SearchInput isActive={isActive} id={'search-collection'} handleSubmit={handleSubmit} ref={collectionInputRef} />
               </form>
@@ -206,6 +194,9 @@ const SearchCollection = ({ user }) => {
                   Show All Cards
                 </Button>
               </Buttons>
+                  </section>
+                )
+              }
             </div>
         )
       }

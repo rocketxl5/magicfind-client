@@ -1,6 +1,6 @@
 const setString = (string, separator) => {
 
-    return string.toLowerCase().replaceAll('/', '').replaceAll('"', '').replace('  ', ' ').split(' ').join(separator);;
+    return string.toLowerCase().replaceAll(/["/,]/g, '').replace('  ', ' ').split(' ').join(separator);
 }
 
 export default setString;
