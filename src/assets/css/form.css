@@ -231,31 +231,28 @@ input:-webkit-autofill:active{
 /*************************/
 
 
-div.expanded-image-container {
+.overlay-container {
     position: fixed;
     top: 0;
     left: 0;
     display: none;
     height: 100vh;
     width: 100vw;
-    padding: 2rem;
+    padding-inline: var(--size-2);
+    padding-block-start: 5rem;
     align-items: center;
-    /* margin-block-start: 5rem; */
+    flex-direction: column;
     background-color: rgba(216, 214, 211, 0.8);
     z-index: 3000;
 }
 
-.expanded-image-container * { 
+.overlay-image {
     pointer-events: none;
-}
-
-div.expanded-image {
-    border-radius: 20px;
     box-shadow: rgba(0, 0, 0, 0.6) 0px 5px 15px;
 }
 
-div.expanded-image img {
-    border-radius: 20px;
+.overlay-image * { 
+    pointer-events: none;
 }
 
 .search-card {
@@ -421,12 +418,18 @@ ul.autocomplete-list {
     cursor: pointer;
   }
 
-  .card-container {
+  .card-container,
+  .card-delete-container {
     margin-block-start: var(--size-2);
     padding: 1rem;
     border: 1px solid var(--clr-grey);
     border-radius: var(--size-1); 
     background: var(--clr-light);
+  }
+
+  .card-delete-container {
+    min-height: 48rem;
+    min-width: calc(100vw - 4rem);
   }
 
   .card-body {
@@ -435,6 +438,17 @@ ul.autocomplete-list {
     gap: 1rem;
     padding-top: 1rem;
     background: var(--clr-light);
+  }
+
+  .response-body {
+    height: fit-content;
+    display: flex;
+    justify-content: center;
+  }
+
+  .response-body svg { 
+    width: 10rem;
+    height: 10rem;
   }
 
   .card-section {
@@ -452,6 +466,7 @@ ul.autocomplete-list {
 
   .card-image-container {
     width: 100%;
+    border-radius: 10px;
   }
 
   .expand-icon-container {
@@ -460,7 +475,7 @@ ul.autocomplete-list {
     right: 1rem;
     background-color: rgba(252, 252, 252, 0.5);
     padding: 0.5rem;
-    border-radius: 50px;
+    /* border-radius: 50px; */
     /* z-index: 10; */
   }
 
@@ -479,7 +494,6 @@ ul.autocomplete-list {
     width: 100%;
     display: block;
     align-self: center;
-    border-radius: 7px;
     z-index: 0;
   }
 
@@ -543,6 +557,13 @@ ul.autocomplete-list {
 
 .card-footer {
     margin-block-start: var(--size-1);
+    border-radius: 5px;
+}
+
+.card-delete-message {
+    margin-block: 1.5rem;
+    padding: 1rem;
+    border: 1px solid var(--clr-grey);
     border-radius: 5px;
 }
 

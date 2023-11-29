@@ -1,18 +1,18 @@
 import { TbRotate360 } from "react-icons/tb";
 
 const ExpandedImage = (props) => {
-    const { attributes, layout, display, setDisplay } = props;
+    const { attributes, expandedImageOvelay, setExpandedImageOvelay } = props;
 
     const handleClick = () => {
-        setDisplay(false);
+        setExpandedImageOvelay(false);
     }
 
     return (
         <>
             {
                 attributes &&
-                <div className={`${display && 'd-flex'} expanded-image-container`} onClick={handleClick}>
-                    <div className="expanded-image">
+                <div className={`${expandedImageOvelay && 'd-flex'} overlay-container`} onClick={handleClick}>
+                    <div className="ovelay-image">
                             <img {...attributes} />
                     </div>
                 </div>

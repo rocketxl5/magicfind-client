@@ -8,9 +8,9 @@ import capitalizeString from '../../../utilities/capitalizeString';
 const SearchResult = () => {
     const location = useLocation();
     const { cards, cardName, type, search } = location.state;
+    console.log(location.state)
     return (
         <>
-
             <div className="search-result">
                 <header className="search-result-header">
                     {type !== 'search-catalog' &&

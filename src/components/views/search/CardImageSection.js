@@ -2,10 +2,10 @@ import CardImage from './CardImage';
 import ExpandIcon from './ExpandIcon';
 
 const CardImageSection = (props) => {
-  const { attributes, setDisplay } = props;
+  const { attributes, setExpandedImageOvelay } = props;
 
   const handleClick = (e) => {
-    setDisplay(true);
+    setExpandedImageOvelay(true);
   }
 
   return (
