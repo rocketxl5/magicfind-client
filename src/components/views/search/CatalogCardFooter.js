@@ -1,20 +1,19 @@
-import { useState } from 'react';
+import { forwardRef } from 'react';
 
-const CatalogCardFooter = (props) => {
+const CatalogCardFooter = forwardRef(function CatalogCardFooter(props, ref) {
+    const { handleClick } = props;
+    const { cartRef, wishlistRef } = ref;
 
-    const handleClick = (e) => {
-        console.log(e.target)
-    }
     return (
         <div className="card-btns-wrapper">
             <div className="btn-container">
-                <button className="card-btn bg-green color-light" type="button" onClick={handleClick}>Add to Wishlist</button>
+                <button id="add-to-wishlist" className="card-btn bg-green color-light" type="button" wishlistRef={wishlistRef} onClick={handleClick}>Add to Wishlist</button>
             </div>
             <div className="btn-container">
-                <button className="card-btn bg-yellow color-light" type="button" onClick={handleClick}>Add to Cart</button>
+                <button id="add-to-cart" className="card-btn bg-yellow color-light" type="button" cartRef={cartRef} onClick={handleClick}>Add to Cart</button>
             </div>
         </div>
     )
-}
+})
 
-export default CatalogCardFooter
+export default CatalogCardFooter;

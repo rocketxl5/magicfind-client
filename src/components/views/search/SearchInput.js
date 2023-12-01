@@ -8,7 +8,8 @@ import { SearchContext } from '../../../contexts/SearchContext';
 const SearchInput = forwardRef(function SearchInput(props, ref) {
   const {
     id,
-    isActive
+    isActive,
+    handleSubmit
   } = props;
   const inputRef = ref;
 
@@ -22,7 +23,7 @@ const SearchInput = forwardRef(function SearchInput(props, ref) {
     setSearchTerm,
     predictions,
     setPredictions,
-    displayAutoComple,
+    displayAutcomplete,
     setDisplayAutocomplete
   } = useContext(SearchContext);
 
@@ -36,7 +37,7 @@ const SearchInput = forwardRef(function SearchInput(props, ref) {
   //       return title.toLowerCase().includes(searchTerm.toLowerCase());
   //     });
 
-  //     !displayAutoComple && setDisplayAutocomplete(true)
+  //     !displayAutcomplete && setDisplayAutocomplete(true)
   //     // Triggers useEffect above
   //     setPredictions(filteredCardTitles);
   //   }
@@ -55,7 +56,7 @@ const SearchInput = forwardRef(function SearchInput(props, ref) {
         return title.toLowerCase().includes(e.target.value.toLowerCase());
       });
 
-      !displayAutoComple && setDisplayAutocomplete(true)
+      !displayAutcomplete && setDisplayAutocomplete(true)
       setPredictions(filteredCardTitles);
       setCardName(e.target.value);
     }
@@ -72,11 +73,12 @@ const SearchInput = forwardRef(function SearchInput(props, ref) {
     setSearchTerm('');
     setPredictions([]);
     setDisplayAutocomplete(false);
-    // setCardNames([]);
+    setCardNames([]);
     setSearchInput(null);
   };
 
   const handleFocus = (e) => {
+    console.log(e.target)
     setSearchInput(e.target);
   }
 
@@ -100,7 +102,7 @@ const SearchInput = forwardRef(function SearchInput(props, ref) {
         }
       />
       {(isActive && searchTerm) &&
-        <AutoComplete predictions={predictions} handleSubmit={props.handleSubmit} inputRef={inputRef} />
+        <AutoComplete predictions={predictions} handleSubmit={handleSubmit} inputRef={inputRef} />
       }
     </>
   );

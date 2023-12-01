@@ -1,20 +1,21 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import CardImage from './CardImage';
 import CollectionCardDetail from './CollectionCardDetail';
-import ConfirmationMessage from './ConfirmationMessage';
 import Loading from '../../layout/Loading';
+import { FaRegCheckCircle } from "react-icons/fa";
+import { FaBan } from "react-icons/fa6";
 import useAuth from '../../../hooks/useAuth';
 import { api } from '../../../api/resources';
 
 const DeleteCard = (props) => {
-    const { attributes, card, deleteCardOverlay, setDeleteCardOverlay } = props;
+    const { attributes, card, handleClick } = props;
     const { user } = useAuth();
+    const navigate = useNavigate();
+    const location = useLocation();
     const [responseObject, setResponseObject] = useState(null);
+    // const [updateResults, setUpdateResults] = useState(false);
     const [loading, setLoading] = useState(false)
-
-    const handleClick = () => {
-        setDeleteCardOverlay(false);
-    }
 
     const deleteHandler = () => {
         setLoading(true);
@@ -51,8 +52,17 @@ const DeleteCard = (props) => {
             });
 
     }
+
+    // useEffect(() => {
+    //     if (updateResults) {
+    //         navigate(`${location.pathname}`,
+    //             {
+    //                 state: { cards: responseObject.cards, type: location.state.type, search: `/${location.state.type}` },
+    //             });
+    //     }
+    // }, [updateResults])
+
     return (
-        <div className={`${deleteCardOverlay ? 'd-flex' : ''} overlay-container`}>
             <div className="card-delete-container">
                 {
                     loading ? (
@@ -82,12 +92,12 @@ const DeleteCard = (props) => {
                                             </div>
                                             <div className="card-btns-wrapper">
                                                 <div className="btn-container">
-                                                    < button id="remove-card" className="card-btn bg-red color-light" type="button" onClick={deleteHandler}>
+                                                    < button id="confirm-delete" className="card-btn bg-red color-light" type="button" onClick={handleClick}>
                                                         Confirm
                                                     </button>
                                                 </div>
                                                 <div className="btn-container">
-                                                    < button id="remove-card" className="card-btn bg-blue color-light" type="button" onClick={handleClick}>
+                                                    < button id="go-back" className="card-btn bg-blue color-light" type="button" onClick={handleClick}>
                                                         Go Back
                                                     </button>
                                                 </div>
@@ -95,14 +105,45 @@ const DeleteCard = (props) => {
                                         </footer>
                                     </>
                                 ) : (
-                                    <ConfirmationMessage {...responseObject} setDeleteCardOverlay={setDeleteCardOverlay} />
+                                        <div className="card-delete-container flex flex-column justify-between">
+                                            {
+                                                responseObject?.isDeleted ? (
+                                                    <>
+                                                        <header className="card-header">
+                                                            <h2 className="color-green fw-500">{responseObject.message}</h2>
+                                                        </header>
+                                                        <section className="response-body">
+                                                            <FaRegCheckCircle className="color-green" />
+                                                        </section>
+                                                        <footer className="card-footer">
+                                                            <div className="btn-container">
+                                                                <button id="unpublish-card" className="card-btn bg-green color-light" type="button" onClick={handleClick}>Back to Search Collection Page </button>
+                                                            </div>
+                                                        </footer>
+                                                    </>
+                                                ) : (
+                                                    <>
+                                                        <header className="card-header">
+                                                            <h2 className="color-danger">{responseObject.message}</h2>
+                                                        </header>
+                                                        <section className="response-body">
+                                                            <FaBan className="color-danger" />
+                                                        </section>
+                                                        <footer className="card-footer">
+                                                            <div className="btn-container">
+                                                                <button id="unpublish-card" className="card-btn bg-danger color-light" type="button" onClick={handleClick}>Back to Search Collection Page </button>
+                                                            </div>
+                                                        </footer>
+                                                    </>
+                                                )
+                                            }
+
+                                        </div>
                                 )
                             }
                         </>
                     )
-                }
-            </div>
-
+            }
         </div>
     )
 }

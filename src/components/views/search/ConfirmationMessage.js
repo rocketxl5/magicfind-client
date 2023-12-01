@@ -2,7 +2,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { FaRegCheckCircle } from "react-icons/fa";
 import { FaBan } from "react-icons/fa6";
 const ConfirmationMessage = (props) => {
-    const { message, cards, isDeleted, setDeleteCardOverlay } = props;
+    const { message, cards, isDeleted } = props;
     const navigate = useNavigate();
     const location = useLocation();
 
@@ -13,8 +13,6 @@ const ConfirmationMessage = (props) => {
                 {
                     state: { cards: cards, type: location.state.type, search: `/${location.state.type}` },
                 });
-
-            setDeleteCardOverlay(false)
         }
     }
     return (
@@ -30,7 +28,7 @@ const ConfirmationMessage = (props) => {
                         </section>
                         <footer className="card-footer">
                             <div className="btn-container">
-                                <button id="unpublish-card" className="card-btn bg-green color-light" type="button" onClick={handleClick}>Back to Search Collection Page </button>
+                                <button id="back-to-search" className="card-btn bg-green color-light" type="button" onClick={handleClick}>Back to Search Collection Page </button>
                             </div>
                         </footer>
                     </>
@@ -44,13 +42,12 @@ const ConfirmationMessage = (props) => {
                         </section>
                         <footer className="card-footer">
                             <div className="btn-container">
-                                <button id="unpublish-card" className="card-btn bg-danger color-light" type="button" onClick={setDeleteCardOverlay(false)}>Back to Search Collection Page </button>
+                                    <button id="back-to-search" className="card-btn bg-danger color-light" type="button" onClick={handleClick}>Back to Search Collection Page </button>
                             </div>
                         </footer>
                     </>
                 )
             }
-
         </div>
     )
 }

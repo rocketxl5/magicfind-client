@@ -7,6 +7,7 @@ import React, {
 import { useLocation, useNavigate } from 'react-router-dom';
 import SearchInput from './search/SearchInput';
 import Spinner from '../layout/Spinner';
+import Loading from '../layout/Loading';
 import { SearchContext } from '../../contexts/SearchContext';
 import { PathContext } from '../../contexts/PathContext';
 import { api } from '../../api/resources';
@@ -147,7 +148,7 @@ const Search = () => {
   }, [oracleID]);
 
   useEffect(() => {
-    // console.log(data)
+    console.log(data)
     if (data) {
       const apiCards = [];
       const filteredCards = filterCards(data);
@@ -170,21 +171,49 @@ const Search = () => {
           return !card.digital && !card.oversized;
               });
       };
-      setLoading(false);
+
+      setLoading(false)
+      setCardName('');
+      setSearchInput(null);
       navigate(`/search-result/${setString(cardName, '-')}`,
         {
           state: { cards: apiCards, cardName: cardName, type: 'search-api', search: location.pathname },
         });
-      setCardName('');
-      setSearchInput(null);
     }
   }, [data])
+
+  // useEffect(() => {
+  //   if (loadImages)
+  //     console.log(apiCards)
+  //   // const loadImage = card => {
+  //   //   return new Promise((resolve, reject) => {
+  //   //     const image = new Image();
+  //   //     image.src = card.image_uris.normal;
+  //   //     image.onload = () => resolve(card);
+  //   //     image.onerror = error => reject(error);
+  //   //   });
+  //   // }
+
+  //   // Promise.all(apiCards.map(card => loadImage(card)))
+  //   //   .then(() => {
+  //   //     setLoadImages(false)
+  //   //     setLoading(false)
+  //   //     setCardName('');
+  //   //     setSearchInput(null);
+  //   //     navigate(`/search-result/${setString(cardName, '-')}`,
+  //   //   {
+  //   //     state: { cards: apiCards, cardName: cardName, type: 'search-api', search: location.pathname },
+  //   //   });
+  //   //   })
+  //   //   .catch(error => console.log('Image load has failed', error))
+
+  // }, [loadImages])
 
   return (
     <>
       {
         loading ? (
-          <Spinner />
+          <Loading />
         ) : (
             <div className="search-card">
               <h2 className="page-title">Add Card Page</h2>

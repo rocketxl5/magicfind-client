@@ -279,3 +279,20 @@ section.banner {
     align-self: flex-end;
     padding-block: var(--size-1);
   }
+
+
+  /* Modal */
+  .overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    /* display: none; */
+    height: 100vh;
+    width: 100vw;
+    padding-inline: var(--size-2);
+    padding-block-start: 5rem;
+    align-items: center;
+    flex-direction: column;
+    background-color: rgba(216, 214, 211, .7);
+    z-index: 3000;
+  }

@@ -27,8 +27,7 @@ const SearchCatalog = () => {
     setCardName, 
     setCardNames,
     predictions,
-    getCardNames,
-    removeUserCards
+    filterUserCards
   } = useContext(SearchContext);
 
   const { user } = useAuth();
@@ -62,15 +61,15 @@ const SearchCatalog = () => {
             headers: headers,
           };
 
-          fetch(`${api.serverURL}/api/catalog`, options)
+          fetch(`${api.serverURL}/api/cards/catalog/${user.id}`, options)
             .then((res) => res.json())
             .then((data) => {
-              const catalogCards = user ? removeUserCards(data, user.id) : data;
+              const catalogCards = user ? filterUserCards(data.cards, user.id) : data.cards;
               console.log(catalogCards)
               setCards(catalogCards);
-              setCardNames(getCardNames(catalogCards));
-              localStorage.setItem('catalogCards', JSON.stringify(catalogCards));
-              localStorage.setItem('cardNames', JSON.stringify(getCardNames(catalogCards)));
+              setCardNames(catalogCards);
+              // localStorage.setItem('catalogCards', JSON.stringify(catalogCards));
+              // localStorage.setItem('cardNames', JSON.stringify(catalogCards));
             })
             .catch((error) => console.log(error));
         }

@@ -7,7 +7,7 @@ import React, {
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { FiArrowRightCircle } from "react-icons/fi"
 import SearchInput from './search/SearchInput';
-import Spinner from '../layout/Spinner';
+import Loading from '../layout/Loading';
 import { SearchContext } from '../../contexts/SearchContext';
 import { PathContext } from '../../contexts/PathContext';
 import { api } from '../../api/resources';
@@ -41,6 +41,7 @@ const SearchCollection = ({ user }) => {
   const browserWidth = getBrowserWidth();
 
   const fetchCollectionCards = () => {
+    console.log('in')
     setLoading(true);
     const headers = new Headers();
     headers.append('Content-Type', 'application/json');
@@ -49,7 +50,7 @@ const SearchCollection = ({ user }) => {
       method: 'GET',
       headers: headers,
     }
-    fetch(`${api.serverURL}/api/cards/${user?.id}`, options)
+    fetch(`${api.serverURL}/api/cards/${user.id}`, options)
       .then((res) => {
         if (res.ok) {
           return res.json();
@@ -62,7 +63,7 @@ const SearchCollection = ({ user }) => {
         })
       })
       .then((data) => {
-        // console.log(data);
+        console.log(data);
         setLoading(false);
         setCardNames(data.names);
         setCards(data.cards);
@@ -75,18 +76,21 @@ const SearchCollection = ({ user }) => {
       });
   }
   useEffect(() => {
-    console.log(user)
+    console.log(location.pathname)
     collectionInputRef?.current?.focus();
     setPathname(location.pathname);
 
     fetchCollectionCards()
+
     if (browserWidth <= 775 && document.querySelector('#mobile-nav')?.checked) {
       hideSearchBar();
     }
   }, []);
 
   useEffect(() => {
+    // console.log(searchInput)
     if (searchInput?.id === 'search-collection') {
+
       setIsActive(true);
     } else {
       setIsActive(false);
@@ -117,6 +121,7 @@ const SearchCollection = ({ user }) => {
         .then((data) => {
           // localStorage.setItem('storeCards', JSON.stringify(data.data));
           // localStorage.setItem('storeCardName', cardName);
+          console.log(cardName)
           setLoading(false);
           setCardName('')
           setSearchInput(null);
@@ -145,7 +150,7 @@ const SearchCollection = ({ user }) => {
     <>
       {
         loading ? (
-          <Spinner />
+          <Loading />
         ) : (
             <div className="search-card">
               <header>

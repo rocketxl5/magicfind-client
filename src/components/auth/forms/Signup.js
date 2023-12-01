@@ -38,6 +38,8 @@ const Signup = () => {
     password: passwordRef.current,
     confirmPassword: confirmPasswordRef.current
   }
+
+  // Input attribute/value pair with requirements array of object
   const inputs = [
     {
       name: 'username',
@@ -112,6 +114,7 @@ const Signup = () => {
       ]
     }
   ];
+
   // Set useReducer hook
   const [inputStates, dispatch] = useReducer(
     reducer,
@@ -301,6 +304,7 @@ const Signup = () => {
             </div>
             <form className="auth-form" id="singup-form" name="singup-form" onSubmit={handleSubmit} noValidate>
               {
+                // Map inputs array
                 inputs.map((input, index) => {
                   return <FormInput
                     key={index}
