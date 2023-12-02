@@ -6,7 +6,7 @@ export const SearchProvider = ({ children }) => {
   const [searchInput, setSearchInput] = useState(null);
   const [cardName, setCardName] = useState('');
   const [searchTerm, setSearchTerm] = useState('');
-  const [apiCards, setApiCards] = useState(undefined);
+  const [apiCards, setApiCards] = useState(null);
   const [collectionCards, setCollectionCards] = useState(undefined);
   const [cards, setCards] = useState([]);
   const [displayAutcomplete, setDisplayAutocomplete] = useState(false);

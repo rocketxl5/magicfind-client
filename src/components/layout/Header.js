@@ -1,5 +1,5 @@
 import React from 'react';
-import SearchCatalog from '../views/SearchCatalog';
+import SearchCatalog from '../views/search/SearchCatalog';
 import Navbar from './Navbar';
 import LogoBtn from './navbtn/LogoBtn';
 import handleSearchBar from '../../utilities/handleSearchBar';

@@ -6,14 +6,15 @@ import React, {
 } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { FiArrowRightCircle } from "react-icons/fi"
-import SearchInput from './search/SearchInput';
-import Loading from '../layout/Loading';
-import { SearchContext } from '../../contexts/SearchContext';
-import { PathContext } from '../../contexts/PathContext';
-import { api } from '../../api/resources';
+import SearchInput from './SearchInput';
+import Loading from '../../layout/Loading';
+import { SearchContext } from '../../../contexts/SearchContext';
+import { PathContext } from '../../../contexts/PathContext';
+import { api } from '../../../api/resources';
 import styled from 'styled-components';
-import hideSearchBar from '../../utilities/hideSearchBar';
-import getBrowserWidth from '../../utilities/getBrowserWidth';
+import hideSearchBar from '../../../utilities/hideSearchBar';
+import getBrowserWidth from '../../../utilities/getBrowserWidth';
+import setQueryString from '../../../utilities/setQueryString';
 
 const SearchCollection = ({ user }) => {
   const [loading, setLoading] = useState(false);
@@ -28,7 +29,7 @@ const SearchCollection = ({ user }) => {
     cardName,
     cards,
     setCards,
-    setCardName, 
+    setCardName,
     setCardNames,
     predictions
   } = useContext(SearchContext);
@@ -101,7 +102,7 @@ const SearchCollection = ({ user }) => {
   const handleSubmit = (e) => {
     e?.preventDefault();
 
-    if (searchTerm) {   
+    if (searchTerm) {
       setLoading(true);
       setSearchTerm(cardName);
       collectionInputRef.current.blur();
@@ -113,19 +114,19 @@ const SearchCollection = ({ user }) => {
         method: 'GET',
         headers: headers,
       };
-      console.log(cardName)
-      const query = !cardName ? searchTerm : predictions.length === 1 ? predictions[0] : cardName;
 
-      fetch(`${api.serverURL}/api/cards/${query}/${user.id}`, options)
+      let query = !cardName ? searchTerm : predictions.length === 1 ? predictions[0] : cardName;
+
+      fetch(`${api.serverURL}/api/cards/${encodeURIComponent(query)}/${user.id}`, options)
         .then((res) => res.json())
         .then((data) => {
           // localStorage.setItem('storeCards', JSON.stringify(data.data));
           // localStorage.setItem('storeCardName', cardName);
-          console.log(cardName)
+
           setLoading(false);
           setCardName('')
           setSearchInput(null);
-          navigate(`/search-result/${cardName.toLowerCase()}`,
+          navigate(`/search-result/${setQueryString(query.toLowerCase(), '-')}`,
             {
               state: { cards: data.results, cardName: data.cardName, type: collectionInputRef.current.id, search: location.pathname },
             });
@@ -152,57 +153,57 @@ const SearchCollection = ({ user }) => {
         loading ? (
           <Loading />
         ) : (
-            <div className="search-card">
-              <header>
-                <h1 className="page-title">Collection Page</h1>
+          <div className="search-card">
+            <header>
+              <h1 className="page-title">Collection Page</h1>
 
-              </header>
-              {
-                message?.title === 'no_cards' ? (
+            </header>
+            {
+              message?.title === 'no_cards' ? (
 
-                  <div className="message">
-                    <section className="message-section">
-                      <div className="message-body">
-                        {
-                          message.body?.map((part, index) => {
-                            return <p key={index}>{part}</p>
-                          })
-                        }
-                      </div>
-                    </section>
-                    <section className="message-section">
-                      <Link className="message-link" to={'/search-api'}> Go To The Add Card Page <FiArrowRightCircle /></Link>
-                    </section>
-                  </div>
-                ) : (
-
-                  <section className="main-collection">
-
-
-              <form id="search-collection-form" className="search-form" onSubmit={handleSubmit} >
-                <SearchInput isActive={isActive} id={'search-collection'} handleSubmit={handleSubmit} ref={collectionInputRef} />
-              </form>
-
-              <Buttons>
-                <Button
-                  className="bg-green"
-                  type="button"
-                  onClick={() => navigate('/search-api')}
-                >
-                  Add New Card
-                </Button>
-                <Button
-                  className="bg-teal"
-                  type="button"
-                  onClick={handleClick}
-                >
-                  Show All Cards
-                </Button>
-              </Buttons>
+                <div className="message">
+                  <section className="message-section">
+                    <div className="message-body">
+                      {
+                        message.body?.map((part, index) => {
+                          return <p key={index}>{part}</p>
+                        })
+                      }
+                    </div>
                   </section>
-                )
-              }
-            </div>
+                  <section className="message-section">
+                    <Link className="message-link" to={'/search-api'}> Go To The Add Card Page <FiArrowRightCircle /></Link>
+                  </section>
+                </div>
+              ) : (
+
+                <section className="main-collection">
+
+
+                  <form id="search-collection-form" className="search-form" onSubmit={handleSubmit} >
+                    <SearchInput isActive={isActive} id={'search-collection'} handleSubmit={handleSubmit} ref={collectionInputRef} />
+                  </form>
+
+                  <Buttons>
+                    <Button
+                      className="bg-green"
+                      type="button"
+                      onClick={() => navigate('/search-api')}
+                    >
+                      Add New Card
+                    </Button>
+                    <Button
+                      className="bg-teal"
+                      type="button"
+                      onClick={handleClick}
+                    >
+                      Show All Cards
+                    </Button>
+                  </Buttons>
+                </section>
+              )
+            }
+          </div>
         )
       }
     </>

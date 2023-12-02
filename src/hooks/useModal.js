@@ -5,8 +5,6 @@ import Button from '../components/layout/Button';
 
 
 const useModal = (card) => {
-    // const [loading, setLoading] = useState(false);
-    const [isOpen, setIsOpen] = useState(false);
     const INIT = {
         open: false,
         component: null
@@ -61,16 +59,12 @@ const useModal = (card) => {
             // case ACTIONS.ADD_TO_WISHLIST:
 
             //     break;
-            // case ACTIONS.CONFIRM_DELETE:
-            //     setIsOpen(true);
-            //     break;
-            // case ACTIONS.GO_BACK:
-            //     setIsOpen(false);
-            //     break;
-            // case ACTIONS.BACK_TO_SEARCH:
-            //     setIsOpen(false);
-            //     break;
-
+            case ACTIONS.CONFIRM_DELETE:
+                return INIT;
+            case ACTIONS.GO_BACK:
+                return INIT;
+            case ACTIONS.BACK_TO_SEARCH:
+                return INIT;
             default:
                 throw new Error(`Unknown action type: ${action.type}`);
         }

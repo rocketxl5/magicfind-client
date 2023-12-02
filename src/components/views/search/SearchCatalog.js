@@ -5,14 +5,14 @@ import React, {
   useContext
 } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import SearchInput from './search/SearchInput';
-import { SearchContext } from '../../contexts/SearchContext';
-import useAuth from '../../hooks/useAuth';
-import { PathContext } from '../../contexts/PathContext';
-import { api } from '../../api/resources';
-import hideSearchBar from '../../utilities/hideSearchBar';
-import getBrowserWidth from '../../utilities/getBrowserWidth';
-import Spinner from '../layout/Spinner';
+import SearchInput from './SearchInput';
+import { SearchContext } from '../../../contexts/SearchContext';
+import useAuth from '../../../hooks/useAuth';
+import { PathContext } from '../../../contexts/PathContext';
+import { api } from '../../../api/resources';
+import hideSearchBar from '../../../utilities/hideSearchBar';
+import getBrowserWidth from '../../../utilities/getBrowserWidth';
+import Spinner from '../../layout/Spinner';
 
 const SearchCatalog = () => {
   const [loading, setLoading] = useState(false);
@@ -24,7 +24,7 @@ const SearchCatalog = () => {
     setSearchTerm,
     cardName,
     setCards,
-    setCardName, 
+    setCardName,
     setCardNames,
     predictions,
     filterUserCards
@@ -75,8 +75,8 @@ const SearchCatalog = () => {
         }
 
         fetchCatalogCards();
-    }
-    else {
+      }
+      else {
         setIsActive(false);
       }
     }
@@ -115,35 +115,35 @@ const SearchCatalog = () => {
 
       catalogInputRef.current?.blur();
 
-    const headers = new Headers();
-    headers.append('Content-Type', 'application/json');
-    user && headers.append('auth-token', user.token)
-    const options = {
-      method: 'GET',
-      headers: headers,
-    };
+      const headers = new Headers();
+      headers.append('Content-Type', 'application/json');
+      user && headers.append('auth-token', user.token)
+      const options = {
+        method: 'GET',
+        headers: headers,
+      };
 
       const query = !cardName ? searchTerm : predictions.length === 1 ? predictions[0] : cardName;
 
       fetch(`${api.serverURL}/api/catalog/${query}`, options)
-      .then((res) => res.json())
-      .then((data) => {
-        // localStorage.setItem('searchCatalog', search);
-        // localStorage.removeItem('catalogCards');
-        console.log(data)
-        setLoading(false);
-        setSearchInput(null);
-        setSearchTerm('');
-        setCardName('');
-        if (browserWidth <= 775 && document.querySelector('#mobile-nav').checked) {
-          hideSearchBar();
-        }
-        navigate(`/search-result/${cardName.toLowerCase()}`,
-          {
-            state: { cards: data.results, cardName: data.cardName, type: catalogInputRef.current.id, search: location.pathname },
-        });
-      })
-      .catch((error) => console.log(error));
+        .then((res) => res.json())
+        .then((data) => {
+          // localStorage.setItem('searchCatalog', search);
+          // localStorage.removeItem('catalogCards');
+          console.log(data)
+          setLoading(false);
+          setSearchInput(null);
+          setSearchTerm('');
+          setCardName('');
+          if (browserWidth <= 775 && document.querySelector('#mobile-nav').checked) {
+            hideSearchBar();
+          }
+          navigate(`/search-result/${cardName.toLowerCase()}`,
+            {
+              state: { cards: data.results, cardName: data.cardName, type: catalogInputRef.current.id, search: location.pathname },
+            });
+        })
+        .catch((error) => console.log(error));
     }
   };
 
@@ -153,11 +153,11 @@ const SearchCatalog = () => {
         loading ? (
           <Spinner />
         ) : (
-            <div id="search-catalog-container">
-              <form id="search-catalog-form" className="search-form" onSubmit={handleSubmit} >
-                <SearchInput isActive={isActive} id={'search-catalog'} handleSubmit={handleSubmit} ref={catalogInputRef} />
-              </form>
-            </div>
+          <div id="search-catalog-container">
+            <form id="search-catalog-form" className="search-form" onSubmit={handleSubmit} >
+              <SearchInput isActive={isActive} id={'search-catalog'} handleSubmit={handleSubmit} ref={catalogInputRef} />
+            </form>
+          </div>
         )
       }
     </>

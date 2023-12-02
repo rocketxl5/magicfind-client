@@ -18,11 +18,11 @@ const Card = (props) => {
 
     const image_uris = card?.image_uris || card?.card_faces[0].image_uris;
     const imgAttributes = {
-        id: "",
+        id: 'expand-card',
         style: 'card-image b-radius-10',
         src: image_uris.small,
         alt: `${card.name} image`,
-        placeholderSrc: card_back
+        placeholder: card_back
     }
 
     // Create expanded image component
@@ -30,7 +30,7 @@ const Card = (props) => {
         setExpandedCard(
             createElement('img', {
                 id: 'close-modal',
-                className: 'card-image b-radius-25',
+                className: 'card-image b-radius-20',
                 src: image_uris.normal,
                 alt: `${card.name} image`,
             })
@@ -68,7 +68,7 @@ const Card = (props) => {
                     <h2 className="card-name">{card.name}</h2>
                 </header>
                 <section className="card-body" >
-                    <CardImageSection attributes={{ ...imgAttributes, id: 'expand-card' }} handleClick={handleClick} cardImageRef={cardImageRef} />
+                    <CardImageSection attributes={imgAttributes} handleClick={handleClick} cardImageRef={cardImageRef} />
                     <CardDetailSection card={card} searchType={searchType} loading={loading} />
                 </section>
                 <footer className="card-footer">

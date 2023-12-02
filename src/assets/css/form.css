@@ -466,11 +466,6 @@ ul.autocomplete-list {
     justify-content: space-between;
   }
 
-  .card-image-container {
-    /* width: 100%; */
-    /* border-radius: 10px; */
-  }
-
   .expand-icon-container {
     position: absolute;
     bottom: 1rem;
@@ -493,20 +488,25 @@ ul.autocomplete-list {
     width: 2rem;
   }
 
+  .blur-load {
+    width: 100%;
+    background-size: cover;
+    background-position: center;
+    /* background-image: url('../img/card_back.jpg'); */
+  }
+
   .card-image {
     width: 100%;
     display: block;
     align-self: center;
-    z-index: 0;
+    object-position: center;
+    object-fit: cover;
   }
 
   .card-image:hover {
     cursor: pointer;
   }
 
-  /* .card-image * {
-    pointer-events: none;
-  } */
 
   .card-header {
     display: flex;

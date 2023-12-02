@@ -128,17 +128,21 @@ button:hover {
     padding-block-start: 5rem;
 }
 
-.loading-icon-container {
+.loading-container {
   display: flex;
   flex-direction: column;
-  height: 100%;
+  height: fit-content;
   align-items: center;
   justify-content: center;
   width: 100%;
   border-radius: 5px;
 }
 
-.loading-icon-container p { 
+.loading-content {
+  height: fit-content;
+}
+
+.loading-container p { 
   color: var(--clr-blue);
 }
 

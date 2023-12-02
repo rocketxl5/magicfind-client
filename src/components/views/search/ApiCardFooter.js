@@ -36,7 +36,7 @@ const ApiCardFooter = forwardRef(function ApiCardFooter({ card, setLoading }, re
     useEffect(() => {
 
         if (selectedCard) {
-
+            console.log(selectedCard)
             setLoading(true)
             const headers = new Headers();
             headers.append('Content-Type', 'application/json');

@@ -1,6 +1,6 @@
-const setString = (string, separator) => {
+const setQueryString = (string, separator) => {
 
     return string.toLowerCase().replaceAll(/["/,]/g, '').replace('  ', ' ').split(' ').join(separator);
 }
 
-export default setString;
+export default setQueryString;
