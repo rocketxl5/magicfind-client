@@ -1,4 +1,4 @@
-// Uniform Resource Locator : address of a given resource on the web
+// Uniform Resource Locators
 const inProduction = true;
 
 export const api = {

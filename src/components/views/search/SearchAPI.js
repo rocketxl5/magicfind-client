@@ -110,7 +110,7 @@ const Search = () => {
         if (data.object === 'error') {
           navigate(`/search-result/${setQueryString(searchTerm, '-')}`,
             {
-              state: { cards: undefined, cardName: searchTerm, type: 'card-not-found', search: location.pathname },
+              state: { cards: undefined, cardName: searchTerm, type: 'not-found', search: location.pathname },
             });
         } else {
           const { name, oracle_id } = data;
@@ -180,12 +180,12 @@ const Search = () => {
   }, [data])
 
   return (
-    <>
+    <div className="flex inherit-height">
       {
         loading ? (
           <Loading />
         ) : (
-            <div className="content">
+            <div className="content flex-grow-1">
               <header className="header">
 
                 <h2 className="title">Search API</h2>
@@ -199,7 +199,7 @@ const Search = () => {
           </div>
         )
       }
-    </>
+    </div>
   );
 };
 

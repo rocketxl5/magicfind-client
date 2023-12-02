@@ -70,6 +70,7 @@ a {
 
 .main-header {
   position: fixed;
+  top: 0;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -84,12 +85,20 @@ a {
 
 
 .wrapper {
-  position: relative;
+  min-height: 100vh;
+  padding-top: var(--header-height);
+}
+
+.container {
   min-width: 300px;
   height: auto;
-  padding-block-start: var(--header-height);
   max-width: 1170px;
-  min-height: calc(100vh - (2 * var(--header-height)));
+  min-height: calc(100vh - 12rem);
+}
+
+.buffer {
+  width: auto;
+  height: auto;
 }
 
 .content {
@@ -102,32 +111,18 @@ button:hover {
   cursor: pointer;
 }
 
+
+
 /* spinner */
-.loading {
-  display: block;
-}
-
-.loading-container {
-  display: flex;
-  flex-direction: column;
-  height: fit-content;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  border-radius: 5px;
-}
-
-.loading-content {
-  height: fit-content;
-}
-
-.loading-container p { 
-  color: var(--clr-blue);
-}
-
 .loading-icon {
-  margin-block-end: 2rem;
-  font-size: 4rem;
+  align-self: center;
+  margin: 0 auto;
+}
+
+.loading-icon svg {
+  display: block;
+  width: 5rem;
+  height: 5rem;
   color: var(--clr-blue);
   animation: animate 0.5s linear infinite;
 }
@@ -141,13 +136,6 @@ button:hover {
   }
 }
 /* end spinner */
-
-div.container {
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  /* margin-top: 1rem; */
-}
 
 .main {
      /* padding-block: 3rem; */
@@ -293,7 +281,6 @@ section.banner {
     width: 100vw;
     padding-inline: var(--size-2);
     background-color: rgba(216, 214, 211, .7);
-    overflow-y: hidden;
     z-index: 3000;
   }
 

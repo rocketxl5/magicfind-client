@@ -144,12 +144,12 @@ const SearchCollection = ({ user }) => {
   };
 
   return (
-    <>
+    <div className="flex inherit-height">
       {
         loading ? (
           <Loading />
         ) : (
-            <div className="content">
+            <div className="content flex-grow-1">
               <header className="header">
 
                 <h2 className="title">Search Collection</h2>
@@ -201,7 +201,7 @@ const SearchCollection = ({ user }) => {
             </div>
         )
       }
-    </>
+    </div>
   );
 };
 

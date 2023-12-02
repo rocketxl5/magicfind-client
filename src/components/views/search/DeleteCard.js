@@ -65,12 +65,12 @@ const DeleteCard = (props) => {
     }, [responseObject])
 
     return (
-        <div className="delete-card-content">
+        <div className="delete-card-content flex">
                 {
                     loading ? (
                         <Loading />
                     ) : (
-                        <>
+                        <div className="flex-grow-1">
                             <header className="card-header">
                                 <h2 className="color-red fw-500">Delete Card Confirmation</h2>
                             </header>
@@ -100,7 +100,7 @@ const DeleteCard = (props) => {
                                     </div>
                                 </div>
                             </footer>
-                        </>
+                        </div>
                     )
             }
         </div>
