@@ -1,8 +1,7 @@
-import { useState, useReducer } from 'react';
+import { useReducer } from 'react';
 import ExpandedCardContent from '../components/views/search/ExpandedCardContent';
 import DeleteCard from '../components/views/search/DeleteCard';
-import Button from '../components/layout/Button';
-
+import FlipIcon from '../components/views/search/FlipIcon';
 
 const useModal = (card) => {
     const INIT = {
@@ -11,16 +10,15 @@ const useModal = (card) => {
     }
     const ACTIONS = {
         EXPAND_CARD: 'expand-card',
-        CLOSE_MODAL: 'close-modal',
+        REDUCE_CARD: 'reduce-card',
+        FLIP_CARD: 'flip-card',
         DELETE_CARD: 'delete-card',
-        PUBLISH_CARD: 'publish-card',
-        UNPUBLISH_CARD: 'unpublish-card',
+        CONFIRM_DELETE: 'confirm-delete',
+        ADD_TO_COLLECTION: 'add-to-collection',
         ADD_TO_CART: 'add-to-cart',
         ADD_TO_WISHLIST: 'add-to-wishlist',
-        ADD_TO_COLLECTION: 'add-to-collection',
-        CONFIRM_DELETE: 'confirm-delete',
         GO_BACK: 'go-back',
-        BACK_TO_SEARCH: 'back-to-search'
+        BACK_TO_SEARCH: 'back-to-search',
     }
 
     const reducer = (state, action) => {
@@ -32,10 +30,9 @@ const useModal = (card) => {
                     component:
                         <ExpandedCardContent handleClick={action.payload.eventHandler}>
                             {action.payload.ImageComponent}
+                            {action.payload.card.card_faces.length && <FlipIcon handleClick={action.payload.eventHandler} />}
                         </ExpandedCardContent>
                 };
-            case ACTIONS.CLOSE_MODAL:
-                return { INIT }
             case ACTIONS.DELETE_CARD:
                 return {
                     open: true,
@@ -44,12 +41,15 @@ const useModal = (card) => {
                         card={action.payload.card} handleClick={action.payload.eventHandler}
                     />
                 };
-            case ACTIONS.PUBLISH_CARD:
-
-                break;
-            case ACTIONS.UNPUBLISH_CARD:
-
-                break;
+            case ACTIONS.FLIP_CARD:
+                return {
+                    open: true,
+                    component:
+                        <ExpandedCardContent handleClick={action.payload.eventHandler}>
+                            {action.payload.card.card_faces[1].normal}
+                            {action.payload.card.card_faces.length && <FlipIcon handleClick={action.payload.eventHandler} />}
+                        </ExpandedCardContent>
+                };
             // case ACTIONS.ADD_TO_COLLECTION:
 
             //     break;
@@ -59,6 +59,8 @@ const useModal = (card) => {
             // case ACTIONS.ADD_TO_WISHLIST:
 
             //     break;
+            case ACTIONS.REDUCE_CARD:
+                return INIT; 
             case ACTIONS.CONFIRM_DELETE:
                 return INIT;
             case ACTIONS.GO_BACK:
@@ -82,7 +84,6 @@ const useModal = (card) => {
             }
         })
     }
-
 
     return [state, { updateState }];
 }

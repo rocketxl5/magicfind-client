@@ -1,7 +1,6 @@
 import { useState, useEffect, forwardRef } from 'react';
 
-const CollectionCardFooter = forwardRef(function (props, ref) {
-    const { card, handleClick } = props;
+const CollectionCardFooter = forwardRef(function ({ card, handleClick }, ref) {
     const { deleteRef, publishRef, unpublishRef } = ref;
 
     return (
@@ -13,11 +12,11 @@ const CollectionCardFooter = forwardRef(function (props, ref) {
             </div>
             {!card.isPublished ? (
                 <div className="btn-container">
-                    <button id="publish-card" className="card-btn bg-blue color-light" type="button" ref={publishRef} onClick={handleClick}>Publish</button>
+                    <button id="publish-card" className="card-btn bg-blue color-light" type="button" ref={publishRef} onClick={() => { }}>Publish</button>
                 </div>
             ) : (
                 <div className="btn-container">
-                        <button id="unpublish-card" className="card-btn bg-yellow color-light" type="button" ref={unpublishRef} onClick={handleClick}>Unpublish</button>
+                        <button id="unpublish-card" className="card-btn bg-yellow color-light" type="button" ref={unpublishRef} onClick={() => { }}>Unpublish</button>
                 </div>
             )}
         </div>

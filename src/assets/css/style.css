@@ -294,7 +294,7 @@ section.banner {
     height: 100vh;
     width: 100vw;
     padding-inline: var(--size-2);
-    padding-block-start: 5rem;
+    padding-block-start: 12rem;
     align-items: center;
     flex-direction: column;
     background-color: rgba(216, 214, 211, .7);

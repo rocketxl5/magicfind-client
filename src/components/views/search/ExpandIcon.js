@@ -1,10 +1,11 @@
 import { FaExpand } from "react-icons/fa";
+// import { LuExpand } from "react-icons/lu";
 
 const ExpandIcon = () => {
     return (
-        <span className="expand-icon-container">
-            <FaExpand className="expand-icon" />
-        </span>
+        <button className="card-icon-container expand-icon">
+            <FaExpand />
+        </button>
     )
 }
 

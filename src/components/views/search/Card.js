@@ -1,9 +1,7 @@
 import { useState, useEffect, useRef, createElement } from 'react';
 import CardImageSection from './CardImageSection';
 import CardDetailSection from './CardDetailSection';
-import Button from '../../layout/Button';
 import Modal from './Modal';
-import DeleteCard from './DeleteCard';
 import card_back from '../../../assets/img/card_back.jpg'
 // Footers
 import CatalogCardFooter from './CatalogCardFooter';
@@ -29,7 +27,7 @@ const Card = (props) => {
     useEffect(() => {
         setExpandedCard(
             createElement('img', {
-                id: 'close-modal',
+                id: 'reduce-card',
                 className: 'card-image b-radius-20',
                 src: image_uris.normal,
                 alt: `${card.name} image`,

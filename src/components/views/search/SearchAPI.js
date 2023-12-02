@@ -63,7 +63,6 @@ const Search = () => {
   }
 
   useEffect(() => {
-    console.log(location.pathname)
     apiInputRef?.current?.focus();
     setPathname(location.pathname);
 

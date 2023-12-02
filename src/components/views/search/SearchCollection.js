@@ -42,7 +42,6 @@ const SearchCollection = ({ user }) => {
   const browserWidth = getBrowserWidth();
 
   const fetchCollectionCards = () => {
-    console.log('in')
     setLoading(true);
     const headers = new Headers();
     headers.append('Content-Type', 'application/json');
@@ -59,19 +58,16 @@ const SearchCollection = ({ user }) => {
 
         return res.json().then((data) => {
           setLoading(false);
-          console.log(data);
           throw new Error(JSON.stringify(data));
         })
       })
       .then((data) => {
-        console.log(data);
         setLoading(false);
         setCardNames(data.names);
         setCards(data.cards);
         collectionInputRef?.current?.focus();
       })
       .catch((error) => {
-        // console.log(error)
         const errorMessage = JSON.parse(error.message);
         setMessage({ ...errorMessage });
       });
