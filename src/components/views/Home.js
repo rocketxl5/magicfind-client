@@ -13,12 +13,15 @@ const Home = () => {
 
   return (
     <>
+
       <section className="banner">
 
       </section>
-    <section className="section home-page">
-      <h2 className="section-title">Welcome to Magic Find 2</h2>
-      <div className="section-content">
+      <div className="content home-page">
+        <header className="header">
+          <h2 className="title">Welcome to Magic Find 2</h2>
+        </header>
+        <main className="main">
         <div className="article">
           <h2 className="article-title">What it is</h2>
           <div className="article-body">
@@ -86,9 +89,9 @@ const Home = () => {
               Populating a store is made through a series of requests to the <a href="https://scryfall.com/docs/api" target="_blank" title="scryfall api docs"><strong>scryfall api</strong></a>.
             </p>
           </div>
-        </div>
-      </div>
-    </section>
+          </div>
+        </main>
+      </div >
     </>
   );
 };

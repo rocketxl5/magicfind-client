@@ -42,6 +42,7 @@ const SearchCollection = ({ user }) => {
   const browserWidth = getBrowserWidth();
 
   const fetchCollectionCards = () => {
+
     setLoading(true);
     const headers = new Headers();
     headers.append('Content-Type', 'application/json');
@@ -73,7 +74,6 @@ const SearchCollection = ({ user }) => {
       });
   }
   useEffect(() => {
-    console.log(location.pathname)
     collectionInputRef?.current?.focus();
     setPathname(location.pathname);
 
@@ -149,11 +149,13 @@ const SearchCollection = ({ user }) => {
         loading ? (
           <Loading />
         ) : (
-          <div className="search-card">
-            <header>
-              <h1 className="page-title">Collection Page</h1>
+            <div className="content">
+              <header className="header">
 
-            </header>
+                <h2 className="title">Collection</h2>
+              </header>
+              <main className="main">
+
             {
               message?.title === 'no_cards' ? (
 
@@ -172,34 +174,31 @@ const SearchCollection = ({ user }) => {
                   </section>
                 </div>
               ) : (
-
-                <section className="main-collection">
-
-
-                  <form id="search-collection-form" className="search-form" onSubmit={handleSubmit} >
-                    <SearchInput isActive={isActive} id={'search-collection'} handleSubmit={handleSubmit} ref={collectionInputRef} />
-                  </form>
-
-                  <Buttons>
-                    <Button
-                      className="bg-green"
-                      type="button"
-                      onClick={() => navigate('/search-api')}
-                    >
-                      Add New Card
-                    </Button>
-                    <Button
-                      className="bg-teal"
-                      type="button"
-                      onClick={handleClick}
-                    >
-                      Show All Cards
-                    </Button>
-                  </Buttons>
-                </section>
+                      <>
+                        <form id="search-collection-form" className="search-form" onSubmit={handleSubmit} >
+                          <SearchInput isActive={isActive} id={'search-collection'} handleSubmit={handleSubmit} ref={collectionInputRef} />
+                        </form>
+                        <Buttons>
+                          <Button
+                            className="bg-green"
+                            type="button"
+                            onClick={() => navigate('/search-api')}
+                          >
+                            Add New Card
+                          </Button>
+                          <Button
+                            className="bg-teal"
+                            type="button"
+                            onClick={handleClick}
+                          >
+                            Show All Cards
+                          </Button>
+                        </Buttons>
+                      </>
               )
             }
-          </div>
+              </main>
+            </div>
         )
       }
     </>

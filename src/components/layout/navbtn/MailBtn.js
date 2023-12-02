@@ -1,4 +1,3 @@
-import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import useAuth from '../../../hooks/useAuth';
 import { FiMail } from 'react-icons/fi';
@@ -8,7 +7,7 @@ const MailIcon = () => {
   const { unreadMail } = useAuth();
     return (
       <Div className="nav-btn">
-        <Mail className="mail-btn" to="/mail/inbox" title=" To Mailbox">
+        <Mail className="mail-btn" to="/mail/inbox" title=" To Inbox">
           {unreadMail > 0 && (
             <UnreadContainer>
               <Unread>{unreadMail}</Unread>

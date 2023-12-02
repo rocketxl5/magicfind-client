@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { FiChevronLeft } from 'react-icons/fi';
 import Card from './Card';
-import NotFound from './NotFound';
+import NotFound from './CardNotFound';
 import capitalizeString from '../../../utilities/capitalizeString';
 
 const SearchResult = () => {

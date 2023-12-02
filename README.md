@@ -1,4 +1,4 @@
-files with import api/resources.js @fetch path -> src/components/auth Login, Register, path -> src/components/views AddCard, CartItem, CatalogItem, ModifyCard, RemoveCard, SearchCatalog, SearchCollection, ShoppingCart, path -> src/components/views/mail ComposeMessage, Mailbox, Message, Sidebar, path -> src/contexts CardContext, AuthContext
+files with import api/resources.js @fetch path -> src/components/auth Login, Register, path -> src/components/views AddCard, CartItem, CatalogItem, ModifyCard, RemoveCard, SearchCatalog, SearchCollection, ShoppingCart, path -> src/components/views/mail ComposeMessage, Inbox, Message, Sidebar, path -> src/contexts CardContext, AuthContext
 
 ##############################
 #### Search Card process ####

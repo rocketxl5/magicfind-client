@@ -1,6 +1,6 @@
 import React, { useRef, useState, useEffect, useContext, useReducer } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
-import Spinner from '../../layout/Spinner';
+import Loading from '../../layout/Loading';
 import FormInput from './FormInput';
 import reducer from './reducer/inputReducer';
 import errorHandler from './helpers/errorHandler';
@@ -290,7 +290,7 @@ const Signup = () => {
     <div className="form-container flex justify-center">
       {loading ?
         (
-          <Spinner />
+          <Loading />
         ) : (
           <div className="form-content">
             <div className="form-logo">

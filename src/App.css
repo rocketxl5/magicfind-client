@@ -269,40 +269,7 @@ ul.auth-dropdown-content li .signout {
   opacity: 0.8;
 }
 
-/* *************************** */
-/* Site wide Form Styling Rules  */
-/* *************************** */
-.form {
-  /* margin: 0 auto;
-  width: 100%;
-  padding: 1em; */
-  /* border: 1px solid var(--light-color); */
-}
 
-div.form-element {
-  /* margin: 1em 0; */
-  /* padding: 0 1em; */
-}
-/* 
-.search-form {
-  width: 100%;
-} */
-
-/* input[type='text'],
-input[type='password'],
-input[type='email'] {
-  padding: 10px;
-  margin: 5px 0;
-  width: 100%;
-  font-size: 1rem;
-  border-style: solid;
-  border-width: 1px;
-} */
-
-.text-field:focus {
-  /* border-color: #17a2bb;
-  outline-color: #17a2bb; */
-}
 
 /* AddCard Component input field for card quantity */
 input#quantity {
@@ -327,23 +294,6 @@ input#price {
   position: relative;
 }
 
-/* Seachbar Style */
-/* ul.search-result { */
-  /* @ views/SearchField.js */
-  /* position: absolute;
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  max-height: 40vh;
-  top: 3.1em;
-  left: 0;
-
-  overflow-y: scroll;
-  overflow-x: hidden;
-  background: #fff;
-  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
-  z-index: 5;
-} */
 
 .suggestion {
   /* @ views/Suggestions.js */
@@ -528,50 +478,9 @@ section.message-form footer {
   /* padding: 0 1em; */
 }
 
-/* Catalog & Store Item */
-.item-container {
-  /* position: relative;
-  padding: 1em;
-  letter-spacing: 0.06rem;
-  margin-bottom: 3em;
-  font-size: 0.8rem;
-  border: 1px solid #e4e4e4;
-  border-radius: 0.5em; */
-}
 
 
 
-.item-info {
-  /* display: flex;
-  width: 100%;
-  justify-content: space-between; */
-  /* height: 30vh; */
-}
-
-.item-image {
-  /* width: 48%; */
-  /* margin: 0 auto; */
-  /* height: 30vh; */
-}
-
-.item-image img {
-  /* padding: 1em; */
-  /* display: block; */
-  /* margin: 0 auto; */
-  /* width: 100%; */
-  /* max-width: 100%;
-  height: auto; */
-  /* height: 25vh; */
-}
-
-/* .item-details {
-  width: 48%;
-  display: flex;
-  flex-direction: column;
-  padding: 0.5em;
-  font-size: 0.9em;
-  line-height: 1.5;
-} */
 
 #item-order {
   /* @ views/CatalogItem.js */
@@ -610,15 +519,6 @@ section.message-form footer {
   flex-direction: column;
 }
 
-.item-button {
-  /* width: 48%;
-  padding: 0.8em 1em;
-  color: #fff;
-  border: none;
-  font-size: 0.9rem;
-  padding: 0.8em 2em;
-  margin-top: 1em; */
-}
 
 .catalog-items {
   display: flex;
@@ -687,7 +587,7 @@ section.message-form footer {
 }
 
 .mailbox-aside {
-  /* @views/mail/Mailbox.js  */
+  /* @views/mail/Inbox.js  */
   /*  width: 20% @ widescreen */
   width: 100%;
 }
@@ -858,46 +758,6 @@ button.compose-message {
   word-wrap: break-word;
 }
 
-.message-container footer {
-  /* @ views/mail/Message */
-  /* display: flex;
-  justify-content: space-between;
-  padding: 0.8em; */
-}
-
-.message-container footer button {
-  /* @ views/mail/Message */
-  /* width: 30%;
-  font-size: 0.8rem;
-  color: #fff;
-  padding: 1em 0;
-  border: none; */
-}
-
-.go-back {
-  /* @ views/mail/Message */
-  /* display: flex;
-  align-items: center;
-  padding: 1em;
-
-  width: 50%;*/
-} 
-
-.go-back:hover {
-  /* @ views/mail/Message */
-  /* cursor: pointer; */
-}
-
-.go-back svg {
-  /* @ views/mail/Message */
-  /* width: 2em;
-  height: 2em; */
-}
-
-.go-back p {
-  /* @ views/mail/Message */
-  /* margin-left: 1em; */
-}
 
 /* Media queries */
 @media (min-width: 500px) {
@@ -1071,20 +931,4 @@ button.compose-message {
     font-size: 0.8rem;
   }
 }
-/* Error message animation */
-/* div.error-msg.fade-out {
-  border: 1px solid var(--danger-color);
-  animation: fade 1s;
-  animation-delay: 2s;
-}
 
-@keyframes fade {
-  from {
-    opacity: 1;
-  }
-  to {
-    opacity: 0;
-  }
-} */
-
-/* Catalog  */ ;

@@ -58,7 +58,7 @@ const Card = (props) => {
     return (
         <>
             {/* <DeleteCard attributes={{ ...attributes }} card={card} confirmationOverlay={confirmationOverlay} setConfirmationOverlay={(value) => setConfirmationOverlay(value)} /> */} 
-            <div className="card-container">
+            <div className="card-content">
                 <Modal open={open}>
                     {component}
                 </Modal>

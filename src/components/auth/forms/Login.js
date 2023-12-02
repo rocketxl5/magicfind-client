@@ -1,9 +1,9 @@
 import React, { useState, useRef, useContext, useEffect } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
-import useAuth from '../../../hooks/useAuth';
-import Spinner from '../../layout/Spinner';
+import Loading from '../../layout/Loading';
 import errorHandler from './helpers/errorHandler';
 import { PathContext } from '../../../contexts/PathContext';
+import useAuth from '../../../hooks/useAuth';
 import { api } from '../../../api/resources';
 
 const Login = () => {
@@ -168,7 +168,7 @@ const Login = () => {
       {
         loading ?
           (
-            <Spinner />
+            <Loading />
           ) : (
 
             <div className="form-content">

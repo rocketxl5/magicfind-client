@@ -58,6 +58,7 @@ const SearchInput = forwardRef(function SearchInput(props, ref) {
   };
 
   const handleFocus = (e) => {
+    console.log(e.target)
     setSearchInput(e.target);
   }
 

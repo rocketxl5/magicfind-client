@@ -59,9 +59,12 @@ function ShoppingCart() {
     }
   };
   return (
-    <div className="container">
-      <h2 className="page-title">Shopping Cart</h2>
-      <Container>
+    <div className="content">
+      <header className="header">
+        <h2 className="title">Shopping Cart</h2>
+      </header>
+      <main className="main">
+        <Container>
         {cartItems.length > 0 ? (
           <Items>
             <Header>
@@ -105,6 +108,7 @@ function ShoppingCart() {
           ''
         )}
       </Container>
+      </main>
     </div>
   );
 }

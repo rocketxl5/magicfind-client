@@ -21,7 +21,7 @@ import NotFound from './components/views/NotFound';
 import ShoppingCart from './components/views/ShoppingCart';
 import RemoveCard from './components/views/RemoveCard';
 import ModifyCard from './components/views/ModifyCard';
-import MailBox from './components/views/mail/MailBox';
+import Inbox from './components/views/mail/Inbox';
 import useAuth from './hooks/useAuth';
 import './assets/css/reset.css';
 import './App.css';
@@ -57,13 +57,13 @@ const App = () => {
           <Route path="modify-card/:cardName" element={<ModifyCard />} />
           <Route path="search-collection" element={<SearchCollection user={user} />} />
           <Route path="search-api" element={<SearchAPI />} />
-          <Route path="mail/inbox" element={<MailBox />} />
-          <Route path="mail/:handle/:handle" element={<MailBox />} />
-          <Route path="mail/unread" element={<MailBox />} />
-          <Route path="mail/sent" element={<MailBox />} />
-          <Route path="mail/trash" element={<MailBox />} />
-          <Route path="mail/message" element={<MailBox />} />
-          </Route>
+          <Route path="mail/inbox" element={<Inbox />} />
+          <Route path="mail/:handle/:handle" element={<Inbox />} />
+          <Route path="mail/unread" element={<Inbox />} />
+          <Route path="mail/sent" element={<Inbox />} />
+          <Route path="mail/trash" element={<Inbox />} />
+          <Route path="mail/message" element={<Inbox />} />
+        </Route>
 
         {/* Catch all */}
         <Route path="*" element={<NotFound />} />

@@ -5,8 +5,7 @@ const Loading = () => {
     return (
         <div className="loading-container">
             <div className="loadin-content">
-            <ImSpinner2 className="loading-icon" />
-                <p>Processing...</p>
+                <ImSpinner2 className="loading-icon" />
             </div>
         </div>
     );

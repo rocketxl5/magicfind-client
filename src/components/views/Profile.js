@@ -4,10 +4,15 @@ const Profile = () => {
   const { user } = useAuth();
 
   return (
-    <div className="container">
-      <h2 className="page-title">Profile</h2>
-      <div>{user.name}</div>
-      <div>{user.country}</div>
+    <div className="content">
+      <header className="header">
+
+        <h2 className="title">Profile</h2>
+      </header>
+      <main className="main">
+        <p>Name: {user.name}</p>
+        <p>Country: {user.country}</p>
+      </main>
     </div>
   );
 };

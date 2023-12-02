@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useLocation } from 'react-router-dom';
 import CatalogItem from './search/CatalogItem';
-import Spinner from '../layout/Spinner';
+import Loading from '../layout/Loading';
 import SearchResultHeader from './search/SearchResultHeader';
 
 
@@ -21,7 +21,7 @@ const Catalog = () => {
   return (
     <>
       {loading ? (
-        <Spinner />
+        <Loading />
       ) : (
         <>
           <div className="search-header">

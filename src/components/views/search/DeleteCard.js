@@ -84,10 +84,8 @@ const DeleteCard = (props) => {
                             </div>
                             <footer className="card-footer">
                                 <div className="card-delete-message">
-                                    <p>Are you sure you want to delete <strong>{card.name}</strong> from your collection?</p>
-                                    <p>This will remove all the data associated with this card.</p>
-                                    <p>Press <strong>Confirm</strong> to proceed with card removal.</p>
-                                    <p>Press <strong>Go Back</strong> to leave without removing card.</p>
+                                    <p>You are about to delete <strong>{card.name}</strong> from your collection.</p>
+                                    <p>This will remove all the information associated with this card.</p>
                                 </div>
                                 <div className="card-btns-wrapper">
                                     <div className="btn-container">

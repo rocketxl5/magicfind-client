@@ -4,7 +4,7 @@ import SideBar from './SideBar';
 import MailHeader from './MailHeader';
 import Mail from './Mail';
 import ComposeMessage from './ComposeMessage';
-import Spinner from '../../layout/Spinner';
+import Loading from '../../layout/Loading';
 import Message from './Message';
 import useAuth from '../../../hooks/useAuth';
 import getPath from '../../../utilities/getPath';
@@ -12,7 +12,7 @@ import { PathContext } from '../../../contexts/PathContext';
 import { api } from '../../../api/resources';
 import styled from 'styled-components';
 
-const MailBox = () => {
+const Inbox = () => {
   const { user, setUnreadMail } = useAuth();
   const { pathname, setPathname } = useContext(PathContext);
 
@@ -131,61 +131,65 @@ const MailBox = () => {
   };
   // console.log(path);
   return (
-    <div className="mailbox-container">
-      <h2 className="page-title">Mailbox</h2>
-      <div className="mailbox-aside">
-        <SideBar
-          isTrash={isTrash}
-          checkedState={checkedState}
-          setMessages={setMessages}
-          setLoading={setLoading}
-          messages={messages}
-          user={user}
-        />
-      </div>
-      <div className="mailbox-content">
-        {location.pathname === '/mail/inbox' ||
-        location.pathname === '/mail/sent' ||
-        location.pathname === '/mail/unread' ||
-        location.pathname === '/mail/trash' ? (
-          <Fragment>
-            <MailHeader
-              handleChange={handleChange}
-              checked={checked}
-                pathname={pathname}
-              checkedState={checkedState}
-              messages={messages}
-            />
-            <Messages>
-              {loading || !messages ? (
-                <Spinner />
-              ) : (
-                messages.map((message, index) => {
-                  return (
-                    <Mail
-                      key={index}
-                      setCurrentMessage={setCurrentMessage}
-                      handleChange={handleChange}
-                      checkedState={checkedState}
-                      message={message}
-                      index={index}
-                      userID={user.id}
-                    />
-                  );
-                })
-              )}
-            </Messages>
-          </Fragment>
-        ) : pathname === 'message' ? (
-          <ComposeMessage />
-        ) : (
-          <Message
-            currentMessage={currentMessage}
+    <div className="content inbox">
+      <header className="header">
+        <h2 className="title">Inbox</h2>
+      </header>
+      <main className="main">
+        <div className="mailbox-aside">
+          <SideBar
+            isTrash={isTrash}
+            checkedState={checkedState}
             setMessages={setMessages}
             setLoading={setLoading}
+            messages={messages}
+            user={user}
           />
-        )}
-      </div>
+        </div>
+        <div className="mailbox-content">
+          {location.pathname === '/mail/inbox' ||
+            location.pathname === '/mail/sent' ||
+            location.pathname === '/mail/unread' ||
+            location.pathname === '/mail/trash' ? (
+            <Fragment>
+              <MailHeader
+                handleChange={handleChange}
+                checked={checked}
+                pathname={pathname}
+                checkedState={checkedState}
+                messages={messages}
+              />
+              <Messages>
+                {loading || !messages ? (
+                  <Loading />
+                ) : (
+                  messages.map((message, index) => {
+                    return (
+                      <Mail
+                        key={index}
+                        setCurrentMessage={setCurrentMessage}
+                        handleChange={handleChange}
+                        checkedState={checkedState}
+                        message={message}
+                        index={index}
+                        userID={user.id}
+                      />
+                    );
+                  })
+                )}
+              </Messages>
+            </Fragment>
+          ) : pathname === 'message' ? (
+            <ComposeMessage />
+          ) : (
+            <Message
+              currentMessage={currentMessage}
+              setMessages={setMessages}
+              setLoading={setLoading}
+            />
+          )}
+        </div>
+      </main>
     </div>
   );
 };
@@ -211,4 +215,4 @@ const Side = styled.aside`
   width: 20%;
 `;
 
-export default MailBox;
+export default Inbox;

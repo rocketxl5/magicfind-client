@@ -12,7 +12,7 @@ import { PathContext } from '../../../contexts/PathContext';
 import { api } from '../../../api/resources';
 import hideSearchBar from '../../../utilities/hideSearchBar';
 import getBrowserWidth from '../../../utilities/getBrowserWidth';
-import Spinner from '../../layout/Spinner';
+import Loading from '../../layout/Loading';
 
 const SearchCatalog = () => {
   const [loading, setLoading] = useState(false);
@@ -151,7 +151,7 @@ const SearchCatalog = () => {
     <>
       {
         loading ? (
-          <Spinner />
+          <Loading />
         ) : (
           <div id="search-catalog-container">
             <form id="search-catalog-form" className="search-form" onSubmit={handleSubmit} >

@@ -1,6 +1,6 @@
 import React from 'react'
 
-const NotFound = (props) => {
+const CardNotFound = (props) => {
     const { cardName } = props;
     return (
         <div className="not-found">
@@ -13,4 +13,4 @@ const NotFound = (props) => {
     )
 }
 
-export default NotFound
+export default CardNotFound

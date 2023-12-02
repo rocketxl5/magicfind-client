@@ -40,7 +40,7 @@ const Search = () => {
   const browserWidth = getBrowserWidth();
 
   const fetchApiCards = () => {
-    console.log('in fetch api cards')
+
     setLoading(true);
     const headers = new Headers();
     headers.append('Content-Type', 'application/json');
@@ -145,7 +145,6 @@ const Search = () => {
   }, [oracleID]);
 
   useEffect(() => {
-    console.log(data)
     if (data) {
       const apiCards = [];
       const filteredCards = filterCards(data);
@@ -185,12 +184,17 @@ const Search = () => {
         loading ? (
           <Loading />
         ) : (
-          <div className="search-card">
-            <h2 className="page-title">Add Card Page</h2>
+            <div className="content">
+              <header className="header">
+
+                <h2 className="title">Search API</h2>
+              </header>
+              <main className="main">
 
             <form id="search-api-form" className="search-form" onSubmit={handleSubmit}>
               <SearchInput isActive={isActive} id={'search-api'} handleSubmit={handleSubmit} ref={apiInputRef} />
             </form>
+              </main>
           </div>
         )
       }
