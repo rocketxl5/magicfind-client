@@ -35,6 +35,8 @@ const Card = (props) => {
         );
     }, [])
 
+
+
     const deleteRef = useRef(null);
     const publishRef = useRef(null);
     const unpublishRef = useRef(null);
@@ -49,9 +51,16 @@ const Card = (props) => {
 
     const [{ open, component }, { updateState }] = useModal(card);
 
+    useEffect(() => {
+        console.log(open)
+        if (open) {
+            document.body.style.overflowY = 'hidden';
+        } else {
+            document.body.style.overflowY = 'scroll';
+        }
+    }, [open])
 
     const handleClick = (e) => {
-        console.log(e.target.id)
         updateState(e.target.id, card, imgAttributes, ExpandedCard, (value) => handleClick(value));
     }
 

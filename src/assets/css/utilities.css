@@ -50,6 +50,10 @@
     min-height: fit-content !important;
 }
 
+.inherit-height {
+    min-height: inherit;
+}
+
 .flex-row {
     flex-direction: row;
 }
@@ -60,6 +64,10 @@
 
 .flex {
     display: flex;
+}
+
+.flex-grow-1 {
+    flex-grow: 1;
 }
 
 .align-center {
@@ -104,10 +112,6 @@
 
 .d-flex {
     display: flex !important;
-}
-
-.content-height {
-    height: max-content;
 }
 
 .col-12 {

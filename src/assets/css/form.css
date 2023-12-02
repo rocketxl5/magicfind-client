@@ -229,41 +229,6 @@ input:-webkit-autofill:active{
 /*************************/
 
 
-/* .overlay-container { */
-    /* position: fixed;
-    top: 0;
-    left: 0;
-    display: none;
-    height: 100vh;
-    width: 100vw;
-    padding-inline: var(--size-2);
-    padding-block-start: 5rem;
-    align-items: center;
-    flex-direction: column;
-    background-color: rgba(216, 214, 211, 0.8);
-    z-index: 3000;
-} */
-
-.overlay-image {
-    /* pointer-events: none; */
-    /* box-shadow: rgba(0, 0, 0, 0.6) 0px 5px 15px; */
-}
-
-.overlay-image * { 
-    pointer-events: none;
-}
-
-.overlay-image
-/* 
-.search-card {
-    margin-block-start: var(--size-4);
-    padding-inline: var(--size-2);
-} */
-
-.search-form {
-
-}
-
 #search-api-form,
 #search-collection-form { 
     position: relative;
@@ -302,7 +267,7 @@ input#search-collection {
     padding-block: 1rem;
     padding-inline: 1.5rem;
     background: var(--clr-blue);
-    border-top: 1px solid rgba(216, 214, 211, 0.3);
+    border-top: 1px solid rgb(107, 107, 107);
   
 }
 
@@ -425,16 +390,16 @@ ul.autocomplete-list {
     border-radius: var(--size-1); 
     background: var(--clr-light);
   }
-
+  
   .delete-card-content {
-    margin-block-start: 5rem;
-    padding: 2rem;
-    min-height: 48rem;
-    min-width: calc(100vw - 4rem);
-    border: 1px solid var(--clr-grey);
-    border-radius: var(--size-1); 
-    background: var(--clr-light);
-  }
+      margin-block-start: 5rem;
+      padding: 2rem;
+      min-height: 48rem;
+      min-width: calc(100vw - 4rem);
+      border: 1px solid var(--clr-grey);
+      border-radius: var(--size-1); 
+      background: var(--clr-light);
+    }
 
   .card-body {
     height: fit-content;
@@ -464,8 +429,6 @@ ul.autocomplete-list {
 
   .card-section:nth-of-type(2) {
     display: flex;
-    flex-direction: column;
-    justify-content: space-between;
   }
 
   .card-icon-container {
@@ -603,7 +566,7 @@ ul.autocomplete-list {
 .card-btns-wrapper {
     width: 100%;
     display: flex;
-    gap: var(--size-2);
+    gap: 1rem;
 }
 
 .btn-container {

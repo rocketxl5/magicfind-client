@@ -7,13 +7,13 @@ const Layout = () => {
     const location = useLocation()
 
     return (
-        <>
+        <div className="wrapper">
             {location.pathname !== '/login' && location.pathname !== '/signup' && <Header />}
-            <div className="wrapper">
+            <div className="container">
                 <Outlet />
             </div>
             <Footer />
-        </>
+        </div>
     )
 }
 
