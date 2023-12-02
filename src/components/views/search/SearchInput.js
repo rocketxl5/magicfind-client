@@ -18,6 +18,7 @@ const SearchInput = forwardRef(function SearchInput(props, ref) {
     cardNames,
     setCardName,
     setSearchInput,
+    setCardNames,
     searchTerm,
     setSearchTerm,
     predictions,
@@ -53,12 +54,11 @@ const SearchInput = forwardRef(function SearchInput(props, ref) {
     setSearchTerm('');
     setPredictions([]);
     setDisplayAutocomplete(false);
-    // setCardNames([]);
     setSearchInput(null);
   };
 
   const handleFocus = (e) => {
-    console.log(e.target)
+    setCardNames([])
     setSearchInput(e.target);
   }
 

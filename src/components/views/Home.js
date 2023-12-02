@@ -19,7 +19,7 @@ const Home = () => {
       </section>
       <div className="content home-page">
         <header className="header">
-          <h2 className="title">Welcome to Magic Find 2</h2>
+          <h2 className="title">Welcome to Magic Find</h2>
         </header>
         <main className="main">
         <div className="article">
