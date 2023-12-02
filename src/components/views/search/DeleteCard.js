@@ -65,7 +65,7 @@ const DeleteCard = (props) => {
     }, [responseObject])
 
     return (
-            <div className="card-delete-container">
+        <div className="delete-card-content">
                 {
                     loading ? (
                         <Loading />

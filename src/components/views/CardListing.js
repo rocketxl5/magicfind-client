@@ -99,7 +99,7 @@ const CardListing = ({ card, setIsSent }) => {
         </span>
       </header>
 
-      <div className="card-container">
+      <div className="card-content">
         <div className="card">
           <div className="card-image">
             <Image card={card} />
