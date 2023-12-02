@@ -131,11 +131,9 @@ input:-webkit-autofill:active{
     margin-block-start: 1rem;
 }
 
-.form-element .btn {
+.form-btn {
     width: 40%;
-    /* flex-basis: 100%; */
     padding-block: 1rem;
-    /* padding-inline: 2rem; */
     font-size: var(--fs-175);
     font-weight: 500;
     color: var(--clr-light);
@@ -613,16 +611,6 @@ ul.autocomplete-list {
     flex-basis: 0;
     flex-grow: 1;
 }
-
-.card-btn {
-    width: 100%;
-    padding-block: 0.6rem;
-    font-size: var(--fs-150);
-    font-weight: 500;
-    text-align: center;
-    border-radius: 5px;
-  }
-
 
 
 

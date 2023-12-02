@@ -3,7 +3,7 @@ import React from 'react'
 const CardNotFound = (props) => {
     const { cardName } = props;
     return (
-        <div className="not-found">
+        <div className="card-not-found">
             <header>
 
             </header>

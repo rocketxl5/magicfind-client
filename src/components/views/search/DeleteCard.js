@@ -89,12 +89,12 @@ const DeleteCard = (props) => {
                                 </div>
                                 <div className="card-btns-wrapper">
                                     <div className="btn-container">
-                                        < button id="confirm-delete" className="card-btn bg-red color-light" type="button" onClick={(e) => deleteCardHandler(e)}>
+                                        < button id="confirm-delete" className="btn bg-red color-light" type="button" onClick={(e) => deleteCardHandler(e)}>
                                             Confirm
                                         </button>
                                     </div>
                                     <div className="btn-container">
-                                        < button id="go-back" className="card-btn bg-blue color-light" type="button" onClick={handleClick}>
+                                        < button id="go-back" className="btn bg-blue color-light" type="button" onClick={handleClick}>
                                             Go Back
                                         </button>
                                     </div>

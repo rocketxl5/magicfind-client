@@ -3,7 +3,7 @@ import Button from '../../layout/Button';
 import useAuth from '../../../hooks/useAuth';
 import { api } from '../../../api/resources';
 const INIT = {
-    style: 'card-btn bg-blue color-light border-blue',
+    style: 'btn bg-blue color-light border-blue',
     type: 'button',
     value: 'Add To Collection',
     statue: false
@@ -18,16 +18,16 @@ const ApiCardFooter = forwardRef(function ApiCardFooter({ card, setLoading }, re
         let attr = { type: 'button', value: message.body, style: '' }
         switch (message.title) {
             case 'card_added':
-                attr = { ...attr, style: 'card-btn bg-light color-success border-success disabled' };
+                attr = { ...attr, style: 'btn bg-light color-success border-success disabled' };
                 break;
             case 'card_exist':
-                attr = { ...attr, style: 'card-btn bg-light color-primary border-primary disabled' };
+                attr = { ...attr, style: 'btn bg-light color-primary border-primary disabled' };
                 break;
             case 'not_found' || 'server':
-                attr = { ...attr, style: 'card-btn bg-light color-danger border-danger disabled' };
+                attr = { ...attr, style: 'btn bg-light color-danger border-danger disabled' };
                 break;
             default:
-                attr = { ...attr, style: 'card-btn bg-blue color-light border-blue', value: 'Add To Collection', status: true };
+                attr = { ...attr, style: 'btn bg-blue color-light border-blue', value: 'Add To Collection', status: true };
                 break;
         }
         return attr;
@@ -79,7 +79,7 @@ const ApiCardFooter = forwardRef(function ApiCardFooter({ card, setLoading }, re
             <div className="btn-container">
                 {/* <Button attributes={attributes} handleClick={handleClick} addCardRef={ref} /> */}
                 <button id="add-to-collection" className={attributes.style} type={attributes.type} ref={ref} onClick={handleClick}>{attributes.value}</button>
-                {/* <button className="card-btn bg-blue color-lg-grey" type="button" onClick={() => handleClick(card)}>{!isLoaded ? 'Add To Collection' : 'Added'}</button> */}
+                {/* <button className="btn bg-blue color-lg-grey" type="button" onClick={() => handleClick(card)}>{!isLoaded ? 'Add To Collection' : 'Added'}</button> */}
             </div>
         </div>
 

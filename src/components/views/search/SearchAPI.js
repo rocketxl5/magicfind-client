@@ -110,7 +110,7 @@ const Search = () => {
         if (data.object === 'error') {
           navigate(`/search-result/${setQueryString(searchTerm, '-')}`,
             {
-              state: { cards: undefined, cardName: searchTerm, type: 'not-found', search: location.pathname },
+              state: { cards: undefined, cardName: searchTerm, type: 'card-not-found', search: location.pathname },
             });
         } else {
           const { name, oracle_id } = data;

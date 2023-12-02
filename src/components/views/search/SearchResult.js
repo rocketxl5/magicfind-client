@@ -53,7 +53,7 @@ const SearchResult = () => {
                     </div>
                 </header>
                 {
-                    type === 'not-found' ?
+                    type === 'card-not-found' ?
                         (
                             <NotFound cardName={cardName} />
                         ) : (
