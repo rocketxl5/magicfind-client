@@ -1,9 +1,8 @@
-const Button = (props) => {
-    const { attributes, eventHandler } = props;
-    const { style, type, value, status } = attributes;
-
+const Button = ({ attributes, handleClick }) => {
+    const { id, style, type, value, status } = attributes;
+    console.log(handleClick)
     return (
-        <button className={style} type={type} onClick={eventHandler} disabled={status}>{value}</button>
+        <button id={id} className={style} type={type} onClick={handleClick} disabled={status}>{value}</button>
     )
 }
 

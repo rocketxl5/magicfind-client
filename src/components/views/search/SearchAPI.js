@@ -5,14 +5,14 @@ import React, {
   useContext
 } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import SearchInput from './search/SearchInput';
-import Spinner from '../layout/Spinner';
-import { SearchContext } from '../../contexts/SearchContext';
-import { PathContext } from '../../contexts/PathContext';
-import { api } from '../../api/resources';
-import setString from '../../utilities/setString';
-import hideSearchBar from '../../utilities/hideSearchBar';
-import getBrowserWidth from '../../utilities/getBrowserWidth';
+import SearchInput from './SearchInput';
+import Loading from '../../layout/Loading';
+import { SearchContext } from '../../../contexts/SearchContext';
+import { PathContext } from '../../../contexts/PathContext';
+import { api } from '../../../api/resources';
+import setQueryString from '../../../utilities/setQueryString';
+import hideSearchBar from '../../../utilities/hideSearchBar';
+import getBrowserWidth from '../../../utilities/getBrowserWidth';
 
 const Search = () => {
   const [loading, setLoading] = useState(false);
@@ -40,6 +40,7 @@ const Search = () => {
   const browserWidth = getBrowserWidth();
 
   const fetchApiCards = () => {
+    console.log('in fetch api cards')
     setLoading(true);
     const headers = new Headers();
     headers.append('Content-Type', 'application/json');
@@ -51,7 +52,6 @@ const Search = () => {
     fetch(`${api.serverURL}/api/cards/api-cardnames`, options)
       .then((res) => res.json())
       .then((data) => {
-        console.log(data)
         setApiCards(data);
         setLoading(false);
         apiInputRef.current.focus();
@@ -61,7 +61,6 @@ const Search = () => {
         console.log(error)
       });
   }
-
 
   useEffect(() => {
     console.log(location.pathname)
@@ -109,7 +108,7 @@ const Search = () => {
       .then((data) => {
         console.log(data)
         if (data.object === 'error') {
-          navigate(`/search-result/${setString(searchTerm, '-')}`,
+          navigate(`/search-result/${setQueryString(searchTerm, '-')}`,
             {
               state: { cards: undefined, cardName: searchTerm, type: 'not-found', search: location.pathname },
             });
@@ -147,7 +146,7 @@ const Search = () => {
   }, [oracleID]);
 
   useEffect(() => {
-    // console.log(data)
+    console.log(data)
     if (data) {
       const apiCards = [];
       const filteredCards = filterCards(data);
@@ -168,15 +167,16 @@ const Search = () => {
       function filterCards(cards) {
         return cards.filter((card) => {
           return !card.digital && !card.oversized;
-              });
+        });
       };
-      setLoading(false);
-      navigate(`/search-result/${setString(cardName, '-')}`,
+
+      setLoading(false)
+      setCardName('');
+      setSearchInput(null);
+      navigate(`/search-result/${setQueryString(cardName, '-')}`,
         {
           state: { cards: apiCards, cardName: cardName, type: 'search-api', search: location.pathname },
         });
-      setCardName('');
-      setSearchInput(null);
     }
   }, [data])
 
@@ -184,15 +184,15 @@ const Search = () => {
     <>
       {
         loading ? (
-          <Spinner />
+          <Loading />
         ) : (
-            <div className="search-card">
-              <h2 className="page-title">Add Card Page</h2>
+          <div className="search-card">
+            <h2 className="page-title">Add Card Page</h2>
 
-              <form id="search-api-form" className="search-form" onSubmit={handleSubmit}>
-                <SearchInput isActive={isActive} id={'search-api'} handleSubmit={handleSubmit} ref={apiInputRef} />
-              </form>
-            </div>
+            <form id="search-api-form" className="search-form" onSubmit={handleSubmit}>
+              <SearchInput isActive={isActive} id={'search-api'} handleSubmit={handleSubmit} ref={apiInputRef} />
+            </form>
+          </div>
         )
       }
     </>

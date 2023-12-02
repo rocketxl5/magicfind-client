@@ -1,4 +1,4 @@
-import setString from './setString';
+import setQueryString from './setQueryString';
 
 const setSearchString = (searchTerm, cardName) => {
 
@@ -6,11 +6,11 @@ const setSearchString = (searchTerm, cardName) => {
 
     if (cardName) {
 
-        return `/cards/named?exact=${setString(cardName, '+')}`;
+        return `/cards/named?exact=${setQueryString(cardName, '+')}`;
     }
     else {
         console.log(searchTerm)
-        return `/cards/named?fuzzy=${setString(searchTerm, '+')}`;
+        return `/cards/named?fuzzy=${setQueryString(searchTerm, '+')}`;
     }
 
 }

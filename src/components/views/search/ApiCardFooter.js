@@ -1,19 +1,18 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, forwardRef } from 'react'
 import Button from '../../layout/Button';
 import useAuth from '../../../hooks/useAuth';
 import { api } from '../../../api/resources';
-
-const ApiCardFooter = (props) => {
-    const { card, setLoading } = props;
-    const [attributes, setAttributes] = useState({
-        style: 'card-btn bg-blue color-light border-blue',
-        type: 'button',
-        value: 'Add To Collection',
-        statue: false
-    });
+const INIT = {
+    style: 'card-btn bg-blue color-light border-blue',
+    type: 'button',
+    value: 'Add To Collection',
+    statue: false
+}
+const ApiCardFooter = forwardRef(function ApiCardFooter({ card, setLoading }, ref) {
+    const [attributes, setAttributes] = useState(INIT);
     const [selectedCard, setSelectedCard] = useState(null);
-    const { user } = useAuth();
 
+    const { user } = useAuth();
 
     const attributesHandler = (message) => {
         let attr = { type: 'button', value: message.body, style: '' }
@@ -37,7 +36,7 @@ const ApiCardFooter = (props) => {
     useEffect(() => {
 
         if (selectedCard) {
-
+            console.log(selectedCard)
             setLoading(true)
             const headers = new Headers();
             headers.append('Content-Type', 'application/json');
@@ -78,12 +77,13 @@ const ApiCardFooter = (props) => {
 
         <div className="card-btns-wrapper">
             <div className="btn-container">
-                <Button attributes={attributes} eventHandler={handleClick} />
+                {/* <Button attributes={attributes} handleClick={handleClick} addCardRef={ref} /> */}
+                <button id="add-to-collection" className={attributes.style} type={attributes.type} ref={ref} onClick={handleClick}>{attributes.value}</button>
                 {/* <button className="card-btn bg-blue color-lg-grey" type="button" onClick={() => handleClick(card)}>{!isLoaded ? 'Add To Collection' : 'Added'}</button> */}
             </div>
         </div>
 
     )
-}
+})
 
 export default ApiCardFooter

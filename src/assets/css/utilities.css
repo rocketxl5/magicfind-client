@@ -70,6 +70,10 @@
     justify-content: center;
 }
 
+.justify-between {
+    justify-content: space-between;
+}
+
 .justify-end {
     justify-content: end;
 }
@@ -144,6 +148,10 @@
     background-color: var(--clr-danger);
 }
 
+.bg-success {
+    background-color: var(--clr-success);
+}
+
 .bg-green {
     background: var(--clr-green);
 }
@@ -208,6 +216,10 @@
     color: var(--clr-success);
 }
 
+.color-green {
+    color: var(--clr-green);
+}
+
 .color-primary {
     color: var(--clr-primary);
 }
@@ -219,3 +231,40 @@
 .disabled {
     pointer-events: none;
 }
+
+.b-radius-5 {
+    border-radius: 5px;
+}
+
+.b-radius-10 {
+    border-radius: 10px;
+}
+
+.b-radius-15 {
+    border-radius: 15px;
+}
+
+.b-radius-20 {
+    border-radius: 20px;
+}
+
+.b-radius-25 {
+    border-radius: 25px;
+}
+
+.fw-100 {
+    font-weight: 100;
+}
+
+.fw-400 {
+    font-weight: 400;
+}
+
+.fw-500 {
+    font-weight: 500;
+}
+
+.fw-600 {
+    font-weight: 600;
+}
+
