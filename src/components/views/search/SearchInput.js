@@ -58,7 +58,6 @@ const SearchInput = forwardRef(function SearchInput(props, ref) {
   };
 
   const handleFocus = (e) => {
-    setCardNames([])
     setSearchInput(e.target);
   }
 

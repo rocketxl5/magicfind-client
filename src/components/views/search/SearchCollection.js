@@ -152,7 +152,7 @@ const SearchCollection = ({ user }) => {
             <div className="content">
               <header className="header">
 
-                <h2 className="title">Collection</h2>
+                <h2 className="title">Search Collection</h2>
               </header>
               <main className="main">
 

@@ -82,6 +82,7 @@ const Search = () => {
       setCardNames(apiCards);
     } else {
       setIsActive(false);
+      setCardNames([])
     }
   }, [searchInput])
 
