@@ -30,7 +30,7 @@ const useModal = (card) => {
                     component:
                         <ExpandedCardContent handleClick={action.payload.eventHandler}>
                             {action.payload.ImageComponent}
-                            {action.payload.card.card_faces.length && <FlipIcon handleClick={action.payload.eventHandler} />}
+                            {action.payload.card.card_faces?.length && <FlipIcon handleClick={action.payload.eventHandler} />}
                         </ExpandedCardContent>
                 };
             case ACTIONS.DELETE_CARD:
