@@ -135,7 +135,7 @@ const CatalogCard = ({ card }) => {
     }, [location]);
 
     return (
-        <div className="card-content">
+        <div className="card-container">
             <>
                 <div className="card">
                     <div className="card-image" >

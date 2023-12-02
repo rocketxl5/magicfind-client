@@ -420,8 +420,7 @@ ul.autocomplete-list {
     cursor: pointer;
   }
 
-  .card-container,
-  .delete-card-content {
+  .card-container {
     margin-block-start: var(--size-2);
     padding: 1rem;
     border: 1px solid var(--clr-grey);
@@ -431,8 +430,12 @@ ul.autocomplete-list {
 
   .delete-card-content {
     margin-block-start: 5rem;
+    padding-inline: 2rem;
     min-height: 48rem;
     min-width: calc(100vw - 4rem);
+    border: 1px solid var(--clr-grey);
+    border-radius: var(--size-1); 
+    background: var(--clr-light);
   }
 
   .card-body {

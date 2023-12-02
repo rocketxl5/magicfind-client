@@ -37,7 +37,6 @@ const Login = () => {
 
   // On component load
   useEffect(() => { 
-    console.log(location)
     if (location.state) {
       if (location.state.message) {
         setMessage({ ...location.state.message });

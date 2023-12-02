@@ -16,7 +16,6 @@ export const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     if (user) {
-      console.log(user)
       const headers = new Headers();
       headers.append('Content-type', 'application/json');
       headers.append('auth-token', user.token);
