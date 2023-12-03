@@ -14,6 +14,14 @@ const Card = (props) => {
     const [loading, setLoading] = useState(false);
     const [ExpandedCard, setExpandedCard] = useState(null);
 
+    const deleteRef = useRef(null);
+    const publishRef = useRef(null);
+    const unpublishRef = useRef(null);
+    const wishlistRef = useRef(null);
+    const cartRef = useRef(null);
+    const apiRef = useRef(null);
+    const cardImageRef = useRef(null);
+
     const image_uris = card?.image_uris || card?.card_faces[0].image_uris;
     const imgAttributes = {
         id: 'expand-card',
@@ -35,30 +43,15 @@ const Card = (props) => {
         );
     }, [])
 
-
-
-    const deleteRef = useRef(null);
-    const publishRef = useRef(null);
-    const unpublishRef = useRef(null);
-
-    const wishlistRef = useRef(null);
-    const cartRef = useRef(null);
-
-    const apiRef = useRef(null);
-
-    const cardImageRef = useRef(null);
-
-
     const [{ open, component }, { updateState }] = useModal(card);
 
-    useEffect(() => {
-        console.log(open)
-        if (open) {
-            document.body.style.overflowY = 'hidden';
-        } else {
-            document.body.style.overflowY = 'scroll';
-        }
-    }, [open])
+    // useEffect(() => {
+    //     if (open) {
+    //         document.body.style.overflowY = 'hidden';
+    //     } else {
+    //         document.body.style.overflowY = 'scroll';
+    //     }
+    // }, [open])
 
     const handleClick = (e) => {
         updateState(e.target.id, card, imgAttributes, ExpandedCard, (value) => handleClick(value));

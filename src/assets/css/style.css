@@ -287,3 +287,11 @@ section.banner {
   .expanded-card {
     margin-top: 5rem;
   }
+
+
+  .confirmation {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+  }

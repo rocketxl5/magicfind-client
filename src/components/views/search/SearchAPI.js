@@ -106,7 +106,6 @@ const Search = () => {
       // https://api.scryfall.com/cards/search?order=released&q=oracleid%3A0c2841bb-038c-4fbf-8360-bc0a1522b58d&unique=prints
       .then((res) => res.json())
       .then((data) => {
-        console.log(data)
         if (data.object === 'error') {
           navigate(`/search-result/${setQueryString(searchTerm, '-')}`,
             {
