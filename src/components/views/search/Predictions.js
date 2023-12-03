@@ -3,7 +3,7 @@ import { SearchContext } from '../../../contexts/SearchContext';
 
 const Predictions = (props) => {
   const {
-    handleSubmit,
+    searchCards,
     prediction,
     index
   } = props;
@@ -42,7 +42,7 @@ const Predictions = (props) => {
   const handleMouseDown = (e) => {
     // console.log(prediction)
     setCardName(prediction)
-    handleSubmit(e);
+    searchCards(e);
     // localStorage.setItem('searchTerm', JSON.stringify(content));
   };
 

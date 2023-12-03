@@ -4,7 +4,7 @@ import { SearchContext } from '../../../contexts/SearchContext';
 const INIT = -200;
 
 const AutoComplete = (props) => {
-    const { predictions, handleSubmit } = props;
+    const { predictions, searchCards } = props;
     const {
         marker,
         setMarker,
@@ -62,7 +62,7 @@ const AutoComplete = (props) => {
             //     if (predictions.length === 1 && predictions[predictions.length - 1]) {
             //         console.log(predictions[predictions.length - 1])
             //         setCardName(predictions[predictions.length - 1])
-            //         handleSubmit()
+            //         searchCards()
             //     }
             // }
         }
@@ -83,7 +83,7 @@ const AutoComplete = (props) => {
                                 index={index}
                                 marker={marker}
                                 prediction={prediction}
-                                handleSubmit={handleSubmit}
+                                searchCards={searchCards}
                             />
                         )
                     );

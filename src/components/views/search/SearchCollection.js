@@ -95,7 +95,7 @@ const SearchCollection = ({ user }) => {
   }, [searchInput]);
 
   // Instore single card request search field with
-  const handleSubmit = (e) => {
+  const searchCollection = (e) => {
     e?.preventDefault();
 
     if (searchTerm) {
@@ -133,9 +133,7 @@ const SearchCollection = ({ user }) => {
 
   // Get all cards from user store
   const handleClick = () => {
-    console.log(cards)
     if (cards) {
-      console.log(cards)
       navigate(`/search-result/all-cards`,
         {
           state: { cards: cards, type: collectionInputRef.current.id, search: location.pathname },
@@ -175,8 +173,8 @@ const SearchCollection = ({ user }) => {
                 </div>
               ) : (
                       <>
-                        <form id="search-collection-form" className="search-form" onSubmit={handleSubmit} >
-                          <SearchInput isActive={isActive} id={'search-collection'} handleSubmit={handleSubmit} ref={collectionInputRef} />
+                        <form id="search-collection-form" className="search-form" onSubmit={searchCollection} >
+                          <SearchInput isActive={isActive} id={'search-collection'} searchCards={searchCollection} ref={collectionInputRef} />
                         </form>
                         <Buttons>
                           <Button

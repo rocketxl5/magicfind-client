@@ -9,7 +9,6 @@ const SearchResult = () => {
     const location = useLocation();
     const { cards, cardName, type, search } = location.state;
     const [loadImages, setLoadImages] = useState(false);
-    console.log(location.state)
 
     useEffect(() => {
         if (cards) {

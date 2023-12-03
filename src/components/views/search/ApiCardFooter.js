@@ -36,7 +36,7 @@ const ApiCardFooter = forwardRef(function ApiCardFooter({ card, setLoading }, re
     useEffect(() => {
 
         if (selectedCard) {
-            console.log(selectedCard)
+
             setLoading(true)
             const headers = new Headers();
             headers.append('Content-Type', 'application/json');
@@ -58,10 +58,8 @@ const ApiCardFooter = forwardRef(function ApiCardFooter({ card, setLoading }, re
                     });
                 })
                 .then((data) => {
-                    console.log(data);
                     setAttributes(attributesHandler(data));
                     setLoading(false);
-                    // navigate('/search-api');
                 })
                 .catch((error) => {
                     console.log(error);
