@@ -164,7 +164,8 @@ const Search = () => {
       // Remove online and oversized cards
       function filterCards(cards) {
         return cards.filter((card) => {
-          return !card.digital && !card.oversized;
+          return !card.digital;
+          // return !card.digital && !card.oversized;
         });
       };
 
