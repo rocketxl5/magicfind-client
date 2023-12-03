@@ -87,7 +87,7 @@ const Search = () => {
   }, [searchInput])
 
 
-  const handleSubmit = (e) => {
+  const searchCards = (e) => {
     e && e.preventDefault();
 
     if (searchTerm.length < 3) { return }
@@ -191,8 +191,8 @@ const Search = () => {
               </header>
               <main className="main">
 
-            <form id="search-api-form" className="search-form" onSubmit={handleSubmit}>
-              <SearchInput isActive={isActive} id={'search-api'} handleSubmit={handleSubmit} ref={apiInputRef} />
+                <form id="search-api-form" className="search-form" onSubmit={searchCards}>
+                  <SearchInput isActive={isActive} id={'search-api'} searchCards={searchCards} ref={apiInputRef} />
             </form>
               </main>
           </div>
