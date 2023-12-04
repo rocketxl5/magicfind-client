@@ -34,16 +34,16 @@ const App = () => {
 
   return (
     <Routes>
-      <Route element={<Layout />} >
+      <Route path="/" element={<Layout />} >
 
         {/* Public routes */}
         <Route exact path="/" element={<Home />} />
-        <Route path="about" element={<About />} />
-        <Route path="contact" element={<Contact />} />
-        <Route path="login" element={<Login />} />
-        <Route path="signup" element={<Signup />} />
-        <Route path="shopping-cart" element={<ShoppingCart />} />
-        <Route path="search-result/:cardName" element={<SearchResult />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/shopping-cart" element={<ShoppingCart />} />
+        <Route path="/search-result/:cardName" element={<SearchResult />} />
 
         {/* Auth protected routes */}
         <Route element={<RequireAuth />}>
