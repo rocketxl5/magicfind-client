@@ -13,7 +13,7 @@ import { api } from '../../../api/resources';
 import styled from 'styled-components';
 
 const Inbox = () => {
-  const { user, setUnreadMail } = useAuth();
+  const { auth, setUnreadMail } = useAuth();
   const { pathname, setPathname } = useContext(PathContext);
 
   const location = useLocation();
@@ -46,14 +46,14 @@ const Inbox = () => {
 
       const headers = new Headers();
       headers.append('Content-type', 'application/json');
-      headers.append('auth-token', user.token);
+      headers.append('auth-token', auth.token);
 
       const options = {
         method: 'GET',
         headers: headers,
       };
 
-      fetch(`${api.serverURL}/api/messages/${pathname}/${user.id}`, options)
+      fetch(`${api.serverURL}/api/messages/${pathname}/${auth.id}`, options)
         .then((res) => res.json())
         .then((data) => {
           if (data.data) {
@@ -88,7 +88,7 @@ const Inbox = () => {
 
   useEffect(() => {
     setCheckedState(new Array(messages.length).fill(checked));
-
+    console.log(checked)
     if (checked) {
       setIsTrash(true);
     } else {
@@ -143,7 +143,7 @@ const Inbox = () => {
             setMessages={setMessages}
             setLoading={setLoading}
             messages={messages}
-            user={user}
+            user={auth}
           />
         </div>
         <div className="mailbox-content">
@@ -172,7 +172,7 @@ const Inbox = () => {
                         checkedState={checkedState}
                         message={message}
                         index={index}
-                        userID={user.id}
+                        userID={auth.id}
                       />
                     );
                   })

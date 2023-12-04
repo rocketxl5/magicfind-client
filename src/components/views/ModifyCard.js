@@ -7,7 +7,7 @@ import { api } from '../../api/resources';
 
 const Modify = () => {
   const [isSent, setIsSent] = useState(false);
-  const { user } = useAuth();
+  const { auth } = useAuth();
   const { setCardContext } = useContext(CardContext);
   const location = useLocation();
   const card = location.state.data;
@@ -32,7 +32,7 @@ const Modify = () => {
       };
       const headers = new Headers();
       headers.append('Content-Type', 'application/json');
-      headers.append('auth-token', user.token);
+      headers.append('auth-token', auth.token);
       const options = {
         method: 'PATCH',
         headers: headers,

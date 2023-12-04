@@ -12,7 +12,7 @@ const ApiCardFooter = forwardRef(function ApiCardFooter({ card, setLoading }, re
     const [attributes, setAttributes] = useState(INIT);
     const [selectedCard, setSelectedCard] = useState(null);
 
-    const { user } = useAuth();
+    const { auth } = useAuth();
 
     const attributesHandler = (message) => {
         let attr = { type: 'button', value: message.body, style: '' }
@@ -40,25 +40,25 @@ const ApiCardFooter = forwardRef(function ApiCardFooter({ card, setLoading }, re
             setLoading(true)
             const headers = new Headers();
             headers.append('Content-Type', 'application/json');
-            headers.append('auth-token', user.token);
+            headers.append('auth-token', auth.token);
 
             const options = {
                 method: 'POST',
                 headers: headers,
                 body: JSON.stringify(selectedCard),
             };
-            fetch(`${api.serverURL}/api/cards/add/${user.id}/${selectedCard.id}`, options)
+            fetch(`${api.serverURL}/api/cards/add/${auth.id}/${selectedCard.id}`, options)
                 .then((res) => {
                     if (res.ok) {
                         return res.json();
                     }
                     return res.json().then((data) => {
                         setLoading(false);
-                        setAttributes(attributesHandler(data));
+                        setAttributes(attributesHandler(data.message));
                     });
                 })
                 .then((data) => {
-                    setAttributes(attributesHandler(data));
+                    setAttributes(attributesHandler(data.message));
                     setLoading(false);
                 })
                 .catch((error) => {

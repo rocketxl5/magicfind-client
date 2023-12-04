@@ -11,7 +11,7 @@ const Message = () => {
   const MAXCHARS = 500;
   const navigate = useNavigate();
   const location = useLocation();
-  const { user } = useAuth();
+  const { auth } = useAuth();
   const { setPathname } = useContext(PathContext);
   // When writing to a seller set recipient name to seller name
   const [recipientName, setRecipientName] = useState(
@@ -30,8 +30,8 @@ const Message = () => {
   const [isValid, setIsValid] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
 
-  const token = user.token;
-  const userName = user.name;
+  const token = auth.token;
+  const userName = auth.name;
 
   const recipientField = useRef();
   const subjectField = useRef();

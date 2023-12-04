@@ -12,7 +12,7 @@ const Message = ({ currentMessage, setMessages, setLoading }) => {
   const navigate = useNavigate();
   const location = useLocation();
   const { pathname, setPathname } = useContext(PathContext);
-  const { user } = useAuth();
+  const { auth } = useAuth();
 
   useEffect(() => {
     if (!currentMessage) {
@@ -28,13 +28,13 @@ const Message = ({ currentMessage, setMessages, setLoading }) => {
     setPathname(null);
     setLoading(true);
     const updates = {
-      userID: user.id,
+      userID: auth.id,
       messageID: currentMessage._id,
       isReadStatus: status,
     };
     const headers = new Headers();
     headers.append('Content-type', 'application/json');
-    headers.append('auth-token', user.token);
+    headers.append('auth-token', auth.token);
 
     const options = {
       method: 'PATCH',
@@ -63,14 +63,14 @@ const Message = ({ currentMessage, setMessages, setLoading }) => {
     setLoading(true);
 
     const updates = {
-      userID: user.id,
+      userID: auth.id,
       messageID: currentMessage._id,
       isSentMessage: currentMessage.isSent,
       isTrashStatus: status,
     };
     const headers = new Headers();
     headers.append('Content-type', 'application/json');
-    headers.append('auth-token', user.token);
+    headers.append('auth-token', auth.token);
 
     const options = {
       method: 'PATCH',
@@ -94,12 +94,12 @@ const Message = ({ currentMessage, setMessages, setLoading }) => {
     setLoading(true);
 
     const updates = {
-      userID: user.id,
+      userID: auth.id,
       toBeDeleted: deleted,
     };
     const headers = new Headers();
     headers.append('Content-type', 'application/json');
-    headers.append('auth-token', user.token);
+    headers.append('auth-token', auth.token);
 
     const options = {
       method: 'DELETE',

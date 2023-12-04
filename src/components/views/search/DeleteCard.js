@@ -10,7 +10,7 @@ import { api } from '../../../api/resources';
 
 const DeleteCard = (props) => {
     const { attributes, card, handleClick } = props;
-    const { user } = useAuth();
+    const { auth } = useAuth();
     const navigate = useNavigate();
     const location = useLocation();
     const [response, setResponse] = useState(null);
@@ -41,11 +41,11 @@ const DeleteCard = (props) => {
         setLoading(true);
         const headers = new Headers();
         headers.append('Content-Type', 'application/json');
-        headers.append('auth-token', user.token);
+        headers.append('auth-token', auth.token);
 
         const input = {
             cardID: card._id,
-            userID: user.id,
+            userID: auth.id,
         }
         const options = {
             method: 'DELETE',

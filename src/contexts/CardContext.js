@@ -3,7 +3,7 @@ export const CardContext = createContext(null);
 export const CardProvider = ({ children }) => {
 
   const [cardContext, setCardContext] = useState(false);
-  const [userStoreContent, setUserStoreContent] = useState([]);
+  const [userStoreContent, setAuthStoreContent] = useState([]);
 
   return (
     <CardContext.Provider
@@ -11,7 +11,7 @@ export const CardProvider = ({ children }) => {
         cardContext,
         setCardContext,
         userStoreContent,
-        setUserStoreContent,
+        setAuthStoreContent,
       }}
     >
       {children}

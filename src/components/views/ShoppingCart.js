@@ -12,7 +12,7 @@ function ShoppingCart() {
   const [subTotal, setSubTotal] = useState(0);
   const [loading, setLoading] = useState(false);
   const [isUpdating, setIsUpdating] = useState(false);
-  const { user } = useAuth();
+  const { auth } = useAuth();
   const { cartItems, setCartItems } = useContext(ShoppingCartContext);
   const navigate = useNavigate();
 
@@ -31,18 +31,18 @@ function ShoppingCart() {
 
   const handleCheckout = () => {
     // setLoading(true);
-    if (!user) {
+    if (!auth) {
       navigate('/login');
     } else {
       const input = {
-        userID: user.id,
+        userID: auth.id,
         cartItems: cartItems,
       };
       const options = {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
-          'auth-token': user.token,
+          'auth-token': auth.token,
         },
         body: JSON.stringify(input),
       };

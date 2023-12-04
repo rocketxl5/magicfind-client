@@ -22,7 +22,6 @@ import ShoppingCart from './components/views/ShoppingCart';
 import RemoveCard from './components/views/RemoveCard';
 import ModifyCard from './components/views/ModifyCard';
 import Inbox from './components/views/mail/Inbox';
-import useAuth from './hooks/useAuth';
 import './assets/css/reset.css';
 import './App.css';
 import './assets/css/utilities.css';
@@ -32,7 +31,7 @@ import './assets/css/form.css';
 import './assets/css/media-queries.css';
 
 const App = () => {
-  const { user } = useAuth();
+
   return (
     <Routes>
       <Route path="/" element={<Layout />} >
@@ -55,7 +54,7 @@ const App = () => {
           <Route path="add-card/:cardName" element={<AddCard />} />
           <Route path="remove-card/:cardName" element={<RemoveCard />} />
           <Route path="modify-card/:cardName" element={<ModifyCard />} />
-          <Route path="search-collection" element={<SearchCollection user={user} />} />
+          <Route path="search-collection" element={<SearchCollection />} />
           <Route path="search-api" element={<SearchAPI />} />
           <Route path="mail/inbox" element={<Inbox />} />
           <Route path="mail/:handle/:handle" element={<Inbox />} />

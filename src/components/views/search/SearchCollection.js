@@ -15,8 +15,9 @@ import styled from 'styled-components';
 import hideSearchBar from '../../../utilities/hideSearchBar';
 import getBrowserWidth from '../../../utilities/getBrowserWidth';
 import setQueryString from '../../../utilities/setQueryString';
+import useAuth from '../../../hooks/useAuth';
 
-const SearchCollection = ({ user }) => {
+const SearchCollection = () => {
   const [loading, setLoading] = useState(false);
   const [isActive, setIsActive] = useState(false);
   const [message, setMessage] = useState(null);
@@ -36,6 +37,7 @@ const SearchCollection = ({ user }) => {
 
   const { setPathname } = useContext(PathContext);
 
+  const { auth } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
   const collectionInputRef = useRef(null);
@@ -46,12 +48,12 @@ const SearchCollection = ({ user }) => {
     setLoading(true);
     const headers = new Headers();
     headers.append('Content-Type', 'application/json');
-    headers.append('auth-token', user.token);
+    headers.append('auth-token', auth.token);
     const options = {
       method: 'GET',
       headers: headers,
     }
-    fetch(`${api.serverURL}/api/cards/${user.id}`, options)
+    fetch(`${api.serverURL}/api/cards/${auth.id}`, options)
       .then((res) => {
         if (res.ok) {
           return res.json();
@@ -105,7 +107,7 @@ const SearchCollection = ({ user }) => {
 
       const headers = new Headers();
       headers.append('Content-Type', 'application/json');
-      headers.append('auth-token', user.token);
+      headers.append('auth-token', auth.token);
       const options = {
         method: 'GET',
         headers: headers,
@@ -113,7 +115,7 @@ const SearchCollection = ({ user }) => {
 
       let query = !cardName ? searchTerm : predictions.length === 1 ? predictions[0] : cardName;
 
-      fetch(`${api.serverURL}/api/cards/${encodeURIComponent(query)}/${user.id}`, options)
+      fetch(`${api.serverURL}/api/cards/${encodeURIComponent(query)}/${auth.id}`, options)
         .then((res) => res.json())
         .then((data) => {
           // localStorage.setItem('storeCards', JSON.stringify(data.data));

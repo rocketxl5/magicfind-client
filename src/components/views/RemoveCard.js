@@ -9,12 +9,12 @@ import { api } from '../../api/resources';
 import styled from 'styled-components';
 
 const Remove = () => {
-  const { user } = useAuth();
+  const { auth } = useAuth();
   const { setCardContext } = useContext(CardContext);
   const navigate = useNavigate();
   const location = useLocation();
   const card = location.state.data;
-  const token = user.token;
+  const token = auth.token;
 
 
   //   Remove card from use store
@@ -24,7 +24,7 @@ const Remove = () => {
     headers.append('auth-token', token);
     const input = {
       cardID: card._id,
-      userID: user.id,
+      userID: auth.id,
     };
     const options = {
       method: 'DELETE',
