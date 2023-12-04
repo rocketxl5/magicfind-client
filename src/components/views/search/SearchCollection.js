@@ -42,7 +42,7 @@ const SearchCollection = () => {
   const location = useLocation();
   const collectionInputRef = useRef(null);
   const browserWidth = getBrowserWidth();
-
+  console.log(auth)
   const fetchCollectionCards = () => {
 
     setLoading(true);

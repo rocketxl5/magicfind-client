@@ -98,6 +98,7 @@ const Login = () => {
             delete data.user.password;
             localStorage.setItem('token', data.token)
             localStorage.setItem('user', JSON.stringify(data.user));
+            console.log(data.token)
             setAuth({ ...data.user, token: data.token });
             setLoading(false)
             // console.log(location?.state)
