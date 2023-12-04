@@ -37,7 +37,6 @@ const handleSearchBar = (e, isOutsideEvent = false) => {
 
         // If Logo
         if (target.classList.contains('logo-btn')) {
-            console.log('logo')
             // If mobile menu is displayed
             if (document.querySelector('#mobile-nav').checked) {
                 // Uncheck checkbox to initiate hamburger animation (from cross to hamburger)

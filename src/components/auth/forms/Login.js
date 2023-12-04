@@ -164,7 +164,8 @@ const Login = () => {
   }
 
   return (
-    <div className="form-container flex justify-center">
+
+    <div className="auth-form-container flex justify-center">
       {
         loading ?
           (
