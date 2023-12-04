@@ -34,7 +34,7 @@ const App = () => {
 
   return (
     <Routes>
-      <Route path="/" element={<Layout />} >
+      <Route element={<Layout />} >
 
         {/* Public routes */}
         <Route exact path="/" element={<Home />} />
