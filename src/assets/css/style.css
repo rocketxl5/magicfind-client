@@ -215,7 +215,7 @@ button:hover {
   text-align: center;
 }
 
-.banner {
+/* .banner {
   width: 100%;
   min-height: 20rem;
   background-image: url('https://cards.scryfall.io/art_crop/front/8/1/817f782f-7e62-44b3-9bb2-3a57d34dfe67.jpg?1682690866');
@@ -224,7 +224,7 @@ button:hover {
   background-position: 0 25%;
   background-color: var(--clr-light-grey);
   aspect-ratio: 3/1;
-}
+} */
 
 /* No card collection page */
 .message-section {
