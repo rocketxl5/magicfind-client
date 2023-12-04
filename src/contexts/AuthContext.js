@@ -62,7 +62,7 @@ export const AuthProvider = ({ children }) => {
   }
 
   useEffect(() => {
-    console.log(auth)
+
     const jwt = localStorage.getItem('token')
     if (jwt) {
       const hasExpired = parseJwt(jwt);
@@ -77,10 +77,6 @@ export const AuthProvider = ({ children }) => {
         navigate(location.pathname)
       }
     }
-    else {
-      navigate(location.pathname)
-    }
-
   }, []);
 
   return (
