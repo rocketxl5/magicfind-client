@@ -3,9 +3,9 @@ import { Navigate, Route } from 'react-router-dom';
 import useAuth from '../../hooks/useAuth';
 
 const ProtectedRoute = (props) => {
-  const { user } = useAuth();
+  const { auth } = useAuth();
 
-  if (!user) {
+  if (!auth) {
     return <Navigate to="/" />
   }
   return <Route {...props} />

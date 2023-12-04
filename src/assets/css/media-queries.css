@@ -17,13 +17,12 @@
 }
 
 @media screen and (width >= 775px) {
-    .spinner {
-        min-height: fit-content;
-    }
-    .wrapper {
+
+    
+    /* .wrapper {
         padding-block-start: var(--header-height-wide);
         min-height: calc(100vh - (2 * var(--header-height-wide)));
-    }
+    } */
 
     .main-header {
         display: flex;
@@ -104,10 +103,6 @@
 
 @media screen and (width >= 1600px) {
     /* landing page */
-    .wrapper {
-        width: 80vw;
-        margin-inline: auto;
-    }
 
     .section {
         padding-block-start: 5rem;

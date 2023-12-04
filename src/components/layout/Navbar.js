@@ -10,7 +10,7 @@ import HamburgerBtn from './navbtn/HamburgerBtn';
 import ShoppingCartBtn from './navbtn/ShoppingCartBtn';
 
 function Navbar() {
-    const { user } = useAuth();
+    const { auth } = useAuth();
     return (
         <div className="navbar">
             <input type="checkbox" id="mobile-nav" className="mobile-nav" />
@@ -21,7 +21,7 @@ function Navbar() {
                      /*  Has a label linked to mobile-nav checkbox 
                      *************************************************/}
                     <SearchBtn />
-                    {user && (
+                    {auth && (
                         <>
                             <MailBtn />
                         </>
@@ -34,7 +34,7 @@ function Navbar() {
                     <HamburgerBtn />
                 </section>
                 <section className="right-side-nav">
-                    {user ? (
+                    {auth ? (
                         <AuthMenu />
                     ) : (
                         <Menu />

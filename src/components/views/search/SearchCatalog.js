@@ -30,7 +30,7 @@ const SearchCatalog = () => {
     filterUserCards
   } = useContext(SearchContext);
 
-  const { user } = useAuth();
+  const { auth } = useAuth();
 
   const { pathname } = useContext(PathContext);
 
@@ -56,15 +56,16 @@ const SearchCatalog = () => {
           console.log('fectching from catalog')
           const headers = new Headers();
           headers.append('Content-Type', 'application/json');
+          headers.append('auth-token', auth.token);
           const options = {
             method: 'GET',
             headers: headers,
           };
 
-          fetch(`${api.serverURL}/api/cards/catalog/${user.id}`, options)
+          fetch(`${api.serverURL}/api/cards/catalog/${auth.id}`, options)
             .then((res) => res.json())
             .then((data) => {
-              const catalogCards = user ? filterUserCards(data.cards, user.id) : data.cards;
+              const catalogCards = auth ? filterUserCards(data.cards, auth.id) : data.cards;
               console.log(catalogCards)
               setCards(catalogCards);
               setCardNames(catalogCards);
@@ -117,7 +118,7 @@ const SearchCatalog = () => {
 
       const headers = new Headers();
       headers.append('Content-Type', 'application/json');
-      user && headers.append('auth-token', user.token)
+      auth && headers.append('auth-token', auth.token)
       const options = {
         method: 'GET',
         headers: headers,

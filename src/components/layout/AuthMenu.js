@@ -1,23 +1,11 @@
 // Dropdown menu available after successfull singin
 import { useContext } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import useAuth from '../../hooks/useAuth';
-import { ShoppingCartContext } from '../../contexts/ShoppingCartContext';
 
 function AuthMenu() {
-  const navigate = useNavigate();
-  const { setUser, setUnreadMail } = useAuth();
-  const { setCartItems, setItemsCount } = useContext(ShoppingCartContext);
+  const { logoutAction } = useAuth();
 
-  // Sign out user
-  const handleClick = () => {
-    localStorage.clear();
-    setUser(null);
-    setUnreadMail(0);
-    setCartItems([]);
-    setItemsCount(0);   
-    navigate('/');
-  };
   return (
     <ul className='menu main-menu'>
       <li >
@@ -41,7 +29,7 @@ function AuthMenu() {
         </Link>
       </li>
       <li>
-        <div className="nav-link signout" onClick={handleClick}>
+        <div className="nav-link signout" onClick={() => logoutAction()}>
           Logout
         </div>
       </li>

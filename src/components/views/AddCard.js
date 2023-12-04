@@ -10,7 +10,7 @@ const AddCard = () => {
   const location = useLocation();
   const [isSent, setIsSent] = useState(false);
 
-  const { user } = useAuth;
+  const { auth } = useAuth;
   const { setCardContext } = useContext(CardContext);
   const card = location.state.data;
 
@@ -35,16 +35,16 @@ const AddCard = () => {
         quantity: parseInt(card.quantity),
         price: parseFloat(card.price),
         comment: card.comment,
-        userName: user.name,
-        userCountry: user.country,
-        userID: user.id,
+        userName: auth.name,
+        userCountry: auth.country,
+        userID: auth.id,
         isPublished: card.isPublished,
         datePublished: card.datePublished
       };
 
       const headers = new Headers();
       headers.append('Content-Type', 'application/json');
-      headers.append('auth-token', user.token);
+      headers.append('auth-token', auth.token);
 
       const options = {
         method: 'POST',

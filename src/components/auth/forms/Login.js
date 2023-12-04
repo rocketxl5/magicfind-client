@@ -19,7 +19,7 @@ const Login = () => {
   const [message, setMessage] = useState(null);
   const [showPassword, setShowPassword] = useState(false);
   const { setPathname } = useContext(PathContext);
-  const { setUser } = useAuth();
+  const { setAuth } = useAuth();
 
   const inputs = {
     email: document.querySelector('#email'),
@@ -92,18 +92,17 @@ const Login = () => {
             })
           })
           .then((data) => {
+            console.log(data)
             data.user.id = data.user._id;
             delete data.user._id;
-            const user = {
-              ...data.user,
-              token: data.token
-            }
+            delete data.user.password;
+            localStorage.setItem('token', data.token)
+            localStorage.setItem('user', JSON.stringify(data.user));
+            setAuth({ ...data.user, token: data.token });
             setLoading(false)
-            setUser({ ...user });
-            localStorage.setItem('user', JSON.stringify(user));
             // console.log(location?.state)
             const destination = location.state?.from ? location.state.from.pathname : '/me';
-            console.log(destination)
+            // console.log(destination)
             navigate(destination, { replace: true });
           })
           .catch((error) => {

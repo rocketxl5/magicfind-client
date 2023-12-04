@@ -13,7 +13,7 @@ export const SearchProvider = ({ children }) => {
   const [predictions, setPredictions] = useState([]);
   const [cardNames, setCardNames] = useState([]);
   const [marker, setMarker] = useState(-1);
-  const { user } = useAuth();
+  const { auth } = useAuth();
 
   // Returns array of unique card names
   const filterCardNames = (cards) => {
@@ -29,7 +29,7 @@ export const SearchProvider = ({ children }) => {
     let filteredData = [];
 
     cards.forEach(card => {
-      card.userID !== user.id && filteredData.push(card);
+      card.userID !== auth.id && filteredData.push(card);
     })
     return filteredData;
   }

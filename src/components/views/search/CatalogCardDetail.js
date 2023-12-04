@@ -5,7 +5,7 @@ import styled from 'styled-components';
 
 const CatalogCardDetail = (props) => {
     const { card, loading } = props;
-    const { user } = useAuth();
+    const { auth } = useAuth();
 
     return (
         <>
@@ -34,7 +34,7 @@ const CatalogCardDetail = (props) => {
                                         <p><span className="card-spec-title">Quantity:</span>  <span className="card-spec-value">{card.quantity}</span></p>
                                     </div>
                                 }
-                                {user && (
+                                {auth && (
                                     <div className="contact-user">
                                         <Contact
                                             to={{
