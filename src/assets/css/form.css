@@ -8,6 +8,7 @@ input:-webkit-autofill:active{
 }
 
 /* container for login and signup */
+
 .form-container {
     min-height: calc(100vh - 2 * var(--header-height));
 }
@@ -20,7 +21,8 @@ input:-webkit-autofill:active{
     font-family: 'Young Serif', serif;
     width: fit-content;
     margin-inline: auto;
-    margin-block-end: 3em;
+    padding-block: 5rem;
+    /* margin-block-end: 3em; */
 }
 
 .form-logo:hover {
