@@ -15,14 +15,14 @@ input:-webkit-autofill:active{
 
 .form-content {
     width: 100%;
+    margin-inline: auto;
 }
 
 .form-logo {
     font-family: 'Young Serif', serif;
     width: fit-content;
     margin-inline: auto;
-    padding-block: 5rem;
-    /* margin-block-end: 3em; */
+    margin-block-end: 3em;
 }
 
 .form-logo:hover {

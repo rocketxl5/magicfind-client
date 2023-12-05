@@ -54,7 +54,7 @@ const ApiCardFooter = forwardRef(function ApiCardFooter({ card, setLoading }, re
                     }
                     return res.json().then((data) => {
                         setLoading(false);
-                        setAttributes(attributesHandler(data.message));
+                        throw new Error(JSON.stringify(data))
                     });
                 })
                 .then((data) => {
@@ -62,6 +62,8 @@ const ApiCardFooter = forwardRef(function ApiCardFooter({ card, setLoading }, re
                     setLoading(false);
                 })
                 .catch((error) => {
+                    const errorMessage = JSON.parse(error.message)
+                    setAttributes(attributesHandler(errorMessage));
                     console.log(error);
                     setLoading(false);
                 });

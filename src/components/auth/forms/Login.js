@@ -165,7 +165,7 @@ const Login = () => {
 
   return (
 
-    <div className="auth-form-container flex justify-center">
+    <div className="flex inherit-height">
       {
         loading ?
           (

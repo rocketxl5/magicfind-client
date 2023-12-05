@@ -22,10 +22,6 @@ const DeleteCard = (props) => {
         btnRef?.current?.click();
     }
 
-    const setCountDown = () => {
-        setTimeout(closeModal, 2500);
-    }
-
     useEffect(() => {
         if (response) {
             // If cardName is set
@@ -34,7 +30,8 @@ const DeleteCard = (props) => {
                     state: { ...response },
                 });
         }
-        setCountDown()
+
+        setTimeout(closeModal, 5000);
     }, [response])
 
     const deleteCardHandler = (location) => {
@@ -66,6 +63,7 @@ const DeleteCard = (props) => {
                     // filter for cards with cardName
                     const updatedCards = cards.filter(card => card.name.toLowerCase() === cardName.toLowerCase());
                     setResponse({ ...responseObject, cards: updatedCards, cardName: cardName });
+
                 } else {
                     setResponse({ ...responseObject, cards: cards, cardName: undefined });
                 }
