@@ -11,6 +11,7 @@ const SearchResult = () => {
     const [loadImages, setLoadImages] = useState(false);
 
     useEffect(() => {
+        console.log(cards)
         if (cards) {
             const preloadImages = (cards) => {
                 const loadImage = card => {
@@ -30,7 +31,8 @@ const SearchResult = () => {
             }
             preloadImages(cards);
         }
-    }, [cards])
+    }, [])
+
     return (
         <>
             <div className="search-result">

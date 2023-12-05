@@ -4,7 +4,7 @@ import CardImage from './CardImage';
 import CollectionCardDetail from './CollectionCardDetail';
 import Loading from '../../layout/Loading';
 import { FaRegCheckCircle } from "react-icons/fa";
-import { FaBan } from "react-icons/fa6";
+// import { FaBan } from "react-icons/fa6";
 import useAuth from '../../../hooks/useAuth';
 import { api } from '../../../api/resources';
 
@@ -25,13 +25,12 @@ const DeleteCard = (props) => {
     useEffect(() => {
         if (response) {
             // If cardName is set
+            setTimeout(closeModal, 2500);
             navigate(`${location.pathname}`,
                 {
                     state: { ...response },
                 });
         }
-
-        setTimeout(closeModal, 5000);
     }, [response])
 
     const deleteCardHandler = (location) => {
@@ -63,7 +62,6 @@ const DeleteCard = (props) => {
                     // filter for cards with cardName
                     const updatedCards = cards.filter(card => card.name.toLowerCase() === cardName.toLowerCase());
                     setResponse({ ...responseObject, cards: updatedCards, cardName: cardName });
-
                 } else {
                     setResponse({ ...responseObject, cards: cards, cardName: undefined });
                 }
