@@ -42,7 +42,7 @@ const SearchCollection = () => {
   const location = useLocation();
   const collectionInputRef = useRef(null);
   const browserWidth = getBrowserWidth();
-  console.log(auth)
+
   const fetchCollectionCards = () => {
 
     setLoading(true);
@@ -76,7 +76,7 @@ const SearchCollection = () => {
       });
   }
   useEffect(() => {
-    collectionInputRef?.current?.focus();
+    // collectionInputRef?.current?.focus();
     setPathname(location.pathname);
 
     fetchCollectionCards()
