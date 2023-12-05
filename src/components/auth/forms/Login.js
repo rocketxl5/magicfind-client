@@ -86,19 +86,15 @@ const Login = () => {
               return res.json()
             }
             return res.json().then((data) => {
-              // setLoading(false)
-              console.log(data)
               throw new Error(JSON.stringify(data))
             })
           })
           .then((data) => {
-            console.log(data)
             data.user.id = data.user._id;
             delete data.user._id;
             delete data.user.password;
             localStorage.setItem('token', data.token)
             localStorage.setItem('user', JSON.stringify(data.user));
-            console.log(data.token)
             setAuth({ ...data.user, token: data.token });
             setLoading(false)
             // console.log(location?.state)

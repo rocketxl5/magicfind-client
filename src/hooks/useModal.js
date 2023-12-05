@@ -30,7 +30,7 @@ const useModal = (card) => {
                     component:
                         <ExpandedCardContent handleClick={action.payload.eventHandler}>
                             {action.payload.ImageComponent}
-                            {action.payload.card.card_faces?.length ? <FlipIcon handleClick={action.payload.eventHandler} /> : null}
+                            {card.card_faces?.length ? <FlipIcon handleClick={action.payload.eventHandler} /> : null}
                         </ExpandedCardContent>
                 };
             case ACTIONS.DELETE_CARD:
@@ -38,7 +38,9 @@ const useModal = (card) => {
                     open: true,
                     component: <DeleteCard
                         attributes={{ ...action.payload.attributes, id: 'confirm-delete' }}
-                        card={action.payload.card} handleClick={action.payload.eventHandler}
+                        card={card}
+                        expandedImage={action.payload.ImageComponent}
+                        handleClick={action.payload.eventHandler}
                     />
                 };
             case ACTIONS.FLIP_CARD:
@@ -46,8 +48,8 @@ const useModal = (card) => {
                     open: true,
                     component:
                         <ExpandedCardContent handleClick={action.payload.eventHandler}>
-                            {action.payload.card.card_faces[1].normal}
-                            {action.payload.card.card_faces.length ? <FlipIcon handleClick={action.payload.eventHandler} /> : null}
+                            {card.card_faces[1].normal}
+                            {card.card_faces.length ? <FlipIcon handleClick={action.payload.eventHandler} /> : null}
                         </ExpandedCardContent>
                 };
             // case ACTIONS.ADD_TO_COLLECTION:
@@ -73,11 +75,10 @@ const useModal = (card) => {
     }
     const [state, dispatch] = useReducer(reducer, INIT)
 
-    const updateState = (id, card, imgAttributes, ExpandedCard, eventHandler) => {
+    const updateState = (id, imgAttributes, ExpandedCard, eventHandler) => {
         dispatch({
             type: id,
             payload: {
-                card: card,
                 attributes: imgAttributes,
                 ImageComponent: ExpandedCard,
                 eventHandler: eventHandler,

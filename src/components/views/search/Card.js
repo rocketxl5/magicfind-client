@@ -7,6 +7,7 @@ import card_back from '../../../assets/img/card_back.jpg'
 import CatalogCardFooter from './CatalogCardFooter';
 import CollectionCardFooter from './CollectionCardFooter';
 import ApiCardFooter from './ApiCardFooter';
+// Modal custom hook
 import useModal from '../../../hooks/useModal';
 
 const Card = (props) => {
@@ -33,6 +34,7 @@ const Card = (props) => {
 
     // Create expanded image component
     useEffect(() => {
+        console.log(card)
         setExpandedCard(
             createElement('img', {
                 id: 'reduce-card',
@@ -41,7 +43,7 @@ const Card = (props) => {
                 alt: `${card.name} image`,
             })
         );
-    }, [])
+    }, [card])
 
     const [{ open, component }, { updateState }] = useModal(card);
 
@@ -54,7 +56,7 @@ const Card = (props) => {
     // }, [open])
 
     const handleClick = (e) => {
-        updateState(e.target.id, card, imgAttributes, ExpandedCard, (value) => handleClick(value));
+        updateState(e.target.id, imgAttributes, ExpandedCard, (value) => handleClick(value));
     }
 
     return (
