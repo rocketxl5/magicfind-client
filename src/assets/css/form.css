@@ -377,11 +377,17 @@ ul.autocomplete-list {
     z-index: 3000;
   }
 
-  .suggestion * {
+  .prediction {
+    padding: 0.8em;
+    border-bottom: 1px solid var(--clr-light);
+    color:  var(--clr-dark);
+  }
+
+  .prediction * {
     pointer-events: none;
   }
 
-  .suggestion:hover {
+  .prediction:hover {
     cursor: pointer;
   }
 

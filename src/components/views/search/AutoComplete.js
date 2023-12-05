@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext, useRef } from 'react'
-import Predictions from './Predictions';
+import Prediction from './Prediction';
 import { SearchContext } from '../../../contexts/SearchContext';
 const INIT = -200;
 
@@ -57,28 +57,25 @@ const AutoComplete = (props) => {
                     setMarker(marker - 1);
                 }
             }
-
-            // if (e.key === 'Enter') {
-            //     if (predictions.length === 1 && predictions[predictions.length - 1]) {
-            //         console.log(predictions[predictions.length - 1])
-            //         setCardName(predictions[predictions.length - 1])
-            //         searchCards()
-            //     }
-            // }
         }
+    };
+
+    const handleMouseDown = (e) => {
+        searchCards(e);
     };
 
     return (
         <ul
             id="autocomplete-list"
             className="autocomplete-list"
+            onMouseDown={handleMouseDown}
             ref={ulRef}
         >
             {displayAutcomplete &&
                 predictions?.map((prediction, index) => {
                     return (
                         (
-                            <Predictions
+                            <Prediction
                                 key={index}
                                 index={index}
                                 marker={marker}

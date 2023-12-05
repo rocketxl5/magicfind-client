@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { FiChevronLeft } from 'react-icons/fi';
 import Card from './Card';
 import NotFound from './CardNotFound';
@@ -7,12 +7,16 @@ import capitalizeString from '../../../utilities/capitalizeString';
 
 const SearchResult = () => {
     const location = useLocation();
-    const { cards, cardName, type, search } = location.state;
-    const [loadImages, setLoadImages] = useState(false);
+    const navigate = useNavigate();
+    const { cards, cardName, type, search } = location?.state;
+    const [haveLoaded, setHaveLoaded] = useState(false);
+
+
 
     useEffect(() => {
+        // If cards is not empty
         console.log(cards)
-        if (cards) {
+        if (cards?.length) {
             const preloadImages = (cards) => {
                 const loadImage = card => {
                     return new Promise((resolve, reject) => {
@@ -25,13 +29,20 @@ const SearchResult = () => {
                 }
                 Promise.all(cards.map(card => loadImage(card)))
                     .then(() => {
-                        setLoadImages(false)
+                        setHaveLoaded(true)
                     })
                     .catch(error => console.log('Image load has failed', error))
             }
             preloadImages(cards);
         }
-    }, [])
+        else {
+            navigate('/search-collection')
+        }
+    }, [location])
+
+    useEffect(() => {
+        console.log('loadImages', haveLoaded)
+    }, [location])
 
     return (
         <>
@@ -59,7 +70,7 @@ const SearchResult = () => {
                             <NotFound cardName={cardName} />
                         ) : (
                             <div className="cards">
-                                {!loadImages &&
+                                {haveLoaded &&
                                     cards.map((card, index) => {
                                         return (
                                             <Card

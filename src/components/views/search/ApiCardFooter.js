@@ -1,4 +1,4 @@
-import { useState, useEffect, forwardRef } from 'react'
+import { useState, useEffect } from 'react'
 import Button from '../../layout/Button';
 import useAuth from '../../../hooks/useAuth';
 import { api } from '../../../api/resources';
@@ -8,7 +8,7 @@ const INIT = {
     value: 'Add To Collection',
     statue: false
 }
-const ApiCardFooter = forwardRef(function ApiCardFooter({ card, setLoading }, ref) {
+const ApiCardFooter = ({ card, setLoading }) => {
     const [attributes, setAttributes] = useState(INIT);
     const [selectedCard, setSelectedCard] = useState(null);
 
@@ -77,13 +77,13 @@ const ApiCardFooter = forwardRef(function ApiCardFooter({ card, setLoading }, re
 
         <div className="card-btns-wrapper">
             <div className="btn-container">
-                {/* <Button attributes={attributes} handleClick={handleClick} addCardRef={ref} /> */}
-                <button id="add-to-collection" className={attributes.style} type={attributes.type} ref={ref} onClick={handleClick}>{attributes.value}</button>
+                {/* <Button attributes={attributes} handleClick={handleClick}  /> */}
+                <button id="add-to-collection" className={attributes.style} type={attributes.type} onClick={handleClick}>{attributes.value}</button>
                 {/* <button className="btn bg-blue color-lg-grey" type="button" onClick={() => handleClick(card)}>{!isLoaded ? 'Add To Collection' : 'Added'}</button> */}
             </div>
         </div>
 
     )
-})
+}
 
 export default ApiCardFooter

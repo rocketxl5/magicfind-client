@@ -13,27 +13,24 @@ const DeleteCard = (props) => {
     const { auth } = useAuth();
     const navigate = useNavigate();
     const location = useLocation();
-    const [response, setResponse] = useState(null);
+    const [response, setResponse] = useState({
+        isDeleted: false,
+        message: (() => {
+            return (
+                <>
+                    <p>You are about to delete <strong>{card.name}</strong> from your collection.</p>
+                    <p>This will remove all the information associated with this card.</p>
+                </>
+            )
+        })()
+    });
     const [loading, setLoading] = useState(false);
-
     const btnRef = useRef(null);
 
-    const closeModal = () => {
-        btnRef?.current?.click();
-    }
 
-    useEffect(() => {
-        if (response) {
-            // If cardName is set
-            setTimeout(closeModal, 2500);
-            navigate(`${location.pathname}`,
-                {
-                    state: { ...response },
-                });
-        }
-    }, [response])
 
     const deleteCardHandler = (location) => {
+        console.log('delecardhandler')
         setLoading(true);
         const headers = new Headers();
         headers.append('Content-Type', 'application/json');
@@ -55,15 +52,30 @@ const DeleteCard = (props) => {
                 setLoading(false);
                 const { cards, isDeleted, message } = data;
                 const { cardName, type } = location.state;
-                let responseObject = { type: type, search: `/${type}`, message: message, isDeleted: isDeleted }
-
+                let resObj = { type: type, search: `/${type}`, isDeleted: isDeleted }
+                console.log(data)
+                // setResponse({ isDeleted: isDeleted, message: message })
                 // If cardName is set
                 if (cardName) {
                     // filter for cards with cardName
                     const updatedCards = cards.filter(card => card.name.toLowerCase() === cardName.toLowerCase());
-                    setResponse({ ...responseObject, cards: updatedCards, cardName: cardName });
+                    setTimeout(() => {
+                        navigate(`${location.pathname}`,
+                            {
+                                state: { ...resObj, cards: updatedCards, cardName: cardName },
+                            });
+                    }, 3000)
+
+
                 } else {
-                    setResponse({ ...responseObject, cards: cards, cardName: undefined });
+                    setTimeout(() => {
+                        navigate(`${location.pathname}`,
+                            {
+                                state: { ...resObj, cards: cards, cardName: undefined },
+                            });
+
+                    }, 3000)
+
                 }
             })
             .catch((error) => {
@@ -81,7 +93,7 @@ const DeleteCard = (props) => {
                     ) : (
                         <div className="flex-grow-1">
                             {
-                                !response ? (
+                                !response.isDeleted ? (
                                     <>
                                         <header className="card-header">
                                 <h2 className="color-red fw-500">Delete Card Confirmation</h2>
@@ -96,8 +108,7 @@ const DeleteCard = (props) => {
                             </div>
                             <footer className="card-footer">
                                 <div className="card-delete-message">
-                                    <p>You are about to delete <strong>{card.name}</strong> from your collection.</p>
-                                    <p>This will remove all the information associated with this card.</p>
+                                                {response.message}
                                 </div>
                                 <div className="card-btns-wrapper">
                                     <div className="btn-container">

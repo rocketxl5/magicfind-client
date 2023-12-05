@@ -86,35 +86,49 @@ const Search = () => {
     }
   }, [searchInput])
 
-
-  const searchCards = (e) => {
-    e && e.preventDefault();
+  // useEffect(() => {
+  //   console.log(cardName)
+  // }, [cardName])
+  const searchAPI = (e) => {
+    e?.preventDefault();
 
     if (searchTerm.length < 3) { return }
 
     setLoading(true);
+    console.log('predictions', predictions)
 
-    apiInputRef.current.blur();
 
     const headers = { method: 'GET' };
 
-    const query = !cardName ? searchTerm : predictions.length === 1 ? predictions[0] : cardName;
+    let query = ''
+
+    if (cardName) {
+      query = `cards/named?exact=${cardName}`;
+    }
+    else if (predictions === 1) {
+      query = `cards/named?exact=${predictions[0]}`;
+    }
+    else if (searchTerm) {
+      query = `cards/named?fuzzy=${searchTerm}`;
+    }
+
+
+
+    apiInputRef.current.blur();
     fetch(
-      `${api.skryfallURL}/cards/named?fuzzy=${query}`,
+      `${api.skryfallURL}/${query}`,
       headers
     )
-      // https://api.scryfall.com/cards/search?order=released&q=oracleid%3A0c2841bb-038c-4fbf-8360-bc0a1522b58d&unique=prints
       .then((res) => res.json())
       .then((data) => {
         if (data.object === 'error') {
           navigate(`/search-result/${setQueryString(searchTerm, '-')}`,
             {
-              state: { cards: undefined, cardName: searchTerm, type: 'not-found', search: location.pathname },
+              state: { cards: undefined, cardName: searchTerm, type: 'card-not-found', search: location.pathname },
             });
         } else {
           const { name, oracle_id } = data;
           localStorage.setItem('oracle', oracle_id);
-          localStorage.setItem('apiCardName', name);
           setOracleID(oracle_id);
           setCardName(name);
         }
@@ -122,6 +136,11 @@ const Search = () => {
       })
       .catch((error) => {
         console.log(error)
+        // const { cards, cardName, type, search } = location.state;
+        // navigate(`/search-result/${setQueryString(searchTerm, '-')}`,
+        //     {
+        //       state: { cards: undefined, cardName: searchTerm, type: 'card-not-found', search: location.pathname },
+        //     });
       });
 
   };
@@ -192,8 +211,8 @@ const Search = () => {
               </header>
               <main className="main">
 
-                <form id="search-api-form" className="search-form" onSubmit={searchCards}>
-                  <SearchInput isActive={isActive} id={'search-api'} searchCards={searchCards} ref={apiInputRef} />
+                <form id="search-api-form" className="search-form" onSubmit={searchAPI}>
+                  <SearchInput isActive={isActive} id={'search-api'} searchCards={searchAPI} ref={apiInputRef} />
             </form>
               </main>
           </div>

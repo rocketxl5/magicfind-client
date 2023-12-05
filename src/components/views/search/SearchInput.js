@@ -38,7 +38,7 @@ const SearchInput = forwardRef(function SearchInput(props, ref) {
 
       !displayAutcomplete && setDisplayAutocomplete(true)
       setPredictions(filteredCardTitles);
-      setCardName(e.target.value);
+      // setCardName(e.target.value);
     }
     else {
       setDisplayAutocomplete(false);
@@ -53,10 +53,11 @@ const SearchInput = forwardRef(function SearchInput(props, ref) {
     setSearchTerm('');
     setPredictions([]);
     setDisplayAutocomplete(false);
-    setSearchInput(null);
+    // setSearchInput(null);
   };
 
   const handleFocus = (e) => {
+    e.preventDefault();
     setSearchInput(e.target);
   }
 
