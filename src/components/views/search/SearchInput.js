@@ -51,8 +51,8 @@ const SearchInput = forwardRef(function SearchInput(props, ref) {
     e.preventDefault();
     setMarker(-1);
     setSearchTerm('');
-    setPredictions([]);
-    setDisplayAutocomplete(false);
+    // setSearchInput(null);
+
     // setSearchInput(null);
   };
 

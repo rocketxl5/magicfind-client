@@ -134,7 +134,6 @@ const SearchCatalog = () => {
           console.log(data)
           setLoading(false);
           setSearchInput(null);
-          setSearchTerm('');
           setCardName('');
           if (browserWidth <= 775 && document.querySelector('#mobile-nav').checked) {
             hideSearchBar();

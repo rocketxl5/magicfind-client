@@ -1,22 +1,24 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { SearchContext } from '../../../contexts/SearchContext';
 
 const Prediction = (props) => {
   const {
     prediction,
-    index
+    index,
   } = props;
 
   const { marker, searchTerm, setCardName } = useContext(SearchContext);
 
   const handleMouseEnter = (e) => {
     e.target.classList.add('bg-grey');
+    // Set card name if form submitted
     setCardName(prediction);
   };
 
   const handleMouseOut = (e) => {
     e.target.classList.remove('bg-grey');
   };
+
 
   const Value = ({ prediction, searchTerm }) => {
     // Gets the index of the first letter matching searchTerm in name string
