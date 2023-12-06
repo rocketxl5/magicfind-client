@@ -1,7 +1,13 @@
 import { createPortal } from 'react-dom';
 
 const Modal = ({ open, children }) => {
-    if (!open) return null;
+    if (!open) {
+        document.body.style.overflowY = 'scroll';
+        return null;
+    }
+    else {
+        document.body.style.overflowY = 'hidden';
+    }
 
     return createPortal(
         <div className="overlay">
@@ -11,4 +17,4 @@ const Modal = ({ open, children }) => {
     )
 }
 
-export default Modal
+export default Modal;
