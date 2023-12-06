@@ -86,7 +86,7 @@ const Search = () => {
     }
   }, [searchInput])
 
-  const searchAPI = (e) => {
+  const searchAPI = (e = undefined, prediction = undefined) => {
     e?.preventDefault();
 
     if (searchTerm.length < 3) { return }
@@ -97,7 +97,10 @@ const Search = () => {
 
     let query = ''
 
-    if (cardName) {
+    if (prediction) {
+      query = `cards/named?exact=${prediction}`;
+    }
+    else if (cardName) {
       query = `cards/named?exact=${cardName}`;
     }
     else if (predictions === 1) {
@@ -108,6 +111,7 @@ const Search = () => {
     }
 
     apiInputRef.current.blur();
+
     fetch(
       `${api.skryfallURL}/${query}`,
       headers

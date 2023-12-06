@@ -10,6 +10,7 @@ const AutoComplete = (props) => {
         setMarker,
         searchTerm,
         setCardName,
+        carddName,
         displayAutcomplete
     } = useContext(SearchContext);
     const [position, setPosition] = useState(INIT);
@@ -61,7 +62,8 @@ const AutoComplete = (props) => {
     };
 
     const handleMouseDown = (e) => {
-        searchCards(e);
+        // Takes event and target li id set to prediction value @ Prediction
+        searchCards(e, e.target.id);
     };
 
     return (
@@ -77,10 +79,8 @@ const AutoComplete = (props) => {
                         (
                             <Prediction
                                 key={index}
-                                index={index}
                                 marker={marker}
                                 prediction={prediction}
-                                searchCards={searchCards}
                             />
                         )
                     );

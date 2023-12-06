@@ -101,8 +101,7 @@ const SearchCollection = () => {
     e?.preventDefault();
 
     if (searchTerm.length < 3) { return }
-      setLoading(true);
-      setSearchTerm(cardName);
+    setLoading(true);
       collectionInputRef.current.blur();
 
       const headers = new Headers();
@@ -132,8 +131,7 @@ const SearchCollection = () => {
     // localStorage.setItem('storeCardName', cardName);
 
         setLoading(false);
-        setCardName('')
-        setSearchInput(null);
+        setCardName('');
         navigate(`/search-result/${setQueryString(query.toLowerCase(), '-')}`,
           {
             state: { cards: data.results, cardName: data.cardName, type: collectionInputRef.current.id, search: location.pathname },
