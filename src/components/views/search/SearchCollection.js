@@ -87,7 +87,6 @@ const SearchCollection = () => {
   }, []);
 
   useEffect(() => {
-    // console.log(searchInput)
     if (searchInput?.id === 'search-collection') {
 
       setIsActive(true);
@@ -100,7 +99,7 @@ const SearchCollection = () => {
   const searchCollection = (e) => {
     e?.preventDefault();
 
-    if (searchTerm) {
+    if (searchTerm.length < 3) { return }
       setLoading(true);
       setSearchTerm(cardName);
       collectionInputRef.current.blur();
@@ -113,24 +112,33 @@ const SearchCollection = () => {
         headers: headers,
       };
 
-      let query = !cardName ? searchTerm : predictions.length === 1 ? predictions[0] : cardName;
+    let query = '';
 
-      fetch(`${api.serverURL}/api/cards/${encodeURIComponent(query)}/${auth.id}`, options)
-        .then((res) => res.json())
-        .then((data) => {
-          // localStorage.setItem('storeCards', JSON.stringify(data.data));
-          // localStorage.setItem('storeCardName', cardName);
-
-          setLoading(false);
-          setCardName('')
-          setSearchInput(null);
-          navigate(`/search-result/${setQueryString(query.toLowerCase(), '-')}`,
-            {
-              state: { cards: data.results, cardName: data.cardName, type: collectionInputRef.current.id, search: location.pathname },
-            });
-        })
-        .catch((error) => console.log(error));
+    if (cardName) {
+      query = cardName
     }
+    else if (predictions.length === 1) {
+      query = predictions[0];
+    }
+    else {
+      query = searchTerm
+    }
+
+    fetch(`${api.serverURL}/api/cards/${encodeURIComponent(query)}/${auth.id}`, options)
+      .then((res) => res.json())
+      .then((data) => {
+    // localStorage.setItem('storeCards', JSON.stringify(data.data));
+    // localStorage.setItem('storeCardName', cardName);
+
+        setLoading(false);
+        setCardName('')
+        setSearchInput(null);
+        navigate(`/search-result/${setQueryString(query.toLowerCase(), '-')}`,
+          {
+            state: { cards: data.results, cardName: data.cardName, type: collectionInputRef.current.id, search: location.pathname },
+          });
+      })
+      .catch((error) => console.log(error));
   };
 
   // Get all cards from user store
