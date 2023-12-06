@@ -92,7 +92,6 @@ const Search = () => {
     if (searchTerm.length < 3) { return }
 
     setLoading(true);
-    console.log('predictions', predictions)
 
     const headers = { method: 'GET' };
 

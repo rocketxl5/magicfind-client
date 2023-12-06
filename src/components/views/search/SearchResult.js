@@ -17,7 +17,6 @@ const SearchResult = () => {
 
     useEffect(() => {
         // If cards is not empty
-        console.log(cards)
         if (cards?.length) {
             const preloadImages = (cards) => {
                 const loadImage = card => {
@@ -35,10 +34,15 @@ const SearchResult = () => {
                     })
                     .catch(error => console.log('Image load has failed', error))
             }
+            // Call normal image async loader
             preloadImages(cards);
         }
+            // No cards collection
+            // Send back to search-collection page
         else {
-            navigate('/search-collection')
+            setTimeout(() => {
+                navigate('/search-collection')
+            }, 1500)
         }
     }, [location])
 
@@ -46,8 +50,6 @@ const SearchResult = () => {
 
     const handleClick = (e, card, attributes, expandedCard) => {
         e.stopPropagation();
-        console.log(e.target.id)
-        console.log(card)
         updateState(e.target.id, card, attributes, expandedCard, (value) => handleClick(value));
     }
 

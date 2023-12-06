@@ -25,14 +25,13 @@ export const AuthProvider = ({ children }) => {
 
   const parseJwt = (token) => {
     const decode = JSON.parse(atob(token?.split('.')[1]));
-    console.log(decode);
+    // console.log(decode);
     if (decode.exp * 1000 < new Date().getTime()) {
       return true;
     } else {
       return false;
     }
   };
-
 
   const checkUnreadMail = (auth) => {
     const headers = new Headers();
@@ -56,7 +55,6 @@ export const AuthProvider = ({ children }) => {
           // If unreadMail
           setUnreadMail(unreadMail && unreadMail.length);
         }
-
       })
       .catch((error) => console.log(error));
   }
@@ -72,7 +70,6 @@ export const AuthProvider = ({ children }) => {
       } else if (localStorage.getItem('user')) {
         const user = JSON.parse(localStorage.getItem('user'));
         const token = localStorage.getItem('token');
-        console.log(user)
         setAuth({ ...user, token: token })
         navigate(location.pathname)
       }
