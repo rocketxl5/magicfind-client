@@ -122,6 +122,11 @@
     overflow: hidden;
 }
 
+.scroll-none {
+    overflow: hidden;
+    -webkit-overflow-scrolling: touch;
+}
+
 .col-12 {
     width: 100%;
 }
