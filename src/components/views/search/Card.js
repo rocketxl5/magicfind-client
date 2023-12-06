@@ -36,16 +36,6 @@ const Card = forwardRef(function Card(props, ref) {
         );
     }, [card]);
 
-    // useEffect(() => {
-    //     if (open) {
-    //         document.body.style.overflowY = 'hidden';
-    //     } else {
-    //         document.body.style.overflowY = 'scroll';
-    //     }
-    // }, [open])
-
-
-
     return (
         <>
             <div className="card-content" onClick={(e) => handleClick(e, card, imgAttributes, ExpandedCard)} ref={ref}>
