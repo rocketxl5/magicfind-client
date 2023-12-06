@@ -3,7 +3,7 @@ import ExpandedCardContent from '../components/views/search/ExpandedCardContent'
 import DeleteCard from '../components/views/search/DeleteCard';
 import FlipIcon from '../components/views/search/FlipIcon';
 
-const useModal = () => {
+const useModal = (callback) => {
     const INIT = {
         open: false,
         component: null
@@ -28,9 +28,9 @@ const useModal = () => {
                 return {
                     open: true,
                     component:
-                        <ExpandedCardContent handleClick={action.payload.eventHandler}>
+                        <ExpandedCardContent handleClick={callback}>
                             {action.payload.ImageComponent}
-                            {action.payload.card.card_faces?.length ? <FlipIcon handleClick={action.payload.eventHandler} /> : null}
+                            {action.payload.card.card_faces?.length ? <FlipIcon handleClick={callback} /> : null}
                         </ExpandedCardContent>
                 };
             case ACTIONS.DELETE_CARD:
@@ -40,7 +40,7 @@ const useModal = () => {
                         attributes={{ ...action.payload.attributes, id: 'confirm-delete' }}
                         card={action.payload.card}
                         expandedImage={action.payload.ImageComponent}
-                        handleClick={action.payload.eventHandler}
+                        handleClick={callback}
                     />
                 };
             case ACTIONS.FLIP_CARD:
@@ -49,7 +49,7 @@ const useModal = () => {
                     component:
                         <ExpandedCardContent handleClick={action.payload.eventHandler}>
                             {action.payload.card.card_faces[1].normal}
-                            {action.payload.card.card_faces.length ? <FlipIcon handleClick={action.payload.eventHandler} /> : null}
+                            {action.payload.card.card_faces.length ? <FlipIcon handleClick={callback} /> : null}
                         </ExpandedCardContent>
                 };
             // case ACTIONS.ADD_TO_COLLECTION:
@@ -82,7 +82,6 @@ const useModal = () => {
                 card: card,
                 attributes: attributes,
                 ImageComponent: ExpandedCard,
-                eventHandler: eventHandler,
             }
         })
     }
