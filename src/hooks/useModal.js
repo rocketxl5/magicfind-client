@@ -3,7 +3,7 @@ import ExpandedCardContent from '../components/views/search/ExpandedCardContent'
 import DeleteCard from '../components/views/search/DeleteCard';
 import FlipIcon from '../components/views/search/FlipIcon';
 
-const useModal = (card) => {
+const useModal = () => {
     const INIT = {
         open: false,
         component: null

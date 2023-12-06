@@ -27,15 +27,14 @@ const DeleteCard = (props) => {
     const [loading, setLoading] = useState(false);
     const btnRef = useRef(null);
 
+    // Trigger click event on button to close modal
     const closeModal = (button) => {
         setTimeout(() => {
             button.click();
-        }, 2000)
+        }, 1500)
     }
 
-
     const deleteCardHandler = (location) => {
-        console.log('delecardhandler')
         setLoading(true);
         const headers = new Headers();
         headers.append('Content-Type', 'application/json');
@@ -58,7 +57,6 @@ const DeleteCard = (props) => {
                 const { cards, isDeleted, message } = data;
                 const { cardName, type } = location.state;
                 let resObj = { type: type, search: `/${type}`, message: message, isDeleted: isDeleted }
-                console.log(data)
                 setResponse({ isDeleted: isDeleted, message: message })
                 // If cardName is set
                 if (cardName) {
@@ -81,7 +79,6 @@ const DeleteCard = (props) => {
             })
             .catch((error) => {
                 setLoading(false);
-                // setResponseObject(error)
                 console.log('error', error)
             });
     }
@@ -138,8 +135,7 @@ const DeleteCard = (props) => {
                                                 <button id="back-to-search" className="card-btn bg-green color-light" type="button" onClick={handleClick} ref={btnRef}>Back to Search Collection Page </button>
                                             </div>
                                         </footer>
-                                    </div>
-
+                                        </div>
                                 )
                             }
                         </div>
