@@ -6,7 +6,7 @@ const Modal = ({ open, children }) => {
         return null;
     }
     else {
-        document.body.style.overflowY = 'hidden';
+        document.body.style.overflow = 'hidden';
     }
 
     return createPortal(
