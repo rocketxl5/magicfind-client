@@ -12,7 +12,6 @@ const SearchResult = () => {
     const navigate = useNavigate();
     const { cards, cardName, type, search } = location?.state;
     const [haveLoaded, setHaveLoaded] = useState(false);
-
     const cardRef = useRef(null);
 
     useEffect(() => {
@@ -47,22 +46,12 @@ const SearchResult = () => {
     }, [location])
 
 
-    const [{ open, component }, { updateState }] = useModal();
+    const [{ open, component }, { updateState }] = useModal((value) => handleClick(value));
 
-    const handleClick = (e, card, attributes, expandedCard) => {
+    function handleClick(e, card, attributes, expandedCard) {
         e.stopPropagation();
-        updateState(e.target.id, card, attributes, expandedCard, (value) => handleClick(value));
+        updateState(e.target.id, card, attributes, expandedCard);
     }
-
-    useEffect(() => {
-        if (open) {
-            document.body.classList.add('scroll-none');
-
-        } else {
-            document.body.classList.remove('scroll-none');
-
-        }
-    }, [open])
 
     return (
         <>
