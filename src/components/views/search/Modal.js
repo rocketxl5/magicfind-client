@@ -2,11 +2,11 @@ import { createPortal } from 'react-dom';
 
 const Modal = ({ open, children }) => {
     if (!open) {
-        document.body.style.overflowY = 'scroll';
+        document.body.classList.remove('overflow-hidden');
         return null;
     }
     else {
-        document.body.style.overflow = 'hidden';
+        document.body.classList.add('overflow-hidden');
     }
 
     return createPortal(
