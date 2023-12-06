@@ -1,17 +1,15 @@
-import { useState, useEffect, createElement } from 'react';
+import { useState, useEffect, createElement, forwardRef } from 'react';
 import CardImageSection from './CardImageSection';
 import CardDetailSection from './CardDetailSection';
-import Modal from './Modal';
 import card_back from '../../../assets/img/card_back.jpg'
 // Footers
 import CatalogCardFooter from './CatalogCardFooter';
 import CollectionCardFooter from './CollectionCardFooter';
 import ApiCardFooter from './ApiCardFooter';
-// Modal custom hook
-import useModal from '../../../hooks/useModal';
 
-const Card = (props) => {
-    const { card, searchType } = props;
+
+const Card = forwardRef(function Card(props, ref) {
+    const { card, searchType, handleClick } = props;
     const [loading, setLoading] = useState(false);
     const [ExpandedCard, setExpandedCard] = useState(null);
 
@@ -36,9 +34,7 @@ const Card = (props) => {
                 alt: `${card.name} image`,
             })
         );
-    }, [card])
-
-    const [{ open, component }, { updateState }] = useModal(card);
+    }, [card]);
 
     // useEffect(() => {
     //     if (open) {
@@ -48,23 +44,16 @@ const Card = (props) => {
     //     }
     // }, [open])
 
-    const handleClick = (e) => {
-        e.stopPropagation();
-        updateState(e.target.id, imgAttributes, ExpandedCard, (value) => handleClick(value));
-    }
+
 
     return (
         <>
-            {/* <DeleteCard attributes={{ ...attributes }} card={card} confirmationOverlay={confirmationOverlay} setConfirmationOverlay={(value) => setConfirmationOverlay(value)} /> */} 
-            <div className="card-content">
-                <Modal open={open}>
-                    {component}
-                </Modal>
+            <div className="card-content" onClick={(e) => handleClick(e, card, imgAttributes, ExpandedCard)} ref={ref}>
                 <header className="card-header">
                     <h2 className="card-name">{card.name}</h2>
                 </header>
                 <section className="card-body" >
-                    <CardImageSection attributes={imgAttributes} handleClick={handleClick} />
+                    <CardImageSection attributes={imgAttributes} />
                     <CardDetailSection card={card} searchType={searchType} loading={loading} />
                 </section>
                 <footer className="card-footer">
@@ -72,7 +61,7 @@ const Card = (props) => {
                         <CatalogCardFooter card={card} />
                     ) :
                         searchType === 'search-collection' ? (
-                            <CollectionCardFooter card={card} handleClick={handleClick} />
+                            <CollectionCardFooter card={card} />
                         ) : (
                                 <ApiCardFooter card={card} setLoading={(value) => { setLoading(value) }} />
                         )
@@ -81,6 +70,6 @@ const Card = (props) => {
             </div>
         </>
     )
-}
+})
 
 export default Card;

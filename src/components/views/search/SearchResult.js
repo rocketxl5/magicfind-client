@@ -1,7 +1,9 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { FiChevronLeft } from 'react-icons/fi';
 import Card from './Card';
+import Modal from './Modal';
+import useModal from '../../../hooks/useModal';
 import NotFound from './CardNotFound';
 import capitalizeString from '../../../utilities/capitalizeString';
 
@@ -11,7 +13,7 @@ const SearchResult = () => {
     const { cards, cardName, type, search } = location?.state;
     const [haveLoaded, setHaveLoaded] = useState(false);
 
-
+    const cardRef = useRef(null);
 
     useEffect(() => {
         // If cards is not empty
@@ -40,13 +42,23 @@ const SearchResult = () => {
         }
     }, [location])
 
-    useEffect(() => {
-        console.log('loadImages', haveLoaded)
-    }, [location])
+    const [{ open, component }, { updateState }] = useModal();
+
+    const handleClick = (e, card, attributes, expandedCard) => {
+        e.stopPropagation();
+        console.log(e.target.id)
+        console.log(card)
+        updateState(e.target.id, card, attributes, expandedCard, (value) => handleClick(value));
+    }
 
     return (
         <>
             <div className="search-result">
+                {
+                    <Modal open={open}>
+                        {component}
+                    </Modal>
+                }
                 <header className="search-result-header">
                     {type !== 'search-catalog' &&
                         <div className="back-link">
@@ -77,6 +89,8 @@ const SearchResult = () => {
                                                 key={index}
                                                 card={card}
                                                 searchType={type}
+                                                handleClick={handleClick}
+                                                ref={cardRef}
                                             />)
                                     })
                                 }

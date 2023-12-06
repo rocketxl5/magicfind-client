@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import CardImage from './CardImage';
 import CollectionCardDetail from './CollectionCardDetail';
@@ -27,6 +27,11 @@ const DeleteCard = (props) => {
     const [loading, setLoading] = useState(false);
     const btnRef = useRef(null);
 
+    const closeModal = (button) => {
+        setTimeout(() => {
+            button.click();
+        }, 2000)
+    }
 
 
     const deleteCardHandler = (location) => {
@@ -52,31 +57,27 @@ const DeleteCard = (props) => {
                 setLoading(false);
                 const { cards, isDeleted, message } = data;
                 const { cardName, type } = location.state;
-                let resObj = { type: type, search: `/${type}`, isDeleted: isDeleted }
+                let resObj = { type: type, search: `/${type}`, message: message, isDeleted: isDeleted }
                 console.log(data)
-                // setResponse({ isDeleted: isDeleted, message: message })
+                setResponse({ isDeleted: isDeleted, message: message })
                 // If cardName is set
                 if (cardName) {
                     // filter for cards with cardName
+                    setResponse({ isDeleted: isDeleted, message: message })
                     const updatedCards = cards.filter(card => card.name.toLowerCase() === cardName.toLowerCase());
-                    setTimeout(() => {
-                        navigate(`${location.pathname}`,
-                            {
-                                state: { ...resObj, cards: updatedCards, cardName: cardName },
-                            });
-                    }, 3000)
-
-
+                    navigate(`${location.pathname}`,
+                        {
+                            state: { ...resObj, cards: updatedCards, cardName: cardName },
+                        });
+                    closeModal(btnRef.current)
                 } else {
-                    setTimeout(() => {
-                        navigate(`${location.pathname}`,
-                            {
-                                state: { ...resObj, cards: cards, cardName: undefined },
-                            });
-
-                    }, 3000)
-
+                    navigate(`${location.pathname}`,
+                        {
+                            state: { ...resObj, cards: cards, cardName: undefined },
+                        });
+                    closeModal(btnRef.current)
                 }
+
             })
             .catch((error) => {
                 setLoading(false);
@@ -142,7 +143,6 @@ const DeleteCard = (props) => {
                                 )
                             }
                         </div>
-
                     )
             }
         </div>

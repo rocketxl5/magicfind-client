@@ -75,8 +75,9 @@ const SearchCollection = () => {
         setMessage({ ...errorMessage });
       });
   }
+
+
   useEffect(() => {
-    // collectionInputRef?.current?.focus();
     setPathname(location.pathname);
 
     fetchCollectionCards()
@@ -163,7 +164,6 @@ const SearchCollection = () => {
                 <h2 className="title">Search Collection</h2>
               </header>
               <main className="main">
-
             {
               message?.title === 'no_cards' ? (
 

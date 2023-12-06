@@ -1,8 +1,8 @@
 import Loading from '../../layout/Loading';
 import capitalizeWord from '../../../utilities/capitalizeWord';
 
-const ApiCardDetail = (props) => {
-    const { card, loading } = props;
+const ApiCardDetail = ({ card, loading }) => {
+
     return (
         <>
             {

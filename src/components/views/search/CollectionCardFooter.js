@@ -3,7 +3,7 @@ const CollectionCardFooter = ({ card, handleClick }) => {
     return (
         <div className="card-btns-wrapper">
             <div className="btn-container">
-                < button id="delete-card" className="btn bg-red color-light" type="button" onClick={handleClick}>
+                < button id="delete-card" className="btn bg-red color-light" type="button">
                     Delete
                 </button>
             </div>
