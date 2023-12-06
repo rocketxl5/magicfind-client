@@ -1,7 +1,6 @@
 import { createPortal } from 'react-dom';
 
-const Modal = (props) => {
-    const { open, children } = props;
+const Modal = ({ open, children }) => {
     if (!open) return null;
 
     return createPortal(

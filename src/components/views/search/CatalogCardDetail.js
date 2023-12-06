@@ -3,8 +3,7 @@ import Loading from '../../layout/Loading';
 import useAuth from '../../../hooks/useAuth';
 import styled from 'styled-components';
 
-const CatalogCardDetail = (props) => {
-    const { card, loading } = props;
+const CatalogCardDetail = ({ card, loading }) => {
     const { auth } = useAuth();
 
     return (

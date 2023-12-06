@@ -30,7 +30,7 @@ const useModal = (card) => {
                     component:
                         <ExpandedCardContent handleClick={action.payload.eventHandler}>
                             {action.payload.ImageComponent}
-                            {card.card_faces?.length ? <FlipIcon handleClick={action.payload.eventHandler} /> : null}
+                            {action.payload.card.card_faces?.length ? <FlipIcon handleClick={action.payload.eventHandler} /> : null}
                         </ExpandedCardContent>
                 };
             case ACTIONS.DELETE_CARD:
@@ -38,7 +38,7 @@ const useModal = (card) => {
                     open: true,
                     component: <DeleteCard
                         attributes={{ ...action.payload.attributes, id: 'confirm-delete' }}
-                        card={card}
+                        card={action.payload.card}
                         expandedImage={action.payload.ImageComponent}
                         handleClick={action.payload.eventHandler}
                     />
@@ -48,8 +48,8 @@ const useModal = (card) => {
                     open: true,
                     component:
                         <ExpandedCardContent handleClick={action.payload.eventHandler}>
-                            {card.card_faces[1].normal}
-                            {card.card_faces.length ? <FlipIcon handleClick={action.payload.eventHandler} /> : null}
+                            {action.payload.card.card_faces[1].normal}
+                            {action.payload.card.card_faces.length ? <FlipIcon handleClick={action.payload.eventHandler} /> : null}
                         </ExpandedCardContent>
                 };
             // case ACTIONS.ADD_TO_COLLECTION:
@@ -70,16 +70,17 @@ const useModal = (card) => {
             case ACTIONS.BACK_TO_SEARCH:
                 return INIT;
             default:
-                throw new Error(`Unknown action type: ${action.type}`);
+                return INIT;
         }
     }
     const [state, dispatch] = useReducer(reducer, INIT)
 
-    const updateState = (id, imgAttributes, ExpandedCard, eventHandler) => {
+    const updateState = (id, card, attributes, ExpandedCard, eventHandler) => {
         dispatch({
             type: id,
             payload: {
-                attributes: imgAttributes,
+                card: card,
+                attributes: attributes,
                 ImageComponent: ExpandedCard,
                 eventHandler: eventHandler,
             }

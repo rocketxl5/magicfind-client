@@ -1,5 +1,3 @@
-import FlipIcon from './FlipIcon'
-
 const ExpandedCardContent = ({ children, handleClick }) => {
 
     return (

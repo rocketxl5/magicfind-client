@@ -86,9 +86,6 @@ const Search = () => {
     }
   }, [searchInput])
 
-  // useEffect(() => {
-  //   console.log(cardName)
-  // }, [cardName])
   const searchAPI = (e) => {
     e?.preventDefault();
 
@@ -96,7 +93,6 @@ const Search = () => {
 
     setLoading(true);
     console.log('predictions', predictions)
-
 
     const headers = { method: 'GET' };
 
@@ -111,8 +107,6 @@ const Search = () => {
     else if (searchTerm) {
       query = `cards/named?fuzzy=${searchTerm}`;
     }
-
-
 
     apiInputRef.current.blur();
     fetch(
@@ -132,7 +126,6 @@ const Search = () => {
           setOracleID(oracle_id);
           setCardName(name);
         }
-
       })
       .catch((error) => {
         console.log(error)
@@ -148,7 +141,6 @@ const Search = () => {
   // Fetch call triggered when oracleID state changes in fetchSingleCard function
   useEffect(() => {
     if (oracleID) {
-
       const headers = { method: 'GET' };
       fetch(
         `${api.skryfallURL}/cards/search?order=released&q=oracleid%3A${oracleID}&unique=prints`,
@@ -178,8 +170,7 @@ const Search = () => {
           apiCards.push({ ...card, finishes: [finish], id: `${card.id}_${finish}` });
         })
       });
-      // Customize cards id to prevent redundancy.
-      // cards.forEach(card => card.id = crypto.randomUUID());
+
       // Remove online and oversized cards
       function filterCards(cards) {
         return cards.filter((card) => {
@@ -210,7 +201,6 @@ const Search = () => {
                 <h2 className="title">Search API</h2>
               </header>
               <main className="main">
-
                 <form id="search-api-form" className="search-form" onSubmit={searchAPI}>
                   <SearchInput isActive={isActive} id={'search-api'} searchCards={searchAPI} ref={apiInputRef} />
             </form>
