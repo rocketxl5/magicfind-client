@@ -46,12 +46,22 @@ const SearchResult = () => {
         }
     }, [location])
 
+
     const [{ open, component }, { updateState }] = useModal();
 
     const handleClick = (e, card, attributes, expandedCard) => {
         e.stopPropagation();
         updateState(e.target.id, card, attributes, expandedCard, (value) => handleClick(value));
     }
+
+    useEffect(() => {
+        if (open) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = 'scroll';
+
+        }
+    }, [open])
 
     return (
         <>
