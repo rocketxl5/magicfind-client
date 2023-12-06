@@ -17,10 +17,10 @@ import SearchCollection from './components/views/search/SearchCollection';
 import SearchAPI from './components/views/search/SearchAPI';
 import SearchResult from './components/views/search/SearchResult';
 import AddCard from './components/views/AddCard';
+import PublishCard from './components/views/PublishCard';
 import NotFound from './components/views/NotFound';
 import ShoppingCart from './components/views/ShoppingCart';
 import RemoveCard from './components/views/RemoveCard';
-import ModifyCard from './components/views/ModifyCard';
 import Inbox from './components/views/mail/Inbox';
 import './assets/css/reset.css';
 import './App.css';
@@ -53,7 +53,7 @@ const App = () => {
           <Route path="profile" element={<Profile />} />
           <Route path="add-card/:cardName" element={<AddCard />} />
           <Route path="remove-card/:cardName" element={<RemoveCard />} />
-          <Route path="modify-card/:cardName" element={<ModifyCard />} />
+          <Route path="publish-card/:cardName" element={<PublishCard />} />
           <Route path="search-collection" element={<SearchCollection />} />
           <Route path="search-api" element={<SearchAPI />} />
           <Route path="mail/inbox" element={<Inbox />} />
