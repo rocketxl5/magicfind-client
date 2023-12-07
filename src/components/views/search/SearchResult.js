@@ -10,40 +10,48 @@ import capitalizeString from '../../../utilities/capitalizeString';
 const SearchResult = () => {
     const location = useLocation();
     const navigate = useNavigate();
-    const { cards, cardName, type, search } = location?.state;
+    const { cards, cardName, type, search } = location.state || JSON.parse(localStorage.getItem('search-result'))
+    // const result = JSON.parse(localStorage.getItem('search-result'))
+    // const { cardName, type, search } = location && location.state;
+
     const [haveLoaded, setHaveLoaded] = useState(false);
     const cardRef = useRef(null);
 
+
+
     useEffect(() => {
-        // If cards is not empty
-        if (cards?.length) {
-            const preloadImages = (cards) => {
-                const loadImage = card => {
-                    return new Promise((resolve, reject) => {
-                        const image = new Image();
-                        const uri = card.image_uris ? card.image_uris.normal : card.card_faces[0].image_uris.normal
-                        image.src = uri;
-                        image.onload = () => resolve(card);
-                        image.onerror = error => reject(error);
-                    });
-                }
-                Promise.all(cards.map(card => loadImage(card)))
-                    .then(() => {
-                        setHaveLoaded(true)
-                    })
-                    .catch(error => console.log('Image load has failed', error))
+        const preloadImages = (cards) => {
+            const loadImage = card => {
+                return new Promise((resolve, reject) => {
+                    const image = new Image();
+                    const uri = card.image_uris ? card.image_uris.normal : card.card_faces[0].image_uris.normal
+                    image.src = uri;
+                    image.onload = () => resolve(card);
+                    image.onerror = error => reject(error);
+                });
             }
+            Promise.all(cards.map(card => loadImage(card)))
+                .then(() => {
+                    setHaveLoaded(true)
+                })
+                .catch(error => console.log('Image load has failed', error))
+        }
+
+
+        // If cards is not empty or localStorage is set
+        if (cards?.length) {
             // Call normal image async loader
             preloadImages(cards);
         }
             // No cards collection
             // Send back to search-collection page
         else {
+            // localStorage.removeItem('search-results');
             setTimeout(() => {
                 navigate('/search-collection')
-            }, 1500)
+            }, 1400)
         }
-    }, [location])
+    }, [cards])
 
 
     const [{ open, component }, { updateState }] = useModal((value) => handleClick(value));
@@ -62,27 +70,33 @@ const SearchResult = () => {
                     </Modal>
                 }
                 <header className="search-result-header">
+
                     {type !== 'search-catalog' &&
-                        <div className="back-link">
-                            <Link to={search}>{<FiChevronLeft />} Back to Search</Link>
-                        </div>
+
+                        <Link className="back-link" to={search}>Back to Search</Link>
+
                     }
-                    <div className="search-result-info">
-                        <h3>{cardName ? capitalizeString(cardName) : 'Search Results'}</h3>
-                        <span>
+                    <span className="space-1">
                             {
                                 cards ?
-                                    `${cards.length} ${cards.length > 1 ? 'Cards' : 'Card'}` :
+                                `${cards.length} ${cards.length > 1 ? 'Results' : 'Result'}` :
                                     'No results'
                             }
                         </span>
-                    </div>
+
+
                 </header>
                 {
                     type === 'card-not-found' ?
                         (
                             <NotFound cardName={cardName} />
                         ) : (
+                            <div className="content">
+                                <header className="header">
+
+                                    <h2 className="title">Search Results</h2>
+                                </header>
+                                <main className="main">
                             <div className="cards">
                                 {haveLoaded &&
                                     cards.map((card, index) => {
@@ -96,6 +110,8 @@ const SearchResult = () => {
                                             />)
                                     })
                                 }
+                            </div>
+                                </main>
                             </div>
                         )
                 }

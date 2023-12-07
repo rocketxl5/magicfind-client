@@ -51,9 +51,6 @@ const SearchInput = forwardRef(function SearchInput(props, ref) {
     e.preventDefault();
     setMarker(-1);
     setSearchTerm('');
-    // setSearchInput(null);
-
-    // setSearchInput(null);
   };
 
   const handleFocus = (e) => {

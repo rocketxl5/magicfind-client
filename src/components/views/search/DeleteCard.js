@@ -56,23 +56,27 @@ const DeleteCard = (props) => {
                 setLoading(false);
                 const { cards, isDeleted, message } = data;
                 const { cardName, type } = location.state;
-                let resObj = { type: type, search: `/${type}`, message: message, isDeleted: isDeleted }
-                setResponse({ isDeleted: isDeleted, message: message })
-                // If cardName is set
+                setResponse({ isDeleted: isDeleted, message: message });
+                // If specific search
                 if (cardName) {
                     // filter for cards with cardName
-                    setResponse({ isDeleted: isDeleted, message: message })
                     const updatedCards = cards.filter(card => card.name.toLowerCase() === cardName.toLowerCase());
+                    const res = { cards: updatedCards, cardName: cardName, type: type, search: `/${type}`, }
                     navigate(`${location.pathname}`,
                         {
-                            state: { ...resObj, cards: updatedCards, cardName: cardName },
+                            state: { ...res },
                         });
+                    localStorage.setItem('search-result', JSON.stringify({ ...res }))
                     closeModal(btnRef.current)
+
                 } else {
+                    // If general search (ex: all-cards)
+                    const res = { cards: cards, cardName: 'all', type: type, search: `/${type}`, }
                     navigate(`${location.pathname}`,
                         {
-                            state: { ...resObj, cards: cards, cardName: undefined },
+                            state: { ...res },
                         });
+                    localStorage.setItem('search-result', JSON.stringify({ ...res }))
                     closeModal(btnRef.current)
                 }
 

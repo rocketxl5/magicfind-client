@@ -24,9 +24,9 @@ const SearchCollection = () => {
 
   const {
     searchInput,
-    setSearchInput,
+    // setSearchInput,
     searchTerm,
-    setSearchTerm,
+    // setSearchTerm,
     cardName,
     cards,
     setCards,
@@ -60,6 +60,7 @@ const SearchCollection = () => {
         }
 
         return res.json().then((data) => {
+          console.log(data)
           setLoading(false);
           throw new Error(JSON.stringify(data));
         })
@@ -68,7 +69,14 @@ const SearchCollection = () => {
         setLoading(false);
         setCardNames(data.names);
         setCards(data.cards);
-        collectionInputRef?.current?.focus();
+        console.log(data.cards)
+        localStorage.setItem('search-result', JSON.stringify({
+          cards: data.cards,
+          cardName: 'all',
+          type: collectionInputRef.current.id,
+          search: location.pathname
+        }));
+        collectionInputRef.current?.focus();
       })
       .catch((error) => {
         const errorMessage = JSON.parse(error.message);
@@ -127,25 +135,38 @@ const SearchCollection = () => {
     fetch(`${api.serverURL}/api/cards/${encodeURIComponent(query)}/${auth.id}`, options)
       .then((res) => res.json())
       .then((data) => {
-    // localStorage.setItem('storeCards', JSON.stringify(data.data));
-    // localStorage.setItem('storeCardName', cardName);
-
+        const result = {
+          cards: data.results,
+          cardName: data.cardName,
+          type: collectionInputRef.current.id,
+          search: location.pathname
+        }
         setLoading(false);
         setCardName('');
+        localStorage.setItem('searc-result', JSON.stringify(result));
         navigate(`/search-result/${setQueryString(query.toLowerCase(), '-')}`,
           {
-            state: { cards: data.results, cardName: data.cardName, type: collectionInputRef.current.id, search: location.pathname },
+            state: result,
           });
       })
       .catch((error) => console.log(error));
   };
 
   // Get all cards from user store
-  const handleClick = () => {
+  const handleClick = (e) => {
+    e.preventDefault();
+
     if (cards) {
+      const result = {
+        cards: cards,
+        cardName: 'all',
+        type: collectionInputRef.current.id,
+        search: location.pathname
+      }
+      localStorage.setItem('search-result', JSON.stringify(result));
       navigate(`/search-result/all-cards`,
         {
-          state: { cards: cards, type: collectionInputRef.current.id, search: location.pathname },
+          state: result,
         });
     }
   };
