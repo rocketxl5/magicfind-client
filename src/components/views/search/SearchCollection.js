@@ -24,7 +24,7 @@ const SearchCollection = () => {
 
   const {
     searchInput,
-    // setSearchInput,
+    setSearchInput,
     searchTerm,
     // setSearchTerm,
     cardName,
@@ -60,7 +60,6 @@ const SearchCollection = () => {
         }
 
         return res.json().then((data) => {
-          console.log(data)
           setLoading(false);
           throw new Error(JSON.stringify(data));
         })
@@ -69,7 +68,6 @@ const SearchCollection = () => {
         setLoading(false);
         setCardNames(data.names);
         setCards(data.cards);
-        console.log(data.cards)
         localStorage.setItem('search-result', JSON.stringify({
           cards: data.cards,
           cardName: 'all',
@@ -105,13 +103,12 @@ const SearchCollection = () => {
   }, [searchInput]);
 
   // Instore single card request search field with
-  const searchCollection = (e) => {
+  const searchCollection = (e = undefined, prediction = undefined) => {
     e?.preventDefault();
 
     if (searchTerm.length < 3) { return }
     setLoading(true);
-      collectionInputRef.current.blur();
-
+    collectionInputRef.current?.blur();
       const headers = new Headers();
       headers.append('Content-Type', 'application/json');
       headers.append('auth-token', auth.token);
@@ -119,17 +116,19 @@ const SearchCollection = () => {
         method: 'GET',
         headers: headers,
       };
+    let query = ''
 
-    let query = '';
-
-    if (cardName) {
-      query = cardName
+    if (prediction) {
+      query = prediction;
     }
-    else if (predictions.length === 1) {
+    else if (cardName) {
+      query = cardName;
+    }
+    else if (predictions === 1) {
       query = predictions[0];
     }
-    else {
-      query = searchTerm
+    else if (searchTerm) {
+      query = searchTerm;
     }
 
     fetch(`${api.serverURL}/api/cards/${encodeURIComponent(query)}/${auth.id}`, options)
@@ -138,11 +137,13 @@ const SearchCollection = () => {
         const result = {
           cards: data.results,
           cardName: data.cardName,
-          type: collectionInputRef.current.id,
+          type: collectionInputRef.current?.id,
           search: location.pathname
         }
         setLoading(false);
+        // setCardName('');
         setCardName('');
+        setSearchInput(null);
         localStorage.setItem('searc-result', JSON.stringify(result));
         navigate(`/search-result/${setQueryString(query.toLowerCase(), '-')}`,
           {

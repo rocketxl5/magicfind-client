@@ -90,13 +90,9 @@ const Login = () => {
             })
           })
           .then((data) => {
-            data.user.id = data.user._id;
-            delete data.user._id;
-            delete data.user.password;
-            console.log(data)
             localStorage.setItem('token', JSON.stringify(data.token));
-            localStorage.setItem('user', JSON.stringify(data.user));
-            setAuth({ ...data.user, token: data.token });
+            localStorage.setItem('user', JSON.stringify(data.payload.user));
+            setAuth({ ...data.payload.user, token: data.token });
             setLoading(false)
             // console.log(location?.state)
             const destination = location.state?.from ? location.state.from.pathname : '/me';
