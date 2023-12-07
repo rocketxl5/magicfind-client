@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import CardImage from './CardImage';
 import CollectionCardDetail from './CollectionCardDetail';
@@ -24,10 +24,11 @@ const DeleteCard = (props) => {
             )
         })()
     });
+
     const [loading, setLoading] = useState(false);
     const btnRef = useRef(null);
 
-    // Trigger click event on button to close modal
+    // Triggers click event on button to close modal
     const closeModal = (button) => {
         setTimeout(() => {
             button.click();
@@ -56,27 +57,28 @@ const DeleteCard = (props) => {
                 setLoading(false);
                 const { cards, isDeleted, message } = data;
                 const { cardName, type } = location.state;
-                setResponse({ isDeleted: isDeleted, message: message });
-                // If specific search
+                // let resObj = { type: type, search: `/${type}` }
+                setResponse({ isDeleted: isDeleted, message: message })
+                // If cardName is set
                 if (cardName) {
                     // filter for cards with cardName
                     const updatedCards = cards.filter(card => card.name.toLowerCase() === cardName.toLowerCase());
-                    const res = { cards: updatedCards, cardName: cardName, type: type, search: `/${type}`, }
-                    navigate(`${location.pathname}`,
-                        {
-                            state: { ...res },
-                        });
-                    localStorage.setItem('search-result', JSON.stringify({ ...res }))
-                    closeModal(btnRef.current)
+                    const result = { cards: updatedCards, cardName: cardName, type: type, search: `/${type}` };
 
-                } else {
-                    // If general search (ex: all-cards)
-                    const res = { cards: cards, cardName: 'all', type: type, search: `/${type}`, }
                     navigate(`${location.pathname}`,
                         {
-                            state: { ...res },
+                            state: result,
                         });
-                    localStorage.setItem('search-result', JSON.stringify({ ...res }))
+                    localStorage.setItem('search-result', JSON.stringify(result));
+                    closeModal(btnRef.current)
+                } else {
+                    const result = { cards: cards, cardName: undefined, type: type, search: `/${type}` };
+
+                    navigate(`${location.pathname}`,
+                        {
+                            state: result,
+                        });
+                    localStorage.setItem('search-result', JSON.stringify(result));
                     closeModal(btnRef.current)
                 }
 
@@ -136,7 +138,7 @@ const DeleteCard = (props) => {
                                         </section>
                                         <footer className="card-footer">
                                             <div className="btn-container hide">
-                                                <button id="back-to-search" className="card-btn bg-green color-light" type="button" onClick={handleClick} ref={btnRef}>Back to Search Collection Page </button>
+                                                    <button id="back-to-search" type="button" onClick={handleClick} ref={btnRef}></button>
                                             </div>
                                         </footer>
                                         </div>

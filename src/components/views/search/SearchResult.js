@@ -11,47 +11,45 @@ const SearchResult = () => {
     const location = useLocation();
     const navigate = useNavigate();
     const { cards, cardName, type, search } = location.state || JSON.parse(localStorage.getItem('search-result'))
+    // const { cards, cardName, type, search } = location.state || JSON.parse(localStorage.getItem('search-result'));
     // const result = JSON.parse(localStorage.getItem('search-result'))
     // const { cardName, type, search } = location && location.state;
 
     const [haveLoaded, setHaveLoaded] = useState(false);
     const cardRef = useRef(null);
 
-
+    console.log(location)
 
     useEffect(() => {
-        const preloadImages = (cards) => {
-            const loadImage = card => {
-                return new Promise((resolve, reject) => {
-                    const image = new Image();
-                    const uri = card.image_uris ? card.image_uris.normal : card.card_faces[0].image_uris.normal
-                    image.src = uri;
-                    image.onload = () => resolve(card);
-                    image.onerror = error => reject(error);
-                });
-            }
-            Promise.all(cards.map(card => loadImage(card)))
-                .then(() => {
-                    setHaveLoaded(true)
-                })
-                .catch(error => console.log('Image load has failed', error))
-        }
-
-
-        // If cards is not empty or localStorage is set
+        // If cards is not empty
         if (cards?.length) {
+            const preloadImages = (cards) => {
+                const loadImage = card => {
+                    return new Promise((resolve, reject) => {
+                        const image = new Image();
+                        const uri = card.image_uris ? card.image_uris.normal : card.card_faces[0].image_uris.normal
+                        image.src = uri;
+                        image.onload = () => resolve(card);
+                        image.onerror = error => reject(error);
+                    });
+                }
+                Promise.all(cards.map(card => loadImage(card)))
+                    .then(() => {
+                        setHaveLoaded(true)
+                    })
+                    .catch(error => console.log('Image load has failed', error))
+            }
             // Call normal image async loader
             preloadImages(cards);
         }
             // No cards collection
             // Send back to search-collection page
         else {
-            // localStorage.removeItem('search-results');
             setTimeout(() => {
                 navigate('/search-collection')
-            }, 1400)
+            }, 1500)
         }
-    }, [cards])
+    }, [location])
 
 
     const [{ open, component }, { updateState }] = useModal((value) => handleClick(value));

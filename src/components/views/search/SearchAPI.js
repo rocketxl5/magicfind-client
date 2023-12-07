@@ -186,10 +186,14 @@ const Search = () => {
       setLoading(false)
       setCardName('');
       setSearchInput(null);
+      const result = { cards: apiCards, cardName: cardName, type: searchInput?.id, search: location.pathname };
+
       navigate(`/search-result/${setQueryString(cardName, '-')}`,
         {
-          state: { cards: apiCards, cardName: cardName, type: 'search-api', search: location.pathname },
+          state: result,
         });
+
+      localStorage.setItem('search-result', JSON.stringify(result));
     }
   }, [data])
 
