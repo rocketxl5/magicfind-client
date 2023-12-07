@@ -65,7 +65,7 @@ body {
 }
 
 a {
-    color: var(--clr-blue)
+    color: var(--clr-dark);
 }
 
 .main-header {

@@ -144,6 +144,10 @@
     margin-inline: auto;
 }
 
+.space-1 {
+    margin-left: var(--size-1);
+}
+
 .btn-small {
     display: inline-block;
     min-width: 5em;

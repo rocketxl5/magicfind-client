@@ -15,17 +15,15 @@ export const AuthProvider = ({ children }) => {
   const navigate = useNavigate();
 
   const logoutAction = () => {
-    localStorage.removeItem('token');
+    localStorage.clear();
     setAuth(null);
-    // setUnreadMail(0);
-    // setCartItems([]);
-    // setItemsCount(0);
     navigate('/');
   }
 
   const parseJwt = (token) => {
+    // Extract payload of jwt
     const decode = JSON.parse(atob(token?.split('.')[1]));
-    // console.log(decode);
+    console.log(decode);
     if (decode.exp * 1000 < new Date().getTime()) {
       return true;
     } else {
@@ -62,14 +60,14 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
 
     const jwt = localStorage.getItem('token')
+    console.log(jwt)
     if (jwt) {
       const hasExpired = parseJwt(jwt);
       if (hasExpired) {
         logoutAction();
-        navigate('/login');
       } else if (localStorage.getItem('user')) {
         const user = JSON.parse(localStorage.getItem('user'));
-        const token = localStorage.getItem('token');
+        const token = JSON.parse(localStorage.getItem('token'));
         setAuth({ ...user, token: token })
         navigate(location.pathname)
       }

@@ -328,7 +328,7 @@ section.user-page {
 /* Mail box     */
 /* ************ */
 main.content {
-  display: flex;
+  /* display: flex; */
   /* justify-content: space-evenly; */
 }
 

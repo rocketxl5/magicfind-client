@@ -93,13 +93,14 @@ const Login = () => {
             data.user.id = data.user._id;
             delete data.user._id;
             delete data.user.password;
-            localStorage.setItem('token', data.token)
+            console.log(data)
+            localStorage.setItem('token', JSON.stringify(data.token));
             localStorage.setItem('user', JSON.stringify(data.user));
             setAuth({ ...data.user, token: data.token });
             setLoading(false)
             // console.log(location?.state)
             const destination = location.state?.from ? location.state.from.pathname : '/me';
-            // console.log(destination)
+            console.log(destination)
             navigate(destination, { replace: true });
           })
           .catch((error) => {

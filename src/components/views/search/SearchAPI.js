@@ -86,6 +86,7 @@ const Search = () => {
     }
   }, [searchInput])
 
+
   const searchAPI = (e = undefined, prediction = undefined) => {
     e?.preventDefault();
 

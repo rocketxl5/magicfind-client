@@ -10,7 +10,6 @@ const AutoComplete = (props) => {
         setMarker,
         searchTerm,
         setCardName,
-        carddName,
         displayAutcomplete
     } = useContext(SearchContext);
     const [position, setPosition] = useState(INIT);
@@ -36,13 +35,10 @@ const AutoComplete = (props) => {
         ulRef.current.scrollTo({ top: position, behavior: 'smooth' })
     }, [marker])
 
-
     // Keyboard arrow up and down autocomplete list searching function
     const handleKeyDown = (e) => {
-
         if (predictions) {
             if (e.key === 'ArrowDown') {
-
                 // console.log(marker)
                 if (marker < predictions.length - 1) {
                     setPosition(position + 40)
@@ -50,7 +46,6 @@ const AutoComplete = (props) => {
                 }
             } 
             if (e.key === 'ArrowUp') {
-
                 // console.log(marker)
                 ulRef?.current?.scrollIntoView(true)
                 if (marker === predictions.length - 1 || marker >= 0) {
@@ -79,6 +74,7 @@ const AutoComplete = (props) => {
                         (
                             <Prediction
                                 key={index}
+                                index={index}
                                 marker={marker}
                                 prediction={prediction}
                             />
