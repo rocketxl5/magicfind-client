@@ -12,7 +12,7 @@ const capitalizeString = (string) => {
 
     // Split string and keep either hyphen white space or slash bar if any
     function split(string) {
-        return string.split(/([- \/])/);
+        return string.split(/([- /])/);
     }
 
     return join(capitalize(split(string)));

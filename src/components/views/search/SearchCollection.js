@@ -70,8 +70,8 @@ const SearchCollection = () => {
         setCards(data.cards);
         localStorage.setItem('search-result', JSON.stringify({
           cards: data.cards,
-          cardName: 'all',
-          type: collectionInputRef.current.id,
+          cardName: undefined,
+          type: searchInput?.id,
           search: location.pathname
         }));
         collectionInputRef.current?.focus();
@@ -116,6 +116,7 @@ const SearchCollection = () => {
         method: 'GET',
         headers: headers,
       };
+
     let query = ''
 
     if (prediction) {
@@ -124,7 +125,7 @@ const SearchCollection = () => {
     else if (cardName) {
       query = cardName;
     }
-    else if (predictions === 1) {
+    else if (predictions.length === 1) {
       query = predictions[0];
     }
     else if (searchTerm) {
@@ -137,14 +138,14 @@ const SearchCollection = () => {
         const result = {
           cards: data.results,
           cardName: data.cardName,
-          type: collectionInputRef.current?.id,
+          type: searchInput.id,
           search: location.pathname
         }
         setLoading(false);
         // setCardName('');
         setCardName('');
         setSearchInput(null);
-        localStorage.setItem('searc-result', JSON.stringify(result));
+        localStorage.setItem('search-result', JSON.stringify(result));
         navigate(`/search-result/${setQueryString(query.toLowerCase(), '-')}`,
           {
             state: result,
@@ -160,8 +161,8 @@ const SearchCollection = () => {
     if (cards) {
       const result = {
         cards: cards,
-        cardName: 'all',
-        type: collectionInputRef.current.id,
+        cardName: undefined,
+        type: searchInput.id,
         search: location.pathname
       }
       localStorage.setItem('search-result', JSON.stringify(result));

@@ -315,7 +315,7 @@ input#search-collection {
 }
 
 div.cards {
-    padding-inline: 2rem;
+    /* padding-inline: 2rem; */
 }
 
 /* SearchCatalog form style */
@@ -387,7 +387,7 @@ ul.autocomplete-list {
   }
 
   .card-content {
-    margin-block-start: var(--size-2);
+    margin-block-end: var(--size-2);
     padding: 1rem;
     border: 1px solid var(--clr-grey);
     border-radius: var(--size-1); 
