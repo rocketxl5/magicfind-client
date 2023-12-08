@@ -17,7 +17,6 @@ import SearchCollection from './components/views/search/SearchCollection';
 import SearchAPI from './components/views/search/SearchAPI';
 import SearchResult from './components/views/search/SearchResult';
 import AddCard from './components/views/AddCard';
-import PublishCard from './components/views/PublishCard';
 import NotFound from './components/views/NotFound';
 import ShoppingCart from './components/views/ShoppingCart';
 import RemoveCard from './components/views/RemoveCard';
@@ -42,18 +41,17 @@ const App = () => {
         <Route path="contact" element={<Contact />} />
         <Route path="login" element={<Login />} />
         <Route path="signup" element={<Signup />} />
+        <Route path="reset-password" element={<ResetPassword />} />
         <Route path="shopping-cart" element={<ShoppingCart />} />
         <Route path="search-result/:cardName" element={<SearchResult />} />
 
         {/* Auth protected routes */}
         <Route element={<RequireAuth />}>
           <Route path="me" element={<AuthPage />} />
-          <Route path="reset-password" element={<ResetPassword />} />
           <Route path="settings" element={<Settings />} />
           <Route path="profile" element={<Profile />} />
           <Route path="add-card/:cardName" element={<AddCard />} />
           <Route path="remove-card/:cardName" element={<RemoveCard />} />
-          <Route path="publish-card/:cardName" element={<PublishCard />} />
           <Route path="search-collection" element={<SearchCollection />} />
           <Route path="search-api" element={<SearchAPI />} />
           <Route path="mail/inbox" element={<Inbox />} />

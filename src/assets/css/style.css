@@ -281,6 +281,7 @@ button:hover {
     left: 0;
     height: 100vh;
     width: 100vw;
+    overflow-y: scroll;
     padding-inline: var(--size-2);
     background-color: rgba(216, 214, 211, .7);
     z-index: 3000;

@@ -1,35 +1,45 @@
 import React, { useState, useRef, useContext, useEffect } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import Loading from '../../layout/Loading';
-import errorHandler from './helpers/errorHandler';
+import errorHandler from './helpers/authErrorHandler';
 import { PathContext } from '../../../contexts/PathContext';
 import useAuth from '../../../hooks/useAuth';
 import { api } from '../../../api/resources';
+const INIT = {
+  email: '',
+  password: '',
+}
 
 const Login = () => {
-  const init = {
-    email: '',
-    password: '',
-  }
-  const [values, setValues] = useState(init);
-  const [errors, setErrors] = useState(init);
+
+  // States
+  const [values, setValues] = useState(INIT);
+  const [errors, setErrors] = useState(INIT);
   const [loading, setLoading] = useState(false);
   const [isValidForm, setIsValidForm] = useState(false);
   const [isSubmit, setIsSubmit] = useState(false);
   const [message, setMessage] = useState(null);
   const [showPassword, setShowPassword] = useState(false);
+
+  // Contexts
   const { setPathname } = useContext(PathContext);
+
+  // Routing
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  // Refs
+  const emailRef = useRef(null);
+  const passwordRef = useRef(null);
+
+  // Custom Hooks
   const { setAuth } = useAuth();
 
   const inputs = {
-    email: document.querySelector('#email'),
-    password: document.querySelector('#password'),
+    email: emailRef.current,
+    password: passwordRef.current
   }
-  const emailRef = useRef(null)
-  const passwordRef = useRef(null)
 
-  const location = useLocation();
-  const navigate = useNavigate();
 
   /**********************
   ***** useEffects  *****
@@ -223,7 +233,7 @@ const Login = () => {
               <div className="form-element flex margin-block-start-2">
                 <Link className="link" to="/reset-password">Forgot password?</Link>
               </div>
-              <div className="form-element">
+                <div className="form-element form-submit">
                 <Link className="link" to="/signup">Create account</Link>
                   <button className="login-btn form-btn" type="submit">Login</button>
               </div>

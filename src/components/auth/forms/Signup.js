@@ -3,20 +3,21 @@ import { Link, useNavigate, useLocation } from 'react-router-dom';
 import Loading from '../../layout/Loading';
 import FormInput from './FormInput';
 import reducer from './reducer/inputReducer';
-import errorHandler from './helpers/errorHandler';
+import errorHandler from './helpers/authErrorHandler';
 import { PathContext } from '../../../contexts/PathContext';
 import { api } from '../../../api/resources';
+const INIT = {
+  username: '',
+  email: '',
+  country: '',
+  password: '',
+  confirmPassword: ''
+}
 
 const Signup = () => {
-  const init = {
-    username: '',
-    email: '',
-    country: '',
-    password: '',
-    confirmPassword: ''
-  }
-  const [values, setValues] = useState(init);
-  const [errors, setErrors] = useState(init);
+
+  const [values, setValues] = useState(INIT);
+  const [errors, setErrors] = useState(INIT);
   const [loading, setLoading] = useState(false);
   const [isValidForm, setIsValidForm] = useState(false);
   const [isSubmit, setIsSubmit] = useState(false)
@@ -120,11 +121,11 @@ const Signup = () => {
     reducer,
     (function () {
       let state = {}
-      for (const prop in init) {
+      for (const prop in INIT) {
         state = { ...state, [prop]: [] }
       }
       return state
-    })(init)
+    })(INIT)
   )
 
   // Setting current path name
@@ -318,7 +319,7 @@ const Signup = () => {
                     ref={input.ref} />
                 })
               }
-              <div className="form-element">
+              <div className="form-element form-submit">
                 <Link className="link" to="/login">Already a member?</Link>
                 <button className="form-btn" type="submit">Submit</button>
               </div>

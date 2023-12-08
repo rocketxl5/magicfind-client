@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useRef } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import CardImage from './CardImage';
 import CollectionCardDetail from './CollectionCardDetail';
@@ -35,7 +35,7 @@ const DeleteCard = (props) => {
         }, 1500)
     }
 
-    const deleteCardHandler = (location) => {
+    const deleteHandler = (location) => {
         setLoading(true);
         const headers = new Headers();
         headers.append('Content-Type', 'application/json');
@@ -57,7 +57,6 @@ const DeleteCard = (props) => {
                 setLoading(false);
                 const { cards, isDeleted, message } = data;
                 const { cardName, type } = location.state;
-                // let resObj = { type: type, search: `/${type}` }
                 setResponse({ isDeleted: isDeleted, message: message })
                 // If cardName is set
                 if (cardName) {
@@ -90,12 +89,12 @@ const DeleteCard = (props) => {
     }
 
     return (
-        <div className="delete-card-content flex">
+        <div className="modal-container flex">
                 {
                     loading ? (
                         <Loading />
                     ) : (
-                        <div className="flex-grow-1">
+                        <div className="modal-content flex-grow-1">
                             {
                                 !response.isDeleted ? (
                                     <>
@@ -110,19 +109,29 @@ const DeleteCard = (props) => {
                                     <CollectionCardDetail card={card} />
                                 </section>
                             </div>
-                            <footer className="card-footer">
-                                <div className="card-delete-message">
+                                        <div className="card-message">
                                                 {response.message}
-                                </div>
+                                        </div>
+                                        <footer className="card-footer">
                                 <div className="card-btns-wrapper">
                                     <div className="btn-container">
-                                                    < button id="confirm-delete" className="btn bg-red color-light" type="button" onClick={handleClick} onMouseDown={(e) => deleteCardHandler(location)} >
-                                            Confirm
+                                                    < button
+                                                        id="go-back"
+                                                        className="btn bg-blue color-light"
+                                                        type="button"
+                                                        onClick={handleClick}
+                                                    >
+                                                        Go Back
                                         </button>
                                     </div>
                                     <div className="btn-container">
-                                                    < button id="go-back" className="btn bg-blue color-light" type="button" onClick={handleClick}>
-                                            Go Back
+                                                    < button
+                                                        id="confirm-delete"
+                                                        className="btn bg-red color-light"
+                                                        type="button"
+                                                        onClick={handleClick}
+                                                        onMouseDown={(e) => deleteHandler(location)} >
+                                                        Confirm
                                         </button>
                                     </div>
                                 </div>

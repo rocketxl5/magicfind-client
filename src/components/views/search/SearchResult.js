@@ -10,15 +10,12 @@ import capitalizeString from '../../../utilities/capitalizeString';
 const SearchResult = () => {
     const location = useLocation();
     const navigate = useNavigate();
-    const { cards, cardName, type, search } = location.state || JSON.parse(localStorage.getItem('search-result'))
-    // const { cards, cardName, type, search } = location.state || JSON.parse(localStorage.getItem('search-result'));
-    // const result = JSON.parse(localStorage.getItem('search-result'))
-    // const { cardName, type, search } = location && location.state;
+    const { cards, cardName, type, search } = location.state || JSON.parse(localStorage.getItem('search-result'));
 
     const [haveLoaded, setHaveLoaded] = useState(false);
     const cardRef = useRef(null);
 
-    console.log(location)
+    // console.log(location)
 
     useEffect(() => {
         // If cards is not empty

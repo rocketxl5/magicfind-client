@@ -205,8 +205,7 @@ const Search = () => {
         ) : (
             <div className="content flex-grow-1">
               <header className="header">
-
-                <h2 className="title">Search API</h2>
+                <h2 className="title">Add a card</h2>
               </header>
               <main className="main">
                 <form id="search-api-form" className="search-form" onSubmit={searchAPI}>
