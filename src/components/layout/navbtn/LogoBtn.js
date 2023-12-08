@@ -2,11 +2,14 @@ import React from 'react'
 import { Link } from 'react-router-dom';
 import { GiWaterBolt } from 'react-icons/gi';
 import styled from 'styled-components';
+import useAuth from '../../../hooks/useAuth';
 
 const LogoBtn = () => {
+  const { auth } = useAuth();
+
   return (
     <Logo >
-      <Anchor className="logo-btn" to="/" title="Magic Find logo">
+      <Anchor className="logo-btn" to={auth ? '/me' : '/'} title="Magic Find logo">
         <SVG>
           <GiWaterBolt />
         </SVG>

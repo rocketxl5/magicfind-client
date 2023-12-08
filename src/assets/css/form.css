@@ -41,7 +41,7 @@ input:-webkit-autofill:active{
 
 /*************************/
 /*************************/
-/* Auth Form Style ******/
+/* Auth & Publish Card Form Style ******/
 /*************************/
 /*************************/
 
@@ -64,7 +64,10 @@ input:-webkit-autofill:active{
     padding-block-end: 0.5em;
 }
 
-.auth-form input {
+.form-element input,
+.form-element textarea,
+.form-element select
+{
     width: 100%;
     padding: 1rem;
     font-size: var(--fs-150);
@@ -73,12 +76,22 @@ input:-webkit-autofill:active{
     border: 1px solid var(--clr-grey);
 }
 
-.form-element input::placeholder {
+.form-element *::placeholder {
     color: var( --clr-grey);
 }
 
-.form-element input:focus::placeholder {
+.form-element *:focus::placeholder {
     opacity: 0;
+}
+
+.form-element *:focus {
+    padding: calc(var(--size-1) - 1px) !important;
+    border: 2px solid rgb(103, 152, 180, 0.7) !important;
+}
+
+.number-container {
+    flex-basis: 0;
+    flex-grow: 1;
 }
 
 .login-password-wrapper  {
@@ -127,7 +140,7 @@ input:-webkit-autofill:active{
 }
 
 
-.form-element:last-of-type {
+.form-submit {
     display: flex;
     justify-content: space-between;
     margin-block-start: 1rem;
@@ -174,10 +187,7 @@ input:-webkit-autofill:active{
     background-color: rgba(34, 170, 68, 0.1);
 }
 
-.form-element input:focus {
-    padding: calc(var(--size-1) - 1px) !important;
-    border: 2px solid rgb(103, 152, 180, 0.7) !important;
-}
+
 
 .auth-message-title {
     padding-block-end: 0.5rem;
@@ -193,6 +203,7 @@ input:-webkit-autofill:active{
     transition: max-height 0.4s ease-out;
     transition-delay: 0.1s;
 }
+
 
 .form-element input:invalid + .requirements-container {
     max-height: 20rem;
@@ -559,12 +570,30 @@ ul.autocomplete-list {
     border-radius: 5px;
 }
 
-.card-delete-message {
+.card-message {
     margin-block: 1.5rem;
     padding: 1rem;
     border: 1px solid var(--clr-grey);
     border-radius: 5px;
 }
+
+.modal-container {
+    margin-block-start: 5rem;
+    padding: 2rem;
+    min-height: 48rem;
+    min-width: calc(100vw - 4rem);
+    border: 1px solid var(--clr-grey);
+    border-radius: var(--size-1); 
+    background: var(--clr-light);
+  }
+
+  .modal-content {
+      flex-grow: 1;
+      display: flex;
+      /* gap: 1rem; */
+      flex-direction: column;
+      justify-content: space-between;
+  }
 
 .card-btns-wrapper {
     width: 100%;

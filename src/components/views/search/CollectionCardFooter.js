@@ -1,16 +1,16 @@
 import { useNavigate } from 'react-router-dom';
 import setQueryString
     from '../../../utilities/setQueryString';
-const CollectionCardFooter = ({ card }) => {
-    const navigate = useNavigate();
+const CollectionCardFooter = ({ card, handleClick }) => {
+// const navigate = useNavigate();
 
-    const handleClick = (e) => {
-        navigate(`/publish-card/${setQueryString(card.name, '-')}`, {
-            state: {
-                card: card
-            }
-        })
-    }
+    // const handleClick = (e) => {
+    //     navigate(`/publish-card/${setQueryString(card.name, '-')}`, {
+    //         state: {
+    //             card: card
+    //         }
+    //     })
+    // }
     return (
         <div className="card-btns-wrapper">
             <div className="btn-container">
@@ -20,11 +20,11 @@ const CollectionCardFooter = ({ card }) => {
             </div>
             {!card.isPublished ? (
                 <div className="btn-container">
-                    <button id="publish-card" className="btn bg-blue color-light" type="button" onClick={handleClick}>Publish</button>
+                    <button id="publish-card" className="btn bg-blue color-light" type="button">Publish</button>
                 </div>
             ) : (
                 <div className="btn-container">
-                        <button id="unpublish-card" className="btn bg-yellow color-light" type="button" onClick={handleClick}>Update</button>
+                        <button id="unpublish-card" className="btn bg-yellow color-light" type="button" >Update</button>
                 </div>
             )}
         </div>

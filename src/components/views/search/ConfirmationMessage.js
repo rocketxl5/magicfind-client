@@ -16,7 +16,7 @@ const ConfirmationMessage = (props) => {
         }
     }
     return (
-        <div className="delete-card-content flex flex-column justify-between">
+        <div className="modal-container flex flex-column justify-between">
             {
                 isDeleted ? (
                     <>
