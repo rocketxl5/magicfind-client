@@ -89,18 +89,21 @@ const DeleteCard = (props) => {
     }
 
     return (
-        <div className="modal-container flex">
+        <div className="modal-content">
                 {
                     loading ? (
                         <Loading />
                     ) : (
-                        <div className="modal-content flex-grow-1">
+                        <>
                             {
                                 !response.isDeleted ? (
                                     <>
-                                        <header className="card-header">
+                                        <header className="modal-header">
+                                            <div className="modal-title">
                                 <h2 className="color-red fw-500">Delete Card Confirmation</h2>
+                                            </div>
                             </header>
+                                        <div className="modal-body">
                             <div className="card-body">
                                 <section className="card-section">
                                     <CardImage attributes={attributes} />
@@ -112,7 +115,8 @@ const DeleteCard = (props) => {
                                         <div className="card-message">
                                                 {response.message}
                                         </div>
-                                        <footer className="card-footer">
+                                        </div>
+                                        <footer className="modal-footer">
                                 <div className="card-btns-wrapper">
                                     <div className="btn-container">
                                                     < button
@@ -138,11 +142,15 @@ const DeleteCard = (props) => {
                             </footer>
                                     </>
                                 ) : (
-                                    <div className="confirmation">
-                                        <header className="card-header">
+                                        <>
+                                            <div className="modal-message">
+
+                                                <header className="modal-header">
+                                                    <div className="modal-title">
                                             <h2 className="color-green fw-500">{response.message}</h2>
+                                                    </div>
                                         </header>
-                                        <section className="response-body">
+                                                <section className="modal-check">
                                             <FaRegCheckCircle className="color-green" />
                                         </section>
                                         <footer className="card-footer">
@@ -151,9 +159,10 @@ const DeleteCard = (props) => {
                                             </div>
                                         </footer>
                                         </div>
+                                        </>
                                 )
                             }
-                        </div>
+                        </>
                     )
             }
         </div>

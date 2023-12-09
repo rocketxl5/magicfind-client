@@ -14,6 +14,7 @@ const INIT = {
     quantity: '',
     price: '',
     condition: '',
+    language: '',
     comment: ''
 }
 
@@ -40,6 +41,7 @@ const PublishCard = (props) => {
     const priceRef = useRef(null);
     const conditionRef = useRef(null);
     const quantityRef = useRef(null);
+    const languageRef = useRef(null);
     const commentRef = useRef(null);
 
     // Hooks
@@ -49,6 +51,7 @@ const PublishCard = (props) => {
         price: priceRef.current,
         condition: conditionRef.current,
         quantity: quantityRef.current,
+        language: languageRef.language,
         comment: commentRef.current,
     }
 
@@ -67,13 +70,12 @@ const PublishCard = (props) => {
                 price: values.price,
                 quantity: values.quantity,
                 condition: values.condition,
+                language: values.language,
                 comment: values.comment,
                 isPublished: true,
                 datePublished: Date.now()
             }
 
-            console.log(auth.id)
-            console.log(card.id)
             setLoading(true);
             const headers = new Headers();
             headers.append('Content-Type', 'application/json');
@@ -182,18 +184,22 @@ const PublishCard = (props) => {
     }
 
     return (
-        <div className="modal-container flex">
+        <div className="modal-content">
             {
                 loading ? (
                     <Loading />
                 ) : (
-                    <div className="modal-content">
+                        <>
                         {
                             !response.isPublished ? (
                                 <>
-                                    <header className="card-header">
+                                        <header className="modal-header">
+                                            <div className="modal-title">
+
                                         <h2 className="color-red fw-500">Publish Card</h2>
+                                            </div>
                                     </header>
+                                        <div className="modal-body">
                                     <div className="card-body">
                                         <section className="card-section">
                                             <CardImage attributes={attributes} />
@@ -243,8 +249,7 @@ const PublishCard = (props) => {
                                                 </div>
                                             </div>
                                             <div className="form-element">
-                                                <label htmlFor="condition" className={errors.condition && 'color-danger'}>{errors.condition ? errors.condition : 'Condition'}</label>
-
+                                                        <label htmlFor="condition" className={errors.condition && 'color-danger'}>{errors.condition ? errors.condition : 'Condition'}</label>
                                                 <select
                                                     className={errors.condition ? 'border-danger danger-padding' : ''}
                                                     id="condition"
@@ -262,10 +267,29 @@ const PublishCard = (props) => {
                                                     <option value="mp">Moderatly Played</option>
                                                     <option value="hp">Heavely Played</option>
                                                     <option value="d">Damaged</option>
-                                                </select>
-
-                                            </div>
-
+                                                        </select>
+                                                    </div>
+                                                    <div className="form-element">
+                                                        <label htmlFor="language" className={errors.language && 'color-danger'}>{errors.language ? errors.language : 'Language'}</label>
+                                                        <select
+                                                            className={errors.language ? 'border-danger danger-padding' : ''}
+                                                            id="language"
+                                                            type="text"
+                                                            name="language"
+                                                            value={values.language}
+                                                            onChange={handleChange}
+                                                            onFocus={handleFocus}
+                                                            ref={languageRef}
+                                                        >
+                                                            <option value="">Choose a language</option>
+                                                            <option value='m'>Mint</option>
+                                                            <option value='nm'>Near Mint</option>
+                                                            <option value="lp">Lightly Played</option>
+                                                            <option value="mp">Moderatly Played</option>
+                                                            <option value="hp">Heavely Played</option>
+                                                            <option value="d">Damaged</option>
+                                                        </select>
+                                                    </div>
                                             <div className="form-element">
                                                 <label htmlFor="comment" className={errors.comment && 'color-danger'}>{errors.comment ? errors.comment : 'Additional Information'}</label>
                                                 <textarea
@@ -282,7 +306,9 @@ const PublishCard = (props) => {
                                             </div>
                                         </form>
                                     </div>
-                                    <footer className="card-footer">
+
+                                        </div>
+                                        <footer className="modal-footer">
                                         <div className="card-btns-wrapper">
                                             <div className="btn-container">
                                                 < button
@@ -324,7 +350,7 @@ const PublishCard = (props) => {
                                 // </div>
                             )
                         }
-                    </div>
+                        </>
                 )
             }
         </div>
