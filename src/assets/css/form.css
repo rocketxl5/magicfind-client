@@ -76,6 +76,10 @@ input:-webkit-autofill:active{
     border: 1px solid var(--clr-grey);
 }
 
+.form-element textarea {
+    min-height: 10rem;
+}
+
 .form-element *::placeholder {
     color: var( --clr-grey);
 }
@@ -423,17 +427,6 @@ ul.autocomplete-list {
     background: var(--clr-light);
   }
 
-  .response-body {
-    height: fit-content;
-    display: flex;
-    justify-content: center;
-  }
-
-  .response-body svg { 
-    width: 14rem;
-    height: 14rem;
-  }
-
   .card-section {
     position: relative;
     display: flex;
@@ -576,24 +569,6 @@ ul.autocomplete-list {
     border: 1px solid var(--clr-grey);
     border-radius: 5px;
 }
-
-.modal-container {
-    margin-block-start: 5rem;
-    padding: 2rem;
-    min-height: 48rem;
-    min-width: calc(100vw - 4rem);
-    border: 1px solid var(--clr-grey);
-    border-radius: var(--size-1); 
-    background: var(--clr-light);
-  }
-
-  .modal-content {
-      flex-grow: 1;
-      display: flex;
-      /* gap: 1rem; */
-      flex-direction: column;
-      justify-content: space-between;
-  }
 
 .card-btns-wrapper {
     width: 100%;
