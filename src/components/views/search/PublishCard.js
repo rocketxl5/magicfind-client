@@ -14,7 +14,6 @@ const INIT = {
     quantity: '',
     price: '',
     condition: '',
-    language: '',
     comment: ''
 }
 
@@ -41,7 +40,6 @@ const PublishCard = (props) => {
     const priceRef = useRef(null);
     const conditionRef = useRef(null);
     const quantityRef = useRef(null);
-    const languageRef = useRef(null);
     const commentRef = useRef(null);
 
     // Hooks
@@ -51,7 +49,6 @@ const PublishCard = (props) => {
         price: priceRef.current,
         condition: conditionRef.current,
         quantity: quantityRef.current,
-        language: languageRef.language,
         comment: commentRef.current,
     }
 
@@ -65,18 +62,18 @@ const PublishCard = (props) => {
     useEffect(() => {
         console.log(values)
         if (isValidForm) {
+            setLoading(true);
 
             const input = {
-                price: values.price,
-                quantity: values.quantity,
+                price: parseFloat(values.price),
+                quantity: parseInt(values.quantity),
                 condition: values.condition,
-                language: values.language,
                 comment: values.comment,
                 isPublished: true,
                 datePublished: Date.now()
             }
 
-            setLoading(true);
+
             const headers = new Headers();
             headers.append('Content-Type', 'application/json');
             headers.append('auth-token', auth.token);
@@ -85,62 +82,18 @@ const PublishCard = (props) => {
                 headers: headers,
                 body: JSON.stringify(input),
             };
-            fetch(`${api.serverURL}/api/cards/edit/${card.id}/${auth.id}`, options)
+            fetch(`${api.serverURL}/api/cards/edit/${card._id}/${auth.id}`, options)
                 .then((res) => res.json())
                 .then((data) => {
                     console.log(data);
-                    // setCardContext(false);
-
+                    setLoading(false);
+                    const { card, isPublished, message } = data;
+                    // const { cardName, type } = location.state;
+                    setResponse({ isPublished: isPublished, message: message })
+                    closeModal(btnRef.current)
                 })
                 .catch((error) => console.log('error', error));
         }
-
-        // const input = {
-        //     cardID: card._id,
-        //     userID: auth.id,
-        // }
-        // const options = {
-        //     method: 'DELETE',
-        //     headers: headers,
-        //     body: JSON.stringify(input)
-        // }
-
-        // fetch(`${api.serverURL}/api/cards/`, options)
-        //     .then((res) => res.json())
-        //     .then((data) => {
-        //         setLoading(false);
-        //         const { cards, isPublished, message } = data;
-        //         const { cardName, type } = location.state;
-        //         setResponse({ isPublished: isPublished, message: message })
-        //         // If cardName is set
-        //         if (cardName) {
-        //             // filter for cards with cardName
-        //             const updatedCards = cards.filter(card => card.name.toLowerCase() === cardName.toLowerCase());
-        //             const result = { cards: updatedCards, cardName: cardName, type: type, search: `/${type}` };
-
-        //             navigate(`${location.pathname}`,
-        //                 {
-        //                     state: result,
-        //                 });
-        //             localStorage.setItem('search-result', JSON.stringify(result));
-        //             closeModal(btnRef.current)
-        //         } else {
-        //             const result = { cards: cards, cardName: undefined, type: type, search: `/${type}` };
-
-        //             navigate(`${location.pathname}`,
-        //                 {
-        //                     state: result,
-        //                 });
-        //             localStorage.setItem('search-result', JSON.stringify(result));
-        //             closeModal(btnRef.current)
-        //         }
-
-        //     })
-        //     .catch((error) => {
-        //         setLoading(false);
-        //         console.log('error', error)
-        //     })
-
     }, [isValidForm])
 
 
@@ -211,42 +164,38 @@ const PublishCard = (props) => {
                                     <div className="publish-card">
                                         <form className="publish-form" id="publish-form" name="publish-form" onSubmit={handleSubmit} noValidate>
                                             <div className="form-element flex gap-1">
-                                                <div className="number-container">
-
-                                                    <label htmlFor="quantity" className={errors.quantity && 'color-danger'}>{errors.quantity ? errors.quantity : 'Quantity'}</label>
-                                                    <input
-                                                        className={errors.quantity ? 'border-danger danger-padding' : ''}
-                                                        id="quantity"
-                                                        type="number"
-                                                        name="quantity"
-                                                        value={values.quantity}
-                                                        onChange={handleChange}
-                                                        onFocus={handleFocus}
-
-                                                        min="0"
-                                                        max="1000"
-                                                        placeholder="Quantity"
-                                                        ref={quantityRef}
-                                                    />
-
-                                                </div>
-                                                <div className="number-container">
-                                                    <label htmlFor="price" className={errors.price && 'color-danger'}>{errors.price ? errors.price : 'Price'}</label>
-                                                    <input
-                                                        className={errors.price ? 'border-danger danger-padding' : ''}
-                                                        id="price"
-                                                        type="number"
-                                                        name="price"
-                                                        value={values.price}
-                                                        onChange={handleChange}
-                                                        onFocus={handleFocus}
-
-                                                        min="0.25"
-                                                        max="10000"
-                                                        placeholder="Price"
-                                                        ref={priceRef}
-                                                    />
-                                                </div>
+                                                        <div className="publish-option">
+                                                            <label htmlFor="price" className={errors.price && 'color-danger'}>{errors.price ? errors.price : 'Price'}</label>
+                                                            <input
+                                                                className={errors.price ? 'border-danger danger-padding' : ''}
+                                                                id="price"
+                                                                type="number"
+                                                                name="price"
+                                                                value={values.price}
+                                                                onChange={handleChange}
+                                                                onFocus={handleFocus}
+                                                                min="0.25"
+                                                                max="10000"
+                                                                placeholder="Price"
+                                                                ref={priceRef}
+                                                            />
+                                                        </div>
+                                                        <div className="publish-option">
+                                                            <label htmlFor="quantity" className={errors.quantity && 'color-danger'}>{errors.quantity ? errors.quantity : 'Quantity'}</label>
+                                                            <input
+                                                                className={errors.quantity ? 'border-danger danger-padding' : ''}
+                                                                id="quantity"
+                                                                type="number"
+                                                                name="quantity"
+                                                                value={values.quantity}
+                                                                onChange={handleChange}
+                                                                onFocus={handleFocus}
+                                                                min="0"
+                                                                max="1000"
+                                                                placeholder="Quantity"
+                                                                ref={quantityRef}
+                                                            />
+                                                        </div>
                                             </div>
                                             <div className="form-element">
                                                         <label htmlFor="condition" className={errors.condition && 'color-danger'}>{errors.condition ? errors.condition : 'Condition'}</label>
@@ -270,27 +219,6 @@ const PublishCard = (props) => {
                                                         </select>
                                                     </div>
                                                     <div className="form-element">
-                                                        <label htmlFor="language" className={errors.language && 'color-danger'}>{errors.language ? errors.language : 'Language'}</label>
-                                                        <select
-                                                            className={errors.language ? 'border-danger danger-padding' : ''}
-                                                            id="language"
-                                                            type="text"
-                                                            name="language"
-                                                            value={values.language}
-                                                            onChange={handleChange}
-                                                            onFocus={handleFocus}
-                                                            ref={languageRef}
-                                                        >
-                                                            <option value="">Choose a language</option>
-                                                            <option value='m'>Mint</option>
-                                                            <option value='nm'>Near Mint</option>
-                                                            <option value="lp">Lightly Played</option>
-                                                            <option value="mp">Moderatly Played</option>
-                                                            <option value="hp">Heavely Played</option>
-                                                            <option value="d">Damaged</option>
-                                                        </select>
-                                                    </div>
-                                            <div className="form-element">
                                                 <label htmlFor="comment" className={errors.comment && 'color-danger'}>{errors.comment ? errors.comment : 'Additional Information'}</label>
                                                 <textarea
                                                     className={errors.comment && 'border-danger danger-padding'}
@@ -304,6 +232,20 @@ const PublishCard = (props) => {
                                                 >
                                                 </textarea>
                                             </div>
+                                                    <div className="form-element">
+                                                        <p>Card Status</p>
+                                                        <div className="card-status flex gap-1">
+                                                            <div className="publish-option status flex align-center space-between">
+                                                                <label htmlFor="publish">Publish</label>
+                                                                <input type="radio" name="publish" id="publish" value={true} />
+
+                                                            </div>
+                                                            <div className="publish-option status flex align-center space-between">
+                                                                <label htmlFor="unpublish">Unpublish</label>
+                                                                <input type="radio" name="publish" id="unpublish" value={false} />
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                         </form>
                                     </div>
 
@@ -334,20 +276,27 @@ const PublishCard = (props) => {
                                     </footer>
                                 </>
                             ) : (
-                                <></>
-                                // <div className="confirmation">
-                                //     <header className="card-header">
-                                //         <h2 className="color-green fw-500">{response.message}</h2>
-                                //     </header>
-                                //     <section className="response-body">
-                                //         <FaRegCheckCircle className="color-green" />
-                                //     </section>
-                                //     <footer className="card-footer">
-                                //         <div className="btn-container hide">
-                                //             <button id="back-to-search" type="button" onClick={handleClick} ref={btnRef}></button>
-                                //         </div>
-                                //     </footer>
-                                // </div>
+
+                                        <div className="modal-message">
+                                            <header className="modal-header">
+                                                <div className="modal-title">
+                                                    <h2 className="color-green fw-500">{response.message}</h2>
+                                                </div>
+                                            </header>
+                                            <section className="modal-check">
+                                                <FaRegCheckCircle className="color-green" />
+                                            </section>
+                                            <footer className="card-footer">
+                                                <div className="btn-container hide">
+                                                    <button
+                                                        id="back-to-search"
+                                                        type="button"
+                                                        onClick={handleClick}
+                                                        ref={btnRef}>
+                                                    </button>
+                                                </div>
+                                            </footer>
+                                        </div>
                             )
                         }
                         </>
