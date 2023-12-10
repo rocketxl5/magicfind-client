@@ -118,7 +118,7 @@ const DeleteCard = (props) => {
                                         </div>
                                         <footer className="modal-footer">
                                 <div className="card-btns-wrapper">
-                                    <div className="btn-container">
+                                                <div className="btn-container">
                                                     < button
                                                         id="go-back"
                                                         className="btn bg-blue color-light"
@@ -138,28 +138,31 @@ const DeleteCard = (props) => {
                                                         Confirm
                                         </button>
                                     </div>
+
                                 </div>
                             </footer>
                                     </>
                                 ) : (
-                                        <>
-                                            <div className="modal-message">
-
-                                                <header className="modal-header">
-                                                    <div className="modal-title">
-                                            <h2 className="color-green fw-500">{response.message}</h2>
-                                                    </div>
-                                        </header>
-                                                <section className="modal-check">
-                                            <FaRegCheckCircle className="color-green" />
-                                        </section>
-                                        <footer className="card-footer">
-                                            <div className="btn-container hide">
-                                                    <button id="back-to-search" type="button" onClick={handleClick} ref={btnRef}></button>
-                                            </div>
-                                        </footer>
+                                        <div className="modal-message">
+                                            <header className="modal-header">
+                                                <div className="modal-title">
+                                                    <h2 className="color-green fw-500">{response.message}</h2>
+                                                </div>
+                                            </header>
+                                            <section className="modal-check">
+                                                <FaRegCheckCircle className="color-green" />
+                                            </section>
+                                            <footer className="card-footer">
+                                                <div className="btn-container hide">
+                                                    <button
+                                                        id="back-to-search"
+                                                        type="button"
+                                                        onClick={handleClick}
+                                                        ref={btnRef}>
+                                                    </button>
+                                                </div>
+                                            </footer>
                                         </div>
-                                        </>
                                 )
                             }
                         </>

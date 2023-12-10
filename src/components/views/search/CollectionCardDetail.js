@@ -28,6 +28,9 @@ const CollectionCardDetail = ({ card }) => {
                 <div className="card-spec">
                     <p><span className="card-spec-title">Artist:</span>  <span className="card-spec-value">{card.artist.split(',')[0]}</span></p>
                 </div>
+                <div className="card-status">
+                    <p><span className="card-spec-title">Status:</span>  <span className="card-spec-value">{card._is_published ? 'Published' : 'Unpublished'}</span></p>
+                </div>
             </div>
         </>
     )

@@ -11,6 +11,8 @@ const CollectionCardFooter = ({ card, handleClick }) => {
     //         }
     //     })
     // }
+
+    console.log(card)
     return (
         <div className="card-btns-wrapper">
             <div className="btn-container">
@@ -18,15 +20,11 @@ const CollectionCardFooter = ({ card, handleClick }) => {
                     Delete
                 </button>
             </div>
-            {!card.isPublished ? (
+
                 <div className="btn-container">
-                    <button id="publish-card" className="btn bg-blue color-light" type="button">Publish</button>
+                <button id="publish-card" className="btn bg-blue color-light" type="button">Edit</button>
                 </div>
-            ) : (
-                <div className="btn-container">
-                        <button id="unpublish-card" className="btn bg-yellow color-light" type="button" >Update</button>
-                </div>
-            )}
+
         </div>
     )
 }

@@ -59,7 +59,8 @@ input:-webkit-autofill:active{
     padding-block-start: 1rem;
 }
 
-.form-element label {
+.form-element label,
+.form-element > p {
     display: block;
     padding-block-end: 0.5em;
 }
@@ -93,9 +94,24 @@ input:-webkit-autofill:active{
     border: 2px solid rgb(103, 152, 180, 0.7) !important;
 }
 
-.number-container {
+.publish-option {
     flex-basis: 0;
     flex-grow: 1;
+} 
+
+.status {
+    padding: 1rem;
+    background-color: #fff;
+    border-radius: 5px;
+    border: 1px solid var(--clr-grey);
+}
+
+.status label {
+    padding-block-end: 0;
+}
+
+.status input {
+   flex-basis: 0;
 }
 
 .login-password-wrapper  {
@@ -275,8 +291,6 @@ input#search-collection {
     font-size: 1.3rem; 
     color: var(--clr-light-grey);
 }
-
-
 
 .search-result-header {
     /* position: relative; */

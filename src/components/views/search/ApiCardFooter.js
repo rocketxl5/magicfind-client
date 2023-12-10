@@ -64,7 +64,7 @@ const ApiCardFooter = ({ card, setLoading }) => {
                 .catch((error) => {
                     const errorMessage = JSON.parse(error.message)
                     setAttributes(attributesHandler(errorMessage));
-                    console.log(error);
+                    // console.log(error);
                     setLoading(false);
                 });
         }
