@@ -99,9 +99,9 @@ const DeleteCard = (props) => {
                                 !response.isDeleted ? (
                                     <>
 
-                                        <header className="modal-header">
-                                            <div className="modal-title border-red">
-                                                <h2 className="color-red fw-500">Delete Card</h2>
+                                        <header className="modal-header bg-red">
+                                            <div className="modal-title">
+                                                <h2 className="fw-500">Delete Card</h2>
                                             </div>
                             </header>
                                         <div className="modal-body">
@@ -122,7 +122,7 @@ const DeleteCard = (props) => {
                                                 <div className="btn-container">
                                                     < button
                                                         id="go-back"
-                                                        className="btn bg-blue color-light"
+                                                        className="btn bg-yellow-2 color-light"
                                                         type="button"
                                                         onClick={handleClick}
                                                     >
