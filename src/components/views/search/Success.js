@@ -5,7 +5,7 @@ const Success = forwardRef(function Success(props, ref) {
     const { response, handleClick } = props;
     return (
         <div className="modal-message">
-            <header className="modal-header">
+            <header className="modal-header bg-green">
                 <div className="modal-title">
                     <h2 className="color-green fw-500">{response.message}</h2>
                 </div>

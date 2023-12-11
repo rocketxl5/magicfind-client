@@ -6,13 +6,14 @@
 
     --clr-blue: rgb(27, 47, 65);
     --clr-light-blue: rgb(219, 236, 250);
-    --clr-grey: rgb(216, 214, 211);
+    --clr-grey: rgb(219, 219, 219);
     --clr-light-grey: #F7F7F7;
     --clr-red: #a31621;
     --clr-light: rgb(252, 252, 252);
     --clr-dark: hwb(0 15% 85%);
     --clr-green: #49A078;
     --clr-yellow: #FFB834;
+    --clr-yellow-2: #eca31a;
     --clr-teal: #3598d1;
     --clr-blue-steel: rgb(103, 152, 180);
 
@@ -306,7 +307,7 @@ button:hover {
     position: relative;
     display: flex;
     flex-direction: column;
-    gap: 2rem;
+    /* gap: 2rem; */
     width: 100%;
     border-radius: 1rem;
     background: var(--clr-light);
@@ -314,31 +315,30 @@ button:hover {
     }
 
   .modal-header {
-    /* flex-shrink: 0;
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between; */
-    padding-block: 1rem;
-    /* background-color:  var(--clr-light-grey); */
-    /* border-bottom: 1px solid var(--clr-light-grey); */
+    padding-block: 1.5rem;
   }
 
   .modal-title {
     text-align: center;
     margin: 0 auto;
-    width: calc(100% - 4rem);
-    /* border: 1px solid var(--clr-grey); */
-    border-radius: 5px;
-    padding-block: var(--size-1);
-    background-color:  var(--clr-light);
-    /* color: var(--clr-blue); */
+    padding: 0;
+    /* width: calc(100% - 4rem); */
+    /* border-radius: 5px; */
+    /* padding-block: var(--size-1); */
+    /* background-color:  var(--clr-light); */
+  }
+
+  .modal-title h2 {
+    color: var(--clr-light);
+    /* line-height: 1.5; */
   }
   
   .modal-body {
-    display: flex;
+    overflow-y: auto;
+    /* display: flex;
     flex-direction: column;
-    justify-content: space-around;
-    padding-inline: 2rem;
+    justify-content: space-around; */
+    padding: 2rem;
     flex-grow: 1;
     z-index: 0;
   }
@@ -349,14 +349,9 @@ button:hover {
 
   .modal-footer {
     padding-inline: 2rem;
-    margin-bottom: 2rem;
-    /* flex-shrink: 0;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: flex-end;
-    background-color:  var(--clr-light-grey);
-    border-top: 1px solid var(--clr-light-grey); */
-  }
+    padding-block: 1.5rem;
+    background-color: var(--clr-grey);
+     }
 
   .expanded-card {
     /* margin-top: 5rem; */

@@ -135,7 +135,7 @@ const EditCard = (props) => {
     }
 
     return (
-        <div className={`modal-content overflow-y ${loading ? 'border-light' : response.isDeleted ? 'border-success' : 'border-blue'}`}>
+        <div className={`modal-content ${loading ? 'border-light' : response.isPublished ? 'border-success' : 'border-blue'}`}>
             {
                 loading ? (
                     <Loading />
@@ -144,10 +144,10 @@ const EditCard = (props) => {
                         {
                             !response.isPublished ? (
                                 <>
-                                    <header className="modal-header">
-                                        <div className="modal-title border-blue">
+                                        <header className="modal-header bg-blue">
+                                            <div className="modal-title">
 
-                                            <h2 className="color-blue fw-500">Edit Card</h2>
+                                                <h2 className="fw-500">Edit Card</h2>
                                         </div>
                                     </header>
                                     <div className="modal-body">
@@ -253,7 +253,7 @@ const EditCard = (props) => {
                                             <div className="btn-container">
                                                 < button
                                                     id="go-back"
-                                                    className="btn bg-blue color-light"
+                                                        className="btn bg-yellow-2 color-light"
                                                     type="button"
                                                     onClick={handleClick}
                                                 >
