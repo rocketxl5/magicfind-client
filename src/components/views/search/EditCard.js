@@ -135,7 +135,7 @@ const EditCard = (props) => {
     }
 
     return (
-        <div className={`modal-content ${loading ? 'border-light' : response.isDeleted ? 'border-success' : 'border-blue'}`}>
+        <div className={`modal-content overflow-y ${loading ? 'border-light' : response.isDeleted ? 'border-success' : 'border-blue'}`}>
             {
                 loading ? (
                     <Loading />
