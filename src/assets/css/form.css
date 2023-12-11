@@ -62,7 +62,7 @@ input:-webkit-autofill:active{
 .form-element label,
 .form-element > p {
     display: block;
-    padding-block-end: 0.5em;
+    /* padding-block-end: 0.5em; */
 }
 
 .form-element input,
@@ -94,7 +94,11 @@ input:-webkit-autofill:active{
     border: 2px solid rgb(103, 152, 180, 0.7) !important;
 }
 
-.publish-option {
+.edit-form * {
+    margin-bottom: 0.5rem;
+}
+
+.edit-option {
     flex-basis: 0;
     flex-grow: 1;
 } 
@@ -595,6 +599,8 @@ ul.autocomplete-list {
     flex-basis: 0;
     flex-grow: 1;
 }
+
+
 
 
 

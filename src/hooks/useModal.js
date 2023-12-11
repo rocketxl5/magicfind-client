@@ -1,6 +1,6 @@
 import { useReducer } from 'react';
 import ExpandedCardContent from '../components/views/search/ExpandedCardContent';
-import PublishCard from '../components/views/search/PublishCard';
+import EditCard from '../components/views/search/EditCard';
 import DeleteCard from '../components/views/search/DeleteCard';
 import FlipIcon from '../components/views/search/FlipIcon';
 
@@ -19,7 +19,7 @@ const useModal = (callback) => {
         EXPAND_CARD: 'expand-card',
         FLIP_CARD: 'flip-card',
         GO_BACK: 'go-back',
-        PUBLISH_CARD: 'publish-card',
+        EDIT_CARD: 'edit-card',
         REDUCE_CARD: 'reduce-card',
     }
 
@@ -54,11 +54,11 @@ const useModal = (callback) => {
                             {action.payload.card.card_faces.length ? <FlipIcon handleClick={callback} /> : null}
                         </ExpandedCardContent>
                 };
-            case ACTIONS.PUBLISH_CARD:
+            case ACTIONS.EDIT_CARD:
                 return {
                     open: true,
                     component:
-                        <PublishCard
+                        <EditCard
                             attributes={{ ...action.payload.attributes, id: 'confirm-publish' }}
                             card={action.payload.card}
                             // expandedImage={action.payload.ImageComponent}

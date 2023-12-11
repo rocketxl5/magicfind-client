@@ -294,7 +294,7 @@ button:hover {
     width: calc(100vw - 4rem);
     margin: 2rem auto;
     border-radius: var(--size-1); 
-    background: var(--clr-light);
+   
     /* position: relative; */
  
   }
@@ -302,14 +302,15 @@ button:hover {
   .modal-content {
     overflow: hidden;
     flex: 1;
+    overflow-y: auto;
     /* max-height: calc(100vh - 4rem); */
     position: relative;
     display: flex;
     flex-direction: column;
     width: 100%;
     border-radius: 1rem;
-      /* border: 1px solid var(--clr-grey); */
-     
+    background: var(--clr-light);
+    /* border: 2px solid var(--clr-light);  */
     }
 
   .modal-header {
@@ -317,20 +318,20 @@ button:hover {
     display: flex;
     align-items: flex-start;
     justify-content: space-between; */
-    padding-block: 2rem;
-    background-color:  var(--clr-light-grey);
-    border-bottom: 1px solid var(--clr-light-grey);
+    padding-block: 1rem;
+    /* background-color:  var(--clr-light-grey); */
+    /* border-bottom: 1px solid var(--clr-light-grey); */
   }
 
   .modal-title {
     text-align: center;
     margin: 0 auto;
     width: calc(100% - 4rem);
-    border: 1px solid var(--clr-grey);
+    /* border: 1px solid var(--clr-grey); */
     border-radius: 5px;
     padding-block: var(--size-1);
     background-color:  var(--clr-light);
-    color: var(--clr-blue);
+    /* color: var(--clr-blue); */
   }
   
   .modal-body {
@@ -338,7 +339,7 @@ button:hover {
     flex-direction: column;
     gap: 3rem;
     padding: 2rem;
-    overflow-y: auto;
+    flex-grow: 1;
     z-index: 0;
   }
 
@@ -347,17 +348,17 @@ button:hover {
   }
 
   .modal-footer {
-    flex-shrink: 0;
+    padding: 2rem;
+    /* flex-shrink: 0;
     display: flex;
     flex-wrap: wrap;
     justify-content: flex-end;
-    padding: 2rem;
     background-color:  var(--clr-light-grey);
-    border-top: 1px solid var(--clr-light-grey);
+    border-top: 1px solid var(--clr-light-grey); */
   }
 
   .expanded-card {
-    margin-top: 5rem;
+    /* margin-top: 5rem; */
   }
 
   .modal-message {
