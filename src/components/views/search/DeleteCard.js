@@ -2,8 +2,8 @@ import { useState, useRef } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import CardImage from './CardImage';
 import CollectionCardDetail from './CollectionCardDetail';
+import Success from './Success';
 import Loading from '../../layout/Loading';
-import { FaRegCheckCircle } from "react-icons/fa";
 // import { FaBan } from "react-icons/fa6";
 import useAuth from '../../../hooks/useAuth';
 import { api } from '../../../api/resources';
@@ -89,7 +89,7 @@ const DeleteCard = (props) => {
     }
 
     return (
-        <div className="modal-content">
+        <div className={`modal-content ${loading ? 'border-light' : response.isDeleted ? 'border-success' : 'border-red'}`}>
                 {
                     loading ? (
                         <Loading />
@@ -98,9 +98,10 @@ const DeleteCard = (props) => {
                             {
                                 !response.isDeleted ? (
                                     <>
+
                                         <header className="modal-header">
-                                            <div className="modal-title">
-                                <h2 className="color-red fw-500">Delete Card Confirmation</h2>
+                                            <div className="modal-title border-red">
+                                                <h2 className="color-red fw-500">Delete Card</h2>
                                             </div>
                             </header>
                                         <div className="modal-body">
@@ -141,28 +142,10 @@ const DeleteCard = (props) => {
 
                                 </div>
                             </footer>
+
                                     </>
                                 ) : (
-                                        <div className="modal-message">
-                                            <header className="modal-header">
-                                                <div className="modal-title">
-                                                    <h2 className="color-green fw-500">{response.message}</h2>
-                                                </div>
-                                            </header>
-                                            <section className="modal-check">
-                                                <FaRegCheckCircle className="color-green" />
-                                            </section>
-                                            <footer className="card-footer">
-                                                <div className="btn-container hide">
-                                                    <button
-                                                        id="back-to-search"
-                                                        type="button"
-                                                        onClick={handleClick}
-                                                        ref={btnRef}>
-                                                    </button>
-                                                </div>
-                                            </footer>
-                                        </div>
+                                        <Success response={response} handleClick={handleClick} ref={btnRef} />
                                 )
                             }
                         </>

@@ -5,7 +5,7 @@ const CollectionCardFooter = ({ card, handleClick }) => {
 // const navigate = useNavigate();
 
     // const handleClick = (e) => {
-    //     navigate(`/publish-card/${setQueryString(card.name, '-')}`, {
+    //     navigate(`/edit-card/${setQueryString(card.name, '-')}`, {
     //         state: {
     //             card: card
     //         }
@@ -22,7 +22,7 @@ const CollectionCardFooter = ({ card, handleClick }) => {
             </div>
 
                 <div className="btn-container">
-                <button id="publish-card" className="btn bg-blue color-light" type="button">Edit</button>
+                <button id="edit-card" className="btn bg-blue color-light" type="button">Edit</button>
                 </div>
 
         </div>
