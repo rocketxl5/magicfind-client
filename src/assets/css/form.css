@@ -71,9 +71,9 @@ input:-webkit-autofill:active{
 {
     width: 100%;
     padding: 1rem;
-    font-size: 1.6rem;
     background-color: #fff;
     border-radius: 5px;
+    font-size: var(--fs-form);
     border: 1px solid var(--clr-grey);
 }
 
@@ -94,8 +94,12 @@ input:-webkit-autofill:active{
     border: 2px solid rgb(103, 152, 180, 0.7) !important;
 }
 
-.edit-form * {
-    margin-bottom: 0.5rem;
+.edit-form {
+    margin-block: 1.5rem;
+    /* margin-top: 0.75rem; */
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
 }
 
 .edit-option {
@@ -379,7 +383,7 @@ div.cards {
     margin-left: auto;
     border-radius: 5px;
     color: var(--clr-dark);
-    font-size: var(--fs-150);
+    font-size: var(--fs-form);
 }
 
 input#search-collection:focus,

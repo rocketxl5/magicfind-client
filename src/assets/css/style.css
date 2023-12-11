@@ -8,7 +8,7 @@
     --clr-light-blue: rgb(219, 236, 250);
     --clr-grey: rgb(219, 219, 219);
     --clr-light-grey: #F7F7F7;
-    --clr-red: #a31621;
+    --clr-red: rgb(162, 22, 34);
     --clr-light: rgb(252, 252, 252);
     --clr-dark: hwb(0 15% 85%);
     --clr-green: #49A078;
@@ -16,6 +16,7 @@
     --clr-yellow-2: #eca31a;
     --clr-teal: #3598d1;
     --clr-blue-steel: rgb(103, 152, 180);
+  
 
 
     /* font sizes */
@@ -30,6 +31,7 @@
     --fs-100: 1rem;
     --fs-075: 0.75rem;
     --fs-050: 0.5rem;
+    --fs-form: 1.6rem;
     
     /* size */
     --size-1: 1rem;
@@ -301,13 +303,11 @@ button:hover {
   }
 
   .modal-content {
-    overflow: hidden;
-    flex: 1;
-    /* max-height: calc(100vh - 4rem); */
     position: relative;
     display: flex;
     flex-direction: column;
-    /* gap: 2rem; */
+    flex: 1;
+    overflow: hidden;
     width: 100%;
     border-radius: 1rem;
     background: var(--clr-light);
@@ -315,6 +315,7 @@ button:hover {
     }
 
   .modal-header {
+    width: 100%;
     padding-block: 1.5rem;
   }
 
@@ -322,10 +323,6 @@ button:hover {
     text-align: center;
     margin: 0 auto;
     padding: 0;
-    /* width: calc(100% - 4rem); */
-    /* border-radius: 5px; */
-    /* padding-block: var(--size-1); */
-    /* background-color:  var(--clr-light); */
   }
 
   .modal-title h2 {
@@ -335,6 +332,7 @@ button:hover {
   
   .modal-body {
     overflow-y: auto;
+    width: 100%;
     /* display: flex;
     flex-direction: column;
     justify-content: space-around; */
@@ -350,12 +348,8 @@ button:hover {
   .modal-footer {
     padding-inline: 2rem;
     padding-block: 1.5rem;
-    background-color: var(--clr-grey);
+   
      }
-
-  .expanded-card {
-    /* margin-top: 5rem; */
-  }
 
   .modal-message {
     flex-grow: 1;
@@ -372,3 +366,4 @@ button:hover {
     width: 14rem;
     height: 14rem;
   }
+
