@@ -149,7 +149,7 @@ const PublishCard = (props) => {
                                         <header className="modal-header">
                                             <div className="modal-title">
 
-                                        <h2 className="color-red fw-500">Publish Card</h2>
+                                                <h2 className="color-red fw-500">Edit Card</h2>
                                             </div>
                                     </header>
                                         <div className="modal-body">
