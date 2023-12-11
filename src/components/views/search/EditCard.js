@@ -196,7 +196,7 @@ const EditCard = (props) => {
                                                     </div>
                                                 </div>
                                                 <div className="form-element">
-                                                    <label htmlFor="condition" className={errors.condition && 'color-danger'}>{errors.condition ? errors.condition : 'Condition'}</label>
+                                                        <label htmlFor="condition" className={errors.condition && 'color-danger'}>{errors.condition ? errors.condition : 'Card Condition'}</label>
                                                     <select
                                                         className={errors.condition ? 'border-danger danger-padding' : ''}
                                                         id="condition"
@@ -225,7 +225,7 @@ const EditCard = (props) => {
                                                         value={values.comment}
                                                         onChange={handleChange}
                                                         onFocus={handleFocus}
-                                                        placeholder="Additional Information"
+                                                            placeholder=""
                                                         ref={commentRef}
                                                     >
                                                     </textarea>
@@ -240,7 +240,7 @@ const EditCard = (props) => {
                                                         </div>
                                                         <div className="edit-option status flex align-center space-between">
                                                             <label htmlFor="unpublish">Unpublish</label>
-                                                            <input type="radio" name="publish" id="unpublish" value={false} />
+                                                                <input type="radio" name="publish" id="unpublish" value={false} checked="checked" />
                                                         </div>
                                                     </div>
                                                 </div>
@@ -248,7 +248,7 @@ const EditCard = (props) => {
                                         </div>
 
                                     </div>
-                                    <footer className="modal-footer">
+                                        <footer className="modal-footer bg-blue-light">
                                         <div className="card-btns-wrapper">
                                             <div className="btn-container">
                                                 < button

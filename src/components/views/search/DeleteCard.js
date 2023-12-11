@@ -117,7 +117,7 @@ const DeleteCard = (props) => {
                                                 {response.message}
                                         </div>
                                         </div>
-                                        <footer className="modal-footer">
+                                        <footer className="modal-footer bg-red-light">
                                 <div className="card-btns-wrapper">
                                                 <div className="btn-container">
                                                     < button

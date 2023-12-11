@@ -194,12 +194,20 @@
     background: var(--clr-blue);
 }
 
+.bg-blue-light {
+    background-color: rgba(27, 47, 65, 0.05);;
+}
+
 .bg-yellow {
     background: var(--clr-yellow);
 }
 
 .bg-red {
     background: var(--clr-red);
+}
+
+.bg-red-light {
+    background-color: rgba(162, 22, 34, 0.05);
 }
 
 .bg-teal {
