@@ -218,6 +218,10 @@
     border: 1px solid var(--clr-blue);
 }
 
+.border-light {
+    border: 1px solid var(--clr-light);
+}
+
 .border-primary {
     border: 1px solid var(--clr-primary);
 }
