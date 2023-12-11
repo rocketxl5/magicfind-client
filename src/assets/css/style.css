@@ -290,7 +290,7 @@ button:hover {
   .modal {
     display: flex;
     flex-direction: column;
-    height: calc(80vh);
+    height: calc(82vh);
     width: calc(100vw - 4rem);
     margin: 2rem auto;
     border-radius: var(--size-1); 
