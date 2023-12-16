@@ -30,7 +30,7 @@ const handleSearchBar = (e, isOutsideEvent = false) => {
             // Show Search bar 
             document.querySelector('#search-catalog-container').style.setProperty('width', 'calc(100% - 5rem)');
             // Hide Search button
-            document.querySelector('.search-btn').style.setProperty('display', 'none');
+            // document.querySelector('.search-btn').style.setProperty('display', 'none');
             // Add input field focus
             document.querySelector('#search-catalog').focus();
         }
