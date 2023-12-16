@@ -282,9 +282,9 @@ const Signup = () => {
   // Submit handler
   const handleSubmit = (e) => {
     e.preventDefault();
-    const inputErrors = (errorHandler(values, refs))
-    setIsSubmit(true)
-    setErrors(inputErrors)
+    const inputErrors = errorHandler(values, refs);
+    setIsSubmit(true);
+    setErrors(inputErrors);
   }
 
   return (

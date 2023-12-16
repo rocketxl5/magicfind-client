@@ -26,7 +26,6 @@ const SearchCollection = () => {
     searchInput,
     setSearchInput,
     searchTerm,
-    // setSearchTerm,
     cardName,
     cards,
     setCards,
@@ -107,15 +106,18 @@ const SearchCollection = () => {
     e?.preventDefault();
 
     if (searchTerm.length < 3) { return }
+
     setLoading(true);
+
     collectionInputRef.current?.blur();
-      const headers = new Headers();
-      headers.append('Content-Type', 'application/json');
-      headers.append('auth-token', auth.token);
-      const options = {
-        method: 'GET',
-        headers: headers,
-      };
+
+    const headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    headers.append('auth-token', auth.token);
+    const options = {
+      method: 'GET',
+      headers: headers,
+    };
 
     let query = ''
 
@@ -132,7 +134,7 @@ const SearchCollection = () => {
       query = searchTerm;
     }
 
-    fetch(`${api.serverURL}/api/cards/${encodeURIComponent(query)}/${auth.id}`, options)
+    fetch(`${api.serverURL}/api/cards/collection/${auth.id}/${encodeURIComponent(query)}`, options)
       .then((res) => res.json())
       .then((data) => {
         const result = {
@@ -142,7 +144,6 @@ const SearchCollection = () => {
           search: location.pathname
         }
         setLoading(false);
-        // setCardName('');
         setCardName('');
         setSearchInput(null);
         localStorage.setItem('search-result', JSON.stringify(result));

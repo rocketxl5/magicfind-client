@@ -15,8 +15,6 @@ const SearchResult = () => {
     const [haveLoaded, setHaveLoaded] = useState(false);
     const cardRef = useRef(null);
 
-    // console.log(location)
-
     useEffect(() => {
         // If cards is not empty
         if (cards?.length) {

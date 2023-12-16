@@ -4,7 +4,7 @@ import CardImage from './CardImage';
 import CollectionCardDetail from './CollectionCardDetail';
 import Success from './Success';
 import Loading from '../../layout/Loading';
-import errorHandler from './helpers/publishErrorHandler';
+import errorHandler from './helpers/editErrorHandler';
 import useAuth from '../../../hooks/useAuth';
 import { api } from '../../../api/resources';
 
@@ -12,11 +12,10 @@ const INIT = {
     quantity: '',
     price: '',
     condition: '',
-    comment: ''
 }
 
 const EditCard = (props) => {
-    const { attributes, card, handleClick } = props;
+    const { card, attributes, handleClick } = props;
 
     // States
     const [errors, setErrors] = useState(INIT);
@@ -25,7 +24,7 @@ const EditCard = (props) => {
     const [isValidForm, setIsValidForm] = useState(false);
     const [isSubmit, setIsSubmit] = useState(false);
     const [response, setResponse] = useState({
-        isPublished: false,
+        isUpdated: false,
         message: ''
     });
 
@@ -39,6 +38,7 @@ const EditCard = (props) => {
     const conditionRef = useRef(null);
     const quantityRef = useRef(null);
     const commentRef = useRef(null);
+    const publishedRef = useRef(null);
 
     // Hooks
     const { auth } = useAuth();
@@ -58,19 +58,18 @@ const EditCard = (props) => {
     }
 
     useEffect(() => {
-        console.log(values)
         if (isValidForm) {
             setLoading(true);
 
             const input = {
+                cardName: card.name?.trim(),
                 price: parseFloat(values.price),
                 quantity: parseInt(values.quantity),
-                condition: values.condition,
-                comment: values.comment,
-                isPublished: true,
-                datePublished: Date.now()
+                condition: values.condition?.trim(),
+                comment: values.comment?.trim(),
+                published: values.published,
+                datePublished: Date.now(),
             }
-
 
             const headers = new Headers();
             headers.append('Content-Type', 'application/json');
@@ -83,22 +82,52 @@ const EditCard = (props) => {
             fetch(`${api.serverURL}/api/cards/edit/${card._id}/${auth.id}`, options)
                 .then((res) => res.json())
                 .then((data) => {
-                    console.log(data);
                     setLoading(false);
-                    const { card, isPublished, message } = data;
-                    // const { cardName, type } = location.state;
-                    setResponse({ isPublished: isPublished, message: message })
-                    closeModal(btnRef.current)
+                    const { cards, isUpdated, message } = data;
+                    console.log(location)
+                    const { cardName, type } = location && location?.state;
+                    setResponse({ isUpdated: isUpdated, message: message })
+                    if (cardName) {
+                        // filter for cards with cardName
+                        const updatedCards = cards.filter(card => card.name.toLowerCase() === cardName.toLowerCase());
+
+                        const result = { cards: updatedCards, cardName: cardName, type: type, search: `/${type}` };
+                        // console.log(result)
+                        navigate(`${location.pathname}`,
+                            {
+                                state: result,
+                            });
+                        localStorage.setItem('search-result', JSON.stringify(result));
+                        closeModal(btnRef.current)
+                    } else {
+                        const result = { cards: cards, cardName: undefined, type: type, search: `/${type}` };
+                        // console.log(result)
+
+                        navigate(`${location.pathname}`,
+                            {
+                                state: result,
+                            });
+                        localStorage.setItem('search-result', JSON.stringify(result));
+                        closeModal(btnRef.current)
+                    }
                 })
                 .catch((error) => console.log('error', error));
         }
     }, [isValidForm])
 
-
+    useEffect(() => {
+        priceRef.current.focus();
+        setValues({
+            price: card['_price'] ? card['_price'] : '',
+            quantity: card['_quantity'] ? card['_quantity'] : '',
+            condition: card['_condition'] ? card['_condition'] : '',
+            comment: card['_comment'],
+            published: card['_is_published']
+        });
+    }, [])
 
     // Error handler 
     useEffect(() => {
-        console.log(errors)
         if (Object.keys(errors).length === 0 && isSubmit) {
             // Trigger Form request handler
             setIsValidForm(true)
@@ -116,6 +145,11 @@ const EditCard = (props) => {
         setValues({ ...values, [e.target.name]: e.target.value })
     }
 
+    // Radio button handler
+    const handleRadioChange = (e) => {
+        setValues({ ...values, published: !values.published })
+    }
+
     // Focus handler
     const handleFocus = (e) => {
         // Remove submit error prop if present
@@ -129,20 +163,21 @@ const EditCard = (props) => {
     // Submit handler
     const handleSubmit = (e) => {
         e.preventDefault();
-        const inputErrors = (errorHandler(values, inputs))
+        const { comment, published, ...updatedValues } = values;
+        const inputErrors = errorHandler(updatedValues, inputs)
         setIsSubmit(true)
         setErrors(inputErrors)
     }
 
     return (
-        <div className={`modal-content ${loading ? 'border-light' : response.isPublished ? 'border-success' : 'border-blue'}`}>
+        <div className={`modal-content ${loading ? 'border-light' : response.isUpdated ? 'border-success' : 'border-blue'}`}>
             {
                 loading ? (
                     <Loading />
                 ) : (
                     <>
                         {
-                            !response.isPublished ? (
+                                !response.isUpdated ? (
                                 <>
                                         <header className="modal-header bg-blue">
                                             <div className="modal-title">
@@ -234,13 +269,13 @@ const EditCard = (props) => {
                                                     <p>Card Status</p>
                                                     <div className="card-status flex gap-1">
                                                         <div className="edit-option status flex align-center space-between">
-                                                            <label htmlFor="publish">Publish</label>
-                                                            <input type="radio" name="publish" id="publish" value={true} />
+                                                                <label htmlFor="published">Published</label>
+                                                                <input type="radio" name="published" id="published" onChange={handleRadioChange} value={values.published} checked={values.published} ref={publishedRef} />
 
                                                         </div>
                                                         <div className="edit-option status flex align-center space-between">
-                                                            <label htmlFor="unpublish">Unpublish</label>
-                                                                <input type="radio" name="publish" id="unpublish" value={false} checked="checked" />
+                                                                <label htmlFor="unpublished">Unpublished</label>
+                                                                <input type="radio" name="published" id="unpublished" onChange={handleRadioChange} value={!values.published} checked={!values.published} />
                                                         </div>
                                                     </div>
                                                 </div>

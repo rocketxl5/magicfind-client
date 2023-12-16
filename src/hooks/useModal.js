@@ -59,7 +59,7 @@ const useModal = (callback) => {
                     open: true,
                     component:
                         <EditCard
-                            attributes={{ ...action.payload.attributes, id: 'confirm-publish' }}
+                            attributes={{ ...action.payload.attributes, id: 'confirm-edit' }}
                             card={action.payload.card}
                             // expandedImage={action.payload.ImageComponent}
                             handleClick={callback}

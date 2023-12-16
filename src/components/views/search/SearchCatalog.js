@@ -13,6 +13,7 @@ import { api } from '../../../api/resources';
 import hideSearchBar from '../../../utilities/hideSearchBar';
 import getBrowserWidth from '../../../utilities/getBrowserWidth';
 import Loading from '../../layout/Loading';
+import setQueryString from '../../../utilities/setQueryString';
 
 const SearchCatalog = () => {
   const [loading, setLoading] = useState(false);
@@ -21,130 +22,129 @@ const SearchCatalog = () => {
     searchInput,
     setSearchInput,
     searchTerm,
-    setSearchTerm,
     cardName,
     setCards,
     setCardName,
     setCardNames,
+    catalogCards,
+    setCatalogCards,
     predictions,
-    filterUserCards
+
   } = useContext(SearchContext);
 
   const { auth } = useAuth();
 
-  const { pathname } = useContext(PathContext);
+  const { setPathname } = useContext(PathContext);
 
   const navigate = useNavigate();
   const location = useLocation();
   const catalogInputRef = useRef(null);
   const browserWidth = getBrowserWidth();
 
-  // useEffect(() => {
-  //   // console.log(pathname)
-  //   // if (browserWidth <= 775 && document.querySelector('#mobile-nav').checked) {
-  //     hideSearchBar();
-  //   catalogInputRef.current.blur();
-  //   // }
-  // }, [pathname])
+  const fetchCatalogCards = () => {
+    console.log('fectching from catalog')
+    const headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    const options = {
+      method: 'GET',
+      headers: headers,
+    };
+
+    fetch(`${api.serverURL}/api/cards/catalog`, options)
+      .then((res) => res.json())
+      .then((data) => {
+        // const catalogCards = auth ? filterUserCards(data.cards, auth.id) : data.cards;
+        // setCatalogCards(data.cards);
+        setCardNames(data.cards)
+      })
+      .catch((error) => console.log(error));
+  }
 
   useEffect(() => {
-    if (searchInput) {
+    console.log('in catalog')
+    setPathname(location.pathname);
 
-      if (searchInput.id === 'search-catalog') {
-        setIsActive(true);
-        const fetchCatalogCards = () => {
-          console.log('fectching from catalog')
-          const headers = new Headers();
-          headers.append('Content-Type', 'application/json');
-          headers.append('auth-token', auth.token);
-          const options = {
-            method: 'GET',
-            headers: headers,
-          };
+    // if (!catalogCards) {
+    //   fetchCatalogCards()
+    // }
 
-          fetch(`${api.serverURL}/api/cards/catalog/${auth.id}`, options)
-            .then((res) => res.json())
-            .then((data) => {
-              const catalogCards = auth ? filterUserCards(data.cards, auth.id) : data.cards;
-              console.log(catalogCards)
-              setCards(catalogCards);
-              setCardNames(catalogCards);
-              // localStorage.setItem('catalogCards', JSON.stringify(catalogCards));
-              // localStorage.setItem('cardNames', JSON.stringify(catalogCards));
-            })
-            .catch((error) => console.log(error));
-        }
+    if (browserWidth <= 775 && document.querySelector('#mobile-nav')?.checked) {
+      hideSearchBar();
+    }
+  }, []);
 
-        fetchCatalogCards();
-      }
-      else {
-        setIsActive(false);
-      }
+  useEffect(() => {
+
+    if (searchInput?.id === 'search-catalog') {
+      fetchCatalogCards();
+      setIsActive(true);
+    } else {
+      setIsActive(false);
     }
   }, [searchInput]);
 
-  // On submit, check if cardName is set
-  // useEffect(() => {
-  //   console.log(searchTerm)
-  //   console.log(cardName)
-  //   if (loading) {
-  //     !cardName && setCardName(searchTerm)
-  //   }
-  // }, [loading])
-
-
-  // useEffect(() => {
-  //   if (localStorage.getItem('catalogCardName')) {
-  //     if (localStorage.getItem('catalogCardName') === 'all') {
-  //       // fetchAllCards();
-  //     } else {
-  //       // setCards(JSON.parse(localStorage.getItem('storeCards')));
-  //       setCardName(localStorage.getItem('catalogCardName'));
-  //       // console.log('in card name', localStorage.getItem('storeCardName'));
-  //       // fetchSingleCard();
-  //     }
-  //   }
-
-  //   // setPathname(location.pathname.split('/')[1]);
-  // }, []);
-  const handleSubmit = (e) => {
+  const searchCatalog = (e = undefined, prediction = undefined) => {
     e?.preventDefault();
 
-    if (searchTerm) {
+    setLoading(true);
 
-      setLoading(true);
+    catalogInputRef.current?.blur();
 
-      catalogInputRef.current?.blur();
+    e?.preventDefault();
 
-      const headers = new Headers();
-      headers.append('Content-Type', 'application/json');
-      auth && headers.append('auth-token', auth.token)
-      const options = {
-        method: 'GET',
-        headers: headers,
-      };
+    if (searchTerm.length < 3) { return }
 
-      const query = !cardName ? searchTerm : predictions.length === 1 ? predictions[0] : cardName;
+    setLoading(true);
 
-      fetch(`${api.serverURL}/api/catalog/${query}`, options)
-        .then((res) => res.json())
-        .then((data) => {
-          // localStorage.setItem('searchCatalog', search);
-          // localStorage.removeItem('catalogCards');
-          console.log(data)
-          setLoading(false);
-          setSearchInput(null);
-          setCardName('');
-          if (browserWidth <= 775 && document.querySelector('#mobile-nav').checked) {
-            hideSearchBar();
-          }
-          navigate(`/search-result/${cardName.toLowerCase()}`,
-            {
-              state: { cards: data.results, cardName: data.cardName, type: catalogInputRef.current.id, search: location.pathname },
-            });
-        })
-        .catch((error) => console.log(error));
+    catalogInputRef.current?.blur();
+
+    const headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    // headers.append('auth-token', auth.token);
+    const options = {
+      method: 'GET',
+      headers: headers,
+    };
+
+    let query = ''
+
+    if (prediction) {
+      query = prediction;
     }
+    else if (cardName) {
+      query = cardName;
+    }
+    else if (predictions.length === 1) {
+      query = predictions[0];
+    }
+    else if (searchTerm) {
+      query = searchTerm;
+    }
+
+    fetch(`${api.serverURL}/api/cards/catalog/${encodeURIComponent(query)}`, options)
+        .then((res) => res.json())
+      .then((data) => {
+        console.log(data.cards)
+        const result = {
+          cards: data.cards,
+          cardName: data.cardName,
+          type: searchInput.id,
+          search: location.pathname
+        }
+        setCardName('');
+        setSearchInput(null);
+        localStorage.setItem('search-result', JSON.stringify(result));
+        // if (browserWidth <= 775 && document.querySelector('#mobile-nav').checked) {
+        //   hideSearchBar();
+        // }
+        navigate(`/search-result/${setQueryString(query.toLowerCase(), '-')}`,
+          {
+            state: result,
+          });
+        setLoading(false);
+      })
+        .catch((error) => console.log(error));
+
   };
 
   return (
@@ -154,8 +154,8 @@ const SearchCatalog = () => {
           <Loading />
         ) : (
           <div id="search-catalog-container">
-            <form id="search-catalog-form" className="search-form" onSubmit={handleSubmit} >
-              <SearchInput isActive={isActive} id={'search-catalog'} handleSubmit={handleSubmit} ref={catalogInputRef} />
+              <form id="search-catalog-form" className="search-form" onSubmit={searchCatalog} >
+                <SearchInput isActive={isActive} id={'search-catalog'} searchCards={searchCatalog} ref={catalogInputRef} />
             </form>
           </div>
         )

@@ -27,8 +27,8 @@ const SearchInput = forwardRef(function SearchInput(props, ref) {
   } = useContext(SearchContext);
 
   const handleChange = (e) => {
-    if (e.target.value.length >= 3) {
 
+    if (e.target.value.length >= 3) {
       // Reset Marker to initial value
       setMarker(-1);
 

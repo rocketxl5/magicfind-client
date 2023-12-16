@@ -9,6 +9,7 @@ export const SearchProvider = ({ children }) => {
   const [apiCards, setApiCards] = useState(null);
   const [collectionCards, setCollectionCards] = useState(undefined);
   const [cards, setCards] = useState([]);
+  const [catalogCards, setCatalogCards] = useState([]);
   const [displayAutcomplete, setDisplayAutocomplete] = useState(false);
   const [predictions, setPredictions] = useState([]);
   const [cardNames, setCardNames] = useState([]);
@@ -47,6 +48,8 @@ export const SearchProvider = ({ children }) => {
         setApiCards,
         collectionCards,
         setCollectionCards,
+        catalogCards,
+        setCatalogCards,
         searchInput, 
         setSearchInput,
         searchTerm,

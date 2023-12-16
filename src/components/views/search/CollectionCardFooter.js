@@ -12,7 +12,7 @@ const CollectionCardFooter = ({ card, handleClick }) => {
     //     })
     // }
 
-    console.log(card)
+    // console.log(card)
     return (
         <div className="card-btns-wrapper">
             <div className="btn-container">

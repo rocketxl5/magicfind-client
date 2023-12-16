@@ -154,9 +154,9 @@ const Login = () => {
   // Submit handler
   const handleSubmit = (e) => {
     e.preventDefault();
-    const inputErrors = (errorHandler(values, inputs))
-    setIsSubmit(true)
-    setErrors(inputErrors)
+    const inputErrors = errorHandler(values, inputs);
+    setIsSubmit(true);
+    setErrors(inputErrors);
   }
 
   // Show passsword button handler
