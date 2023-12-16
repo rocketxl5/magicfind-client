@@ -374,6 +374,7 @@ input#search-collection {
 }
 
 .search-catalog-field {
+    display: block;
     width: calc(100% - var(--size-1));
     margin-left: auto;
     border-radius: 5px;
