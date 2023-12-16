@@ -52,11 +52,19 @@ const DeleteCard = (props) => {
         }
 
         fetch(`${api.serverURL}/api/cards/`, options)
-            .then((res) => res.json())
+            .then((res) => {
+                if (res.ok) {
+                    return res.json()
+                }
+                return res.json().then((data) => {
+                    setLoading(false)
+                    throw new Error(JSON.stringify(data))
+                })
+            })
             .then((data) => {
                 setLoading(false);
                 const { cards, isDeleted, message } = data;
-                const { cardName, type } = location.state;
+                const { cardName, type } = location && location.state;
                 setResponse({ isDeleted: isDeleted, message: message })
                 // If cardName is set
                 if (cardName) {

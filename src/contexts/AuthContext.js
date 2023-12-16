@@ -23,7 +23,7 @@ export const AuthProvider = ({ children }) => {
   const parseJwt = (token) => {
     // Extract payload of jwt
     const decode = JSON.parse(atob(token?.split('.')[1]));
-    console.log(decode);
+    // console.log(decode);
     if (decode.exp * 1000 < new Date().getTime()) {
       return true;
     } else {
@@ -59,8 +59,8 @@ export const AuthProvider = ({ children }) => {
 
   useEffect(() => {
 
-    const jwt = localStorage.getItem('token')
-    console.log(jwt)
+    const jwt = localStorage.getItem('token');
+
     if (jwt) {
       const hasExpired = parseJwt(jwt);
       if (hasExpired) {
