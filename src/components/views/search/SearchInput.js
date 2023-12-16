@@ -63,7 +63,7 @@ const SearchInput = forwardRef(function SearchInput(props, ref) {
       <input
         id={id}
         type="text"
-        className="search-field"
+        className={id === 'search-catalog' ? 'search-catalog-field' : 'search-field'}
         value={isActive ? searchTerm : ''}
         onChange={handleChange}
         onFocus={handleFocus}
