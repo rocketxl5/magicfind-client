@@ -12,22 +12,18 @@ import { PathContext } from '../../../contexts/PathContext';
 import { api } from '../../../api/resources';
 import hideSearchBar from '../../../utilities/hideSearchBar';
 import getBrowserWidth from '../../../utilities/getBrowserWidth';
-import Loading from '../../layout/Loading';
 import setQueryString from '../../../utilities/setQueryString';
 
 const SearchCatalog = () => {
-  const [loading, setLoading] = useState(false);
   const [isActive, setIsActive] = useState(false);
   const {
     searchInput,
+    setLoading,
     setSearchInput,
     searchTerm,
     cardName,
-    setCards,
     setCardName,
     setCardNames,
-    catalogCards,
-    setCatalogCards,
     predictions,
 
   } = useContext(SearchContext);
@@ -61,12 +57,7 @@ const SearchCatalog = () => {
   }
 
   useEffect(() => {
-    console.log('in catalog')
     setPathname(location.pathname);
-
-    // if (!catalogCards) {
-    //   fetchCatalogCards()
-    // }
 
     if (browserWidth <= 775 && document.querySelector('#mobile-nav')?.checked) {
       hideSearchBar();
@@ -86,17 +77,13 @@ const SearchCatalog = () => {
   const searchCatalog = (e = undefined, prediction = undefined) => {
     e?.preventDefault();
 
-    setLoading(true);
-
-    catalogInputRef.current?.blur();
-
-    e?.preventDefault();
-
     if (searchTerm.length < 3) { return }
 
     setLoading(true);
 
     catalogInputRef.current?.blur();
+
+
 
     const headers = new Headers();
     headers.append('Content-Type', 'application/json');
@@ -124,6 +111,7 @@ const SearchCatalog = () => {
     fetch(`${api.serverURL}/api/cards/catalog/${encodeURIComponent(query)}`, options)
         .then((res) => res.json())
       .then((data) => {
+        setLoading(false);
         console.log(data.cards)
         const result = {
           cards: data.cards,
@@ -131,36 +119,36 @@ const SearchCatalog = () => {
           type: searchInput.id,
           search: location.pathname
         }
+
+        if (browserWidth <= 775 && document.querySelector('#mobile-nav').checked) {
+          hideSearchBar();
+        }
+
         setCardName('');
         setSearchInput(null);
         localStorage.setItem('search-result', JSON.stringify(result));
-        // if (browserWidth <= 775 && document.querySelector('#mobile-nav').checked) {
-        //   hideSearchBar();
-        // }
         navigate(`/search-result/${setQueryString(query.toLowerCase(), '-')}`,
           {
             state: result,
           });
-        setLoading(false);
+
       })
         .catch((error) => console.log(error));
 
   };
 
   return (
-    <>
-      {
-        loading ? (
-          <Loading />
-        ) : (
+
+
+
           <div id="search-catalog-container">
               <form id="search-catalog-form" className="search-form" onSubmit={searchCatalog} >
-                <SearchInput isActive={isActive} id={'search-catalog'} searchCards={searchCatalog} ref={catalogInputRef} />
+        <SearchInput isActive={isActive} id={'search-catalog'} searchCards={searchCatalog} ref={catalogInputRef} />
             </form>
           </div>
-        )
-      }
-    </>
+
+
+
   );
 };
 

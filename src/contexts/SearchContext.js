@@ -7,12 +7,11 @@ export const SearchProvider = ({ children }) => {
   const [cardName, setCardName] = useState('');
   const [searchTerm, setSearchTerm] = useState('');
   const [apiCards, setApiCards] = useState(null);
-  const [collectionCards, setCollectionCards] = useState(undefined);
   const [cards, setCards] = useState([]);
-  const [catalogCards, setCatalogCards] = useState([]);
   const [displayAutcomplete, setDisplayAutocomplete] = useState(false);
   const [predictions, setPredictions] = useState([]);
   const [cardNames, setCardNames] = useState([]);
+  const [loading, setLoading] = useState(false);
   const [marker, setMarker] = useState(-1);
   const { auth } = useAuth();
 
@@ -40,16 +39,14 @@ export const SearchProvider = ({ children }) => {
       value={{
         marker,
         setMarker,
+        loading,
+        setLoading,
         cardNames,
         setCardNames,
         cards,
         setCards,
         apiCards,
         setApiCards,
-        collectionCards,
-        setCollectionCards,
-        catalogCards,
-        setCatalogCards,
         searchInput, 
         setSearchInput,
         searchTerm,

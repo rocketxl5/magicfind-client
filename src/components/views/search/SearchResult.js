@@ -11,7 +11,6 @@ const SearchResult = () => {
     const location = useLocation();
     const navigate = useNavigate();
     const { cards, cardName, type, search } = location.state || JSON.parse(localStorage.getItem('search-result'));
-
     const [haveLoaded, setHaveLoaded] = useState(false);
     const cardRef = useRef(null);
 
@@ -44,7 +43,7 @@ const SearchResult = () => {
                 navigate('/search-collection')
             }, 1500)
         }
-    }, [location])
+    }, [])
 
 
     const [{ open, component }, { updateState }] = useModal((value) => handleClick(value));

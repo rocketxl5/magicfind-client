@@ -7,7 +7,6 @@ import React, {
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { FiArrowRightCircle } from "react-icons/fi"
 import SearchInput from './SearchInput';
-import Loading from '../../layout/Loading';
 import { SearchContext } from '../../../contexts/SearchContext';
 import { PathContext } from '../../../contexts/PathContext';
 import { api } from '../../../api/resources';
@@ -18,7 +17,6 @@ import setQueryString from '../../../utilities/setQueryString';
 import useAuth from '../../../hooks/useAuth';
 
 const SearchCollection = () => {
-  const [loading, setLoading] = useState(false);
   const [isActive, setIsActive] = useState(false);
   const [message, setMessage] = useState(null);
 
@@ -31,10 +29,11 @@ const SearchCollection = () => {
     setCards,
     setCardName,
     setCardNames,
+    setLoading,
     predictions
   } = useContext(SearchContext);
 
-  const { setPathname } = useContext(PathContext);
+  const { pathname, setPathname } = useContext(PathContext);
 
   const { auth } = useAuth();
   const navigate = useNavigate();
@@ -58,11 +57,11 @@ const SearchCollection = () => {
           return res.json();
         }
 
-        return res.json().then((data) => {
-          setLoading(false);
-          throw new Error(JSON.stringify(data));
-        })
+      return res.json().then((data) => {
+        setLoading(false);
+        throw new Error(JSON.stringify(data));
       })
+    })
       .then((data) => {
         setLoading(false);
         setCardNames(data.names);
@@ -78,14 +77,17 @@ const SearchCollection = () => {
       .catch((error) => {
         const errorMessage = JSON.parse(error.message);
         setMessage({ ...errorMessage });
-      });
+    });;
   }
 
-
   useEffect(() => {
-    setPathname(location.pathname);
 
-    fetchCollectionCards()
+    collectionInputRef.current?.focus();
+    if (pathname !== location.pathname) {
+
+      fetchCollectionCards()
+    }
+    setPathname(location.pathname);
 
     if (browserWidth <= 775 && document.querySelector('#mobile-nav')?.checked) {
       hideSearchBar();
@@ -100,6 +102,10 @@ const SearchCollection = () => {
       setIsActive(false);
     }
   }, [searchInput]);
+
+  useEffect(() => {
+    console.log(message)
+  }, [message])
 
   // Instore single card request search field with
   const searchCollection = (e = undefined, prediction = undefined) => {
@@ -176,10 +182,6 @@ const SearchCollection = () => {
 
   return (
     <div className="flex inherit-height">
-      {
-        loading ? (
-          <Loading />
-        ) : (
             <div className="content flex-grow-1">
               <header className="header">
 
@@ -228,9 +230,7 @@ const SearchCollection = () => {
               )
             }
               </main>
-            </div>
-        )
-      }
+      </div>
     </div>
   );
 };
