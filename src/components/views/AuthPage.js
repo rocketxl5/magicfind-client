@@ -1,13 +1,7 @@
-import React, { useEffect, useContext } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 // import { FiArrowRightCircle } from 'react-icons/fi';
-import { PathContext } from '../../contexts/PathContext';
 
 const AuthPage = () => {
-  const { setPathname } = useContext(PathContext);
-  const location = useLocation();
-
-  useEffect(() => { setPathname(location.pathname) }, []);
 
   return (
     <div className="content">
