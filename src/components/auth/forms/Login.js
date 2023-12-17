@@ -106,7 +106,6 @@ const Login = () => {
             setLoading(false)
             // console.log(location?.state)
             const destination = location.state?.from ? location.state.from.pathname : '/me';
-            console.log(destination)
             navigate(destination, { replace: true });
           })
           .catch((error) => {

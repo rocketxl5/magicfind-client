@@ -51,7 +51,7 @@ const DeleteCard = (props) => {
             body: JSON.stringify(input)
         }
 
-        fetch(`${api.serverURL}/api/cards/`, options)
+        fetch(`${api.serverURL}/api/cards/delete`, options)
             .then((res) => {
                 if (res.ok) {
                     return res.json()
@@ -63,14 +63,13 @@ const DeleteCard = (props) => {
             })
             .then((data) => {
                 setLoading(false);
-                const { cards, isDeleted, message } = data;
-                const { cardName, type } = location && location.state;
+                const { cardName, cards, isDeleted, message } = data;
                 setResponse({ isDeleted: isDeleted, message: message })
                 // If cardName is set
                 if (cardName) {
                     // filter for cards with cardName
                     const updatedCards = cards.filter(card => card.name.toLowerCase() === cardName.toLowerCase());
-                    const result = { cards: updatedCards, cardName: cardName, type: type, search: `/${type}` };
+                    const result = { cards: updatedCards, cardName: cardName, type: 'search-collection', search: `/search-collection` };
 
                     navigate(`${location.pathname}`,
                         {
@@ -79,7 +78,7 @@ const DeleteCard = (props) => {
                     localStorage.setItem('search-result', JSON.stringify(result));
                     closeModal(btnRef.current)
                 } else {
-                    const result = { cards: cards, cardName: undefined, type: type, search: `/${type}` };
+                    const result = { cards: cards, cardName: undefined, type: 'search-collection', search: '/search-collection' };
 
                     navigate(`${location.pathname}`,
                         {

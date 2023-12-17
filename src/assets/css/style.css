@@ -115,7 +115,15 @@ button:hover {
   cursor: pointer;
 }
 
-/* spinner */
+/* Loading Spinner Styling */
+
+.loading-content {
+  display: flex;
+  min-height: inherit;
+  justify-content: center;
+  align-items: center;
+}
+
 .loading-icon {
   margin: auto;
 }

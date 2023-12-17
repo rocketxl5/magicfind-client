@@ -7,7 +7,8 @@ export const SearchProvider = ({ children }) => {
   const [cardName, setCardName] = useState('');
   const [searchTerm, setSearchTerm] = useState('');
   const [apiCards, setApiCards] = useState(null);
-  const [cards, setCards] = useState([]);
+  const [hasMounted, setHasMounted] = useState(false);
+  const [errorMessage, setErrorMessage] = useState(null);
   const [displayAutcomplete, setDisplayAutocomplete] = useState(false);
   const [predictions, setPredictions] = useState([]);
   const [cardNames, setCardNames] = useState([]);
@@ -37,14 +38,16 @@ export const SearchProvider = ({ children }) => {
   return (
     <SearchContext.Provider
       value={{
+        errorMessage,
+        setErrorMessage,
+        hasMounted,
+        setHasMounted,
         marker,
         setMarker,
         loading,
         setLoading,
         cardNames,
         setCardNames,
-        cards,
-        setCards,
         apiCards,
         setApiCards,
         searchInput, 

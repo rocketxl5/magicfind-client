@@ -25,7 +25,6 @@ const SearchCatalog = () => {
     setCardName,
     setCardNames,
     predictions,
-
   } = useContext(SearchContext);
 
   const { auth } = useAuth();
@@ -38,7 +37,6 @@ const SearchCatalog = () => {
   const browserWidth = getBrowserWidth();
 
   const fetchCatalogCards = () => {
-    console.log('fectching from catalog')
     const headers = new Headers();
     headers.append('Content-Type', 'application/json');
     const options = {
@@ -49,8 +47,6 @@ const SearchCatalog = () => {
     fetch(`${api.serverURL}/api/cards/catalog`, options)
       .then((res) => res.json())
       .then((data) => {
-        // const catalogCards = auth ? filterUserCards(data.cards, auth.id) : data.cards;
-        // setCatalogCards(data.cards);
         setCardNames(data.cards)
       })
       .catch((error) => console.log(error));
@@ -83,8 +79,6 @@ const SearchCatalog = () => {
 
     catalogInputRef.current?.blur();
 
-
-
     const headers = new Headers();
     headers.append('Content-Type', 'application/json');
     // headers.append('auth-token', auth.token);
@@ -93,7 +87,7 @@ const SearchCatalog = () => {
       headers: headers,
     };
 
-    let query = ''
+    let query;
 
     if (prediction) {
       query = prediction;
@@ -112,7 +106,7 @@ const SearchCatalog = () => {
         .then((res) => res.json())
       .then((data) => {
         setLoading(false);
-        console.log(data.cards)
+
         const result = {
           cards: data.cards,
           cardName: data.cardName,
@@ -134,21 +128,14 @@ const SearchCatalog = () => {
 
       })
         .catch((error) => console.log(error));
-
-  };
+  }
 
   return (
-
-
-
-          <div id="search-catalog-container">
-              <form id="search-catalog-form" className="search-form" onSubmit={searchCatalog} >
+    <div id="search-catalog-container">
+      <form id="search-catalog-form" className="search-form" onSubmit={searchCatalog} >
         <SearchInput isActive={isActive} id={'search-catalog'} searchCards={searchCatalog} ref={catalogInputRef} />
-            </form>
-          </div>
-
-
-
+      </form>
+    </div>
   );
 };
 
