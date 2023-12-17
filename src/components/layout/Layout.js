@@ -15,13 +15,14 @@ const Layout = () => {
             {location.pathname !== '/login' && location.pathname !== '/signup' && <Header />}
             <div className="container">
                 {
-                    loading ?
-                        (
-                            <Loading />
-                        ) :
-                        (
+                    !loading ? (
 
-                            <Outlet />
+                        <Outlet />
+
+                    ) : (
+                        <div className="loading-content">
+                            <Loading />
+                        </div>
                         )
                 }
             </div>

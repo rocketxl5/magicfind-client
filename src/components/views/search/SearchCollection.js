@@ -18,15 +18,17 @@ import useAuth from '../../../hooks/useAuth';
 
 const SearchCollection = () => {
   const [isActive, setIsActive] = useState(false);
-  const [message, setMessage] = useState(null);
+  // const [message, setMessage] = useState(null);
 
   const {
+    errorMessage,
+    setErrorMessage,
+    hasMounted,
+    setHasMounted,
     searchInput,
     setSearchInput,
     searchTerm,
     cardName,
-    cards,
-    setCards,
     setCardName,
     setCardNames,
     setLoading,
@@ -51,61 +53,61 @@ const SearchCollection = () => {
       method: 'GET',
       headers: headers,
     }
+
     fetch(`${api.serverURL}/api/cards/${auth.id}`, options)
       .then((res) => {
         if (res.ok) {
-          return res.json();
+          return res.json()
+            .then((data) => {
+              setCardNames(data.names);
+              // Update local storage with search data
+              localStorage.setItem('search-result', JSON.stringify({
+                cards: data.cards,
+                cardName: undefined,
+                type: searchInput?.id,
+                search: location.pathname
+              }));
+              setHasMounted(true);
+              setErrorMessage(null);
+              setLoading(false);
+              setPathname(location.pathname);
+              if (browserWidth <= 775 && document.querySelector('#mobile-nav')?.checked) {
+                hideSearchBar();
+              }
+            });
         }
-
-      return res.json().then((data) => {
-        setLoading(false);
-        throw new Error(JSON.stringify(data));
-      })
-    })
-      .then((data) => {
-        setLoading(false);
-        setCardNames(data.names);
-        setCards(data.cards);
-        localStorage.setItem('search-result', JSON.stringify({
-          cards: data.cards,
-          cardName: undefined,
-          type: searchInput?.id,
-          search: location.pathname
-        }));
-        collectionInputRef.current?.focus();
-      })
-      .catch((error) => {
-        const errorMessage = JSON.parse(error.message);
-        setMessage({ ...errorMessage });
-    });;
+        else if (res.status === 400) {
+          return res.json()
+            .then((error) => {
+              console.log(error.message)
+              setHasMounted(true);
+              setLoading(false);
+              setErrorMessage({ ...error.message });
+            })
+        }
+      });
   }
 
   useEffect(() => {
-
-    collectionInputRef.current?.focus();
-    if (pathname !== location.pathname) {
-
+    if (!hasMounted) {
       fetchCollectionCards()
-    }
-    setPathname(location.pathname);
-
+    } else {
+      collectionInputRef.current?.focus();
+      setHasMounted(false);
     if (browserWidth <= 775 && document.querySelector('#mobile-nav')?.checked) {
       hideSearchBar();
+    }
     }
   }, []);
 
   useEffect(() => {
     if (searchInput?.id === 'search-collection') {
-
       setIsActive(true);
     } else {
+      setHasMounted(false)
       setIsActive(false);
     }
   }, [searchInput]);
-
-  useEffect(() => {
-    console.log(message)
-  }, [message])
 
   // Instore single card request search field with
   const searchCollection = (e = undefined, prediction = undefined) => {
@@ -165,14 +167,15 @@ const SearchCollection = () => {
   const handleClick = (e) => {
     e.preventDefault();
 
-    if (cards) {
+    if (localStorage.getItem('search-result')) {
+      const jsonResult = JSON.parse(localStorage.getItem('search-result'))
       const result = {
-        cards: cards,
+        cards: jsonResult.cards,
         cardName: undefined,
         type: searchInput.id,
         search: location.pathname
       }
-      localStorage.setItem('search-result', JSON.stringify(result));
+      // localStorage.setItem('search-result', JSON.stringify(result));
       navigate(`/search-result/all-cards`,
         {
           state: result,
@@ -189,13 +192,13 @@ const SearchCollection = () => {
               </header>
               <main className="main">
             {
-              message?.title === 'no_cards' ? (
+            errorMessage?.title === 'no_cards' ? (
 
                 <div className="message">
                   <section className="message-section">
                     <div className="message-body">
                       {
-                        message.body?.map((part, index) => {
+                      errorMessage.body?.map((part, index) => {
                           return <p key={index}>{part}</p>
                         })
                       }

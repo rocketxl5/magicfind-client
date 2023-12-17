@@ -1,22 +1,20 @@
 import { useState, useEffect, useRef } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { FiChevronLeft } from 'react-icons/fi';
 import Card from './Card';
 import Modal from './Modal';
 import useModal from '../../../hooks/useModal';
 import NotFound from './CardNotFound';
-import capitalizeString from '../../../utilities/capitalizeString';
 
 const SearchResult = () => {
     const location = useLocation();
     const navigate = useNavigate();
-    const { cards, cardName, type, search } = location.state || JSON.parse(localStorage.getItem('search-result'));
+    const { cards, cardName, type, search } = location.state;
     const [haveLoaded, setHaveLoaded] = useState(false);
     const cardRef = useRef(null);
 
     useEffect(() => {
         // If cards is not empty
-        if (cards?.length) {
+        if (cards.length > 0) {
             const preloadImages = (cards) => {
                 const loadImage = card => {
                     return new Promise((resolve, reject) => {
@@ -33,17 +31,20 @@ const SearchResult = () => {
                     })
                     .catch(error => console.log('Image load has failed', error))
             }
-            // Call normal image async loader
+            // Call async image loader
             preloadImages(cards);
         }
-            // No cards collection
-            // Send back to search-collection page
-        else {
+    }, [])
+
+    useEffect(() => {
+        // No cards collection
+        // Send back to search-collection page
+        if (!cards.length) {
             setTimeout(() => {
                 navigate('/search-collection')
             }, 1500)
         }
-    }, [])
+    }, [cards])
 
 
     const [{ open, component }, { updateState }] = useModal((value) => handleClick(value));

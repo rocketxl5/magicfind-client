@@ -84,7 +84,7 @@ const EditCard = (props) => {
                 .then((data) => {
                     setLoading(false);
                     const { cards, isUpdated, message } = data;
-                    console.log(location)
+
                     const { cardName, type } = location && location?.state;
                     setResponse({ isUpdated: isUpdated, message: message })
                     if (cardName) {
