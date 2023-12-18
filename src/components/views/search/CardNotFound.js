@@ -12,7 +12,7 @@ const CardNotFound = () => {
 
             <main className="main">
                 <h2>Zoinks!!!</h2>
-                <p>No results were found for "{cardName}".</p>
+                <p>No results were found for "{cardName}"</p>
             </main>
             <footer>
                 <button className="not-found-btn" onClick={() => navigate(-1)}> Go Back </button>

@@ -194,12 +194,13 @@ button:hover {
   min-height: inherit;
   display: flex;
   flex-direction: column;
-  gap: 6rem;
+  gap: 5rem;
 }
 
 .not-found > main,
 .not-found > footer {
   padding-inline: 2rem;
+  text-align: center;
 }
 
 .not-found p,
@@ -222,8 +223,8 @@ button:hover {
 .not-found-btn {
   font-size: var(--fs-175);
   font-weight: 500;
-  width: 100%;
-  padding: 1.5rem;
+  width: 50%;
+  padding-block: 1rem;
   color: var(--clr-light);
   background-color: var(--clr-blue);
   border: 1px solid var(--clr-grey);
