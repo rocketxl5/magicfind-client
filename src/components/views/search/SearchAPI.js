@@ -113,35 +113,22 @@ const Search = () => {
 
     apiInputRef.current.blur();
 
-    fetch(
-      `${api.skryfallURL}/${query}`,
-      headers
-    )
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.object === 'error') {
-          console.log('error not handled in search api 1')
-          // navigate(`/search-result/api/${setQueryString(searchTerm, '-')}`,
-          //   {
-          //     state: { cards: undefined, cardName: searchTerm, type: 'card-not-found', search: location.pathname },
-          //   });
-        } else {
-          const { name, oracle_id } = data;
-          localStorage.setItem('oracle', oracle_id);
-          setOracleID(oracle_id);
-          setCardName(name);
+    fetch(`${api.skryfallURL}/${query}`, headers)
+      .then((res) => {
+        if (res.ok) {
+          return res.json()
+            .then((data) => {
+              const { name, oracle_id } = data;
+              localStorage.setItem('oracle', oracle_id);
+              setOracleID(oracle_id);
+              setCardName(name);
+            })
+        }
+        else if (res.status === 404) {
+          setLoading(false);
+          navigate(`/search-result/not-found/${searchTerm}`);
         }
       })
-      .catch((error) => {
-        console.log('error not handled in search api 2')
-        console.log(error)
-        // const { cards, cardName, type, search } = location.state;
-        // navigate(`/search-result/${setQueryString(searchTerm, '-')}`,
-        //     {
-        //       state: { cards: undefined, cardName: searchTerm, type: 'card-not-found', search: location.pathname },
-        //     });
-      });
-
   };
 
   // Fetch call triggered when oracleID state changes in fetchSingleCard function

@@ -143,27 +143,34 @@ const SearchCollection = () => {
     }
 
     fetch(`${api.serverURL}/api/cards/collection/${auth.id}/${encodeURIComponent(query)}`, options)
-      .then((res) => res.json())
-      .then((data) => {
-        setLoading(false);
+      .then((res) => {
+        if (res.status === 200) {
+          return res.json()
+            .then((data) => {
+              setLoading(false);
 
-        const result = {
-          cards: data.results,
-          cardName: data.cardName,
-          type: searchInput.id,
-          search: location.pathname
+              const result = {
+                cards: data.cards,
+                cardName: data.cardName,
+                type: searchInput.id,
+                search: location.pathname
+              }
+
+              setCardName('');
+              setSearchInput(null);
+              localStorage.setItem('search-result', JSON.stringify(result));
+              navigate(`/search-result/collection/${setQueryString(query.toLowerCase(), '-')}`,
+                {
+                  state: result,
+                });
+            })
         }
-
-        setCardName('');
-        setSearchInput(null);
-        localStorage.setItem('search-result', JSON.stringify(result));
-        navigate(`/search-result/collection/${setQueryString(query.toLowerCase(), '-')}`,
-          {
-            state: result,
-          });
-      })
-      .catch((error) => console.log(error));
-  };
+        else if (res.status === 400) {
+          setLoading(false);
+          navigate(`/search-result/not-found/${query}`);
+        }
+      });
+  }
 
   // Get all cards from user store
   const handleClick = (e) => {
@@ -207,7 +214,7 @@ const SearchCollection = () => {
                     </div>
                   </section>
                   <section className="message-section">
-                    <Link className="message-link" to={'/search-api'}> Go To The Add Card Page <FiArrowRightCircle /></Link>
+                  <Link className="message-link" to={'/search-api'}> To Add Card Page <FiArrowRightCircle /></Link>
                   </section>
                 </div>
               ) : (

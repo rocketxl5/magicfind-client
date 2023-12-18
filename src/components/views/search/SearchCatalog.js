@@ -105,32 +105,36 @@ const SearchCatalog = () => {
     console.log(query)
 
     fetch(`${api.serverURL}/api/cards/catalog/${encodeURIComponent(query)}`, options)
-        .then((res) => res.json())
-      .then((data) => {
+      .then((res) => {
+        if (res.status === 200) {
+          return res.json()
+            .then((data) => {
+              setLoading(false);
 
-        setLoading(false);
+              const result = {
+                cards: data.cards,
+                cardName: data.cardName,
+                type: searchInput.id,
+                search: location.pathname
+              }
 
-        const result = {
-          cards: data.cards,
-          cardName: data.cardName,
-          type: searchInput.id,
-          search: location.pathname
+              setCardName('');
+              setSearchInput(null);
+              localStorage.setItem('search-result', JSON.stringify(result));
+              navigate(`/search-result/catalog/${setQueryString(query.toLowerCase(), '-')}`,
+                {
+                  state: result,
+                });
+            })
         }
-
-        if (browserWidth <= 775 && document.querySelector('#mobile-nav').checked) {
-          hideSearchBar();
+        else if (res.status === 400) {
+          setLoading(false);
+          navigate(`/search-result/not-found/${query}`);
+          if (browserWidth <= 775 && document.querySelector('#mobile-nav')?.checked) {
+            hideSearchBar();
+          }
         }
-
-        setCardName('');
-        setSearchInput(null);
-        localStorage.setItem('search-result', JSON.stringify(result));
-        navigate(`/search-result/catalog/${setQueryString(query.toLowerCase(), '-')}`,
-          {
-            state: result,
-          });
-
-      })
-        .catch((error) => console.log(error));
+      });
   }
 
   return (

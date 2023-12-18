@@ -97,7 +97,7 @@ a {
   height: auto;
   margin: 0 auto;
   max-width: 1170px;
-  min-height: calc(100vh - 12rem);
+  min-height: calc(100vh - 10rem);
 }
 
 .buffer {
@@ -189,49 +189,63 @@ button:hover {
     padding: 1rem;
 }
 
-/* 404 */
-.not-found {
-  text-align: center;
-}
-
-.not-found button {
-  margin-top: 2rem;
-  width: 50%;
-}
-
 /* Not found search page */
-.card-not-found header {
-  width: 100%;
-  min-height: 20rem;
-  background-image: url('https://cards.scryfall.io/art_crop/front/1/9/1904db14-6df7-424f-afa5-e3dfab31300a.jpg?1562862327');
-  background-repeat: no-repeat;
-  background-position: 50% 8%;
-  background-color: var(--clr-light-grey);
+.not-found {
+  min-height: inherit;
+  display: flex;
+  flex-direction: column;
+  gap: 6rem;
 }
 
-.card-not-found h2 {
-  margin-block: 2rem;
-  padding-inline: 1rem;
+.not-found > main,
+.not-found > footer {
+  padding-inline: 2rem;
+}
+
+.not-found p,
+.not-found h2 {
+  margin-block: 1rem;
   line-height: 1.8;
+  color: var(--clr-blue);
   text-align: center;
 }
 
-.card-not-found p {
-  padding: 2rem;
+.not-found h2 {
+  font-size: var(--fs-250);
+}
+
+.not-found p {
+  font-size: var(--fs-175);
+  font-weight: 600;
+}
+
+.not-found-btn {
+  font-size: var(--fs-175);
   font-weight: 500;
-  font-size: var(--fs-150);
-  text-align: center;
+  width: 100%;
+  padding: 1.5rem;
+  color: var(--clr-light);
+  background-color: var(--clr-blue);
+  border: 1px solid var(--clr-grey);
+  border-radius: 5px;
 }
 
 .banner {
   width: 100%;
   min-height: 20rem;
-  background-image: url('https://cards.scryfall.io/art_crop/front/8/1/817f782f-7e62-44b3-9bb2-3a57d34dfe67.jpg?1682690866');
   background-repeat: no-repeat;
   background-size: 100%;
   background-position: 0 25%;
   background-color: var(--clr-light-grey);
   /* aspect-ratio: 3/1; */
+}
+
+.home-page-banner {
+  background-image: url('https://cards.scryfall.io/art_crop/front/8/1/817f782f-7e62-44b3-9bb2-3a57d34dfe67.jpg?1682690866');
+}
+
+.not-found-banner {
+  background-image: url('https://cards.scryfall.io/art_crop/front/5/9/597a8a8f-84ff-4041-9c99-938454a47951.jpg?1702429856');
 }
 
 /* No card collection page */
@@ -267,6 +281,8 @@ button:hover {
   width: 2rem;
   height: 2rem;
 }
+
+
 
 /* Footer styles */
 .footer {

@@ -1,11 +1,24 @@
-import React from 'react'
+import { useParams, useNavigate } from 'react-router-dom';
 
-const CardNotFound = (props) => {
-    const { cardName } = props;
+const CardNotFound = () => {
+    const { cardName } = useParams();
+    const navigate = useNavigate();
+
     return (
-        <div className="card-not-found">
-            <h2>Ooops! No results were found for "{cardName}"</h2>
-            <p>Check your spelling or search the autocomplete list.</p>
+        <div className="not-found">
+            <header>
+                <section className="banner not-found-banner"></section>
+            </header>
+
+            <main className="main">
+                <h2>Zoinks!!!</h2>
+                <p>No results were found for "{cardName}".</p>
+            </main>
+            <footer>
+                <button className="not-found-btn" onClick={() => navigate(-1)}> Go Back </button>
+            </footer>
+
+
         </div>
     )
 }
