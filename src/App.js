@@ -4,6 +4,7 @@ import {
 } from 'react-router-dom';
 import Layout from './components/layout/Layout';
 import RequireAuth from './components/auth/RequireAuth';
+import RequireNotAuth from './components/auth/RequireNotAuth';
 import AuthPage from './components/views/AuthPage';
 import Login from './components/auth/forms/Login';
 import Signup from './components/auth/forms/Signup';
@@ -33,15 +34,18 @@ const App = () => {
     <Routes>
       <Route path="/" element={<Layout />} >
 
-        {/* Public routes */}
-        <Route exact path="/" element={<Home />} />
-        <Route path="about" element={<About />} />
-        <Route path="contact" element={<Contact />} />
-        <Route path="login" element={<Login />} />
-        <Route path="signup" element={<Signup />} />
-        <Route path="reset-password" element={<ResetPassword />} />
+        {/* Public routes auth / not auth */}
         <Route path="shopping-cart" element={<ShoppingCart />} />
         <Route path="search-result/:cardName" element={<SearchResult />} />
+        {/* Public routes not auth */}
+        <Route element={<RequireNotAuth />}>
+          <Route exact path="/" element={<Home />} />
+          <Route path="about" element={<About />} />
+          <Route path="contact" element={<Contact />} />
+          <Route path="login" element={<Login />} />
+          <Route path="signup" element={<Signup />} />
+          <Route path="reset-password" element={<ResetPassword />} />
+        </Route>
 
         {/* Auth protected routes */}
         <Route element={<RequireAuth />}>
