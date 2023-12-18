@@ -3,7 +3,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import Card from './Card';
 import Modal from './Modal';
 import useModal from '../../../hooks/useModal';
-import NotFound from './CardNotFound';
+// import NotFound from './CardNotFound';
 
 const SearchResult = () => {
     const location = useLocation();
@@ -73,7 +73,8 @@ const SearchResult = () => {
                 {
                     type === 'card-not-found' ?
                         (
-                            <NotFound cardName={cardName} />
+                            // <NotFound cardName={cardName} />
+                            <></>
                         ) : (
                             <div className="content">
                                 <header className="header">

@@ -14,7 +14,7 @@ const Home = () => {
   return (
     <>
 
-      <section className="banner">
+      <section className="banner home-page-banner">
 
       </section>
       <div className="content home-page">

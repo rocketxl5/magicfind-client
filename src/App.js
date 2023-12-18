@@ -18,6 +18,7 @@ import SearchCollection from './components/views/search/SearchCollection';
 import SearchAPI from './components/views/search/SearchAPI';
 import SearchResult from './components/views/search/SearchResult';
 import NotFound from './components/views/NotFound';
+import CardNotFound from './components/views/search/CardNotFound';
 import ShoppingCart from './components/views/ShoppingCart';
 import Inbox from './components/views/mail/Inbox';
 import './assets/css/reset.css';
@@ -56,6 +57,7 @@ const App = () => {
           <Route path="search-api" element={<SearchAPI />} />
           <Route path="search-result/collection/:cardName" element={<SearchResult />} />
           <Route path="search-result/api/:cardName" element={<SearchResult />} />
+          <Route path="search-result/not-found/:cardName" element={<CardNotFound />} />
           <Route path="mail/inbox" element={<Inbox />} />
           <Route path="mail/:handle/:handle" element={<Inbox />} />
           <Route path="mail/unread" element={<Inbox />} />
