@@ -8,13 +8,14 @@ import NotFound from './CardNotFound';
 const SearchResult = () => {
     const location = useLocation();
     const navigate = useNavigate();
-    const { cards, cardName, type, search } = location.state;
-    const [haveLoaded, setHaveLoaded] = useState(false);
+    const { cards, cardName, type, search } = location.state || JSON.parse(localStorage.getItem('search-result'));
+    const [loadedCards, setLoadedCards] = useState(null);
     const cardRef = useRef(null);
 
     useEffect(() => {
+
         // If cards is not empty
-        if (cards.length > 0) {
+        if (cards) {
             const preloadImages = (cards) => {
                 const loadImage = card => {
                     return new Promise((resolve, reject) => {
@@ -27,25 +28,19 @@ const SearchResult = () => {
                 }
                 Promise.all(cards.map(card => loadImage(card)))
                     .then(() => {
-                        setHaveLoaded(true)
+                        setLoadedCards(cards);
                     })
                     .catch(error => console.log('Image load has failed', error))
             }
             // Call async image loader
             preloadImages(cards);
         }
+        // else {
+        // setTimeout(() => {
+        //     navigate('/search-collection')
+        // }, 1500)
+        // }
     }, [])
-
-    useEffect(() => {
-        // No cards collection
-        // Send back to search-collection page
-        if (!cards.length) {
-            setTimeout(() => {
-                navigate('/search-collection')
-            }, 1500)
-        }
-    }, [cards])
-
 
     const [{ open, component }, { updateState }] = useModal((value) => handleClick(value));
 
@@ -75,9 +70,7 @@ const SearchResult = () => {
                                 `${cards.length} ${cards.length > 1 ? 'Results' : 'Result'}` :
                                     'No results'
                             }
-                        </span>
-
-
+                    </span>
                 </header>
                 {
                     type === 'card-not-found' ?
@@ -91,18 +84,19 @@ const SearchResult = () => {
                                 </header>
                                 <main className="main">
                             <div className="cards">
-                                {haveLoaded &&
-                                    cards.map((card, index) => {
-                                        return (
-                                            <Card
-                                                key={index}
-                                                card={card}
-                                                searchType={type}
-                                                handleClick={handleClick}
-                                                ref={cardRef}
-                                            />)
-                                    })
-                                }
+                                        {
+                                            loadedCards &&
+                                            loadedCards.map((card, index) => {
+                                                return (
+                                                    <Card
+                                                        key={index}
+                                                        card={card}
+                                                        searchType={type}
+                                                        handleClick={handleClick}
+                                                        ref={cardRef}
+                                                    />)
+                                            })
+                                        }
                             </div>
                                 </main>
                             </div>

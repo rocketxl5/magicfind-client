@@ -105,6 +105,7 @@ const SearchCatalog = () => {
     fetch(`${api.serverURL}/api/cards/catalog/${encodeURIComponent(query)}`, options)
         .then((res) => res.json())
       .then((data) => {
+
         setLoading(false);
 
         const result = {
@@ -121,7 +122,7 @@ const SearchCatalog = () => {
         setCardName('');
         setSearchInput(null);
         localStorage.setItem('search-result', JSON.stringify(result));
-        navigate(`/search-result/${setQueryString(query.toLowerCase(), '-')}`,
+        navigate(`/search-result/catalog/${setQueryString(query.toLowerCase(), '-')}`,
           {
             state: result,
           });

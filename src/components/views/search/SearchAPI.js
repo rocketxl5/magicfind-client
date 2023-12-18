@@ -120,10 +120,11 @@ const Search = () => {
       .then((res) => res.json())
       .then((data) => {
         if (data.object === 'error') {
-          navigate(`/search-result/${setQueryString(searchTerm, '-')}`,
-            {
-              state: { cards: undefined, cardName: searchTerm, type: 'card-not-found', search: location.pathname },
-            });
+          console.log('error not handled in search api 1')
+          // navigate(`/search-result/api/${setQueryString(searchTerm, '-')}`,
+          //   {
+          //     state: { cards: undefined, cardName: searchTerm, type: 'card-not-found', search: location.pathname },
+          //   });
         } else {
           const { name, oracle_id } = data;
           localStorage.setItem('oracle', oracle_id);
@@ -132,6 +133,7 @@ const Search = () => {
         }
       })
       .catch((error) => {
+        console.log('error not handled in search api 2')
         console.log(error)
         // const { cards, cardName, type, search } = location.state;
         // navigate(`/search-result/${setQueryString(searchTerm, '-')}`,
@@ -175,7 +177,7 @@ const Search = () => {
         })
       });
 
-      // Remove online and oversized cards
+      // Remove online versions
       function filterCards(cards) {
         return cards.filter((card) => {
           return !card.digital;
@@ -186,14 +188,19 @@ const Search = () => {
       setLoading(false)
       setCardName('');
       setSearchInput(null);
-      const result = { cards: apiCards, cardName: cardName, type: searchInput?.id, search: location.pathname };
+      const result = {
+        cards: apiCards,
+        cardName: cardName,
+        type: searchInput.id,
+        search: location.pathname
+      };
 
-      navigate(`/search-result/${setQueryString(cardName, '-')}`,
+      localStorage.setItem('search-result', JSON.stringify(result));
+      navigate(`/search-result/api/${setQueryString(cardName, '-')}`,
         {
           state: result,
         });
 
-      localStorage.setItem('search-result', JSON.stringify(result));
     }
   }, [data])
 
@@ -210,9 +217,9 @@ const Search = () => {
               <main className="main">
                 <form id="search-api-form" className="search-form" onSubmit={searchAPI}>
                   <SearchInput isActive={isActive} id={'search-api'} searchCards={searchAPI} ref={apiInputRef} />
-            </form>
+                </form>
               </main>
-          </div>
+            </div>
         )
       }
     </div>
