@@ -35,9 +35,10 @@ const App = () => {
     <Routes>
       <Route path="/" element={<Layout />} >
 
-        {/* Public routes auth / not auth */}
+        {/* Public routes */}
         <Route path="shopping-cart" element={<ShoppingCart />} />
         <Route path="search-result/catalog/:cardName" element={<SearchResult />} />
+        <Route path="search-result/not-found/:cardName" element={<CardNotFound />} />
         {/* Public routes not auth */}
         <Route element={<RequireNotAuth />}>
           <Route exact path="/" element={<Home />} />
@@ -57,7 +58,6 @@ const App = () => {
           <Route path="search-api" element={<SearchAPI />} />
           <Route path="search-result/collection/:cardName" element={<SearchResult />} />
           <Route path="search-result/api/:cardName" element={<SearchResult />} />
-          <Route path="search-result/not-found/:cardName" element={<CardNotFound />} />
           <Route path="mail/inbox" element={<Inbox />} />
           <Route path="mail/:handle/:handle" element={<Inbox />} />
           <Route path="mail/unread" element={<Inbox />} />
