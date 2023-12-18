@@ -145,17 +145,19 @@ const SearchCollection = () => {
     fetch(`${api.serverURL}/api/cards/collection/${auth.id}/${encodeURIComponent(query)}`, options)
       .then((res) => res.json())
       .then((data) => {
+        setLoading(false);
+
         const result = {
           cards: data.results,
           cardName: data.cardName,
           type: searchInput.id,
           search: location.pathname
         }
-        setLoading(false);
+
         setCardName('');
         setSearchInput(null);
         localStorage.setItem('search-result', JSON.stringify(result));
-        navigate(`/search-result/${setQueryString(query.toLowerCase(), '-')}`,
+        navigate(`/search-result/collection/${setQueryString(query.toLowerCase(), '-')}`,
           {
             state: result,
           });
@@ -175,8 +177,8 @@ const SearchCollection = () => {
         type: searchInput.id,
         search: location.pathname
       }
-      // localStorage.setItem('search-result', JSON.stringify(result));
-      navigate(`/search-result/all-cards`,
+      localStorage.setItem('search-result', JSON.stringify(result));
+      navigate(`/search-result/collection/all-cards`,
         {
           state: result,
         });

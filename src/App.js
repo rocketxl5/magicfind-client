@@ -36,7 +36,7 @@ const App = () => {
 
         {/* Public routes auth / not auth */}
         <Route path="shopping-cart" element={<ShoppingCart />} />
-        <Route path="search-result/:cardName" element={<SearchResult />} />
+        <Route path="search-result/catalog/:cardName" element={<SearchResult />} />
         {/* Public routes not auth */}
         <Route element={<RequireNotAuth />}>
           <Route exact path="/" element={<Home />} />
@@ -54,6 +54,8 @@ const App = () => {
           <Route path="profile" element={<Profile />} />
           <Route path="search-collection" element={<SearchCollection />} />
           <Route path="search-api" element={<SearchAPI />} />
+          <Route path="search-result/collection/:cardName" element={<SearchResult />} />
+          <Route path="search-result/api/:cardName" element={<SearchResult />} />
           <Route path="mail/inbox" element={<Inbox />} />
           <Route path="mail/:handle/:handle" element={<Inbox />} />
           <Route path="mail/unread" element={<Inbox />} />
