@@ -5,7 +5,6 @@ import { PathProvider } from './contexts/PathContext';
 import { AuthProvider } from './contexts/AuthContext';
 import { MailProvider } from './contexts/MailContext';
 import { SearchProvider } from './contexts/SearchContext';
-import { CardProvider } from './contexts/CardContext';
 import { ShoppingCartProvider } from './contexts/ShoppingCartContext';
 import App from './App';
 
@@ -16,13 +15,11 @@ ReactDOM.render(
         <AuthProvider>
           <MailProvider>
             <SearchProvider>
-              <CardProvider>
                 <ShoppingCartProvider>
                     <Routes>
                       <Route path="/*" element={<App />} />
                     </Routes>
-                </ShoppingCartProvider>
-              </CardProvider>
+              </ShoppingCartProvider>
             </SearchProvider>
           </MailProvider>
         </AuthProvider>
