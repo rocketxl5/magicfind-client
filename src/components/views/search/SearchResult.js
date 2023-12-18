@@ -9,11 +9,9 @@ const SearchResult = () => {
     const location = useLocation();
     const navigate = useNavigate();
     const { cards, cardName, type, search } = location.state || JSON.parse(localStorage.getItem('search-result'));
-    const [loadedCards, setLoadedCards] = useState(null);
     const cardRef = useRef(null);
 
     useEffect(() => {
-
         // If cards is not empty
         if (cards) {
             const preloadImages = (cards) => {
@@ -28,7 +26,7 @@ const SearchResult = () => {
                 }
                 Promise.all(cards.map(card => loadImage(card)))
                     .then(() => {
-                        setLoadedCards(cards);
+                        // console.log('card images loaded')
                     })
                     .catch(error => console.log('Image load has failed', error))
             }
@@ -40,7 +38,7 @@ const SearchResult = () => {
         //     navigate('/search-collection')
         // }, 1500)
         // }
-    }, [])
+    }, []);
 
     const [{ open, component }, { updateState }] = useModal((value) => handleClick(value));
 
@@ -85,8 +83,8 @@ const SearchResult = () => {
                                 <main className="main">
                             <div className="cards">
                                         {
-                                            loadedCards &&
-                                            loadedCards.map((card, index) => {
+                                            cards &&
+                                            cards.map((card, index) => {
                                                 return (
                                                     <Card
                                                         key={index}

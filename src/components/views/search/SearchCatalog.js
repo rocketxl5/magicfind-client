@@ -89,6 +89,7 @@ const SearchCatalog = () => {
 
     let query;
 
+
     if (prediction) {
       query = prediction;
     }
@@ -101,6 +102,7 @@ const SearchCatalog = () => {
     else if (searchTerm) {
       query = searchTerm;
     }
+    console.log(query)
 
     fetch(`${api.serverURL}/api/cards/catalog/${encodeURIComponent(query)}`, options)
         .then((res) => res.json())
