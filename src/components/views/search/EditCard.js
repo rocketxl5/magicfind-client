@@ -252,6 +252,28 @@ const EditCard = (props) => {
                                                     </select>
                                                 </div>
                                                 <div className="form-element">
+                                                        <label htmlFor="condition">Card language: </label>
+                                                        <select
+                                                            id="condition"
+                                                            name="condition"
+                                                            value={values.language}
+                                                            onChange={handleChange}
+                                                        >
+                                                            <option value="en">English</option>
+                                                            <option value="es">Spanish</option>
+                                                            <option value="fr">French</option>
+                                                            <option value="de">German</option>
+                                                            <option value="it">Italian</option>
+                                                            <option value="pt">Portuguese</option>
+                                                            <option value="ja">Japanese</option>
+                                                            <option value="ko">Korean</option>
+                                                            <option value="ru">Russian</option>
+                                                            <option value="zhs">Simplified Chinese</option>
+                                                            <option value="zht">Traditional Chinese</option>
+                                                            <option value="ph">Phyrexian</option>
+                                                        </select>
+                                                    </div>
+                                                    <div className="form-element">
                                                     <label htmlFor="comment" className={errors.comment && 'color-danger'}>{errors.comment ? errors.comment : 'Additional Information'}</label>
                                                     <textarea
                                                         className={errors.comment && 'border-danger danger-padding'}

@@ -16,10 +16,8 @@ import Profile from './components/views/Profile';
 import SearchCollection from './components/views/search/SearchCollection';
 import SearchAPI from './components/views/search/SearchAPI';
 import SearchResult from './components/views/search/SearchResult';
-import AddCard from './components/views/AddCard';
 import NotFound from './components/views/NotFound';
 import ShoppingCart from './components/views/ShoppingCart';
-import RemoveCard from './components/views/RemoveCard';
 import Inbox from './components/views/mail/Inbox';
 import './assets/css/reset.css';
 import './App.css';
@@ -50,8 +48,6 @@ const App = () => {
           <Route path="me" element={<AuthPage />} />
           <Route path="settings" element={<Settings />} />
           <Route path="profile" element={<Profile />} />
-          <Route path="add-card/:cardName" element={<AddCard />} />
-          <Route path="remove-card/:cardName" element={<RemoveCard />} />
           <Route path="search-collection" element={<SearchCollection />} />
           <Route path="search-api" element={<SearchAPI />} />
           <Route path="mail/inbox" element={<Inbox />} />
