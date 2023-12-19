@@ -184,13 +184,12 @@ const SearchCollection = () => {
           state: result,
         });
     }
-  };
+  }
 
   return (
     <div className="flex inherit-height">
             <div className="content flex-grow-1">
-              <header className="header">
-
+        <header className="header">
                 <h2 className="title">Search Collection</h2>
               </header>
               <main className="main">
