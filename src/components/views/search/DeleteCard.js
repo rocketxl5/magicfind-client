@@ -1,5 +1,5 @@
 import { useState, useRef } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation, useParams } from 'react-router-dom';
 import CardImage from './CardImage';
 import CollectionCardDetail from './CollectionCardDetail';
 import Success from './Success';
@@ -9,10 +9,9 @@ import useAuth from '../../../hooks/useAuth';
 import { api } from '../../../api/resources';
 
 const DeleteCard = (props) => {
-    const { attributes, card, handleClick } = props;
-    const { auth } = useAuth();
-    const navigate = useNavigate();
-    const location = useLocation();
+    // Props
+    const { card, searchType, attributes, handleClick } = props;
+    // States
     const [response, setResponse] = useState({
         isDeleted: false,
         message: (() => {
@@ -24,9 +23,15 @@ const DeleteCard = (props) => {
             )
         })()
     });
-
     const [loading, setLoading] = useState(false);
+    // Ref
     const btnRef = useRef(null);
+    // Routing
+    const navigate = useNavigate();
+    const location = useLocation();
+    const { query } = useParams();
+    // Context
+    const { auth } = useAuth();
 
     // Triggers click event on button to close modal
     const closeModal = (button) => {
@@ -63,14 +68,15 @@ const DeleteCard = (props) => {
             })
             .then((data) => {
                 setLoading(false);
-                const { cardName, cards, isDeleted, message } = data;
+                const { cards, isDeleted, message } = data;
                 setResponse({ isDeleted: isDeleted, message: message })
                 // If cardName is set
-                if (cardName) {
+                if (query !== 'all-cards') {
+                    console.log(query)
                     // filter for cards with cardName
-                    const updatedCards = cards.filter(card => card.name.toLowerCase() === cardName.toLowerCase());
-                    const result = { cards: updatedCards, cardName: cardName, type: 'search-collection', search: `/search-collection` };
-
+                    const updatedCards = cards.filter(cardObj => cardObj.name.toLowerCase() === card.name.toLowerCase());
+                    const result = { cards: updatedCards, searchType, isDeleted };
+                    console.log(result)
                     navigate(`${location.pathname}`,
                         {
                             state: result,
@@ -78,8 +84,7 @@ const DeleteCard = (props) => {
                     localStorage.setItem('search-result', JSON.stringify(result));
                     closeModal(btnRef.current)
                 } else {
-                    const result = { cards: cards, cardName: undefined, type: 'search-collection', search: '/search-collection' };
-
+                    const result = { cards: cards, searchType, isDeleted };
                     navigate(`${location.pathname}`,
                         {
                             state: result,
@@ -87,7 +92,6 @@ const DeleteCard = (props) => {
                     localStorage.setItem('search-result', JSON.stringify(result));
                     closeModal(btnRef.current)
                 }
-
             })
             .catch((error) => {
                 setLoading(false);

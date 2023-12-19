@@ -151,9 +151,7 @@ const SearchCollection = () => {
 
               const result = {
                 cards: data.cards,
-                cardName: data.cardName,
-                type: searchInput.id,
-                search: location.pathname
+                searchType: searchInput.id,
               }
 
               setCardName('');
@@ -180,9 +178,7 @@ const SearchCollection = () => {
       const jsonResult = JSON.parse(localStorage.getItem('search-result'))
       const result = {
         cards: jsonResult.cards,
-        cardName: undefined,
-        type: searchInput.id,
-        search: location.pathname
+        searchType: searchInput.id
       }
       localStorage.setItem('search-result', JSON.stringify(result));
       navigate(`/search-result/collection/all-cards`,

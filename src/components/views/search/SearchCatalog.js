@@ -113,9 +113,7 @@ const SearchCatalog = () => {
 
               const result = {
                 cards: data.cards,
-                cardName: data.cardName,
-                type: searchInput.id,
-                search: location.pathname
+                searchType: searchInput.id
               }
 
               setCardName('');

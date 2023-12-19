@@ -39,8 +39,9 @@ const useModal = (callback) => {
                 return {
                     open: true,
                     component: <DeleteCard
-                        attributes={{ ...action.payload.attributes, id: 'confirm-delete' }}
                         card={action.payload.card}
+                        searchType={'search-collection'}
+                        attributes={{ ...action.payload.attributes, id: 'confirm-delete' }}
                         // expandedImage={action.payload.ImageComponent}
                         handleClick={callback}
                     />

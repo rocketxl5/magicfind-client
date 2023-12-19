@@ -13,6 +13,7 @@ const Card = forwardRef(function Card(props, ref) {
     const [loading, setLoading] = useState(false);
     const [ExpandedCard, setExpandedCard] = useState(null);
 
+    console.log(searchType)
     const image_uris = card?.image_uris || card?.card_faces[0].image_uris;
     const imgAttributes = {
         id: 'expand-card',
