@@ -10,7 +10,7 @@ const CardNotFound = () => {
                 <section className="banner not-found-banner"></section>
             </header>
             <main className="main">
-                <h2>Zoinks!!!</h2>
+                <h2>Oops!</h2>
                 <p>No results were found for "{cardName}"</p>
             </main>
             <footer>

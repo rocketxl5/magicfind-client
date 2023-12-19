@@ -8,7 +8,6 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { FiArrowRightCircle } from "react-icons/fi"
 import SearchInput from './SearchInput';
 import { SearchContext } from '../../../contexts/SearchContext';
-import { PathContext } from '../../../contexts/PathContext';
 import { api } from '../../../api/resources';
 import styled from 'styled-components';
 import hideSearchBar from '../../../utilities/hideSearchBar';
@@ -17,9 +16,11 @@ import setQueryString from '../../../utilities/setQueryString';
 import useAuth from '../../../hooks/useAuth';
 
 const SearchCollection = () => {
+  // States
   const [isActive, setIsActive] = useState(false);
-  // const [message, setMessage] = useState(null);
-
+  // Ref
+  const collectionInputRef = useRef(null);
+  // Context
   const {
     errorMessage,
     setErrorMessage,
@@ -34,13 +35,12 @@ const SearchCollection = () => {
     setLoading,
     predictions
   } = useContext(SearchContext);
-
-  const { pathname, setPathname } = useContext(PathContext);
-
-  const { auth } = useAuth();
+  // Routing
   const navigate = useNavigate();
   const location = useLocation();
-  const collectionInputRef = useRef(null);
+  // Hook
+  const { auth } = useAuth();
+  // Utilities
   const browserWidth = getBrowserWidth();
 
   const fetchCollectionCards = () => {
@@ -70,7 +70,6 @@ const SearchCollection = () => {
               setHasMounted(true);
               setErrorMessage(null);
               setLoading(false);
-              setPathname(location.pathname);
               if (browserWidth <= 775 && document.querySelector('#mobile-nav')?.checked) {
                 hideSearchBar();
               }
@@ -79,7 +78,6 @@ const SearchCollection = () => {
         else if (res.status === 400) {
           return res.json()
             .then((error) => {
-              console.log(error.message)
               setHasMounted(true);
               setLoading(false);
               setErrorMessage({ ...error.message });

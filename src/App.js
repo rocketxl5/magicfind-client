@@ -37,7 +37,6 @@ const App = () => {
 
         {/* Public routes */}
         <Route path="shopping-cart" element={<ShoppingCart />} />
-        <Route path="search-result/catalog/:cardName" element={<SearchResult />} />
         <Route path="search-result/not-found/:cardName" element={<CardNotFound />} />
         {/* Public routes not auth */}
         <Route element={<RequireNotAuth />}>
@@ -47,6 +46,7 @@ const App = () => {
           <Route path="login" element={<Login />} />
           <Route path="signup" element={<Signup />} />
           <Route path="reset-password" element={<ResetPassword />} />
+          <Route path="search-result/catalog/:cardName" element={<SearchResult />} />
         </Route>
 
         {/* Auth protected routes */}
@@ -56,6 +56,7 @@ const App = () => {
           <Route path="profile" element={<Profile />} />
           <Route path="search-collection" element={<SearchCollection />} />
           <Route path="search-api" element={<SearchAPI />} />
+          <Route path="search-result/catalog/:cardName/:userID" element={<SearchResult />} />
           <Route path="search-result/collection/:query" element={<SearchResult />} />
           <Route path="search-result/api/:cardName" element={<SearchResult />} />
           <Route path="mail/inbox" element={<Inbox />} />

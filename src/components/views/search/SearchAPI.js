@@ -4,22 +4,24 @@ import React, {
   useEffect,
   useContext
 } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import SearchInput from './SearchInput';
 import Loading from '../../layout/Loading';
 import { SearchContext } from '../../../contexts/SearchContext';
-import { PathContext } from '../../../contexts/PathContext';
 import { api } from '../../../api/resources';
 import setQueryString from '../../../utilities/setQueryString';
 import hideSearchBar from '../../../utilities/hideSearchBar';
 import getBrowserWidth from '../../../utilities/getBrowserWidth';
 
 const Search = () => {
+  // States
   const [loading, setLoading] = useState(false);
   const [isActive, setIsActive] = useState(false);
   const [oracleID, setOracleID] = useState('');
   const [data, setData] = useState(null);
-
+  // Ref
+  const apiInputRef = useRef(null);
+  // Context
   const {
     searchInput,
     setSearchInput,
@@ -31,12 +33,9 @@ const Search = () => {
     apiCards,
     setApiCards
   } = useContext(SearchContext);
-
-  const { setPathname } = useContext(PathContext);
-
-  const location = useLocation()
+  // Routing
   const navigate = useNavigate();
-  const apiInputRef = useRef(null);
+  // Utilities
   const browserWidth = getBrowserWidth();
 
   const fetchApiCards = () => {
@@ -63,8 +62,7 @@ const Search = () => {
   }
 
   useEffect(() => {
-    apiInputRef?.current?.focus();
-    setPathname(location.pathname);
+    apiInputRef?.current?.focus();;
 
     // If apiCards is undefined
     if (!apiCards) {

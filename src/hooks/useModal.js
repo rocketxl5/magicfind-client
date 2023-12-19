@@ -42,7 +42,6 @@ const useModal = (callback) => {
                         card={action.payload.card}
                         searchType={'search-collection'}
                         attributes={{ ...action.payload.attributes, id: 'confirm-delete' }}
-                        // expandedImage={action.payload.ImageComponent}
                         handleClick={callback}
                     />
                 };
@@ -60,9 +59,9 @@ const useModal = (callback) => {
                     open: true,
                     component:
                         <EditCard
-                            attributes={{ ...action.payload.attributes, id: 'confirm-edit' }}
                             card={action.payload.card}
-                            // expandedImage={action.payload.ImageComponent}
+                            searchType={'search-collection'}
+                            attributes={{ ...action.payload.attributes, id: 'confirm-edit' }}
                             handleClick={callback}
                         />
                 }
