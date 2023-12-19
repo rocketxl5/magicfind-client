@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation, useParams } from 'react-router-dom';
 import CardImage from './CardImage';
 import CollectionCardDetail from './CollectionCardDetail';
 import Success from './Success';
@@ -12,11 +12,12 @@ const INIT = {
     quantity: '',
     price: '',
     condition: '',
+    language: ''
 }
 
 const EditCard = (props) => {
-    const { card, attributes, handleClick } = props;
-
+    // Props
+    const { card, searchType, attributes, handleClick } = props;
     // States
     const [errors, setErrors] = useState(INIT);
     const [values, setValues] = useState(INIT);
@@ -27,28 +28,20 @@ const EditCard = (props) => {
         isUpdated: false,
         message: ''
     });
-
-    // Routing
-    const navigate = useNavigate();
-    const location = useLocation();
-
     // Refs
     const btnRef = useRef(null);
     const priceRef = useRef(null);
     const conditionRef = useRef(null);
     const quantityRef = useRef(null);
+    const languageRef = useRef(null);
     const commentRef = useRef(null);
     const publishedRef = useRef(null);
-
-    // Hooks
+    // Routing
+    const navigate = useNavigate();
+    const location = useLocation();
+    const { query } = useParams();
+    // Hook
     const { auth } = useAuth();
-
-    const inputs = {
-        price: priceRef.current,
-        condition: conditionRef.current,
-        quantity: quantityRef.current,
-        comment: commentRef.current,
-    }
 
     // Triggers click event on button to close modal
     const closeModal = (button) => {
@@ -65,7 +58,8 @@ const EditCard = (props) => {
                 cardName: card.name?.trim(),
                 price: parseFloat(values.price),
                 quantity: parseInt(values.quantity),
-                condition: values.condition?.trim(),
+                condition: values.condition,
+                language: values.language,
                 comment: values.comment?.trim(),
                 published: values.published,
                 datePublished: Date.now(),
@@ -85,13 +79,12 @@ const EditCard = (props) => {
                     setLoading(false);
                     const { cards, isUpdated, message } = data;
 
-                    const { cardName, type } = location && location?.state;
                     setResponse({ isUpdated: isUpdated, message: message })
-                    if (cardName) {
+                    if (query === 'all-cards') {
                         // filter for cards with cardName
-                        const updatedCards = cards.filter(card => card.name.toLowerCase() === cardName.toLowerCase());
+                        const updatedCards = cards.filter(cardObj => cardObj.name.toLowerCase() === card.name.toLowerCase());
 
-                        const result = { cards: updatedCards, cardName: cardName, type: type, search: `/${type}` };
+                        const result = { cards: updatedCards, searchType, isUpdated };
                         // console.log(result)
                         navigate(`${location.pathname}`,
                             {
@@ -100,7 +93,7 @@ const EditCard = (props) => {
                         localStorage.setItem('search-result', JSON.stringify(result));
                         closeModal(btnRef.current)
                     } else {
-                        const result = { cards: cards, cardName: undefined, type: type, search: `/${type}` };
+                        const result = { cards: cards, searchType, isUpdated };
                         // console.log(result)
 
                         navigate(`${location.pathname}`,
@@ -121,6 +114,7 @@ const EditCard = (props) => {
             price: card['_price'] ? card['_price'] : '',
             quantity: card['_quantity'] ? card['_quantity'] : '',
             condition: card['_condition'] ? card['_condition'] : '',
+            language: card['_language'] ? card['_language'] : '',
             comment: card['_comment'],
             published: card['_is_published']
         });
@@ -164,7 +158,7 @@ const EditCard = (props) => {
     const handleSubmit = (e) => {
         e.preventDefault();
         const { comment, published, ...updatedValues } = values;
-        const inputErrors = errorHandler(updatedValues, inputs)
+        const inputErrors = errorHandler(updatedValues)
         setIsSubmit(true)
         setErrors(inputErrors)
     }
@@ -252,13 +246,17 @@ const EditCard = (props) => {
                                                     </select>
                                                 </div>
                                                 <div className="form-element">
-                                                        <label htmlFor="condition">Card language: </label>
+                                                        <label htmlFor="language" className={errors.language && 'color-danger'}>{errors.language ? errors.language : 'Card Condition'}</label>
                                                         <select
-                                                            id="condition"
-                                                            name="condition"
+                                                            className={errors.language ? 'border-danger danger-padding' : ''}
+                                                            id="language"
+                                                            name="language"
                                                             value={values.language}
                                                             onChange={handleChange}
+                                                            onFocus={handleFocus}
+                                                            ref={languageRef}
                                                         >
+                                                            <option value="">Choose a language</option>
                                                             <option value="en">English</option>
                                                             <option value="es">Spanish</option>
                                                             <option value="fr">French</option>

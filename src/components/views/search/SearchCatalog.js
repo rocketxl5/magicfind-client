@@ -4,18 +4,21 @@ import React, {
   useEffect,
   useContext
 } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import SearchInput from './SearchInput';
 import { SearchContext } from '../../../contexts/SearchContext';
 import useAuth from '../../../hooks/useAuth';
-import { PathContext } from '../../../contexts/PathContext';
 import { api } from '../../../api/resources';
 import hideSearchBar from '../../../utilities/hideSearchBar';
 import getBrowserWidth from '../../../utilities/getBrowserWidth';
 import setQueryString from '../../../utilities/setQueryString';
 
 const SearchCatalog = () => {
+  // States
   const [isActive, setIsActive] = useState(false);
+  // Ref
+  const catalogInputRef = useRef(null);
+  // Context
   const {
     searchInput,
     setLoading,
@@ -26,14 +29,11 @@ const SearchCatalog = () => {
     setCardNames,
     predictions,
   } = useContext(SearchContext);
-
-  const { auth } = useAuth();
-
-  const { setPathname } = useContext(PathContext);
-
+  // Routing
   const navigate = useNavigate();
-  const location = useLocation();
-  const catalogInputRef = useRef(null);
+  // Hook
+  const { auth } = useAuth();
+  // Utilities
   const browserWidth = getBrowserWidth();
 
   const fetchCatalogCards = () => {
@@ -53,7 +53,6 @@ const SearchCatalog = () => {
   }
 
   useEffect(() => {
-    setPathname(location.pathname);
 
     if (browserWidth <= 775 && document.querySelector('#mobile-nav')?.checked) {
       hideSearchBar();
@@ -81,14 +80,13 @@ const SearchCatalog = () => {
 
     const headers = new Headers();
     headers.append('Content-Type', 'application/json');
-    // headers.append('auth-token', auth.token);
+    auth && headers.append('auth-token', auth.token);
     const options = {
       method: 'GET',
       headers: headers,
     };
 
     let query;
-
 
     if (prediction) {
       query = prediction;
@@ -102,9 +100,13 @@ const SearchCatalog = () => {
     else if (searchTerm) {
       query = searchTerm;
     }
-    console.log(query)
+    // Conditional query string won't return user cards if auth
+    // Else returns all cards
+    const queryString = auth ?
+      `${api.serverURL}/api/cards/catalog/${encodeURIComponent(query)}/${auth.id}` :
+      `${api.serverURL}/api/cards/catalog/${encodeURIComponent(query)}`;
 
-    fetch(`${api.serverURL}/api/cards/catalog/${encodeURIComponent(query)}`, options)
+    fetch(queryString, options)
       .then((res) => {
         if (res.status === 200) {
           return res.json()

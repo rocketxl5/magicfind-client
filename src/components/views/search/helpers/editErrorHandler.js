@@ -1,6 +1,6 @@
 import capitalizeWord from '../../../../utilities/capitalizeWord'
 // Sets and return error message object 
-const editErrorHandler = (values, inputs) => {
+const editErrorHandler = (values) => {
     const handles = Object.keys(values)
     let errors = {}
     handles.forEach((handle) => {

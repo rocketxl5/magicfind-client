@@ -8,9 +8,9 @@ import useModal from '../../../hooks/useModal';
 const SearchResult = () => {
     const location = useLocation();
     const navigate = useNavigate();
-    const { cards, searchType, isDeleted = false } = location.state || JSON.parse(localStorage.getItem('search-result'));
+    const { cards, searchType, isDeleted = false, isUpdated = false } = location.state || JSON.parse(localStorage.getItem('search-result'));
     const cardRef = useRef(null);
-    console.log(location.pathname)
+
     useEffect(() => {
         // If cards is not empty
         if (cards) {
@@ -54,7 +54,7 @@ const SearchResult = () => {
                     </Modal>
                 }
                 <header className="search-result-header">
-                    <button className="back-btn" onClick={() => !isDeleted ? navigate(-1) : navigate(-2)}>Go Back</button>
+                    <button className="back-btn" onClick={() => !isDeleted && !isUpdated ? navigate(-1) : navigate(-2)}>Go Back</button>
                     <span className="space-1">
                             {
                                 cards ?

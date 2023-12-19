@@ -1,22 +1,9 @@
-import React, { useEffect, useContext } from 'react';
-import { Link, useLocation } from 'react-router-dom';
-import { PathContext } from '../../contexts/PathContext';
+import { Link } from 'react-router-dom';
 
 const Home = () => {
-  const { setPathname } = useContext(PathContext);
-  const location = useLocation();
-
-  // Setting path with component url pathname onload
-  useEffect(() => {
-    setPathname(location.pathname);
-  }, []);
-
   return (
     <>
-
-      <section className="banner home-page-banner">
-
-      </section>
+      <section className="banner home-page-banner"></section>
       <div className="content home-page">
         <header className="header">
           <h2 className="title">Welcome to Magic Find</h2>
