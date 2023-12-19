@@ -125,11 +125,16 @@ const SearchCatalog = () => {
                 {
                   state: result,
                 });
+
+              if (browserWidth <= 775 && document.querySelector('#mobile-nav')?.checked) {
+                hideSearchBar();
+              }
             })
         }
         else if (res.status === 400) {
           setLoading(false);
           navigate(`/search-result/not-found/${query}`);
+
           if (browserWidth <= 775 && document.querySelector('#mobile-nav')?.checked) {
             hideSearchBar();
           }

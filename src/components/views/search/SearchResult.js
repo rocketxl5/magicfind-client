@@ -56,12 +56,7 @@ const SearchResult = () => {
                     </Modal>
                 }
                 <header className="search-result-header">
-
-                    {type !== 'search-catalog' &&
-
-                        <Link className="back-link" to={search}>Back to Search</Link>
-
-                    }
+                    <button className="back-btn" onClick={() => navigate(-1)}>Go Back</button>
                     <span className="space-1">
                             {
                                 cards ?
@@ -70,37 +65,28 @@ const SearchResult = () => {
                             }
                     </span>
                 </header>
-                {
-                    type === 'card-not-found' ?
-                        (
-                            // <NotFound cardName={cardName} />
-                            <></>
-                        ) : (
-                            <div className="content">
-                                <header className="header">
-
-                                    <h2 className="title">Search Results</h2>
-                                </header>
-                                <main className="main">
-                            <div className="cards">
-                                        {
-                                            cards &&
-                                            cards.map((card, index) => {
-                                                return (
-                                                    <Card
-                                                        key={index}
-                                                        card={card}
-                                                        searchType={type}
-                                                        handleClick={handleClick}
-                                                        ref={cardRef}
-                                                    />)
-                                            })
-                                        }
-                            </div>
-                                </main>
-                            </div>
-                        )
-                }
+                <div className="content">
+                    <header className="header">
+                        <h2 className="title">Search Results</h2>
+                    </header>
+                    <main className="main">
+                        <div className="cards">
+                            {
+                                cards &&
+                                cards.map((card, index) => {
+                                    return (
+                                        <Card
+                                            key={index}
+                                            card={card}
+                                            searchType={type}
+                                            handleClick={handleClick}
+                                            ref={cardRef}
+                                        />)
+                                })
+                            }
+                        </div>
+                    </main>
+                </div>
             </div>
         </>
     )
