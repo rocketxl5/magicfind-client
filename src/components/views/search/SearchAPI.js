@@ -177,9 +177,7 @@ const Search = () => {
       setSearchInput(null);
       const result = {
         cards: apiCards,
-        cardName: cardName,
-        type: searchInput.id,
-        search: location.pathname
+        searchType: searchInput.id
       };
 
       localStorage.setItem('search-result', JSON.stringify(result));

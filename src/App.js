@@ -56,7 +56,7 @@ const App = () => {
           <Route path="profile" element={<Profile />} />
           <Route path="search-collection" element={<SearchCollection />} />
           <Route path="search-api" element={<SearchAPI />} />
-          <Route path="search-result/collection/:cardName" element={<SearchResult />} />
+          <Route path="search-result/collection/:query" element={<SearchResult />} />
           <Route path="search-result/api/:cardName" element={<SearchResult />} />
           <Route path="mail/inbox" element={<Inbox />} />
           <Route path="mail/:handle/:handle" element={<Inbox />} />
