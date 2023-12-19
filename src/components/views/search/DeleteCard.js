@@ -74,7 +74,7 @@ const DeleteCard = (props) => {
                 if (query !== 'all-cards') {
                     // filter for cards with cardName
                     const updatedCards = cards.filter(cardObj => cardObj.name.toLowerCase() === card.name.toLowerCase());
-                    const result = { cards: updatedCards, searchType, isDeleted };
+                    const result = { cards: updatedCards, searchType };
                     navigate(`${location.pathname}`,
                         {
                             state: result,
@@ -82,7 +82,7 @@ const DeleteCard = (props) => {
                     localStorage.setItem('search-result', JSON.stringify(result));
                     closeModal(btnRef.current)
                 } else {
-                    const result = { cards: cards, searchType, isDeleted };
+                    const result = { cards: cards, searchType };
                     navigate(`${location.pathname}`,
                         {
                             state: result,
