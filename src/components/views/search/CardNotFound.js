@@ -9,7 +9,6 @@ const CardNotFound = () => {
             <header>
                 <section className="banner not-found-banner"></section>
             </header>
-
             <main className="main">
                 <h2>Zoinks!!!</h2>
                 <p>No results were found for "{cardName}"</p>
@@ -17,8 +16,6 @@ const CardNotFound = () => {
             <footer>
                 <button className="not-found-btn" onClick={() => navigate(-1)}> Go Back </button>
             </footer>
-
-
         </div>
     )
 }
