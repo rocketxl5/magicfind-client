@@ -4,7 +4,7 @@ import React, {
   useEffect,
   useContext
 } from 'react';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { FiArrowRightCircle } from "react-icons/fi"
 import SearchInput from './SearchInput';
 import { SearchContext } from '../../../contexts/SearchContext';
@@ -37,13 +37,12 @@ const SearchCollection = () => {
   } = useContext(SearchContext);
   // Routing
   const navigate = useNavigate();
-  const location = useLocation();
   // Hook
   const { auth } = useAuth();
   // Utilities
   const browserWidth = getBrowserWidth();
 
-  const fetchCollectionCards = () => {
+  const searchCollection = (query = '') => {
 
     setLoading(true);
     const headers = new Headers();
@@ -54,21 +53,26 @@ const SearchCollection = () => {
       headers: headers,
     }
 
-    fetch(`${api.serverURL}/api/cards/${auth.id}`, options)
+    fetch(`${api.serverURL}/api/cards/${auth.id}/${query}`, options)
       .then((res) => {
         if (res.ok) {
           return res.json()
-            .then((data) => {
-              setCardNames(data.names);
-              // Update local storage with search data
-              localStorage.setItem('search-result', JSON.stringify({
-                cards: data.cards,
-                cardName: undefined,
-                type: searchInput?.id,
-                search: location.pathname
-              }));
-              setHasMounted(true);
-              setErrorMessage(null);
+            .then((dataObj) => {
+              const { query, data } = dataObj;
+              if (query === 'card-names') {
+                setCardNames(data);
+                setHasMounted(true);
+                setErrorMessage(null);
+              }
+              else if (query === 'cards') {
+                const result = { cards: data, searchType: searchInput.id }
+                // Update local storage with search data
+                localStorage.setItem('search-result', JSON.stringify(result));
+                navigate(`/search-result/collection/all-cards`,
+                  {
+                    state: result,
+                  });
+              }
               setLoading(false);
               if (browserWidth <= 775 && document.querySelector('#mobile-nav')?.checked) {
                 hideSearchBar();
@@ -88,7 +92,7 @@ const SearchCollection = () => {
 
   useEffect(() => {
     if (!hasMounted) {
-      fetchCollectionCards()
+      searchCollection('card-names')
     } else {
       collectionInputRef.current?.focus();
       setHasMounted(false);
@@ -108,7 +112,7 @@ const SearchCollection = () => {
   }, [searchInput]);
 
   // Instore single card request search field with
-  const searchCollection = (e = undefined, prediction = undefined) => {
+  const searchCollectionCard = (e = undefined, prediction = undefined) => {
     e?.preventDefault();
 
     if (searchTerm.length < 3) { return }
@@ -168,24 +172,6 @@ const SearchCollection = () => {
       });
   }
 
-  // Get all cards from user store
-  const handleClick = (e) => {
-    e.preventDefault();
-
-    if (localStorage.getItem('search-result')) {
-      const jsonResult = JSON.parse(localStorage.getItem('search-result'))
-      const result = {
-        cards: jsonResult.cards,
-        searchType: searchInput.id
-      }
-      localStorage.setItem('search-result', JSON.stringify(result));
-      navigate(`/search-result/collection/all-cards`,
-        {
-          state: result,
-        });
-    }
-  }
-
   return (
     <div className="flex inherit-height">
             <div className="content flex-grow-1">
@@ -212,8 +198,8 @@ const SearchCollection = () => {
                 </div>
               ) : (
                       <>
-                        <form id="search-collection-form" className="search-form" onSubmit={searchCollection} >
-                          <SearchInput isActive={isActive} id={'search-collection'} searchCards={searchCollection} ref={collectionInputRef} />
+                  <form id="search-collection-form" className="search-form" onSubmit={searchCollectionCard} >
+                    <SearchInput isActive={isActive} id={'search-collection'} searchCard={searchCollectionCard} ref={collectionInputRef} />
                         </form>
                         <Buttons>
                           <Button
@@ -226,7 +212,7 @@ const SearchCollection = () => {
                           <Button
                             className="bg-teal"
                             type="button"
-                            onClick={handleClick}
+                      onClick={() => searchCollection('cards')}
                           >
                             Show All Cards
                           </Button>

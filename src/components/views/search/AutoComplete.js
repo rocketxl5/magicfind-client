@@ -4,7 +4,7 @@ import { SearchContext } from '../../../contexts/SearchContext';
 const INIT = -200;
 
 const AutoComplete = (props) => {
-    const { predictions, searchCards } = props;
+    const { predictions, searchCard } = props;
     const {
         marker,
         setMarker,
@@ -58,7 +58,7 @@ const AutoComplete = (props) => {
 
     const handleMouseDown = (e) => {
         // Takes event and target li id set to prediction value @ Prediction
-        searchCards(e, e.target.id);
+        searchCard(e, e.target.id);
     };
 
     return (

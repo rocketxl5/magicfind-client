@@ -103,7 +103,10 @@ const EditCard = (props) => {
                         closeModal(btnRef.current)
                     }
                 })
-                .catch((error) => console.log('error', error));
+                .catch((error) => {
+                    setLoading(false);
+                    console.log('error', error)
+                });
         }
     }, [isValidForm])
 
