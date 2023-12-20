@@ -80,7 +80,7 @@ const EditCard = (props) => {
                     const { cards, isUpdated, message } = data;
 
                     setResponse({ isUpdated: isUpdated, message: message })
-                    if (query === 'all-cards') {
+                    if (query !== 'all-cards') {
                         // filter for cards with cardName
                         const updatedCards = cards.filter(cardObj => cardObj.name.toLowerCase() === card.name.toLowerCase());
 
