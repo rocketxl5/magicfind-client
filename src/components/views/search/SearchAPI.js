@@ -80,7 +80,7 @@ const Search = () => {
       setCardNames(apiCards);
     } else {
       setIsActive(false);
-      setCardNames([])
+      setCardNames([]);
     }
   }, [searchInput])
 
@@ -199,7 +199,7 @@ const Search = () => {
               </header>
               <main className="main">
                 <form id="search-api-form" className="search-form" onSubmit={searchAPI}>
-                  <SearchInput isActive={isActive} id={'search-api'} searchCards={searchAPI} ref={apiInputRef} />
+                  <SearchInput isActive={isActive} id={'search-api'} searchCard={searchAPI} ref={apiInputRef} />
                 </form>
               </main>
             </div>

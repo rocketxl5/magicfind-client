@@ -145,7 +145,7 @@ const SearchCatalog = () => {
   return (
     <div id="search-catalog-container">
       <form id="search-catalog-form" className="search-form" onSubmit={searchCatalog} >
-        <SearchInput isActive={isActive} id={'search-catalog'} searchCards={searchCatalog} ref={catalogInputRef} />
+        <SearchInput isActive={isActive} id={'search-catalog'} searchCard={searchCatalog} ref={catalogInputRef} />
       </form>
     </div>
   );

@@ -12,7 +12,6 @@ const SearchResult = () => {
 
     useEffect(() => {
         // If cards is not empty
-
         if (cards.length) {
             const preloadImages = (cards) => {
                 const loadImage = card => {
