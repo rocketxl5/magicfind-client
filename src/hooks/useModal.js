@@ -17,7 +17,7 @@ const useModal = (callback) => {
         CONFIRM_DELETE: 'confirm-delete',
         DELETE_CARD: 'delete-card',
         EXPAND_CARD: 'expand-card',
-        FLIP_CARD: 'flip-card',
+        // FLIP_CARD: 'flip-card',
         GO_BACK: 'go-back',
         EDIT_CARD: 'edit-card',
         REDUCE_CARD: 'reduce-card',
@@ -27,41 +27,48 @@ const useModal = (callback) => {
 
         switch (action.type) {
             case ACTIONS.EXPAND_CARD:
-                return {
+                // 
+                return !action.payload.card.card_faces.length ?
+                    {
                     open: true,
                     component:
                         <ExpandedCardContent handleClick={callback}>
                             {action.payload.ImageComponent}
-                            {action.payload.card.card_faces?.length ? <FlipIcon handleClick={callback} /> : null}
                         </ExpandedCardContent>
-                };
+                    } : {
+                        open: true,
+                        component:
+                            <ExpandedCardContent handleClick={callback}>
+                                {action.payload.ImageComponent}
+                                <FlipIcon handleClick={callback} />
+                            </ExpandedCardContent>
+                    }
             case ACTIONS.DELETE_CARD:
                 return {
                     open: true,
                     component: <DeleteCard
-                        card={action.payload.card}
-                        searchType={'search-collection'}
                         attributes={{ ...action.payload.attributes, id: 'confirm-delete' }}
+                        card={action.payload.card}
                         handleClick={callback}
                     />
                 };
-            case ACTIONS.FLIP_CARD:
-                return {
-                    open: true,
-                    component:
-                        <ExpandedCardContent handleClick={callback}>
-                            {action.payload.card.card_faces[1].normal}
-                            {action.payload.card.card_faces.length ? <FlipIcon handleClick={callback} /> : null}
-                        </ExpandedCardContent>
-                };
+            // case ACTIONS.FLIP_CARD:
+            //     return {
+            //         open: true,
+            //         component:
+            //             <ExpandedCardContent handleClick={callback}>
+            //                 {action.payload.card.card_faces[1].normal}
+            //                 {action.payload.card.card_faces.length ? <FlipIcon handleClick={callback} /> : null}
+            //             </ExpandedCardContent>
+            //     };
             case ACTIONS.EDIT_CARD:
                 return {
                     open: true,
                     component:
                         <EditCard
-                            card={action.payload.card}
-                            searchType={'search-collection'}
                             attributes={{ ...action.payload.attributes, id: 'confirm-edit' }}
+                            card={action.payload.card}
+                            // expandedImage={action.payload.ImageComponent}
                             handleClick={callback}
                         />
                 }
@@ -89,7 +96,7 @@ const useModal = (callback) => {
     }
     const [state, dispatch] = useReducer(reducer, INIT)
 
-    const updateState = (id, card, attributes, ExpandedCard, eventHandler) => {
+    const updateState = (id, card, attributes, ExpandedCard) => {
         dispatch({
             type: id,
             payload: {

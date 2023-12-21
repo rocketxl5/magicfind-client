@@ -36,7 +36,7 @@ const SearchCatalog = () => {
   // Utilities
   const browserWidth = getBrowserWidth();
 
-  const fetchCatalogCards = () => {
+  const searchCatalog = () => {
     const headers = new Headers();
     headers.append('Content-Type', 'application/json');
     const options = {
@@ -48,6 +48,7 @@ const SearchCatalog = () => {
       .then((res) => res.json())
       .then((data) => {
         setCardNames(data.cards)
+        console.log(data.cards)
       })
       .catch((error) => console.log(error));
   }
@@ -62,14 +63,14 @@ const SearchCatalog = () => {
   useEffect(() => {
 
     if (searchInput?.id === 'search-catalog') {
-      fetchCatalogCards();
+      searchCatalog();
       setIsActive(true);
     } else {
       setIsActive(false);
     }
   }, [searchInput]);
 
-  const searchCatalog = (e = undefined, prediction = undefined) => {
+  const searchCatalogCard = (e = undefined, prediction = undefined) => {
     e?.preventDefault();
 
     if (searchTerm.length < 3) { return }
@@ -144,8 +145,8 @@ const SearchCatalog = () => {
 
   return (
     <div id="search-catalog-container">
-      <form id="search-catalog-form" className="search-form" onSubmit={searchCatalog} >
-        <SearchInput isActive={isActive} id={'search-catalog'} searchCard={searchCatalog} ref={catalogInputRef} />
+      <form id="search-catalog-form" className="search-form" onSubmit={searchCatalogCard} >
+        <SearchInput isActive={isActive} id={'search-catalog'} searchCard={searchCatalogCard} ref={catalogInputRef} />
       </form>
     </div>
   );
