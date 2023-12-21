@@ -27,6 +27,7 @@ import './assets/css/utilities.css';
 import './assets/css/style.css';
 import './assets/css/navbar.css';
 import './assets/css/form.css';
+import './assets/css/dashboard.css'
 import './assets/css/media-queries.css';
 
 const App = () => {
