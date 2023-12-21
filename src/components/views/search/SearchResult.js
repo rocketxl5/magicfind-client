@@ -28,7 +28,12 @@ const SearchResult = () => {
                     .catch(error => console.log('Image load has failed', error))
             }
             // Call async image loader
-            preloadImages(cards);
+            // With cards both sides if any (Transform cards)
+            preloadImages(cards.flatMap(card => {
+                return card.card_faces.map(cardFace => {
+                    return cardFace;
+                })
+            }));
         }
         else {
             // localStorage.removeItem('search-result')
