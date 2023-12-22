@@ -556,10 +556,6 @@ ul.autocomplete-list {
     z-index: 3000;
   }
 
-  .left {
-    left: 2.8rem !important;
-  }
-
   .flip-card-btn > svg {
     /* display: none; */
     pointer-events: none;
