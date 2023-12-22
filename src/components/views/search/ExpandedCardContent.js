@@ -6,13 +6,11 @@ const ExpandedCardContent = ({ children, transform, handleClick }) => {
         if (e.target.id === 'reduce-card') {
             handleClick(e)
         }
-        else if (e.target.id === 'flip-card-btn') {
-
+        else if (e.target.classList.contains('flip-card-btn')) {
             document.querySelector('.flip-card-inner').classList.toggle('rotate-y');
             setTimeout(() => {
-                document.querySelector('#flip-card-btn').classList.toggle('left');
+                document.getElementsByClassName('flip-card-btn')[0].classList.toggle('d-none');
             }, 100);
-
         }
 
     }
@@ -29,13 +27,12 @@ const ExpandedCardContent = ({ children, transform, handleClick }) => {
                         <div className="flip-card-inner">
                             <div className="flip-card-recto">
                                 {children[0][0]}
-                                {/* {children[1]} */}
+                                {children[1]}
                             </div>
                             <div className="flip-card-verso">
                                 {children[0][1]}
-                                {/* {children[1]} */}
+                                {children[1]}
                             </div>
-                            {children[1]}
                         </div>
                     </div>
                 )}
