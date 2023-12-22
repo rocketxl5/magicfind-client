@@ -597,7 +597,7 @@ ul.autocomplete-list {
 
 .flip-card-verso {
     transform: rotateY(180deg);
-    -webkit-transform: rotate(180deg);
+    -webkit-transform: rotateY(180deg);
 }
 
 
