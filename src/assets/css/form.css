@@ -406,56 +406,6 @@ ul.autocomplete-list {
     display: flex;
   }
 
-  .card-icon-container {
-    position: absolute;
-    padding: 0.5rem;
-    pointer-events: none;
-    background-color: rgba(255, 255, 255, 0.4);
-    border: 2px solid rgba(0, 0, 0, 0.5);
-    border-radius: 50px;
-    /* z-index: 10; */
-  }
-
-  .expand-icon {
-    bottom: 1rem;
-    right: 1rem;
-    background-color: rgba(255, 255, 255, 0.4);
-  }
-
-  .flip-icon {
-    /* padding: 1rem; */
-    pointer-events: none;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 6rem;
-    height: 6rem;
-    top: 19rem;
-    right: 5rem;
-    background-color: rgba(255, 255, 255, 0.3);
-    border: 3px solid rgba(0, 0, 0, 0.5);
-    z-index: 1000;
-  }
-
-  .card-icon-container:hover { 
-    cursor: pointer;
-  }
-
-  .flip-icon > svg {
-    /* display: none; */
-    pointer-events: none;
-    color: rgba(255, 255, 255, 0.8);
-    height: 5rem;
-    width: 5rem;
-  }
-
- .expand-icon > svg {
-     display: block;
-     color: rgba(0, 0, 0, 0.8);
-    height: 2rem;
-    width: 2rem;
-  }
-
   .blur-load {
     width: 100%;
     background-size: cover;
@@ -465,16 +415,16 @@ ul.autocomplete-list {
 
   .card-image {
     width: 100%;
+    height: auto;
     display: block;
-    align-self: center;
+    /* align-self: center;
     object-position: center;
-    object-fit: cover;
+    object-fit: cover; */
   }
 
   .card-image:hover {
     cursor: pointer;
   }
-
 
   .card-header {
     display: flex;
@@ -543,16 +493,107 @@ ul.autocomplete-list {
     display: flex;
     gap: 1rem;
 }
-/* ///////// */
-/* Flip Card */
-/* ///////// */
-
 
 .btn-container {
     display: flex;
     flex-basis: 0;
     flex-grow: 1;
 }
+
+
+/* ////////////////// */
+/* Flip & Expand Card */
+/* ////////////////// */
+.card-icon-container {
+    position: absolute;
+    padding: 0.5rem;
+    background-color: rgba(255, 255, 255, 0.4);
+    border: 2px solid rgba(0, 0, 0, 0.5);
+    border-radius: 50px;
+    /* z-index: 1000; */
+  }
+
+  .expand-icon-btn {
+    pointer-events: none;
+    bottom: 1rem;
+    right: 1rem;
+    background-color: rgba(255, 255, 255, 0.4);
+  }
+
+  .expand-icon-btn > svg {
+    display: block;
+    color: rgba(0, 0, 0, 0.8);
+   height: 2rem;
+   width: 2rem;
+ }
+
+ .expanded-card {
+    width: inherit;
+    perspective: 1500px;
+}
+
+.flip-card {
+    background-color: transparent;
+}
+
+.rotate-y {
+    transform: rotateY(180deg);
+  }
+
+  .flip-card-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 6rem;
+    height: 6rem;
+    top: 13rem;
+    right: 2.6rem;
+    /* background-color: rgba(255, 255, 255, 0.3); */
+    border: 3px solid rgba(0, 0, 0, 0.5);
+    z-index: 3000;
+  }
+
+  .flip-card-btn > svg {
+    /* display: none; */
+    pointer-events: none;
+    color: rgba(255, 255, 255, 1);
+    height: 5rem;
+    width: 5rem;
+  }
+
+  .flip-card-verso .flip-card-btn {
+    rotate: y 180deg;
+  }
+
+  .flip-card-btn:hover { 
+    cursor: pointer;
+  }
+
+.flip-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.5s;
+    transform-style: preserve-3d;
+}
+
+.flip-card-recto, 
+.flip-card-verso {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+}
+
+/* .flip-card-recto {
+    background-color: var(--clr-light);
+} */
+
+.flip-card-verso {
+    transform: rotateY(180deg);
+}
+
 
 
 

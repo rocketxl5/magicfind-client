@@ -84,7 +84,7 @@ const EditCard = (props) => {
                         // filter for cards with cardName
                         const updatedCards = cards.filter(cardObj => cardObj.name.toLowerCase() === card.name.toLowerCase());
 
-                        const result = { cards: updatedCards, searchType };
+                        const result = { cards: updatedCards, searchType: searchType };
 
                         navigate(`${location.pathname}`,
                             {
@@ -93,7 +93,7 @@ const EditCard = (props) => {
                         localStorage.setItem('search-result', JSON.stringify(result));
                         closeModal(btnRef.current)
                     } else {
-                        const result = { cards: cards, searchType };
+                        const result = { cards: cards, searchType: searchType };
 
                         navigate(`${location.pathname}`,
                             {

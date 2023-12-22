@@ -72,6 +72,7 @@ const DeleteCard = (props) => {
                 setResponse({ isDeleted: isDeleted, message: message })
                 // If cardName is set
                 if (query !== 'all-cards') {
+                    console.log(searchType)
                     // filter for cards with cardName
                     const updatedCards = cards.filter(cardObj => cardObj.name.toLowerCase() === card.name.toLowerCase());
                     const result = { cards: updatedCards, searchType };

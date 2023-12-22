@@ -3,7 +3,7 @@ import { FaExpand } from "react-icons/fa";
 
 const ExpandIcon = () => {
     return (
-        <button className="card-icon-container expand-icon">
+        <button className="card-icon-container expand-icon-btn" type="button">
             <FaExpand />
         </button>
     )

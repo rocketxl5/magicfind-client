@@ -4,20 +4,18 @@ import EditCard from '../components/views/search/EditCard';
 import DeleteCard from '../components/views/search/DeleteCard';
 import FlipIcon from '../components/views/search/FlipIcon';
 
-const useModal = (callback) => {
+const useModal = (searchType, callback) => {
     const INIT = {
         open: false,
         component: null
     }
     const ACTIONS = {
         ADD_TO_CART: 'add-to-cart',
-        ADD_TO_COLLECTION: 'add-to-collection',
         ADD_TO_WISHLIST: 'add-to-wishlist',
         BACK_TO_SEARCH: 'back-to-search',
         CONFIRM_DELETE: 'confirm-delete',
         DELETE_CARD: 'delete-card',
         EXPAND_CARD: 'expand-card',
-        // FLIP_CARD: 'flip-card',
         GO_BACK: 'go-back',
         EDIT_CARD: 'edit-card',
         REDUCE_CARD: 'reduce-card',
@@ -28,17 +26,17 @@ const useModal = (callback) => {
         switch (action.type) {
             case ACTIONS.EXPAND_CARD:
                 // 
-                return !action.payload.card.card_faces.length ?
+                return !action.payload.card.card_faces?.length ?
                     {
                     open: true,
                     component:
-                        <ExpandedCardContent handleClick={callback}>
+                        <ExpandedCardContent transform={false} handleClick={callback}>
                             {action.payload.ImageComponent}
                         </ExpandedCardContent>
                     } : {
                         open: true,
                         component:
-                            <ExpandedCardContent handleClick={callback}>
+                            <ExpandedCardContent transform={true} handleClick={callback}>
                                 {action.payload.ImageComponent}
                                 <FlipIcon handleClick={callback} />
                             </ExpandedCardContent>
@@ -48,34 +46,22 @@ const useModal = (callback) => {
                     open: true,
                     component: <DeleteCard
                         attributes={{ ...action.payload.attributes, id: 'confirm-delete' }}
+                        searchType={searchType}
                         card={action.payload.card}
                         handleClick={callback}
                     />
                 };
-            // case ACTIONS.FLIP_CARD:
-            //     return {
-            //         open: true,
-            //         component:
-            //             <ExpandedCardContent handleClick={callback}>
-            //                 {action.payload.card.card_faces[1].normal}
-            //                 {action.payload.card.card_faces.length ? <FlipIcon handleClick={callback} /> : null}
-            //             </ExpandedCardContent>
-            //     };
             case ACTIONS.EDIT_CARD:
                 return {
                     open: true,
                     component:
                         <EditCard
                             attributes={{ ...action.payload.attributes, id: 'confirm-edit' }}
+                            searchType={searchType}
                             card={action.payload.card}
-                            // expandedImage={action.payload.ImageComponent}
                             handleClick={callback}
                         />
                 }
-
-            // case ACTIONS.ADD_TO_COLLECTION:
-
-            //     break;
             // case ACTIONS.ADD_TO_CART:
 
             //     break;
