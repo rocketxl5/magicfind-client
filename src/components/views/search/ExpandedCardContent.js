@@ -7,6 +7,7 @@ const ExpandedCardContent = ({ children, transform, handleClick }) => {
             handleClick(e)
         }
         else if (e.target.id === 'flip-card-btn') {
+
             document.querySelector('.flip-card-inner').classList.toggle('rotate-y');
         }
 

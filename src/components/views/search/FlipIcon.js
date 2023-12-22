@@ -4,7 +4,7 @@ import { Tb360 } from "react-icons/tb";
 const FlipIcon = () => {
 
     return (
-        <button id="flip-card-btn" className="card-icon-container flip-card-btn" type="button">
+        <button id="flip-card-btn" className="flip-card-btn" type="button">
             <Tb360 />
         </button>
     )
