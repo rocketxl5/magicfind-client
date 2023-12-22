@@ -9,7 +9,8 @@ const SearchResult = () => {
     const navigate = useNavigate();
     const { cards, searchType } = location.state || JSON.parse(localStorage.getItem('search-result'));
     const cardRef = useRef(null);
-
+    // console.log(cards)
+    // console.log(searchType)
     useEffect(() => {
         // If cards is not empty
         if (cards.length) {
@@ -29,11 +30,7 @@ const SearchResult = () => {
             }
             // Call async image loader
             // With cards both sides if any (Transform cards)
-            preloadImages(cards.flatMap(card => {
-                return card.card_faces.map(cardFace => {
-                    return cardFace;
-                })
-            }));
+            preloadImages(setCards(cards));
         }
         else {
             // localStorage.removeItem('search-result')
@@ -41,9 +38,17 @@ const SearchResult = () => {
                 navigate('/search-collection')
             }, 1500)
         }
+
+        function setCards(cards) {
+            return cards.flatMap(card => {
+                return card.card_faces?.map(cardFace => {
+                    return cardFace;
+                })
+            })
+        }
     }, [location]);
 
-    const [{ open, component }, { updateState }] = useModal((value) => handleClick(value));
+    const [{ open, component }, { updateState }] = useModal(searchType, (value) => handleClick(value));
 
     function handleClick(e, card, attributes, expandedCard) {
         e.stopPropagation();

@@ -1,6 +1,6 @@
-const ExpandedCard = ({ id, style, src, alt }) => {
+const ExpandedCard = ({ id, src, alt }) => {
     return (
-        <img id={id} className={style} src={src} alt={alt} />
+        <img id={id} src={src} alt={alt} />
     )
 }
 
