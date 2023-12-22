@@ -538,6 +538,7 @@ ul.autocomplete-list {
 
 .rotate-y {
     transform: rotateY(180deg);
+    -webkit-transform: rotateY(180deg);
   }
 
   .flip-card-btn {
@@ -576,8 +577,9 @@ ul.autocomplete-list {
     position: relative;
     width: 100%;
     height: 100%;
-    transition: transform 0.5s;
     transform-style: preserve-3d;
+    transition: transform 0.5s;
+    -webkit-transition: transform 0.5s;
 }
 
 .flip-card-recto, 
@@ -585,8 +587,8 @@ ul.autocomplete-list {
     position: absolute;
     width: 100%;
     height: 100%;
-    -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
 }
 
 /* .flip-card-recto {
@@ -595,6 +597,7 @@ ul.autocomplete-list {
 
 .flip-card-verso {
     transform: rotateY(180deg);
+    -webkit-transform: rotate(180deg);
 }
 
 
