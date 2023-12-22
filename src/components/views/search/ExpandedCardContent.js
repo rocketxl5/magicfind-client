@@ -9,6 +9,10 @@ const ExpandedCardContent = ({ children, transform, handleClick }) => {
         else if (e.target.id === 'flip-card-btn') {
 
             document.querySelector('.flip-card-inner').classList.toggle('rotate-y');
+            setTimeout(() => {
+                document.querySelector('#flip-card-btn').classList.toggle('left');
+            }, 100);
+
         }
 
     }
@@ -25,12 +29,13 @@ const ExpandedCardContent = ({ children, transform, handleClick }) => {
                         <div className="flip-card-inner">
                             <div className="flip-card-recto">
                                 {children[0][0]}
-                                {children[1]}
+                                {/* {children[1]} */}
                             </div>
                             <div className="flip-card-verso">
                                 {children[0][1]}
-                                {children[1]}
+                                {/* {children[1]} */}
                             </div>
+                            {children[1]}
                         </div>
                     </div>
                 )}
