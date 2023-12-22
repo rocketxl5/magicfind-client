@@ -541,15 +541,20 @@ ul.autocomplete-list {
   }
 
   .flip-card-btn {
+    position: absolute;
+    top: 15rem;
+    right: 2.6rem;
     display: flex;
     align-items: center;
     justify-content: center;
     width: 6rem;
     height: 6rem;
-    top: 13rem;
-    right: 2.6rem;
-    /* background-color: rgba(255, 255, 255, 0.3); */
+    padding: 0.5rem;
+    background-color: rgba(255, 255, 255, 0.4);
     border: 3px solid rgba(0, 0, 0, 0.5);
+    border-radius: 50px;
+    /* background-color: rgba(255, 255, 255, 0.3); */
+    /* border: 3px solid rgba(0, 0, 0, 0.5); */
     z-index: 3000;
   }
 
@@ -603,14 +608,3 @@ ul.autocomplete-list {
 
 
   
-
-
-
-
-
-
-
-
-
-
-
