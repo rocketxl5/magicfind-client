@@ -165,8 +165,6 @@ button:hover {
   border-radius: 5px;
 }
 
-
-
 .title {
     text-align: center;
     font-size: var(--fs-250);
@@ -253,6 +251,40 @@ button:hover {
 .message-section {
   margin-block-start: var(--size-2);
   /* padding-inline: var(--size-1); */
+}
+
+
+/* //////////////// */
+/* // Auth Views //*/
+/* ///////////// //*/
+.contextual-menu {
+  display: flex;
+  /* align-items: center; */
+  height: 4rem;
+  background-color: var(--clr-blue);
+  border-top: 1px solid var(--clr-light-grey);
+  box-shadow: 0px 0px 13px -3px rgba(0,0,0,0.5);
+}
+
+.contextual-menu a {
+  display: flex;
+  flex: 2;
+  align-items: center; 
+  justify-content: center;
+  height: 100%;
+  border-right: 1px solid var(--clr-light);
+
+}
+
+.contextual-menu a:last-of-type {
+  border-right: none;
+ }
+
+.contextual-menu a span {
+  pointer-events: none;
+  color: var(--clr-light);
+  font-size: var(--fs-150);
+  font-weight: 500;
 }
 
 .message-body p {

@@ -1,18 +1,31 @@
-import { useNavigate } from 'react-router-dom';
-// import { FiArrowRightCircle } from 'react-icons/fi';
+import { useLocation, useParams } from 'react-router-dom';
+import AuthContextualMenu from '../layout/AuthContextualMenu';
+import Dashboard from './Dashboard';
+import SearchCollection from './search/SearchCollection';
+import SearchAPI from './search/SearchAPI';
 
 const AuthPage = () => {
-  const navigate = useNavigate();
-
+  const location = useLocation();
+  const { path } = useParams();
+  // console.log(location)
   return (
-    <div className="content auth-page">
-      <header className="auth-header">
-        <div className='tabs'>
-          <button className="tab" type="button" onClick={() => { navigate('/me') }}>Dashboard</button>
-          <button className="tab" type="button" onClick={() => { navigate('/search-collection') }}>Collection</button>
-          <button className="tab" type="button" onClick={() => { navigate('/search-api') }}>New Card</button>
-        </div>
+    <>
+      <header>
+        <AuthContextualMenu />
       </header>
+      <div className="content">
+        {
+          path === 'dashboard' ?
+            (
+              <Dashboard />
+            ) : path === 'collection' ? (
+              <SearchCollection />
+            ) : path === 'add-card' ? (
+              <SearchAPI />
+            ) : (
+              <h1>Home</h1>
+            )
+        }
       {/* <main className="main">
         <section className="auth-card">
           <header className="header">
@@ -60,6 +73,7 @@ const AuthPage = () => {
       </main> */}
 
     </div>
+    </>
   );
 };
 

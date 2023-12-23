@@ -8,13 +8,18 @@ function AuthMenu() {
   return (
     <ul className='menu main-menu'>
       <li >
-        <Link className="nav-link" to="/search-collection">
-          Search Collection
+        <Link className="nav-link" to="/me/dashboard">
+          Dashboard
         </Link>
       </li>
       <li >
-        <Link className="nav-link" to="/search-api">
-          Search API
+        <Link className="nav-link" to="/me/collection">
+          Collection
+        </Link>
+      </li>
+      <li >
+        <Link className="nav-link" to="/me/add-card">
+          Add Card
         </Link>
       </li>
       <li>
