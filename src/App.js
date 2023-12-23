@@ -14,6 +14,7 @@ import Home from './components/views/Home';
 import Contact from './components/views/Contact';
 import About from './components/views/About';
 import Profile from './components/views/Profile';
+import Dashboard from './components/views/Dashboard';
 import SearchCollection from './components/views/search/SearchCollection';
 import SearchAPI from './components/views/search/SearchAPI';
 import SearchResult from './components/views/search/SearchResult';
@@ -27,7 +28,6 @@ import './assets/css/utilities.css';
 import './assets/css/style.css';
 import './assets/css/navbar.css';
 import './assets/css/form.css';
-import './assets/css/dashboard.css'
 import './assets/css/media-queries.css';
 
 const App = () => {
@@ -52,11 +52,13 @@ const App = () => {
 
         {/* Auth protected routes */}
         <Route element={<RequireAuth />}>
-          <Route path="me" element={<AuthPage />} />
+          <Route path="me" exact element={<AuthPage />} />
+          <Route path="me/:path" element={<AuthPage />} />
+          {/* <Route path="me/dashboard" element={<Dashboard />} /> */}
+          {/* <Route path="me/collection" element={<SearchCollection />} />
+          <Route path="me/add-card" element={<SearchAPI />} /> */}
           <Route path="settings" element={<Settings />} />
           <Route path="profile" element={<Profile />} />
-          <Route path="search-collection" element={<SearchCollection />} />
-          <Route path="search-api" element={<SearchAPI />} />
           <Route path="search-result/catalog/:cardName/:userID" element={<SearchResult />} />
           <Route path="search-result/collection/:query" element={<SearchResult />} />
           <Route path="search-result/api/:cardName" element={<SearchResult />} />

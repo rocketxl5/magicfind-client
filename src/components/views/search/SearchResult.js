@@ -65,7 +65,7 @@ const SearchResult = () => {
                 }
                 <header className="search-result-header">
                     <button className="back-btn" type="button" onClick={() => {
-                        searchType === 'search-collection' ? navigate('/search-collection') : navigate(-1)
+                        searchType === 'search-collection' ? navigate('/me/collection') : navigate(-1);
                     }}>Go Back</button>
                     <span className="space-1">
                             {

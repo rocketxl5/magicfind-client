@@ -174,10 +174,9 @@ const SearchCollection = () => {
 
   return (
     <div className="flex inherit-height">
-            <div className="content flex-grow-1">
+      <div className="content flex-grow-1">
         <header className="header">
-                <h2 className="title">Search Collection</h2>
-              </header>
+        </header>
               <main className="main">
             {
             errorMessage?.title === 'no_cards' ? (
@@ -202,13 +201,7 @@ const SearchCollection = () => {
                     <SearchInput isActive={isActive} id={'search-collection'} searchCard={searchCollectionCard} ref={collectionInputRef} />
                         </form>
                         <Buttons>
-                          <Button
-                            className="bg-green"
-                            type="button"
-                            onClick={() => navigate('/search-api')}
-                          >
-                            Add New Card
-                          </Button>
+
                           <Button
                             className="bg-teal"
                             type="button"

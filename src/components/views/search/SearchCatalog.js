@@ -133,12 +133,18 @@ const SearchCatalog = () => {
             })
         }
         else if (res.status === 400) {
-          setLoading(false);
-          navigate(`/search-result/not-found/${query}`);
+          return res.json().then((error) => {
+            console.log(error.message)
+            setLoading(false);
+            // If not found
+            if (error.errorType === 'not-found') {
+              navigate(`/search-result/not-found/${query}`);
+            }
 
-          if (browserWidth <= 775 && document.querySelector('#mobile-nav')?.checked) {
-            hideSearchBar();
-          }
+            if (browserWidth <= 775 && document.querySelector('#mobile-nav')?.checked) {
+              hideSearchBar();
+            }
+          })
         }
       });
   }
