@@ -92,8 +92,10 @@ header.main-header {
 }
 
 .container {
+  position: relative;
+  top: var(--header-height);
   min-width: 300px;
-  padding-top: var(--header-height);
+  /* padding-top: var(--header-height); */
   height: calc(100% - var(--header-height));
   max-width: 1170px;
   /* min-height: calc(100vh - calc(100vh - 100%)); */
@@ -101,7 +103,6 @@ header.main-header {
 
 .content {
   height: 100%;
-  min-height: inherit;
   margin: auto;
   padding: 1rem;
 }
