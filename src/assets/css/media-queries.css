@@ -26,9 +26,21 @@
 
     .main-header {
         display: flex;
-        /* grid-template-columns: 1fr 3fr 1fr; */
+        
         min-height: var(--header-height-wide);
         padding-inline: var(--size-2);
+    }
+
+    #search-catalog-container {
+        padding-block: 0;
+    }
+
+    #search-catalog-form {
+        padding-block: 0;
+    }
+
+    #search-catalog {
+        margin-block: 0;
     }
 
     .section-content { 
