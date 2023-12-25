@@ -1,34 +1,20 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
 
-const Menu = () => {
+const Menu = ({ paths }) => {
     return (
         <ul className='menu main-menu'>
-            <li >
-                <Link className="nav-link" to="/">
-                    Home
-                </Link>
-            </li>
-            <li>
-                <Link className="nav-link" to="/about">
-                    About
-                </Link>
-            </li>
-            <li>
-                <Link className="nav-link" to="/contact">
-                    Contact
-                </Link>
-            </li>
-            <li>
-                <Link className="nav-link" to="/login">
-                    Sign In
-                </Link>
-            </li>
-            <li>
-                <Link className="nav-link" to="/signup">
-                    Create Account
-                </Link>
-            </li>
+            {
+                paths.map((path, index) => {
+                    return (
+                        <li key={index}>
+                            <Link className="nav-link" to={path.to} replace>
+                                {path.name}
+                            </Link>
+                        </li>
+                    )
+                })
+            }
         </ul>
     )
 }

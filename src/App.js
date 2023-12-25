@@ -14,7 +14,7 @@ import Home from './components/views/Home';
 import Contact from './components/views/Contact';
 import About from './components/views/About';
 import Profile from './components/views/Profile';
-import Dashboard from './components/views/Dashboard';
+import Dashboard from './components/views/DashboardView';
 import SearchCollection from './components/views/search/SearchCollection';
 import SearchAPI from './components/views/search/SearchAPI';
 import SearchResult from './components/views/search/SearchResult';
@@ -53,10 +53,7 @@ const App = () => {
         {/* Auth protected routes */}
         <Route element={<RequireAuth />}>
           <Route path="me" exact element={<AuthPage />} />
-          <Route path="me/:path" element={<AuthPage />} />
-          {/* <Route path="me/dashboard" element={<Dashboard />} /> */}
-          {/* <Route path="me/collection" element={<SearchCollection />} />
-          <Route path="me/add-card" element={<SearchAPI />} /> */}
+          <Route path="me/:path" exact element={<AuthPage />} />
           <Route path="settings" element={<Settings />} />
           <Route path="profile" element={<Profile />} />
           <Route path="search-result/catalog/:cardName/:userID" element={<SearchResult />} />

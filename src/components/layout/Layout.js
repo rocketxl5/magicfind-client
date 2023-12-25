@@ -16,10 +16,12 @@ const Layout = () => {
             <div className="container">
                 {
                     !loading ? (
+
                         <Outlet />
+
                     ) : (
                         <div className="loading-content">
-                            <Loading />
+                                <Loading />
                         </div>
                         )
                 }

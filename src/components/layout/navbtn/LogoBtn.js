@@ -9,7 +9,7 @@ const LogoBtn = () => {
 
   return (
     <Logo >
-      <Anchor className="logo-btn" to={auth ? '/me' : '/'} title="Magic Find logo">
+      <Anchor className="logo-btn" to={auth ? 'me' : '/'} title="Magic Find logo">
         <SVG>
           <GiWaterBolt />
         </SVG>

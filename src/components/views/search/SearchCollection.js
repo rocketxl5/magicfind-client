@@ -7,6 +7,7 @@ import React, {
 import { Link, useNavigate } from 'react-router-dom';
 import { FiArrowRightCircle } from "react-icons/fi"
 import SearchInput from './SearchInput';
+import Loading from '../../layout/Loading';
 import { SearchContext } from '../../../contexts/SearchContext';
 import { api } from '../../../api/resources';
 import styled from 'styled-components';
@@ -17,6 +18,7 @@ import useAuth from '../../../hooks/useAuth';
 
 const SearchCollection = () => {
   // States
+  const [loading, setLoading] = useState(false);
   const [isActive, setIsActive] = useState(false);
   // Ref
   const collectionInputRef = useRef(null);
@@ -32,7 +34,7 @@ const SearchCollection = () => {
     cardName,
     setCardName,
     setCardNames,
-    setLoading,
+
     predictions
   } = useContext(SearchContext);
   // Routing
@@ -195,13 +197,16 @@ const SearchCollection = () => {
                   <Link className="message-link" to={'/search-api'}> To Add Card Page <FiArrowRightCircle /></Link>
                   </section>
                 </div>
-              ) : (
+            ) : ( 
+                <div className="flex inherit-height">
+                  {loading ? (
+                    <Loading />
+                  ) : (
                       <>
                   <form id="search-collection-form" className="search-form" onSubmit={searchCollectionCard} >
                     <SearchInput isActive={isActive} id={'search-collection'} searchCard={searchCollectionCard} ref={collectionInputRef} />
                         </form>
                         <Buttons>
-
                           <Button
                             className="bg-teal"
                             type="button"
@@ -211,6 +216,9 @@ const SearchCollection = () => {
                           </Button>
                         </Buttons>
                       </>
+                  )}
+                </div>
+
               )
             }
               </main>

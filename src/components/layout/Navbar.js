@@ -5,12 +5,57 @@ import SearchBtn from './navbtn/SearchBtn';
 import MailBtn from './navbtn/MailBtn';
 import AuthBtn from './navbtn/AuthBtn';
 import HamburgerBtn from './navbtn/HamburgerBtn';
-// import SignupBtn from './navbar/SignupBtn';
-// import SigninBtn from './navbar/SigninBtn';
 import ShoppingCartBtn from './navbtn/ShoppingCartBtn';
 
 function Navbar() {
     const { auth } = useAuth();
+
+    const authPaths = [
+        {
+            name: 'Dashboard',
+            to: '../me/dashboard',
+        },
+        {
+            name: 'Collection',
+            to: '../me/collection'
+        },
+        {
+            name: 'Store',
+            to: '../me/store'
+        },
+        {
+            name: 'Profile',
+            to: 'profile'
+        },
+        {
+            name: 'Settings',
+            to: 'settings'
+        },
+    ]
+
+    const paths = [
+        {
+            name: 'Home',
+            to: '/'
+        },
+        {
+            name: 'About',
+            to: 'about'
+        },
+        {
+            name: 'Contact',
+            to: 'contact'
+        },
+        {
+            name: 'Sing in',
+            to: 'login'
+        },
+        {
+            name: 'Crate Account',
+            to: 'signup'
+        },
+
+    ]
     return (
         <div className="navbar">
             <input type="checkbox" id="mobile-nav" className="mobile-nav" />
@@ -35,9 +80,9 @@ function Navbar() {
                 </section>
                 <section className="right-side-nav">
                     {auth ? (
-                        <AuthMenu />
+                        <AuthMenu authPaths={authPaths} />
                     ) : (
-                        <Menu />
+                            <Menu paths={paths} />
                     )}
                 </section>
             </nav>

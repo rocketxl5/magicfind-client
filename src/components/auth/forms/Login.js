@@ -105,7 +105,7 @@ const Login = () => {
             setAuth({ ...data.payload.user, token: data.token });
             setLoading(false)
             // console.log(location?.state)
-            const destination = location.state?.from ? location.state.from.pathname : '/me';
+            const destination = location.state?.from ? location.state.from.pathname : 'me/pathname';
             navigate(destination, { replace: true });
           })
           .catch((error) => {

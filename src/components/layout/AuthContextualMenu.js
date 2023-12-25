@@ -1,11 +1,11 @@
 import { NavLink } from 'react-router-dom'
 
-const AuthContextualMenu = () => {
+const AuthContextualMenu = ({ paths }) => {
     return (
         <div className="contextual-menu">
-            <NavLink to='../me/dashboard' style={({ isActive }) => { }}><span>Dahsboard</span></NavLink>
-            <NavLink to='../me/collection' style={({ isActive }) => { }}><span>Collection</span></NavLink>
-            <NavLink to='../me/add-card' style={({ isActive }) => { }}><span>Add Card</span></NavLink>
+            {paths.map((path, index) => {
+                return <NavLink key={index} to={`../me/${path.toLowerCase()}`} className={({ isActive }) => { return isActive ? 'active-link' : 'inactive-link' }}><span>{path}</span></NavLink>
+            })}
         </div>
     )
 }
