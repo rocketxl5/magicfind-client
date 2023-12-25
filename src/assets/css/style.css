@@ -100,15 +100,12 @@ a {
   min-height: calc(100vh - 10rem);
 }
 
-.buffer {
-  width: auto;
-  height: auto;
-}
-
 .content {
+  height: auto;
   min-height: inherit;
   margin: auto;
-  padding: 2rem;
+  padding: 1rem;
+
 }
 
 button:hover {
@@ -257,14 +254,20 @@ button:hover {
 /* //////////////// */
 /* // Auth Views //*/
 /* ///////////// //*/
+.auth-page {
+  padding: 1rem;
+  background-color: var(--clr-light-grey);
+}
+
 .contextual-menu {
   display: flex;
   /* align-items: center; */
   height: 4rem;
-  background-color: var(--clr-blue);
-  border-top: 1px solid var(--clr-light-grey);
-  box-shadow: 0px 0px 13px -3px rgba(0,0,0,0.5);
+  /* border-top: 1px solid var(--clr-blue);
+  border-left: 1px solid var(--clr-blue);
+  border-right: 1px solid var(--clr-blue); */
 }
+
 
 .contextual-menu a {
   display: flex;
@@ -272,8 +275,18 @@ button:hover {
   align-items: center; 
   justify-content: center;
   height: 100%;
-  border-right: 1px solid var(--clr-light);
+  /* background-color: var(--clr-blue); */
+  border-right: 1px solid var(--clr-grey);
+}
 
+.active-link {
+  background-color: var(--clr-light-grey);
+  color: var(--clr-blue);
+}
+
+.inactive-link {
+  background-color: var(--clr-blue);
+  color: var(--clr-grey);
 }
 
 .contextual-menu a:last-of-type {
@@ -282,7 +295,7 @@ button:hover {
 
 .contextual-menu a span {
   pointer-events: none;
-  color: var(--clr-light);
+  /* color: var(--clr-grey); */
   font-size: var(--fs-150);
   font-weight: 500;
 }
