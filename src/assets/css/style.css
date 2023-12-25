@@ -228,11 +228,11 @@ button:hover {
 
 .banner {
   width: 100%;
-  min-height: 20rem;
+  min-height: clamp(20rem, 35vh, 400px);
   background-repeat: no-repeat;
   background-size: 100%;
   background-position: 0 25%;
-  background-color: var(--clr-light-grey);
+  background-color: red;
   /* aspect-ratio: 3/1; */
 }
 
