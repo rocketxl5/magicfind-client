@@ -1,6 +1,7 @@
 import {
   Route,
-  Routes
+  Routes,
+  Navigate
 } from 'react-router-dom';
 import Layout from './components/layout/Layout';
 import RequireAuth from './components/auth/RequireAuth';
@@ -14,9 +15,6 @@ import Home from './components/views/Home';
 import Contact from './components/views/Contact';
 import About from './components/views/About';
 import Profile from './components/views/Profile';
-import Dashboard from './components/views/DashboardView';
-import SearchCollection from './components/views/search/SearchCollection';
-import SearchAPI from './components/views/search/SearchAPI';
 import SearchResult from './components/views/search/SearchResult';
 import NotFound from './components/views/NotFound';
 import CardNotFound from './components/views/search/CardNotFound';
@@ -52,8 +50,8 @@ const App = () => {
 
         {/* Auth protected routes */}
         <Route element={<RequireAuth />}>
-          <Route path="me" exact element={<AuthPage />} />
-          <Route path="me/:path" exact element={<AuthPage />} />
+          <Route path="me" exact element={<Navigate replace to="../me/home" />} />
+          <Route path="me/:path" element={<AuthPage />} />
           <Route path="settings" element={<Settings />} />
           <Route path="profile" element={<Profile />} />
           <Route path="search-result/catalog/:cardName/:userID" element={<SearchResult />} />

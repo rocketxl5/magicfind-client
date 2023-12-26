@@ -1,13 +1,11 @@
 import React from 'react';
 import SearchCollection from './search/SearchCollection';
-import SearchApi from './search/SearchAPI';
 
 const CollectionView = () => {
     return (
-        <div className="content">
+        <div>
             Collection
             <SearchCollection />
-            <SearchApi />
         </div>
     )
 }

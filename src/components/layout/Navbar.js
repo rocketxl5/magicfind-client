@@ -1,14 +1,12 @@
 import Menu from './Menu';
 import AuthMenu from './AuthMenu';
-import useAuth from '../../hooks/useAuth';
 import SearchBtn from './navbtn/SearchBtn';
 import MailBtn from './navbtn/MailBtn';
 import AuthBtn from './navbtn/AuthBtn';
 import HamburgerBtn from './navbtn/HamburgerBtn';
 import ShoppingCartBtn from './navbtn/ShoppingCartBtn';
 
-function Navbar() {
-    const { auth } = useAuth();
+function Navbar({ auth }) {
 
     const authPaths = [
         {

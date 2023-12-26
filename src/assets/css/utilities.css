@@ -195,7 +195,7 @@
 }
 
 .bg-blue {
-    background: var(--clr-blue);
+    background: var(--clr-primary);
 }
 
 .bg-blue-light {
@@ -231,7 +231,7 @@
 }
 
 .border-blue {
-    border: 2px solid var(--clr-blue);
+    border: 2px solid var(--clr-primary);
 }
 
 .border-light {
@@ -271,7 +271,7 @@
 }
 
 .color-blue {
-    color: var(--clr-blue);
+    color: var(--clr-primary);
 }
 
 .color-success {
