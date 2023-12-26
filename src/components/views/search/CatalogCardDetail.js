@@ -64,7 +64,7 @@ const Contact = styled(Link)`
     padding-block: 0.5em;
     margin-top: 0.5em;
     font-size: var(--fs-125);
-    color: var(--clr-blue);
+    color: var(--clr-primary);
     border: 1px solid #e4e4e4;
     border-radius: 5px;
   `;
