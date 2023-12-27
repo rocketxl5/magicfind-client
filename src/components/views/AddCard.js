@@ -1,6 +1,6 @@
 import SearchApi from './search/SearchAPI';
 
-const AddCardView = () => {
+const AddCard = () => {
     return (
         <div>
             Add Card
@@ -9,4 +9,4 @@ const AddCardView = () => {
     )
 }
 
-export default AddCardView
+export default AddCard

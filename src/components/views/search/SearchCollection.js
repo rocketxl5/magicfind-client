@@ -175,11 +175,10 @@ const SearchCollection = () => {
   }
 
   return (
-    <div className="flex inherit-height">
-      <div className="content flex-grow-1">
-        <header className="header">
-        </header>
-              <main className="main">
+    <>
+      {/* <div className="content flex-grow-1"> */}
+
+
             {
             errorMessage?.title === 'no_cards' ? (
 
@@ -198,7 +197,11 @@ const SearchCollection = () => {
                   </section>
                 </div>
             ) : ( 
-                <div className="flex inherit-height">
+            <>
+              <header className="header">
+                <h2 className="title">Search Collection</h2>
+              </header>
+              <main className="flex flex-column">
                   {loading ? (
                     <Loading />
                   ) : (
@@ -215,15 +218,15 @@ const SearchCollection = () => {
                             Show All Cards
                           </Button>
                         </Buttons>
-                      </>
+                    </>
                   )}
-                </div>
-
-              )
-            }
               </main>
-      </div>
-    </div>
+            </>
+          )
+            }
+
+      {/* </div> */}
+    </>
   );
 };
 
