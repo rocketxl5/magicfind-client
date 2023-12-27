@@ -1,7 +1,7 @@
 import React from 'react';
 import SearchCollection from './search/SearchCollection';
 
-const CollectionView = () => {
+const Collection = () => {
     return (
         <div>
             Collection
@@ -10,4 +10,4 @@ const CollectionView = () => {
     )
 }
 
-export default CollectionView
+export default Collection

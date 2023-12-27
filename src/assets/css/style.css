@@ -44,6 +44,7 @@
 
     /* header heights */
     --header-height: 5rem;
+    --footer-height: 5rem;
     --header-height-wide: 6rem;
 }
 
@@ -78,7 +79,7 @@ a {
   position: fixed;
   top: 0;
   color: var(--clr-grey);
-  z-index: 9000;
+  z-index: 2000;
 }
 
 .top-header {
@@ -134,21 +135,26 @@ a {
   /* top: 8.5rem; */
 
   min-width: 300px;
-  min-height: calc(100vh - 8.5rem);
+  min-height: calc(100vh - var(--footer-height));
   max-width: 1170px;
 }
 
 .content {
-  min-height: inherit;
+  /* padding-block-start: 5rem; */
+
+  padding-inline: 1rem;
+  min-height: calc(100vh - 13.5rem);
   margin: auto;
-  padding: 1rem;
 }
 
 .auth-content {
+  /* display: flex;
+  flex-direction: column;
+  justify-content: space-between; */
   padding-inline: 1rem;
-  padding-top: 8.5rem;
+  /* padding-top: 5rem; */
   background-color: var(--clr-light-grey);
-  min-height: calc(100vh - var(--header-height));
+  min-height: calc(100vh - 13.5rem);
 }
 
 button:hover {
@@ -186,10 +192,6 @@ button:hover {
 }
 /* end spinner */
 
-.main {
-     /* padding-block: 3rem; */
-     /* padding: 2rem; */
-}
 
 .header {
   width: 100%;
@@ -447,8 +449,8 @@ button:hover {
 
 .search-result-header {
     /* position: relative; */
-    position: sticky;
-    top: calc(var(--header-height) + 3.5rem);
+    /* position: sticky;
+    top: calc(var(--header-height) + 3.5rem); */
     min-height: 3.5rem;
     display: flex;
     justify-content: space-between;
@@ -459,7 +461,7 @@ button:hover {
     left: 0;
     z-index: 100;
     background: var(--clr-secondary);
-    border-top: 1px solid rgb(107, 107, 107);
+    /* border-top: 1px solid rgb(107, 107, 107); */
 }
 
 .search-result-header * {

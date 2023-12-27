@@ -57,7 +57,7 @@ const SearchResult = () => {
 
     return (
         <>
-            <div className="search-result">
+            <div className="buffer">   </div>
                 {
                     <Modal open={open}>
                         {component}
@@ -96,7 +96,6 @@ const SearchResult = () => {
                             }
                         </div>
                     </main>
-                </div>
             </div>
         </>
     )
