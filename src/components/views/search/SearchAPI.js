@@ -13,7 +13,7 @@ import setQueryString from '../../../utilities/setQueryString';
 import hideSearchBar from '../../../utilities/hideSearchBar';
 import getBrowserWidth from '../../../utilities/getBrowserWidth';
 
-const Search = () => {
+const Search = ({ path }) => {
   // States
   const [loading, setLoading] = useState(false);
   const [isActive, setIsActive] = useState(false);
@@ -31,7 +31,7 @@ const Search = () => {
     setCardName,
     setCardNames,
     apiCards,
-    setApiCards
+    setApiCards,
   } = useContext(SearchContext);
   // Routing
   const navigate = useNavigate();
@@ -52,6 +52,7 @@ const Search = () => {
       .then((res) => res.json())
       .then((data) => {
         setApiCards(data);
+        setCardNames(data);
         setLoading(false);
         apiInputRef.current.focus();
       })
@@ -62,27 +63,25 @@ const Search = () => {
   }
 
   useEffect(() => {
-    apiInputRef?.current?.focus();;
-
-    // If apiCards is undefined
-    if (!apiCards) {
-      fetchApiCards()
-    }
-
     if (browserWidth <= 775 && document.querySelector('#mobile-nav')?.checked) {
       hideSearchBar();
     }
   }, [])
 
   useEffect(() => {
-    if (searchInput?.id === 'search-api') {
+    if (path === 'add-card') {
+      apiInputRef.current.focus();
       setIsActive(true);
-      setCardNames(apiCards);
+      if (!apiCards) {
+        fetchApiCards()
+      } else {
+        setCardNames(apiCards);
+      }
     } else {
       setIsActive(false);
       setCardNames([]);
     }
-  }, [searchInput])
+  }, [path])
 
 
   const searchAPI = (e = undefined, prediction = undefined) => {

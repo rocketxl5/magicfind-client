@@ -1,35 +1,34 @@
-import { useParams, useNavigate, useLocation } from 'react-router-dom';
-
+import { useParams, useLocation } from 'react-router-dom';
 import Store from './Store';
-
 import AuthContextualNav from '../layout/AuthContextualNav';
 import SearchCollection from './search/SearchCollection';
 import SearchApi from './search/SearchAPI';
 
 const AuthPage = () => {
-  const { path } = useParams();
+  const { path } = useParams()
+  const location = useLocation()
 
   const views = [
-    { title: 'Home', path: '../me/home' },
-    { title: 'Collection', path: '../me/collection' },
-    { title: 'Store', path: '../me/store' },
-    { title: 'Add Card', path: '../me/add-card' },
+    { title: 'Home', id: 'home', path: '../me/home' },
+    { title: 'Collection', id: 'collection', path: '../me/collection' },
+    { title: 'Store', id: 'store', path: '../me/store' },
+    { title: 'Add Card', id: 'add-card', path: '../me/add-card' },
   ]
 
   return (
     <>
       <div className="buffer"></div>
-      <aside>
+
         <AuthContextualNav views={views} />
-      </aside>
-      <div className="auth-content">
+
+      <div className="content">
           {
             path === 'collection' ? (
-            <SearchCollection />
+            <SearchCollection path={path} />
           ) : path === 'store' ? (
-              <Store />
+              <Store path={path} />
           ) : path === 'add-card' ? (
-            <SearchApi />
+                <SearchApi path={path} />
           ) : (
             <>Home</>
           )

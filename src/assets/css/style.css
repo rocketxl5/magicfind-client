@@ -140,8 +140,6 @@ a {
 }
 
 .content {
-  /* padding-block-start: 5rem; */
-
   padding-inline: 1rem;
   min-height: calc(100vh - 13.5rem);
   margin: auto;
@@ -447,10 +445,11 @@ button:hover {
     color: var(--clr-light-grey);
 }
 
+
+
 .search-result-header {
-    /* position: relative; */
-    /* position: sticky;
-    top: calc(var(--header-height) + 3.5rem); */
+    position: fixed;
+    top: var(--header-height);
     min-height: 3.5rem;
     display: flex;
     justify-content: space-between;
@@ -458,7 +457,6 @@ button:hover {
     width: 100%;
     /* padding-block: 1rem; */
     padding-inline: 1.5rem;
-    left: 0;
     z-index: 100;
     background: var(--clr-secondary);
     /* border-top: 1px solid rgb(107, 107, 107); */
