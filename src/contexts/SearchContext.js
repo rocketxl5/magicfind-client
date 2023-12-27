@@ -8,7 +8,6 @@ export const SearchProvider = ({ children }) => {
   const [searchTerm, setSearchTerm] = useState('');
   const [apiCards, setApiCards] = useState(null);
   // Mount state @ SearchCollection initial fetch 
-  const [hasMounted, setHasMounted] = useState(false);
   const [errorMessage, setErrorMessage] = useState(null);
   const [displayAutcomplete, setDisplayAutocomplete] = useState(false);
   const [predictions, setPredictions] = useState([]);
@@ -41,8 +40,6 @@ export const SearchProvider = ({ children }) => {
       value={{
         errorMessage,
         setErrorMessage,
-        hasMounted,
-        setHasMounted,
         marker,
         setMarker,
         loading,

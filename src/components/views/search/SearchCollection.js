@@ -16,7 +16,7 @@ import getBrowserWidth from '../../../utilities/getBrowserWidth';
 import setQueryString from '../../../utilities/setQueryString';
 import useAuth from '../../../hooks/useAuth';
 
-const SearchCollection = () => {
+const SearchCollection = ({ path }) => {
   // States
   const [loading, setLoading] = useState(false);
   const [isActive, setIsActive] = useState(false);
@@ -26,7 +26,6 @@ const SearchCollection = () => {
   const {
     errorMessage,
     setErrorMessage,
-    hasMounted,
     setHasMounted,
     searchInput,
     setSearchInput,
@@ -34,7 +33,6 @@ const SearchCollection = () => {
     cardName,
     setCardName,
     setCardNames,
-
     predictions
   } = useContext(SearchContext);
   // Routing
@@ -63,8 +61,9 @@ const SearchCollection = () => {
               const { query, data } = dataObj;
               if (query === 'card-names') {
                 setCardNames(data);
-                setHasMounted(true);
-                setErrorMessage(null);
+                errorMessage && setErrorMessage(null);
+                setLoading(false);
+                collectionInputRef.current?.focus();
               }
               else if (query === 'cards') {
                 const result = { cards: data, searchType: searchInput.id }
@@ -74,10 +73,6 @@ const SearchCollection = () => {
                   {
                     state: result,
                   });
-              }
-              setLoading(false);
-              if (browserWidth <= 775 && document.querySelector('#mobile-nav')?.checked) {
-                hideSearchBar();
               }
             });
         }
@@ -93,25 +88,22 @@ const SearchCollection = () => {
   }
 
   useEffect(() => {
-    if (!hasMounted) {
-      searchCollection('card-names')
-    } else {
-      collectionInputRef.current?.focus();
-      setHasMounted(false);
     if (browserWidth <= 775 && document.querySelector('#mobile-nav')?.checked) {
       hideSearchBar();
-    }
     }
   }, []);
 
   useEffect(() => {
-    if (searchInput?.id === 'search-collection') {
+
+    if (path === 'collection') {
       setIsActive(true);
+      searchCollection('card-names')
+      collectionInputRef.current?.focus()
     } else {
       setHasMounted(false)
       setIsActive(false);
     }
-  }, [searchInput]);
+  }, [path]);
 
   // Instore single card request search field with
   const searchCollectionCard = (e = undefined, prediction = undefined) => {
