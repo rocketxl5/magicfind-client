@@ -9,44 +9,29 @@ const SearchResult = () => {
     const navigate = useNavigate();
     const { cards, searchType } = location.state || JSON.parse(localStorage.getItem('search-result'));
     const cardRef = useRef(null);
-    // console.log(cards)
-    // console.log(searchType)
+
     useEffect(() => {
         // If cards is not empty
         if (cards.length) {
-
-            // const preloadImages = async (cards) => {
-                const loadImage = card => {
-                    return new Promise((resolve, reject) => {
-                        const image = new Image();
-                        const uri = card.image_uris?.normal || card.card_faces[0]?.image_uris.normal
-                        // console.log(uri)
-                        image.src = uri;
-                        image.onload = () => resolve(card);
-                        image.onerror = error => reject(error);
-                    });
-                }
-                Promise.all(cards.map(card => loadImage(card)))
-                    .then((data) => console.log(data))
-                    .catch(error => console.log('Image load has failed', error))
+            const loadImage = card => {
+                return new Promise((resolve, reject) => {
+                    const image = new Image();
+                    const uri = card.image_uris?.normal || card.card_faces[0]?.image_uris.normal
+                    // console.log(uri)
+                    image.src = uri;
+                    image.onload = () => resolve(card);
+                    image.onerror = error => reject(error);
+                });
             }
-            // Call async image loader
-            // With cards both sides if any (Transform cards)
-            // preloadImages(setCards(cards));
-            // }
+            Promise.all(cards.map(card => loadImage(card)))
+                .then((data) => console.log(data))
+                .catch(error => console.log('Image load has failed', error))
+        }
         else {
             // localStorage.removeItem('search-result')
             setTimeout(() => {
                 navigate('/search-collection')
             }, 1500)
-        }
-
-        function setCards(cards) {
-            return cards.flatMap(card => {
-                return card.card_faces?.map(cardFace => {
-                    return cardFace;
-                })
-            })
         }
     }, [location]);
 

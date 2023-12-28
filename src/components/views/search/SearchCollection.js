@@ -61,9 +61,8 @@ const SearchCollection = ({ path }) => {
               const { query, data } = dataObj;
               if (query === 'card-names') {
                 setCardNames(data);
-                errorMessage && setErrorMessage(null);
                 setHasLoaded(true);
-                setLoading(false);
+                errorMessage && setErrorMessage(null);
               }
               else if (query === 'cards') {
                 const result = { cards: data, searchType: searchInput.id }
@@ -73,9 +72,9 @@ const SearchCollection = ({ path }) => {
                   {
                     state: result,
                   });
-                setLoading(false);
               }
-
+              setLoading(false);
+              collectionInputRef.current?.focus();
             });
         }
         else if (res.status === 400) {
@@ -87,28 +86,28 @@ const SearchCollection = ({ path }) => {
         }
       });
   }
-
   useEffect(() => {
-    if (path === 'collection') {
-      collectionInputRef.current?.focus();
-    }
+    // if (!hasLoaded) {
+    searchCollection('card-names')
+    // } else {
+
+    // setHasLoaded(false);
     if (browserWidth <= 775 && document.querySelector('#mobile-nav')?.checked) {
       hideSearchBar();
+      // }
     }
   }, []);
 
   useEffect(() => {
     if (searchInput?.id === 'search-collection') {
-      if (!hasLoaded) {
-        searchCollection('card-names');
-      }
       setIsActive(true);
     } else {
-      setHasLoaded(false);
+      // setHasLoaded(false)
+      // setCardNames([]);
       setIsActive(false);
-      setCardNames([]);
     }
   }, [searchInput]);
+
 
   // Instore single card request search field with
   const searchCollectionCard = (e = undefined, prediction = undefined) => {

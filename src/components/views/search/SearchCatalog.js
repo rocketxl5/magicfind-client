@@ -48,17 +48,9 @@ const SearchCatalog = () => {
       .then((res) => res.json())
       .then((data) => {
         setCardNames(data.cards)
-        console.log(data.cards)
       })
       .catch((error) => console.log(error));
   }
-
-  // useEffect(() => {
-
-  //   if (browserWidth <= 775 && document.querySelector('#mobile-nav')?.checked) {
-  //     hideSearchBar();
-  //   }
-  // }, []);
 
   useEffect(() => {
 
@@ -66,7 +58,6 @@ const SearchCatalog = () => {
       searchCatalog();
       setIsActive(true);
     } else {
-      setCardNames([]);
       setIsActive(false);
     }
   }, [searchInput]);

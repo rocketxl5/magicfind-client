@@ -1,4 +1,4 @@
-import { useParams, useLocation } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import Store from './Store';
 import AuthContextualNav from '../layout/AuthContextualNav';
 import SearchCollection from './search/SearchCollection';
@@ -6,7 +6,6 @@ import SearchApi from './search/SearchAPI';
 
 const AuthPage = () => {
   const { path } = useParams()
-  const location = useLocation()
 
   const views = [
     { title: 'Home', id: 'home', path: '../me/home' },
