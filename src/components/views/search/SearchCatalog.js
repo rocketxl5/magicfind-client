@@ -53,12 +53,12 @@ const SearchCatalog = () => {
       .catch((error) => console.log(error));
   }
 
-  useEffect(() => {
+  // useEffect(() => {
 
-    if (browserWidth <= 775 && document.querySelector('#mobile-nav')?.checked) {
-      hideSearchBar();
-    }
-  }, []);
+  //   if (browserWidth <= 775 && document.querySelector('#mobile-nav')?.checked) {
+  //     hideSearchBar();
+  //   }
+  // }, []);
 
   useEffect(() => {
 
@@ -66,6 +66,7 @@ const SearchCatalog = () => {
       searchCatalog();
       setIsActive(true);
     } else {
+      setCardNames([]);
       setIsActive(false);
     }
   }, [searchInput]);

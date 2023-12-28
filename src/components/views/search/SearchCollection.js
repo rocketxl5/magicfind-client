@@ -10,7 +10,6 @@ import SearchInput from './SearchInput';
 import Loading from '../../layout/Loading';
 import { SearchContext } from '../../../contexts/SearchContext';
 import { api } from '../../../api/resources';
-import styled from 'styled-components';
 import hideSearchBar from '../../../utilities/hideSearchBar';
 import getBrowserWidth from '../../../utilities/getBrowserWidth';
 import setQueryString from '../../../utilities/setQueryString';
@@ -26,14 +25,15 @@ const SearchCollection = ({ path }) => {
   const {
     errorMessage,
     setErrorMessage,
-    setHasMounted,
     searchInput,
     setSearchInput,
     searchTerm,
     cardName,
     setCardName,
     setCardNames,
-    predictions
+    predictions,
+    setHasLoaded,
+    hasLoaded
   } = useContext(SearchContext);
   // Routing
   const navigate = useNavigate();
@@ -62,8 +62,8 @@ const SearchCollection = ({ path }) => {
               if (query === 'card-names') {
                 setCardNames(data);
                 errorMessage && setErrorMessage(null);
+                setHasLoaded(true);
                 setLoading(false);
-                collectionInputRef.current?.focus();
               }
               else if (query === 'cards') {
                 const result = { cards: data, searchType: searchInput.id }
@@ -73,13 +73,14 @@ const SearchCollection = ({ path }) => {
                   {
                     state: result,
                   });
+                setLoading(false);
               }
+
             });
         }
         else if (res.status === 400) {
           return res.json()
             .then((error) => {
-              setHasMounted(true);
               setLoading(false);
               setErrorMessage({ ...error.message });
             })
@@ -88,22 +89,26 @@ const SearchCollection = ({ path }) => {
   }
 
   useEffect(() => {
+    if (path === 'collection') {
+      collectionInputRef.current?.focus();
+    }
     if (browserWidth <= 775 && document.querySelector('#mobile-nav')?.checked) {
       hideSearchBar();
     }
   }, []);
 
   useEffect(() => {
-
-    if (path === 'collection') {
+    if (searchInput?.id === 'search-collection') {
+      if (!hasLoaded) {
+        searchCollection('card-names');
+      }
       setIsActive(true);
-      searchCollection('card-names')
-      collectionInputRef.current?.focus()
     } else {
-      setHasMounted(false)
+      setHasLoaded(false);
       setIsActive(false);
+      setCardNames([]);
     }
-  }, [path]);
+  }, [searchInput]);
 
   // Instore single card request search field with
   const searchCollectionCard = (e = undefined, prediction = undefined) => {
@@ -167,90 +172,49 @@ const SearchCollection = ({ path }) => {
   }
 
   return (
-    <>
-      {/* <div className="content flex-grow-1"> */}
-
-
-            {
-            errorMessage?.title === 'no_cards' ? (
-
-                <div className="message">
-                  <section className="message-section">
-                    <div className="message-body">
-                      {
-                      errorMessage.body?.map((part, index) => {
-                          return <p key={index}>{part}</p>
-                        })
-                      }
-                    </div>
-                  </section>
-                  <section className="message-section">
-                  <Link className="message-link" to={'/search-api'}> To Add Card Page <FiArrowRightCircle /></Link>
-                  </section>
-                </div>
-            ) : ( 
-            <>
-              <header className="header">
-                <h2 className="title">Search Collection</h2>
-              </header>
-              <main className="flex flex-column">
-                  {loading ? (
-                    <Loading />
-                  ) : (
-                      <>
+    <div className="flex inherit-height">
+      {
+        errorMessage?.title === 'no_cards' ? (
+          <div className="message">
+            <section className="message-section">
+              <div className="message-body">
+                {
+                  errorMessage.body?.map((part, index) => {
+                    return <p key={index}>{part}</p>
+                  })
+                }
+              </div>
+            </section>
+            <section className="message-section">
+              <Link className="message-link" to={'/search-api'}> To Add Card Page <FiArrowRightCircle /></Link>
+            </section>
+          </div>
+        ) : (
+            loading ? (
+              <Loading />
+            ) : (
+              <div className="content flex-grow-1">
+                <header className="header">
+                  <h2 className="title">Search Collection</h2>
+                </header>
+                <main className="flex flex-column">
                   <form id="search-collection-form" className="search-form" onSubmit={searchCollectionCard} >
                     <SearchInput isActive={isActive} id={'search-collection'} searchCard={searchCollectionCard} ref={collectionInputRef} />
-                        </form>
-                        <Buttons>
-                          <Button
-                            className="bg-teal"
-                            type="button"
+                    </form>
+                    <button
+                      className="bg-green"
+                      type="button"
                       onClick={() => searchCollection('cards')}
-                          >
-                            Show All Cards
-                          </Button>
-                        </Buttons>
-                    </>
-                  )}
-              </main>
-            </>
+                    >
+                      All Cards
+                    </button>
+                  </main>
+            </div>
           )
-            }
-
-      {/* </div> */}
-    </>
-  );
-};
-
-const Buttons = styled.div`
-  margin-block-start: 4rem;
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-  gap: 1rem;
-`;
-const Button = styled.button`
-  min-width: 45%;
-  color: var(--clr-light);
-  font-size: 1.5rem;
-  padding: 1rem 2rem;
-  border-radius: 5px;
-
-  svg {
-    display: block;
-    margin-left: 1em;
-    width: 1.5em;
-    height: 1.5em;
-  }
-
-  &:hover {
-    opacity: 0.8;
-  }
-
-  @media (max-width: 320px) {
-    width: 100%;
-    margin-top: 1em;
-  }
-`;
+        )
+      }
+    </div>
+  )
+}
 
 export default SearchCollection;

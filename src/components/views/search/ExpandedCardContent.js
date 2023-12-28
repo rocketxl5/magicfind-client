@@ -1,6 +1,4 @@
 const ExpandedCardContent = ({ children, transform, handleClick }) => {
-    console.log(transform)
-    console.log(children)
 
     const handleFlipCard = (e) => {
         if (e.target.id === 'reduce-card') {
