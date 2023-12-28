@@ -288,7 +288,7 @@ const Signup = () => {
   }
 
   return (
-    <div className="flex inherit-height">
+    <>
       {loading ?
         (
           <Loading />
@@ -326,7 +326,7 @@ const Signup = () => {
             </form>
           </div >
         )}
-    </div >
+    </>
   );
 };
 

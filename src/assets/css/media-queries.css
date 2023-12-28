@@ -9,13 +9,6 @@
     }
 }
 
-@media screen and (width >= 500px) { 
-
-    nav .left-side-nav {
-        gap: var(--size-2);
-    }
-}
-
 @media screen and (width >= 775px) {
     .content {
         display: flex;
@@ -28,7 +21,7 @@
         display: block;
     }
     .container {
-        margin-top: var(--header-height-wide);
+        padding-top: var(--header-height-wide);
         margin-inline: auto;
     }
 
@@ -42,6 +35,18 @@
     
     .top-header  {
         padding-inline: 2rem;
+    }
+
+    nav .left-side-nav {
+        gap: 2rem;
+    }
+
+    .hamburger {
+        display: none;
+    }
+
+    .auth-btn {
+        display: block;
     }
     
     #search-catalog-container {
@@ -62,6 +67,7 @@
         display: block;
         top: var(--header-height-wide);
         width: 30vw;
+        z-index: 0;
     }
 
     .contextual-links {

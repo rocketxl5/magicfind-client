@@ -185,7 +185,7 @@ const SearchCollection = ({ path }) => {
               </div>
             </section>
             <section className="message-section">
-              <Link className="message-link" to={'/search-api'}> To Add Card Page <FiArrowRightCircle /></Link>
+              <Link className="message-link" to={'../me/add-card'}> To Add Card Page <FiArrowRightCircle /></Link>
             </section>
           </div>
         ) : (
@@ -194,7 +194,7 @@ const SearchCollection = ({ path }) => {
             ) : (
                 <div className="inner-content">
                 <header className="header">
-                  <h2 className="title">Search Collection</h2>
+                    <h2 className="title">Browse Collection</h2>
                 </header>
                 <main className="flex flex-column">
                   <form id="search-collection-form" className="search-form" onSubmit={searchCollectionCard} >

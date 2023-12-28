@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 const Menu = ({ paths }) => {
     return (
-        <ul className='menu main-menu'>
+        <ul className='menu'>
             {
                 paths.map((path, index) => {
                     return (

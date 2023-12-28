@@ -83,6 +83,7 @@ a {
 }
 
 .top-header {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -101,7 +102,7 @@ a {
   left: 0;
   top: var(--header-height);
   background-color: var(--clr-light);
-  z-index: 2000;
+  z-index: 1000;
 
 }
 
@@ -143,7 +144,7 @@ a {
   min-width: 300px;
   min-height: calc(100vh - var(--footer-height));
   max-width: 1170px;
-  margin-top: var(--header-height);
+  padding-top: var(--header-height);
   margin-inline: auto;
 }
 

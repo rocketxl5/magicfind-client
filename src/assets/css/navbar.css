@@ -13,8 +13,73 @@
    /* width: 3rem; */
 }
 
+.nav-btn a {
+    color: var(--clr-grey);
+}
+
 .nav-btn svg {
     display: block;
+}
+
+.auth-btn {
+    display: none;
+}
+
+.auth-btn:hover {
+    opacity: 0.8;
+}
+
+/* .auth-btn a {
+    display: block;
+    color: var(--clr-grey);
+} */
+
+.auth-btn a * {
+    pointer-events: none;
+}
+
+.auth-modal {
+    display: none;
+    position: absolute;
+    top: 6rem;
+    right: 0;
+    width: 15rem;
+    /* height: 10rem; */
+    background-color: red;
+    transition: height 0.5s ease-in;
+}
+
+.auth-modal ul {
+    height: inherit;
+    display: block;
+    position: static;
+
+}
+
+.auth-modal a {
+   display: block;
+   padding: 1rem;
+   text-align: center;
+   font-size: var(--fs-150);
+   color: var(--clr-grey);
+   background-color: var(--clr-primary);
+   border-top: 1px solid var(--clr-grey);
+}
+
+/* .auth-modal a:hover { 
+    background-color: var(--clr-light-grey);
+    color: var(--clr-primary);
+} */
+
+
+.auth-modal a * { 
+    pointer-events: none;
+}
+
+
+.auth-btn:hover .auth-modal {
+        display: block;
+        
 }
 
 .auth-btn,
@@ -67,6 +132,7 @@ nav .right-side-nav .nav-link {
     font-size: var(--fs-175);
     color: var(--clr-dark);
     border-bottom: 1px solid var(--clr-grey);
+    z-index: 9000;
 }
 
 /* Hamburger */

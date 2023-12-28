@@ -11,21 +11,34 @@ const Layout = () => {
     const { loading } = useContext(SearchContext);
     return (
         <div className="wrapper">
-            {location.pathname !== '/login' && location.pathname !== '/signup' && <Header />}
-            <div className="container">
-                {
-                    !loading ? (
-
+            {location.pathname === '/login' || location.pathname === '/signup' ? (
+                <>
+                    <div className="container">
                         <Outlet />
+                    </div>
+                    <Footer />
+                </>
+            ) : (
+                <>
+                    <Header />
+                    <div className="container">
+                        <div className="content">
+                                {
+                                    !loading ? (
 
-                    ) : (
-                        <div className="loading-content">
-                                <Loading />
+                                        <Outlet />
+
+                                    ) : (
+                                        <div className="loading-content">
+                                            <Loading />
+                                        </div>
+                                    )
+                                }
+                            </div>
                         </div>
-                        )
-                }
-            </div>
-            <Footer />
+                        <Footer />
+                </>
+            )}
         </div>
     )
 }

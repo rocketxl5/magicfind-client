@@ -167,7 +167,7 @@ const Login = () => {
 
   return (
 
-    <div className="flex inherit-height">
+    <>
       {
         loading ?
           (
@@ -241,7 +241,7 @@ const Login = () => {
           )
 
       }
-    </div>
+    </>
   )
 }
 
