@@ -44,7 +44,7 @@ const SearchResult = () => {
 
     return (
         <>
-            <div className="buffer">   </div>
+
                 {
                     <Modal open={open}>
                         {component}

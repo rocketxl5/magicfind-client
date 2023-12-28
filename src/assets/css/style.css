@@ -97,14 +97,20 @@ a {
 
 .contextual-nav {
   position: fixed;
-  width: 100%;
+  width: 100vw;
+  left: 0;
   top: var(--header-height);
-  display: flex;
-  min-height: 3.5rem;
   background-color: var(--clr-light);
+  z-index: 2000;
+
 }
 
-.contextual-nav > a {
+.contextual-links {
+  min-height: 3.5rem;
+  display: flex;
+}
+
+.contextual-links > a {
   display: flex;
   flex: 1;
   align-items: center; 
@@ -134,18 +140,28 @@ a {
 }
 
 .container {
-  /* position: relative; */
-  /* top: 8.5rem; */
-
   min-width: 300px;
   min-height: calc(100vh - var(--footer-height));
   max-width: 1170px;
+  margin-top: var(--header-height);
+  margin-inline: auto;
 }
 
 .content {
+  position: relative;
   padding-inline: 1rem;
   min-height: calc(100vh - 13.5rem);
   margin: auto;
+}
+
+.outer-content {
+  display: flex;
+  padding-top: 3.5rem;
+  min-height: inherit;
+}
+
+.inner-content {
+  flex-grow: 1;
 }
 
 .auth-content {
@@ -274,7 +290,7 @@ button:hover {
 
 .banner {
   width: 100%;
-  min-height: clamp(20rem, 35vh, 400px);
+  height: min(40vw, 400px);
   background-repeat: no-repeat;
   background-size: 100%;
   background-position: 0 25%;

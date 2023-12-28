@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom'
 const AuthContextualNav = ({ views }) => {
 
     return (
-        <div className="contextual-nav">
+        <div className="contextual-links">
             {views.map((view, index) => {
                 return (
                     <NavLink
