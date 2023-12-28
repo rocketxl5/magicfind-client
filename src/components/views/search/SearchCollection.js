@@ -171,7 +171,7 @@ const SearchCollection = ({ path }) => {
   }
 
   return (
-    <div className="flex inherit-height">
+    <div className="outer-content">
       {
         errorMessage?.title === 'no_cards' ? (
           <div className="message">
@@ -192,7 +192,7 @@ const SearchCollection = ({ path }) => {
             loading ? (
               <Loading />
             ) : (
-              <div className="content flex-grow-1">
+                <div className="inner-content">
                 <header className="header">
                   <h2 className="title">Search Collection</h2>
                 </header>

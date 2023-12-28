@@ -1,6 +1,7 @@
 import { useParams } from 'react-router-dom';
 import Store from './Store';
 import AuthContextualNav from '../layout/AuthContextualNav';
+import AuthLanding from './AuthLanding';
 import SearchCollection from './search/SearchCollection';
 import SearchApi from './search/SearchAPI';
 
@@ -16,11 +17,10 @@ const AuthPage = () => {
 
   return (
     <>
-      <div className="buffer"></div>
-
-        <AuthContextualNav views={views} />
-
       <div className="content">
+        <section className="contextual-nav">
+          <AuthContextualNav views={views} />
+        </section>
           {
             path === 'collection' ? (
             <SearchCollection path={path} />
@@ -29,7 +29,7 @@ const AuthPage = () => {
           ) : path === 'add-card' ? (
                 <SearchApi path={path} />
           ) : (
-            <>Home</>
+                  <AuthLanding />
           )
         } 
         </div>
