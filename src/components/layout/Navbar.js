@@ -2,8 +2,9 @@ import Menu from './Menu';
 import AuthMenu from './AuthMenu';
 import SearchBtn from './navbtn/SearchBtn';
 import MailBtn from './navbtn/MailBtn';
-import AuthBtn from './navbtn/AuthBtn';
 import HamburgerBtn from './navbtn/HamburgerBtn';
+import AuthBtn from './navbtn/AuthBtn';
+import SignedBtn from './navbtn/SignedBtn';
 import ShoppingCartBtn from './navbtn/ShoppingCartBtn';
 
 function Navbar({ auth }) {
@@ -64,21 +65,31 @@ function Navbar({ auth }) {
                      /*  Has a label linked to mobile-nav checkbox 
                      *************************************************/}
                     <SearchBtn />
-                    {auth && (
+                    {auth ? (
                         <>
                             <MailBtn />
+                            <ShoppingCartBtn />
+                            <HamburgerBtn />
+                            <SignedBtn />
+                        </>
+                    ) : (
+                        <>
+                            <ShoppingCartBtn />
+                            <AuthBtn />
+                            <HamburgerBtn />
                         </>
                     )}
                     {/************************************************* 
                      /*  Hamburger 
                      /*  Has a label linked to mobile-nav checkbox 
                      *************************************************/}
-                    <ShoppingCartBtn />
-                    <HamburgerBtn />
+                    {/* <ShoppingCartBtn />
+                    <HamburgerBtn /> */}
+
                 </section>
                 <section className="right-side-nav">
                     {auth ? (
-                        <AuthMenu authPaths={authPaths} />
+                        <AuthMenu auth={auth} authPaths={authPaths} />
                     ) : (
                             <Menu paths={paths} />
                     )}

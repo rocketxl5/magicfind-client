@@ -2,11 +2,11 @@ import SearchCatalog from '../views/search/SearchCatalog';
 import Navbar from './Navbar';
 import LogoBtn from './navbtn/LogoBtn';
 import useAuth from '../../hooks/useAuth';
+import AuthModal from '../layout/AuthModal'
 import handleSearchBar from '../../utilities/handleSearchBar';
 
 const Header = () => {
   const { auth } = useAuth();
-
 
   // Handle search bar and menu animation
   const handleClick = (e) => {
@@ -15,11 +15,11 @@ const Header = () => {
   return (
     <header className="main-header" onClick={handleClick}>
       <div className="top-header">
-      <LogoBtn />
-      <SearchCatalog />
+        <LogoBtn />
+        <SearchCatalog />
         <Navbar auth={auth} />
+        <AuthModal />
       </div>
-
     </header>
   )
 }

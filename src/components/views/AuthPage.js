@@ -17,7 +17,6 @@ const AuthPage = () => {
 
   return (
     <>
-      <div className="content">
         <section className="contextual-nav">
           <AuthContextualNav views={views} />
         </section>
@@ -31,8 +30,7 @@ const AuthPage = () => {
           ) : (
                   <AuthLanding />
           )
-        } 
-        </div>
+      } 
     </>
   )
 }

@@ -8,14 +8,14 @@ const ShoppingCartBtn = () => {
   const { itemsCount } = useContext(ShoppingCartContext);
   return (
     <Div className="nav-btn">
-      <Cart to="/shopping-cart" className="cart-btn">
+      <Link to="/shopping-cart" className="cart-btn">
         {itemsCount > 0 && (
           <CountContainer>
             <Count>{itemsCount}</Count>
           </CountContainer>
         )}
         <FiShoppingCart className="nav-icon" size={27} title="To Shopping Cart" />
-      </Cart>
+      </Link>
     </Div>
   )
 }
@@ -26,10 +26,6 @@ const Div = styled.div`
   position: relative;
   display: flex;
 `;
-
-const Cart = styled(Link)`
-  color: var(--clr-grey);
-`
 
 const CountContainer = styled.div`
   position: absolute;

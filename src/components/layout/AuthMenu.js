@@ -2,11 +2,11 @@
 import { NavLink } from 'react-router-dom';
 import useAuth from '../../hooks/useAuth';
 
-function AuthMenu({ authPaths }) {
+function AuthMenu({ auth, authPaths }) {
   const { logoutAction } = useAuth();
 
   return (
-    <ul className='menu main-menu'>
+    <ul className='menu auth-nav'>
       {
         authPaths.map((path, index) => {
           return (
