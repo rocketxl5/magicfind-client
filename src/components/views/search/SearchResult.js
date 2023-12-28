@@ -44,46 +44,45 @@ const SearchResult = () => {
 
     return (
         <>
-
-                {
-                    <Modal open={open}>
-                        {component}
-                    </Modal>
-                }
-                <header className="search-result-header">
-                    <button className="back-btn" type="button" onClick={() => {
-                        searchType === 'search-collection' ? navigate('/me/collection') : navigate(-1);
-                    }}>Go Back</button>
-                    <span className="space-1">
-                            {
-                                cards ?
-                                `${cards.length} ${cards.length > 1 ? 'Results' : 'Result'}` :
-                                    'No results'
-                            }
-                    </span>
+            {
+                <Modal open={open}>
+                    {component}
+                </Modal>
+            }
+            <header className="search-result-header">
+                <button className="back-btn" type="button" onClick={() => {
+                    searchType === 'search-collection' ? navigate('/me/collection') : navigate(-1);
+                }}>Back To Search</button>
+                <span className="space-1">
+                    {
+                        cards ?
+                            `${cards.length} ${cards.length > 1 ? 'Results' : 'Result'}` :
+                            'No results'
+                    }
+                </span>
+            </header>
+            <>
+                <header className="header">
+                    <h2 className="title">Search Results</h2>
                 </header>
-                <div className="content">
-                    <header className="header">
-                        <h2 className="title">Search Results</h2>
-                    </header>
-                    <main className="main">
-                        <div className="cards">
-                            {
-                                cards &&
-                                cards.map((card, index) => {
-                                    return (
-                                        <Card
-                                            key={index}
-                                            card={card}
-                                            searchType={searchType}
-                                            handleClick={handleClick}
-                                            ref={cardRef}
-                                        />)
-                                })
-                            }
-                        </div>
-                    </main>
-            </div>
+                <main className="main">
+                    <div className="cards">
+                        {
+                            cards &&
+                            cards.map((card, index) => {
+                                return (
+                                    <Card
+                                        key={index}
+                                        card={card}
+                                        searchType={searchType}
+                                        handleClick={handleClick}
+                                        ref={cardRef}
+                                    />)
+                            })
+                        }
+                    </div>
+                </main>
+            </>
         </>
     )
 }

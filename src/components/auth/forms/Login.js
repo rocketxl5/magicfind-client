@@ -1,8 +1,7 @@
-import React, { useState, useRef, useContext, useEffect } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import Loading from '../../layout/Loading';
 import errorHandler from './helpers/authErrorHandler';
-import { PathContext } from '../../../contexts/PathContext';
 import useAuth from '../../../hooks/useAuth';
 import { api } from '../../../api/resources';
 const INIT = {
@@ -20,9 +19,6 @@ const Login = () => {
   const [isSubmit, setIsSubmit] = useState(false);
   const [message, setMessage] = useState(null);
   const [showPassword, setShowPassword] = useState(false);
-
-  // Contexts
-  const { setPathname } = useContext(PathContext);
 
   // Routing
   const location = useLocation();
@@ -52,9 +48,6 @@ const Login = () => {
         setMessage({ ...location.state.message });
       }
     }
-    // Prevents Header component load
-    setPathname(location.pathname);
-
     // Set focus on email input
     emailRef?.current.focus();
   }, []);
@@ -116,7 +109,7 @@ const Login = () => {
             inputs.password.setCustomValidity('invalid')
             setErrors(errorHandler(values, inputs))
             setValues({ ...values, email: "", password: "" })
-            setLoading(false);
+            // setLoading(false);
             setIsValidForm(false);
           });
       } catch (error) {
