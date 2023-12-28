@@ -3,7 +3,7 @@ import { FaUserCircle } from 'react-icons/fa';
 
 const AuthBtn = () => {
     return (
-        <div className="nav-btn">
+        <div className="nav-btn auth-nav-btn">
             <Link className="auth-btn" to='/login'>
                 <FaUserCircle className="nav-icon" size={27} title="Login" />
             </Link>

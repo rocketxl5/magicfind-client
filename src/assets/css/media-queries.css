@@ -45,7 +45,12 @@
         display: none;
     }
 
-    .auth-btn {
+    .auth-nav-btn {
+        display: block;
+    }
+
+    .auth-btn,
+    .signed-btn {
         display: block;
     }
     

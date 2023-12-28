@@ -1,10 +1,9 @@
-import React, { useRef, useState, useEffect, useContext, useReducer } from 'react';
-import { Link, useNavigate, useLocation } from 'react-router-dom';
+import React, { useRef, useState, useEffect, useReducer } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import Loading from '../../layout/Loading';
 import FormInput from './FormInput';
 import reducer from './reducer/inputReducer';
 import errorHandler from './helpers/authErrorHandler';
-import { PathContext } from '../../../contexts/PathContext';
 import { api } from '../../../api/resources';
 const INIT = {
   username: '',
@@ -128,22 +127,11 @@ const Signup = () => {
     })(INIT)
   )
 
-  // Setting current path name
-  const { setPathname } = useContext(PathContext);
-
-  const location = useLocation();
   const navigate = useNavigate();
-
 
   /**********************
   ***** useEffects  *****
   ***********************/
-
-  // On component load
-  useEffect(() => {
-    // Prevents Header component load
-    setPathname(location.pathname);
-  }, []);
 
   // Error handler
   useEffect(() => {
