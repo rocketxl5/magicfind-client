@@ -9,7 +9,6 @@ import { SearchContext } from '../../contexts/SearchContext';
 const Layout = () => {
     const location = useLocation();
     const { loading } = useContext(SearchContext);
-
     return (
         <div className="wrapper">
             {location.pathname !== '/login' && location.pathname !== '/signup' && <Header />}

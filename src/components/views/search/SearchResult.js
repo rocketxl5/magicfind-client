@@ -14,24 +14,26 @@ const SearchResult = () => {
     useEffect(() => {
         // If cards is not empty
         if (cards.length) {
-            const preloadImages = (cards) => {
+
+            // const preloadImages = async (cards) => {
                 const loadImage = card => {
                     return new Promise((resolve, reject) => {
                         const image = new Image();
-                        const uri = card.image_uris ? card.image_uris.normal : card.card_faces[0].image_uris.normal
+                        const uri = card.image_uris?.normal || card.card_faces[0]?.image_uris.normal
+                        // console.log(uri)
                         image.src = uri;
                         image.onload = () => resolve(card);
                         image.onerror = error => reject(error);
                     });
                 }
                 Promise.all(cards.map(card => loadImage(card)))
-                    .then((data) => data)
+                    .then((data) => console.log(data))
                     .catch(error => console.log('Image load has failed', error))
             }
             // Call async image loader
             // With cards both sides if any (Transform cards)
-            preloadImages(setCards(cards));
-        }
+            // preloadImages(setCards(cards));
+            // }
         else {
             // localStorage.removeItem('search-result')
             setTimeout(() => {

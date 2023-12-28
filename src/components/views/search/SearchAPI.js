@@ -63,25 +63,27 @@ const Search = ({ path }) => {
   }
 
   useEffect(() => {
+    if (path === 'add-card') {
+      apiInputRef.current.focus();
+    }
     if (browserWidth <= 775 && document.querySelector('#mobile-nav')?.checked) {
       hideSearchBar();
     }
   }, [])
 
   useEffect(() => {
-    if (path === 'add-card') {
-      apiInputRef.current.focus();
-      setIsActive(true);
+    if (searchInput?.id === 'search-api') {
       if (!apiCards) {
         fetchApiCards()
       } else {
         setCardNames(apiCards);
       }
+      setIsActive(true);
     } else {
       setIsActive(false);
       setCardNames([]);
     }
-  }, [path])
+  }, [searchInput])
 
 
   const searchAPI = (e = undefined, prediction = undefined) => {
