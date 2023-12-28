@@ -96,6 +96,9 @@ a {
 }
 
 .contextual-nav {
+  position: fixed;
+  width: 100%;
+  top: var(--header-height);
   display: flex;
   min-height: 3.5rem;
   background-color: var(--clr-light);

@@ -81,7 +81,6 @@ const Search = ({ path }) => {
       setIsActive(true);
     } else {
       setIsActive(false);
-      setCardNames([]);
     }
   }, [searchInput])
 
