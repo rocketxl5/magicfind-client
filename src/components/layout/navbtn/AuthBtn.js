@@ -1,13 +1,15 @@
-import { Link } from 'react-router-dom';
 import { FaUserCircle } from 'react-icons/fa';
+import Avatar from '../Avatar';
 
-const AuthBtn = () => {
+const AuthBtn = ({ auth, panelRef }) => {
+
+
     return (
-        <div className="nav-btn auth-nav-btn">
-            <Link className="auth-btn" to='/login'>
-                <FaUserCircle className="nav-icon" size={27} title="Login" />
-            </Link>
-        </div>
+
+        <button className="nav-btn auth-nav-btn" onClick={() => panelRef.current.classList.toggle('side-show')}>
+            <Avatar auth={auth} />
+        </button>
+
     )
 }
 

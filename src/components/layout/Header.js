@@ -2,7 +2,6 @@ import SearchCatalog from '../views/search/SearchCatalog';
 import Navbar from './Navbar';
 import LogoBtn from './navbtn/LogoBtn';
 import useAuth from '../../hooks/useAuth';
-import AuthModal from '../layout/AuthModal'
 import handleSearchBar from '../../utilities/handleSearchBar';
 
 const Header = () => {
@@ -18,7 +17,6 @@ const Header = () => {
         <LogoBtn />
         <SearchCatalog />
         <Navbar auth={auth} />
-        <AuthModal />
       </div>
     </header>
   )
