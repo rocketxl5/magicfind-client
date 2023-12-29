@@ -2,7 +2,7 @@
 import { NavLink } from 'react-router-dom';
 import useAuth from '../../hooks/useAuth';
 
-function AuthMenu({ auth, authPaths }) {
+function AuthMenu({ authPaths }) {
   const { logoutAction } = useAuth();
 
   return (
@@ -18,9 +18,8 @@ function AuthMenu({ auth, authPaths }) {
           )
         })
       }
-
       <li>
-        <div className="nav-link signout" onClick={() => logoutAction()}>
+        <div className="nav-link logout" onClick={() => logoutAction()}>
           Logout
         </div>
       </li>

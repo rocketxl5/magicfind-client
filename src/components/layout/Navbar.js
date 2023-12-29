@@ -1,13 +1,16 @@
+import { useRef } from 'react';
 import Menu from './Menu';
 import AuthMenu from './AuthMenu';
 import SearchBtn from './navbtn/SearchBtn';
 import MailBtn from './navbtn/MailBtn';
 import HamburgerBtn from './navbtn/HamburgerBtn';
+import SignInBtn from './navbtn/SignInBtn';
 import AuthBtn from './navbtn/AuthBtn';
-import SignedBtn from './navbtn/SignedBtn';
+import SidePanel from '../layout/SidePanel'
 import ShoppingCartBtn from './navbtn/ShoppingCartBtn';
 
 function Navbar({ auth }) {
+    const panelRef = useRef(null);
 
     const authPaths = [
         {
@@ -70,12 +73,12 @@ function Navbar({ auth }) {
                             <MailBtn />
                             <ShoppingCartBtn />
                             <HamburgerBtn />
-                            <SignedBtn />
+                            <AuthBtn auth={auth} panelRef={panelRef} />
                         </>
                     ) : (
                         <>
                             <ShoppingCartBtn />
-                            <AuthBtn />
+                                <SignInBtn />
                             <HamburgerBtn />
                         </>
                     )}
@@ -83,17 +86,18 @@ function Navbar({ auth }) {
                      /*  Hamburger 
                      /*  Has a label linked to mobile-nav checkbox 
                      *************************************************/}
-                    {/* <ShoppingCartBtn />
-                    <HamburgerBtn /> */}
 
                 </section>
                 <section className="right-side-nav">
                     {auth ? (
-                        <AuthMenu auth={auth} authPaths={authPaths} />
+                        <AuthMenu authPaths={authPaths} />
                     ) : (
                             <Menu paths={paths} />
                     )}
                 </section>
+                <SidePanel ref={panelRef}>
+                    <AuthMenu authPaths={authPaths} />
+                </SidePanel>
             </nav>
         </div>
     )

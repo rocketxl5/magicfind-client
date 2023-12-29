@@ -1,10 +1,14 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
+import { FaUserCircle } from 'react-icons/fa';
 
-const SigninBtn = () => {
+const SignInBtn = () => {
     return (
-        <Link className="btn-small" to="/login">Sign in</Link>
+        <div className="nav-btn signin-nav-btn">
+            <Link className="signin-btn" to='/login'>
+                <FaUserCircle className="nav-icon" size={27} title="Login" />
+            </Link>
+        </div>
     )
 }
 
-export default SigninBtn;
+export default SignInBtn;
