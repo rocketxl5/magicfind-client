@@ -9,6 +9,7 @@ export const AuthProvider = ({ children }) => {
   // const [user, setAuth] = useState(JSON.parse(localStorage.getItem('user')));
   // const { setCartItems, setItemsCount } = useContext(ShoppingCartContext);
   const [auth, setAuth] = useState(null);
+  const [isAuth, setIsAuth] = useState(false);
   const [unreadMail, setUnreadMail] = useState(null);
 
   const location = useLocation();
@@ -46,7 +47,6 @@ export const AuthProvider = ({ children }) => {
       .then((data) => {
 
         if (data.data) {
-          // console.log(data.data);
           const unreadMail = data.data.filter((message) => {
             return !message.isRead && !message.isTrash;
           });
