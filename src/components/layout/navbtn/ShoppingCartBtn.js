@@ -20,8 +20,6 @@ const ShoppingCartBtn = () => {
   )
 }
 
-
-
 const Div = styled.div`
   position: relative;
   display: flex;
