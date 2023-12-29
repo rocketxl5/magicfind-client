@@ -11,14 +11,12 @@
     --clr-light-grey: #F7F7F7;
     --clr-red: rgb(162, 22, 34);
     --clr-light: rgb(252, 252, 252);
-    --clr-dark: hwb(0 15% 85%);
+    --clr-dark: #3a3735;
     --clr-green: #49A078;
     --clr-yellow: #FFB834;
     --clr-yellow-2: #eca31a;
     --clr-teal: #3598d1;
     --clr-primary-steel: rgb(103, 152, 180);
-  
-
 
     /* font sizes */
     --fs-300: 3rem;

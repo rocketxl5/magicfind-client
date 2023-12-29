@@ -41,6 +41,10 @@
         gap: 2rem;
     }
 
+    .auth-nav-btn {
+        display: block;
+    }
+
     .hamburger {
         display: none;
     }

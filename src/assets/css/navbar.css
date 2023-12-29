@@ -102,18 +102,12 @@
 
 /* Avatar */
 .auth-nav-btn {
+    display: none;
     min-width: 3.3rem;
     min-height: 3.3rem;
     border-radius: 50%;
-    background-color: red;
-}
-
-.avatar {
-    width: 100%;
-    height: 100%;
     font-size: var(--fs-200);
     color: var(--clr-grey);
-    border-radius: 50%;
 }
 
 
