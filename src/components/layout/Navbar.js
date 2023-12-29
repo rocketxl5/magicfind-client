@@ -8,10 +8,11 @@ import SignInBtn from './navbtn/SignInBtn';
 import AuthBtn from './navbtn/AuthBtn';
 import SidePanel from '../layout/SidePanel'
 import ShoppingCartBtn from './navbtn/ShoppingCartBtn';
+import getViewPortWidth from '../../utilities/getViewPortWidth'
 
 function Navbar({ auth }) {
     const panelRef = useRef(null);
-
+    const viewport = getViewPortWidth();
     const authPaths = [
         {
             name: 'Dashboard',
@@ -72,7 +73,7 @@ function Navbar({ auth }) {
                         <>
                             <MailBtn />
                             <ShoppingCartBtn />
-                            <HamburgerBtn />
+                            {viewport < 775 && <HamburgerBtn />}
                             <AuthBtn auth={auth} panelRef={panelRef} />
                         </>
                     ) : (

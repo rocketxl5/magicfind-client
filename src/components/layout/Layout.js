@@ -10,16 +10,15 @@ const Layout = () => {
     const location = useLocation();
     const { loading } = useContext(SearchContext);
     return (
-        <div className="wrapper">
-            {location.pathname === '/login' || location.pathname === '/signup' ? (
+
+        location.pathname === '/login' || location.pathname === '/signup' ? (
                 <>
                     <div className="container">
                         <Outlet />
-                    </div>
-                    <Footer />
+                </div>
                 </>
             ) : (
-                <>
+                <div className="wrapper">
                     <Header />
                     <div className="container">
                         <div className="content">
@@ -37,9 +36,10 @@ const Layout = () => {
                             </div>
                         </div>
                         <Footer />
-                </>
-            )}
-        </div>
+
+                </div>
+        )
+
     )
 }
 

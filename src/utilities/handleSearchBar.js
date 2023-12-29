@@ -1,4 +1,4 @@
-import getBrowserWidth from './getBrowserWidth';
+import getViewPortWidth from './getViewPortWidth';
 import getUserAgent from './getUserAgent';
 import toggleClass from './toggleClass';
 
@@ -7,10 +7,14 @@ import toggleClass from './toggleClass';
 const handleSearchBar = (e, isOutsideEvent = false) => {
 // e.stopPropagation();
     const userAgent = getUserAgent();
-    const browserWidth = getBrowserWidth();
+    const browserWidth = getViewPortWidth();
     const target = e.target;
 
     if (target) {
+        if (target.classList.contains('logout')) {
+            // Unfold hamburger on logout
+            document.querySelector('#mobile-nav').checked = true
+        }
         // If target is menu link (i.e mobile menu is displayed) or if target is header log
         if (target.classList.contains('nav-link')) {
             // Uncheck checkbox to initiate hamburger animation (from cross to hamburger)
@@ -86,9 +90,13 @@ const handleSearchBar = (e, isOutsideEvent = false) => {
                 if (browserWidth <= 775) {
                     // Hide Search button icon
                     document.querySelector('.search-btn').style.setProperty('display', 'none');
+                    // Show Menu
+                    document.querySelector('.menu').style.setProperty('left', '0');
                 }
-                // Show Menu
-                document.querySelector('.menu').style.setProperty('left', '0');
+                else {
+                    // Show Menu
+                    document.querySelector('.menu').style.setProperty('left', '70%');
+                }
             }
         }
         // If event is triggered outside of Main Header

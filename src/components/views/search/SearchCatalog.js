@@ -10,7 +10,7 @@ import { SearchContext } from '../../../contexts/SearchContext';
 import useAuth from '../../../hooks/useAuth';
 import { api } from '../../../api/resources';
 import hideSearchBar from '../../../utilities/hideSearchBar';
-import getBrowserWidth from '../../../utilities/getBrowserWidth';
+import getViewPortWidth from '../../../utilities/getViewPortWidth';
 import setQueryString from '../../../utilities/setQueryString';
 
 const SearchCatalog = () => {
@@ -34,7 +34,7 @@ const SearchCatalog = () => {
   // Hook
   const { auth } = useAuth();
   // Utilities
-  const browserWidth = getBrowserWidth();
+  const browserWidth = getViewPortWidth();
 
   const searchCatalog = () => {
     const headers = new Headers();
@@ -119,7 +119,7 @@ const SearchCatalog = () => {
                   state: result,
                 });
 
-              if (browserWidth <= 775 && document.querySelector('#mobile-nav')?.checked) {
+              if (document.querySelector('#mobile-nav')?.checked) {
                 hideSearchBar();
               }
             })
@@ -133,7 +133,7 @@ const SearchCatalog = () => {
               navigate(`/search-result/not-found/${query}`);
             }
 
-            if (browserWidth <= 775 && document.querySelector('#mobile-nav')?.checked) {
+            if (document.querySelector('#mobile-nav')?.checked) {
               hideSearchBar();
             }
           })

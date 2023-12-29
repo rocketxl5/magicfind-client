@@ -10,27 +10,87 @@
 }
 
 @media screen and (width >= 775px) {
-    .content {
-        display: flex;
-        padding: 1rem;
-    }
-
-    .content > div {
-        /* width: 100%; */
-        width: 60vw;
-        display: block;
+    .wrapper {
+        background-color: var(--clr-dark);
     }
     .container {
         padding-top: var(--header-height-wide);
-        margin-inline: auto;
+        /* background-color: rgb(65, 57, 57); */
+    }
+    .content {
+        padding-inline: 2rem;
     }
 
+    /* login & signup */
+    .form-element label {
+        padding-bottom: 0.5rem;
+     }
+
+    .form-element label,
+    .form-element p,
+    .form-element .link {
+        font-size: 1.3rem;
+    }
+
+    /* Header */
+    .nav-btn svg {
+        height: 3rem;
+        width: 3rem;
+    }
+
+    .banner {
+        width: 100%;
+        left: 0;
+        background-position: 0 50%;
+        background-size: 105%;
+        width: 100vw;
+        left: -2rem;
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+    }
+
+    .home-page-banner {
+        background-image: url('https://cards.scryfall.io/art_crop/front/9/f/9f9f5e0c-8bf4-46ab-ad79-332ceeaed3d5.jpg?1681768912');
+    }
+
+    .banner-link {
+        display: none;
+        background-color: var(--clr-secondary);
+        color: var(--clr-ternary);
+        -webkit-text-stroke-width: 0;
+        -webkit-text-stroke-color: none;
+    }
+
+    .banner-section {
+        position: static;
+        width: 100%;
+    }
+
+    .features-section {
+        flex-direction: row;
+        justify-content: space-between;
+        width: 100%;
+        margin-top: 6rem;
+        padding-inline: 2rem;
+        padding-block: 2rem;
+        gap: 2rem;
+        background-color: var(--clr-light-grey);
+        border-radius: 10px;
+      }
+
+    .feature {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        max-width: 30rem;
+    }
+  
     /* Header */
     .main-header {
         display: flex;
         flex-direction: column;
         min-height: var(--header-height-wide);
-        /* padding-inline: var(--size-2); */
+
     }
     
     .top-header  {
@@ -45,8 +105,9 @@
         display: block;
     }
 
-    .hamburger {
-        display: none;
+    .right-side-nav ul {
+        width: 100%;
+        
     }
 
     .signin-nav-btn {
@@ -105,10 +166,15 @@
     }
 
     #search-catalog-container {
-        position: static;
+        position: relative;
         min-height: var(--header-height-wide);
         min-width: clamp(20rem, 50%, 60rem) !important;
-  
+    }
+
+      /* Autocomplete */
+      .autocomplete-list {
+        top: 6rem;
+        min-width: clamp(20rem, 50%, 60rem) !important;
     }
 
     #search-catalog-form {
@@ -123,7 +189,7 @@
         font-size: var(--fs-175);
         min-height: 4.5rem;
         width: 100%;
-           padding-inline: var(--size-1);
+        padding-inline: var(--size-1);
         margin-block: 0.75rem;
         margin-inline: auto;
     }
@@ -133,11 +199,6 @@
     }
     
     /* site menu left property is pushed top a 100% (off screen) */
-        
-    /* Hamburger */
-    .mobile-nav-label {
-        /* display: none; */
-    }
 
     .logo-btn {
         margin-inline-end: var(--size-2);
@@ -165,35 +226,18 @@
     }
 
     .footer {
-        min-height: var(--header-height--wide);
+        min-height: var(--header-height-wide);
+        margin-inline: auto;
+        margin-top: 6rem;
+        font-size: var(--fs-125);
     }
 }
 
-@media screen and (width >= 1600px) {
-    /* landing page */
-
-    .section {
-        padding-block-start: 5rem;
+@media screen and (width >= 1200px) {
+    
+    .banner {
+        width: 100%;
+        left: 0;
     }
-
-    .section-content {
-        flex-direction: row;
-        gap: 10rem;
-        margin-block-start: 5rem;
-    }
-
-    .article-title {
-        padding-block: 2rem;
-    }
-
-    .article {
-        padding-inline: 0;
-    }
-
-    .article-body {
-        min-height: 50vh;
-        padding-block-start: 4rem;
-    }
-
        
 }

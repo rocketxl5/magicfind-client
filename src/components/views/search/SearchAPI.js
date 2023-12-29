@@ -11,7 +11,7 @@ import { SearchContext } from '../../../contexts/SearchContext';
 import { api } from '../../../api/resources';
 import setQueryString from '../../../utilities/setQueryString';
 import hideSearchBar from '../../../utilities/hideSearchBar';
-import getBrowserWidth from '../../../utilities/getBrowserWidth';
+import getViewPortWidth from '../../../utilities/getViewPortWidth';
 
 const Search = ({ path }) => {
   // States
@@ -36,7 +36,7 @@ const Search = ({ path }) => {
   // Routing
   const navigate = useNavigate();
   // Utilities
-  const browserWidth = getBrowserWidth();
+  const browserWidth = getViewPortWidth();
 
   const fetchApiCards = () => {
 
