@@ -11,7 +11,7 @@ import Loading from '../../layout/Loading';
 import { SearchContext } from '../../../contexts/SearchContext';
 import { api } from '../../../api/resources';
 import hideSearchBar from '../../../utilities/hideSearchBar';
-import getBrowserWidth from '../../../utilities/getBrowserWidth';
+import getViewPortWidth from '../../../utilities/getViewPortWidth';
 import setQueryString from '../../../utilities/setQueryString';
 import useAuth from '../../../hooks/useAuth';
 
@@ -40,7 +40,7 @@ const SearchCollection = ({ path }) => {
   // Hook
   const { auth } = useAuth();
   // Utilities
-  const browserWidth = getBrowserWidth();
+  const browserWidth = getViewPortWidth();
 
   const searchCollection = (query = '') => {
 

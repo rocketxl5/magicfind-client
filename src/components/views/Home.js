@@ -1,10 +1,76 @@
 import { Link } from 'react-router-dom';
-
+import { TbCards } from "react-icons/tb";
+import { FaStore } from "react-icons/fa";
+import { FaCommentsDollar } from "react-icons/fa";
 const Home = () => {
   return (
     <>
-      <section className="banner home-page-banner"></section>
-      <div className="content home-page">
+
+      <section className='banner-section'>
+        <div className="banner home-page-banner">
+          <Link className="banner-link" to="/signup">
+            Join Magic Find
+          </Link>
+        </div>
+      </section>
+
+      <section className="features-section">
+        <div className="feature">
+          <header>
+            <div className="feature-icon">
+              <TbCards size={35} />
+            </div>
+          </header>
+          <main>
+            <p>Build and organize your Virtual Magic the Gathering card Collection.</p>
+            <p>Easily add any 20 000+ card titles from the MTG card library.</p>
+          </main>
+          <footer>
+            <div className="feature-title">
+              <h2>Collect</h2>
+            </div>
+          </footer>
+        </div>
+        <div className="feature">
+          <header>
+            <div className="feature-icon">
+              <FaStore size={30} />
+            </div>
+          </header>
+          <main>
+            <p>Publish your collection cards to push them to your Virtual Store.</p>
+            <p>Stores are visible by all users of the community.</p>
+          </main>
+          <footer>
+            <div className="feature-title">
+              <h2>Sell</h2>
+            </div>
+          </footer>
+        </div>
+        <div className="feature">
+          <header>
+            <div className="feature-icon">
+              <FaCommentsDollar size={30} />
+            </div>
+          </header>
+          <main>
+            <p>Compare prices from all users Virtual Store.</p>
+            <p>Get in touch with the seller through you own personnal mailbox.</p>
+          </main>
+          <footer>
+            <div className="feature-title">
+              <h2>Buy</h2>
+            </div>
+          </footer>
+        </div>
+      </section>
+
+      <section className="features-section special-feature">
+        <header>
+          <h2>The Secret Lair Artwork</h2>
+        </header>
+      </section>
+      {/* <div className="home-page">
         <header className="header">
           <h2 className="title">Welcome to Magic Find</h2>
         </header>
@@ -28,7 +94,7 @@ const Home = () => {
             <p>
               Magic Find's philosophy revolves around the belief that by cutting
               through intermediaries, you get to pay less for the cards you buy, and
-              you get more dollars for the ones you sell. 
+              you get more dollars for the ones you sell.
             </p>
           </div>
         </div>
@@ -53,7 +119,7 @@ const Home = () => {
               As a member, you get the possibility to buy cards from other members of the community.
               Your Magic Find account also gives you access to an internal mail service with your own personal inbox.
               The Magic Find catalog is accessible anytime to anyone. But only members can buy, sell
-              and communicate with other members. 
+              and communicate with other members.
             </p>
           </div>
         </div>
@@ -78,7 +144,7 @@ const Home = () => {
           </div>
           </div>
         </main>
-      </div >
+      </div > */}
     </>
   );
 };

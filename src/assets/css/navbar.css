@@ -17,7 +17,9 @@
 }
 
 .nav-btn svg {
+    color: var(--clr-grey);
     display: block;
+
 }
 
 .auth-btn,
@@ -75,12 +77,6 @@
    border-top: 1px solid var(--clr-grey);
 }
 
-/* .auth-modal a:hover { 
-    background-color: var(--clr-light-grey);
-    color: var(--clr-primary);
-} */
-
-
 .signin-nav-btn {
     display: none;
 }
@@ -110,8 +106,6 @@
     color: var(--clr-grey);
 }
 
-
-
 nav .left-side-nav {
     display: flex;
     width: 100%;
@@ -127,14 +121,18 @@ nav .right-side-nav {
 
 nav .right-side-nav ul {
     position: fixed;
-    inset: 5rem 0 0 100%;
+    top: var(--header-height);
+    left: 100%; 
     display: flex;
     flex-direction: column;
     min-height: calc(100vh - var(--header-height));
+    width: 100%;
     overflow-y: hidden;
     transition: 0.2s ease;
-    /* border-top: 1px solid var(--clr-grey); */
     background-color: var(--clr-light);
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    box-shadow: 0px 0px 18px 0px rgba(0,0,0,0.2);
     z-index: 9000;
 }
 

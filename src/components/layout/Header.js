@@ -7,7 +7,7 @@ import handleSearchBar from '../../utilities/handleSearchBar';
 const Header = () => {
   const { auth } = useAuth();
 
-  // Handle search bar and menu animation
+  // Handle search bar and menu animation 
   const handleClick = (e) => {
     handleSearchBar(e);
   }

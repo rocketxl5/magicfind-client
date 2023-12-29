@@ -19,7 +19,9 @@ function AuthMenu({ authPaths }) {
         })
       }
       <li>
-        <div className="nav-link logout" onClick={() => logoutAction()}>
+        <div className="nav-link logout" onClick={() => {
+          logoutAction();
+        }}>
           Logout
         </div>
       </li>

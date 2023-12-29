@@ -4,6 +4,7 @@ import React, {
 } from 'react';
 import AutoComplete from './AutoComplete';
 import { SearchContext } from '../../../contexts/SearchContext';
+import hideSearchBar from '../../../utilities/hideSearchBar';
 
 const SearchInput = forwardRef(function SearchInput(props, ref) {
   const {
@@ -55,6 +56,9 @@ const SearchInput = forwardRef(function SearchInput(props, ref) {
   const handleFocus = (e) => {
     e.preventDefault();
     setSearchInput(e.target);
+    if (document.querySelector('#mobile-nav')?.checked) {
+      hideSearchBar();
+    }
   }
 
   return (
