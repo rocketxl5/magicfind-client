@@ -4,14 +4,15 @@
     --clr-danger: rgb(220, 53, 69);
     --clr-success: rgb(34, 170, 68);
 
-    --clr-primary: rgb(27, 47, 65);
-    --clr-secondary: rgb(42, 73, 101);
+    /* --clr-primary: rgb(27, 47, 65); */
+    /* --clr-primary: rgb(27, 47, 65); */
+    --clr-primary: rgb(42, 73, 101);
     --clr-ternary: rgb(250, 250, 211);
     --clr-dark: #2C2C2C;
     --clr-light-blue: rgb(219, 236, 250);
     --clr-grey: rgb(219, 219, 219);
     --clr-light-grey: #F7F7F7;
-    --clr-red: rgb(162, 22, 34);
+    --clr-red: #b3422f;
     --clr-light: rgb(252, 252, 252);
     --clr-green: #49A078;
     --clr-yellow: #FFB834;
@@ -77,6 +78,7 @@ a {
   min-width: 300px;
   position: fixed;
   top: 0;
+  border-bottom: 1px solid rgba(219, 219, 219, 0.2);
   z-index: 2000;
 }
 
@@ -125,7 +127,7 @@ a {
 
 .inactive-link {
   color: var(--clr-grey);
-  background-color: var(--clr-secondary);
+  background-color: var(--clr-primary);
 }
 
 .wrapper {
@@ -143,9 +145,13 @@ a {
 
 .content {
   position: relative;
-  padding-inline: 1rem;
+  /* padding-inline: 1rem; */
   min-height: calc(100vh - 13.5rem);
   margin: 0 auto;
+}
+
+.main-content {
+  padding-inline: 2rem;
 }
 
 .outer-content {
@@ -281,14 +287,15 @@ button:hover {
 .banner {
   position: relative;
   top: 0;
-  left: -1rem;
+  /* left: -1rem; */
   width: 100vw;
-  height: min(40vw, 400px);
+  /* height: min(40vw, 400px); */
   background-repeat: no-repeat;
   background-size: 100%;
   background-position: 0 25%;
-  background-color: var(--clr-secondary);
+  background-color: var(--clr-primary);
   z-index: 1000;
+  aspect-ratio: 3.5 / 2;
 }
 
 .banner-link {
@@ -310,14 +317,17 @@ button:hover {
   display: flex;
   flex-direction: column;
   width: 100%;
-  margin-top: 8rem;
+  margin-top: 6rem;
   gap: 2rem;
 }
 
 .feature {
-  min-width: 20rem;
+  /* min-width: 20rem; */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   color: var(--clr-grey);
-  background-color: var(--clr-secondary);
+  background-color: var(--clr-primary);
   border-radius: 15px;
 }
 
@@ -336,6 +346,7 @@ button:hover {
 }
 
 .feature footer {
+  margin-top: 0;
   min-height: 5rem;
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
@@ -345,6 +356,7 @@ button:hover {
   text-align: center;
   letter-spacing: 2px;
   font-weight: 500;
+  color: var(--clr-ternary);
 }
 
 .feature-icon {
@@ -354,23 +366,43 @@ button:hover {
   width: 5.5rem;
   height: 5.5rem;
   margin: 0 auto;
-  border: 2px solid var(--clr-grey);
+  border: 2px solid var(--clr-ternary);
   border-radius: 50%;
 }
 
 .feature-icon svg {
   display: block;
+  color: var(--clr-ternary);
 }
 
 .feature main {
-  padding-inline: 2rem;
-  min-height: 15rem;
-  font-size: var(--fs-150);
+  flex: 1;
+  padding: 2rem;
+  margin: 1rem;
+  font-size: var(--fs-125);
+  line-height: 1.7;
+  border: 2px solid var(--clr-ternary);
+}
+
+.line-icon {
+  margin-right: 0.7rem;
+}
+.line-icon svg {
+  vertical-align: middle;
 }
 
 .feature main p {
   margin-top: 1rem;
+  font-weight: 500;
 }
+
+.img-container {
+  border-radius: 100%;
+}
+  .img-container img { 
+
+    margin: 0 auto;
+  }
 
 .special-feature header {
   width: 100%;
@@ -427,6 +459,7 @@ button:hover {
 .footer {
     display: flex;
     justify-content: center;
+    align-items: center;
     min-width: 300px;
     min-height: var(--header-height);
     max-width: 1200px;
@@ -436,7 +469,6 @@ button:hover {
   }
 
   .footer p {
-    align-self: flex-end;
     padding-block: var(--size-1);
   }
 
@@ -535,7 +567,7 @@ button:hover {
     justify-content: space-between;
     align-items: center; 
     padding-inline: 1rem;
-    background-color: var(--clr-secondary);
+    background-color: var(--clr-primary);
 }
 
 .search-result-header * {
@@ -550,7 +582,7 @@ button:hover {
     line-height: 1.4;
     padding: 0.5rem;
     align-items: center;
-    background-color: var(--clr-secondary);
+    background-color: var(--clr-primary);
     border: 1px solid var(--clr-grey);
     border-radius: 5px;
 }
