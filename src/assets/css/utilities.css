@@ -50,10 +50,6 @@
     color: var(--clr-danger);
 }
 
-.height-fit-content {
-    min-height: fit-content !important;
-}
-
 .inherit-height {
     min-height: inherit;
 }
@@ -151,17 +147,25 @@
 .col-9 {
     width: 75%;
 }
+
+.col-8 {
+    width: 66.33%
+}
  
 .col-6 {
     width: 50%;
 }
 
 .col-4 {
-    width: 33%;
+    width: 33.33%;
 }
 
 .col-3 {
     width: 25%;
+}
+
+.col-2 {
+    width: 20%;
 }
 
 .margin-inline-auto {
@@ -218,16 +222,29 @@
     background-color: rgba(162, 22, 34, 0.05);
 }
 
-.bg-teal {
-    background: var(--clr-teal);
-}
-
 .bg-grey {
     background: var(--clr-grey);
 }
 
 .bg-light {
     background: var(--clr-light);
+}
+
+/* MTG colors */
+.mtg-blue {
+    background-color: #1F447E;
+}
+.mtg-red {
+    background-color: #A63331;
+}
+.mtg-green {
+    background-color: #2A4E27;
+}
+.mtg-white {
+    background-color: #FFFDDE;
+}
+.mtg-black {
+    background-color: #0D0C0A;
 }
 
 .border-success {
@@ -340,4 +357,20 @@
 
 .buffer {
     padding-block-start: var(--header-height);
+}
+
+.fifth {
+    min-height: 20rem;
+    /* background-color: #3a8160; */
+    border-radius: 10px;
+}
+.fifth {
+    min-height: 20rem;
+    /* background-color: #cf472e; */
+    border-radius: 10px;
+}
+.fifth-square {
+    min-height: 20rem;
+    /* background-color: #2579c7; */
+    border-radius: 10px;
 }
