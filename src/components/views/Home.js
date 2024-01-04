@@ -72,13 +72,17 @@ const Home = () => {
       </section>
       <>
         <main className="main-content">
-      <section className="features-section">
+          <section className="feature-section">
+            <header>
+              <h2>What Is Magic Find</h2>
+            </header>
+            <div className="site-features">
             {
               mainFeature.map(feature => {
                 return (
-              <div className="feature">
+                  <div className="feature-element">
                 <header>
-                  <div className="feature-icon">
+                      <div className="feature-element-icon">
                     {feature.icon}
                   </div>
                 </header>
@@ -87,9 +91,9 @@ const Home = () => {
                         feature.text.map((line, index) => {
                       return (
                         <p key={index}>
-                          <span className="line-icon">
+                          {/* <span className="line-icon">
                             <GoShieldCheck size={13} strokeWidth={'1px'} />
-                          </span>
+                          </span> */}
                           {line}
                         </p>
                       )
@@ -104,10 +108,11 @@ const Home = () => {
               </div>)
           })
             }
+            </div>
       </section>
 
-          <section className="special-feature">
-        <header>
+          <section className="feature-section">
+            <header>
               <h2>The Secret Lair Drop Artwork</h2>
               <img src="https://svgs.scryfall.io/sets/star.svg?1704085200" alt="Secret Lair Drop logo" />
             </header>
@@ -117,18 +122,16 @@ const Home = () => {
                 cards.map((card, index) => {
                   return (
                     <div className="media-element" key={index}>
-                      <header>
 
-                      </header>
-                      <main>
+
                         {
                           <img src={card.image_uris?.normal || card.card_faces[0]?.image_uris.normal} alt={card.name} />
                         }
 
-                      </main>
-                      <footer>
+
+
                         <h3>{card.artist}</h3>
-                      </footer>
+
                     </div>
                   )
                 })

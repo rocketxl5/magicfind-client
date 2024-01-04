@@ -3,7 +3,7 @@ import frank from '../../assets/img/frank.png'
 
 const About = () => {
   return (<>
-    <section className="features-section about-me">
+    <section className="feature-section about-me">
       <div className="col-3 img-container">
         <img src={frank} alt="Frankenstein" />
       </div>
@@ -11,7 +11,7 @@ const About = () => {
 
       </div>
     </section>
-    <section className="features-section about-me">
+    <section className="feature-section about-me">
       <div className="feature col-8">
 
       </div>

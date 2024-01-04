@@ -134,6 +134,7 @@ a {
 .wrapper {
   min-width: 100vw;
   min-height: 100vh;
+  background-color: var(--clr-dark);
 }
 
 .container {
@@ -146,13 +147,13 @@ a {
 
 .content {
   position: relative;
-  /* padding-inline: 1rem; */
   min-height: calc(100vh - 13.5rem);
   margin: 0 auto;
 }
 
 .main-content {
-  padding-inline: 2rem;
+  margin: auto;
+
 }
 
 .outer-content {
@@ -314,26 +315,35 @@ button:hover {
   box-shadow: 0px 0px 15px 4px rgba(0,0,0,0.1);
 }
 
-.media-scroller {
+.media-scroller,
+.site-features {
   width: 100%;
-  padding: 2rem;
+  padding-block: 2rem;
   /* margin-top: 6rem; */
   display: grid;
   grid-auto-flow: column;
-  grid-auto-columns: 21%;
-  gap: var(--size-2);
+  grid-auto-columns: 55%;
+  gap: var(--size-2); 
   overflow-x: auto;
   overscroll-behavior-inline: contain;
-  background-color: var(--clr-dark);
+  background-color: var(--clr-surface);
 }
+
+.site-features { 
+  padding-block: 3rem;
+  grid-auto-columns: 0;
+  grid-auto-columns: max(55%, 30rem);
+  gap: var(--size-3);
+}
+
 
 .media-element {
   display: grid;
   grid-template-rows: min-content;
   gap: var(--size-1);
   padding: var(--size-1);
-  /* background-color: var(--clr-grey); */
-  border-radius: 15px;
+  background-color: var(--clr-dark);
+  border-radius: 5px;
 }
 
 .media-element h3 {
@@ -344,45 +354,32 @@ button:hover {
 }
 
 .media-element img {
-  border-radius: 1.2rem;
-}
-
-.special-feature {
-  width: 100%;
-  margin-block-start: 6rem;
-  padding: 2rem;
-  background-color: var(--clr-light-grey);
-  /* background-color: red; */
   border-radius: 10px;
 }
 
-.special-feature > header {
+.feature-section {
+  margin-block-start: 4rem;
+  width: 100%;
+}
+
+.feature-section header {
   display: flex;
   align-items: center;
   gap: 2rem;
   width: 100%;
-  padding-block: 1rem;
-  margin-block-end: 1rem;
-  color: #2C2C2C;
-  border-bottom: 2px solid #2C2C2C;
+  padding: 1rem;
+  color: var(--clr-light-grey);
 }
 
-
-.special-feature > header > img {
+/* SVG */
+.feature-section > header > img {
   width: 4rem;
-  color: yellow
 }
 
-.features-section {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  margin-top: 6rem;
-  gap: 2rem;
-}
-
-.feature {
-  min-width: 20rem;
+.feature-element {
+  /* max-width: calc(100% - 10rem); */
+  /* margin: aut0; */
+  flex: 2;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -391,21 +388,21 @@ button:hover {
   border-radius: 15px;
 }
 
-.feature header,
-.feature footer {
-  margin: 1rem;
+.feature-element header,
+.feature-element footer {
+  /* margin: 1rem; */
   padding-block: 2rem;
   border: 2px solid var(--clr-ternary);
   background-color: #49A078;
 }
 
-.feature header {
+.feature-element header {
   margin-bottom: 0;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
 }
 
-.feature footer {
+.feature-element footer {
   margin-top: 0;
   min-height: 5rem;
   border-bottom-left-radius: 10px;
@@ -419,27 +416,28 @@ button:hover {
   color: var(--clr-ternary);
 }
 
-.feature-icon {
+.feature-element-icon {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 5.5rem;
-  height: 5.5rem;
+  width: 5rem;
+  height: 5rem;
+  padding: 0.5rem;
   margin: 0 auto;
   border: 2px solid var(--clr-ternary);
   border-radius: 50%;
 }
 
-.feature-icon svg {
+.feature-element-icon svg {
   display: block;
   color: var(--clr-ternary);
 }
 
-.feature main {
+.feature-element main {
   flex: 1;
-  padding: 2rem;
-  margin: 1rem;
-  font-size: var(--fs-125);
+  padding-block: 1rem;
+  padding-inline: 2rem;
+  font-size: clamp(var(--fs-125), 2vw, var(--fs-175));
   line-height: 1.7;
   border: 2px solid var(--clr-ternary);
 }
@@ -451,9 +449,9 @@ button:hover {
   vertical-align: middle;
 }
 
-.feature main p {
+.feature-element p {
   margin-top: 1rem;
-  font-weight: 500;
+  font-weight: 400;
 }
 
 .img-container {
@@ -516,6 +514,7 @@ button:hover {
     min-width: 300px;
     min-height: var(--header-height);
     max-width: 1200px;
+    margin-block-start: 4rem;
     color: var(--clr-grey);
     background-color: var(--clr-primary);
     font-size: var(--fs-100);
