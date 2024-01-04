@@ -102,17 +102,18 @@ const Login = () => {
             navigate(destination, { replace: true });
           })
           .catch((error) => {
-            console.log(error)
-            const errorMessage = error && JSON.parse(error.message)
-            setMessage({ ...errorMessage });
+            console.log(error.message)
+            // const errorMessage = error &&
+            setMessage(JSON.parse(error.message));
             inputs.email.setCustomValidity('invalid')
             inputs.password.setCustomValidity('invalid')
             setErrors(errorHandler(values, inputs))
             setValues({ ...values, email: "", password: "" })
-            // setLoading(false);
+            setLoading(false);
             setIsValidForm(false);
           });
       } catch (error) {
+        console.log(error.message)
         const errorMessage = JSON.parse(error.message)
         setMessage({ ...errorMessage });
         setLoading(false);
@@ -177,7 +178,7 @@ const Login = () => {
 
                   <h4 className="auth-message-title">{message.name ? <>{message.title} <strong>{message.name}</strong>!</> : message.title}</h4>
 
-                  <p className="auth-message-body">{message.body}</p>
+                  <p className="auth-message-body center">{message.body}</p>
                 </div>
               ) : (
                   <div className="form-title">
