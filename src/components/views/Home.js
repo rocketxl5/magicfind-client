@@ -113,26 +113,25 @@ const Home = () => {
 
           <section className="feature-section">
             <header>
-              <h2>The Secret Lair Drop Artwork</h2>
-              <img src="https://svgs.scryfall.io/sets/star.svg?1704085200" alt="Secret Lair Drop logo" />
+              <h2 className="title"><span>The Secret Lair Drop Artwork</span>
+                <span className="feature-icon">
+                </span>
+              </h2>
+
             </header>
-            <div className="media-scroller">
+            <div className="media-scroller snaps-inline">
               {
                 imagesLoaded &&
                 cards.map((card, index) => {
                   return (
-                    <div className="media-element" key={index}>
-
-
+                    <>
+                      <div className="media-element" key={index}>
                         {
                           <img src={card.image_uris?.normal || card.card_faces[0]?.image_uris.normal} alt={card.name} />
                         }
-
-
-
-                        <h3>{card.artist}</h3>
-
-                    </div>
+                        <p>{card.artist}</p>
+                      </div>
+                    </>
                   )
                 })
               }
