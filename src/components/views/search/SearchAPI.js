@@ -199,7 +199,7 @@ const Search = ({ path }) => {
               </header>
               <main className="main">
                 <form id="search-api-form" className="search-form" onSubmit={searchAPI}>
-                  <SearchInput isActive={isActive} id={'search-api'} searchCard={searchAPI} ref={apiInputRef} />
+                  <SearchInput id={'search-api'} className={'search-field'} placeholder={'Search MTG Cards'} searchCard={searchAPI} isActive={isActive} ref={apiInputRef} />
                 </form>
               </main>
             </div>

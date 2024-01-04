@@ -1,9 +1,33 @@
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { TbCards } from "react-icons/tb";
 import { FaStore } from "react-icons/fa";
 import { FaCommentsDollar } from "react-icons/fa";
 import { GoShieldCheck } from "react-icons/go";
+import { api } from '../../api/resources';
+import useImageLoader from '../../hooks/useImageLoader';
+
 const Home = () => {
+  const [cards, setCards] = useState([]);
+
+  useEffect(() => {
+    const query = 'sld'
+    const iteration = 10;
+    const headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    const options = {
+      method: 'GET',
+      headers: headers,
+    }
+    fetch(`${api.serverURL}/api/cards/feature/${query}/${iteration}`, options)
+      .then(res => res.json())
+      .then(data => {
+        setCards(data.results)
+      })
+      .catch(err => { console.log(err.message) })
+  }, [])
+
+  const imagesLoaded = useImageLoader(cards);
 
   const mainFeature = [
     {
@@ -24,16 +48,15 @@ const Home = () => {
         'Organize your cards according to your preferences.',
         'Build, save and update your decks.'
       ],
-      title: 'Collect'
+      title: 'Sell'
     },
     {
       icon: <FaCommentsDollar size={30} />,
       text: [
-        'Search the Magic Find Catalog list for a specific cards',
+        'Search the Magic Find Catalog list for a specific card',
         'Compare prices and conditions.',
-        'Keep track of your purchasses.',
-        'Find sellers close to your area.',
-        'Make an offer of ask questions to the sellers through Magic Fink email modules.'
+        'Keep track of your purchases.',
+        'Find sellers close to your area.'
       ],
       title: 'Buy'
     },
@@ -61,9 +84,9 @@ const Home = () => {
                 </header>
                 <main>
                   {
-                    feature.text.map(line => {
+                        feature.text.map((line, index) => {
                       return (
-                        <p>
+                        <p key={index}>
                           <span className="line-icon">
                             <GoShieldCheck size={13} strokeWidth={'1px'} />
                           </span>
@@ -83,10 +106,34 @@ const Home = () => {
             }
       </section>
 
-      <section className="features-section special-feature">
+          <section className="special-feature">
         <header>
-          <h2>The Secret Lair Artwork</h2>
-        </header>
+              <h2>The Secret Lair Drop Artwork</h2>
+              <img src="https://svgs.scryfall.io/sets/star.svg?1704085200" alt="Secret Lair Drop logo" />
+            </header>
+            <div className="media-scroller">
+              {
+                imagesLoaded &&
+                cards.map((card, index) => {
+                  return (
+                    <div className="media-element" key={index}>
+                      <header>
+
+                      </header>
+                      <main>
+                        {
+                          <img src={card.image_uris?.normal || card.card_faces[0]?.image_uris.normal} alt={card.name} />
+                        }
+
+                      </main>
+                      <footer>
+                        <h3>{card.artist}</h3>
+                      </footer>
+                    </div>
+                  )
+                })
+              }
+            </div>
       </section>
 
         </main>
