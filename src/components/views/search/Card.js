@@ -51,6 +51,7 @@ const Card = forwardRef(function Card(props, ref) {
         }
     }, [card]);
 
+
     return (
         <>
             <div className="card-content" onClick={(e) => handleClick(e, card, imgAttributes, ExpandedCard)} ref={ref}>

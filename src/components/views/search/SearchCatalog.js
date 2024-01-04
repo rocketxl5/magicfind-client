@@ -10,7 +10,6 @@ import { SearchContext } from '../../../contexts/SearchContext';
 import useAuth from '../../../hooks/useAuth';
 import { api } from '../../../api/resources';
 import hideSearchBar from '../../../utilities/hideSearchBar';
-import getViewPortWidth from '../../../utilities/getViewPortWidth';
 import setQueryString from '../../../utilities/setQueryString';
 
 const SearchCatalog = () => {
@@ -33,8 +32,6 @@ const SearchCatalog = () => {
   const navigate = useNavigate();
   // Hook
   const { auth } = useAuth();
-  // Utilities
-  const browserWidth = getViewPortWidth();
 
   const searchCatalog = () => {
     const headers = new Headers();
@@ -55,9 +52,12 @@ const SearchCatalog = () => {
   useEffect(() => {
 
     if (searchInput?.id === 'search-catalog') {
+      // if (!isActive) {
       searchCatalog();
+      // }
       setIsActive(true);
     } else {
+      setCardNames(null);
       setIsActive(false);
     }
   }, [searchInput]);
@@ -144,7 +144,7 @@ const SearchCatalog = () => {
   return (
     <div id="search-catalog-container">
       <form id="search-catalog-form" className="search-form" onSubmit={searchCatalogCard} >
-        <SearchInput isActive={isActive} id={'search-catalog'} searchCard={searchCatalogCard} ref={catalogInputRef} />
+        <SearchInput id={'search-catalog'} className={'search-catalog-field'} placeholder={'Search Magic Find'} searchCard={searchCatalogCard} isActive={isActive} ref={catalogInputRef} />
       </form>
     </div>
   );

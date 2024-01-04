@@ -9,7 +9,6 @@ export const SearchProvider = ({ children }) => {
   const [apiCards, setApiCards] = useState(null);
   // Mount state @ SearchCollection initial fetch 
   const [errorMessage, setErrorMessage] = useState(null);
-  const [hasLoaded, setHasLoaded] = useState(false);
   const [displayAutcomplete, setDisplayAutocomplete] = useState(false);
   const [predictions, setPredictions] = useState([]);
   const [cardNames, setCardNames] = useState([]);
@@ -45,8 +44,6 @@ export const SearchProvider = ({ children }) => {
         setMarker,
         loading,
         setLoading,
-        hasLoaded,
-        setHasLoaded,
         cardNames,
         setCardNames,
         apiCards,

@@ -3,6 +3,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import Card from './Card';
 import Modal from './Modal';
 import useModal from '../../../hooks/useModal';
+import useImageLoader from '../../../hooks/useImageLoader';
 
 const SearchResult = () => {
     const location = useLocation();
@@ -10,36 +11,23 @@ const SearchResult = () => {
     const { cards, searchType } = location.state || JSON.parse(localStorage.getItem('search-result'));
     const cardRef = useRef(null);
 
+
     useEffect(() => {
-        // If cards is not empty
-        if (cards.length) {
-            const loadImage = card => {
-                return new Promise((resolve, reject) => {
-                    const image = new Image();
-                    const uri = card.image_uris?.normal || card.card_faces[0]?.image_uris.normal
-                    // console.log(uri)
-                    image.src = uri;
-                    image.onload = () => resolve(card);
-                    image.onerror = error => reject(error);
-                });
-            }
-            Promise.all(cards.map(card => loadImage(card)))
-                .then((data) => console.log(data))
-                .catch(error => console.log('Image load has failed', error))
-        }
-        else {
-            // localStorage.removeItem('search-result')
+        // If cards is empty
+        if (!cards.length) {
             setTimeout(() => {
                 navigate('/search-collection')
             }, 1500)
         }
     }, [location]);
 
+    const { imagesLoaded } = useImageLoader(cards)
+
     const [{ open, component }, { updateState }] = useModal(searchType, (value) => handleClick(value));
 
-    function handleClick(e, card, attributes, expandedCard) {
+    function handleClick(e, card, attributes, ExpandedCard) {
         e.stopPropagation();
-        updateState(e.target.id, card, attributes, expandedCard);
+        updateState(e.target.id, card, attributes, ExpandedCard);
     }
 
     return (
@@ -68,7 +56,7 @@ const SearchResult = () => {
                 <main className="main">
                     <div className="cards">
                         {
-                            cards &&
+                            imagesLoaded &&
                             cards.map((card, index) => {
                                 return (
                                     <Card

@@ -31,9 +31,7 @@ const SearchCollection = ({ path }) => {
     cardName,
     setCardName,
     setCardNames,
-    predictions,
-    setHasLoaded,
-    hasLoaded
+    predictions
   } = useContext(SearchContext);
   // Routing
   const navigate = useNavigate();
@@ -61,7 +59,6 @@ const SearchCollection = ({ path }) => {
               const { query, data } = dataObj;
               if (query === 'card-names') {
                 setCardNames(data);
-                setHasLoaded(true);
                 errorMessage && setErrorMessage(null);
               }
               else if (query === 'cards') {
@@ -100,10 +97,13 @@ const SearchCollection = ({ path }) => {
 
   useEffect(() => {
     if (searchInput?.id === 'search-collection') {
+      if (!isActive) {
+
+        searchCollection('card-names');
+      }
       setIsActive(true);
+
     } else {
-      // setHasLoaded(false)
-      // setCardNames([]);
       setIsActive(false);
     }
   }, [searchInput]);
@@ -198,7 +198,7 @@ const SearchCollection = ({ path }) => {
                 </header>
                 <main className="flex flex-column">
                   <form id="search-collection-form" className="search-form" onSubmit={searchCollectionCard} >
-                    <SearchInput isActive={isActive} id={'search-collection'} searchCard={searchCollectionCard} ref={collectionInputRef} />
+                      <SearchInput id={'search-collection'} className={'search-field'} placeholder={'Search Your Collection'} searchCard={searchCollectionCard} isActive={isActive} ref={collectionInputRef} />
                     </form>
                     <button
                       className="bg-green"

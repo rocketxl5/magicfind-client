@@ -9,8 +9,10 @@ import hideSearchBar from '../../../utilities/hideSearchBar';
 const SearchInput = forwardRef(function SearchInput(props, ref) {
   const {
     id,
+    className,
+    placeholder,
+    searchCard,
     isActive,
-    searchCard
   } = props;
   const inputRef = ref;
 
@@ -23,6 +25,7 @@ const SearchInput = forwardRef(function SearchInput(props, ref) {
     setSearchTerm,
     predictions,
     setPredictions,
+    searchInput,
     displayAutcomplete,
     setDisplayAutocomplete
   } = useContext(SearchContext);
@@ -55,7 +58,12 @@ const SearchInput = forwardRef(function SearchInput(props, ref) {
 
   const handleFocus = (e) => {
     e.preventDefault();
-    setSearchInput(e.target);
+
+    if (searchInput?.id !== e.target.id) {
+
+      setSearchInput(e.target);
+    }
+
     if (document.querySelector('#mobile-nav')?.checked) {
       hideSearchBar();
     }
@@ -66,19 +74,13 @@ const SearchInput = forwardRef(function SearchInput(props, ref) {
       <input
         id={id}
         type="text"
-        className={id === 'search-catalog' ? 'search-catalog-field' : 'search-field'}
+        className={className}
         value={isActive ? searchTerm : ''}
         onChange={handleChange}
         onFocus={handleFocus}
         onBlur={handleBlur}
         ref={inputRef}
-        placeholder={
-          id === 'search-catalog'
-            ? 'Search Magic Find'
-            : id === 'search-collection'
-              ? 'Search Your Collection'
-              : 'Search Skryfall API'
-        }
+        placeholder={placeholder}
       />
       {(isActive && searchTerm) &&
         <AutoComplete predictions={predictions} searchCard={searchCard} inputRef={inputRef} />
