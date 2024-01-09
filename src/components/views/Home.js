@@ -32,11 +32,11 @@ const Home = () => {
     {
       bgLink: 'https://cards.scryfall.io/art_crop/front/6/7/673a67b2-fbb0-4be4-9edd-93946a583f23.jpg?1692938189',
       body: [
-        'Complete access to the site catalog.',
-        'Compare prices and card conditions.',
-        'Get in touch with the sellers.',
-        'Find sellers in your area.',
-        'Keep track of your purchases.',
+        'Compare card prices & condition',
+        'Get in touch with the sellers',
+        'Find sellers in your area',
+        'Access restricted search features',
+        'Keep track of your purchases',
       ],
       title: 'Buy',
       button: 'Join Magic Find',
@@ -45,11 +45,11 @@ const Home = () => {
     {
       bgLink: 'https://cards.scryfall.io/art_crop/front/7/9/79b0e035-8716-469d-99ae-a530cd96ef09.jpg?1562558471',
       body: [
-        'Publish cards in your virtual store.',
-        'Customize your store landing page.',
-        'Easily update your store inventory.',
-        'Push a card to increase its visibility.',
-        'Keep track of your sales.',
+        'Create your store',
+        'Customize your landing page',
+        'Update your store inventory',
+        'Increase card visibility',
+        'Keep track of your sales',
       ],
       title: 'Sell',
       button: 'Join Magic Find',
@@ -57,11 +57,11 @@ const Home = () => {
     {
       bgLink: 'https://cards.scryfall.io/large/front/1/8/18b77346-d6e4-4d2f-b054-19fdea686d40.jpg?1682689593',
       body: [
-        'Create your collector profile.',
-        'Easily manage your card collection.',
-        'Add any of the 20 000+ MTG cards.',
-        'Save your preferences.',
-        'Get in touch with other members.'
+        'Create a collector profile',
+        'Manage your card collection',
+        'Add any of the 20 000+ MTG cards',
+        'Customize your collection',
+        'Save your preferences',
       ],
       title: 'Collect',
       button: 'Join Magic Find',
@@ -69,10 +69,10 @@ const Home = () => {
     {
       bgLink: 'https://cards.scryfall.io/art_crop/front/e/3/e37da81e-be12-45a2-9128-376f1ad7b3e8.jpg?1562202585',
       body: [
-        'Build decks with your collection.',
-        'Share them with the community.',
-        'Make a wishlist.',
-        'Find missing cards in our catalog.',
+        'Build decks in any format',
+        'Share them with the community',
+        'Find members with similar taste',
+        'Create wishlists',
         'Have fun!',
       ],
       title: 'Build',
@@ -83,9 +83,9 @@ const Home = () => {
     <>
       <section className='banner-section'>
         <div className="banner home-page-banner">
-          <Link className="banner-link" to="/login">
+          {/* <Link className="banner-link" to="/login">
             Enter Magic Find
-          </Link>
+          </Link> */}
         </div>
       </section>
       <>
