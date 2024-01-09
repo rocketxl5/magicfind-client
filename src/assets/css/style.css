@@ -519,10 +519,12 @@ scroll-snap-align: start;
 
 
 .feature-footer .btn {
-  background-color: var(--clr-light-grey); 
+  /* background-color: var(--clr-light-grey);  */
+  background-color: rgba(42, 73, 101, 0.7);
   padding-inline: 1.5rem;
-  color: var(--clr-primary);
   font-family: "Young Serif", serif;
+  color: var(--clr-light-grey);
+  border: 1px solid var(--clr-light-grey);
 }
 
 /* .card-title h2 {
