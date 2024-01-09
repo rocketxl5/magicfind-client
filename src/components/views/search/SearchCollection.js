@@ -59,6 +59,7 @@ const SearchCollection = ({ path }) => {
               const { query, data } = dataObj;
               if (query === 'card-names') {
                 setCardNames(data);
+                // setSearchInput(collectionInputRef.current?.id)
                 errorMessage && setErrorMessage(null);
               }
               else if (query === 'cards') {
@@ -97,12 +98,7 @@ const SearchCollection = ({ path }) => {
 
   useEffect(() => {
     if (searchInput?.id === 'search-collection') {
-      if (!isActive) {
-
-        searchCollection('card-names');
-      }
       setIsActive(true);
-
     } else {
       setIsActive(false);
     }
@@ -201,7 +197,7 @@ const SearchCollection = ({ path }) => {
                       <SearchInput id={'search-collection'} className={'search-field'} placeholder={'Search Your Collection'} searchCard={searchCollectionCard} isActive={isActive} ref={collectionInputRef} />
                     </form>
                     <button
-                      className="bg-green"
+                      className="btn bg-green"
                       type="button"
                       onClick={() => searchCollection('cards')}
                     >

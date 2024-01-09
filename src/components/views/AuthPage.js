@@ -4,7 +4,6 @@ import AuthContextualNav from '../layout/AuthContextualNav';
 import AuthLanding from './AuthLanding';
 import SearchCollection from './search/SearchCollection';
 import SearchApi from './search/SearchAPI';
-
 const AuthPage = () => {
   const { path } = useParams()
 

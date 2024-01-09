@@ -48,7 +48,7 @@ const Search = ({ path }) => {
       headers: headers,
     };
 
-    fetch(`${api.serverURL}/api/cards/api-cardnames`, options)
+    fetch(`${api.serverURL}/api/cards/mtg-cardnames`, options)
       .then((res) => res.json())
       .then((data) => {
         setApiCards(data);
