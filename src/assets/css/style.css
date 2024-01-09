@@ -330,7 +330,7 @@ color: var(--clr-light-grey);
 font-family: 'Young Serif',serif;
 font-size: min(3.5rem, 4vw);
 font-weight: 500;
-background-color: rgba(0, 0, 0, 0.4);
+background-color: rgba(0, 0, 0, 0.6);
 border: 2px solid var(--clr-light-grey);
 border-radius: var(--radius-1);
 }
@@ -481,7 +481,7 @@ scroll-snap-align: start;
   margin-block-end: 1rem;
   text-align: center;
   font-family: "Young Serif", serif;
-  font-size: clamp(var(--fs-150), 3.5vw, var(--fs-250));
+  font-size: clamp(var(--fs-150), 3.5vw, var(--fs-200));
   letter-spacing: 0.2rem;
   color: var(--clr-light-grey);
   font-weight: 500;
@@ -520,11 +520,12 @@ scroll-snap-align: start;
 
 .feature-footer .btn {
   /* background-color: var(--clr-light-grey);  */
+  padding-inline: 1rem;
   background-color: rgba(42, 73, 101, 0.7);
-  padding-inline: 1.5rem;
+  font-size: clamp(var(--fs-150), 3.5vw, var(--fs-175));
   font-family: "Young Serif", serif;
   color: var(--clr-light-grey);
-  border: 1px solid var(--clr-light-grey);
+  border: 1px solid rgba(255, 255, 255, 0.5);;
 }
 
 /* .card-title h2 {
