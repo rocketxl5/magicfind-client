@@ -83,7 +83,7 @@ const Home = () => {
     <>
       <section className='banner-section'>
         <div className="banner home-page-banner">
-          <Link className="banner-link" to="/signup">
+          <Link className="banner-link" to="/login">
             Enter Magic Find
           </Link>
         </div>
