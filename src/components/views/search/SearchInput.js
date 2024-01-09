@@ -58,7 +58,7 @@ const SearchInput = forwardRef(function SearchInput(props, ref) {
 
   const handleFocus = (e) => {
     e.preventDefault();
-
+    // console.log(searchInput?.id)
     if (searchInput?.id !== e.target.id) {
 
       setSearchInput(e.target);

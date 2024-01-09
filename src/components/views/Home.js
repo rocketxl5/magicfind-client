@@ -23,42 +23,49 @@ const Home = () => {
       .then(res => res.json())
       .then(data => {
         setCards(data.results)
+        console.log(data.results)
       })
       .catch(err => { console.log(err.message) })
   }, [])
 
   const imagesLoaded = useImageLoader(cards);
 
-  const mainFeature = [
+  const features_content = [
     {
       icon: <TbCards size={35} />,
-      text: [
-        'Build and organize your Virtual Magic the Gathering card Collection.',
-        'Easily add any of the 20 000+ card titles from the MTG card library to your Collection.',
-        'Organize your cards according to your preferences.',
-        'Build, save and update your decks.'
+      bgLink: 'https://cards.scryfall.io/large/front/1/8/18b77346-d6e4-4d2f-b054-19fdea686d40.jpg?1682689593',
+      body: [
+        'Create your collector profile.',
+        'Easily manage your card collection.',
+        'Add any of the 20 000+ MTG card titles.',
+        'Save your preferences.',
+        'Get in touch with other members.'
       ],
       title: 'Collect'
     },
     {
-      icon: <FaStore size={30} />,
-      text: [
-        'Publish your collection cards to push them to your Virtual Store.',
-        'Sell at the price range established by the community. Which is hihger than what retailers would give you.',
-        'Organize your cards according to your preferences.',
-        'Build, save and update your decks.'
-      ],
-      title: 'Sell'
-    },
-    {
       icon: <FaCommentsDollar size={30} />,
-      text: [
-        'Search the Magic Find Catalog list for a specific card',
-        'Compare prices and conditions.',
+      bgLink: 'https://cards.scryfall.io/art_crop/front/3/c/3c7de64b-3dc8-47dd-8999-4353b5a3a06f.jpg?1608911508',
+      body: [
+        'Complete access to the site catalog.',
+        'Compare prices and card conditions.',
+        'Get in touch with the sellers.',
         'Keep track of your purchases.',
-        'Find sellers close to your area.'
+        'Find sellers in your area.'
       ],
       title: 'Buy'
+    },
+    {
+      icon: <FaStore size={30} />,
+      bgLink: 'https://cards.scryfall.io/art_crop/front/7/9/79b0e035-8716-469d-99ae-a530cd96ef09.jpg?1562558471',
+      body: [
+        'Publish cards in your virtual store.',
+        'Customize your store landing page.',
+        'Easily update your store iventory.',
+        'Push a card to increase its visibility.',
+        'Keep track of your sales.',
+      ],
+      title: 'Sell'
     },
   ]
   return (
@@ -73,37 +80,41 @@ const Home = () => {
       <>
         <main className="main-content">
           <section className="feature-section">
-            <header>
-              <h2>What Is Magic Find</h2>
+            <header className="feature-section-header">
+              <h2 className="feature-section-title">Magic Find Features</h2>
             </header>
-            <div className="site-features">
+            <div className="features grid-section">
             {
-              mainFeature.map(feature => {
+                features_content.map(content => {
                 return (
-                  <div className="feature-element">
-                <header>
-                      <div className="feature-element-icon">
-                    {feature.icon}
-                  </div>
-                </header>
-                <main>
+                  <div className="feature">
+                    <header className="feature-header">
+                      <div style={{ backgroundImage: `url(${content.bgLink})` }} className="feature-image" >
+
+                      </div>
+
+                    </header>
+                    <main className="feature-body">
                   {
-                        feature.text.map((line, index) => {
+                        content.body.map((line, index) => {
                       return (
+
                         <p key={index}>
-                          {/* <span className="line-icon">
-                            <GoShieldCheck size={13} strokeWidth={'1px'} />
-                          </span> */}
+                          <span className="line-icon">
+                            <GoShieldCheck strokeWidth={'1px'} />
+                          </span>
+                          <span>
                           {line}
+                          </span>
                         </p>
+
                       )
                     })
                   }
                 </main>
-                <footer>
-                  <div className="feature-title">
-                    <h2>{feature.title}</h2>
-                  </div>
+                    <footer className="feature-footer">
+                      <h2>{content.title}</h2>
+                      {/* <button className="btn">More</button> */}
                 </footer>
               </div>)
           })
@@ -111,13 +122,13 @@ const Home = () => {
             </div>
       </section>
 
-          <section className="feature-section">
-            <header>
-              <h2 className="title"><span>The Secret Lair Drop Artwork</span>
-                <span className="feature-icon">
+          <section className="feature-section media">
+            <header className="feature-section-header">
+              <h2 className="feature-section-title">
+                <span>The Secret Lair Drop Artwork</span>
+                <span className="feature-section-icon">
                 </span>
               </h2>
-
             </header>
             <div className="media-scroller snaps-inline">
               {
