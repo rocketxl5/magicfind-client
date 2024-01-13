@@ -181,6 +181,7 @@ const EditCard = (props) => {
                                                 <h2 className="fw-500">Edit Card</h2>
                                                 </div>
                                             </header>
+                                            <div className="scroll">
                                             <div className="modal-body">
                                                 <section className="modal-section">
 
@@ -325,6 +326,7 @@ const EditCard = (props) => {
                                                     </button>
                                                 </div>
                                             </footer>
+                                            </div>
                                 </>
                             ) : (
                                 <Success response={response} handleClick={handleClick} ref={btnRef} />
