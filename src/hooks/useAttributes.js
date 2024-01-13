@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import cardBack from '../assets/img/mtg_card_back.jpg'
 const useAttributes = (card) => {
-    const [attributes, setAttributes] = useState(null);
+    const [attributes, setAttributes] = useState({});
     const image_uris = card?.image_uris || card?.card_faces[0].image_uris;
     useEffect(() => {
         setAttributes(
@@ -13,7 +13,7 @@ const useAttributes = (card) => {
                 placeholder: cardBack
             }
         )
-    }, []);
+    }, [card]);
 
     return { attributes }
 }
