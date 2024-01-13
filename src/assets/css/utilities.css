@@ -134,11 +134,7 @@
     display: flex !important;
 }
 
-.scroll-none {
-    overflow: hidden;
-    touch-action: none;
-    -webkit-overflow-scrolling: touch;
-}
+
 
 .col-12 {
     width: 100%;
@@ -374,4 +370,14 @@
     min-width: 20rem;
     /* background-color: #2579c7; */
     border-radius: 10px;
+}
+
+.scroll {
+    overflow-y: auto;
+}
+
+.scroll-none {
+    overflow: hidden;
+    touch-action: none;
+    -webkit-overflow-scrolling: touch;
 }
