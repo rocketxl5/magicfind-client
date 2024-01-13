@@ -55,11 +55,12 @@ const useModalView = (callback) => {
                     {children[2]}
                     {/* {children[2]} */}
                     <div className="double-faced-card">
-                        {/* {children[2]} */}
+
                         <div className="double-faced-recto">
                             {children[0][0]}
                         </div>
                         <div className="double-faced-verso">
+                            {/* {children[2]} */}
                             {children[0][1]}
                         </div>
                     </div>
