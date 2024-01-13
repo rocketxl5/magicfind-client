@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { GoShieldCheck } from "react-icons/go";
 import { api } from '../../api/resources';
-import useImageLoader from '../../hooks/useImageLoader';
+import useLoadImage from '../../hooks/useLoadImage';
 
 const Home = () => {
   const [cards, setCards] = useState([]);
@@ -26,20 +26,20 @@ const Home = () => {
       .catch(err => { console.log(err.message) })
   }, [])
 
-  const imagesLoaded = useImageLoader(cards);
+  const imagesLoaded = useLoadImage(cards);
 
   const features_content = [
     {
       bgLink: 'https://cards.scryfall.io/art_crop/front/6/7/673a67b2-fbb0-4be4-9edd-93946a583f23.jpg?1692938189',
       body: [
-        'Compare card prices & condition',
+        'Compare card prices & conditions',
         'Get in touch with the sellers',
         'Find sellers in your area',
         'Access restricted search features',
         'Keep track of your purchases',
       ],
       title: 'Buy',
-      button: 'Join Magic Find',
+      button: 'Read More',
 
     },
     {
@@ -52,7 +52,7 @@ const Home = () => {
         'Keep track of your sales',
       ],
       title: 'Sell',
-      button: 'Join Magic Find',
+      button: 'Read More',
     },
     {
       bgLink: 'https://cards.scryfall.io/large/front/1/8/18b77346-d6e4-4d2f-b054-19fdea686d40.jpg?1682689593',
@@ -64,7 +64,7 @@ const Home = () => {
         'Save your preferences',
       ],
       title: 'Collect',
-      button: 'Join Magic Find',
+      button: 'Read More',
     },
     {
       bgLink: 'https://cards.scryfall.io/art_crop/front/e/3/e37da81e-be12-45a2-9128-376f1ad7b3e8.jpg?1562202585',
@@ -76,16 +76,16 @@ const Home = () => {
         'Have fun!',
       ],
       title: 'Build',
-      button: 'Join Magic Find',
+      button: 'Read More',
     },
   ]
   return (
     <>
       <section className='banner-section'>
         <div className="banner home-page-banner">
-          {/* <Link className="banner-link" to="/login">
-            Enter Magic Find
-          </Link> */}
+          <Link className="banner-link" to="/signup">
+            Join Magic Find
+          </Link>                                  
         </div>
       </section>
       <>
@@ -127,7 +127,7 @@ const Home = () => {
                 </main>
                     <footer className="feature-footer">
 
-                        <button className="btn" type="button" onClick={() => navigate('/signup')}>{content.button}</button>
+                        <button className="btn" type="button" onClick={() => navigate('/about')}>{content.button}</button>
                 </footer>
                     </div>
               </div>)

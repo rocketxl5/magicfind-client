@@ -75,7 +75,7 @@ const ApiCardFooter = ({ card, setLoading }) => {
     }
     return (
 
-        <div className="card-btns-wrapper">
+        <div className="card-btns">
             <div className="btn-container">
                 {/* <Button attributes={attributes} handleClick={handleClick}  /> */}
                 <button id="add-to-collection" className={attributes.style} type={attributes.type} onClick={handleClick}>{attributes.value}</button>

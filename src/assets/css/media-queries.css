@@ -19,7 +19,7 @@
     }
 
     .feature-footer .btn {
-        font-size: clamp(var(--fs-150), 2.5vw, var(--fs-200));
+        /* font-size: clamp(var(--fs-150), 2.5vw, var(--fs-200)); */
     }
 }
 
@@ -63,13 +63,6 @@
 
     .home-page-banner {
         background-image: url('https://cards.scryfall.io/art_crop/front/9/f/9f9f5e0c-8bf4-46ab-ad79-332ceeaed3d5.jpg?1681768912');
-    }
-
-    .banner-link {
-        background-color: var(--clr-primary);
-        color: var(--clr-ternary);
-        -webkit-text-stroke-width: 0;
-        -webkit-text-stroke-color: none;
     }
 
     .banner-section {
@@ -119,6 +112,12 @@
     
     #search-catalog {
         margin-block: 0;
+    }
+
+    /* Home Page */
+    .feature-footer {
+        /* width: max(50%, 10vw); */
+        /* font-size: clamp(var(--fs-125), 2vw, var(--fs-175)); */
     }
 
     /* Side Section */
@@ -286,6 +285,10 @@
     .feature {
         padding: 0;
     }
+
+    .feature-content {
+        border: none;
+    }
     
     .feature-image {
         aspect-ratio: 9 / 6;
@@ -293,10 +296,6 @@
     
     .feature-body p {
         font-size: clamp(1rem, 2vw, 1.25rem);
-    }
-
-    .feature-footer .btn {
-        font-size: var(--fs-175);
     }
 
     .banner {

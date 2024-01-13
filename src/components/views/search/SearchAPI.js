@@ -140,7 +140,6 @@ const Search = ({ path }) => {
         .then((res) => res.json())
         .then((data) => {
           setData(data.data);
-          // localStorage.setItem('apiCards', JSON.stringify(data.data));
         })
         .catch((error) => console.log(error));
     }

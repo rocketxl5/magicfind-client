@@ -1,6 +1,6 @@
 import { useState, useRef } from 'react';
 import { useNavigate, useLocation, useParams } from 'react-router-dom';
-import CardImage from './CardImage';
+import Image from './CardImage';
 import CollectionCardDetail from './CollectionCardDetail';
 import Success from './Success';
 import Loading from '../../layout/Loading';
@@ -99,7 +99,8 @@ const DeleteCard = (props) => {
     }
 
     return (
-        <div className={`modal-content ${loading ? 'border-light' : response.isDeleted ? 'border-success' : 'border-red'}`}>
+        <div className="modal-state">
+            <div className={`modal-state-content delete-state ${loading ? 'border-light' : response.isDeleted ? 'border-success' : 'border-red'}`}>
                 {
                     loading ? (
                         <Loading />
@@ -107,52 +108,34 @@ const DeleteCard = (props) => {
                         <>
                             {
                                 !response.isDeleted ? (
-                                    <>
-
+                                        <>
                                         <header className="modal-header bg-red">
                                             <div className="modal-title">
                                                 <h2 className="fw-500">Delete Card</h2>
                                             </div>
-                            </header>
-                                        <div className="modal-body">
-                            <div className="card-body">
-                                <section className="card-section">
-                                    <CardImage attributes={attributes} />
-                                </section>
-                                <section className="card-section">
-                                    <CollectionCardDetail card={card} />
-                                </section>
-                            </div>
-                                        <div className="card-message">
+                                            </header>
+                                            <div className="modal-body">
+                                                <section className="modal-section">
+                                                    <div className="card-section">
+                                                        <Image attributes={attributes} />
+                                                    </div>
+                                                    <div className="card-section">
+                                                        <CollectionCardDetail card={card} />
+                                                    </div>
+                                                </section>
+                                                <section className="modal-warning">
+                                                    <div className="warning-message">
                                                 {response.message}
-                                        </div>
-                                        </div>
-                                        <footer className="modal-footer bg-red-light">
-                                <div className="card-btns-wrapper">
+                                                    </div>
+                                                </section>
+                                            </div>
+                                            <footer className="modal-footer bg-red-light">
                                                 <div className="btn-container">
-                                                    < button
-                                                        id="go-back"
-                                                        className="btn bg-yellow-2 color-light"
-                                                        type="button"
-                                                        onClick={handleClick}
-                                                    >
-                                                        Go Back
-                                        </button>
-                                    </div>
-                                    <div className="btn-container">
-                                                    < button
-                                                        id="confirm-delete"
-                                                        className="btn bg-red color-light"
-                                                        type="button"
-                                                        onClick={handleClick}
-                                                        onMouseDown={(e) => deleteHandler(location)} >
-                                                        Confirm
-                                        </button>
-                                    </div>
+                                                    <button id="go-back" className="btn bg-blue color-light" type="button" onClick={handleClick}>Cancel </button>
+                                                    < button id="confirm-delete" className="btn bg-red color-light" type="button" onClick={handleClick} onMouseDown={(e) => deleteHandler(location)} >Confirm </button>
 
-                                </div>
-                            </footer>
-
+                                                </div>
+                                            </footer>
                                     </>
                                 ) : (
                                         <Success response={response} handleClick={handleClick} ref={btnRef} />
@@ -161,6 +144,7 @@ const DeleteCard = (props) => {
                         </>
                     )
             }
+        </div>
         </div>
     )
 }

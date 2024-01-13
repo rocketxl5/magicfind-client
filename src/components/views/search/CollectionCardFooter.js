@@ -14,7 +14,7 @@ const CollectionCardFooter = ({ card, handleClick }) => {
 
     // console.log(card)
     return (
-        <div className="card-btns-wrapper">
+        <div className="card-btns">
             <div className="btn-container">
                 < button id="delete-card" className="btn bg-red color-light" type="button">
                     Delete

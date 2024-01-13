@@ -1,11 +1,11 @@
 import CardImage from './CardImage';
-import ExpandIcon from './ExpandIcon';
+import ExpandBtn from './cardbtn/ExpandBtn';
 
 const CardImageSection = (props) => {
   return (
     <section className="card-section">
       <CardImage {...props} />
-      <ExpandIcon />
+      <ExpandBtn />
     </section>
   )
 }

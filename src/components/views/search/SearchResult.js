@@ -1,9 +1,10 @@
 import { useEffect, useRef } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import Card from './Card';
+import SearchItem from './SearchItem';
 import Modal from './Modal';
-import useModal from '../../../hooks/useModal';
-import useImageLoader from '../../../hooks/useImageLoader';
+import useModalState from '../../../hooks/useModalState';
+import useLoadImage from '../../../hooks/useLoadImage';
+import useModalView from '../../../hooks/useModalView';
 
 const SearchResult = () => {
     const location = useLocation();
@@ -11,8 +12,8 @@ const SearchResult = () => {
     const { cards, searchType } = location.state || JSON.parse(localStorage.getItem('search-result'));
     const cardRef = useRef(null);
 
-
     useEffect(() => {
+        console.log(cards)
         // If cards is empty
         if (!cards.length) {
             setTimeout(() => {
@@ -21,20 +22,33 @@ const SearchResult = () => {
         }
     }, [location]);
 
-    const { imagesLoaded } = useImageLoader(cards)
+    const { imagesLoaded } = useLoadImage(cards)
 
-    const [{ open, component }, { updateState }] = useModal(searchType, (value) => handleClick(value));
+    const [view, updateCardView] = useModalView(handleCardView);
 
-    function handleClick(e, card, attributes, ExpandedCard) {
+    const [state, updateCardState] = useModalState(searchType, handleCardState);
+
+    function handleCardView(e, layout, expandedImage) {
         e.stopPropagation();
-        updateState(e.target.id, card, attributes, ExpandedCard);
+        updateCardView(layout, expandedImage)
+    }
+
+    function handleCardState(e, card, imgAttributes) {
+        e.stopPropagation();
+        console.log(e.target)
+        updateCardState(e.target.id, card, imgAttributes)
     }
 
     return (
         <>
             {
-                <Modal open={open}>
-                    {component}
+                <Modal open={view.open}>
+                    {view.component}
+                </Modal>
+            }
+            {
+                <Modal open={state.open}>
+                    {state.component}
                 </Modal>
             }
             <header className="search-result-header">
@@ -54,21 +68,20 @@ const SearchResult = () => {
                     <h2 className="title">Search Results</h2>
                 </header>
                 <main className="main">
-                    <div className="cards">
                         {
                             imagesLoaded &&
                             cards.map((card, index) => {
                                 return (
-                                    <Card
+                                    <SearchItem
                                         key={index}
                                         card={card}
                                         searchType={searchType}
-                                        handleClick={handleClick}
+                                        handleCardView={handleCardView}
+                                        handleCardState={handleCardState}
                                         ref={cardRef}
                                     />)
                             })
-                        }
-                    </div>
+                    }
                 </main>
             </>
         </>
