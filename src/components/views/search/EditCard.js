@@ -167,7 +167,7 @@ const EditCard = (props) => {
 
     return (
         <div className="modal-state">
-            <div className={`modal-state-content edit-state ${loading ? 'border-light' : response.isUpdated ? 'border-success' : 'border-blue'}`}>
+            <div className={`modal-state-content ${loading ? 'border-light' : response.isUpdated ? 'border-success' : 'border-blue'}`}>
             {
                 loading ? (
                     <Loading />

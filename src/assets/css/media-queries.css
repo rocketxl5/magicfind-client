@@ -1,3 +1,8 @@
+
+/* iPhone SE */
+@media screen and (height < 70rem) {
+    
+}
 /* form.css */
 @media screen and (width >= 400px) {
     .form-content {
