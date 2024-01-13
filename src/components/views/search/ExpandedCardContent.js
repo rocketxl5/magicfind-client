@@ -1,33 +1,33 @@
-const ExpandedCardContent = ({ children, transform, handleClick }) => {
-
-    const handleFlipCard = (e) => {
+const ExpandedCardContent = ({ children, layout, handleClick }) => {
+    console.log(layout)
+    const clickHandler = (e) => {
+        console.log(e.target.id)
         if (e.target.id === 'reduce-card') {
             handleClick(e)
         }
-        else if (e.target.classList.contains('flip-card-btn')) {
-            document.querySelector('.flip-card-inner').classList.toggle('rotate-y');
+        else if (e.target.classList.contains('transform-btn')) {
+            document.querySelector('.transform-card-inner').classList.toggle('rotate-y');
             setTimeout(() => {
-                document.getElementsByClassName('flip-card-btn')[0].classList.toggle('d-none');
+                document.getElementsByClassName('transform-btn')[0].classList.toggle('d-none');
             }, 100);
         }
 
     }
     return (
         <>
-            {!transform ?
+            {layout !== 'transform' ?
                 (
-                    <div className="expanded-card" onClick={handleClick}>
+                    <div className="modal-view" onClick={handleClick}>
                         {children}
                     </div>
                 ) : (
-
-                    <div className="expanded-card flip-card" onClick={(e) => { handleFlipCard(e) }} >
-                        <div className="flip-card-inner">
-                            <div className="flip-card-recto">
+                    <div className="modal-view transform-card" onClick={(e) => { clickHandler(e) }} >
+                        <div className="transform-card-inner">
+                            <div className="transform-card-recto">
                                 {children[0][0]}
                                 {children[1]}
                             </div>
-                            <div className="flip-card-verso">
+                            <div className="transform-card-verso">
                                 {children[0][1]}
                                 {children[1]}
                             </div>

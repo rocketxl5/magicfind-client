@@ -2,7 +2,7 @@
 const CatalogCardFooter = () => {
 
     return (
-        <div className="card-btns-wrapper">
+        <div className="card-btns">
             <div className="btn-container">
                 <button id="add-to-wishlist" className="btn bg-green color-light" type="button" >Add to Wishlist</button>
             </div>

@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { useNavigate, useLocation, useParams } from 'react-router-dom';
-import CardImage from './CardImage';
+import Image from './CardImage';
 import CollectionCardDetail from './CollectionCardDetail';
 import Success from './Success';
 import Loading from '../../layout/Loading';
@@ -166,7 +166,8 @@ const EditCard = (props) => {
     }
 
     return (
-        <div className={`modal-content ${loading ? 'border-light' : response.isUpdated ? 'border-success' : 'border-blue'}`}>
+        <div className="modal-state">
+            <div className={`modal-state-content edit-state ${loading ? 'border-light' : response.isUpdated ? 'border-success' : 'border-blue'}`}>
             {
                 loading ? (
                     <Loading />
@@ -175,160 +176,155 @@ const EditCard = (props) => {
                         {
                                 !response.isUpdated ? (
                                 <>
-                                        <header className="modal-header bg-blue">
-                                            <div className="modal-title">
-
+                                            <header className="modal-header bg-blue">
+                                                <div className="modal-title">
                                                 <h2 className="fw-500">Edit Card</h2>
-                                        </div>
-                                    </header>
-                                    <div className="modal-body">
-                                        <div className="card-body">
-                                            <section className="card-section">
-                                                <CardImage attributes={attributes} />
-                                            </section>
-                                            <section className="card-section">
-                                                <CollectionCardDetail card={card} />
-                                            </section>
-                                        </div>
-                                        <div className="edit-card">
-                                            <form className="edit-form" id="edit-form" name="edit-form" onSubmit={handleSubmit} noValidate>
-                                                <div className="form-element flex gap-1">
-                                                    <div className="edit-option">
-                                                        <label htmlFor="price" className={errors.price && 'color-danger'}>{errors.price ? errors.price : 'Price'}</label>
-                                                        <input
-                                                            className={errors.price ? 'border-danger danger-padding' : ''}
-                                                            id="price"
-                                                            type="number"
-                                                            name="price"
-                                                            value={values.price}
-                                                            onChange={handleChange}
-                                                            onFocus={handleFocus}
-                                                            min="0.25"
-                                                            max="10000"
-                                                            placeholder="Price"
-                                                            ref={priceRef}
-                                                        />
-                                                    </div>
-                                                    <div className="edit-option">
-                                                        <label htmlFor="quantity" className={errors.quantity && 'color-danger'}>{errors.quantity ? errors.quantity : 'Quantity'}</label>
-                                                        <input
-                                                            className={errors.quantity ? 'border-danger danger-padding' : ''}
-                                                            id="quantity"
-                                                            type="number"
-                                                            name="quantity"
-                                                            value={values.quantity}
-                                                            onChange={handleChange}
-                                                            onFocus={handleFocus}
-                                                            min="0"
-                                                            max="1000"
-                                                            placeholder="Quantity"
-                                                            ref={quantityRef}
-                                                        />
-                                                    </div>
                                                 </div>
-                                                <div className="form-element">
-                                                        <label htmlFor="condition" className={errors.condition && 'color-danger'}>{errors.condition ? errors.condition : 'Card Condition'}</label>
-                                                    <select
-                                                        className={errors.condition ? 'border-danger danger-padding' : ''}
-                                                        id="condition"
-                                                        type="text"
-                                                        name="condition"
-                                                        value={values.condition}
-                                                        onChange={handleChange}
-                                                        onFocus={handleFocus}
-                                                        ref={conditionRef}
-                                                    >
-                                                        <option value="">Choose a condition</option>
-                                                        <option value='m'>Mint</option>
-                                                        <option value='nm'>Near Mint</option>
-                                                        <option value="lp">Lightly Played</option>
-                                                        <option value="mp">Moderatly Played</option>
-                                                        <option value="hp">Heavely Played</option>
-                                                        <option value="d">Damaged</option>
-                                                    </select>
-                                                </div>
-                                                <div className="form-element">
-                                                        <label htmlFor="language" className={errors.language && 'color-danger'}>{errors.language ? errors.language : 'Card Condition'}</label>
-                                                        <select
-                                                            className={errors.language ? 'border-danger danger-padding' : ''}
-                                                            id="language"
-                                                            name="language"
-                                                            value={values.language}
-                                                            onChange={handleChange}
-                                                            onFocus={handleFocus}
-                                                            ref={languageRef}
-                                                        >
-                                                            <option value="">Choose a language</option>
-                                                            <option value="en">English</option>
-                                                            <option value="es">Spanish</option>
-                                                            <option value="fr">French</option>
-                                                            <option value="de">German</option>
-                                                            <option value="it">Italian</option>
-                                                            <option value="pt">Portuguese</option>
-                                                            <option value="ja">Japanese</option>
-                                                            <option value="ko">Korean</option>
-                                                            <option value="ru">Russian</option>
-                                                            <option value="zhs">Simplified Chinese</option>
-                                                            <option value="zht">Traditional Chinese</option>
-                                                            <option value="ph">Phyrexian</option>
-                                                        </select>
-                                                    </div>
-                                                    <div className="form-element">
-                                                    <label htmlFor="comment" className={errors.comment && 'color-danger'}>{errors.comment ? errors.comment : 'Additional Information'}</label>
-                                                    <textarea
-                                                        className={errors.comment && 'border-danger danger-padding'}
-                                                        id="comment"
-                                                        name="comment"
-                                                        value={values.comment}
-                                                        onChange={handleChange}
-                                                        onFocus={handleFocus}
-                                                            placeholder=""
-                                                        ref={commentRef}
-                                                    >
-                                                    </textarea>
-                                                </div>
-                                                <div className="form-element">
-                                                    <p>Card Status</p>
-                                                    <div className="card-status flex gap-1">
-                                                        <div className="edit-option status flex align-center space-between">
-                                                                <label htmlFor="published">Published</label>
-                                                                <input type="radio" name="published" id="published" onChange={handleRadioChange} value={values.published} checked={values.published} ref={publishedRef} />
+                                            </header>
+                                            <div className="modal-body">
+                                                <section className="modal-section">
 
+                                                    <div className="card-section">
+                                                        <Image attributes={attributes} />
+                                                    </div>
+                                                    <div className="card-section">
+                                                        <CollectionCardDetail card={card} />
+                                                    </div>
+                                                </section>
+                                                <div className="edit-card">
+                                                    <form className="edit-form" id="edit-form" name="edit-form" onSubmit={handleSubmit} noValidate>
+                                                        <div className="form-element flex gap-1">
+                                                            <div className="edit-option">
+                                                                <label htmlFor="price" className={errors.price && 'color-danger'}>{errors.price ? errors.price : 'Price'}</label>
+                                                                <input
+                                                                    className={errors.price ? 'border-danger danger-padding' : ''}
+                                                                    id="price"
+                                                                    type="number"
+                                                                    name="price"
+                                                                    value={values.price}
+                                                                    onChange={handleChange}
+                                                                    onFocus={handleFocus}
+                                                                    min="0.25"
+                                                                    max="10000"
+                                                                    placeholder="Price"
+                                                                    ref={priceRef}
+                                                                />
+                                                            </div>
+                                                            <div className="edit-option">
+                                                                <label htmlFor="quantity" className={errors.quantity && 'color-danger'}>{errors.quantity ? errors.quantity : 'Quantity'}</label>
+                                                                <input
+                                                                    className={errors.quantity ? 'border-danger danger-padding' : ''}
+                                                                    id="quantity"
+                                                                    type="number"
+                                                                    name="quantity"
+                                                                    value={values.quantity}
+                                                                    onChange={handleChange}
+                                                                    onFocus={handleFocus}
+                                                                    min="0"
+                                                                    max="1000"
+                                                                    placeholder="Quantity"
+                                                                    ref={quantityRef}
+                                                                />
+                                                            </div>
                                                         </div>
-                                                        <div className="edit-option status flex align-center space-between">
-                                                                <label htmlFor="unpublished">Unpublished</label>
-                                                                <input type="radio" name="published" id="unpublished" onChange={handleRadioChange} value={!values.published} checked={!values.published} />
+                                                        <div className="form-element">
+                                                            <label htmlFor="condition" className={errors.condition && 'color-danger'}>{errors.condition ? errors.condition : 'Card Condition'}</label>
+                                                            <select
+                                                                className={errors.condition ? 'border-danger danger-padding' : ''}
+                                                                id="condition"
+                                                                type="text"
+                                                                name="condition"
+                                                                value={values.condition}
+                                                                onChange={handleChange}
+                                                                onFocus={handleFocus}
+                                                                ref={conditionRef}
+                                                            >
+                                                                <option value="">Choose a condition</option>
+                                                                <option value='m'>Mint</option>
+                                                                <option value='nm'>Near Mint</option>
+                                                                <option value="lp">Lightly Played</option>
+                                                                <option value="mp">Moderatly Played</option>
+                                                                <option value="hp">Heavely Played</option>
+                                                                <option value="d">Damaged</option>
+                                                            </select>
                                                         </div>
-                                                    </div>
+                                                        <div className="form-element">
+                                                            <label htmlFor="language" className={errors.language && 'color-danger'}>{errors.language ? errors.language : 'Card Condition'}</label>
+                                                            <select
+                                                                className={errors.language ? 'border-danger danger-padding' : ''}
+                                                                id="language"
+                                                                name="language"
+                                                                value={values.language}
+                                                                onChange={handleChange}
+                                                                onFocus={handleFocus}
+                                                                ref={languageRef}
+                                                            >
+                                                                <option value="">Choose a language</option>
+                                                                <option value="en">English</option>
+                                                                <option value="es">Spanish</option>
+                                                                <option value="fr">French</option>
+                                                                <option value="de">German</option>
+                                                                <option value="it">Italian</option>
+                                                                <option value="pt">Portuguese</option>
+                                                                <option value="ja">Japanese</option>
+                                                                <option value="ko">Korean</option>
+                                                                <option value="ru">Russian</option>
+                                                                <option value="zhs">Simplified Chinese</option>
+                                                                <option value="zht">Traditional Chinese</option>
+                                                                <option value="ph">Phyrexian</option>
+                                                            </select>
+                                                        </div>
+                                                        <div className="form-element">
+                                                            <label htmlFor="comment" className={errors.comment && 'color-danger'}>{errors.comment ? errors.comment : 'Additional Information'}</label>
+                                                            <textarea
+                                                                className={errors.comment && 'border-danger danger-padding'}
+                                                                id="comment"
+                                                                name="comment"
+                                                                value={values.comment}
+                                                                onChange={handleChange}
+                                                                onFocus={handleFocus}
+                                                                placeholder=""
+                                                                ref={commentRef}
+                                                            >
+                                                            </textarea>
+                                                        </div>
+                                                        <div className="form-element">
+                                                            <p>Card Status</p>
+                                                            <div className="card-status flex gap-1">
+                                                                <div className="edit-option status flex align-center space-between">
+                                                                    <label htmlFor="published">Published</label>
+                                                                    <input type="radio" name="published" id="published" onChange={handleRadioChange} value={values.published} checked={values.published} ref={publishedRef} />
+
+                                                                </div>
+                                                                <div className="edit-option status flex align-center space-between">
+                                                                    <label htmlFor="unpublished">Unpublished</label>
+                                                                    <input type="radio" name="published" id="unpublished" onChange={handleRadioChange} value={!values.published} checked={!values.published} />
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </form>
                                                 </div>
-                                            </form>
-                                        </div>
-
-                                    </div>
-                                        <footer className="modal-footer bg-blue-light">
-                                        <div className="card-btns-wrapper">
-                                            <div className="btn-container">
-                                                < button
-                                                    id="go-back"
-                                                        className="btn bg-yellow-2 color-light"
-                                                    type="button"
-                                                    onClick={handleClick}
-                                                >
-                                                    Go Back
-                                                </button>
                                             </div>
-                                            <div className="btn-container">
-                                                < button
-                                                    id="confirm-publish"
-                                                    className="btn bg-green color-light"
-                                                    type="button"
+                                            <footer className="modal-footer bg-blue-light">
+                                                <div className="btn-container">
+                                                    < button
+                                                        id="go-back"
+                                                        className="btn bg-blue color-light"
+                                                        type="button"
+                                                        onClick={handleClick}
+                                                    >
+                                                        Go Back
+                                                    </button>
+                                                    < button
+                                                        id="confirm-publish"
+                                                        className="btn bg-green color-light"
+                                                        type="button"
 
-                                                    onClick={handleSubmit} >
-                                                    Submit
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </footer>
+                                                        onClick={handleSubmit} >
+                                                        Submit
+                                                    </button>
+                                                </div>
+                                            </footer>
                                 </>
                             ) : (
                                 <Success response={response} handleClick={handleClick} ref={btnRef} />
@@ -337,7 +333,8 @@ const EditCard = (props) => {
                     </>
                 )
             }
-        </div>
+            </div>
+        </div >
     )
 }
 

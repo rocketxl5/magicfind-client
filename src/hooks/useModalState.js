@@ -1,10 +1,8 @@
 import { useReducer } from 'react';
-import ExpandedCardContent from '../components/views/search/ExpandedCardContent';
 import EditCard from '../components/views/search/EditCard';
 import DeleteCard from '../components/views/search/DeleteCard';
-import FlipIcon from '../components/views/search/FlipIcon';
 
-const useModal = (searchType, callback) => {
+const useModalState = (searchType, callback) => {
     const INIT = {
         open: false,
         component: null
@@ -18,29 +16,14 @@ const useModal = (searchType, callback) => {
         EXPAND_CARD: 'expand-card',
         GO_BACK: 'go-back',
         EDIT_CARD: 'edit-card',
-        REDUCE_CARD: 'reduce-card',
+        CLOSE_MODAL: 'close',
     }
+
 
     const reducer = (state, action) => {
 
         switch (action.type) {
-            case ACTIONS.EXPAND_CARD:
-                // 
-                return !action.payload.card.card_faces?.length ?
-                    {
-                    open: true,
-                    component:
-                        <ExpandedCardContent transform={false} handleClick={callback}>
-                            {action.payload.ImageComponent}
-                        </ExpandedCardContent>
-                    } : {
-                        open: true,
-                        component:
-                            <ExpandedCardContent transform={true} handleClick={callback}>
-                                {action.payload.ImageComponent}
-                                <FlipIcon handleClick={callback} />
-                            </ExpandedCardContent>
-                    }
+
             case ACTIONS.DELETE_CARD:
                 return {
                     open: true,
@@ -69,7 +52,7 @@ const useModal = (searchType, callback) => {
 
             //     break;
             case ACTIONS.REDUCE_CARD:
-                return INIT; 
+                return INIT;
             case ACTIONS.CONFIRM_DELETE:
                 return INIT;
             case ACTIONS.GO_BACK:
@@ -82,18 +65,17 @@ const useModal = (searchType, callback) => {
     }
     const [state, dispatch] = useReducer(reducer, INIT)
 
-    const updateState = (id, card, attributes, ExpandedCard) => {
+    const updateCardState = (id, card, imgAttributes) => {
         dispatch({
             type: id,
             payload: {
                 card: card,
-                attributes: attributes,
-                ImageComponent: ExpandedCard,
+                attributes: imgAttributes,
             }
         })
     }
 
-    return [state, { updateState }];
+    return [state, updateCardState];
 }
 
-export default useModal;
+export default useModalState;

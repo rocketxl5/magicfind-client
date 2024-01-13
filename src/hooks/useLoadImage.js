@@ -1,8 +1,7 @@
 // source @ https://codesandbox.io/p/sandbox/react-image-preload-ptosn?file=%2Fsrc%2FApp.js
 import { useState, useEffect } from 'react'
-import { json } from 'react-router-dom';
 
-const useImageLoader = (cards) => {
+const useLoadImage = (cards) => {
     const [imagesLoaded, setImagesLoaded] = useState(false);
     useEffect(() => {
         const loadImage = card => {
@@ -26,4 +25,4 @@ const useImageLoader = (cards) => {
     return { cards, imagesLoaded }
 }
 
-export default useImageLoader
+export default useLoadImage

@@ -1,12 +1,12 @@
 import { FaExpand } from "react-icons/fa";
 // import { LuExpand } from "react-icons/lu";
 
-const ExpandIcon = () => {
+const ExpandBtn = () => {
     return (
-        <button className="card-icon-container expand-icon-btn" type="button">
+        <button className="card-icon-container magnify-btn" type="button">
             <FaExpand />
         </button>
     )
 }
 
-export default ExpandIcon
+export default ExpandBtn
