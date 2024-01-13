@@ -2,7 +2,7 @@
 import { useState, useEffect } from 'react'
 
 const useLoadImage = (cards) => {
-    const [imagesLoaded, setImagesLoaded] = useState(false);
+    const [imagesLoaded, setImagesLoaded] = useState(null);
     useEffect(() => {
         const loadImage = card => {
             return new Promise((resolve, reject) => {

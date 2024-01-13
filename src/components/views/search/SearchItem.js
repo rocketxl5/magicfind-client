@@ -1,33 +1,25 @@
-import { useState, useEffect, createElement, forwardRef } from 'react';
-import CardImageSection from './CardImageSection';
+import { useState, forwardRef } from 'react';
 import CardDetailSection from './CardDetailSection';
-import card_back from '../../../assets/img/card_back.jpg'
 // Footers
 import CatalogCardFooter from './CatalogCardFooter';
 import CollectionCardFooter from './CollectionCardFooter';
 import ApiCardFooter from './ApiCardFooter';
-
 import useMagnifyImage from '../../../hooks/useMagnifyImage';
 
 import CardImage from './CardImage';
 import ExpandBtn from './cardbtn/ExpandBtn';
+import useAttributes from '../../../hooks/useAttributes';
 
 const SearchItem = forwardRef(function SearchItem(props, ref) {
     const { card, searchType, handleCardView, handleCardState } = props;
     const [loading, setLoading] = useState(false);
-    const image_uris = card?.image_uris || card?.card_faces[0].image_uris;
-    const imgAttributes = {
-        id: 'expand-card',
-        style: 'card-image b-radius-10',
-        src: image_uris.small,
-        alt: `${card.name} image`,
-        placeholder: card_back
-    }
 
+
+    const { imgAttributes } = useAttributes(card);
     const { expandedImage } = useMagnifyImage(card)
 
     return (
-        <>
+        (expandedImage && imgAttributes) && 
             <div className="card-content" ref={ref}>
                 <header className="card-header">
                     <h2 className="card-name">{card.name}</h2>
@@ -51,7 +43,7 @@ const SearchItem = forwardRef(function SearchItem(props, ref) {
                     }
                 </footer>
             </div>
-        </>
+
     )
 })
 

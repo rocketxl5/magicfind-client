@@ -1,0 +1,21 @@
+import { useState, useEffect } from 'react'
+import cardBack from '../assets/img/mtg_card_back.jpg'
+const useAttributes = (card) => {
+    const [attributes, setAttributes] = useState(null);
+    const image_uris = card?.image_uris || card?.card_faces[0].image_uris;
+    useEffect(() => {
+        setAttributes(
+            {
+                id: 'expand-card',
+                style: 'card-image b-radius-10',
+                src: image_uris.small,
+                alt: `${card.name} image`,
+                placeholder: cardBack
+            }
+        )
+    }, []);
+
+    return { attributes }
+}
+
+export default useAttributes
