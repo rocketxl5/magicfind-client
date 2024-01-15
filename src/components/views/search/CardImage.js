@@ -1,25 +1,32 @@
 import { useState, useEffect } from 'react';
+// import useExpandImage from '../../../hooks/useExpandImage';
+import useExpandImage from '../../../hooks/useExpandImage';
+import useAttributes from '../../../hooks/useAttributes';
 
-const CardImage = ({ attributes }) => {
+const CardImage = ({ card, handleCardView }) => {
+    const [hasLoaded, setHasLoaded] = useState(false);
+    const { attributes } = useAttributes(card);
+    const { expandedImage } = useExpandImage(card);
     const { id, style, src, alt, placeholder } = attributes;
 
-    const [hasLoaded, setHasLoaded] = useState(false);
     useEffect(() => {
+        console.log(src)
         const img = new Image();
-        img.src = src;
+        img.src = card?.image_uris?.small || card?.card_faces[0]?.image_uris?.small;
         img.onload = () => {
             setHasLoaded(true);
         }
-    }, [src])
+    }, [card])
 
     return (
-        <div className="blur-load">
+        expandedImage &&
+        <div className="blur-load" onClick={(e) => handleCardView(e, card.layout, expandedImage)}>
             {
                 !hasLoaded ? (
-                    <img id={id} className={style} src={placeholder} alt={alt} />
+                        <img id={id} className={style} src={placeholder} alt={alt} />
                 ) : (
 
-                        <img id={id} className={style} src={src} alt={alt} loading="lazy" />
+                            <img id={id} className={style} src={src} alt={alt} loading="lazy" />
                 )
             }
         </div>

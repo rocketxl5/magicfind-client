@@ -18,9 +18,6 @@ const useModalView = (callback) => {
     const turnCard = () => {
         console.log('turn')
         document.querySelector('.double-faced-card').classList.toggle('rotate-y');
-        setTimeout(() => {
-            // document.querySelectorAll('.turn-btn')[0].classList.toggle('d-none');
-        }, 100);
     }
 
     const flipCard = () => {
@@ -53,14 +50,11 @@ const useModalView = (callback) => {
                 <div className="modal-view-content">
                     {children[1]}
                     {children[2]}
-                    {/* {children[2]} */}
                     <div className="double-faced-card">
-
                         <div className="double-faced-recto">
                             {children[0][0]}
                         </div>
                         <div className="double-faced-verso">
-                            {/* {children[2]} */}
                             {children[0][1]}
                         </div>
                     </div>
@@ -144,7 +138,6 @@ const useModalView = (callback) => {
             case 'modal_dfc':
             case 'reversible_card':
             case 'double_faced_token':
-            case 'meld':
             case 'art_series':
                 dispatch({
                     type: 'turn',
@@ -158,6 +151,7 @@ const useModalView = (callback) => {
             case 'leveler':
             case 'class':
             case 'saga':
+            case 'meld':
             case 'adventure':
             case 'mutate':
             case 'prototype':
