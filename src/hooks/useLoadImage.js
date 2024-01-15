@@ -7,7 +7,7 @@ const useLoadImage = (cards) => {
         const loadImage = card => {
             return new Promise((resolve, reject) => {
                 const image = new Image();
-                const uri = card.image_uris?.normal || card.card_faces[0]?.image_uris.normal;
+                const uri = card.image_uris?.normal || card.card_faces[0].image_uris?.normal;
                 image.src = uri;
                 image.onload = () => resolve(card);
                 image.onerror = error => reject(error);
@@ -22,7 +22,7 @@ const useLoadImage = (cards) => {
             .catch(error => console.log('Image load has failed', error))
     }, [cards])
 
-    return { cards, imagesLoaded }
+    return { imagesLoaded }
 }
 
 export default useLoadImage

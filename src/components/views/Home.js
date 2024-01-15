@@ -1,33 +1,16 @@
 import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { GoShieldCheck } from "react-icons/go";
-import { api } from '../../api/resources';
+import CardImage from './search/CardImage';
+import Modal from './search/Modal';
 import useLoadImage from '../../hooks/useLoadImage';
+import useExpandImage from '../../hooks/useExpandImage';
+import useModalView from '../../hooks/useModalView';
+import { api } from '../../api/resources';
 
 const Home = () => {
   const [cards, setCards] = useState([]);
   const navigate = useNavigate();
-
-  useEffect(() => {
-    const query = 'sld'
-    const iteration = 10;
-    const headers = new Headers();
-    headers.append('Content-Type', 'application/json');
-    const options = {
-      method: 'GET',
-      headers: headers,
-    }
-    fetch(`${api.serverURL}/api/cards/feature/${query}/${iteration}`, options)
-      .then(res => res.json())
-      .then(data => {
-        setCards(data.results)
-        console.log(data.results)
-      })
-      .catch(err => { console.log(err.message) })
-  }, [])
-
-  const imagesLoaded = useLoadImage(cards);
-
   const features_content = [
     {
       bgLink: 'https://cards.scryfall.io/art_crop/front/6/7/673a67b2-fbb0-4be4-9edd-93946a583f23.jpg?1692938189',
@@ -79,8 +62,38 @@ const Home = () => {
       button: 'Read More',
     },
   ]
+
+  useEffect(() => {
+    const query = 'sld'
+    const iteration = 10;
+    const headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    const options = {
+      method: 'GET',
+      headers: headers,
+    }
+    fetch(`${api.serverURL}/api/cards/feature/${query}/${iteration}`, options)
+      .then(res => res.json())
+      .then(data => {
+        setCards(data.results)
+        console.log(data.results)
+      })
+      .catch(err => { console.log(err.message) })
+  }, [])
+
+  const { imagesLoaded } = useLoadImage(cards);
+  const [view, updateCardView] = useModalView(handleCardView)
+
+  function handleCardView(e, layout, expandedImage) {
+    e.stopPropagation();
+    updateCardView(layout, expandedImage)
+
+  }
   return (
     <>
+      <Modal open={view.open}>
+        {view.component}
+      </Modal>
       <section className='banner-section'>
         <div className="banner home-page-banner">
           <Link className="banner-link" to="/signup">
@@ -145,18 +158,18 @@ const Home = () => {
               </h2>
             </header>
             <div className="media-scroller snaps-inline">
+
               {
-                imagesLoaded &&
                 cards.map((card, index) => {
                   return (
-                    <>
-                      <div className="media-element" key={index}>
+                    <div className="media-element">
+                      <CardImage key={index} card={card} handleCardView={handleCardView} />
+                      {/* <div className="media-element" key={index} onClick={(e) => handleCardView()}>
                         {
                           <img src={card.image_uris?.normal || card.card_faces[0]?.image_uris.normal} alt={card.name} />
                         }
-                        <p>{card.artist}</p>
-                      </div>
-                    </>
+                        <p>{card.artist}</p>*/}
+                    </div> 
                   )
                 })
               }

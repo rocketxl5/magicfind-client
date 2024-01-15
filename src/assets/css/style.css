@@ -326,10 +326,10 @@ right: 3rem;
 padding-inline: 1rem;
 padding-block: 0.5rem;
 color: var(--clr-grey);
-font-size: clamp(var(--fs-150), 2vw, var(--fs-300));
+font-size: clamp(var(--fs-150), 3vw, var(--fs-300));
 font-weight: 500;
 /* background-color: rgba(0, 0, 0, 0.6); */
-background-color: rgba(42, 73, 101, 0.9);
+background-color: rgba(42, 73, 101, 1);
 border: 2px solid var(--clr-grey);
 border-radius: var(--radius-1);
 }
@@ -398,7 +398,7 @@ scroll-snap-align: start;
 .feature-section-title {
   display: flex;
   align-items: center;
-  font-size: clamp(var(--fs-175), 3vw, var(--fs-200));
+  font-size: clamp(var(--fs-175), 4vw, var(--fs-300));
   font-weight: 500;
   margin-inline: 1.5rem;
   padding-block-end: 1.5rem;

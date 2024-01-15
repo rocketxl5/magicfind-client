@@ -35,7 +35,6 @@ const SearchResult = () => {
 
     function handleCardState(e, card, imgAttributes) {
         e.stopPropagation();
-        console.log(e.target)
         updateCardState(e.target.id, card, imgAttributes)
     }
 
