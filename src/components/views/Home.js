@@ -1,92 +1,56 @@
 import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import { GoShieldCheck } from "react-icons/go";
 import CardImage from './search/CardImage';
 import Modal from './search/Modal';
 import useLoadImage from '../../hooks/useLoadImage';
 import useExpandImage from '../../hooks/useExpandImage';
 import useModalView from '../../hooks/useModalView';
+import data from '../../assets/data/HOME_PAGE';
 import { api } from '../../api/resources';
 
 const Home = () => {
-  const [cards, setCards] = useState([]);
+  const [cardImages, setCardImages] = useState([]);
+  const [hasLoaded, setHasLoaded] = useState(false);
+  const [featureData, setFeatureData] = useState(null)
   const navigate = useNavigate();
-  const features_content = [
-    {
-      bgLink: 'https://cards.scryfall.io/art_crop/front/6/7/673a67b2-fbb0-4be4-9edd-93946a583f23.jpg?1692938189',
-      body: [
-        'Compare card prices & conditions',
-        'Get in touch with the sellers',
-        'Find sellers in your area',
-        'Access restricted search features',
-        'Keep track of your purchases',
-      ],
-      title: 'Buy',
-      button: 'Read More',
+  const { site_features, main_feature } = data;
+  // const sldSeries = main_feature;
 
-    },
-    {
-      bgLink: 'https://cards.scryfall.io/art_crop/front/7/9/79b0e035-8716-469d-99ae-a530cd96ef09.jpg?1562558471',
-      body: [
-        'Create your store',
-        'Customize your landing page',
-        'Update your store inventory',
-        'Increase card visibility',
-        'Keep track of your sales',
-      ],
-      title: 'Sell',
-      button: 'Read More',
-    },
-    {
-      bgLink: 'https://cards.scryfall.io/large/front/1/8/18b77346-d6e4-4d2f-b054-19fdea686d40.jpg?1682689593',
-      body: [
-        'Create a collector profile',
-        'Manage your card collection',
-        'Add any of the 20 000+ MTG cards',
-        'Customize your collection',
-        'Save your preferences',
-      ],
-      title: 'Collect',
-      button: 'Read More',
-    },
-    {
-      bgLink: 'https://cards.scryfall.io/art_crop/front/e/3/e37da81e-be12-45a2-9128-376f1ad7b3e8.jpg?1562202585',
-      body: [
-        'Build decks in any format',
-        'Share them with the community',
-        'Find members with similar taste',
-        'Create wishlists',
-        'Have fun!',
-      ],
-      title: 'Build',
-      button: 'Read More',
-    },
-  ]
+
 
   useEffect(() => {
-    const query = 'sld'
-    const iteration = 10;
-    const headers = new Headers();
-    headers.append('Content-Type', 'application/json');
-    const options = {
-      method: 'GET',
-      headers: headers,
-    }
-    fetch(`${api.serverURL}/api/cards/feature/${query}/${iteration}`, options)
-      .then(res => res.json())
-      .then(data => {
-        setCards(data.results)
-        console.log(data.results)
-      })
-      .catch(err => { console.log(err.message) })
+    let images = [];
+    const promises = main_feature.map(async (series, index) => {
+      const response = await axios.get(`${api.skryfallURL}/cards/search?order=set&q=e%3Asld+${series.query}&unique=cards`);
+      images = [...images, ...response.data.data]
+      setFeatureData({ cards: response.data.data, index: index })
+      return response;
+    })
+
+    Promise.all(promises)
+      .then(responses => responses && console.log(featureData))
+      .catch((error) => { throw new Error(error) })
+
+    setCardImages(images)
+    setHasLoaded(true)
   }, [])
 
-  const { imagesLoaded } = useLoadImage(cards);
+  useEffect(() => {
+    if (featureData) {
+      const { cards, index } = featureData;
+      main_feature[index].cards = [...cards];
+      main_feature[index].art = cards[main_feature[index].index]?.image_uris?.normal || cards[main_feature[index].index]?.card_faces[0]?.image_uris?.normal;
+    }
+  }, [featureData])
+
+  const { imagesLoaded } = useLoadImage(cardImages);
   const [view, updateCardView] = useModalView(handleCardView)
 
   function handleCardView(e, layout, expandedImage) {
-    e.stopPropagation();
-    updateCardView(layout, expandedImage)
+    // e.stopPropagation();
+    // updateCardView(layout, expandedImage)
 
   }
   return (
@@ -109,9 +73,9 @@ const Home = () => {
             </header>
             <div className="features grid-section">
             {
-                features_content.map(content => {
+                site_features.map((content, index) => {
                 return (
-                  <div className="feature">
+                  <div key={index} className="feature">
                     <div className="feature-content">
                     <header className="feature-header">
                         <h2 className="feature-title">{content.title}</h2>
@@ -157,21 +121,24 @@ const Home = () => {
                 </span>
               </h2>
             </header>
+            {/* <CardImage key={index} card={card} handleCardView={handleCardView} /> */}
             <div className="media-scroller snaps-inline">
 
               {
-                cards.map((card, index) => {
+                imagesLoaded ?
+                  (main_feature.map((feature, index) => {
+                // console.log(card?.image_uris?.small || card?.card_faces[0]?.image_uris?.small)
                   return (
-                    <div className="media-element">
-                      <CardImage key={index} card={card} handleCardView={handleCardView} />
-                      {/* <div className="media-element" key={index} onClick={(e) => handleCardView()}>
+                    <div key={index} className="media-element" onClick={(e) => handleCardView()}>
                         {
-                          <img src={card.image_uris?.normal || card.card_faces[0]?.image_uris.normal} alt={card.name} />
+                        <img src={feature.art} alt={feature.title} />
                         }
-                        <p>{card.artist}</p>*/}
+                      <p>{feature.title}</p>
                     </div> 
                   )
-                })
+                  })) : (
+                    ''
+                  )
               }
             </div>
       </section>

@@ -1,8 +1,8 @@
 import { IoClose } from "react-icons/io5";
 
-const CloseBtn = ({ handleClick }) => {
+const CloseBtn = ({ handleClick, coordinates }) => {
     return (
-        <button className="close-btn card-btn" type="button" onClick={(e) => handleClick(e, null)}>
+        <button className={`${coordinates} close-btn card-btn`} type="button" onClick={(e) => handleClick(e, null)}>
             <IoClose />
         </button>
     )
