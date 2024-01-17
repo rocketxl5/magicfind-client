@@ -15,6 +15,8 @@ const useModalView = (callback) => {
         TURN: 'turn'
     }
 
+    const COORD_CLASSNAME = 'close-btn-coordinates';
+
     const turnCard = () => {
         console.log('turn')
         document.querySelector('.double-faced-card').classList.toggle('rotate-y');
@@ -73,7 +75,7 @@ const useModalView = (callback) => {
                         <SingleFacedCard action={action.type}>
                             {action.payload.expandedImage}
                             {/* Passing handleCardView as callback @ SearchResult */}
-                            <CloseBtn handleClick={callback} />
+                            <CloseBtn coordinates={COORD_CLASSNAME} handleClick={callback} />
                         </SingleFacedCard>
                 }
             case ACTIONS.ROTATE:
@@ -82,7 +84,7 @@ const useModalView = (callback) => {
                     component:
                         <SingleFacedCard action={action.type}>
                             {action.payload.expandedImage}
-                            <CloseBtn handleClick={callback} />
+                            <CloseBtn coordinates={COORD_CLASSNAME} handleClick={callback} />
                             <RotateBtn handleClick={rotateCard} />
                         </SingleFacedCard>
                 }
@@ -92,7 +94,7 @@ const useModalView = (callback) => {
                     component:
                         <SingleFacedCard action={action.type}>
                             {action.payload.expandedImage}
-                            <CloseBtn handleClick={callback} />
+                            <CloseBtn coordinates={COORD_CLASSNAME} handleClick={callback} />
                             <RotateBtn handleClick={flipCard} />
                         </SingleFacedCard>
                 }
@@ -102,7 +104,7 @@ const useModalView = (callback) => {
                     component:
                         <DoubleFacedCard action={action.type}>
                             {action.payload.expandedImage}
-                            <CloseBtn handleClick={callback} />
+                            <CloseBtn coordinates={COORD_CLASSNAME} handleClick={callback} />
                             <TurnBtn handleClick={turnCard} />
                         </DoubleFacedCard>
                 }
