@@ -8,7 +8,7 @@ import SignInBtn from './navbtn/SignInBtn';
 import AuthBtn from './navbtn/AuthBtn';
 import SidePanel from '../layout/SidePanel'
 import ShoppingCartBtn from './navbtn/ShoppingCartBtn';
-import getViewPortWidth from '../../utilities/getViewPortWidth'
+import getViewPortWidth from '../../assets/utilities/getViewPortWidth'
 
 function Navbar({ auth }) {
     const panelRef = useRef(null);

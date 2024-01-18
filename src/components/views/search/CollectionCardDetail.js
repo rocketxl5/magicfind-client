@@ -1,4 +1,4 @@
-import capitalizeWord from '../../../utilities/capitalizeWord';
+import capitalizeWord from '../../../assets/utilities/capitalizeWord';
 const CollectionCardDetail = ({ card }) => {
 
     return (

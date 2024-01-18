@@ -15,20 +15,18 @@ const useModalView = (callback) => {
         TURN: 'turn'
     }
 
-    const COORD_CLASSNAME = 'close-btn-coordinates';
-
     const turnCard = () => {
-        console.log('turn')
+
         document.querySelector('.double-faced-card').classList.toggle('rotate-y');
     }
 
     const flipCard = () => {
-        console.log('flip')
+
         document.querySelector('.modal-image').classList.toggle('rotate-180');
     }
 
     const rotateCard = () => {
-        console.log('rotate')
+
         document.querySelector('.modal-image').classList.toggle('rotate-90');
     }
 
@@ -66,7 +64,6 @@ const useModalView = (callback) => {
     }
 
     const reducer = (view, action) => {
-        console.log(action.type)
         switch (action.type) {
             case ACTIONS.STATIC:
                 return {
@@ -75,7 +72,7 @@ const useModalView = (callback) => {
                         <SingleFacedCard action={action.type}>
                             {action.payload.expandedImage}
                             {/* Passing handleCardView as callback @ SearchResult */}
-                            <CloseBtn coordinates={COORD_CLASSNAME} handleClick={callback} />
+                            <CloseBtn style={`view-close-btn close-btn card-btn`} handleClick={callback} />
                         </SingleFacedCard>
                 }
             case ACTIONS.ROTATE:
@@ -84,7 +81,7 @@ const useModalView = (callback) => {
                     component:
                         <SingleFacedCard action={action.type}>
                             {action.payload.expandedImage}
-                            <CloseBtn coordinates={COORD_CLASSNAME} handleClick={callback} />
+                            <CloseBtn style={`view-close-btn close-btn card-btn`} handleClick={callback} />
                             <RotateBtn handleClick={rotateCard} />
                         </SingleFacedCard>
                 }
@@ -94,7 +91,7 @@ const useModalView = (callback) => {
                     component:
                         <SingleFacedCard action={action.type}>
                             {action.payload.expandedImage}
-                            <CloseBtn coordinates={COORD_CLASSNAME} handleClick={callback} />
+                            <CloseBtn style={`view-close-btn close-btn card-btn`} handleClick={callback} />
                             <RotateBtn handleClick={flipCard} />
                         </SingleFacedCard>
                 }
@@ -104,7 +101,7 @@ const useModalView = (callback) => {
                     component:
                         <DoubleFacedCard action={action.type}>
                             {action.payload.expandedImage}
-                            <CloseBtn coordinates={COORD_CLASSNAME} handleClick={callback} />
+                            <CloseBtn style={`view-close-btn close-btn card-btn`} handleClick={callback} />
                             <TurnBtn handleClick={turnCard} />
                         </DoubleFacedCard>
                 }

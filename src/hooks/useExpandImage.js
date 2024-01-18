@@ -19,7 +19,7 @@ const useExpandImage = (card) => {
                 setExpandedImage(
                     card.card_faces.map((card_face) => {
                         return createElement('img', {
-                            id: 'reduce-card',
+                            // id: 'reduce-card',
                             className: 'modal-image',
                             src: card_face.image_uris?.normal,
                             alt: `${card.name} image`,
@@ -30,7 +30,7 @@ const useExpandImage = (card) => {
             else {
                 setExpandedImage(
                     createElement('img', {
-                        id: 'reduce-card',
+                        // id: 'reduce-card',
                         className: 'modal-image',
                         src: image_uris.normal,
                         alt: `${card.name} image`,

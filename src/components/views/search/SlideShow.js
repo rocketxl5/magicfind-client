@@ -2,23 +2,20 @@ import { useState, useEffect } from 'react'
 import CardImage from './CardImage'
 import { RxCaretLeft } from "react-icons/rx";
 import { RxCaretRight } from "react-icons/rx";
-import CloseBtn from './cardbtn/CloseBtn';
+// import CloseBtn from './cardbtn/CloseBtn';
 
-const SlideShow = (cards) => {
+const SlideShow = ({ children, handleSliderView }) => {
+    console.log(children)
     return (
         <>
 
-            <div className="slide-show">
+            <div className="slide-show" onClick={handleSliderView}>
                 {
-                    cards.map((card, index) => {
-                        return (
-                            <CardImage key={index} card={card} />
-                        )
-                    })
+                    children.map(child => child)
                 }
                 <button className="slide-btn slide-btn-left" type="button"><RxCaretLeft size={25} /></button>
                 <button className="slide-btn slide-btn-right" type="button"><RxCaretRight size={25} /></button>
-                <CloseBtn />
+                {/* <CloseBtn /> */}
             </div>
         </>
     )

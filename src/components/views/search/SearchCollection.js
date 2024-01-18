@@ -10,9 +10,9 @@ import SearchInput from './SearchInput';
 import Loading from '../../layout/Loading';
 import { SearchContext } from '../../../contexts/SearchContext';
 import { api } from '../../../api/resources';
-import hideSearchBar from '../../../utilities/hideSearchBar';
-import getViewPortWidth from '../../../utilities/getViewPortWidth';
-import setQueryString from '../../../utilities/setQueryString';
+import hideSearchBar from '../../../assets/utilities/hideSearchBar';
+import getViewPortWidth from '../../../assets/utilities/getViewPortWidth';
+import setQueryString from '../../../assets/utilities/setQueryString';
 import useAuth from '../../../hooks/useAuth';
 
 const SearchCollection = ({ path }) => {
@@ -63,6 +63,7 @@ const SearchCollection = ({ path }) => {
                 errorMessage && setErrorMessage(null);
               }
               else if (query === 'cards') {
+                console.log(data)
                 const result = { cards: data, searchType: searchInput.id }
                 // Update local storage with search data
                 localStorage.setItem('search-result', JSON.stringify(result));
@@ -75,7 +76,7 @@ const SearchCollection = ({ path }) => {
               collectionInputRef.current?.focus();
             });
         }
-        else if (res.status === 400) {
+        else if (res.status === 400 || res.status === 404) {
           return res.json()
             .then((error) => {
               setLoading(false);

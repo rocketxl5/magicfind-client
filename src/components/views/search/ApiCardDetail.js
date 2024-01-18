@@ -1,5 +1,5 @@
 import Loading from '../../layout/Loading';
-import capitalizeWord from '../../../utilities/capitalizeWord';
+import capitalizeWord from '../../../assets/utilities/capitalizeWord';
 
 const ApiCardDetail = ({ card, loading }) => {
 

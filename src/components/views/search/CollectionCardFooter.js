@@ -1,18 +1,5 @@
-import { useNavigate } from 'react-router-dom';
-import setQueryString
-    from '../../../utilities/setQueryString';
-const CollectionCardFooter = ({ card, handleClick }) => {
-// const navigate = useNavigate();
 
-    // const handleClick = (e) => {
-    //     navigate(`/edit-card/${setQueryString(card.name, '-')}`, {
-    //         state: {
-    //             card: card
-    //         }
-    //     })
-    // }
-
-    // console.log(card)
+const CollectionCardFooter = () => {
     return (
         <div className="card-btns">
             <div className="btn-container">

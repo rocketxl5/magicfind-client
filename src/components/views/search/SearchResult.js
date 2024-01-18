@@ -5,6 +5,7 @@ import Modal from './Modal';
 import useModalState from '../../../hooks/useModalState';
 import useLoadImage from '../../../hooks/useLoadImage';
 import useModalView from '../../../hooks/useModalView';
+import getCardImgUrls from '../../../assets/utilities/getCardImgUrls';
 
 const SearchResult = () => {
     const location = useLocation();
@@ -22,7 +23,7 @@ const SearchResult = () => {
         }
     }, [location]);
 
-    const { imagesLoaded } = useLoadImage(cards)
+    const { imagesLoaded } = useLoadImage(getCardImgUrls(cards))
 
     const [view, updateCardView] = useModalView(handleCardView);
 
