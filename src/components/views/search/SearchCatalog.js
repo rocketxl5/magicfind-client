@@ -9,8 +9,8 @@ import SearchInput from './SearchInput';
 import { SearchContext } from '../../../contexts/SearchContext';
 import useAuth from '../../../hooks/useAuth';
 import { api } from '../../../api/resources';
-import hideSearchBar from '../../../utilities/hideSearchBar';
-import setQueryString from '../../../utilities/setQueryString';
+import hideSearchBar from '../../../assets/utilities/hideSearchBar';
+import setQueryString from '../../../assets/utilities/setQueryString';
 
 const SearchCatalog = () => {
   // States

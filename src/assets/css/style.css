@@ -361,11 +361,20 @@ border-radius: var(--radius-1);
 box-shadow: var(--shadow-3);
 }
 
-.media-element:hover {
+.media-element .feature-cover:hover {
   cursor: pointer;
 }
 
-.media-element > img {
+.media-element .feature-cover * {
+  pointer-events: none;
+}
+
+.media-element > button {
+  border-radius: var(--radius-2);
+  background-color: var(--clr-surface);
+}
+
+.media-element img {
 inline-size: 100%;
 object-fit: cover;
 border-radius: var(--radius-2);
@@ -736,6 +745,13 @@ height: 2rem;
   background-color: rgba(0, 0, 0, 0);
 }
 
+.modal-view-content {
+  position: relative;
+  perspective: 1500px;
+  width: 100%;
+  height: 100%;
+}
+
 .modal-image {
   display: block;
   width: calc(100% - 6rem);
@@ -784,7 +800,7 @@ height: 2rem;
   width: 5rem;
 }
 
-.close-btn-coordinates {
+.view-close-btn {
   top: -6rem;
   right: 2rem;
 }
@@ -805,12 +821,6 @@ height: 2rem;
   cursor: pointer;
 }
 
-.modal-view-content {
-  position: relative;
-  perspective: 1500px;
-  width: 100%;
-  height: 100%;
-}
 .double-faced-card {
   position: relative;
   transform-style: preserve-3d;
@@ -836,10 +846,62 @@ height: 2rem;
 /* ////////////////// */
 /* /// Slide Show /// */
 /* ////////////////// */
+/* .media-scroller {
+  --spacer: 1.4rem;
+  display: grid;
+  gap: var(--size-2);
+  grid-auto-flow: column;
+  grid-auto-columns: 71%;
+  padding: 0 var(--spacer) var(--spacer);
+  overflow-x: auto;
+  overscroll-behavior-inline: contain;
+  }
+  
+  .media-element {
+  display: grid;
+  grid-template-rows: min-content;
+  gap: var(--spacer);
+  padding: var(--spacer);
+  background-color: var(--clr-surface);
+  border-radius: var(--radius-1);
+  box-shadow: var(--shadow-3);
+  } */
 
 .slide-show {
-  position: relative;
+
+  position: relative;  
+ 
+  /* gap: var(--size-2); */
+  height: 100%;
   background: var(--clr-transparent);
+}
+
+.slide-track {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 100%;
+  /* position: relative; */
+  height: 100%;
+  overflow-x: auto;
+}
+
+.slide-view {
+  width: 100%;
+
+  /* position: relative; */
+  /* display: flex; */
+  /* flex-grow: 1;
+  width: 100%; */
+  padding-block-start: clamp(4rem, calc(7vh + 15px), 12rem);
+  background-color: red;
+  /* overflow-y: auto; */
+}
+
+.modal-slide-content {
+  position: relative;
+  perspective: 1500px;
+  width: 100%;
+  height: 100%;
 }
 
 .slide-btn {
@@ -847,10 +909,15 @@ height: 2rem;
   top: 50%;
 }
 
-.slide-btn-left {
+.slide-left-btn {
   left: 1rem;
 }
-.slide-btn-right {
+.slide-right-btn {
+  right: 1rem;
+}
+
+.slide-close-btn {
+  top: 1rem;
   right: 1rem;
 }
 

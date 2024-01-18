@@ -2,7 +2,7 @@ import SearchCatalog from '../views/search/SearchCatalog';
 import Navbar from './Navbar';
 import LogoBtn from './navbtn/LogoBtn';
 import useAuth from '../../hooks/useAuth';
-import handleSearchBar from '../../utilities/handleSearchBar';
+import handleSearchBar from '../../assets/utilities/handleSearchBar';
 
 const Header = () => {
   const { auth } = useAuth();

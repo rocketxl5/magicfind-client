@@ -9,9 +9,9 @@ import SearchInput from './SearchInput';
 import Loading from '../../layout/Loading';
 import { SearchContext } from '../../../contexts/SearchContext';
 import { api } from '../../../api/resources';
-import setQueryString from '../../../utilities/setQueryString';
-import hideSearchBar from '../../../utilities/hideSearchBar';
-import getViewPortWidth from '../../../utilities/getViewPortWidth';
+import setQueryString from '../../../assets/utilities/setQueryString';
+import hideSearchBar from '../../../assets/utilities/hideSearchBar';
+import getViewPortWidth from '../../../assets/utilities/getViewPortWidth';
 
 const Search = ({ path }) => {
   // States

@@ -4,7 +4,7 @@ import React, {
 } from 'react';
 import AutoComplete from './AutoComplete';
 import { SearchContext } from '../../../contexts/SearchContext';
-import hideSearchBar from '../../../utilities/hideSearchBar';
+import hideSearchBar from '../../../assets/utilities/hideSearchBar';
 
 const SearchInput = forwardRef(function SearchInput(props, ref) {
   const {
