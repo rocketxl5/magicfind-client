@@ -1,8 +1,8 @@
 import { RxCaretLeft } from "react-icons/rx";
 
-const LeftBtn = ({ style, handleClick }) => {
+const LeftBtn = ({ style, name, handleClick }) => {
     return (
-        <button className={style} name="left-btn" type="button" onClick={(e) => handleClick(e)}>
+        <button className={style} name={name} type="button" onClick={(e) => handleClick(e)}>
             <RxCaretLeft size={25} />
         </button>
     )

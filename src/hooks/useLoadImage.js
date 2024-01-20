@@ -2,13 +2,11 @@
 import { useState, useEffect } from 'react'
 
 const useLoadImage = (urls) => {
-    console.log(urls)
     const [imagesLoaded, setImagesLoaded] = useState(null);
     useEffect(() => {
         const loadImage = url => {
             return new Promise((resolve, reject) => {
                 const image = new Image();
-                // image.className = 'modal-image';
                 image.src = url;
                 image.alt = 'Magic card image'
                 image.onload = () => resolve(url);
@@ -18,7 +16,6 @@ const useLoadImage = (urls) => {
         Promise.all(urls.map(url => loadImage(url)))
             .then((data) => {
                 if (data) {
-                    console.log(data)
                     setImagesLoaded(true);
                 }
             })

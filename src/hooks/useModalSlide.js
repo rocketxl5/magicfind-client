@@ -1,24 +1,17 @@
-import { useState, useEffect, useReducer } from 'react';
+import { useReducer } from 'react';
 import RotateBtn from '../components/views/search/cardbtn/RotateBtn';
 import TurnBtn from '../components/views/search/cardbtn/TurnBtn';
-import CloseBtn from '../components/views/search/cardbtn/CloseBtn';
-import LeftBtn from '../components/views/search/cardbtn/LeftBtn';
-import RightBtn from '../components/views/search/cardbtn/RightBtn';
 import SlideShow from '../components/views/search/SlideShow';
 
 const useModalSlide = (callback, expandedImages) => {
+    const ACTIONS = {
+        SHOW: 'show',
+        HIDE: 'hide',
+    }
+
     const INIT = {
         open: false,
-        component: null
-    }
-    const ACTIONS = {
-        STATIC: 'static',
-        FLIP: 'flip',
-        ROTATE: 'rotate',
-        TURN: 'turn',
-        SHOW: 'show',
-        LEFT: 'left',
-        RIGHT: 'right',
+        component: null,
     }
 
     function turnCard(index) {
@@ -27,12 +20,10 @@ const useModalSlide = (callback, expandedImages) => {
     }
 
     function flipCard() {
-        console.log('flip')
         document.querySelector('.modal-image').classList.toggle('rotate-180');
     }
 
     function rotateCard() {
-        console.log('rotate')
         document.querySelector('.modal-image').classList.toggle('rotate-90');
     }
 
@@ -59,7 +50,6 @@ const useModalSlide = (callback, expandedImages) => {
 
     function DoubleFacedCard({ children, action }) {
         return (
-
             <div id={action} className="slide-view" >
                 <div className="modal-slide-content">
                     {children[1]}
@@ -76,54 +66,14 @@ const useModalSlide = (callback, expandedImages) => {
         )
     }
 
-    function SlideShow({ children }) {
-        const [slides, setSlides] = useState(null);
-        const elements = children.props.children;
+    function setSlideComponent(props, index) {
+        const { layout, element } = props;
 
-        useEffect(() => {
-            const images = children.props.children[0];
-            const components = []
-            images.forEach((image, i) => {
-                console.log(image)
-                const component = wrapedComponent(image.layout, image.element, i)
-                components.push(component)
-            });
-            setSlides(components)
-        }, [children])
-
-        console.log(slides)
-        return (
-            <>
-                <div className="slide-show">
-                    <div className="slide-track">
-                        <>
-                            {
-                                slides &&
-                                slides.map(slide => {
-                                    return (
-                                        <>
-                                            {slide}
-                                        </>
-                                    )
-                                })
-                            }
-                        </>
-                    </div>
-                    {elements[1]}
-                    {elements[2]}
-                    {elements[3]}
-                </div>
-            </>
-        )
-    }
-
-    function wrapedComponent(layout, image, index) {
-        console.log(index)
         switch (layout) {
             case 'flip':
                 return (
                     <SingleFacedCard key={index} action='flip'>
-                        {image}
+                        {element}
                         <RotateBtn handleClick={flipCard} />
                     </SingleFacedCard>
                 )
@@ -131,7 +81,7 @@ const useModalSlide = (callback, expandedImages) => {
             case 'planar':
                 return (
                     <SingleFacedCard key={index} action='static'>
-                        {image}
+                        {element}
                         <RotateBtn handleClick={rotateCard} />
                     </SingleFacedCard>
                 )
@@ -142,7 +92,7 @@ const useModalSlide = (callback, expandedImages) => {
             case 'art_series':
                 return (
                     <DoubleFacedCard key={index} action='turn'>
-                        {image}
+                        {element}
                         <TurnBtn handleClick={() => turnCard(index)} />
                     </DoubleFacedCard>
                 )
@@ -162,7 +112,7 @@ const useModalSlide = (callback, expandedImages) => {
             case 'vanguard':
                 return (
                     <SingleFacedCard key={index} action='static'>
-                        {image}
+                        {element}
                     </SingleFacedCard>
                 )
             default:
@@ -171,69 +121,31 @@ const useModalSlide = (callback, expandedImages) => {
     }
 
     const reducer = (view, action) => {
-
         switch (action.type) {
             case ACTIONS.SHOW:
                 return {
                     open: true,
                     component:
-                        // <div className="modal-view">
-                        //     <div className="modal-view-content">
-                        <SlideShow>
+                        <SlideShow handleClick={callback} setComponent={(props, index) => setSlideComponent(props, index)}>
                             <>
-                                {action.payload.images}
-                                <LeftBtn style={`slide-btn slide-left-btn`} handleClick={callback} />
-                                <RightBtn style={`slide-btn slide-right-btn`} handleClick={callback} />
-                                <CloseBtn style={`slide-close-btn close-btn card-btn`} handleClick={callback} />
+                                {
+                                    action.payload.images
+                                }
                             </>
                         </SlideShow>
-                    //     </div>
-                    // </div>
+
                 }
-            case ACTIONS.STATIC:
-                return {
-                    open: true,
-                    component:
-                        <SingleFacedCard action={action.type}>
-                            {action.payload.expandedImage}
-                        </SingleFacedCard>
-                }
-            case ACTIONS.ROTATE:
-                return {
-                    open: true,
-                    component:
-                        <SingleFacedCard action={action.type}>
-                            {action.payload.expandedImage}
-                            <RotateBtn handleClick={rotateCard} />
-                        </SingleFacedCard>
-                }
-            case ACTIONS.FLIP:
-                return {
-                    open: true,
-                    component:
-                        <SingleFacedCard action={action.type}>
-                            {action.payload.expandedImage}
-                            <RotateBtn handleClick={flipCard} />
-                        </SingleFacedCard>
-                }
-            case ACTIONS.TURN:
-                return {
-                    open: true,
-                    component:
-                        <DoubleFacedCard action={action.type}>
-                            {action.payload.expandedImage}
-                            <TurnBtn handleClick={turnCard} />
-                        </DoubleFacedCard>
-                }
-            default:
+            case ACTIONS.HIDE:
                 return INIT;
+            default:
+                console.log('Unknow Action')
         }
     }
 
     const [view, dispatch] = useReducer(reducer, INIT)
 
     const updateSliderView = (e) => {
-        console.log(e.target)
+
         switch (e.target.name) {
             case 'feature-cover':
                 dispatch({
@@ -245,10 +157,13 @@ const useModalSlide = (callback, expandedImages) => {
                 break;
             case 'close-btn':
                 dispatch({
-                    type: undefined,
+                    type: 'hide',
                 })
                 break;
             default:
+                dispatch({
+                    type: undefined
+                })
         }
 
     }

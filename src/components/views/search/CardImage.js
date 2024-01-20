@@ -10,7 +10,6 @@ const CardImage = ({ card, handleCardView }) => {
     const { id, style, src, alt, placeholder } = attributes;
 
     useEffect(() => {
-        console.log(src)
         const img = new Image();
         img.src = card?.image_uris?.small || card?.card_faces[0]?.image_uris?.small;
         img.onload = () => {

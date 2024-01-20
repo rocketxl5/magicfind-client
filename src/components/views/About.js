@@ -2,10 +2,9 @@ import { Link } from 'react-router-dom';
 
 const About = () => {
   return (<>
-    <section className="banner home-page-banner"></section>
-    <div className="content home-page">
+    <div className="content about-page">
       <header className="header">
-        <h2 className="title">Welcome to Magic Find</h2>
+        <h2 className="title">About Magic Find</h2>
       </header>
       <main className="main">
         <div className="article">

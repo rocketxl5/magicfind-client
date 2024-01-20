@@ -46,7 +46,6 @@ const Home = () => {
   useEffect(() => {
     if (expandedImages) {
       const features = []
-      console.log(expandedImages)
       expandedImages.forEach((images, i) => {
         const feature = media.features[i]
         features.push({
@@ -59,9 +58,6 @@ const Home = () => {
     }
   }, [expandedImages])
 
-  useEffect(() => {
-    console.log(mediaFeatures)
-  }, [mediaFeatures])
   return (
     <>
       <Modal open={view.open}>
