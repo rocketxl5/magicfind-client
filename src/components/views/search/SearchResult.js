@@ -14,7 +14,6 @@ const SearchResult = () => {
     const cardRef = useRef(null);
 
     useEffect(() => {
-        console.log(cards)
         // If cards is empty
         if (!cards.length) {
             setTimeout(() => {

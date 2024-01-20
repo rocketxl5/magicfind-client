@@ -1,15 +1,16 @@
-import ACTIONS from './ACTIONS';
+import ACTIONS from '../../../../assets/data/ACTIONS';
 
 const inputReducer = (inputStates, action) => {
+  const { CHANGE, FOCUS, BLUR } = ACTIONS.INPUT;
 
   switch (action.type) {
-    case ACTIONS.INPUT_CHANGE:
+    case CHANGE:
       changeHandler(action.payload)
       break;
-    case ACTIONS.INPUT_FOCUS:
+    case FOCUS:
       focusHandler(action.payload)
       break;
-    case ACTIONS.INPUT_BLUR:
+    case BLUR:
       blurHandler(action.payload)
       break;
     default:
