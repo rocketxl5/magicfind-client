@@ -2,13 +2,24 @@ import { Link } from 'react-router-dom';
 
 const About = () => {
   return (<>
-    <div className="content about-page">
-      <header className="header">
-        <h2 className="title">About Magic Find</h2>
+    <div className="about">
+
+      <main className="main-content">
+        <section className="feature-setion">
+
+          <header className="section-header">
+            <h2 className="section-title">About Magic Find</h2>
       </header>
-      <main className="main">
-        <div className="article">
-          <h2 className="article-title">What it is</h2>
+          <div className="features grid-section">
+
+
+            <article className="feature">
+
+              <header className="feature-header">
+                <h2 className="feature-title">What it is</h2>
+
+              </header>
+
           <div className="article-body">
             <p>
               Magic Find is an interactive environment where you can buy and sell
@@ -29,12 +40,17 @@ const About = () => {
               you get more dollars for the ones you sell.
             </p>
           </div>
-        </div>
-        <div className="article">
-          <h2 className="article-title center">How it works</h2>
+
+            </article>
+            <article className="feature">
+
+              <header className="feature-header">
+                <h2 className="feature-title">How it works</h2>
+
+              </header>
           <div className="article-body">
             <p>
-              First of all, you need to <Link to={'/register'} >create your account</Link> and sign into it.
+                  First of all, you need to <Link to={'/signup'} >create your account</Link> and sign into it.
               At that point, you will be redirected to your own personnal virtual store.
             </p>
             <br />
@@ -54,9 +70,15 @@ const About = () => {
               and communicate with other members.
             </p>
           </div>
-        </div>
-        <div className="article">
-          <h2 className="article-title center">Parts & Labour</h2>
+
+            </article>
+            <article className="feature">
+
+
+              <header className="feature-header">
+                <h2 className="feature-title">Parts & Labour</h2>
+
+              </header>
           <div className="article-body">
             <p>
               Magic Find is a <strong>REST api</strong> with complete <strong>CRUD</strong> operations.
@@ -74,7 +96,10 @@ const About = () => {
               Populating a store is made through a series of requests to the <a href="https://scryfall.com/docs/api" target="_blank" title="scryfall api docs"><strong>scryfall api</strong></a>.
             </p>
           </div>
-        </div>
+
+            </article>
+          </div>
+        </section>
       </main>
     </div >
     {/* <section className="media-scroller">

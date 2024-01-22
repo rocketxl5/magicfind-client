@@ -1,10 +1,11 @@
 import { useRef, useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { GoShieldCheck } from "react-icons/go";
-import Modal from './search/Modal';
-import useExpandImages from '../../hooks/useExpandImages';
+import Banner from './Banner';
 import MediaElement from './MediaElement';
+import Modal from './search/Modal';
+import { GoShieldCheck } from "react-icons/go";
+import useExpandImages from '../../hooks/useExpandImages';
 import data from '../../assets/data/HOME_PAGE';
 import { api } from '../../api/resources';
 import useModalSlide from '../../hooks/useModalSlide';
@@ -13,7 +14,8 @@ const Home = () => {
   const [mediaFeatures, setMediaFeatures] = useState(null);
   const [cardCollections, setCardCollections] = useState(null);
   const navigate = useNavigate();
-  const { media, app } = data;
+  const { banner, main, media } = data;
+  const { classList, title, link } = banner
 
   useEffect(() => {
     const cards = []
@@ -39,7 +41,6 @@ const Home = () => {
 
   function handleSliderView(e) {
     e.stopPropagation();
-    // console.log(e.target.name)
     updateSliderView(e)
   }
 
@@ -62,23 +63,17 @@ const Home = () => {
     <>
       <Modal open={view.open}>
         {view.component}
-      </Modal>
-      <section className='banner-section'>
-        <div className="banner home-page-banner">
-          <Link className="banner-link" to="/signup">
-            Join Magic Find
-          </Link>                                  
-        </div>
-      </section>
+      </Modal>  
+      <Banner classList={classList} title={title} link={link} />
       <>
-        <main className="main-content">
+        <main className="main-content home">
           <section className="feature-section">
-            <header className="feature-section-header">
-              <h2 className="feature-section-title">Magic Find Features</h2>
+            <header className="section-header">
+              <h2 className="section-title">Magic Find Features</h2>
             </header>
             <div className="features grid-section">
             {
-                app.features.map((feature, index) => {
+                main.features.map((feature, index) => {
                 return (
                   <div key={index} className="feature">
                     <div className="feature-content">
@@ -116,8 +111,8 @@ const Home = () => {
             </div>
           </section>
           <section className="feature-section media">
-            <header className="feature-section-header">
-              <h2 className="feature-section-title">
+            <header className="section-header">
+              <h2 className="section-title">
                 <span>The Secret Lair Drop Artwork</span>
                 <span className="feature-section-icon">
                 </span>

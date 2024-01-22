@@ -15,20 +15,20 @@
 }
 
 @media screen and (width >= 660px) {
-    .features.grid-section {
+    .home .grid-section {
         grid-template-columns: repeat(2, 1fr);
     }
 
     .feature-body p {
         font-size: clamp(1rem, 1.75vw, 1.5rem);
     }
-
-    .feature-footer .btn {
-        /* font-size: clamp(var(--fs-150), 2.5vw, var(--fs-200)); */
-    }
 }
 
 @media screen and (width >= 775px) {
+    
+.about .grid-section {
+    grid-template-columns: repeat(3, 1fr);
+  }
     .wrapper {
         background-color: var(--clr-dark);
     }
@@ -56,24 +56,20 @@
         height: 3rem;
         width: 3rem;
     }
-
-    .banner {
-        width: 100%;
-        left: 0;
-        background-position: 0 50%;
-        background-size: 105%;
-        width: 100vw;
-        aspect-ratio: 9 / 3;
-    }
-
-    .home-page-banner {
-        background-image: url('https://cards.scryfall.io/art_crop/front/9/f/9f9f5e0c-8bf4-46ab-ad79-332ceeaed3d5.jpg?1681768912');
-    }
-
     .banner-section {
         position: static;
         width: 100%;
     }
+
+    .banner {
+        width: 100%;
+        left: 0;
+        background-position: 50% 25%;
+        background-size: 110%;
+        width: 100vw;
+        aspect-ratio: 3 / 1.5;
+    }
+
   
     /* Header */
     .main-header {
@@ -230,24 +226,14 @@
     /* Feature Section Style & Media Element */
 
     .media-scroller {
-        width: 100%;
         padding: 2rem;
-        display: grid;
-        grid-auto-flow: column;
-        grid-auto-columns: 21%;
         gap: var(--size-2);
-        overflow-x: auto;
-        overscroll-behavior-inline: contain;
-        background-color: var(--clr-dark);
       }
       
       .media-element {
-        display: grid;
-        grid-template-rows: min-content;
         gap: var(--size-1);
         padding: var(--size-1);
-        background-color: var(--clr-surface);
-        border-radius: 15px;
+        border-radius: var(--radius-1);
       }
       
       .media-element h3 {
@@ -255,10 +241,6 @@
         text-align: center;
         font-weight: 400;
         font-size: var(--fs-125);
-      }
-      
-      .media-element img {
-        border-radius: 1.2rem;
       }
            
       .img-container {
@@ -272,22 +254,26 @@
 
 @media screen and (width >= 960px) { 
     .feature-image {
-        aspect-ratio: 16 / 9;
+        /* aspect-ratio: 16 / 9; */
     }
 }
 
 @media screen and (width >= 1200px) {
     
-    .features.grid-section {
+    .home .grid-section {
         grid-template-columns: repeat(4, 1fr);
         padding-inline: 0;
     }
+
+    .about .grid-section {
+        grid-template-columns: repeat(3, 1fr);
+    }
     
-    .feature-section-header h2 {
+    .section-header h2 {
         margin-inline: 0;
     }
 
-    .feature {
+    .home .feature {
         padding: 0;
     }
 
@@ -296,7 +282,7 @@
     }
     
     .feature-image {
-        aspect-ratio: 9 / 6;
+        aspect-ratio: 16 / 9;
     }
     
     .feature-body p {
@@ -307,5 +293,9 @@
         width: 100%;
         border-bottom-left-radius: 10px;
         border-bottom-right-radius: 10px;
+        background-position: 50% 25%;
+        background-size: 100%;
+        aspect-ratio: 3 / 1;
+        /* aspect-ratio: 3 / 1.5; */
     }
 }

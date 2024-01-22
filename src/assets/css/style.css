@@ -164,6 +164,7 @@ min-height: calc(100vh - 13.5rem);
 margin: 0 auto;
 }
 
+
 .main-content {
 /* inline-size: calc(100% - var(--size-4)); */
 margin-inline: auto;
@@ -312,8 +313,8 @@ top: 0;
 width: 100vw;
 min-width: 37rem;
 background-repeat: no-repeat;
-background-size: 100%;
-background-position: 0 25%;
+background-size: 110%;
+background-position: 50% 25%;
 background-color: var(--clr-primary);
 z-index: 1000;
 aspect-ratio: 16 / 9;
@@ -345,8 +346,8 @@ border-radius: var(--radius-1);
 display: grid;
 gap: var(--size-2);
 grid-auto-flow: column;
-grid-auto-columns: 71%;
-padding: 0 var(--spacer) var(--spacer);
+grid-auto-columns: clamp(27rem, calc(21vw + 15px), 29rem);
+padding-inline: var(--size-2);
 overflow-x: auto;
 overscroll-behavior-inline: contain;
 }
@@ -377,7 +378,7 @@ box-shadow: var(--shadow-3);
 .media-element img {
 inline-size: 100%;
 object-fit: cover;
-border-radius: var(--radius-2);
+border-radius: calc(var(--radius-2) + 3px);
 }
 
 .media-element > p {
@@ -403,11 +404,11 @@ scroll-snap-align: start;
   width: 100%;
 }
 
-.feature-section-header {
+.section-header {
   padding-block: 2rem;
 }
 
-.feature-section-title {
+.section-title {
   display: flex;
   align-items: center;
   font-size: clamp(var(--fs-175), 4vw, var(--fs-300));
@@ -436,11 +437,18 @@ scroll-snap-align: start;
   border-radius: var(--radius-1);
 }
 
-.features.grid-section {
+.grid-section {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
   grid-gap: var(--size-2);
   padding-inline: var(--size-2);
+}
+
+.home .grid-section {
+  grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
+}
+
+.about .grid-section {
+  grid-template-columns: repeat(auto-fit, minmax(37.5rem, 1fr));
 }
 
 .feature {
@@ -552,7 +560,8 @@ border-radius: 100%;
 }
 
 .home-page-banner {
-background-image: url('https://cards.scryfall.io/art_crop/front/8/1/817f782f-7e62-44b3-9bb2-3a57d34dfe67.jpg?1682690866');
+background-image: url("https://cards.scryfall.io/png/front/8/1/817f782f-7e62-44b3-9bb2-3a57d34dfe67.png?1682690866"
+);
 }
 
 .not-found-banner {
@@ -947,11 +956,11 @@ font-weight: 500;
   color: var(--clr-red);
 }
 
-.about-page {
+.about {
   color: var(--clr-light);
 }
 
-.about-page a {
+.about a {
   color: var(--clr-light-grey);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.8);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.5);
 }
