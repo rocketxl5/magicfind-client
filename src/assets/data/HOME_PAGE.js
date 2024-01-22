@@ -1,5 +1,10 @@
 const HOME_PAGE = {
-    app: {
+    banner: {
+        classList: "banner home-page-banner",
+        title: 'Join Magic Find',
+        link: '/signup'
+    },
+    main: {
         features: [
             {
                 bgLink: 'https://cards.scryfall.io/art_crop/front/6/7/673a67b2-fbb0-4be4-9edd-93946a583f23.jpg?1692938189',
