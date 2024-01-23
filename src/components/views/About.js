@@ -1,7 +1,13 @@
 import { Link } from 'react-router-dom';
+import Banner from './Banner';
+import data from '../../assets/data/ABOUT_PAGE';
 
 const About = () => {
-  return (<>
+  const { classList, title, link } = data.banner
+  return (
+    <>
+      <Banner classList={classList} title={title} link={link} />
+
     <div className="about">
 
       <main className="main-content">
