@@ -804,7 +804,8 @@ height: 2rem;
   justify-content: center;
   width: 6rem;
   height: 6rem;
-  top: min(calc(clamp(31rem, calc(80vw + 10px), 55rem) * 1.392), 72.5rem);
+  fill: var(--clr-light);
+  top: min(calc(clamp(31rem, calc(80vw + 10px), 55rem) * 1.4), 72.5rem);
   left: 0;
   right: 0;
   margin: 0 auto;
@@ -814,8 +815,16 @@ height: 2rem;
 }
 
 .action-btn svg {
-  width: 5rem !important;
-  height: 5rem !important;
+  width: 4.5rem !important;
+  height: 4.5rem !important;
+}
+
+.action-btn svg path:nth-of-type(1) { 
+  fill: var(--clr-light);
+}
+
+.action-btn svg path:nth-of-type(2) { 
+  fill: rgba(255, 255, 255, 0.5);
 }
 
 .double-faced-card {
@@ -926,9 +935,8 @@ height: 2rem;
 }
 
 .card-btn svg,
-.action-btn svg,
 .indicator svg {
-  color: var(--clr-light);
+  color: var(--clr-light) !important;
 }
 
 .card-btn * {
@@ -943,7 +951,7 @@ height: 2rem;
   position: absolute;
   left: 0;
   right: 0;
-  top: min(calc(clamp(31rem, calc(80vw + 10px), 55rem) * 1.579), 80rem);
+  top: min(calc(clamp(31rem, calc(80vw + 10px), 55rem) * 1.6), 80rem);
   display: flex;
   justify-content: center;
   align-items: center;
