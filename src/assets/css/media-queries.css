@@ -74,13 +74,11 @@
     .banner {
         width: 100%;
         left: 0;
-        background-position: 50% 50%;
         background-size: 100%;
         width: 100vw;
         aspect-ratio: 3 / 1.5;
     }
 
-  
     /* Header */
     .main-header {
         display: flex;
@@ -268,10 +266,8 @@
     
 }
 
-@media screen and (width >= 960px) { 
-    .feature-image {
-        /* aspect-ratio: 16 / 9; */
-    }
+@media screen and (width >= 1024px) { 
+
 }
 
 @media screen and (width >= 1200px) {
