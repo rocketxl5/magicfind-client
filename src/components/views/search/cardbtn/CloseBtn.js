@@ -1,10 +1,10 @@
-import { IoClose } from "react-icons/io5";
+import { FaXmark } from "react-icons/fa6";
 
 const CloseBtn = ({ style, name, handleClick }) => {
 
     return (
         <button className={style} name={name} type="button" onClick={(e) => handleClick(e)}>
-            <IoClose />
+            <FaXmark />
         </button>
     )
 }
