@@ -767,6 +767,7 @@ height: 2rem;
 .modal-image {
   display: block;
   width: clamp(31rem, calc(80vw + 10px), 55rem);
+  max-width: 50rem;
   height: auto;
   margin: 0 auto;
   border-radius: 17px;
@@ -803,9 +804,10 @@ height: 2rem;
   justify-content: center;
   width: 6rem;
   height: 6rem;
-  /* top: calc((100vw - 8rem) * 1.5); */
-  top: calc(clamp(31rem, calc(80vw + 10px), 55rem) * 1.392);
-  right: calc(50vw - 3rem);
+  top: min(calc(clamp(31rem, calc(80vw + 10px), 55rem) * 1.392), 72.5rem);
+  left: 0;
+  right: 0;
+  margin: 0 auto;
   background-color: rgba(0, 0, 0, 0);
   border-radius: 50px;
   z-index: 6000;
@@ -845,7 +847,8 @@ height: 2rem;
   position: relative;  
   height: 100%;
   min-width: 37rem;
-  background: var(--clr-transparent);
+  /* background: var(--clr-transparent); */
+  background: rgba(0, 0, 0, 0.7);
 }
 
 .slide-track {
@@ -906,8 +909,6 @@ height: 2rem;
 }
 
 .slide-close-btn {
-  /* top: clamp(1rem, calc(1.5vh + 7px), 6rem);
-  right: clamp(1rem, calc(3vw + 10px), 3rem); */
   top: -6rem;
   right: -2rem;
 }
@@ -919,10 +920,15 @@ height: 2rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  fill: var(--clr-dark);
   background-color: rgba(0, 0, 0, 0);
   border-radius: 50px;
   z-index: 3000;
+}
+
+.card-btn svg,
+.action-btn svg,
+.indicator svg {
+  color: var(--clr-light);
 }
 
 .card-btn * {
@@ -932,6 +938,34 @@ height: 2rem;
 .card-btn:hover { 
   cursor: pointer;
 }
+
+.indicators {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: min(calc(clamp(31rem, calc(80vw + 10px), 55rem) * 1.579), 80rem);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  min-height: 3rem;
+  /* background-color: red; */
+  z-index: 6001;
+}
+
+.indicator svg {
+  height: 2rem;
+  width: 2rem;
+  stroke-width: 0.8;
+  vertical-align: middle;
+}
+
+.current-indicator svg {
+  display: block;
+  height: 2rem;
+  width: 2rem;
+}
+
 
 /* ////////////////////////// */
 /* /// Search Result View /// */
