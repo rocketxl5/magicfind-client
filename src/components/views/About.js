@@ -8,9 +8,7 @@ const About = () => {
     <>
       <Banner classList={classList} title={title} link={link} />
 
-    <div className="about">
-
-      <main className="main-content">
+      <main className="main-content about">
         <section className="feature-setion">
 
           <header className="section-header">
@@ -107,7 +105,7 @@ const About = () => {
           </div>
         </section>
       </main>
-    </div >
+
     {/* <section className="media-scroller">
       <div className="fifth-square media-element mtg-blue">
         <img style={{ color: 'white' }} src="https://svgs.scryfall.io/card-symbols/U.svg" alt="" />

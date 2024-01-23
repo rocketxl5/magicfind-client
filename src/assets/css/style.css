@@ -166,7 +166,7 @@ margin: 0 auto;
 
 
 .main-content {
-/* inline-size: calc(100% - var(--size-4)); */
+margin-block-start: var(--size-3);
 margin-inline: auto;
 
 }
@@ -369,9 +369,7 @@ scroll-snap-align: start;
 }
 
 /* Feature */
-
 .feature-section {
-  margin-block-start: var(--size-3);
   width: 100%;
 }
 
@@ -416,10 +414,6 @@ scroll-snap-align: start;
 
 .home .grid-section {
   grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
-}
-
-.about .grid-section {
-  grid-template-columns: repeat(auto-fit, minmax(37.5rem, 1fr));
 }
 
 .feature {
