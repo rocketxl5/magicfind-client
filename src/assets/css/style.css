@@ -166,7 +166,7 @@ margin: 0 auto;
 
 
 .main-content {
-/* inline-size: calc(100% - var(--size-4)); */
+margin-block-start: var(--size-3);
 margin-inline: auto;
 
 }
@@ -369,9 +369,7 @@ scroll-snap-align: start;
 }
 
 /* Feature */
-
 .feature-section {
-  margin-block-start: var(--size-3);
   width: 100%;
 }
 
@@ -416,10 +414,6 @@ scroll-snap-align: start;
 
 .home .grid-section {
   grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
-}
-
-.about .grid-section {
-  grid-template-columns: repeat(auto-fit, minmax(37.5rem, 1fr));
 }
 
 .feature {
@@ -898,18 +892,6 @@ height: 2rem;
   top: calc((clamp(31rem, calc(80vw + 10px), 55rem) * 1.392 - 7rem) / 2) ;
 }
 
-.card-btn > svg {
-  stroke-width: 0.4;
-  width: 90% !important;
-  height: 90% !important;
-  margin: 0 auto;
-}
-
-.close-btn > svg {
-  width: 80% !important;
-  height: 80% !important;
-}
-
 .slide-left-btn {
   left: -5rem;
 }
@@ -932,6 +914,15 @@ height: 2rem;
   background-color: rgba(0, 0, 0, 0);
   border-radius: 50px;
   z-index: 3000;
+}
+
+.card-btn > svg {
+  width: 50%;
+  height: 50%;
+  /* stroke-width: 0.1; */
+  /* width: 90% !important;
+  height: 90% !important; */
+  /* margin: 0 auto; */
 }
 
 .card-btn svg,
