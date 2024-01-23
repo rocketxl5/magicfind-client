@@ -5,8 +5,12 @@ import useAuth from '../../../hooks/useAuth';
 import styled from 'styled-components';
 
 const CatalogCardDetail = forwardRef(function CatalogCardDetail({ card, loading }, ref) {
-    const [quantity, setQuantity] = useState(0);
+    const [quantity, setQuantity] = useState(1);
     const { auth } = useAuth();
+
+    const addToCart = (e) => {
+        console.log(card)
+    }
 
     return (
         <>
@@ -34,7 +38,7 @@ const CatalogCardDetail = forwardRef(function CatalogCardDetail({ card, loading 
                                     <div className="card-spec">
                                         {/* <p><span className="card-spec-title">Quantity:</span>  <span className="card-spec-value">{card.quantity}</span></p> */}
                                         <label htmlFor="quantity"><span className="card-spec-title">Quantity:</span></label>
-                                        <input className="card-quantity" type="number" name="quantity" id="quantity" min="1" max={card.quantity} onClick={(e) => setQuantity(e.target.value)} ref={ref} />
+                                        <input className="card-quantity" type="number" name="quantity" id="quantity" min="1" value={quantity} max={card.quantity} onChange={(e) => setQuantity(e.target.value)} ref={ref} />
                                     </div>
                                 }
                                 {auth && (
@@ -50,7 +54,14 @@ const CatalogCardDetail = forwardRef(function CatalogCardDetail({ card, loading 
                                     </div>
                                 )}
 
-
+                                <div className="card-btns">
+                                    <div className="btn-container">
+                                        <button id="add-to-wishlist" className="btn bg-green color-light" type="button" >Add to Wishlist</button>
+                                    </div>
+                                    <div className="btn-container">
+                                        <button id="add-to-cart" className="btn bg-yellow color-light" type="button" onClick={addToCart}>Add to Cart</button>
+                                    </div>
+                                </div>
                             </div>
                         </>
                     )

@@ -479,6 +479,11 @@ input#search-api:focus {
     justify-content: space-between;
 }
 
+.card-quantity {
+    width: 6rem;
+    border: 1px solid black;
+}
+
 
 
 

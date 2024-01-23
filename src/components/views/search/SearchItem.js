@@ -18,7 +18,7 @@ const SearchItem = forwardRef(function SearchItem(props, ref) {
 
     return (
             <div className="card-content" ref={ref}>
-                <header className="card-header">
+            <header className="card-header">
                     <h2 className="card-name">{card.name}</h2>
                 </header>
                 <section className="card-body" >
@@ -30,7 +30,8 @@ const SearchItem = forwardRef(function SearchItem(props, ref) {
                 </section>
                 <footer className="card-footer" onClick={(e) => handleCardState(e, card, attributes)}>
                     {searchType === 'search-catalog' ? (
-                        <CatalogCardFooter card={card} />
+                    // <CatalogCardFooter card={card} />
+                    ''
                     ) :
                         searchType === 'search-collection' ? (
                             <CollectionCardFooter card={card} />
