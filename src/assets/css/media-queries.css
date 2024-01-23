@@ -25,7 +25,9 @@
 }
 
 @media screen and (width >= 775px) {
-    
+    .modal-image {
+        border-radius: 25px;
+    }
 .about .grid-section {
     grid-template-columns: repeat(3, 1fr);
   }
@@ -64,8 +66,8 @@
     .banner {
         width: 100%;
         left: 0;
-        background-position: 50% 25%;
-        background-size: 110%;
+        background-position: 50% 50%;
+        background-size: 100%;
         width: 100vw;
         aspect-ratio: 3 / 1.5;
     }
@@ -224,7 +226,6 @@
     }
 
     /* Feature Section Style & Media Element */
-
     .media-scroller {
         padding: 2rem;
         gap: var(--size-2);
@@ -250,6 +251,13 @@
       
           margin: 0 auto;
         }
+    
+    /* .slide-btn {
+  height: 9rem;
+  width: 9rem;
+    } */
+
+    
 }
 
 @media screen and (width >= 960px) { 
@@ -298,4 +306,7 @@
         aspect-ratio: 3 / 1;
         /* aspect-ratio: 3 / 1.5; */
     }
+}
+.about-page-banner.banner {
+    background-position: 100%  50%!important;
 }

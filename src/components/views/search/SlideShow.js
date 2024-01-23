@@ -9,7 +9,13 @@ const SlideShow = ({ children, handleClick, setComponent }) => {
     const [slides, setSlides] = useState(null);
     const [coordinate, setCoordinate] = useState(RESET);
     const trackRef = useRef(null);
-
+    const SlideComponent = ({ children }) => {
+        return (
+            <>
+                {children}
+            </>
+        )
+    }
     useEffect(() => {
         const components = []
         children.props.children.forEach((child, i) => {
@@ -22,11 +28,13 @@ const SlideShow = ({ children, handleClick, setComponent }) => {
 
 
     useEffect(() => {
+        console.log(trackRef.current)
         trackRef.current.style.left = `${coordinate}vw`;
     }, [coordinate])
 
     const setSlideMotion = (e) => {
         e.stopPropagation();
+        console.log(e.target)
         if (e.target.name === 'right-btn') {
             if (coordinate > LIMIT.MIN)
                 setCoordinate(coordinate - INTERVAL)
@@ -38,28 +46,29 @@ const SlideShow = ({ children, handleClick, setComponent }) => {
     }
 
     return (
-        <>
-            <div className="slide-show">
-                <div className="slide-track" ref={trackRef}>
-                    <>
-                        {
-                            slides &&
-                            slides.map((slide, i) => {
-                                return (
-                                    <>
-                                        {slide}
-                                    </>
-                                )
-                            })
 
-                        }
-                    </>
-                </div>
+            <div className="slide-show">
+            <div className="slide-frame">
                 <LeftBtn style={`slide-btn slide-left-btn card-btn`} name={'left-btn'} handleClick={setSlideMotion} />
                 <RightBtn style={`slide-btn slide-right-btn card-btn`} name={'right-btn'} handleClick={setSlideMotion} />
                 <CloseBtn style={`slide-close-btn close-btn card-btn`} name={'close-btn'} handleClick={handleClick} />
             </div>
-        </>
+            <div className="slide-track" ref={trackRef}>
+                        {
+                            slides &&
+                            slides.map((slide, i) => {
+                                return (
+                                    <SlideComponent key={i}>
+                                        {slide}
+                                    </SlideComponent>
+                                )
+                            })
+
+                }
+            </div>
+        </div>
+
+
     )
 }
 
