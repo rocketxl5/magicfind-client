@@ -15,7 +15,7 @@
 }
 
 @media screen and (width >= 500px) {
-    .modal-image {
+    .modal .modal-image {
         border-radius: 25px;
     }
 }
@@ -35,9 +35,7 @@
 }
 
 @media screen and (width >= 775px) {
-    .modal-image {
-        border-radius: 25px;
-    }
+
 .about .grid-section {
     grid-template-columns: repeat(3, 1fr);
   }

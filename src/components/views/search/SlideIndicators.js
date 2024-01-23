@@ -10,8 +10,6 @@ const SlideIndicators = ({ slides, currentIndicator }) => {
                 slides &&
                 slides.map((slide, index) => {
                     return (
-                        // <span key={index} className={`indicator ${currentIndicator === index && 'current-indicator'}`}>
-
                         <span key={index} className="indicator">
                             {currentIndicator === index ? <FaRegCircleDot /> : <FaRegCircle />}
                         </span>
