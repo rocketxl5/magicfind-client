@@ -1,9 +1,11 @@
+import { useState, forwardRef } from 'react';
 import { Link } from 'react-router-dom';
 import Loading from '../../layout/Loading';
 import useAuth from '../../../hooks/useAuth';
 import styled from 'styled-components';
 
-const CatalogCardDetail = ({ card, loading }) => {
+const CatalogCardDetail = forwardRef(function CatalogCardDetail({ card, loading }, ref) {
+    const [quantity, setQuantity] = useState(0);
     const { auth } = useAuth();
 
     return (
@@ -30,7 +32,9 @@ const CatalogCardDetail = ({ card, loading }) => {
                                 </div>
                                 {card.quantity > 0 &&
                                     <div className="card-spec">
-                                        <p><span className="card-spec-title">Quantity:</span>  <span className="card-spec-value">{card.quantity}</span></p>
+                                        {/* <p><span className="card-spec-title">Quantity:</span>  <span className="card-spec-value">{card.quantity}</span></p> */}
+                                        <label htmlFor="quantity"><span className="card-spec-title">Quantity:</span></label>
+                                        <input className="card-quantity" type="number" name="quantity" id="quantity" min="1" max={card.quantity} onClick={(e) => setQuantity(e.target.value)} ref={ref} />
                                     </div>
                                 }
                                 {auth && (
@@ -55,7 +59,7 @@ const CatalogCardDetail = ({ card, loading }) => {
         </>
 
     )
-}
+})
 
 const Contact = styled(Link)`
     display: block;
