@@ -1,12 +1,87 @@
-import { useState, forwardRef } from 'react';
+import { useState, useContext, forwardRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Loading from '../../layout/Loading';
 import useAuth from '../../../hooks/useAuth';
+import { CartContext } from '../../../contexts/CartContext';
 import styled from 'styled-components';
 
 const CatalogCardDetail = forwardRef(function CatalogCardDetail({ card, loading }, ref) {
-    const [quantity, setQuantity] = useState(0);
+    const [quantitySelected, setQuantitySelected] = useState(0);
+    const [quantityAvailable, setQuantityAvailable] = useState(card.quantity);
+    const [foundItem, setFoundItem] = useState(undefined);
+    const [itemIndex, setItemIndex] = useState(undefined);
+    const [showMessage, setShowMessage] = useState(false);
+    const { cartItems, setCartItems } = useContext(CartContext);
     const { auth } = useAuth();
+
+    const addToCart = (e) => {
+        // console.log(e.target)
+        if (quantitySelected) {
+            // card.quatity = quantitySelected;
+            setCartItems([...cartItems, card])
+            // const cart = JSON.parse(localStorage.getItem(('cart')));
+            // // console.log(cart)
+            // // cart.items = [...cart.items, card];
+            // localStorage.setItem('cart', JSON.stringify(cart));
+        }
+        else {
+            setShowMessage(true)
+            setTimeout(() => {
+                setShowMessage(false);
+            }, 3000);
+        }
+    }
+
+
+
+    const handleChange = (e) => {
+        // console.log(e.target)
+        // Check if value is greater than quantity available
+        // const items = JSON.parse(localStorage.getItem('cart'));
+        if (e.target.value < quantitySelected) {
+            console.log('is smaller')
+            setQuantityAvailable(pre => pre + 1);
+        }
+        else {
+            console.log('is greater')
+            setQuantityAvailable(pre => pre - 1);
+        }
+
+        setQuantitySelected(parseInt(e.target.value));
+    }
+
+    // useEffect(() => {
+    //     // foundItem.quantity = quantitySelected;
+    //     // console.log(foundItem)
+    //     const items = JSON.parse(localStorage.getItem('cart'));
+
+    //     console.log(items[itemIndex].quantity)
+    // }, [quantitySelected])
+
+    useEffect(() => {
+        if (foundItem) {
+            console.log(foundItem)
+            if (card.quantity >= foundItem.quantity) {
+                setQuantitySelected(foundItem.quantity)
+                setQuantityAvailable(foundItem.quantity - card.quantity)
+            }
+            else {
+                throw new Error('An item availability has changed')
+            }
+        }
+    }, [foundItem])
+
+    useEffect(() => {
+        // console.log(card._uuid)
+        // console.log(cartItems)
+        const foundItem = cartItems.find((item, i) => item._uuid = card._uuid);
+        if (foundItem) {
+            const index = cartItems.findIndex((item) => item._uuid = card._uuid)
+            setItemIndex(index)
+            setFoundItem(foundItem)
+            console.log(foundItem)
+        }
+    }, [])
 
     return (
         <>
@@ -30,11 +105,15 @@ const CatalogCardDetail = forwardRef(function CatalogCardDetail({ card, loading 
                                     {/* <p>Price:  <span>{parseFloat(card.price)}</span></p> */}
                                     <p><span className="card-spec-title">Price:</span>  <span className="card-spec-value">{card.price}</span></p>
                                 </div>
+                                <div className="card-spec">
+                                    {/* <p>Price:  <span>{parseFloat(card.price)}</span></p> */}
+                                    <p><span className="card-spec-title">Quantity available:</span>  <span className="card-spec-value">{quantityAvailable}</span></p>
+                                </div>
                                 {card.quantity > 0 &&
                                     <div className="card-spec">
                                         {/* <p><span className="card-spec-title">Quantity:</span>  <span className="card-spec-value">{card.quantity}</span></p> */}
-                                        <label htmlFor="quantity"><span className="card-spec-title">Quantity:</span></label>
-                                        <input className="card-quantity" type="number" name="quantity" id="quantity" min="1" max={card.quantity} onClick={(e) => setQuantity(e.target.value)} ref={ref} />
+                                        <label htmlFor="quantity"><span className="card-spec-title">Quantity selected:</span></label>
+                                        <input className="card-quantity" type="number" name="quantity" id="quantity" min="0" value={quantitySelected} max={card.quantity} onChange={handleChange} ref={ref} />
                                     </div>
                                 }
                                 {auth && (
@@ -49,8 +128,20 @@ const CatalogCardDetail = forwardRef(function CatalogCardDetail({ card, loading 
                                         </Contact>
                                     </div>
                                 )}
-
-
+                                <div className="alert-message">
+                                    {
+                                        showMessage &&
+                                        <p>Please select a quantity</p>
+                                    }
+                                </div>
+                                <div className="card-btns">
+                                    <div className="btn-container">
+                                        <button id="add-to-wishlist" className="btn bg-green color-light" type="button" >Add to Wishlist</button>
+                                    </div>
+                                    <div className="btn-container">
+                                        <button id="add-to-cart" className="btn bg-yellow color-light" type="button" onClick={addToCart}>Add to Cart</button>
+                                    </div>
+                                </div>
                             </div>
                         </>
                     )

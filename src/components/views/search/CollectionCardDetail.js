@@ -5,6 +5,9 @@ const CollectionCardDetail = ({ card }) => {
         <>
             <div className="card-info">
                 <div className="card-spec">
+                    <p><span className="card-spec-title">Name:</span> <span className="card-spec-value">{card.name}</span></p>
+                </div>
+                <div className="card-spec">
                     <p><span className="card-spec-title">Set:</span> <span className="card-spec-value">{card.set_name}</span></p>
                 </div>
                 <div className="card-spec">

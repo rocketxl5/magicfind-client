@@ -1,13 +1,13 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import styled from 'styled-components';
-import { ShoppingCartContext } from '../../contexts/ShoppingCartContext';
+import { CartContext } from '../../contexts/CartContext';
 import { api } from '../../api/resources';
 
 const CartItem = ({ item, setIsUpdating }) => {
   const [loading, setLoading] = useState(false);
   const [quantity, setQuantity] = useState(1);
 
-  const { cartItems, setCartItems } = useContext(ShoppingCartContext);
+  const { cartItems, setCartItems } = useContext(CartContext);
 
   const handleChange = (e, item) => {
     cartItems.forEach((cartItem) => {

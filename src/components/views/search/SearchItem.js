@@ -5,7 +5,7 @@ import CatalogCardFooter from './CatalogCardFooter';
 import CollectionCardFooter from './CollectionCardFooter';
 import ApiCardFooter from './ApiCardFooter';
 
-import CardImage from './CardImage';
+import Image from './CardImage';
 import ExpandBtn from './cardbtn/ExpandBtn';
 import useAttributes from '../../../hooks/useAttributes';
 
@@ -18,19 +18,22 @@ const SearchItem = forwardRef(function SearchItem(props, ref) {
 
     return (
             <div className="card-content" ref={ref}>
-                <header className="card-header">
+            <header className="card-header">
                     <h2 className="card-name">{card.name}</h2>
                 </header>
-                <section className="card-body" >
+            <div className="card-body" >
                 <section className="card-section">
-                    <CardImage card={card} handleCardView={handleCardView} />
+                    <Image card={card} handleCardView={handleCardView} />
                         <ExpandBtn />
                     </section>
+                <section className="card-section">
                     <CardDetailSection card={card} searchType={searchType} loading={loading} />
                 </section>
+            </div>
                 <footer className="card-footer" onClick={(e) => handleCardState(e, card, attributes)}>
                     {searchType === 'search-catalog' ? (
-                        <CatalogCardFooter card={card} />
+                    // <CatalogCardFooter card={card} />
+                    ''
                     ) :
                         searchType === 'search-collection' ? (
                             <CollectionCardFooter card={card} />
