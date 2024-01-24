@@ -10,7 +10,7 @@ import { api } from '../../../api/resources';
 
 const DeleteCard = (props) => {
     // Props
-    const { card, searchType, attributes, handleClick } = props;
+    const { card, searchType, handleClick } = props;
     // States
     const [response, setResponse] = useState({
         isDeleted: false,
@@ -117,7 +117,7 @@ const DeleteCard = (props) => {
                                             <div className="modal-body">
                                                 <section className="modal-section">
                                                     <div className="card-section">
-                                                        <Image attributes={attributes} />
+                                                        <Image card={card} />
                                                     </div>
                                                     <div className="card-section">
                                                         <CollectionCardDetail card={card} />

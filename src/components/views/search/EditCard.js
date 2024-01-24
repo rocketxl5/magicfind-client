@@ -17,7 +17,7 @@ const INIT = {
 
 const EditCard = (props) => {
     // Props
-    const { card, searchType, attributes, handleClick } = props;
+    const { card, searchType, handleClick } = props;
     // States
     const [errors, setErrors] = useState(INIT);
     const [values, setValues] = useState(INIT);
@@ -31,11 +31,6 @@ const EditCard = (props) => {
     // Refs
     const btnRef = useRef(null);
     const priceRef = useRef(null);
-    const conditionRef = useRef(null);
-    const quantityRef = useRef(null);
-    const languageRef = useRef(null);
-    const commentRef = useRef(null);
-    const publishedRef = useRef(null);
     // Routing
     const navigate = useNavigate();
     const location = useLocation();
@@ -186,7 +181,7 @@ const EditCard = (props) => {
                                                 <section className="modal-section">
 
                                                     <div className="card-section">
-                                                        <Image attributes={attributes} />
+                                                            <Image card={card} />
                                                     </div>
                                                     <div className="card-section">
                                                         <CollectionCardDetail card={card} />
@@ -223,8 +218,7 @@ const EditCard = (props) => {
                                                                     onFocus={handleFocus}
                                                                     min="0"
                                                                     max="1000"
-                                                                    placeholder="Quantity"
-                                                                    ref={quantityRef}
+                                                                        placeholder="Quantity"
                                                                 />
                                                             </div>
                                                         </div>
@@ -237,8 +231,7 @@ const EditCard = (props) => {
                                                                 name="condition"
                                                                 value={values.condition}
                                                                 onChange={handleChange}
-                                                                onFocus={handleFocus}
-                                                                ref={conditionRef}
+                                                                    onFocus={handleFocus}
                                                             >
                                                                 <option value="">Choose a condition</option>
                                                                 <option value='m'>Mint</option>
@@ -257,8 +250,7 @@ const EditCard = (props) => {
                                                                 name="language"
                                                                 value={values.language}
                                                                 onChange={handleChange}
-                                                                onFocus={handleFocus}
-                                                                ref={languageRef}
+                                                                    onFocus={handleFocus}
                                                             >
                                                                 <option value="">Choose a language</option>
                                                                 <option value="en">English</option>
@@ -284,8 +276,7 @@ const EditCard = (props) => {
                                                                 value={values.comment}
                                                                 onChange={handleChange}
                                                                 onFocus={handleFocus}
-                                                                placeholder=""
-                                                                ref={commentRef}
+                                                                    placeholder=""
                                                             >
                                                             </textarea>
                                                         </div>
@@ -294,7 +285,7 @@ const EditCard = (props) => {
                                                             <div className="card-status flex gap-1">
                                                                 <div className="edit-option status flex align-center space-between">
                                                                     <label htmlFor="published">Published</label>
-                                                                    <input type="radio" name="published" id="published" onChange={handleRadioChange} value={values.published} checked={values.published} ref={publishedRef} />
+                                                                        <input type="radio" name="published" id="published" onChange={handleRadioChange} value={values.published} checked={values.published} />
 
                                                                 </div>
                                                                 <div className="edit-option status flex align-center space-between">

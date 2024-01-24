@@ -1,11 +1,11 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { FiShoppingCart } from 'react-icons/fi';
-import { ShoppingCartContext } from '../../../contexts/ShoppingCartContext';
+import { CartContext } from '../../../contexts/CartContext';
 import styled from 'styled-components';
 
 const ShoppingCartBtn = () => {
-  const { itemsCount } = useContext(ShoppingCartContext);
+  const { itemsCount } = useContext(CartContext);
   return (
     <Div className="nav-btn">
       <Link to="/shopping-cart" className="cart-btn">

@@ -357,6 +357,7 @@ input#search-api:focus {
   }
 
   .card-content {
+    /* max-width: 40rem; */
     margin-block-end: var(--size-2);
     padding: 1rem;
     border: 1px solid var(--clr-grey);
@@ -383,6 +384,7 @@ input#search-api:focus {
   }
 
   .card-section {
+    width: 50%;
     position: relative;
     display: flex;
     flex-basis: 0;
@@ -438,8 +440,8 @@ input#search-api:focus {
 
   .card-spec-title {
     /* display: inline-block; */
-    font-weight: 500;
-    margin-inline-end: var(--size-1);
+    font-weight: 600;
+    margin-inline-end: 0.2rem;
   }
 
   .card-selected {
@@ -468,6 +470,7 @@ input#search-api:focus {
 .card-btns {
     width: 100%;
     display: flex;
+    flex-direction: column;
     gap: 1rem;
 }
 

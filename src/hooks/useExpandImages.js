@@ -21,28 +21,54 @@ const useExpandImages = (collections) => {
                             return createElement('img', {
                                 key: { i },
                                 className: 'modal-image',
-                                layout: card.layout,
+                                name: 'modal-image',
+                                action: 'turn',
                                 src: card_face.image_uris.normal,
                                 alt: `${card.name} image`,
                             })
                         })
-                        elements[i].push({ layout: card.layout, element })
+                        elements[i].push(element)
+                    }
+                    else if (card.layout === 'split' ||
+                        card.layout === 'planar') {
+                        const element = createElement('img', {
+                            className: 'modal-image',
+                            name: 'modal-image',
+                            action: 'rotate',
+                            src: card.image_uris.normal,
+                            alt: `${card.name} Card Image`,
+                        })
+
+                        elements[i].push(element)
+
+                    }
+                    else if (card.layout === 'flip') {
+                        const element = createElement('img', {
+                            className: 'modal-image',
+                            name: 'modal-image',
+                            action: 'flip',
+                            src: card.image_uris.normal,
+                            alt: `${card.name} Card Image`,
+                        })
+
+                        elements[i].push(element)
+
                     }
                     else {
                         // Single faced card
                         const element = createElement('img', {
                             className: 'modal-image',
-                            layout: card.layout,
+                            name: 'modal-image',
+                            action: 'static',
                             src: card.image_uris.normal,
-                            alt: `${card.name} image`,
+                            alt: `${card.name} Card Image`,
                         })
 
-                        elements[i].push({ layout: card.layout, element })
+                        elements[i].push(element)
                     }
                 })
             })
             setExpandedImages(elements);
-            // console.log(collections)
         }
     }, [collections]);
 

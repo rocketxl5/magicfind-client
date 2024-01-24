@@ -1,10 +1,10 @@
-const RotateBtn = ({ ref }) => {
+const FlipBtn = ({ ref }) => {
 
-    const rotateCard = () => {
-        ref.current?.classList.toggle('rotate-90');
+    const flipCard = () => {
+        ref.current?.classList.toggle('rotate-180');
     }
     return (
-        <button className="action-btn" type="button" onClick={rotateCard}>
+        <button className="action-btn" type="button" onClick={flipCard} >
             <svg focusable="false" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
                 <path d="M158.6,724.5L83.8,779c29.8,40.9,66.2,76.2,108.1,104.8l52.2-76.4C210.9,784.7,182.2,756.8,158.6,724.5z"></path>
                 <path d="M94.1,558.9c-0.7-6.5-1.3-13.1-1.7-19.6L0,544.8c0.5,8.2,1.2,16.5,2.2,24.7c4.8,42.1,15.6,83.2,32,121.9l85.2-36.1 C106.4,624.7,97.9,592.3,94.1,558.9z"></path>
@@ -17,4 +17,4 @@ const RotateBtn = ({ ref }) => {
     )
 }
 
-export default RotateBtn;
+export default FlipBtn;

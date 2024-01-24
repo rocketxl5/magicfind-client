@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Banner from './Banner';
 import MediaElement from './MediaElement';
-import Modal from './search/Modal';
+import Modal from './modal/Modal';
 import { GoShieldCheck } from "react-icons/go";
 import useExpandImages from '../../hooks/useExpandImages';
 import data from '../../assets/data/HOME_PAGE';
@@ -39,20 +39,25 @@ const Home = () => {
 
   const [view, updateSliderView] = useModalSlide(handleSliderView, expandedImages)
 
-  function handleSliderView(e) {
+  function handleSliderView(e, id) {
     e.stopPropagation();
-    updateSliderView(e)
+    // console.log(e.target)
+    updateSliderView(e, id)
   }
 
   useEffect(() => {
+    // console.log(expandedImages)
     if (expandedImages) {
       const features = []
-      expandedImages.forEach((images, i) => {
+      expandedImages.forEach((collection, i) => {
+      // console.log(collection)
         const feature = media.features[i]
+        const cover = collection[feature.cover] || collection[feature.cover]
+        // console.log(cover)
         features.push({
           title: feature.title,
-          cover: !images[feature.cover].element.length ? images[feature.cover].element : images[feature.cover].element[0],
-          images: images
+          cover: !cover.length ? cover : cover[0],
+          images: collection
         })
       })
       setMediaFeatures(features)

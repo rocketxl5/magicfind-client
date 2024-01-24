@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 // import { FiPlusCircle, FiMinusCircle, FiTrash2 } from 'react-icons/fi';
 import CartItem from './CartItem';
 import useAuth from '../../hooks/useAuth';
-import { ShoppingCartContext } from '../../contexts/ShoppingCartContext';
+import { CartContext } from '../../contexts/CartContext';
 import { api } from '../../api/resources';
 import styled from 'styled-components';
 
@@ -13,7 +13,7 @@ function ShoppingCart() {
   const [loading, setLoading] = useState(false);
   const [isUpdating, setIsUpdating] = useState(false);
   const { auth } = useAuth();
-  const { cartItems, setCartItems } = useContext(ShoppingCartContext);
+  const { cartItems, setCartItems } = useContext(CartContext);
   const navigate = useNavigate();
 
   // This is where the amount or items in the cart is set & the subtotal of off all items in the cart
