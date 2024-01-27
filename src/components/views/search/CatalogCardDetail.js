@@ -26,7 +26,7 @@ const CatalogCardDetail = ({ card, loading }) => {
         //     }, 3000);
 
         // }
-        if (!isCartItem) {
+        if (itemIndex) {
             setCartItems([...cartItems, { selected: card, quantity: quantitySelected }])
             setIsCartItem(true);
         }
@@ -44,7 +44,6 @@ const CatalogCardDetail = ({ card, loading }) => {
 
     const handleChange = (e) => {
 
-        setQuantitySelected(parseInt(e.target.value));
         const value = parseInt(e.target.value);
 
         setIsLoading(true);
@@ -61,11 +60,18 @@ const CatalogCardDetail = ({ card, loading }) => {
             .then((res) => res.json())
             .then((data) => {
                 setIsLoading(false);
-                console.log(data)
                 if (data.isAvailable) {
-                    const items = JSON.parse(localStorage.getItem('cart'));
-                    items[itemIndex].quantity = value;
-                    setCartItems(items);
+                    if (isCartItem) {
+
+                        const items = JSON.parse(localStorage.getItem('cart'));
+                        items[itemIndex].quantity = value;
+                        setCartItems(items);
+                    }
+                    else {
+                        setCartItems([...cartItems, { selected: card, quantity: value }])
+                        setIsCartItem(true);
+                    }
+                    setQuantitySelected(value);
                 } else {
                     setQuantitySelected(data.card._quantity);
                 }
@@ -77,25 +83,17 @@ const CatalogCardDetail = ({ card, loading }) => {
     }
 
     useEffect(() => {
-        if (itemIndex) {
-            setQuantitySelected(cartItems[itemIndex]?.quantity)
-        }
+        setQuantitySelected(cartItems[itemIndex]?.quantity)
     }, [itemIndex])
 
     useEffect(() => {
+        setQuantityAvailable(card.quantity);
         const index = cartItems.findIndex((item) => {
-
             return item.selected._id === card._id
         });
-        setQuantityAvailable(card.quantity);
-
-        if (index > -1) {
-            setItemIndex(index)
+        if (index >= 0) {
             setIsCartItem(true);
-        }
-        else {
-            setQuantitySelected(1);
-            setIsCartItem(false);
+            setItemIndex(index);
         }
     }, [])
 
@@ -135,11 +133,11 @@ const CatalogCardDetail = ({ card, loading }) => {
                                                 value={quantitySelected}
                                                 onChange={(e) => handleChange(e)}
                                             >
-                                                {[...Array(quantityAvailable).keys()].map((key) => {
-                                                    const quantity = key + 1;
+                                                {[...Array(quantityAvailable + 1).keys()].map((key) => {
+
                                                     return (
-                                                        <option key={key} value={`${quantity}`}>
-                                                            {quantity}
+                                                        <option key={key} value={`${key}`}>
+                                                            {key}
                                                         </option>
                                                     )
                                                 })}
@@ -171,8 +169,8 @@ const CatalogCardDetail = ({ card, loading }) => {
                                     </div> */}
                                     <div className="btn-container">
                                         {
-                                            !isCartItem &&
-                                                <button id="add-to-cart" className="btn bg-yellow color-light" type="button" onClick={addToCart}>Add to Cart</button>
+                                            // !isCartItem &&
+                                            //     <button id="add-to-cart" className="btn bg-yellow color-light" type="button" onClick={addToCart}>Add to Cart</button>
 
                                             //     :
                                             //     <button id="add-to-cart" className="btn bg-green color-light" type="button" onClick={updateCart}>Update Cart</button>
