@@ -5,8 +5,6 @@
   --clr-danger: rgb(220, 53, 69);
   --clr-success: rgb(34, 170, 68);
 
-  /* --clr-primary: rgb(27, 47, 65); */
-  /* --clr-primary: rgb(27, 47, 65); */
   --clr-transparent: rgba(0, 0, 0, 0);
   --clr-primary: rgb(42, 73, 101);
   --clr-secondary: hsl(200, 50%, 50%);
@@ -191,7 +189,6 @@ cursor: pointer;
 }
 
 /* Loading Spinner Styling */
-
 .loading-content {
 display: flex;
 min-height: inherit;
@@ -451,7 +448,6 @@ scroll-snap-align: start;
   letter-spacing: 0.1rem;
   color: var(--clr-light-grey);
   font-weight: 500;
-  /* border: 1px solid rgba(255, 255, 255, 0.1); */
   background-color: var(--clr-primary);
   border-radius: var(--radius-1);
   box-shadow: var(--shadow-1);
@@ -461,7 +457,6 @@ scroll-snap-align: start;
   position: relative;
   color: var(--clr-light-grey);
   padding: max(0.5vw, 1rem);
-  /* border: 1px solid rgba(255, 255, 255, 0.1); */
   background-color: var(--clr-primary);
   border-radius: var(--radius-1);
   box-shadow: var(--shadow-1);
@@ -495,12 +490,10 @@ scroll-snap-align: start;
 
 .feature-footer .btn {
   width: 100%;
-  /* padding-inline: 0; */
   background-color: rgba(42, 73, 101, 0.7);
   font-size: clamp(var(--fs-100), 3.5vw, var(--fs-150));
   color: var(--clr-light-grey);
   border-radius: var(--radius-1);
-  /* border: 1px solid rgba(255, 255, 255, 0.3); */
 }
 
 .line-icon {
@@ -538,7 +531,6 @@ border-radius: 100%;
   color: var(--clr-grey);
   font-size: clamp(var(--fs-150), 3vw, var(--fs-300));
   font-weight: 500;
-  /* background-color: rgba(0, 0, 0, 0.6); */
   background-color: rgba(42, 73, 101, 1);
   border: 2px solid var(--clr-grey);
   border-radius: var(--radius-1);
@@ -629,15 +621,10 @@ height: 2rem;
 .modal {
   height: 100%;
   min-width: 37rem;
-  /* height: calc(80vh); */
-  /* width: calc(100vw - 4rem); */
-  /* margin-block-start: 8rem; */
-  /* border-radius: var(--size-1); */
 }
 
 .modal-state {
   width: calc(100vw - 4rem);
-  /* height: calc(100vh - 2rem); */
   height: 100%;
   margin: 0 auto;
   margin-block-start: 2rem;
@@ -846,7 +833,6 @@ height: 2rem;
   position: relative;  
   height: 100%;
   min-width: 37rem;
-  /* background: var(--clr-transparent); */
   background: rgba(0, 0, 0, 0.7);
 }
 
@@ -915,10 +901,6 @@ height: 2rem;
 .card-btn > svg {
   width: 50%;
   height: 50%;
-  /* stroke-width: 0.1; */
-  /* width: 90% !important;
-  height: 90% !important; */
-  /* margin: 0 auto; */
 }
 
 .card-btn svg,
@@ -944,7 +926,6 @@ height: 2rem;
   align-items: center;
   gap: 2rem;
   min-height: 3rem;
-  /* background-color: red; */
   z-index: 6001;
 }
 

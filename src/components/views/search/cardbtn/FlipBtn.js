@@ -1,7 +1,7 @@
-const FlipBtn = ({ ref }) => {
+const FlipBtn = ({ target }) => {
 
     const flipCard = () => {
-        ref.current?.classList.toggle('rotate-180');
+        target.classList.toggle('rotate-180');
     }
     return (
         <button className="action-btn" type="button" onClick={flipCard} >

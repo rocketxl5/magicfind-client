@@ -3,7 +3,6 @@
 const TurnBtn = ({ target }) => {
 
     const turnCard = () => {
-        console.log(target)
         target.classList.toggle('rotate-y');
     }
     return (

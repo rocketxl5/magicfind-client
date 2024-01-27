@@ -1,98 +1,115 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import styled from 'styled-components';
 import { CartContext } from '../../contexts/CartContext';
 import { api } from '../../api/resources';
 
-const CartItem = ({ item, setIsUpdating }) => {
+const CartItem = ({ item, index }) => {
   const [loading, setLoading] = useState(false);
-  const [quantity, setQuantity] = useState(1);
+  const [quantity, setQuantity] = useState(0);
+  const [total, setTotal] = useState(item.quantity * item.selected.price)
+  const [value, setValue] = useState(item.quantity);
+  const { setCartItems, setSubTotal } = useContext(CartContext);
 
-  const { cartItems, setCartItems } = useContext(CartContext);
+  const handleChange = (e) => {
+  // console.log(e.target.value)
+  // // e.stopPropagation();
+  // console.log(quantity)
+  // console.log(item.quantity)
 
-  const handleChange = (e, item) => {
-    cartItems.forEach((cartItem) => {
-      if (cartItem === item) {
-        // console.log(e.target.value);
-        cartItem.quantity_selected = parseInt(e.target.value);
-      }
+    setValue(parseInt(e.target.value));
+    // setTotal(parseInt(e.target.value) * item.selected.price);
 
-      setLoading(true);
-      setIsUpdating(true);
-      const options = {
-        method: 'GET',
-        header: { 'Content-Type': 'application/json' },
-      };
+    // setLoading(true);
+    // setIsUpdating(true);
+    // const options = {
+    //   method: 'GET',
+    //   header: { 'Content-Type': 'application/json' },
+    // };
 
-      fetch(
-        `${api.serverURL}/api/catalog/${item.name}/${item._id}/${item.quantity_selected}`,
-        options
-      )
-        .then((res) => res.json())
-        .then((data) => {
-          if (data.data.isQuantityAvailable) {
-            setLoading(false);
-            setIsUpdating(false);
-            setQuantity(cartItem.quantity_selected);
-            const items = [...cartItems];
-            setCartItems(items);
-          } else {
-            return console.log('Quantity not available');
-          }
-        });
-    });
+    // fetch(
+    //   `${api.serverURL}/api/catalog/${item.selected.userID}/${item.selected._id}/${e.target.value}`,
+    //   options
+    // )
+    //   .then((res) => res.json())
+    //   .then((data) => {
+    //     console.log(data)
+    //     if (data.isAvailable) {
+    //       // setLoading(false);
+    //       // setIsUpdating(false);
+    //       const items = JSON.parse(localStorage.getItem('cart'));
+    //       // setQuantity(items[index].quantity - quantity);
+    //       items[index].quantity = parseInt(e.target.value);
+    //       setCartItems(items);
+    //     } else {
+    //       return console.log('Quantity not available');
+    //     }
+    //   });
+
   };
 
-  const handleClick = (item) => {
-    cartItems.forEach((cartItem, index) => {
-      if (cartItem === item) {
-        cartItems.splice(index, 1);
-      }
-
-      const items = [...cartItems];
-      setCartItems(items);
-    });
+  const deleteItem = (e) => {
+    e.stopPropagation();
+    const items = JSON.parse(localStorage.getItem('cart'));
+    items.splice(index, 1);
+    localStorage.setItem('cart', JSON.stringify(items));
+    setCartItems(items);
   };
+
+  useEffect(() => {
+    // Set article total price
+    setTotal(value * item.selected.price)
+
+    // Update cartItems state
+    const items = JSON.parse(localStorage.getItem('cart'));
+    items[index].quantity = parseInt(value);
+    items[index].total = value;
+    setCartItems(items);
+  }, [value])
+
+  useEffect(() => {
+    setValue(item.quantity);
+    setQuantity(item.selected.quantity)
+  }, []);
+
   return (
     <Content className={loading ? 'loading' : ''}>
       <ImageContainer>
-        <Image src={item.image_uris.png} />
+        <Image src={item.selected.image_uris.small} />
       </ImageContainer>
       <DetailsContainer>
         <DetailsHeader>
-          <h3>{item.name}</h3>
-          <p>$ {item.price}.00</p>
+          <h3>{item.selected.name}</h3>
+          <p>$ {item.selected.price}.00</p>
         </DetailsHeader>
         <Details>
           <Info>
-            <p>Seller: {item.userName}</p>
-            <p>Ships from: {item.userCountry}</p>
-            <p>Card Condition: {item.condition.toUpperCase()}</p>
+            <p>Seller: {item.selected.userName}</p>
+            <p>Ships from: {item.selected.country}</p>
+            <p>Card Condition: {item.selected.condition.toUpperCase()}</p>
           </Info>
           <Selector>
             <select
-              onChange={(e) => {
-                handleChange(e, item);
-              }}
+
+              name="quantity"
+              value={value}
+              onChange={(e) => handleChange(e)}
             >
-              {[...new Array(item.quantity)].map((x, i) => {
-                return i + 1 === item.quantity_selected ? (
-                  <option key={i} value={i + 1} selected>
-                    {i + 1}
+              {[...Array(quantity).keys()].map((key) => {
+                const val = key + 1;
+                return (
+                  <option key={key} value={`${val}`}>
+                    {val}
                   </option>
-                ) : (
-                  <option key={i} value={i + 1}>
-                    {i + 1}
-                  </option>
-                );
+                )
               })}
             </select>
 
-            <button type="button" onClick={() => handleClick(item)}>Delete</button>
+            <button type="button" onClick={deleteItem}>Delete</button>
           </Selector>
         </Details>
         <DetailsFooter>
           <h4>Total:</h4>
-          <p>{quantity && `$ ${item.quantity_selected * item.price}.00`}</p>
+          <p>{quantity && `$ ${total}.00`}</p>
         </DetailsFooter>
       </DetailsContainer>
     </Content>
