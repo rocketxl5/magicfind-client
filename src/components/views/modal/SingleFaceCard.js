@@ -18,9 +18,9 @@ const SingleFaceCard = ({ children, action }) => {
                     {
                         isMounted &&
                             action === 'flip' ? (
-                            <FlipBtn ref={cardRef} />
+                                <FlipBtn target={cardRef} />
                         ) : action === 'rotate' ? (
-                            <RotateBtn ref={cardRef} />
+                                <RotateBtn target={cardRef} />
                         ) : (
                             <></>
                         )

@@ -9,20 +9,18 @@ const CatalogCardDetail = forwardRef(function CatalogCardDetail({ card, loading 
     const [quantitySelected, setQuantitySelected] = useState(0);
     const [quantityAvailable, setQuantityAvailable] = useState(card.quantity);
     const [foundItem, setFoundItem] = useState(undefined);
+    const [isCartItem, setIsCartItem] = useState(false);
     const [itemIndex, setItemIndex] = useState(undefined);
     const [showMessage, setShowMessage] = useState(false);
     const { cartItems, setCartItems } = useContext(CartContext);
     const { auth } = useAuth();
 
     const addToCart = (e) => {
-        // console.log(e.target)
+        e.stopPropagation();
+
         if (quantitySelected) {
-            // card.quatity = quantitySelected;
-            setCartItems([...cartItems, card])
-            // const cart = JSON.parse(localStorage.getItem(('cart')));
-            // // console.log(cart)
-            // // cart.items = [...cart.items, card];
-            // localStorage.setItem('cart', JSON.stringify(cart));
+            setCartItems([...cartItems, { selected: card, quantity: quantitySelected, total: card.price * parseInt(quantitySelected) }])
+            setIsCartItem(true);
         }
         else {
             setShowMessage(true)
@@ -32,55 +30,69 @@ const CatalogCardDetail = forwardRef(function CatalogCardDetail({ card, loading 
         }
     }
 
+    const updateCart = (e) => {
+        e.stopPropagation();
+        const items = JSON.parse(localStorage.getItem('cart'));
 
+        if (items[itemIndex].quantity === quantitySelected) {
 
-    const handleChange = (e) => {
-        // console.log(e.target)
-        // Check if value is greater than quantity available
-        // const items = JSON.parse(localStorage.getItem('cart'));
-        if (e.target.value < quantitySelected) {
-            console.log('is smaller')
-            setQuantityAvailable(pre => pre + 1);
+            setShowMessage(true)
+            setTimeout(() => {
+                setShowMessage(false);
+            }, 3000);
         }
         else {
-            console.log('is greater')
+            if (!quantitySelected) {
+                setIsCartItem(false);
+                items.splice(itemIndex, 1);
+            }
+            else {
+                items[itemIndex].quantity = quantitySelected;
+                items[itemIndex].total = quantitySelected * items[itemIndex].selected.price;
+                !isCartItem && setIsCartItem(true);
+            }
+
+            setCartItems(items);
+            localStorage.setItem('cart', JSON.stringify(items));
+        }
+    }
+
+    const handleChange = (e) => {
+        e.stopPropagation();
+        const quantity = parseInt(e.target.value);
+        if (quantity > quantitySelected) {
             setQuantityAvailable(pre => pre - 1);
         }
-
+        else {
+            setQuantityAvailable(pre => pre + 1);
+        }
+        // Update quantity selected
         setQuantitySelected(parseInt(e.target.value));
     }
 
-    // useEffect(() => {
-    //     // foundItem.quantity = quantitySelected;
-    //     // console.log(foundItem)
-    //     const items = JSON.parse(localStorage.getItem('cart'));
-
-    //     console.log(items[itemIndex].quantity)
-    // }, [quantitySelected])
-
     useEffect(() => {
-        if (foundItem) {
-            console.log(foundItem)
-            if (card.quantity >= foundItem.quantity) {
-                setQuantitySelected(foundItem.quantity)
-                setQuantityAvailable(foundItem.quantity - card.quantity)
-            }
-            else {
-                throw new Error('An item availability has changed')
+        if (isCartItem) {
+            if (foundItem) {
+                if (card.quantity >= foundItem.quantity) {
+                    setQuantitySelected(foundItem.quantity)
+                    setQuantityAvailable(card.quantity - foundItem.quantity)
+                }
+                else {
+                    throw new Error('Item\'s availability has changed')
+                }
             }
         }
-    }, [foundItem])
+    }, [isCartItem])
 
     useEffect(() => {
-        // console.log(card._uuid)
-        // console.log(cartItems)
-        const foundItem = cartItems.find((item, i) => item._uuid = card._uuid);
-        if (foundItem) {
-            const index = cartItems.findIndex((item) => item._uuid = card._uuid)
+        const item = cartItems.find((item, i) => item.selected._id === card._id);
+        // console.log(item)
+        if (item) {
+            const index = cartItems.findIndex((item) => item.selected._id === card._id)
             setItemIndex(index)
-            setFoundItem(foundItem)
-            console.log(foundItem)
-        }
+            setFoundItem(item)
+            item.quantity && setIsCartItem(true);
+        } else { }
     }, [])
 
     return (
@@ -102,11 +114,9 @@ const CatalogCardDetail = forwardRef(function CatalogCardDetail({ card, loading 
                                     <p><span className="card-spec-title">Ships From:</span>  <span className="card-spec-value">{card.userCountry}</span></p>
                                 </div>
                                 <div className="card-spec">
-                                    {/* <p>Price:  <span>{parseFloat(card.price)}</span></p> */}
                                     <p><span className="card-spec-title">Price:</span>  <span className="card-spec-value">{card.price}</span></p>
                                 </div>
                                 <div className="card-spec">
-                                    {/* <p>Price:  <span>{parseFloat(card.price)}</span></p> */}
                                     <p><span className="card-spec-title">Quantity available:</span>  <span className="card-spec-value">{quantityAvailable}</span></p>
                                 </div>
                                 {card.quantity > 0 &&
@@ -135,11 +145,16 @@ const CatalogCardDetail = forwardRef(function CatalogCardDetail({ card, loading 
                                     }
                                 </div>
                                 <div className="card-btns">
-                                    <div className="btn-container">
+                                    {/* <div className="btn-container">
                                         <button id="add-to-wishlist" className="btn bg-green color-light" type="button" >Add to Wishlist</button>
-                                    </div>
+                                    </div> */}
                                     <div className="btn-container">
-                                        <button id="add-to-cart" className="btn bg-yellow color-light" type="button" onClick={addToCart}>Add to Cart</button>
+                                        {
+                                            !isCartItem ? 
+                                                <button id="add-to-cart" className="btn bg-yellow color-light" type="button" onClick={addToCart}>Add to Cart</button>
+                                                :
+                                                <button id="add-to-cart" className="btn bg-green color-light" type="button" onClick={updateCart}>Update Cart</button>
+                                        }
                                     </div>
                                 </div>
                             </div>

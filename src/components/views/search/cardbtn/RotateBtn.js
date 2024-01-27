@@ -1,7 +1,7 @@
-const RotateBtn = ({ ref }) => {
+const RotateBtn = ({ target }) => {
 
     const rotateCard = () => {
-        ref.current?.classList.toggle('rotate-90');
+        target.classList.toggle('rotate-90');
     }
     return (
         <button className="action-btn" type="button" onClick={rotateCard}>

@@ -9,25 +9,26 @@ import styled from 'styled-components';
 
 function ShoppingCart() {
   const [totalItems, setTotalItems] = useState(0);
-  const [subTotal, setSubTotal] = useState(0);
   const [loading, setLoading] = useState(false);
   const [isUpdating, setIsUpdating] = useState(false);
   const { auth } = useAuth();
-  const { cartItems, setCartItems } = useContext(CartContext);
+  const { cartItems, subTotal, itemsCount } = useContext(CartContext);
   const navigate = useNavigate();
-
-  // This is where the amount or items in the cart is set & the subtotal of off all items in the cart
   useEffect(() => {
-    let amount = 0;
-    let items = 0;
-    cartItems.forEach((cartItem) => {
-      items += cartItem.quantity_selected;
-      amount += cartItem.quantity_selected * cartItem.price;
-    });
+    console.log(subTotal)
+  }, [])
+  // This is where the amount or items in the cart is set & the subtotal of off all items in the cart
+  // useEffect(() => {
+  //   let amount = 0;
+  //   let items = 0;
+  //   cartItems.forEach((cartItem) => {
+  //     items += cartItem.quantity_selected;
+  //     amount += cartItem.quantity_selected * cartItem.price;
+  //   });
 
-    setSubTotal(amount);
-    setTotalItems(items);
-  }, [cartItems]);
+  //   setSubTotal(amount);
+  //   setTotalItems(items);
+  // }, [cartItems]);
 
   const handleCheckout = () => {
     // setLoading(true);
@@ -73,9 +74,7 @@ function ShoppingCart() {
             </Header>
 
             {cartItems &&
-              cartItems.map((item) => {
-                return <CartItem item={item} setIsUpdating={setIsUpdating} />;
-              })}
+                cartItems.map((item, i) => <CartItem key={i} item={item} index={i} />)}
           </Items>
         ) : (
           <div>Your Cart is Empty</div>
@@ -85,12 +84,12 @@ function ShoppingCart() {
             <h3>Subtotal</h3>
             {!isUpdating && totalItems ? (
               <p>
-                {`(${totalItems} items): `}
+                  {`(${itemsCount} items): `}
                 <strong>{`$ ${subTotal}.00`}</strong>
               </p>
             ) : (
               <p>
-                {`(${totalItems} items): `}
+                    {`(${itemsCount} items): `}
                 <strong>{`$ ${subTotal}.00`}</strong>
               </p>
             )}

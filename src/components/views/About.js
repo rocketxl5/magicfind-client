@@ -9,7 +9,7 @@ const About = () => {
       <Banner classList={classList} title={title} link={link} />
 
       <main className="main-content about">
-        <section className="feature-setion">
+        <section className="feature-section">
 
           <header className="section-header">
             <h2 className="section-title">About Magic Find</h2>

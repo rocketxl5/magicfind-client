@@ -7,49 +7,28 @@ export const CartProvider = ({ children }) => {
   const [itemsCount, setItemsCount] = useState(0);
   const [subTotal, setSubTotal] = useState(0);
 
-  // const getCart = (cartName) => {
-  //   return JSON.parse(localStorage.getItem(cartName));
-  // }
-
-  // useEffect(() => {
-  //   if (itemsCount) {
-  //     localStorage.setItem('cart', JSON.stringify(itemsCount));
-  //   }
-  // }, [itemsCount]);
-
   useEffect(() => {
+    const items = cartItems.reduce((accumulator, currentItem) =>
+      accumulator + currentItem.quantity
+      , 0)
+    const total = cartItems.reduce((accumulator, currentItem) =>
+      accumulator + currentItem.quantity * currentItem.selected.price
+      , 0)
 
+    if (cartItems.length > 0) {
+      localStorage.setItem('cart', JSON.stringify(cartItems));
+    }
 
-    // localStorage.setItem('cart', JSON.stringify(cartItems));
-    // let quantity = 0;
-    // const cart = getCart('cart');
-
-    // if (cart) {
-    //   cart?.items.forEach((item) => {
-    //     quantity += parseInt(item.quantity_selected);
-    //   });
-    // } else {
-    //   return;
-    // }
-
-    // setItemsCount(quantity);
-
-    // if (cartItems.length > 0) {
-    //   cart.items = cartItems;
-    //   localStorage.setItem('cart', JSON.stringify(cart));
-    // }
+    // Update SubTotal state
+    setSubTotal(total)
+    // Update ItemsCount state
+    setItemsCount(items);
   }, [cartItems]);
 
   useEffect(() => {
-    const cart = JSON.parse(localStorage.getItem('cart'));
-    console.log(cart)
-    if (cart) {
-      setCartItems(cart);
-      setItemsCount(cart.length);
-    }
-    else {
-      localStorage.setItem('cart', JSON.stringify(cartItems));
-      // console.log('hello')
+    const items = JSON.parse(localStorage.getItem('cart'));
+    if (items?.length > 0) {
+      setCartItems(items);
     }
   }, []);
 
@@ -59,7 +38,9 @@ export const CartProvider = ({ children }) => {
         cartItems,
         setCartItems,
         itemsCount,
-        setItemsCount
+        setItemsCount,
+        subTotal,
+        setSubTotal
       }}
     >
       {children}

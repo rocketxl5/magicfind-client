@@ -25,7 +25,6 @@ const useModalSlide = (callback, expandedImages) => {
                                 }
                             </>
                         </SlideShow>
-
                 }
             case ACTIONS.CLOSE:
                 return INIT;
