@@ -6,6 +6,7 @@ import useAuth from '../../hooks/useAuth';
 import { CartContext } from '../../contexts/CartContext';
 import { api } from '../../api/resources';
 import styled from 'styled-components';
+import Loading from '../layout/Loading';
 
 function ShoppingCart() {
   const [totalItems, setTotalItems] = useState(0);
@@ -15,8 +16,8 @@ function ShoppingCart() {
   const { cartItems, subTotal, itemsCount } = useContext(CartContext);
   const navigate = useNavigate();
   useEffect(() => {
-    console.log(subTotal)
-  }, [])
+    console.log('loading', loading)
+  }, [loading])
   // This is where the amount or items in the cart is set & the subtotal of off all items in the cart
   // useEffect(() => {
   //   let amount = 0;
@@ -67,6 +68,7 @@ function ShoppingCart() {
       <main className="main">
         <Container>
         {cartItems.length > 0 ? (
+            <>
           <Items>
             <Header>
               <h3>Items</h3>
@@ -74,38 +76,36 @@ function ShoppingCart() {
             </Header>
 
             {cartItems &&
-                cartItems.map((item, i) => <CartItem key={i} item={item} index={i} />)}
-          </Items>
-        ) : (
-          <div>Your Cart is Empty</div>
-        )}
-        {cartItems.length > 0 ? (
+                  cartItems.map((item, i) => <CartItem key={i} item={item} index={i} setLoading={(value) => setLoading(value)} />)}
+              </Items>
           <Aside className={isUpdating ? 'loading' : ''}>
-            <h3>Subtotal</h3>
-            {!isUpdating && totalItems ? (
-              <p>
-                  {`(${itemsCount} items): `}
-                <strong>{`$ ${subTotal}.00`}</strong>
-              </p>
-            ) : (
-              <p>
+                <>
+                  <h3>Subtotal</h3>
+                  {
+                    loading ? (
+                      <Loading />
+                    ) : (
+                      <p>
                     {`(${itemsCount} items): `}
-                <strong>{`$ ${subTotal}.00`}</strong>
-              </p>
-            )}
+                          <strong>{`$ ${subTotal}.00`}</strong>
+                        </p>
+                    )
+                  }
 
-            <CheckoutButton
-              type="button"
-              onClick={() => {
-                handleCheckout();
-              }}
-            >
-              Checkout
-            </CheckoutButton>
-          </Aside>
+                  <CheckoutButton
+                    type="button"
+                    onClick={() => {
+                      handleCheckout();
+                    }}
+                  >
+                    Checkout
+                  </CheckoutButton>
+                </>
+              </Aside>
+            </>
         ) : (
-          ''
-        )}
+            <div>Your Cart is Empty</div>
+          )}
       </Container>
       </main>
     </div>

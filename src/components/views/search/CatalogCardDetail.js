@@ -1,14 +1,15 @@
-import { useState, useContext, forwardRef, useEffect } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Loading from '../../layout/Loading';
 import useAuth from '../../../hooks/useAuth';
 import { CartContext } from '../../../contexts/CartContext';
+import { api } from '../../../api/resources';
 import styled from 'styled-components';
 
-const CatalogCardDetail = forwardRef(function CatalogCardDetail({ card, loading }, ref) {
+const CatalogCardDetail = ({ card, loading }) => {
+    const [isLoading, setIsLoading] = useState(false);
     const [quantitySelected, setQuantitySelected] = useState(0);
-    const [quantityAvailable, setQuantityAvailable] = useState(card.quantity);
-    const [foundItem, setFoundItem] = useState(undefined);
+    const [quantityAvailable, setQuantityAvailable] = useState(0);
     const [isCartItem, setIsCartItem] = useState(false);
     const [itemIndex, setItemIndex] = useState(undefined);
     const [showMessage, setShowMessage] = useState(false);
@@ -18,87 +19,90 @@ const CatalogCardDetail = forwardRef(function CatalogCardDetail({ card, loading 
     const addToCart = (e) => {
         e.stopPropagation();
 
-        if (quantitySelected) {
-            setCartItems([...cartItems, { selected: card, quantity: quantitySelected, total: card.price * parseInt(quantitySelected) }])
+        // if (quantitySelected === cartItems[itemIndex].quantity) {
+        //     setShowMessage(true)
+        //     setTimeout(() => {
+        //         return setShowMessage(false);
+        //     }, 3000);
+
+        // }
+        if (!isCartItem) {
+            setCartItems([...cartItems, { selected: card, quantity: quantitySelected }])
             setIsCartItem(true);
         }
-        else {
-            setShowMessage(true)
-            setTimeout(() => {
-                setShowMessage(false);
-            }, 3000);
-        }
-    }
 
-    const updateCart = (e) => {
-        e.stopPropagation();
-        const items = JSON.parse(localStorage.getItem('cart'));
+        // if (isCartItem) {
+        //     const items = JSON.parse(localStorage.getItem('cart'));
+        //     items[itemIndex].quantity = quantitySelected;
+        //     setCartItems(items);
+        // } else {
 
-        if (items[itemIndex].quantity === quantitySelected) {
-
-            setShowMessage(true)
-            setTimeout(() => {
-                setShowMessage(false);
-            }, 3000);
-        }
-        else {
-            if (!quantitySelected) {
-                setIsCartItem(false);
-                items.splice(itemIndex, 1);
-            }
-            else {
-                items[itemIndex].quantity = quantitySelected;
-                items[itemIndex].total = quantitySelected * items[itemIndex].selected.price;
-                !isCartItem && setIsCartItem(true);
-            }
-
-            setCartItems(items);
-            localStorage.setItem('cart', JSON.stringify(items));
-        }
+        //     setCartItems([...cartItems, { selected: card, quantity: quantitySelected }])
+        //     setIsCartItem(true);
+        // }
     }
 
     const handleChange = (e) => {
-        e.stopPropagation();
-        const quantity = parseInt(e.target.value);
-        if (quantity > quantitySelected) {
-            setQuantityAvailable(pre => pre - 1);
-        }
-        else {
-            setQuantityAvailable(pre => pre + 1);
-        }
-        // Update quantity selected
+
         setQuantitySelected(parseInt(e.target.value));
+        const value = parseInt(e.target.value);
+
+        setIsLoading(true);
+
+        const options = {
+            method: 'GET',
+            header: { 'Content-Type': 'application/json' },
+        };
+
+        fetch(
+            `${api.serverURL}/api/catalog/${card.userID}/${card._id}/${value}`,
+            options
+        )
+            .then((res) => res.json())
+            .then((data) => {
+                setIsLoading(false);
+                console.log(data)
+                if (data.isAvailable) {
+                    const items = JSON.parse(localStorage.getItem('cart'));
+                    items[itemIndex].quantity = value;
+                    setCartItems(items);
+                } else {
+                    setQuantitySelected(data.card._quantity);
+                }
+            })
+            .catch((error) => {
+                setIsLoading(false)
+                console.log(error.message)
+            })
     }
 
     useEffect(() => {
-        if (isCartItem) {
-            if (foundItem) {
-                if (card.quantity >= foundItem.quantity) {
-                    setQuantitySelected(foundItem.quantity)
-                    setQuantityAvailable(card.quantity - foundItem.quantity)
-                }
-                else {
-                    throw new Error('Item\'s availability has changed')
-                }
-            }
+        if (itemIndex) {
+            setQuantitySelected(cartItems[itemIndex]?.quantity)
         }
-    }, [isCartItem])
+    }, [itemIndex])
 
     useEffect(() => {
-        const item = cartItems.find((item, i) => item.selected._id === card._id);
-        // console.log(item)
-        if (item) {
-            const index = cartItems.findIndex((item) => item.selected._id === card._id)
+        const index = cartItems.findIndex((item) => {
+
+            return item.selected._id === card._id
+        });
+        setQuantityAvailable(card.quantity);
+
+        if (index > -1) {
             setItemIndex(index)
-            setFoundItem(item)
-            item.quantity && setIsCartItem(true);
-        } else { }
+            setIsCartItem(true);
+        }
+        else {
+            setQuantitySelected(1);
+            setIsCartItem(false);
+        }
     }, [])
 
     return (
         <>
             {
-                loading ?
+                isLoading ?
                     (
                         <Loading />
                     ) : (
@@ -116,14 +120,31 @@ const CatalogCardDetail = forwardRef(function CatalogCardDetail({ card, loading 
                                 <div className="card-spec">
                                     <p><span className="card-spec-title">Price:</span>  <span className="card-spec-value">{card.price}</span></p>
                                 </div>
-                                <div className="card-spec">
+                                {/* <div className="card-spec">
                                     <p><span className="card-spec-title">Quantity available:</span>  <span className="card-spec-value">{quantityAvailable}</span></p>
-                                </div>
+                                </div> */}
+                                <p><span className="card-spec-title">Quantity Available:</span>  <span className="card-spec-value">{card.quantity}</span></p>
+
+                                <label htmlFor="quantity"><span className="card-spec-title">Quantity selected:</span></label>
                                 {card.quantity > 0 &&
                                     <div className="card-spec">
-                                        {/* <p><span className="card-spec-title">Quantity:</span>  <span className="card-spec-value">{card.quantity}</span></p> */}
-                                        <label htmlFor="quantity"><span className="card-spec-title">Quantity selected:</span></label>
-                                        <input className="card-quantity" type="number" name="quantity" id="quantity" min="0" value={quantitySelected} max={card.quantity} onChange={handleChange} ref={ref} />
+                                        <Selector>
+                                            <select
+                                                id="quantity"
+                                                name="quantity"
+                                                value={quantitySelected}
+                                                onChange={(e) => handleChange(e)}
+                                            >
+                                                {[...Array(quantityAvailable).keys()].map((key) => {
+                                                    const quantity = key + 1;
+                                                    return (
+                                                        <option key={key} value={`${quantity}`}>
+                                                            {quantity}
+                                                        </option>
+                                                    )
+                                                })}
+                                            </select>
+                                        </Selector>
                                     </div>
                                 }
                                 {auth && (
@@ -150,10 +171,11 @@ const CatalogCardDetail = forwardRef(function CatalogCardDetail({ card, loading 
                                     </div> */}
                                     <div className="btn-container">
                                         {
-                                            !isCartItem ? 
+                                            !isCartItem &&
                                                 <button id="add-to-cart" className="btn bg-yellow color-light" type="button" onClick={addToCart}>Add to Cart</button>
-                                                :
-                                                <button id="add-to-cart" className="btn bg-green color-light" type="button" onClick={updateCart}>Update Cart</button>
+
+                                            //     :
+                                            //     <button id="add-to-cart" className="btn bg-green color-light" type="button" onClick={updateCart}>Update Cart</button>
                                         }
                                     </div>
                                 </div>
@@ -165,7 +187,7 @@ const CatalogCardDetail = forwardRef(function CatalogCardDetail({ card, loading 
         </>
 
     )
-})
+}
 
 const Contact = styled(Link)`
     display: block;
@@ -179,5 +201,18 @@ const Contact = styled(Link)`
     border-radius: 5px;
   `;
 
+const Selector = styled.div`
+  display: flex;
+  justify-content: space-between;
+  width: 10em;
+  padding: 0.5em 0;
+
+  select {
+    padding: 0.2em;
+    width: 4em;
+  }
+
+
+`;
 
 export default CatalogCardDetail
