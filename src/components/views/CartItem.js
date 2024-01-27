@@ -30,15 +30,12 @@ const CartItem = ({ item, index, setLoading }) => {
       header: { 'Content-Type': 'application/json' },
     };
 
-    console.log(item.selected)
-
     fetch(
       `${api.serverURL}/api/catalog/${item.selected.userID}/${item.selected._id}/${e.target.value}`,
       options
     )
       .then((res) => res.json())
       .then((data) => {
-        console.log(data)
         if (data.isAvailable) {
           setLoading(false);
           const items = JSON.parse(localStorage.getItem('cart'));
@@ -64,7 +61,6 @@ const CartItem = ({ item, index, setLoading }) => {
   };
 
   useEffect(() => {
-    console.log(item.quantity)
     setQuantitySelected(item.quantity);
     setQuantityAvailable(item.selected.quantity);
     setTotal(item.quantity * item.selected.price)

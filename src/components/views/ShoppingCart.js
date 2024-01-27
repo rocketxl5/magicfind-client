@@ -9,15 +9,12 @@ import styled from 'styled-components';
 import Loading from '../layout/Loading';
 
 function ShoppingCart() {
-  const [totalItems, setTotalItems] = useState(0);
   const [loading, setLoading] = useState(false);
   const [isUpdating, setIsUpdating] = useState(false);
   const { auth } = useAuth();
   const { cartItems, subTotal, itemsCount } = useContext(CartContext);
   const navigate = useNavigate();
-  useEffect(() => {
-    console.log('loading', loading)
-  }, [loading])
+
   // This is where the amount or items in the cart is set & the subtotal of off all items in the cart
   // useEffect(() => {
   //   let amount = 0;

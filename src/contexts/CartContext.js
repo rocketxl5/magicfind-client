@@ -8,12 +8,7 @@ export const CartProvider = ({ children }) => {
   const [subTotal, setSubTotal] = useState(0);
 
   useEffect(() => {
-    // console.log(itemsCount)
-    // console.log(cartItems)
-  }, [itemsCount])
 
-  useEffect(() => {
-    console.log(cartItems)
     const items = cartItems.reduce((accumulator, currentItem) =>
       accumulator + currentItem.quantity
       , 0)
@@ -25,8 +20,6 @@ export const CartProvider = ({ children }) => {
       localStorage.setItem('cart', JSON.stringify(cartItems));
     }
 
-    console.log(items)
-    console.log(total)
     // Update SubTotal state
     setSubTotal(total)
     // Update ItemsCount state
