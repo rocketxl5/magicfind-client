@@ -22,7 +22,7 @@ const CartItem = ({ item, index, setLoading }) => {
       return;
     }
 
-    setQuantitySelected(parseInt(e.target.value));
+    setQuantitySelected(value);
     setLoading(true);
     const options = {
       method: 'GET',
@@ -30,16 +30,16 @@ const CartItem = ({ item, index, setLoading }) => {
     };
 
     fetch(
-      `${api.serverURL}/api/catalog/${item.selected.userID}/${item.selected._id}/${e.target.value}`,
+      `${api.serverURL}/api/catalog/${item.selected.userID}/${item.selected._id}/${value}`,
       options
     )
       .then((res) => res.json())
       .then((data) => {
-        console.log(data)
+        // console.log(data)
         if (data.isAvailable) {
           setLoading(false);
           const items = JSON.parse(localStorage.getItem('cart'));
-          items[index].quantity = parseInt(e.target.value);
+          items[index].quantity = value
           setTotal(value * data.card._price);
           setCartItems(items);
         } else {
