@@ -6,9 +6,9 @@ import MailBtn from './navbtn/MailBtn';
 import HamburgerBtn from './navbtn/HamburgerBtn';
 import SignInBtn from './navbtn/SignInBtn';
 import AuthBtn from './navbtn/AuthBtn';
-import SidePanel from '../layout/SidePanel'
+import SidePanel from '../layout/SidePanel';
 import ShoppingCartBtn from './navbtn/ShoppingCartBtn';
-import getViewPortWidth from '../../assets/utilities/getViewPortWidth'
+import getViewPortWidth from '../../assets/utilities/getViewPortWidth';
 
 function Navbar({ auth }) {
     const panelRef = useRef(null);
@@ -28,11 +28,11 @@ function Navbar({ auth }) {
         },
         {
             name: 'Profile',
-            to: 'profile'
+            to: '/me/profile'
         },
         {
             name: 'Settings',
-            to: 'settings'
+            to: '/me/settings'
         },
     ]
 

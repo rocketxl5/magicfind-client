@@ -33,17 +33,17 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  const checkUnreadMail = (auth) => {
+  const checkUnreadMail = (id, token) => {
     const headers = new Headers();
     headers.append('Content-type', 'application/json');
-    headers.append('auth-token', auth.token);
+    headers.append('auth-token', token);
 
     const options = {
       method: 'GET',
       headers: headers,
     };
 
-    fetch(`${api.serverURL}/api/messages/unread/${auth.id}`, options)
+    fetch(`${api.serverURL}/api/messages/unread/${id}`, options)
       .then((res) => res.json())
       .then((data) => {
 
@@ -59,6 +59,17 @@ export const AuthProvider = ({ children }) => {
   }
 
   useEffect(() => {
+    if (auth) {
+      setIsAuth(true);
+      checkUnreadMail(auth.id, auth.token)
+      navigate(location.pathname);
+    }
+    else {
+      setIsAuth(false);
+    }
+  }, [auth])
+
+  useEffect(() => {
 
     const jwt = localStorage.getItem('token');
 
@@ -70,7 +81,6 @@ export const AuthProvider = ({ children }) => {
         const user = JSON.parse(localStorage.getItem('user'));
         const token = JSON.parse(localStorage.getItem('token'));
         setAuth({ ...user, token: token })
-        navigate(location.pathname)
       }
     }
   }, []);
@@ -79,6 +89,7 @@ export const AuthProvider = ({ children }) => {
     <AuthContext.Provider value={{
       auth,
       setAuth,
+      isAuth,
       unreadMail,
       setUnreadMail,
       logoutAction
