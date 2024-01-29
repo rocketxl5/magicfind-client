@@ -22,6 +22,7 @@ import CardNotFound from './components/views/search/CardNotFound';
 import ShoppingCart from './components/views/ShoppingCart';
 import Checkout from './components/views/Checkout';
 import Inbox from './components/views/mail/Inbox';
+import Store from './components/views/Store';
 import './assets/css/reset.css';
 import './App.css';
 import './assets/css/utilities.css';
@@ -37,13 +38,14 @@ const App = () => {
       <Route path="/" element={<Layout />} >
 
         {/* Public routes */}
-        <Route path="shopping-cart" element={<ShoppingCart />} />
         <Route path="search-result/not-found/:cardName" element={<CardNotFound />} />
         {/* Public routes not auth */}
         <Route element={<RequireNotAuth />}>
           <Route exact path="/" element={<Home />} />
           <Route path="about" element={<About />} />
           <Route path="contact" element={<Contact />} />
+          <Route path="store/:userID" element={<Store />} />
+          <Route path="shopping-cart" element={<ShoppingCart />} />
           <Route path="login" element={<Login />} />
           <Route path="signup" element={<Signup />} />
           <Route path="reset-password" element={<ResetPassword />} />
@@ -55,9 +57,10 @@ const App = () => {
           <Route path="me" exact element={<Navigate replace to="../me/home" />} />
           <Route path="me/:path" element={<AuthPage />} />
           <Route path="me/search-result/:searchType/:cardName" exact element={<SearchResult />} />
-          <Route path="settings" element={<Settings />} />
-          <Route path="profile" element={<Profile />} />
-          <Route path="checkout" element={<Checkout />} />
+          <Route path="me/shopping-cart" element={<ShoppingCart />} />
+          <Route path="me/settings" element={<Settings />} />
+          <Route path="me/profile" element={<Profile />} />
+          <Route path="me/checkout" element={<Checkout />} />
           {/* <Route path="search-result/collection/:query" element={<SearchResult />} />
           <Route path="search-result/api/:cardName" element={<SearchResult />} /> */}
           <Route path="mail/inbox" element={<Inbox />} />

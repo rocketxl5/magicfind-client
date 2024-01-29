@@ -14,7 +14,7 @@ const CatalogCardDetail = (props) => {
     const [itemIndex, setItemIndex] = useState(undefined);
     const [showMessage, setShowMessage] = useState(false);
     const { cartItems, setCartItems } = useContext(CartContext);
-    const { auth } = useAuth();
+    const { auth, isAuth } = useAuth();
 
     const addToCart = (e) => {
         e.stopPropagation();
@@ -147,17 +147,26 @@ const CatalogCardDetail = (props) => {
                                         </Selector>
                                     </div>
                                 }
-                                {auth && (
-                                    <div className="contact-user">
-                                        <Contact
-                                            to={{
+
+                                <Contact>
+                                    <Link
+                                        to={`/store/${card.userID}`}
+                                    >
+                                        Visit Seller Store
+                                    </Link>
+                                </Contact>
+
+                                {isAuth && (
+
+                                    <Contact>
+                                        <Link to={{
                                                 pathname: '/mail/message',
                                                 state: { sender: card.userName, subject: card.name },
-                                            }}
-                                        >
+                                        }}>
                                             Contact Seller
+                                        </Link>
                                         </Contact>
-                                    </div>
+
                                 )}
                                 <div className="alert-message">
                                     {
@@ -166,9 +175,6 @@ const CatalogCardDetail = (props) => {
                                     }
                                 </div>
                                 <div className="card-btns">
-                                    {/* <div className="btn-container">
-                                        <button id="add-to-wishlist" className="btn bg-green color-light" type="button" >Add to Wishlist</button>
-                                    </div> */}
                                     <div className="btn-container">
                                         {
                                             // !isCartItem &&
@@ -189,16 +195,21 @@ const CatalogCardDetail = (props) => {
     )
 }
 
-const Contact = styled(Link)`
-    display: block;
-    text-align: center;
-    margin-inline-end: 1rem;
+const Contact = styled.div`
+
+margin-top: 0.5em;
+text-align: center;
+border: 1px solid #e4e4e4;
+border-radius: 5px;
+
+a {
     padding-block: 0.5em;
-    margin-top: 0.5em;
-    font-size: var(--fs-125);
-    color: var(--clr-primary);
-    border: 1px solid #e4e4e4;
-    border-radius: 5px;
+    padding-inline: 1em;
+    display: block;
+        width: 100%;
+        font-size: var(--fs-125);
+        color: var(--clr-primary);
+    }
   `;
 
 const Selector = styled.div`

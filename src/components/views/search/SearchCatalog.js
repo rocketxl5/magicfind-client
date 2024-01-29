@@ -31,7 +31,7 @@ const SearchCatalog = () => {
   // Routing
   const navigate = useNavigate();
   // Hook
-  const { auth } = useAuth();
+  const { auth, isAuth } = useAuth();
 
   const searchCatalog = () => {
     const headers = new Headers();
@@ -73,7 +73,7 @@ const SearchCatalog = () => {
 
     const headers = new Headers();
     headers.append('Content-Type', 'application/json');
-    auth && headers.append('auth-token', auth.token);
+    isAuth && headers.append('auth-token', auth.token);
     const options = {
       method: 'GET',
       headers: headers,
@@ -95,7 +95,7 @@ const SearchCatalog = () => {
     }
     // Conditional query string won't return user cards if auth
     // Else returns all cards
-    const queryString = auth ?
+    const queryString = isAuth ?
       `${api.serverURL}/api/cards/catalog/${encodeURIComponent(query)}/${auth.id}` :
       `${api.serverURL}/api/cards/catalog/${encodeURIComponent(query)}`;
 
@@ -114,7 +114,7 @@ const SearchCatalog = () => {
               setCardName('');
               setSearchInput(null);
               localStorage.setItem('search-result', JSON.stringify(result));
-              !auth ? (
+              !isAuth ? (
 
                 navigate(`/search-result/catalog/${setQueryString(query.toLowerCase(), '-')}`,
                   {
