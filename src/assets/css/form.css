@@ -263,8 +263,11 @@ input:-webkit-autofill:active{
     position: relative;
     height: 5rem;
     width: 100%;
-    margin-block: var(--size-2);
+    max-width: clamp(20rem, 100%, 60rem) !important;
+    /* margin-block: var(--size-2); */
+    margin: 0 auto;
 }
+
 input#search-api,
 input#search-collection {
     border: 1px solid var(--clr-grey);
@@ -302,6 +305,7 @@ input#search-collection {
     background-color: #fff;
     border-radius: 5px;
 }
+
 
 .search-catalog-field {
     display: block;

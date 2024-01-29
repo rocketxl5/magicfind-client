@@ -13,7 +13,11 @@ const ShoppingCartBtn = () => {
       <Link to={!isAuth ? '/shopping-cart' : '/me/shopping-cart'} className="cart-btn">
         {itemsCount > 0 && (
           <CountContainer>
-            <Count>{itemsCount}</Count>
+            <Count>
+              <span>
+                {itemsCount}
+              </span>
+            </Count>
           </CountContainer>
         )}
         <FiShoppingCart className="nav-icon" size={27} title="To Shopping Cart" />
@@ -30,22 +34,29 @@ const Div = styled.div`
 const CountContainer = styled.div`
   position: absolute;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   top: -10px;
   left: 17px;
-  background: #dc3545;
-  width: 22px;
-  height: 22px;
+  background: var(--clr-primary);
+  width: 2rem;
+  height: 2rem;
+  border: 2px solid var(--clr-grey);
   border-radius: 50%;
   z-index: 10;
 `;
 
 const Count = styled.div`
-  text-align: center;
-  font-size: 0.8em;
-  font-weight: bold;
-  color: #fff;
+
+  // height: 100%;
+  font-size: 1rem;
+  font-weight: 400;
+  color: var(--clr-light);
+
+  span {
+    veritcal-align: middle
+  }
 `;
 
 export default ShoppingCartBtn

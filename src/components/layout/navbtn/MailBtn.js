@@ -7,7 +7,7 @@ const MailIcon = () => {
   const { unreadMail } = useAuth();
     return (
       <Div className="nav-btn">
-        <Mail className="mail-btn" to="/mail/inbox" title=" To Inbox">
+        <Mail className="mail-btn" to="me/mail" title=" To Inbox">
           {unreadMail > 0 && (
             <UnreadContainer>
               <Unread>{unreadMail}</Unread>
