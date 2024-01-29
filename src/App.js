@@ -1,7 +1,8 @@
 import {
   Route,
   Routes,
-  Navigate
+  Navigate,
+  useParams
 } from 'react-router-dom';
 import Layout from './components/layout/Layout';
 import RequireAuth from './components/auth/RequireAuth';
@@ -19,6 +20,7 @@ import SearchResult from './components/views/search/SearchResult';
 import NotFound from './components/views/NotFound';
 import CardNotFound from './components/views/search/CardNotFound';
 import ShoppingCart from './components/views/ShoppingCart';
+import Checkout from './components/views/Checkout';
 import Inbox from './components/views/mail/Inbox';
 import './assets/css/reset.css';
 import './App.css';
@@ -45,18 +47,19 @@ const App = () => {
           <Route path="login" element={<Login />} />
           <Route path="signup" element={<Signup />} />
           <Route path="reset-password" element={<ResetPassword />} />
-          <Route path="search-result/catalog/:cardName" element={<SearchResult />} />
+          <Route path="search-result/:searchType/:cardName" element={<SearchResult />} />
         </Route>
 
         {/* Auth protected routes */}
         <Route element={<RequireAuth />}>
           <Route path="me" exact element={<Navigate replace to="../me/home" />} />
           <Route path="me/:path" element={<AuthPage />} />
+          <Route path="me/search-result/:searchType/:cardName" exact element={<SearchResult />} />
           <Route path="settings" element={<Settings />} />
           <Route path="profile" element={<Profile />} />
-          <Route path="search-result/catalog/:cardName/:userID" element={<SearchResult />} />
-          <Route path="search-result/collection/:query" element={<SearchResult />} />
-          <Route path="search-result/api/:cardName" element={<SearchResult />} />
+          <Route path="checkout" element={<Checkout />} />
+          {/* <Route path="search-result/collection/:query" element={<SearchResult />} />
+          <Route path="search-result/api/:cardName" element={<SearchResult />} /> */}
           <Route path="mail/inbox" element={<Inbox />} />
           <Route path="mail/:handle/:handle" element={<Inbox />} />
           <Route path="mail/unread" element={<Inbox />} />

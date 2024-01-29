@@ -97,13 +97,10 @@ const Login = () => {
             localStorage.setItem('user', JSON.stringify(data.payload.user));
             setAuth({ ...data.payload.user, token: data.token });
             setLoading(false)
-            // console.log(location?.state)
             const destination = location.state?.from ? location.state.from.pathname : 'me/pathname';
             navigate(destination, { replace: true });
           })
           .catch((error) => {
-            console.log(error.message)
-            // const errorMessage = error &&
             setMessage(JSON.parse(error.message));
             inputs.email.setCustomValidity('invalid')
             inputs.password.setCustomValidity('invalid')
@@ -113,7 +110,6 @@ const Login = () => {
             setIsValidForm(false);
           });
       } catch (error) {
-        console.log(error.message)
         const errorMessage = JSON.parse(error.message)
         setMessage({ ...errorMessage });
         setLoading(false);

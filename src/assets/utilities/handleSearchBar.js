@@ -35,6 +35,8 @@ const handleSearchBar = (e, isOutsideEvent = false) => {
             document.querySelector('#search-catalog-container').style.setProperty('width', 'calc(100% - 5rem)');
             // Hide Search button
             // document.querySelector('.search-btn').style.setProperty('display', 'none');
+            // Hide Cart button
+            document.querySelector('.cart-btn').style.setProperty('display', 'none');
             // Add input field focus
             document.querySelector('#search-catalog').focus();
         }
@@ -68,7 +70,9 @@ const handleSearchBar = (e, isOutsideEvent = false) => {
                         // Hide Search bar
                         document.querySelector('#search-catalog-container').style.setProperty('width', '0');
                         // Show Search button icon
-                        document.querySelector('.search-btn').style.setProperty('display', 'block');
+                        // document.querySelector('.search-btn').style.setProperty('display', 'block');
+                        // Show Cart button
+                        document.querySelector('.cart-btn').style.setProperty('display', 'block');
                         // Reset field state
                         document.querySelector('#search-catalog').blur();
                         // Empty search input

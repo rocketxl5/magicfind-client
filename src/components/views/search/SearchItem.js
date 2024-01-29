@@ -11,7 +11,7 @@ import useAttributes from '../../../hooks/useAttributes';
 
 
 const SearchItem = forwardRef(function SearchItem(props, ref) {
-    const { card, searchType, handleCardView, handleCardState } = props;
+    const { index, card, searchType, handleCardView, handleCardState } = props;
     const [loading, setLoading] = useState(false);
     const { attributes } = useAttributes(card);
 
@@ -27,7 +27,7 @@ const SearchItem = forwardRef(function SearchItem(props, ref) {
                         <ExpandBtn />
                     </section>
                 <section className="card-section">
-                    <CardDetailSection card={card} searchType={searchType} loading={loading} />
+                    <CardDetailSection index={index} card={card} searchType={searchType} loading={loading} />
                 </section>
             </div>
                 <footer className="card-footer" onClick={(e) => handleCardState(e, card, attributes)}>

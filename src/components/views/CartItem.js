@@ -4,7 +4,6 @@ import { CartContext } from '../../contexts/CartContext';
 import { api } from '../../api/resources';
 
 const CartItem = ({ item, index, setLoading }) => {
-  const [quantityAvailable, setQuantityAvailable] = useState(0);
   const [quantitySelected, setQuantitySelected] = useState(0);
   const [total, setTotal] = useState(0)
   const { setCartItems } = useContext(CartContext);
@@ -13,6 +12,7 @@ const CartItem = ({ item, index, setLoading }) => {
     const value = parseInt(e.target.value);
 
     // If value is 0
+    console.log('value', value)
     if (!value) {
       // Delete item
       const items = JSON.parse(localStorage.getItem('cart'));
@@ -24,7 +24,6 @@ const CartItem = ({ item, index, setLoading }) => {
 
     setQuantitySelected(parseInt(e.target.value));
     setLoading(true);
-    // setIsUpdating(true);
     const options = {
       method: 'GET',
       header: { 'Content-Type': 'application/json' },
@@ -36,14 +35,15 @@ const CartItem = ({ item, index, setLoading }) => {
     )
       .then((res) => res.json())
       .then((data) => {
+        console.log(data)
         if (data.isAvailable) {
           setLoading(false);
           const items = JSON.parse(localStorage.getItem('cart'));
           items[index].quantity = parseInt(e.target.value);
-          setTotal(parseInt(e.target.value) * item.selected.price);
+          setTotal(value * data.card._price);
           setCartItems(items);
         } else {
-          setQuantitySelected(data.card._quantity);
+          setQuantitySelected(item.quantity);
         }
       })
       .catch((error) => {
@@ -61,10 +61,10 @@ const CartItem = ({ item, index, setLoading }) => {
   };
 
   useEffect(() => {
-    setQuantitySelected(item.quantity);
-    setQuantityAvailable(item.selected.quantity);
+    setQuantitySelected(item.quantity)
     setTotal(item.quantity * item.selected.price)
   }, []);
+
 
   return (
     <Content>
@@ -82,14 +82,15 @@ const CartItem = ({ item, index, setLoading }) => {
             <p>Ships from: {item.selected.country}</p>
             <p>Card Condition: {item.selected.condition.toUpperCase()}</p>
           </Info>
+          {item.quantity &&
           <Selector>
-            <select
-
+              <select
               name="quantity"
               value={quantitySelected}
               onChange={(e) => handleChange(e)}
             >
-              {[...Array(quantityAvailable + 1).keys()].map((key) => {
+
+                {[...Array(item.selected.quantity + 1).keys()].map((key) => {
                 return (
                   <option key={key} value={`${key}`}>
                     {key}
@@ -100,10 +101,11 @@ const CartItem = ({ item, index, setLoading }) => {
 
             <button type="button" onClick={deleteItem}>Delete</button>
           </Selector>
+          }
         </Details>
         <DetailsFooter>
           <h4>Total:</h4>
-          <p>{quantityAvailable && `$ ${total}.00`}</p>
+          <p>{item.quantity && `$ ${total}.00`}</p>
         </DetailsFooter>
       </DetailsContainer>
     </Content>
