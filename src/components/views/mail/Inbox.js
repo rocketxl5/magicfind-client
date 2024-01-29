@@ -32,8 +32,7 @@ const Inbox = () => {
 
   // Set path on page load
   useEffect(() => {
-    // console.log(path);
-    setPathname(getPath(location.pathname));
+    console.log(location.pathname);
   }, []);
 
   useEffect(() => {

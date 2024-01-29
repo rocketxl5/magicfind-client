@@ -45,7 +45,10 @@ function ShoppingCart() {
     // }
   };
   return (
-    <div className="content">
+    <div className="outer-content">
+      <div className="inner-content">
+
+
       <header className="header">
         <h2 className="title">Shopping Cart</h2>
       </header>
@@ -93,6 +96,7 @@ function ShoppingCart() {
           )}
       </Container>
       </main>
+      </div>
     </div>
   );
 }

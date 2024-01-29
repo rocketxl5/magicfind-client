@@ -169,32 +169,33 @@ const SearchCollection = ({ path }) => {
 
   return (
     <div className="outer-content">
+
       {
-        errorMessage?.title === 'no_cards' ? (
-          <div className="message">
-            <section className="message-section">
-              <div className="message-body">
-                {
-                  errorMessage.body?.map((part, index) => {
-                    return <p key={index}>{part}</p>
-                  })
-                }
-              </div>
-            </section>
-            <section className="message-section">
-              <Link className="message-link" to={'../me/add-card'}> To Add Card Page <FiArrowRightCircle /></Link>
-            </section>
-          </div>
+        loading ? (
+          <Loading />
         ) : (
-            loading ? (
-              <Loading />
-            ) : (
-                <div className="inner-content">
-                <header className="header">
-                    <h2 className="title">Browse Collection</h2>
-                </header>
-                <main className="flex flex-column">
-                  <form id="search-collection-form" className="search-form" onSubmit={searchCollectionCard} >
+          <div className="inner-content">
+            <header className="header">
+              <h2 className="title">Collection</h2>
+            </header>
+            {errorMessage?.title === 'no_cards' ? (
+              <div className="message">
+                <section className="message-section">
+                  <div className="message-body">
+                    {
+                      errorMessage.body?.map((part, index) => {
+                        return <p key={index}>{part}</p>
+                      })
+                    }
+                  </div>
+                </section>
+                <section className="message-section">
+                  <Link className="message-link" to={'../me/add-card'}> To Add Card Page <FiArrowRightCircle /></Link>
+                </section>
+              </div>
+            ) : ( 
+                  <main className="flex flex-column">
+                    <form id="search-collection-form" className="search-form" onSubmit={searchCollectionCard} >
                       <SearchInput id={'search-collection'} className={'search-field'} placeholder={'Search Your Collection'} searchCard={searchCollectionCard} isActive={isActive} ref={collectionInputRef} />
                     </form>
                     <button
@@ -205,8 +206,9 @@ const SearchCollection = ({ path }) => {
                       All Cards
                     </button>
                   </main>
+              )
+              }
             </div>
-          )
         )
       }
     </div>

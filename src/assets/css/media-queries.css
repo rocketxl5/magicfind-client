@@ -91,7 +91,8 @@
     }
 
     nav .left-side-nav {
-        gap: 2rem;
+        width: 100%;
+        justify-content: space-between;
     }
 
     .auth-nav-btn {
@@ -111,9 +112,7 @@
         display: block;
     }
     
-    #search-catalog-container {
-        padding-block: 0;
-    }
+
     
     #search-catalog-form {
         padding-block: 0;
@@ -134,23 +133,23 @@
         position:static;
         display: block;
         top: var(--header-height-wide);
-        width: 30vw;
+        /* width: 30vw; */
         z-index: 0;
     }
 
     .contextual-links {
-        display: block;
+        display: flex;
     }
 
     .contextual-links > a {
         display: block;
         padding: var(--size-1);
         text-align: center;
-        border-bottom: 1px solid var(--clr-grey);
+        /* border-bottom: 1px solid var(--clr-grey); */
     }
 
     .contextual-links > a:last-of-type {
-        border-bottom: none;
+        /* border-bottom: none; */
     }
 
     .contextual-links a span {
@@ -166,7 +165,10 @@
     #search-catalog-container {
         position: relative;
         min-height: var(--header-height-wide);
-        min-width: clamp(20rem, 50%, 60rem) !important;
+        min-width: clamp(20rem, 45%, 60rem) !important;
+        padding-block: 0;
+        margin: auto;
+        /* margin-right: auto; */
     }
 
       /* Autocomplete */
@@ -199,11 +201,16 @@
     /* site menu left property is pushed top a 100% (off screen) */
 
     .logo-btn {
-        margin-inline-end: var(--size-2);
+        margin-inline-end: var(--size-1);
     }
     .navbar {
         display: flex;
-        min-width: fit-content;
+        /* min-width: fit-content; */
+    }
+
+    .header-logo, 
+    .navbar {
+        min-width: 18rem;
     }
     
     .nav-btn svg {
@@ -256,19 +263,9 @@
         .img-container img { 
       
           margin: 0 auto;
-        }
-    
-    /* .slide-btn {
-  height: 9rem;
-  width: 9rem;
-    } */
-
-    
+        }  
 }
 
-@media screen and (width >= 1024px) { 
-
-}
 
 @media screen and (width >= 1200px) {
     

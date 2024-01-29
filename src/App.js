@@ -63,12 +63,13 @@ const App = () => {
           <Route path="me/checkout" element={<Checkout />} />
           {/* <Route path="search-result/collection/:query" element={<SearchResult />} />
           <Route path="search-result/api/:cardName" element={<SearchResult />} /> */}
-          <Route path="mail/inbox" element={<Inbox />} />
-          <Route path="mail/:handle/:handle" element={<Inbox />} />
-          <Route path="mail/unread" element={<Inbox />} />
-          <Route path="mail/sent" element={<Inbox />} />
-          <Route path="mail/trash" element={<Inbox />} />
-          <Route path="mail/message" element={<Inbox />} />
+          <Route path="me/mail" exact element={<Navigate replace to="../me/mail/inbox" />} />
+          <Route path="me/mail/:path" element={<Inbox />} />
+          {/* <Route path="me/mail/:handle/:handle" element={<Inbox />} />
+          <Route path="me/mail/unread" element={<Inbox />} />
+          <Route path="me/mail/sent" element={<Inbox />} />
+          <Route path="me/mail/trash" element={<Inbox />} />
+          <Route path="me/mail/message" element={<Inbox />} /> */}
         </Route>
 
         {/* Catch all */}

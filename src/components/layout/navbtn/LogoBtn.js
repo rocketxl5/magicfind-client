@@ -8,7 +8,7 @@ const LogoBtn = () => {
   const { auth } = useAuth();
 
   return (
-    <Logo >
+    <Logo className="header-logo">
       <Anchor className="logo-btn" to={auth ? 'me' : '/'} title="Magic Find logo">
         <SVG>
           <GiWaterBolt />

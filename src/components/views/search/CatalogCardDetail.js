@@ -160,7 +160,7 @@ const CatalogCardDetail = (props) => {
 
                                     <Contact>
                                         <Link to={{
-                                                pathname: '/mail/message',
+                                            pathname: '/me/mail/message',
                                                 state: { sender: card.userName, subject: card.name },
                                         }}>
                                             Contact Seller
