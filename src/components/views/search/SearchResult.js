@@ -14,6 +14,7 @@ const SearchResult = () => {
     const cardRef = useRef(null);
 
     useEffect(() => {
+        console.log(cards)
         // If cards is empty
         if (!cards.length) {
             setTimeout(() => {
@@ -51,9 +52,11 @@ const SearchResult = () => {
                 </Modal>
             }
             <header className="search-result-header">
+                {
+                    searchType !== 'search-catalog' &&
                 <button className="back-btn" type="button" onClick={() => {
                     searchType === 'search-collection' ? navigate('/me/collection') : navigate(-1);
-                }}>Back To Search</button>
+                    }}>Back To Search</button>}
                 <span className="space-1">
                     {
                         cards ?
@@ -69,10 +72,11 @@ const SearchResult = () => {
                 <main className="main">
                         {
                             imagesLoaded &&
-                            cards.map((card, index) => {
+                        cards.map((card, i) => {
                                 return (
                                     <SearchItem
-                                        key={index}
+                                        key={i}
+                                        index={i}
                                         card={card}
                                         searchType={searchType}
                                         handleCardView={handleCardView}

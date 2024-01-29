@@ -1,5 +1,5 @@
-import React, { useEffect, useContext, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useContext, useState } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 // import { FiPlusCircle, FiMinusCircle, FiTrash2 } from 'react-icons/fi';
 import CartItem from './CartItem';
 import useAuth from '../../hooks/useAuth';
@@ -10,52 +10,39 @@ import Loading from '../layout/Loading';
 
 function ShoppingCart() {
   const [loading, setLoading] = useState(false);
-  const [isUpdating, setIsUpdating] = useState(false);
   const { auth } = useAuth();
   const { cartItems, subTotal, itemsCount } = useContext(CartContext);
   const navigate = useNavigate();
+  const location = useLocation();
 
-  // This is where the amount or items in the cart is set & the subtotal of off all items in the cart
-  // useEffect(() => {
-  //   let amount = 0;
-  //   let items = 0;
-  //   cartItems.forEach((cartItem) => {
-  //     items += cartItem.quantity_selected;
-  //     amount += cartItem.quantity_selected * cartItem.price;
-  //   });
-
-  //   setSubTotal(amount);
-  //   setTotalItems(items);
-  // }, [cartItems]);
-
-  const handleCheckout = () => {
+  const handleClick = () => {
     // setLoading(true);
-    if (!auth) {
-      navigate('/login');
-    } else {
-      const input = {
-        userID: auth.id,
-        cartItems: cartItems,
-      };
-      const options = {
-        method: 'PATCH',
-        headers: {
-          'Content-Type': 'application/json',
-          'auth-token': auth.token,
-        },
-        body: JSON.stringify(input),
-      };
+    // if (!auth) {
+    //   navigate('/login', { state: { from: location } });
+    // } else {
+    //   const input = {
+    //     userID: auth.id,
+    //     cartItems: cartItems,
+    //   };
+    //   const options = {
+    //     method: 'PATCH',
+    //     headers: {
+    //       'Content-Type': 'application/json',
+    //       'auth-token': auth.token,
+    //     },
+    //     body: JSON.stringify(input),
+    //   };
 
-      fetch(`${api.serverURL}/api/cart/`, options)
-        .then((res) => res.json())
-        .then((data) => {
-          // setLoading(false);
-          // setCartItems([]);
-          // navigate('/confirmation');
-          console.log(data);
-        })
-        .catch((error) => console.log('error', error));
-    }
+    //   fetch(`${api.serverURL}/api/cart/`, options)
+    //     .then((res) => res.json())
+    //     .then((data) => {
+    //       // setLoading(false);
+    //       // setCartItems([]);
+    //       // navigate('/confirmation');
+    //       console.log(data);
+    //     })
+    //     .catch((error) => console.log('error', error));
+    // }
   };
   return (
     <div className="content">
@@ -75,7 +62,7 @@ function ShoppingCart() {
             {cartItems &&
                   cartItems.map((item, i) => <CartItem key={i} item={item} index={i} setLoading={(value) => setLoading(value)} />)}
               </Items>
-          <Aside className={isUpdating ? 'loading' : ''}>
+              <Aside>
                 <>
                   <h3>Subtotal</h3>
                   {
@@ -91,8 +78,9 @@ function ShoppingCart() {
 
                   <CheckoutButton
                     type="button"
-                    onClick={() => {
-                      handleCheckout();
+                    onClick={(e) => {
+                      // handleClick(e);
+                      navigate('/me/checkout', { state: { from: location } })
                     }}
                   >
                     Checkout

@@ -6,10 +6,10 @@ import { CartContext } from '../../../contexts/CartContext';
 import { api } from '../../../api/resources';
 import styled from 'styled-components';
 
-const CatalogCardDetail = ({ card, loading }) => {
+const CatalogCardDetail = (props) => {
+    const { card } = props;
     const [isLoading, setIsLoading] = useState(false);
     const [quantitySelected, setQuantitySelected] = useState(0);
-    const [quantityAvailable, setQuantityAvailable] = useState(0);
     const [isCartItem, setIsCartItem] = useState(false);
     const [itemIndex, setItemIndex] = useState(undefined);
     const [showMessage, setShowMessage] = useState(false);
@@ -69,11 +69,11 @@ const CatalogCardDetail = ({ card, loading }) => {
                     }
                     else {
                         setCartItems([...cartItems, { selected: card, quantity: value }])
-                        setIsCartItem(true);
+
                     }
                     setQuantitySelected(value);
                 } else {
-                    setQuantitySelected(data.card._quantity);
+                    setQuantitySelected(card._quantity);
                 }
             })
             .catch((error) => {
@@ -87,15 +87,17 @@ const CatalogCardDetail = ({ card, loading }) => {
     }, [itemIndex])
 
     useEffect(() => {
-        setQuantityAvailable(card.quantity);
-        const index = cartItems.findIndex((item) => {
+        console.log(card)
+        const foundIndex = cartItems.findIndex((item) => {
             return item.selected._id === card._id
         });
-        if (index >= 0) {
+        if (foundIndex >= 0) {
             setIsCartItem(true);
-            setItemIndex(index);
+            setItemIndex(foundIndex);
         }
     }, [])
+
+    // useEffect(() => { console.log(data) }, [data])
 
     return (
         <>
@@ -110,10 +112,10 @@ const CatalogCardDetail = ({ card, loading }) => {
                                     <p><span className="card-spec-title">Seller:</span>  <span className="card-spec-value">{card.userName}</span></p>
                                 </div>
                                 <div className="card-spec">
-                                    <p><span className="card-spec-title">Condition:</span> <span className="card-spec-value">{card.condition.toUpperCase()}</span></p>
+                                    <p><span className="card-spec-title">Condition:</span><span className="card-spec-value">{card.condition?.toUpperCase()}</span></p>
                                 </div>
                                 <div className="card-spec">
-                                    <p><span className="card-spec-title">Ships From:</span>  <span className="card-spec-value">{card.userCountry}</span></p>
+                                    <p><span className="card-spec-title">Ships From:</span>  <span className="card-spec-value">{card.country}</span></p>
                                 </div>
                                 <div className="card-spec">
                                     <p><span className="card-spec-title">Price:</span>  <span className="card-spec-value">{card.price}</span></p>
@@ -124,7 +126,7 @@ const CatalogCardDetail = ({ card, loading }) => {
                                 <p><span className="card-spec-title">Quantity Available:</span>  <span className="card-spec-value">{card.quantity}</span></p>
 
                                 <label htmlFor="quantity"><span className="card-spec-title">Quantity selected:</span></label>
-                                {card.quantity > 0 &&
+                                {card.quantity &&
                                     <div className="card-spec">
                                         <Selector>
                                             <select
@@ -133,7 +135,7 @@ const CatalogCardDetail = ({ card, loading }) => {
                                                 value={quantitySelected}
                                                 onChange={(e) => handleChange(e)}
                                             >
-                                                {[...Array(quantityAvailable + 1).keys()].map((key) => {
+                                                {[...Array(card.quantity + 1).keys()].map((key) => {
 
                                                     return (
                                                         <option key={key} value={`${key}`}>

@@ -87,7 +87,7 @@ const SearchCatalog = () => {
     else if (cardName) {
       query = cardName;
     }
-    else if (predictions.length === 1) {
+    else if (predictions?.length === 1) {
       query = predictions[0];
     }
     else if (searchTerm) {
@@ -110,14 +110,22 @@ const SearchCatalog = () => {
                 cards: data.cards,
                 searchType: searchInput.id
               }
-
+              // console.log(result)
               setCardName('');
               setSearchInput(null);
               localStorage.setItem('search-result', JSON.stringify(result));
-              navigate(`/search-result/catalog/${setQueryString(query.toLowerCase(), '-')}`,
-                {
-                  state: result,
-                });
+              !auth ? (
+
+                navigate(`/search-result/catalog/${setQueryString(query.toLowerCase(), '-')}`,
+                  {
+                    state: result,
+                  })
+              ) : (
+                navigate(`me/search-result/catalog/${setQueryString(query.toLowerCase(), '-')}`,
+                  {
+                    state: result,
+                  })
+              )
 
               if (document.querySelector('#mobile-nav')?.checked) {
                 hideSearchBar();
@@ -126,12 +134,10 @@ const SearchCatalog = () => {
         }
         else if (res.status === 400) {
           return res.json().then((error) => {
-            console.log(error.message)
+
             setLoading(false);
-            // If not found
-            if (error.errorType === 'not-found') {
-              navigate(`/search-result/not-found/${query}`);
-            }
+
+            navigate(`/search-result/not-found/${query}`);
 
             if (document.querySelector('#mobile-nav')?.checked) {
               hideSearchBar();
