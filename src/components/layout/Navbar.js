@@ -27,6 +27,10 @@ function Navbar({ auth }) {
             to: '../me/store'
         },
         {
+            name: 'Add Card',
+            to: '../me/add-card'
+        },
+        {
             name: 'Profile',
             to: '/me/profile'
         },

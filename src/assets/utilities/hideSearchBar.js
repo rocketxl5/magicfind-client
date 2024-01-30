@@ -7,7 +7,7 @@ const hideSearchBar = (state) => {
     const userAgent = getUserAgent();
 
     // Click label attached to checkbox to check it
-    document.querySelector('.mobile-nav-label').click();
+    document.querySelector('.mobile-nav-label')?.click();
     // Hide search catalog search bar
     document.querySelector('#search-catalog-container').style.width = 0;
     // Display search icon (magnifier)

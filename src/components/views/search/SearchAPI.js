@@ -178,7 +178,7 @@ const Search = ({ path }) => {
       };
 
       localStorage.setItem('search-result', JSON.stringify(result));
-      navigate(`/search-result/api/${setQueryString(cardName, '-')}`,
+      navigate(`/me/search-result/api/${setQueryString(cardName, '-')}`,
         {
           state: result,
         });

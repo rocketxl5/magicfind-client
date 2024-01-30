@@ -64,10 +64,10 @@ const SearchCollection = ({ path }) => {
               }
               else if (query === 'cards') {
                 console.log(data)
-                const result = { cards: data, searchType: searchInput.id }
+                const result = { cards: data, searchType: searchInput?.id }
                 // Update local storage with search data
                 localStorage.setItem('search-result', JSON.stringify(result));
-                navigate(`/search-result/collection/all-cards`,
+                navigate(`/me/search-result/collection/all-cards`,
                   {
                     state: result,
                   });
@@ -154,7 +154,7 @@ const SearchCollection = ({ path }) => {
               setCardName('');
               setSearchInput(null);
               localStorage.setItem('search-result', JSON.stringify(result));
-              navigate(`/search-result/collection/${setQueryString(query.toLowerCase(), '-')}`,
+              navigate(`/me/search-result/collection/${setQueryString(query.toLowerCase(), '-')}`,
                 {
                   state: result,
                 });
@@ -190,7 +190,7 @@ const SearchCollection = ({ path }) => {
                   </div>
                 </section>
                 <section className="message-section">
-                  <Link className="message-link" to={'../me/add-card'}> To Add Card Page <FiArrowRightCircle /></Link>
+                    <Link className="message-link" to="/me/add-card"> To Add Card Page <FiArrowRightCircle /></Link>
                 </section>
               </div>
             ) : ( 
@@ -201,7 +201,10 @@ const SearchCollection = ({ path }) => {
                     <button
                       className="btn bg-green"
                       type="button"
-                      onClick={() => searchCollection('cards')}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        searchCollection('cards');
+                      }}
                     >
                       All Cards
                     </button>

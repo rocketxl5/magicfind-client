@@ -1,10 +1,9 @@
 import {
   Route,
   Routes,
-  Navigate,
-  useParams
 } from 'react-router-dom';
 import Layout from './components/layout/Layout';
+import AuthLayout from './components/layout/AuthLayout';
 import RequireAuth from './components/auth/RequireAuth';
 import RequireNotAuth from './components/auth/RequireNotAuth';
 import AuthPage from './components/views/AuthPage';
@@ -20,6 +19,9 @@ import SearchResult from './components/views/search/SearchResult';
 import NotFound from './components/views/NotFound';
 import CardNotFound from './components/views/search/CardNotFound';
 import ShoppingCart from './components/views/ShoppingCart';
+import DashBoard from './components/views/DashBoard';
+import SearchCollection from './components/views/search/SearchCollection';
+import SearchAPI from './components/views/search/SearchAPI';
 import Checkout from './components/views/Checkout';
 import Inbox from './components/views/mail/Inbox';
 import Store from './components/views/Store';
@@ -35,46 +37,43 @@ const App = () => {
 
   return (
     <Routes>
-      <Route path="/" element={<Layout />} >
-
-        {/* Public routes */}
-        <Route path="search-result/not-found/:cardName" element={<CardNotFound />} />
+      {/* Public routes */}
         {/* Public routes not auth */}
+      <Route path="/" element={<Layout />} >
+        <Route path="search-result/not-found/:name" element={<CardNotFound />} />
         <Route element={<RequireNotAuth />}>
-          <Route exact path="/" element={<Home />} />
+          <Route index element={<Home />} />
           <Route path="about" element={<About />} />
           <Route path="contact" element={<Contact />} />
-          <Route path="store/:userID" element={<Store />} />
+          <Route path="store/:id" element={<Store />} />
           <Route path="shopping-cart" element={<ShoppingCart />} />
           <Route path="login" element={<Login />} />
           <Route path="signup" element={<Signup />} />
           <Route path="reset-password" element={<ResetPassword />} />
-          <Route path="search-result/:searchType/:cardName" element={<SearchResult />} />
+          <Route path="search-result/:type/:name" element={<SearchResult />} />
         </Route>
-
+      </Route>
         {/* Auth protected routes */}
         <Route element={<RequireAuth />}>
-          <Route path="me" exact element={<Navigate replace to="../me/home" />} />
-          <Route path="me/:path" element={<AuthPage />} />
-          <Route path="me/search-result/:searchType/:cardName" exact element={<SearchResult />} />
+        <Route path="/" element={<AuthLayout />} >
+          <Route path="me/" element={<AuthPage />}>
+            <Route path="dashboard" element={<DashBoard />} />
+            <Route path="collection" element={<SearchCollection />} />
+            <Route path="store" element={<Store />} />
+            <Route path="add-card" element={<SearchAPI />} />
+          </Route>
           <Route path="me/shopping-cart" element={<ShoppingCart />} />
           <Route path="me/settings" element={<Settings />} />
           <Route path="me/profile" element={<Profile />} />
           <Route path="me/checkout" element={<Checkout />} />
-          {/* <Route path="search-result/collection/:query" element={<SearchResult />} />
-          <Route path="search-result/api/:cardName" element={<SearchResult />} /> */}
-          <Route path="me/mail" exact element={<Navigate replace to="../me/mail/inbox" />} />
-          <Route path="me/mail/:path" element={<Inbox />} />
-          {/* <Route path="me/mail/:handle/:handle" element={<Inbox />} />
-          <Route path="me/mail/unread" element={<Inbox />} />
-          <Route path="me/mail/sent" element={<Inbox />} />
-          <Route path="me/mail/trash" element={<Inbox />} />
-          <Route path="me/mail/message" element={<Inbox />} /> */}
+          <Route path="me/search-result/*" element={<SearchResult />} />
+          <Route path="me/mail/*" element={<Inbox />} ></Route>
+        </Route>
         </Route>
 
+
         {/* Catch all */}
-        <Route path="*" element={<NotFound />} />
-      </Route>
+      <Route path="*" element={<NotFound />} />
     </Routes >
   );
 };
