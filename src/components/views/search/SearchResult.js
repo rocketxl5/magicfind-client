@@ -65,7 +65,8 @@ const SearchResult = () => {
                     }
                 </span>
             </header>
-            <>
+
+            <div className="search-result">
                 <header className="header">
                     <h2 className="title">Search Results</h2>
                 </header>
@@ -86,7 +87,7 @@ const SearchResult = () => {
                             })
                     }
                 </main>
-            </>
+            </div>
         </>
     )
 }

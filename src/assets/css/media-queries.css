@@ -38,12 +38,14 @@
 
 .about .grid-section {
     grid-template-columns: repeat(3, 1fr);
-  }
-    .wrapper {
-        background-color: var(--clr-dark);
-    }
+}
+
     .container {
         padding-top: var(--header-height-wide);
+    }
+
+    .search-result-header {
+        top: var(--header-height-wide);
     }
 
     .main-content {

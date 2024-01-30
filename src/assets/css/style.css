@@ -94,53 +94,18 @@ border-bottom: 1px solid rgba(219, 219, 219, 0.2);
 z-index: 2000;
 }
 
-.contextual-nav,
-.search-result-header {
-position: fixed;
-width: 100%;
-min-width: 37rem;
-left: 0;
-top: var(--header-height);
-z-index: 1000;
-}
-
-.contextual-links {
-background-color: var(--clr-light);
-min-height: 4rem;
-display: flex;
-}
-
-.contextual-links > a {
-display: flex;
-flex: 1;
-align-items: center; 
-justify-content: center;
-}
-
-.contextual-nav a span {
-pointer-events: none;
-font-size: var(--fs-125);
-font-weight: 500;
-}
-
-.active-link {
-color: var(--clr-primary);
-background-color: var(--clr-light);
-}
-
-.active-link span {
-  /* font-size: var(--fs-150) !important; */
-}
-
-.inactive-link {
-color: var(--clr-grey);
-background-color: var(--clr-primary);
-}
-
-.wrapper {
+.layout,
+.auth-layout {
 min-width: 37rem;
 min-height: 100vh;
-/* background-color: var(--clr-dark); */
+}
+
+.layout {
+  background-color: var(--clr-dark);
+}
+
+.auth-layout {
+  background-color: var(--clr-light);
 }
 
 .container {
@@ -943,12 +908,58 @@ height: 2rem;
 /* ////////////////////////// */
 /* /// Search Result View /// */
 /* ////////////////////////// */
+.search-result {
+  padding-block-start: 4rem;
+}
 
 .search-result-info h3,
 .search-result-info span {
   font-weight: 400;
   font-size: 1.3rem; 
   color: var(--clr-light-grey);
+}
+
+.contextual-nav,
+.search-result-header {
+position: fixed;
+width: 100%;
+min-width: 37rem;
+left: 0;
+top: var(--header-height);
+z-index: 1000;
+}
+
+.contextual-links {
+background-color: var(--clr-light);
+min-height: 4rem;
+display: flex;
+}
+
+.contextual-links > a {
+display: flex;
+flex: 1;
+align-items: center; 
+justify-content: center;
+}
+
+.contextual-nav a span {
+pointer-events: none;
+font-size: var(--fs-125);
+font-weight: 500;
+}
+
+.active-link {
+color: var(--clr-primary);
+background-color: var(--clr-light);
+}
+
+.active-link span {
+  /* font-size: var(--fs-150) !important; */
+}
+
+.inactive-link {
+color: var(--clr-grey);
+background-color: var(--clr-primary);
 }
 
 

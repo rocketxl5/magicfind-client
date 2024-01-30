@@ -15,7 +15,7 @@ const SearchItem = forwardRef(function SearchItem(props, ref) {
     const [loading, setLoading] = useState(false);
     const { attributes } = useAttributes(card);
 
-
+    console.log(searchType)
     return (
             <div className="card-content" ref={ref}>
             <header className="card-header">
