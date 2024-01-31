@@ -52,10 +52,9 @@ const SearchCatalog = () => {
   useEffect(() => {
 
     if (searchInput?.id === 'search-catalog') {
-      // if (!isActive) {
-      searchCatalog();
-      // }
+
       setIsActive(true);
+      searchCatalog();
     } else {
       setCardNames(null);
       setIsActive(false);
