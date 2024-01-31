@@ -2,9 +2,9 @@ import React from 'react'
 
 const Checkout = () => {
     return (
-        <div>
+        <main className="main-content checkout">
             Check out
-        </div>
+        </main>
     )
 }
 

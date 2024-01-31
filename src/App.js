@@ -56,7 +56,7 @@ const App = () => {
         {/* Auth protected routes */}
         <Route element={<RequireAuth />}>
         <Route path="/" element={<AuthLayout />} >
-          <Route path="me/" element={<AuthPage />}>
+          <Route path="me" element={<AuthPage />}>
             <Route path="dashboard" element={<DashBoard />} />
             <Route path="collection" element={<SearchCollection />} />
             <Route path="store" element={<Store />} />
