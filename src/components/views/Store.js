@@ -1,5 +1,3 @@
-import React from 'react'
-
 const Store = () => {
     return (
         <div className="outer-content">
@@ -14,4 +12,4 @@ const Store = () => {
     )
 }
 
-export default Store
+export default Store;

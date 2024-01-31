@@ -9,8 +9,8 @@ const CartItem = ({ item, index, setLoading }) => {
   const { setCartItems } = useContext(CartContext);
 
   const handleChange = (e) => {
-    const value = parseInt(e.target.value);
 
+    const value = parseInt(e.target.value);
     // If value is 0
     console.log('value', value)
     if (!value) {

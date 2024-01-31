@@ -23,7 +23,6 @@ const SearchInput = forwardRef(function SearchInput(props, ref) {
     setSearchInput,
     searchTerm,
     setSearchTerm,
-    predictions,
     setPredictions,
     searchInput,
     displayAutcomplete,
@@ -89,7 +88,8 @@ const SearchInput = forwardRef(function SearchInput(props, ref) {
         placeholder={placeholder}
       />
       {(isActive && searchTerm) &&
-        <AutoComplete predictions={predictions} searchCard={searchCard} inputRef={inputRef} />
+        <AutoComplete searchCard={searchCard} inputRef={inputRef} />
+        // <AutoComplete predictions={predictions}  inputRef={inputRef} />
       }
     </>
   );
