@@ -352,7 +352,7 @@
 }
 
 .buffer {
-    padding-block-start: var(--header-height);
+    padding-block-start: var(--layout-top);
 }
 
 .fifth {

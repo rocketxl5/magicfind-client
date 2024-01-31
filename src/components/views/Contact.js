@@ -2,15 +2,15 @@ import React from 'react';
 
 const Contact = () => {
   return (
-    <div className="content">
+    <main className="main-content contact">
       <header className="header">
 
         <h2 className="title">Contact</h2>
       </header>
       <main className="main">
       </main>
-    </div>
-  );
-};
+    </main>
+  )
+}
 
 export default Contact;

@@ -10,11 +10,12 @@ input:-webkit-autofill:active{
 /* container for login and signup */
 
 .form-container {
-    min-height: calc(100vh - 2 * var(--header-height));
+    min-height: calc(100vh - 2 * var(--layout-top));
 }
 
 .form-content {
     width: 100%;
+    padding-block-start: var(--layout-top-wide);
     margin-inline: auto;
 }
 

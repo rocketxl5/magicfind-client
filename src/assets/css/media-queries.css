@@ -39,17 +39,33 @@
 .about .grid-section {
     grid-template-columns: repeat(3, 1fr);
 }
+    
+     .layout {
+        padding-block-start: var(--layout-top-wide);
+    }
 
-    .container {
-        padding-top: var(--header-height-wide);
+    .layout > .container {
+        min-height: calc(100vh - 20rem);
+    }
+
+    .auth-layout {
+        padding-block-start: 6rem;
+    }
+
+    .auth-layout .container {
+        min-height: calc(100vh - 16rem);
     }
 
     .search-result-header {
-        top: var(--header-height-wide);
+        top: var(--layout-top-wide);
     }
 
     .main-content {
         padding-inline: var(--size-1); 
+    }
+
+    .footer {
+        margin-inline: auto;
     }
 
     /* login & signup */
@@ -85,7 +101,7 @@
     .main-header {
         display: flex;
         flex-direction: column;
-        min-height: var(--header-height-wide);
+        min-height: var(--layout-top-wide);
     }
     
     .top-header  {
@@ -114,8 +130,6 @@
         display: block;
     }
     
-
-    
     #search-catalog-form {
         padding-block: 0;
     }
@@ -124,22 +138,18 @@
         margin-block: 0;
     }
 
-    /* Home Page */
-    .feature-footer {
-        /* width: max(50%, 10vw); */
-        /* font-size: clamp(var(--fs-125), 2vw, var(--fs-175)); */
-    }
-
     /* Side Section */
     .contextual-nav {
         position:static;
         display: block;
-        top: var(--header-height-wide);
-        /* width: 30vw; */
+        top: var(--layout-top-wide);
+        max-width: 130rem;
+        margin-inline: auto;
         z-index: 0;
     }
 
     .contextual-links {
+        min-height: 5rem;
         display: flex;
     }
 
@@ -166,7 +176,7 @@
 
     #search-catalog-container {
         position: relative;
-        min-height: var(--header-height-wide);
+        min-height: var(--layout-top-wide);
         min-width: clamp(20rem, 45%, 60rem) !important;
         padding-block: 0;
         margin: auto;
@@ -220,7 +230,7 @@
     }
 
     nav .right-side-nav ul {
-        inset: var(--header-height-wide) 0 0 100%;
+        inset: var(--layout-top-wide) 0 0 100%;
         border-top-left-radius: 10px;
         border-bottom-left-radius: 10px;
     }
@@ -233,10 +243,10 @@
         display: none;
     }
 
-    .footer {
-        min-height: var(--header-height-wide);
+    .layout .footer {
+        min-height: var(--layout-top-wide);
         margin-inline: auto;
-        margin-top: 6rem;
+        margin-top: var(--layout-bottom-wide);
         font-size: var(--fs-125);
     }
 

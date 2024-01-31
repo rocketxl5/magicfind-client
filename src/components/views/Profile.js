@@ -4,7 +4,7 @@ const Profile = () => {
   const { auth } = useAuth();
 
   return (
-    <div className="content">
+    <main className="main-content profile">
       <header className="header">
 
         <h2 className="title">Profile</h2>
@@ -13,7 +13,7 @@ const Profile = () => {
         <p>Name: {auth.name}</p>
         <p>Country: {auth.country}</p>
       </main>
-    </div>
+    </main>
   );
 };
 
