@@ -63,7 +63,6 @@ const SearchCollection = ({ path }) => {
                 errorMessage && setErrorMessage(null);
               }
               else if (query === 'cards') {
-                console.log(data)
                 const result = { cards: data, searchType: searchInput?.id }
                 // Update local storage with search data
                 localStorage.setItem('search-result', JSON.stringify(result));

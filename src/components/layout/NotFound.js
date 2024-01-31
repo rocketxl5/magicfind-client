@@ -1,7 +1,10 @@
 import { useNavigate } from 'react-router-dom';
-import Button from '../layout/Button';
+import Button from './Button';
+import useAuth from '../../hooks/useAuth';
+
 const NotFound = () => {
   const navigate = useNavigate();
+  const { isAuth } = useAuth();
 
   const attributes = {
     id: '',
@@ -11,8 +14,9 @@ const NotFound = () => {
     status: false
   }
 
-  const handleClick = () => {
-    navigate('/', { replace: true })
+  const goBack = (e) => {
+    console.log(e.target)
+    navigate('/me/');
   }
   return (
     <div className="content">
@@ -22,7 +26,7 @@ const NotFound = () => {
       </header>
       <main className="main not-found">
         <p>The page you requested does not exist</p>
-        <Button attributes={attributes} handleClick={handleClick} />
+        <Button attributes={attributes} handleClick={goBack} />
       </main>
     </div>
   );

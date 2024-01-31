@@ -16,7 +16,7 @@ import Contact from './components/views/Contact';
 import About from './components/views/About';
 import Profile from './components/views/Profile';
 import SearchResult from './components/views/search/SearchResult';
-import NotFound from './components/views/NotFound';
+import NotFound from './components/layout/NotFound';
 import CardNotFound from './components/views/search/CardNotFound';
 import ShoppingCart from './components/views/ShoppingCart';
 import DashBoard from './components/views/DashBoard';

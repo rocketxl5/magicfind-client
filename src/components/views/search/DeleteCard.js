@@ -31,7 +31,7 @@ const DeleteCard = (props) => {
     const location = useLocation();
     const { query } = useParams();
     // Hook
-    const { isAuth, auth } = useAuth();
+    const { auth } = useAuth();
 
     // Triggers click event on button to close modal
     const closeModal = (button, result, destination) => {
@@ -72,24 +72,20 @@ const DeleteCard = (props) => {
                 })
             })
             .then((data) => {
-                setLoading(false);
                 const { cards, isDeleted, message } = data;
+                let result;
                 setResponse({ isDeleted: isDeleted, message: message })
                 // If cardName is set
                 if (query !== 'all-cards') {
-                    console.log(searchType)
                     // filter for cards with cardName
                     const updatedCards = cards.filter(cardObj => cardObj.name.toLowerCase() === card.name.toLowerCase());
-                    const result = { cards: updatedCards, searchType };
-                    const destination = isAuth ? '/me/collection' : location.pathname;
-
-                    closeModal(btnRef.current, result, destination)
+                    result = { cards: updatedCards, searchType };
                 } else {
-                    const result = { cards: cards, searchType };
-                    const destination = isAuth ? '/me/collection' : location.pathname;
-
-                    closeModal(btnRef.current, result, destination)
+                    result = { cards: cards, searchType };
                 }
+                setLoading(false);
+                localStorage.setItem('search-result', JSON.stringify(result));
+                closeModal(btnRef.current, result, location.pathname);
             })
             .catch((error) => {
                 setLoading(false);
