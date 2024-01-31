@@ -3,12 +3,12 @@ import Prediction from './Prediction';
 import { SearchContext } from '../../../contexts/SearchContext';
 const INIT = -200;
 
-const AutoComplete = (props) => {
-    const { predictions, searchCard } = props;
+const AutoComplete = ({ searchCard }) => {
     const {
         marker,
         setMarker,
         searchTerm,
+        predictions,
         setCardName,
         displayAutcomplete
     } = useContext(SearchContext);
@@ -31,8 +31,13 @@ const AutoComplete = (props) => {
     // Updates scroll position of autocomplete list (ul).
     // Marker's value updates on arrow key events (up or down).
     useEffect(() => {
-        setCardName(predictions[marker]);
-        ulRef.current.scrollTo({ top: position, behavior: 'smooth' })
+        // If array of predictions is defined
+        if (predictions) {
+
+            setCardName(predictions[marker]);
+        }
+
+        ulRef.current?.scrollTo({ top: position, behavior: 'smooth' })
     }, [marker])
 
     // Keyboard arrow up and down autocomplete list searching function
