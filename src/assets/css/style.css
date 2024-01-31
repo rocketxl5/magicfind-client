@@ -786,7 +786,7 @@ height: 2rem;
   width: 6rem;
   height: 6rem;
   fill: var(--clr-light);
-  top: min(calc(clamp(31rem, calc(80vw + 10px), 55rem) * 1.4), 72.5rem);
+  top: min(calc(clamp(31rem, calc(80vw + 10px), 55rem) * 1.45), 72.5rem);
   left: 0;
   right: 0;
   margin: auto;
@@ -796,7 +796,7 @@ height: 2rem;
   transform: rotateY(180deg);
   -webkit-transform: rotateY(180deg);
   transition: all 0.3s;
-  border: 2px solid var(--clr-light);
+  border: 3px solid var(--clr-light-grey);
   -webkit-transition: all 0.3s;
 }
 
@@ -925,7 +925,7 @@ height: 2rem;
   position: absolute;
   left: 0;
   right: 0;
-  top: min(calc(clamp(31rem, calc(80vw + 10px), 55rem) * 1.6), 80rem);
+  top: min(calc(clamp(31rem, calc(80vw + 10px), 55rem) * 1.7), 80rem);
   display: flex;
   justify-content: center;
   align-items: center;
