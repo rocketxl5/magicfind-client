@@ -14,12 +14,12 @@ const SearchResult = () => {
     const cardRef = useRef(null);
 
     useEffect(() => {
-        console.log(cards)
+        console.log(cards.length)
         // If cards is empty
         if (!cards.length) {
-            setTimeout(() => {
-                navigate('/search-collection')
-            }, 1500)
+
+            navigate('/me/collection');
+
         }
     }, [location]);
 
@@ -54,9 +54,16 @@ const SearchResult = () => {
             <header className="search-result-header">
                 {
                     searchType !== 'search-catalog' &&
-                <button className="back-btn" type="button" onClick={() => {
-                    searchType === 'search-collection' ? navigate('/me/collection') : navigate(-1);
-                    }}>Back To Search</button>}
+                    <button
+                        className="back-btn"
+                        type="button"
+                        onClick={() => {
+                            searchType === 'search-collection' ?
+                                navigate('/me/collection') :
+                                navigate(-1);
+                        }}>
+                        Back To Search
+                    </button>}
                 <span className="space-1">
                     {
                         cards ?

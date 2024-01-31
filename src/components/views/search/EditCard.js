@@ -39,9 +39,16 @@ const EditCard = (props) => {
     const { auth } = useAuth();
 
     // Triggers click event on button to close modal
-    const closeModal = (button) => {
+    // Triggers click event on button to close modal
+    const closeModal = (button, result, destination) => {
+        console.log(button)
         setTimeout(() => {
-            button.click();
+            navigate(`${destination}`,
+                {
+                    state: result,
+                });
+            localStorage.setItem('search-result', JSON.stringify(result));
+            button?.click();
         }, 1500)
     }
 
@@ -71,32 +78,21 @@ const EditCard = (props) => {
             fetch(`${api.serverURL}/api/cards/edit/${card._id}/${auth.id}`, options)
                 .then((res) => res.json())
                 .then((data) => {
-                    setLoading(false);
                     const { cards, isUpdated, message } = data;
+                    let result;
+                    setResponse({ isUpdated: isUpdated, message: message });
 
-                    setResponse({ isUpdated: isUpdated, message: message })
                     if (query !== 'all-cards') {
                         // filter for cards with cardName
                         const updatedCards = cards.filter(cardObj => cardObj.name.toLowerCase() === card.name.toLowerCase());
-
-                        const result = { cards: updatedCards, searchType: searchType };
-
-                        navigate(`${location.pathname}`,
-                            {
-                                state: result,
-                            });
-                        localStorage.setItem('search-result', JSON.stringify(result));
-                        closeModal(btnRef.current)
+                        result = { cards: updatedCards, searchType: searchType };
                     } else {
-                        const result = { cards: cards, searchType: searchType };
-
-                        navigate(`${location.pathname}`,
-                            {
-                                state: result,
-                            });
-                        localStorage.setItem('search-result', JSON.stringify(result));
-                        closeModal(btnRef.current)
+                        result = { cards: cards, searchType: searchType };
                     }
+
+                    setLoading(false);
+                    localStorage.setItem('search-result', JSON.stringify(result));
+                    closeModal(btnRef.current, result, location.pathname);
                 })
                 .catch((error) => {
                     setLoading(false);

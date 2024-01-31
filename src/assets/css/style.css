@@ -48,6 +48,8 @@
   --header-height: 5rem;
   --footer-height: 5rem;
   --header-height-wide: 6rem;
+  --margin-top: 9rem;
+  --margin-top-wide: 10rem;
 
   /* boder-radius */
   --radius-1: 0.5rem;
@@ -105,20 +107,23 @@ min-height: 100vh;
 }
 
 .auth-layout {
+
+
   background-color: var(--clr-light);
 }
 
 .container {
+min-height: calc(100vh - (var(--margin-top) + var(--footer-height)));
+margin-top: var(--margin-top);
 min-width: 37rem;
-min-height: calc(100vh - var(--footer-height));
 max-width: 1300px;
-padding-top: var(--header-height);
-margin: 0 auto;
+/* padding-top: var(--header-height); */
+margin-inline: auto;
 }
 
 .content {
 position: relative;
-min-height: calc(100vh - 13.5rem);
+min-height: inherit;
 margin: 0 auto;
 }
 
@@ -132,7 +137,6 @@ margin-inline: auto;
 /* display: flex; */
 min-height: inherit;
 margin: 0 auto;
-padding-top: var(--header-height);
 }
 
 .inner-content {
@@ -557,7 +561,7 @@ height: 2rem;
   min-width: 37rem;
   min-height: var(--header-height);
   max-width: 1300px;
-  margin-block-start: 4rem;
+  /* margin-block-start: 4rem; */
   color: var(--clr-grey);
   background-color: var(--clr-primary);
   font-size: var(--fs-100);
