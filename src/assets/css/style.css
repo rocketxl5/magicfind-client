@@ -99,7 +99,7 @@ color: var(--clr-dark);
   top: 0;
   width: 100%;
   min-width: 37rem;
-z-index: 2000;
+  z-index: 2000;
 }
 
 .layout,
@@ -129,7 +129,7 @@ z-index: 2000;
 .container {
   min-height: 100vh;
   min-width: 37rem;
-  max-width: 1300px;
+  max-width: 1350px;
   margin-inline: auto;
 }
 
