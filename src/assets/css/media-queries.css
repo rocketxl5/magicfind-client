@@ -279,11 +279,17 @@
 }
 
 
+@media screen and (width >= 960px) {
+    .feature-image {
+        aspect-ratio: 16 / 9;
+    }
+}
+
 @media screen and (width >= 1200px) {
     
     .home .grid-section {
         grid-template-columns: repeat(4, 1fr);
-        padding-inline: 0;
+        padding-inline: 1rem;
     }
 
     .about .grid-section {
@@ -295,11 +301,11 @@
     }
 
     .home .feature {
-        padding: 0;
+        /* padding: 0; */
     }
 
     .feature-content {
-        border: none;
+        /* border: none; */
     }
     
     .feature-image {

@@ -9,10 +9,10 @@ const HOME_PAGE = {
             {
                 bgLink: 'https://cards.scryfall.io/art_crop/front/6/7/673a67b2-fbb0-4be4-9edd-93946a583f23.jpg?1692938189',
                 body: [
-                    'Compare card prices & conditions',
-                    'Get in touch with the sellers',
+                    'Compare card prices',
                     'Find sellers in your area',
-                    'Access restricted search features',
+                    'Access to latest arrivals',
+                    'Reach out card sellers',
                     'Keep track of your purchases',
                 ],
                 title: 'Buy',
@@ -36,7 +36,7 @@ const HOME_PAGE = {
                 body: [
                     'Create a collector profile',
                     'Manage your card collection',
-                    'Add any of the 20 000+ MTG cards',
+                    'Add any 20 000+ MTG cards',
                     'Customize your collection',
                     'Save your preferences',
                 ],
@@ -47,9 +47,9 @@ const HOME_PAGE = {
                 bgLink: 'https://cards.scryfall.io/art_crop/front/e/3/e37da81e-be12-45a2-9128-376f1ad7b3e8.jpg?1562202585',
                 body: [
                     'Build decks in any format',
-                    'Share them with the community',
-                    'Find members with similar taste',
                     'Create wishlists',
+                    'Share with the community',
+                    'See the latest trends',
                     'Have fun!',
                 ],
                 title: 'Build',
