@@ -66,7 +66,9 @@ const App = () => {
           <Route path="me/settings" element={<Settings />} />
           <Route path="me/profile" element={<Profile />} />
           <Route path="me/checkout" element={<Checkout />} />
-          <Route path="me/search-result/*" element={<SearchResult />} />
+          <Route path="me/search-result/catalog/:cardName/:userID" element={<SearchResult />} />
+          <Route path="me/search-result/collection/:query" element={<SearchResult />} />
+          <Route path="me/search-result/api/:cardName" element={<SearchResult />} />
           <Route path="me/mail/*" element={<Inbox />} ></Route>
         </Route>
         </Route>
