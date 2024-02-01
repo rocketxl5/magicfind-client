@@ -87,7 +87,7 @@ const CatalogCardDetail = (props) => {
     }, [itemIndex])
 
     useEffect(() => {
-        console.log(card)
+
         const foundIndex = cartItems.findIndex((item) => {
             return item.selected._id === card._id
         });

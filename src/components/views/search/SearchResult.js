@@ -14,10 +14,9 @@ const SearchResult = () => {
     const cardRef = useRef(null);
 
     useEffect(() => {
-        console.log(cards.length)
         // If cards is empty
         if (!cards.length) {
-
+            // Send to collection view
             navigate('/me/collection');
 
         }

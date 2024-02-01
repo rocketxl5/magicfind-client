@@ -36,7 +36,7 @@ const useModalSlide = (callback, expandedImages) => {
     const [view, dispatch] = useReducer(reducer, INIT)
 
     const updateSliderView = (e, id) => {
-        console.log(e.target.name, id)
+
         switch (e.target.name) {
             case 'modal-image':
                 dispatch({

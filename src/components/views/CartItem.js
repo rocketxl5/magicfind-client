@@ -12,7 +12,6 @@ const CartItem = ({ item, index, setLoading }) => {
 
     const value = parseInt(e.target.value);
     // If value is 0
-    console.log('value', value)
     if (!value) {
       // Delete item
       const items = JSON.parse(localStorage.getItem('cart'));

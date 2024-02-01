@@ -120,7 +120,7 @@ const SearchCatalog = () => {
                     state: result,
                   })
               ) : (
-                navigate(`me/search-result/catalog/${setQueryString(query.toLowerCase(), '-')}`,
+                  navigate(`/me/search-result/catalog/${setQueryString(query.toLowerCase(), '-')}`,
                   {
                     state: result,
                   })

@@ -39,9 +39,7 @@ const EditCard = (props) => {
     const { auth } = useAuth();
 
     // Triggers click event on button to close modal
-    // Triggers click event on button to close modal
     const closeModal = (button, result, destination) => {
-        console.log(button)
         setTimeout(() => {
             navigate(`${destination}`,
                 {
@@ -80,6 +78,7 @@ const EditCard = (props) => {
                 .then((data) => {
                     const { cards, isUpdated, message } = data;
                     let result;
+
                     setResponse({ isUpdated: isUpdated, message: message });
 
                     if (query !== 'all-cards') {
