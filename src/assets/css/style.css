@@ -209,6 +209,9 @@ animation: animate 0.5s linear infinite;
 .header {
 width: 100%;
 padding: 2rem;
+margin-block-end: 1rem;
+color: var(--clr-light);
+border-bottom: 1px solid var(--clr-light)
 }
 
 .btn {
@@ -581,7 +584,7 @@ height: 2rem;
   align-items: center;
   min-width: 37rem;
   min-height: var(--layout-top);
-  max-width: 1300px;
+  max-width: 1350px;
   /* margin-block-start: 4rem; */
   color: var(--clr-grey);
   background-color: var(--clr-primary);
@@ -694,7 +697,7 @@ height: 2rem;
   height: 14rem;
 }
 
-.magnify-btn  {
+.expand-btn  {
   position: absolute;
   bottom: 1rem;
   right: 1rem;
@@ -705,7 +708,7 @@ height: 2rem;
   pointer-events: none;
 }
 
-.magnify-btn > svg {
+.expand-btn > svg {
   display: block;
   fill: var(--clr-dark);
   height: 2rem;
@@ -957,6 +960,13 @@ height: 2rem;
 /* ////////////////////////// */
 /* /// Search Result View /// */
 /* ////////////////////////// */
+.search-result {
+  width: 100%;
+}
+
+/* .layout .search-result header {
+
+} */
 
 .layout .search-result {
   padding-block-start: 4rem;
@@ -972,7 +982,7 @@ height: 2rem;
 .contextual-nav,
 .search-result-header {
 position: fixed;
-width: 100%;
+width: 100vw;
 min-width: 37rem;
 left: 0;
 top: var(--layout-top);

@@ -108,22 +108,22 @@ const CatalogCardDetail = (props) => {
                     ) : (
                         <>
                             <div className="card-info">
-                                <div className="card-spec">
+                                {/* <div className="card-spec">
                                     <p><span className="card-spec-title">Seller:</span>  <span className="card-spec-value">{card.userName}</span></p>
-                                </div>
+                                </div> */}
                                 <div className="card-spec">
                                     <p><span className="card-spec-title">Condition:</span><span className="card-spec-value">{card.condition?.toUpperCase()}</span></p>
                                 </div>
-                                <div className="card-spec">
+                                {/* <div className="card-spec">
                                     <p><span className="card-spec-title">Ships From:</span>  <span className="card-spec-value">{card.country}</span></p>
-                                </div>
-                                <div className="card-spec">
+                                </div> */}
+                                {/* <div className="card-spec">
                                     <p><span className="card-spec-title">Price:</span>  <span className="card-spec-value">{card.price}</span></p>
-                                </div>
+                                </div> */}
                                 {/* <div className="card-spec">
                                     <p><span className="card-spec-title">Quantity available:</span>  <span className="card-spec-value">{quantityAvailable}</span></p>
                                 </div> */}
-                                <p><span className="card-spec-title">Quantity Available:</span>  <span className="card-spec-value">{card.quantity}</span></p>
+                                {/* <p><span className="card-spec-title">Quantity Available:</span>  <span className="card-spec-value">{card.quantity}</span></p>
 
                                 <label htmlFor="quantity"><span className="card-spec-title">Quantity selected:</span></label>
                                 {card.quantity &&
@@ -146,9 +146,9 @@ const CatalogCardDetail = (props) => {
                                             </select>
                                         </Selector>
                                     </div>
-                                }
+                                } */}
 
-                                <Contact>
+                                {/* <Contact>
                                     <Link
                                         to={`/store/${card.userID}`}
                                     >
@@ -167,7 +167,7 @@ const CatalogCardDetail = (props) => {
                                         </Link>
                                         </Contact>
 
-                                )}
+                                )} */}
                                 <div className="alert-message">
                                     {
                                         showMessage &&

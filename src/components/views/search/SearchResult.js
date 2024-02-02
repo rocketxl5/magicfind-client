@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import SearchItem from './SearchItem';
+import Product from './Product';
+import Parameter from './Parameter';
 import Modal from '../modal/Modal';
 import useModalState from '../../../hooks/useModalState';
 import useLoadImage from '../../../hooks/useLoadImage';
@@ -10,9 +11,10 @@ import getCardImgUrls from '../../../assets/utilities/getCardImgUrls';
 const SearchResult = () => {
     const location = useLocation();
     const navigate = useNavigate();
-    const { cards, searchType } = location.state || JSON.parse(localStorage.getItem('search-result'));
+    const { result, parameters } = location.state || JSON.parse(localStorage.getItem('search-result'));
+    const { cards, searchType } = result;
     const cardRef = useRef(null);
-
+    console.log(cards)
     useEffect(() => {
         // If cards is empty
         if (!cards.length) {
@@ -71,17 +73,28 @@ const SearchResult = () => {
                     }
                 </span>
             </header>
-
             <div className="search-result">
                 <header className="header">
                     <h2 className="title">Search Results</h2>
                 </header>
-                <main className="main">
+                <div className="grid-container">
+                    <aside className="parameters">
+                        <ul>
+                            {
+                                parameters &&
+                                parameters.map((parameter, i) => {
+                                    return <Parameter key={i} parameter={parameter} />
+                                })
+                            }
+                        </ul>
+                    </aside>
+                    <main className="products">
+                        <ul>
                         {
                             imagesLoaded &&
                         cards.map((card, i) => {
                                 return (
-                                    <SearchItem
+                                    <Product
                                         key={i}
                                         index={i}
                                         card={card}
@@ -92,7 +105,9 @@ const SearchResult = () => {
                                     />)
                             })
                     }
+                        </ul>
                 </main>
+                </div>
             </div>
         </>
     )

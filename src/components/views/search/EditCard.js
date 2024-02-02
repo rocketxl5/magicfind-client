@@ -4,6 +4,8 @@ import Image from './CardImage';
 import CollectionCardDetail from './CollectionCardDetail';
 import Success from './Success';
 import Loading from '../../layout/Loading';
+import Option from '../../layout/Option';
+import data from '../../../assets/data/EDIT';
 import errorHandler from './helpers/editErrorHandler';
 import useAuth from '../../../hooks/useAuth';
 import { api } from '../../../api/resources';
@@ -228,13 +230,11 @@ const EditCard = (props) => {
                                                                 onChange={handleChange}
                                                                     onFocus={handleFocus}
                                                             >
-                                                                <option value="">Choose a condition</option>
-                                                                <option value='m'>Mint</option>
-                                                                <option value='nm'>Near Mint</option>
-                                                                <option value="lp">Lightly Played</option>
-                                                                <option value="mp">Moderatly Played</option>
-                                                                <option value="hp">Heavely Played</option>
-                                                                <option value="d">Damaged</option>
+                                                                    {
+                                                                        data.conditions.map((condition, i) => {
+                                                                            <Option key={i} item={condition} />
+                                                                        })
+                                                                    }
                                                             </select>
                                                         </div>
                                                         <div className="form-element">
@@ -247,19 +247,12 @@ const EditCard = (props) => {
                                                                 onChange={handleChange}
                                                                     onFocus={handleFocus}
                                                             >
-                                                                <option value="">Choose a language</option>
-                                                                <option value="en">English</option>
-                                                                <option value="es">Spanish</option>
-                                                                <option value="fr">French</option>
-                                                                <option value="de">German</option>
-                                                                <option value="it">Italian</option>
-                                                                <option value="pt">Portuguese</option>
-                                                                <option value="ja">Japanese</option>
-                                                                <option value="ko">Korean</option>
-                                                                <option value="ru">Russian</option>
-                                                                <option value="zhs">Simplified Chinese</option>
-                                                                <option value="zht">Traditional Chinese</option>
-                                                                <option value="ph">Phyrexian</option>
+                                                                    {
+                                                                        data.languages.map((language, i) => {
+
+                                                                            return <Option key={i} item={language} />
+                                                                        })
+                                                                    }
                                                             </select>
                                                         </div>
                                                         <div className="form-element">

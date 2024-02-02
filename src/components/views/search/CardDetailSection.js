@@ -6,7 +6,7 @@ const CardDetailSection = (props) => {
     const { searchType, ...rest } = props;
 
     return (
-        <section className="card-section">
+        <>
             {searchType === 'search-catalog' ? (
                 <CatalogCardDetail {...rest} />
             ) :
@@ -16,7 +16,7 @@ const CardDetailSection = (props) => {
                         <ApiCardDetail {...rest} />
                         )
             }
-        </section>
+        </>
     )
 }
 
