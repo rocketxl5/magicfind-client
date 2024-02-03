@@ -265,7 +265,6 @@ input:-webkit-autofill:active{
     height: 5rem;
     width: 100%;
     max-width: clamp(20rem, 100%, 60rem) !important;
-    /* margin-block: var(--size-2); */
     margin: 0 auto;
 }
 
@@ -276,6 +275,7 @@ input#search-collection {
     padding: var(--size-1);
     margin-inline: auto;
 }
+
 
 .save-to-collection span {
     font-size: 1.3rem;

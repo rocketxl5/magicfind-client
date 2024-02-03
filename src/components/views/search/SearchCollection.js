@@ -200,7 +200,7 @@ const SearchCollection = ({ path }) => {
                       <SearchInput id={'search-collection'} className={'search-field'} placeholder={'Search Your Collection'} searchCard={searchCollectionCard} isActive={isActive} ref={collectionInputRef} />
                     </form>
                     <button
-                      className="btn bg-green"
+                      className="bg-green btn-collection"
                       type="button"
                       onClick={(e) => {
                         e.stopPropagation();

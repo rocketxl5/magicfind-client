@@ -227,21 +227,15 @@
     /* Side Section */
     .contextual-nav {
         position:static;
-        display: block;
         top: var(--layout-top-wide);
-        max-width: 130rem;
-        margin-inline: auto;
+        border-right: 1px solid var(--clr-light);
         z-index: 0;
+         background-color: var(--clr-primary);
+         /* border-top: 1px solid var(--clr-primary); */
     }
 
     .contextual-links {
         min-height: 5rem;
-    }
-
-    .contextual-links > a {
-        display: block; 
-        padding: var(--size-1);
-        text-align: center;
     }
 
     .contextual-links a span {
@@ -441,4 +435,16 @@
         margin: 1rem;
         border-radius: 5px;
       }
+}
+
+@media screen and (width >= 1350px) {
+    .contextual-links a {
+        /* border-right: 1px solid var(--clr-light); */
+    }
+    .contextual-links a:first-of-type {
+        border-left: 1px solid var(--clr-light-border);
+    }
+    .contextual-links a:last-of-type {
+        border-right: 1px solid var(--clr-light-border);
+    }
 }
