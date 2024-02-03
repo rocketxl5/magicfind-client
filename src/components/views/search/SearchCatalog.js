@@ -33,16 +33,6 @@ const SearchCatalog = () => {
   // Hook
   const { auth, isAuth } = useAuth();
 
-
-  // Search Parameter
-  const parameters = [
-    "Price",
-    "Condition",
-    "Expansion",
-    "Date",
-    "Foil"
-  ]
-
   const searchCatalog = () => {
     const headers = new Headers();
     headers.append('Content-Type', 'application/json');
@@ -119,19 +109,18 @@ const SearchCatalog = () => {
                 cards: data.cards,
                 searchType: searchInput.id
               }
-              console.log(result)
               setCardName('');
               setSearchInput(null);
               localStorage.setItem('search-result', JSON.stringify(result));
               !isAuth ? (
                 navigate(`/search-result/catalog/${setQueryString(query.toLowerCase(), '-')}`,
                   {
-                    state: { result: result, parameters: parameters },
+                    state: { result: result },
                   })
               ) : (
                   navigate(`/me/search-result/catalog/${setQueryString(query.toLowerCase(), '-')}`,
                   {
-                    state: { result: result, parameters: parameters },
+                    state: { result: result },
                   })
               )
 

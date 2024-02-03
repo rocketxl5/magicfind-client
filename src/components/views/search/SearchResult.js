@@ -6,13 +6,14 @@ import Modal from '../modal/Modal';
 import useModalState from '../../../hooks/useModalState';
 import useLoadImage from '../../../hooks/useLoadImage';
 import useModalView from '../../../hooks/useModalView';
+import useProduct from '../../../hooks/useProduct';
 import getCardImgUrls from '../../../assets/utilities/getCardImgUrls';
+import data from '../../../assets/data/SEARCH';
 
 const SearchResult = () => {
     const location = useLocation();
     const navigate = useNavigate();
-    const { result, parameters } = location.state || JSON.parse(localStorage.getItem('search-result'));
-    const { cards, searchType } = result;
+    const { cards, searchType } = location.state || JSON.parse(localStorage.getItem('search-result'));
     const cardRef = useRef(null);
     console.log(cards)
     useEffect(() => {
@@ -29,6 +30,8 @@ const SearchResult = () => {
     const [view, updateCardView] = useModalView(handleCardView);
 
     const [state, updateCardState] = useModalState(searchType, handleCardState);
+
+    // const [products] = useProduct(cards, searchType)
 
     function handleCardView(e, layout, expandedImage) {
         e.stopPropagation();
@@ -59,11 +62,11 @@ const SearchResult = () => {
                         className="back-btn"
                         type="button"
                         onClick={() => {
-                            searchType === 'search-collection' ?
-                                navigate('/me/collection') :
+                            // searchType === 'search-collection' ?
+                            //     navigate('/me/collection') :
                                 navigate(-1);
                         }}>
-                        Back To Search
+                            Go Back
                     </button>}
                 <span className="space-1">
                     {
@@ -81,8 +84,8 @@ const SearchResult = () => {
                     <aside className="parameters">
                         <ul>
                             {
-                                parameters &&
-                                parameters.map((parameter, i) => {
+
+                                data.parameters.map((parameter, i) => {
                                     return <Parameter key={i} parameter={parameter} />
                                 })
                             }

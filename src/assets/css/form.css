@@ -277,10 +277,6 @@ input#search-collection {
     margin-inline: auto;
 }
 
-.search-result {
-    position: relative;
-}
-
 .save-to-collection span {
     font-size: 1.3rem;
 }

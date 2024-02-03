@@ -962,14 +962,13 @@ height: 2rem;
 /* ////////////////////////// */
 .search-result {
   width: 100%;
+  padding-block-start: 4rem;
+  /* position: relative; */
 }
 
-/* .layout .search-result header {
-
-} */
-
-.layout .search-result {
-  padding-block-start: 4rem;
+.auth-layout .search-result header {
+  color: var(--clr-dark);
+  margin-block-end: 0;
 }
 
 .search-result-info h3,
@@ -1060,6 +1059,113 @@ font-weight: 500;
   font-size: var(--fs-150);
   color: var(--clr-red);
 }
+
+
+/* ////////////////// */
+/* /// Parameters /// */
+/* ////////////////// */
+
+.grid-container {
+  position: relative;
+  gap: 1.5rem;
+  display: grid;
+  grid-template-columns: 1fr;
+  /* padding: 1rem; */
+  /* background-color: red; */
+}
+
+.parameters {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 10rem;
+  left: 0;
+  height: max-content;
+  
+  background-color: var(--clr-light);
+  border-bottom: 1px solid var(--clr-grey);
+  z-index: 1001;
+}
+
+
+.parameters ul {
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem;
+  margin: 1rem;
+  border-radius: 5px;
+}
+
+/* ////////////////// */
+/* /// Parameters /// */
+/* ////////////////// */
+
+.product {
+  margin-block-end: 1.5rem;
+  padding: 1rem;
+  border: 1px solid var(--clr-grey);
+  border-radius: 5px; 
+  background: var(--clr-light);
+}
+
+.product-grid {
+  width: 100%;
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(6, 15%);
+}
+
+.product-grid section {
+  border-radius: 5px;
+}
+
+.product-grid .head {
+  padding: 0.5rem;
+  grid-column: span 9;
+  /* border: 1px solid black; */
+}
+.product-grid .image {
+  grid-column: span 1;
+  grid-row: 2 / 6;
+      border: 1px solid black;
+}
+
+.product-grid .specifications {
+  grid-column: span 2;
+  grid-row: 2 / 4;
+  background-color: gainsboro;
+}
+
+.product-grid .owner {
+  grid-column: span 2;
+  grid-row: 2 / 5;
+  background-color: aquamarine;
+}
+
+.product-grid .handler {  
+  grid-column: span 4;
+  /* grid-row: 5 / 6; */
+  background-color: orange;
+}
+
+.product-grid > .section {
+  padding: 0.5rem;
+}
+
+.product-order {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: fit-content;
+  margin: 0;
+  padding: 0;
+}
+
+.product-order * {
+  /* display: inline-block; */
+}
+
+
 
 .about {
   color: var(--clr-light);

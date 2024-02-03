@@ -9,7 +9,7 @@ import Image from './CardImage';
 import ExpandBtn from './cardbtn/ExpandBtn';
 
 import Seller from './product/Seller';
-import Order from './product/Oder';
+import Order from './product/Order';
 import Detail from './product/Detail';
 
 import useAttributes from '../../../hooks/useAttributes';
@@ -31,16 +31,16 @@ const Product = forwardRef(function Product(props, ref) {
                     <Image card={card} handleCardView={handleCardView} />
                     <ExpandBtn />
                 </section>
-                <section className="detail section">
+                <section className="specifications section">
                     {/* <h2>Detail</h2> */}
                     {/* <CardDetailSection index={index} card={card} searchType={searchType} loading={loading} /> */}
                     <Detail product={card} />
                 </section>
-                <section className="seller section">
+                <section className="owner section">
                     {/* <h2>Seller</h2> */}
                     <Seller product={card} />
                 </section>
-                <section className="order section">
+                <section className="handler section">
                     {/* <h2>Order</h2> */}
                     <Order product={card} />
                 </section>

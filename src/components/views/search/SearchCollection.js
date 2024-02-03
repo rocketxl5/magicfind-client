@@ -66,6 +66,7 @@ const SearchCollection = ({ path }) => {
                 const result = { cards: data, searchType: searchInput?.id }
                 // Update local storage with search data
                 localStorage.setItem('search-result', JSON.stringify(result));
+                console.log(result)
                 navigate(`/me/search-result/collection/all-cards`,
                   {
                     state: result,
@@ -153,6 +154,7 @@ const SearchCollection = ({ path }) => {
               setCardName('');
               setSearchInput(null);
               localStorage.setItem('search-result', JSON.stringify(result));
+              console.log(result)
               navigate(`/me/search-result/collection/${setQueryString(query.toLowerCase(), '-')}`,
                 {
                   state: result,

@@ -39,47 +39,7 @@
         padding-inline: 1rem;
     }
 
-
-.grid-container {
-    position: relative;
-    gap: 1.5rem;
-    display: grid;
-    grid-template-columns: 1fr 4fr;
-    padding: 1rem;
-}
-
-.parameters {
-    position: -webkit-sticky;
-    position: sticky;
-    top: 12rem;
-    left: 0;
-    background-color: var(--clr-light);
-    height: max-content;
-    border-radius: 5px;
-}
-
-.parameters ul {
-    /* width: 100%; */
-        padding: 1rem;
-        margin: 1rem;
-
-    border-radius: 5px;
- 
-    border: 1px solid var(--clr-grey);
-}
-
-.products ul {
-
-}
-
-
-
-.parameter {
-
-}
-
-
-.product-grid {
+/* .product-grid {
     width: 100%;
     display: grid;
     gap: 1rem;
@@ -101,28 +61,27 @@
 .product-grid .head {
     padding: 0.5rem;
     grid-column: span 9;
-    /* border: 1px solid black; */
 }
 .product-grid .image {
     grid-column: span 1;
     grid-row: 2 / 6;
+        border: 1px solid black;
 }
 
-.product-grid .detail {
-    grid-column: span 3;
-    grid-row: 2 / 5;
+.product-grid .specifications {
+    grid-column: span 2;
+    grid-row: 2 / 4;
     background-color: gainsboro;
 }
 
-.product-grid .seller {
-    grid-column: span 5;
+.product-grid .owner {
+    grid-column: span 2;
     grid-row: 2 / 5;
     background-color: aquamarine;
 }
 
-.product-grid .order {  
-    grid-column: span 8;
-    grid-row: 5 / 6;
+.product-grid .handler {  
+    grid-column: span 4;
     background-color: orange;
 }
 
@@ -138,11 +97,7 @@
     height: fit-content;
     margin: 0;
     padding: 0;
-}
-
-.product-order * {
-    /* display: inline-block; */
-}
+} */
 
 .image {
     position: relative;
@@ -445,7 +400,33 @@
         background-size: 100%;
         aspect-ratio: 3 / 1;
     }
-}
-.about-page-banner.banner {
-    background-position: 100%  50%!important;
+    .about-page-banner.banner {
+        background-position: 100%  50%!important;
+    }
+    
+    .grid-container {
+        position: relative;
+        gap: 1.5rem;
+        display: grid;
+        grid-template-columns: 1fr 4fr;
+        padding-inline: 1rem;
+    }
+
+    .parameters {
+        position: -webkit-sticky;
+        position: sticky;
+        top: 11rem;
+        left: 0;
+        height: max-content;
+        border: 1px solid var(--clr-grey);
+        border-radius: 5px;
+    }
+
+    .parameters ul {
+        flex-direction: column;
+    }
+
+    .parameters ul li {
+        flex-direction: column;
+    }
 }
