@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import Product from './Product';
 import Parameter from './Parameter';
@@ -11,21 +11,31 @@ import getCardImgUrls from '../../../assets/utilities/getCardImgUrls';
 import data from '../../../assets/data/SEARCH';
 
 const SearchResult = () => {
+    const [urls, setUrls] = useState(null);
     const location = useLocation();
     const navigate = useNavigate();
-    const { cards, searchType } = location.state || JSON.parse(localStorage.getItem('search-result'));
+    const { cards, searchType } = location.state?.result || JSON.parse(localStorage.getItem('search-result'));
     const cardRef = useRef(null);
     console.log(cards)
     useEffect(() => {
+
+        console.log(location.state)
         // If cards is empty
         if (!cards.length) {
             // Send to collection view
             navigate('/me/collection');
 
+        } else {
+            const urls = getCardImgUrls(cards)
+            console.log(urls);
+            if (urls) {
+                setUrls(urls);
+            }
         }
     }, [location]);
 
-    const { imagesLoaded } = useLoadImage(getCardImgUrls(cards))
+
+    const { imagesLoaded } = useLoadImage(urls);
 
     const [view, updateCardView] = useModalView(handleCardView);
 
@@ -55,15 +65,14 @@ const SearchResult = () => {
                     {state.component}
                 </Modal>
             }
-            <header className="search-result-header">
+            <div className="search-count">
+                <div className="inner">
                 {
                     searchType !== 'search-catalog' &&
                     <button
                         className="back-btn"
                         type="button"
-                        onClick={() => {
-                            // searchType === 'search-collection' ?
-                            //     navigate('/me/collection') :
+                                onClick={() => {
                                 navigate(-1);
                         }}>
                             Go Back
@@ -75,7 +84,8 @@ const SearchResult = () => {
                             'No results'
                     }
                 </span>
-            </header>
+                </div>
+            </div>
             <div className="search-result">
                 <header className="header">
                     <h2 className="title">Search Results</h2>
@@ -95,18 +105,18 @@ const SearchResult = () => {
                         <ul>
                         {
                             imagesLoaded &&
-                        cards.map((card, i) => {
-                                return (
-                                    <Product
-                                        key={i}
-                                        index={i}
-                                        card={card}
-                                        searchType={searchType}
-                                        handleCardView={handleCardView}
-                                        handleCardState={handleCardState}
-                                        ref={cardRef}
-                                    />)
-                            })
+                                cards.map((card, i) => {
+                                    return (
+                                        <Product
+                                            key={i}
+                                            index={i}
+                                            card={card}
+                                            searchType={searchType}
+                                            handleCardView={handleCardView}
+                                            handleCardState={handleCardState}
+                                            ref={cardRef}
+                                        />)
+                                })
                     }
                         </ul>
                 </main>

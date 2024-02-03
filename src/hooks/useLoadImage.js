@@ -2,8 +2,10 @@
 import { useState, useEffect } from 'react'
 
 const useLoadImage = (urls) => {
+
     const [imagesLoaded, setImagesLoaded] = useState(null);
     useEffect(() => {
+        if (urls) {
         const loadImage = url => {
             return new Promise((resolve, reject) => {
                 const image = new Image();
@@ -20,6 +22,7 @@ const useLoadImage = (urls) => {
                 }
             })
             .catch(error => console.log('Image load has failed', error))
+        }
     }, [urls])
 
     return { imagesLoaded }
