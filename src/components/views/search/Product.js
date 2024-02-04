@@ -13,6 +13,7 @@ import Order from './product/Order';
 import Detail from './product/Detail';
 
 import useAttributes from '../../../hooks/useAttributes';
+import data from '../../../assets/data/SEARCH';
 
 
 const Product = forwardRef(function Product(props, ref) {
@@ -23,29 +24,34 @@ const Product = forwardRef(function Product(props, ref) {
     return (
         <li className="product" ref={ref}>
 
+            <header className="product-header">
+                <h3>{card.name}</h3>
+                <p>{card.set_name}</p>
+            </header>
+
             <div className="product-grid" >
-                <section className="head">
-                    <h2>{card.name}</h2>
-                </section>
                 <section className="image">
                     <Image card={card} handleCardView={handleCardView} />
                     <ExpandBtn />
                 </section>
-                <section className="specifications section">
+                <section className="information section">
+                    <span>{data.product.conditions[`${card.condition}`]}</span>
+                    <span>{data.product.languages[`${card.language}`]}</span>
+
                     {/* <h2>Detail</h2> */}
                     {/* <CardDetailSection index={index} card={card} searchType={searchType} loading={loading} /> */}
-                    <Detail product={card} />
+                    {/* <Detail product={card} /> */}
                 </section>
-                <section className="owner section">
+                <section className="specifications section">
                     {/* <h2>Seller</h2> */}
-                    <Seller product={card} />
+                    {/* <Seller product={card} /> */}
                 </section>
-                <section className="handler section">
+                <section className="handlers section">
                     {/* <h2>Order</h2> */}
-                    <Order product={card} />
+                    {/* <Order product={card} /> */}
                 </section>
             </div>
-            <footer className="card-footer" onClick={(e) => handleCardState(e, card, attributes)}>
+            {/* <footer className="card-footer" onClick={(e) => handleCardState(e, card, attributes)}>
                 {searchType === 'search-catalog' ? (
                     // <CatalogCardFooter card={card} />
                     ''
@@ -56,7 +62,8 @@ const Product = forwardRef(function Product(props, ref) {
                         <ApiCardFooter card={card} setLoading={(value) => { setLoading(value) }} />
                     )
                 }
-            </footer>
+            </footer> */}
+
         </li>
     )
 

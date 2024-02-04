@@ -8,7 +8,7 @@ const useAttributes = (card) => {
         setAttributes(
             {
                 id: 'expand-card',
-                style: 'card-image b-radius-10',
+                style: 'card-image',
                 src: image_uris,
                 alt: `${card?.name} image`,
                 placeholder: cardBack

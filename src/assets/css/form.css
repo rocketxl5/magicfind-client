@@ -408,14 +408,11 @@ input#search-api:focus {
 
   .blur-load {
     width: 100%;
-    background-size: cover;
-    background-position: center;
-    /* background-image: url('../img/card_back.jpg'); */
   }
 
   .card-image {
     width: 100%;
-    height: auto;
+    height: 100%;
     display: block;
   }
 
