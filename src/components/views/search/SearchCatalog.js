@@ -109,20 +109,19 @@ const SearchCatalog = () => {
                 cards: data.cards,
                 searchType: searchInput.id
               }
-              // console.log(result)
               setCardName('');
               setSearchInput(null);
+              console.log(result)
               localStorage.setItem('search-result', JSON.stringify(result));
               !isAuth ? (
-
                 navigate(`/search-result/catalog/${setQueryString(query.toLowerCase(), '-')}`,
                   {
-                    state: result,
+                    state: { result: result },
                   })
               ) : (
                   navigate(`/me/search-result/catalog/${setQueryString(query.toLowerCase(), '-')}`,
                   {
-                    state: result,
+                    state: { result: result },
                   })
               )
 

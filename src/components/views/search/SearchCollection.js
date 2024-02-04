@@ -66,6 +66,7 @@ const SearchCollection = ({ path }) => {
                 const result = { cards: data, searchType: searchInput?.id }
                 // Update local storage with search data
                 localStorage.setItem('search-result', JSON.stringify(result));
+                console.log(result)
                 navigate(`/me/search-result/collection/all-cards`,
                   {
                     state: result,
@@ -153,6 +154,7 @@ const SearchCollection = ({ path }) => {
               setCardName('');
               setSearchInput(null);
               localStorage.setItem('search-result', JSON.stringify(result));
+              console.log(result)
               navigate(`/me/search-result/collection/${setQueryString(query.toLowerCase(), '-')}`,
                 {
                   state: result,
@@ -198,7 +200,7 @@ const SearchCollection = ({ path }) => {
                       <SearchInput id={'search-collection'} className={'search-field'} placeholder={'Search Your Collection'} searchCard={searchCollectionCard} isActive={isActive} ref={collectionInputRef} />
                     </form>
                     <button
-                      className="btn bg-green"
+                      className="bg-green btn-collection"
                       type="button"
                       onClick={(e) => {
                         e.stopPropagation();

@@ -11,7 +11,7 @@ const AuthLayout = () => {
     const { loading } = useContext(SearchContext);
     const navigate = useNavigate();
     const param = useParams()['*'];
-
+    console.log(param)
     const views = [
         { title: 'Dashboard', id: 'dashboard', path: '/me/dashboard' },
         { title: 'Collection', id: 'collection', path: '/me/collection' },
@@ -42,9 +42,13 @@ const AuthLayout = () => {
     return (
         <div className="auth-layout">
             <Header />
-            <section className="contextual-nav">
+            {
+                // Exclude if view is search result
+                !param.includes('search-result') && 
+                <section className="contextual-nav">
                 <AuthContextualNav views={views} />
             </section>
+            }
             <div className="container">
                 <div className="content">
                     {
