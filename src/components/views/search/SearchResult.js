@@ -49,11 +49,11 @@ const SearchResult = () => {
     useEffect(() => {
         // Update ref value with state value
         console.log(offset)
-        if (offset > 0) {
-            stateRef.current = offset;
+        if (offset < 0) {
+            stateRef.current = 0;
         }
         else {
-            stateRef.current = 0;
+            stateRef.current = offset;
         }   
     }, [offset])
 
