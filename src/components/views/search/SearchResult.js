@@ -35,7 +35,7 @@ const SearchResult = () => {
 
         setTimeout(() => {
             tabRef.current?.classList.remove('move-tab-right');
-        }, 1500);
+        }, 2000);
 
     }, [offset])
 
