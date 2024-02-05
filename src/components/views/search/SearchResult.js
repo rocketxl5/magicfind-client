@@ -48,13 +48,7 @@ const SearchResult = () => {
 
     useEffect(() => {
         // Update ref value with state value
-        console.log(offset)
-        if (offset < 0) {
-            stateRef.current = 0;
-        }
-        else {
-            stateRef.current = offset;
-        }   
+        stateRef.current = offset;
     }, [offset])
 
     useEffect(() => {
@@ -138,7 +132,11 @@ const SearchResult = () => {
                 </div>
             </div> */}
             <div className="search-result" >
-
+                <div className="scroll">
+                    <p>{`window.scrollY ${window.scrollY}`}</p>
+                    <p>{`stateRef ${stateRef.current}`}</p>
+                    <p>{`offset ${offset}`}</p>
+                </div>
                 <aside className="parameters" >
                     <div className="parameters-container">
                         <ul className="parameters-list" ref={ulRef}>

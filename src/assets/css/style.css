@@ -1083,6 +1083,13 @@ font-weight: 500;
 /* ////////////////// */
 /* /// Parameters /// */
 /* ////////////////// */
+.scroll {
+  position: sticky;
+  top: 0;
+  text-align: center;
+  color: white;
+  z-index: 3000;
+}
 
 .parameters {
   position: sticky;
