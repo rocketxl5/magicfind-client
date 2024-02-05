@@ -81,50 +81,20 @@
         width: 100%;
     }
 
-    .content {
-        padding-inline: 1rem;
-    }
-
     .parameters {
-        top: 10rem;
-    }
+        top: 6rem;
+      }
 
     .product-grid {
         width: 100%;
         display: grid;
         gap: 2rem;
         grid-template-columns: repeat(5, calc(20% - 1.6rem));
-      }
+    }
 
-      .product-grid .image {
-        /* position: relative; */
+    .product-grid .image {
         grid-column: span 1;
-        /* grid-row: 1 / 5; */
-      }
-
-      /* .product-grid .image {
-        grid-column: span ;
-        grid-row: 2 / 6;
-      }
-
-      .product-grid .information {
-        grid-column: span 2;
-        grid-row: 2 / 6;
-        background-color: gainsboro;
-      }
-      
-      
-      .product-grid .specifications {
-        grid-column: span 1;
-        grid-row: 2 / 6;
-        background-color: aquamarine;
-      }
-      
-      .product-grid .handlers {  
-        grid-column: span 2;
-        grid-row: 2 / 6;
-        background-color: orange;
-      } */
+    }
 
     .about .grid-section {
         grid-template-columns: repeat(3, 1fr);
@@ -403,30 +373,39 @@
     .about-page-banner.banner {
         background-position: 100%  50%!important;
     }
-    
-    .grid-container {
-        position: relative;
-        gap: 1.5rem;
+
+    .search-result {
+        padding-inline: 0;
         display: grid;
-        grid-template-columns: 1fr 4fr;
-        padding-inline: 1rem;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 2rem;
     }
 
-    .parameters {
-        top: 11rem;
-        height: max-content;
-
-        border: 1px solid var(--clr-grey);
-        border-radius: 5px;
+    .search-result .header {
+        grid-column: span 4;
     }
 
-    .parameters ul {
-        flex-direction: column;
+    .search-result .parameters {
+        grid-column: span 1;
+    }
+    .search-result .products {
+        padding-inline: 0;
+        grid-column: span 3;
+    }
+
+    .parameters-list {
+        position: static;
+        display: flex;
+        width: 100%;
+        height: auto;
         justify-content: space-between;
-        align-items: start;
         padding: 1rem;
-        margin: 1rem;
+        margin: 0 auto;
         border-radius: 5px;
+      }
+
+      .parameters-btn {
+        display: none;
       }
 }
 

@@ -3,6 +3,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import Product from './Product';
 import Parameter from './Parameter';
 import Modal from '../modal/Modal';
+import { HiOutlineAdjustmentsHorizontal } from "react-icons/hi2";
 import useModalState from '../../../hooks/useModalState';
 import useLoadImage from '../../../hooks/useLoadImage';
 import useModalView from '../../../hooks/useModalView';
@@ -13,7 +14,7 @@ import data from '../../../assets/data/SEARCH';
 const SearchResult = () => {
     const [urls, setUrls] = useState(null);
     const [offset, setOffset] = useState(0);
-    const [openParameters, setOpenParameters] = useState(false);
+    const [searchFeatures, setSearchFeatures] = useState(false);
     const location = useLocation();
     const navigate = useNavigate();
     const { cards, searchType } = location.state?.result || JSON.parse(localStorage.getItem('search-result'));
@@ -24,20 +25,19 @@ const SearchResult = () => {
     // Hides of display search tab on scroll
     const handleScroll = () => {
         // If ref value is greater than y
-
         if (window.scrollY > offset) {
             // Add class to hide tab
             tabRef.current?.classList.add('hide-tab');
-            console.log('down', 'scrolly', window.scrollY, 'offset', offset)
         }
         else {
             // Remove class to display tab
             tabRef.current?.classList.remove('hide-tab');
-            console.log('up', 'scrolly', window.scrollY, 'offset', offset)
         }
 
         setOffset(window.scrollY)
     }
+
+
 
     useEffect(() => {
         window.addEventListener('scroll', handleScroll);
@@ -46,8 +46,6 @@ const SearchResult = () => {
     }, [offset]);
 
     useEffect(() => {
-
-        console.log(location.state)
         // If cards is empty
         if (!cards.length) {
             // Send to collection view
@@ -63,16 +61,16 @@ const SearchResult = () => {
     }, [location]);
 
     useEffect(() => {
-        if (openParameters) {
+        if (searchFeatures) {
             document.body.classList.add('scroll-none');
-            ulRef.current?.classList.add('move-panel-left');
-            tabRef.current?.classList.add('move-tab-left');
+            ulRef.current?.classList.add('move-panel');
+            tabRef.current?.classList.add('move-tab');
         } else {
             document.body.classList.remove('scroll-none');
-            ulRef.current?.classList.remove('move-panel-left');
-            tabRef.current?.classList.remove('move-tab-left');
+            ulRef.current?.classList.remove('move-panel');
+            tabRef.current?.classList.remove('move-tab');
         }
-    }, [openParameters]);
+    }, [searchFeatures]);
 
     const { imagesLoaded } = useLoadImage(urls);
 
@@ -125,7 +123,11 @@ const SearchResult = () => {
                 </span>
                 </div>
             </div> */}
-            <div className="search-result" >
+
+            <div className="search-result">
+                {/* <header className="header">
+                    <h2 className="title">Search Results</h2>
+                </header> */}
                 <aside className="parameters" >
                     <div className="parameters-container">
                         <ul className="parameters-list" ref={ulRef}>
@@ -137,13 +139,10 @@ const SearchResult = () => {
                             }
                         </ul>
 
-                        <button className="parameters-btn" type="button" onClick={() => setOpenParameters(!openParameters)} ref={tabRef}><span>Search</span></button>
+                        <button className="parameters-btn" type="button" onClick={() => setSearchFeatures(!searchFeatures)} ref={tabRef}><HiOutlineAdjustmentsHorizontal /></button>
                     </div>
-                    </aside>
-                <header className="header">
-                    <h2 className="title">Search Results</h2>
-                </header>
-                    <main className="products">
+                </aside>
+                <main className="products">
                         <ul>
                         {
                             imagesLoaded &&
@@ -164,6 +163,7 @@ const SearchResult = () => {
 
                 </main>
             </div>
+
         </>
     )
 }
