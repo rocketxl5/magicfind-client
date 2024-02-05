@@ -20,23 +20,22 @@ const SearchResult = () => {
     const cardRef = useRef(null);
     const ulRef = useRef(null);
     const tabRef = useRef(null);
-    // Declaring ref to save and access current value of offset state
-    const stateRef = useRef(offset);
-
 
     // Hides of display search tab on scroll
     const handleScroll = () => {
         // If ref value is greater than y
-        if (window.scrollY > stateRef.current) {
+
+        if (window.scrollY > offset) {
             // Add class to hide tab
             tabRef.current?.classList.add('hide-tab');
-            console.log('down', 'scrolly', window.scrollY, 'ref', stateRef.current)
+            console.log('down', 'scrolly', window.scrollY, 'offset', offset)
         }
         else {
             // Remove class to display tab
             tabRef.current?.classList.remove('hide-tab');
-            console.log('up', 'scrolly', window.scrollY, 'ref', stateRef.current)
+            console.log('up', 'scrolly', window.scrollY, 'offset', offset)
         }
+
         setOffset(window.scrollY)
     }
 
@@ -44,12 +43,7 @@ const SearchResult = () => {
         window.addEventListener('scroll', handleScroll);
 
         return () => window.removeEventListener('scroll', handleScroll)
-    }, []);
-
-    useEffect(() => {
-        // Update ref value with state value
-        stateRef.current = offset;
-    }, [offset])
+    }, [offset]);
 
     useEffect(() => {
 
@@ -132,11 +126,6 @@ const SearchResult = () => {
                 </div>
             </div> */}
             <div className="search-result" >
-                <div className="scroll">
-                    <p>{`window.scrollY ${window.scrollY}`}</p>
-                    <p>{`stateRef ${stateRef.current}`}</p>
-                    <p>{`offset ${offset}`}</p>
-                </div>
                 <aside className="parameters" >
                     <div className="parameters-container">
                         <ul className="parameters-list" ref={ulRef}>
