@@ -1,4 +1,3 @@
-import React from 'react'
 import RequirementMessage from './RequirementMessage'
 
 const Requirements = ({ inputState }) => {
