@@ -381,3 +381,7 @@
     touch-action: none;
     -webkit-overflow-scrolling: touch;
 }
+
+.pos-relative {
+    position: relative;
+}

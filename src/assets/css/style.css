@@ -231,9 +231,9 @@ border-radius: var(--radius-1);
 .btn-collection {
   font-size: var(--fs-150);
   padding-block: 1rem;
-font-weight: 500;
-line-height: 1.5;
-text-align: center;
+  font-weight: 500;
+  line-height: 1.5;
+  text-align: center;
   width: 100%;
   margin-inline: auto;
   margin-block-start: 1rem;
@@ -971,6 +971,7 @@ height: 2rem;
 /* ////////////////////////// */
 .search-result {   
   position: relative;
+  /* padding-inline: 2rem; */
   /* padding-block-start: 4rem; */
 }
 
@@ -1083,13 +1084,6 @@ font-weight: 500;
 /* ////////////////// */
 /* /// Parameters /// */
 /* ////////////////// */
-.scroll {
-  position: sticky;
-  top: 0;
-  text-align: center;
-  color: white;
-  z-index: 3000;
-}
 
 .parameters {
   position: sticky;
@@ -1104,46 +1098,65 @@ font-weight: 500;
 
 .parameters-list {
   position: absolute;
-  left: -20rem;
+  left: -25rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   padding: 2rem;
   height: calc(100vh - 5rem);
+  width: 25rem;
   background-color: var(--clr-light);
-  width: 20rem;
   transition: all 0.2s ease-in;
 }
 
-.move-panel-left {
+.parameters-btn {
+  position: absolute;
+  top: 0;
+  left: -1.5px;
+  min-height: 6rem;
+  min-width: 4.5rem;
+  display: flex;
+  align-items: center;
+  background: var(--clr-light);
+  border-bottom-right-radius: 5px;
+  border-top-right-radius: 5px;
+  transition: all 0.2s ease-in;
+  z-index: 6000;
+}
+
+.parameters-list, .parameters-btn {
+  border: 1.5px solid var(--clr-primary);
+  border-left: none;
+}
+
+.parameters-btn * {
+  pointer-events: none;
+}
+
+.parameters-btn svg {
+  display: block;
+  fill: var(--clr-light);
+  stroke: var(--clr-primary);
+  stroke-width: 1;
+  margin: auto;
+  width: 3.5rem;
+  height: 3.5rem;
+}
+.move-panel {
   left: 0;
 }
 
-.move-tab-left {
-  left: 20rem !important;
+.move-tab {
+  left: calc(25rem - 1.5px) !important;
   top: 0;
 }
 
 .hide-tab {
   left: -4rem !important;
 }
-
-.parameters-btn {
-  position: absolute;
-  top: 0;
-  left: 0;
-  min-height: 10rem;
-  max-width: 4rem;
-  z-index: 2000;
-  transition: all 0.2s ease-in;
-  background: var(--clr-light);
-  border-bottom-right-radius: 5px;
-  border-top-right-radius: 5px;
-}
-
 .parameters-btn span {
   line-height: 1.5;
-  width: 100%;
+  width: 4rem;
   display: block;
   transform: rotate(90deg);
 }
