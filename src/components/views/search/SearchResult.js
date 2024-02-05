@@ -30,10 +30,12 @@ const SearchResult = () => {
         if (window.scrollY > stateRef.current) {
             // Add class to hide tab
             tabRef.current?.classList.add('hide-tab');
+            console.log('down', 'scrolly', window.scrollY, 'ref', stateRef.current)
         }
-        else if (window.scrollY <= stateRef.current) {
+        else {
             // Remove class to display tab
             tabRef.current?.classList.remove('hide-tab');
+            console.log('up', 'scrolly', window.scrollY, 'ref', stateRef.current)
         }
         setOffset(window.scrollY)
     }
@@ -46,7 +48,13 @@ const SearchResult = () => {
 
     useEffect(() => {
         // Update ref value with state value
-        stateRef.current = offset;
+        console.log(offset)
+        if (offset > 0) {
+            stateRef.current = offset;
+        }
+        else {
+            stateRef.current = 0;
+        }   
     }, [offset])
 
     useEffect(() => {
