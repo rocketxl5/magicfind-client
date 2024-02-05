@@ -1105,55 +1105,45 @@ font-weight: 500;
   height: calc(100vh - 5rem);
   background-color: var(--clr-light);
   width: 20rem;
-  /* border-top-right-radius: 5px;
-  border-bottom-right-radius: 5px; */
-  transition: all 0.25s ease-in-out;
-  /* transition: opacity 0.4s ease-in 0.2s; */
+  transition: all 0.25s ease-in;
 }
 
-.left-origin {
+.move-panel-left {
   left: 0;
 }
 
-.left-30 {
-  left: calc(20rem - 4.6rem) !important;
-  top: 4.6rem;
+.move-tab-left {
+  left: 20rem !important;
+  top: 0;
+}
+
+.move-tab-right {
+  left: -4rem !important;
 }
 
 .parameters-btn {
   position: absolute;
-  /* position: sticky; */
-  top: 4.6rem;
-  left: -4.6rem;
-  min-height: 4.5;
-  min-width: 11rem;
-  padding: 0.5rem;
-    /* Safari */
-    -webkit-transform: rotate(90deg);
-
-    /* Firefox */
-    -moz-transform: rotate(90deg);
-  
-    /* IE */
-    -ms-transform: rotate(90deg);
-  
-    /* Opera */
-    -o-transform: rotate(90deg);
+  top: 0;
+  left: 0;
+  min-height: 10rem;
+  /* min-width: 3rem; */
+  max-width: 4rem;
   z-index: 2000;
-  transition: all 0.25s ease-in-out;
+  transition: all 0.25s ease-in;
   background: var(--clr-light);
-  border-top-left-radius: 5px;
+  border-bottom-right-radius: 5px;
   border-top-right-radius: 5px;
+  /* background-color: red; */
 }
 
-.parameters-btn svg {
+.parameters-btn span {
+  /* display: flex; */
+  /* position: absolute;
+  top: 1rem; */
+  line-height: 1.5;
+  width: 100%;
   display: block;
-  fill: var(--clr-light);
-  stroke-width: 1;
-  vertical-align: middle;
-width: 3rem;
-height: 3rem;
-
+  transform: rotate(90deg);
 }
 
 .contact-link {
