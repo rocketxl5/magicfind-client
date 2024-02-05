@@ -25,18 +25,22 @@ const SearchResult = () => {
         const handleScroll = () => {
             if (window.scrollY > offset) {
                 tabRef.current?.classList.add('move-tab-right');
+                setOffset(window.scrollY);
             }
-            else {
+            else if (window.scrollY <= offset) {
                 tabRef.current?.classList.remove('move-tab-right');
+                setOffset(window.scrollY);
             }
-            setOffset(window.scrollY);
-
-
         }
         window.addEventListener('scroll', handleScroll);
 
         return () => window.removeEventListener('scroll', handleScroll)
-    }, [])
+    }, []);
+
+    useEffect(() => {
+        console.log('offset', offset)
+        console.log('scrollT', window.scrollY)
+    }, [offset])
 
     useEffect(() => {
 
