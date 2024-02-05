@@ -3,6 +3,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import Product from './Product';
 import Parameter from './Parameter';
 import Modal from '../modal/Modal';
+import { HiOutlineAdjustmentsHorizontal } from "react-icons/hi2";
 import useModalState from '../../../hooks/useModalState';
 import useLoadImage from '../../../hooks/useLoadImage';
 import useModalView from '../../../hooks/useModalView';
@@ -12,11 +13,13 @@ import data from '../../../assets/data/SEARCH';
 
 const SearchResult = () => {
     const [urls, setUrls] = useState(null);
+    const [openParameters, setOpenParameters] = useState(false);
     const location = useLocation();
     const navigate = useNavigate();
     const { cards, searchType } = location.state?.result || JSON.parse(localStorage.getItem('search-result'));
     const cardRef = useRef(null);
-    console.log(cards)
+    const ulRef = useRef(null);
+    const btnRef = useRef(null);
     useEffect(() => {
 
         console.log(location.state)
@@ -34,6 +37,17 @@ const SearchResult = () => {
         }
     }, [location]);
 
+    useEffect(() => {
+        if (openParameters) {
+            document.body.classList.add('scroll-none');
+            ulRef.current?.classList.add('left-origin');
+            btnRef.current?.classList.add('left-30');
+        } else {
+            document.body.classList.remove('scroll-none');
+            ulRef.current?.classList.remove('left-origin');
+            btnRef.current?.classList.remove('left-30');
+        }
+    }, [openParameters]);
 
     const { imagesLoaded } = useLoadImage(urls);
 
@@ -65,7 +79,7 @@ const SearchResult = () => {
                     {state.component}
                 </Modal>
             }
-            <div className="search-count">
+            {/* <div className="search-count">
                 <div className="inner">
                 {
                     searchType !== 'search-catalog' &&
@@ -85,14 +99,12 @@ const SearchResult = () => {
                     }
                 </span>
                 </div>
-            </div>
+            </div> */}
             <div className="search-result">
-                <header className="header">
-                    <h2 className="title">Search Results</h2>
-                </header>
-                <div className="grid-container">
-                    <aside className="parameters">
-                        <ul>
+
+                <aside className="parameters" >
+                    <div className="parameters-container">
+                        <ul className="parameters-list" ref={ulRef}>
                             {
 
                                 data.parameters.map((parameter, i) => {
@@ -100,7 +112,13 @@ const SearchResult = () => {
                                 })
                             }
                         </ul>
+
+                        <button className="parameters-btn" onClick={() => setOpenParameters(!openParameters)} ref={btnRef}>Advanced Search</button>
+                    </div>
                     </aside>
+                <header className="header">
+                    <h2 className="title">Search Results</h2>
+                </header>
                     <main className="products">
                         <ul>
                         {
@@ -119,8 +137,8 @@ const SearchResult = () => {
                                 })
                     }
                         </ul>
+
                 </main>
-                </div>
             </div>
         </>
     )
