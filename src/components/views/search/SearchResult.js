@@ -3,7 +3,6 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import Product from './Product';
 import Parameter from './Parameter';
 import Modal from '../modal/Modal';
-import { HiOutlineAdjustmentsHorizontal } from "react-icons/hi2";
 import useModalState from '../../../hooks/useModalState';
 import useLoadImage from '../../../hooks/useLoadImage';
 import useModalView from '../../../hooks/useModalView';
@@ -13,13 +12,33 @@ import data from '../../../assets/data/SEARCH';
 
 const SearchResult = () => {
     const [urls, setUrls] = useState(null);
+    const [offset, setOffset] = useState(0);
     const [openParameters, setOpenParameters] = useState(false);
     const location = useLocation();
     const navigate = useNavigate();
     const { cards, searchType } = location.state?.result || JSON.parse(localStorage.getItem('search-result'));
     const cardRef = useRef(null);
     const ulRef = useRef(null);
-    const btnRef = useRef(null);
+    const tabRef = useRef(null);
+
+    useEffect(() => {
+        const handleScroll = () => {
+            setOffset(window.scrollY);
+        }
+        window.addEventListener('scroll', handleScroll);
+
+        return () => window.removeEventListener('scroll', handleScroll)
+    }, [])
+
+    useEffect(() => {
+        tabRef.current?.classList.add('move-tab-right');
+
+        setTimeout(() => {
+            tabRef.current?.classList.remove('move-tab-right');
+        }, 1000);
+
+    }, [offset])
+
     useEffect(() => {
 
         console.log(location.state)
@@ -30,7 +49,7 @@ const SearchResult = () => {
 
         } else {
             const urls = getCardImgUrls(cards)
-            console.log(urls);
+            // console.log(urls);
             if (urls) {
                 setUrls(urls);
             }
@@ -40,12 +59,12 @@ const SearchResult = () => {
     useEffect(() => {
         if (openParameters) {
             document.body.classList.add('scroll-none');
-            ulRef.current?.classList.add('left-origin');
-            btnRef.current?.classList.add('left-30');
+            ulRef.current?.classList.add('move-panel-left');
+            tabRef.current?.classList.add('move-tab-left');
         } else {
             document.body.classList.remove('scroll-none');
-            ulRef.current?.classList.remove('left-origin');
-            btnRef.current?.classList.remove('left-30');
+            ulRef.current?.classList.remove('move-panel-left');
+            tabRef.current?.classList.remove('move-tab-left');
         }
     }, [openParameters]);
 
@@ -113,7 +132,7 @@ const SearchResult = () => {
                             }
                         </ul>
 
-                        <button className="parameters-btn" onClick={() => setOpenParameters(!openParameters)} ref={btnRef}>Advanced Search</button>
+                        <button className="parameters-btn" type="button" onClick={() => setOpenParameters(!openParameters)} ref={tabRef}><span>Search</span></button>
                     </div>
                     </aside>
                 <header className="header">
