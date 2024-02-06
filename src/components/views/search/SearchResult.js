@@ -1,8 +1,9 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useContext, useRef } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import Product from './Product';
 import Parameter from './Parameter';
 import Modal from '../modal/Modal';
+import { ScrollContext } from '../../../contexts/ScrollContext';
 import { HiOutlineAdjustmentsHorizontal } from "react-icons/hi2";
 import useModalState from '../../../hooks/useModalState';
 import useLoadImage from '../../../hooks/useLoadImage';
@@ -12,38 +13,43 @@ import getCardImgUrls from '../../../assets/utilities/getCardImgUrls';
 import data from '../../../assets/data/SEARCH';
 
 const SearchResult = () => {
+    // States
     const [urls, setUrls] = useState(null);
-    const [offset, setOffset] = useState(0);
+    // const [offset, setOffset] = useState(0);
     const [searchFeatures, setSearchFeatures] = useState(false);
+    // Refs
+    const cardRef = useRef(null);
+    const panelRef = useRef(null);
+    // const tabRef = useRef(null);
+    // Context
+    const { tabRef } = useContext(ScrollContext);
     const location = useLocation();
     const navigate = useNavigate();
     const { cards, searchType } = location.state?.result || JSON.parse(localStorage.getItem('search-result'));
-    const cardRef = useRef(null);
-    const ulRef = useRef(null);
-    const tabRef = useRef(null);
+
 
     // Hides of display search tab on scroll
-    const handleScroll = () => {
-        // If ref value is greater than y
-        if (window.scrollY > offset) {
-            // Add class to hide tab
-            tabRef.current?.classList.add('hide-tab');
-        }
-        else {
-            // Remove class to display tab
-            tabRef.current?.classList.remove('hide-tab');
-        }
+    // const handleScroll = () => {
+    //     // If ref value is greater than y
+    //     if (window.scrollY > offset) {
+    //         // Add class to hide tab
+    //         tabRef.current?.classList.add('hide-tab');
+    //     }
+    //     else {
+    //         // Remove class to display tab
+    //         tabRef.current?.classList.remove('hide-tab');
+    //     }
 
-        setOffset(window.scrollY)
-    }
+    //     setOffset(window.scrollY)
+    // }
 
 
 
-    useEffect(() => {
-        window.addEventListener('scroll', handleScroll);
+    // useEffect(() => {
+    //     window.addEventListener('scroll', handleScroll);
 
-        return () => window.removeEventListener('scroll', handleScroll)
-    }, [offset]);
+    //     return () => window.removeEventListener('scroll', handleScroll)
+    // }, [offset]);
 
     useEffect(() => {
         // If cards is empty
@@ -63,11 +69,11 @@ const SearchResult = () => {
     useEffect(() => {
         if (searchFeatures) {
             document.body.classList.add('scroll-none');
-            ulRef.current?.classList.add('move-panel');
+            panelRef.current?.classList.add('move-panel');
             tabRef.current?.classList.add('move-tab');
         } else {
             document.body.classList.remove('scroll-none');
-            ulRef.current?.classList.remove('move-panel');
+            panelRef.current?.classList.remove('move-panel');
             tabRef.current?.classList.remove('move-tab');
         }
     }, [searchFeatures]);
@@ -130,7 +136,7 @@ const SearchResult = () => {
                 </header> */}
                 <aside className="parameters" >
                     <div className="parameters-container">
-                        <ul className="parameters-list" ref={ulRef}>
+                        <ul className="parameters-list" ref={panelRef}>
                             {
 
                                 data.parameters.map((parameter, i) => {

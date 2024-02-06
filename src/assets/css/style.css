@@ -97,9 +97,11 @@ color: var(--clr-dark);
 
 .main-header {
   position: fixed;
+  /* position: relative; */
   top: 0;
   width: 100%;
   min-width: 37rem;
+  transition: top 0.2s ease-in;
   z-index: 2000;
 }
 
@@ -1106,27 +1108,22 @@ font-weight: 500;
   height: calc(100vh - 5rem);
   width: 25rem;
   background-color: var(--clr-light);
-  transition: all 0.2s ease-in;
+  transition: all 0.15s ease-in;
 }
 
 .parameters-btn {
   position: absolute;
-  top: 0;
-  left: -1.5px;
-  min-height: 6rem;
-  min-width: 4.5rem;
+  top: 3rem;
+  left: 0;
+  min-height: 5rem;
+  min-width: 4rem;
   display: flex;
   align-items: center;
   background: var(--clr-light);
   border-bottom-right-radius: 5px;
   border-top-right-radius: 5px;
-  transition: all 0.2s ease-in;
+  transition: all 0.15s ease-in;
   z-index: 6000;
-}
-
-.parameters-list, .parameters-btn {
-  border: 1.5px solid var(--clr-primary);
-  border-left: none;
 }
 
 .parameters-btn * {
@@ -1147,13 +1144,22 @@ font-weight: 500;
 }
 
 .move-tab {
-  left: calc(25rem - 1.5px) !important;
-  top: 0;
+  left: calc(25rem) !important;
+  /* top: 0; */
 }
-
 .hide-tab {
   left: -4rem !important;
 }
+
+.hide-mobile-nav {
+  top: -5rem;
+}
+
+.hide-nav {
+  top: -6rem;
+}
+
+
 .parameters-btn span {
   line-height: 1.5;
   width: 4rem;
