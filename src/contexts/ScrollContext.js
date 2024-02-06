@@ -14,7 +14,7 @@ export const ScrollProvider = ({ children }) => {
         // if(viewport > 1200)
         // If ref value is greater than y
         if (viewport < 1200) {
-            if (window.scrollY > offset && offset > 50) {
+            if (window.scrollY > offset && offset > 25) {
                 // Add class to hide tab
                 btnRef.current?.classList.add('hide-btn');
                 navRef.current?.classList.add('hide-nav');
