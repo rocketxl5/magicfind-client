@@ -48,12 +48,10 @@ const SearchResult = () => {
         if (searchFeatures) {
             document.body.classList.add('scroll-none');
             panelRef.current?.classList.add('move-panel');
-            // btnRef.current?.classList.add('move-btn');
             iconRef.current?.classList.add('rotate-icon');
         } else {
             document.body.classList.remove('scroll-none');
             panelRef.current?.classList.remove('move-panel');
-            // btnRef.current?.classList.remove('move-btn');
             iconRef.current?.classList.remove('rotate-icon');
         }
     }, [searchFeatures]);
@@ -125,9 +123,9 @@ const SearchResult = () => {
                             }
                         </ul>
 
-                        <button className="parameters-btn" type="button" onClick={() => setSearchFeatures(!searchFeatures)} ref={btnRef}><span className="parameters-icon" ref={iconRef}><FiPlus /></span></button>
                     </div>
                 </aside>
+                <button className="parameters-btn" type="button" onClick={() => setSearchFeatures(!searchFeatures)} ref={btnRef}><span className="parameters-icon" ref={iconRef}><FiPlus /></span></button>
                 <main className="products">
                         <ul>
                         {
