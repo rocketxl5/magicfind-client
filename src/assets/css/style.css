@@ -1109,8 +1109,9 @@ font-weight: 500;
 
 .parameters-btn {
   position: fixed;
-  bottom: 20rem; 
-  right: 5rem;
+  /* top: calc(80vh);  */
+  bottom: 15rem;
+  right: 3rem;
   min-height: 4rem;
   min-width: 4rem;
   padding: 1rem;
@@ -1140,6 +1141,7 @@ font-weight: 500;
   height: 3.5rem;
   vertical-align: middle;
 }
+
 .move-panel {
   left: 0;
 }
@@ -1149,11 +1151,6 @@ font-weight: 500;
 }
 
 .hide-btn {
-  /* bottom: calc(-105vh); */
-  right: -6rem;
-}
-
-.move-btn {
   right: -6rem;
 }
 
