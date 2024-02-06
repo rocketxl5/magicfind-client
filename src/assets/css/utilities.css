@@ -382,6 +382,12 @@
     -webkit-overflow-scrolling: touch;
 }
 
-.pos-relative {
+.p-relative {
     position: relative;
+}
+
+.p-fixed {
+    position: sticky !important;
+    top: 0;
+    left: 0;
 }

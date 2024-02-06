@@ -15,12 +15,10 @@ import data from '../../../assets/data/SEARCH';
 const SearchResult = () => {
     // States
     const [urls, setUrls] = useState(null);
-    // const [offset, setOffset] = useState(0);
     const [searchFeatures, setSearchFeatures] = useState(false);
     // Refs
     const cardRef = useRef(null);
     const panelRef = useRef(null);
-    // const tabRef = useRef(null);
     // Context
     const { tabRef } = useContext(ScrollContext);
     const location = useLocation();
@@ -28,30 +26,8 @@ const SearchResult = () => {
     const { cards, searchType } = location.state?.result || JSON.parse(localStorage.getItem('search-result'));
 
 
-    // Hides of display search tab on scroll
-    // const handleScroll = () => {
-    //     // If ref value is greater than y
-    //     if (window.scrollY > offset) {
-    //         // Add class to hide tab
-    //         tabRef.current?.classList.add('hide-tab');
-    //     }
-    //     else {
-    //         // Remove class to display tab
-    //         tabRef.current?.classList.remove('hide-tab');
-    //     }
-
-    //     setOffset(window.scrollY)
-    // }
-
-
-
-    // useEffect(() => {
-    //     window.addEventListener('scroll', handleScroll);
-
-    //     return () => window.removeEventListener('scroll', handleScroll)
-    // }, [offset]);
-
     useEffect(() => {
+
         // If cards is empty
         if (!cards.length) {
             // Send to collection view

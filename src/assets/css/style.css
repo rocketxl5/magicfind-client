@@ -68,16 +68,12 @@
   --shadow-3: 0px 4px 6px 0px rgba(0,0,0,0.3);
   --shadow-4: 0px 4px 6px 0px rgba(255,255,255,0.3);
 
-
+  font-size: 62.5%;
 }
 
 .check-icon {
   color: var(--clr-success);
   font-size: 4rem;
-}
-
-html {
-  font-size: 62.5%;
 }
 
 body {
@@ -90,7 +86,7 @@ line-height: 1.5;
 color: var(--clr-dark);
 background-color: var(--clr-light);
 overflow-x: hidden;
-overscroll-behavior-block: none;
+  /* overscroll-behavior-block: contain; */
 }
 
 a {
@@ -99,7 +95,6 @@ color: var(--clr-dark);
 
 .main-header {
   position: fixed;
-  /* position: relative; */
   top: 0;
   width: 100%;
   min-width: 37rem;
@@ -975,8 +970,10 @@ height: 2rem;
 /* ////////////////////////// */
 .search-result {   
   position: relative;
+  /* overscroll-behavior-block: none; */
   /* padding-inline: 2rem; */
   /* padding-block-start: 4rem; */
+
 }
 
 .auth-layout .inner-content > header,
