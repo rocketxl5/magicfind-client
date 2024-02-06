@@ -89,6 +89,7 @@ line-height: 1.5;
 color: var(--clr-dark);
 background-color: var(--clr-light);
 overflow-x: hidden;
+overscroll-behavior-block: contain;
 }
 
 a {
@@ -973,7 +974,6 @@ height: 2rem;
 /* ////////////////////////// */
 .search-result {   
   position: relative;
-  overscroll-behavior-block: contain;
   /* padding-inline: 2rem; */
   /* padding-block-start: 4rem; */
 }
