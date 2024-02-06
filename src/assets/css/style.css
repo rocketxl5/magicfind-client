@@ -68,6 +68,7 @@
   --shadow-3: 0px 4px 6px 0px rgba(0,0,0,0.3);
   --shadow-4: 0px 4px 6px 0px rgba(255,255,255,0.3);
 
+
 }
 
 .check-icon {
@@ -89,7 +90,7 @@ line-height: 1.5;
 color: var(--clr-dark);
 background-color: var(--clr-light);
 overflow-x: hidden;
-overscroll-behavior-block: contain;
+overscroll-behavior-block: none;
 }
 
 a {
