@@ -5,10 +5,9 @@ export const ScrollContext = createContext();
 export const ScrollProvider = ({ children }) => {
     const [viewport, setViewport] = useState(0);
     const [offset, setOffset] = useState(0);
-    const [className, setClassName] = useState('');
 
     const navRef = useRef(null);
-    const tabRef = useRef(null);
+    const btnRef = useRef(null);
 
     const handleScroll = () => {
         console.log(viewport)
@@ -17,12 +16,12 @@ export const ScrollProvider = ({ children }) => {
         if (viewport < 1200) {
             if (window.scrollY > offset && offset > 50) {
                 // Add class to hide tab
-                tabRef.current?.classList.add('hide-tab');
+                btnRef.current?.classList.add('hide-btn');
                 navRef.current?.classList.add('hide-nav');
             }
             else {
-                // Remove class to display tab
-                tabRef.current?.classList.remove('hide-tab');
+                // Remove class to display btn
+                btnRef.current?.classList.remove('hide-btn');
                 navRef.current?.classList.remove('hide-nav');
             }
         }
@@ -34,14 +33,6 @@ export const ScrollProvider = ({ children }) => {
         setViewport(document.body.clientWidth);
     }, [])
 
-    // useEffect(() => {
-    //     if (viewport < 775) {
-    //         setClassName('hide-mobile-nav');
-    //     } else {
-    //         setClassName('hide-nav');
-    //     }
-    // }, [viewport])
-
     useEffect(() => {
         window.addEventListener('scroll', handleScroll);
 
@@ -51,7 +42,7 @@ export const ScrollProvider = ({ children }) => {
     return (
         <ScrollContext.Provider
             value={{
-                tabRef,
+                btnRef,
                 navRef
             }}
         >

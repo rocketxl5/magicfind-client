@@ -5,6 +5,7 @@ import Parameter from './Parameter';
 import Modal from '../modal/Modal';
 import { ScrollContext } from '../../../contexts/ScrollContext';
 import { HiOutlineAdjustmentsHorizontal } from "react-icons/hi2";
+import { FiPlus } from "react-icons/fi";
 import useModalState from '../../../hooks/useModalState';
 import useLoadImage from '../../../hooks/useLoadImage';
 import useModalView from '../../../hooks/useModalView';
@@ -20,7 +21,7 @@ const SearchResult = () => {
     const cardRef = useRef(null);
     const panelRef = useRef(null);
     // Context
-    const { tabRef } = useContext(ScrollContext);
+    const { btnRef } = useContext(ScrollContext);
     const location = useLocation();
     const navigate = useNavigate();
     const { cards, searchType } = location.state?.result || JSON.parse(localStorage.getItem('search-result'));
@@ -46,11 +47,11 @@ const SearchResult = () => {
         if (searchFeatures) {
             document.body.classList.add('scroll-none');
             panelRef.current?.classList.add('move-panel');
-            tabRef.current?.classList.add('move-tab');
+            btnRef.current?.classList.add('rotate-btn');
         } else {
             document.body.classList.remove('scroll-none');
             panelRef.current?.classList.remove('move-panel');
-            tabRef.current?.classList.remove('move-tab');
+            btnRef.current?.classList.remove('rotate-btn');
         }
     }, [searchFeatures]);
 
@@ -121,7 +122,7 @@ const SearchResult = () => {
                             }
                         </ul>
 
-                        <button className="parameters-btn" type="button" onClick={() => setSearchFeatures(!searchFeatures)} ref={tabRef}><HiOutlineAdjustmentsHorizontal /></button>
+                        <button className="parameters-btn" type="button" onClick={() => setSearchFeatures(!searchFeatures)} ref={btnRef}><FiPlus /></button>
                     </div>
                 </aside>
                 <main className="products">
