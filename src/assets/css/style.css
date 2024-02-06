@@ -1109,7 +1109,7 @@ font-weight: 500;
 
 .parameters-btn {
   position: fixed;
-  top: calc(88vh); 
+  bottom: 3vh;
   right: 3rem;
   min-height: 4rem;
   min-width: 4rem;
