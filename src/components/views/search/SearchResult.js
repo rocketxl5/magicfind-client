@@ -20,6 +20,7 @@ const SearchResult = () => {
     // Refs
     const cardRef = useRef(null);
     const panelRef = useRef(null);
+    const iconRef = useRef(null);
     // Context
     const { btnRef } = useContext(ScrollContext);
     const location = useLocation();
@@ -47,11 +48,13 @@ const SearchResult = () => {
         if (searchFeatures) {
             document.body.classList.add('scroll-none');
             panelRef.current?.classList.add('move-panel');
-            btnRef.current?.classList.add('rotate-btn');
+            btnRef.current?.classList.add('move-btn');
+            iconRef.current?.classList.add('rotate-icon');
         } else {
             document.body.classList.remove('scroll-none');
             panelRef.current?.classList.remove('move-panel');
-            btnRef.current?.classList.remove('rotate-btn');
+            btnRef.current?.classList.remove('move-btn');
+            iconRef.current?.classList.remove('rotate-icon');
         }
     }, [searchFeatures]);
 
@@ -122,7 +125,7 @@ const SearchResult = () => {
                             }
                         </ul>
 
-                        <button className="parameters-btn" type="button" onClick={() => setSearchFeatures(!searchFeatures)} ref={btnRef}><FiPlus /></button>
+                        <button className="parameters-btn" type="button" onClick={() => setSearchFeatures(!searchFeatures)} ref={btnRef}><span className="parameters-icon" ref={iconRef}><FiPlus /></span></button>
                     </div>
                 </aside>
                 <main className="products">
