@@ -1110,7 +1110,7 @@ font-weight: 500;
 .parameters-btn {
   position: fixed;
   /* top: calc(80vh);  */
-  top: 8vw;
+  bottom: 22vh;
   right: 3rem;
   min-height: 4rem;
   min-width: 4rem;
@@ -1118,7 +1118,7 @@ font-weight: 500;
   background: var(--clr-light-grey);
   border-radius: 50px;
   box-shadow: 0px 0px 15px -3px rgba(0,0,0,0.1);
-  transition: all 0.2s ease-in-out;
+  transition: all 0.3s ease-in-out;
   z-index: 6000;
 }
 
@@ -1151,7 +1151,7 @@ font-weight: 500;
 }
 
 .hide-btn {
-  right: -6rem;
+  bottom: -8vh;
 }
 
 .hide-nav {
