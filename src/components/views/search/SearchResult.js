@@ -123,9 +123,9 @@ const SearchResult = () => {
                             }
                         </ul>
 
+                        <button className="parameters-btn" type="button" onClick={() => setSearchFeatures(!searchFeatures)} ref={btnRef}><span className="parameters-icon" ref={iconRef}><FiPlus /></span></button>
                     </div>
                 </aside>
-                <button className="parameters-btn" type="button" onClick={() => setSearchFeatures(!searchFeatures)} ref={btnRef}><span className="parameters-icon" ref={iconRef}><FiPlus /></span></button>
                 <main className="products">
                         <ul>
                         {

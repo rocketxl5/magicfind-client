@@ -1094,7 +1094,8 @@ font-weight: 500;
 }
 
 .parameters-list {
-  position: fixed;
+  position: absolute;
+  top: 0;
   left: -25rem;
   display: flex;
   flex-direction: column;
@@ -1109,7 +1110,7 @@ font-weight: 500;
 
 .parameters-btn {
   position: fixed;
-  bottom: 3vh;
+  bottom: 3rem;
   right: 3rem;
   min-height: 4rem;
   min-width: 4rem;
@@ -1150,7 +1151,7 @@ font-weight: 500;
 }
 
 .hide-btn {
-  right: -9rem;
+  bottom: -9rem;
 }
 
 .hide-nav {
