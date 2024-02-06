@@ -48,12 +48,12 @@ const SearchResult = () => {
         if (searchFeatures) {
             document.body.classList.add('scroll-none');
             panelRef.current?.classList.add('move-panel');
-            btnRef.current?.classList.add('move-btn');
+            // btnRef.current?.classList.add('move-btn');
             iconRef.current?.classList.add('rotate-icon');
         } else {
             document.body.classList.remove('scroll-none');
             panelRef.current?.classList.remove('move-panel');
-            btnRef.current?.classList.remove('move-btn');
+            // btnRef.current?.classList.remove('move-btn');
             iconRef.current?.classList.remove('rotate-icon');
         }
     }, [searchFeatures]);
