@@ -1105,7 +1105,7 @@ font-weight: 500;
   width: 25rem;
   background-color: var(--clr-light-grey);
   box-shadow: 9px 0px 15px -3px rgba(0,0,0,0.1);
-  transition: all 0.2s ease-in-out;
+  transition: all 0.1s ease-in-out;
 }
 
 .parameters-btn {
@@ -1118,7 +1118,7 @@ font-weight: 500;
   background: var(--clr-light-grey);
   border-radius: 50px;
   box-shadow: 0px 0px 15px -3px rgba(0,0,0,0.1);
-  transition: all 0.2s ease-in-out;
+  transition: all 0.1s ease-in-out;
   z-index: 6000;
 }
 
@@ -1147,11 +1147,11 @@ font-weight: 500;
 }
 
 .rotate-icon {
- transform: rotate(-225deg);
+ transform: rotate(-135deg);
 }
 
 .hide-btn {
-  bottom: -14rem;
+  right: -14rem;
 }
 
 .hide-nav {
