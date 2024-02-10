@@ -22,6 +22,17 @@ const SEARCH = {
             hp: 'Heavily Played',
             d: 'Damaged'
         },
+        colors: {
+            w: 'https://svgs.scryfall.io/card-symbols/W.svg',
+            u: 'https://svgs.scryfall.io/card-symbols/U.svg',
+            g: 'https://svgs.scryfall.io/card-symbols/G.svg',
+            r: 'https://svgs.scryfall.io/card-symbols/R.svg',
+            b: 'https://svgs.scryfall.io/card-symbols/B.svg',
+        },
+        symbologies: [
+            'color_identity',
+            'mana_cost'
+        ]
     },
     parameters: [
         "Price",

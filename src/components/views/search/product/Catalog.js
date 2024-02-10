@@ -4,7 +4,7 @@ import { CartContext } from '../../../../contexts/CartContext';
 import { api } from '../../../../api/resources';
 import styled from 'styled-components';
 
-const Oder = ({ product }) => {
+const Catalog = ({ product }) => {
     const [isLoading, setIsLoading] = useState(false);
     const [quantitySelected, setQuantitySelected] = useState(0);
     const [isCartItem, setIsCartItem] = useState(false);
@@ -73,9 +73,9 @@ const Oder = ({ product }) => {
                     ) : (
 
                         <div className="product-order">
-                            <div className="">
+                            {/* <div className="">
                                 <p><span className="">Ships From:</span>  <span className="card-spec-value">{product.country}</span></p>
-                            </div>
+                            </div> */}
                             <div className="">
                                 <p><span className="">Price:</span>  <span className="card-spec-value">{product.price}</span></p>
                             </div>
@@ -84,25 +84,24 @@ const Oder = ({ product }) => {
                             </div>
                             {
                                 product.quantity &&
-                                <div className="card-spec">
-                                    <Selector>
-                                        <select
-                                            id="quantity"
-                                            name="quantity"
-                                            value={quantitySelected}
-                                            onChange={(e) => handleChange(e)}
-                                        >
-                                            {[...Array(product.quantity + 1).keys()].map((key) => {
+                                <Selector>
+                                    <select
+                                        id="quantity"
+                                        name="quantity"
+                                        value={quantitySelected}
+                                        onChange={(e) => handleChange(e)}
+                                    >
+                                        {[...Array(product.quantity + 1).keys()].map((key) => {
 
-                                                return (
-                                                    <option key={key} value={`${key}`}>
-                                                        {key}
-                                                    </option>
-                                                )
-                                            })}
-                                        </select>
-                                    </Selector>
-                                </div>
+                                            return (
+                                                <option key={key} value={`${key}`}>
+                                                    {key}
+                                                </option>
+                                            )
+                                        })}
+                                    </select>
+                                </Selector>
+
                             }
                         </div>
                     )
@@ -126,4 +125,4 @@ const Selector = styled.div`
   }
 `;
 
-export default Oder
+export default Catalog

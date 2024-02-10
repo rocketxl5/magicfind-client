@@ -1,6 +1,6 @@
 import { useReducer } from 'react';
 import Seller from '../components/views/search/product/Seller';
-import Order from '../components/views/search/product/Order';
+import Catalog from '../components/views/search/product/Catalog';
 import Detail from '../components/views/search/product/Detail';
 
 const ACTIONS = {
@@ -32,6 +32,8 @@ const useProduct = () => {
     const updateSearchResult = (searchType) => {
 
     }
+
+    return [state, updateSearchResult];
 }
 
 export default useProduct
