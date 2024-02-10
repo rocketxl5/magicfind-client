@@ -44,27 +44,28 @@ const SearchResult = () => {
         }
     }, [location]);
 
-    useEffect(() => {
-        if (searchFeatures) {
-            document.body.classList.add('scroll-none');
-            panelRef.current?.classList.add('move-panel');
-            btnRef.current?.classList.add('move-btn');
-            iconRef.current?.classList.add('rotate-icon');
-        } else {
-            document.body.classList.remove('scroll-none');
-            panelRef.current?.classList.remove('move-panel');
-            btnRef.current?.classList.remove('move-btn');
-            iconRef.current?.classList.remove('rotate-icon');
-        }
-    }, [searchFeatures]);
+    // useEffect(() => {
+    //     if (searchFeatures) {
+    //         document.body.classList.add('scroll-none');
+    //         panelRef.current?.classList.add('move-panel');
+    //         btnRef.current?.classList.add('move-btn');
+    //         iconRef.current?.classList.add('rotate-icon');
+    //     } else {
+    //         document.body.classList.remove('scroll-none');
+    //         panelRef.current?.classList.remove('move-panel');
+    //         btnRef.current?.classList.remove('move-btn');
+    //         iconRef.current?.classList.remove('rotate-icon');
+    //     }
+    // }, [searchFeatures]);
 
-    const { imagesLoaded } = useLoadImage(urls);
+    const [imagesLoaded] = useLoadImage(urls);
 
     const [view, updateCardView] = useModalView(handleCardView);
 
     const [state, updateCardState] = useModalState(searchType, handleCardState);
 
-    // const [products] = useProduct(cards, searchType)
+    // const [products] = useProduct(searchType)
+
 
     function handleCardView(e, layout, expandedImage) {
         e.stopPropagation();
@@ -114,7 +115,7 @@ const SearchResult = () => {
                 {/* <header className="header">
                     <h2 className="title">Search Results</h2>
                 </header> */}
-                <aside className="parameters" >
+                {/* <aside className="parameters" >
                     <div className="parameters-container">
                         <ul className="parameters-list" ref={panelRef}>
                             {
@@ -127,7 +128,7 @@ const SearchResult = () => {
 
                         <button className="parameters-btn" type="button" onClick={() => setSearchFeatures(!searchFeatures)} ref={btnRef}><span className="parameters-icon" ref={iconRef}><FiPlus /></span></button>
                     </div>
-                </aside>
+                </aside> */}
                 <main className="products">
                         <ul>
                         {

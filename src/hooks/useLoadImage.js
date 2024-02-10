@@ -25,7 +25,7 @@ const useLoadImage = (urls) => {
         }
     }, [urls])
 
-    return { imagesLoaded }
+    return [imagesLoaded]
 }
 
 export default useLoadImage
