@@ -3,6 +3,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import Product from './Product';
 import Parameter from './Parameter';
 import Modal from '../modal/Modal';
+import Breadcrumbs from '../../layout/Breadcrumbs';
 import { ScrollContext } from '../../../contexts/ScrollContext';
 import { HiOutlineAdjustmentsHorizontal } from "react-icons/hi2";
 import { FiPlus } from "react-icons/fi";
@@ -22,13 +23,15 @@ const SearchResult = () => {
     const panelRef = useRef(null);
     const iconRef = useRef(null);
     // Context
-    const { btnRef } = useContext(ScrollContext);
+    const { btnRef, countRef } = useContext(ScrollContext);
     const location = useLocation();
     const navigate = useNavigate();
-    const { cards, searchType } = location.state?.result || JSON.parse(localStorage.getItem('search-result'));
+    const { cards, searchType } = location.state?.result || JSON.parse(localStorage.getItem('search-results'));
 
 
     useEffect(() => {
+        console.log(location);
+
 
         // If cards is empty
         if (!cards.length) {
@@ -37,7 +40,6 @@ const SearchResult = () => {
 
         } else {
             const urls = getCardImgUrls(cards)
-            // console.log(urls);
             if (urls) {
                 setUrls(urls);
             }
@@ -69,6 +71,7 @@ const SearchResult = () => {
 
     function handleCardView(e, layout, expandedImage) {
         e.stopPropagation();
+        // console.log(e.target);
         updateCardView(layout, expandedImage)
     }
 
@@ -89,32 +92,35 @@ const SearchResult = () => {
                     {state.component}
                 </Modal>
             }
-            {/* <div className="search-count">
-                <div className="inner">
-                {
-                    searchType !== 'search-catalog' &&
-                    <button
-                        className="back-btn"
-                        type="button"
-                                onClick={() => {
-                                navigate(-1);
-                        }}>
-                            Go Back
-                    </button>}
-                <span className="space-1">
-                    {
-                        cards ?
-                            `${cards.length} ${cards.length > 1 ? 'Results' : 'Result'}` :
-                            'No results'
-                    }
-                </span>
-                </div>
-            </div> */}
 
             <div className="search-result">
-                {/* <header className="header">
-                    <h2 className="title">Search Results</h2>
-                </header> */}
+                <header className="header">
+                    {/* <div className="inner-top">
+                        <div className="breadcrumb">
+                            {
+                                searchType !== 'search-catalog' &&
+                                <button
+                                    className="back-btn"
+                                    type="button"
+                                onClick={() => {
+                                        navigate(-1);
+                                    }}>
+                                    Go Back
+                                </button>}
+                        </div>
+                    </div> */}
+                    <div className="inner-bottom">
+
+                        <h2 className="title">Search Results</h2>
+                        <span className="space-1">
+                            {
+                                cards ?
+                                    `${cards.length} ${cards.length > 1 ? 'Results' : 'Result'}` :
+                                    'No results'
+                            }
+                        </span>
+                    </div>
+                </header>
                 {/* <aside className="parameters" >
                     <div className="parameters-container">
                         <ul className="parameters-list" ref={panelRef}>

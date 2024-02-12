@@ -9,60 +9,13 @@ import AuthBtn from './navbtn/AuthBtn';
 import SidePanel from '../layout/SidePanel';
 import ShoppingCartBtn from './navbtn/ShoppingCartBtn';
 import getViewPortWidth from '../../assets/utilities/getViewPortWidth';
+import data from '../../assets/data/NAV';
 
 function Navbar({ auth }) {
     const panelRef = useRef(null);
     const viewport = getViewPortWidth();
-    const authPaths = [
-        {
-            name: 'Dashboard',
-            to: '../me/dashboard',
-        },
-        {
-            name: 'Collection',
-            to: '../me/collection'
-        },
-        {
-            name: 'Store',
-            to: '../me/store'
-        },
-        {
-            name: 'Add Card',
-            to: '../me/add-card'
-        },
-        {
-            name: 'Profile',
-            to: '/me/profile'
-        },
-        {
-            name: 'Settings',
-            to: '/me/settings'
-        },
-    ]
+    const { authPaths, paths } = data;
 
-    const paths = [
-        {
-            name: 'Home',
-            to: '/'
-        },
-        {
-            name: 'About',
-            to: 'about'
-        },
-        {
-            name: 'Contact',
-            to: 'contact'
-        },
-        {
-            name: 'Sing in',
-            to: 'login'
-        },
-        {
-            name: 'Crate Account',
-            to: 'signup'
-        },
-
-    ]
     return (
         <div className="navbar">
             <input type="checkbox" id="mobile-nav" className="mobile-nav" />

@@ -112,14 +112,14 @@ const SearchCatalog = () => {
               setCardName('');
               setSearchInput(null);
               console.log(result)
-              localStorage.setItem('search-result', JSON.stringify(result));
+              localStorage.setItem('search-results', JSON.stringify(result));
               !isAuth ? (
-                navigate(`/search-result/catalog/${setQueryString(query.toLowerCase(), '-')}`,
+                navigate(`/catalog/search-results/${setQueryString(query.toLowerCase(), '-')}`,
                   {
                     state: { result: result },
                   })
               ) : (
-                  navigate(`/me/search-result/catalog/${setQueryString(query.toLowerCase(), '-')}`,
+                  navigate(`/search-results/${setQueryString(query.toLowerCase(), '-')}`,
                   {
                     state: { result: result },
                   })

@@ -23,7 +23,7 @@ const Seller = ({ product }) => {
                 isAuth &&
                 <div className="contact-link">
                     <Link to={{
-                        pathname: '/me/mail/message',
+                            pathname: '/mail/message',
                         state: { sender: product.userName, subject: product.name },
                     }}>
                         Contact Seller

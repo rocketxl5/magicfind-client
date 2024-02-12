@@ -65,9 +65,9 @@ const SearchCollection = ({ path }) => {
               else if (query === 'cards') {
                 const result = { cards: data, searchType: searchInput?.id }
                 // Update local storage with search data
-                localStorage.setItem('search-result', JSON.stringify(result));
+                localStorage.setItem('search-results', JSON.stringify(result));
                 console.log(result)
-                navigate(`/me/search-result/collection/all-cards`,
+                navigate(`/me/collection/all-cards`,
                   {
                     state: result,
                   });
@@ -153,9 +153,9 @@ const SearchCollection = ({ path }) => {
 
               setCardName('');
               setSearchInput(null);
-              localStorage.setItem('search-result', JSON.stringify(result));
+              localStorage.setItem('search-results', JSON.stringify(result));
               console.log(result)
-              navigate(`/me/search-result/collection/${setQueryString(query.toLowerCase(), '-')}`,
+              navigate(`/me/collection/${setQueryString(query.toLowerCase(), '-')}`,
                 {
                   state: result,
                 });
@@ -163,7 +163,7 @@ const SearchCollection = ({ path }) => {
         }
         else if (res.status === 400) {
           setLoading(false);
-          navigate(`/search-result/not-found/${query}`);
+          navigate(`/search-results/not-found/${query}`);
         }
       });
   }
@@ -191,7 +191,7 @@ const SearchCollection = ({ path }) => {
                   </div>
                 </section>
                 <section className="message-section">
-                    <Link className="message-link" to="/me/add-card"> To Add Card Page <FiArrowRightCircle /></Link>
+                    <Link className="message-link" to="/add-card"> To Add Card Page <FiArrowRightCircle /></Link>
                 </section>
               </div>
             ) : ( 

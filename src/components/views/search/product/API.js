@@ -18,20 +18,24 @@ const API = ({ card, setLoading }) => {
         let attr = { type: 'button', value: message.body, style: '' }
         switch (message.title) {
             case 'card_added':
-                attr = { ...attr, style: 'btn bg-light color-success border-success disabled' };
+                attr = { ...attr, style: 'btn btn-api bg-light color-success border-success disabled' };
                 break;
             case 'card_exist':
-                attr = { ...attr, style: 'btn bg-light color-primary border-primary disabled' };
+                attr = { ...attr, style: 'btn btn-api bg-light color-primary border-primary disabled' };
                 break;
             case 'not_found' || 'server':
-                attr = { ...attr, style: 'btn bg-light color-danger border-danger disabled' };
+                attr = { ...attr, style: 'btn btn-api bg-light color-danger border-danger disabled' };
                 break;
             default:
-                attr = { ...attr, style: 'btn bg-blue color-light border-blue', value: 'Add To Collection', status: true };
+                attr = { ...attr, style: 'btn btn-api bg-blue color-light border-primary', value: 'Add To Collection', status: true };
                 break;
         }
         return attr;
     }
+
+    useEffect(() => {
+        setAttributes(attributesHandler(''))
+    }, [])
 
     useEffect(() => {
 
@@ -75,13 +79,13 @@ const API = ({ card, setLoading }) => {
     }
     return (
 
-        <div className="card-btns">
+
             <div className="btn-container">
                 {/* <Button attributes={attributes} handleClick={handleClick}  /> */}
                 <button id="add-to-collection" className={attributes.style} type={attributes.type} onClick={handleClick}>{attributes.value}</button>
                 {/* <button className="btn bg-blue color-lg-grey" type="button" onClick={() => handleClick(card)}>{!isLoaded ? 'Add To Collection' : 'Added'}</button> */}
             </div>
-        </div>
+
 
     )
 }

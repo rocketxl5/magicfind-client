@@ -97,7 +97,8 @@ const Login = () => {
             localStorage.setItem('user', JSON.stringify(data.payload.user));
             setAuth({ ...data.payload.user, token: data.token });
             setLoading(false)
-            const destination = location.state?.from ? location.state.from.pathname : 'me/pathname';
+            const destination = location.state?.from ? location.state.from.pathname : 'pathname';
+            console.log(destination)
             navigate(destination, { replace: true });
           })
           .catch((error) => {

@@ -32,7 +32,12 @@ const SEARCH = {
         symbologies: [
             'color_identity',
             'mana_cost'
-        ]
+        ],
+        finishes: {
+            nonfoil: 'Non Foil',
+            foil: 'Foil',
+            eched: 'Etched'
+        }
     },
     parameters: [
         "Price",

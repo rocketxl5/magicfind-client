@@ -8,14 +8,13 @@ export const ScrollProvider = ({ children }) => {
 
     const navRef = useRef(null);
     const btnRef = useRef(null);
+    const countRef = useRef(null);
 
     const handleScroll = () => {
-        console.log(offset)
-        // if(viewport > 1200)
-        // If ref value is greater than y
         if (viewport < 1200) {
             if (window.scrollY > offset && offset > 50) {
                 // Add class to hide tab
+                countRef.current?.classList.add('move-count')
                 btnRef.current?.classList.add('hide-btn');
                 navRef.current?.classList.add('hide-nav');
             }
@@ -23,6 +22,7 @@ export const ScrollProvider = ({ children }) => {
                 // Remove class to display btn
                 btnRef.current?.classList.remove('hide-btn');
                 navRef.current?.classList.remove('hide-nav');
+                countRef.current?.classList.remove('move-count')
             }
         }
 
@@ -43,7 +43,8 @@ export const ScrollProvider = ({ children }) => {
         <ScrollContext.Provider
             value={{
                 btnRef,
-                navRef
+                navRef,
+                countRef
             }}
         >
             {children}

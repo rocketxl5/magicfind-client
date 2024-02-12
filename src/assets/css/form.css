@@ -406,14 +406,15 @@ input#search-api:focus {
     display: flex;
   }
 
-  .blur-load {
+  .lazy-load {
     width: 100%;
   }
 
   .card-image {
     width: 100%;
     height: 100%;
-    display: block;
+    vertical-align: middle;
+    /* display: block; */
   }
 
   .card-image:hover {
@@ -463,6 +464,7 @@ input#search-api:focus {
 }
 
 .foil-finish {
+    position: relative;
     padding-inline: 0.5rem;
     color: var(--clr-light-grey);
     background: var(--clr-teal);
@@ -481,13 +483,7 @@ input#search-api:focus {
     gap: 1rem;
 }
 
-.btn-container {
-    /* display: flex;
-    flex-basis: 0;
-    flex-grow: 1; */
-    display: flex;
-    justify-content: space-between;
-}
+
 
 .card-quantity {
     width: 6rem;
