@@ -187,13 +187,13 @@ const Search = ({ path }) => {
   }, [data])
 
   return (
-    <div className="outer-content">
+    <>
       {
         loading ? (
           <Loading />
         ) : (
-            <div className="inner-content">
-              <header className="header">
+            <>
+              <header className="content-header">
                 <h2 className="title">Add a card</h2>
               </header>
               <main className="main">
@@ -201,10 +201,10 @@ const Search = ({ path }) => {
                   <SearchInput id={'search-api'} className={'search-field'} placeholder={'Search MTG Cards'} searchCard={searchAPI} isActive={isActive} ref={apiInputRef} />
                 </form>
               </main>
-            </div>
+            </>
         )
       }
-    </div>
+    </>
   );
 };
 

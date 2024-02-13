@@ -384,7 +384,6 @@
 
 .p-relative {
     position: relative;
-    min-height: clamp(40rem, calc(3vh + 10px), 45rem);
 }
 
 .p-absolute {

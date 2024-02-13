@@ -169,14 +169,14 @@ const SearchCollection = ({ path }) => {
   }
 
   return (
-    <div className="outer-content">
+    <>
 
       {
         loading ? (
           <Loading />
         ) : (
-          <div className="inner-content">
-            <header className="header">
+            <>
+              <header className="content-header">
               <h2 className="title">Collection</h2>
             </header>
             {errorMessage?.title === 'no_cards' ? (
@@ -212,10 +212,10 @@ const SearchCollection = ({ path }) => {
                   </main>
               )
               }
-            </div>
+            </>
         )
       }
-    </div>
+    </>
   )
 }
 

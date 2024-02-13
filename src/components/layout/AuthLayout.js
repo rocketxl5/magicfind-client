@@ -37,20 +37,20 @@ const AuthLayout = () => {
         <div className="auth-layout">
             <Header />
             <div className="container">
-                <Breadcrumbs />
-                <div className="content">
-                    {
-                        !loading ? (
+                {
+                    loading ? (
+                        <div className="loading-content">
+                            <Loading />
+                        </div>
+                    ) : (
+                        <div className="content">
+                                <Breadcrumbs />
 
                             <Outlet />
 
-                        ) : (
-                            <div className="loading-content">
-                                <Loading />
                             </div>
                         )
-                    }
-                </div>
+                }
             </div>
             <Footer />
         </div>

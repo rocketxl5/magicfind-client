@@ -10,15 +10,9 @@
 }
 
 @media screen and (width >= 500px) {
-    .modal .modal-image {
-        /* border-radius: 25px; */
-    }
 
     .product-grid {
-        /* width: 100%;
-        display: grid; */
         gap: 1rem;
-        /* grid-template-columns: repeat(4, calc(25% - 0.75rem)); */
       }
       
     .product-grid .image {
@@ -28,9 +22,7 @@
 }
 
 @media screen and (width >= 660px) {
-   
-  
-          
+      
     .product-grid {
         border: 1px solid red;
         width: 100%;
@@ -38,35 +30,12 @@
         gap: 1.5rem;
         grid-template-columns: repeat(10, calc(10% - 1.35rem));
       } 
-     
-    /* .product-grid section {
-        border-radius: 5px;
-    } */
 
     .product-grid .image {
         grid-column: span 3;
        
     }
     
-    .product-grid .information {
-        /* grid-column: span 3;
-        grid-row: 2 / 6;
-        background-color: gainsboro; */
-    }
-    /*
-            
-    .product-grid .specifications {
-        grid-column: span 3;
-        grid-row: 2 / 4;
-        background-color: aquamarine;
-    }
-    
-    .product-grid .handlers {  
-        grid-column: span 3;
-        grid-row: 4 / 6;
-        background-color: orange;
-    } */
-
     .home .grid-section {
         grid-template-columns: repeat(2, 1fr);
     }
@@ -101,47 +70,6 @@
        
     }
 
-    .product-grid .card-image {
-        /* height: 100%; */
-     }
-
-/* 
-    .row {
-        display: flex;
-        width: 100%;
-        gap: 2rem;
-
-        align-items: center;
-      }
-      
-      .column .categories {
-        width: 30%;
-      }
-      
-      .column .values {
-        width: 60%;
-      } */
-      
-    
-    /* .product-grid .information {
-        grid-column: span 1;
-        grid-row: 1 / 4;
-    }
-    
-    .product-grid .search-api.information {
-        grid-column: span 4;
-        grid-row: 1 / 4;
-    }
-
-    .product-grid .user {
-        grid-column: span 1;
-        grid-row: 1 / 5;
-    }
-    .product-grid .handler {
-        grid-column: span 1;
-        grid-row: 1 / 5;
-    } */
-
     .product-grid .section {
         flex-direction: column;
         align-items: flex-start;
@@ -152,23 +80,23 @@
     }
     
     .layout {
-        padding-block-start: var(--layout-top-wide);
+        padding-block-start: 0;
     }
 
     .layout > .container {
-        min-height: calc(100vh - 18rem);
+        min-height: calc(100vh - var(--desktop));
     }
 
     .auth-layout {
-        padding-block-start: 6rem;
+        padding-block-start: var(--auth-top-desktop);
     }
 
     .auth-layout .container {
-        min-height: calc(100vh - 16rem);
+        min-height: calc(100vh - var(--auth-desktop));
     }
-
+    
     .search-count {
-        top: var(--layout-top-wide);
+        top: var(--top-desktop);
     }
 
     .main-content {
@@ -213,7 +141,7 @@
     .main-header {
         display: flex;
         flex-direction: column;
-        min-height: var(--layout-top-wide);
+        min-height: var(--top-desktop);
     }
     
     .top-header  {
@@ -253,7 +181,7 @@
     /* Side Section */
     .contextual-nav {
         position: static;
-        top: var(--layout-top-wide);
+        margin: 0 auto;
         border-right: 1px solid var(--clr-light);
         background-color: var(--clr-primary);
         z-index: 0;
@@ -275,7 +203,7 @@
 
     #search-catalog-container {
         position: relative;
-        min-height: var(--layout-top-wide);
+        min-height: var(--top-desktop);
         min-width: clamp(20rem, 45%, 60rem) !important;
         padding-block: 0;
         margin: auto;
@@ -333,7 +261,7 @@
     }
 
     nav .right-side-nav ul {
-        inset: var(--layout-top-wide) 0 0 100%;
+        inset: var(--top-desktop) 0 0 100%;
         border-top-left-radius: 10px;
         border-bottom-left-radius: 10px;
     }
@@ -347,9 +275,8 @@
     }
 
     .layout .footer {
-        min-height: var(--layout-top-wide);
+        min-height: var(--top-desktop);
         margin-inline: auto;
-        margin-top: var(--layout-bottom-wide);
         font-size: var(--fs-125);
     }
 

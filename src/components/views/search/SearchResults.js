@@ -94,7 +94,7 @@ const SearchResults = () => {
             }
 
             <div className="search-result">
-                <header className="header">
+                <header className="content-header">
                     {/* <div className="inner-top">
                         <div className="breadcrumb">
                             {
