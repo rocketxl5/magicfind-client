@@ -8,13 +8,15 @@ import SignInBtn from './navbtn/SignInBtn';
 import AuthBtn from './navbtn/AuthBtn';
 import SidePanel from '../layout/SidePanel';
 import ShoppingCartBtn from './navbtn/ShoppingCartBtn';
+import useAuth from '../../hooks/useAuth';
 import getViewPortWidth from '../../assets/utilities/getViewPortWidth';
 import data from '../../assets/data/NAV';
 
-function Navbar({ auth }) {
+function Navbar() {
     const panelRef = useRef(null);
-    const viewport = getViewPortWidth();
+    const { isAuth, auth } = useAuth();
     const { authPaths, paths } = data;
+    const viewport = getViewPortWidth();
 
     return (
         <div className="navbar">
@@ -26,7 +28,7 @@ function Navbar({ auth }) {
                      /*  Has a label linked to mobile-nav checkbox 
                      *************************************************/}
                     <SearchBtn />
-                    {auth ? (
+                    {isAuth ? (
                         <>
                             <MailBtn />
                             <ShoppingCartBtn />
@@ -47,7 +49,7 @@ function Navbar({ auth }) {
 
                 </section>
                 <section className="right-side-nav">
-                    {auth ? (
+                    {isAuth ? (
                         <AuthMenu authPaths={authPaths} />
                     ) : (
                             <Menu paths={paths} />

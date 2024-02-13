@@ -1,10 +1,12 @@
 const Avatar = ({ auth }) => {
 
     return (
-        auth.avatar.src ? (
-            <img src={auth.avatar.src} alt="Avatar" />
+        auth?.avatar.src ? (
+            <img src={auth?.avatar.src} alt="Avatar" />
                 ) : (
-                auth.avatar.letter
+                <>
+                    {auth?.avatar.letter}
+                </>
             )
     )
 }

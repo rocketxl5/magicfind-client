@@ -14,7 +14,7 @@ import useProduct from '../../../hooks/useProduct';
 import getCardImgUrls from '../../../assets/utilities/getCardImgUrls';
 import data from '../../../assets/data/SEARCH';
 
-const SearchResult = () => {
+const SearchResults = () => {
     // States
     const [urls, setUrls] = useState(null);
     const [searchFeatures, setSearchFeatures] = useState(false);
@@ -161,4 +161,4 @@ const SearchResult = () => {
     )
 }
 
-export default SearchResult;
+export default SearchResults;

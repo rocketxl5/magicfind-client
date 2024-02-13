@@ -71,7 +71,7 @@ const useModalView = (callback) => {
                     component:
                         <SingleFacedCard action={action.type}>
                             {action.payload.expandedImage}
-                            {/* Passing handleCardView as callback @ SearchResult */}
+                            {/* Passing handleCardView as callback @ SearchResults */}
                             <CloseBtn style={`view-close-btn close-btn card-btn`} handleClick={callback} />
                         </SingleFacedCard>
                 }
