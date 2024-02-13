@@ -50,16 +50,24 @@
   --footer-height: 5rem;
   --footer-height-wide: 6rem;
   --layout-top: 5rem;
-  --layout-top-wide: 6rem;
-  --layout-bottom-wide: 6rem;
+  /* --layout-top-wide: 6rem; */
+  /* --layout-bottom-wide: 6rem; */
 
+
+  --auth-mobile: 14rem;
+  --auth-desktop: 16rem;
+  --mobile: 10rem;
+  --desktop: 5rem;
   --section-gap: 4rem; 
 
   /* main header 5rem + contextual header 4rem */
-  --auth-layout-top: 9rem;
+  --auth-top-mobile: 9rem;
   /* main header wide 6rem + contextual header 4rem */
-  --auth-layout-top-wide: 10rem;
-  /*  */
+  --auth-top-desktop: 11rem;
+
+  --top-mobile: 5rem;
+  --top-desktop: 6rem;
+
   --layout-bottom: 5rem;
 
   /* boder-radius */
@@ -105,7 +113,6 @@ color: var(--clr-dark);
   min-width: 37rem;
   transition: top 0.2s ease-in;
   z-index: 2000;
-  /* padding-bottom: 9rem; */
 }
 
 .layout,
@@ -119,52 +126,47 @@ color: var(--clr-dark);
   color: var(--clr-light);
 }
 
-.layout .footer {
-  margin-block-start: var(--size-3);
-}
-
 .auth-layout {
-  padding-top: var(--auth-layout-top);
+  padding-top: var(--auth-top-mobile);
   background-color: var(--clr-light);
-  color: var(--clr-dark);
 }
 
 .container {
-  min-height: 100vh;
   min-width: 37rem;
   max-width: 1350px;
   margin-inline: auto;
 }
 
-.layout > .container {
-  min-height: calc(100vh - (var(--layout-top) + var(--layout-bottom) + 3rem));
+.auth-layout .container {
+  min-height: calc(100vh - var(--auth-mobile));
 }
 
-.auth-layout > .container {
-  min-height: calc(100vh - (var(--auth-layout-top) + var(--layout-bottom)));
-  
+.layout .container {
+  min-height: calc(100vh - var(--mobile));
 }
 
 .content {
 position: relative;
-min-height: inherit;
+/* min-height: inherit; */
 margin: 0 auto;
 }
 
+.auth-layout .content {
+ padding-inline: 2rem;
+}
+
+.content-header  {
+  color: var(--clr-dark);
+  margin-block-end: 2rem;
+  border-bottom: 1px solid var(--clr-dark);
+}
+
+.content-header .title {
+  padding-block: 1rem;
+}
 
 .main-content {
 margin-inline: auto;
-}
-
-.outer-content {
-/* display: flex; */
-min-height: inherit;
-margin: 0 auto;
-}
-
-.inner-content {
-flex-grow: 1;
-padding-inline: 2rem;
 }
 
 .auth-content {
@@ -1019,11 +1021,7 @@ height: 2rem;
 
 }
 
-.auth-layout .inner-content > header,
-.auth-layout .search-result .header  {
-  color: var(--clr-dark);
-  margin-block-end: 0;
-}
+
 
 .search-result > .header {
  width: 100%;
