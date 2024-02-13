@@ -12,7 +12,7 @@ export const ScrollProvider = ({ children }) => {
 
     const handleScroll = () => {
         if (viewport < 1200) {
-            if (window.scrollY > offset && offset > 50) {
+            if (window.scrollY > offset && offset > 75) {
                 // Add class to hide tab
                 countRef.current?.classList.add('move-count')
                 btnRef.current?.classList.add('hide-btn');

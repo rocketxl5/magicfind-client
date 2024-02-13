@@ -196,12 +196,12 @@
         height: 3rem;
         width: 3rem;
     }
-    .banner-section {
+    .banner {
         position: static;
         width: 100%;
     }
 
-    .banner {
+    .banner-content {
         width: 100%;
         left: 0;
         background-size: 100%;
@@ -422,7 +422,7 @@
         font-size: clamp(1rem, 2vw, 1.25rem);
     }
 
-    .banner {
+    .banner-content {
         width: 100%;
         border-bottom-left-radius: 10px;
         border-bottom-right-radius: 10px;

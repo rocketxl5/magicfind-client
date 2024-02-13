@@ -1,9 +1,4 @@
 const HOME_PAGE = {
-    banner: {
-        classList: "banner home-page-banner",
-        title: 'Join Magic Find',
-        link: '/signup'
-    },
     main: {
         features: [
             {
