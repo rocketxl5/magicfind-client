@@ -2,15 +2,13 @@ import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { FiShoppingCart } from 'react-icons/fi';
 import { CartContext } from '../../../contexts/CartContext';
-import useAuth from '../../../hooks/useAuth';
 import styled from 'styled-components';
 
 const ShoppingCartBtn = () => {
   const { itemsCount } = useContext(CartContext);
-  const { isAuth } = useAuth();
   return (
     <Div className="nav-btn">
-      <Link to={!isAuth ? '/shopping-cart' : '/me/shopping-cart'} className="cart-btn">
+      <Link to='/shopping-cart' className="cart-btn">
         {itemsCount > 0 && (
           <CountContainer>
             <Count>

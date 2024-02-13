@@ -252,11 +252,11 @@
 
     /* Side Section */
     .contextual-nav {
-        position:static;
+        position: static;
         top: var(--layout-top-wide);
         border-right: 1px solid var(--clr-light);
-        /* z-index: 0; */
-         background-color: var(--clr-primary);
+        background-color: var(--clr-primary);
+        z-index: 0;
     }
 
     .contextual-links {

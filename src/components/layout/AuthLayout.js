@@ -13,13 +13,6 @@ const AuthLayout = () => {
     const navigate = useNavigate();
     const param = useParams()['*'];
 
-    const views = [
-        { title: 'Dashboard', id: 'dashboard' },
-        { title: 'Collection', id: 'collection' },
-        { title: 'Store', id: 'store' },
-        { title: 'Add Card', id: 'add-card' },
-    ]
-
     // Updates each time pathname changes
     useEffect(() => {
         console.log(param)
@@ -44,7 +37,6 @@ const AuthLayout = () => {
         <div className="auth-layout">
             <Header />
             <div className="container">
-                <AuthContextualNav views={views} />
                 <Breadcrumbs />
                 <div className="content">
                     {

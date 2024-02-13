@@ -18,7 +18,7 @@ import Home from './components/views/Home';
 import Contact from './components/views/Contact';
 import About from './components/views/About';
 import Profile from './components/views/Profile';
-import SearchResult from './components/views/search/SearchResult';
+import SearchResults from './components/views/search/SearchResults';
 import NotFound from './components/layout/NotFound';
 import CardNotFound from './components/views/search/CardNotFound';
 import ShoppingCart from './components/views/ShoppingCart';
@@ -63,11 +63,11 @@ const App = () => {
           <Route path="me" exact element={<AuthPage />}>
             <Route path="dashboard" element={<DashBoard />} />
             <Route path="collection" element={<SearchCollection />} />
-            <Route path="collection/:id" element={<SearchResult />} >
+            <Route path="collection/:id" element={<SearchResults />} >
               <Route path="details" element={<ProductDetails />} />
             </Route>
             <Route path="add-card" element={<SearchAPI />} />
-            <Route path="add-card/:id" element={<SearchResult />} >
+            <Route path="add-card/:id" element={<SearchResults />} >
               <Route path="details" element={<ProductDetails />} />
             </Route>
             <Route path="store" element={<Store />} />
@@ -77,7 +77,7 @@ const App = () => {
             <Route path="mail" element={<Inbox />} ></Route>
           </Route>
         </Route>
-        <Route path="search-results/" element={<SearchResult />} />
+        {/* <Route path="search-results/" element={<SearchResults />} /> */}
         <Route path="shopping-cart" element={<ShoppingCart />} />
         <Route path="search-results/not-found/:name" element={<CardNotFound />} />
         {/* Catch all */}

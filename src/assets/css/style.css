@@ -1035,11 +1035,11 @@ height: 2rem;
 }
 
 .contextual-nav {
-position: fixed;
 width: 100vw;
 min-width: 37rem;
-left: 0;
-top: var(--layout-top);
+max-width: 135rem;
+/* left: 0;
+top: var(--layout-top); */
 z-index: 1000;
 }
 
@@ -1047,7 +1047,6 @@ z-index: 1000;
 .contextual-links {
   display: flex;
   min-height: 4rem;
-  max-width: 130rem;
   margin: auto;
 }
 
