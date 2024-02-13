@@ -1,4 +1,4 @@
-import { useState, forwardRef, useRef } from 'react';
+import { useState, forwardRef, useRef, useEffect } from 'react';
 import { FiPlus } from "react-icons/fi";
 import CardDetailSection from './CardDetailSection';
 // Footers
@@ -19,7 +19,7 @@ import useAttributes from '../../../hooks/useAttributes';
 import capitalizeWord from '../../../assets/utilities/capitalizeWord';
 import getYear from '../../../assets/utilities/getYear';
 import data from '../../../assets/data/SEARCH';
-import useColorIdentity from '../../../hooks/useColorIdentity';
+import useColorSymbols from '../../../hooks/useColorSymbols';
 import Loading from '../../layout/Loading';
 
 
@@ -29,12 +29,8 @@ const Product = forwardRef(function Product(props, ref) {
     const { attributes } = useAttributes(card);
     const detailsRef = useRef(null);
 
-    const { colorIdentity, manaCost } = useColorIdentity(card, data);
-    // const re = /\{([^}]+)\}/;
-    // console.log(card.mana_cost.split(/\{([^}]+)\}/).filter(value => value))
-    // console.log(colorIdentity)
-    // console.log(manaCost)
-    // console.log(card)
+    const { colorIdentity, manaCost } = useColorSymbols(card);
+
     return (
         <li className="product" ref={ref}>
 
@@ -94,7 +90,11 @@ const Product = forwardRef(function Product(props, ref) {
                                                 </div>
                                                 <div className="column values">
                                                     <p>{card.type_line.split('—')[0]}</p>
-                                                    <p className="color-identity">{colorIdentity && colorIdentity.map((id, i) => id)}</p>
+                                                    {
+                                                        card.color_identity &&
+                                                        <p className="color-identity">{colorIdentity.lenght ? colorIdentity.map((id, i) => id) : 'Colorless'}</p>
+                                                    }
+                                                    
                                                     <p className="color-identity">{manaCost && manaCost.map((id, i) => id)}</p>
                                                     <p>{`${getYear(card.released_at)}`}</p>
                                                     <p>{`${capitalizeWord(card.rarity)}`}</p>

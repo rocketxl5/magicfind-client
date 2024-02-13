@@ -1,13 +1,17 @@
 import { useState, useEffect, createElement } from 'react'
 
-const useColorIdentity = (card, data) => {
-    const [colorIdentity, setColorIdentity] = useState(false);
-    const [manaCost, setManaCost] = useState(false);
+const useColorSymbols = (card) => {
+    const [colorIdentity, setColorIdentity] = useState([]);
+    const [manaCost, setManaCost] = useState([]);
 
     useEffect(() => {
-
         const setUrls = (symbols) => {
-            return symbols.map(symbol => `https://svgs.scryfall.io/card-symbols/${symbol}.svg`);
+            if (symbols?.length) {
+
+                return symbols.map(symbol => `https://svgs.scryfall.io/card-symbols/${symbol}.svg`);
+            }
+            else
+                console.log('symbols', symbols)
         }
 
         const setIcons = (urls, type) => {
@@ -20,7 +24,7 @@ const useColorIdentity = (card, data) => {
                 })
             }
 
-            Promise.all(urls.map((url, i) => loadImage(url, i)))
+            Promise.all(urls?.map((url, i) => loadImage(url, i)))
                 .then(data => {
                     if (data) {
                         const imgs = data.map((url, i) => {
@@ -43,13 +47,13 @@ const useColorIdentity = (card, data) => {
                 .catch(error => console.log('Imgage load has failded'));
         }
 
-        const costUrls = setUrls(card.mana_cost.split(/\{([^}]+)\}/).filter(value => value));
+        const costUrls = setUrls(card.mana_cost?.split(/\{([^}]+)\}/).filter(value => value));
         const identityUrls = setUrls(card.color_identity);
-        setIcons(identityUrls, 'identity');
         setIcons(costUrls, 'cost');
+        setIcons(identityUrls, 'identity');
     }, [card])
 
     return { colorIdentity, manaCost }
 }
 
-export default useColorIdentity
+export default useColorSymbols
