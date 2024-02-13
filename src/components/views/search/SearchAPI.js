@@ -124,7 +124,7 @@ const Search = ({ path }) => {
         }
         else if (res.status === 404) {
           setLoading(false);
-          navigate(`/search-result/not-found/${searchTerm}`);
+          navigate(`/search-results/not-found/${searchTerm}`);
         }
       })
   };
@@ -177,8 +177,8 @@ const Search = ({ path }) => {
         searchType: searchInput.id
       };
 
-      localStorage.setItem('search-result', JSON.stringify(result));
-      navigate(`/me/search-result/api/${setQueryString(cardName, '-')}`,
+      localStorage.setItem('search-results', JSON.stringify(result));
+      navigate(`/me/add-card/${setQueryString(cardName, '-')}`,
         {
           state: result,
         });

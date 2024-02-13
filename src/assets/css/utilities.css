@@ -256,7 +256,7 @@
 }
 
 .border-primary {
-    border: 1px solid var(--clr-primary);
+    border: 2px solid var(--clr-primary);
 }
 
 .border-red {
@@ -292,7 +292,7 @@
 }
 
 .color-success {
-    color: var(--clr-success);
+    color: var(--clr-success) !important;
 }
 
 .color-green {
@@ -300,7 +300,7 @@
 }
 
 .color-primary {
-    color: var(--clr-primary);
+    color: var(--clr-primary) !important;
 }
 
 .hide {

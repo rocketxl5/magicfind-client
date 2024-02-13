@@ -16,7 +16,7 @@ const NotFound = () => {
 
   const goBack = (e) => {
     console.log(e.target)
-    navigate('/me/');
+    navigate('/');
   }
   return (
     <div className="content">

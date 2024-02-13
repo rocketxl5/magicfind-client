@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-// import useExpandImage from '../../../hooks/useExpandImage';
+import { FaExpand } from "react-icons/fa";
 import useExpandImage from '../../../hooks/useExpandImage';
 import useAttributes from '../../../hooks/useAttributes';
 
@@ -19,7 +19,7 @@ const CardImage = ({ card, handleCardView }) => {
 
     return (
         expandedImage &&
-        <div className="blur-load" onClick={(e) => handleCardView(e, card.layout, expandedImage)}>
+        <div className="lazy-load" >
             {
                 !hasLoaded ? (
                         <img id={id} className={style} src={placeholder} alt={alt} />
@@ -28,6 +28,9 @@ const CardImage = ({ card, handleCardView }) => {
                             <img id={id} className={style} src={src} alt={alt} loading="lazy" />
                 )
             }
+                <button className="card-icon-container expand-btn" type="button" onClick={(e) => handleCardView(e, card.layout, expandedImage)}>
+                    <FaExpand />
+                </button>
         </div>
     )
 }

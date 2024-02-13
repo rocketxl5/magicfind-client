@@ -1,6 +1,9 @@
 import {
   Route,
   Routes,
+  useParams,
+  useLocation,
+  Navigate
 } from 'react-router-dom';
 import Layout from './components/layout/Layout';
 import AuthLayout from './components/layout/AuthLayout';
@@ -25,6 +28,8 @@ import SearchAPI from './components/views/search/SearchAPI';
 import Checkout from './components/views/Checkout';
 import Inbox from './components/views/mail/Inbox';
 import Store from './components/views/Store';
+import ProductDetails from './components/views/search/ProductDetails';
+import useAuth from './hooks/useAuth';
 import './assets/css/reset.css';
 import './App.css';
 import './assets/css/utilities.css';
@@ -34,49 +39,50 @@ import './assets/css/form.css';
 import './assets/css/media-queries.css';
 
 const App = () => {
+  const { isAuth } = useAuth();
 
   return (
     <Routes>
       {/* Public routes */}
         {/* Public routes not auth */}
-      <Route path="/" element={<Layout />} >
-        <Route path="search-result/not-found/:name" element={<CardNotFound />} />
+      <Route path="/" element={!isAuth ? <Layout /> : <AuthLayout />} >
         <Route element={<RequireNotAuth />}>
           <Route index element={<Home />} />
           <Route path="about" element={<About />} />
           <Route path="contact" element={<Contact />} />
           <Route path="store/:id" element={<Store />} />
-          <Route path="shopping-cart" element={<ShoppingCart />} />
           <Route path="login" element={<Login />} />
           <Route path="signup" element={<Signup />} />
           <Route path="reset-password" element={<ResetPassword />} />
-          <Route path="search-result/:type/:name" element={<SearchResult />} />
         </Route>
-      </Route>
+
         {/* Auth protected routes */}
         <Route element={<RequireAuth />}>
-        <Route path="/" element={<AuthLayout />} >
-          <Route path="me" element={<AuthPage />}>
+          <Route index element={<AuthPage />} />
+          <Route path="home" element={<Navigate to="/" />} />
+          <Route path="me" exact element={<AuthPage />}>
             <Route path="dashboard" element={<DashBoard />} />
             <Route path="collection" element={<SearchCollection />} />
-            <Route path="store" element={<Store />} />
+            <Route path="collection/:id" element={<SearchResult />} >
+              <Route path="details" element={<ProductDetails />} />
+            </Route>
             <Route path="add-card" element={<SearchAPI />} />
+            <Route path="add-card/:id" element={<SearchResult />} >
+              <Route path="details" element={<ProductDetails />} />
+            </Route>
+            <Route path="store" element={<Store />} />
+            <Route path="settings" element={<Settings />} />
+            <Route path="profile" element={<Profile />} />
+            <Route path="checkout" element={<Checkout />} />
+            <Route path="mail" element={<Inbox />} ></Route>
           </Route>
-          <Route path="me/shopping-cart" element={<ShoppingCart />} />
-          <Route path="me/settings" element={<Settings />} />
-          <Route path="me/profile" element={<Profile />} />
-          <Route path="me/checkout" element={<Checkout />} />
-          <Route path="me/search-result/catalog/:cardName/:userID" element={<SearchResult />} />
-          <Route path="me/search-result/catalog/:cardName" element={<SearchResult />} />
-          <Route path="me/search-result/collection/:query" element={<SearchResult />} />
-          <Route path="me/search-result/api/:cardName" element={<SearchResult />} />
-          <Route path="me/mail/*" element={<Inbox />} ></Route>
         </Route>
-        </Route>
-
-
+        <Route path="search-results/" element={<SearchResult />} />
+        <Route path="shopping-cart" element={<ShoppingCart />} />
+        <Route path="search-results/not-found/:name" element={<CardNotFound />} />
         {/* Catch all */}
-      <Route path="*" element={<NotFound />} />
+        <Route path="*" element={<NotFound />} />
+      </Route>
     </Routes >
   );
 };

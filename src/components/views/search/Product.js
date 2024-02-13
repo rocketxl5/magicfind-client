@@ -1,4 +1,5 @@
-import { useState, forwardRef } from 'react';
+import { useState, forwardRef, useRef } from 'react';
+import { FiPlus } from "react-icons/fi";
 import CardDetailSection from './CardDetailSection';
 // Footers
 import CatalogCardFooter from './CatalogCardFooter';
@@ -6,7 +7,7 @@ import CollectionCardFooter from './CollectionCardFooter';
 import ApiCardFooter from './ApiCardFooter';
 
 import Image from './CardImage';
-import ExpandBtn from './cardbtn/ExpandBtn';
+
 
 import Seller from './product/Seller';
 import Catalog from './product/Catalog';
@@ -19,12 +20,14 @@ import capitalizeWord from '../../../assets/utilities/capitalizeWord';
 import getYear from '../../../assets/utilities/getYear';
 import data from '../../../assets/data/SEARCH';
 import useColorIdentity from '../../../hooks/useColorIdentity';
+import Loading from '../../layout/Loading';
 
 
 const Product = forwardRef(function Product(props, ref) {
     const { index, card, searchType, handleCardView, handleCardState } = props;
     const [loading, setLoading] = useState(false);
     const { attributes } = useAttributes(card);
+    const detailsRef = useRef(null);
 
     const { colorIdentity, manaCost } = useColorIdentity(card, data);
     // const re = /\{([^}]+)\}/;
@@ -37,16 +40,25 @@ const Product = forwardRef(function Product(props, ref) {
 
             <header className="product-header">
                 <h3>{card.name}</h3>
-                <p>{card.set_name}</p>
             </header>
 
-            <div className="product-grid" >
-                <section className="image">
-                    <Image card={card} handleCardView={handleCardView} />
-                    <ExpandBtn />
+            <div className="product-container" >
+
+                {/* <button type="button" onClick={() => detailsRef.current.classList.toggle('show-details')}>
+                    <FiPlus />
+                </button> */}
+                <section className="product-image">
+                    {
+                        loading ? (
+                            <Loading />
+                        ) : (
+
+                            <Image card={card} handleCardView={handleCardView} />
+                        )
+                    }
                 </section>
-                <section className={`${searchType} information section`}>
-                    <h2>Detail</h2>
+                <section className={`${searchType} product-details`} ref={detailsRef}>
+                    {/* <div className="inner">
                     {
 
 
@@ -63,29 +75,61 @@ const Product = forwardRef(function Product(props, ref) {
                             </>
                         ) : (
                             <>
-                                {
-                                }
-                                <span>Year: {`${getYear(card.released_at)}`}</span>
-                                <span>Rarity: {`${capitalizeWord(card.rarity)}`}</span>
-                                <span>Language: {`${data.product.languages[card.lang]}`}</span>
-                                <span>Collector #: {card.collector_number}</span>
-                                <span className="color-identity">Color Identity: {colorIdentity && colorIdentity.map((id, i) => id)}</span>
-                                <span className="color-identity">Mana Cost: {manaCost && manaCost.map((id, i) => id)}</span>
+                                            <div className="row">
+
+                                                <div className="column categories">
+                                                    <p>Type:</p>
+                                                    <p className="color-identity">Color:</p>
+                                                    <p className="color-identity">Mana:</p>
+                                                    <p>Year: </p>
+                                                    <p>Rarity: </p>
+                                                    <p>Language: </p>
+                                                    <p>Collector #: </p>
+                                                    <p>Artist: </p>
+                                                    <p>Frame:</p>
+                                                    {
+                                                        !card.finishes.includes('nonfoil') &&
+                                                        <p>Finish:</p>
+                                                    }
+                                                </div>
+                                                <div className="column values">
+                                                    <p>{card.type_line.split('—')[0]}</p>
+                                                    <p className="color-identity">{colorIdentity && colorIdentity.map((id, i) => id)}</p>
+                                                    <p className="color-identity">{manaCost && manaCost.map((id, i) => id)}</p>
+                                                    <p>{`${getYear(card.released_at)}`}</p>
+                                                    <p>{`${capitalizeWord(card.rarity)}`}</p>
+                                                    <p>{`${data.product.languages[card.lang]}`}</p>
+                                                    <p>{card.collector_number}</p>
+                                                    <p>{card.artist}</p>
+                                                    <p>{card.frame}</p>
+                                                    {
+                                                        !card.finishes.includes('nonfoil') &&
+
+                                                        <p className={`${card.finishes[0].toLowerCase() === 'foil' ? 'foil-finish' : ''}`}>
+                                                            {` ${capitalizeWord(card.finishes[0])}`}
+                                                        </p>
+
+                                                    }
+
+                                                </div>
+                                            </div>
 
                             </>
                         )
 
                     }
+                    </div> */}
 
                     {/* <CardDetailSection index={index} card={card} searchType={searchType} loading={loading} /> */}
                     {/* <Detail product={card} /> */}
                 </section>
+
                 {
                     searchType !== "search-api" &&
                     <section className={`${searchType} user section`}>
                         <h2>Seller</h2>
                     {/* <Seller product={card} /> */}
-                            {
+                            {/* {
 
                                 searchType === 'search-catalog' ? (
                                     <>
@@ -99,7 +143,7 @@ const Product = forwardRef(function Product(props, ref) {
                                     </>
                                 )
 
-                            }
+                            } */}
                 </section>
                 }
                 <section className={`${searchType} handler section`}>
