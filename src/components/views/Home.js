@@ -15,7 +15,7 @@ const Home = () => {
   const [cardCollections, setCardCollections] = useState(null);
   const navigate = useNavigate();
   const { banner, main, media } = data;
-  const { classList, title, link } = banner
+  // const { classList, title, link } = banner
 
   useEffect(() => {
     const cards = []
@@ -69,7 +69,7 @@ const Home = () => {
       <Modal open={view.open}>
         {view.component}
       </Modal>  
-      <Banner classList={classList} title={title} link={link} />
+
       <>
         <main className="main-content home">
           <section className="feature-section">
@@ -123,7 +123,6 @@ const Home = () => {
                 </span>
               </h2>
             </header>
-            {/* <CardImage key={index} card={card} handleCardView={handleCardView} /> */}
             <div className="media-scroller snaps-inline">
               {
                 mediaFeatures &&

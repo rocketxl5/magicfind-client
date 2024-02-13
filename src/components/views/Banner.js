@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 const Banner = ({ classList, title, link }) => {
     return (
-        <section className='banner-section'>
+        <section className='banner'>
             <div className={classList}>
                 <Link className="banner-link" to={link}>
                     {title}

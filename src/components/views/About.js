@@ -3,10 +3,10 @@ import Banner from './Banner';
 import data from '../../assets/data/ABOUT_PAGE';
 
 const About = () => {
-  const { classList, title, link } = data.banner
+  // const { classList, title, link } = data.banner
   return (
     <>
-      <Banner classList={classList} title={title} link={link} />
+      {/* <Banner classList={classList} title={title} link={link} /> */}
       <main className="main-content about">
         <section className="feature-section">
           <header className="section-header">
