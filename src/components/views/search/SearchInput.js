@@ -53,10 +53,10 @@ const SearchInput = forwardRef(function SearchInput(props, ref) {
     e.preventDefault();
     setMarker(-1);
     setSearchTerm('');
-    // Reinitialize input state if search-catalog 
+    // Reinitialize input state if catalog 
     // query is triggered each time search catalog has focus
     // making sure search catalog cardnames is updated with latest results  
-    if (e.target.id === 'search-catalog') {
+    if (e.target.id === 'catalog') {
       setSearchInput(null)
     }
   };

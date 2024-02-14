@@ -72,7 +72,7 @@ const Search = ({ path }) => {
   }, [])
 
   useEffect(() => {
-    if (searchInput?.id === 'search-api') {
+    if (searchInput?.id === 'api') {
       if (!apiCards) {
         fetchApiCards()
       } else {
@@ -174,7 +174,7 @@ const Search = ({ path }) => {
       setSearchInput(null);
       const result = {
         cards: apiCards,
-        searchType: searchInput.id
+        search: searchInput.id
       };
 
       localStorage.setItem('search-results', JSON.stringify(result));
@@ -197,8 +197,8 @@ const Search = ({ path }) => {
                 <h2 className="title">Add a card</h2>
               </header>
               <main className="main">
-                <form id="search-api-form" className="search-form" onSubmit={searchAPI}>
-                  <SearchInput id={'search-api'} className={'search-field'} placeholder={'Search MTG Cards'} searchCard={searchAPI} isActive={isActive} ref={apiInputRef} />
+                <form id="api-form" className="search-form" onSubmit={searchAPI}>
+                  <SearchInput id={'api'} className={'search-field'} placeholder={'Search MTG Cards'} searchCard={searchAPI} isActive={isActive} ref={apiInputRef} />
                 </form>
               </main>
             </>

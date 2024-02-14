@@ -51,7 +51,7 @@ const SearchCatalog = () => {
 
   useEffect(() => {
 
-    if (searchInput?.id === 'search-catalog') {
+    if (searchInput?.id === 'catalog') {
 
       setIsActive(true);
       searchCatalog();
@@ -107,7 +107,7 @@ const SearchCatalog = () => {
 
               const result = {
                 cards: data.cards,
-                searchType: searchInput.id
+                search: searchInput.id
               }
               setCardName('');
               setSearchInput(null);
@@ -146,9 +146,9 @@ const SearchCatalog = () => {
   }
 
   return (
-    <div id="search-catalog-container">
-      <form id="search-catalog-form" className="search-form" onSubmit={searchCatalogCard} >
-        <SearchInput id={'search-catalog'} className={'search-catalog-field'} placeholder={'Search Magic Find'} searchCard={searchCatalogCard} isActive={isActive} ref={catalogInputRef} />
+    <div id="catalog-container">
+      <form id="catalog-form" className="search-form" onSubmit={searchCatalogCard} >
+        <SearchInput id={'catalog'} className={'catalog-field'} placeholder={'Search Magic Find'} searchCard={searchCatalogCard} isActive={isActive} ref={catalogInputRef} />
       </form>
     </div>
   );

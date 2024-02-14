@@ -63,7 +63,7 @@ const App = () => {
           <Route path="me" exact element={<AuthPage />}>
             <Route path="dashboard" element={<DashBoard />} />
             <Route path="collection" element={<SearchCollection />} />
-            <Route path="collection/:id" element={<SearchResults />} >
+            <Route path="collection/:id" element={<SearchResults replace />} >
               <Route path="details" element={<ProductDetails />} />
             </Route>
             <Route path="add-card" element={<SearchAPI />} />

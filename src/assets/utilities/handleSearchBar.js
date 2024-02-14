@@ -32,13 +32,13 @@ const handleSearchBar = (e, isOutsideEvent = false) => {
         // If Search button (magnifier icon)
         if (target.classList.contains('search-btn')) {
             // Show Search bar 
-            document.querySelector('#search-catalog-container').style.setProperty('width', 'calc(100% - 5rem)');
+            document.querySelector('#catalog-container').style.setProperty('width', 'calc(100% - 5rem)');
             // Hide Search button
             // document.querySelector('.search-btn').style.setProperty('display', 'none');
             // Hide Cart button
             document.querySelector('.cart-btn').style.setProperty('display', 'none');
             // Add input field focus
-            document.querySelector('#search-catalog').focus();
+            document.querySelector('#catalog').focus();
         }
 
         // If Logo
@@ -66,17 +66,17 @@ const handleSearchBar = (e, isOutsideEvent = false) => {
             if (document.querySelector('#mobile-nav').checked) {
                 if (browserWidth <= 775) {
                     // If Search bar is displayed
-                    if (document.querySelector('#search-catalog-container').style.width === 'calc(100% - 5rem)') {
+                    if (document.querySelector('#catalog-container').style.width === 'calc(100% - 5rem)') {
                         // Hide Search bar
-                        document.querySelector('#search-catalog-container').style.setProperty('width', '0');
+                        document.querySelector('#catalog-container').style.setProperty('width', '0');
                         // Show Search button icon
                         // document.querySelector('.search-btn').style.setProperty('display', 'block');
                         // Show Cart button
                         document.querySelector('.cart-btn').style.setProperty('display', 'block');
                         // Reset field state
-                        document.querySelector('#search-catalog').blur();
+                        document.querySelector('#catalog').blur();
                         // Empty search input
-                        document.querySelector('#search-catalog').value = '';
+                        document.querySelector('#catalog').value = '';
                     }
                 }
                 // If menu is displayed
@@ -107,7 +107,7 @@ const handleSearchBar = (e, isOutsideEvent = false) => {
         if (isOutsideEvent) {
             if (browserWidth <= 775) {
                 // Clear search catalog search bar
-                document.querySelector('#search-catalog-container').style.width = 0;
+                document.querySelector('#catalog-container').style.width = 0;
                 // Display search icon (magnifier)
                 document.querySelector('.search-btn').style.setProperty('display', 'block');
             }

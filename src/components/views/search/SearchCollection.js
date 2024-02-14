@@ -63,13 +63,14 @@ const SearchCollection = ({ path }) => {
                 errorMessage && setErrorMessage(null);
               }
               else if (query === 'cards') {
-                const result = { cards: data, searchType: searchInput?.id }
+                const result = { cards: data, search: searchInput?.id }
                 // Update local storage with search data
                 localStorage.setItem('search-results', JSON.stringify(result));
                 console.log(result)
                 navigate(`/me/collection/all-cards`,
                   {
                     state: result,
+
                   });
               }
               setLoading(false);
@@ -98,7 +99,7 @@ const SearchCollection = ({ path }) => {
   }, []);
 
   useEffect(() => {
-    if (searchInput?.id === 'search-collection') {
+    if (searchInput?.id === 'collection') {
       setIsActive(true);
     } else {
       setIsActive(false);
@@ -148,7 +149,7 @@ const SearchCollection = ({ path }) => {
 
               const result = {
                 cards: data.cards,
-                searchType: searchInput.id,
+                search: searchInput.id,
               }
 
               setCardName('');
@@ -171,16 +172,13 @@ const SearchCollection = ({ path }) => {
   return (
     <>
 
+      <header className="content-header">
+        <h2 className="title">Collection</h2>
+      </header>
+
       {
-        loading ? (
-          <Loading />
-        ) : (
-            <>
-              <header className="content-header">
-              <h2 className="title">Collection</h2>
-            </header>
-            {errorMessage?.title === 'no_cards' ? (
-              <div className="message">
+        errorMessage?.title === 'no_cards' ? (
+          <div className="message">
                 <section className="message-section">
                   <div className="message-body">
                     {
@@ -195,9 +193,16 @@ const SearchCollection = ({ path }) => {
                 </section>
               </div>
             ) : ( 
-                  <main className="flex flex-column">
-                    <form id="search-collection-form" className="search-form" onSubmit={searchCollectionCard} >
-                      <SearchInput id={'search-collection'} className={'search-field'} placeholder={'Search Your Collection'} searchCard={searchCollectionCard} isActive={isActive} ref={collectionInputRef} />
+            <main>
+              {
+                loading ? (
+
+                  <Loading />
+
+                ) : (
+                  <>
+                    <form id="collection-form" className="search-form" onSubmit={searchCollectionCard} >
+                      <SearchInput id={'collection'} className={'search-field'} placeholder={'Search Your Collection'} searchCard={searchCollectionCard} isActive={isActive} ref={collectionInputRef} />
                     </form>
                     <button
                       className="bg-green btn-collection"
@@ -206,13 +211,14 @@ const SearchCollection = ({ path }) => {
                         e.stopPropagation();
                         searchCollection('cards');
                       }}
-                    >
+                      >
                       All Cards
                     </button>
-                  </main>
+                    </>
               )
               }
-            </>
+            </main>
+
         )
       }
     </>

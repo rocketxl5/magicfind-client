@@ -2,7 +2,7 @@ import { useReducer } from 'react';
 import EditCard from '../components/views/search/EditCard';
 import DeleteCard from '../components/views/search/DeleteCard';
 
-const useModalState = (searchType, callback) => {
+const useModalState = (search, callback) => {
     const INIT = {
         open: false,
         component: null
@@ -29,7 +29,7 @@ const useModalState = (searchType, callback) => {
                     open: true,
                     component: <DeleteCard
                         attributes={{ ...action.payload.attributes, id: 'confirm-delete' }}
-                        searchType={searchType}
+                        search={search}
                         card={action.payload.card}
                         handleClick={callback}
                     />
@@ -40,7 +40,7 @@ const useModalState = (searchType, callback) => {
                     component:
                         <EditCard
                             attributes={{ ...action.payload.attributes, id: 'confirm-edit' }}
-                            searchType={searchType}
+                            search={search}
                             card={action.payload.card}
                             handleClick={callback}
                         />

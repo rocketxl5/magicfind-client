@@ -4,9 +4,9 @@ import Catalog from '../components/views/search/product/Catalog';
 import Detail from '../components/views/search/product/Detail';
 
 const ACTIONS = {
-    COLLECTION: 'search-collection',
-    CATALOG: 'search-catalog',
-    API: 'search-api',
+    COLLECTION: 'collection',
+    CATALOG: 'catalog',
+    API: 'api',
 }
 const useProduct = () => {
 
@@ -29,7 +29,7 @@ const useProduct = () => {
 
     const [state, dispatch] = useReducer(reducer);
 
-    const updateSearchResult = (searchType) => {
+    const updateSearchResult = (search) => {
 
     }
 

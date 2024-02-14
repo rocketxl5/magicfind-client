@@ -10,7 +10,7 @@ import { api } from '../../../api/resources';
 
 const DeleteCard = (props) => {
     // Props
-    const { card, searchType, handleClick } = props;
+    const { card, search, handleClick } = props;
     // States
     const [response, setResponse] = useState({
         isDeleted: false,
@@ -79,9 +79,9 @@ const DeleteCard = (props) => {
                 if (query !== 'all-cards') {
                     // filter for cards with cardName
                     const updatedCards = cards.filter(cardObj => cardObj.name.toLowerCase() === card.name.toLowerCase());
-                    result = { cards: updatedCards, searchType };
+                    result = { cards: updatedCards, search };
                 } else {
-                    result = { cards: cards, searchType };
+                    result = { cards: cards, search };
                 }
                 setLoading(false);
                 localStorage.setItem('search-result', JSON.stringify(result));
