@@ -1,21 +1,76 @@
-import { NavLink, useLocation } from 'react-router-dom'
+import { useEffect, useContext } from 'react';
+import { NavLink, useParams } from 'react-router-dom'
+import { SearchContext } from '../../contexts/SearchContext';
+import useAuth from '../../hooks/useAuth';
+import { api } from '../../api/resources';
 
 const AuthContextualNav = ({ views }) => {
-    const location = useLocation()
+    const {
+        archiveCardNames,
+        setArchiveCardNames,
+        setCollectionCardNames,
+        updateCollection
+    } = useContext(SearchContext);
+
+    const { auth } = useAuth();
+    const { query } = useParams();
+
+    useEffect(() => {
+        if (!archiveCardNames) {
+
+            const headers = new Headers();
+            headers.append('Content-Type', 'application/json');
+            const options = {
+                method: 'GET',
+                headers: headers,
+            };
+
+            fetch(`${api.serverURL}/api/cards/mtg-cardnames`, options)
+                .then((res) => res.json())
+                .then((data) => {
+                    setArchiveCardNames(data);
+                })
+                .catch((error) => {
+                    console.log(error)
+                });
+        }
+    }, [])
+
+
+    useEffect(() => {
+
+        const headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+        headers.append('auth-token', auth.token);
+        const options = {
+            method: 'GET',
+            headers: headers,
+        }
+
+        fetch(`${api.serverURL}/api/cards/${auth.id}/cardnames`, options)
+            .then(res => res.json())
+            .then((data) => {
+                console.log(data)
+                setCollectionCardNames(data);
+            })
+            .catch((error) => {
+                console.log(error)
+            });
+
+    }, [updateCollection])
 
     return (
         <section className="contextual-nav">
         <div className="contextual-links">
-            {views.map((view, index) => {
-                console.log(location)
+                {views.map((view, index) => {
                 return (
                     <NavLink
                         key={index}
                         id={view.id}
                         to={`/me/${view.id}`}                        
                         className={({ isActive }) => {
-                            // If search param is defined and is equal to view.id, deactivate link 
-                            return isActive && location?.state?.search !== view.id ? 'active-link' : 'inactive-link'
+                            // If search param is defined, add active class else add inactive class 
+                            return isActive && !query ? 'active-link' : 'inactive-link'
                         }}
                     >
                         <span >{view.title}</span>

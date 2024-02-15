@@ -255,7 +255,7 @@ input:-webkit-autofill:active{
 /*************************/
 /*************************/
 
-#api-form,
+#archive-form,
 #collection-form { 
     position: relative;
     height: 5rem;
@@ -264,7 +264,7 @@ input:-webkit-autofill:active{
     margin: 0 auto;
 }
 
-input#api,
+input#archive,
 input#collection {
     border: 1px solid var(--clr-grey);
     width: 100%;
@@ -316,7 +316,7 @@ input#collection {
 }
 
 input#collection:focus,
-input#api:focus {
+input#archive:focus {
     padding: calc(var(--size-1) - 1px) !important;
     border: 2px solid rgb(103, 152, 180, 0.7) !important;
 }

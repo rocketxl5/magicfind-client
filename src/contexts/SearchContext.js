@@ -1,4 +1,5 @@
-import React, { useState, createContext } from 'react';
+import React, { useState, useEffect, createContext } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import useAuth from '../hooks/useAuth';
 export const SearchContext = createContext(null);
 
@@ -6,7 +7,15 @@ export const SearchProvider = ({ children }) => {
   const [searchInput, setSearchInput] = useState(null);
   const [cardName, setCardName] = useState('');
   const [searchTerm, setSearchTerm] = useState('');
-  const [apiCards, setApiCards] = useState(null);
+
+
+  const [archiveCardNames, setArchiveCardNames] = useState(null);
+  const [collectionCardNames, setCollectionCardNames] = useState(null);
+
+  // State changes on delete and add card actions
+  // Resets collectionCardNames state @ AuthContextualNav
+  const [updateCollection, setUpdateCollection] = useState(false);
+
   // Mount state @ SearchCollection initial fetch 
   const [errorMessage, setErrorMessage] = useState(null);
   const [displayAutcomplete, setDisplayAutocomplete] = useState(false);
@@ -15,6 +24,12 @@ export const SearchProvider = ({ children }) => {
   const [loading, setLoading] = useState(false);
   const [marker, setMarker] = useState(-1);
   const { auth } = useAuth();
+
+  // const [searchParams, setSearchParams] = useSearchParams();
+
+  // useEffect(() => {
+  //   setSearchParams({ query: cardName })
+  // }, [cardName])
 
   // Returns array of unique card names
   const filterCardNames = (cards) => {
@@ -46,8 +61,12 @@ export const SearchProvider = ({ children }) => {
         setLoading,
         cardNames,
         setCardNames,
-        apiCards,
-        setApiCards,
+        archiveCardNames,
+        setArchiveCardNames,
+        collectionCardNames,
+        setCollectionCardNames,
+        updateCollection,
+        setUpdateCollection,
         searchInput, 
         setSearchInput,
         searchTerm,

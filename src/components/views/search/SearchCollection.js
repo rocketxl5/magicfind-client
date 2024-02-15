@@ -4,7 +4,7 @@ import React, {
   useEffect,
   useContext
 } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { FiArrowRightCircle } from "react-icons/fi"
 import SearchInput from './SearchInput';
 import Loading from '../../layout/Loading';
@@ -15,7 +15,7 @@ import getViewPortWidth from '../../../assets/utilities/getViewPortWidth';
 import setQueryString from '../../../assets/utilities/setQueryString';
 import useAuth from '../../../hooks/useAuth';
 
-const SearchCollection = ({ path }) => {
+const SearchCollection = () => {
   // States
   const [loading, setLoading] = useState(false);
   const [isActive, setIsActive] = useState(false);
@@ -31,16 +31,17 @@ const SearchCollection = ({ path }) => {
     cardName,
     setCardName,
     setCardNames,
-    predictions
+    predictions,
+    collectionCardNames
   } = useContext(SearchContext);
-  // Routing
-  const navigate = useNavigate();
-  // Hook
+  // Hooks
   const { auth } = useAuth();
+  const navigate = useNavigate();
+  const location = useLocation();
   // Utilities
   const browserWidth = getViewPortWidth();
 
-  const searchCollection = (query = '') => {
+  const searchCollection = () => {
 
     setLoading(true);
     const headers = new Headers();
@@ -51,30 +52,20 @@ const SearchCollection = ({ path }) => {
       headers: headers,
     }
 
-    fetch(`${api.serverURL}/api/cards/${auth.id}/${query}`, options)
+    fetch(`${api.serverURL}/api/cards/${auth.id}/cards`, options)
       .then((res) => {
         if (res.ok) {
           return res.json()
-            .then((dataObj) => {
-              const { query, data } = dataObj;
-              if (query === 'card-names') {
-                setCardNames(data);
-                // setSearchInput(collectionInputRef.current?.id)
-                errorMessage && setErrorMessage(null);
-              }
-              else if (query === 'cards') {
+            .then((data) => {
                 const result = { cards: data, search: searchInput?.id }
                 // Update local storage with search data
                 localStorage.setItem('search-results', JSON.stringify(result));
-                console.log(result)
+              setLoading(false);    
                 navigate(`/me/collection/all-cards`,
                   {
                     state: result,
 
                   });
-              }
-              setLoading(false);
-              collectionInputRef.current?.focus();
             });
         }
         else if (res.status === 400 || res.status === 404) {
@@ -87,19 +78,20 @@ const SearchCollection = ({ path }) => {
       });
   }
   useEffect(() => {
-    // if (!hasLoaded) {
-    searchCollection('card-names')
-    // } else {
+    if (location.pathname.includes('collection')) {
+      collectionInputRef.current?.focus();
+    }
 
-    // setHasLoaded(false);
     if (browserWidth <= 775 && document.querySelector('#mobile-nav')?.checked) {
       hideSearchBar();
-      // }
     }
   }, []);
 
   useEffect(() => {
+    console.log(searchInput)
+    console.log(collectionCardNames)
     if (searchInput?.id === 'collection') {
+      setCardNames(collectionCardNames)
       setIsActive(true);
     } else {
       setIsActive(false);

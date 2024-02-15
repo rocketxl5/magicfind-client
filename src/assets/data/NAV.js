@@ -17,8 +17,8 @@ const NAV = {
             to: '../me/store'
         },
         {
-            name: 'Add Card',
-            to: '../me/add-card'
+            name: 'Archive',
+            to: '../me/archive'
         },
         {
             name: 'Profile',

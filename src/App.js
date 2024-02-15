@@ -1,8 +1,6 @@
 import {
   Route,
   Routes,
-  useParams,
-  useLocation,
   Navigate
 } from 'react-router-dom';
 import Layout from './components/layout/Layout';
@@ -24,7 +22,7 @@ import CardNotFound from './components/views/search/CardNotFound';
 import ShoppingCart from './components/views/ShoppingCart';
 import DashBoard from './components/views/DashBoard';
 import SearchCollection from './components/views/search/SearchCollection';
-import SearchAPI from './components/views/search/SearchAPI';
+import SearchArchive from './components/views/search/SearchArchive';
 import Checkout from './components/views/Checkout';
 import Inbox from './components/views/mail/Inbox';
 import Store from './components/views/Store';
@@ -63,13 +61,13 @@ const App = () => {
           <Route path="me" exact element={<AuthPage />}>
             <Route path="dashboard" element={<DashBoard />} />
             <Route path="collection" element={<SearchCollection />} />
-            <Route path="collection/:id" element={<SearchResults replace />} >
-              <Route path="details" element={<ProductDetails />} />
-            </Route>
-            <Route path="add-card" element={<SearchAPI />} />
-            <Route path="add-card/:id" element={<SearchResults />} >
-              <Route path="details" element={<ProductDetails />} />
-            </Route>
+            <Route path="collection/:query" element={<SearchResults />} />
+            {/* <Route path="details" element={<ProductDetails />} /> */}
+            <Route path="archive" exact element={<SearchArchive />} />
+            <Route path="archive/:query" element={<SearchResults />} />
+            <Route path="catalog/:query" element={<SearchResults />} />
+
+            {/* <Route path="details" element={<ProductDetails />} /> */}
             <Route path="store" element={<Store />} />
             <Route path="settings" element={<Settings />} />
             <Route path="profile" element={<Profile />} />

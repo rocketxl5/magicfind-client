@@ -10,8 +10,6 @@ const useColorSymbols = (card) => {
 
                 return symbols.map(symbol => `https://svgs.scryfall.io/card-symbols/${symbol}.svg`);
             }
-            else
-                console.log('symbols', symbols)
         }
 
         const setIcons = (urls, type) => {
