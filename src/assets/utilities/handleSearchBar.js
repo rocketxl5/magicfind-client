@@ -2,8 +2,8 @@ import getViewPortWidth from './getViewPortWidth';
 import getUserAgent from './getUserAgent';
 import toggleClass from './toggleClass';
 
-// Handles Header Search bar and mobile menu behaviour
-// [target] node element, [callback] stateSetter (searchTerm), [isOutsideEvent: bool] optional flag for extra Header events
+// Handles MainHeader Search bar and mobile menu behaviour
+// [target] node element, [callback] stateSetter (searchTerm), [isOutsideEvent: bool] optional flag for extra MainHeader events
 const handleSearchBar = (e, isOutsideEvent = false) => {
 // e.stopPropagation();
     const userAgent = getUserAgent();
@@ -103,7 +103,7 @@ const handleSearchBar = (e, isOutsideEvent = false) => {
                 }
             }
         }
-        // If event is triggered outside of Main Header
+        // If event is triggered outside of Main MainHeader
         if (isOutsideEvent) {
             if (browserWidth <= 775) {
                 // Clear search catalog search bar

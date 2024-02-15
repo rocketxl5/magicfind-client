@@ -22,7 +22,9 @@ const Breadcrumbs = () => {
 
     return (
         <div className="breadcrumbs">
+            <div className="crumbs">
             {crumbs}
+            </div>
         </div>
     )
 }

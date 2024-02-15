@@ -1,4 +1,4 @@
-// Main Header search form (search bar)
+// Main MainHeader search form (search bar)
 // Called on browser width <=775px
 import getUserAgent from './getUserAgent';
 import toggleClass from './toggleClass';

@@ -1,13 +1,21 @@
-import { useParams } from 'react-router-dom'
+import ArchiveDetails from './product/ArchiveDetails';
+import CatalogDetails from './product/CatalogDetails';
+import CollectionDetails from './product/CollectionDetails';
+// import { useParams } from 'react-router-dom'
 
-const ProductDetails = () => {
-    const { name } = useParams();
 
+const ProductDetails = ({ search, card }) => {
+    const handlers = {
+        archive: <ArchiveDetails card={card} />,
+        catalog: <CatalogDetails card={card} />,
+        collection: <CollectionDetails card={card} />
+    }
     return (
-        <div>
-            <h2>Product Details</h2>
-            <p>{name}</p>
-        </div>
+        <section className="product-details">
+            {
+                handlers[search]
+            }
+        </section>
     )
 }
 

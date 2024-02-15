@@ -88,8 +88,6 @@ const Collection = () => {
   }, []);
 
   useEffect(() => {
-    console.log(searchInput)
-    console.log(collectionCardNames)
     if (searchInput?.id === 'collection') {
       setCardNames(collectionCardNames)
       setIsActive(true);
@@ -147,7 +145,6 @@ const Collection = () => {
               setCardName('');
               setSearchInput(null);
               localStorage.setItem('search-results', JSON.stringify(result));
-              console.log(result)
               navigate(`/me/collection/${setQueryString(query.toLowerCase(), '-')}`,
                 {
                   state: result,

@@ -3,7 +3,7 @@ import RotateBtn from '../components/views/search/cardbtn/RotateBtn'
 import TurnBtn from '../components/views/search/cardbtn/TurnBtn'
 import CloseBtn from '../components/views/search/cardbtn/CloseBtn'
 
-const useModalView = (callback) => {
+const useModalProductView = (callback) => {
     const INIT = {
         open: false,
         component: null
@@ -112,7 +112,7 @@ const useModalView = (callback) => {
 
     const [view, dispatch] = useReducer(reducer, INIT)
 
-    const updateCardView = (layout, expandedImage) => {
+    const updateProductView = (layout, expandedImage) => {
         switch (layout) {
             case 'flip':
                 dispatch({
@@ -176,7 +176,7 @@ const useModalView = (callback) => {
         }
     }
 
-    return [view, updateCardView]
+    return [view, updateProductView]
 }
 
-export default useModalView
+export default useModalProductView

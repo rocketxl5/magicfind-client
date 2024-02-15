@@ -1,7 +1,7 @@
 
 import { useContext } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
-import Header from './Header';
+import MainHeader from './MainHeader';
 import Banner from '../views/Banner';
 import Footer from './Footer';
 import Loading from './Loading';
@@ -23,7 +23,7 @@ const Layout = () => {
                 </>
             ) : (
                 <div className="layout">
-                    <Header />
+                    <MainHeader />
                     <div className="container">
                         <Banner classList={classList} title={title} link={link} />
                         <div className="content">

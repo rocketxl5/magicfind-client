@@ -7,42 +7,38 @@ import Breadcrumbs from '../../layout/Breadcrumbs';
 import { ScrollContext } from '../../../contexts/ScrollContext';
 import { HiOutlineAdjustmentsHorizontal } from "react-icons/hi2";
 import { FiPlus } from "react-icons/fi";
-import useModalState from '../../../hooks/useModalState';
+import useModalProductState from '../../../hooks/useModalProductState';
 import useLoadImage from '../../../hooks/useLoadImage';
-import useModalView from '../../../hooks/useModalView';
+import useModalProductView from '../../../hooks/useModalProductView';
 import useProduct from '../../../hooks/useProduct';
-import getCardImgUrls from '../../../assets/utilities/getCardImgUrls';
 import data from '../../../assets/data/SEARCH';
 
 const SearchResults = () => {
     // States
-    const [urls, setUrls] = useState(null);
     const [searchFeatures, setSearchFeatures] = useState(false);
+    // Context
+    // const { btnRef, countRef } = useContext(ScrollContext);
+    // Hooks
+    const location = useLocation();
+    const navigate = useNavigate();
     // Refs
     const cardRef = useRef(null);
     const panelRef = useRef(null);
     const iconRef = useRef(null);
-    // Context
-    const { btnRef, countRef } = useContext(ScrollContext);
-    const location = useLocation();
-    const navigate = useNavigate();
+
+
     const { cards, search } = location.state?.result || JSON.parse(localStorage.getItem('search-results'));
 
 
     useEffect(() => {
-        console.log(location);
-
 
         // If cards is empty
         if (!cards.length) {
             // Send to collection view
             navigate('/me/collection');
-
-        } else {
-            const urls = getCardImgUrls(cards)
-            if (urls) {
-                setUrls(urls);
-            }
+        }
+        else {
+            // updateProducts(search)
         }
     }, [location]);
 
@@ -59,25 +55,21 @@ const SearchResults = () => {
     //         iconRef.current?.classList.remove('rotate-icon');
     //     }
     // }, [searchFeatures]);
+    // const [Product, updateProducts, view, state] = useProduct(cards);
 
-    const [imagesLoaded] = useLoadImage(urls);
+    const [view, updateProductView] = useModalProductView(handleModalProductView);
 
-    const [view, updateCardView] = useModalView(handleCardView);
-
-    const [state, updateCardState] = useModalState(search, handleCardState);
-
-    // const [products] = useProduct(search)
+    const [state, updateProductState] = useModalProductState(search, handleModelProductState);
 
 
-    function handleCardView(e, layout, expandedImage) {
+    function handleModalProductView(e, layout, expandedImage) {
         e.stopPropagation();
-        // console.log(e.target);
-        updateCardView(layout, expandedImage)
+        updateProductView(layout, expandedImage)
     }
 
-    function handleCardState(e, card, imgAttributes) {
+    function handleModelProductState(e, card) {
         e.stopPropagation();
-        updateCardState(e.target.id, card, imgAttributes)
+        updateProductState(e.target.id, card)
     }
 
     return (
@@ -93,24 +85,8 @@ const SearchResults = () => {
                 </Modal>
             }
 
-            <div className="search-result">
-                <header className="content-header">
-                    {/* <div className="inner-top">
-                        <div className="breadcrumb">
-                            {
-                                search !== 'catalog' &&
-                                <button
-                                    className="back-btn"
-                                    type="button"
-                                onClick={() => {
-                                        navigate(-1);
-                                    }}>
-                                    Go Back
-                                </button>}
-                        </div>
-                    </div> */}
-                    <div className="inner-bottom">
-
+            <div className="search-results">
+                <header className="search-results-header">
                         <h2 className="title">Search Results</h2>
                         <span className="space-1">
                             {
@@ -118,8 +94,7 @@ const SearchResults = () => {
                                     `${cards.length} ${cards.length > 1 ? 'Results' : 'Result'}` :
                                     'No results'
                             }
-                        </span>
-                    </div>
+                    </span>
                 </header>
                 {/* <aside className="parameters" >
                     <div className="parameters-container">
@@ -138,7 +113,7 @@ const SearchResults = () => {
                 <main className="products">
                         <ul>
                         {
-                            imagesLoaded &&
+                            // imagesLoaded &&
                                 cards.map((card, i) => {
                                     return (
                                         <Product
@@ -146,10 +121,13 @@ const SearchResults = () => {
                                             index={i}
                                             card={card}
                                             search={search}
-                                            handleCardView={handleCardView}
-                                            handleCardState={handleCardState}
+                                            handleModalProductView={handleModalProductView}
+                                            handleModelProductState={handleModelProductState}
                                             ref={cardRef}
-                                        />)
+                                        >
+
+                                        </Product>
+                                    )
                                 })
                     }
                         </ul>
