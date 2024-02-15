@@ -10,9 +10,9 @@ import Image from './CardImage';
 
 
 import Seller from './product/Seller';
-import Catalog from './product/Catalog';
-import API from './product/API';
-import Collection from './product/Collection';
+import CatalogHelpers from './product/CatalogHelpers';
+import ArchiveHelpers from './product/ArchiveHelpers';
+import CollectionHelpers from './product/CollectionHelpers';
 import Detail from './product/Detail';
 
 import useAttributes from '../../../hooks/useAttributes';
@@ -151,15 +151,15 @@ const Product = forwardRef(function Product(props, ref) {
                     {
                         search === 'catalog' ? (
                             <>
-                                <Catalog product={card} />
+                                <CatalogHelpers product={card} />
                             </>
                         ) : search === 'collection' ? (
                             <>
-                                <Collection />
+                                    <CollectionHelpers />
                             </>
                         ) : (
                             <>
-                                <API card={card} setLoading={setLoading} />
+                                        <ArchiveHelpers card={card} setLoading={setLoading} />
                             </>
                         )
 

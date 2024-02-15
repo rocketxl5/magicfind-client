@@ -1,5 +1,5 @@
 
-const Collection = () => {
+const CollectionHelpers = () => {
     return (
         <div className="card-btns">
             <div className="btn-container">
@@ -16,4 +16,4 @@ const Collection = () => {
     )
 }
 
-export default Collection
+export default CollectionHelpers

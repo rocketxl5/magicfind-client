@@ -1,5 +1,5 @@
 import { useContext, useRef } from 'react';
-import SearchCatalog from '../views/search/SearchCatalog';
+import Catalog from '../views/search/Catalog';
 import Navbar from './Navbar';
 import AuthContextualNav from './AuthContextualNav';
 import LogoBtn from './navbtn/LogoBtn';
@@ -26,7 +26,7 @@ const Header = () => {
     <header className="main-header" onClick={handleClick} ref={navRef}>
       <div className="top-header">
         <LogoBtn />
-        <SearchCatalog />
+        <Catalog />
         <Navbar />
       </div>
       {

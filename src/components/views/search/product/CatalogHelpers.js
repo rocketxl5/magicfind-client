@@ -4,7 +4,7 @@ import { CartContext } from '../../../../contexts/CartContext';
 import { api } from '../../../../api/resources';
 import styled from 'styled-components';
 
-const Catalog = ({ product }) => {
+const CatalogHelpers = ({ product }) => {
     const [isLoading, setIsLoading] = useState(false);
     const [quantitySelected, setQuantitySelected] = useState(0);
     const [isCartItem, setIsCartItem] = useState(false);
@@ -125,4 +125,4 @@ const Selector = styled.div`
   }
 `;
 
-export default Catalog
+export default CatalogHelpers

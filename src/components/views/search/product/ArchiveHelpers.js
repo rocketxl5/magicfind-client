@@ -8,7 +8,7 @@ const INIT = {
     value: 'Add To Collection',
     statue: false
 }
-const API = ({ card, setLoading }) => {
+const ArchiveHelpers = ({ card, setLoading }) => {
     const [attributes, setAttributes] = useState(INIT);
     const [selectedCard, setSelectedCard] = useState(null);
 
@@ -80,14 +80,14 @@ const API = ({ card, setLoading }) => {
     return (
 
 
-            <div className="btn-container">
-                {/* <Button attributes={attributes} handleClick={handleClick}  /> */}
-                <button id="add-to-collection" className={attributes.style} type={attributes.type} onClick={handleClick}>{attributes.value}</button>
-                {/* <button className="btn bg-blue color-lg-grey" type="button" onClick={() => handleClick(card)}>{!isLoaded ? 'Add To Collection' : 'Added'}</button> */}
-            </div>
+        <div className="btn-container">
+            {/* <Button attributes={attributes} handleClick={handleClick}  /> */}
+            <button id="add-to-collection" className={attributes.style} type={attributes.type} onClick={handleClick}>{attributes.value}</button>
+            {/* <button className="btn bg-blue color-lg-grey" type="button" onClick={() => handleClick(card)}>{!isLoaded ? 'Add To Collection' : 'Added'}</button> */}
+        </div>
 
 
     )
 }
 
-export default API
+export default ArchiveHelpers

@@ -21,8 +21,8 @@ import NotFound from './components/layout/NotFound';
 import CardNotFound from './components/views/search/CardNotFound';
 import ShoppingCart from './components/views/ShoppingCart';
 import DashBoard from './components/views/DashBoard';
-import SearchCollection from './components/views/search/SearchCollection';
-import SearchArchive from './components/views/search/SearchArchive';
+import Collection from './components/views/search/Collection';
+import Archive from './components/views/search/Archive';
 import Checkout from './components/views/Checkout';
 import Inbox from './components/views/mail/Inbox';
 import Store from './components/views/Store';
@@ -60,10 +60,10 @@ const App = () => {
           <Route path="home" element={<Navigate to="/" />} />
           <Route path="me" exact element={<AuthPage />}>
             <Route path="dashboard" element={<DashBoard />} />
-            <Route path="collection" element={<SearchCollection />} />
+            <Route path="collection" element={<Collection />} />
             <Route path="collection/:query" element={<SearchResults />} />
             {/* <Route path="details" element={<ProductDetails />} /> */}
-            <Route path="archive" exact element={<SearchArchive />} />
+            <Route path="archive" exact element={<Archive />} />
             <Route path="archive/:query" element={<SearchResults />} />
             <Route path="catalog/:query" element={<SearchResults />} />
 

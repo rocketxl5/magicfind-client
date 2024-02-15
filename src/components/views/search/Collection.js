@@ -15,7 +15,7 @@ import getViewPortWidth from '../../../assets/utilities/getViewPortWidth';
 import setQueryString from '../../../assets/utilities/setQueryString';
 import useAuth from '../../../hooks/useAuth';
 
-const SearchCollection = () => {
+const Collection = () => {
   // States
   const [loading, setLoading] = useState(false);
   const [isActive, setIsActive] = useState(false);
@@ -192,10 +192,8 @@ const SearchCollection = () => {
                   <Loading />
 
                 ) : (
-                  <>
                     <form id="collection-form" className="search-form" onSubmit={searchCollectionCard} >
                       <SearchInput id={'collection'} className={'search-field'} placeholder={'Search Your Collection'} searchCard={searchCollectionCard} isActive={isActive} ref={collectionInputRef} />
-                    </form>
                     <button
                       className="bg-green btn-collection"
                       type="button"
@@ -206,7 +204,7 @@ const SearchCollection = () => {
                       >
                       All Cards
                     </button>
-                    </>
+                    </form>
               )
               }
             </main>
@@ -217,4 +215,4 @@ const SearchCollection = () => {
   )
 }
 
-export default SearchCollection;
+export default Collection;

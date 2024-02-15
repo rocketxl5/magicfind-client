@@ -12,7 +12,7 @@ import { api } from '../../../api/resources';
 import hideSearchBar from '../../../assets/utilities/hideSearchBar';
 import setQueryString from '../../../assets/utilities/setQueryString';
 
-const SearchCatalog = () => {
+const Catalog = () => {
   // States
   const [isActive, setIsActive] = useState(false);
   // Ref
@@ -27,34 +27,19 @@ const SearchCatalog = () => {
     setCardName,
     setCardNames,
     predictions,
+    catalogCardNames
   } = useContext(SearchContext);
-  // Routing
-  const navigate = useNavigate();
-  // Hook
+  // Hooks
   const { auth, isAuth } = useAuth();
+  const navigate = useNavigate();
 
-  const searchCatalog = () => {
-    const headers = new Headers();
-    headers.append('Content-Type', 'application/json');
-    const options = {
-      method: 'GET',
-      headers: headers,
-    };
-
-    fetch(`${api.serverURL}/api/cards/catalog`, options)
-      .then((res) => res.json())
-      .then((data) => {
-        setCardNames(data.cards)
-      })
-      .catch((error) => console.log(error));
-  }
 
   useEffect(() => {
 
     if (searchInput?.id === 'catalog') {
 
+      setCardNames(catalogCardNames);
       setIsActive(true);
-      searchCatalog();
     } else {
       setCardNames(null);
       setIsActive(false);
@@ -119,7 +104,7 @@ const SearchCatalog = () => {
                     state: { result: result },
                   })
               ) : (
-                  navigate(`/search-results/${setQueryString(query.toLowerCase(), '-')}`,
+                navigate(`/search-results/${setQueryString(query.toLowerCase(), '-')}`,
                   {
                     state: { result: result },
                   })
@@ -154,4 +139,4 @@ const SearchCatalog = () => {
   );
 };
 
-export default SearchCatalog;
+export default Catalog;

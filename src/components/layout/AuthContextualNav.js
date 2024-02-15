@@ -9,12 +9,15 @@ const AuthContextualNav = ({ views }) => {
         archiveCardNames,
         setArchiveCardNames,
         setCollectionCardNames,
-        updateCollection
+        updateCollection,
+        setCatalogCardNames,
+        updateCatalog
     } = useContext(SearchContext);
 
     const { auth } = useAuth();
     const { query } = useParams();
 
+    // Setting archive card names for autocomplete archive search
     useEffect(() => {
         if (!archiveCardNames) {
 
@@ -36,9 +39,25 @@ const AuthContextualNav = ({ views }) => {
         }
     }, [])
 
-
+    // Setting catalog card names for autocomplete catalog search
     useEffect(() => {
+        const headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+        const options = {
+            method: 'GET',
+            headers: headers,
+        };
 
+        fetch(`${api.serverURL}/api/cards/catalog`, options)
+            .then((res) => res.json())
+            .then((data) => {
+                setCatalogCardNames(data)
+            })
+            .catch((error) => console.log(error));
+    }, [updateCatalog])
+
+    // Setting collection card names for autocomplete collection search
+    useEffect(() => {
         const headers = new Headers();
         headers.append('Content-Type', 'application/json');
         headers.append('auth-token', auth.token);
@@ -50,7 +69,6 @@ const AuthContextualNav = ({ views }) => {
         fetch(`${api.serverURL}/api/cards/${auth.id}/cardnames`, options)
             .then(res => res.json())
             .then((data) => {
-                console.log(data)
                 setCollectionCardNames(data);
             })
             .catch((error) => {
