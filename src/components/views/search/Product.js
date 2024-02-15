@@ -1,6 +1,5 @@
 import { useState, forwardRef, useRef, useEffect } from 'react';
 import { FiPlus } from "react-icons/fi";
-import CardDetailSection from './CardDetailSection';
 // Footers
 import CatalogCardFooter from './CatalogCardFooter';
 import CollectionCardFooter from './CollectionCardFooter';
@@ -10,10 +9,14 @@ import Image from './CardImage';
 
 
 import Seller from './product/Seller';
-import CatalogHelpers from './product/CatalogHelpers';
-import ArchiveHelpers from './product/ArchiveHelpers';
-import CollectionHelpers from './product/CollectionHelpers';
-import Detail from './product/Detail';
+import CatalogHandlers from './product/CatalogHandlers';
+import ArchiveHandlers from './product/ArchiveHandlers';
+import CollectionHandlers from './product/CollectionHandlers';
+
+import Header from '../../layout/Header';
+import ProductImage from './ProductImage';
+import ProductDetails from './ProductDetails';
+import ProductHandlers from './ProductHandlers';
 
 import useAttributes from '../../../hooks/useAttributes';
 import capitalizeWord from '../../../assets/utilities/capitalizeWord';
@@ -24,36 +27,26 @@ import Loading from '../../layout/Loading';
 
 
 const Product = forwardRef(function Product(props, ref) {
-    const { index, card, search, handleCardView, handleCardState } = props;
+    const { index, card, search, handleModalProductView, handleModelProductState } = props;
     const [loading, setLoading] = useState(false);
     const { attributes } = useAttributes(card);
     const detailsRef = useRef(null);
 
-    const { colorIdentity, manaCost } = useColorSymbols(card);
+    // const { colorIdentity, manaCost } = useColorSymbols(card);
 
     return (
         <li className="product" ref={ref}>
-
-            <header className="product-header">
-                <h3>{card.name}</h3>
-            </header>
-
+            <Header title={card.name} classList={'product-header'} />
             <div className="product-container" >
 
                 {/* <button type="button" onClick={() => detailsRef.current.classList.toggle('show-details')}>
                     <FiPlus />
                 </button> */}
-                <section className="product-image">
-                    {
-                        loading ? (
-                            <Loading />
-                        ) : (
+                <ProductImage card={card} loading={loading} handleClick={handleModalProductView} />
+                <ProductDetails card={card} search={search} />
+                <ProductHandlers card={card} search={search} setLoading={value => setLoading(value)} andleModelProductState={handleModelProductState} />
 
-                            <Image card={card} handleCardView={handleCardView} />
-                        )
-                    }
-                </section>
-                <section className={`${search} product-details`} ref={detailsRef}>
+                {/* <section className={`${search} product-details`} ref={detailsRef}> */}
                     {/* <div className="inner">
                     {
 
@@ -73,7 +66,7 @@ const Product = forwardRef(function Product(props, ref) {
                             <>
                                             <div className="row">
 
-                                                <div className="column categories">
+                                                <div className="column specs">
                                                     <p>Type:</p>
                                                     <p className="color-identity">Color:</p>
                                                     <p className="color-identity">Mana:</p>
@@ -122,7 +115,7 @@ const Product = forwardRef(function Product(props, ref) {
 
                     {/* <CardDetailSection index={index} card={card} search={search} loading={loading} /> */}
                     {/* <Detail product={card} /> */}
-                </section>
+                {/* </section> */}
 
                 {
                     search !== "api" &&
@@ -146,25 +139,7 @@ const Product = forwardRef(function Product(props, ref) {
                             } */}
                 </section>
                 }
-                <section className={`${search} handler section`}>
-                    {/* <h2>Handler</h2> */}
-                    {
-                        search === 'catalog' ? (
-                            <>
-                                <CatalogHelpers product={card} />
-                            </>
-                        ) : search === 'collection' ? (
-                            <>
-                                    <CollectionHelpers />
-                            </>
-                        ) : (
-                            <>
-                                        <ArchiveHelpers card={card} setLoading={setLoading} />
-                            </>
-                        )
 
-                    }
-                </section>
             </div>
             {/* <footer className="card-footer" onClick={(e) => handleCardState(e, card, attributes)}>
                 {search === 'catalog' ? (

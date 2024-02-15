@@ -119,7 +119,7 @@
         font-size: 1.3rem;
     }
 
-    /* Header */
+    /* MainHeader */
     .nav-btn svg {
         height: 3rem;
         width: 3rem;
@@ -137,7 +137,7 @@
         aspect-ratio: 3 / 1.5;
     }
 
-    /* Header */
+    /* MainHeader */
     .main-header {
         display: flex;
         flex-direction: column;
@@ -361,21 +361,21 @@
         background-position: 100%  50%!important;
     }
 
-    .search-result {
+    .search-results {
         padding-inline: 0;
         display: grid;
         grid-template-columns: repeat(4, 1fr);
         gap: 2rem;
     }
 
-    .search-result .header {
+    .search-results .header {
         grid-column: span 4;
     }
 
-    .search-result .parameters {
+    .search-results .parameters {
         grid-column: span 1;
     }
-    .search-result .products {
+    .search-results .products {
         padding-inline: 0;
         grid-column: span 3;
     }

@@ -40,7 +40,7 @@ const DeleteCard = (props) => {
                 {
                     state: result,
                 });
-            localStorage.setItem('search-result', JSON.stringify(result));
+            localStorage.setItem('search-results', JSON.stringify(result));
             button.click();
         }, 1500)
     }
@@ -84,7 +84,7 @@ const DeleteCard = (props) => {
                     result = { cards: cards, search };
                 }
                 setLoading(false);
-                localStorage.setItem('search-result', JSON.stringify(result));
+                localStorage.setItem('search-results', JSON.stringify(result));
                 closeModal(btnRef.current, result, location.pathname);
             })
             .catch((error) => {

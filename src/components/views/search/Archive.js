@@ -122,7 +122,6 @@ const Search = () => {
     if (data) {
       const cards = [];
       const filteredCards = filterCards(data);
-      console.log(data)
       filteredCards.forEach((card, index) => {
         if (card.finishes.length === 1) {
           cards.push(filteredCards.splice(index, 1).pop());

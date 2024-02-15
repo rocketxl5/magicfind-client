@@ -1,8 +1,9 @@
 import { useReducer } from 'react';
 import EditCard from '../components/views/search/EditCard';
 import DeleteCard from '../components/views/search/DeleteCard';
+import cardBack from '../assets/img/mtg_card_back.jpg'
 
-const useModalState = (search, callback) => {
+const useModalProductState = (search, callback) => {
     const INIT = {
         open: false,
         component: null
@@ -18,7 +19,6 @@ const useModalState = (search, callback) => {
         EDIT_CARD: 'edit-card',
         CLOSE_MODAL: 'close',
     }
-
 
     const reducer = (state, action) => {
 
@@ -65,17 +65,23 @@ const useModalState = (search, callback) => {
     }
     const [state, dispatch] = useReducer(reducer, INIT)
 
-    const updateCardState = (id, card, imgAttributes) => {
+    const updateProductState = (id, card) => {
         dispatch({
             type: id,
             payload: {
                 card: card,
-                attributes: imgAttributes,
+                attributes: {
+                    id: 'expand-card',
+                    style: 'card-image',
+                    src: card?.image_uris?.small || card?.card_faces[0]?.image_uris?.small,
+                    alt: `${card?.name} image`,
+                    placeholder: cardBack
+                },
             }
         })
     }
 
-    return [state, updateCardState];
+    return [state, updateProductState];
 }
 
-export default useModalState;
+export default useModalProductState;

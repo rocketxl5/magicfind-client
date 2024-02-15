@@ -96,7 +96,6 @@ const Catalog = () => {
               }
               setCardName('');
               setSearchInput(null);
-              console.log(result)
               localStorage.setItem('search-results', JSON.stringify(result));
               !isAuth ? (
                 navigate(`/catalog/search-results/${setQueryString(query.toLowerCase(), '-')}`,
@@ -120,7 +119,7 @@ const Catalog = () => {
 
             setLoading(false);
 
-            navigate(`/search-result/not-found/${query}`);
+            navigate(`/search-results/not-found/${query}`);
 
             if (document.querySelector('#mobile-nav')?.checked) {
               hideSearchBar();

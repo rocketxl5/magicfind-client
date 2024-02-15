@@ -8,7 +8,7 @@ const INIT = {
     value: 'Add To Collection',
     statue: false
 }
-const ArchiveHelpers = ({ card, setLoading }) => {
+const ArchiveHandlers = ({ card, setLoading }) => {
     const [attributes, setAttributes] = useState(INIT);
     const [selectedCard, setSelectedCard] = useState(null);
 
@@ -38,7 +38,7 @@ const ArchiveHelpers = ({ card, setLoading }) => {
     }, [])
 
     useEffect(() => {
-
+        console.log(selectedCard)
         if (selectedCard) {
 
             setLoading(true)
@@ -74,7 +74,7 @@ const ArchiveHelpers = ({ card, setLoading }) => {
         }
     }, [selectedCard])
 
-    const handleClick = () => {
+    const handleClick = (e) => {
         setSelectedCard(card)
     }
     return (
@@ -90,4 +90,4 @@ const ArchiveHelpers = ({ card, setLoading }) => {
     )
 }
 
-export default ArchiveHelpers
+export default ArchiveHandlers

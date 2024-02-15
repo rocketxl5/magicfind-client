@@ -1,7 +1,7 @@
 
 import { useEffect, useContext } from 'react';
 import { useNavigate, useParams, Outlet } from 'react-router-dom';
-import Header from './Header';
+import MainHeader from './MainHeader';
 import AuthContextualNav from './AuthContextualNav';
 import Breadcrumbs from './Breadcrumbs';
 import Footer from './Footer';
@@ -35,7 +35,7 @@ const AuthLayout = () => {
 
     return (
         <div className="auth-layout">
-            <Header />
+            <MainHeader />
             <div className="container">
                 <div className="content">
                     <Breadcrumbs />              
