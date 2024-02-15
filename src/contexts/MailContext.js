@@ -3,7 +3,7 @@ import useAuth from '../hooks/useAuth';
 
 export const MailContext = createContext(null);
 // Prevents access to add-card component if a card  hasen't been selected
-// previously. This means a search has been done in the search-api view
+// previously. This means a search has been done in the api view
 // and a card was selected to be added to the user store
 export const MailProvider = ({ children }) => {
   const { auth } = useAuth();

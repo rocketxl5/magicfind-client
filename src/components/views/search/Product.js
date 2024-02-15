@@ -24,7 +24,7 @@ import Loading from '../../layout/Loading';
 
 
 const Product = forwardRef(function Product(props, ref) {
-    const { index, card, searchType, handleCardView, handleCardState } = props;
+    const { index, card, search, handleCardView, handleCardState } = props;
     const [loading, setLoading] = useState(false);
     const { attributes } = useAttributes(card);
     const detailsRef = useRef(null);
@@ -53,18 +53,18 @@ const Product = forwardRef(function Product(props, ref) {
                         )
                     }
                 </section>
-                <section className={`${searchType} product-details`} ref={detailsRef}>
+                <section className={`${search} product-details`} ref={detailsRef}>
                     {/* <div className="inner">
                     {
 
 
-                        searchType === 'search-catalog' ? (
+                        search === 'catalog' ? (
                             <>
                                 <span>{data.product.conditions[`${card.condition}`]}</span>
                                 <span>{data.product.languages[`${card.language}`]}</span>
 
                             </>
-                        ) : searchType === 'search-collection' ? (
+                        ) : search === 'collection' ? (
                             <>
                                 <span>{data.product.conditions[`${card.condition}`]}</span>
                                 <span>{data.product.languages[`${card.language}`]}</span>
@@ -120,23 +120,23 @@ const Product = forwardRef(function Product(props, ref) {
                     }
                     </div> */}
 
-                    {/* <CardDetailSection index={index} card={card} searchType={searchType} loading={loading} /> */}
+                    {/* <CardDetailSection index={index} card={card} search={search} loading={loading} /> */}
                     {/* <Detail product={card} /> */}
                 </section>
 
                 {
-                    searchType !== "search-api" &&
-                    <section className={`${searchType} user section`}>
+                    search !== "api" &&
+                    <section className={`${search} user section`}>
                         <h2>Seller</h2>
                     {/* <Seller product={card} /> */}
                             {/* {
 
-                                searchType === 'search-catalog' ? (
+                                search === 'catalog' ? (
                                     <>
                                         <span>{data.product.conditions[`${card.condition}`]}</span>
                                         <span>{data.product.languages[`${card.language}`]}</span>
                                     </>
-                                ) : searchType === 'search-collection'(
+                                ) : search === 'collection'(
                                     <>
                                         <span>{data.product.conditions[`${card.condition}`]}</span>
                                         <span>{data.product.languages[`${card.language}`]}</span>
@@ -146,14 +146,14 @@ const Product = forwardRef(function Product(props, ref) {
                             } */}
                 </section>
                 }
-                <section className={`${searchType} handler section`}>
+                <section className={`${search} handler section`}>
                     {/* <h2>Handler</h2> */}
                     {
-                        searchType === 'search-catalog' ? (
+                        search === 'catalog' ? (
                             <>
                                 <Catalog product={card} />
                             </>
-                        ) : searchType === 'search-collection' ? (
+                        ) : search === 'collection' ? (
                             <>
                                 <Collection />
                             </>
@@ -167,11 +167,11 @@ const Product = forwardRef(function Product(props, ref) {
                 </section>
             </div>
             {/* <footer className="card-footer" onClick={(e) => handleCardState(e, card, attributes)}>
-                {searchType === 'search-catalog' ? (
+                {search === 'catalog' ? (
                     // <CatalogCardFooter card={card} />
                     ''
                 ) :
-                    searchType === 'search-collection' ? (
+                    search === 'collection' ? (
                         <CollectionCardFooter card={card} />
                     ) : (
                         <ApiCardFooter card={card} setLoading={(value) => { setLoading(value) }} />

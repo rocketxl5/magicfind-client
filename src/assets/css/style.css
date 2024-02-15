@@ -147,12 +147,12 @@ color: var(--clr-dark);
 
 .content {
 position: relative;
-/* min-height: inherit; */
 margin: 0 auto;
 }
 
 .auth-layout .content {
  padding-inline: 2rem;
+ min-height: inherit;
 }
 
 .content-header  {
@@ -169,12 +169,6 @@ margin: 0 auto;
 margin-inline: auto;
 }
 
-.auth-content {
-padding-inline: 1rem;
-background-color: var(--clr-light-grey);
-min-height: calc(100vh - 13.5rem);
-}
-
 button:hover {
 cursor: pointer;
 }
@@ -182,13 +176,16 @@ cursor: pointer;
 /* Loading Spinner Styling */
 .loading-content {
 display: flex;
-min-height: inherit;
+height: inherit;
+flex-direction: column;
 justify-content: center;
 align-items: center;
 }
 
 .loading-icon {
-margin: auto;
+display: flex;
+align-items: stretch;
+justify-content: center;
 }
 
 .loading-icon svg {

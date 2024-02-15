@@ -26,7 +26,7 @@ const SearchResults = () => {
     const { btnRef, countRef } = useContext(ScrollContext);
     const location = useLocation();
     const navigate = useNavigate();
-    const { cards, searchType } = location.state?.result || JSON.parse(localStorage.getItem('search-results'));
+    const { cards, search } = location.state?.result || JSON.parse(localStorage.getItem('search-results'));
 
 
     useEffect(() => {
@@ -64,9 +64,9 @@ const SearchResults = () => {
 
     const [view, updateCardView] = useModalView(handleCardView);
 
-    const [state, updateCardState] = useModalState(searchType, handleCardState);
+    const [state, updateCardState] = useModalState(search, handleCardState);
 
-    // const [products] = useProduct(searchType)
+    // const [products] = useProduct(search)
 
 
     function handleCardView(e, layout, expandedImage) {
@@ -98,7 +98,7 @@ const SearchResults = () => {
                     {/* <div className="inner-top">
                         <div className="breadcrumb">
                             {
-                                searchType !== 'search-catalog' &&
+                                search !== 'catalog' &&
                                 <button
                                     className="back-btn"
                                     type="button"
@@ -145,7 +145,7 @@ const SearchResults = () => {
                                             key={i}
                                             index={i}
                                             card={card}
-                                            searchType={searchType}
+                                            search={search}
                                             handleCardView={handleCardView}
                                             handleCardState={handleCardState}
                                             ref={cardRef}

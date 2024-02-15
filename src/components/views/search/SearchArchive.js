@@ -4,7 +4,7 @@ import React, {
   useEffect,
   useContext
 } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import SearchInput from './SearchInput';
 import Loading from '../../layout/Loading';
 import { SearchContext } from '../../../contexts/SearchContext';
@@ -13,14 +13,14 @@ import setQueryString from '../../../assets/utilities/setQueryString';
 import hideSearchBar from '../../../assets/utilities/hideSearchBar';
 import getViewPortWidth from '../../../assets/utilities/getViewPortWidth';
 
-const Search = ({ path }) => {
+const Search = () => {
   // States
   const [loading, setLoading] = useState(false);
   const [isActive, setIsActive] = useState(false);
   const [oracleID, setOracleID] = useState('');
   const [data, setData] = useState(null);
   // Ref
-  const apiInputRef = useRef(null);
+  const archiveInputRef = useRef(null);
   // Context
   const {
     searchInput,
@@ -30,41 +30,18 @@ const Search = ({ path }) => {
     cardName,
     setCardName,
     setCardNames,
-    apiCards,
-    setApiCards,
+    archiveCardNames,
   } = useContext(SearchContext);
-  // Routing
+  // Hooks
   const navigate = useNavigate();
+  const location = useLocation();
   // Utilities
   const browserWidth = getViewPortWidth();
 
-  const fetchApiCards = () => {
-
-    setLoading(true);
-    const headers = new Headers();
-    headers.append('Content-Type', 'application/json');
-    const options = {
-      method: 'GET',
-      headers: headers,
-    };
-
-    fetch(`${api.serverURL}/api/cards/mtg-cardnames`, options)
-      .then((res) => res.json())
-      .then((data) => {
-        setApiCards(data);
-        setCardNames(data);
-        setLoading(false);
-        apiInputRef.current.focus();
-      })
-      .catch((error) => {
-        setLoading(false);
-        console.log(error)
-      });
-  }
-
   useEffect(() => {
-    if (path === 'add-card') {
-      apiInputRef.current.focus();
+    if (location.pathname.includes('archive')) {
+      archiveInputRef.current?.focus();
+
     }
     if (browserWidth <= 775 && document.querySelector('#mobile-nav')?.checked) {
       hideSearchBar();
@@ -72,12 +49,8 @@ const Search = ({ path }) => {
   }, [])
 
   useEffect(() => {
-    if (searchInput?.id === 'search-api') {
-      if (!apiCards) {
-        fetchApiCards()
-      } else {
-        setCardNames(apiCards);
-      }
+    if (searchInput?.id === 'archive') {
+      setCardNames(archiveCardNames);
       setIsActive(true);
     } else {
       setIsActive(false);
@@ -85,7 +58,7 @@ const Search = ({ path }) => {
   }, [searchInput])
 
 
-  const searchAPI = (e = undefined, prediction = undefined) => {
+  const searchArchive = (e = undefined, prediction = undefined) => {
     e?.preventDefault();
 
     if (searchTerm.length < 3) { return }
@@ -102,14 +75,14 @@ const Search = ({ path }) => {
     else if (cardName) {
       query = `cards/named?exact=${cardName}`;
     }
-    else if (predictions === 1) {
+    else if (predictions.length === 1) {
       query = `cards/named?exact=${predictions[0]}`;
     }
     else if (searchTerm) {
       query = `cards/named?fuzzy=${searchTerm}`;
     }
 
-    apiInputRef.current.blur();
+    archiveInputRef.current.blur();
 
     fetch(`${api.skryfallURL}/${query}`, headers)
       .then((res) => {
@@ -147,17 +120,17 @@ const Search = ({ path }) => {
 
   useEffect(() => {
     if (data) {
-      const apiCards = [];
+      const cards = [];
       const filteredCards = filterCards(data);
-
+      console.log(data)
       filteredCards.forEach((card, index) => {
         if (card.finishes.length === 1) {
-          apiCards.push(filteredCards.splice(index, 1).pop());
+          cards.push(filteredCards.splice(index, 1).pop());
         }
       });
       filteredCards.forEach(card => {
         card.finishes.forEach(finish => {
-          apiCards.push({ ...card, finishes: [finish], id: `${card.id}_${finish}` });
+          cards.push({ ...card, finishes: [finish], id: `${card.id}_${finish}` });
         })
       });
 
@@ -173,12 +146,11 @@ const Search = ({ path }) => {
       setCardName('');
       setSearchInput(null);
       const result = {
-        cards: apiCards,
-        searchType: searchInput.id
+        cards: cards,
+        search: searchInput.id
       };
-
       localStorage.setItem('search-results', JSON.stringify(result));
-      navigate(`/me/add-card/${setQueryString(cardName, '-')}`,
+      navigate(`/me/archive/${setQueryString(cardName, '-')}`,
         {
           state: result,
         });
@@ -192,16 +164,16 @@ const Search = ({ path }) => {
         loading ? (
           <Loading />
         ) : (
-            <>
-              <header className="content-header">
-                <h2 className="title">Add a card</h2>
-              </header>
-              <main className="main">
-                <form id="search-api-form" className="search-form" onSubmit={searchAPI}>
-                  <SearchInput id={'search-api'} className={'search-field'} placeholder={'Search MTG Cards'} searchCard={searchAPI} isActive={isActive} ref={apiInputRef} />
-                </form>
-              </main>
-            </>
+          <>
+            <header className="content-header">
+              <h2 className="title">Search MTG Archive</h2>
+            </header>
+            <main className="main">
+              <form id="archive-form" className="search-form" onSubmit={searchArchive}>
+                <SearchInput id="archive" className={'search-field'} placeholder={'Search MTG Archive'} searchCard={searchArchive} isActive={isActive} ref={archiveInputRef} />
+              </form>
+            </main>
+          </>
         )
       }
     </>

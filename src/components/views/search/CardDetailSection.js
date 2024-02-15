@@ -3,14 +3,14 @@ import CatalogCardDetail from './CatalogCardDetail';
 import CollectionCardDetail from './CollectionCardDetail';
 
 const CardDetailSection = (props) => {
-    const { searchType, ...rest } = props;
+    const { search, ...rest } = props;
 
     return (
         <>
-            {searchType === 'search-catalog' ? (
+            {search === 'catalog' ? (
                 <CatalogCardDetail {...rest} />
             ) :
-                searchType === 'search-collection' ? (
+                search === 'collection' ? (
                     <CollectionCardDetail {...rest} />
                 ) : (
                         <ApiCardDetail {...rest} />

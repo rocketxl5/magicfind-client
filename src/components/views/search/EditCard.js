@@ -19,7 +19,7 @@ const INIT = {
 
 const EditCard = (props) => {
     // Props
-    const { card, searchType, handleClick } = props;
+    const { card, search, handleClick } = props;
     // States
     const [errors, setErrors] = useState(INIT);
     const [values, setValues] = useState(INIT);
@@ -86,9 +86,9 @@ const EditCard = (props) => {
                     if (query !== 'all-cards') {
                         // filter for cards with cardName
                         const updatedCards = cards.filter(cardObj => cardObj.name.toLowerCase() === card.name.toLowerCase());
-                        result = { cards: updatedCards, searchType: searchType };
+                        result = { cards: updatedCards, search: search };
                     } else {
-                        result = { cards: cards, searchType: searchType };
+                        result = { cards: cards, search: search };
                     }
 
                     setLoading(false);

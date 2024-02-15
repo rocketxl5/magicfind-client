@@ -40,7 +40,7 @@ const AutoComplete = ({ searchCard }) => {
         ulRef.current?.scrollTo({ top: position, behavior: 'smooth' })
     }, [marker])
 
-    // Keyboard arrow up and down autocomplete list searching function
+    // Keyboard arrow up and down autocomplete list search function
     const handleKeyDown = (e) => {
         if (predictions) {
             if (e.key === 'ArrowDown') {

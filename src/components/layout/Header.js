@@ -15,7 +15,7 @@ const Header = () => {
     { title: 'Dashboard', id: 'dashboard' },
     { title: 'Collection', id: 'collection' },
     { title: 'Store', id: 'store' },
-    { title: 'Add Card', id: 'add-card' },
+    { title: 'Archive', id: 'archive' },
   ]
 
   // Handle search bar and menu animation 

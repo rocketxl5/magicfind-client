@@ -14,43 +14,33 @@ const AuthLayout = () => {
     const param = useParams()['*'];
 
     // Updates each time pathname changes
-    useEffect(() => {
-        console.log(param)
-        // If param is defined      
-        if (param === 'me') {
-            navigate(`/${param}`, { replace: true })
-        }
-        else {
-            localStorage.setItem('param', JSON.stringify(param));
-        }
-    }, [param])
+    // useEffect(() => {
+    //     console.log(param)
+    //     // If param is defined      
+    //     if (param === 'me') {
+    //         navigate(`/${param}`, { replace: true })
+    //     }
+    //     else {
+    //         localStorage.setItem('param', JSON.stringify(param));
+    //     }
+    // }, [param])
 
-    useEffect(() => {
-        const param = JSON.parse(localStorage.getItem('param'))
+    // useEffect(() => {
+    //     const param = JSON.parse(localStorage.getItem('param'))
 
-        if (param) {
-            navigate(`/${param}`, { replace: true });
-        }
-    }, [])
+    //     if (param) {
+    //         navigate(`/${param}`, { replace: true });
+    //     }
+    // }, [])
 
     return (
         <div className="auth-layout">
             <Header />
             <div className="container">
-                {
-                    loading ? (
-                        <div className="loading-content">
-                            <Loading />
-                        </div>
-                    ) : (
-                        <div className="content">
-                                <Breadcrumbs />
-
-                            <Outlet />
-
-                            </div>
-                        )
-                }
+                <div className="content">
+                    <Breadcrumbs />              
+                    <Outlet />
+                </div>
             </div>
             <Footer />
         </div>
