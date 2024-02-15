@@ -1,6 +1,6 @@
 import { useReducer } from 'react';
 import Seller from '../components/views/search/product/Seller';
-import Catalog from '../components/views/search/product/Catalog';
+import CatalogHelpers from '../components/views/search/product/CatalogHelpers';
 import Detail from '../components/views/search/product/Detail';
 
 const ACTIONS = {

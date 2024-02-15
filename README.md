@@ -1,4 +1,4 @@
-files with import api/resources.js @fetch path -> src/components/auth Login, Register, path -> src/components/views AddCard, CartItem, CatalogItem, ModifyCard, RemoveCard, SearchCatalog, SearchCollection, ShoppingCart, path -> src/components/views/mail ComposeMessage, Inbox, Message, Sidebar, path -> src/contexts CardContext, AuthContext
+files with import api/resources.js @fetch path -> src/components/auth Login, Register, path -> src/components/views AddCard, CartItem, CatalogItem, ModifyCard, RemoveCard, Catalog, Collection, ShoppingCart, path -> src/components/views/mail ComposeMessage, Inbox, Message, Sidebar, path -> src/contexts CardContext, AuthContext
 
 ##############################
 #### Search Card process ####
@@ -11,8 +11,8 @@ files with import api/resources.js @fetch path -> src/components/auth Login, Reg
 3- Search API: Query Skryfall cards api.
 
 
-catalogInput -> useRef assigned to SearchCatalog component search input
-storeInput -> useRef assigned to SearchCollection component search input
+catalogInput -> useRef assigned to Catalog component search input
+storeInput -> useRef assigned to Collection component search input
 apiInput -> useRef assigned to SearchAPI component search input
 
 The form Component takes a formID prop. This formID is passed down to SearchInput to assign the proper Text to the placeholder attribute. 
@@ -42,7 +42,7 @@ isActive state is passed as prop to SearchInput component and is set as a condit
 #### AUTOCOMPLETE ####
 ######################
 
-SearchCatalog => 
+Catalog => 
 [1] useEffect with searchTerm dependency array: fetch predictions data (setPredictionResults) from catalog route @ data/cardcatalog.jsos. Triggers an updata data on each keypress. 
 [2] useEffect with predictionResults dependency array: filters results from previous fetch
 
