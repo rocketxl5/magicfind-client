@@ -3,15 +3,12 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import Product from './Product';
 import Parameter from './Parameter';
 import Modal from '../modal/Modal';
-import Breadcrumbs from '../../layout/Breadcrumbs';
 import { ScrollContext } from '../../../contexts/ScrollContext';
 import { HiOutlineAdjustmentsHorizontal } from "react-icons/hi2";
 import { FiPlus } from "react-icons/fi";
 import useModalProductState from '../../../hooks/useModalProductState';
-import useLoadImage from '../../../hooks/useLoadImage';
 import useModalProductView from '../../../hooks/useModalProductView';
 import useProduct from '../../../hooks/useProduct';
-import data from '../../../assets/data/SEARCH';
 
 const SearchResults = () => {
     // States
@@ -26,9 +23,9 @@ const SearchResults = () => {
     const panelRef = useRef(null);
     const iconRef = useRef(null);
 
-
     const { cards, search } = location.state?.result || JSON.parse(localStorage.getItem('search-results'));
 
+    const count = cards.length;
 
     useEffect(() => {
 
@@ -119,6 +116,7 @@ const SearchResults = () => {
                                         <Product
                                             key={i}
                                             index={i}
+                                            count={count}
                                             card={card}
                                             search={search}
                                             handleModalProductView={handleModalProductView}

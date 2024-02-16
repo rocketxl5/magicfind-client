@@ -5,6 +5,7 @@ import MainHeader from './MainHeader';
 import Banner from '../views/Banner';
 import Footer from './Footer';
 import Loading from './Loading';
+import Breadcrumbs from './Breadcrumbs';
 import { SearchContext } from '../../contexts/SearchContext';
 import data from '../../assets/data/BANNER';
 
@@ -26,12 +27,11 @@ const Layout = () => {
                     <MainHeader />
                     <div className="container">
                         <Banner classList={classList} title={title} link={link} />
+                        <Breadcrumbs />   
                         <div className="content">
                                 {
-                                    !loading ? (
-
-                                        <Outlet />
-
+                                !loading ? (
+                                    <Outlet />
                                     ) : (
                                         <div className="loading-content">
                                             <Loading />

@@ -99,14 +99,7 @@ const Catalog = () => {
               navigate(`/catalog/${setQueryString(query.toLowerCase(), '-')}`,
                 {
                   state: { result: result },
-                })
-              // !isAuth ? (
-              // ) : (
-              //     navigate(`/catalog/${setQueryString(query.toLowerCase(), '-')}`,
-              //     {
-              //       state: { result: result },
-              //     })
-              // )
+                });
 
               if (document.querySelector('#mobile-nav')?.checked) {
                 hideSearchBar();
