@@ -3,8 +3,8 @@ import capitalizeWord from '../../../../assets/utilities/capitalizeWord';
 import getYear from '../../../../assets/utilities/getYear';
 import data from '../../../../assets/data/SEARCH';
 
-const ArchiveDetails = ({ card }) => {
-    const { colorIdentity, manaCost } = useColorSymbols(card);
+const ArchiveDetails = ({ product }) => {
+    const { colorIdentity, manaCost } = useColorSymbols(product);
     return (
         <div className="row">
 
@@ -19,29 +19,29 @@ const ArchiveDetails = ({ card }) => {
                 <p>Artist: </p>
                 <p>Frame:</p>
                 {
-                    !card.finishes.includes('nonfoil') &&
+                    !product.finishes.includes('nonfoil') &&
                     <p>Finish:</p>
                 }
             </div>
             <div className="column values">
-                <p>{card.type_line.split('—')[0]}</p>
+                <p>{product.type_line.split('—')[0]}</p>
                 {
-                    card.color_identity &&
+                    product.color_identity &&
                     <p className="color-identity">{colorIdentity.lenght ? colorIdentity.map((id, i) => id) : 'Colorless'}</p>
                 }
 
                 <p className="color-identity">{manaCost && manaCost.map((id, i) => id)}</p>
-                <p>{`${getYear(card.released_at)}`}</p>
-                <p>{`${capitalizeWord(card.rarity)}`}</p>
-                <p>{`${data.product.languages[card.lang]}`}</p>
-                <p>{card.collector_number}</p>
-                <p>{card.artist}</p>
-                <p>{card.frame}</p>
+                <p>{`${getYear(product.released_at)}`}</p>
+                <p>{`${capitalizeWord(product.rarity)}`}</p>
+                <p>{`${data.product.languages[product.lang]}`}</p>
+                <p>{product.collector_number}</p>
+                <p>{product.artist}</p>
+                <p>{product.frame}</p>
                 {
-                    !card.finishes.includes('nonfoil') &&
+                    !product.finishes.includes('nonfoil') &&
 
-                    <p className={`${card.finishes[0].toLowerCase() === 'foil' ? 'foil-finish' : ''}`}>
-                        {` ${capitalizeWord(card.finishes[0])}`}
+                    <p className={`${product.finishes[0].toLowerCase() === 'foil' ? 'foil-finish' : ''}`}>
+                        {` ${capitalizeWord(product.finishes[0])}`}
                     </p>
 
                 }

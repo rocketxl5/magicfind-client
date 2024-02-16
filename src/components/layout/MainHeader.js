@@ -1,25 +1,19 @@
 import { useContext, useEffect } from 'react';
 import Catalog from '../views/search/Catalog';
 import Navbar from './Navbar';
-import AuthContextualNav from './AuthContextualNav';
+import DashboardNav from './DashboardNav';
 import LogoBtn from './navbtn/LogoBtn';
 import { ScrollContext } from '../../contexts/ScrollContext';
-import { SearchContext } from '../../contexts/SearchContext';
 import useAuth from '../../hooks/useAuth';
+import useSearch from '../../hooks/useSearch';
 import { api } from '../../api/resources';
 import handleSearchBar from '../../assets/utilities/handleSearchBar';
 
 const MainHeader = () => {
   const { navRef } = useContext(ScrollContext);
-  const { setCatalogCardNames, updateCatalog } = useContext(SearchContext);
-  const { isAuth } = useAuth();
 
-  const views = [
-    { title: 'Dashboard', id: 'dashboard' },
-    { title: 'Collection', id: 'collection' },
-    { title: 'Store', id: 'store' },
-    { title: 'Archive', id: 'archive' },
-  ];
+  const { isAuth } = useAuth();
+  const { updateCatalog, setCatalogCardNames } = useSearch();
 
   // Setting catalog card names for autocomplete catalog search
   useEffect(() => {
@@ -51,7 +45,7 @@ const MainHeader = () => {
       </div>
       {
         isAuth &&
-        <AuthContextualNav views={views} />
+        <DashboardNav />
       }
     </header>
   )

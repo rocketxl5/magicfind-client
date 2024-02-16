@@ -4,11 +4,11 @@ import CollectionDetails from './product/CollectionDetails';
 // import { useParams } from 'react-router-dom'
 
 
-const ProductDetails = ({ search, card }) => {
+const ProductDetails = ({ search, product }) => {
     const handlers = {
-        archive: <ArchiveDetails card={card} />,
-        catalog: <CatalogDetails card={card} />,
-        collection: <CollectionDetails card={card} />
+        archive: <ArchiveDetails product={product} />,
+        catalog: <CatalogDetails product={product} />,
+        collection: <CollectionDetails product={product} />
     }
     return (
         <section className="product-details">

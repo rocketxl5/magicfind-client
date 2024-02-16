@@ -10,7 +10,7 @@ import SidePanel from '../layout/SidePanel';
 import ShoppingCartBtn from './navbtn/ShoppingCartBtn';
 import useAuth from '../../hooks/useAuth';
 import getViewPortWidth from '../../assets/utilities/getViewPortWidth';
-import data from '../../assets/data/NAV';
+import data from '../../assets/data/ROUTES';
 
 function Navbar() {
     const panelRef = useRef(null);

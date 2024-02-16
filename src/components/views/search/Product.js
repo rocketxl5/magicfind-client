@@ -1,11 +1,6 @@
 import { useState, forwardRef, useRef, useEffect } from 'react';
 import { FiPlus } from "react-icons/fi";
-// Footers
-import CatalogCardFooter from './CatalogCardFooter';
-import CollectionCardFooter from './CollectionCardFooter';
-import ApiCardFooter from './ApiCardFooter';
 
-import Image from './CardImage';
 
 
 import Seller from './product/Seller';
@@ -41,9 +36,9 @@ const Product = forwardRef(function Product(props, ref) {
                 {/* <button type="button" onClick={() => detailsRef.current.classList.toggle('show-details')}>
                     <FiPlus />
                 </button> */}
-                <ProductImage card={card} loading={loading} handleClick={handleModalProductView} />
-                <ProductDetails card={card} search={search} />
-                <ProductHandlers card={card} search={search} setLoading={value => setLoading(value)} handleClick={handleModalProductState} />
+                <ProductImage product={card} loading={loading} handleClick={handleModalProductView} />
+                <ProductDetails product={card} search={search} />
+                <ProductHandlers product={card} search={search} setLoading={value => setLoading(value)} handleClick={handleModalProductState} />
 
                 {/* <section className={`${search} product-details`} ref={detailsRef}> */}
                     {/* <div className="inner">
@@ -140,19 +135,6 @@ const Product = forwardRef(function Product(props, ref) {
                 }
 
             </div>
-            {/* <footer className="card-footer" onClick={(e) => handleCardState(e, card, attributes)}>
-                {search === 'catalog' ? (
-                    // <CatalogCardFooter card={card} />
-                    ''
-                ) :
-                    search === 'collection' ? (
-                        <CollectionCardFooter card={card} />
-                    ) : (
-                        <ApiCardFooter card={card} setLoading={(value) => { setLoading(value) }} />
-                    )
-                }
-            </footer> */}
-
         </li>
     )
 

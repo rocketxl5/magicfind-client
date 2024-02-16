@@ -2,12 +2,12 @@ import ArchiveHandlers from './product/ArchiveHandlers'
 import CatalogHandlers from './product/CatalogHandlers'
 import CollectionHandlers from './product/CollectionHandlers'
 
-const ProductHandlers = ({ card, search, setLoading, handleClick }) => {
+const ProductHandlers = ({ product, search, setLoading, handleClick }) => {
 
     const handlers = {
-        archive: <ArchiveHandlers setLoading={setLoading} card={card} />,
-        catalog: <CatalogHandlers setLoading={setLoading} card={card} />,
-        collection: <CollectionHandlers setLoading={setLoading} card={card} handleClick={handleClick} />
+        archive: <ArchiveHandlers setLoading={setLoading} product={product} />,
+        catalog: <CatalogHandlers setLoading={setLoading} product={product} />,
+        collection: <CollectionHandlers setLoading={setLoading} product={product} handleClick={handleClick} />
     }
     return (
         <section className="product-handlers">

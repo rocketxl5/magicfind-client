@@ -8,9 +8,9 @@ const INIT = {
     value: 'Add To Collection',
     statue: false
 }
-const ArchiveHandlers = ({ card, setLoading }) => {
+const ArchiveHandlers = ({ product, setLoading }) => {
     const [attributes, setAttributes] = useState(INIT);
-    const [selectedCard, setSelectedCard] = useState(null);
+    const [selectedProduct, setSelectedProduct] = useState(null);
 
     const { auth } = useAuth();
 
@@ -38,8 +38,8 @@ const ArchiveHandlers = ({ card, setLoading }) => {
     }, [])
 
     useEffect(() => {
-        console.log(selectedCard)
-        if (selectedCard) {
+        console.log(selectedProduct)
+        if (selectedProduct) {
 
             setLoading(true)
             const headers = new Headers();
@@ -49,9 +49,9 @@ const ArchiveHandlers = ({ card, setLoading }) => {
             const options = {
                 method: 'POST',
                 headers: headers,
-                body: JSON.stringify(selectedCard),
+                body: JSON.stringify(selectedProduct),
             };
-            fetch(`${api.serverURL}/api/cards/add/${auth.id}/${selectedCard.id}`, options)
+            fetch(`${api.serverURL}/api/cards/add/${auth.id}/${selectedProduct.id}`, options)
                 .then((res) => {
                     if (res.ok) {
                         return res.json();
@@ -72,10 +72,10 @@ const ArchiveHandlers = ({ card, setLoading }) => {
                     setLoading(false);
                 });
         }
-    }, [selectedCard])
+    }, [selectedProduct])
 
     const handleClick = (e) => {
-        setSelectedCard(card)
+        setSelectedProduct(product)
     }
     return (
 

@@ -2,7 +2,7 @@
 import { useEffect, useContext } from 'react';
 import { useNavigate, useParams, Outlet } from 'react-router-dom';
 import MainHeader from './MainHeader';
-import AuthContextualNav from './AuthContextualNav';
+import DashboardNav from './DashboardNav';
 import Breadcrumbs from './Breadcrumbs';
 import Footer from './Footer';
 import Loading from './Loading';

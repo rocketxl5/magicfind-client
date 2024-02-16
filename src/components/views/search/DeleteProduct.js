@@ -1,14 +1,14 @@
 import { useState, useRef } from 'react';
 import { useNavigate, useLocation, useParams } from 'react-router-dom';
-import Image from './CardImage';
-import CollectionCardDetail from './CollectionCardDetail';
+import Image from './ProductImage';
+import CollectionDetails from './product/CollectionDetails';
 import Success from './Success';
 import Loading from '../../layout/Loading';
 // import { FaBan } from "react-icons/fa6";
 import useAuth from '../../../hooks/useAuth';
 import { api } from '../../../api/resources';
 
-const DeleteCard = (props) => {
+const DeleteProduct = (props) => {
     // Props
     const { card, search, handleClick } = props;
     // States
@@ -103,45 +103,45 @@ const DeleteCard = (props) => {
                         <>
                             {
                                 !response.isDeleted ? (
-                                        <>
+                                    <>
                                         <header className="modal-header bg-red">
                                             <div className="modal-title">
                                                 <h2 className="fw-500">Delete Card</h2>
                                             </div>
-                                            </header>
-                                            <div className="modal-body">
-                                                <section className="modal-section">
-                                                    <div className="card-section">
-                                                        <Image card={card} />
-                                                    </div>
-                                                    <div className="card-section">
-                                                        <CollectionCardDetail card={card} />
-                                                    </div>
-                                                </section>
-                                                <section className="modal-warning">
-                                                    <div className="warning-message">
-                                                {response.message}
-                                                    </div>
-                                                </section>
-                                            </div>
-                                            <footer className="modal-footer bg-red-light">
-                                                <div className="btn-container">
-                                                    <button id="go-back" className="btn bg-blue color-light" type="button" onClick={handleClick}>Cancel </button>
-                                                    < button id="confirm-delete" className="btn bg-red color-light" type="button" onClick={handleClick} onMouseDown={(e) => deleteHandler(location)} >Confirm </button>
-
+                                        </header>
+                                        <div className="modal-body">
+                                            <section className="modal-section">
+                                                <div className="card-section">
+                                                    <Image card={card} />
                                                 </div>
-                                            </footer>
+                                                <div className="card-section">
+                                                    <CollectionDetails card={card} />
+                                                </div>
+                                            </section>
+                                            <section className="modal-warning">
+                                                <div className="warning-message">
+                                                    {response.message}
+                                                </div>
+                                            </section>
+                                        </div>
+                                        <footer className="modal-footer bg-red-light">
+                                            <div className="btn-container">
+                                                <button id="go-back" className="btn bg-blue color-light" type="button" onClick={handleClick}>Cancel </button>
+                                                < button id="confirm-delete" className="btn bg-red color-light" type="button" onClick={handleClick} onMouseDown={(e) => deleteHandler(location)} >Confirm </button>
+
+                                            </div>
+                                        </footer>
                                     </>
                                 ) : (
-                                        <Success response={response} handleClick={handleClick} ref={btnRef} />
+                                    <Success response={response} handleClick={handleClick} ref={btnRef} />
                                 )
                             }
                         </>
                     )
-            }
-        </div>
+                }
+            </div>
         </div>
     )
 }
 
-export default DeleteCard;
+export default DeleteProduct;
