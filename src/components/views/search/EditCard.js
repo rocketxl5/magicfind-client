@@ -20,6 +20,7 @@ const INIT = {
 const EditCard = (props) => {
     // Props
     const { card, search, handleClick } = props;
+    console.log(card)
     // States
     const [errors, setErrors] = useState(INIT);
     const [values, setValues] = useState(INIT);
@@ -39,6 +40,8 @@ const EditCard = (props) => {
     const { query } = useParams();
     // Hook
     const { auth } = useAuth();
+
+    const { languages, conditions } = data;
 
     // Triggers click event on button to close modal
     const closeModal = (button, result, destination) => {
@@ -231,9 +234,7 @@ const EditCard = (props) => {
                                                                     onFocus={handleFocus}
                                                             >
                                                                     {
-                                                                        data.conditions.map((condition, i) => {
-                                                                            <Option key={i} item={condition} />
-                                                                        })
+                                                                        conditions.map((condition, i) => <Option key={i} item={condition} />)
                                                                     }
                                                             </select>
                                                         </div>
@@ -273,12 +274,12 @@ const EditCard = (props) => {
                                                             <div className="card-status flex gap-1">
                                                                 <div className="edit-option status flex align-center space-between">
                                                                     <label htmlFor="published">Published</label>
-                                                                        <input type="radio" name="published" id="published" onChange={handleRadioChange} value={values.published} checked={values.published} />
+                                                                        <input type="radio" name="published" id="published" onChange={handleRadioChange} checked={values.published} />
 
                                                                 </div>
                                                                 <div className="edit-option status flex align-center space-between">
                                                                     <label htmlFor="unpublished">Unpublished</label>
-                                                                    <input type="radio" name="published" id="unpublished" onChange={handleRadioChange} value={!values.published} checked={!values.published} />
+                                                                        <input type="radio" name="published" id="unpublished" onChange={handleRadioChange} checked={!values.published} />
                                                                 </div>
                                                             </div>
                                                         </div>

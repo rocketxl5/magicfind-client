@@ -27,13 +27,12 @@ import Loading from '../../layout/Loading';
 
 
 const Product = forwardRef(function Product(props, ref) {
-    const { index, card, search, handleModalProductView, handleModelProductState } = props;
+    const { index, card, search, handleModalProductView, handleModalProductState } = props;
     const [loading, setLoading] = useState(false);
     const { attributes } = useAttributes(card);
     const detailsRef = useRef(null);
 
     // const { colorIdentity, manaCost } = useColorSymbols(card);
-
     return (
         <li className="product" ref={ref}>
             <Header title={card.name} classList={'product-header'} />
@@ -44,7 +43,7 @@ const Product = forwardRef(function Product(props, ref) {
                 </button> */}
                 <ProductImage card={card} loading={loading} handleClick={handleModalProductView} />
                 <ProductDetails card={card} search={search} />
-                <ProductHandlers card={card} search={search} setLoading={value => setLoading(value)} andleModelProductState={handleModelProductState} />
+                <ProductHandlers card={card} search={search} setLoading={value => setLoading(value)} handleClick={handleModalProductState} />
 
                 {/* <section className={`${search} product-details`} ref={detailsRef}> */}
                     {/* <div className="inner">

@@ -1,5 +1,6 @@
 
 const CollectionHandlers = ({ card, handleClick }) => {
+
     return (
         <div className="card-btns">
             <div className="btn-container">
