@@ -1,14 +1,16 @@
 import { useState, useEffect, useRef } from 'react';
 import { useNavigate, useLocation, useParams } from 'react-router-dom';
-import Image from './CardImage';
-import CollectionCardDetail from './CollectionCardDetail';
+import Image from './ProductImage';
+import CollectionDetails from './product/CollectionDetails';
 import Success from './Success';
 import Loading from '../../layout/Loading';
 import Option from '../../layout/Option';
 import data from '../../../assets/data/EDIT';
 import errorHandler from './helpers/editErrorHandler';
 import useAuth from '../../../hooks/useAuth';
+import useSearch from '../../../hooks/useSearch';
 import { api } from '../../../api/resources';
+
 
 const INIT = {
     quantity: '',
@@ -17,10 +19,9 @@ const INIT = {
     language: ''
 }
 
-const EditCard = (props) => {
+const EditProduct = (props) => {
     // Props
     const { card, search, handleClick } = props;
-    console.log(card)
     // States
     const [errors, setErrors] = useState(INIT);
     const [values, setValues] = useState(INIT);
@@ -38,8 +39,9 @@ const EditCard = (props) => {
     const navigate = useNavigate();
     const location = useLocation();
     const { query } = useParams();
-    // Hook
+    // Hooks
     const { auth } = useAuth();
+    const { setUpdateCatalog } = useSearch();
 
     const { languages, conditions } = data;
 
@@ -51,6 +53,7 @@ const EditCard = (props) => {
                     state: result,
                 });
             localStorage.setItem('search-results', JSON.stringify(result));
+            setUpdateCatalog(true);
             button?.click();
         }, 1500)
     }
@@ -163,28 +166,28 @@ const EditCard = (props) => {
     return (
         <div className="modal-state">
             <div className={`modal-state-content ${loading ? 'border-light' : response.isUpdated ? 'border-success' : 'border-blue'}`}>
-            {
-                loading ? (
-                    <Loading />
-                ) : (
-                    <>
-                        {
+                {
+                    loading ? (
+                        <Loading />
+                    ) : (
+                        <>
+                            {
                                 !response.isUpdated ? (
-                                <>
-                                            <header className="modal-header bg-blue">
-                                                <div className="modal-title">
+                                    <>
+                                        <header className="modal-header bg-blue">
+                                            <div className="modal-title">
                                                 <h2 className="fw-500">Edit Card</h2>
-                                                </div>
-                                            </header>
-                                            <div className="scroll">
+                                            </div>
+                                        </header>
+                                        <div className="scroll">
                                             <div className="modal-body">
                                                 <section className="modal-section">
 
                                                     <div className="card-section">
-                                                            <Image card={card} />
+                                                        <Image card={card} />
                                                     </div>
                                                     <div className="card-section">
-                                                        <CollectionCardDetail card={card} />
+                                                        <CollectionDetails card={card} />
                                                     </div>
                                                 </section>
                                                 <div className="edit-card">
@@ -218,7 +221,7 @@ const EditCard = (props) => {
                                                                     onFocus={handleFocus}
                                                                     min="0"
                                                                     max="1000"
-                                                                        placeholder="Quantity"
+                                                                    placeholder="Quantity"
                                                                 />
                                                             </div>
                                                         </div>
@@ -231,11 +234,11 @@ const EditCard = (props) => {
                                                                 name="condition"
                                                                 value={values.condition}
                                                                 onChange={handleChange}
-                                                                    onFocus={handleFocus}
+                                                                onFocus={handleFocus}
                                                             >
-                                                                    {
-                                                                        conditions.map((condition, i) => <Option key={i} item={condition} />)
-                                                                    }
+                                                                {
+                                                                    conditions.map((condition, i) => <Option key={i} item={condition} />)
+                                                                }
                                                             </select>
                                                         </div>
                                                         <div className="form-element">
@@ -246,14 +249,14 @@ const EditCard = (props) => {
                                                                 name="language"
                                                                 value={values.language}
                                                                 onChange={handleChange}
-                                                                    onFocus={handleFocus}
+                                                                onFocus={handleFocus}
                                                             >
-                                                                    {
-                                                                        data.languages.map((language, i) => {
+                                                                {
+                                                                    data.languages.map((language, i) => {
 
-                                                                            return <Option key={i} item={language} />
-                                                                        })
-                                                                    }
+                                                                        return <Option key={i} item={language} />
+                                                                    })
+                                                                }
                                                             </select>
                                                         </div>
                                                         <div className="form-element">
@@ -265,7 +268,7 @@ const EditCard = (props) => {
                                                                 value={values.comment}
                                                                 onChange={handleChange}
                                                                 onFocus={handleFocus}
-                                                                    placeholder=""
+                                                                placeholder=""
                                                             >
                                                             </textarea>
                                                         </div>
@@ -274,12 +277,12 @@ const EditCard = (props) => {
                                                             <div className="card-status flex gap-1">
                                                                 <div className="edit-option status flex align-center space-between">
                                                                     <label htmlFor="published">Published</label>
-                                                                        <input type="radio" name="published" id="published" onChange={handleRadioChange} checked={values.published} />
+                                                                    <input type="radio" name="published" id="published" onChange={handleRadioChange} checked={values.published} />
 
                                                                 </div>
                                                                 <div className="edit-option status flex align-center space-between">
                                                                     <label htmlFor="unpublished">Unpublished</label>
-                                                                        <input type="radio" name="published" id="unpublished" onChange={handleRadioChange} checked={!values.published} />
+                                                                    <input type="radio" name="published" id="unpublished" onChange={handleRadioChange} checked={!values.published} />
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -306,18 +309,18 @@ const EditCard = (props) => {
                                                     </button>
                                                 </div>
                                             </footer>
-                                            </div>
-                                </>
-                            ) : (
-                                <Success response={response} handleClick={handleClick} ref={btnRef} />
-                            )
-                        }
-                    </>
-                )
-            }
+                                        </div>
+                                    </>
+                                ) : (
+                                    <Success response={response} handleClick={handleClick} ref={btnRef} />
+                                )
+                            }
+                        </>
+                    )
+                }
             </div>
         </div >
     )
 }
 
-export default EditCard
+export default EditProduct

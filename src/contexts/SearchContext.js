@@ -13,7 +13,7 @@ export const SearchProvider = ({ children }) => {
   const [catalogCardNames, setCatalogCardNames] = useState(null);
 
   // State changes on delete and add card actions
-  // Resets collectionCardNames state @ AuthContextualNav
+  // Resets collectionCardNames state @ DashboardNav
   const [updateCollection, setUpdateCollection] = useState(false);
 
   const [updateCatalog, setUpdateCatalog] = useState(false);

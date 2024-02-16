@@ -1,6 +1,6 @@
 import { useReducer } from 'react';
-import EditCard from '../components/views/search/EditCard';
-import DeleteCard from '../components/views/search/DeleteCard';
+import EditProduct from '../components/views/search/EditProduct';
+import DeleteProduct from '../components/views/search/DeleteProduct';
 import cardBack from '../assets/img/mtg_card_back.jpg'
 
 const useModalProductState = (search, callback) => {
@@ -27,7 +27,7 @@ const useModalProductState = (search, callback) => {
             case ACTIONS.DELETE_CARD:
                 return {
                     open: true,
-                    component: <DeleteCard
+                    component: <DeleteProduct
                         attributes={{ ...action.payload.attributes, id: 'confirm-delete' }}
                         search={search}
                         card={action.payload.card}
@@ -38,7 +38,7 @@ const useModalProductState = (search, callback) => {
                 return {
                     open: true,
                     component:
-                        <EditCard
+                        <EditProduct
                             attributes={{ ...action.payload.attributes, id: 'confirm-edit' }}
                             search={search}
                             card={action.payload.card}

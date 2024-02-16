@@ -65,7 +65,6 @@ const App = () => {
             {/* <Route path="details" element={<ProductDetails />} /> */}
             <Route path="archive" exact element={<Archive />} />
             <Route path="archive/:query" element={<SearchResults />} />
-            <Route path="catalog/:query" element={<SearchResults />} />
 
             {/* <Route path="details" element={<ProductDetails />} /> */}
             <Route path="store" element={<Store />} />
@@ -76,6 +75,7 @@ const App = () => {
           </Route>
         </Route>
         {/* <Route path="search-results/" element={<SearchResults />} /> */}
+        <Route path="catalog/:query" element={<SearchResults />} />
         <Route path="shopping-cart" element={<ShoppingCart />} />
         <Route path="search-results/not-found/:name" element={<CardNotFound />} />
         {/* Catch all */}

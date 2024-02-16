@@ -1,4 +1,4 @@
-const NAV = {
+const ROUTES = {
     authPaths: [
         {
             name: 'Home',
@@ -54,4 +54,4 @@ const NAV = {
     ]
 }
 
-export default NAV;
+export default ROUTES;

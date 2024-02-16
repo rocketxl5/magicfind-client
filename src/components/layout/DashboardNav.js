@@ -2,9 +2,10 @@ import { useEffect, useContext } from 'react';
 import { NavLink, useParams } from 'react-router-dom'
 import { SearchContext } from '../../contexts/SearchContext';
 import useAuth from '../../hooks/useAuth';
+import data from '../../assets/data/AUTH';
 import { api } from '../../api/resources';
 
-const AuthContextualNav = ({ views }) => {
+const DashboardNav = () => {
     const {
         archiveCardNames,
         setArchiveCardNames,
@@ -15,6 +16,7 @@ const AuthContextualNav = ({ views }) => {
     const { auth } = useAuth();
     const { query } = useParams();
 
+    const { links } = data;
     // Setting archive card names for autocomplete archive search
     useEffect(() => {
         if (!archiveCardNames) {
@@ -61,25 +63,25 @@ const AuthContextualNav = ({ views }) => {
 
     return (
         <section className="contextual-nav">
-        <div className="contextual-links">
-                {views.map((view, index) => {
-                return (
-                    <NavLink
-                        key={index}
-                        id={view.id}
-                        to={`/me/${view.id}`}                        
-                        className={({ isActive }) => {
-                            // If search param is defined, add active class else add inactive class 
-                            return isActive && !query ? 'active-link' : 'inactive-link'
-                        }}
-                    >
-                        <span >{view.title}</span>
-                    </NavLink>
-                )
-            })}
-        </div>
+            <div className="contextual-links">
+                {links.map((link, index) => {
+                    return (
+                        <NavLink
+                            key={index}
+                            id={link.id}
+                            to={`/me/${link.id}`}
+                            className={({ isActive }) => {
+                                // If search param is defined, add active class else add inactive class 
+                                return isActive && !query ? 'active-link' : 'inactive-link'
+                            }}
+                        >
+                            <span >{link.title}</span>
+                        </NavLink>
+                    )
+                })}
+            </div>
         </section>
     )
 }
 
-export default AuthContextualNav
+export default DashboardNav

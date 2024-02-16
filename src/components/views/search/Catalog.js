@@ -96,17 +96,17 @@ const Catalog = () => {
               setCardName('');
               setSearchInput(null);
               localStorage.setItem('search-results', JSON.stringify(result));
-              !isAuth ? (
-                navigate(`/catalog/search-results/${setQueryString(query.toLowerCase(), '-')}`,
-                  {
-                    state: { result: result },
-                  })
-              ) : (
-                navigate(`/search-results/${setQueryString(query.toLowerCase(), '-')}`,
-                  {
-                    state: { result: result },
-                  })
-              )
+              navigate(`/catalog/${setQueryString(query.toLowerCase(), '-')}`,
+                {
+                  state: { result: result },
+                })
+              // !isAuth ? (
+              // ) : (
+              //     navigate(`/catalog/${setQueryString(query.toLowerCase(), '-')}`,
+              //     {
+              //       state: { result: result },
+              //     })
+              // )
 
               if (document.querySelector('#mobile-nav')?.checked) {
                 hideSearchBar();
