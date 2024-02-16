@@ -15,6 +15,7 @@ const PRODUCT = {
         { value: 'ph', text: 'Phyrexian' }
     ],
     conditions: [
+        { value: '', text: 'Select a condition' },
         { value: 'm', text: 'Mint' },
         { value: 'nm', text: 'Near Mint' },
         { value: 'lp', text: 'Lightly Played' },

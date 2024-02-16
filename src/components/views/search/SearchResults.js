@@ -59,7 +59,7 @@ const SearchResults = () => {
 
     const [view, updateProductView] = useModalProductView(handleModalProductView);
 
-    const [state, updateProductState] = useModalProductState(search, handleModelProductState);
+    const [state, updateProductState] = useModalProductState(search, handleModalProductState);
 
 
     function handleModalProductView(e, layout, expandedImage) {
@@ -67,7 +67,7 @@ const SearchResults = () => {
         updateProductView(layout, expandedImage)
     }
 
-    function handleModelProductState(e, card) {
+    function handleModalProductState(e, card) {
         e.stopPropagation();
         updateProductState(e.target.id, card)
     }
@@ -122,7 +122,7 @@ const SearchResults = () => {
                                             card={card}
                                             search={search}
                                             handleModalProductView={handleModalProductView}
-                                            handleModelProductState={handleModelProductState}
+                                            handleModalProductState={handleModalProductState}
                                             ref={cardRef}
                                         >
 

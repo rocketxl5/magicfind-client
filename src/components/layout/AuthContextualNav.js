@@ -9,9 +9,7 @@ const AuthContextualNav = ({ views }) => {
         archiveCardNames,
         setArchiveCardNames,
         setCollectionCardNames,
-        updateCollection,
-        setCatalogCardNames,
-        updateCatalog
+        updateCollection
     } = useContext(SearchContext);
 
     const { auth } = useAuth();
@@ -39,22 +37,6 @@ const AuthContextualNav = ({ views }) => {
         }
     }, [])
 
-    // Setting catalog card names for autocomplete catalog search
-    useEffect(() => {
-        const headers = new Headers();
-        headers.append('Content-Type', 'application/json');
-        const options = {
-            method: 'GET',
-            headers: headers,
-        };
-
-        fetch(`${api.serverURL}/api/cards/catalog`, options)
-            .then((res) => res.json())
-            .then((data) => {
-                setCatalogCardNames(data)
-            })
-            .catch((error) => console.log(error));
-    }, [updateCatalog])
 
     // Setting collection card names for autocomplete collection search
     useEffect(() => {
