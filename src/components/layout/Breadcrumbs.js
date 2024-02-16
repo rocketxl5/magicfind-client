@@ -5,7 +5,9 @@ import capitalizeString from '../../assets/utilities/capitalizeString';
 
 const Breadcrumbs = () => {
     const location = useLocation();
-
+    if (location.pathname.includes('catalog')) {
+        return null
+    }
     let currentLink = '';
     const crumbs = location.pathname.split('/')
         .filter(crumb => crumb !== '')

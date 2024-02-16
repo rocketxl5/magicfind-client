@@ -1,13 +1,13 @@
 import { useState, forwardRef } from 'react';
 import { FiPlus } from "react-icons/fi";
-
+import Result from './Result';
 import Header from '../../layout/Header';
 import ProductImage from './ProductImage';
 import ProductDetails from './ProductDetails';
 import ProductHandlers from './ProductHandlers';
 
 const Product = forwardRef(function Product(props, ref) {
-    const { index, card, search, handleModalProductView, handleModalProductState } = props;
+    const { index, count, card, search, handleModalProductView, handleModalProductState } = props;
     const [loading, setLoading] = useState(false);
 
 
@@ -22,6 +22,7 @@ const Product = forwardRef(function Product(props, ref) {
                 <ProductImage product={card} loading={loading} handleClick={handleModalProductView} />
                 <ProductDetails product={card} search={search} />
                 <ProductHandlers product={card} search={search} setLoading={value => setLoading(value)} handleClick={handleModalProductState} />
+                <Result count={count} result={index + 1} />
 
                 {/* <section className={`${search} product-details`} ref={detailsRef}> */}
                     {/* <div className="inner">
