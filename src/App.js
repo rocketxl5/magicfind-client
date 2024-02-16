@@ -44,6 +44,7 @@ const App = () => {
       {/* Public routes */}
         {/* Public routes not auth */}
       <Route path="/" element={!isAuth ? <Layout /> : <AuthLayout />} >
+        <Route path="home" element={<Navigate to="/" />} />
         <Route element={<RequireNotAuth />}>
           <Route index element={<Home />} />
           <Route path="about" element={<About />} />
@@ -57,7 +58,6 @@ const App = () => {
         {/* Auth protected routes */}
         <Route element={<RequireAuth />}>
           <Route index element={<AuthPage />} />
-          <Route path="home" element={<Navigate to="/" />} />
           <Route path="me" exact element={<AuthPage />}>
             <Route path="dashboard" element={<DashBoard />} />
             <Route path="collection" element={<Collection />} />
