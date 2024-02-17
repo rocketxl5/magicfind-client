@@ -3,7 +3,7 @@ import { useNavigate, useLocation, useParams } from 'react-router-dom';
 import Image from './ProductImage';
 import CollectionDetails from './product/CollectionDetails';
 import Success from './Success';
-import Loading from '../../layout/Loading';
+import Loading from '../../elements/Loading';
 import Option from '../../layout/Option';
 import data from '../../../assets/data/EDIT';
 import errorHandler from './helpers/editErrorHandler';

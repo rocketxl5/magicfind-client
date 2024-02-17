@@ -2,20 +2,17 @@ import { useEffect } from 'react';
 import {
   Route,
   Navigate,
-  useLocation,
-  useNavigate,
   createBrowserRouter,
   createRoutesFromElements,
   RouterProvider
 } from 'react-router-dom';
 // Layouts
 import RootLayout from './components/layouts/RootLayout';
-import Layout from './components/layout/Layout';
-import AuthLayout from './components/layout/AuthLayout';
+import Layout from './components/layouts/Layout';
 
 
-import RequireAuth from './components/auth/RequireAuth';
-import RequireNotAuth from './components/auth/RequireNotAuth';
+import RequireAuth from './components/layouts/RequireAuth';
+import RequireNotAuth from './components/layouts/RequireNotAuth';
 
 // Views
 import AuthPage from './components/views/AuthPage';

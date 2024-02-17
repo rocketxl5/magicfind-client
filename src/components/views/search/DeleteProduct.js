@@ -3,7 +3,7 @@ import { useNavigate, useLocation, useParams } from 'react-router-dom';
 import Image from './ProductImage';
 import CollectionDetails from './product/CollectionDetails';
 import Success from './Success';
-import Loading from '../../layout/Loading';
+import Loading from '../../elements/Loading';
 // import { FaBan } from "react-icons/fa6";
 import useAuth from '../../../hooks/useAuth';
 import { api } from '../../../api/resources';

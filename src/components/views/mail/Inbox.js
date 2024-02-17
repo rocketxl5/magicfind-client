@@ -4,7 +4,7 @@ import SideBar from './SideBar';
 import MailHeader from './MailHeader';
 import Mail from './Mail';
 import ComposeMessage from './ComposeMessage';
-import Loading from '../../layout/Loading';
+import Loading from '../../elements/Loading';
 import Message from './Message';
 import useAuth from '../../../hooks/useAuth';
 import getPath from '../../../assets/utilities/getPath'

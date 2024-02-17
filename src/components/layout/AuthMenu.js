@@ -4,10 +4,12 @@ import useAuth from '../../hooks/useAuth';
 
 function AuthMenu({ authRoutes }) {
   const { logoutAction } = useAuth();
+  console.log(authRoutes)
 
   return (
     <ul className='menu auth-nav'>
       {
+        authRoutes &&
         authRoutes.map((route, index) => {
           return (
             <li key={index}>

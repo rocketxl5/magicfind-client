@@ -1,6 +1,6 @@
 import { Outlet, useLocation } from 'react-router-dom';
-import Banner from '../views/Banner';
-import Loading from './Loading';
+import Banner from '../elements/Banner';
+import Loading from '../elements/Loading';
 import useSearch from '../../hooks/useSearch';
 import data from '../../assets/data/BANNERS';
 

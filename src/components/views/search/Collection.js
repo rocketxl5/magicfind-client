@@ -7,7 +7,7 @@ import React, {
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { FiArrowRightCircle } from "react-icons/fi"
 import SearchInput from './SearchInput';
-import Loading from '../../layout/Loading';
+import Loading from '../../elements/Loading';
 import { SearchContext } from '../../../contexts/SearchContext';
 import { api } from '../../../api/resources';
 import hideSearchBar from '../../../assets/utilities/hideSearchBar';

@@ -6,7 +6,7 @@ import useAuth from '../../hooks/useAuth';
 import { CartContext } from '../../contexts/CartContext';
 import { api } from '../../api/resources';
 import styled from 'styled-components';
-import Loading from '../layout/Loading';
+import Loading from '../elements/Loading';
 
 function ShoppingCart() {
   const [loading, setLoading] = useState(false);

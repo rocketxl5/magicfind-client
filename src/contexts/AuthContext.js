@@ -1,5 +1,5 @@
 import React, { createContext, useState, useEffect } from 'react';
-// import { useNavigate } from 'react-router-dom';
+// import { useNavigate, useLocation } from 'react-router-dom';
 // import { ShoppingCartContext } from './ShoppingCartContext'
 import { api } from '../api/resources';
 
@@ -19,6 +19,7 @@ export const AuthProvider = ({ children }) => {
     localStorage.removeItem('token');
     localStorage.removeItem('user');
     setAuth(null);
+    setIsAuth(false);
     // navigate('/');
   }
 

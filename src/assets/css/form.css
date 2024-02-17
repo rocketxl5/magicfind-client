@@ -15,6 +15,10 @@ input:-webkit-autofill:active{
     margin-inline: auto;
 }
 
+.form-content a {
+    color: var(--clr-dark);
+}
+
 .form-logo {
     font-family: 'Young Serif', serif;
     width: fit-content;
