@@ -1,7 +1,10 @@
+import { useEffect } from 'react';
 import {
   Route,
   Routes,
-  Navigate
+  Navigate,
+  useLocation,
+  useNavigate
 } from 'react-router-dom';
 import Layout from './components/layout/Layout';
 import AuthLayout from './components/layout/AuthLayout';
@@ -28,6 +31,7 @@ import Inbox from './components/views/mail/Inbox';
 import Store from './components/views/Store';
 import ProductDetails from './components/views/search/ProductDetails';
 import useAuth from './hooks/useAuth';
+import useSearch from './hooks/useSearch';
 import './assets/css/reset.css';
 import './App.css';
 import './assets/css/utilities.css';
@@ -37,7 +41,24 @@ import './assets/css/form.css';
 import './assets/css/media-queries.css';
 
 const App = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
+
   const { isAuth } = useAuth();
+  const { setUpdateCatalog } = useSearch();
+
+
+  useEffect(() => {
+    localStorage.setItem('pathname', JSON.stringify(location.pathname));
+  }, [location])
+
+  useEffect(() => {
+    if (localStorage.getItem('pathname')) {
+      navigate(JSON.parse(localStorage.getItem('pathname')));
+    }
+
+    setUpdateCatalog(true);
+  }, [])
 
   return (
     <Routes>

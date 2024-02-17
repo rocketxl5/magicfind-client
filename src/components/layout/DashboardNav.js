@@ -10,6 +10,7 @@ const DashboardNav = () => {
         archiveCardNames,
         setArchiveCardNames,
         setCollectionCardNames,
+        setUpdateCollection,
         updateCollection
     } = useContext(SearchContext);
 
@@ -32,6 +33,7 @@ const DashboardNav = () => {
                 .then((res) => res.json())
                 .then((data) => {
                     setArchiveCardNames(data);
+                    setUpdateCollection(true);
                 })
                 .catch((error) => {
                     console.log(error)
@@ -42,22 +44,28 @@ const DashboardNav = () => {
 
     // Setting collection card names for autocomplete collection search
     useEffect(() => {
-        const headers = new Headers();
-        headers.append('Content-Type', 'application/json');
-        headers.append('auth-token', auth.token);
-        const options = {
-            method: 'GET',
-            headers: headers,
-        }
+        // If true
+        if (updateCollection) {
 
-        fetch(`${api.serverURL}/api/cards/${auth.id}/cardnames`, options)
-            .then(res => res.json())
-            .then((data) => {
-                setCollectionCardNames(data);
-            })
-            .catch((error) => {
-                console.log(error)
-            });
+            const headers = new Headers();
+            headers.append('Content-Type', 'application/json');
+            headers.append('auth-token', auth.token);
+            const options = {
+                method: 'GET',
+                headers: headers,
+            }
+
+            fetch(`${api.serverURL}/api/cards/${auth.id}/cardnames`, options)
+                .then(res => res.json())
+                .then((data) => {
+                    setCollectionCardNames(data);
+                    // Reinitialize updateCollection to allow updates
+                    setUpdateCollection(false);
+                })
+                .catch((error) => {
+                    console.log(error)
+                });
+        }
 
     }, [updateCollection])
 

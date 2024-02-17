@@ -24,31 +24,6 @@ const Product = forwardRef(function Product(props, ref) {
                 <ProductHandlers product={card} search={search} setLoading={value => setLoading(value)} handleClick={handleModalProductState} />
                 <Result count={count} result={index + 1} />
 
-                {/* <section className={`${search} product-details`} ref={detailsRef}> */}
-                    {/* <div className="inner">
-                    {
-
-
-                        search === 'catalog' ? (
-                            <>
-                                <span>{data.product.conditions[`${card.condition}`]}</span>
-                                <span>{data.product.languages[`${card.language}`]}</span>
-
-                            </>
-                        ) : search === 'collection' ? (
-                            <>
-                                <span>{data.product.conditions[`${card.condition}`]}</span>
-                                <span>{data.product.languages[`${card.language}`]}</span>
-                            </>
-                        ) : (
-                            <>
-                            </>
-                        )
-
-                    }
-                    </div> */}
-                {/* </section> */}
-
                 {
                     search !== "api" &&
                     <section className={`${search} user section`}>

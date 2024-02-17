@@ -21,7 +21,7 @@ const INIT = {
 
 const EditProduct = (props) => {
     // Props
-    const { card, search, handleClick } = props;
+    const { product, search, handleClick } = props;
     // States
     const [errors, setErrors] = useState(INIT);
     const [values, setValues] = useState(INIT);
@@ -63,7 +63,7 @@ const EditProduct = (props) => {
             setLoading(true);
 
             const input = {
-                cardName: card.name?.trim(),
+                cardName: product.name?.trim(),
                 price: parseFloat(values.price),
                 quantity: parseInt(values.quantity),
                 condition: values.condition,
@@ -81,7 +81,7 @@ const EditProduct = (props) => {
                 headers: headers,
                 body: JSON.stringify(input),
             };
-            fetch(`${api.serverURL}/api/cards/edit/${card._id}/${auth.id}`, options)
+            fetch(`${api.serverURL}/api/cards/edit/${product._id}/${auth.id}`, options)
                 .then((res) => res.json())
                 .then((data) => {
                     const { cards, isUpdated, message } = data;
@@ -91,7 +91,7 @@ const EditProduct = (props) => {
 
                     if (query !== 'all-cards') {
                         // filter for cards with cardName
-                        const updatedCards = cards.filter(cardObj => cardObj.name.toLowerCase() === card.name.toLowerCase());
+                        const updatedCards = cards.filter(cardObj => cardObj.name.toLowerCase() === product.name.toLowerCase());
                         result = { cards: updatedCards, search: search };
                     } else {
                         result = { cards: cards, search: search };
@@ -111,12 +111,12 @@ const EditProduct = (props) => {
     useEffect(() => {
         priceRef.current.focus();
         setValues({
-            price: card['_price'] ? card['_price'] : '',
-            quantity: card['_quantity'] ? card['_quantity'] : '',
-            condition: card['_condition'] ? card['_condition'] : '',
-            language: card['_language'] ? card['_language'] : '',
-            comment: card['_comment'],
-            published: card['_is_published']
+            price: product['_price'] ? product['_price'] : '',
+            quantity: product['_quantity'] ? product['_quantity'] : '',
+            condition: product['_condition'] ? product['_condition'] : '',
+            language: product['_language'] ? product['_language'] : '',
+            comment: product['_comment'],
+            published: product['_is_published']
         });
     }, [])
 
@@ -184,10 +184,10 @@ const EditProduct = (props) => {
                                                 <section className="modal-section">
 
                                                     <div className="card-section">
-                                                        <Image card={card} />
+                                                            <Image product={product} />
                                                     </div>
                                                     <div className="card-section">
-                                                        <CollectionDetails card={card} />
+                                                            <CollectionDetails product={product} />
                                                     </div>
                                                 </section>
                                                 <div className="edit-card">

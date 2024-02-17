@@ -4,7 +4,7 @@ const CollectionHandlers = ({ product, handleClick }) => {
     return (
         <div className="card-btns">
             <div className="btn-container">
-                < button id="delete-card" className="btn bg-red color-light" type="button" onClick={(e) => handleClick(e, product)}>
+                < button id="delete-product" className="btn bg-red color-light" type="button" onClick={(e) => handleClick(e, product)}>
                     Delete
                 </button>
             </div>

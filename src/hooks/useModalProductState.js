@@ -13,35 +13,35 @@ const useModalProductState = (search, callback) => {
         ADD_TO_WISHLIST: 'add-to-wishlist',
         BACK_TO_SEARCH: 'back-to-search',
         CONFIRM_DELETE: 'confirm-delete',
-        DELETE_CARD: 'delete-card',
+        DELETE_PRODUCT: 'delete-product',
         EXPAND_CARD: 'expand-card',
         GO_BACK: 'go-back',
-        EDIT_CARD: 'edit-card',
+        EDIT_PRODUCT: 'edit-product',
         CLOSE_MODAL: 'close',
     }
 
     const reducer = (state, action) => {
-
+        console.log(action.payload.product)
         switch (action.type) {
 
-            case ACTIONS.DELETE_CARD:
+            case ACTIONS.DELETE_PRODUCT:
                 return {
                     open: true,
                     component: <DeleteProduct
                         attributes={{ ...action.payload.attributes, id: 'confirm-delete' }}
                         search={search}
-                        card={action.payload.card}
+                        product={action.payload.product}
                         handleClick={callback}
                     />
                 };
-            case ACTIONS.EDIT_CARD:
+            case ACTIONS.EDIT_PRODUCT:
                 return {
                     open: true,
                     component:
                         <EditProduct
                             attributes={{ ...action.payload.attributes, id: 'confirm-edit' }}
                             search={search}
-                            card={action.payload.card}
+                            product={action.payload.product}
                             handleClick={callback}
                         />
                 }
@@ -65,16 +65,18 @@ const useModalProductState = (search, callback) => {
     }
     const [state, dispatch] = useReducer(reducer, INIT)
 
-    const updateProductState = (id, card) => {
+    const updateProductState = (id, product) => {
+        console.log(id)
+        console.log(product)
         dispatch({
             type: id,
             payload: {
-                card: card,
+                product: product,
                 attributes: {
                     id: 'expand-card',
                     style: 'card-image',
-                    src: card?.image_uris?.small || card?.card_faces[0]?.image_uris?.small,
-                    alt: `${card?.name} image`,
+                    src: product?.image_uris?.small || product?.card_faces[0]?.image_uris?.small,
+                    alt: `${product?.name} image`,
                     placeholder: cardBack
                 },
             }

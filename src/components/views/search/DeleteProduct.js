@@ -10,14 +10,15 @@ import { api } from '../../../api/resources';
 
 const DeleteProduct = (props) => {
     // Props
-    const { card, search, handleClick } = props;
+    const { product, search, handleClick } = props;
+    console.log(product)
     // States
     const [response, setResponse] = useState({
         isDeleted: false,
         message: (() => {
             return (
                 <>
-                    <p>You are about to delete <strong>{card.name}</strong> from your collection.</p>
+                    <p>You are about to delete <strong>{product.name}</strong> from your collection.</p>
                     <p>This will remove all the information associated with this card.</p>
                 </>
             )
@@ -52,7 +53,7 @@ const DeleteProduct = (props) => {
         headers.append('auth-token', auth.token);
 
         const input = {
-            cardID: card._id,
+            cardID: product._id,
             userID: auth.id,
         }
         const options = {
@@ -78,7 +79,7 @@ const DeleteProduct = (props) => {
                 // If cardName is set
                 if (query !== 'all-cards') {
                     // filter for cards with cardName
-                    const updatedCards = cards.filter(cardObj => cardObj.name.toLowerCase() === card.name.toLowerCase());
+                    const updatedCards = cards.filter(cardObj => cardObj.name.toLowerCase() === product.name.toLowerCase());
                     result = { cards: updatedCards, search };
                 } else {
                     result = { cards: cards, search };
@@ -112,10 +113,10 @@ const DeleteProduct = (props) => {
                                         <div className="modal-body">
                                             <section className="modal-section">
                                                 <div className="card-section">
-                                                    <Image card={card} />
+                                                        <Image product={product} />
                                                 </div>
                                                 <div className="card-section">
-                                                    <CollectionDetails card={card} />
+                                                        <CollectionDetails product={product} />
                                                 </div>
                                             </section>
                                             <section className="modal-warning">
