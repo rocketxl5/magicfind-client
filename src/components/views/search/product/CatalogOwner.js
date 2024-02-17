@@ -1,13 +1,10 @@
 import { Link } from 'react-router-dom';
 import useAuth from '../../../../hooks/useAuth';
-import styled from 'styled-components';
 
-const Seller = ({ product }) => {
+const CatalogOwner = ({ product }) => {
     const { isAuth } = useAuth();
-
     return (
-
-        <div className="product-section">
+        <div className="catalog-owner">
             <div className="">
                 <p><span className="">{product.userName}</span></p>
             </div>
@@ -23,15 +20,15 @@ const Seller = ({ product }) => {
                 isAuth &&
                 <div className="contact-link">
                     <Link to={{
-                            pathname: '/mail/message',
+                        pathname: '/mail/message',
                         state: { sender: product.userName, subject: product.name },
                     }}>
                         Contact Seller
                     </Link>
-                    </div>
+                </div>
             }
         </div>
     )
 }
 
-export default Seller
+export default CatalogOwner

@@ -9,8 +9,7 @@ import ProductHandlers from './ProductHandlers';
 const Product = forwardRef(function Product(props, ref) {
     const { index, count, card, search, handleModalProductView, handleModalProductState } = props;
     const [loading, setLoading] = useState(false);
-
-
+    console.log(search)
     return (
         <li className="product" ref={ref}>
             <Header title={card.name} classList={'product-header'} />
@@ -23,30 +22,6 @@ const Product = forwardRef(function Product(props, ref) {
                 <ProductDetails product={card} search={search} />
                 <ProductHandlers product={card} search={search} setLoading={value => setLoading(value)} handleClick={handleModalProductState} />
                 <Result count={count} result={index + 1} />
-
-                {
-                    search !== "api" &&
-                    <section className={`${search} user section`}>
-                        <h2>Seller</h2>
-                    {/* <Seller product={card} /> */}
-                            {/* {
-
-                                search === 'catalog' ? (
-                                    <>
-                                        <span>{data.product.conditions[`${card.condition}`]}</span>
-                                        <span>{data.product.languages[`${card.language}`]}</span>
-                                    </>
-                                ) : search === 'collection'(
-                                    <>
-                                        <span>{data.product.conditions[`${card.condition}`]}</span>
-                                        <span>{data.product.languages[`${card.language}`]}</span>
-                                    </>
-                                )
-
-                            } */}
-                </section>
-                }
-
             </div>
         </li>
     )
