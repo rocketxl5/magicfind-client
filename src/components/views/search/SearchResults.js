@@ -8,7 +8,6 @@ import { HiOutlineAdjustmentsHorizontal } from "react-icons/hi2";
 import { FiPlus } from "react-icons/fi";
 import useModalProductState from '../../../hooks/useModalProductState';
 import useModalProductView from '../../../hooks/useModalProductView';
-import useProduct from '../../../hooks/useProduct';
 
 const SearchResults = () => {
     // States
@@ -52,7 +51,6 @@ const SearchResults = () => {
     //         iconRef.current?.classList.remove('rotate-icon');
     //     }
     // }, [searchFeatures]);
-    // const [Product, updateProducts, view, state] = useProduct(cards);
 
     const [view, updateProductView] = useModalProductView(handleModalProductView);
 

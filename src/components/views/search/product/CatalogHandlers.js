@@ -72,7 +72,7 @@ const CatalogHandlers = ({ product }) => {
                         <Loading />
                     ) : (
 
-                        <div className="product-order">
+                        <div className="catalog-handlers">
                             {/* <div className="">
                                 <p><span className="">Ships From:</span>  <span className="card-spec-value">{product.country}</span></p>
                             </div> */}

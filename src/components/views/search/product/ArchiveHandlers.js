@@ -81,15 +81,13 @@ const ArchiveHandlers = ({ product, setLoading }) => {
         setSelectedProduct(product)
     }
     return (
-
-
-        <div className="btn-container">
-            {/* <Button attributes={attributes} handleClick={handleClick}  /> */}
-            <button id="add-to-collection" className={attributes.style} type={attributes.type} onClick={handleClick}>{attributes.value}</button>
-            {/* <button className="btn bg-blue color-lg-grey" type="button" onClick={() => handleClick(card)}>{!isLoaded ? 'Add To Collection' : 'Added'}</button> */}
+        <div className="archive-handlers">
+            <div className="btn-container">
+                {/* <Button attributes={attributes} handleClick={handleClick}  /> */}
+                <button id="add-to-collection" className={attributes.style} type={attributes.type} onClick={handleClick}>{attributes.value}</button>
+                {/* <button className="btn bg-blue color-lg-grey" type="button" onClick={() => handleClick(card)}>{!isLoaded ? 'Add To Collection' : 'Added'}</button> */}
+            </div>
         </div>
-
-
     )
 }
 

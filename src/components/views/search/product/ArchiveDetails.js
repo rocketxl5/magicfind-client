@@ -6,6 +6,7 @@ const ArchiveDetails = ({ product }) => {
     const { languages } = data.product;
     const { set_name, released_at, rarity, type_line, artist, lang, collector_number } = product;
     return (
+        <div className="archive-details">
         <table className="table">
             <tbody>
                 <tr>
@@ -50,6 +51,7 @@ const ArchiveDetails = ({ product }) => {
                 </tr>
             </tbody>
         </table>
+        </div>
     )
 }
 

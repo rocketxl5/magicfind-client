@@ -1,5 +1,7 @@
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
+
 const Banner = ({ classList, title, link }) => {
+
     return (
         <section className='banner'>
             <div className={classList}>
@@ -8,6 +10,7 @@ const Banner = ({ classList, title, link }) => {
                 </Link>
             </div>
         </section>
+
     )
 }
 

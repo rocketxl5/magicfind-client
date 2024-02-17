@@ -1,14 +1,14 @@
-const BANNER = {
-    home: {
+const BANNERS = {
+    '/': {
         classList: "banner-content home-page-banner",
         title: 'Join Magic Find',
         link: '/signup'
     },
-    about: {
+    '/about': {
         classList: "banner-content about-page-banner",
         title: 'Join Magic Find',
         link: '/signup'
     },
 }
 
-export default BANNER;
+export default BANNERS

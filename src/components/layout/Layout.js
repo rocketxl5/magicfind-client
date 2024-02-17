@@ -7,13 +7,13 @@ import Footer from './Footer';
 import Loading from './Loading';
 import Breadcrumbs from './Breadcrumbs';
 import { SearchContext } from '../../contexts/SearchContext';
-import data from '../../assets/data/BANNER';
+import data from '../../assets/data/BANNERS';
 
 const Layout = () => {
     const location = useLocation();
     const { loading } = useContext(SearchContext);
-    const { home } = data;
-    const { classList, title, link } = home;
+    const path = location.pathname;
+
     return (
 
         location.pathname === '/login' || location.pathname === '/signup' ? (
@@ -26,7 +26,13 @@ const Layout = () => {
                 <div className="layout">
                     <MainHeader />
                     <div className="container">
-                        <Banner classList={classList} title={title} link={link} />
+                        {
+                            data[path] &&
+                            <Banner
+                                classList={data[path].classList}
+                                title={data[path].title}
+                                link={data[path].link} />
+                        }
                         <Breadcrumbs />   
                         <div className="content">
                                 {

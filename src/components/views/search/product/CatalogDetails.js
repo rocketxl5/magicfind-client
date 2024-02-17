@@ -10,7 +10,7 @@ const CatalogDetails = ({ product }) => {
     const { set_name, released_at, rarity, type_line, name, language, userName, comment, country, condition, card_faces, oversized, avatar, rating, joined } = product;
     return (
         <>
-
+            <div className="catalog-details">
             <table className="table">
                 <tbody>
                     <tr>
@@ -74,6 +74,7 @@ const CatalogDetails = ({ product }) => {
                     </tr>
                 </tbody>
             </table>
+            </div>
         </>
 
         // <div className="card-info">
