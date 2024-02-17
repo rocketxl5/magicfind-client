@@ -35,15 +35,21 @@ const Catalog = () => {
 
 
   useEffect(() => {
-
+    console.log(catalogCardNames)
     if (searchInput?.id === 'catalog') {
-      setCardNames(catalogCardNames);
+      // setCardNames(catalogCardNames);
       setIsActive(true);
     } else {
       setCardNames(null);
       setIsActive(false);
     }
   }, [searchInput]);
+
+  useEffect(() => {
+    if (isActive) {
+      setCardNames(catalogCardNames)
+    }
+  }, [isActive, catalogCardNames])
 
   const searchCatalogCard = (e = undefined, prediction = undefined) => {
     e?.preventDefault();
@@ -76,6 +82,7 @@ const Catalog = () => {
     else if (searchTerm) {
       query = searchTerm;
     }
+
     // Conditional query string won't return user cards if auth
     // Else returns all cards
     const queryString = isAuth ?

@@ -15,8 +15,8 @@ export const SearchProvider = ({ children }) => {
   // State changes on delete and add card actions
   // Resets collectionCardNames state @ DashboardNav
   const [updateCollection, setUpdateCollection] = useState(false);
-
   const [updateCatalog, setUpdateCatalog] = useState(false);
+  const [updateArchive, setUpdateArchive] = useState(false);
 
   // Mount state @ Collection initial fetch 
   const [errorMessage, setErrorMessage] = useState(null);
@@ -64,6 +64,8 @@ export const SearchProvider = ({ children }) => {
         setCollectionCardNames,
         updateCollection,
         setUpdateCollection,
+        updateArchive,
+        setUpdateArchive,
         setCatalogCardNames,
         catalogCardNames,
         updateCatalog,

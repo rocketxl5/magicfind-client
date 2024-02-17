@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 // import Button from '../../layout/Button';
 import useAuth from '../../../../hooks/useAuth';
+import useSearch from '../../../../hooks/useSearch';
 import { api } from '../../../../api/resources';
 const INIT = {
     style: 'btn bg-blue color-light border-blue',
@@ -13,6 +14,7 @@ const ArchiveHandlers = ({ product, setLoading }) => {
     const [selectedProduct, setSelectedProduct] = useState(null);
 
     const { auth } = useAuth();
+    const { setUpdateCollection } = useSearch();
 
     const attributesHandler = (message) => {
         let attr = { type: 'button', value: message.body, style: '' }
@@ -38,7 +40,7 @@ const ArchiveHandlers = ({ product, setLoading }) => {
     }, [])
 
     useEffect(() => {
-        console.log(selectedProduct)
+        // console.log(selectedProduct)
         if (selectedProduct) {
 
             setLoading(true)
@@ -63,6 +65,7 @@ const ArchiveHandlers = ({ product, setLoading }) => {
                 })
                 .then((data) => {
                     setAttributes(attributesHandler(data.message));
+                    setUpdateCollection(true)
                     setLoading(false);
                 })
                 .catch((error) => {

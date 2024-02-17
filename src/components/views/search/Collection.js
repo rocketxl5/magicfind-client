@@ -78,9 +78,10 @@ const Collection = () => {
       });
   }
   useEffect(() => {
-    if (location.pathname.includes('collection')) {
+    console.log('collection')
+    // if (location.pathname.includes('collection')) {
       collectionInputRef.current?.focus();
-    }
+    // }
 
     if (browserWidth <= 775 && document.querySelector('#mobile-nav')?.checked) {
       hideSearchBar();
@@ -88,13 +89,20 @@ const Collection = () => {
   }, []);
 
   useEffect(() => {
+    // console.log(collectionCardNames)
     if (searchInput?.id === 'collection') {
-      setCardNames(collectionCardNames)
       setIsActive(true);
     } else {
       setIsActive(false);
     }
   }, [searchInput]);
+
+  useEffect(() => {
+    if (isActive) {
+      setCardNames(collectionCardNames);
+    }
+  }, [isActive, collectionCardNames])
+
 
 
   // Instore single card request search field with

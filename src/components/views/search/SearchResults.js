@@ -25,7 +25,7 @@ const SearchResults = () => {
 
     const { cards, search } = location.state?.result || JSON.parse(localStorage.getItem('search-results'));
 
-    const count = cards.length;
+
 
     useEffect(() => {
 
@@ -110,13 +110,13 @@ const SearchResults = () => {
                 <main className="products">
                         <ul>
                         {
-                            // imagesLoaded &&
+                            cards &&
                                 cards.map((card, i) => {
                                     return (
                                         <Product
                                             key={i}
                                             index={i}
-                                            count={count}
+                                            count={cards.length}
                                             card={card}
                                             search={search}
                                             handleModalProductView={handleModalProductView}

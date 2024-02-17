@@ -4,7 +4,7 @@ import React, {
   useEffect,
   useContext
 } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import SearchInput from './SearchInput';
 import Loading from '../../layout/Loading';
 import { SearchContext } from '../../../contexts/SearchContext';
@@ -34,15 +34,12 @@ const Search = () => {
   } = useContext(SearchContext);
   // Hooks
   const navigate = useNavigate();
-  const location = useLocation();
+
   // Utilities
   const browserWidth = getViewPortWidth();
 
   useEffect(() => {
-    if (location.pathname.includes('archive')) {
-      archiveInputRef.current?.focus();
-
-    }
+    archiveInputRef.current?.focus();
     if (browserWidth <= 775 && document.querySelector('#mobile-nav')?.checked) {
       hideSearchBar();
     }
@@ -50,12 +47,17 @@ const Search = () => {
 
   useEffect(() => {
     if (searchInput?.id === 'archive') {
-      setCardNames(archiveCardNames);
       setIsActive(true);
     } else {
       setIsActive(false);
     }
   }, [searchInput])
+
+  useEffect(() => {
+    if (isActive) {
+      setCardNames(archiveCardNames);
+    }
+  }, [isActive, archiveCardNames])
 
 
   const searchArchive = (e = undefined, prediction = undefined) => {
@@ -144,6 +146,7 @@ const Search = () => {
       setLoading(false)
       setCardName('');
       setSearchInput(null);
+      console.log(cards)
       const result = {
         cards: cards,
         search: searchInput.id

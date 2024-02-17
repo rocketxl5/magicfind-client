@@ -1,53 +1,55 @@
 import useColorSymbols from '../../../../hooks/useColorSymbols';
-import capitalizeWord from '../../../../assets/utilities/capitalizeWord';
-import getYear from '../../../../assets/utilities/getYear';
 import data from '../../../../assets/data/SEARCH';
 
 const ArchiveDetails = ({ product }) => {
     const { colorIdentity, manaCost } = useColorSymbols(product);
+    const { languages } = data.product;
+    const { set_name, released_at, rarity, type_line, artist, lang, collector_number } = product;
     return (
-        <div className="row">
-
-            <div className="column specs">
-                <p>Type:</p>
-                <p className="color-identity">Color:</p>
-                <p className="color-identity">Mana:</p>
-                <p>Year: </p>
-                <p>Rarity: </p>
-                <p>Language: </p>
-                <p>Collector #: </p>
-                <p>Artist: </p>
-                <p>Frame:</p>
-                {
-                    !product.finishes.includes('nonfoil') &&
-                    <p>Finish:</p>
-                }
-            </div>
-            <div className="column values">
-                <p>{product.type_line.split('—')[0]}</p>
-                {
-                    product.color_identity &&
-                    <p className="color-identity">{colorIdentity.lenght ? colorIdentity.map((id, i) => id) : 'Colorless'}</p>
-                }
-
-                <p className="color-identity">{manaCost && manaCost.map((id, i) => id)}</p>
-                <p>{`${getYear(product.released_at)}`}</p>
-                <p>{`${capitalizeWord(product.rarity)}`}</p>
-                <p>{`${data.product.languages[product.lang]}`}</p>
-                <p>{product.collector_number}</p>
-                <p>{product.artist}</p>
-                <p>{product.frame}</p>
-                {
-                    !product.finishes.includes('nonfoil') &&
-
-                    <p className={`${product.finishes[0].toLowerCase() === 'foil' ? 'foil-finish' : ''}`}>
-                        {` ${capitalizeWord(product.finishes[0])}`}
-                    </p>
-
-                }
-
-            </div>
-        </div>
+        <table className="table">
+            <tbody>
+                <tr>
+                    <td>Edition:</td>
+                    <td>{set_name}</td>
+                </tr>
+                <tr>
+                    <td>Year:</td>
+                    <td>{`${released_at?.split('-')[0]}`}</td>
+                </tr>
+                <tr>
+                    <td>Rarity:</td>
+                    <td>{rarity.charAt(0).toUpperCase()}{rarity.substring(1)}</td>
+                </tr>
+                <tr>
+                    <td>Type:</td>
+                    <td>{type_line.split('—')[0]}</td>
+                </tr>
+                <tr>
+                    <td>Sub Type:</td>
+                    <td>{type_line.split('—')[1]}</td>
+                </tr>
+                <tr>
+                    <td>Identity:</td>
+                    <td className="color-identity">{colorIdentity.length ? colorIdentity.map((color) => color) : 'Colorless'}</td>
+                </tr>
+                <tr>
+                    <td >Cast:</td>
+                    <td className="color-identity">{manaCost && manaCost.map((color) => color)}</td>
+                </tr>
+                <tr>
+                    <td>Artist:</td>
+                    <td>{artist}</td>
+                </tr>
+                <tr>
+                    <td>Language:</td>
+                    <td>{`${languages[lang]}`}</td>
+                </tr>
+                <tr>
+                    <td>Collector #:</td>
+                    <td>{collector_number}</td>
+                </tr>
+            </tbody>
+        </table>
     )
 }
 

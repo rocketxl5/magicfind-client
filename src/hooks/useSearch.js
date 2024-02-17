@@ -1,8 +1,8 @@
 import { useContext } from 'react';
 import { SearchContext } from '../contexts/SearchContext';
 
-const useAuth = () => {
+const useSearch = () => {
     return useContext(SearchContext);
 }
 
-export default useAuth;
+export default useSearch;
