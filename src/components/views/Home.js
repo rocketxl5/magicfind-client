@@ -1,21 +1,19 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import Banner from './Banner';
 import MediaElement from './MediaElement';
 import Modal from './modal/Modal';
 import { GoShieldCheck } from "react-icons/go";
+import data from '../../assets/data/HOME';
 import useExpandImages from '../../hooks/useExpandImages';
-import data from '../../assets/data/HOME_PAGE';
-import { api } from '../../api/resources';
 import useModalSlide from '../../hooks/useModalSlide';
+import { api } from '../../api/resources';
 
 const Home = () => {
   const [mediaFeatures, setMediaFeatures] = useState(null);
   const [cardCollections, setCardCollections] = useState(null);
   const navigate = useNavigate();
-  const { banner, main, media } = data;
-  // const { classList, title, link } = banner
+  const { main, media } = data;
 
   useEffect(() => {
     const cards = []

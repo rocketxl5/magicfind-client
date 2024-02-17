@@ -1,4 +1,9 @@
-const HOME_PAGE = {
+const HOME = {
+    banner: {
+        classList: "banner-content home-page-banner",
+        title: 'Join Magic Find',
+        link: '/signup'
+    },
     main: {
         features: [
             {
@@ -54,78 +59,78 @@ const HOME_PAGE = {
     },
     media: {
         features: [
-        {
-            title: 'Absolute Annihilation',
-            query: 'cn≥1424+cn≤1427',
+            {
+                title: 'Absolute Annihilation',
+                query: 'cn≥1424+cn≤1427',
                 cover: 1,
-        },
-        {
-            title: 'Now on VHS',
-            query: 'cn≥1368+cn≤1371',
-            cover: 1
-        },
-        {
-            title: 'The Baseballing',
-            query: 'cn≥1453+cn≤1457',
-            cover: 1
-        },
-        {
-            title: 'Buggin\' Out',
-            query: 'cn≥1414+cn≤1418',
-            cover: 1
-        },
-        {
-            title: 'Tales of the Time Stoppers',
-            query: 'cn≥1497+cn≤1500',
-            cover: 1
-        },
-        {
-            title: 'Creepshow',
-            query: '%28%28%28cn≥1458+cn≤1462%29+OR+cn%3A"750"%29%29',
-            cover: 1
-        },
-        {
-            title: 'Legendary flyers',
-            query: 'cn≥1195+cn≤1198',
-            cover: 1
-        },
-        {
-            title: 'Welcome to the Fungal',
-            query: 'cn≥1135+cn≤1139',
-            cover: 1
-        },
-        {
-            title: 'Psychedelic Show',
-            query: 'cn≥185+cn≤189',
-            cover: 1
-        },
-        {
-            title: 'Party Hard, Shred Harder',
-            query: 'cn≥138+cn≤142',
-            cover: 1
-        },
-        {
-            title: 'Thrilling Tales of the Undead',
-            query: 'cn≥231+cn≤233',
-            cover: 1
-        },
-        {
-            title: 'Tokyo Lands',
-            query: 'cn≥46+cn≤50',
-            cover: 1
-        },
-        {
-            title: 'Monster Movie Marathon',
-            query: 'cn≥321+cn≤324',
-            cover: 1
-        },
-        {
-            title: 'Calling All Hydra Heads',
-            query: 'cn≥1329+cn≤1334',
+            },
+            {
+                title: 'Now on VHS',
+                query: 'cn≥1368+cn≤1371',
+                cover: 1
+            },
+            {
+                title: 'The Baseballing',
+                query: 'cn≥1453+cn≤1457',
+                cover: 1
+            },
+            {
+                title: 'Buggin\' Out',
+                query: 'cn≥1414+cn≤1418',
+                cover: 1
+            },
+            {
+                title: 'Tales of the Time Stoppers',
+                query: 'cn≥1497+cn≤1500',
+                cover: 1
+            },
+            {
+                title: 'Creepshow',
+                query: '%28%28%28cn≥1458+cn≤1462%29+OR+cn%3A"750"%29%29',
+                cover: 1
+            },
+            {
+                title: 'Legendary flyers',
+                query: 'cn≥1195+cn≤1198',
+                cover: 1
+            },
+            {
+                title: 'Welcome to the Fungal',
+                query: 'cn≥1135+cn≤1139',
+                cover: 1
+            },
+            {
+                title: 'Psychedelic Show',
+                query: 'cn≥185+cn≤189',
+                cover: 1
+            },
+            {
+                title: 'Party Hard, Shred Harder',
+                query: 'cn≥138+cn≤142',
+                cover: 1
+            },
+            {
+                title: 'Thrilling Tales of the Undead',
+                query: 'cn≥231+cn≤233',
+                cover: 1
+            },
+            {
+                title: 'Tokyo Lands',
+                query: 'cn≥46+cn≤50',
+                cover: 1
+            },
+            {
+                title: 'Monster Movie Marathon',
+                query: 'cn≥321+cn≤324',
+                cover: 1
+            },
+            {
+                title: 'Calling All Hydra Heads',
+                query: 'cn≥1329+cn≤1334',
                 cover: 1
             },
         ]
     }
 }
 
-export default HOME_PAGE;
+export default HOME;
