@@ -1,15 +1,15 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
 
-const Menu = ({ paths }) => {
+const Menu = ({ routes }) => {
     return (
         <ul className='menu'>
             {
-                paths.map((path, index) => {
+                routes.map((route, index) => {
                     return (
                         <li key={index}>
-                            <Link className="nav-link" to={path.to} replace>
-                                {path.name}
+                            <Link className="nav-link" to={route.to} replace>
+                                {route.name}
                             </Link>
                         </li>
                     )

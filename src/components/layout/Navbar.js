@@ -15,7 +15,7 @@ import data from '../../assets/data/ROUTES';
 function Navbar() {
     const panelRef = useRef(null);
     const { isAuth, auth } = useAuth();
-    const { authPaths, paths } = data;
+    const { authRoutes, routes } = data;
     const viewport = getViewPortWidth();
 
     return (
@@ -50,13 +50,13 @@ function Navbar() {
                 </section>
                 <section className="right-side-nav">
                     {isAuth ? (
-                        <AuthMenu authPaths={authPaths} />
+                        <AuthMenu authPaths={authRoutes} />
                     ) : (
-                            <Menu paths={paths} />
+                            <Menu routes={routes} />
                     )}
                 </section>
                 <SidePanel ref={panelRef}>
-                    <AuthMenu authPaths={authPaths} />
+                    <AuthMenu authRoutes={authRoutes} />
                 </SidePanel>
             </nav>
         </div>

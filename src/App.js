@@ -1,15 +1,23 @@
 import { useEffect } from 'react';
 import {
   Route,
-  Routes,
   Navigate,
   useLocation,
-  useNavigate
+  useNavigate,
+  createBrowserRouter,
+  createRoutesFromElements,
+  RouterProvider
 } from 'react-router-dom';
+// Layouts
+import RootLayout from './components/layouts/RootLayout';
 import Layout from './components/layout/Layout';
 import AuthLayout from './components/layout/AuthLayout';
+
+
 import RequireAuth from './components/auth/RequireAuth';
 import RequireNotAuth from './components/auth/RequireNotAuth';
+
+// Views
 import AuthPage from './components/views/AuthPage';
 import Login from './components/auth/forms/Login';
 import Signup from './components/auth/forms/Signup';
@@ -40,37 +48,16 @@ import './assets/css/navbar.css';
 import './assets/css/form.css';
 import './assets/css/media-queries.css';
 
-const App = () => {
-  const navigate = useNavigate();
-  const location = useLocation();
-
-  const { isAuth } = useAuth();
-  const { setUpdateCatalog } = useSearch();
-
-
-  useEffect(() => {
-    localStorage.setItem('pathname', JSON.stringify(location.pathname));
-  }, [location])
-
-  useEffect(() => {
-    if (localStorage.getItem('pathname')) {
-      navigate(JSON.parse(localStorage.getItem('pathname')));
-    }
-
-    setUpdateCatalog(true);
-  }, [])
-
-  return (
-    <Routes>
-      {/* Public routes */}
-        {/* Public routes not auth */}
-      <Route path="/" element={!isAuth ? <Layout /> : <AuthLayout />} >
-        <Route path="home" element={<Navigate to="/" />} />
+const router = createBrowserRouter(
+  createRoutesFromElements(
+    <Route path="/" element={<RootLayout />} >
         <Route element={<RequireNotAuth />}>
           <Route index element={<Home />} />
+        <Route path="home" exact element={<Navigate to="/" replace />} />
           <Route path="about" element={<About />} />
           <Route path="contact" element={<Contact />} />
           <Route path="store/:id" element={<Store />} />
+        {/* </Route> */}
           <Route path="login" element={<Login />} />
           <Route path="signup" element={<Signup />} />
           <Route path="reset-password" element={<ResetPassword />} />
@@ -102,7 +89,30 @@ const App = () => {
         {/* Catch all */}
         <Route path="*" element={<NotFound />} />
       </Route>
-    </Routes >
+
+  )
+)
+const App = () => {
+  // const navigate = useNavigate();
+  // const location = useLocation();
+
+  // const { isAuth } = useAuth();
+  // const { setUpdateCatalog } = useSearch();
+
+
+  // useEffect(() => {
+  //   localStorage.setItem('pathname', JSON.stringify(location.pathname));
+  // }, [location])
+
+  // useEffect(() => {
+  //   if (localStorage.getItem('pathname')) {
+  //     navigate(JSON.parse(localStorage.getItem('pathname')));
+  //   }
+  //   setUpdateCatalog(true);
+  // }, [])
+
+  return (
+    <RouterProvider router={router} />
   );
 };
 

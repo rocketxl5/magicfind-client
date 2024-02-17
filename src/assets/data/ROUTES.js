@@ -1,5 +1,5 @@
 const ROUTES = {
-    authPaths: [
+    authRoutes: [
         {
             name: 'Home',
             to: '../me',
@@ -30,18 +30,18 @@ const ROUTES = {
         },
     ],
 
-    paths: [
+    routes: [
         {
             name: 'Home',
             to: '/'
         },
         {
             name: 'About',
-            to: 'about'
+            to: '../about'
         },
         {
             name: 'Contact',
-            to: 'contact'
+            to: '../contact'
         },
         {
             name: 'Sing in',

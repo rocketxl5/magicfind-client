@@ -1,5 +1,5 @@
 import React, { createContext, useState, useEffect } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 // import { ShoppingCartContext } from './ShoppingCartContext'
 import { api } from '../api/resources';
 
@@ -12,14 +12,14 @@ export const AuthProvider = ({ children }) => {
   const [isAuth, setIsAuth] = useState(false);
   const [unreadMail, setUnreadMail] = useState(null);
 
-  const location = useLocation();
-  const navigate = useNavigate();
+  // const location = useLocation();
+  // const navigate = useNavigate();
 
   const logoutAction = () => {
     localStorage.removeItem('token');
     localStorage.removeItem('user');
     setAuth(null);
-    navigate('/');
+    // navigate('/');
   }
 
   const parseJwt = (token) => {
@@ -62,7 +62,7 @@ export const AuthProvider = ({ children }) => {
     if (auth) {
       setIsAuth(true);
       checkUnreadMail(auth.id, auth.token)
-      navigate(location.pathname);
+      // navigate(location.pathname);
     }
     else {
       setIsAuth(false);

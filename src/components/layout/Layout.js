@@ -33,7 +33,7 @@ const Layout = () => {
                                 title={data[path].title}
                                 link={data[path].link} />
                         }
-                        <Breadcrumbs />   
+                        {/* <Breadcrumbs />    */}
                         <div className="content">
                                 {
                                 !loading ? (
