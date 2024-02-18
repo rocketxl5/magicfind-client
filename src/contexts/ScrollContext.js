@@ -11,7 +11,7 @@ export const ScrollProvider = ({ children }) => {
     const countRef = useRef(null);
 
     const handleScroll = () => {
-        if (viewport < 1200) {
+
             if (window.scrollY > offset && offset > 75) {
                 // Add class to hide tab
                 countRef.current?.classList.add('move-count')
@@ -24,7 +24,6 @@ export const ScrollProvider = ({ children }) => {
                 navRef.current?.classList.remove('hide-nav');
                 countRef.current?.classList.remove('move-count')
             }
-        }
 
         setOffset(window.scrollY)
     }

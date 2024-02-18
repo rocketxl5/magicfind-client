@@ -11,12 +11,7 @@ const Layout = () => {
 
     return (
 
-        <div className="wrapper">
-            {
-                location.pathname === '/login' || location.pathname === '/signup' ? (
-                    <Outlet />
-                ) : (
-                        <div className="">
+        <div className="layout">
                         {
                             data[path] &&
                             <Banner
@@ -25,7 +20,7 @@ const Layout = () => {
                                 link={data[path].link} />
                         }
                         {/* <Breadcrumbs />    */}
-                        <div className="content">
+
                             {
                                 !loading ? (
                                     <Outlet />
@@ -34,11 +29,8 @@ const Layout = () => {
                                         <Loading />
                                     </div>
                                 )
-                            }
-                        </div>
-                    </div>
+            }
 
-                )}
         </div>
 
     )
