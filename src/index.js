@@ -1,6 +1,5 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import ReactDOM from 'react-dom/client';
 import { PathProvider } from './contexts/PathContext';
 import { AuthProvider } from './contexts/AuthContext';
 import { MailProvider } from './contexts/MailContext';
@@ -9,25 +8,22 @@ import { CartProvider } from './contexts/CartContext';
 import { ScrollProvider } from './contexts/ScrollContext';
 import App from './App';
 
-ReactDOM.render(
+const root = ReactDOM.createRoot(document.getElementById('root'))
+root.render(
   <React.StrictMode>
-    <BrowserRouter >    
       <PathProvider>
         <AuthProvider>
           <MailProvider>
             <SearchProvider>
               <CartProvider>
                 <ScrollProvider>
-                    <Routes>
-                      <Route path="/*" element={<App />} />
-                    </Routes>
+                <App />
                 </ScrollProvider>
               </CartProvider>
             </SearchProvider>
           </MailProvider>
         </AuthProvider>
-      </PathProvider>
-    </BrowserRouter>
-  </React.StrictMode>,
-  document.getElementById('root')
+    </PathProvider>
+  </React.StrictMode>
 );
+

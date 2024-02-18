@@ -5,17 +5,18 @@ import capitalizeString from '../../assets/utilities/capitalizeString';
 
 const Breadcrumbs = () => {
     const location = useLocation();
-    const path = location.pathname
+    const path = location.pathname;
 
     if (path.includes('catalog') || path === '/') {
         return null
     }
 
-    let currentLink = '';
+    let currentLink = ''
 
     const crumbs = path.split('/')
         .filter(crumb => crumb !== '')
         .map(crumb => {
+            console.log(currentLink)
             currentLink += `/${crumb}`;
             return (
                 <span className="crumb" key={crumb}>

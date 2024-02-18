@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
-import Loading from '../../layout/Loading';
+import Loading from '../../elements/Loading';
 import errorHandler from './helpers/authErrorHandler';
 import useAuth from '../../../hooks/useAuth';
 import { api } from '../../../api/resources';
@@ -97,7 +97,7 @@ const Login = () => {
             localStorage.setItem('user', JSON.stringify(data.payload.user));
             setAuth({ ...data.payload.user, token: data.token });
             setLoading(false)
-            const destination = location.state?.from ? location.state.from.pathname : 'pathname';
+            const destination = location.state?.from ? location.state.from.pathname : '/';
             console.log(destination)
             navigate(destination, { replace: true });
           })

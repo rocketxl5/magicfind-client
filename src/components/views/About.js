@@ -4,7 +4,7 @@ import data from '../../assets/data/ABOUT';
 const About = () => {
   return (
     <>
-      <main className="main-content about">
+      <main className="page about">
         <section className="feature-section">
           <header className="section-header">
             <h2 className="section-title">About Magic Find</h2>

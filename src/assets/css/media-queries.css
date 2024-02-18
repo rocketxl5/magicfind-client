@@ -51,7 +51,7 @@
 
 @media screen and (width >= 775px) {
 
-    .main-content {
+    .page {
         width: 100%;
     }
 
@@ -83,7 +83,7 @@
         padding-block-start: 0;
     }
 
-    .layout > .container {
+    .layout > .wrapper {
         min-height: calc(100vh - var(--desktop));
     }
 
@@ -91,7 +91,7 @@
         padding-block-start: var(--auth-top-desktop);
     }
 
-    .auth-layout .container {
+    .auth-layout .wrapper {
         min-height: calc(100vh - var(--auth-desktop));
     }
     
@@ -99,7 +99,7 @@
         top: var(--top-desktop);
     }
 
-    .main-content {
+    .page {
         /* background-color: red; */
         padding: var(--size-1); 
     }
@@ -144,7 +144,7 @@
         min-height: var(--top-desktop);
     }
     
-    .top-header  {
+    .header-container  {
         padding-inline: 2rem;
     }
 

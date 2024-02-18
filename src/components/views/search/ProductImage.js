@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { FaExpand } from "react-icons/fa";
-import Loading from '../../layout/Loading';
+import Loading from '../../elements/Loading';
 import useExpandImage from '../../../hooks/useExpandImage';
 import useAttributes from '../../../hooks/useAttributes';
 

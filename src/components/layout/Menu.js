@@ -1,15 +1,17 @@
-import React from 'react'
 import { Link } from 'react-router-dom';
+import data from '../../assets/data/routes.json'
 
-const Menu = ({ paths }) => {
+const Menu = () => {
+    const { routes } = data;
+
     return (
         <ul className='menu'>
             {
-                paths.map((path, index) => {
+                routes.map((route, index) => {
                     return (
                         <li key={index}>
-                            <Link className="nav-link" to={path.to} replace>
-                                {path.name}
+                            <Link className="nav-link" to={route.to} replace>
+                                {route.name}
                             </Link>
                         </li>
                     )

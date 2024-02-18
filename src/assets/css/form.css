@@ -11,8 +11,11 @@ input:-webkit-autofill:active{
 .form-content {
     width: 100%;
     min-height: 100vh;
-    padding-block-start: var(--top-desktop);
     margin-inline: auto;
+}
+
+.form-content a {
+    color: var(--clr-dark);
 }
 
 .form-logo {

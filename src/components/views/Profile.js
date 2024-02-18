@@ -4,7 +4,7 @@ const Profile = () => {
   const { auth } = useAuth();
 
   return (
-    <main className="main-content profile">
+    <main className="page profile">
       <header className="header">
 
         <h2 className="title">Profile</h2>

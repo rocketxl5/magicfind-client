@@ -1,18 +1,20 @@
 // Dropdown menu available after successfull singin
 import { NavLink } from 'react-router-dom';
+import data from '../../assets/data/routes.json'
 import useAuth from '../../hooks/useAuth';
 
-function AuthMenu({ authPaths }) {
+function AuthMenu() {
   const { logoutAction } = useAuth();
+  const { authRoutes } = data;
 
   return (
     <ul className='menu auth-nav'>
       {
-        authPaths.map((path, index) => {
+        authRoutes.map((route, index) => {
           return (
             <li key={index}>
-              <NavLink className="nav-link" to={path.to} >
-                {path.name}
+              <NavLink className="nav-link" to={route.to} >
+                {route.name}
               </NavLink>
             </li>
           )

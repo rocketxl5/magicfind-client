@@ -6,7 +6,7 @@ import useAuth from '../../hooks/useAuth';
 import { CartContext } from '../../contexts/CartContext';
 import { api } from '../../api/resources';
 import styled from 'styled-components';
-import Loading from '../layout/Loading';
+import Loading from '../elements/Loading';
 
 function ShoppingCart() {
   const [loading, setLoading] = useState(false);
@@ -46,10 +46,11 @@ function ShoppingCart() {
   };
   return (
     <>
+
+      <main className="main">
       <header className="header">
         <h2 className="title">Shopping Cart</h2>
-      </header>
-      <main className="main">
+        </header>
         <Container>
         {cartItems.length > 0 ? (
             <>
