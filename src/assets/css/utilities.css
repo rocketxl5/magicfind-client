@@ -222,9 +222,28 @@
     background: var(--clr-grey);
 }
 
+
+/* Root layout selectors */
 .bg-light {
     background: var(--clr-light);
 }
+
+.bg-dark {
+    background: var(--clr-dark);
+}
+
+.p-top-5 {
+    padding-top: var(--size-5);
+}
+
+.p-top-9 {
+    padding-top: var(--size-9);
+}
+
+.m-top-5 {
+    margin-top: var(--size-5);
+}
+
 
 /* MTG colors */
 .mtg-blue {
@@ -352,7 +371,7 @@
 }
 
 .buffer {
-    padding-block-start: var(--layout-top);
+    padding-block-start: var(--header-height-small);
 }
 
 .fifth {

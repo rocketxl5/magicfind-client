@@ -4,7 +4,7 @@
     display: flex;
     align-items: center;
     padding-inline: var(--size-1);
-    min-height: var(--layout-top);
+    min-height: var(--header-height-small);
     background-color: var(--clr-primary);
     }
     
@@ -72,7 +72,7 @@ nav {
     top: 6rem;
     right: 0;
     width: 0;
-    min-height: calc(100vh - var(--layout-top-wide)); 
+    min-height: calc(100vh - var(--header-height-wide)); 
     background-color: var(--clr-light);
     border-top-left-radius: 10px;
     border-bottom-left-radius: 10px;
@@ -148,11 +148,11 @@ nav .right-side-nav {
 
 nav .right-side-nav ul {
     position: fixed;
-    top: var(--layout-top);
+    top: var(--header-height-small);
     left: 100%; 
     display: flex;
     flex-direction: column;
-    min-height: calc(100vh - var(--layout-top));
+    min-height: calc(100vh - var(--header-height-small));
     width: 100%;
     overflow-y: hidden;
     transition: 0.2s ease;

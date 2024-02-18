@@ -4,7 +4,7 @@ import Breadcrumbs from '../elements/Breadcrumbs';
 const AuthLayout = () => {
 
     return (
-        <div className="">
+        <div className="wrapper">
             <div className="content">
                 <Breadcrumbs />
                 <Outlet />

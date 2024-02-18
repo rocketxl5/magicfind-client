@@ -7,16 +7,22 @@ import useAuth from '../../hooks/useAuth';
 const RootLayout = () => {
     const location = useLocation();
     const { isAuth } = useAuth();
+    const path = location.pathname;
 
     return (
-        <div className={isAuth ? 'auth-layout' : 'layout'}>
+        <div className={`root-layout ${isAuth || path === '/login' || path === '/signup' ? 'bg-light' : 'bg-dark'}`}>
+
             {
-                location.pathname === '/login' || location.pathname === '/signup' ? (
+                path === '/login' || path === '/signup' ? (
+
                     <Outlet />
+
                 ) : (
                     <>
                             <MainHeader />
+                            <div className="wrapper">
                             <Outlet />
+                            </div>
                             <Footer />
                     </>
                 )
