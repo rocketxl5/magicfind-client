@@ -11,12 +11,12 @@ const Layout = () => {
 
     return (
 
-        <div className="container">
+        <div className="wrapper">
             {
                 location.pathname === '/login' || location.pathname === '/signup' ? (
                     <Outlet />
                 ) : (
-                    <div className="layout">
+                        <div className="">
                         {
                             data[path] &&
                             <Banner

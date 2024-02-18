@@ -9,6 +9,7 @@ import {
 // Layouts
 import RootLayout from './components/layouts/RootLayout';
 import Layout from './components/layouts/Layout';
+import AuthLayout from './components/layouts/AuthLayout';
 
 
 import RequireAuth from './components/layouts/RequireAuth';
@@ -49,8 +50,9 @@ const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<RootLayout />} >
         <Route element={<RequireNotAuth />}>
+        <Route element={<Layout />}>
           <Route index element={<Home />} />
-        <Route path="home" exact element={<Navigate to="/" replace />} />
+          <Route path="home" exact element={<Navigate to="/" replace />} />
           <Route path="about" element={<About />} />
           <Route path="contact" element={<Contact />} />
           <Route path="store/:id" element={<Store />} />
@@ -59,9 +61,11 @@ const router = createBrowserRouter(
           <Route path="signup" element={<Signup />} />
           <Route path="reset-password" element={<ResetPassword />} />
         </Route>
+      </Route>
 
         {/* Auth protected routes */}
         <Route element={<RequireAuth />}>
+        <Route element={<AuthLayout />} >
           <Route index element={<AuthPage />} />
           <Route path="me" exact element={<AuthPage />}>
             <Route path="dashboard" element={<DashBoard />} />
@@ -79,9 +83,10 @@ const router = createBrowserRouter(
             <Route path="mail" element={<Inbox />} ></Route>
           </Route>
         </Route>
+      </Route>
         {/* <Route path="search-results/" element={<SearchResults />} /> */}
-        <Route path="catalog/:query" element={<SearchResults />} />
-        <Route path="shopping-cart" element={<ShoppingCart />} />
+      <Route path="shopping-cart" element={<ShoppingCart />} />
+      <Route path="catalog/:query" element={<SearchResults />} />
         <Route path="search-results/not-found/:name" element={<CardNotFound />} />
         {/* Catch all */}
         <Route path="*" element={<NotFound />} />

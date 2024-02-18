@@ -10,12 +10,10 @@ import SidePanel from '../layout/SidePanel';
 import ShoppingCartBtn from './navbtn/ShoppingCartBtn';
 import useAuth from '../../hooks/useAuth';
 import getViewPortWidth from '../../assets/utilities/getViewPortWidth';
-import data from '../../assets/data/ROUTES';
 
 function Navbar() {
     const panelRef = useRef(null);
     const { isAuth, auth } = useAuth();
-    const { authRoutes, routes } = data;
     const viewport = getViewPortWidth();
 
     return (
@@ -50,13 +48,13 @@ function Navbar() {
                 </section>
                 <section className="right-side-nav">
                     {isAuth ? (
-                        <AuthMenu authPaths={authRoutes} />
+                        <AuthMenu />
                     ) : (
-                            <Menu routes={routes} />
+                            <Menu />
                     )}
                 </section>
                 <SidePanel ref={panelRef}>
-                    <AuthMenu authRoutes={authRoutes} />
+                    <AuthMenu />
                 </SidePanel>
             </nav>
         </div>

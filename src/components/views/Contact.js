@@ -3,12 +3,13 @@ import React from 'react';
 const Contact = () => {
   return (
     <>
-      <header className="header">
+      <main className="page contact">
+        <section className="feature-section">
+          <header className="section-header">
 
         <h2 className="title">Contact</h2>
       </header>
-      <main className="main-content contact">
-
+        </section>
       </main>
     </>
   )

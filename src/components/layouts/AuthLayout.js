@@ -1,10 +1,10 @@
 import { Outlet } from 'react-router-dom';
-import Breadcrumbs from './Breadcrumbs';
+import Breadcrumbs from '../elements/Breadcrumbs';
 
 const AuthLayout = () => {
 
     return (
-        <div className="auth-layout">
+        <div className="">
             <div className="content">
                 <Breadcrumbs />
                 <Outlet />

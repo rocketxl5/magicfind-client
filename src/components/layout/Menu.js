@@ -1,7 +1,9 @@
-import React from 'react'
 import { Link } from 'react-router-dom';
+import data from '../../assets/data/routes.json'
 
-const Menu = ({ routes }) => {
+const Menu = () => {
+    const { routes } = data;
+
     return (
         <ul className='menu'>
             {

@@ -45,7 +45,7 @@ const MainHeader = () => {
   }
   return (
     <header className="main-header" onClick={handleClick} ref={navRef}>
-      <div className="top-header">
+      <div className="header-container">
         <LogoBtn />
         <Catalog />
         <Navbar />

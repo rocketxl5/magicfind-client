@@ -2,21 +2,21 @@
 import { Outlet, useLocation } from 'react-router-dom';
 import MainHeader from '../layout/MainHeader';
 import Footer from '../layout/Footer';
+import useAuth from '../../hooks/useAuth';
 
 const RootLayout = () => {
     const location = useLocation();
+    const { isAuth } = useAuth();
 
     return (
-        <div className="root-layout">
+        <div className={isAuth ? 'auth-layout' : 'layout'}>
             {
                 location.pathname === '/login' || location.pathname === '/signup' ? (
                     <Outlet />
                 ) : (
                     <>
                             <MainHeader />
-                            <div className="container">
-                                <Outlet />
-                            </div>
+                            <Outlet />
                             <Footer />
                     </>
                 )

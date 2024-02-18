@@ -46,10 +46,11 @@ function ShoppingCart() {
   };
   return (
     <>
+
+      <main className="main">
       <header className="header">
         <h2 className="title">Shopping Cart</h2>
-      </header>
-      <main className="main">
+        </header>
         <Container>
         {cartItems.length > 0 ? (
             <>
