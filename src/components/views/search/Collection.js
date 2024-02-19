@@ -161,7 +161,7 @@ const Collection = () => {
         }
         else if (res.status === 400) {
           setLoading(false);
-          navigate(`/search-results/not-found/${query}`);
+          navigate(`/not-found/${query}`);
         }
       });
   }

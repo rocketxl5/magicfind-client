@@ -99,7 +99,7 @@ const Search = () => {
         }
         else if (res.status === 404) {
           setLoading(false);
-          navigate(`/search-results/not-found/${searchTerm}`);
+          navigate(`/not-found/${searchTerm}`);
         }
       })
   };

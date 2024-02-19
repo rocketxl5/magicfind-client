@@ -118,7 +118,7 @@ const Catalog = () => {
 
             setLoading(false);
 
-            navigate(`/search-results/not-found/${query}`);
+            navigate(`/not-found/${query}`);
 
             if (document.querySelector('#mobile-nav')?.checked) {
               hideSearchBar();
