@@ -1,0 +1,26 @@
+{
+  "tabs": [
+    {
+      "id": "product-status",
+      "style": "inactive",
+      "type": "button",
+      "value": "Status",
+      "status": false
+    },
+    {
+      "id": "product-actions",
+      "style": "inactive",
+      "type": "button",
+      "value": "Action",
+      "status": false
+    },
+
+    {
+      "id": "product-info",
+      "style": "inactive",
+      "type": "button",
+      "value": "Info",
+      "status": false
+    }
+  ]
+}

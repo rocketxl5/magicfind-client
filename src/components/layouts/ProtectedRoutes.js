@@ -1,12 +1,12 @@
 import { Outlet } from 'react-router-dom';
 import useAuth from '../../hooks/useAuth';
 
-const RequireUnauth = () => {
+const ProtectedRoutes = () => {
     const { isAuth } = useAuth();
 
     return (
-        !isAuth && <Outlet />
+        isAuth && <Outlet />
     )
 }
 
-export default RequireUnauth;
+export default ProtectedRoutes;

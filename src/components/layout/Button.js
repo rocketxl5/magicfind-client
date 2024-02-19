@@ -1,8 +1,9 @@
-const Button = ({ attributes, handleClick }) => {
-    const { id, style, type, value, status } = attributes;
+
+const Button = ({ attributes, handleClick, active }) => {
+    const { id, type, style, value, status } = attributes;
 
     return (
-        <button id={id} className={style} type={type} onClick={handleClick} disabled={status}>{value}</button>
+        <button id={id} className={active === id ? 'active' : style} type={type} onClick={handleClick} disabled={status}>{value}</button>
     )
 }
 

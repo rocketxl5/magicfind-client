@@ -2,7 +2,7 @@ import ArchiveHandlers from './product/ArchiveHandlers'
 import CatalogHandlers from './product/CatalogHandlers'
 import CollectionHandlers from './product/CollectionHandlers'
 
-const ProductHandlers = ({ product, search, setLoading, handleClick }) => {
+const ProductHandlers = ({ id, product, active, search, setLoading, handleClick }) => {
 
     const handlers = {
         archive: <ArchiveHandlers setLoading={setLoading} product={product} />,
@@ -10,10 +10,12 @@ const ProductHandlers = ({ product, search, setLoading, handleClick }) => {
         collection: <CollectionHandlers setLoading={setLoading} product={product} handleClick={handleClick} />
     }
     return (
-        <section className="product-handlers">
+        <section id={id} className={active === id ? 'd-block' : 'd-none'}>
+            <div className="product-handlers border-succes">
             {
                 handlers[search]
             }
+            </div>
         </section>
     )
 }

@@ -16,7 +16,6 @@ const Breadcrumbs = () => {
     const crumbs = path.split('/')
         .filter(crumb => crumb !== '')
         .map(crumb => {
-            console.log(currentLink)
             currentLink += `/${crumb}`;
             return (
                 <span className="crumb" key={crumb}>

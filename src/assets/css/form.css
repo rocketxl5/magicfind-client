@@ -356,7 +356,7 @@ input#archive:focus {
     cursor: pointer;
   }
 
-  /* .product-container {
+  /* .product-wrapper {
 
     margin-block-end: var(--size-2);
     padding: 1rem;

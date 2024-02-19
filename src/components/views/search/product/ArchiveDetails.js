@@ -23,12 +23,19 @@ const ArchiveDetails = ({ product }) => {
                 </tr>
                 <tr>
                     <td>Type:</td>
-                    <td>{type_line.split('—')[0]}</td>
+                        {
+
+                            !type_line?.includes('—') ? (
+                                <td>{type_line}</td>
+                            ) : (
+                                <td>{type_line?.split('—')[0]}</td>
+                            )
+                        }
                 </tr>
-                <tr>
+                    {/* <tr>
                     <td>Sub Type:</td>
                     <td>{type_line.split('—')[1]}</td>
-                </tr>
+                </tr> */}
                 <tr>
                     <td>Identity:</td>
                     <td className="color-identity">{colorIdentity.length ? colorIdentity.map((color) => color) : 'Colorless'}</td>
