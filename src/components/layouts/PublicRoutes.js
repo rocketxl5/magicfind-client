@@ -1,7 +1,7 @@
 import { Outlet } from 'react-router-dom';
 import useAuth from '../../hooks/useAuth';
 
-const UnrestrictedLayout = () => {
+const PublicRoutes = () => {
     const { isAuth } = useAuth();
 
     return (
@@ -19,4 +19,4 @@ const UnrestrictedLayout = () => {
     )
 }
 
-export default UnrestrictedLayout
+export default PublicRoutes

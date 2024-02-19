@@ -20,13 +20,13 @@ const ProductImage = ({ product, loading, handleClick }) => {
 
     return (
         // expandedImage &&
-        <section className="product-image">
+        <section className="product-image border-success">
             {
                 loading ? (
                     <Loading />
                 ) : (
 
-                    <div className="lazy-load" >
+                        <div className="lazy-load border-danger" >
                         {
                             !hasLoaded ? (
                                 <img id={id} className={style} src={placeholder} alt={alt} />

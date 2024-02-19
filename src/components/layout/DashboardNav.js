@@ -2,7 +2,7 @@ import { useEffect, useContext } from 'react';
 import { NavLink, useParams } from 'react-router-dom'
 import { SearchContext } from '../../contexts/SearchContext';
 import useAuth from '../../hooks/useAuth';
-import data from '../../assets/data/AUTH';
+import data from '../../assets/data/AUTH.json';
 import { api } from '../../api/resources';
 
 const DashboardNav = () => {
@@ -70,7 +70,7 @@ const DashboardNav = () => {
     }, [updateCollection])
 
     return (
-        <section className="contextual-nav">
+        <section className="dashboard-nav">
             <div className="contextual-links">
                 {links.map((link, index) => {
                     return (
@@ -80,7 +80,7 @@ const DashboardNav = () => {
                             to={`/me/${link.id}`}
                             className={({ isActive }) => {
                                 // If search param is defined, add active class else add inactive class 
-                                return isActive && !query ? 'active-link' : 'inactive-link'
+                                return isActive && !query ? 'active' : 'inactive'
                             }}
                         >
                             <span >{link.title}</span>

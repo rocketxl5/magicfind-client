@@ -9,9 +9,9 @@ import Layout from './components/layouts/Layout';
 import AuthLayout from './components/layouts/AuthLayout';
 
 
-import RequireAuth from './components/layouts/RequireAuth';
-import RequireUnauth from './components/layouts/RequireUnauth';
-import UnrestrictedLayout from './components/layouts/UnrestrictedLayout'
+import ProtectedRoutes from './components/layouts/ProtectedRoutes';
+import RestrictedRoutes from './components/layouts/RestrictedRoutes';
+import PublicRoutes from './components/layouts/PublicRoutes'
 
 // Views
 import AuthPage from './components/views/AuthPage';
@@ -48,7 +48,7 @@ const App = () => {
     <Routes>
       <Route path="/" element={<RootLayout />} >
         {/* Cannot access if authenticated */}
-        <Route element={<RequireUnauth />}>
+        <Route element={<RestrictedRoutes />}>
           <Route element={<Layout />}>
           <Route index element={<Home />} />
             <Route path="home" element={<Navigate to="/" replace />} />
@@ -58,7 +58,7 @@ const App = () => {
         </Route>
         </Route>
         {/* Auth protected routes */}
-        <Route element={<RequireAuth />}>
+        <Route element={<ProtectedRoutes />}>
           <Route element={<AuthLayout />} >
             <Route index element={<AuthPage />} />
             <Route path="me" element={<AuthPage />}>
@@ -78,7 +78,7 @@ const App = () => {
           </Route>
           </Route>
         </Route>
-        <Route element={<UnrestrictedLayout />} >
+        <Route element={<PublicRoutes />} >
           <Route path="about" element={<About />} />
           <Route path="contact" element={<Contact />} />
           <Route path="catalog/:query" element={<SearchResults />} />

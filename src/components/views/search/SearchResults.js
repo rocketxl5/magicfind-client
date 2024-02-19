@@ -13,7 +13,7 @@ const SearchResults = () => {
     // States
     const [searchFeatures, setSearchFeatures] = useState(false);
     // Context
-    // const { btnRef, countRef } = useContext(ScrollContext);
+    const { btnRef, countRef } = useContext(ScrollContext);
     // Hooks
     const location = useLocation();
     const navigate = useNavigate();
@@ -81,7 +81,26 @@ const SearchResults = () => {
             }
 
             <div className="search-results">
-                <header className="search-results-header">
+
+                <aside className="parameters" >
+                    <header className="parameters-header">
+                        <h3>Search Parameters</h3>
+                    </header>
+                    <div className="parameters-container">
+                        <ul className="parameters-list" ref={panelRef}>
+                            {
+
+                                // data.parameters.map((parameter, i) => {
+                                //     return <Parameter key={i} parameter={parameter} />
+                                // })
+                            }
+                        </ul>
+
+                        <button className="parameters-btn" type="button" onClick={() => setSearchFeatures(!searchFeatures)} ref={btnRef}><span className="parameters-icon" ref={iconRef}><FiPlus /></span></button>
+                    </div>
+                </aside>
+                <main className="containter">
+                    <header className="search-results-header">
                         <h2 className="title">Search Results</h2>
                         <span className="space-1">
                             {
@@ -89,24 +108,9 @@ const SearchResults = () => {
                                     `${cards.length} ${cards.length > 1 ? 'Results' : 'Result'}` :
                                     'No results'
                             }
-                    </span>
-                </header>
-                {/* <aside className="parameters" >
-                    <div className="parameters-container">
-                        <ul className="parameters-list" ref={panelRef}>
-                            {
-
-                                data.parameters.map((parameter, i) => {
-                                    return <Parameter key={i} parameter={parameter} />
-                                })
-                            }
-                        </ul>
-
-                        <button className="parameters-btn" type="button" onClick={() => setSearchFeatures(!searchFeatures)} ref={btnRef}><span className="parameters-icon" ref={iconRef}><FiPlus /></span></button>
-                    </div>
-                </aside> */}
-                <main className="products">
-                        <ul>
+                        </span>
+                    </header>
+                    <ul className="products">
                         {
                             cards &&
                                 cards.map((card, i) => {
@@ -125,12 +129,10 @@ const SearchResults = () => {
                                         </Product>
                                     )
                                 })
-                    }
-                        </ul>
-
+                        }
+                    </ul>
                 </main>
             </div>
-
         </>
     )
 }

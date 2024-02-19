@@ -4,17 +4,19 @@ import CollectionDetails from './product/CollectionDetails';
 // import { useParams } from 'react-router-dom'
 
 
-const ProductDetails = ({ search, product }) => {
+const ProductDetails = ({ id, product, active, search }) => {
     const handlers = {
         archive: <ArchiveDetails product={product} />,
         catalog: <CatalogDetails product={product} />,
         collection: <CollectionDetails product={product} />
     }
     return (
-        <section className="product-details">
+        <section id={id} className={active === id ? 'd-block' : 'd-none'}>
+            <div className="product-details border-succes">
             {
                 handlers[search]
             }
+            </div>
         </section>
     )
 }

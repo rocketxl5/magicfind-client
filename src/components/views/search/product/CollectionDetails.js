@@ -3,11 +3,11 @@ import data from '../../../../assets/data/SEARCH';
 
 const CollectionDetails = ({ product }) => {
     const { set_name, released_at, rarity, type_line, artist, lang, collector_number, finishes, _is_published } = product;
-    console.log(product)
+    // console.log(product)
     const { colorIdentity, manaCost } = useColorSymbols(product);
     // <span className={`${product.finishes[0].toLowerCase() === 'foil' ? 'foil-finish' : ''} card-spec-value`}>{capitalizeWord(product.finishes[0])}</span>
     return (
-        <div className="collection-details">
+        <div className="collection-details border-danger">
             <table className="table">
                 <tbody>
                     <tr>
