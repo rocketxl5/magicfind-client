@@ -1,10 +1,11 @@
 // Dropdown menu available after successfull singin
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import data from '../../assets/data/routes.json'
 import useAuth from '../../hooks/useAuth';
 
 function AuthMenu() {
   const { logoutAction } = useAuth();
+  const navigate = useNavigate();
   const { authRoutes } = data;
 
   return (
@@ -23,6 +24,7 @@ function AuthMenu() {
       <li>
         <div className="nav-link logout" onClick={() => {
           logoutAction();
+          navigate('/login');
         }}>
           Logout
         </div>

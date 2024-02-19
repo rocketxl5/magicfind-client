@@ -6,9 +6,9 @@ const CardNotFound = () => {
 
     return (
         <div className="not-found">
-            <header>
+            {/* <header>
                 <section className="banner not-found-banner"></section>
-            </header>
+            </header> */}
             <main className="main">
                 <h2>Oops!</h2>
                 <p>No results were found for "{cardName}"</p>

@@ -1,4 +1,4 @@
-import React, { useState, createContext } from 'react';
+import React, { useState, useEffect, createContext } from 'react';
 import useAuth from '../hooks/useAuth';
 export const SearchContext = createContext(null);
 
@@ -27,6 +27,10 @@ export const SearchProvider = ({ children }) => {
   const [marker, setMarker] = useState(-1);
   const { auth } = useAuth();
 
+
+  useEffect(() => {
+    setUpdateCatalog(true);
+  }, [])
 
   // Returns array of unique card names
   const filterCardNames = (cards) => {

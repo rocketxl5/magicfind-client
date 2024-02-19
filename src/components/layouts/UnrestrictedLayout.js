@@ -7,7 +7,9 @@ const UnrestrictedLayout = () => {
     return (
         isAuth ? (
             <div className="auth-layout">
-                <Outlet />
+                <div className="wrapper">
+                    <Outlet />
+                </div>
             </div>
         ) : (
             <div className="layout">
