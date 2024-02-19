@@ -2,9 +2,9 @@ import { useEffect } from 'react';
 import {
   Route,
   Navigate,
-  createBrowserRouter,
-  createRoutesFromElements,
-  RouterProvider
+  useLocation,
+  useNavigate,
+  Routes
 } from 'react-router-dom';
 // Layouts
 import RootLayout from './components/layouts/RootLayout';
@@ -13,7 +13,8 @@ import AuthLayout from './components/layouts/AuthLayout';
 
 
 import RequireAuth from './components/layouts/RequireAuth';
-import RequireNotAuth from './components/layouts/RequireNotAuth';
+import RequireUnauth from './components/layouts/RequireUnauth';
+import UnrestrictedLayout from './components/layouts/UnrestrictedLayout'
 
 // Views
 import AuthPage from './components/views/AuthPage';
@@ -36,7 +37,6 @@ import Checkout from './components/views/Checkout';
 import Inbox from './components/views/mail/Inbox';
 import Store from './components/views/Store';
 import ProductDetails from './components/views/search/ProductDetails';
-import useAuth from './hooks/useAuth';
 import useSearch from './hooks/useSearch';
 import './assets/css/reset.css';
 import './App.css';
@@ -46,26 +46,39 @@ import './assets/css/navbar.css';
 import './assets/css/form.css';
 import './assets/css/media-queries.css';
 
-const router = createBrowserRouter(
-  createRoutesFromElements(
-    <Route path="/" element={<RootLayout />} >
-        <Route element={<RequireNotAuth />}>
+const App = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const { setUpdateCatalog } = useSearch();
+
+  useEffect(() => {
+    localStorage.setItem('pathname', JSON.stringify(location.pathname));
+  }, [location])
+
+  useEffect(() => {
+    if (localStorage.getItem('pathname')) {
+      navigate(JSON.parse(localStorage.getItem('pathname')));
+    }
+    setUpdateCatalog(true);
+  }, [])
+
+  return (
+    <Routes>
+      <Route path="/" element={<RootLayout />} >
+        {/* Cannot access if authenticated */}
         <Route element={<Layout />}>
+        <Route element={<RequireUnauth />}>
           <Route index element={<Home />} />
           <Route path="home" exact element={<Navigate to="/" replace />} />
-          <Route path="about" element={<About />} />
-          <Route path="contact" element={<Contact />} />
-          <Route path="store/:id" element={<Store />} />
-        {/* </Route> */}
           <Route path="login" element={<Login />} />
           <Route path="signup" element={<Signup />} />
           <Route path="reset-password" element={<ResetPassword />} />
         </Route>
-      </Route>
-
+        </Route>
         {/* Auth protected routes */}
-        <Route element={<RequireAuth />}>
         <Route element={<AuthLayout />} >
+        <Route element={<RequireAuth />}>
           <Route index element={<AuthPage />} />
           <Route path="me" exact element={<AuthPage />}>
             <Route path="dashboard" element={<DashBoard />} />
@@ -80,41 +93,68 @@ const router = createBrowserRouter(
             <Route path="settings" element={<Settings />} />
             <Route path="profile" element={<Profile />} />
             <Route path="checkout" element={<Checkout />} />
-            <Route path="mail" element={<Inbox />} ></Route>
+            <Route path="mail" element={<Inbox />} />
           </Route>
         </Route>
-      </Route>
+        </Route>
+        <Route element={<UnrestrictedLayout />} >
+          <Route path="about" element={<About />} />
+          <Route path="contact" element={<Contact />} />
+          <Route path="catalog/:query" element={<SearchResults />} />
+          <Route path="search-results/not-found/:name" element={<CardNotFound />} />
+          <Route path="store/:id" element={<Store />} />
+          <Route path="shopping-cart" element={<ShoppingCart />} />
+        </Route>
         {/* <Route path="search-results/" element={<SearchResults />} /> */}
-      <Route path="shopping-cart" element={<ShoppingCart />} />
-      <Route path="catalog/:query" element={<SearchResults />} />
-        <Route path="search-results/not-found/:name" element={<CardNotFound />} />
         {/* Catch all */}
         <Route path="*" element={<NotFound />} />
       </Route>
+    </Routes>
+    // <Routes>
+    //   <Route path="/" element={<RootLayout />} >
+    //     {/* Auth protected routes */}
+    //     <Route element={<RequireNotAuth />}>  
+    //     <Route element={<Layout />}>
+    //       <Route index element={<Home />} />
+    //       <Route path="home" exact element={<Navigate to="/" replace />} />
+    //         <Route path="about" element={<About />} />
+    //         <Route path="contact" element={<Contact />} />
+    //         {/* </Route> */}
+    //       <Route path="login" element={<Login />} />
+    //       <Route path="signup" element={<Signup />} />
+    //       <Route path="reset-password" element={<ResetPassword />} />
+    //       </Route>
+    //     </Route>
+    //     <Route element={<RequireAuth />}>
+    //     <Route element={<AuthLayout />} >
+    //         <Route index element={<AuthPage />} />
+    //         <Route path="me" exact element={<AuthPage />}>
+    //           <Route path="dashboard" element={<DashBoard />} />
+    //           <Route path="collection" element={<Collection />} />
+    //           <Route path="collection/:query" element={<SearchResults />} />
+    //           {/* <Route path="details" element={<ProductDetails />} /> */}
+    //           <Route path="archive" exact element={<Archive />} />
+    //           <Route path="archive/:query" element={<SearchResults />} />
 
-  )
-)
-const App = () => {
-  // const navigate = useNavigate();
-  // const location = useLocation();
+    //           {/* <Route path="details" element={<ProductDetails />} /> */}
+    //           <Route path="store" element={<Store />} />
+    //           <Route path="settings" element={<Settings />} />
+    //           <Route path="profile" element={<Profile />} />
+    //           <Route path="checkout" element={<Checkout />} />
+    //           <Route path="mail" element={<Inbox />} />
+    //         </Route>
+    //       </Route>
+    //     </Route>
+    //     <Route path="catalog/:query" element={<SearchResults />} />
+    //     <Route path="store/:id" element={<Store />} />
+    //     <Route path="shopping-cart" element={<ShoppingCart />} />
+    //     <Route path="search-results/not-found/:name" element={<CardNotFound />} />
+    //     {/* <Route path="search-results/" element={<SearchResults />} /> */}
+    //     {/* Catch all */}
+    //     <Route path="*" element={<NotFound />} />
+    //   </Route>
+    // </Routes>
 
-  // const { isAuth } = useAuth();
-  // const { setUpdateCatalog } = useSearch();
-
-
-  // useEffect(() => {
-  //   localStorage.setItem('pathname', JSON.stringify(location.pathname));
-  // }, [location])
-
-  // useEffect(() => {
-  //   if (localStorage.getItem('pathname')) {
-  //     navigate(JSON.parse(localStorage.getItem('pathname')));
-  //   }
-  //   setUpdateCatalog(true);
-  // }, [])
-
-  return (
-    <RouterProvider router={router} />
   );
 };
 

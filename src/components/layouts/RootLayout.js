@@ -20,9 +20,9 @@ const RootLayout = () => {
                 ) : (
                     <>
                             <MainHeader />
-                            <div className="wrapper">
+
                             <Outlet />
-                            </div>
+
                             <Footer />
                     </>
                 )

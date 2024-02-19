@@ -59,7 +59,7 @@ const Collection = () => {
             .then((data) => {
                 const result = { cards: data, search: searchInput?.id }
                 // Update local storage with search data
-                localStorage.setItem('search-results', JSON.stringify(result));
+              localStorage.setItem('search-results', JSON.stringify(result));
               setLoading(false);    
                 navigate(`/me/collection/all-cards`,
                   {

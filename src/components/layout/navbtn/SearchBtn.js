@@ -5,7 +5,7 @@ const SearchBtn = () => {
 
     return (
         <Label htmlFor="mobile-nav" className="nav-btn search-btn search-nav-label">
-            <FiSearch className="nav-icon" size={28} title="Search Catalog" />
+            <FiSearch className="nav-icon" />
         </Label>
     );
 }

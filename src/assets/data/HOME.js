@@ -16,7 +16,7 @@ const HOME = {
                     'Keep track of your purchases',
                 ],
                 title: 'Buy',
-                button: 'Read More',
+                button: 'Learn More',
 
             },
             {
@@ -29,7 +29,7 @@ const HOME = {
                     'Keep track of your sales',
                 ],
                 title: 'Sell',
-                button: 'Read More',
+                button: 'Learn More',
             },
             {
                 bgLink: 'https://cards.scryfall.io/large/front/1/8/18b77346-d6e4-4d2f-b054-19fdea686d40.jpg?1682689593',
@@ -41,7 +41,7 @@ const HOME = {
                     'Save your preferences',
                 ],
                 title: 'Collect',
-                button: 'Read More',
+                button: 'Learn More',
             },
             {
                 bgLink: 'https://cards.scryfall.io/art_crop/front/e/3/e37da81e-be12-45a2-9128-376f1ad7b3e8.jpg?1562202585',
@@ -53,7 +53,7 @@ const HOME = {
                     'Have fun!',
                 ],
                 title: 'Build',
-                button: 'Read More',
+                button: 'Learn More',
             },
         ],
     },
