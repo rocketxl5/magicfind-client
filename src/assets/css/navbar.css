@@ -4,7 +4,7 @@
     display: flex;
     align-items: center;
     padding-inline: var(--size-1);
-    min-height: var(--header-height-small);
+    min-height: var(--header-height);
     background-color: var(--clr-primary);
     }
     
@@ -34,6 +34,11 @@ nav {
     width: 100%;
 }
 
+.nav-btn {
+    width: 3rem;
+    height: 3rem;
+}
+
 .nav-btn:hover {
    opacity: 0.8;
 }
@@ -45,6 +50,8 @@ nav {
 .nav-btn svg {
     color: var(--clr-grey);
     display: block;
+    width: 100%;
+    height: 100%;
 
 }
 
@@ -148,11 +155,11 @@ nav .right-side-nav {
 
 nav .right-side-nav ul {
     position: fixed;
-    top: var(--header-height-small);
+    top: var(--header-height);
     left: 100%; 
     display: flex;
     flex-direction: column;
-    min-height: calc(100vh - var(--header-height-small));
+    min-height: calc(100vh - var(--header-height));
     width: 100%;
     overflow-y: hidden;
     transition: 0.2s ease;
@@ -192,18 +199,18 @@ nav .right-side-nav ul {
     position: relative;
     display: flex;
     align-items: center;
-    min-width: var(--size-3);
-    min-height: 2em;
+    width: 3rem;
+    height: 2.7rem;
     cursor: pointer;
 }
 .mobile-nav-label span,
 .mobile-nav-label::before,
 .mobile-nav-label::after {
-    width: var(--size-3);
+    width: 3rem;
     height: 3px;
     border-radius: 5px;
     background-color: var(--clr-grey);
-    transition: 0.2s ease;
+    transition: all 0.2s ease;
     z-index: 999;
 }
 
@@ -225,15 +232,17 @@ nav .right-side-nav ul {
 /* 'checked' className option for Firebox browser added to header @ main.js */
 header:has(input:checked) .mobile-nav-label::before,
 header.checked .mobile-nav-label::before {
+  
     rotate: -45deg;
-    translate: 1px 9px;
+    translate: 1px 9.6px;
 }
 
 
 header:has(input:checked) .mobile-nav-label::after,
 header.checked .mobile-nav-label::after {
+   
     rotate: 45deg;
-    translate: 1px -9px;
+    translate: 1px -9.6px;
 }
 
 header:has(input:checked) .mobile-nav-label span,

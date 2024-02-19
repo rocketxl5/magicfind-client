@@ -4,14 +4,12 @@ import Breadcrumbs from '../elements/Breadcrumbs';
 const AuthLayout = () => {
 
     return (
-        <div className="wrapper">
-            <div className="content">
-                <Breadcrumbs />
+        <div className="auth-layout">
+            <Breadcrumbs />
+            <div className="wrapper">
                 <Outlet />
             </div>
         </div>
-
-
     )
 }
 

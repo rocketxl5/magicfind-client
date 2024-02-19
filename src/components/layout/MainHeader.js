@@ -37,8 +37,6 @@ const MainHeader = () => {
     }
   }, [updateCatalog]);
 
-
-
   // Handle search bar and menu animation 
   const handleClick = (e) => {
     handleSearchBar(e);

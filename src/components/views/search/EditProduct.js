@@ -46,7 +46,8 @@ const EditProduct = (props) => {
     const { languages, conditions } = data;
 
     // Triggers click event on button to close modal
-    const closeModal = (button, result, destination) => {
+    const closeModal = (result, destination) => {
+        console.log(destination)
         setTimeout(() => {
             navigate(`${destination}`,
                 {
@@ -54,7 +55,7 @@ const EditProduct = (props) => {
                 });
             localStorage.setItem('search-results', JSON.stringify(result));
             setUpdateCatalog(true);
-            button?.click();
+            btnRef.current?.click();
         }, 1500)
     }
 
@@ -99,7 +100,7 @@ const EditProduct = (props) => {
 
                     setLoading(false);
                     localStorage.setItem('search-results', JSON.stringify(result));
-                    closeModal(btnRef.current, result, location.pathname);
+                    closeModal(result, location.pathname);
                 })
                 .catch((error) => {
                     setLoading(false);
@@ -109,7 +110,7 @@ const EditProduct = (props) => {
     }, [isValidForm])
 
     useEffect(() => {
-        priceRef.current.focus();
+        priceRef.current?.focus();
         setValues({
             price: product['_price'] ? product['_price'] : '',
             quantity: product['_quantity'] ? product['_quantity'] : '',
