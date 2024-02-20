@@ -27,31 +27,31 @@ const Product = forwardRef(function Product(props, ref) {
             <Header title={card.name} classList={'product-header'} >
                 <Result count={count} result={index + 1} />
             </Header>
+            <div className="product-nav">
+                <div className="contextual-tabs">
+                    {
+                        tabs.map((tab, i) => {
+                            return (
+                                <Button key={i + index} attributes={tab} handleClick={handleClick} active={activeTab} />
+                            )
+                        })
+                    }
+                </div>
+            </div>
             <div className="product-wrapper" >
 
                 {/* <button type="button" onClick={() => detailsRef.current.classList.toggle('show-details')}>
                     <FiPlus />
                 </button> */}
 
-                <section>
-                <ProductImage product={card} loading={loading} handleClick={handleModalProductView} />
-                </section>
-                <section>
-                    <div className="product-nav">
-                        <div className="contextual-tabs">
-                            {
-                                tabs.map((tab, i) => {
-                                    return (
-                                        <Button key={i + index} attributes={tab} handleClick={handleClick} active={activeTab} />
-                                    )
-                                })
-                            }
-                        </div>
-                    </div>
+                <>
+                    <ProductImage product={card} loading={loading} handleClick={handleModalProductView} />
+                </>
+                <>
                     <ProductOwner id={'product-status'} product={card} active={activeTab} search={search} />
                     <ProductDetails id={'product-info'} product={card} active={activeTab} search={search} />
                     <ProductHandlers id={'product-actions'} product={card} active={activeTab} search={search} setLoading={value => setLoading(value)} handleClick={handleModalProductState} />
-                </section>
+                </>
             </div>
         </li>
     )

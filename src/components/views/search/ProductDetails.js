@@ -12,7 +12,7 @@ const ProductDetails = ({ id, product, active, search }) => {
     }
     return (
         <section id={id} className={active === id ? 'd-block' : 'd-none'}>
-            <div className="product-details border-succes">
+            <div className="product-details border-success">
             {
                 handlers[search]
             }
