@@ -4,7 +4,6 @@ const timestampConverter = {
     const day = date.getDate();
     const month = convertMonth(date.getMonth() + 1);
     const year = date.getFullYear();
-    console.log(date);
     return `${day} ${month} ${year}`;
   },
   shortDate: (timestamp) => {

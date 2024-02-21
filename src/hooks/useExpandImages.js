@@ -4,11 +4,12 @@ const useExpandImages = (collections) => {
     const [expandedImages, setExpandedImages] = useState([]);
 
     useEffect(() => {
+        console.log(collections)
         if (collections) {
             const elements = []
-            collections.forEach((cards, i) => {
+            collections.forEach((collection, i) => {
                 elements.push([])
-                cards.forEach((card) => {
+                collection.forEach((card) => {
                     if (
                         card.layout === 'transform' ||
                         card.layout === 'modal_dfc' ||

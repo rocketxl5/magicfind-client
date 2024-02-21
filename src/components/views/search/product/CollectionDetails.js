@@ -53,10 +53,6 @@ const CollectionDetails = ({ product }) => {
                         <td>Collector #:</td>
                         <td>{collector_number}</td>
                     </tr>
-                    <tr>
-                        <td>Status:</td>
-                        <td>{product._is_published ? 'Published' : 'Unpublished'}</td>
-                    </tr>
                 </tbody>
             </table>
         </div>

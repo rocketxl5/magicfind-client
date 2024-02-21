@@ -5,7 +5,7 @@ import CollectionDetails from './product/CollectionDetails';
 
 
 const ProductDetails = ({ id, product, active, search }) => {
-    const handlers = {
+    const details = {
         archive: <ArchiveDetails product={product} />,
         catalog: <CatalogDetails product={product} />,
         collection: <CollectionDetails product={product} />
@@ -14,7 +14,7 @@ const ProductDetails = ({ id, product, active, search }) => {
         <section id={id} className={active === id ? 'd-block' : 'd-none'}>
             <div className="product-details border-success">
             {
-                handlers[search]
+                    details[search]
             }
             </div>
         </section>

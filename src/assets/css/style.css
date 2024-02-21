@@ -997,7 +997,7 @@ height: 2rem;
   align-self: center;
   margin-inline-end: 0.3rem;
   /* line-height: 1; */
-  font-size: clamp(var(--fs-100), calc(0.5vw + 5px), var(--fs-150));
+  font-size: clamp(11.5px, calc(0.5vw + 5px), var(--fs-150));
 }
 
 .breadcrumbs .crumb::after {
@@ -1247,7 +1247,7 @@ text-align: center;
   display: flex;
   justify-content: space-between;
   width: 100%;
-  padding: 1rem;
+  padding-block: 1rem;
 }
 
 .search-results-header .title {
