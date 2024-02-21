@@ -69,7 +69,7 @@ const Home = () => {
       </Modal>  
 
       <>
-        <main className="page home">
+        <main className="main-content home">
           <section className="feature-section">
             <header className="section-header">
               <h2 className="section-title">Magic Find Features</h2>

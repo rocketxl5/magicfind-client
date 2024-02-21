@@ -2,6 +2,8 @@ import { useReducer } from 'react'
 import RotateBtn from '../components/views/search/cardbtn/RotateBtn'
 import TurnBtn from '../components/views/search/cardbtn/TurnBtn'
 import CloseBtn from '../components/views/search/cardbtn/CloseBtn'
+import SingleFaceCard from '../components/views/modal/SingleFaceCard'
+import DoubleFaceCard from '../components/views/modal/DoubleFaceCard'
 
 const useModalProductView = (callback) => {
     const INIT = {

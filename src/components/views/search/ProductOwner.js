@@ -3,14 +3,14 @@ import CollectionOwner from './product/CollectionOwner'
 
 const ProductOwner = ({ id, product, active, search, setLoading, handleClick }) => {
 
-    const handlers = {
+    const status = {
         catalog: <CatalogOwner setLoading={setLoading} product={product} />,
         collection: <CollectionOwner setLoading={setLoading} product={product} handleClick={handleClick} />
     }
     return (
         <section id={id} className={active === id ? 'd-block' : 'd-none'}>
             <div className="product-owner border-succes">
-                Product owner
+                {status[search]}
             </div>
         </section>
     )

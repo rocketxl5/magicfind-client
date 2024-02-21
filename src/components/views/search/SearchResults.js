@@ -8,6 +8,7 @@ import { HiOutlineAdjustmentsHorizontal } from "react-icons/hi2";
 import { FiPlus } from "react-icons/fi";
 import useModalProductState from '../../../hooks/useModalProductState';
 import useModalProductView from '../../../hooks/useModalProductView';
+import useModalSlide from '../../../hooks/useModalSlide';
 
 const SearchResults = () => {
     // States
@@ -23,8 +24,6 @@ const SearchResults = () => {
     const iconRef = useRef(null);
 
     const { cards, search } = location.state?.result || JSON.parse(localStorage.getItem('search-results'));
-
-
 
     useEffect(() => {
 
@@ -125,7 +124,6 @@ const SearchResults = () => {
                                             handleModalProductState={handleModalProductState}
                                             ref={cardRef}
                                         >
-
                                         </Product>
                                     )
                                 })
