@@ -86,7 +86,7 @@ const Catalog = () => {
     // Conditional query string won't return user cards if auth
     // Else returns all cards
     const queryString = isAuth ?
-      `${api.serverURL}/api/cards/catalog/${encodeURIComponent(query)}/${auth.id}` :
+      `${api.serverURL}/api/cards/catalog/${encodeURIComponent(query)}/${auth.user.id}` :
       `${api.serverURL}/api/cards/catalog/${encodeURIComponent(query)}`;
 
     fetch(queryString, options)

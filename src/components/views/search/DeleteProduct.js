@@ -54,7 +54,7 @@ const DeleteProduct = (props) => {
 
         const input = {
             cardID: product._id,
-            userID: auth.id,
+            userID: auth.user.id,
         }
         const options = {
             method: 'DELETE',
