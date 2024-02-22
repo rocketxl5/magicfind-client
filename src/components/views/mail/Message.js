@@ -28,7 +28,7 @@ const Message = ({ currentMessage, setMessages, setLoading }) => {
     setPathname(null);
     setLoading(true);
     const updates = {
-      userID: auth.id,
+      userID: auth.user.id,
       messageID: currentMessage._id,
       isReadStatus: status,
     };
@@ -63,7 +63,7 @@ const Message = ({ currentMessage, setMessages, setLoading }) => {
     setLoading(true);
 
     const updates = {
-      userID: auth.id,
+      userID: auth.user.id,
       messageID: currentMessage._id,
       isSentMessage: currentMessage.isSent,
       isTrashStatus: status,
@@ -94,7 +94,7 @@ const Message = ({ currentMessage, setMessages, setLoading }) => {
     setLoading(true);
 
     const updates = {
-      userID: auth.id,
+      userID: auth.user.id,
       toBeDeleted: deleted,
     };
     const headers = new Headers();

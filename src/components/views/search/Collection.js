@@ -52,7 +52,7 @@ const Collection = () => {
       headers: headers,
     }
 
-    fetch(`${api.serverURL}/api/cards/${auth.id}/cards`, options)
+    fetch(`${api.serverURL}/api/cards/${auth.user.id}/cards`, options)
       .then((res) => {
         if (res.ok) {
           return res.json()
@@ -138,7 +138,7 @@ const Collection = () => {
       query = searchTerm;
     }
 
-    fetch(`${api.serverURL}/api/cards/collection/${auth.id}/${encodeURIComponent(query)}`, options)
+    fetch(`${api.serverURL}/api/cards/collection/${auth.user.id}/${encodeURIComponent(query)}`, options)
       .then((res) => {
         if (res.status === 200) {
           return res.json()

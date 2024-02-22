@@ -53,7 +53,7 @@ const ArchiveHandlers = ({ product, setLoading }) => {
                 headers: headers,
                 body: JSON.stringify(selectedProduct),
             };
-            fetch(`${api.serverURL}/api/cards/add/${auth.id}/${selectedProduct.id}`, options)
+            fetch(`${api.serverURL}/api/cards/add/${auth.user.id}/${selectedProduct.id}`, options)
                 .then((res) => {
                     if (res.ok) {
                         return res.json();

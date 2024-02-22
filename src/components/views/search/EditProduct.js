@@ -82,7 +82,7 @@ const EditProduct = (props) => {
                 headers: headers,
                 body: JSON.stringify(input),
             };
-            fetch(`${api.serverURL}/api/cards/edit/${product._id}/${auth.id}`, options)
+            fetch(`${api.serverURL}/api/cards/edit/${product._id}/${auth.user.id}`, options)
                 .then((res) => res.json())
                 .then((data) => {
                     const { cards, isUpdated, message } = data;

@@ -21,7 +21,7 @@ function ShoppingCart() {
     //   navigate('/login', { state: { from: location } });
     // } else {
     //   const input = {
-    //     userID: auth.id,
+    //     userID: auth.user.id,
     //     cartItems: cartItems,
     //   };
     //   const options = {

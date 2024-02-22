@@ -46,7 +46,7 @@ export const SearchProvider = ({ children }) => {
     let filteredData = [];
 
     cards.forEach(card => {
-      card.userID !== auth.id && filteredData.push(card);
+      card.userID !== auth.user.id && filteredData.push(card);
     })
     return filteredData;
   }

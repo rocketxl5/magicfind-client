@@ -52,7 +52,7 @@ const Inbox = () => {
         headers: headers,
       };
 
-      fetch(`${api.serverURL}/api/messages/${pathname}/${auth.id}`, options)
+      fetch(`${api.serverURL}/api/messages/${pathname}/${auth.user.id}`, options)
         .then((res) => res.json())
         .then((data) => {
           if (data.data) {
@@ -171,7 +171,7 @@ const Inbox = () => {
                         checkedState={checkedState}
                         message={message}
                         index={index}
-                        userID={auth.id}
+                        userID={auth.user.id}
                       />
                     );
                   })
