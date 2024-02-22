@@ -1,5 +1,4 @@
 import { Link } from 'react-router-dom';
-import data from '../../data/ABOUT';
 
 const About = () => {
   return (

@@ -1,4 +1,4 @@
-import capitalizeWord from '../../../../assets/utilities/capitalizeWord'
+import capitalizeWord from '../../assets/utilities/capitalizeWord';
 // Sets and return error message object 
 const authErrorHandler = (values, inputs) => {
     const handles = Object.keys(values);

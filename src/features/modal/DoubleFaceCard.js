@@ -1,5 +1,5 @@
 import { useRef, useState, useEffect } from 'react'
-import TurnBtn from '../search/cardbtn/TurnBtn'
+import TurnBtn from './buttons/TurnBtn';
 
 const DoubleFaceCard = ({ children, action }) => {
     const [isMounted, setIsMounted] = useState(false);

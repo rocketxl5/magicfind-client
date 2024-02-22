@@ -1,11 +1,11 @@
 import React, { useContext, useState, useEffect, useRef } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { PathContext } from '../../../contexts/PathContext';
-import useAuth from '../../../hooks/useAuth';
-import validate from '../../../assets/utilities/validateMessage';
-import getPath from '../../../assets/utilities/getPath'
-import useMessage from '../../../hooks/useMessage';
-import { api } from '../../../api/resources';
+import { PathContext } from '../../contexts/PathContext';
+import useAuth from '../../hooks/useAuth';
+import validate from '../../assets/utilities/validateMessage';
+import getPath from '../../assets/utilities/getPath';
+import useMessage from '../../hooks/useMessage';
+import { api } from '../../api/resources';
 
 const Message = () => {
   const MAXCHARS = 500;

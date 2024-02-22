@@ -3,7 +3,7 @@ import CloseBtn from '../search/cardbtn/CloseBtn';
 import LeftBtn from '../search/cardbtn/LeftBtn';
 import RightBtn from '../search/cardbtn/RightBtn';
 import SingleFaceCard from './SingleFaceCard';
-import DoubleFaceCard from './DoubleFaceCard';
+import DoubleFaceCard from './DoubleFaceCard'
 import SlideIndicators from './SlideIndicators';
 import ACTIONS from '../../../data/ACTIONS';
 

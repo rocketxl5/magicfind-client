@@ -1,9 +1,10 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
-import Loading from '../../../layouts/Loading';
+import Loading from '../layout/Loading';
 import errorHandler from './helpers/authErrorHandler';
-import useAuth from '../../../hooks/useAuth';
-import { api } from '../../../api/resources';
+import useAuth from '../hooks/useAuth';
+import { api } from '../api/resources';
+
 const INIT = {
   email: '',
   password: '',
@@ -42,7 +43,7 @@ const Login = () => {
   ***********************/
 
   // On component load
-  useEffect(() => { 
+  useEffect(() => {
     if (location.state) {
       if (location.state.message) {
         setMessage({ ...location.state.message });
@@ -168,9 +169,9 @@ const Login = () => {
           ) : (
 
             <div className="form-content">
-            <div className="form-logo">
-              <Link to="/"><h1>Magic Find</h1></Link>
-            </div>
+              <div className="form-logo">
+                <Link to="/"><h1>Magic Find</h1></Link>
+              </div>
 
               {message ? (
                 <div className={message.type === 'error' ? 'show-error-message' : message.type === 'success' ? 'show-success-message' : 'hide'}>
@@ -180,13 +181,13 @@ const Login = () => {
                   <p className="auth-message-body center">{message.body}</p>
                 </div>
               ) : (
-                  <div className="form-title">
-                <h2>Log in to your account</h2>
-            </div>
+                <div className="form-title">
+                  <h2>Log in to your account</h2>
+                </div>
               )
-              } 
+              }
               <form className="auth-form" id="signin-form" name="signin-form" onSubmit={handleSubmit} noValidate>
-              <div className="form-element">
+                <div className="form-element">
                   <label htmlFor="email" className={errors.email && 'color-danger'}>{errors.email ? errors.email : 'Email'}</label>
                   <input
                     className={errors.email && 'border-danger danger-padding'}
@@ -201,11 +202,11 @@ const Login = () => {
                     placeholder="Email"
                     ref={emailRef}
                   />
-              </div>
-              <div className="form-element">
+                </div>
+                <div className="form-element">
                   <label htmlFor="password" className={errors.password && 'color-danger'}>{errors.password ? errors.password : 'Password'}</label>
                   <div className={`login-password-wrapper center content-height flex ${errors.password && 'border-danger'}`}>
-                  <input
+                    <input
                       id="password"
                       type="password"
                       name="password"
@@ -216,21 +217,21 @@ const Login = () => {
                       pattern="^(?!Enter Code$).*"
                       placeholder='Password'
                       ref={passwordRef}
-                  />
-                  <button className="password-btn flex align-center justify-center" type="button" onMouseDown={handleMouseDown}>
-                    <i className={!showPassword ? "fa-solid fa-eye" : "fa-solid fa-eye-slash"}></i>
-                  </button>
+                    />
+                    <button className="password-btn flex align-center justify-center" type="button" onMouseDown={handleMouseDown}>
+                      <i className={!showPassword ? "fa-solid fa-eye" : "fa-solid fa-eye-slash"}></i>
+                    </button>
+                  </div>
                 </div>
-              </div>
-              <div className="form-element flex margin-block-start-2">
-                <Link className="link" to="/reset-password">Forgot password?</Link>
-              </div>
+                <div className="form-element flex margin-block-start-2">
+                  <Link className="link" to="/reset-password">Forgot password?</Link>
+                </div>
                 <div className="form-element form-submit">
-                <Link className="link" to="/signup">Create account</Link>
+                  <Link className="link" to="/signup">Create account</Link>
                   <button className="login-btn form-btn" type="submit">Login</button>
-              </div>
-            </form>
-          </div>
+                </div>
+              </form>
+            </div>
           )
 
       }

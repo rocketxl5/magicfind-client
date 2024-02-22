@@ -6,7 +6,7 @@ import React, {
 } from 'react';
 import { useNavigate } from 'react-router-dom';
 import SearchInput from './components/SearchInput'
-import Loading from '../../layouts/Loading';
+import Loading from '../../layout/Loading';
 import { SearchContext } from '../../contexts/SearchContext';
 import { api } from '../../api/resources';
 import setQueryString from '../../assets/utilities/setQueryString';

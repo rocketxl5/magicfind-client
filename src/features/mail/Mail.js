@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
-import timestampConverter from '../../../assets/utilities/timestampConverter';
-import { PathContext } from '../../../contexts/PathContext';
+import timestampConverter from '../../assets/utilities/timestampConverter';
+import { PathContext } from '../../contexts/PathContext';
 import styled from 'styled-components';
 
 const Mail = ({

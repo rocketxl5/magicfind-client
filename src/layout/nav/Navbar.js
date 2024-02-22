@@ -1,13 +1,13 @@
 import { useRef } from 'react';
 import Menu from './Menu';
-import AuthMenu from './AuthMenu';
-import SearchBtn from './navbtn/SearchBtn';
-import MailBtn from './navbtn/MailBtn';
-import HamburgerBtn from './navbtn/HamburgerBtn';
-import SignInBtn from './navbtn/SignInBtn';
-import AuthBtn from './navbtn/AuthBtn';
+import AuthMenu from '../AuthMenu';
+import SearchBtn from './buttons/SearchBtn';
+import MailBtn from './buttons/MailBtn';
+import HamburgerBtn from './buttons/HamburgerBtn';
+import SignInBtn from './buttons/SignInBtn';
+import AuthBtn from './buttons/AuthBtn';
 import SidePanel from '../SidePanel';
-import ShoppingCartBtn from './navbtn/ShoppingCartBtn';
+import ShoppingCartBtn from './buttons/ShoppingCartBtn';
 import useAuth from '../../hooks/useAuth';
 import getViewPortWidth from '../../assets/utilities/getViewPortWidth';
 

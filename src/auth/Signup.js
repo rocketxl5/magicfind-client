@@ -1,10 +1,10 @@
 import React, { useRef, useState, useEffect, useReducer } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import Loading from '../../../layouts/Loading';
-import FormInput from './FormInput';
+import Loading from '../layout/Loading';
+import FormInput from './components/FormInput';
 import reducer from './reducer/inputReducer';
 import errorHandler from './helpers/authErrorHandler';
-import { api } from '../../../api/resources';
+import { api } from '../api/resources';
 const INIT = {
   username: '',
   email: '',

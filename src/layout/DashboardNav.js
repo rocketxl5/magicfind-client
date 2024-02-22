@@ -1,9 +1,9 @@
-import { useEffect, useContext } from 'react';
+import { useEffect } from 'react';
 import { NavLink, useParams } from 'react-router-dom'
-import { SearchContext } from '../../contexts/SearchContext';
-import useAuth from '../../hooks/useAuth';
-import data from '../../data/AUTH.json';
-import { api } from '../../api/resources';
+import data from '../data/AUTH.json';
+import { api } from '../api/resources';
+import useAuth from '../hooks/useAuth';
+import useSearch from '../hooks/useSearch';
 
 const DashboardNav = () => {
     const {
@@ -12,7 +12,7 @@ const DashboardNav = () => {
         setCollectionCardNames,
         setUpdateCollection,
         updateCollection
-    } = useContext(SearchContext);
+    } = useSearch();
 
     const { auth } = useAuth();
     const { query } = useParams();

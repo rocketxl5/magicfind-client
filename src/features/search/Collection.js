@@ -7,7 +7,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { FiArrowRightCircle } from "react-icons/fi"
 
 import SearchInput from './components/SearchInput'
-import Loading from '../../layouts/Loading';
+import Loading from '../../layout/Loading';
 import { api } from '../../api/resources';
 import getViewPortWidth from '../../assets/utilities/getViewPortWidth';
 import hideSearchBar from '../../assets/utilities/hideSearchBar';

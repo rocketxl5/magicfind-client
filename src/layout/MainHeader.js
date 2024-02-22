@@ -1,13 +1,13 @@
 import { useContext, useEffect } from 'react';
-import Catalog from '../views/search/Catalog';
-import Navbar from './Navbar';
+import Catalog from '../features/search/Catalog';
+import Navbar from './nav/Navbar';
 import DashboardNav from './DashboardNav';
-import LogoBtn from './navbtn/LogoBtn';
-import { ScrollContext } from '../../contexts/ScrollContext';
-import useAuth from '../../hooks/useAuth';
-import useSearch from '../../hooks/useSearch';
-import { api } from '../../api/resources';
-import handleSearchBar from '../../assets/utilities/handleSearchBar';
+import LogoBtn from './nav/buttons/LogoBtn';
+import { ScrollContext } from '../contexts/ScrollContext';
+import { api } from '../api/resources';
+import handleSearchBar from '../assets/utilities/handleSearchBar';
+import useAuth from '../hooks/useAuth';
+import useSearch from '../hooks/useSearch';
 
 const MainHeader = () => {
   const { navRef } = useContext(ScrollContext);
@@ -27,13 +27,13 @@ const MainHeader = () => {
       };
 
       fetch(`${api.serverURL}/api/cards/catalog`, options)
-      .then((res) => res.json())
-      .then((data) => {
-        setCatalogCardNames(data);
-        // Reinitialize updateCatalog to allow updates
-        setUpdateCatalog(false);
-      })
-      .catch((error) => console.log(error));
+        .then((res) => res.json())
+        .then((data) => {
+          setCatalogCardNames(data);
+          // Reinitialize updateCatalog to allow updates
+          setUpdateCatalog(false);
+        })
+        .catch((error) => console.log(error));
     }
   }, [updateCatalog]);
 

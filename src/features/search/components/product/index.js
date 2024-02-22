@@ -1,11 +1,11 @@
-import DeleteProduct from '../../../../components/views/search/DeleteProduct';
-import EditProduct from '../../../../components/views/search/EditProduct';
-import Parameter from '../../../../components/views/search/Parameter';
-import Product from '../../../../components/views/search/Product';
-import ProductDetails from '../../../../components/views/search/ProductDetails';
-import ProductHandlers from '../../../../components/views/search/ProductHandlers';
-import ProductImage from '../../../../components/views/search/ProductImage';
-import ProductOwner from '../../../../components/views/search/ProductOwner';
+import DeleteProduct from './DeleteProduct';
+import EditProduct from './EditProduct';
+import Parameter from './Parameter';
+import Product from './Product';
+import ProductDetails from './ProductDetails';
+import ProductHandlers from './ProductHandlers';
+import ProductImage from './ProductImage';
+import ProductOwner from './ProductOwner';
 import sections from './sections';
 
 

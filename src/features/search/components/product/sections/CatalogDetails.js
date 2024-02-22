@@ -5,7 +5,6 @@ import data from '../../../../../data/SEARCH.json';
 
 const CatalogDetails = ({ product }) => {
     const { isAuth } = useAuth();
-    console.log(product)
     const { conditions, finishes, languages } = data.product;
     const { set_name, released_at, rarity, type_line, name, language, userName, comment, country, condition, card_faces, oversized, avatar, rating, joined } = product;
     return (

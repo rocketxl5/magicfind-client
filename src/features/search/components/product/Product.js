@@ -1,13 +1,13 @@
 import { useState, forwardRef } from 'react';
 import { FiPlus } from "react-icons/fi";
-import Result from './Result';
-import Header from '../../../../layouts//Header';
-import Button from '../../../../layouts/Button';
+import Result from '../../components/Result';
+import Header from '../../../../components/Header'
+import Button from '../../../../components/Button'
 import ProductImage from './ProductImage';
 import ProductDetails from './ProductDetails';
 import ProductHandlers from './ProductHandlers';
 import ProductOwner from './ProductOwner';
-import data from '../../../data/PRODUCT.json';
+import data from '../../../../data/PRODUCT.json';
 
 const Product = forwardRef(function Product(props, ref) {
     const { index, count, card, search, handleModalProductView, handleModalProductState } = props;

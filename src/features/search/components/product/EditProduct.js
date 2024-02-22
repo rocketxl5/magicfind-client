@@ -2,14 +2,14 @@ import { useState, useEffect, useRef } from 'react';
 import { useNavigate, useLocation, useParams } from 'react-router-dom';
 import Image from './ProductImage';
 import CollectionDetails from './sections/CollectionDetails';
-import Success from './Success';
-import Loading from '../../../../components/elements/Loading';
+import Success from '../Success'
+import Loading from '../../../../layout/Loading';
 import Option from '../../../../components/Option';
 import data from '../../../../data/EDIT.json';
-import errorHandler from './helpers/editErrorHandler';
-import useAuth from '../../../hooks/useAuth';
-import useSearch from '../../../hooks/useSearch';
-import { api } from '../../../api/resources';
+import errorHandler from '../../services/editErrorHandler';
+import useAuth from '../../../../hooks/useAuth';
+import useSearch from '../../../../hooks/useSearch';
+import { api } from '../../../../api/resources';
 
 
 const INIT = {

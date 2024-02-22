@@ -1,5 +1,5 @@
-import CatalogOwner from './product/CatalogOwner'
-import CollectionOwner from './product/CollectionOwner'
+import CatalogOwner from './sections/CatalogOwner'
+import CollectionOwner from './sections/CollectionOwner'
 
 const ProductOwner = ({ id, product, active, search, setLoading, handleClick }) => {
 

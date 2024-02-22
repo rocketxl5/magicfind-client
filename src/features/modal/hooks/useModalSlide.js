@@ -1,6 +1,6 @@
 import { useReducer } from 'react';
-import SlideShow from '../components/views/modal/SlideShow';
-import SingleShow from '../components/views/modal/SingleShow';
+import SlideShow from '../SingleShow'
+// import SingleShow from '../components/views/modal/SingleShow';
 
 const useModalSlide = (callback, expandedImages) => {
     const ACTIONS = {

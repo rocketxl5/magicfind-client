@@ -1,6 +1,6 @@
 import { useRef, useState, useEffect } from 'react'
-import RotateBtn from '../search/cardbtn/RotateBtn';
-import FlipBtn from '../search/cardbtn/FlipBtn';
+import RotateBtn from './buttons/RotateBtn';
+import FlipBtn from './buttons/FlipBtn';
 
 const SingleFaceCard = ({ children, action }) => {
     const [isMounted, setIsMounted] = useState(false);

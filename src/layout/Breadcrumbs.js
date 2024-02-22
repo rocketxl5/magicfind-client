@@ -1,7 +1,7 @@
 // Source @ https://www.youtube.com/watch?v=zy8rqihtvA8
 
 import { Link, useLocation } from 'react-router-dom';
-import capitalizeString from '../../assets/utilities/capitalizeString';
+import capitalizeString from '../assets/utilities/capitalizeString';
 
 const Breadcrumbs = () => {
     const location = useLocation();
@@ -29,7 +29,7 @@ const Breadcrumbs = () => {
     return (
         <div className="breadcrumbs">
             <div className="crumbs">
-            {crumbs}
+                {crumbs}
             </div>
         </div>
     )

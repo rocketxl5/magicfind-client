@@ -10,7 +10,7 @@ const FormInput = forwardRef((props, ref) => {
                 !errors[name] ? (
                     <label htmlFor={id} >{label}</label>
                 ) : (
-                        <label className="color-danger" htmlFor={id} >{errors[name]}</label>
+                    <label className="color-danger" htmlFor={id} >{errors[name]}</label>
                 )
             }
             <input

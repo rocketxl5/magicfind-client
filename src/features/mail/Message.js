@@ -1,11 +1,11 @@
 import React, { useContext, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { FiArrowLeftCircle } from 'react-icons/fi';
-import timestampConverter from '../../../assets/utilities/timestampConverter';
-import getPath from '../../../assets/utilities/getPath'
-import { PathContext } from '../../../contexts/PathContext';
-import useAuth from '../../../hooks/useAuth';
-import { api } from '../../../api/resources';
+import timestampConverter from '../../assets/utilities/timestampConverter';
+import getPath from '../../assets/utilities/getPath';
+import { PathContext } from '../../contexts/PathContext';
+import useAuth from '../../hooks/useAuth';
+import { api } from '../../api/resources';
 import styled from 'styled-components';
 
 const Message = ({ currentMessage, setMessages, setLoading }) => {

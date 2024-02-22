@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import styled from 'styled-components';
-import { CartContext } from '../../contexts/CartContext';
-import { api } from '../../api/resources';
+import { CartContext } from '../contexts/CartContext';
+import { api } from '../api/resources';
 
 const CartItem = ({ item, index, setLoading }) => {
   const [quantitySelected, setQuantitySelected] = useState(0);

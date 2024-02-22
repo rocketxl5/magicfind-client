@@ -2,11 +2,11 @@ import React, { useContext, useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 // import { FiPlusCircle, FiMinusCircle, FiTrash2 } from 'react-icons/fi';
 import CartItem from './CartItem';
-import useAuth from '../../hooks/useAuth';
-import { CartContext } from '../../contexts/CartContext';
-import { api } from '../../api/resources';
+import useAuth from '../hooks/useAuth';
+import { CartContext } from '../contexts/CartContext';
+import { api } from '../api/resources';
 import styled from 'styled-components';
-import Loading from '../../layouts/Loading';
+import Loading from '../layout/Loading';
 
 function ShoppingCart() {
   const [loading, setLoading] = useState(false);

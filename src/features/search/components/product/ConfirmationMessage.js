@@ -8,7 +8,7 @@ const ConfirmationMessage = (props) => {
 
     const handleClick = () => {
         if (cards) {
-            console.log(location)
+
             navigate(`${location.pathname}`,
                 {
                     state: { cards: cards, type: location.state.type, search: `/${location.state.type}` },

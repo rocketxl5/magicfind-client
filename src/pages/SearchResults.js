@@ -2,13 +2,13 @@ import { useState, useEffect, useContext, useRef } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import Product from '../features/search/components/product/Product';
 import Parameter from '../features/search/components/Parameter';
-import Modal from '../components/views/modal/Modal';
-import { ScrollContext } from '../../../contexts/ScrollContext';
+import Modal from '../features/modal/Modal';
+import { ScrollContext } from '../contexts/ScrollContext';
 import { HiOutlineAdjustmentsHorizontal } from "react-icons/hi2";
 import { FiPlus } from "react-icons/fi";
-import useModalProductState from '../../../hooks/useModalProductState';
-import useModalProductView from '../../../hooks/useModalProductView';
-import useModalSlide from '../../../hooks/useModalSlide';
+import useModalProductState from '../features/search/hooks/useModalProductState';
+import useModalProductView from '../features/search/hooks/useModalProductView';
+import useModalSlide from '../features/modal/hooks/useModalSlide';
 
 const SearchResults = () => {
     // States

@@ -4,12 +4,12 @@ import SideBar from './SideBar';
 import MailHeader from './MailHeader';
 import Mail from './Mail';
 import ComposeMessage from './ComposeMessage';
-import Loading from '../../../layouts/Loading';
+import Loading from '../../layout/Loading';
 import Message from './Message';
-import useAuth from '../../../hooks/useAuth';
-import getPath from '../../../assets/utilities/getPath'
-import { PathContext } from '../../../contexts/PathContext';
-import { api } from '../../../api/resources';
+import useAuth from '../../hooks/useAuth';
+import getPath from '../../assets/utilities/getPath';
+import { PathContext } from '../../contexts/PathContext';
+import { api } from '../../api/resources';
 import styled from 'styled-components';
 
 const Inbox = () => {

@@ -1,4 +1,4 @@
-import useColorSymbols from '../../../../hooks/useColorSymbols';
+import useColorSymbols from '../../../../../hooks/useColorSymbols';
 import data from '../../../../../data/SEARCH.json';
 
 const CollectionDetails = ({ product }) => {

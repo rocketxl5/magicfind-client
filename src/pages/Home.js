@@ -1,12 +1,12 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import MediaElement from '../components/views/MediaElement';
-import Modal from ''
+import MediaElement from '../components/MediaElement';
+import Modal from '../features/modal/Modal.js';
 import { GoShieldCheck } from "react-icons/go";
 import data from '../data/HOME';
 import useExpandImages from '../hooks/useExpandImages';
-import useModalSlide from '../hooks/useModalSlide';
+import useModalSlide from '../features/modal/hooks/useModalSlide.js';
 import { api } from '../api/resources';
 
 const Home = () => {

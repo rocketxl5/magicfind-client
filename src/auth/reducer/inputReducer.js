@@ -1,4 +1,4 @@
-import ACTIONS from '../../../../data/ACTIONS';
+import ACTIONS from '../../data/ACTIONS';
 
 const inputReducer = (inputStates, action) => {
   const { CHANGE, FOCUS, BLUR } = ACTIONS.INPUT;
@@ -58,11 +58,11 @@ const inputReducer = (inputStates, action) => {
   }
 
   function updateRequirements(requirements, value, isConfirmPassword = false) {
-      return requirements.map((requirement) => {
-        const pattern = !isConfirmPassword ? requirement.pattern : new RegExp(requirement.pattern)
-        requirement = { ...requirement, fullfiled: pattern.test(value) ? true : false }
-        return requirement
-      })
+    return requirements.map((requirement) => {
+      const pattern = !isConfirmPassword ? requirement.pattern : new RegExp(requirement.pattern)
+      requirement = { ...requirement, fullfiled: pattern.test(value) ? true : false }
+      return requirement
+    })
   }
 }
 
