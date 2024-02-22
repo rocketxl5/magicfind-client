@@ -8,7 +8,7 @@ export const AuthContext = createContext(null);
 export const AuthProvider = ({ children }) => {
   // const [user, setAuth] = useState(JSON.parse(localStorage.getItem('user')));
   // const { setCartItems, setItemsCount } = useContext(ShoppingCartContext);
-  const [auth, setAuth] = useState(null);
+  const [auth, setAuth] = useState(localStorage.getItem('auth') ? JSON.parse(localStorage.getItem('auth')) : null);
   const [isAuth, setIsAuth] = useState(false);
   const [unreadMail, setUnreadMail] = useState(null);
 
@@ -16,8 +16,7 @@ export const AuthProvider = ({ children }) => {
   // const navigate = useNavigate();
 
   const logoutAction = () => {
-    localStorage.removeItem('token');
-    localStorage.removeItem('user');
+    localStorage.removeItem('auth');
     setAuth(null);
     setIsAuth(false);
     // navigate('/');
@@ -62,8 +61,9 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     if (auth) {
       setIsAuth(true);
-      checkUnreadMail(auth.id, auth.token)
-      // navigate(location.pathname);
+      // checkUnreadMail(auth.user.id, auth.token)
+
+
     }
     else {
       setIsAuth(false);
@@ -72,16 +72,22 @@ export const AuthProvider = ({ children }) => {
 
   useEffect(() => {
 
-    const jwt = localStorage.getItem('token');
+    const auth = JSON.parse(localStorage.getItem('auth'));
+    const jwt = auth?.token;
 
     if (jwt) {
       const hasExpired = parseJwt(jwt);
       if (hasExpired) {
         logoutAction();
-      } else if (localStorage.getItem('user')) {
-        const user = JSON.parse(localStorage.getItem('user'));
-        const token = JSON.parse(localStorage.getItem('token'));
-        setAuth({ ...user, token: token })
+      } else if (auth) {
+        console.log(auth)
+        // const user = JSON.parse(localStorage.getItem('user'));
+        // const token = JSON.parse(localStorage.getItem('token'));
+        if (!localStorage.getItem('auth')) {
+
+          // localStorage.setItem('auth', JSON.stringify(auth));
+        }
+        setAuth(auth);
       }
     }
   }, []);
