@@ -9,7 +9,7 @@ import Layout from './components/layouts/Layout';
 import AuthLayout from './components/layouts/AuthLayout';
 
 
-import ProtectedRoutes from './components/layouts/ProtectedRoutes';
+import PrivateRoutes from './components/layouts/PrivateRoutes';
 import RestrictedRoutes from './components/layouts/RestrictedRoutes';
 import PublicRoutes from './components/layouts/PublicRoutes'
 
@@ -47,20 +47,11 @@ const App = () => {
   return (
     <Routes>
       <Route path="/" element={<RootLayout />} >
-        {/* Cannot access if authenticated */}
-        <Route element={<RestrictedRoutes />}>
-          <Route element={<Layout />}>
-          <Route index element={<Home />} />
-            <Route path="home" element={<Navigate to="/" replace />} />
-          <Route path="login" element={<Login />} />
-          <Route path="signup" element={<Signup />} />
-          <Route path="reset-password" element={<ResetPassword />} />
-        </Route>
-        </Route>
-        {/* Auth protected routes */}
-        <Route element={<ProtectedRoutes />}>
+        {/* Authenticated routes */}
+        <Route element={<PrivateRoutes />}>
           <Route element={<AuthLayout />} >
-            <Route index element={<AuthPage />} />
+            {/* <Route index element={<AuthPage />} /> */}
+            <Route path="/" element={<Navigate to="/me" replace />} />
             <Route path="me" element={<AuthPage />}>
             <Route path="dashboard" element={<DashBoard />} />
             <Route path="collection" element={<Collection />} />
@@ -76,6 +67,16 @@ const App = () => {
             <Route path="checkout" element={<Checkout />} />
             <Route path="mail" element={<Inbox />} />
           </Route>
+          </Route>
+        </Route>
+        {/* Unauthenticated routes */}
+        <Route element={<RestrictedRoutes />}>
+          <Route element={<Layout />}>
+            <Route index element={<Home />} />
+            <Route path="home" element={<Navigate to="/" replace />} />
+            <Route path="login" element={<Login />} />
+            <Route path="signup" element={<Signup />} />
+            <Route path="reset-password" element={<ResetPassword />} />
           </Route>
         </Route>
         <Route element={<PublicRoutes />} >

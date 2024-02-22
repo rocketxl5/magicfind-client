@@ -93,9 +93,11 @@ const Login = () => {
             })
           })
           .then((data) => {
-            localStorage.setItem('token', JSON.stringify(data.token));
-            localStorage.setItem('user', JSON.stringify(data.payload.user));
-            setAuth({ ...data.payload.user, token: data.token });
+            const auth = { user: data.payload.user, token: data.token }
+            // localStorage.setItem('token', JSON.stringify(data.token));
+            // localStorage.setItem('user', JSON.stringify(data.payload.user));
+            localStorage.setItem('auth', JSON.stringify(auth))
+            setAuth(auth);
             setLoading(false)
             const destination = location.state?.from ? location.state.from.pathname : '/me';
             console.log(destination)

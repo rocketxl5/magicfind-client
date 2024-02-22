@@ -6,7 +6,7 @@ const AuthBtn = ({ auth, panelRef }) => {
         <button
             className="nav-btn auth-nav-btn"
             style={
-                { backgroundColor: `#${auth?.avatar.color}` }
+                { backgroundColor: `#${auth.user?.avatar.color}` }
             }
             onClick={
                 () => panelRef.current.classList.toggle('side-show')

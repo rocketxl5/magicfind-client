@@ -1,19 +1,18 @@
-import { useEffect } from 'react';
-import { useNavigate, Outlet } from 'react-router-dom';
+import { Navigate, Outlet } from 'react-router-dom';
 import useAuth from '../../hooks/useAuth';
 
 const RestrictedRoutes = () => {
-    const navigate = useNavigate();
-    const { isAuth } = useAuth();
+    const { auth } = useAuth();
 
-    useEffect(() => {
-        if (isAuth) {
-            navigate('/me', { replace: true });
-        }
-    }, [])
-
+    console.log(auth)
     return (
-        !isAuth && <Outlet />
+
+        <>
+            {
+
+                auth ? <Navigate to="/me" replace /> : <Outlet />
+            }
+        </>
     )
 }
 
