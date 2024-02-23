@@ -3,37 +3,39 @@ import {
   Navigate,
   Routes
 } from 'react-router-dom';
+
 // Layouts
-import RootLayout from './components/layouts/RootLayout';
-import Layout from './components/layouts/Layout';
-import AuthLayout from './components/layouts/AuthLayout';
+import RootLayout from './layout/RootLayout';
+import Layout from './layout/Layout';
+import AuthLayout from './layout/AuthLayout';
 
 
-import PrivateRoutes from './components/layouts/PrivateRoutes';
-import RestrictedRoutes from './components/layouts/RestrictedRoutes';
-import PublicRoutes from './components/layouts/PublicRoutes'
+import PrivateRoutes from './routes/PrivateRoutes';
+import PublicRoutes from './routes/PublicRoutes';
+import RestrictedRoutes from './routes/RestrictedRoutes';
 
 // Views
-import AuthPage from './components/views/AuthPage';
-import Login from './components/auth/forms/Login';
-import Signup from './components/auth/forms/Signup';
-import Settings from './components/auth/Settings';
-import ResetPassword from './components/auth/ResetPassword';
-import Home from './components/views/Home';
-import Contact from './components/views/Contact';
-import About from './components/views/About';
-import Profile from './components/views/Profile';
-import SearchResults from './components/views/search/SearchResults';
-import NotFound from './components/layout/NotFound';
-import CardNotFound from './components/views/search/CardNotFound';
-import ShoppingCart from './components/views/ShoppingCart';
-import DashBoard from './components/views/DashBoard';
-import Collection from './components/views/search/Collection';
-import Archive from './components/views/search/Archive';
-import Checkout from './components/views/Checkout';
-import Inbox from './components/views/mail/Inbox';
-import Store from './components/views/Store';
-import ProductDetails from './components/views/search/ProductDetails';
+import Login from './auth/Login';
+import Signup from './auth/Signup';
+import Settings from './auth/Settings';
+import ResetPassword from './auth/ResetPassword';
+import AuthPage from './pages/AuthPage';
+import Home from './pages/Home';
+import Contact from './pages/Contact';
+import About from './pages/About';
+import Profile from './pages/Profile';
+import SearchResults from './pages/SearchResults';
+
+import CardNotFound from './pages/CardNotFound';
+import PageNotFound from './pages/PageNotFound';
+import ShoppingCart from './pages/ShoppingCart';
+import DashBoard from './pages/DashBoard';
+import Collection from './features/search/Collection'
+import Archive from './features/search/Archive'
+import Checkout from './pages/Checkout';
+import Inbox from './features/mail/Inbox';
+import Store from './pages/Store';
+import ProductDetails from './features/search/components/product/ProductDetails';
 import './assets/css/reset.css';
 import './App.css';
 import './assets/css/utilities.css';
@@ -55,12 +57,9 @@ const App = () => {
             <Route path="me" element={<AuthPage />}>
             <Route path="dashboard" element={<DashBoard />} />
             <Route path="collection" element={<Collection />} />
-            <Route path="collection/:query" element={<SearchResults />} />
-            {/* <Route path="details" element={<ProductDetails />} /> */}
+              <Route path="collection/:query" element={<SearchResults />} />
             <Route path="archive" exact element={<Archive />} />
-            <Route path="archive/:query" element={<SearchResults />} />
-
-            {/* <Route path="details" element={<ProductDetails />} /> */}
+              <Route path="archive/:query" element={<SearchResults />} />
             <Route path="store" element={<Store />} />
             <Route path="settings" element={<Settings />} />
             <Route path="profile" element={<Profile />} />
@@ -88,7 +87,7 @@ const App = () => {
           <Route path="shopping-cart" element={<ShoppingCart />} />
         </Route>
         {/* Catch all */}
-        <Route path="*" element={<NotFound />} />
+        <Route path="*" element={< PageNotFound />} />
       </Route>
     </Routes>
   );
