@@ -1,6 +1,6 @@
 import React from 'react'
-import data from '../../../../../data/SEARCH.json';
-import timestampConverter from '../../../../../assets/utilities/timestampConverter';
+import data from '../../../data/SEARCH.json';
+import timestampConverter from '../../../assets/utilities/timestampConverter';
 
 const CollectionOwner = ({ product }) => {
     const { conditions, languages, finishes } = data.product;

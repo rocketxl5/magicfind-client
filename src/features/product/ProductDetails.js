@@ -1,6 +1,6 @@
-import ArchiveDetails from './sections/ArchiveDetails';
-import CatalogDetails from './sections/CatalogDetails';
-import CollectionDetails from './sections/CollectionDetails';
+import ArchiveDetails from './components/ArchiveDetails';
+import CatalogDetails from './components/CatalogDetails';
+import CollectionDetails from './components/CollectionDetails';
 // import { useParams } from 'react-router-dom'
 
 

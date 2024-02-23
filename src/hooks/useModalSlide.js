@@ -1,5 +1,5 @@
 import { useReducer } from 'react';
-import SlideShow from '../SingleShow'
+import SlideShow from '../features/modal/SlideShow';
 // import SingleShow from '../components/views/modal/SingleShow';
 
 const useModalSlide = (callback, expandedImages) => {
@@ -37,7 +37,6 @@ const useModalSlide = (callback, expandedImages) => {
     const [view, dispatch] = useReducer(reducer, INIT)
 
     const updateSliderView = (e, id) => {
-
         switch (e.target.name) {
             case 'modal-image':
                 dispatch({

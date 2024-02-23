@@ -1,7 +1,7 @@
 import { useReducer } from 'react';
-import EditProduct from '../components/product/EditProduct';
-import DeleteProduct from '../components/product/DeleteProduct';
-import cardBack from '../../../assets/img/mtg_card_back.jpg';
+import EditProduct from '../features/product/EditProduct';
+import DeleteProduct from '../features/product/DeleteProduct';
+import cardBack from '../assets/img/mtg_card_back.jpg';
 
 const useModalProductState = (search, callback) => {
     const INIT = {

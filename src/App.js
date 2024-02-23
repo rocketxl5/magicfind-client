@@ -35,7 +35,7 @@ import Archive from './features/search/Archive'
 import Checkout from './pages/Checkout';
 import Inbox from './features/mail/Inbox';
 import Store from './pages/Store';
-import ProductDetails from './features/search/components/product/ProductDetails';
+import ProductDetails from './features/product/ProductDetails';
 import './assets/css/reset.css';
 import './App.css';
 import './assets/css/utilities.css';

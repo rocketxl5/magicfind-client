@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
-import useAuth from '../../../../../hooks/useAuth';
-import useSearch from '../../../../../hooks/useSearch';
-import { api } from '../../../../../api/resources';
+import useAuth from '../../../hooks/useAuth';
+import useSearch from '../../../hooks/useSearch';
+import { api } from '../../../api/resources';
 
 const INIT = {
     style: 'btn bg-blue color-light border-blue',

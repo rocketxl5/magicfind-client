@@ -1,5 +1,5 @@
-import useColorSymbols from '../../../../../hooks/useColorSymbols';
-import data from '../../../../../data/SEARCH.json';
+import useColorSymbols from '../../../hooks/useColorSymbols';
+import data from '../../../data/SEARCH.json';
 
 const ArchiveDetails = ({ product }) => {
     const { colorIdentity, manaCost } = useColorSymbols(product);

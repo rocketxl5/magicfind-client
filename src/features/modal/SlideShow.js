@@ -1,11 +1,11 @@
 import { useRef, useState, useEffect } from 'react'
-import CloseBtn from '../search/cardbtn/CloseBtn';
-import LeftBtn from '../search/cardbtn/LeftBtn';
-import RightBtn from '../search/cardbtn/RightBtn';
+import CloseBtn from './buttons/CloseBtn';
+import LeftBtn from './buttons/LeftBtn';
+import RightBtn from './buttons/RightBtn';
 import SingleFaceCard from './SingleFaceCard';
 import DoubleFaceCard from './DoubleFaceCard'
 import SlideIndicators from './SlideIndicators';
-import ACTIONS from '../../../data/ACTIONS';
+import ACTIONS from '../../data/ACTIONS';
 
 const SlideShow = ({ children, handleClick }) => {
     const { INTERVAL, RESET, LIMIT } = ACTIONS.SLIDE;
@@ -16,7 +16,6 @@ const SlideShow = ({ children, handleClick }) => {
     useEffect(() => {
         LIMIT.MIN = (children.props.children.length - 1) * -INTERVAL;
     }, [])
-
 
     useEffect(() => {
         trackRef.current.style.left = `${coordinate}vw`;

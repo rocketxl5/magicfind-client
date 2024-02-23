@@ -6,7 +6,7 @@ import Modal from '../features/modal/Modal.js';
 import { GoShieldCheck } from "react-icons/go";
 import data from '../data/HOME';
 import useExpandImages from '../hooks/useExpandImages';
-import useModalSlide from '../features/modal/hooks/useModalSlide.js';
+import useModalSlide from '../hooks/useModalSlide.js';
 import { api } from '../api/resources';
 
 const Home = () => {
@@ -39,7 +39,6 @@ const Home = () => {
 
   function handleSliderView(e, id) {
     e.stopPropagation();
-    // console.log(e.target)
     updateSliderView(e, id)
   }
 
@@ -126,7 +125,7 @@ const Home = () => {
                 mediaFeatures &&
                 mediaFeatures.map((feature, i) => {
                   return (
-                    <MediaElement key={i} id={i} handleSliderView={handleSliderView}>
+                    <MediaElement key={i + 1} id={i} handleSliderView={handleSliderView}>
                       {feature.cover}
                       {feature.title}
                     </MediaElement>

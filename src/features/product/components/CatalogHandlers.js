@@ -1,7 +1,7 @@
 import { useState, useContext, useEffect } from 'react';
-import Loading from '../../../../../layout/Loading';
-import { CartContext } from '../../../../../contexts/CartContext';
-import { api } from '../../../../../api/resources';
+import Loading from '../../../layout/Loading';
+import { CartContext } from '../../../contexts/CartContext';
+import { api } from '../../../api/resources';
 import styled from 'styled-components';
 
 const CatalogHandlers = ({ product }) => {
