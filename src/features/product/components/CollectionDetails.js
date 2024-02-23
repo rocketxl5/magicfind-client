@@ -1,5 +1,5 @@
-import useColorSymbols from '../../../../../hooks/useColorSymbols';
-import data from '../../../../../data/SEARCH.json';
+import useColorSymbols from '../../../hooks/useColorSymbols';
+import data from '../../../data/SEARCH.json';
 
 const CollectionDetails = ({ product }) => {
     const { set_name, released_at, rarity, type_line, artist, lang, collector_number, finishes, _is_published } = product;

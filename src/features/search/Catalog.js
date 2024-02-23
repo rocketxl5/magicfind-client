@@ -37,9 +37,7 @@ const Catalog = () => {
 
 
     useEffect(() => {
-        console.log(catalogCardNames)
         if (searchInput?.id === 'catalog') {
-            // setCardNames(catalogCardNames);
             setIsActive(true);
         } else {
             setCardNames(null);

@@ -1,6 +1,6 @@
-import ArchiveHandlers from './sections/ArchiveHandlers';
-import CatalogHandlers from './sections/CatalogHandlers'
-import CollectionHandlers from './sections/CollectionHandlers'
+import ArchiveHandlers from './components/ArchiveHandlers';
+import CatalogHandlers from './components/CatalogHandlers'
+import CollectionHandlers from './components/CollectionHandlers'
 
 const ProductHandlers = ({ id, product, active, search, setLoading, handleClick }) => {
 

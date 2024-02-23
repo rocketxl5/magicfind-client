@@ -42,7 +42,7 @@ const handleSearchBar = (e, isOutsideEvent = false) => {
         }
 
         // If Logo
-        if (target.classList.contains('logo-btn')) {
+        if (target.classList.contains('logo-btn') || target.classList.contains('cart-btn') || target.classList.contains('mail-btn')) {
             // If mobile menu is displayed
             if (document.querySelector('#mobile-nav').checked) {
                 // Uncheck checkbox to initiate hamburger animation (from cross to hamburger)
@@ -53,7 +53,7 @@ const handleSearchBar = (e, isOutsideEvent = false) => {
                     // Display search button (maginifier icon)
                     document.querySelector('.search-btn').style.setProperty('display', 'block');
                 }
-                    if (userAgent.toLocaleLowerCase().includes.firefox) {
+                if (userAgent.toLowerCase().includes.firefox) {
                         // Remove 'checked' class from main header
                         toggleClass(document.querySelector('.main-header'), 'checked');
                     }
@@ -103,8 +103,10 @@ const handleSearchBar = (e, isOutsideEvent = false) => {
                 }
             }
         }
+
         // If event is triggered outside of Main MainHeader
         if (isOutsideEvent) {
+            console.log(isOutsideEvent)
             if (browserWidth <= 775) {
                 // Clear search catalog search bar
                 document.querySelector('#catalog-container').style.width = 0;

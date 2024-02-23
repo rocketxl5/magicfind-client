@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import useAuth from '../../../../../hooks/useAuth';
-import data from '../../../../../data/SEARCH.json';
+import useAuth from '../../../hooks/useAuth';
+import data from '../../../data/SEARCH.json';
 
 const CatalogDetails = ({ product }) => {
     const { isAuth } = useAuth();

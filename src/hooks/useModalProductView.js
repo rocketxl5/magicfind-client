@@ -1,9 +1,9 @@
 import { useReducer } from 'react';
-import RotateBtn from '../../modal/buttons/RotateBtn';
-import TurnBtn from '../../modal/buttons/TurnBtn';
-import CloseBtn from '../../modal/buttons/CloseBtn';
-import SingleFaceCard from '../../modal/SingleFaceCard';
-import DoubleFaceCard from '../../modal/DoubleFaceCard';
+import RotateBtn from '../features/modal/buttons/RotateBtn';
+import TurnBtn from '../features/modal/buttons/TurnBtn';
+import CloseBtn from '../features/modal/buttons/CloseBtn';
+import SingleFaceCard from '../features/modal/SingleFaceCard';
+import DoubleFaceCard from '../features/modal/DoubleFaceCard';
 
 const useModalProductView = (callback) => {
     const INIT = {

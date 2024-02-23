@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 import { FaExpand } from "react-icons/fa";
-import Loading from '../../../../layout/Loading';
-import useExpandImage from '../../../../hooks/useExpandImage';
-import useAttributes from '../../../../hooks/useAttributes';
+import Loading from '../../layout/Loading';
+import useExpandImage from '../../hooks/useExpandImage';
+import useAttributes from '../../hooks/useAttributes';
 
 const ProductImage = ({ product, loading, handleClick }) => {
     const [hasLoaded, setHasLoaded] = useState(false);

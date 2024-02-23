@@ -1,12 +1,12 @@
 import { useState, useRef } from 'react';
 import { useNavigate, useLocation, useParams } from 'react-router-dom';
 import Image from './ProductImage';
-import CollectionDetails from './sections/CollectionDetails';
-import Success from '../Success';
-import Loading from '../../../../layout/Loading';
+import CollectionDetails from './components/CollectionDetails';
+import Success from './Success';
+import Loading from '../../layout/Loading';
 // import { FaBan } from "react-icons/fa6";
-import useAuth from '../../../../hooks/useAuth';
-import { api } from '../../../../api/resources';
+import useAuth from '../../hooks/useAuth';
+import { api } from '../../api/resources';
 
 const DeleteProduct = (props) => {
     // Props
