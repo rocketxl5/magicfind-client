@@ -35,21 +35,20 @@ const EditProduct = (props) => {
     // Refs
     const btnRef = useRef(null);
     const priceRef = useRef(null);
-    // Routing
-    const navigate = useNavigate();
-    const location = useLocation();
-    const { query } = useParams();
+
     // Hooks
     const { auth } = useAuth();
     const { setUpdateCatalog } = useSearch();
+    const navigate = useNavigate();
+    const location = useLocation();
+    const { query } = useParams();
 
     const { languages, conditions } = data;
 
     // Triggers click event on button to close modal
-    const closeModal = (result, destination) => {
-        console.log(destination)
+    const closeModal = (result) => {
         setTimeout(() => {
-            navigate(`${destination}`,
+            navigate(`${location.pathname}`,
                 {
                     state: result,
                 });
@@ -100,7 +99,7 @@ const EditProduct = (props) => {
 
                     setLoading(false);
                     localStorage.setItem('search-results', JSON.stringify(result));
-                    closeModal(result, location.pathname);
+                    closeModal(result);
                 })
                 .catch((error) => {
                     setLoading(false);
