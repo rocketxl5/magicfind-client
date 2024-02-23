@@ -6,12 +6,14 @@ import Success from './Success';
 import Loading from '../../layout/Loading';
 // import { FaBan } from "react-icons/fa6";
 import useAuth from '../../hooks/useAuth';
+import useSearch from '../../hooks/useSearch';
 import { api } from '../../api/resources';
+import { FaChessKing } from 'react-icons/fa6';
 
 const DeleteProduct = (props) => {
     // Props
     const { product, search, handleClick } = props;
-    console.log(product)
+
     // States
     const [response, setResponse] = useState({
         isDeleted: false,
@@ -27,26 +29,28 @@ const DeleteProduct = (props) => {
     const [loading, setLoading] = useState(false);
     // Ref
     const btnRef = useRef(null);
-    // Routing
+    // Hooks
+    const { auth } = useAuth();
+    const { setUpdateCatalog } = useSearch();
     const navigate = useNavigate();
     const location = useLocation();
     const { query } = useParams();
-    // Hook
-    const { auth } = useAuth();
+
 
     // Triggers click event on button to close modal
-    const closeModal = (button, result, destination) => {
+    const closeModal = (result) => {
         setTimeout(() => {
-            navigate(`${destination}`,
+            navigate(`${location.pathname}`,
                 {
                     state: result,
                 });
             localStorage.setItem('search-results', JSON.stringify(result));
-            button.click();
+            setUpdateCatalog(true);
+            btnRef.current?.click();
         }, 1500)
     }
 
-    const deleteHandler = (location) => {
+    const deleteHandler = () => {
         setLoading(true);
         const headers = new Headers();
         headers.append('Content-Type', 'application/json');
@@ -86,7 +90,7 @@ const DeleteProduct = (props) => {
                 }
                 setLoading(false);
                 localStorage.setItem('search-results', JSON.stringify(result));
-                closeModal(btnRef.current, result, location.pathname);
+                closeModal(result);
             })
             .catch((error) => {
                 setLoading(false);
@@ -128,7 +132,7 @@ const DeleteProduct = (props) => {
                                         <footer className="modal-footer bg-red-light">
                                             <div className="btn-container">
                                                 <button id="go-back" className="btn bg-blue color-light" type="button" onClick={handleClick}>Cancel </button>
-                                                < button id="confirm-delete" className="btn bg-red color-light" type="button" onClick={handleClick} onMouseDown={(e) => deleteHandler(location)} >Confirm </button>
+                                                    < button id="confirm-delete" className="btn bg-red color-light" type="button" onClick={handleClick} onMouseDown={deleteHandler} >Confirm </button>
 
                                             </div>
                                         </footer>
