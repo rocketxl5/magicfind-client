@@ -48,8 +48,8 @@ function ShoppingCart() {
                       <Loading />
                     ) : (
                       <p>
-                    {`(${itemsCount} items): `}
-                            <strong>{subTotal}</strong>
+                            {`(${itemsCount} items) : `}
+                            <strong>{`$ ${subTotal}`}</strong>
                         </p>
                     )
                   }
