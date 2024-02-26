@@ -15,11 +15,11 @@ export const CartProvider = ({ children }) => {
       accumulator + currentItem.quantity
       , 0)
     const total = cartItems?.reduce((accumulator, currentItem) =>
-      accumulator + currentItem.quantity * currentItem.selected?.price
+      accumulator + currentItem.quantity * parseFloat(currentItem.selected?.price)
       , 0)
 
     // Update SubTotal state
-    setSubTotal(total)
+    setSubTotal(total.toFixed(2))
     // Update ItemsCount state
     setItemsCount(items);
 

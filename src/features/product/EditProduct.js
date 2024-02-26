@@ -61,10 +61,10 @@ const EditProduct = (props) => {
     useEffect(() => {
         if (isValidForm) {
             setLoading(true);
-
+            const price = parseFloat(values.price);
             const input = {
                 cardName: product.name?.trim(),
-                price: parseFloat(values.price),
+                price: price.toFixed(2),
                 quantity: parseInt(values.quantity),
                 condition: values.condition,
                 language: values.language,
@@ -109,7 +109,6 @@ const EditProduct = (props) => {
     }, [isValidForm])
 
     useEffect(() => {
-        console.log(conditions)
         priceRef.current?.focus();
         setValues({
             price: product['_price'] ? product['_price'] : '',
@@ -137,6 +136,7 @@ const EditProduct = (props) => {
 
     // Change handler
     const handleChange = (e) => {
+        // console.log(object)
         setValues({ ...values, [e.target.name]: e.target.value })
     }
 
@@ -202,7 +202,7 @@ const EditProduct = (props) => {
                                                                     type="number"
                                                                     name="price"
                                                                     value={values.price}
-                                                                    onChange={handleChange}
+                                                                        onChange={handleChange}
                                                                     onFocus={handleFocus}
                                                                     min="0.25"
                                                                     max="10000"

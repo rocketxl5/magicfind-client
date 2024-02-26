@@ -7,7 +7,7 @@ const CartItem = ({ item, setLoading }) => {
   const [total, setTotal] = useState(0);
 
   useEffect(() => {
-    setTotal(item.quantity * item.selected?.price)
+    setTotal(item.quantity * parseFloat(item.selected?.price))
   }, []);
 
   return (
@@ -32,7 +32,7 @@ const CartItem = ({ item, setLoading }) => {
         </Details>
         <DetailsFooter>
           <h4>Total:</h4>
-          <p>{item.quantity && total}</p>
+          <p>{item.quantity && `$ ${total.toFixed(2)}`}</p>
         </DetailsFooter>
       </DetailsContainer>
     </Content>
