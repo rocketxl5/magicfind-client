@@ -24,7 +24,6 @@
 @media screen and (width >= 660px) {
       
     .product-grid {
-        border: 1px solid red;
         width: 100%;
         display: grid;
         gap: 1.5rem;
@@ -50,6 +49,8 @@
 }
 
 @media screen and (width >= 775px) {
+
+    
 
     .page {
         width: 100%;
@@ -95,7 +96,7 @@
     }
 
     .layout {
-        min-height: calc(100vh - calc(var(--header-height) + var(--layout-bottom)));
+        min-height: calc(100vh - calc(var(--header-height)));
     }
 
 
