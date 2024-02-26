@@ -1,14 +1,19 @@
 import React, { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import useCart from '../hooks/useCart';
 import Select from './Select';
 import styled from 'styled-components';
 
 const CartItem = ({ item, setLoading }) => {
   const [total, setTotal] = useState(0);
+  const [price, setPrice] = useState(0);
+  const { subTotal } = useCart();
+
 
   useEffect(() => {
-    setTotal(item.quantity * parseFloat(item.selected?.price))
-  }, []);
+    const parsedPrice = parseFloat(item.selected.price)
+    setTotal(parseInt(item.quantity * parsedPrice))
+    setPrice(parsedPrice)
+  }, [subTotal]);
 
   return (
     <Content>
@@ -18,7 +23,7 @@ const CartItem = ({ item, setLoading }) => {
       <DetailsContainer>
         <DetailsHeader>
           <h3>{item.selected?.name}</h3>
-          <p>$ {item.selected?.price}</p>
+          <p>$ {price.toFixed(2)}</p>
         </DetailsHeader>
         <Details>
           <Info>
