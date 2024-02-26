@@ -1,67 +1,44 @@
-import React, { useContext, useState } from 'react';
+import { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 // import { FiPlusCircle, FiMinusCircle, FiTrash2 } from 'react-icons/fi';
 import CartItem from '../components/CartItem';
 import useAuth from '../hooks/useAuth';
-import { CartContext } from '../contexts/CartContext';
-import { api } from '../api/resources';
+import useCart from '../hooks/useCart';
 import styled from 'styled-components';
 import Loading from '../layout/Loading';
 
 function ShoppingCart() {
   const [loading, setLoading] = useState(false);
+  const { cartItems, subTotal, itemsCount } = useCart();
   const { auth } = useAuth();
-  const { cartItems, subTotal, itemsCount } = useContext(CartContext);
   const navigate = useNavigate();
   const location = useLocation();
 
-  const handleClick = () => {
-    // setLoading(true);
-    // if (!auth) {
-    //   navigate('/login', { state: { from: location } });
-    // } else {
-    //   const input = {
-    //     userID: auth.user.id,
-    //     cartItems: cartItems,
-    //   };
-    //   const options = {
-    //     method: 'PATCH',
-    //     headers: {
-    //       'Content-Type': 'application/json',
-    //       'auth-token': auth.token,
-    //     },
-    //     body: JSON.stringify(input),
-    //   };
 
-    //   fetch(`${api.serverURL}/api/cart/`, options)
-    //     .then((res) => res.json())
-    //     .then((data) => {
-    //       // setLoading(false);
-    //       // setCartItems([]);
-    //       // navigate('/confirmation');
-    //       console.log(data);
-    //     })
-    //     .catch((error) => console.log('error', error));
-    // }
-  };
   return (
     <>
-
-      <main className="main">
+      <main className="main shopping-cart">
       <header className="header">
         <h2 className="title">Shopping Cart</h2>
         </header>
         <Container>
-        {cartItems.length > 0 ? (
+          {
+            cartItems ? (
             <>
           <Items>
             <Header>
               <h3>Items</h3>
               <h3>Price</h3>
             </Header>
-
-            {cartItems &&
-                  cartItems.map((item, i) => <CartItem key={i} item={item} index={i} setLoading={(value) => setLoading(value)} />)}
+                  <div className="cart-items">
+                    {
+                      cartItems.map((item, i) => {
+                        return (
+                          <CartItem key={i} item={item} index={i} setLoading={(value) => setLoading(value)} />
+                        )
+                      })
+                    }
+                  </div>
               </Items>
               <Aside>
                 <>
@@ -72,7 +49,7 @@ function ShoppingCart() {
                     ) : (
                       <p>
                     {`(${itemsCount} items): `}
-                          <strong>{`$ ${subTotal}.00`}</strong>
+                            <strong>{subTotal}</strong>
                         </p>
                     )
                   }

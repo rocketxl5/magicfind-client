@@ -109,6 +109,7 @@ const EditProduct = (props) => {
     }, [isValidForm])
 
     useEffect(() => {
+        console.log(conditions)
         priceRef.current?.focus();
         setValues({
             price: product['_price'] ? product['_price'] : '',
@@ -237,7 +238,14 @@ const EditProduct = (props) => {
                                                                 onFocus={handleFocus}
                                                             >
                                                                 {
-                                                                    conditions.map((condition, i) => <Option key={i} item={condition} />)
+                                                                        conditions.map((condition, i) => {
+                                                                            return (
+                                                                                <Option key={i} value={condition.value}>
+                                                                                    {condition.text}
+                                                                                </Option>
+                                                                            )
+                                                                        }
+                                                                        )
                                                                 }
                                                             </select>
                                                         </div>
@@ -253,8 +261,11 @@ const EditProduct = (props) => {
                                                             >
                                                                 {
                                                                     languages.map((language, i) => {
-
-                                                                        return <Option key={i} item={language} />
+                                                                        return (
+                                                                            <Option key={i} value={language.value}>
+                                                                                {language.text}
+                                                                            </Option>
+                                                                        )
                                                                     })
                                                                 }
                                                             </select>

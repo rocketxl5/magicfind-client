@@ -1,17 +1,32 @@
+import { useState } from 'react';
 import ArchiveHandlers from './components/ArchiveHandlers';
 import CatalogHandlers from './components/CatalogHandlers'
 import CollectionHandlers from './components/CollectionHandlers'
 
-const ProductHandlers = ({ id, product, active, search, setLoading, handleClick }) => {
+const ProductHandlers = ({ id, product, active, search, handleClick }) => {
+    const [loading, setLoading] = useState(false);
 
     const handlers = {
-        archive: <ArchiveHandlers setLoading={setLoading} product={product} />,
-        catalog: <CatalogHandlers setLoading={setLoading} product={product} />,
-        collection: <CollectionHandlers setLoading={setLoading} product={product} handleClick={handleClick} />
+        archive: <ArchiveHandlers
+            loading={loading}
+            setLoading={value => setLoading(value)}
+            product={product}
+        />,
+        catalog: <CatalogHandlers
+            loading={loading}
+            setLoading={value => setLoading(value)}
+            product={product}
+        />,
+        collection: <CollectionHandlers
+            loading={loading}
+            setLoading={value => setLoading(value)}
+            product={product}
+            handleClick={handleClick}
+        />
     }
     return (
         <section id={id} className={active === id ? 'd-block' : 'd-none'}>
-            <div className="product-handlers border-succes">
+            <div className="product-handlers border-red">
                 {
                     handlers[search]
                 }

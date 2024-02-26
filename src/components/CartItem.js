@@ -1,115 +1,43 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
+import Select from './Select';
 import styled from 'styled-components';
-import { CartContext } from '../contexts/CartContext';
-import { api } from '../api/resources';
 
-const CartItem = ({ item, index, setLoading }) => {
-  const [quantitySelected, setQuantitySelected] = useState(0);
-  const [total, setTotal] = useState(0)
-  const { setCartItems } = useContext(CartContext);
-
-  const handleChange = (e) => {
-
-    const value = parseInt(e.target.value);
-    // If value is 0
-    if (!value) {
-      // Delete item
-      const items = JSON.parse(localStorage.getItem('cart'));
-      items.splice(index, 1);
-      localStorage.setItem('cart', JSON.stringify(items));
-      setCartItems(items);
-      return;
-    }
-
-    setQuantitySelected(value);
-    setLoading(true);
-    const options = {
-      method: 'GET',
-      header: { 'Content-Type': 'application/json' },
-    };
-
-    fetch(
-      `${api.serverURL}/api/catalog/${item.selected.userID}/${item.selected._id}/${value}`,
-      options
-    )
-      .then((res) => res.json())
-      .then((data) => {
-        // console.log(data)
-        if (data.isAvailable) {
-          setLoading(false);
-          const items = JSON.parse(localStorage.getItem('cart'));
-          items[index].quantity = value
-          setTotal(value * data.card._price);
-          setCartItems(items);
-        } else {
-          setQuantitySelected(item.quantity);
-        }
-      })
-      .catch((error) => {
-        console.log(error.message)
-      })
-
-  };
-
-  const deleteItem = (e) => {
-    e.stopPropagation();
-    const items = JSON.parse(localStorage.getItem('cart'));
-    items.splice(index, 1);
-    localStorage.setItem('cart', JSON.stringify(items));
-    setCartItems(items);
-  };
+const CartItem = ({ item, setLoading }) => {
+  const [total, setTotal] = useState(0);
 
   useEffect(() => {
-    setQuantitySelected(item.quantity)
-    setTotal(item.quantity * item.selected.price)
+    setTotal(item.quantity * item.selected?.price)
   }, []);
-
 
   return (
     <Content>
       <ImageContainer>
-        <Image src={item.selected.image_uris.small} />
+        <Image src={item.selected?.image_uris?.small} />
       </ImageContainer>
       <DetailsContainer>
         <DetailsHeader>
-          <h3>{item.selected.name}</h3>
-          <p>$ {item.selected.price}.00</p>
+          <h3>{item.selected?.name}</h3>
+          <p>$ {item.selected?.price}</p>
         </DetailsHeader>
         <Details>
           <Info>
-            <p>Seller: {item.selected.userName}</p>
-            <p>Ships from: {item.selected.country}</p>
-            <p>Card Condition: {item.selected.condition.toUpperCase()}</p>
+            <p>Seller: {item.selected?.userName}</p>
+            <p>Ships from: {item.selected?.country}</p>
+            <p>Card Condition: {item.selected?.condition?.toUpperCase()}</p>
           </Info>
-          {item.quantity &&
-          <Selector>
-              <select
-              name="quantity"
-              value={quantitySelected}
-              onChange={(e) => handleChange(e)}
-            >
-
-                {[...Array(item.selected.quantity + 1).keys()].map((key) => {
-                return (
-                  <option key={key} value={`${key}`}>
-                    {key}
-                  </option>
-                )
-              })}
-            </select>
-
-            <button type="button" onClick={deleteItem}>Delete</button>
-          </Selector>
+          {item?.quantity &&
+            <Select className={'cart-item-quantity'} product={item.selected} quantity={item.quantity} setLoading={setLoading} />
           }
         </Details>
         <DetailsFooter>
           <h4>Total:</h4>
-          <p>{item.quantity && `$ ${total}.00`}</p>
+          <p>{item.quantity && total}</p>
         </DetailsFooter>
       </DetailsContainer>
     </Content>
-  );
-};
+  )
+}
 
 const Info = styled.div``;
 const DetailsContainer = styled.div`

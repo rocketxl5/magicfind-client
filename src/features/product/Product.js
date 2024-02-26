@@ -12,7 +12,6 @@ import data from '../../data/PRODUCT.json';
 const Product = forwardRef(function Product(props, ref) {
     const { index, count, card, search, handleModalProductView, handleModalProductState } = props;
     // States
-    const [loading, setLoading] = useState(false);
     const [activeTab, setActiveTab] = useState(null);
 
     const { tabs } = data;
@@ -45,12 +44,12 @@ const Product = forwardRef(function Product(props, ref) {
                 </button> */}
 
                 <>
-                    <ProductImage product={card} loading={loading} handleClick={handleModalProductView} />
+                    <ProductImage product={card} handleClick={handleModalProductView} />
                 </>
                 <>
                     <ProductOwner id={'product-status'} product={card} active={activeTab} search={search} />
                     <ProductDetails id={'product-info'} product={card} active={activeTab} search={search} />
-                    <ProductHandlers id={'product-actions'} product={card} active={activeTab} search={search} setLoading={value => setLoading(value)} handleClick={handleModalProductState} />
+                    <ProductHandlers id={'product-actions'} product={card} active={activeTab} search={search} handleClick={handleModalProductState} />
                 </>
             </div>
         </li>

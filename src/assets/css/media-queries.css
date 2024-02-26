@@ -166,7 +166,8 @@
 
     nav .left-side-nav {
         width: 100%;
-        justify-content: space-between;
+        justify-content: flex-end;
+        gap: 2rem;
     }
 
     .hide-nav {
@@ -271,7 +272,8 @@
         min-width: 18rem;
     }
 
-    nav .left-side-nav {
+    .left-side-nav {
+        grid-gap: 2.5rem;
         gap: 2.5rem;
     }
 
@@ -324,7 +326,7 @@
         display: inline-block;
     } 
 
-    nav .search-btn * {
+    nav .search-btn {
         display: none;
     }
 
@@ -430,6 +432,11 @@
 
       .parameters-btn {
         display: none;
+      }
+
+      .left-side-nav {
+        gap: 3rem;
+        grid-gap: 3rem;
       }
 }
 
