@@ -19,7 +19,6 @@ const SearchResults = () => {
     const location = useLocation();
     const navigate = useNavigate();
     // Refs
-    const cardRef = useRef(null);
     const panelRef = useRef(null);
     const iconRef = useRef(null);
 
@@ -122,7 +121,6 @@ const SearchResults = () => {
                                         search={search}
                                         handleModalProductView={handleModalProductView}
                                         handleModalProductState={handleModalProductState}
-                                        ref={cardRef}
                                     >
                                     </Product>
                                 )

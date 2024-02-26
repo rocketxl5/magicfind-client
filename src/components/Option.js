@@ -1,6 +1,8 @@
-const Option = ({ item }) => {
+const Option = ({ children, value }) => {
     return (
-        <option value={item.value}>{item.text}</option>
+        <option value={value} >
+            {children}
+        </option>
     )
 }
 

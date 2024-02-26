@@ -126,6 +126,10 @@ color: var(--clr-light);
   color: var(--clr-light);
 }
 
+.layout .shopping-cart {
+  color: var(--clr-dark);
+}
+
 .auth-layout {
   padding-top: var(--auth-header-height);
   background-color: var(--clr-light);

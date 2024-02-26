@@ -44,6 +44,7 @@ const DashboardNav = () => {
 
     // Setting collection card names for autocomplete collection search
     useEffect(() => {
+        console.log(auth)
         // If true
         if (updateCollection) {
 
@@ -55,7 +56,7 @@ const DashboardNav = () => {
                 headers: headers,
             }
 
-            fetch(`${api.serverURL}/api/cards/${auth.id}/cardnames`, options)
+            fetch(`${api.serverURL}/api/cards/${auth.user.id}/cardnames`, options)
                 .then(res => res.json())
                 .then((data) => {
                     setCollectionCardNames(data);

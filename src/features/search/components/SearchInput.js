@@ -28,7 +28,7 @@ const SearchInput = forwardRef(function SearchInput(props, ref) {
         displayAutcomplete,
         setDisplayAutocomplete
     } = useContext(SearchContext);
-
+    console.log(cardNames)
     const handleChange = (e) => {
 
         if (e.target.value.length >= 3) {
