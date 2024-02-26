@@ -36,13 +36,13 @@ import Checkout from './pages/Checkout';
 import Inbox from './features/mail/Inbox';
 import Store from './pages/Store';
 import ProductDetails from './features/product/ProductDetails';
-import './assets/css/reset.css';
+import './styles/reset.css';
 import './App.css';
-import './assets/css/utilities.css';
-import './assets/css/style.css';
-import './assets/css/navbar.css';
-import './assets/css/form.css';
-import './assets/css/media-queries.css';
+import './styles/utilities.css';
+import './styles/style.css';
+import './styles/navbar.css';
+import './styles/form.css';
+import './styles/media-queries.css';
 
 const App = () => {
 
