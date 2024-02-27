@@ -7,8 +7,8 @@ import { ScrollContext } from '../contexts/ScrollContext';
 import { HiOutlineAdjustmentsHorizontal } from "react-icons/hi2";
 import { FiPlus } from "react-icons/fi";
 import useModalProductState from '../hooks/useModalProductState';
-import useModalProductView from '../hooks/useModalProductView';
-import useModalSlide from '../hooks/useModalSlide';
+import useModalProductView from '../hooks/useSlideView';
+import useSlideView from '../hooks/useSlideView';
 import useExpandImages from '../hooks/useExpandImages';
 
 const SearchResults = () => {
@@ -51,24 +51,27 @@ const SearchResults = () => {
     //     }
     // }, [searchFeatures]);
 
-    const { expandedImages } = useExpandImages([cards]);
+    console.log([cards])
 
-    const [view, updateSliderView] = useModalSlide(handleSlideView, expandedImages)
+    // const { expandedImages } = useExpandImages([cards]);
 
-    function handleSlideView(e, id) {
-        e.stopPropagation();
-        updateSliderView(e, id)
-    }
 
-    // const [view, updateProductView] = useModalProductView(handleModalProductView);
+
+
+    // function handleSlideView(e, id) {
+    //     e.stopPropagation();
+    //     updateSliderView(e, id)
+    // }
+
+    const [view, updateSlideView] = useSlideView(handleSlideView); 
 
     const [state, updateProductState] = useModalProductState(search, handleModalProductState);
     console.log(cards)
 
-    // function handleModalProductView(e, layout, expandedImage) {
-    //     e.stopPropagation();
-    //     updateProductView(layout, expandedImage)
-    // }
+    function handleSlideView(e, layout, expandedImage) {
+        e.stopPropagation();
+        updateSlideView(layout, expandedImage)
+    }
 
     function handleModalProductState(e, card) {
         e.stopPropagation();

@@ -77,7 +77,7 @@ const Home = () => {
               {
                 main.features.map((feature, index) => {
                   return (
-                    <div key={index} className="feature">
+                    <div key={index + 1} className="feature">
                       <div className="feature-content">
                         <header className="feature-header">
                           <h2 className="feature-title">{feature.title}</h2>

@@ -5,8 +5,8 @@ const useExpandImage = (card) => {
 
     useEffect(() => {
         if (card) {
-            // console.log(card)
-            const image_uris = card?.image_uris || card?.card_faces[0].image_uris;
+            const image_uris = card.image_uris || card.card_faces[0].image_uris;
+            let image;
             // Single faced card
             if (
                 card.layout === 'transform' ||
@@ -16,28 +16,47 @@ const useExpandImage = (card) => {
                 card.layout === 'art_series'
             ) {
                 // Double faced card
-                setExpandedImage(
-                    card.card_faces.map((card_face) => {
-                        return createElement('img', {
-                            // id: 'reduce-card',
+                image = card.card_faces.map((card_face) => {
+                    return (
+                        createElement('img', {
                             className: 'modal-image',
+                            motion: 'turn',
                             src: card_face.image_uris?.normal,
                             alt: `${card.name} image`,
-                        })
-                    })
-                )
-            }
-            else {
-                setExpandedImage(
-                    createElement('img', {
-                        // id: 'reduce-card',
-                        className: 'modal-image',
-                        src: image_uris.normal,
-                        alt: `${card.name} image`,
-                    })
-                );
+                        }))
+                })
 
             }
+            else if (
+                card.layout === 'split' ||
+                card.layout === 'planar') {
+                image = createElement('img', {
+                    className: 'modal-image',
+                    name: 'modal-image',
+                    motion: 'rotate',
+                    src: card.image_uris.normal,
+                    alt: `${card.name} Card Image`,
+                })
+            }
+            else if (card.layout === 'flip') {
+                image = createElement('img', {
+                    className: 'modal-image',
+                    name: 'modal-image',
+                    motion: 'flip',
+                    src: card.image_uris.normal,
+                    alt: `${card.name} Card Image`,
+                })
+            }
+            else {
+                image = createElement('img', {
+                    className: 'modal-image',
+                    name: 'modal-image',
+                    motion: 'static',
+                    src: card.image_uris.normal,
+                    alt: `${card.name} Card Image`,
+                })
+            }
+            setExpandedImage(image);
         }
     }, [card]);
 

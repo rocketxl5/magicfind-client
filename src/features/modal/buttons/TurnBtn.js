@@ -4,13 +4,9 @@ import { useRef } from 'react';
 const TurnBtn = ({ target }) => {
     const btnRef = useRef(null);
     const svgRef = useRef(null);
-    console.log(target)
     const turnCard = () => {
         target.classList.toggle('rotate-y-180');
         btnRef.current.classList.toggle('rotate-y-0');
-        // const path = svgRef.current.childNodes;
-        // path[0].classList.toggle('invert');
-        // path[1].classList.toggle('invert');
     }
     return (
         <button className="action-btn" type="button" onClick={turnCard} ref={btnRef}>
