@@ -51,14 +51,13 @@
 @media screen and (width >= 775px) {
 
     
-
     .page {
-        width: 100%;
+        padding: var(--size-1);
+        min-height: calc(100vh - calc(var(--footer-height) + var(--header-height-wide))); 
     }
 
-    
-    .search-results {
-        
+    .modal-image { 
+        border-radius: 2.2rem;
     }
 
     .search-results > .container {
@@ -96,6 +95,7 @@
     }
 
     .layout {
+        padding-block-start: var(--header-height-wide);
         min-height: calc(100vh - calc(var(--header-height)));
     }
 
@@ -114,11 +114,6 @@
     
     .search-count {
         top: var(--top-desktop);
-    }
-
-    .page {
-        /* background-color: red; */
-        padding: var(--size-1); 
     }
 
     .footer {

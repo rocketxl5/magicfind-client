@@ -17,13 +17,13 @@ function ShoppingCart() {
 
   return (
     <>
-      <main className="main shopping-cart">
+      <main className="page shopping-cart">
       <header className="header">
         <h2 className="title">Shopping Cart</h2>
         </header>
         <Container>
           {
-            cartItems.length ? (
+            cartItems?.length ? (
             <>
           <Items>
             <Header>

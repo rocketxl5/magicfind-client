@@ -6,6 +6,10 @@
     padding-inline: var(--size-2);
 }
 
+.padding-block-1 {
+    padding-block: var(--size-1);
+}
+
 .padding-block-2 {
     padding-block: var(--size-2);
 }
@@ -21,9 +25,15 @@
 .margin-block-start-1 {
     margin-block-start: var(--size-1);
 }
+
+.margin-block-end-1 {
+    margin-block-end: var(--size-1);
+}
+
 .margin-block-start-2 {
     margin-block-start: var(--size-2);
 }
+
 .margin-block-start-3 {
     margin-block-start: var(--size-3);
 }
