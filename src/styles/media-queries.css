@@ -261,7 +261,7 @@
     /* site menu left property is pushed top a 100% (off screen) */
 
     .logo-btn {
-        margin-inline-end: var(--size-1);
+        /* margin-inline-end: var(--size-1); */
     }
     .navbar {
         display: flex;
@@ -270,7 +270,7 @@
 
     .header-logo, 
     .navbar {
-        min-width: 18rem;
+        min-width: 20rem;
     }
 
     .left-side-nav {
@@ -282,7 +282,7 @@
     /* Hamburger container */
     .mobile-nav-label {
         width: 3.3rem;
-        height: 3.1rem;
+        height: 3rem;
     }
     
     .mobile-nav-label span,
@@ -384,6 +384,15 @@
 }
 
 @media screen and (width >= 1200px) {
+
+    .header-container {
+        padding-inline: 4rem;
+    }
+
+    nav .left-side-nav {
+        gap: 3rem;
+        grid-gap: 3rem;
+      }
     
     .home .grid-section {
         grid-template-columns: repeat(4, 1fr);
@@ -433,11 +442,6 @@
 
       .parameters-btn {
         display: none;
-      }
-
-      .left-side-nav {
-        gap: 3rem;
-        grid-gap: 3rem;
       }
 }
 

@@ -84,7 +84,10 @@ const handleSearchBar = (e, isOutsideEvent = false) => {
                     // Hide menu
                     document.querySelector('.menu').style.setProperty('left', '100%');
                     // Show Search button icon
-                    document.querySelector('.search-btn').style.setProperty('display', 'block');
+                    if (browserWidth <= 775) {
+
+                        document.querySelector('.search-btn').style.setProperty('display', 'block');
+                    } 
                 }
             } else {
                 // Hide menu

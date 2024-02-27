@@ -770,9 +770,9 @@ height: 2rem;
   margin: 0 auto;
   border-radius: 17px;
   box-shadow: var(--shadow-3);
-  transition: all 0.3s;
-  -webkit-transition: all 0.3s;
 }
+
+
 
 .modal-image:hover {
   cursor: pointer;
@@ -833,8 +833,8 @@ height: 2rem;
   transform: rotateY(180deg);
   -webkit-transform: rotateY(180deg);
   border: 3px solid var(--clr-light-grey);
-  transition: all 0.4s;
-  -webkit-transition: all 0.4s;
+  transition: all 0.3s;
+  -webkit-transition: all 0.3s;
 }
 
 .action-btn svg {
@@ -849,6 +849,11 @@ height: 2rem;
 .double-faced-card {
   position: relative;
   transform-style: preserve-3d;
+  transition: transform 0.3s;
+  -webkit-transition: transform 0.3s;
+}
+
+.single-faced-card {
   transition: transform 0.3s;
   -webkit-transition: transform 0.3s;
 }
@@ -900,12 +905,12 @@ height: 2rem;
   min-height: calc(clamp(31rem, calc(80vw + 10px), 55rem) * 1.392);
 }
 
-.slide-view {
+.slide-container {
   width: 100%;
   padding-block-start: clamp(4rem, calc(7vh + 15px), 12rem);
 }
 
-.modal-slide-content {
+.slide {
   position: relative;
   perspective: 1500px;
   width: 100%;

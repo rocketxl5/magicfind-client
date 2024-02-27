@@ -23,7 +23,7 @@ function ShoppingCart() {
         </header>
         <Container>
           {
-            cartItems ? (
+            cartItems.length ? (
             <>
           <Items>
             <Header>

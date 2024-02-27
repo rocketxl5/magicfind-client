@@ -5,16 +5,19 @@ import RightBtn from './buttons/RightBtn';
 import SingleFaceCard from './SingleFaceCard';
 import DoubleFaceCard from './DoubleFaceCard'
 import SlideIndicators from './SlideIndicators';
+import Div from '../../components/Div';
 import ACTIONS from '../../data/ACTIONS';
+import { FaImages } from 'react-icons/fa6';
 
-const SlideShow = ({ children, handleClick }) => {
+const SlideShow = ({ slides, handleClick }) => {
     const { INTERVAL, RESET, LIMIT } = ACTIONS.SLIDE;
     const [coordinate, setCoordinate] = useState(RESET);
     const [currentIndicator, setCurrentIndicator] = useState(RESET);
     const trackRef = useRef(null);
+    console.log(slides)
 
     useEffect(() => {
-        LIMIT.MIN = (children.props.children.length - 1) * -INTERVAL;
+        LIMIT.MIN = (slides.length - 1) * -INTERVAL;
     }, [])
 
     useEffect(() => {
@@ -35,35 +38,38 @@ const SlideShow = ({ children, handleClick }) => {
     }
 
     return (
-        <div className="slide-show">
-            <div className="slide-frame">
+        <Div className={"slide-show"}>
+            <Div className={"slide-frame"}>
                 <LeftBtn style={`slide-btn slide-left-btn card-btn`} name={'left-btn'} handleClick={setSlideMotion} />
                 <RightBtn style={`slide-btn slide-right-btn card-btn`} name={'right-btn'} handleClick={setSlideMotion} />
                 <CloseBtn style={`slide-close-btn close-btn card-btn`} name={'close-btn'} handleClick={handleClick} />
-                <SlideIndicators items={children.props.children.length} currentIndicator={currentIndicator} />
-            </div>
-            <div className="slide-track" ref={trackRef}>
+                <SlideIndicators items={slides.length} currentIndicator={currentIndicator} />
+            </Div>
+
+            <Div className={"slide-track"} ref={trackRef}>
                 {
-                    children.props.children.map((children, i) => {
-                        const action = !children.length ? children.props.action : children[0].props.action;
-                        if (['static', 'flip', 'rotate'].includes(action)) {
+                    slides.map((slide, i) => {
+                        console.log(slide)
+                        const motion = !slide.length ? slide.props.motion : slide[0].props.motion;
+                        if (['static', 'flip', 'rotate'].includes(motion)) {
                             return (
-                                <SingleFaceCard key={i} action={action}>
-                                    <>{children}</>
+                                <SingleFaceCard key={i} motion={motion}>
+                                    {slide}
                                 </SingleFaceCard>
                             );
                         }
                         else {
+                            console.log(slide)
                             return (
-                                <DoubleFaceCard key={i} action={action}>
-                                    <>{children}</>
+                                <DoubleFaceCard key={i} motion={motion}>
+                                    {slide}
                                 </DoubleFaceCard>
                             );
                         }
                     })
                 }
-            </div>
-        </div>
+            </Div>
+        </Div>
     )
 }
 

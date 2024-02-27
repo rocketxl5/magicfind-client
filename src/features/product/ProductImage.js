@@ -4,7 +4,7 @@ import Loading from '../../layout/Loading';
 import useExpandImage from '../../hooks/useExpandImage';
 import useAttributes from '../../hooks/useAttributes';
 
-const ProductImage = ({ product, loading, handleClick }) => {
+const ProductImage = ({ product, loading, handleSlideView }) => {
     const [hasLoaded, setHasLoaded] = useState(false);
     const { attributes } = useAttributes(product);
     const { expandedImage } = useExpandImage(product);
@@ -18,6 +18,8 @@ const ProductImage = ({ product, loading, handleClick }) => {
         }
     }, [product])
 
+    // console.log(product.layout)
+
     return (
         // expandedImage &&
         <section className="product-image border-success">
@@ -25,8 +27,8 @@ const ProductImage = ({ product, loading, handleClick }) => {
                 loading ? (
                     <Loading />
                 ) : (
-                        <button className="slide-view-btn" name="slide-view-btn">
-                    <div className="lazy-load border-danger" >
+                        <button className="slide-view-btn" name="slide-view-btn" onClick={(e) => handleSlideView(e, product.layout, expandedImage)}>
+                            <div className="lazy-load border-danger" >
                         {
                             !hasLoaded ? (
                                 <img id={id} className={style} src={placeholder} alt={alt} />
@@ -35,8 +37,8 @@ const ProductImage = ({ product, loading, handleClick }) => {
                                 <img id={id} className={style} src={src} alt={alt} loading="lazy" />
                             )
                         }
-                                <span className="card-icon-container expand-icon" type="button" onClick={(e) => handleClick(e, product.layout, expandedImage)}>
-                            <FaExpand />
+                                <span className="card-icon-container expand-icon" type="button" >
+                                    <FaExpand />
                                 </span>
                             </div>
                         </button>

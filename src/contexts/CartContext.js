@@ -19,7 +19,7 @@ export const CartProvider = ({ children }) => {
       , 0)
 
     // Update SubTotal state
-    setSubTotal(total.toFixed(2))
+    setSubTotal(total?.toFixed(2))
     // Update ItemsCount state
     setItemsCount(items);
 
