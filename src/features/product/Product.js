@@ -10,7 +10,7 @@ import ProductOwner from './ProductOwner';
 import data from '../../data/PRODUCT.json';
 
 const Product = forwardRef(function Product(props, ref) {
-    const { index, count, card, search, handleModalProductView, handleModalProductState } = props;
+    const { index, count, card, search, handleSliderView, handleModalProductState } = props;
     // States
     const [activeTab, setActiveTab] = useState(null);
 
@@ -44,7 +44,7 @@ const Product = forwardRef(function Product(props, ref) {
                 </button> */}
 
                 <>
-                    <ProductImage product={card} handleClick={handleModalProductView} />
+                    <ProductImage product={card} handleClick={handleSliderView} />
                 </>
                 <>
                     <ProductOwner id={'product-status'} product={card} active={activeTab} search={search} />

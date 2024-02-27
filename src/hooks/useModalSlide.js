@@ -1,10 +1,12 @@
 import { useReducer } from 'react';
+import SlideView from '../features/modal/SlideView';
 import SlideShow from '../features/modal/SlideShow';
 // import SingleShow from '../components/views/modal/SingleShow';
 
 const useModalSlide = (callback, expandedImages) => {
     const ACTIONS = {
-        OPEN: 'open',
+        SLIDE_SHOW: 'slide-show',
+        SLIDE_VIEW: 'slide-view',
         CLOSE: 'close',
     }
 
@@ -15,7 +17,7 @@ const useModalSlide = (callback, expandedImages) => {
 
     const reducer = (view, action) => {
         switch (action.type) {
-            case ACTIONS.OPEN:
+            case ACTIONS.SLIDE_SHOW:
                 return {
                     open: true,
                     component:
@@ -26,6 +28,18 @@ const useModalSlide = (callback, expandedImages) => {
                                 }
                             </>
                         </SlideShow>
+                }
+            case ACTIONS.SLIDE_VIEW:
+                return {
+                    open: true,
+                    component:
+                        <SlideView handleClick={callback} >
+                            <>
+                                {
+                                    action.payload.images
+                                }
+                            </>
+                        </SlideView>
                 }
             case ACTIONS.CLOSE:
                 return INIT;
@@ -38,11 +52,21 @@ const useModalSlide = (callback, expandedImages) => {
 
     const updateSliderView = (e, id) => {
         switch (e.target.name) {
-            case 'modal-image':
+            case 'slide-show-btn':
+                console.log(e.target)
                 dispatch({
-                    type: 'open',
+                    type: 'slide-show',
                     payload: {
                         images: expandedImages[parseInt(id)],
+                    }
+                })
+                break;
+            case 'slide-view-btn':
+                console.log(e.target)
+                dispatch({
+                    type: 'slide-view',
+                    payload: {
+                        Image: expandedImages[parseInt(id)],
                     }
                 })
                 break;

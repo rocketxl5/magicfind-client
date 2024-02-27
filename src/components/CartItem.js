@@ -3,17 +3,23 @@ import useCart from '../hooks/useCart';
 import Select from './Select';
 import styled from 'styled-components';
 
-const CartItem = ({ item, setLoading }) => {
+const CartItem = ({ index, item, setLoading }) => {
   const [total, setTotal] = useState(0);
   const [price, setPrice] = useState(0);
-  const { subTotal } = useCart();
+  const { subTotal, cartItems, setCartItems } = useCart();
 
 
   useEffect(() => {
     const parsedPrice = parseFloat(item.selected.price)
-    setTotal(parseInt(item.quantity * parsedPrice))
+    setTotal(parseFloat(item.quantity * parsedPrice))
     setPrice(parsedPrice)
   }, [subTotal]);
+
+  const handleClick = () => {
+    const items = [...cartItems]
+    items.splice(index, 1);
+    setCartItems(items);
+  };
 
   return (
     <Content>
@@ -35,6 +41,7 @@ const CartItem = ({ item, setLoading }) => {
             <Select className={'cart-item-quantity'} product={item.selected} quantity={item.quantity} setLoading={setLoading} />
           }
         </Details>
+        <button type="button" onClick={handleClick}>Delete</button>
         <DetailsFooter>
           <h4>Total:</h4>
           <p>{item.quantity && `$ ${total.toFixed(2)}`}</p>
