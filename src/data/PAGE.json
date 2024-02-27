@@ -1,0 +1,12 @@
+{
+  "searc-results": {
+    "classList": "search-results",
+    "header": {
+      "classList": "flex space-between align-center col-12 padding-block-1 margin-block-end-1"
+    },
+    "title": {
+      "classList": "title",
+      "text": "Search Result"
+    }
+  }
+}
