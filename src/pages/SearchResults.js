@@ -9,6 +9,7 @@ import { FiPlus } from "react-icons/fi";
 import useModalProductState from '../hooks/useModalProductState';
 import useModalProductView from '../hooks/useModalProductView';
 import useModalSlide from '../hooks/useModalSlide';
+import useExpandImages from '../hooks/useExpandImages';
 
 const SearchResults = () => {
     // States
@@ -50,15 +51,24 @@ const SearchResults = () => {
     //     }
     // }, [searchFeatures]);
 
-    const [view, updateProductView] = useModalProductView(handleModalProductView);
+    const { expandedImages } = useExpandImages([cards]);
+
+    const [view, updateSliderView] = useModalSlide(handleSlideView, expandedImages)
+
+    function handleSlideView(e, id) {
+        e.stopPropagation();
+        updateSliderView(e, id)
+    }
+
+    // const [view, updateProductView] = useModalProductView(handleModalProductView);
 
     const [state, updateProductState] = useModalProductState(search, handleModalProductState);
+    console.log(cards)
 
-
-    function handleModalProductView(e, layout, expandedImage) {
-        e.stopPropagation();
-        updateProductView(layout, expandedImage)
-    }
+    // function handleModalProductView(e, layout, expandedImage) {
+    //     e.stopPropagation();
+    //     updateProductView(layout, expandedImage)
+    // }
 
     function handleModalProductState(e, card) {
         e.stopPropagation();
@@ -119,7 +129,7 @@ const SearchResults = () => {
                                         count={cards.length}
                                         card={card}
                                         search={search}
-                                        handleModalProductView={handleModalProductView}
+                                        handleSlideView={handleSlideView}
                                         handleModalProductState={handleModalProductState}
                                     >
                                     </Product>

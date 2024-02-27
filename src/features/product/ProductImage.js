@@ -25,7 +25,7 @@ const ProductImage = ({ product, loading, handleClick }) => {
                 loading ? (
                     <Loading />
                 ) : (
-
+                        <button className="slide-view-btn" name="slide-view-btn">
                     <div className="lazy-load border-danger" >
                         {
                             !hasLoaded ? (
@@ -35,10 +35,11 @@ const ProductImage = ({ product, loading, handleClick }) => {
                                 <img id={id} className={style} src={src} alt={alt} loading="lazy" />
                             )
                         }
-                        <button className="card-icon-container expand-btn" type="button" onClick={(e) => handleClick(e, product.layout, expandedImage)}>
+                                <span className="card-icon-container expand-icon" type="button" onClick={(e) => handleClick(e, product.layout, expandedImage)}>
                             <FaExpand />
+                                </span>
+                            </div>
                         </button>
-                    </div>
                 )
             }
         </section>

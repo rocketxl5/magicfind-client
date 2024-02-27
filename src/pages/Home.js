@@ -35,9 +35,9 @@ const Home = () => {
 
   const { expandedImages } = useExpandImages(cardCollections);
 
-  const [view, updateSliderView] = useModalSlide(handleSliderView, expandedImages)
+  const [view, updateSliderView] = useModalSlide(handleSlideView, expandedImages)
 
-  function handleSliderView(e, id) {
+  function handleSlideView(e, id) {
     e.stopPropagation();
     updateSliderView(e, id)
   }
@@ -125,7 +125,7 @@ const Home = () => {
                 mediaFeatures &&
                 mediaFeatures.map((feature, i) => {
                   return (
-                    <MediaElement key={i + 1} id={i} handleSliderView={handleSliderView}>
+                    <MediaElement key={i + 1} id={i} handleSlideView={handleSlideView}>
                       {feature.cover}
                       {feature.title}
                     </MediaElement>
