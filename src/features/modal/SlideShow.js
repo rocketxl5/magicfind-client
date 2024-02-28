@@ -38,15 +38,15 @@ const SlideShow = ({ slides, handleClick }) => {
     }
 
     return (
-        <Div className={"slide-show"}>
-            <Div className={"slide-frame"}>
-                <LeftBtn style={`slide-btn slide-left-btn card-btn`} name={'left-btn'} handleClick={setSlideMotion} />
-                <RightBtn style={`slide-btn slide-right-btn card-btn`} name={'right-btn'} handleClick={setSlideMotion} />
-                <CloseBtn style={`slide-close-btn close-btn card-btn`} name={'close-btn'} handleClick={handleClick} />
+        <Div classList={"slide-show"}>
+            <Div classList={"slide-frame"}>
+                <LeftBtn classList={`slide-btn slide-left-btn card-btn`} name={'left-btn'} handleClick={setSlideMotion} />
+                <RightBtn classList={`slide-btn slide-right-btn card-btn`} name={'right-btn'} handleClick={setSlideMotion} />
+                <CloseBtn classList={`slide-close-btn close-btn card-btn`} name={'close-btn'} handleClick={handleClick} />
                 <SlideIndicators items={slides.length} currentIndicator={currentIndicator} />
             </Div>
 
-            <Div className={"slide-track"} ref={trackRef}>
+            <Div classList={"slide-track"} ref={trackRef}>
                 {
                     slides.map((slide, i) => {
                         console.log(slide)
@@ -59,7 +59,6 @@ const SlideShow = ({ slides, handleClick }) => {
                             );
                         }
                         else {
-                            console.log(slide)
                             return (
                                 <DoubleFaceCard key={i} motion={motion}>
                                     {slide}

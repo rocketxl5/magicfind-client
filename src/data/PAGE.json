@@ -1,12 +1,32 @@
 {
-  "searc-results": {
-    "classList": "search-results",
+  "search-results": {
+    "classList": "page search-results",
     "header": {
-      "classList": "flex space-between align-center col-12 padding-block-1 margin-block-end-1"
+      "classList": "page-header flex space-between align-center col-12 padding-block-1 margin-block-end-1"
     },
     "title": {
-      "classList": "title",
-      "text": "Search Result"
+      "classList": "page-title",
+      "text": "Search Results"
+    }
+  },
+  "shopping-cart": {
+    "classList": "page shopping-cart",
+    "header": {
+      "classList": "page-header flex space-between align-center col-12 padding-block-1 margin-block-end-1"
+    },
+    "title": {
+      "classList": "page-title",
+      "text": "Shopping Cart"
+    }
+  },
+  "collection": {
+    "classList": "page collection",
+    "header": {
+      "classList": "page-header flex space-between align-center col-12 padding-block-1 margin-block-end-1"
+    },
+    "title": {
+      "classList": "page-title",
+      "text": "Collection Page"
     }
   }
 }

@@ -6,13 +6,12 @@ import React, {
 } from 'react';
 import { useNavigate } from 'react-router-dom';
 import SearchInput from './components/SearchInput'
+import Form from '../../components/Form';
 import { SearchContext } from '../../contexts/SearchContext';
 import useAuth from '../../hooks/useAuth';
 import { api } from '../../api/resources';
 import hideSearchBar from '../../assets/utilities/hideSearchBar';
 import setQueryString from '../../assets/utilities/setQueryString';
-
-
 
 const Catalog = () => {
     // States
@@ -60,13 +59,10 @@ const Catalog = () => {
 
         catalogInputRef.current?.blur();
 
-        const headers = new Headers();
-        headers.append('Content-Type', 'application/json');
-        isAuth && headers.append('auth-token', auth.token);
-        const options = {
-            method: 'GET',
-            headers: headers,
-        };
+        const headers = {
+            'Content-Type': 'application/json',
+            'auth-token': isAuth && auth.token
+        }
 
         let query;
 
@@ -89,7 +85,7 @@ const Catalog = () => {
             `${api.serverURL}/api/cards/catalog/${encodeURIComponent(query)}/${auth.user.id}` :
             `${api.serverURL}/api/cards/catalog/${encodeURIComponent(query)}`;
 
-        fetch(queryString, options)
+        fetch(queryString, headers)
             .then((res) => {
                 if (res.status === 200) {
                     return res.json()
@@ -130,9 +126,9 @@ const Catalog = () => {
 
     return (
         <div id="catalog-container">
-            <form id="catalog-form" className="search-form" onSubmit={searchCatalogCard} >
+            <Form id={'catalog-form'} classList={'search-form'} handleSubmit={searchCatalogCard}>
                 <SearchInput id={'catalog'} className={'catalog-field'} placeholder={'Search Magic Find'} searchCard={searchCatalogCard} isActive={isActive} ref={catalogInputRef} />
-            </form>
+            </Form>
         </div>
     );
 };

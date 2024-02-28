@@ -231,11 +231,6 @@ border-radius: var(--radius-1);
 .btn-api {
   width: var(--card-width) !important;
 }
-.title {
-  text-align: center;
-  font-size: var(--fs-250);
-  font-weight: 300;
-}
 
 .article {
 flex-basis: 100%;
@@ -1242,32 +1237,25 @@ text-align: center;
   border-bottom: 1px solid var(--clr-dark);
 }
 
-.page-header .title {
-  padding-block: 1rem;
+.page-title {
+  text-align: center;
+  font-size: var(--fs-250);
+  font-weight: 300;
+}
+
+.results {
+  font-size: var(--fs-150);
 }
 
 .search-results {   
   position: relative;
 }
 
-.search-results-header {
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-  padding-block: 1rem;
-}
-
-.search-results-header .title {
-  font-size: var(--fs-175);
-}
-
 .search-results .container {
-
   padding-inline: 1rem;
 }
 
-.products {
-}
+
 
 .product {
   margin-block-end: 1.5rem;
@@ -1280,17 +1268,13 @@ text-align: center;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding-block-end: 0.25rem;
+  padding-block-end: 0.5rem;
   margin-block-end: 1rem; 
-  border-bottom: 1px solid var(--clr-light); 
+  /* border-bottom: 1px solid rgba(0, 0, 0, 0.6);  */
 }
 
-.auth-layout .product-header {
-  border-bottom-color: var(--clr-dark);
-}
-
-.product-header h3 {
-  font-size: clamp(13px, calc(1vw + 5px), var(--fs-200));
+.product-title {
+  font-size: clamp(var(--fs-150), calc(1vw + 5px), var(--fs-200));
   font-weight: 500;
 }
 

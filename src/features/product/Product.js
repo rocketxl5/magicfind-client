@@ -1,9 +1,10 @@
 import { useState, forwardRef } from 'react';
 import { FiPlus } from "react-icons/fi";
-import Result from '../search/components/Result';
+import Count from '../search/components/Count';
 import Header from '../../components/Header';
 import Button from '../../components/Button'
 import ProductImage from './ProductImage';
+import Title from '../../components/Title';
 import ProductDetails from './ProductDetails';
 import ProductHandlers from './ProductHandlers';
 import ProductOwner from './ProductOwner';
@@ -14,7 +15,7 @@ const Product = forwardRef(function Product(props, ref) {
     // States
     const [activeTab, setActiveTab] = useState(null);
 
-    const { tabs } = data;
+    const { tabs, header, title } = data['singles'];
 
     const handleClick = (e) => {
         // console.log(e.target.disabled)
@@ -23,10 +24,11 @@ const Product = forwardRef(function Product(props, ref) {
     // console.log(search)
     return (
         <li className="product" ref={ref}>
-            <Header title={card.name} classList={'product-header'} >
-                <Result count={count} result={index + 1} />
+            <Header classList={header.classList} >
+                <Title classList={title.classList} title={card.name} />
+                <Count count={count} unit={index + 1} />
             </Header>
-            <div className="product-nav">
+            {/* <div className="product-nav">
                 <div className="contextual-tabs">
                     {
                         tabs.map((tab, i) => {
@@ -36,7 +38,7 @@ const Product = forwardRef(function Product(props, ref) {
                         })
                     }
                 </div>
-            </div>
+            </div> */}
             <div className="product-wrapper" >
 
                 {/* <button type="button" onClick={() => detailsRef.current.classList.toggle('show-details')}>
@@ -44,12 +46,12 @@ const Product = forwardRef(function Product(props, ref) {
                 </button> */}
 
                 <>
-                    <ProductImage product={card} handleSlideView={handleSlideView} />
+                    {/* <ProductImage product={card} handleSlideView={handleSlideView} /> */}
                 </>
                 <>
-                    <ProductOwner id={'product-status'} product={card} active={activeTab} search={search} />
-                    <ProductDetails id={'product-info'} product={card} active={activeTab} search={search} />
-                    <ProductHandlers id={'product-actions'} product={card} active={activeTab} search={search} handleClick={handleModalProductState} />
+                    {/* <ProductDetails id={'product-info'} product={card} search={search} /> */}
+                    {/* <ProductOwner id={'product-status'} product={card}  search={search} /> */}
+                    <ProductHandlers id={'product-actions'} product={card} search={search} handleClick={handleModalProductState} />
                 </>
             </div>
         </li>

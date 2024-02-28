@@ -1,18 +1,18 @@
 import { Link } from 'react-router-dom';
-import styled from 'styled-components';
 import useAuth from '../../../hooks/useAuth';
 import data from '../../../data/SEARCH.json';
 
 const CatalogDetails = ({ product }) => {
     const { isAuth } = useAuth();
     const { conditions, finishes, languages } = data.product;
-    const { set_name, released_at, rarity, type_line, name, language, userName, comment, country, condition, card_faces, oversized, avatar, rating, joined } = product;
+    const { set_name, released_at, price, type_line, name, language, userName, comment, country, condition, card_faces, oversized, avatar, rating, joined } = product;
+    console.log(product)
     return (
         <>
             <div className="catalog-details">
                 <table className="table">
                     <tbody>
-                        <tr>
+                        {/* <tr>
                             <th>Card Information</th>
                         </tr>
                         <tr>
@@ -22,11 +22,11 @@ const CatalogDetails = ({ product }) => {
                         <tr>
                             <td>Edition:</td>
                             <td>{set_name}</td>
-                        </tr>
-                        <tr>
+                        </tr> */}
+                        {/* <tr>
                             <td>Year:</td>
                             <td>{`${released_at?.split('-')[0]}`}</td>
-                        </tr>
+                        </tr> */}
                         {/* <tr>
                         <td>Rarity:</td>
                         <td>{rarity.charAt(0).toUpperCase()}{rarity.substring(1)}</td>
@@ -41,6 +41,10 @@ const CatalogDetails = ({ product }) => {
                     </tr> */}
 
                         <tr>
+                            <td>Edition:</td>
+                            <td>{set_name}</td>
+                        </tr>
+                        <tr>
                             <td>Condition:</td>
                             <td>{conditions[condition]}</td>
                         </tr>
@@ -48,12 +52,13 @@ const CatalogDetails = ({ product }) => {
                             <td>Language:</td>
                             <td>{languages[language]}</td>
                         </tr>
-                    </tbody>
-                </table>
-                <table className="table">
-                    <tbody>
                         <tr>
-                            <th>Seller</th>
+                            <td>Price:</td>
+                            <td>{price}</td>
+                        </tr>
+                        <tr>
+                            <td>Language:</td>
+                            <td>{languages[language]}</td>
                         </tr>
                         <tr>
                             <td>Seller:</td>
@@ -61,15 +66,11 @@ const CatalogDetails = ({ product }) => {
                         </tr>
                         <tr>
                             <td>Avatar:</td>
-                            <td>{`${released_at?.split('-')[0]}`}</td>
+                            <td>{avatar}</td>
                         </tr>
                         <tr>
                             <td>Rating:</td>
                             <td>{rating}</td>
-                        </tr>
-                        <tr>
-                            <td>Joined:</td>
-                            <td>{joined}</td>
                         </tr>
                     </tbody>
                 </table>
@@ -108,17 +109,5 @@ const CatalogDetails = ({ product }) => {
         // </div>
     )
 }
-
-const Contact = styled(Link)`
-    display: block;
-    text-align: center;
-    margin-inline-end: 1rem;
-    padding-block: 0.5em;
-    margin-top: 0.5em;
-    font-size: var(--fs-125);
-    color: var(--clr-primary);
-    border: 1px solid #e4e4e4;
-    border-radius: 5px;
-    `
 
 export default CatalogDetails

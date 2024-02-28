@@ -6,7 +6,7 @@ import Modal from '../features/modal/Modal.js';
 import { GoShieldCheck } from "react-icons/go";
 import data from '../data/HOME';
 import useExpandImages from '../hooks/useExpandImages';
-import useModalSlide from '../hooks/useModalSlide.js';
+import useSlideShow from '../hooks/useSlideShow.js';
 import { api } from '../api/resources';
 
 const Home = () => {
@@ -35,11 +35,11 @@ const Home = () => {
 
   const { expandedImages } = useExpandImages(cardCollections);
 
-  const [view, updateSliderView] = useModalSlide(handleSlideView, expandedImages)
+  const [view, updateSlideShow] = useSlideShow(handleSlideShow, expandedImages)
 
-  function handleSlideView(e, id) {
+  function handleSlideShow(e, id) {
     e.stopPropagation();
-    updateSliderView(e, id)
+    updateSlideShow(e.target.name, id)
   }
 
   useEffect(() => {
@@ -125,7 +125,7 @@ const Home = () => {
                 mediaFeatures &&
                 mediaFeatures.map((feature, i) => {
                   return (
-                    <MediaElement key={i + 1} id={i} handleSlideView={handleSlideView}>
+                    <MediaElement key={i + 1} id={i} handleSlideShow={handleSlideShow}>
                       {feature.cover}
                       {feature.title}
                     </MediaElement>

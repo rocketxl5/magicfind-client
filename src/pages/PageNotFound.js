@@ -4,18 +4,6 @@ import Button from '../components/Button';
 const PageNotFound = () => {
   const navigate = useNavigate();
 
-  const attributes = {
-    id: '',
-    style: 'btn color-light bg-blue',
-    type: 'button',
-    value: 'Back to Homepage',
-    status: false
-  }
-
-  const goBack = (e) => {
-    console.log(e.target)
-    navigate('/');
-  }
   return (
     <div className="content">
       <header className="header">
@@ -24,7 +12,7 @@ const PageNotFound = () => {
       </header>
       <main className="main not-found">
         <p>The page you requested does not exist</p>
-        <Button attributes={attributes} handleClick={goBack} />
+        <Button id={''} classList={'btn color-light bg-blue'} type={'button'} text={'Back to Homepage'} handleClick={() => navigate('/')} status={false} />
       </main>
     </div>
   );

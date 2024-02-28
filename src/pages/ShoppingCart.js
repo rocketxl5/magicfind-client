@@ -2,34 +2,35 @@ import { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 // import { FiPlusCircle, FiMinusCircle, FiTrash2 } from 'react-icons/fi';
 import CartItem from '../components/CartItem';
+import Page from '../components/Page';
+import Results from '../features/search/components/Results';
 import useAuth from '../hooks/useAuth';
 import useCart from '../hooks/useCart';
 import styled from 'styled-components';
 import Loading from '../layout/Loading';
 
 function ShoppingCart() {
+  // States
   const [loading, setLoading] = useState(false);
+  // Hooks
   const { cartItems, subTotal, itemsCount } = useCart();
   const { auth } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
+  // Data 
 
 
   return (
-    <>
-      <main className="page shopping-cart">
-      <header className="header">
-        <h2 className="title">Shopping Cart</h2>
-        </header>
-        <Container>
+    <Page name={'shopping-cart'} component={<Results items={cartItems.length} />} >
+      <Container>
           {
             cartItems?.length ? (
             <>
           <Items>
-            <Header>
+                <Head>
               <h3>Items</h3>
               <h3>Price</h3>
-            </Header>
+                </Head>
                   <div className="cart-items">
                     {
                       cartItems.map((item, i) => {
@@ -70,12 +71,11 @@ function ShoppingCart() {
             <div>Your Cart is Empty</div>
           )}
       </Container>
-      </main>
-    </>
+    </Page>
   );
 }
 
-const Header = styled.header`
+const Head = styled.header`
   display: flex;
   justify-content: space-between;
   width: 100%;

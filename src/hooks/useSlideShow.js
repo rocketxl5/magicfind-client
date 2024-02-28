@@ -2,7 +2,7 @@ import { useReducer } from 'react';
 import SlideShow from '../features/modal/SlideShow';
 // import SingleShow from '../components/views/modal/SingleShow';
 
-const useModalSlide = (callback, expandedImages) => {
+const useSlideShow = (callback, expandedImages) => {
     const ACTIONS = {
         SLIDE_SHOW: 'slide-show',
         CLOSE: 'close',
@@ -30,8 +30,8 @@ const useModalSlide = (callback, expandedImages) => {
 
     const [view, dispatch] = useReducer(reducer, INIT)
 
-    const updateSliderView = (e, id) => {
-        switch (e.target.name) {
+    const updateSlideShow = (name, id) => {
+        switch (name) {
             case 'slide-show-btn':
                 dispatch({
                     type: 'slide-show',
@@ -52,7 +52,7 @@ const useModalSlide = (callback, expandedImages) => {
         }
     }
 
-    return [view, updateSliderView]
+    return [view, updateSlideShow]
 }
 
-export default useModalSlide
+export default useSlideShow

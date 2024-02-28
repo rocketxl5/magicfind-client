@@ -1,11 +1,19 @@
 import React from 'react';
-import Main from './Main';
+import Header from './Header';
+import Title from './Title';
+import Div from './Div';
+import data from '../data/PAGE.json';
 
-const Page = ({ children, classList }) => {
+const Page = ({ children, name, component }) => {
+    const { classList, header, title } = data[name];
     return (
-        <Main className={`page ${classList}`}>
+        <Div classList={classList}>
+            <Header {...header}>
+                <Title {...title} />
+                {component}
+            </Header>
             {children}
-        </Main>
+        </Div>
     )
 }
 

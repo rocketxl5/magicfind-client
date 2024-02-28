@@ -6,9 +6,8 @@ import { HiOutlineAdjustmentsHorizontal } from "react-icons/hi2";
 import useModalProductState from '../hooks/useModalProductState';
 import useSlideView from '../hooks/useSlideView';
 import Page from '../components/Page';
-import Header from '../components/Header';
+import Results from '../features/search/components/Results';
 import SearchParameters from '../features/search/components/SearchParameters';
-import Title from '../components/Title';
 import data from '../data/PAGE.json';
 
 const SearchResults = () => {
@@ -21,19 +20,7 @@ const SearchResults = () => {
     const { cards, search } = location.state?.result || JSON.parse(localStorage.getItem('search-results'));
 
     // Data
-    const { classList, header, title } = data['searc-results'];
-
-    const Results = () => {
-        return (
-            <span className="space-1">
-                {
-                    cards ?
-                        `${cards.length} ${cards.length > 1 ? 'Results' : 'Result'}` :
-                        'No results'
-                }
-            </span>
-        )
-    }
+    const { classList, header, title } = data['search-results'];
 
     useEffect(() => {
         // If cards is empty
@@ -70,11 +57,7 @@ const SearchResults = () => {
                     {state.component}
                 </Modal>
             }
-            <Page classList={classList}>
-                <Header classList={header.classList}>
-                    <Title classList={title.classList} title={title.text} />
-                    <Results />
-                </Header>
+            <Page name={'search-results'} component={<Results items={cards.length} />}>
                 <SearchParameters setSearchFeatures={(value) => setSearchFeatures(value)} searchFeatures={searchFeatures} /> 
                     <ul className="products">
                         {
@@ -94,10 +77,8 @@ const SearchResults = () => {
                                 )
                             })
                         }
-                    </ul>
-
+                </ul>
             </Page>
-
         </>
     )
 }
