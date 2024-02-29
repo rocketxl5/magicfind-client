@@ -1,3 +1,5 @@
+import Button from '../../../components/Button';
+
 const CollectionHandlers = ({ product, handleClick }) => {
 
     return (

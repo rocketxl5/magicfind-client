@@ -5,7 +5,7 @@ import RightBtn from './buttons/RightBtn';
 import SingleFaceCard from './SingleFaceCard';
 import DoubleFaceCard from './DoubleFaceCard'
 import SlideIndicators from './SlideIndicators';
-import Div from '../../components/Div';
+import Container from '../../components/Container';
 import ACTIONS from '../../data/ACTIONS';
 import { FaImages } from 'react-icons/fa6';
 
@@ -38,15 +38,15 @@ const SlideShow = ({ slides, handleClick }) => {
     }
 
     return (
-        <Div classList={"slide-show"}>
-            <Div classList={"slide-frame"}>
+        <Container classList={"slide-show"}>
+            <Container classList={"slide-frame"}>
                 <LeftBtn classList={`slide-btn slide-left-btn card-btn`} name={'left-btn'} handleClick={setSlideMotion} />
                 <RightBtn classList={`slide-btn slide-right-btn card-btn`} name={'right-btn'} handleClick={setSlideMotion} />
                 <CloseBtn classList={`slide-close-btn close-btn card-btn`} name={'close-btn'} handleClick={handleClick} />
                 <SlideIndicators items={slides.length} currentIndicator={currentIndicator} />
-            </Div>
+            </Container>
 
-            <Div classList={"slide-track"} ref={trackRef}>
+            <Container classList={"slide-track"} ref={trackRef}>
                 {
                     slides.map((slide, i) => {
                         console.log(slide)
@@ -67,8 +67,8 @@ const SlideShow = ({ slides, handleClick }) => {
                         }
                     })
                 }
-            </Div>
-        </Div>
+            </Container>
+        </Container>
     )
 }
 

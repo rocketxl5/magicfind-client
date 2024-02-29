@@ -7,7 +7,7 @@ import styled from 'styled-components';
 const ShoppingCartBtn = () => {
   const { itemsCount } = useContext(CartContext);
   return (
-    <Div className="nav-btn">
+    <Container className="nav-btn">
       <Link to='/shopping-cart' className="cart-btn">
         {itemsCount > 0 && (
           <CountContainer>
@@ -20,11 +20,11 @@ const ShoppingCartBtn = () => {
         )}
         <FiShoppingCart className="nav-icon" size={27} title="To Shopping Cart" />
       </Link>
-    </Div>
+    </Container>
   )
 }
 
-const Div = styled.div`
+const Container = styled.div`
   position: relative;
   display: flex;
 `;

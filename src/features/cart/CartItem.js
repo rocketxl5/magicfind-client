@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import useCart from '../hooks/useCart';
-import Select from './Select';
+import useCart from '../../hooks/useCart';
+import Item from '../../components/Item';
+import Select from '../../components/Select';
 import styled from 'styled-components';
 
 const CartItem = ({ index, item, setLoading }) => {
@@ -22,7 +23,7 @@ const CartItem = ({ index, item, setLoading }) => {
   };
 
   return (
-    <Content>
+    <Item classList='cart-item'>
       <ImageContainer>
         <Image src={item.selected?.image_uris?.small} />
       </ImageContainer>
@@ -47,7 +48,7 @@ const CartItem = ({ index, item, setLoading }) => {
           <p>{item.quantity && `$ ${total.toFixed(2)}`}</p>
         </DetailsFooter>
       </DetailsContainer>
-    </Content>
+    </Item>
   )
 }
 

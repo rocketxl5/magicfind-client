@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import MediaElement from '../components/MediaElement';
+import MediaElement from '../features/media/MediaElement.js';
 import Modal from '../features/modal/Modal.js';
 import { GoShieldCheck } from "react-icons/go";
 import data from '../data/HOME';

@@ -1,6 +1,7 @@
 import { forwardRef } from 'react'
 
-const Div = forwardRef(function Div({ children, classList }, ref) {
+const Container = forwardRef(function Container({ children, classList }, ref) {
+    console.log(classList)
     return (
         <div className={classList} ref={ref}>
             {children}
@@ -8,4 +9,4 @@ const Div = forwardRef(function Div({ children, classList }, ref) {
     )
 })
 
-export default Div
+export default Container

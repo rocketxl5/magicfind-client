@@ -12,5 +12,4 @@ const MediaElement = ({ children, handleSlideShow, id }) => {
     )
 }
 
-
 export default MediaElement

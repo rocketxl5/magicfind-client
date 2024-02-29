@@ -5,7 +5,8 @@ const Button = (props) => {
     return (
         <button
             id={id ? id : ''}
-            className={active === id ? 'active' : classList}
+            // className={active === id ? 'active' : classList}
+            className={classList}
             type={type ? type : 'button'}
             onClick={handleClick}
             disabled={status}
