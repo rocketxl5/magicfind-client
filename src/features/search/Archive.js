@@ -1,13 +1,14 @@
 import React, {
     useRef,
     useState,
-    useEffect,
-    useContext
+    useEffect
 } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Page from '../../components/Page';
+import Form from '../../components/Form';
 import SearchInput from './components/SearchInput'
 import Loading from '../../layout/Loading';
-import { SearchContext } from '../../contexts/SearchContext';
+import useSearch from '../../hooks/useSearch';
 import { api } from '../../api/resources';
 import setQueryString from '../../assets/utilities/setQueryString';
 import hideSearchBar from '../../assets/utilities/hideSearchBar';
@@ -21,7 +22,7 @@ const Search = () => {
     const [data, setData] = useState(null);
     // Ref
     const archiveInputRef = useRef(null);
-    // Context
+    // Hooks
     const {
         searchInput,
         setSearchInput,
@@ -31,8 +32,8 @@ const Search = () => {
         setCardName,
         setCardNames,
         archiveCardNames,
-    } = useContext(SearchContext);
-    // Hooks
+    } = useSearch();
+
     const navigate = useNavigate();
 
     // Utilities
@@ -166,16 +167,23 @@ const Search = () => {
                 loading ? (
                     <Loading />
                 ) : (
-                    <>
-                        <header className="content-header">
-                            <h2 className="title">Search MTG Archive</h2>
-                        </header>
-                        <main className="main">
-                            <form id="archive-form" className="search-form" onSubmit={searchArchive}>
-                                <SearchInput id="archive" className={'search-field'} placeholder={'Search MTG Archive'} searchCard={searchArchive} isActive={isActive} ref={archiveInputRef} />
-                            </form>
-                        </main>
-                    </>
+                        <Page name={'archive'}>
+                            <main>
+                                <Form
+                                    d={'archive-form'}
+                                    classList={'search-form'}
+                                    handleSubmit={searchArchive}
+                                >
+                                    <SearchInput
+                                        id={'archive'}
+                                        className={'search-field'}
+                                        placeholder={'Search MTG Archive'}
+                                        searchCard={searchArchive}
+                                        isActive={isActive}
+                                        ref={archiveInputRef} />
+                                </Form>
+                            </main>
+                        </Page>
                 )
             }
         </>

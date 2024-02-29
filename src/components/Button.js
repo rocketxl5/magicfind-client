@@ -1,9 +1,17 @@
 
 const Button = (props) => {
-    const { id, type, classList, text, status, handleClick, active } = props;
+    const { children, id, type, classList, status, handleClick, active } = props;
 
     return (
-        <button id={id} className={active === id ? 'active' : classList} type={type} onClick={handleClick} disabled={status}>{text}</button>
+        <button
+            id={id ? id : ''}
+            className={active === id ? 'active' : classList}
+            type={type ? type : 'button'}
+            onClick={handleClick}
+            disabled={status}
+        >
+            {children}
+        </button>
     )
 }
 

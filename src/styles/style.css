@@ -24,6 +24,8 @@
   --clr-primary-steel: rgb(103, 152, 180);
 
   /* font sizes */
+  --fs-500: 5rem;
+  --fs-400: 4rem;
   --fs-300: 3rem;
   --fs-275: 2.75rem;
   --fs-250: 2.5rem;
@@ -250,10 +252,12 @@ border-bottom: 1px solid var(--clr-grey);
 
 /* Not found search page */
 .not-found {
-min-height: inherit;
+margin-top: 9rem;
+min-height: 100%;
 display: flex;
 flex-direction: column;
 gap: 5rem;
+background-color: red;
 }
 
 .not-found > main,

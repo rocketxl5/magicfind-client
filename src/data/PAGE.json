@@ -28,5 +28,45 @@
       "classList": "page-title",
       "text": "Collection Page"
     }
+  },
+  "archive": {
+    "classList": "page archive",
+    "header": {
+      "classList": "page-header flex space-between align-center col-12 padding-block-1 margin-block-end-1"
+    },
+    "title": {
+      "classList": "page-title",
+      "text": "Search MTG Archive"
+    }
+  },
+  "store": {
+    "classList": "page store",
+    "header": {
+      "classList": "page-header flex space-between align-center col-12 padding-block-1 margin-block-end-1"
+    },
+    "title": {
+      "classList": "page-title",
+      "text": "Store"
+    }
+  },
+  "dashboard": {
+    "classList": "page dashboard",
+    "header": {
+      "classList": "page-header flex space-between align-center col-12 padding-block-1 margin-block-end-1"
+    },
+    "title": {
+      "classList": "page-title",
+      "text": "Dashboard"
+    }
+  },
+  "not-found": {
+    "classList": "page not-found",
+    "header": {
+      "classList": "flex justify-center align-center col-12 padding-block-1 margin-block-end-1"
+    },
+    "title": {
+      "classList": "page-title fs-500 fw-600",
+      "text": "404"
+    }
   }
 }

@@ -1,11 +1,10 @@
-import React from 'react'
+import Page from '../components/Page'
 
 const DashBoard = () => {
     return (
+        <Page name={'dashboard'}>
 
-        <header className="content-header">
-                    <h2 className="title">Dashboard</h2>
-        </header>
+        </Page>
     )
 }
 

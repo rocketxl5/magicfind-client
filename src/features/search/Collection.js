@@ -5,19 +5,17 @@ import React, {
 } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { FiArrowRightCircle } from "react-icons/fi";
-import SearchInput from './components/SearchInput';
 import Page from '../../components/Page';
-
 import Form from '../../components/Form';
+import SearchInput from './components/SearchInput';
 import Button from '../../components/Button';
 import Loading from '../../layout/Loading';
+import useAuth from '../../hooks/useAuth';
+import useSearch from '../../hooks/useSearch';
 import { api } from '../../api/resources';
 import getViewPortWidth from '../../assets/utilities/getViewPortWidth';
 import hideSearchBar from '../../assets/utilities/hideSearchBar';
 import setQueryString from '../../assets/utilities/setQueryString';
-import useAuth from '../../hooks/useAuth';
-import useSearch from '../../hooks/useSearch';
-import data from '../../data/PAGE.json';
 
 const Collection = () => {
     // States
@@ -43,8 +41,6 @@ const Collection = () => {
     const navigate = useNavigate();
     // Utilities
     const browserWidth = getViewPortWidth();
-
-    const { classList, header, title } = data['collection'];
 
     const searchCollection = () => {
 
@@ -192,10 +188,8 @@ const Collection = () => {
                 ) : (
                     <main>
                         {
-                            loading ? (
-
-                                <Loading />
-
+                                loading ? (
+                                    <Loading />
                             ) : (
                                         <Form id={'collection-form'} classList={'search-form'} handleSubmit={searchCollectionCard}>
                                             <SearchInput
@@ -208,8 +202,10 @@ const Collection = () => {
                                             <Button
                                                 id={''}
                                                 classList={'bg-green btn-collection'}
-                                                text={'All Cards'}
-                                                handleClick={() => searchCollection('cards')} />
+                                                handleClick={() => searchCollection('cards')}
+                                            >
+                                                {'All Cards'}
+                                            </Button>
                                         </Form>
                             )
                         }

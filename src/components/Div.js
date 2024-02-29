@@ -6,6 +6,6 @@ const Div = forwardRef(function Div({ children, classList }, ref) {
             {children}
         </div>
     )
-}
-)
+})
+
 export default Div
