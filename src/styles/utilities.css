@@ -89,7 +89,7 @@
 }
 
 .flex-grow-1 {
-    flex-grow: 1;
+    flex-grow: 1 !important;
 }
 
 .flex-grow-2 {
@@ -120,8 +120,8 @@
     justify-content: space-between;
 }
 
-.justify-end {
-    justify-content: end;
+.flex-end {
+    justify-content: flex-end !important;
 }
 
 .align-self-center {
@@ -216,8 +216,12 @@
     background: var(--clr-green);
 }
 
-.bg-blue {
+.bg-primary {
     background: var(--clr-primary);
+}
+
+.bg-secondary {
+    background: var(--clr-secondary);
 }
 
 .bg-light-blue {
@@ -228,12 +232,16 @@
     background: var(--clr-yellow);
 }
 
+.bg-surface {
+    background: var(--clr-surface);
+}
+
 .bg-red {
     background: var(--clr-red);
 }
 
 .bg-red-light {
-    background-color: rgba(162, 22, 34, 0.05);
+    background: rgba(162, 22, 34, 0.05);
 }
 
 .bg-grey {
@@ -265,19 +273,19 @@
 
 /* MTG colors */
 .mtg-blue {
-    background-color: #1F447E;
+    background: #1F447E;
 }
 .mtg-red {
-    background-color: #A63331;
+    background: #A63331;
 }
 .mtg-green {
-    background-color: #2A4E27;
+    background: #2A4E27;
 }
 .mtg-white {
-    background-color: #FFFDDE;
+    background: #FFFDDE;
 }
 .mtg-black {
-    background-color: #0D0C0A;
+    background: #0D0C0A;
 }
 
 .border-success {
@@ -304,7 +312,7 @@
     border: none;
 }
 
-.color-lg-grey {
+.color-light-grey {
     color: var(--clr-light-grey);
 }
 
@@ -312,8 +320,12 @@
     color: var(--clr-dark) !important;
 }
 
+.color-surface {
+    color: var(--clr-surface) !important;
+}
+
 .color-light {
-    color: var(--clr-light-grey)
+    color: var(--clr-light)
 }
 
 .color-danger {
@@ -322,10 +334,6 @@
 
 .color-red {
     color: var(--clr-red);
-}
-
-.color-blue {
-    color: var(--clr-primary);
 }
 
 .color-success {
@@ -338,6 +346,14 @@
 
 .color-primary {
     color: var(--clr-primary) !important;
+}
+
+.color-secondary {
+    color: var(--clr-secondary) !important;
+}
+
+.color-grey {
+    color: var(--clr-grey) !important;
 }
 
 .hide {
@@ -368,6 +384,14 @@
     border-radius: 25px;
 }
 
+.fs-125 {
+    font-size: var(--fs-125) !important;
+}
+
+.fs-150 {
+    font-size: var(--fs-150) !important;
+}
+
 .fs-200 {
     font-size: var(--fs-200) !important;
 }
@@ -379,15 +403,15 @@
 }
 
 .fw-100 {
-    font-weight: 100;
+    font-weight: 100 !important;
 }
 
 .fw-400 {
-    font-weight: 400;
+    font-weight: 400 !important;
 }
 
 .fw-500 {
-    font-weight: 500;
+    font-weight: 500 !important;
 }
 
 .fw-600 {

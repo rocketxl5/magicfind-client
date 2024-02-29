@@ -19,7 +19,7 @@ function ShoppingCart() {
   // States
   const [loading, setLoading] = useState(false);
   // Hooks
-  const { cartItems, subTotal, itemsCount } = useCart();
+  const { cartItems, subTotal } = useCart();
   const { auth } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
@@ -34,21 +34,21 @@ function ShoppingCart() {
             <>
               <Aside classList={'cart-aside'}>
                 <>
-                  <Container>
-                    <Title text={'Total'} />
+                  <Container classList="cart-total flex gap-1">
+                    <p className="fw-500">Subtotal:</p>
                   {
                     loading ? (
                       <Loading />
                     ) : (
-                          <p>
-                            <strong>{`$ ${subTotal}`}</strong>
-                        </p>
+                          <Container>
+                            <p>{`$ ${subTotal}`}</p>
+                          </Container>
                     )
                   }
                   </Container>
                   <Container>
                     <Button
-                      classList={'btn col-12 padding-block-1 bg-yellow color-dark fw-600'}
+                      classList={'btn col-12 padding-block-1 bg-yellow color-primary fw-600'}
                       handleClick={() => navigate('/me/checkout', { state: { from: location } })}
                   >
                     Checkout
@@ -67,7 +67,7 @@ function ShoppingCart() {
               </List>
             </>
         ) : (
-            <div>Your Cart is Empty</div>
+              <Container>Your Cart is Empty</Container>
           )}
       </Main>
     </Page>
