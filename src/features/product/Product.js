@@ -1,8 +1,8 @@
 import { useState, forwardRef } from 'react';
-import { FiPlus } from "react-icons/fi";
-import Count from '../search/components/Count';
+import Container from '../../components/Container';
 import Header from '../../components/Header';
 import Button from '../../components/Button'
+import Count from '../search/components/Count';
 import ProductImage from './ProductImage';
 import Title from '../../components/Title';
 import ProductDetails from './ProductDetails';
@@ -12,38 +12,17 @@ import data from '../../data/PRODUCT.json';
 
 const Product = forwardRef(function Product(props, ref) {
     const { index, count, card, search, handleSlideView, handleModalProductState } = props;
-    // States
-    const [activeTab, setActiveTab] = useState(null);
 
-    const { tabs, header, title } = data['singles'];
+    const { header, title } = data['singles'];
 
-    const handleClick = (e) => {
-        // console.log(e.target.disabled)
-        setActiveTab(e.target.id)
-    }
-    // console.log(search)
     return (
         <li className="product" ref={ref}>
             <Header classList={header.classList} >
-                <Title classList={title.classList} title={card.name} />
+                <Title classList={title.classList} text={card.name} />
                 <Count count={count} unit={index + 1} />
             </Header>
-            {/* <div className="product-nav">
-                <div className="contextual-tabs">
-                    {
-                        tabs.map((tab, i) => {
-                            return (
-                                <Button key={i + index} attributes={tab} handleClick={handleClick} active={activeTab} />
-                            )
-                        })
-                    }
-                </div>
-            </div> */}
-            <div className="product-wrapper" >
+            <Container classList={"product-wrapper"}>
 
-                {/* <button type="button" onClick={() => detailsRef.current.classList.toggle('show-details')}>
-                    <FiPlus />
-                </button> */}
 
                 <>
                     {/* <ProductImage product={card} handleSlideView={handleSlideView} /> */}
@@ -53,7 +32,7 @@ const Product = forwardRef(function Product(props, ref) {
                     {/* <ProductOwner id={'product-status'} product={card}  search={search} /> */}
                     <ProductHandlers id={'product-actions'} product={card} search={search} handleClick={handleModalProductState} />
                 </>
-            </div>
+            </Container>
         </li>
     )
 

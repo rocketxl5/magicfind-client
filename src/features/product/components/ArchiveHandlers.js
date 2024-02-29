@@ -4,7 +4,7 @@ import useSearch from '../../../hooks/useSearch';
 import { api } from '../../../api/resources';
 
 const INIT = {
-    style: 'btn bg-blue color-light border-blue',
+    style: 'btn bg-primary color-light border-blue',
     type: 'button',
     value: 'Add To Collection',
     statue: false
@@ -29,7 +29,7 @@ const ArchiveHandlers = ({ product, setLoading }) => {
                 attr = { ...attr, style: 'btn btn-api bg-light color-danger border-danger disabled' };
                 break;
             default:
-                attr = { ...attr, style: 'btn btn-api bg-blue color-light border-primary', value: 'Add To Collection', status: true };
+                attr = { ...attr, style: 'btn btn-api bg-primary color-light border-primary', value: 'Add To Collection', status: true };
                 break;
         }
         return attr;
@@ -85,7 +85,7 @@ const ArchiveHandlers = ({ product, setLoading }) => {
             <div className="btn-container">
 
                 <button id="add-to-collection" className={attributes.style} type={attributes.type} onClick={handleClick}>{attributes.value}</button>
-                {/* <button className="btn bg-blue color-lg-grey" type="button" onClick={() => handleClick(card)}>{!isLoaded ? 'Add To Collection' : 'Added'}</button> */}
+                {/* <button className="btn bg-primary color-lg-grey" type="button" onClick={() => handleClick(card)}>{!isLoaded ? 'Add To Collection' : 'Added'}</button> */}
             </div>
         </div>
     )

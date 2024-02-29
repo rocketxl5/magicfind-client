@@ -175,7 +175,7 @@ const EditProduct = (props) => {
                             {
                                 !response.isUpdated ? (
                                     <>
-                                        <header className="modal-header bg-blue">
+                                            <header className="modal-header bg-primary">
                                             <div className="modal-title">
                                                 <h2 className="fw-500">Edit Card</h2>
                                             </div>
@@ -300,11 +300,11 @@ const EditProduct = (props) => {
                                                     </form>
                                                 </div>
                                             </div>
-                                            <footer className="modal-footer bg-blue-light">
+                                                <footer className="modal-footer bg-primary-light">
                                                 <div className="btn-container">
                                                     < button
                                                         id="go-back"
-                                                        className="btn bg-blue color-light"
+                                                            className="btn bg-primary color-light"
                                                         type="button"
                                                         onClick={handleClick}
                                                     >

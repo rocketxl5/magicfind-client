@@ -6,7 +6,7 @@ import styled from 'styled-components';
 const MailIcon = () => {
   const { unreadMail } = useAuth();
     return (
-      <Div className="nav-btn">
+      <Container className="nav-btn">
         <Mail className="mail-btn" to="me/mail" title=" To Inbox">
           {unreadMail > 0 && (
             <UnreadContainer>
@@ -15,13 +15,13 @@ const MailIcon = () => {
           )}
           <FiMail className="nav-icon" size={27} />
         </Mail>
-      </Div>
+      </Container>
     )
 }
 
 
 
-const Div = styled.div`
+const Container = styled.div`
   position: relative;
   display: flex;
 `;

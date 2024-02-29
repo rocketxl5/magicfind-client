@@ -6,9 +6,7 @@ const AuthLayout = () => {
     return (
         <div className="auth-layout">
             <Breadcrumbs />
-            <div className="wrapper">
-                <Outlet />
-            </div>
+            <Outlet />
         </div>
     )
 }

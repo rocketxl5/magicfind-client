@@ -1,7 +1,7 @@
 // source @ https://www.youtube.com/watch?v=5s57C7leXc4&list=PL4cUxeGkcC9iVKmtNuCeIswnQ97in2GGf&index=3
 import { Outlet, useLocation } from 'react-router-dom';
 import MainHeader from './MainHeader';
-import Footer from './Footer'
+import MainFooter from './MainFooter'
 import useAuth from '../hooks/useAuth';
 
 const RootLayout = () => {
@@ -19,9 +19,9 @@ const RootLayout = () => {
 
                 ) : (
                     <>
-                        <MainHeader />
-                        <Outlet />
-                        <Footer />
+                            <MainHeader />
+                            <Outlet />
+                            <MainFooter />
                     </>
                 )
             }

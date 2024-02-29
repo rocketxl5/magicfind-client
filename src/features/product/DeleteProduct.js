@@ -131,7 +131,7 @@ const DeleteProduct = (props) => {
                                         </div>
                                         <footer className="modal-footer bg-red-light">
                                             <div className="btn-container">
-                                                <button id="go-back" className="btn bg-blue color-light" type="button" onClick={handleClick}>Cancel </button>
+                                                    <button id="go-back" className="btn bg-primary color-light" type="button" onClick={handleClick}>Cancel </button>
                                                     < button id="confirm-delete" className="btn bg-red color-light" type="button" onClick={handleClick} onMouseDown={deleteHandler} >Confirm </button>
 
                                             </div>

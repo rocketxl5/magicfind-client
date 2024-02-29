@@ -1,18 +1,64 @@
 import Loading from '../../../layout/Loading';
-import Select from '../../../components/Select';
+import Container from '../../../components/Container';
 import Label from '../../../components/Label';
+import Select from '../../../components/Select';
+import Button from '../../../components/Button';
+import { FiPlus } from "react-icons/fi";
 import useAuth from '../../../hooks/useAuth';
 import useCart from '../../../hooks/useCart';
 import useFetch from '../../../hooks/useFetch';
 import data from '../../../data/SEARCH.json';
 
 
-const CatalogHandlers = ({ product, loading, setLoading }) => {
-    const { conditions, finishes, languages } = data.product;
-    const { set_name, price, language, userName, comment, country, condition, card_faces, oversized, avatar, rating } = product;
 
+const CatalogHandlers = ({ product, loading, setLoading }) => {
+    const { conditions, finish, languages } = data.product;
+    const { set_name, price, quantity, language, userName, country, condition, finishes, card_faces, oversized, avatar, rating } = product;
+    console.log(product)
     const { cartItems } = useCart();
     // const {data, loading, error } = useFetch 
+    const specs = [
+        {
+            title: 'Edition:',
+            value: set_name
+        },
+        {
+            title: 'Finish:',
+            value: finish[finishes]
+        },
+        {
+            title: 'Condition:',
+            value: conditions[condition]
+        },
+        {
+            title: 'Language:',
+            value: languages[language]
+        },
+        {
+            title: 'Price:',
+            value: price
+        },
+        {
+            title: 'Quantity available:',
+            value: quantity
+        }
+    ]
+
+    const credentials = [
+        {
+            title: 'Seller:',
+            value: userName
+        },
+        // {
+        //     title: 'Rating:',
+        //     value: rating
+        // },
+        {
+            title: 'Country:',
+            value: country
+        }
+    ]
+
     console.log(cartItems)
     return (
         <>
@@ -20,31 +66,58 @@ const CatalogHandlers = ({ product, loading, setLoading }) => {
                 loading ? (
                         <Loading />
                 ) : (
-                        <div className="catalog-handlers">
-                            <div className="">
-                                <p><span className="">Condition:</span>  <span className="">{conditions[condition]}</span></p>
-                            </div>
-                            <div className="">
-                                <p><span className="">Language:</span>  <span className="">{languages[language]}</span></p>
-                            </div>
-                            <div className="">
-                                <p><span className="">Price:</span>  <span className="">{product.price}</span></p>
-                            </div>
-                            <div className="">
-                                <p><span className="">Quantity Available:</span>  <span className="">{product.quantity}</span></p>
-                            </div>
-                            <div className="">
-                                <p><span className="">Quantity Selected:</span>  <span className="">{product.quantity}</span></p>
-                            </div>
-                            {
-                                product?.quantity &&
-                                <div>
-                                    <Label htmlFor={'quantity-selector'} label={'Choose Quantity:'}>
-                                        <Select id={'quantity-selector'} className={'catalog-item-quantity'} product={product} setLoading={(value) => setLoading(value)} />
+                        <>
+                            <Container>
+                                {
+                                    specs &&
+                                    specs.map((spec, i) => {
+                                        return (
+                                            <Container key={i} classList={''}>
+                                                <p><span className="">{spec.title}</span>  <span className="">{spec.value}</span></p>
+                                            </Container>
+
+                                        )
+                                    })
+                                }
+
+                            </Container>
+                            <Container>
+                                {
+                                    credentials &&
+                                    credentials.map((credential, i) => {
+                                        return (
+                                            <Container key={i + 1} classList={''}>
+                                                <p><span className="">{credential.title}</span>  <span className="">{credential.value}</span></p>
+                                            </Container>
+
+                                        )
+                                    })
+                                }
+                            </Container>
+                            <Container>
+                                {
+                                    quantity &&
+                                    <Container>
+                                        <Label
+                                            htmlFor={'quantity-selector'}
+                                            label={'Quantity Selected:'}
+                                        >
+                                            <Select
+                                                id={'quantity-selector'}
+                                                className={'catalog-item-quantity'}
+                                                product={product}
+                                                setLoading={(value) => setLoading(value)}
+                                            />
                                     </Label>
-                                </div>
+                                        </Container>
                             }
-                        </div>
+                            </Container>
+                            <Container>
+                                <Button>
+                                    <FiPlus />
+                                </Button>
+                            </Container>
+                        </>
                     )
             }
 

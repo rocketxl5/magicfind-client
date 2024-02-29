@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import cartLoader from '../services/cartLoader.js';
+import Container from './Container.js';
 import Option from './Option';
 import useCart from '../hooks/useCart';
 
@@ -9,7 +10,7 @@ const Select = (props) => {
   const [value, setValue] = useState(undefined);
   const [quantitySelected, setQuantitySelected] = useState(0);
   // Props
-  const { className, product, quantity, setLoading } = props;
+  const { classList, product, quantity, setLoading } = props;
   // Hooks
   const { cartItems, setCartItems } = useCart();
   const location = useLocation();
@@ -111,12 +112,13 @@ const Select = (props) => {
 
   return (
     product?.quantity &&
+    <Container classList={'p-relative'}>
     <select
-      id="quantity"
-      className={className}
-      name="quantity"
-      value={quantitySelected}
-      onChange={(e) => setValue(parseInt(e.target.value))}
+          id="quantity"
+          className={classList}
+          name="quantity"
+          value={quantitySelected}
+          onChange={(e) => setValue(parseInt(e.target.value))}
     >
       {[...Array(product?.quantity + 1).keys()].map((key) => {
 
@@ -127,6 +129,7 @@ const Select = (props) => {
         )
       })}
     </select>
+      </Container>
   )
 }
 export default Select

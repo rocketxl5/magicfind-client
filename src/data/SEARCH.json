@@ -30,7 +30,7 @@
       "b": "https://svgs.scryfall.io/card-symbols/B.svg"
     },
     "symbologies": ["color_identity", "mana_cost"],
-    "finishes": {
+    "finish": {
       "nonfoil": "Non Foil",
       "foil": "Foil",
       "eched": "Etched"

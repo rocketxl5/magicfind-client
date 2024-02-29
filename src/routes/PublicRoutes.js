@@ -8,9 +8,7 @@ const PublicRoutes = () => {
     return (
         isAuth ? (
             <div className="auth-layout">
-                <div className="wrapper">
-                    <Outlet />
-                </div>
+                <Outlet />
             </div>
         ) : (
             <div className="layout">

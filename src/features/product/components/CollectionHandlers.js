@@ -1,3 +1,5 @@
+import Button from '../../../components/Button';
+
 const CollectionHandlers = ({ product, handleClick }) => {
 
     return (
@@ -11,11 +13,11 @@ const CollectionHandlers = ({ product, handleClick }) => {
                 </div>
 
                 <div className="btn-container">
-                    {/* <button id="edit-product" className="btn bg-blue color-light" type="button" onClick={(e) => handleClick(e, product)}>Edit</button> */}
+                    {/* <button id="edit-product" className="btn bg-primary color-light" type="button" onClick={(e) => handleClick(e, product)}>Edit</button> */}
                     <button id="edit-product" className="" type="button" onClick={(e) => handleClick(e, product)}>Edit</button>
                 </div>
                 <div className="btn-container">
-                    {/* <button id="edit-product" className="btn bg-blue color-light" type="button" onClick={(e) => handleClick(e, product)}>Edit</button> */}
+                    {/* <button id="edit-product" className="btn bg-primary color-light" type="button" onClick={(e) => handleClick(e, product)}>Edit</button> */}
                     <button id="edit-product" className="" type="button" onClick={(e) => handleClick(e, product)}>Add</button>
                 </div>
 

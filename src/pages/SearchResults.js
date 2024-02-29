@@ -8,7 +8,6 @@ import useSlideView from '../hooks/useSlideView';
 import Page from '../components/Page';
 import Results from '../features/search/components/Results';
 import SearchParameters from '../features/search/components/SearchParameters';
-import data from '../data/PAGE.json';
 
 const SearchResults = () => {
     // States
@@ -18,9 +17,6 @@ const SearchResults = () => {
     const location = useLocation();
     const navigate = useNavigate();
     const { cards, search } = location.state?.result || JSON.parse(localStorage.getItem('search-results'));
-
-    // Data
-    const { classList, header, title } = data['search-results'];
 
     useEffect(() => {
         // If cards is empty
