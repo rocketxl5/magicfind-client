@@ -1,9 +1,9 @@
 import { FaXmark } from "react-icons/fa6";
 
-const CloseBtn = ({ style, name, handleClick }) => {
+const CloseBtn = ({ classList, name, handleClick }) => {
 
     return (
-        <button className={style} name={name} type="button" onClick={(e) => handleClick(e)}>
+        <button className={classList} name={name} type="button" onClick={(e) => handleClick(e)}>
             <FaXmark />
         </button>
     )

@@ -3,7 +3,7 @@ import React from 'react';
 const Contact = () => {
   return (
     <>
-      <main className="page contact">
+      <main className="contact">
         <section className="feature-section">
           <header className="section-header">
 

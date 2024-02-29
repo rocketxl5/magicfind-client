@@ -1,12 +1,72 @@
 {
-  "searc-results": {
-    "classList": "search-results",
+  "search-results": {
+    "classList": "page search-results",
     "header": {
-      "classList": "flex space-between align-center col-12 padding-block-1 margin-block-end-1"
+      "classList": "page-header flex space-between align-center col-12 padding-block-1 margin-block-end-1"
     },
     "title": {
-      "classList": "title",
-      "text": "Search Result"
+      "classList": "page-title",
+      "text": "Search Results"
+    }
+  },
+  "shopping-cart": {
+    "classList": "page shopping-cart",
+    "header": {
+      "classList": "page-header flex space-between align-center col-12 padding-block-1 margin-block-end-1"
+    },
+    "title": {
+      "classList": "page-title",
+      "text": "Shopping Cart"
+    }
+  },
+  "collection": {
+    "classList": "page collection",
+    "header": {
+      "classList": "page-header flex space-between align-center col-12 padding-block-1 margin-block-end-1"
+    },
+    "title": {
+      "classList": "page-title",
+      "text": "Collection Page"
+    }
+  },
+  "archive": {
+    "classList": "page archive",
+    "header": {
+      "classList": "page-header flex space-between align-center col-12 padding-block-1 margin-block-end-1"
+    },
+    "title": {
+      "classList": "page-title",
+      "text": "Search MTG Archive"
+    }
+  },
+  "store": {
+    "classList": "page store",
+    "header": {
+      "classList": "page-header flex space-between align-center col-12 padding-block-1 margin-block-end-1"
+    },
+    "title": {
+      "classList": "page-title",
+      "text": "Store"
+    }
+  },
+  "dashboard": {
+    "classList": "page dashboard",
+    "header": {
+      "classList": "page-header flex space-between align-center col-12 padding-block-1 margin-block-end-1"
+    },
+    "title": {
+      "classList": "page-title",
+      "text": "Dashboard"
+    }
+  },
+  "not-found": {
+    "classList": "page not-found",
+    "header": {
+      "classList": "flex justify-center align-center col-12 padding-block-1 margin-block-end-1"
+    },
+    "title": {
+      "classList": "page-title fs-500 fw-600",
+      "text": "404"
     }
   }
 }

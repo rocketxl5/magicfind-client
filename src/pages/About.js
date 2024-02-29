@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 const About = () => {
   return (
     <>
-      <main className="page about">
+      <main className="about">
         <section className="feature-section">
           <header className="section-header">
             <h2 className="section-title">About Magic Find</h2>

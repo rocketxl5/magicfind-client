@@ -1,6 +1,6 @@
 import AutoComplete from './AutoComplete';
 import Prediction from './Prediction';
-import Result from './Result';
+import Count from './Count';
 import SearchInput from './SearchInput';
 import product from './product';
 
@@ -8,6 +8,6 @@ export default {
     ...product,
     AutoComplete,
     Prediction,
-    Result,
+    Count,
     SearchInput
 }

@@ -4,16 +4,18 @@ import React, {
     useEffect,
 } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { FiArrowRightCircle } from "react-icons/fi"
-
-import SearchInput from './components/SearchInput'
+import { FiArrowRightCircle } from "react-icons/fi";
+import Page from '../../components/Page';
+import Form from '../../components/Form';
+import SearchInput from './components/SearchInput';
+import Button from '../../components/Button';
 import Loading from '../../layout/Loading';
+import useAuth from '../../hooks/useAuth';
+import useSearch from '../../hooks/useSearch';
 import { api } from '../../api/resources';
 import getViewPortWidth from '../../assets/utilities/getViewPortWidth';
 import hideSearchBar from '../../assets/utilities/hideSearchBar';
 import setQueryString from '../../assets/utilities/setQueryString';
-import useAuth from '../../hooks/useAuth';
-import useSearch from '../../hooks/useSearch';
 
 const Collection = () => {
     // States
@@ -166,12 +168,7 @@ const Collection = () => {
     }
 
     return (
-        <>
-
-            <header className="content-header">
-                <h2 className="title">Collection</h2>
-            </header>
-
+        <Page name={'collection'}>
             {
                 errorMessage?.title === 'no_cards' ? (
                     <div className="message">
@@ -191,31 +188,32 @@ const Collection = () => {
                 ) : (
                     <main>
                         {
-                            loading ? (
-
-                                <Loading />
-
+                                loading ? (
+                                    <Loading />
                             ) : (
-                                <form id="collection-form" className="search-form" onSubmit={searchCollectionCard} >
-                                    <SearchInput id={'collection'} className={'search-field'} placeholder={'Search Your Collection'} searchCard={searchCollectionCard} isActive={isActive} ref={collectionInputRef} />
-                                    <button
-                                        className="bg-green btn-collection"
-                                        type="button"
-                                        onClick={(e) => {
-                                            e.stopPropagation();
-                                            searchCollection('cards');
-                                        }}
-                                    >
-                                        All Cards
-                                    </button>
-                                </form>
+                                        <Form id={'collection-form'} classList={'search-form'} handleSubmit={searchCollectionCard}>
+                                            <SearchInput
+                                                id={'collection'}
+                                                className={'search-field'}
+                                                placeholder={'Search Your Collection'}
+                                                searchCard={searchCollectionCard}
+                                                isActive={isActive}
+                                                ref={collectionInputRef} />
+                                            <Button
+                                                id={''}
+                                                classList={'bg-green btn-collection'}
+                                                handleClick={() => searchCollection('cards')}
+                                            >
+                                                {'All Cards'}
+                                            </Button>
+                                        </Form>
                             )
                         }
                     </main>
 
                 )
             }
-        </>
+        </Page>
     )
 }
 

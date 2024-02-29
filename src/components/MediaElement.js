@@ -1,10 +1,9 @@
-const MediaElement = ({ children, handleSlideView, id }) => {
+
+const MediaElement = ({ children, handleSlideShow, id }) => {
     return (
         <div className="media-element">
             <button id={id} className="slide-show-btn" type="button" name="slide-show-btn" onClick={(e) => {
-                console.log(e.target.name)
-                handleSlideView(e, id)
-
+                handleSlideShow(e, id);
             }}>
                 {children[0]}
             </button>

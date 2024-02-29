@@ -1,8 +1,8 @@
 import { FaChevronRight } from "react-icons/fa6";
 
-const RightBtn = ({ style, name, handleClick }) => {
+const RightBtn = ({ classList, name, handleClick }) => {
     return (
-        <button className={style} name={name} type="button" onClick={(e) => handleClick(e)}>
+        <button className={classList} name={name} type="button" onClick={(e) => handleClick(e)}>
             <FaChevronRight />
         </button>
     )

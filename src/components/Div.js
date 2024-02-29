@@ -1,11 +1,11 @@
 import { forwardRef } from 'react'
 
-const Div = forwardRef(function Div({ children, className }, ref) {
+const Div = forwardRef(function Div({ children, classList }, ref) {
     return (
-        <div className={className} ref={ref}>
+        <div className={classList} ref={ref}>
             {children}
         </div>
     )
-}
-)
+})
+
 export default Div

@@ -48,6 +48,10 @@
     margin-inline-end: var(--size-3);
 }
 
+.margin-auto {
+    margin-inline: auto;
+}
+
 .border-danger {
     border: 2px solid rgba(220, 53, 69, 0.7) !important;
 }
@@ -360,6 +364,16 @@
     border-radius: 25px;
 }
 
+.fs-200 {
+    font-size: var(--fs-200) !important;
+}
+.fs-400 {
+    font-size: var(--fs-400) !important;
+}
+.fs-500 {
+    font-size: var(--fs-500) !important;
+}
+
 .fw-100 {
     font-weight: 100;
 }
@@ -374,6 +388,9 @@
 
 .fw-600 {
     font-weight: 600;
+}
+.fw-900 {
+    font-weight: 900 !important;
 }
 
 .overflow-y {
@@ -427,4 +444,8 @@
 
 .grid {
     display: grid;
+}
+
+.bold {
+    font-weight: bold;
 }

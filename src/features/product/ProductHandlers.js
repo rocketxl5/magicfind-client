@@ -25,13 +25,13 @@ const ProductHandlers = ({ id, product, active, search, handleClick }) => {
         />
     }
     return (
-        <section id={id} className={active === id ? 'd-block' : 'd-none'}>
+
             <div className="product-handlers border-red">
                 {
                     handlers[search]
                 }
             </div>
-        </section>
+
     )
 }
 
