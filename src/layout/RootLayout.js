@@ -19,8 +19,8 @@ const RootLayout = () => {
 
                 ) : (
                     <>
-                        <MainHeader />
-                        <Outlet />
+                            <MainHeader />
+                            <Outlet />
                             <MainFooter />
                     </>
                 )

@@ -2,8 +2,6 @@ import { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 // import { FiPlusCircle, FiMinusCircle, FiTrash2 } from 'react-icons/fi';
 import Page from '../components/Page';
-import Title from '../components/Title'
-import Header from '../components/Header';
 import List from '../components/List';
 import Button from '../components/Button';
 import Container from '../components/Container';
@@ -48,7 +46,7 @@ function ShoppingCart() {
                   </Container>
                   <Container>
                     <Button
-                      classList={'btn col-12 padding-block-1 bg-yellow color-primary fw-600'}
+                      classList={'checkout-btn col-12 padding-block-1 bg-yellow color-primary'}
                       handleClick={() => navigate('/me/checkout', { state: { from: location } })}
                   >
                     Checkout
