@@ -8,7 +8,7 @@ import Container from '../components/Container';
 import Aside from '../components/Aside';
 import Main from '../components/Main';
 import CartItem from '../features/cart/CartItem';
-import Results from '../features/search/components/Results';
+import Count from '../features/search/components/Count';
 import useAuth from '../hooks/useAuth';
 import useCart from '../hooks/useCart';
 import Loading from '../layout/Loading';
@@ -17,7 +17,7 @@ function ShoppingCart() {
   // States
   const [loading, setLoading] = useState(false);
   // Hooks
-  const { cartItems, subTotal } = useCart();
+  const { cartItems, itemsCount, subTotal } = useCart();
   const { auth } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
@@ -25,7 +25,7 @@ function ShoppingCart() {
 
 
   return (
-    <Page name={'shopping-cart'} component={<Results items={cartItems.length} />} >
+    <Page name={'shopping-cart'} component={<Count count={itemsCount} type={'Item'} />} >
       <Main classList={'cart-main col-12 bg-light-blue padding-1'}>
           {
             cartItems?.length ? (

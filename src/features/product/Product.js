@@ -2,7 +2,7 @@ import { useState, forwardRef } from 'react';
 import Container from '../../components/Container';
 import Header from '../../components/Header';
 import Button from '../../components/Button'
-import Count from '../search/components/Count';
+import CountDown from '../search/components/CountDown';
 import ProductImage from './ProductImage';
 import Title from '../../components/Title';
 import ProductDetails from './ProductDetails';
@@ -19,7 +19,7 @@ const Product = forwardRef(function Product(props, ref) {
         <li className="product" ref={ref}>
             <Header classList={header.classList} >
                 <Title classList={title.classList} text={card.name} />
-                <Count count={count} unit={index + 1} />
+                <CountDown count={count} unit={index + 1} type={'Result'} />
             </Header>
             <Container classList={"product-wrapper"}>
 

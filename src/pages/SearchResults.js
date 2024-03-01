@@ -6,7 +6,7 @@ import { HiOutlineAdjustmentsHorizontal } from "react-icons/hi2";
 import useModalProductState from '../hooks/useModalProductState';
 import useSlideView from '../hooks/useSlideView';
 import Page from '../components/Page';
-import Results from '../features/search/components/Results';
+import Count from '../features/search/components/Count';
 import SearchParameters from '../features/search/components/SearchParameters';
 
 const SearchResults = () => {
@@ -53,7 +53,7 @@ const SearchResults = () => {
                     {state.component}
                 </Modal>
             }
-            <Page name={'search-results'} component={<Results items={cards.length} />}>
+            <Page name={'search-results'} component={<Count count={cards.length} type={'Result'} />}>
                 <SearchParameters setSearchFeatures={(value) => setSearchFeatures(value)} searchFeatures={searchFeatures} /> 
                     <ul className="products">
                         {

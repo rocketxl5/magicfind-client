@@ -22,7 +22,19 @@
 }
 
 @media screen and (width >= 660px) {
+
+    .cart-main {
+        flex-direction: row-reverse;
+    }
+
+    .cart-aside {
+        width: 40%;
+    }
       
+    .cart-list {
+        width: 60%;
+    }
+
     .product-grid {
         width: 100%;
         display: grid;

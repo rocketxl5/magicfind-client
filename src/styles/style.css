@@ -1242,7 +1242,7 @@ text-align: center;
   font-weight: 300;
 }
 
-.results {
+.count {
   font-size: var(--fs-150);
 }
 
@@ -1423,6 +1423,10 @@ padding-inline-start: 0.75rem;
 
 }
 
+.item-image img {
+  width: 100%;
+}
+
 .item-btn {
   background: var(--clr-danger);
   color: var(--clr-light);
@@ -1430,7 +1434,7 @@ padding-inline-start: 0.75rem;
 }
 
 .item-detail {
-  font-size: var(--fs-100);
+  font-size: clamp(var(--fs-100), calc(1vw + 5px), var(--fs-150));
 }
 
 .item-footer {
