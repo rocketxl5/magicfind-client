@@ -11,11 +11,11 @@ const ShoppingCartBtn = () => {
       <Link to='/shopping-cart' className="cart-btn">
         {itemsCount > 0 && (
           <CountContainer>
-            <Count>
+            <CountDown>
               <span>
                 {itemsCount}
               </span>
-            </Count>
+            </CountDown>
           </CountContainer>
         )}
         <FiShoppingCart className="nav-icon" size={27} title="To Shopping Cart" />
@@ -45,7 +45,7 @@ const CountContainer = styled.div`
   z-index: 10;
 `;
 
-const Count = styled.div`
+const CountDown = styled.div`
 
   // height: 100%;
   font-size: 1rem;

@@ -1,8 +1,14 @@
-const Count = ({ count, unit, classList }) => {
+import React from 'react'
+
+const Count = ({ count, type }) => {
     return (
-        <div className={classList}>
-            <p><span>{unit}</span> of <span>{count}</span> {count > 1 ? 'results' : 'result'}</p>
-        </div>
+        <span className="count">
+            {
+                count ?
+                    `${count} ${count > 1 ? `${type}s` : type}` :
+                    'No results'
+            }
+        </span>
     )
 }
 

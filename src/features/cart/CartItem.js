@@ -67,7 +67,7 @@ const CartItem = ({ index, item, setLoading }) => {
       </Header>
       <Container classList={'flex col-12 gap-1'}>
         <Container id={'item-image'} classList={'item-image col-6'}>
-          <Image classList={''} url={item.selected.image_uris?.small} />
+          <Image classList={'col-12'} url={item.selected.image_uris?.small} />
         </Container>
         <Container id={'item-details'} classList={'flex flex-column space-between col-6 flex-grow-2 gap-1'}>
           <Container classList={'flex flex-column'}>
