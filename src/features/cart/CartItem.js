@@ -18,6 +18,13 @@ const CartItem = ({ index, item }) => {
   const navigate = useNavigate();
 
   const { conditions, languages, finish } = data.product;
+
+  useEffect(() => {
+    const parsedPrice = parseFloat(item.selected.price)
+    setTotal(parseFloat(item.quantity * parsedPrice))
+    setPrice(parsedPrice)
+  }, [subTotal]);
+
   const details = [
     {
       text: item.selected.name,
@@ -44,24 +51,18 @@ const CartItem = ({ index, item }) => {
       style: 'item-detail item-finish'
     },
     {
-      text: price.toFixed(2),
+      text: `${item.selected.quantity}  in stock`,
+      style: 'item-detail item-quantity'
+    },
+    {
+      text: `Price $${price.toFixed(2)}`,
       style: 'item-detail item-price'
     },
     {
-      text: `${item.selected.quantity} ${item.selected.quantity > 1 ? 'items' : 'item'} in stock`,
-      style: 'item-detail item-quantity'
-    },
-    {
-      text: `${item.quantity} ${item.quantity > 1 ? 'items' : 'item'} selected`,
+      text: `Total: $${total.toFixed(2)} (${item.quantity} ${item.quantity > 1 ? 'items' : 'item'})`,
       style: 'item-detail item-quantity'
     },
   ]
-
-  useEffect(() => {
-    const parsedPrice = parseFloat(item.selected.price)
-    setTotal(parseFloat(item.quantity * parsedPrice))
-    setPrice(parsedPrice)
-  }, [subTotal]);
 
   const deleteItem = () => {
     const items = [...cartItems]
@@ -91,10 +92,6 @@ const CartItem = ({ index, item }) => {
               })
             }
           </Container>
-          {/* <Container classList={''}>
-            <p>{item.quantity && `Total: $ ${total.toFixed(2)}`}</p>
-
-          </Container> */}
         </Container>
 
       </Container>
