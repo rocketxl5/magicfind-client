@@ -35,14 +35,15 @@ import Archive from './features/search/Archive'
 import Checkout from './pages/Checkout';
 import Inbox from './features/mail/Inbox';
 import Store from './pages/Store';
-import ProductDetails from './features/product/ProductDetails';
+import Product from './pages/Product';
+
 import './styles/reset.css';
-import './App.css';
 import './styles/utilities.css';
 import './styles/style.css';
 import './styles/navbar.css';
 import './styles/form.css';
 import './styles/media-queries.css';
+// import './App.css';
 
 const App = () => {
 
@@ -58,7 +59,7 @@ const App = () => {
             <Route path="dashboard" element={<DashBoard />} />
             <Route path="collection" element={<Collection />} />
               <Route path="collection/:query" element={<SearchResults />} />
-            <Route path="archive" exact element={<Archive />} />
+              <Route path="archive" element={<Archive />} />
               <Route path="archive/:query" element={<SearchResults />} />
             <Route path="store" element={<Store />} />
             <Route path="settings" element={<Settings />} />
@@ -85,6 +86,7 @@ const App = () => {
           <Route path="not-found/:name" element={<CardNotFound />} />
           <Route path="store/:id" element={<Store />} />
           <Route path="shopping-cart" element={<ShoppingCart />} />
+          <Route path="product/:id" element={<Product />} />
         </Route>
         {/* Catch all */}
         <Route path="*" element={< PageNotFound />} />

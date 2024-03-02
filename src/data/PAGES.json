@@ -19,6 +19,9 @@
       "text": "Shopping Cart"
     }
   },
+  "product": {
+    "classList": "page product"
+  },
   "collection": {
     "classList": "page collection",
     "header": {

@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Item = ({ children, classList }) => {
+const ListItem = ({ children, classList }) => {
     return (
         <li className={classList}>
             {children}
@@ -8,4 +8,4 @@ const Item = ({ children, classList }) => {
     )
 }
 
-export default Item
+export default ListItem

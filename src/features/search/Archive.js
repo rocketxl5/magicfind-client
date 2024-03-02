@@ -24,6 +24,8 @@ const Search = () => {
     const archiveInputRef = useRef(null);
     // Hooks
     const {
+        errorMessage,
+        setErrorMessage,
         searchInput,
         setSearchInput,
         searchTerm,
@@ -32,6 +34,7 @@ const Search = () => {
         setCardName,
         setCardNames,
         archiveCardNames,
+        setUpdateCollection
     } = useSearch();
 
     const navigate = useNavigate();
@@ -147,7 +150,13 @@ const Search = () => {
             setLoading(false)
             setCardName('');
             setSearchInput(null);
-            console.log(cards)
+            // If errorMessage is set ['...collection currently empty...']
+            if (errorMessage) {
+                // Clear errorMessage
+                setErrorMessage(null);
+            }
+            setUpdateCollection(true);
+            // console.log(cards)
             const result = {
                 cards: cards,
                 search: searchInput.id
@@ -170,7 +179,7 @@ const Search = () => {
                         <Page name={'archive'}>
                             <main>
                                 <Form
-                                    d={'archive-form'}
+                                    id={'archive-form'}
                                     classList={'search-form'}
                                     handleSubmit={searchArchive}
                                 >
