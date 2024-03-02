@@ -3,15 +3,15 @@ import { useNavigate } from 'react-router-dom';
 import Container from '../../components/Container';
 import ListItem from '../../components/ListItem';
 import Button from '../../components/Button';
-
-import Footer from '../../components/Footer';
 import Select from '../../components/Select';
 import Span from '../../components/Span';
 import Image from '../../components/Image';
+import Loader from '../../layout/Loader';
 import useCart from '../../hooks/useCart';
 import data from '../../data/SEARCH.json';
 
-const CartItem = ({ index, item, setLoading }) => {
+const CartItem = ({ index, item }) => {
+  const [loading, setLoading] = useState(false);
   const [total, setTotal] = useState(0);
   const [price, setPrice] = useState(0);
   const { subTotal, cartItems, setCartItems } = useCart();
@@ -71,9 +71,12 @@ const CartItem = ({ index, item, setLoading }) => {
 
   return (
     <ListItem classList='cart-item'>
-      <Container classList={'flex col-12 gap-1'}>
+      <Container classList={'flex col-12 gap-1 p-relative'}>
+        {loading && <Loader />}
         <Container id={'item-image'} classList={'item-image'} >
+
           <Image classList={'col-12'} url={item.selected.image_uris?.small} handleClick={() => navigate(`/product/${item.selected._id}`, { state: { product: item.selected } })} />
+
         </Container>
         <Container id={'item-details'} classList={'item-details'}>
           <Container classList={'flex flex-column'}>
@@ -88,11 +91,12 @@ const CartItem = ({ index, item, setLoading }) => {
               })
             }
           </Container>
-          <Container classList={''}>
+          {/* <Container classList={''}>
             <p>{item.quantity && `Total: $ ${total.toFixed(2)}`}</p>
 
-          </Container>
+          </Container> */}
         </Container>
+
       </Container>
       <Container classList={'item-btns'}>
         <Button classList={'btn-small item-btn bg-danger'} handleClick={() => deleteItem()}>
@@ -101,7 +105,7 @@ const CartItem = ({ index, item, setLoading }) => {
         <Button classList={'btn-small item-btn bg-primary'} title={'Add to wishlist'} handleClick={() => console.log('wishlist')}>
           {'Wishlist'}
         </Button>
-        <Select classList={'dropdown item-dropdown'} name={'item'} product={item.selected} quantity={item.quantity} setLoading={setLoading} />
+        <Select classList={'dropdown item-dropdown'} name={'item'} product={item.selected} quantity={item.quantity} setLoading={(value) => setLoading(value)} />
       </Container>
     </ListItem>
   )

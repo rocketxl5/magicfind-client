@@ -11,11 +11,8 @@ import CartItem from '../features/cart/CartItem';
 import Count from '../features/search/components/Count';
 import useAuth from '../hooks/useAuth';
 import useCart from '../hooks/useCart';
-import Loading from '../layout/Loading';
 
 function ShoppingCart() {
-  // States
-  const [loading, setLoading] = useState(false);
   // Hooks
   const { cartItems, itemsCount, subTotal } = useCart();
   const { auth } = useAuth();
@@ -34,15 +31,10 @@ function ShoppingCart() {
                 <>
                   <Container classList="cart-total flex gap-1">
                     <p className="fw-500">Subtotal:</p>
-                  {
-                    loading ? (
-                      <Loading />
-                    ) : (
+
                           <Container>
                             <p><strong>{`$ ${subTotal}`}</strong></p>
-                          </Container>
-                    )
-                  }
+                    </Container>
                   </Container>
                   <Container>
                     <Button
@@ -59,7 +51,7 @@ function ShoppingCart() {
                   {
                     cartItems.map((item, i) => {
                       return (
-                        <CartItem key={i} item={item} index={i} setLoading={(value) => setLoading(value)} />
+                        <CartItem key={i} item={item} index={i} />
                       )
                     })
                   }
