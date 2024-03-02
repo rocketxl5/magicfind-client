@@ -5,18 +5,19 @@ import Button from '../../components/Button'
 import CountDown from '../search/components/CountDown';
 import ProductImage from './ProductImage';
 import Title from '../../components/Title';
+import ListItem from '../../components/ListItem';
 import ProductDetails from './ProductDetails';
 import ProductHandlers from './ProductHandlers';
 import ProductOwner from './ProductOwner';
 import data from '../../data/PRODUCT.json';
 
-const Product = forwardRef(function Product(props, ref) {
+const ProductItem = forwardRef(function Product(props, ref) {
     const { index, count, card, search, handleSlideView, handleModalProductState } = props;
 
     const { header, title } = data['singles'];
 
     return (
-        <li className="product" ref={ref}>
+        <ListItem classList={'product-item'} ref={ref}>
             <Header classList={header.classList} >
                 <Title classList={title.classList} text={card.name} />
                 <CountDown count={count} unit={index + 1} type={'Result'} />
@@ -33,9 +34,9 @@ const Product = forwardRef(function Product(props, ref) {
                     <ProductHandlers id={'product-actions'} product={card} search={search} handleClick={handleModalProductState} />
                 </>
             </Container>
-        </li>
+        </ListItem>
     )
 
 })
 
-export default Product;
+export default ProductItem;

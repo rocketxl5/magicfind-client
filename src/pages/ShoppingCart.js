@@ -25,7 +25,7 @@ function ShoppingCart() {
 
 
   return (
-    <Page name={'shopping-cart'} component={<Count count={itemsCount} type={'Item'} />} >
+    <Page name={'shopping-cart'} hasHeader={false} component={<Count count={itemsCount} type={'Item'} />} >
       <Main classList={'cart-main col-12 bg-light-blue padding-1'}>
           {
             cartItems?.length ? (
@@ -39,30 +39,32 @@ function ShoppingCart() {
                       <Loading />
                     ) : (
                           <Container>
-                            <p>{`$ ${subTotal}`}</p>
+                            <p><strong>{`$ ${subTotal}`}</strong></p>
                           </Container>
                     )
                   }
                   </Container>
                   <Container>
                     <Button
-                      classList={'checkout-btn col-12 padding-block-1 bg-yellow color-primary'}
+                      classList={'btn checkout-btn'}
                       handleClick={() => navigate('/me/checkout', { state: { from: location } })}
                   >
-                    Checkout
+                      Proceed to checkout 
                     </Button>
                   </Container>
                 </>
               </Aside>
-              <List classList={'cart-list'}>
-                {
-                  cartItems.map((item, i) => {
-                    return (
-                      <CartItem key={i} item={item} index={i} setLoading={(value) => setLoading(value)} />
-                    )
-                  })
-                }
-              </List>
+              <Container>
+                <List classList={'cart-list'}>
+                  {
+                    cartItems.map((item, i) => {
+                      return (
+                        <CartItem key={i} item={item} index={i} setLoading={(value) => setLoading(value)} />
+                      )
+                    })
+                  }
+                </List>
+              </Container>
             </>
         ) : (
               <Container>Your Cart is Empty</Container>

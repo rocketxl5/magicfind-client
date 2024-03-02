@@ -1,14 +1,12 @@
-import { Link } from 'react-router-dom';
+import Container from '../components/Container'
 
-const Banner = ({ classList, title, link }) => {
+const Banner = ({ children, classList }) => {
 
     return (
         <section className='banner'>
-            <div className={classList}>
-                <Link className="banner-link" to={link}>
-                    {title}
-                </Link>
-            </div>
+            <Container classList={classList}>
+                {children}
+            </Container>
         </section>
 
     )

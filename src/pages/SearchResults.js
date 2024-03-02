@@ -1,8 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import Product from '../features/product/Product';
+import ProductItem from '../features/product/ProductItem';
 import Modal from '../features/modal/Modal';
-import { HiOutlineAdjustmentsHorizontal } from "react-icons/hi2";
 import useModalProductState from '../hooks/useModalProductState';
 import useSlideView from '../hooks/useSlideView';
 import Page from '../components/Page';
@@ -29,7 +28,6 @@ const SearchResults = () => {
     const [view, updateSlideView] = useSlideView(handleSlideView); 
 
     const [state, updateProductState] = useModalProductState(search, handleModalProductState);
-    console.log(cards)
 
     function handleSlideView(e, layout, expandedImage) {
         e.stopPropagation();
@@ -60,7 +58,7 @@ const SearchResults = () => {
                             cards &&
                             cards.map((card, i) => {
                                 return (
-                                    <Product
+                                    <ProductItem
                                         key={i}
                                         index={i}
                                         count={cards.length}
@@ -69,7 +67,7 @@ const SearchResults = () => {
                                         handleSlideView={handleSlideView}
                                         handleModalProductState={handleModalProductState}
                                     >
-                                    </Product>
+                                    </ProductItem>
                                 )
                             })
                         }

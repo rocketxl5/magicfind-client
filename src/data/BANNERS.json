@@ -1,8 +1,11 @@
 {
   "/": {
-    "classList": "banner-content home-page-banner",
     "title": "Join Magic Find",
-    "link": "/signup"
+    "link": "/signup",
+    "styles": {
+      "banner": "banner-content home-page-banner",
+      "link": "banner-link"
+    }
   },
   "/about": {
     "classList": "banner-content about-page-banner",

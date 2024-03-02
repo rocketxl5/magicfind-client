@@ -190,22 +190,13 @@
     margin-left: var(--size-1);
 }
 
-.btn-small {
-    display: inline-block;
-    min-width: 5em;
-    text-align: center;
-    padding-block: 0.5rem;
-    color: var(--clr-dark);
-    border: 1px solid var(--clr-grey);
-    border-radius: 5px;
-}
 
 .bg-yellow {
     background: var(--clr-yellow);
 }
 
 .bg-danger {
-    background: var(--clr-danger);
+    background: var(--clr-danger) !important;
 }
 
 .bg-success {
@@ -217,7 +208,7 @@
 }
 
 .bg-primary {
-    background: var(--clr-primary);
+    background: var(--clr-primary) !important;
 }
 
 .bg-secondary {

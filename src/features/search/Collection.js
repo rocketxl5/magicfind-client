@@ -62,6 +62,7 @@ const Collection = () => {
                             // Update local storage with search data
                             localStorage.setItem('search-results', JSON.stringify(result));
                             setLoading(false);
+                            console.log(data)
                             navigate(`/me/collection/all-cards`,
                                 {
                                     state: result,
@@ -182,7 +183,7 @@ const Collection = () => {
                             </div>
                         </section>
                         <section className="message-section">
-                            <Link className="message-link" to="/add-card"> To Add Card Page <FiArrowRightCircle /></Link>
+                            <Link className="message-link" to="/me/archive"> To MTG Archive <FiArrowRightCircle /></Link>
                         </section>
                     </div>
                 ) : (

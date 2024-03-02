@@ -112,10 +112,9 @@ const Select = (props) => {
 
   return (
     product?.quantity &&
-    <Container classList={'p-relative'}>
+    <Container classList={classList}>
     <select
           id="quantity"
-          className={classList}
           name="quantity"
           value={quantitySelected}
           onChange={(e) => setValue(parseInt(e.target.value))}

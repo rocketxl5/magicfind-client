@@ -28,11 +28,11 @@
     }
 
     .cart-aside {
-        width: 40%;
+        width: 25%;
     }
       
     .cart-list {
-        width: 60%;
+        width: 75%;
     }
 
     .product-grid {
@@ -64,7 +64,7 @@
 
     
     .page {
-        padding: var(--size-1);
+        padding: var(--size-2);
         min-height: calc(100vh - calc(var(--footer-height) + var(--header-height-wide))); 
     }
 
