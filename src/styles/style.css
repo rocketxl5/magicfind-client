@@ -1509,21 +1509,23 @@ background-repeat: no-repeat;
 }
 
 .item-image {
-  width: 35%;
+  width: 40%;
   padding: 0.5rem;
+  /* border-radius: var(--radius-1); */
 }
 
 .item-image * {
   width: 100%;
+  border-radius: var(--radius-1);
 }
 
 .item-details {
-  width: 65%;
+  width: 60%;
   padding: 0.5rem;
 }
 
 .item-detail {
-  font-size: clamp(var(--fs-100), calc(1vw + 5px), var(--fs-150));
+  font-size: clamp(11.5px, calc(1vw + 5px), var(--fs-150));
 }
 
 
