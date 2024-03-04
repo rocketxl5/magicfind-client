@@ -130,13 +130,13 @@ nav {
 }
 
 /* Avatar */
-.auth-nav-btn {
-    display: none;
+.avatar-btn {
+    /* display: none; */
     min-width: 3.3rem;
     min-height: 3.3rem;
     border-radius: 50%;
     font-size: var(--fs-200);
-    color: var(--clr-grey);
+    color: var(--clr-light);
 }
 
 nav .left-side-nav {

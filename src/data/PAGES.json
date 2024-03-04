@@ -1,5 +1,6 @@
 {
   "search-results": {
+    "id": "search-results",
     "classList": "page search-results",
     "header": {
       "classList": "page-header flex space-between align-center col-12 padding-block-1 margin-block-end-1"
@@ -10,6 +11,7 @@
     }
   },
   "shopping-cart": {
+    "id": "shopping-cart",
     "classList": "page shopping-cart",
     "header": {
       "classList": "page-header flex space-between align-center col-12 padding-block-1 margin-block-end-1"
@@ -20,9 +22,11 @@
     }
   },
   "product": {
+    "id": "product",
     "classList": "page product"
   },
   "collection": {
+    "id": "collection",
     "classList": "page collection",
     "header": {
       "classList": "page-header flex space-between align-center col-12 padding-block-1 margin-block-end-1"
@@ -33,6 +37,7 @@
     }
   },
   "archive": {
+    "id": "archive",
     "classList": "page archive",
     "header": {
       "classList": "page-header flex space-between align-center col-12 padding-block-1 margin-block-end-1"
@@ -43,6 +48,7 @@
     }
   },
   "store": {
+    "id": "store",
     "classList": "page store",
     "header": {
       "classList": "page-header flex space-between align-center col-12 padding-block-1 margin-block-end-1"
@@ -53,6 +59,7 @@
     }
   },
   "dashboard": {
+    "id": "dashboard",
     "classList": "page dashboard",
     "header": {
       "classList": "page-header flex space-between align-center col-12 padding-block-1 margin-block-end-1"
@@ -63,6 +70,7 @@
     }
   },
   "not-found": {
+    "id": "not-found",
     "classList": "page not-found",
     "header": {
       "classList": "flex justify-center align-center col-12 padding-block-1 margin-block-end-1"

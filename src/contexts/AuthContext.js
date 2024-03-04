@@ -62,8 +62,6 @@ export const AuthProvider = ({ children }) => {
     if (auth) {
       setIsAuth(true);
       // checkUnreadMail(auth.user.id, auth.token)
-
-
     }
     else {
       setIsAuth(false);
@@ -80,11 +78,9 @@ export const AuthProvider = ({ children }) => {
       if (hasExpired) {
         logoutAction();
       } else if (auth) {
-        console.log(auth)
         // const user = JSON.parse(localStorage.getItem('user'));
         // const token = JSON.parse(localStorage.getItem('token'));
         if (!localStorage.getItem('auth')) {
-
           // localStorage.setItem('auth', JSON.stringify(auth));
         }
         setAuth(auth);

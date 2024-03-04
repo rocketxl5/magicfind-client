@@ -3,7 +3,6 @@ import { api } from '../api/resources';
 const cartLoader = async (userID, productID, quantity, setLoading) => {
     // loading state @ CartContext
     setLoading(true);
-
     const options = {
         method: 'GET',
         header: { 'Content-Type': 'application/json' },

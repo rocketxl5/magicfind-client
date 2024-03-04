@@ -1,8 +1,8 @@
 import { forwardRef } from 'react'
 
-const Container = forwardRef(function Container({ children, classList }, ref) {
+const Container = forwardRef(function Container({ children, id, classList }, ref) {
     return (
-        <div className={classList} ref={ref}>
+        <div id={id} className={classList} ref={ref}>
             {children}
         </div>
     )
