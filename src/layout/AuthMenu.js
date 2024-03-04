@@ -1,6 +1,6 @@
 // Dropdown menu available after successfull singin
 import { NavLink, useNavigate } from 'react-router-dom';
-import data from '../data/routes.json'
+import data from '../data/ROUTES.json';
 import useAuth from '../hooks/useAuth';
 
 function AuthMenu() {

@@ -5,10 +5,9 @@ const AuthBtn = ({ panelRef }) => {
     const { isAuth, auth } = useAuth();
     return (
         isAuth &&
-        <Avatar
-            avatar={auth.user.avatar}
-            handleClick={() => panelRef.current.classList.toggle('side-show')}
-        />
+        <label htmlFor="mobile-nav" className="">
+            <Avatar avatar={auth.user.avatar} />
+        </label>
     )
 }
 

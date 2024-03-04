@@ -64,6 +64,7 @@ const handleSearchBar = (e, isOutsideEvent = false) => {
         if (target.classList.contains('hamburger-btn')) {
             // Handle Search bar
             if (document.querySelector('#mobile-nav').checked) {
+
                 if (browserWidth <= 775) {
                     // If Search bar is displayed
                     if (document.querySelector('#catalog-container').style.width === 'calc(100% - 5rem)') {
@@ -105,6 +106,30 @@ const handleSearchBar = (e, isOutsideEvent = false) => {
                     document.querySelector('.menu').style.setProperty('left', '70%');
                 }
             }
+        }
+        // Viewport > 775px
+        if (target.classList.contains('avatar-btn')) {
+            console.log(document.querySelector('#mobile-nav').checked)
+            console.log(document.querySelector('.menu').style.left)
+            // If menu is displayed
+            if (!document.querySelector('#mobile-nav').checked) {
+                // If menu is displayed
+                // if (document.querySelector('.menu').style.left !== '100%') {
+                // Hide menu
+                document.querySelector('.menu').style.setProperty('left', '70%');
+                document.querySelector('#mobile-nav').checked = true;
+                // }
+                // else {
+                // Hide menu
+                // document.querySelector('.menu').style.setProperty('left', '100%');
+                // }
+            }
+            else {
+                document.querySelector('.menu').style.setProperty('left', '100%');
+                document.querySelector('#mobile-nav').checked = false;
+            }
+
+
         }
 
         // If event is triggered outside of Main MainHeader
