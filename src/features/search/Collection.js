@@ -54,7 +54,7 @@ const Collection = () => {
         }
 
         fetch(`${api.serverURL}/api/cards/${auth.user.id}/cards`, options)
-            .then((res) => {
+            .then(res => {
                 if (res.ok) {
                     return res.json()
                         .then((data) => {
@@ -77,7 +77,10 @@ const Collection = () => {
                             setErrorMessage({ ...error.message });
                         })
                 }
-            });
+            })
+            .catch((error) => {
+                console.log(error.message)
+            })
     }
     useEffect(() => {
         console.log('collection')

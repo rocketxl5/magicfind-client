@@ -9,9 +9,6 @@
     }
     
 .header-logo {
-    /* margin-inline-start: 0; */
-    /* align-self: flex; */
-    /* justify-content: flex-start; */
     margin-right: auto;
 }
 
@@ -64,33 +61,8 @@ nav {
     opacity: 0.8;
 }
 
-/* .auth-btn a {
-    display: block;
-    color: var(--clr-grey);
-} */
-
 .auth-btn a * {
     pointer-events: none;
-}
-
-.side-panel {
-    /* display: none; */
-    position: absolute;
-    top: 6rem;
-    right: 0;
-    width: 0;
-    min-height: calc(100vh - var(--header-height-wide)); 
-    background-color: var(--clr-light);
-    border-top-left-radius: 10px;
-    border-bottom-left-radius: 10px;
-    transition: width 0.2s ease-in-out;
-    z-index: 1000;
-    box-shadow: 0px 0px 18px 0px rgba(0,0,0,0.2);
-}
-
-.side-show {
-    /* display: block; */
-    width: 30rem;
 }
 
 .auth-modal ul {
@@ -131,7 +103,6 @@ nav {
 
 /* Avatar */
 .avatar-btn {
-    /* display: none; */
     min-width: 3.3rem;
     min-height: 3.3rem;
     border-radius: 50%;
@@ -139,21 +110,20 @@ nav {
     color: var(--clr-light);
 }
 
-nav .left-side-nav {
+.left-side-nav {
     display: flex;
     width: 100%;
     align-items: center;
     gap: 1.5rem;
 }
 
-nav .right-side-nav {
+.right-side-nav {
     display: flex;
     height: 0;
     width: 0;
-    /* background: red; */
 }
 
-nav .right-side-nav ul {
+.right-side-nav ul {
     position: fixed;
     top: var(--header-height);
     left: 100%; 
@@ -166,6 +136,24 @@ nav .right-side-nav ul {
     background-color: var(--clr-light);
     box-shadow: 0px 0px 18px 0px rgba(0,0,0,0.2);
     z-index: 9000;
+}
+
+.side-panel {
+    position: absolute;
+    top: 5rem;
+    right: 0;
+    width: 0;
+    min-height: calc(100vh - var(--header-height)); 
+    background-color: var(--clr-light);
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    transition: width 0.2s ease-in-out;
+    z-index: 1005;
+    box-shadow: 0px 0px 18px 0px rgba(0,0,0,0.2);
+}
+
+.side-show {
+    width: 100%;
 }
 
 .nav-link {
@@ -232,11 +220,9 @@ nav .right-side-nav ul {
 /* 'checked' className option for Firebox browser added to header @ main.js */
 header:has(input:checked) .mobile-nav-label::before,
 header.checked .mobile-nav-label::before {
-  
     rotate: -45deg;
     translate: 1px 10px;
 }
-
 
 header:has(input:checked) .mobile-nav-label::after,
 header.checked .mobile-nav-label::after {
@@ -249,4 +235,3 @@ header:has(input:checked) .mobile-nav-label span,
 header.checked .mobile-nav-label span {
     opacity: 0;
 }
-

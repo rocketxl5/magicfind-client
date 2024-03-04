@@ -11,13 +11,15 @@ const DashboardNav = () => {
         setArchiveCardNames,
         setCollectionCardNames,
         setUpdateCollection,
-        updateCollection
+        updateCollection,
+        setErrorMessage
     } = useSearch();
 
     const { auth } = useAuth();
     const { query } = useParams();
 
     const { links } = data;
+
     // Setting archive card names for autocomplete archive search
     useEffect(() => {
         if (!archiveCardNames) {
@@ -54,14 +56,24 @@ const DashboardNav = () => {
                 method: 'GET',
                 headers: headers,
             }
-
             fetch(`${api.serverURL}/api/cards/${auth.user.id}/cardnames`, options)
-                .then(res => res.json())
-                .then((data) => {
-                    setCollectionCardNames(data);
-                    // Reinitialize updateCollection to allow updates
-                    setUpdateCollection(false);
-                })
+                .then(res => {
+                    if (res.ok) {
+                        return res.json()
+                            .then((data) => {
+                                setCollectionCardNames(data);
+                                // Reinitialize updateCollection to allow updates
+                                setUpdateCollection(false);
+                            })
+                    }
+                    else if (res.status === 400) {
+                        return res.json()
+                            .then((error) => {
+                                setErrorMessage({ ...error.message });
+                            })
+                    }
+                }
+                )
                 .catch((error) => {
                     console.log(error)
                 });

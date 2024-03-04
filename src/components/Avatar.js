@@ -1,10 +1,11 @@
 import Button from './Button.js';
 
-const Avatar = ({ avatar, classList = '', handleClick }) => {
+const Avatar = ({ id = '', avatar, classList = '', handleClick }) => {
     // console.log(avatar.color)
     return (
         <Button
-            classList={`nav-btn avatar-btn ${classList}`}
+            id={'avatar'}
+            classList={`nav-btn avatar-btn`}
             style={
                 { backgroundColor: `#${avatar.color}` }
             }

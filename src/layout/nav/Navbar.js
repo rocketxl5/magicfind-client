@@ -30,8 +30,11 @@ function Navbar() {
                         <>
                             <MailBtn />
                             <ShoppingCartBtn />
-                            {viewport < 775 && <HamburgerBtn />}
-                            <AuthBtn auth={auth} panelRef={panelRef} />
+                            {
+                                viewport < 775 ?
+                                    <HamburgerBtn /> :
+                                    <AuthBtn auth={auth} panelRef={panelRef} />
+                            }
                         </>
                     ) : (
                         <>
@@ -53,9 +56,9 @@ function Navbar() {
                         <Menu />
                     )}
                 </section>
-                <SidePanel ref={panelRef}>
+                {/* <SidePanel ref={panelRef}>
                     <AuthMenu />
-                </SidePanel>
+                </SidePanel> */}
             </nav>
         </div>
     )
