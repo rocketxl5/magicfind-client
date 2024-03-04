@@ -1,6 +1,4 @@
-import React, { createContext, useState, useEffect } from 'react';
-// import { useNavigate, useLocation } from 'react-router-dom';
-// import { ShoppingCartContext } from './ShoppingCartContext'
+import { createContext, useState, useEffect } from 'react';
 import { api } from '../api/resources';
 
 export const AuthContext = createContext(null);
