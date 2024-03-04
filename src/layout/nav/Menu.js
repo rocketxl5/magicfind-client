@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import data from '../../data/ROUTES.json'
+import data from '../../data/ROUTES.json';
 
 const Menu = () => {
     const { routes } = data;
