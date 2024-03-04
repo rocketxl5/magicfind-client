@@ -1,20 +1,14 @@
-import Avatar from './Avatar';
+import Avatar from '../../../components/Avatar';
+import useAuth from '../../../hooks/useAuth';
 
-const AuthBtn = ({ auth, panelRef }) => {
-
+const AuthBtn = ({ panelRef }) => {
+    const { isAuth, auth } = useAuth();
     return (
-        <button
-            className="nav-btn auth-nav-btn"
-            style={
-                { backgroundColor: `#${auth.user?.avatar.color}` }
-            }
-            onClick={
-                () => panelRef.current.classList.toggle('side-show')
-            }
-        >
-            <Avatar auth={auth} />
-        </button>
-
+        isAuth &&
+        <Avatar
+            avatar={auth.user.avatar}
+            handleClick={() => panelRef.current.classList.toggle('side-show')}
+        />
     )
 }
 

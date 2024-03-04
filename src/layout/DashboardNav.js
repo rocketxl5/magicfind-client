@@ -44,7 +44,6 @@ const DashboardNav = () => {
 
     // Setting collection card names for autocomplete collection search
     useEffect(() => {
-        console.log(auth)
         // If true
         if (updateCollection) {
 

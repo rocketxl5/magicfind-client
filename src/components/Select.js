@@ -11,9 +11,11 @@ const Select = (props) => {
   const [quantitySelected, setQuantitySelected] = useState(0);
   // Props
   const { classList, product, quantity, setLoading } = props;
+  const { seller } = product
   // Hooks
   const { cartItems, setCartItems } = useCart();
   const location = useLocation();
+  console.log(product)
 
   const isIndex = () => {
     // Look for item index in cart
@@ -27,6 +29,7 @@ const Select = (props) => {
       return false
     }
   }
+  console.log(product)
 
   useEffect(() => {
     const index = isIndex();
@@ -37,7 +40,7 @@ const Select = (props) => {
       // Call async cartLoader function
       (async () => {
         // Get selected item current availabity from items owner store
-        const item = await cartLoader(product.userID, product._id, value, (val) => setLoading(val));
+        const item = await cartLoader(seller.userID, product._id, value, (val) => setLoading(val));
 
         // If item quantity selected is available  
         if (item.isAvailable) {

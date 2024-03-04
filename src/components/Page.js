@@ -4,10 +4,10 @@ import Title from './Title';
 import Container from './Container';
 import data from '../data/PAGES.json';
 
-const Page = ({ children, name, component, hasHeader = true }) => {
-    const { classList, header, title } = data[name];
+const Page = ({ children, name, hasHeader = true, component }) => {
+    const { id, classList, header, title } = data[name];
     return (
-        <Container classList={classList}>
+        <Container id={id} classList={classList}>
             {
                 hasHeader && 
                 <Header {...header}>

@@ -2,7 +2,7 @@ import React from 'react'
 
 const Aside = ({ children, classList }) => {
     return (
-        <aside className={classList}>
+        <aside className={`aside ${classList}`}>
             {children}
         </aside>
     )

@@ -3,18 +3,20 @@ import Container from '../../../components/Container';
 import Label from '../../../components/Label';
 import Select from '../../../components/Select';
 import Button from '../../../components/Button';
+import Avatar from '../../../components/Avatar';
 import { FiPlus } from "react-icons/fi";
 import useAuth from '../../../hooks/useAuth';
 import useCart from '../../../hooks/useCart';
 import useFetch from '../../../hooks/useFetch';
 import data from '../../../data/SEARCH.json';
 
-
+// userName, country, avatar, rating, email
 
 const CatalogHandlers = ({ product, loading, setLoading }) => {
     const { conditions, finish, languages } = data.product;
-    const { set_name, price, quantity, language, userName, country, condition, finishes, card_faces, oversized, avatar, rating } = product;
-    console.log(product)
+    const { set_name, price, quantity, language, condition, finishes, seller } = product;
+    const { userName, country, avatar, rating, email } = seller;
+
     const { cartItems } = useCart();
     // const {data, loading, error } = useFetch 
     const specs = [
@@ -44,21 +46,6 @@ const CatalogHandlers = ({ product, loading, setLoading }) => {
         }
     ]
 
-    const credentials = [
-        {
-            title: 'Seller:',
-            value: userName
-        },
-        // {
-        //     title: 'Rating:',
-        //     value: rating
-        // },
-        {
-            title: 'Country:',
-            value: country
-        }
-    ]
-
     console.log(cartItems)
     return (
         <>
@@ -82,17 +69,7 @@ const CatalogHandlers = ({ product, loading, setLoading }) => {
 
                             </Container>
                             <Container>
-                                {
-                                    credentials &&
-                                    credentials.map((credential, i) => {
-                                        return (
-                                            <Container key={i + 1} classList={''}>
-                                                <p><span className="">{credential.title}</span>  <span className="">{credential.value}</span></p>
-                                            </Container>
-
-                                        )
-                                    })
-                                }
+                                <Avatar avatar={product.seller.avatar} handleClick={() => { console.log(seller) }} />
                             </Container>
                             <Container>
                                 {
