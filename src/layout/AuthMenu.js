@@ -4,8 +4,8 @@ import data from '../data/ROUTES.json';
 import useAuth from '../hooks/useAuth';
 
 function AuthMenu() {
-  const { logoutAction } = useAuth();
   const navigate = useNavigate();
+  const { logoutAction } = useAuth();
   const { authRoutes } = data;
 
   return (
