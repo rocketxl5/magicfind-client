@@ -29,7 +29,6 @@
       "to": "/me/settings"
     }
   ],
-
   "routes": [
     {
       "name": "Home",
@@ -53,3 +52,4 @@
     }
   ]
 }
+  
