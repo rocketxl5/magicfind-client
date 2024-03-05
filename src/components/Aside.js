@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Aside = ({ children, classList }) => {
+const Aside = ({ children, classList = '' }) => {
     return (
         <aside className={`aside ${classList}`}>
             {children}
