@@ -6,7 +6,7 @@ const AuthBtn = ({ panelRef }) => {
     return (
         isAuth &&
         <label htmlFor="mobile-nav">
-            <Avatar avatar={auth.user.avatar} />
+                <Avatar avatar={auth?.user.avatar} />
         </label>
     )
 }

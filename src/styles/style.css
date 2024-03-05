@@ -636,10 +636,13 @@ height: 2rem;
 .modal {
   height: 100%;
   min-width: 37rem;
+  /* max-width: 50rem; */
+  margin-inline: auto;
+  /* margin-block-start: 11rem; */
 }
 
 .modal-state {
-  width: calc(100vw - 4rem);
+  /* width: calc(100vw - 4rem); */
   height: 100%;
   margin: 0 auto;
   margin-block-start: 2rem;

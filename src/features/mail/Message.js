@@ -129,7 +129,7 @@ const Message = ({ currentMessage, setMessages, setLoading }) => {
     <div className="message-container">
       <div>
         <div
-          className="go-back"
+          className="cancel"
           onClick={() => {
             localStorage.removeItem('message');
             navigate(`/mail/${pathname}`);

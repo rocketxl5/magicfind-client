@@ -1,5 +1,5 @@
 import { useNavigate, useLocation } from 'react-router-dom';
-// import { FiPlusCircle, FiMinusCircle, FiTrash2 } from 'react-icons/fi';
+
 import Page from '../components/Page';
 import List from '../components/List';
 import ListItem from '../components/ListItem';
@@ -21,7 +21,7 @@ function ShoppingCart() {
   const location = useLocation();
   // Data 
 
-
+  console.log('in')
   return (
     <Page
       id={'shopping-cart'}
