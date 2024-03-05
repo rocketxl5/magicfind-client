@@ -15,7 +15,7 @@ const useModalProductState = (search, callback) => {
         CONFIRM_DELETE: 'confirm-delete',
         DELETE_PRODUCT: 'delete-product',
         EXPAND_CARD: 'expand-card',
-        GO_BACK: 'go-back',
+        CANCEL: 'cancel',
         EDIT_PRODUCT: 'edit-product',
         CLOSE_MODAL: 'close',
     }
@@ -55,7 +55,7 @@ const useModalProductState = (search, callback) => {
                 return INIT;
             case ACTIONS.CONFIRM_DELETE:
                 return INIT;
-            case ACTIONS.GO_BACK:
+            case ACTIONS.CANCEL:
                 return INIT;
             case ACTIONS.BACK_TO_SEARCH:
                 return INIT;

@@ -3,10 +3,10 @@ import useAuth from '../hooks/useAuth';
 
 // Requires authentication
 const PrivateRoutes = () => {
-    const { auth } = useAuth();
+    const { isAuth } = useAuth();
 
     return (
-        auth ? <Outlet /> : <Navigate to="/login" replace />
+        isAuth ? <Outlet /> : <Navigate to="/login" replace />
     )
 }
 

@@ -1,4 +1,4 @@
-const HamburgerBtn = () => {
+const Hamburger = () => {
 
     return (
         <div className="hamburger  nav-btn">
@@ -10,4 +10,4 @@ const HamburgerBtn = () => {
     )
 }
 
-export default HamburgerBtn;
+export default Hamburger;

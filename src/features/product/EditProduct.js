@@ -304,7 +304,7 @@ const EditProduct = (props) => {
                                                 <footer className="modal-footer bg-primary-light">
                                                 <div className="btn-container">
                                                     < button
-                                                        id="go-back"
+                                                            id="cancel"
                                                             className="btn bg-primary color-light"
                                                         type="button"
                                                         onClick={handleClick}

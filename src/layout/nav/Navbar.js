@@ -3,7 +3,7 @@ import Menu from './Menu';
 import AuthMenu from '../AuthMenu';
 import SearchBtn from './buttons/SearchBtn';
 import MailBtn from './buttons/MailBtn';
-import HamburgerBtn from './buttons/HamburgerBtn';
+import Hamburger from './buttons/Hamburger';
 import SignInBtn from './buttons/SignInBtn';
 import AuthBtn from './buttons/AuthBtn';
 import SidePanel from '../SidePanel';
@@ -25,24 +25,25 @@ function Navbar() {
                      /*  SearchBtn icon mobile only @ screen < 725px 
                      /*  Has a label linked to mobile-nav checkbox 
                      *************************************************/}
-                    <SearchBtn />
+                    {
+                        viewport < 775 && <SearchBtn />
+                    }
                     {isAuth ? (
                         <>
                             <MailBtn />
-                            <ShoppingCartBtn />
                             {
                                 viewport < 775 ?
-                                    <HamburgerBtn /> :
+                                    <Hamburger /> :
                                     <AuthBtn auth={auth} panelRef={panelRef} />
                             }
                         </>
                     ) : (
-                        <>
-                            <ShoppingCartBtn />
+                            <>
                             <SignInBtn />
-                            <HamburgerBtn />
+                                <Hamburger />
                         </>
                     )}
+                    <ShoppingCartBtn />
                     {/************************************************* 
                      /*  Hamburger 
                      /*  Has a label linked to mobile-nav checkbox 
