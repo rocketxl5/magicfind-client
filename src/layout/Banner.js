@@ -1,6 +1,6 @@
 import Container from '../components/Container'
 
-const Banner = ({ children, classList }) => {
+const Banner = ({ children, classList = '' }) => {
 
     return (
         <section className='banner'>
