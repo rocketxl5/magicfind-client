@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Form = ({ children, id, classList, handleSubmit }) => {
+const Form = ({ children, id, classList = '', handleSubmit }) => {
     return (
         <form id={id} className={classList} onSubmit={handleSubmit} >
             {children}

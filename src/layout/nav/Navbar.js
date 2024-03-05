@@ -25,25 +25,21 @@ function Navbar() {
                      /*  SearchBtn icon mobile only @ screen < 725px 
                      /*  Has a label linked to mobile-nav checkbox 
                      *************************************************/}
-                    {
-                        viewport < 775 && <SearchBtn />
-                    }
+                    <SearchBtn />
                     {isAuth ? (
                         <>
                             <MailBtn />
-                            {
-                                viewport < 775 ?
-                                    <Hamburger /> :
-                                    <AuthBtn auth={auth} panelRef={panelRef} />
-                            }
+                            <ShoppingCartBtn />
+                            {viewport < 775 && <Hamburger />}
+                            <AuthBtn auth={auth} panelRef={panelRef} />
                         </>
                     ) : (
                             <>
+                                <ShoppingCartBtn />
                             <SignInBtn />
                                 <Hamburger />
                         </>
                     )}
-                    <ShoppingCartBtn />
                     {/************************************************* 
                      /*  Hamburger 
                      /*  Has a label linked to mobile-nav checkbox 

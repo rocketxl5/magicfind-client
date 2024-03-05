@@ -10,6 +10,8 @@ const handleSearchBar = (e, isOutsideEvent = false) => {
     const browserWidth = getViewPortWidth();
     const target = e.target;
 
+    console.log(target)
+
     if (target) {
         if (target.classList.contains('logout')) {
             // Unfold hamburger on logout
@@ -64,7 +66,6 @@ const handleSearchBar = (e, isOutsideEvent = false) => {
         if (target.classList.contains('hamburger-btn')) {
             // Handle Search bar
             if (document.querySelector('#mobile-nav').checked) {
-
                 if (browserWidth <= 775) {
                     // If Search bar is displayed
                     if (document.querySelector('#catalog-container').style.width === 'calc(100% - 5rem)') {
@@ -88,7 +89,7 @@ const handleSearchBar = (e, isOutsideEvent = false) => {
                     if (browserWidth <= 775) {
 
                         document.querySelector('.search-btn').style.setProperty('display', 'block');
-                    }
+                    } 
                 }
             } else {
                 // Hide menu
@@ -107,6 +108,7 @@ const handleSearchBar = (e, isOutsideEvent = false) => {
                 }
             }
         }
+
         // Viewport > 775px
         if (target.classList.contains('avatar-btn')) {
             console.log(document.querySelector('#mobile-nav').checked)
@@ -151,3 +153,5 @@ const handleSearchBar = (e, isOutsideEvent = false) => {
 }
 
 export default handleSearchBar;
+
+
