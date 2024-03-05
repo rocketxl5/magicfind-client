@@ -15,13 +15,15 @@ const ProductItem = forwardRef(function Product(props, ref) {
     const { index, count, card, search, handleSlideView, handleModalProductState } = props;
 
     const { header, title } = data['singles'];
+    console.log(header)
+    console.log(title)
 
     return (
         <ListItem classList={'product-item'} ref={ref}>
-            <Header classList={header.classList} >
+            {/* <Header classList={header.classList} >
                 <Title classList={title.classList} text={card.name} />
                 <CountDown count={count} unit={index + 1} type={'Result'} />
-            </Header>
+            </Header> */}
             <Container classList={"product-wrapper"}>
 
 

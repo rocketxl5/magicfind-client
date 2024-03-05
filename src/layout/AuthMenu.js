@@ -7,7 +7,7 @@ function AuthMenu() {
   const navigate = useNavigate();
   const { logoutAction } = useAuth();
   const { authRoutes } = data;
-
+  console.log(authRoutes)
   return (
     <ul className='menu auth-nav'>
       {
