@@ -80,10 +80,10 @@ const CatalogHandlers = ({ product, loading, setLoading }) => {
                                             label={'Quantity Selected:'}
                                         >
                                             <Select
-                                                id={'quantity-selector'}
-                                                className={'catalog-item-quantity'}
-                                                product={product}
-                                                setLoading={(value) => setLoading(value)}
+                                                    id={'quantity-selector'}
+                                                    classList={'catalog-item-quantity'}
+                                                    product={product}
+                                                    setLoading={(value) => setLoading(value)}
                                             />
                                     </Label>
                                         </Container>

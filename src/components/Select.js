@@ -10,7 +10,7 @@ const Select = (props) => {
   const [value, setValue] = useState(undefined);
   const [quantitySelected, setQuantitySelected] = useState(0);
   // Props
-  const { classList, product, quantity, setLoading } = props;
+  const { classList = '', product, quantity, setLoading } = props;
   const { seller } = product
   // Hooks
   const { cartItems, setCartItems } = useCart();
