@@ -13,7 +13,7 @@ export const ScrollProvider = ({ children }) => {
     const countRef = useRef(null);
 
     const handleScroll = () => {
-        const hideNav = !isAuth ? 'hide-nav' : 'hide-auth-nav';
+        const hideNav = !isAuth ? 'hide-nav' : 'hide-auth-menu';
 
             if (window.scrollY > offset && offset > 75) {
                 // Add class to hide tab

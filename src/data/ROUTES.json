@@ -1,4 +1,5 @@
 {
+  "classList": "nav-link",
   "authRoutes": [
     {
       "name": "Home",
@@ -29,7 +30,7 @@
       "to": "/me/settings"
     }
   ],
-  "routes": [
+  "publicRoutes": [
     {
       "name": "Home",
       "to": "/"
