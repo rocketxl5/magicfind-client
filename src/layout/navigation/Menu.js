@@ -13,8 +13,8 @@ function Menu() {
     const routes = isAuth ? authRoutes : publicRoutes;
 
     return (
-        <nav className="nav-menu" ref={navRef}>
-            <ul>
+        <nav className="nav-menu">
+            <ul ref={navRef}>
                 {
                     routes.map((route, index) => {
                         return (

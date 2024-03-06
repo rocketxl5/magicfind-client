@@ -4,7 +4,7 @@ const useExpandImages = (collections) => {
     const [expandedImages, setExpandedImages] = useState([]);
 
     useEffect(() => {
-        console.log(collections)
+
         if (collections) {
             const elements = []
             collections.forEach((collection, i) => {

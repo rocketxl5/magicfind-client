@@ -14,9 +14,14 @@ const NavIcons = () => {
     return (
         <div className="nav-icons">
             {/************************************************* 
-             /*  SearchIcon icon mobile only @ screen < 725px 
-             /*  Has a label linked to mobile-nav checkbox 
+             /*  Hamburger
+             /*  Has a label linked to mobile-nav checkbox
+             *********** **************************************/}
+            {/*************************************************
+             /*  SearchIcon icon mobile only @ screen < 725px
+             /*  Has a label linked to mobile-nav checkbox
               *************************************************/}
+            {/* Mobile & Desktop [public & authenticated]*/}
             {
                 viewport < 775 ? (
                     <>
@@ -48,12 +53,7 @@ const NavIcons = () => {
                     </>
                 )
             }
-            {/************************************************* 
-             /*  Hamburger 
-             /*  Has a label linked to mobile-nav checkbox 
-             *********** **************************************/}
         </div>
-
     )
 }
 

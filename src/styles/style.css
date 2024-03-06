@@ -1548,6 +1548,16 @@ background-repeat: no-repeat;
   background: var(--clr-secondary);
 }
 
+.mobile-menu {
+  width: 100% !important;
+  left: 0 !important;
+}
+
+.desktop-menu {
+  width: 100%;
+  left: 70%;
+}
+
 
 
 

@@ -15,7 +15,6 @@ const Select = (props) => {
   // Hooks
   const { cartItems, setCartItems } = useCart();
   const location = useLocation();
-  console.log(product)
 
   const isIndex = () => {
     // Look for item index in cart
@@ -29,7 +28,6 @@ const Select = (props) => {
       return false
     }
   }
-  console.log(product)
 
   useEffect(() => {
     const index = isIndex();
@@ -110,7 +108,7 @@ const Select = (props) => {
       }
     }
 
-  }, [product])
+  }, [product, cartItems, isIndex])
 
 
   return (

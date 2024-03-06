@@ -5,7 +5,7 @@ const Avatar = ({ avatar, handleClick }) => {
     return (
         <Button
             id={'avatar'}
-            classList={`nav-btn avatar-btn`}
+            classList={`nav-btn avatar`}
             style={
                 { backgroundColor: `#${avatar.color}` }
             }

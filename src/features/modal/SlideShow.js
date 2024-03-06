@@ -14,7 +14,6 @@ const SlideShow = ({ slides, handleClick }) => {
     const [coordinate, setCoordinate] = useState(RESET);
     const [currentIndicator, setCurrentIndicator] = useState(RESET);
     const trackRef = useRef(null);
-    console.log(slides)
 
     useEffect(() => {
         LIMIT.MIN = (slides.length - 1) * -INTERVAL;
@@ -49,7 +48,7 @@ const SlideShow = ({ slides, handleClick }) => {
             <Container classList={"slide-track"} ref={trackRef}>
                 {
                     slides.map((slide, i) => {
-                        console.log(slide)
+
                         const motion = !slide.length ? slide.props.motion : slide[0].props.motion;
                         if (['static', 'flip', 'rotate'].includes(motion)) {
                             return (
