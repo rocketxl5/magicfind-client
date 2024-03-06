@@ -1,7 +1,7 @@
 import Button from './Button.js';
 
-const Avatar = ({ id = '', avatar, classList = '', handleClick }) => {
-    // console.log(avatar.color)
+const Avatar = ({ avatar, handleClick }) => {
+
     return (
         <Button
             id={'avatar'}

@@ -10,7 +10,7 @@ import Container from '../components/Container';
 import Aside from '../components/Aside';
 import Main from '../components/Main';
 import Count from '../features/search/components/Count';
-import useAuth from '../hooks/useAuth';
+// import useAuth from '../hooks/useAuth';
 import useCart from '../hooks/useCart';
 
 function ShoppingCart() {
@@ -19,9 +19,7 @@ function ShoppingCart() {
   // const { auth } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
-  // Data 
 
-  console.log('in')
   return (
     <Page
       id={'shopping-cart'}

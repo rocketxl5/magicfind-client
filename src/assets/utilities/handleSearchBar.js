@@ -44,7 +44,7 @@ const handleSearchBar = (e, isOutsideEvent = false) => {
     //         }
 
     //         // If Logo
-    //         if (target.classList.contains('logo-btn') || target.classList.contains('cart-btn') || target.classList.contains('mail-btn')) {
+    //         if (target.classList.contains('logo') || target.classList.contains('cart-btn') || target.classList.contains('mail-btn')) {
     //             // If mobile menu is displayed
     //             if (document.querySelector('#mobile-nav').checked) {
     //                 // Uncheck checkbox to initiate hamburger animation (from cross to hamburger)

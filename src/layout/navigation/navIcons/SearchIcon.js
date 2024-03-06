@@ -1,10 +1,10 @@
 import { FiSearch } from 'react-icons/fi';
 import styled from 'styled-components';
 
-const SearchBtn = () => {
+const SearchIcon = () => {
 
     return (
-        <Label htmlFor="mobile-nav" className="nav-btn search-btn search-nav-label">
+        <Label htmlFor="mobile-nav" className="nav-icon search-icon">
             <FiSearch className="nav-icon" />
         </Label>
     );
@@ -22,4 +22,4 @@ svg {
 }
 
 `;
-export default SearchBtn;
+export default SearchIcon;

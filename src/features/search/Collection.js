@@ -62,7 +62,7 @@ const Collection = () => {
                             // Update local storage with search data
                             localStorage.setItem('search-results', JSON.stringify(result));
                             setLoading(false);
-                            console.log(data)
+
                             navigate(`/me/collection/all-cards`,
                                 {
                                     state: result,
@@ -83,10 +83,7 @@ const Collection = () => {
             })
     }
     useEffect(() => {
-        console.log('collection')
-        // if (location.pathname.includes('collection')) {
         collectionInputRef.current?.focus();
-        // }
 
         if (browserWidth <= 775 && document.querySelector('#mobile-nav')?.checked) {
             hideSearchBar();

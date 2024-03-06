@@ -14,9 +14,9 @@ import data from '../../data/PRODUCT.json';
 const ProductItem = forwardRef(function Product(props, ref) {
     const { index, count, card, search, handleSlideView, handleModalProductState } = props;
 
-    const { header, title } = data['singles'];
-    console.log(header)
-    console.log(title)
+    // const { header, title } = data['singles'];
+    // console.log(header)
+    // console.log(title)
 
     return (
         <ListItem classList={'product-item'} ref={ref}>
@@ -25,8 +25,6 @@ const ProductItem = forwardRef(function Product(props, ref) {
                 <CountDown count={count} unit={index + 1} type={'Result'} />
             </Header> */}
             <Container classList={"product-wrapper"}>
-
-
                 <>
                     {/* <ProductImage product={card} handleSlideView={handleSlideView} /> */}
                 </>
@@ -38,7 +36,6 @@ const ProductItem = forwardRef(function Product(props, ref) {
             </Container>
         </ListItem>
     )
-
 })
 
 export default ProductItem;

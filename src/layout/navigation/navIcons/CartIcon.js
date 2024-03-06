@@ -4,11 +4,11 @@ import { FiShoppingCart } from 'react-icons/fi';
 import { CartContext } from '../../../contexts/CartContext';
 import styled from 'styled-components';
 
-const ShoppingCartBtn = () => {
+const CartIcon = () => {
   const { itemsCount } = useContext(CartContext);
   return (
-    <Container className="nav-btn">
-      <Link to='/shopping-cart' className="cart-btn">
+    <Container className="nav-icon">
+      <Link to='/shopping-cart' className="cart-icon">
         {itemsCount > 0 && (
           <CountContainer>
             <CountDown>
@@ -57,4 +57,4 @@ const CountDown = styled.div`
   }
 `;
 
-export default ShoppingCartBtn
+export default CartIcon

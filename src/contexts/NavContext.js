@@ -9,6 +9,12 @@ export const NavProvider = ({ children }) => {
 
     useEffect(() => {
         console.log(isOpen)
+        if (isOpen) {
+            navRef.current?.classList.add('display-nav');
+        }
+        else {
+            navRef.current?.classList.remove('display-nav');
+        }
     }, [isOpen]);
 
     return (

@@ -136,8 +136,6 @@ const EditProduct = (props) => {
 
     // Change handler
     const handleChange = (e) => {
-        // console.log(object)
-        console.log(e.target.value)
         setValues({ ...values, [e.target.name]: e.target.value })
     }
 

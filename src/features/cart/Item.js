@@ -25,7 +25,7 @@ const Item = ({ index, item }) => {
     setPrice(parsedPrice)
   }, [subTotal]);
 
-  console.log(item)
+  // console.log(item)
   const details = [
     {
       text: item.selected.name,

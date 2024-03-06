@@ -5,18 +5,18 @@ import styled from 'styled-components';
 
 const MailIcon = () => {
   const { unreadMail } = useAuth();
-    return (
-      <Container className="nav-btn">
-        <Mail className="mail-btn" to="me/mail" title=" To Inbox">
-          {unreadMail > 0 && (
-            <UnreadContainer>
-              <Unread>{unreadMail}</Unread>
-            </UnreadContainer>
-          )}
-          <FiMail className="nav-icon" size={27} />
-        </Mail>
-      </Container>
-    )
+  return (
+    <Container className="nav-icon">
+      <Mail className="mail-icon" to="me/mail" title=" To Inbox">
+        {unreadMail > 0 && (
+          <UnreadContainer>
+            <Unread>{unreadMail}</Unread>
+          </UnreadContainer>
+        )}
+        <FiMail className="nav-icon" size={27} />
+      </Mail>
+    </Container>
+  )
 }
 
 

@@ -1,15 +1,14 @@
-import React from 'react'
 import { Link } from 'react-router-dom';
 import { GiWaterBolt } from 'react-icons/gi';
 import styled from 'styled-components';
-import useAuth from '../../../hooks/useAuth';
+import useAuth from '../../hooks/useAuth';
 
-const LogoBtn = () => {
+const Logo = () => {
   const { auth } = useAuth();
 
   return (
-    <Logo className="header-logo">
-      <Anchor className="logo-btn" to={auth ? 'me' : '/'} title="Magic Find logo">
+    <Div className="logo">
+      <Anchor className="logo-anchor" to={auth ? 'me' : '/'} title="Magic Find logo">
         <SVG>
           <GiWaterBolt />
         </SVG>
@@ -18,11 +17,11 @@ const LogoBtn = () => {
           <Text>Find</Text>
         </Title>
       </Anchor>
-    </Logo>
+    </Div>
   )
 }
 
-const Logo = styled.div`
+const Div = styled.div`
 height: inherit;
 display: flex;
 align-items: center;
@@ -68,4 +67,4 @@ const Text = styled.div`
 `;
 
 
-export default LogoBtn;
+export default Logo;

@@ -2,16 +2,14 @@ import { useContext, useEffect } from 'react';
 import Catalog from '../features/search/Catalog';
 import Navbar from './navigation/Navbar';
 import DashboardNav from './DashboardNav';
-import LogoBtn from './navigation/buttons/LogoBtn';
+import Logo from './navigation/Logo';
 import { ScrollContext } from '../contexts/ScrollContext';
 import { api } from '../api/resources';
-import handleSearchBar from '../assets/utilities/handleSearchBar';
 import useAuth from '../hooks/useAuth';
 import useSearch from '../hooks/useSearch';
-import useNav from '../hooks/useNav';
 
 const MainHeader = () => {
-  const { navRef } = useContext(ScrollContext);
+  const { headerRef } = useContext(ScrollContext);
 
   const { isAuth } = useAuth();
   const { updateCatalog, setUpdateCatalog, setCatalogCardNames } = useSearch();
@@ -45,9 +43,9 @@ const MainHeader = () => {
 
   }
   return (
-    <header className="main-header" onClick={handleClick} ref={navRef}>
+    <header className="main-header" onClick={handleClick} ref={headerRef}>
       <div className="header-container">
-        <LogoBtn />
+        <Logo />
         <Catalog />
         <Navbar />
       </div>

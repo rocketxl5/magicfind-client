@@ -1,12 +1,12 @@
 import Menu from './Menu';
-import Buttons from './Buttons';
+import NavIcons from './NavIcons';
 
 function Navbar() {
 
     return (
         <div className="navbar">
             <input type="checkbox" id="mobile-nav" className="mobile-nav" />
-            <Buttons />
+            <NavIcons />
             <Menu />
         </div>
     )

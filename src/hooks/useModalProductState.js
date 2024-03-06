@@ -21,7 +21,7 @@ const useModalProductState = (search, callback) => {
     }
 
     const reducer = (state, action) => {
-        console.log(action.payload.product)
+        // console.log(action.payload.product)
         switch (action.type) {
 
             case ACTIONS.DELETE_PRODUCT:
@@ -66,8 +66,8 @@ const useModalProductState = (search, callback) => {
     const [state, dispatch] = useReducer(reducer, INIT)
 
     const updateProductState = (id, product) => {
-        console.log(id)
-        console.log(product)
+        // console.log(id)
+        // console.log(product)
         dispatch({
             type: id,
             payload: {

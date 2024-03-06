@@ -158,7 +158,7 @@
     }
 
     /* MainHeader */
-    .nav-btn svg {
+    .nav-icon svg {
         height: 3rem;
         width: 3rem;
     }
@@ -185,7 +185,7 @@
         padding-inline: 2rem;
     }
 
-    .nav-btns {
+    .nav-icons {
         width: 100%;
         justify-content: flex-end;
         gap: 2rem;
@@ -203,12 +203,12 @@
         width: 100%;
     }
 
-    .signin-nav-btn {
+    .signin {
         display: block;
     }
 
-    .auth-btn,
-    .signed-btn {
+    .auth-icon,
+    .signin-icon {
         display: block;
     }
     
@@ -266,27 +266,20 @@
         font-size: var(--fs-175);
     }
     
-    /* site menu left property is pushed top a 100% (off screen) */
-
-    .logo-btn {
-        /* margin-inline-end: var(--size-1); */
-    }
     .navbar {
         display: flex;
-        /* min-width: fit-content; */
     }
 
-    .header-logo, 
+    .logo, 
     .navbar {
         min-width: 20rem;
     }
 
-    .nav-btns {
+    .nav-icons {
         grid-gap: 2.5rem;
         gap: 2.5rem;
     }
 
-    
     /* Hamburger container */
     .mobile-nav-label {
         width: 3.3rem;
@@ -297,7 +290,6 @@
     .mobile-nav-label::before,
     .mobile-nav-label::after {
         width: 3.3rem;
-        
     }
 
     header:has(input:checked) .mobile-nav-label::before,
@@ -315,12 +307,12 @@
         translate: 1px -11.5px;
     }
     
-    .nav-btn {
+    .nav-icon {
         width: 3.3rem;
         height: 3.3rem;
     }
     
-    .nav-btn svg {
+    .nav-icon svg {
         width: 100%;
         height: 100%;
     }
@@ -335,7 +327,7 @@
         display: inline-block;
     } 
 
-    .search-btn {
+    .search-icon {
         display: none;
     }
 
@@ -397,7 +389,7 @@
         padding-inline: 4rem;
     }
 
-    .nav-btns {
+    .nav-icons {
         gap: 3rem;
         grid-gap: 3rem;
       }

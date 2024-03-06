@@ -2,7 +2,7 @@ import Avatar from '../../../components/Avatar';
 import useAuth from '../../../hooks/useAuth';
 import useNav from '../../../hooks/useNav';
 
-const AuthBtn = () => {
+const AuthIcon = () => {
     const { isAuth, auth } = useAuth();
     const { isOpen, setIsOpen } = useNav();
 
@@ -12,4 +12,4 @@ const AuthBtn = () => {
     )
 }
 
-export default AuthBtn;
+export default AuthIcon;
