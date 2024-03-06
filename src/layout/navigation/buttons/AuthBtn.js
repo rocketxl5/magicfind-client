@@ -1,13 +1,14 @@
 import Avatar from '../../../components/Avatar';
 import useAuth from '../../../hooks/useAuth';
+import useNav from '../../../hooks/useNav';
 
-const AuthBtn = ({ panelRef }) => {
+const AuthBtn = () => {
     const { isAuth, auth } = useAuth();
+    const { isOpen, setIsOpen } = useNav();
+
     return (
         isAuth &&
-        <label htmlFor="mobile-nav">
-                <Avatar avatar={auth?.user.avatar} />
-        </label>
+        <Avatar avatar={auth?.user.avatar} handleClick={() => setIsOpen(!isOpen)} />
     )
 }
 

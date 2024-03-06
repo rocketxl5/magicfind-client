@@ -110,20 +110,20 @@ nav {
     color: var(--clr-light);
 }
 
-.left-side-nav {
+.nav-btns {
     display: flex;
     width: 100%;
     align-items: center;
     gap: 1.5rem;
 }
 
-.right-side-nav {
+.nav-menu {
     display: flex;
     height: 0;
     width: 0;
 }
 
-.right-side-nav ul {
+.nav-menu ul {
     position: fixed;
     top: var(--header-height);
     left: 100%; 
@@ -164,10 +164,6 @@ nav {
     color: var(--clr-dark);
     border-bottom: 1px solid var(--clr-grey);
     z-index: 9000;
-}
-
-.logout:hover {
-    cursor: pointer;
 }
 
 /* Hamburger */

@@ -115,7 +115,7 @@ const Message = () => {
                 <label htmlFor="recipient">Recipient:</label>
               )}
               <input
-                className={errors.recipient && 'empty-field'}
+                className={errors.recipient ? 'empty-field' : ''}
                 id="recipient"
                 type="text"
                 name="recipient"
@@ -131,7 +131,7 @@ const Message = () => {
                 <label htmlFor="subject">Subject:</label>
               )}
               <input
-                className={errors.subject && 'empty-field'}
+                className={errors.subject ? 'empty-field' : ''}
                 id="subject"
                 type="text"
                 name="subject"
@@ -145,7 +145,7 @@ const Message = () => {
                 <label htmlFor="text">Message:</label>
               )}
               <textarea
-                className={errors.text && 'empty-field'}
+                className={errors.text ? 'empty-field' : ''}
                 id="text"
                 name="text"
                 value={values.text}

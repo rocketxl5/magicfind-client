@@ -16,7 +16,7 @@ import useCart from '../hooks/useCart';
 function ShoppingCart() {
   // Hooks
   const { cartItems, itemsCount, subTotal } = useCart();
-  const { auth } = useAuth();
+  // const { auth } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
   // Data 
@@ -52,7 +52,7 @@ function ShoppingCart() {
                   </Container>
                 </>
               </Aside>
-              <Main classList >
+              <Main>
                 <List classList={'list'}>
                   {
                     cartItems.map((item, i) => {
