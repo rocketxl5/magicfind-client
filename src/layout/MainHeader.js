@@ -2,7 +2,7 @@ import { useContext, useEffect } from 'react';
 import Catalog from '../features/search/Catalog';
 import Navbar from './navigation/Navbar';
 import DashboardNav from './DashboardNav';
-import LogoBtn from './nav/buttons/LogoBtn';
+import LogoBtn from './navigation/buttons/LogoBtn';
 import { ScrollContext } from '../contexts/ScrollContext';
 import { api } from '../api/resources';
 import handleSearchBar from '../assets/utilities/handleSearchBar';

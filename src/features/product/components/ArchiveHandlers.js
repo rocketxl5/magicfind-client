@@ -84,7 +84,7 @@ const ArchiveHandlers = ({ product, setLoading }) => {
         <div className="archive-handlers">
             <div className="btn-container">
 
-                <button id="add-to-collection" className={attributes.style} type={attributes.type} onClick={handleClick}>{attributes.value}</button>
+                <button id="add-to-collection" className={attributes?.style} type={attributes.type} onClick={handleClick}>{attributes.value}</button>
                 {/* <button className="btn bg-primary color-lg-grey" type="button" onClick={() => handleClick(card)}>{!isLoaded ? 'Add To Collection' : 'Added'}</button> */}
             </div>
         </div>

@@ -92,7 +92,7 @@ const DashboardNav = () => {
                             to={`/me/${link.id}`}
                             className={({ isActive }) => {
                                 // If search param is defined, add active class else add inactive class 
-                                return isActive && !query ? 'active' : 'inactive'
+                                return (isActive && !query) ? 'active' : 'inactive'
                             }}
                         >
                             <span >{link.title}</span>

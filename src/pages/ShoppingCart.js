@@ -52,7 +52,7 @@ function ShoppingCart() {
                   </Container>
                 </>
               </Aside>
-              <Main classList >
+              <Main>
                 <List classList={'list'}>
                   {
                     cartItems.map((item, i) => {

@@ -26,12 +26,12 @@ function Menu() {
                 }
                 {isAuth &&
                     <li>
-                        <a className="nav-link" onClick={() => {
+                        <div className="nav-link" onClick={() => {
                             logoutAction();
                             navigate('/login');
                         }}>
                             Logout
-                        </a>
+                        </div>
                     </li>
                 }
             </ul>
