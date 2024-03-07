@@ -195,20 +195,13 @@
         top: -6rem;
       }
 
-    .avatar-btn {
-        display: block;
-    }
-
     .nav-menu ul {
         width: 100%;
     }
 
-    .signin {
-        display: block;
-    }
 
-    .auth-icon,
-    .signin-icon {
+    #auth-icon,
+    #signin-icon {
         display: block;
     }
     

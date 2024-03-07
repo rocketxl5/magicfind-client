@@ -3,32 +3,31 @@ import { useState, useEffect, useRef, createContext } from 'react';
 export const NavContext = createContext(null);
 
 export const NavProvider = ({ children }) => {
-    const [isOpen, setIsOpen] = useState(false);
+    const [displayMenu, setDisplayMenu] = useState(false);
     const [viewportWidth, setViewPortWidth] = useState(0);
 
     const navRef = useRef(null);
 
     useEffect(() => {
-        console.log(viewportWidth)
-        const selector = viewportWidth <= 775 ? 'mobile-menu' : 'desktop-menu';
+        const selector = viewportWidth <= 775 ? 'display-mobile-menu' : 'display-desktop-menu';
 
-        if (isOpen) {
+        if (displayMenu) {
             navRef.current?.classList.add(selector);
         }
         else {
             navRef.current?.classList.remove(selector);
         }
-    }, [isOpen, viewportWidth]);
+    }, [displayMenu, viewportWidth]);
 
     useEffect(() => {
         setViewPortWidth(document.body.clientWidth)
-    }, [isOpen]);
+    }, [displayMenu]);
 
     return (
         <NavContext.Provider
             value={{
-            isOpen,
-            setIsOpen,
+                displayMenu,
+                setDisplayMenu,
                 viewportWidth,
                 navRef,
         }}>

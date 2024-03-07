@@ -3,7 +3,7 @@ import { FaUserCircle } from 'react-icons/fa';
 
 const SignIcon = () => {
     return (
-        <div className="nav-btn signin">
+        <div id="signin-icon" className="nav-icon">
             <Link className="signin-icon" to='/login'>
                 <FaUserCircle className="nav-icon" size={27} title="Login" />
             </Link>

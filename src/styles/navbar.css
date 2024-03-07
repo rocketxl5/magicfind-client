@@ -23,7 +23,6 @@
 
 .navbar {
     justify-content: end;
-    /* align-self: flex-end; */
     margin-left: auto;
 }
 
@@ -58,8 +57,7 @@ nav {
     height: 100%;
 }
 
-.auth-icon,
-.sigin-icon {
+.auth-icon {
     display: none;
 }
 
@@ -71,7 +69,8 @@ nav {
     pointer-events: none;
 }
 
-.signin {
+#auth-icon
+#signin-icon {
     display: none;
 }
 
@@ -81,7 +80,8 @@ nav {
 }
 
 .hamburger *,
-.cart-icon *,
+.cart-icon *
+.signin-icon *,
 .mail-icon *,
 .search-icon *
  {
@@ -89,7 +89,7 @@ nav {
 }
 
 /* Avatar */
-.avatar {
+.avatar-icon {
     min-width: 3.3rem;
     min-height: 3.3rem;
     border-radius: 50%;

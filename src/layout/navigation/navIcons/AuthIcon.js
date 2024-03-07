@@ -4,11 +4,11 @@ import useNav from '../../../hooks/useNav';
 
 const AuthIcon = () => {
     const { isAuth, auth } = useAuth();
-    const { isOpen, setIsOpen } = useNav();
+    const { displayMenu, setDisplayMenu } = useNav();
 
     return (
         isAuth &&
-        <Avatar avatar={auth?.user.avatar} handleClick={() => setIsOpen(!isOpen)} />
+        <Avatar id={'auth-icon'} classList={'nav-icon'} avatar={auth?.user.avatar} handleClick={() => setDisplayMenu(!displayMenu)} />
     )
 }
 

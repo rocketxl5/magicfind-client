@@ -1,10 +1,10 @@
 import useNav from '../../hooks/useNav';
 
 const Hamburger = () => {
-    const { isOpen, setIsOpen } = useNav();
+    const { displayMenu, setDisplayMenu } = useNav();
 
     return (
-        <label htmlFor="mobile-nav" className="hamburger mobile-nav-label" onClick={() => setIsOpen(!isOpen)}>
+        <label htmlFor="mobile-nav" className="hamburger mobile-nav-label" onClick={() => setDisplayMenu(!displayMenu)}>
             <span></span>
         </label>
     )
