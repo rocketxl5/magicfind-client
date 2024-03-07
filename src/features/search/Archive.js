@@ -8,7 +8,7 @@ import Page from '../../components/Page';
 import Form from '../../components/Form';
 import SearchInput from './components/SearchInput'
 import Loading from '../../layout/Loading';
-import useSearch from '../../hooks/useSearch';
+import useSearch from '../../hooks/contexthooks/useSearch';
 import { api } from '../../api/resources';
 import setQueryString from '../../assets/utilities/setQueryString';
 import hideSearchBar from '../../assets/utilities/hideSearchBar';

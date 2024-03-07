@@ -7,8 +7,8 @@ import Loading from '../../layout/Loading';
 import Option from '../../components/Option';
 import data from '../../data/EDIT.json';
 import errorHandler from './services/editErrorHandler';
-import useAuth from '../../hooks/useAuth';
-import useSearch from '../../hooks/useSearch';
+import useAuth from '../../hooks/contexthooks/useAuth';
+import useSearch from '../../hooks/contexthooks/useSearch';
 import { api } from '../../api/resources';
 
 

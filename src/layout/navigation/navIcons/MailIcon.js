@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import useAuth from '../../../hooks/useAuth';
+import useAuth from '../../../hooks/contexthooks/useAuth';
 import { FiMail } from 'react-icons/fi';
 import styled from 'styled-components';
 

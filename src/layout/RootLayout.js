@@ -2,7 +2,7 @@
 import { Outlet, useLocation } from 'react-router-dom';
 import MainHeader from './MainHeader';
 import MainFooter from './MainFooter'
-import useAuth from '../hooks/useAuth';
+import useAuth from '../hooks/contexthooks/useAuth';
 
 const RootLayout = () => {
     const location = useLocation();

@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import Loading from '../layout/Loading';
 import errorHandler from './helpers/authErrorHandler';
-import useAuth from '../hooks/useAuth';
+import useAuth from '../hooks/contexthooks/useAuth';
 import { api } from '../api/resources';
 
 const INIT = {

@@ -5,8 +5,8 @@ import DashboardNav from './DashboardNav';
 import Logo from './navigation/Logo';
 import { ScrollContext } from '../contexts/ScrollContext';
 import { api } from '../api/resources';
-import useAuth from '../hooks/useAuth';
-import useSearch from '../hooks/useSearch';
+import useAuth from '../hooks/contexthooks/useAuth';
+import useSearch from '../hooks/contexthooks/useSearch';
 
 const MainHeader = () => {
   const { headerRef } = useContext(ScrollContext);

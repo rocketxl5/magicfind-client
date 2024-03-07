@@ -1,15 +1,14 @@
-import React from 'react';
+import { StrictMode } from 'react';
 import ReactDOM from 'react-dom/client';
 import {
   Route,
-  Routes,
   createBrowserRouter,
   createRoutesFromElements,
   RouterProvider,
 } from 'react-router-dom';
 import { PathProvider } from './contexts/PathContext';
 import { AuthProvider } from './contexts/AuthContext';
-import { NavProvider } from './contexts/NavContext';
+import { MenuProvider } from './contexts/MenuContext';
 import { MailProvider } from './contexts/MailContext';
 import { SearchProvider } from './contexts/SearchContext';
 import { CartProvider } from './contexts/CartContext';
@@ -25,10 +24,10 @@ const router = createBrowserRouter(
 
 const root = ReactDOM.createRoot(document.getElementById('root'))
 root.render(
-  <React.StrictMode>
-      <PathProvider>
-        <AuthProvider>
-        <NavProvider>
+  <StrictMode>
+    <PathProvider>
+      <AuthProvider>
+        <MenuProvider>
           <MailProvider>
             <SearchProvider>
               <CartProvider>
@@ -38,9 +37,9 @@ root.render(
               </CartProvider>
             </SearchProvider>
           </MailProvider>
-        </NavProvider>
-        </AuthProvider>
+        </MenuProvider>
+      </AuthProvider>
     </PathProvider>
-  </React.StrictMode>
+  </StrictMode>
 );
 

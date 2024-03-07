@@ -4,26 +4,20 @@ import { api } from '../api/resources';
 export const AuthContext = createContext(null);
 
 export const AuthProvider = ({ children }) => {
-  // const [user, setAuth] = useState(JSON.parse(localStorage.getItem('user')));
-  // const { setCartItems, setItemsCount } = useContext(ShoppingCartContext);
   const [auth, setAuth] = useState(localStorage.getItem('auth') ? JSON.parse(localStorage.getItem('auth')) : null);
   const [isAuth, setIsAuth] = useState(false);
   const [unreadMail, setUnreadMail] = useState(null);
-
-  // const location = useLocation();
-  // const navigate = useNavigate();
 
   const logoutAction = () => {
     localStorage.removeItem('auth');
     setAuth(null);
     setIsAuth(false);
-    // navigate('/');
   }
 
   const parseJwt = (token) => {
     // Extract payload of jwt
     const decode = JSON.parse(atob(token?.split('.')[1]));
-    // console.log(decode);
+
     if (decode.exp * 1000 < new Date().getTime()) {
       return true;
     } else {

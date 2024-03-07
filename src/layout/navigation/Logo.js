@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { GiWaterBolt } from 'react-icons/gi';
 import styled from 'styled-components';
-import useAuth from '../../hooks/useAuth';
+import useAuth from '../../hooks/contexthooks/useAuth';
 
 const Logo = () => {
   const { auth } = useAuth();

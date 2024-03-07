@@ -1,5 +1,5 @@
 import React, { createContext, useState, useEffect, useRef } from 'react';
-import useAuth from '../hooks/useAuth';
+import useAuth from '../hooks/contexthooks/useAuth';
 
 export const ScrollContext = createContext();
 

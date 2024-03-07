@@ -7,7 +7,7 @@ import Span from '../../components/Span';
 import Image from '../../components/Image';
 import Avatar from '../../components/Avatar';
 import Loader from '../../layout/Loader';
-import useCart from '../../hooks/useCart';
+import useCart from '../../hooks/contexthooks/useCart';
 import data from '../../data/SEARCH.json';
 
 const Item = ({ index, item }) => {

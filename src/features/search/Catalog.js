@@ -8,7 +8,7 @@ import { useNavigate } from 'react-router-dom';
 import SearchInput from './components/SearchInput'
 import Form from '../../components/Form';
 import { SearchContext } from '../../contexts/SearchContext';
-import useAuth from '../../hooks/useAuth';
+import useAuth from '../../hooks/contexthooks/useAuth';
 import { api } from '../../api/resources';
 import hideSearchBar from '../../assets/utilities/hideSearchBar';
 import setQueryString from '../../assets/utilities/setQueryString';

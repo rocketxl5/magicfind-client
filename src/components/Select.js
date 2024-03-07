@@ -3,7 +3,7 @@ import { useLocation } from 'react-router-dom';
 import cartLoader from '../services/cartLoader.js';
 import Container from './Container.js';
 import Option from './Option';
-import useCart from '../hooks/useCart';
+import useCart from '../hooks/contexthooks/useCart';
 
 const Select = (props) => {
   // States

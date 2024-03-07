@@ -5,8 +5,8 @@ import Select from '../../../components/Select';
 import Button from '../../../components/Button';
 import Avatar from '../../../components/Avatar';
 import { FiPlus } from "react-icons/fi";
-import useAuth from '../../../hooks/useAuth';
-import useCart from '../../../hooks/useCart';
+import useAuth from '../../../hooks/contexthooks/useAuth';
+import useCart from '../../../hooks/contexthooks/useCart';
 import useFetch from '../../../hooks/useFetch';
 import data from '../../../data/SEARCH.json';
 

@@ -1,8 +1,8 @@
 import { useState, useEffect, useRef, createContext } from 'react';
 
-export const NavContext = createContext(null);
+export const MenuContext = createContext(null);
 
-export const NavProvider = ({ children }) => {
+export const MenuProvider = ({ children }) => {
     const [displayMenu, setDisplayMenu] = useState(false);
     const [viewportWidth, setViewPortWidth] = useState(0);
 
@@ -24,14 +24,13 @@ export const NavProvider = ({ children }) => {
     }, [displayMenu]);
 
     return (
-        <NavContext.Provider
-            value={{
-                displayMenu,
-                setDisplayMenu,
-                viewportWidth,
-                navRef,
+        <MenuContext.Provider value={{
+            displayMenu,
+            setDisplayMenu,
+            viewportWidth,
+            navRef,
         }}>
             {children}
-        </NavContext.Provider>
+        </MenuContext.Provider>
     )
 }

@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
-import useAuth from '../../../hooks/useAuth';
-import useSearch from '../../../hooks/useSearch';
+import useAuth from '../../../hooks/contexthooks/useAuth';
+import useSearch from '../../../hooks/contexthooks/useSearch';
 import { api } from '../../../api/resources';
 
 const INIT = {

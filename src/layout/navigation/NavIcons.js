@@ -4,7 +4,7 @@ import Hamburger from './Hamburger';
 import SignIcon from './navIcons/SignIcon';
 import AuthIcon from './navIcons/AuthIcon';
 import CartIcon from './navIcons/CartIcon';
-import useAuth from '../../hooks/useAuth';
+import useAuth from '../../hooks/contexthooks/useAuth';
 import getViewPortWidth from '../../assets/utilities/getViewPortWidth';
 
 const NavIcons = () => {
