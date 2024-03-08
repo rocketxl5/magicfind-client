@@ -9,6 +9,7 @@ import SearchInput from './components/SearchInput'
 import Form from '../../components/Form';
 import { SearchContext } from '../../contexts/SearchContext';
 import useAuth from '../../hooks/contexthooks/useAuth';
+import useMenu from '../../hooks/contexthooks/useMenu';
 import { api } from '../../api/resources';
 import hideSearchBar from '../../assets/utilities/hideSearchBar';
 import setQueryString from '../../assets/utilities/setQueryString';
@@ -32,6 +33,7 @@ const Catalog = () => {
     } = useContext(SearchContext);
     // Hooks
     const { auth, isAuth } = useAuth();
+    const { searchBarRef } = useMenu();
     const navigate = useNavigate();
 
 
@@ -125,7 +127,7 @@ const Catalog = () => {
     }
 
     return (
-        <div id="search-catalog">
+        <div id="search-catalog-form" ref={searchBarRef}>
             <Form id={'catalog-form'} classList={'search-form'} handleSubmit={searchCatalogCard}>
                 <SearchInput id={'catalog'} className={'search-catalog-field'} placeholder={'Search Magic Find'} searchCard={searchCatalogCard} isActive={isActive} ref={catalogInputRef} />
             </Form>

@@ -4,21 +4,37 @@ export const MenuContext = createContext(null);
 
 export const MenuProvider = ({ children }) => {
     const [displayMenu, setDisplayMenu] = useState(false);
+    const [displaySearchBar, setDisplaySearchBar] = useState(false);
+
     const [isMobile, setIsMobile] = useState(false);
 
-    const inputRef = useRef(null);
     const menuRef = useRef(null);
+    const checkboxRef = useRef(null);
+    const searchBarRef = useRef(null);
+    const searchIconRef = useRef(null);
 
     useEffect(() => {
         const selector = isMobile ? 'display-mobile-menu' : 'display-desktop-menu';
 
         if (displayMenu) {
             menuRef.current?.classList.add(selector);
+            isMobile && searchIconRef.current.classList.add('d-none');
         }
         else {
             menuRef.current?.classList.remove(selector);
+            isMobile && searchIconRef.current?.classList.remove('d-none');
         }
     }, [displayMenu, isMobile]);
+
+    useEffect(() => {
+        if (displaySearchBar) {
+            searchBarRef.current?.classList.add('display-searchbar');
+        }
+        else {
+            searchBarRef.current?.classList.remove('display-searchbar');
+        }
+
+    }, [displaySearchBar])
 
     useEffect(() => {
         if (document.body.clientWidth <= 775) {
@@ -33,9 +49,13 @@ export const MenuProvider = ({ children }) => {
         <MenuContext.Provider value={{
             displayMenu,
             setDisplayMenu,
+            displaySearchBar,
+            setDisplaySearchBar,
             isMobile,
-            inputRef,
             menuRef,
+            checkboxRef,
+            searchIconRef,
+            searchBarRef
         }}>
             {children}
         </MenuContext.Provider>

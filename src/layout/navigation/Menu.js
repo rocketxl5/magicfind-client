@@ -7,7 +7,7 @@ import data from '../../data/ROUTES.json';
 function Menu() {
     const navigate = useNavigate();
     const { isAuth, logoutAction } = useAuth();
-    const { displayMenu, setDisplayMenu, menuRef, inputRef } = useMenu();
+    const { displayMenu, setDisplayMenu, menuRef, checkboxRef } = useMenu();
     // Declares menus related variables
     const { authRoutes, publicRoutes, classList } = data;
     // Defines routes according to user status
@@ -17,7 +17,7 @@ function Menu() {
         // Close Menu
         setDisplayMenu(!displayMenu);
         // Check mobile-nav checkbox to trigger css hamburger animation
-        inputRef.current.click();
+        checkboxRef.current?.click();
     }
 
     return (

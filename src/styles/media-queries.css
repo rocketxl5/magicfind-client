@@ -224,7 +224,7 @@
         align-items: flex-start;
     }
 
-    #catalog-container {
+    #search-catalog-form {
         position: relative;
         min-height: var(--top-desktop);
         min-width: clamp(20rem, 45%, 60rem) !important;
