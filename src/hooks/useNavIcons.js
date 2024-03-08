@@ -14,12 +14,8 @@ const useNavIcons = () => {
         }
     }
 
-    const handleSearchField = () => {
+    const handleSearchIcon = () => {
 
-        if (displayMenu) {
-            // Hide menu
-            setDisplayMenu(false);
-        }
         // If searchbar is hidden
         if (!displaySearchBar) {
             // Display searchbar
@@ -55,7 +51,7 @@ const useNavIcons = () => {
                 handleNavIcons();
                 break;
             case 'search-icon':
-                handleSearchField();
+                handleSearchIcon();
                 break;
             case 'hamburger-icon':
             case 'auth-icon':

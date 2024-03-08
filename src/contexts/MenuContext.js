@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef, createContext } from 'react';
+import useViewport from '../hooks/contexthooks/useViewport';
 
 export const MenuContext = createContext(null);
 
@@ -6,7 +7,7 @@ export const MenuProvider = ({ children }) => {
     const [displayMenu, setDisplayMenu] = useState(false);
     const [displaySearchBar, setDisplaySearchBar] = useState(false);
 
-    const [isMobile, setIsMobile] = useState(false);
+    const { isMobile } = useViewport();
 
     const menuRef = useRef(null);
     const checkboxRef = useRef(null);
@@ -17,11 +18,11 @@ export const MenuProvider = ({ children }) => {
         const selector = isMobile ? 'd-mobile-menu' : 'd-desktop-menu';
 
         if (displayMenu) {
-            menuRef.current?.classList.add(selector);
-            isMobile && searchIconRef.current.classList.add('d-none');
+            menuRef.current.classList.add(selector);
+            isMobile && searchIconRef.current?.classList.add('d-none');
         }
         else {
-            menuRef.current?.classList.remove(selector);
+            menuRef.current.classList.remove(selector);
             isMobile && searchIconRef.current?.classList.remove('d-none');
         }
     }, [displayMenu, isMobile]);
@@ -31,19 +32,11 @@ export const MenuProvider = ({ children }) => {
             searchBarRef.current?.classList.add('d-searchbar');
         }
         else {
-            searchBarRef.current?.classList.remove('d-searchbar');
+            searchBarRef.current.classList.remove('d-searchbar');
+            checkboxRef.current?.click();
         }
 
     }, [displaySearchBar])
-
-    useEffect(() => {
-        if (document.body.clientWidth <= 775) {
-            setIsMobile(true);
-        }
-        else {
-            setIsMobile(false);
-        }
-    }, [displayMenu]);
 
     return (
         <MenuContext.Provider value={{
@@ -51,7 +44,6 @@ export const MenuProvider = ({ children }) => {
             setDisplayMenu,
             displaySearchBar,
             setDisplaySearchBar,
-            isMobile,
             menuRef,
             checkboxRef,
             searchIconRef,

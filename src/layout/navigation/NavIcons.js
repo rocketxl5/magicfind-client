@@ -6,10 +6,11 @@ import AuthIcon from './navIcons/AuthIcon';
 import CartIcon from './navIcons/CartIcon';
 import useMenu from '../../hooks/contexthooks/useMenu';
 import useAuth from '../../hooks/contexthooks/useAuth';
+import useViewport from '../../hooks/contexthooks/useViewport';
 
 const NavIcons = () => {
     const { isAuth, auth } = useAuth();
-    const { isMobile } = useMenu();
+    const { isMobile } = useViewport();
 
     return (
         <div className="nav-icons" >

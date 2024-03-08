@@ -13,6 +13,8 @@ import { MailProvider } from './contexts/MailContext';
 import { SearchProvider } from './contexts/SearchContext';
 import { CartProvider } from './contexts/CartContext';
 import { ScrollProvider } from './contexts/ScrollContext';
+import { ViewportProvider } from './contexts/ViewportContext';
+
 import App from './App';
 
 const router = createBrowserRouter(
@@ -25,21 +27,23 @@ const router = createBrowserRouter(
 const root = ReactDOM.createRoot(document.getElementById('root'))
 root.render(
   <StrictMode>
-    <PathProvider>
-      <AuthProvider>
-        <MenuProvider>
-          <MailProvider>
-            <SearchProvider>
-              <CartProvider>
-                <ScrollProvider>
-                  <RouterProvider router={router} />
-                </ScrollProvider>
-              </CartProvider>
-            </SearchProvider>
-          </MailProvider>
-        </MenuProvider>
-      </AuthProvider>
-    </PathProvider>
+    <ViewportProvider>
+      <PathProvider>
+        <AuthProvider>
+          <MenuProvider>
+            <MailProvider>
+              <SearchProvider>
+                <CartProvider>
+                  <ScrollProvider>
+                    <RouterProvider router={router} />
+                  </ScrollProvider>
+                </CartProvider>
+              </SearchProvider>
+            </MailProvider>
+          </MenuProvider>
+        </AuthProvider>
+      </PathProvider>
+    </ViewportProvider>
   </StrictMode>
 );
 

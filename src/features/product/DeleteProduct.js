@@ -100,7 +100,7 @@ const DeleteProduct = (props) => {
 
     return (
         <div className="modal-state">
-            <div className={`modal-state-content ${loading ? 'border-light' : response.isDeleted ? 'border-success' : 'border-red'}`}>
+            <div className={`modal-state-content ${loading ? 'border-light' : response.isDeleted ? 'border-success' : 'border-danger'}`}>
                 {
                     loading ? (
                         <Loading />

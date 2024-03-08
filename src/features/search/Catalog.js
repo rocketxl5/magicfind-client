@@ -100,6 +100,9 @@ const Catalog = () => {
                             setCardName('');
                             setSearchInput(null);
                             localStorage.setItem('search-results', JSON.stringify(result));
+                            if (displaySeachBar) {
+                                setDisplaySearchBar(false);
+                            }
                             navigate(`/catalog/${setQueryString(query.toLowerCase(), '-')}`,
                                 {
                                     state: { result: result },
@@ -110,13 +113,13 @@ const Catalog = () => {
                     return res.json().then((error) => {
 
                         setLoading(false);
-
+                        if (displaySeachBar) {
+                            setDisplaySearchBar(false);
+                        }
                         navigate(`/not-found/${query}`);
                     })
                 }
-                if (displaySeachBar) {
-                    setDisplaySearchBar(false);
-                }
+
             });
     }
 
