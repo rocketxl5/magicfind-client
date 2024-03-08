@@ -12,6 +12,7 @@ export const MenuProvider = ({ children }) => {
     const menuRef = useRef(null);
     const checkboxRef = useRef(null);
     const searchBarRef = useRef(null);
+    const cartCountRef = useRef(null);
     const searchIconRef = useRef(null);
 
     useEffect(() => {
@@ -19,11 +20,15 @@ export const MenuProvider = ({ children }) => {
 
         if (displayMenu) {
             menuRef.current?.classList.add(selector);
-            isMobile && searchIconRef.current?.classList.add('d-none');
+            if (isMobile) {
+                searchIconRef.current?.classList.add('d-none');
+            }
         }
         else {
             menuRef.current?.classList.remove(selector);
-            isMobile && searchIconRef.current?.classList.remove('d-none');
+            if (isMobile) {
+                searchIconRef.current?.classList.remove('d-none');
+            }
         }
     }, [displayMenu, isMobile]);
 
@@ -31,9 +36,11 @@ export const MenuProvider = ({ children }) => {
 
         if (displaySearchBar) {
             searchBarRef.current?.classList.add('d-searchbar');
+            cartCountRef.current?.classList.add('d-none');
         }
         else {
             searchBarRef.current?.classList.remove('d-searchbar');
+            cartCountRef.current?.classList.remove('d-none');
         }
     }, [displaySearchBar])
 
@@ -45,8 +52,9 @@ export const MenuProvider = ({ children }) => {
             setDisplaySearchBar,
             menuRef,
             checkboxRef,
+            searchBarRef,
+            cartCountRef,
             searchIconRef,
-            searchBarRef
         }}>
             {children}
         </NavigationContext.Provider>
