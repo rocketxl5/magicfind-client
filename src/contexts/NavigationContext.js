@@ -18,24 +18,23 @@ export const MenuProvider = ({ children }) => {
         const selector = isMobile ? 'd-mobile-menu' : 'd-desktop-menu';
 
         if (displayMenu) {
-            menuRef.current.classList.add(selector);
+            menuRef.current?.classList.add(selector);
             isMobile && searchIconRef.current?.classList.add('d-none');
         }
         else {
-            menuRef.current.classList.remove(selector);
+            menuRef.current?.classList.remove(selector);
             isMobile && searchIconRef.current?.classList.remove('d-none');
         }
     }, [displayMenu, isMobile]);
 
     useEffect(() => {
+
         if (displaySearchBar) {
             searchBarRef.current?.classList.add('d-searchbar');
         }
         else {
-            searchBarRef.current.classList.remove('d-searchbar');
-            checkboxRef.current?.click();
+            searchBarRef.current?.classList.remove('d-searchbar');
         }
-
     }, [displaySearchBar])
 
     return (

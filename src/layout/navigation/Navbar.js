@@ -7,7 +7,7 @@ function Navbar() {
 
     return (
         <div className="navbar">
-            <input type="checkbox" id="mobile-nav" className="mobile-nav" ref={checkboxRef} />
+            <input type="checkbox" id="mobile-nav" className="mobile-nav" defaultChecked={false} ref={checkboxRef} />
             <NavIcons />
             <Menu />
         </div>
