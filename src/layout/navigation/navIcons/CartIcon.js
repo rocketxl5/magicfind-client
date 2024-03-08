@@ -2,15 +2,18 @@ import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { FiShoppingCart } from 'react-icons/fi';
 import { CartContext } from '../../../contexts/CartContext';
+import useNav from '../../../hooks/contexthooks/useNav';
 import styled from 'styled-components';
 
 const CartIcon = () => {
   const { itemsCount } = useContext(CartContext);
+  const { cartCountRef } = useNav();
+
   return (
     <Container className="nav-icon">
       <Link id="cart-icon" className="cart-icon" to='/shopping-cart' title="Shopping Cart">
         {itemsCount > 0 && (
-          <CountContainer>
+          <CountContainer ref={cartCountRef}>
             <CountDown>
               <span>
                 {itemsCount}

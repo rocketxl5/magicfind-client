@@ -9,12 +9,6 @@ export const ViewportProvider = ({ children }) => {
     useEffect(() => {
         const handleResize = () => {
             setViewPortWidth(window.innerWidth);
-            // if (window.innerWidth <= 775) {
-            //     setIsMobile(true);
-            // }
-            // else {
-            //     setIsMobile(false);
-            // }
         }
         window.addEventListener('resize', handleResize);
     }, [])
@@ -28,12 +22,7 @@ export const ViewportProvider = ({ children }) => {
         else {
             setIsMobile(false);
         }
-        // console.log(isMobile)
     }, [viewportWidth])
-
-    useEffect(() => {
-        console.log(isMobile)
-    }, [isMobile])
 
     return (
         <ViewportContext.Provider value={{
