@@ -1,6 +1,6 @@
 import { forwardRef, useRef, useEffect } from 'react'
 import { FiPlus } from "react-icons/fi";
-import useScroll from '../../../hooks/useScroll';
+import useScroll from '../../../hooks/contexthooks/useScroll';
 
 const SearchParameters = forwardRef(function SearchParameters(props, ref) {
     const { setSearchFeatures, searchFeatures } = props;

@@ -7,8 +7,8 @@ import Loading from '../../layout/Loading';
 import Option from '../../components/Option';
 import data from '../../data/EDIT.json';
 import errorHandler from './services/editErrorHandler';
-import useAuth from '../../hooks/useAuth';
-import useSearch from '../../hooks/useSearch';
+import useAuth from '../../hooks/contexthooks/useAuth';
+import useSearch from '../../hooks/contexthooks/useSearch';
 import { api } from '../../api/resources';
 
 
@@ -136,8 +136,6 @@ const EditProduct = (props) => {
 
     // Change handler
     const handleChange = (e) => {
-        // console.log(object)
-        console.log(e.target.value)
         setValues({ ...values, [e.target.name]: e.target.value })
     }
 
@@ -313,7 +311,7 @@ const EditProduct = (props) => {
                                                     </button>
                                                     < button
                                                         id="confirm-publish"
-                                                        className="btn bg-green color-light"
+                                                            className="btn bg-success color-light"
                                                         type="button"
 
                                                         onClick={handleSubmit} >

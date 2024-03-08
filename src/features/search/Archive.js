@@ -8,11 +8,10 @@ import Page from '../../components/Page';
 import Form from '../../components/Form';
 import SearchInput from './components/SearchInput'
 import Loading from '../../layout/Loading';
-import useSearch from '../../hooks/useSearch';
 import { api } from '../../api/resources';
+import useSearch from '../../hooks/contexthooks/useSearch';
+import useNav from '../../hooks/contexthooks/useNav.js';
 import setQueryString from '../../assets/utilities/setQueryString';
-import hideSearchBar from '../../assets/utilities/hideSearchBar';
-import getViewPortWidth from '../../assets/utilities/getViewPortWidth';
 
 const Search = () => {
     // States
@@ -37,15 +36,15 @@ const Search = () => {
         setUpdateCollection
     } = useSearch();
 
+    const { displaySeachBar, setDisplaySearchBar } = useNav();
+
     const navigate = useNavigate();
 
-    // Utilities
-    const browserWidth = getViewPortWidth();
 
     useEffect(() => {
         archiveInputRef.current?.focus();
-        if (browserWidth <= 775 && document.querySelector('#mobile-nav')?.checked) {
-            hideSearchBar();
+        if (displaySeachBar) {
+            setDisplaySearchBar(false);
         }
     }, [])
 

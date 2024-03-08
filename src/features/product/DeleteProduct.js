@@ -5,8 +5,8 @@ import CollectionDetails from './components/CollectionDetails';
 import Success from './Success';
 import Loading from '../../layout/Loading';
 // import { FaBan } from "react-icons/fa6";
-import useAuth from '../../hooks/useAuth';
-import useSearch from '../../hooks/useSearch';
+import useAuth from '../../hooks/contexthooks/useAuth';
+import useSearch from '../../hooks/contexthooks/useSearch';
 import { api } from '../../api/resources';
 import { FaChessKing } from 'react-icons/fa6';
 
@@ -100,7 +100,7 @@ const DeleteProduct = (props) => {
 
     return (
         <div className="modal-state">
-            <div className={`modal-state-content ${loading ? 'border-light' : response.isDeleted ? 'border-success' : 'border-red'}`}>
+            <div className={`modal-state-content ${loading ? 'border-light' : response.isDeleted ? 'border-success' : 'border-danger'}`}>
                 {
                     loading ? (
                         <Loading />

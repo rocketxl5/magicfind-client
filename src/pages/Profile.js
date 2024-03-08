@@ -1,4 +1,4 @@
-import useAuth from '../hooks/useAuth';
+import useAuth from '../hooks/contexthooks/useAuth';
 
 const Profile = () => {
   const { auth } = useAuth();

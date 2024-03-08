@@ -25,6 +25,7 @@ picture {
 
 body {
     line-height: 1.5;
+    min-width: 100vw;
     min-height: 100vh;
 }
 

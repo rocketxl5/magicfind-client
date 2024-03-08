@@ -1,8 +1,8 @@
 import { Outlet, useLocation } from 'react-router-dom';
-import Banner from './Banner';
 import { Link } from 'react-router-dom';
+import Banner from './Banner';
 import Loading from './Loading';
-import useSearch from '../hooks/useSearch';
+import useSearch from '../hooks/contexthooks/useSearch';
 import data from '../data/BANNERS.json';
 
 const Layout = () => {

@@ -1,12 +1,14 @@
 import Menu from './Menu';
-import Buttons from './Buttons';
+import NavIcons from './NavIcons';
+import useNav from '../../hooks/contexthooks/useNav.js';
 
 function Navbar() {
+    const { checkboxRef } = useNav();
 
     return (
         <div className="navbar">
-            <input type="checkbox" id="mobile-nav" className="mobile-nav" />
-            <Buttons />
+            <input type="checkbox" id="mobile-nav" className="mobile-nav" ref={checkboxRef} />
+            <NavIcons />
             <Menu />
         </div>
     )

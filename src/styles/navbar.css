@@ -8,22 +8,21 @@
     background-color: var(--clr-primary);
     }
     
-.header-logo {
+.logo {
     margin-right: auto;
 }
 
-.logo-btn {
+.logo-anchor {
     min-width: 5rem;
 }
 
-.logo-btn * {
+.logo-anchor * {
     pointer-events: none;
     color: var(--clr-grey);
 }
 
 .navbar {
     justify-content: end;
-    /* align-self: flex-end; */
     margin-left: auto;
 }
 
@@ -31,90 +30,70 @@ nav {
     width: 100%;
 }
 
-.nav-btn {
+.nav-icons {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.nav-icon {
     width: 3rem;
     height: 3rem;
 }
 
-.nav-btn:hover {
+.nav-icon:hover {
    opacity: 0.8;
 }
 
-.nav-btn a {
+.nav-icon a {
     color: var(--clr-grey);
 }
 
-.nav-btn svg {
+.nav-icon svg {
     color: var(--clr-grey);
     display: block;
     width: 100%;
     height: 100%;
-
 }
 
-.auth-btn,
-.sigin-btn {
+.auth-icon {
     display: none;
 }
 
-.auth-btn:hover {
+.auth-icon:hover {
     opacity: 0.8;
 }
 
-.auth-btn a * {
+.auth-icon a * {
     pointer-events: none;
 }
 
-.auth-modal ul {
-    height: inherit;
-    display: block;
-    position: static;
-
-}
-
-.auth-modal a {
-   display: block;
-   padding: 1rem;
-   text-align: center;
-   font-size: var(--fs-150);
-   color: var(--clr-grey);
-   background-color: var(--clr-secondary);
-   border-top: 1px solid var(--clr-grey);
-}
-
-.signin-nav-btn {
+#auth-icon {
     display: none;
 }
 
-.auth-btn,
-.hamburger-btn,
-.search-btn {
+.hamburger,
+.search-icon {
     cursor: pointer;
 }
 
-.auth-btn *,
-.hamburger-btn *,
-.cart-btn *,
-.mail-btn *,
-.search-btn *
+.hamburger *,
+.cart-icon *,
+.signin-icon *,
+.mail-icon *,
+.search-icon *
  {
     pointer-events: none;
 }
 
 /* Avatar */
-.avatar-btn {
+.avatar-icon {
     min-width: 3.3rem;
     min-height: 3.3rem;
     border-radius: 50%;
     font-size: var(--fs-200);
     color: var(--clr-light);
-}
-
-.nav-btns {
-    display: flex;
-    width: 100%;
-    align-items: center;
-    gap: 1.5rem;
 }
 
 .nav-menu {
@@ -130,7 +109,7 @@ nav {
     display: flex;
     flex-direction: column;
     min-height: calc(100vh - var(--header-height));
-    width: 100%;
+    width: 0;
     overflow-y: hidden;
     transition: 0.2s ease;
     background-color: var(--clr-light);
@@ -171,14 +150,6 @@ nav {
     display: none;
 }
 
-.hamburger {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 3rem;
-    min-height: 4rem;
-}
-
 .mobile-nav-label {
     position: relative;
     display: flex;
@@ -187,6 +158,7 @@ nav {
     height: 2.7rem;
     cursor: pointer;
 }
+
 .mobile-nav-label span,
 .mobile-nav-label::before,
 .mobile-nav-label::after {
@@ -204,30 +176,35 @@ nav {
     position: absolute;
 }
 
-.mobile-nav-label::before {
+ .mobile-nav-label::before {
+    /* rotate: var(--rotation-before);
+    translate: var(--translation-before); */
     top: 2px;
 }
 
 .mobile-nav-label::after {
+    /* rotate: var(--rotation-after);
+    translate: var(--translation-after); */
     bottom: 2px;
 }
 
+/* .mobile-nav-label span {
+    opacity: var(--opacity-between);
+} */
+
 /* Hamburger animation */
 /* 'checked' className option for Firebox browser added to header @ main.js */
-header:has(input:checked) .mobile-nav-label::before,
-header.checked .mobile-nav-label::before {
+.navbar:has(input:checked) .mobile-nav-label::before {
     rotate: -45deg;
     translate: 1px 10px;
 }
 
-header:has(input:checked) .mobile-nav-label::after,
-header.checked .mobile-nav-label::after {
+.navbar:has(input:checked) .mobile-nav-label::after {
    
     rotate: 45deg;
     translate: 1px -10px;
 }
 
-header:has(input:checked) .mobile-nav-label span,
-header.checked .mobile-nav-label span {
+.navbar:has(input:checked) .mobile-nav-label span {
     opacity: 0;
 }

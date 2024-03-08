@@ -1,10 +1,9 @@
 import React, {
-    forwardRef,
-    useContext
+    forwardRef
 } from 'react';
 import AutoComplete from './AutoComplete';
-import { SearchContext } from '../../../contexts/SearchContext';
-import hideSearchBar from '../../../assets/utilities/hideSearchBar';
+import useNav from '../../../hooks/contexthooks/useNav.js';
+import useSearch from '../../../hooks/contexthooks/useSearch';
 
 const SearchInput = forwardRef(function SearchInput(props, ref) {
     const {
@@ -27,7 +26,9 @@ const SearchInput = forwardRef(function SearchInput(props, ref) {
         searchInput,
         displayAutcomplete,
         setDisplayAutocomplete
-    } = useContext(SearchContext);
+    } = useSearch();
+
+    const { displaySeachBar, setDisplaySearchBar } = useNav();
 
     const handleChange = (e) => {
 
@@ -70,8 +71,8 @@ const SearchInput = forwardRef(function SearchInput(props, ref) {
             setSearchInput(e.target);
         }
 
-        if (document.querySelector('#mobile-nav')?.checked) {
-            hideSearchBar();
+        if (displaySeachBar) {
+            setDisplaySearchBar(false);
         }
     }
 

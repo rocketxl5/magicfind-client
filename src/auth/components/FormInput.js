@@ -1,4 +1,4 @@
-import React, { forwardRef } from 'react';
+import { forwardRef } from 'react';
 import Requirements from './Requirements';
 
 const FormInput = forwardRef((props, ref) => {

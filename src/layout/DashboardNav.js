@@ -2,8 +2,8 @@ import { useEffect } from 'react';
 import { NavLink, useParams } from 'react-router-dom'
 import data from '../data/AUTH.json';
 import { api } from '../api/resources';
-import useAuth from '../hooks/useAuth';
-import useSearch from '../hooks/useSearch';
+import useAuth from '../hooks/contexthooks/useAuth';
+import useSearch from '../hooks/contexthooks/useSearch';
 
 const DashboardNav = () => {
     const {

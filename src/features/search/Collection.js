@@ -10,11 +10,10 @@ import Form from '../../components/Form';
 import SearchInput from './components/SearchInput';
 import Button from '../../components/Button';
 import Loading from '../../layout/Loading';
-import useAuth from '../../hooks/useAuth';
-import useSearch from '../../hooks/useSearch';
+import useAuth from '../../hooks/contexthooks/useAuth';
+import useSearch from '../../hooks/contexthooks/useSearch';
+import useNav from '../../hooks/contexthooks/useNav.js';
 import { api } from '../../api/resources';
-import getViewPortWidth from '../../assets/utilities/getViewPortWidth';
-import hideSearchBar from '../../assets/utilities/hideSearchBar';
 import setQueryString from '../../assets/utilities/setQueryString';
 
 const Collection = () => {
@@ -36,11 +35,11 @@ const Collection = () => {
         predictions,
         collectionCardNames
     } = useSearch();
-    // Hooks
+
+    const { displaySeachBar, setDisplaySearchBar } = useNav();
+
     const { auth } = useAuth();
     const navigate = useNavigate();
-    // Utilities
-    const browserWidth = getViewPortWidth();
 
     const searchCollection = () => {
 
@@ -62,7 +61,7 @@ const Collection = () => {
                             // Update local storage with search data
                             localStorage.setItem('search-results', JSON.stringify(result));
                             setLoading(false);
-                            console.log(data)
+
                             navigate(`/me/collection/all-cards`,
                                 {
                                     state: result,
@@ -83,13 +82,10 @@ const Collection = () => {
             })
     }
     useEffect(() => {
-        console.log('collection')
-        // if (location.pathname.includes('collection')) {
         collectionInputRef.current?.focus();
-        // }
 
-        if (browserWidth <= 775 && document.querySelector('#mobile-nav')?.checked) {
-            hideSearchBar();
+        if (displaySeachBar) {
+            setDisplaySearchBar(false);
         }
     }, []);
 
@@ -205,7 +201,7 @@ const Collection = () => {
                                                 ref={collectionInputRef} />
                                             <Button
                                                 id={''}
-                                                classList='bg-green btn-collection'
+                                                classList='bg-success btn-collection'
                                                 handleClick={() => searchCollection('cards')}
                                             >
                                                 {'All Cards'}

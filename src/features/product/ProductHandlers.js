@@ -26,7 +26,7 @@ const ProductHandlers = ({ id, product, active, search, handleClick }) => {
     }
     return (
 
-            <div className="product-handlers border-red">
+        <div className="product-handlers border-danger">
                 {
                     handlers[search]
                 }

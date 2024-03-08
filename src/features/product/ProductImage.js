@@ -18,8 +18,6 @@ const ProductImage = ({ product, loading, handleSlideView }) => {
         }
     }, [product])
 
-    // console.log(product.layout)
-
     return (
         // expandedImage &&
         <section className="product-image border-success">

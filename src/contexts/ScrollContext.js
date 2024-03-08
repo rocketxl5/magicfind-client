@@ -1,39 +1,34 @@
 import React, { createContext, useState, useEffect, useRef } from 'react';
-import useAuth from '../hooks/useAuth';
+import useAuth from '../hooks/contexthooks/useAuth';
 
 export const ScrollContext = createContext();
 
 export const ScrollProvider = ({ children }) => {
-    const [viewport, setViewport] = useState(0);
     const [offset, setOffset] = useState(0);
     const { isAuth } = useAuth();
 
-    const navRef = useRef(null);
+    const headerRef = useRef(null);
     const btnRef = useRef(null);
     const countRef = useRef(null);
 
     const handleScroll = () => {
-        const hideNav = !isAuth ? 'hide-nav' : 'hide-auth-menu';
+        const hideHeader = !isAuth ? 'hide-nav' : 'hide-auth-menu';
 
             if (window.scrollY > offset && offset > 75) {
                 // Add class to hide tab
-                navRef.current?.classList.add(hideNav);
+                headerRef.current?.classList.add(hideHeader);
                 countRef.current?.classList.add('move-count')
                 btnRef.current?.classList.add('hide-btn');
             }
             else {
                 // Remove class to display btn
-                navRef.current?.classList.remove(hideNav);
+                headerRef.current?.classList.remove(hideHeader);
                 countRef.current?.classList.remove('move-count')
                 btnRef.current?.classList.remove('hide-btn');
             }
 
         setOffset(window.scrollY)
     }
-
-    useEffect(() => {
-        setViewport(document.body.clientWidth);
-    }, [])
 
     useEffect(() => {
         window.addEventListener('scroll', handleScroll);
@@ -45,7 +40,7 @@ export const ScrollProvider = ({ children }) => {
         <ScrollContext.Provider
             value={{
                 btnRef,
-                navRef,
+                headerRef,
                 countRef
             }}
         >

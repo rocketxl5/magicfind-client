@@ -2,9 +2,7 @@
 :root {
   /* site colors */
   /* --clr-primary: #ee6352; */
-  --clr-danger: rgb(220, 53, 69);
-  --clr-success: rgb(34, 170, 68);
-
+  
   --clr-transparent: rgba(0, 0, 0, 0);
   --clr-primary: rgb(42, 73, 101);
   --clr-secondary: rgb(225, 232, 237);
@@ -14,9 +12,9 @@
   --clr-grey: rgb(219, 219, 219);
   --clr-light-border: rgba(255, 255, 255, 0.3);
   --clr-light-grey: #F7F7F7;
-  --clr-red: #b3422f;
   --clr-light: rgb(252, 252, 252);
-  --clr-green: #49A078;
+  --clr-success: #49A078;
+  --clr-danger: rgb(220, 53, 69);
   --clr-yellow-2: #ff6e34;
   --clr-yellow: #FFD814;
   --clr-teal: #3598d1;
@@ -83,6 +81,35 @@
   --card-width: 24.5rem;
   --card-height: 34rem;
   font-size: 62.5%;
+
+  /* Hamburger animation style */
+  --rotation-before: 0deg;
+  --translation-before: 0px 0px;
+
+  --rotation-after: 0deg;
+  --translation-after: 0px 0px;
+
+  --opacity-between: 1;
+
+  /* Hamburger animation */
+/* 'checked' className option for Firebox browser added to header @ main.js */
+/* header:has(input:checked) .mobile-nav-label::before,
+header.checked .mobile-nav-label::before {
+    rotate: -45deg;
+    translate: 1px 10px;
+}
+
+header:has(input:checked) .mobile-nav-label::after,
+header.checked .mobile-nav-label::after {
+   
+    rotate: 45deg;
+    translate: 1px -10px;
+}
+
+header:has(input:checked) .mobile-nav-label span,
+header.checked .mobile-nav-label span {
+    opacity: 0;
+} */
 }
 
 .check-icon {
@@ -1109,7 +1136,7 @@ background-color: var(--clr-primary);
   display: block;
   font-weight: 300;
   font-size: var(--fs-150);
-  color: var(--clr-red);
+  color: var(--clr-danger);
 }
 
 /* ////////////////// */
@@ -1546,6 +1573,16 @@ background-repeat: no-repeat;
 
 .shopping-cart {
   background: var(--clr-secondary);
+}
+
+.d-mobile-menu {
+  width: 100% !important;
+  left: 0 !important;
+}
+
+.d-desktop-menu {
+  width: 100% !important;
+  left: 70% !important;
 }
 
 

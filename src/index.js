@@ -1,19 +1,20 @@
-import React from 'react';
+import { StrictMode } from 'react';
 import ReactDOM from 'react-dom/client';
 import {
   Route,
-  Routes,
   createBrowserRouter,
   createRoutesFromElements,
   RouterProvider,
 } from 'react-router-dom';
 import { PathProvider } from './contexts/PathContext';
 import { AuthProvider } from './contexts/AuthContext';
-import { NavProvider } from './contexts/NavContext';
+import { MenuProvider } from './contexts/NavigationContext';
 import { MailProvider } from './contexts/MailContext';
 import { SearchProvider } from './contexts/SearchContext';
 import { CartProvider } from './contexts/CartContext';
 import { ScrollProvider } from './contexts/ScrollContext';
+import { ViewportProvider } from './contexts/ViewportContext';
+
 import App from './App';
 
 const router = createBrowserRouter(
@@ -25,22 +26,24 @@ const router = createBrowserRouter(
 
 const root = ReactDOM.createRoot(document.getElementById('root'))
 root.render(
-  <React.StrictMode>
+  <StrictMode>
+    <ViewportProvider>
       <PathProvider>
         <AuthProvider>
-        <NavProvider>
-          <MailProvider>
-            <SearchProvider>
-              <CartProvider>
-                <ScrollProvider>
-                  <RouterProvider router={router} />
-                </ScrollProvider>
-              </CartProvider>
-            </SearchProvider>
-          </MailProvider>
-        </NavProvider>
+          <MenuProvider>
+            <MailProvider>
+              <SearchProvider>
+                <CartProvider>
+                  <ScrollProvider>
+                    <RouterProvider router={router} />
+                  </ScrollProvider>
+                </CartProvider>
+              </SearchProvider>
+            </MailProvider>
+          </MenuProvider>
         </AuthProvider>
-    </PathProvider>
-  </React.StrictMode>
+      </PathProvider>
+    </ViewportProvider>
+  </StrictMode>
 );
 

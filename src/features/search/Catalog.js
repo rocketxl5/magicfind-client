@@ -8,9 +8,9 @@ import { useNavigate } from 'react-router-dom';
 import SearchInput from './components/SearchInput'
 import Form from '../../components/Form';
 import { SearchContext } from '../../contexts/SearchContext';
-import useAuth from '../../hooks/useAuth';
+import useAuth from '../../hooks/contexthooks/useAuth';
+import useNav from '../../hooks/contexthooks/useNav.js';
 import { api } from '../../api/resources';
-import hideSearchBar from '../../assets/utilities/hideSearchBar';
 import setQueryString from '../../assets/utilities/setQueryString';
 
 const Catalog = () => {
@@ -32,6 +32,7 @@ const Catalog = () => {
     } = useContext(SearchContext);
     // Hooks
     const { auth, isAuth } = useAuth();
+    const { searchBarRef, displaySeachBar, setDisplaySearchBar } = useNav();
     const navigate = useNavigate();
 
 
@@ -99,35 +100,33 @@ const Catalog = () => {
                             setCardName('');
                             setSearchInput(null);
                             localStorage.setItem('search-results', JSON.stringify(result));
+                            if (displaySeachBar) {
+                                setDisplaySearchBar(false);
+                            }
                             navigate(`/catalog/${setQueryString(query.toLowerCase(), '-')}`,
                                 {
                                     state: { result: result },
                                 });
-
-                            if (document.querySelector('#mobile-nav')?.checked) {
-                                hideSearchBar();
-                            }
                         })
                 }
                 else if (res.status === 400) {
                     return res.json().then((error) => {
 
                         setLoading(false);
-
-                        navigate(`/not-found/${query}`);
-
-                        if (document.querySelector('#mobile-nav')?.checked) {
-                            hideSearchBar();
+                        if (displaySeachBar) {
+                            setDisplaySearchBar(false);
                         }
+                        navigate(`/not-found/${query}`);
                     })
                 }
+
             });
     }
 
     return (
-        <div id="catalog-container">
+        <div id="search-catalog-form" ref={searchBarRef}>
             <Form id={'catalog-form'} classList={'search-form'} handleSubmit={searchCatalogCard}>
-                <SearchInput id={'catalog'} className={'catalog-field'} placeholder={'Search Magic Find'} searchCard={searchCatalogCard} isActive={isActive} ref={catalogInputRef} />
+                <SearchInput id={'catalog'} className={'search-catalog-field'} placeholder={'Search Magic Find'} searchCard={searchCatalogCard} isActive={isActive} ref={catalogInputRef} />
             </Form>
         </div>
     );
