@@ -15,22 +15,12 @@ const useNavIcons = () => {
     }
 
     const handleSearchIcon = () => {
-
-        // If searchbar is displayed
-        if (displaySearchBar) {
-            // Hide searchbar
-            setDisplaySearchBar(false);
-        }
-        else {
-            // Display searchbar
-            setDisplaySearchBar(true);
-        }
+        setDisplaySearchBar(true);
     }
 
     const handleHamburger = () => {
-        if (isMobile && displaySearchBar) { 
+        if (displaySearchBar) {
             setDisplaySearchBar(false);
-            checkboxRef.current.click();
         } else {
             setDisplayMenu(!displayMenu);
         }
