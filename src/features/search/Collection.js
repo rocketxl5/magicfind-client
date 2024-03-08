@@ -12,9 +12,8 @@ import Button from '../../components/Button';
 import Loading from '../../layout/Loading';
 import useAuth from '../../hooks/contexthooks/useAuth';
 import useSearch from '../../hooks/contexthooks/useSearch';
+import useMenu from '../../hooks/contexthooks/useMenu';
 import { api } from '../../api/resources';
-import getViewPortWidth from '../../assets/utilities/getViewPortWidth';
-import hideSearchBar from '../../assets/utilities/hideSearchBar';
 import setQueryString from '../../assets/utilities/setQueryString';
 
 const Collection = () => {
@@ -36,11 +35,11 @@ const Collection = () => {
         predictions,
         collectionCardNames
     } = useSearch();
-    // Hooks
+
+    const { displaySeachBar, setDisplaySearchBar } = useMenu();
+
     const { auth } = useAuth();
     const navigate = useNavigate();
-    // Utilities
-    const browserWidth = getViewPortWidth();
 
     const searchCollection = () => {
 
@@ -85,8 +84,8 @@ const Collection = () => {
     useEffect(() => {
         collectionInputRef.current?.focus();
 
-        if (browserWidth <= 775 && document.querySelector('#mobile-nav')?.checked) {
-            hideSearchBar();
+        if (displaySeachBar) {
+            setDisplaySearchBar(false);
         }
     }, []);
 

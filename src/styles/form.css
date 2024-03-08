@@ -292,7 +292,7 @@ input#collection {
     transition: 0.1s ease-in-out;
 }
 
-.display-searchbar {
+.d-searchbar {
     width: calc(100% - 5rem) !important;
 }
 

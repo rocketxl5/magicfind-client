@@ -11,7 +11,6 @@ import { SearchContext } from '../../contexts/SearchContext';
 import useAuth from '../../hooks/contexthooks/useAuth';
 import useMenu from '../../hooks/contexthooks/useMenu';
 import { api } from '../../api/resources';
-import hideSearchBar from '../../assets/utilities/hideSearchBar';
 import setQueryString from '../../assets/utilities/setQueryString';
 
 const Catalog = () => {
@@ -33,7 +32,7 @@ const Catalog = () => {
     } = useContext(SearchContext);
     // Hooks
     const { auth, isAuth } = useAuth();
-    const { searchBarRef } = useMenu();
+    const { searchBarRef, displaySeachBar, setDisplaySearchBar } = useMenu();
     const navigate = useNavigate();
 
 
@@ -105,10 +104,6 @@ const Catalog = () => {
                                 {
                                     state: { result: result },
                                 });
-
-                            if (document.querySelector('#mobile-nav')?.checked) {
-                                hideSearchBar();
-                            }
                         })
                 }
                 else if (res.status === 400) {
@@ -117,11 +112,10 @@ const Catalog = () => {
                         setLoading(false);
 
                         navigate(`/not-found/${query}`);
-
-                        if (document.querySelector('#mobile-nav')?.checked) {
-                            hideSearchBar();
-                        }
                     })
+                }
+                if (displaySeachBar) {
+                    setDisplaySearchBar(false);
                 }
             });
     }

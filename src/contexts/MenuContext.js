@@ -14,7 +14,7 @@ export const MenuProvider = ({ children }) => {
     const searchIconRef = useRef(null);
 
     useEffect(() => {
-        const selector = isMobile ? 'display-mobile-menu' : 'display-desktop-menu';
+        const selector = isMobile ? 'd-mobile-menu' : 'd-desktop-menu';
 
         if (displayMenu) {
             menuRef.current?.classList.add(selector);
@@ -28,10 +28,10 @@ export const MenuProvider = ({ children }) => {
 
     useEffect(() => {
         if (displaySearchBar) {
-            searchBarRef.current?.classList.add('display-searchbar');
+            searchBarRef.current?.classList.add('d-searchbar');
         }
         else {
-            searchBarRef.current?.classList.remove('display-searchbar');
+            searchBarRef.current?.classList.remove('d-searchbar');
         }
 
     }, [displaySearchBar])
