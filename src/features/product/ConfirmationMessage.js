@@ -28,7 +28,7 @@ const ConfirmationMessage = (props) => {
                         </section>
                         <footer className="card-footer">
                             <div className="btn-container">
-                                <button id="back-to-search" className="btn bg-green color-light" type="button" onClick={handleClick}>Back to Search Collection Page </button>
+                                <button id="back-to-search" className="btn bg-success color-light" type="button" onClick={handleClick}>Back to Search Collection Page </button>
                             </div>
                         </footer>
                     </>

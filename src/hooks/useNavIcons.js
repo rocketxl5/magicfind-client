@@ -1,9 +1,9 @@
-import { useEffect } from 'react';
 import useNav from './contexthooks/useNav.js';
+import useViewport from './contexthooks/useViewport.js';
 
 const useNavIcons = () => {
     const { displayMenu, setDisplayMenu, displaySearchBar, setDisplaySearchBar, checkboxRef } = useNav();
-    console.log(displayMenu)
+    const { isMobile } = useViewport();
 
     const handleNavIcons = () => {
         if (displayMenu) {
@@ -16,28 +16,36 @@ const useNavIcons = () => {
 
     const handleSearchIcon = () => {
 
-        // If searchbar is hidden
-        if (!displaySearchBar) {
+        // If searchbar is displayed
+        if (displaySearchBar) {
+            // Hide searchbar
+            setDisplaySearchBar(false);
+        }
+        else {
             // Display searchbar
             setDisplaySearchBar(true);
         }
-        else {
-            // Hide searchbar
+    }
+
+    const handleHamburger = () => {
+        if (isMobile && displaySearchBar) { 
             setDisplaySearchBar(false);
+            checkboxRef.current.click();
+        } else {
+            setDisplayMenu(!displayMenu);
         }
     }
 
     const handleNavMenu = () => {
         // If searchbar is displayed
-        if (displaySearchBar) {
+        if (displayMenu) {
             // Hide search bar
-            setDisplaySearchBar(false);
+            setDisplayMenu(false);
         }
         else {
             // Hide or display menu
-            setDisplayMenu(!displayMenu);
+            setDisplayMenu(true);
         }
-
     }
 
     const handleIcons = (e) => {
@@ -54,6 +62,8 @@ const useNavIcons = () => {
                 handleSearchIcon();
                 break;
             case 'hamburger-icon':
+                handleHamburger();
+                break;
             case 'auth-icon':
                 handleNavMenu()
                 break;

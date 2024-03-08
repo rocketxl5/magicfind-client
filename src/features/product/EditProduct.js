@@ -311,7 +311,7 @@ const EditProduct = (props) => {
                                                     </button>
                                                     < button
                                                         id="confirm-publish"
-                                                        className="btn bg-green color-light"
+                                                            className="btn bg-success color-light"
                                                         type="button"
 
                                                         onClick={handleSubmit} >

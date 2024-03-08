@@ -201,7 +201,7 @@ const Collection = () => {
                                                 ref={collectionInputRef} />
                                             <Button
                                                 id={''}
-                                                classList='bg-green btn-collection'
+                                                classList='bg-success btn-collection'
                                                 handleClick={() => searchCollection('cards')}
                                             >
                                                 {'All Cards'}
