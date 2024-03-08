@@ -1,9 +1,9 @@
 import Menu from './Menu';
 import NavIcons from './NavIcons';
-import useMenu from '../../hooks/contexthooks/useMenu';
+import useNav from '../../hooks/contexthooks/useNav.js';
 
 function Navbar() {
-    const { checkboxRef } = useMenu();
+    const { checkboxRef } = useNav();
 
     return (
         <div className="navbar">

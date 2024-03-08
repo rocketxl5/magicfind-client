@@ -2,7 +2,7 @@ import React, {
     forwardRef
 } from 'react';
 import AutoComplete from './AutoComplete';
-import useMenu from '../../../hooks/contexthooks/useMenu';
+import useNav from '../../../hooks/contexthooks/useNav.js';
 import useSearch from '../../../hooks/contexthooks/useSearch';
 
 const SearchInput = forwardRef(function SearchInput(props, ref) {
@@ -28,7 +28,7 @@ const SearchInput = forwardRef(function SearchInput(props, ref) {
         setDisplayAutocomplete
     } = useSearch();
 
-    const { displaySeachBar, setDisplaySearchBar } = useMenu();
+    const { displaySeachBar, setDisplaySearchBar } = useNav();
 
     const handleChange = (e) => {
 

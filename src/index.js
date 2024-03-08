@@ -8,7 +8,7 @@ import {
 } from 'react-router-dom';
 import { PathProvider } from './contexts/PathContext';
 import { AuthProvider } from './contexts/AuthContext';
-import { MenuProvider } from './contexts/MenuContext';
+import { MenuProvider } from './contexts/NavigationContext';
 import { MailProvider } from './contexts/MailContext';
 import { SearchProvider } from './contexts/SearchContext';
 import { CartProvider } from './contexts/CartContext';

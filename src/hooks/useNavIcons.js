@@ -1,8 +1,8 @@
 import { useEffect } from 'react';
-import useMenu from './contexthooks/useMenu';
+import useNav from './contexthooks/useNav.js';
 
 const useNavIcons = () => {
-    const { displayMenu, setDisplayMenu, displaySearchBar, setDisplaySearchBar, checkboxRef } = useMenu();
+    const { displayMenu, setDisplayMenu, displaySearchBar, setDisplaySearchBar, checkboxRef } = useNav();
     console.log(displayMenu)
 
     const handleNavIcons = () => {

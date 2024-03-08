@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef, createContext } from 'react';
 import useViewport from '../hooks/contexthooks/useViewport';
 
-export const MenuContext = createContext(null);
+export const NavigationContext = createContext(null);
 
 export const MenuProvider = ({ children }) => {
     const [displayMenu, setDisplayMenu] = useState(false);
@@ -39,7 +39,7 @@ export const MenuProvider = ({ children }) => {
     }, [displaySearchBar])
 
     return (
-        <MenuContext.Provider value={{
+        <NavigationContext.Provider value={{
             displayMenu,
             setDisplayMenu,
             displaySearchBar,
@@ -50,6 +50,6 @@ export const MenuProvider = ({ children }) => {
             searchBarRef
         }}>
             {children}
-        </MenuContext.Provider>
+        </NavigationContext.Provider>
     )
 }

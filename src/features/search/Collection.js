@@ -12,7 +12,7 @@ import Button from '../../components/Button';
 import Loading from '../../layout/Loading';
 import useAuth from '../../hooks/contexthooks/useAuth';
 import useSearch from '../../hooks/contexthooks/useSearch';
-import useMenu from '../../hooks/contexthooks/useMenu';
+import useNav from '../../hooks/contexthooks/useNav.js';
 import { api } from '../../api/resources';
 import setQueryString from '../../assets/utilities/setQueryString';
 
@@ -36,7 +36,7 @@ const Collection = () => {
         collectionCardNames
     } = useSearch();
 
-    const { displaySeachBar, setDisplaySearchBar } = useMenu();
+    const { displaySeachBar, setDisplaySearchBar } = useNav();
 
     const { auth } = useAuth();
     const navigate = useNavigate();

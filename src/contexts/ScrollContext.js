@@ -4,7 +4,6 @@ import useAuth from '../hooks/contexthooks/useAuth';
 export const ScrollContext = createContext();
 
 export const ScrollProvider = ({ children }) => {
-    const [viewport, setViewport] = useState(0);
     const [offset, setOffset] = useState(0);
     const { isAuth } = useAuth();
 
@@ -30,10 +29,6 @@ export const ScrollProvider = ({ children }) => {
 
         setOffset(window.scrollY)
     }
-
-    useEffect(() => {
-        setViewport(document.body.clientWidth);
-    }, [])
 
     useEffect(() => {
         window.addEventListener('scroll', handleScroll);

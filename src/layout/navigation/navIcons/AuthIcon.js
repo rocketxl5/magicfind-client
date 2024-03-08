@@ -1,10 +1,10 @@
 import Avatar from '../../../components/Avatar';
 import useAuth from '../../../hooks/contexthooks/useAuth';
-import useMenu from '../../../hooks/contexthooks/useMenu';
+import useNav from '../../../hooks/contexthooks/useNav.js';
 
 const AuthIcon = () => {
     const { isAuth, auth } = useAuth();
-    const { displayMenu, setDisplayMenu } = useMenu();
+    const { displayMenu, setDisplayMenu } = useNav();
 
     return (
         isAuth &&

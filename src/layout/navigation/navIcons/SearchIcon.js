@@ -1,8 +1,8 @@
 import { FiSearch } from 'react-icons/fi';
-import useMenu from '../../../hooks/contexthooks/useMenu';
+import useNav from '../../../hooks/contexthooks/useNav.js';
 
 const SearchIcon = () => {
-    const { searchIconRef } = useMenu();
+    const { searchIconRef } = useNav();
 
     return (
         <label id="search-icon" htmlFor="mobile-nav" className="nav-icon search-icon" ref={searchIconRef}>

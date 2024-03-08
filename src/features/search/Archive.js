@@ -10,7 +10,7 @@ import SearchInput from './components/SearchInput'
 import Loading from '../../layout/Loading';
 import { api } from '../../api/resources';
 import useSearch from '../../hooks/contexthooks/useSearch';
-import useMenu from '../../hooks/contexthooks/useMenu';
+import useNav from '../../hooks/contexthooks/useNav.js';
 import setQueryString from '../../assets/utilities/setQueryString';
 
 const Search = () => {
@@ -36,7 +36,7 @@ const Search = () => {
         setUpdateCollection
     } = useSearch();
 
-    const { displaySeachBar, setDisplaySearchBar } = useMenu();
+    const { displaySeachBar, setDisplaySearchBar } = useNav();
 
     const navigate = useNavigate();
 
