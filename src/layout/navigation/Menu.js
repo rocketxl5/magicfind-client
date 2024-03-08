@@ -7,21 +7,28 @@ import data from '../../data/ROUTES.json';
 function Menu() {
     const navigate = useNavigate();
     const { isAuth, logoutAction } = useAuth();
-    const { navRef } = useMenu();
+    const { displayMenu, setDisplayMenu, menuRef, inputRef } = useMenu();
     // Declares menus related variables
     const { authRoutes, publicRoutes, classList } = data;
     // Defines routes according to user status
     const routes = isAuth ? authRoutes : publicRoutes;
 
+    const handleClick = () => {
+        // Close Menu
+        setDisplayMenu(!displayMenu);
+        // Check mobile-nav checkbox to trigger css hamburger animation
+        inputRef.current.click();
+    }
+
     return (
         <nav className="nav-menu">
-            <ul ref={navRef}>
+            <ul id="nav-links" ref={menuRef} onClick={handleClick}>
                 {
                     // Generates menus list of links
                     routes.map((route, index) => {
                         return (
                             <li key={index}>
-                                <NavLink className={classList} to={route.to} >
+                                <NavLink className={classList} name={'nav-link'} to={route.to} >
                                     {route.name}
                                 </NavLink>
                             </li>

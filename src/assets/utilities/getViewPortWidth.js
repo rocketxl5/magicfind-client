@@ -1,5 +1,5 @@
-const viewportWidth = () => {
+const isMobile = () => {
     return document.body.clientWidth
 }
 
-export default viewportWidth;
+export default isMobile;

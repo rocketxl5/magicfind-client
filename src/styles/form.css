@@ -281,7 +281,7 @@ input#collection {
 }
 
 /* Catalog form style */
-#catalog-container {
+#search-catalog {
     position: absolute;
     top: 0;
     left: 0;
@@ -303,7 +303,7 @@ input#collection {
 }
 
 
-.catalog-field {
+.search-catalog-field {
     display: block;
     width: calc(100% - var(--size-1));
     margin-left: auto;

@@ -3,25 +3,22 @@ import EditProduct from '../features/product/EditProduct';
 import DeleteProduct from '../features/product/DeleteProduct';
 import cardBack from '../assets/img/mtg_card_back.jpg';
 
-const useModalProductState = (search, callback) => {
+// Edit and Delete product form
+const useModalProductForm = (search, callback) => {
     const INIT = {
         open: false,
         component: null
     }
     const ACTIONS = {
-        ADD_TO_CART: 'add-to-cart',
-        ADD_TO_WISHLIST: 'add-to-wishlist',
-        BACK_TO_SEARCH: 'back-to-search',
         CONFIRM_DELETE: 'confirm-delete',
         DELETE_PRODUCT: 'delete-product',
-        EXPAND_CARD: 'expand-card',
         CANCEL: 'cancel',
         EDIT_PRODUCT: 'edit-product',
         CLOSE_MODAL: 'close',
     }
 
     const reducer = (state, action) => {
-        // console.log(action.payload.product)
+
         switch (action.type) {
 
             case ACTIONS.DELETE_PRODUCT:
@@ -45,19 +42,9 @@ const useModalProductState = (search, callback) => {
                             handleClick={callback}
                         />
                 }
-            // case ACTIONS.ADD_TO_CART:
-
-            //     break;
-            // case ACTIONS.ADD_TO_WISHLIST:
-
-            //     break;
-            case ACTIONS.REDUCE_CARD:
-                return INIT;
             case ACTIONS.CONFIRM_DELETE:
                 return INIT;
             case ACTIONS.CANCEL:
-                return INIT;
-            case ACTIONS.BACK_TO_SEARCH:
                 return INIT;
             default:
                 return INIT;
@@ -65,9 +52,7 @@ const useModalProductState = (search, callback) => {
     }
     const [state, dispatch] = useReducer(reducer, INIT)
 
-    const updateProductState = (id, product) => {
-        // console.log(id)
-        // console.log(product)
+    const useProductForms = (id, product) => {
         dispatch({
             type: id,
             payload: {
@@ -83,7 +68,7 @@ const useModalProductState = (search, callback) => {
         })
     }
 
-    return [state, updateProductState];
+    return [state, useProductForms];
 }
 
-export default useModalProductState;
+export default useModalProductForm;

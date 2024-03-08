@@ -125,9 +125,9 @@ const Catalog = () => {
     }
 
     return (
-        <div id="catalog-container">
+        <div id="search-catalog">
             <Form id={'catalog-form'} classList={'search-form'} handleSubmit={searchCatalogCard}>
-                <SearchInput id={'catalog'} className={'catalog-field'} placeholder={'Search Magic Find'} searchCard={searchCatalogCard} isActive={isActive} ref={catalogInputRef} />
+                <SearchInput id={'catalog'} className={'search-catalog-field'} placeholder={'Search Magic Find'} searchCard={searchCatalogCard} isActive={isActive} ref={catalogInputRef} />
             </Form>
         </div>
     );

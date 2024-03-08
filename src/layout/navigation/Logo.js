@@ -8,7 +8,7 @@ const Logo = () => {
 
   return (
     <Div className="logo">
-      <Anchor className="logo-anchor" to={auth ? 'me' : '/'} title="Magic Find logo">
+      <Anchor id={'logo-icon'} className="logo-anchor" to={auth ? 'me' : '/'} title="Magic Find logo">
         <SVG>
           <GiWaterBolt />
         </SVG>

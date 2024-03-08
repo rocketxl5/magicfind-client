@@ -4,9 +4,9 @@ import { FaUserCircle } from 'react-icons/fa';
 const SignIcon = () => {
 
     return (
-        <div id="signin-icon" className="nav-icon">
-            <Link className="signin-icon" to='/login'>
-                <FaUserCircle className="nav-icon" size={27} title="Login" />
+        <div className="nav-icon">
+            <Link id="signin-icon" className="signin-icon" to='/login' title="Login">
+                <FaUserCircle className="nav-icon" size={27} />
             </Link>
         </div>
     )

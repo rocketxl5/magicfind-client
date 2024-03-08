@@ -4,15 +4,16 @@ import Hamburger from './Hamburger';
 import SignIcon from './navIcons/SignIcon';
 import AuthIcon from './navIcons/AuthIcon';
 import CartIcon from './navIcons/CartIcon';
+import useMenu from '../../hooks/contexthooks/useMenu';
 import useAuth from '../../hooks/contexthooks/useAuth';
-import getViewPortWidth from '../../assets/utilities/getViewPortWidth';
 
 const NavIcons = () => {
     const { isAuth, auth } = useAuth();
-    const viewport = getViewPortWidth();
+    const { isMobile } = useMenu();
 
     return (
-        <div className="nav-icons">
+        <div className="nav-icons" >
+            {/* <div className="nav-icons" onClick={(e) => handleMenu(e)}> */}
             {/************************************************* 
              /*  Hamburger
              /*  Has a label linked to mobile-nav checkbox
@@ -23,7 +24,7 @@ const NavIcons = () => {
               *************************************************/}
             {/* Mobile & Desktop [public & authenticated]*/}
             {
-                viewport < 775 ? (
+                isMobile ? (
                     <>
                         <SearchIcon />
                         {isAuth ? (

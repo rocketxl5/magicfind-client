@@ -12,7 +12,7 @@ import ProductOwner from './ProductOwner';
 import data from '../../data/PRODUCT.json';
 
 const ProductItem = forwardRef(function Product(props, ref) {
-    const { index, count, card, search, handleSlideView, handleModalProductState } = props;
+    const { index, count, card, search, handleSlideView, handleProductForm } = props;
 
     // const { header, title } = data['singles'];
     // console.log(header)
@@ -31,7 +31,7 @@ const ProductItem = forwardRef(function Product(props, ref) {
                 <>
                     {/* <ProductDetails id={'product-info'} product={card} search={search} /> */}
                     {/* <ProductOwner id={'product-status'} product={card}  search={search} /> */}
-                    <ProductHandlers id={'product-actions'} product={card} search={search} handleClick={handleModalProductState} />
+                    <ProductHandlers id={'product-actions'} product={card} search={search} handleClick={handleProductForm} />
                 </>
             </Container>
         </ListItem>

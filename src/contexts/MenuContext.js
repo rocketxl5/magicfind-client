@@ -4,31 +4,38 @@ export const MenuContext = createContext(null);
 
 export const MenuProvider = ({ children }) => {
     const [displayMenu, setDisplayMenu] = useState(false);
-    const [viewportWidth, setViewPortWidth] = useState(0);
+    const [isMobile, setIsMobile] = useState(false);
 
-    const navRef = useRef(null);
+    const inputRef = useRef(null);
+    const menuRef = useRef(null);
 
     useEffect(() => {
-        const selector = viewportWidth <= 775 ? 'display-mobile-menu' : 'display-desktop-menu';
+        const selector = isMobile ? 'display-mobile-menu' : 'display-desktop-menu';
 
         if (displayMenu) {
-            navRef.current?.classList.add(selector);
+            menuRef.current?.classList.add(selector);
         }
         else {
-            navRef.current?.classList.remove(selector);
+            menuRef.current?.classList.remove(selector);
         }
-    }, [displayMenu, viewportWidth]);
+    }, [displayMenu, isMobile]);
 
     useEffect(() => {
-        setViewPortWidth(document.body.clientWidth)
+        if (document.body.clientWidth <= 775) {
+            setIsMobile(true);
+        }
+        else {
+            setIsMobile(false);
+        }
     }, [displayMenu]);
 
     return (
         <MenuContext.Provider value={{
             displayMenu,
             setDisplayMenu,
-            viewportWidth,
-            navRef,
+            isMobile,
+            inputRef,
+            menuRef,
         }}>
             {children}
         </MenuContext.Provider>

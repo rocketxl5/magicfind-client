@@ -79,7 +79,7 @@ nav {
 }
 
 .hamburger *,
-.cart-icon *
+.cart-icon *,
 .signin-icon *,
 .mail-icon *,
 .search-icon *
@@ -158,6 +158,7 @@ nav {
     height: 2.7rem;
     cursor: pointer;
 }
+
 .mobile-nav-label span,
 .mobile-nav-label::before,
 .mobile-nav-label::after {
@@ -175,30 +176,35 @@ nav {
     position: absolute;
 }
 
-.mobile-nav-label::before {
+ .mobile-nav-label::before {
+    /* rotate: var(--rotation-before);
+    translate: var(--translation-before); */
     top: 2px;
 }
 
 .mobile-nav-label::after {
+    /* rotate: var(--rotation-after);
+    translate: var(--translation-after); */
     bottom: 2px;
 }
 
+/* .mobile-nav-label span {
+    opacity: var(--opacity-between);
+} */
+
 /* Hamburger animation */
 /* 'checked' className option for Firebox browser added to header @ main.js */
-header:has(input:checked) .mobile-nav-label::before,
-header.checked .mobile-nav-label::before {
+.navbar:has(input:checked) .mobile-nav-label::before {
     rotate: -45deg;
     translate: 1px 10px;
 }
 
-header:has(input:checked) .mobile-nav-label::after,
-header.checked .mobile-nav-label::after {
+.navbar:has(input:checked) .mobile-nav-label::after {
    
     rotate: 45deg;
     translate: 1px -10px;
 }
 
-header:has(input:checked) .mobile-nav-label span,
-header.checked .mobile-nav-label span {
+.navbar:has(input:checked) .mobile-nav-label span {
     opacity: 0;
 }

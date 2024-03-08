@@ -83,6 +83,35 @@
   --card-width: 24.5rem;
   --card-height: 34rem;
   font-size: 62.5%;
+
+  /* Hamburger animation style */
+  --rotation-before: 0deg;
+  --translation-before: 0px 0px;
+
+  --rotation-after: 0deg;
+  --translation-after: 0px 0px;
+
+  --opacity-between: 1;
+
+  /* Hamburger animation */
+/* 'checked' className option for Firebox browser added to header @ main.js */
+/* header:has(input:checked) .mobile-nav-label::before,
+header.checked .mobile-nav-label::before {
+    rotate: -45deg;
+    translate: 1px 10px;
+}
+
+header:has(input:checked) .mobile-nav-label::after,
+header.checked .mobile-nav-label::after {
+   
+    rotate: 45deg;
+    translate: 1px -10px;
+}
+
+header:has(input:checked) .mobile-nav-label span,
+header.checked .mobile-nav-label span {
+    opacity: 0;
+} */
 }
 
 .check-icon {

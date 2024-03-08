@@ -7,8 +7,8 @@ import styled from 'styled-components';
 const CartIcon = () => {
   const { itemsCount } = useContext(CartContext);
   return (
-    <Container id={'cart-icon'} className="nav-icon">
-      <Link to='/shopping-cart' className="cart-icon">
+    <Container className="nav-icon">
+      <Link id="cart-icon" className="cart-icon" to='/shopping-cart' title="Shopping Cart">
         {itemsCount > 0 && (
           <CountContainer>
             <CountDown>
@@ -18,7 +18,7 @@ const CartIcon = () => {
             </CountDown>
           </CountContainer>
         )}
-        <FiShoppingCart className="nav-icon" size={27} title="To Shopping Cart" />
+        <FiShoppingCart className="nav-icon" size={27} />
       </Link>
     </Container>
   )

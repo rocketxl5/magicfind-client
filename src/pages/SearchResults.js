@@ -2,19 +2,19 @@ import { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import ProductItem from '../features/product/ProductItem';
 import Modal from '../features/modal/Modal';
-import useModalProductState from '../hooks/useModalProductState';
-import useSlideView from '../hooks/useSlideView';
 import Page from '../components/Page';
 import Count from '../features/search/components/Count';
 import SearchParameters from '../features/search/components/SearchParameters';
+import useProductForms from '../hooks/useProductForms';
+import useSlideView from '../hooks/useSlideView';
 
 const SearchResults = () => {
     // States
     const [searchFeatures, setSearchFeatures] = useState(false);
-
     // Hooks
     const location = useLocation();
     const navigate = useNavigate();
+
     const { cards, search } = location.state?.result || JSON.parse(localStorage.getItem('search-results'));
 
     useEffect(() => {
@@ -27,14 +27,14 @@ const SearchResults = () => {
 
     const [view, updateSlideView] = useSlideView(handleSlideView); 
 
-    const [state, updateProductState] = useModalProductState(search, handleModalProductState);
+    const [state, updateProductState] = useProductForms(search, handleProductForm);
 
     function handleSlideView(e, layout, expandedImage) {
         e.stopPropagation();
         updateSlideView(layout, expandedImage)
     }
 
-    function handleModalProductState(e, card) {
+    function handleProductForm(e, card) {
         e.stopPropagation();
         updateProductState(e.target.id, card)
     }
@@ -65,7 +65,7 @@ const SearchResults = () => {
                                         card={card}
                                         search={search}
                                         handleSlideView={handleSlideView}
-                                        handleModalProductState={handleModalProductState}
+                                        handleProductForm={handleProductForm}
                                     >
                                     </ProductItem>
                                 )

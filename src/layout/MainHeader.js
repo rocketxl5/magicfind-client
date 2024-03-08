@@ -1,19 +1,20 @@
-import { useContext, useEffect } from 'react';
+import { useEffect } from 'react';
 import Catalog from '../features/search/Catalog';
 import Navbar from './navigation/Navbar';
 import DashboardNav from './DashboardNav';
 import Logo from './navigation/Logo';
-import { ScrollContext } from '../contexts/ScrollContext';
 import { api } from '../api/resources';
 import useAuth from '../hooks/contexthooks/useAuth';
 import useSearch from '../hooks/contexthooks/useSearch';
+import useScroll from '../hooks/contexthooks/useScroll';
+import useNavIcons from '../hooks/useNavIcons';
 
 const MainHeader = () => {
-  const { headerRef } = useContext(ScrollContext);
-
+  const { headerRef } = useScroll();
   const { isAuth } = useAuth();
   const { updateCatalog, setUpdateCatalog, setCatalogCardNames } = useSearch();
 
+  const { handleIcons } = useNavIcons();
 
   // Setting catalog card names for autocomplete catalog search
   useEffect(() => {
@@ -37,13 +38,8 @@ const MainHeader = () => {
     }
   }, [updateCatalog]);
 
-  // Handle search bar and menu animation 
-  const handleClick = (e) => {
-    // handleSearchBar(e);
-
-  }
   return (
-    <header className="main-header" onClick={handleClick} ref={headerRef}>
+    <header className="main-header" onClick={(e) => handleIcons(e)} ref={headerRef}>
       <div className="header-container">
         <Logo />
         <Catalog />
