@@ -15,7 +15,7 @@ import data from '../../../data/SEARCH.json';
 const CatalogHandlers = ({ product, loading, setLoading }) => {
     const { conditions, finish, languages } = data.product;
     const { set_name, price, quantity, language, condition, finishes, seller } = product;
-    const { userName, country, avatar, rating, email } = seller;
+    // const { userName, country, avatar, rating, email } = seller;
 
     const { cartItems } = useCart();
     // const {data, loading, error } = useFetch 
@@ -46,7 +46,7 @@ const CatalogHandlers = ({ product, loading, setLoading }) => {
         }
     ]
 
-    console.log(cartItems)
+    // console.log(cartItems)
     return (
         <>
             {

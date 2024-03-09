@@ -20,26 +20,30 @@ const useNavIcons = () => {
 
     const handleHamburger = () => {
         if (displaySearchBar) {
-            setDisplaySearchBar(false);
-        } else {
-            setDisplayMenu(!displayMenu);
+            // return setDisplaySearchBar(false);
         }
+        // if (displayMenu) {
+        //     setDisplayMenu(!displayMenu);
+        // }
+        // else {
+        //     setDisplayMenu(true);
+        // } 
     }
 
     const handleNavMenu = () => {
         // If searchbar is displayed
-        if (displayMenu) {
-            // Hide search bar
-            setDisplayMenu(false);
-        }
-        else {
-            // Hide or display menu
-            setDisplayMenu(true);
-        }
+        // if (displayMenu) {
+        //     // Hide search bar
+        //     setDisplayMenu(false);
+        // }
+        // else {
+        //     // Hide or display menu
+        //     setDisplayMenu(true);
+        // }
     }
 
     const handleIcons = (e) => {
-        e.stopPropagation();
+        // e.preventDefault();
 
         switch (e.target.id) {
             case 'cart-icon':

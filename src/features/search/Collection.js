@@ -21,7 +21,7 @@ const Collection = () => {
     const [loading, setLoading] = useState(false);
     const [isActive, setIsActive] = useState(false);
     // Ref
-    const collectionInputRef = useRef(null);
+    // const collectionInputRef = useRef(null);
     // Context
     const {
         errorMessage,
@@ -33,7 +33,8 @@ const Collection = () => {
         setCardName,
         setCardNames,
         predictions,
-        collectionCardNames
+        collectionCardNames,
+        collectionInputRef
     } = useSearch();
 
     const { displaySeachBar, setDisplaySearchBar } = useNav();

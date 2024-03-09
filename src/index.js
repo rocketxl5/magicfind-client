@@ -8,7 +8,7 @@ import {
 } from 'react-router-dom';
 import { PathProvider } from './contexts/PathContext';
 import { AuthProvider } from './contexts/AuthContext';
-import { MenuProvider } from './contexts/NavigationContext';
+import { NavigationProvider } from './contexts/NavigationContext';
 import { MailProvider } from './contexts/MailContext';
 import { SearchProvider } from './contexts/SearchContext';
 import { CartProvider } from './contexts/CartContext';
@@ -28,9 +28,9 @@ const root = ReactDOM.createRoot(document.getElementById('root'))
 root.render(
   <StrictMode>
     <ViewportProvider>
-      <PathProvider>
-        <AuthProvider>
-          <MenuProvider>
+      <NavigationProvider>
+        <PathProvider>
+          <AuthProvider>
             <MailProvider>
               <SearchProvider>
                 <CartProvider>
@@ -40,9 +40,9 @@ root.render(
                 </CartProvider>
               </SearchProvider>
             </MailProvider>
-          </MenuProvider>
-        </AuthProvider>
-      </PathProvider>
+          </AuthProvider>
+        </PathProvider>
+      </NavigationProvider>
     </ViewportProvider>
   </StrictMode>
 );

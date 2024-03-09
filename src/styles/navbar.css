@@ -146,65 +146,39 @@ nav {
 }
 
 /* Hamburger */
-#mobile-nav {
-    display: none;
+/* source @ https://www.youtube.com/watch?v=R00QiudbD4Y&t=3167s */
+.hamburger-btn {
+   background: transparent;
+   color: var(--clr-grey);
 }
 
-.mobile-nav-label {
-    position: relative;
-    display: flex;
-    align-items: center;
-    width: 3rem;
-    height: 2.7rem;
-    cursor: pointer;
+.hamburger-btn .line {
+ transition: 
+  y 100ms ease-in 100ms,
+  rotate 100ms ease-in,
+  opacity 0ms 100ms;
+ transform-origin: center;
 }
 
-.mobile-nav-label span,
-.mobile-nav-label::before,
-.mobile-nav-label::after {
-    width: 3rem;
-    height: 3px;
-    border-radius: 5px;
-    background-color: var(--clr-grey);
-    transition: all 0.2s ease;
-    z-index: 999;
+.hamburger-btn[aria-expanded="true"] .line {
+ transition: 
+  y 100ms ease-in,
+  rotate 100ms ease-in 100ms,
+  opacity 0ms 100ms;
 }
 
-.mobile-nav-label::before,
-.mobile-nav-label::after {
-    content: '';
-    position: absolute;
+.hamburger-btn[aria-expanded="true"] :is(.top, .bottom) {
+    y: 45;
 }
 
- .mobile-nav-label::before {
-    /* rotate: var(--rotation-before);
-    translate: var(--translation-before); */
-    top: 2px;
+.hamburger-btn[aria-expanded="true"] .top {
+   rotate: 45deg;
 }
 
-.mobile-nav-label::after {
-    /* rotate: var(--rotation-after);
-    translate: var(--translation-after); */
-    bottom: 2px;
+.hamburger-btn[aria-expanded="true"] .middle {
+   opacity: 0; 
 }
 
-/* .mobile-nav-label span {
-    opacity: var(--opacity-between);
-} */
-
-/* Hamburger animation */
-/* 'checked' className option for Firebox browser added to header @ main.js */
-.navbar:has(input:checked) .mobile-nav-label::before {
-    rotate: -45deg;
-    translate: 1px 10px;
-}
-
-.navbar:has(input:checked) .mobile-nav-label::after {
-   
-    rotate: 45deg;
-    translate: 1px -10px;
-}
-
-.navbar:has(input:checked) .mobile-nav-label span {
-    opacity: 0;
+.hamburger-btn[aria-expanded="true"] .bottom {
+   rotate: -45deg;
 }

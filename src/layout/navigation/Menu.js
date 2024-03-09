@@ -1,24 +1,25 @@
 import { NavLink, useNavigate } from 'react-router-dom';
 import useAuth from '../../hooks/contexthooks/useAuth';
-import useNav from '../../hooks/contexthooks/useNav.js';
 import data from '../../data/ROUTES.json';
+import useNav from '../../hooks/contexthooks/useNav';
 
 // Dynamic navigation menues for public and authenticated users
-function Menu() {
+function Menu({ handleClick }) {
+
     const navigate = useNavigate();
     const { isAuth, logoutAction } = useAuth();
-    const { displayMenu, setDisplayMenu, menuRef, checkboxRef } = useNav();
+    const { menuRef } = useNav();
     // Declares menus related variables
     const { authRoutes, publicRoutes, classList } = data;
     // Defines routes according to user status
     const routes = isAuth ? authRoutes : publicRoutes;
 
-    const handleClick = () => {
-        // Close Menu
-        setDisplayMenu(!displayMenu);
-        // Check mobile-nav checkbox to trigger css hamburger animation
-        checkboxRef.current?.click();
-    }
+    // const handleClick = () => {
+    //     // Close Menu
+    //     setDisplayMenu(!displayMenu);
+    //     // Check mobile-nav checkbox to trigger css hamburger animation
+    //     checkboxRef.current?.click();
+    // }
 
     return (
         <nav className="nav-menu">

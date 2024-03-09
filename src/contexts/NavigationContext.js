@@ -3,14 +3,15 @@ import useViewport from '../hooks/contexthooks/useViewport';
 
 export const NavigationContext = createContext(null);
 
-export const MenuProvider = ({ children }) => {
+export const NavigationProvider = ({ children }) => {
     const [displayMenu, setDisplayMenu] = useState(false);
     const [displaySearchBar, setDisplaySearchBar] = useState(false);
+    const [isChecked, setIsChecked] = useState(false);
 
     const { isMobile } = useViewport();
 
     const menuRef = useRef(null);
-    const checkboxRef = useRef(null);
+    const hamburgerRef = useRef(null);
     const searchBarRef = useRef(null);
     const cartCountRef = useRef(null);
     const searchIconRef = useRef(null);
@@ -37,25 +38,31 @@ export const MenuProvider = ({ children }) => {
         if (displaySearchBar) {
             searchBarRef.current?.classList.add('d-searchbar');
             cartCountRef.current?.classList.add('d-none');
+            // setIsChecked(true)
         }
         else {
             searchBarRef.current?.classList.remove('d-searchbar');
             cartCountRef.current?.classList.remove('d-none');
+            // hamburgerRef.current.click();
         }
     }, [displaySearchBar])
 
     return (
-        <NavigationContext.Provider value={{
-            displayMenu,
-            setDisplayMenu,
-            displaySearchBar,
-            setDisplaySearchBar,
-            menuRef,
-            checkboxRef,
-            searchBarRef,
-            cartCountRef,
-            searchIconRef,
-        }}>
+        <NavigationContext.Provider
+            value={{
+                displayMenu,
+                setDisplayMenu,
+                displaySearchBar,
+                setDisplaySearchBar,
+                menuRef,
+                hamburgerRef,
+                searchBarRef,
+                cartCountRef,
+                searchIconRef,
+                isChecked,
+                setIsChecked
+            }}
+        >
             {children}
         </NavigationContext.Provider>
     )

@@ -13,7 +13,6 @@ const SearchInput = forwardRef(function SearchInput(props, ref) {
         searchCard,
         isActive,
     } = props;
-    const inputRef = ref;
 
     const {
         setMarker,
@@ -25,10 +24,11 @@ const SearchInput = forwardRef(function SearchInput(props, ref) {
         setPredictions,
         searchInput,
         displayAutcomplete,
+        setCardNames,
         setDisplayAutocomplete
     } = useSearch();
 
-    const { displaySeachBar, setDisplaySearchBar } = useNav();
+    const { displaySeachBar, setDisplaySearchBar, checkboxRef } = useNav();
 
     const handleChange = (e) => {
 
@@ -53,13 +53,17 @@ const SearchInput = forwardRef(function SearchInput(props, ref) {
 
     const handleBlur = (e) => {
         e.preventDefault();
+        // console.log(e.target)
         setMarker(-1);
         setSearchTerm('');
         // Reinitialize input state if catalog 
         // query is triggered each time search catalog has focus
         // making sure search catalog cardnames is updated with latest results  
         if (e.target.id === 'catalog') {
-            setSearchInput(null)
+            console.log('catalog')
+            setSearchInput(null);
+            setCardNames(null);
+            setDisplaySearchBar(false);
         }
     };
 
@@ -67,9 +71,9 @@ const SearchInput = forwardRef(function SearchInput(props, ref) {
         e.preventDefault();
 
         if (searchInput?.id !== e.target.id) {
-
             setSearchInput(e.target);
         }
+
 
         if (displaySeachBar) {
             setDisplaySearchBar(false);
@@ -86,12 +90,11 @@ const SearchInput = forwardRef(function SearchInput(props, ref) {
                 onChange={handleChange}
                 onFocus={handleFocus}
                 onBlur={handleBlur}
-                ref={inputRef}
+                ref={ref}
                 placeholder={placeholder}
             />
             {(isActive && searchTerm) &&
-                <AutoComplete searchCard={searchCard} inputRef={inputRef} />
-                // <AutoComplete predictions={predictions}  inputRef={inputRef} />
+                <AutoComplete searchCard={searchCard} />
             }
         </>
     );
