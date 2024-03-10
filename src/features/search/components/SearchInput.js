@@ -4,6 +4,7 @@ import React, {
 import AutoComplete from './AutoComplete';
 import useNav from '../../../hooks/contexthooks/useNav.js';
 import useSearch from '../../../hooks/contexthooks/useSearch';
+import useViewport from '../../../hooks/contexthooks/useViewport.js';
 
 const SearchInput = forwardRef(function SearchInput(props, ref) {
     const {
@@ -28,7 +29,8 @@ const SearchInput = forwardRef(function SearchInput(props, ref) {
         setDisplayAutocomplete
     } = useSearch();
 
-    const { displaySeachBar, setDisplaySearchBar, checkboxRef } = useNav();
+    const { displaySeachBar, setDisplaySearchBar, hamburgerRef } = useNav();
+    const { isMobile } = useViewport();
 
     const handleChange = (e) => {
 
@@ -60,10 +62,15 @@ const SearchInput = forwardRef(function SearchInput(props, ref) {
         // query is triggered each time search catalog has focus
         // making sure search catalog cardnames is updated with latest results  
         if (e.target.id === 'catalog') {
-            console.log('catalog')
             setSearchInput(null);
             setCardNames(null);
-            setDisplaySearchBar(false);
+            if (isMobile) {
+                setDisplaySearchBar(false);
+                hamburgerRef.current?.setAttribute('aria-expanded', 'false');
+                setTimeout(() => {
+                    hamburgerRef.current.disabled = false;
+                }, 500);
+            }
         }
     };
 

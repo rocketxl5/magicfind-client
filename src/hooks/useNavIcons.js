@@ -52,7 +52,7 @@ const useNavIcons = () => {
             case 'logo-icon':
                 handleNavIcons();
                 break;
-            case 'search-icon':
+            case 'search-btn':
                 handleSearchIcon();
                 break;
             case 'hamburger-icon':

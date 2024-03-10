@@ -73,16 +73,17 @@ nav {
     display: none;
 }
 
-.hamburger,
-.search-icon {
+.hamburger-btn,
+.search-btn {
+    background: transparent;
     cursor: pointer;
 }
 
-.hamburger *,
+.hamburger-btn *,
 .cart-icon *,
 .signin-icon *,
 .mail-icon *,
-.search-icon *
+.search-btn *
  {
     pointer-events: none;
 }

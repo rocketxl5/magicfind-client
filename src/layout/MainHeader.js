@@ -34,7 +34,7 @@ const MainHeader = () => {
         })
         .catch((error) => console.log(error));
     }
-  }, [updateCatalog]);
+  }, [updateCatalog, setCatalogCardNames, setUpdateCatalog]);
 
   return (
     <header className="main-header" ref={headerRef}>

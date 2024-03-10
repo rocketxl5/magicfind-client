@@ -1,14 +1,15 @@
 import { useState, useEffect, useRef, createContext } from 'react';
 import useViewport from '../hooks/contexthooks/useViewport';
+// import useSearch from '../hooks/contexthooks/useSearch';
 
 export const NavigationContext = createContext(null);
 
 export const NavigationProvider = ({ children }) => {
     const [displayMenu, setDisplayMenu] = useState(false);
     const [displaySearchBar, setDisplaySearchBar] = useState(false);
-    const [isChecked, setIsChecked] = useState(false);
 
     const { isMobile } = useViewport();
+    // const { catalogInputRef } = useSearch();
 
     const menuRef = useRef(null);
     const hamburgerRef = useRef(null);
@@ -34,16 +35,15 @@ export const NavigationProvider = ({ children }) => {
     }, [displayMenu, isMobile]);
 
     useEffect(() => {
-
-        if (displaySearchBar) {
-            searchBarRef.current?.classList.add('d-searchbar');
-            cartCountRef.current?.classList.add('d-none');
-            // setIsChecked(true)
-        }
-        else {
-            searchBarRef.current?.classList.remove('d-searchbar');
-            cartCountRef.current?.classList.remove('d-none');
-            // hamburgerRef.current.click();
+        if (isMobile) {
+            if (displaySearchBar) {
+                searchBarRef.current?.classList.add('d-searchbar');
+                cartCountRef.current?.classList.add('d-none');
+            }
+            else {
+                searchBarRef.current?.classList.remove('d-searchbar');
+                cartCountRef.current?.classList.remove('d-none');
+            }
         }
     }, [displaySearchBar])
 
@@ -59,8 +59,6 @@ export const NavigationProvider = ({ children }) => {
                 searchBarRef,
                 cartCountRef,
                 searchIconRef,
-                isChecked,
-                setIsChecked
             }}
         >
             {children}

@@ -1,14 +1,15 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useEffect } from 'react';
+import useNav from '../../hooks/contexthooks/useNav';
 
 const Hamburger = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [stateChanged, setStateChanged] = useState(false);
+    const { hamburgerRef } = useNav();
 
-    const btnRef = useRef(null);
 
-    const handleClick = () => {
-
-        const state = btnRef.current?.getAttribute('aria-expanded');
+    const handleClick = (e) => {
+        console.log(e.target)
+        const state = hamburgerRef.current?.getAttribute('aria-expanded');
 
         if (state === 'true') {
             setIsOpen(true);
@@ -24,15 +25,15 @@ const Hamburger = () => {
         if (stateChanged) {
             if (!isOpen) {
                 console.log('isNotOpen', isOpen)
-                btnRef.current?.setAttribute('aria-expanded', 'true');
+                hamburgerRef.current?.setAttribute('aria-expanded', 'true');
             }
             else {
                 console.log('isOpen', isOpen)
-                btnRef.current?.setAttribute('aria-expanded', 'false');
+                hamburgerRef.current?.setAttribute('aria-expanded', 'false');
             }
             setStateChanged(false);
         }
-    }, [stateChanged, isOpen])
+    }, [stateChanged, isOpen, hamburgerRef])
 
     return (
         <button
@@ -41,7 +42,7 @@ const Hamburger = () => {
             aria-controls='navigation'
             aria-expanded='false'
             onClick={handleClick}
-            ref={btnRef}
+            ref={hamburgerRef}
         >
             <svg className='hamburger' fill='var(--clr-grey)' viewBox='0 0 100 100' width='30'>
                 <rect className='line top'
