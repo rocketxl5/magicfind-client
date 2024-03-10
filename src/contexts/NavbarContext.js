@@ -2,7 +2,7 @@ import { useState, useEffect, useRef, createContext } from 'react';
 import useViewport from '../hooks/contexthooks/useViewport';
 // import useSearch from '../hooks/contexthooks/useSearch';
 
-export const NavigationContext = createContext(null);
+export const NavbarContext = createContext(null);
 
 export const NavigationProvider = ({ children }) => {
     const [displayMenu, setDisplayMenu] = useState(false);
@@ -48,7 +48,7 @@ export const NavigationProvider = ({ children }) => {
     }, [displaySearchBar])
 
     return (
-        <NavigationContext.Provider
+        <NavbarContext.Provider
             value={{
                 displayMenu,
                 setDisplayMenu,
@@ -62,6 +62,6 @@ export const NavigationProvider = ({ children }) => {
             }}
         >
             {children}
-        </NavigationContext.Provider>
+        </NavbarContext.Provider>
     )
 }

@@ -1,8 +1,8 @@
-import useNav from './contexthooks/useNav.js';
+import useNavbar from './contexthooks/useNavbar.js';
 import useViewport from './contexthooks/useViewport.js';
 
-const useNavIcons = () => {
-    const { displayMenu, setDisplayMenu, displaySearchBar, setDisplaySearchBar, checkboxRef } = useNav();
+const useNavbarHandler = () => {
+    const { displayMenu, setDisplayMenu, displaySearchBar, setDisplaySearchBar, checkboxRef } = useNavbar();
     const { isMobile } = useViewport();
 
     const handleNavIcons = () => {
@@ -73,4 +73,4 @@ const useNavIcons = () => {
     return { handleIcons, handleLinks };
 }
 
-export default useNavIcons
+export default useNavbarHandler

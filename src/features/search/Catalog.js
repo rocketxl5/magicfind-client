@@ -9,7 +9,7 @@ import SearchInput from './components/SearchInput'
 import Form from '../../components/Form';
 import { SearchContext } from '../../contexts/SearchContext';
 import useAuth from '../../hooks/contexthooks/useAuth';
-import useNav from '../../hooks/contexthooks/useNav.js';
+import useNavbar from '../../hooks/contexthooks/useNavbar.js';
 import { api } from '../../api/resources';
 import setQueryString from '../../assets/utilities/setQueryString';
 
@@ -33,7 +33,7 @@ const Catalog = () => {
     } = useContext(SearchContext);
     // Hooks
     const { auth, isAuth } = useAuth();
-    const { setDisplaySearchBar, searchBarRef } = useNav();
+    const { setDisplaySearchBar, searchBarRef } = useNavbar();
     const navigate = useNavigate();
 
     useEffect(() => {

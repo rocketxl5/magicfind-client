@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react';
-import useNav from '../../hooks/contexthooks/useNav';
+import useNavbar from '../../hooks/contexthooks/useNavbar';
 
 const Hamburger = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [stateChanged, setStateChanged] = useState(false);
-    const { hamburgerRef } = useNav();
+    const { hamburgerRef } = useNavbar();
 
 
     const handleClick = (e) => {

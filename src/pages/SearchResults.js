@@ -4,11 +4,11 @@ import ProductItem from '../features/product/ProductItem';
 import Modal from '../features/modal/Modal';
 import Page from '../components/Page';
 import Count from '../features/search/components/Count';
-import { NavigationContext } from '../contexts/NavigationContext';
+import { NavbarContext } from '../contexts/NavbarContext';
 import SearchParameters from '../features/search/components/SearchParameters';
 import useProductForms from '../hooks/useProductForms';
 import useSlideView from '../hooks/useSlideView';
-import useNav from '../hooks/contexthooks/useNav';
+import useNavbar from '../hooks/contexthooks/useNavbar';
 
 const SearchResults = () => {
     // States
@@ -17,7 +17,7 @@ const SearchResults = () => {
     const location = useLocation();
     const navigate = useNavigate();
 
-    const { displaySeachBar, setDisplaySearchBar } = useContext(NavigationContext);
+    const { displaySeachBar, setDisplaySearchBar } = useContext(NavbarContext);
 
     const { cards, search } = location.state?.result || JSON.parse(localStorage.getItem('search-results'));
 

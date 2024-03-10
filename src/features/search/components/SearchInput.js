@@ -2,9 +2,9 @@ import React, {
     forwardRef
 } from 'react';
 import AutoComplete from './AutoComplete';
-import useNav from '../../../hooks/contexthooks/useNav.js';
+import useNavbar from '../../../hooks/contexthooks/useNavbar'
 import useSearch from '../../../hooks/contexthooks/useSearch';
-import useViewport from '../../../hooks/contexthooks/useViewport.js';
+import useViewport from '../../../hooks/contexthooks/useViewport';
 
 const SearchInput = forwardRef(function SearchInput(props, ref) {
     const {
@@ -29,7 +29,7 @@ const SearchInput = forwardRef(function SearchInput(props, ref) {
         setDisplayAutocomplete
     } = useSearch();
 
-    const { displaySeachBar, setDisplaySearchBar, hamburgerRef } = useNav();
+    const { displaySeachBar, setDisplaySearchBar, hamburgerRef } = useNavbar();
     const { isMobile } = useViewport();
 
     const handleChange = (e) => {

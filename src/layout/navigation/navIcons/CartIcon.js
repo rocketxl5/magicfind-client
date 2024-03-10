@@ -2,12 +2,12 @@ import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { FiShoppingCart } from 'react-icons/fi';
 import { CartContext } from '../../../contexts/CartContext';
-import useNav from '../../../hooks/contexthooks/useNav';
+import useNavbar from '../../../hooks/contexthooks/useNavbar';
 import styled from 'styled-components';
 
 const CartIcon = () => {
   const { itemsCount } = useContext(CartContext);
-  const { cartCountRef } = useNav();
+  const { cartCountRef } = useNavbar();
 
   return (
     <Container className="nav-icon">
