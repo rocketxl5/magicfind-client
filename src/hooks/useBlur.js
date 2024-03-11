@@ -29,7 +29,7 @@ const useBlur = () => {
                 // Was set to true on click of search button
                 setTimeout(() => {
                     hamburgerRef.current.disabled = false;
-                }, 500);
+                }, 100);
             }
             // Reinitialize input state if catalog 
             // Query is triggered each time search catalog has focus

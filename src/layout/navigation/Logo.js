@@ -1,22 +1,14 @@
-import { useNavigate } from 'react-router-dom';
 import { GiWaterBolt } from 'react-icons/gi';
 import styled from 'styled-components';
 import useAuth from '../../hooks/contexthooks/useAuth';
 import useNavbar from '../../hooks/contexthooks/useNavbar';
+import useHamburger from '../../hooks/useHamburger';
 
 const Logo = () => {
-  const navigate = useNavigate();
-
   const { auth } = useAuth();
-  const { displayMenu, hamburgerRef } = useNavbar();
+  const { hamburgerRef } = useNavbar();
+  const { resetHamburger } = useHamburger(hamburgerRef)
 
-  const handleClick = () => {
-    if (displayMenu) {
-      hamburgerRef.current.click();
-    }
-
-    navigate(auth ? 'me' : '/');
-  }
 
   return (
     <button
@@ -24,9 +16,9 @@ const Logo = () => {
       className='logo bg-transparent'
       type='button'
       title='Magic Find logo'
-      onClick={handleClick}
+      onClick={() => resetHamburger(auth ? 'me' : '/')}
     >
-      <Anchor id={'logo-icon'} className='logo-anchor'>
+      <Anchor id={'logo-icon'}>
         <SVG>
           <GiWaterBolt />
         </SVG>
@@ -39,15 +31,7 @@ const Logo = () => {
   )
 }
 
-const Div = styled.button`
-height: inherit;
-display: flex;
-align-items: center;
 
-&:hover {
-  cursor: pointer;
-}
-`;
 const Anchor = styled.span`
 display: flex;
 align-items: center;

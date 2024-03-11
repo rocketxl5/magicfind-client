@@ -10,14 +10,10 @@
     
 .logo {
     margin-right: auto;
-}
-
-.logo-anchor {
     min-width: 5rem;
 }
 
-.logo-anchor * {
-    pointer-events: none;
+.logo * {
     color: var(--clr-grey);
 }
 
@@ -74,10 +70,11 @@ nav {
     display: none;
 }
 
+.logo *,
 .hamburger-btn *,
 .cart-btn *,
-.signin-icon *,
-.mail-icon *,
+.signin-btn *,
+.mail-btn *,
 .search-btn *
  {
     pointer-events: none;
@@ -156,6 +153,7 @@ nav {
  transform-origin: center;
 }
 
+/* Open Menu/Searchbar hamburger [X] animation rules */
 .hamburger-btn[aria-expanded="true"] .line {
  transition: 
   y 100ms ease-in,

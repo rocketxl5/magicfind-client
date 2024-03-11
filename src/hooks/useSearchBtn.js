@@ -17,12 +17,7 @@ const useSearchBtn = (hamburgerRef, catalogInputRef) => {
         // Change aria-expanded attribute to trigger "Open" hamburger animation 
         // @ navbar.css
         hamburgerRef.current?.setAttribute('aria-expanded', 'true');
-        setTimeout(() => {
-            // Disable hamburger button
-            // Hamburger closing animation triggers without click event
-            hamburgerRef.current.disabled = true;
-        }, 500);
-
+        hamburgerRef.current.disabled = true;
         // Set focus on Catalog Search Input
         catalogInputRef.current?.focus();
     }

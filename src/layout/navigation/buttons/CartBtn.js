@@ -1,29 +1,20 @@
-import { useNavigate } from 'react-router-dom';
 import { FiShoppingCart } from 'react-icons/fi';
 import useNavbar from '../../../hooks/contexthooks/useNavbar';
 import useCart from '../../../hooks/contexthooks/useCart';
+import useHamburger from '../../../hooks/useHamburger';
 import styled from 'styled-components';
 
 const CartBtn = () => {
-  const navigate = useNavigate();
-
-  const { displayMenu, hamburgerRef, cartCountRef } = useNavbar();
+  const { hamburgerRef, cartCountRef } = useNavbar();
+  const { resetHamburger } = useHamburger(hamburgerRef);
   const { itemsCount } = useCart();
-
-  const handleClick = () => {
-    if (displayMenu) {
-      hamburgerRef.current.click();
-    }
-
-    navigate('/shopping-cart')
-  }
 
   return (
     <button
       id='cart-btn'
-      className='nav-btn'
+      className='nav-btn cart-btn'
       type='button'
-      onClick={handleClick}
+      onClick={() => resetHamburger('/shopping-cart')}
     >
       {itemsCount > 0 && (
         <CountContainer ref={cartCountRef}>

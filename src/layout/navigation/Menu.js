@@ -2,28 +2,28 @@ import { NavLink, useNavigate } from 'react-router-dom';
 import useAuth from '../../hooks/contexthooks/useAuth';
 import data from '../../data/ROUTES.json';
 import useNavbar from '../../hooks/contexthooks/useNavbar';
+import useViewport from '../../hooks/contexthooks/useViewport';
+import useHamburger from '../../hooks/useHamburger';
 
 // Dynamic navigation menues for public and authenticated users
-function Menu({ handleClick }) {
+function Menu() {
 
     const navigate = useNavigate();
+    const { isMobile } = useViewport();
     const { isAuth, logoutAction } = useAuth();
-    const { menuRef } = useNavbar();
+    const { setDisplayMenu, hamburgerRef, menuRef } = useNavbar();
+
+    const { resetHamburger } = useHamburger(hamburgerRef);
+
+
     // Declares menus related variables
     const { authRoutes, publicRoutes, classList } = data;
     // Defines routes according to user status
     const routes = isAuth ? authRoutes : publicRoutes;
 
-    // const handleClick = () => {
-    //     // Close Menu
-    //     setDisplayMenu(!displayMenu);
-    //     // Check mobile-nav checkbox to trigger css hamburger animation
-    //     checkboxRef.current?.click();
-    // }
-
     return (
         <nav className="nav-menu">
-            <ul id="nav-links" ref={menuRef} onClick={handleClick}>
+            <ul id="nav-links" ref={menuRef} onClick={(e) => resetHamburger()}>
                 {
                     // Generates menus list of links
                     routes.map((route, index) => {

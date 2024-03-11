@@ -1,25 +1,19 @@
-import { useNavigate } from 'react-router-dom';
 import { FaUserCircle } from 'react-icons/fa';
 import useNavbar from '../../../hooks/contexthooks/useNavbar';
+import useHamburger from '../../../hooks/useHamburger';
 
 const SignBtn = () => {
-    const navigate = useNavigate();
-    const { displayMenu, setDisplayMenu } = useNavbar();
+    const { hamburgerRef } = useNavbar();
 
-    const handleClick = () => {
-        if (displayMenu) {
-            setDisplayMenu(false);
-        }
-        navigate('/login');
-    }
+    const { resetHamburger } = useHamburger(hamburgerRef);
 
     return (
         <button
             id='sigin-btn'
-            className='nav-btn search-btn'
+            className='nav-btn sign-btn'
             type='button'
             title='Login'
-            onClick={handleClick}
+            onClick={() => resetHamburger('/login')}
         >
             <FaUserCircle className="nav-btn" size={27} />
         </button>
@@ -27,4 +21,3 @@ const SignBtn = () => {
 }
 
 export default SignBtn;
-{/* <Link id="signin-icon" className="signin-icon" to='/login' title="Login"> */ }
