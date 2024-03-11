@@ -2,7 +2,8 @@ import React, {
     forwardRef
 } from 'react';
 import AutoComplete from './AutoComplete';
-import useNav from '../../../hooks/contexthooks/useNav.js';
+import useBlur from '../../../hooks/useBlur';
+import useFocus from '../../../hooks/useFocus';
 import useSearch from '../../../hooks/contexthooks/useSearch';
 
 const SearchInput = forwardRef(function SearchInput(props, ref) {
@@ -13,22 +14,20 @@ const SearchInput = forwardRef(function SearchInput(props, ref) {
         searchCard,
         isActive,
     } = props;
-    const inputRef = ref;
 
     const {
         setMarker,
         cardNames,
         setCardName,
-        setSearchInput,
         searchTerm,
         setSearchTerm,
         setPredictions,
-        searchInput,
         displayAutcomplete,
         setDisplayAutocomplete
     } = useSearch();
 
-    const { displaySeachBar, setDisplaySearchBar } = useNav();
+    const { updateBlur } = useBlur();
+    const { updateFocus } = useFocus();
 
     const handleChange = (e) => {
 
@@ -51,31 +50,6 @@ const SearchInput = forwardRef(function SearchInput(props, ref) {
         setSearchTerm(e.target.value)
     };
 
-    const handleBlur = (e) => {
-        e.preventDefault();
-        setMarker(-1);
-        setSearchTerm('');
-        // Reinitialize input state if catalog 
-        // query is triggered each time search catalog has focus
-        // making sure search catalog cardnames is updated with latest results  
-        if (e.target.id === 'catalog') {
-            setSearchInput(null)
-        }
-    };
-
-    const handleFocus = (e) => {
-        e.preventDefault();
-
-        if (searchInput?.id !== e.target.id) {
-
-            setSearchInput(e.target);
-        }
-
-        if (displaySeachBar) {
-            setDisplaySearchBar(false);
-        }
-    }
-
     return (
         <>
             <input
@@ -84,14 +58,13 @@ const SearchInput = forwardRef(function SearchInput(props, ref) {
                 className={className}
                 value={isActive ? searchTerm : ''}
                 onChange={handleChange}
-                onFocus={handleFocus}
-                onBlur={handleBlur}
-                ref={inputRef}
+                onFocus={(e) => updateFocus(e.target)}
+                onBlur={(e) => updateBlur(e.target.id)}
+                ref={ref}
                 placeholder={placeholder}
             />
             {(isActive && searchTerm) &&
-                <AutoComplete searchCard={searchCard} inputRef={inputRef} />
-                // <AutoComplete predictions={predictions}  inputRef={inputRef} />
+                <AutoComplete searchCard={searchCard} />
             }
         </>
     );

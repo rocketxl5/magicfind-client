@@ -3,17 +3,17 @@ import useAuth from '../../../hooks/contexthooks/useAuth';
 import { FiMail } from 'react-icons/fi';
 import styled from 'styled-components';
 
-const MailIcon = () => {
+const MailBtn = () => {
   const { unreadMail } = useAuth();
   return (
-    <Container className="nav-icon">
+    <Container className="nav-btn">
       <Mail id="mail-icon" className="mail-icon" to="me/mail" title=" To Inbox">
         {unreadMail > 0 && (
           <UnreadContainer>
             <Unread>{unreadMail}</Unread>
           </UnreadContainer>
         )}
-        <FiMail className="nav-icon" size={27} />
+        <FiMail className="nav-btn" size={27} />
       </Mail>
     </Container>
   )
@@ -51,4 +51,4 @@ const Unread = styled.div`
   color: #fff;
 `;
 
-export default MailIcon;
+export default MailBtn;

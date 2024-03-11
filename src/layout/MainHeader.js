@@ -7,14 +7,11 @@ import { api } from '../api/resources';
 import useAuth from '../hooks/contexthooks/useAuth';
 import useSearch from '../hooks/contexthooks/useSearch';
 import useScroll from '../hooks/contexthooks/useScroll';
-import useNavIcons from '../hooks/useNavIcons';
 
 const MainHeader = () => {
   const { headerRef } = useScroll();
   const { isAuth } = useAuth();
   const { updateCatalog, setUpdateCatalog, setCatalogCardNames } = useSearch();
-
-  const { handleIcons } = useNavIcons();
 
   // Setting catalog card names for autocomplete catalog search
   useEffect(() => {
@@ -36,10 +33,10 @@ const MainHeader = () => {
         })
         .catch((error) => console.log(error));
     }
-  }, [updateCatalog]);
+  }, [updateCatalog, setCatalogCardNames, setUpdateCatalog]);
 
   return (
-    <header className="main-header" onClick={(e) => handleIcons(e)} ref={headerRef}>
+    <header className="main-header" ref={headerRef}>
       <div className="header-container">
         <Logo />
         <Catalog />

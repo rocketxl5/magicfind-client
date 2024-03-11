@@ -12,7 +12,7 @@ import Button from '../../components/Button';
 import Loading from '../../layout/Loading';
 import useAuth from '../../hooks/contexthooks/useAuth';
 import useSearch from '../../hooks/contexthooks/useSearch';
-import useNav from '../../hooks/contexthooks/useNav.js';
+import useNavbar from '../../hooks/contexthooks/useNavbar.js';
 import { api } from '../../api/resources';
 import setQueryString from '../../assets/utilities/setQueryString';
 
@@ -21,7 +21,7 @@ const Collection = () => {
     const [loading, setLoading] = useState(false);
     const [isActive, setIsActive] = useState(false);
     // Ref
-    const collectionInputRef = useRef(null);
+    // const collectionInputRef = useRef(null);
     // Context
     const {
         errorMessage,
@@ -33,10 +33,11 @@ const Collection = () => {
         setCardName,
         setCardNames,
         predictions,
-        collectionCardNames
+        collectionCardNames,
+        collectionInputRef
     } = useSearch();
 
-    const { displaySeachBar, setDisplaySearchBar } = useNav();
+    const { displaySeachBar, setDisplaySearchBar } = useNavbar();
 
     const { auth } = useAuth();
     const navigate = useNavigate();

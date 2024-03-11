@@ -1,9 +1,9 @@
-import SearchIcon from './navIcons/SearchIcon';
-import MailIcon from './navIcons/MailIcon';
+import SearchBtn from './buttons/SearchBtn';
+import MailBtn from './buttons/MailBtn';
 import Hamburger from './Hamburger';
-import SignIcon from './navIcons/SignIcon';
-import AuthIcon from './navIcons/AuthIcon';
-import CartIcon from './navIcons/CartIcon';
+import SignBtn from './buttons/SignBtn';
+import AuthBtn from './buttons/AuthBtn';
+import CartBtn from './buttons/CartBtn';
 import useAuth from '../../hooks/contexthooks/useAuth';
 import useViewport from '../../hooks/contexthooks/useViewport';
 
@@ -19,34 +19,34 @@ const NavIcons = () => {
              /*  Has a label linked to mobile-nav checkbox
              *********** **************************************/}
             {/*************************************************
-             /*  SearchIcon icon mobile only @ screen < 725px
+             /*  SearchBtn icon mobile only @ screen < 725px
              /*  Has a label linked to mobile-nav checkbox
               *************************************************/}
             {/* Mobile & Desktop [public & authenticated]*/}
             {
                 isMobile ? (
                     <>
-                        <SearchIcon />
+                        <SearchBtn />
                         {isAuth ? (
-                            <MailIcon />
+                            <MailBtn />
                         ) : (
-                            <SignIcon />
+                                <SignBtn />
                         )}
-                        <CartIcon />
+                        <CartBtn />
                         <Hamburger />
                     </>
                 ) : (
                     <>
                         {isAuth ? (
                             <>
-                                <MailIcon />
-                                <CartIcon />
-                                <AuthIcon auth={auth} />
+                                    <MailBtn />
+                                    <CartBtn />
+                                    <AuthBtn auth={auth} />
                             </>
                         ) : (
                             <>
-                                <SignIcon />
-                                <CartIcon />
+                                        <SignBtn />
+                                        <CartBtn />
                                 <Hamburger />
                             </>
                         )

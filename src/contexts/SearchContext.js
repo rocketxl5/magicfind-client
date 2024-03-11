@@ -1,4 +1,4 @@
-import React, { useState, useEffect, createContext } from 'react';
+import { useRef, useState, useEffect, createContext } from 'react';
 import useAuth from '../hooks/contexthooks/useAuth';
 export const SearchContext = createContext(null);
 
@@ -25,8 +25,14 @@ export const SearchProvider = ({ children }) => {
   const [cardNames, setCardNames] = useState([]);
   const [loading, setLoading] = useState(false);
   const [marker, setMarker] = useState(-1);
+
   const { auth } = useAuth();
 
+  // Search field Refs
+  const catalogInputRef = useRef(null);
+  const collectionInputRef = useRef(null);
+  const archiveInputRef = useRef(null);
+  // catalogInputRef.current?.focus();
 
   useEffect(() => {
     setUpdateCatalog(true);
@@ -85,7 +91,10 @@ export const SearchProvider = ({ children }) => {
         filterUserCards,
         filterCardNames,
         displayAutcomplete,
-        setDisplayAutocomplete
+        setDisplayAutocomplete,
+        catalogInputRef,
+        collectionInputRef,
+        archiveInputRef
       }}
     >
       {children}

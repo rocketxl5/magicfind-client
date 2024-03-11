@@ -9,7 +9,7 @@ import SearchInput from './components/SearchInput'
 import Form from '../../components/Form';
 import { SearchContext } from '../../contexts/SearchContext';
 import useAuth from '../../hooks/contexthooks/useAuth';
-import useNav from '../../hooks/contexthooks/useNav.js';
+import useNavbar from '../../hooks/contexthooks/useNavbar.js';
 import { api } from '../../api/resources';
 import setQueryString from '../../assets/utilities/setQueryString';
 
@@ -17,7 +17,7 @@ const Catalog = () => {
     // States
     const [isActive, setIsActive] = useState(false);
     // Ref
-    const catalogInputRef = useRef(null);
+    // const catalogInputRef = useRef(null);
     // Context
     const {
         searchInput,
@@ -28,19 +28,18 @@ const Catalog = () => {
         setCardName,
         setCardNames,
         predictions,
-        catalogCardNames
+        catalogCardNames,
+        catalogInputRef
     } = useContext(SearchContext);
     // Hooks
     const { auth, isAuth } = useAuth();
-    const { searchBarRef, displaySeachBar, setDisplaySearchBar } = useNav();
+    const { setDisplaySearchBar, searchBarRef } = useNavbar();
     const navigate = useNavigate();
-
 
     useEffect(() => {
         if (searchInput?.id === 'catalog') {
             setIsActive(true);
-        } else {
-            setCardNames(null);
+        } else if (isActive) {
             setIsActive(false);
         }
     }, [searchInput]);
@@ -100,9 +99,6 @@ const Catalog = () => {
                             setCardName('');
                             setSearchInput(null);
                             localStorage.setItem('search-results', JSON.stringify(result));
-                            if (displaySeachBar) {
-                                setDisplaySearchBar(false);
-                            }
                             navigate(`/catalog/${setQueryString(query.toLowerCase(), '-')}`,
                                 {
                                     state: { result: result },
@@ -113,9 +109,6 @@ const Catalog = () => {
                     return res.json().then((error) => {
 
                         setLoading(false);
-                        if (displaySeachBar) {
-                            setDisplaySearchBar(false);
-                        }
                         navigate(`/not-found/${query}`);
                     })
                 }
