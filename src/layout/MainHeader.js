@@ -13,7 +13,6 @@ const MainHeader = () => {
   const { isAuth } = useAuth();
   const { updateCatalog, setUpdateCatalog, setCatalogCardNames } = useSearch();
 
-
   // Setting catalog card names for autocomplete catalog search
   useEffect(() => {
     // If true

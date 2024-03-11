@@ -1,47 +1,18 @@
-import { useState, useEffect } from 'react';
 import useNavbar from '../../hooks/contexthooks/useNavbar';
+import useHamburger from '../../hooks/useHamburger';
 
 const Hamburger = () => {
-    const [isOpen, setIsOpen] = useState(false);
-    const [stateChanged, setStateChanged] = useState(false);
     const { hamburgerRef } = useNavbar();
-
-
-    const handleClick = (e) => {
-        console.log(e.target)
-        const state = hamburgerRef.current?.getAttribute('aria-expanded');
-
-        if (state === 'true') {
-            setIsOpen(true);
-        }
-        else {
-            setIsOpen(false);
-        }
-
-        setStateChanged(true);
-    }
-
-    useEffect(() => {
-        if (stateChanged) {
-            if (!isOpen) {
-                console.log('isNotOpen', isOpen)
-                hamburgerRef.current?.setAttribute('aria-expanded', 'true');
-            }
-            else {
-                console.log('isOpen', isOpen)
-                hamburgerRef.current?.setAttribute('aria-expanded', 'false');
-            }
-            setStateChanged(false);
-        }
-    }, [stateChanged, isOpen, hamburgerRef])
+    const { hamburgerHandler } = useHamburger(hamburgerRef)
 
     return (
         <button
-            className='hamburger-btn nav-icon'
+            id='hamburger-btn'
+            className='hamburger-btn nav-btn'
             type='button'
             aria-controls='navigation'
             aria-expanded='false'
-            onClick={handleClick}
+            onClick={() => hamburgerHandler()}
             ref={hamburgerRef}
         >
             <svg className='hamburger' fill='var(--clr-grey)' viewBox='0 0 100 100' width='30'>

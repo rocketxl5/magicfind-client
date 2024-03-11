@@ -1,14 +1,32 @@
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { GiWaterBolt } from 'react-icons/gi';
 import styled from 'styled-components';
 import useAuth from '../../hooks/contexthooks/useAuth';
+import useNavbar from '../../hooks/contexthooks/useNavbar';
 
 const Logo = () => {
+  const navigate = useNavigate();
+
   const { auth } = useAuth();
+  const { displayMenu, hamburgerRef } = useNavbar();
+
+  const handleClick = () => {
+    if (displayMenu) {
+      hamburgerRef.current.click();
+    }
+
+    navigate(auth ? 'me' : '/');
+  }
 
   return (
-    <Div className="logo">
-      <Anchor id={'logo-icon'} className="logo-anchor" to={auth ? 'me' : '/'} title="Magic Find logo">
+    <button
+      id='logo-btn'
+      className='logo bg-transparent'
+      type='button'
+      title='Magic Find logo'
+      onClick={handleClick}
+    >
+      <Anchor id={'logo-icon'} className='logo-anchor'>
         <SVG>
           <GiWaterBolt />
         </SVG>
@@ -17,11 +35,11 @@ const Logo = () => {
           <Text>Find</Text>
         </Title>
       </Anchor>
-    </Div>
+    </button>
   )
 }
 
-const Div = styled.div`
+const Div = styled.button`
 height: inherit;
 display: flex;
 align-items: center;
@@ -30,7 +48,7 @@ align-items: center;
   cursor: pointer;
 }
 `;
-const Anchor = styled(Link)`
+const Anchor = styled.span`
 display: flex;
 align-items: center;
 `;
@@ -68,3 +86,38 @@ const Text = styled.div`
 
 
 export default Logo;
+// import { useNavigate } from 'react-router-dom';
+// import { GiWaterBolt } from 'react-icons/gi';
+// import styled from 'styled-components';
+// import useAuth from '../../hooks/contexthooks/useAuth';
+// import useNavbar from '../../hooks/contexthooks/useNavbar';
+
+// const Logo = () => {
+//   const navigate = useNavigate();
+
+//   const { auth } = useAuth();
+//   const { displayMenu, setDisplayMenu } = useNavbar();
+
+//   const handleClick = () => {
+//     if (displayMenu) {
+//       setDisplayMenu(false);
+//     }
+//     navigate(auth ? 'me' : '/')
+//   }
+
+
+// id='logo-btn'
+// className='nav-btn logo logo-btn'
+// type='button'
+// title='Magic Find logo'
+// onClick={handleClick}
+// >
+//   <Span id={'logo-icon'} className="logo-Span" to={auth ? 'me' : '/'} title="Magic Find logo">
+//     <SVG>"
+//       <GiWaterBolt />
+//     </SVG>
+//     <Title>
+//       <Text>Magic</Text>
+//       <Text>Find</Text>
+//     </Title>
+//   </Span>

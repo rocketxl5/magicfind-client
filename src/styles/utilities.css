@@ -227,6 +227,10 @@
     background: var(--clr-grey);
 }
 
+.bg-transparent {
+    background: transparent !important;
+}
+
 
 /* Root layout selectors */
 .bg-light {
