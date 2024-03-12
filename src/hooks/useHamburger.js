@@ -10,15 +10,17 @@ const useHamburger = (hamburgerRef) => {
     // Prevents Hamburger menu from opening on load
     const [stateChanged, setStateChanged] = useState(false);
     const navigate = useNavigate();
-    const { setDisplayMenu } = useNavbar();
+    const { displaySearchBar, setDisplayMenu } = useNavbar();
     const { isMobile } = useViewport();
     const { isAuth } = useAuth();
 
+    // -Triggers hamburger closing animation
+    // -Hides nav menue
     const resetHamburger = (location = undefined) => {
         // If unauthenticated or authenticated and mobile [authenticated destop has avatar]
         if (!isAuth || (isAuth && isMobile)) {
         // Trigger hamburger closing animation
-            hamburgerRef.current?.setAttribute('aria-expanded', 'false');
+            hamburgerRef.current.setAttribute('aria-expanded', 'false');
         }
         // Close menu
         setDisplayMenu(false);
@@ -26,6 +28,24 @@ const useHamburger = (hamburgerRef) => {
         if (location) {
             navigate(location);
         }
+    }
+
+    const hamburgerHandler = () => {
+        if (displaySearchBar) { return }
+        // Get hamburger aria-expanded attribute state
+        const state = hamburgerRef.current?.getAttribute('aria-expanded');
+        // If state is true [hamburger === X]
+        if (state === 'true') {
+            // Sets hiding menu/searchbar animation [stack]
+            setIsOpen(true);
+        }
+        else {
+            // Sets display menu/searchbar animation [X]
+            setIsOpen(false);
+        }
+
+        // Enables hamburger animation
+        setStateChanged(true);
     }
 
     // Calls resetHamburger if event target is anything but a redirect to a location
@@ -67,22 +87,6 @@ const useHamburger = (hamburgerRef) => {
             setStateChanged(false);
         }
     }, [stateChanged, isOpen, hamburgerRef, setDisplayMenu])
-
-    const hamburgerHandler = () => {
-        // Get hamburger aria-expanded attribute state
-        const state = hamburgerRef.current?.getAttribute('aria-expanded');
-        // If state is true [hamburger === stack]
-        if (state === 'true') {
-            // Sets closing animation [X]
-            setIsOpen(true);
-        }
-        else {
-            // Sets opening animation [X]
-            setIsOpen(false);
-        }
-        // Triggers hamburger animation
-        setStateChanged(true);
-    }
 
     return { hamburgerHandler, resetHamburger }
 }

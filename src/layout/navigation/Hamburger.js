@@ -3,7 +3,7 @@ import useHamburger from '../../hooks/useHamburger';
 
 const Hamburger = () => {
     const { hamburgerRef } = useNavbar();
-    const { hamburgerHandler } = useHamburger(hamburgerRef)
+    const { hamburgerHandler } = useHamburger(hamburgerRef);
 
     return (
         <button

@@ -1,13 +1,11 @@
 import { FiMail } from 'react-icons/fi';
 import useAuth from '../../../hooks/contexthooks/useAuth';
 import useHamburger from '../../../hooks/useHamburger';
-import useViewport from '../../../hooks/contexthooks/useViewport';
 import useNavbar from '../../../hooks/contexthooks/useNavbar';
 import styled from 'styled-components';
 
 const MailBtn = () => {
   const { unreadMail } = useAuth();
-  const { isMobile } = useViewport();
   const { hamburgerRef } = useNavbar();
   const { resetHamburger } = useHamburger(hamburgerRef);
 

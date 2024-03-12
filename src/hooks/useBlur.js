@@ -19,17 +19,8 @@ const useBlur = () => {
         if (id === 'catalog') {
             // If Mobile
             if (displaySearchBar && isMobile) {
-                // Set searchbar state to false
                 // Hides searchbar @ NavbarContext
                 setDisplaySearchBar(false);
-                // Set aria-expanded attribute to false
-                // Triggers hamburger animation 
-                hamburgerRef.current?.setAttribute('aria-expanded', 'false');
-                // Set button diabled attribute to false
-                // Was set to true on click of search button
-                setTimeout(() => {
-                    hamburgerRef.current.disabled = false;
-                }, 100);
             }
             // Reinitialize input state if catalog 
             // Query is triggered each time search catalog has focus
