@@ -3,21 +3,26 @@ import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
 import useNavbar from './contexthooks/useNavbar';
 import useViewport from './contexthooks/useViewport';
+import useAuth from './contexthooks/useAuth';
 
 const useHamburger = (hamburgerRef) => {
     const [isOpen, setIsOpen] = useState(false);
     // Prevents Hamburger menu from opening on load
     const [stateChanged, setStateChanged] = useState(false);
     const navigate = useNavigate();
-    const {
-        displayMenu,
-        setDisplayMenu,
-    } = useNavbar();
+    const { setDisplayMenu } = useNavbar();
     const { isMobile } = useViewport();
+    const { isAuth } = useAuth();
 
     const resetHamburger = (location = undefined) => {
-        hamburgerRef.current?.setAttribute('aria-expanded', 'false');
+        // If unauthenticated or authenticated and mobile [authenticated destop has avatar]
+        if (!isAuth || (isAuth && isMobile)) {
+        // Trigger hamburger closing animation
+            hamburgerRef.current?.setAttribute('aria-expanded', 'false');
+        }
+        // Close menu
         setDisplayMenu(false);
+
         if (location) {
             navigate(location);
         }

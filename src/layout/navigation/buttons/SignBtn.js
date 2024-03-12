@@ -15,9 +15,9 @@ const SignBtn = () => {
             title='Login'
             onClick={() => resetHamburger('/login')}
         >
-            <FaUserCircle className="nav-btn" size={27} />
+            <FaUserCircle />
         </button>
     )
 }
 
-export default SignBtn;
+export default SignBtn
