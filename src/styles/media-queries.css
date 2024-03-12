@@ -185,7 +185,7 @@
         padding-inline: 2rem;
     }
 
-    .nav-icons {
+    .nav-btns {
         width: 100%;
         justify-content: flex-end;
         gap: 2rem;
@@ -268,7 +268,7 @@
         min-width: 20rem;
     }
 
-    .nav-icons {
+    .nav-btns {
         grid-gap: 2.5rem;
         gap: 2.5rem;
     }
@@ -382,7 +382,7 @@
         padding-inline: 4rem;
     }
 
-    .nav-icons {
+    .nav-btns {
         gap: 3rem;
         grid-gap: 3rem;
       }
