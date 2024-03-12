@@ -12,8 +12,8 @@ const NavIcons = () => {
     const { isMobile } = useViewport();
 
     return (
-        <div className="nav-icons" >
-            {/* <div className="nav-icons" onClick={(e) => handleMenu(e)}> */}
+        <div className="nav-btns" >
+            {/* <div className="nav-btns" onClick={(e) => handleMenu(e)}> */}
             {/************************************************* 
              /*  Hamburger
              /*  Has a label linked to mobile-nav checkbox
