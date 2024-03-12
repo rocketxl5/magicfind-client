@@ -68,9 +68,9 @@ const CatalogHandlers = ({ product, loading, setLoading }) => {
                                 }
 
                             </Container>
-                            <Container>
+                            {/* <Container>
                                 <Avatar avatar={product.seller.avatar} handleClick={() => { console.log(seller) }} />
-                            </Container>
+                            </Container> */}
                             <Container>
                                 {
                                     quantity &&

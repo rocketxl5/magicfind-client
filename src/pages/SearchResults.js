@@ -31,12 +31,12 @@ const SearchResults = () => {
 
     function handleSlideView(e, layout, expandedImage) {
         e.stopPropagation();
-        updateSlideView(layout, expandedImage)
+        updateSlideView(layout, expandedImage);
     }
 
     function handleProductForm(e, card) {
         e.stopPropagation();
-        updateProductState(e.target.id, card)
+        updateProductState(e.target.id, card);
     }
 
     return (
