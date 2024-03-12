@@ -16,7 +16,7 @@ const CatalogHandlers = ({ product, loading, setLoading }) => {
     const { conditions, finish, languages } = data.product;
     const { set_name, price, quantity, language, condition, finishes, seller } = product;
     // const { userName, country, avatar, rating, email } = seller;
-
+    console.log(product)
     const { cartItems } = useCart();
     // const {data, loading, error } = useFetch 
     const specs = [
@@ -55,7 +55,7 @@ const CatalogHandlers = ({ product, loading, setLoading }) => {
                 ) : (
                         <>
                             <Container>
-                                {
+                                {/* {
                                     specs &&
                                     specs.map((spec, i) => {
                                         return (
@@ -65,7 +65,7 @@ const CatalogHandlers = ({ product, loading, setLoading }) => {
 
                                         )
                                     })
-                                }
+                                } */}
 
                             </Container>
                             {/* <Container>
