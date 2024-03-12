@@ -17,7 +17,7 @@ const SearchBtn = () => {
             onClick={(e) => searchBtnHandler(e.target.id)}
             ref={searchBtnRef}
         >
-            <FiSearch className="nav-btn" />
+            <FiSearch />
         </button>
     );
 }

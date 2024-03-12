@@ -1,34 +1,29 @@
-import { Link } from 'react-router-dom';
-import useAuth from '../../../hooks/contexthooks/useAuth';
 import { FiMail } from 'react-icons/fi';
+import useAuth from '../../../hooks/contexthooks/useAuth';
+import useHamburger from '../../../hooks/useHamburger';
+import useViewport from '../../../hooks/contexthooks/useViewport';
+import useNavbar from '../../../hooks/contexthooks/useNavbar';
 import styled from 'styled-components';
 
 const MailBtn = () => {
   const { unreadMail } = useAuth();
+  const { isMobile } = useViewport();
+  const { hamburgerRef } = useNavbar();
+  const { resetHamburger } = useHamburger(hamburgerRef);
+
   return (
-    <Container className="nav-btn">
-      <Mail id="mail-icon" className="mail-icon" to="me/mail" title=" To Inbox">
+    <button
+      id='mail-btn' className='nav-btn mail-btn' onClick={() => resetHamburger('me/mail')}>
         {unreadMail > 0 && (
           <UnreadContainer>
             <Unread>{unreadMail}</Unread>
           </UnreadContainer>
         )}
-        <FiMail className="nav-btn" size={27} />
-      </Mail>
-    </Container>
+      <FiMail />
+    </button>
   )
 }
 
-
-
-const Container = styled.div`
-  position: relative;
-  display: flex;
-`;
-
-const Mail = styled(Link)`
-   color: var(--clr-grey);
-`;
 
 const UnreadContainer = styled.div`
   position: absolute;

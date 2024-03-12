@@ -25,7 +25,7 @@ const CartBtn = () => {
           </CountDown>
         </CountContainer>
       )}
-      <FiShoppingCart className="nav-btn" size={27} />
+      <FiShoppingCart />
     </button>
   )
 }
