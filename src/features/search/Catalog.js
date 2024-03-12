@@ -90,8 +90,8 @@ const Catalog = () => {
                 if (res.status === 200) {
                     return res.json()
                         .then((data) => {
+                            console.log(data)
                             setLoading(false);
-
                             const result = {
                                 cards: data.cards,
                                 search: searchInput.id
