@@ -24,18 +24,18 @@ const CatalogHandlers = ({ product, loading, setLoading }) => {
             title: 'Edition:',
             value: set_name
         },
-        // {
-        //     title: 'Finish:',
-        //     value: finish[finishes]
-        // },
-        // {
-        //     title: 'Condition:',
-        //     value: conditions[condition]
-        // },
-        // {
-        //     title: 'Language:',
-        //     value: languages[language]
-        // },
+        {
+            title: 'Finish:',
+            value: finish[product.finishes]
+        },
+        {
+            title: 'Condition:',
+            value: conditions[product.condition]
+        },
+        {
+            title: 'Language:',
+            value: languages[product.language]
+        },
         {
             title: 'Price:',
             value: price
