@@ -6,8 +6,8 @@ import styled from 'styled-components';
 
 const CartBtn = () => {
   const { hamburgerRef, cartCountRef } = useNavbar();
-  const { resetHamburger } = useHamburger(hamburgerRef);
   const { itemsCount } = useCart();
+  const { resetHamburger } = useHamburger(hamburgerRef);
 
   return (
     <button

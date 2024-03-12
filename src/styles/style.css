@@ -90,26 +90,6 @@
   --translation-after: 0px 0px;
 
   --opacity-between: 1;
-
-  /* Hamburger animation */
-/* 'checked' className option for Firebox browser added to header @ main.js */
-/* header:has(input:checked) .mobile-nav-label::before,
-header.checked .mobile-nav-label::before {
-    rotate: -45deg;
-    translate: 1px 10px;
-}
-
-header:has(input:checked) .mobile-nav-label::after,
-header.checked .mobile-nav-label::after {
-   
-    rotate: 45deg;
-    translate: 1px -10px;
-}
-
-header:has(input:checked) .mobile-nav-label span,
-header.checked .mobile-nav-label span {
-    opacity: 0;
-} */
 }
 
 .check-icon {
@@ -118,15 +98,15 @@ header.checked .mobile-nav-label span {
 }
 
 body {
-width: 100%;
-height: 100%;
-margin-inline: auto;
-font-family: 'Poppins', sans-serif;
-font-size: var(--fs-125);
-line-height: 1.5;
-scrollbar-gutter: stable both-edges;
-background-color: var(--clr-light);
-  /* overscroll-behavior-block: contain; */
+  min-width: 37rem;
+  width: 100%;
+  height: 100%;
+  margin-inline: auto;
+  font-family: 'Poppins', sans-serif;
+  font-size: var(--fs-125);
+  line-height: 1.5;
+  scrollbar-gutter: stable both-edges;
+  background-color: var(--clr-light);
 }
 
 a {

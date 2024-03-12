@@ -1,8 +1,8 @@
 import { GiWaterBolt } from 'react-icons/gi';
+import useAuth from '../../../hooks/contexthooks/useAuth';
+import useNavbar from '../../../hooks/contexthooks/useNavbar';
+import useHamburger from '../../../hooks/useHamburger';
 import styled from 'styled-components';
-import useAuth from '../../hooks/contexthooks/useAuth';
-import useNavbar from '../../hooks/contexthooks/useNavbar';
-import useHamburger from '../../hooks/useHamburger';
 
 const Logo = () => {
   const { auth } = useAuth();

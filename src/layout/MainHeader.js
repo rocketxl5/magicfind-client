@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import Catalog from '../features/search/Catalog';
 import Navbar from './navigation/Navbar';
 import DashboardNav from './DashboardNav';
-import Logo from './navigation/Logo';
+import Logo from './navigation/buttons/Logo';
 import { api } from '../api/resources';
 import useAuth from '../hooks/contexthooks/useAuth';
 import useSearch from '../hooks/contexthooks/useSearch';

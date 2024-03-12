@@ -7,7 +7,7 @@ import CartBtn from './buttons/CartBtn';
 import useAuth from '../../hooks/contexthooks/useAuth';
 import useViewport from '../../hooks/contexthooks/useViewport';
 
-const NavIcons = () => {
+const NavBtns = () => {
     const { isAuth, auth } = useAuth();
     const { isMobile } = useViewport();
 
@@ -58,4 +58,4 @@ const NavIcons = () => {
     )
 }
 
-export default NavIcons;
+export default NavBtns;

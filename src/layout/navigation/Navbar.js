@@ -1,11 +1,11 @@
 import Menu from './Menu';
-import NavIcons from './NavIcons';
+import NavBtns from './NavBtns';
 
 function Navbar() {
 
     return (
         <div className="navbar">
-            <NavIcons />
+            <NavBtns />
             <Menu />
         </div>
     )
