@@ -5,6 +5,7 @@ export const NavbarContext = createContext(null);
 export const NavigationProvider = ({ children }) => {
     const [displayMenu, setDisplayMenu] = useState(false);
     const [displaySearchBar, setDisplaySearchBar] = useState(false);
+    const [isSearchBar, setIsSearchBar] = useState(true);
 
     const menuRef = useRef(null);
     const hamburgerRef = useRef(null);
@@ -19,6 +20,8 @@ export const NavigationProvider = ({ children }) => {
                 setDisplayMenu,
                 displaySearchBar,
                 setDisplaySearchBar,
+                isSearchBar,
+                setIsSearchBar,
                 menuRef,
                 hamburgerRef,
                 searchBarRef,
