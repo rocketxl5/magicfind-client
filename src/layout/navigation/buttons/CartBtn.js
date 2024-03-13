@@ -1,20 +1,21 @@
 import { FiShoppingCart } from 'react-icons/fi';
-import useNavbar from '../../../hooks/contexthooks/useNavbar';
+import useNavButton from '../../../hooks/useNavButton';
 import useCart from '../../../hooks/contexthooks/useCart';
-import useHamburger from '../../../hooks/useHamburger';
+import useNavbar from '../../../hooks/contexthooks/useNavbar';
 import styled from 'styled-components';
 
 const CartBtn = () => {
-  const { hamburgerRef, cartCountRef } = useNavbar();
   const { itemsCount } = useCart();
-  const { resetHamburger } = useHamburger(hamburgerRef);
+  const { cartCountRef } = useNavbar();
+  const { navButtonHandler } = useNavButton()
+
 
   return (
     <button
       id='cart-btn'
       className='nav-btn cart-btn'
       type='button'
-      onClick={() => resetHamburger('/shopping-cart')}
+      onClick={(e) => navButtonHandler('/shopping-cart')}
     >
       {itemsCount > 0 && (
         <CountContainer ref={cartCountRef}>

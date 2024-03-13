@@ -1,20 +1,17 @@
 import { FiSearch } from 'react-icons/fi';
-import useNavbar from '../../../hooks/contexthooks/useNavbar.js';
-import useSearch from '../../../hooks/contexthooks/useSearch.js';
-import useSearchBtn from '../../../hooks/useSearchBtn.js';
+import useNavbar from '../../../hooks/contexthooks/useNavbar';
+import useNavButton from '../../../hooks/useNavButton';
 
 const SearchBtn = () => {
-    const { searchBtnRef, hamburgerRef } = useNavbar();
-    const { catalogInputRef } = useSearch();
-
-    const { searchBtnHandler } = useSearchBtn(hamburgerRef, catalogInputRef)
+    const { searchBtnRef } = useNavbar();
+    const { searchButtonHandler } = useNavButton();
 
     return (
         <button
             id="search-btn"
             type='button'
             className="nav-btn search-btn"
-            onClick={(e) => searchBtnHandler(e.target.id)}
+            onClick={() => searchButtonHandler()}
             ref={searchBtnRef}
         >
             <FiSearch />

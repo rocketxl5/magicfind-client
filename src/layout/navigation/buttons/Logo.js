@@ -1,14 +1,12 @@
 import { GiWaterBolt } from 'react-icons/gi';
 import useAuth from '../../../hooks/contexthooks/useAuth';
-import useNavbar from '../../../hooks/contexthooks/useNavbar';
-import useHamburger from '../../../hooks/useHamburger';
+import useNavButton from '../../../hooks/useNavButton';
 import styled from 'styled-components';
 
 const Logo = () => {
-  const { auth } = useAuth();
-  const { hamburgerRef } = useNavbar();
-  const { resetHamburger } = useHamburger(hamburgerRef)
+  const { isAuth } = useAuth();
 
+  const { navButtonHandler } = useNavButton();
 
   return (
     <button
@@ -16,7 +14,7 @@ const Logo = () => {
       className='logo bg-transparent'
       type='button'
       title='Magic Find logo'
-      onClick={() => resetHamburger(auth ? 'me' : '/')}
+      onClick={(e) => navButtonHandler(isAuth ? 'me' : '/')}
     >
       <Anchor id={'logo-icon'}>
         <SVG>

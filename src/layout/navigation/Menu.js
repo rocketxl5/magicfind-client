@@ -2,16 +2,14 @@ import { NavLink, useNavigate } from 'react-router-dom';
 import useAuth from '../../hooks/contexthooks/useAuth';
 import data from '../../data/ROUTES.json';
 import useNavbar from '../../hooks/contexthooks/useNavbar';
-import useHamburger from '../../hooks/useHamburger';
+import useNavButton from '../../hooks/useNavButton';
 
-// Dynamic navigation menues for public and authenticated users
 function Menu() {
 
     const navigate = useNavigate();
     const { isAuth, logoutAction } = useAuth();
-    const { hamburgerRef, menuRef } = useNavbar();
-
-    const { resetHamburger } = useHamburger(hamburgerRef);
+    const { menuRef } = useNavbar();
+    const { menuHandler } = useNavButton();
 
     // Declares menus related variables
     const { authRoutes, publicRoutes, classList } = data;
@@ -20,7 +18,7 @@ function Menu() {
 
     return (
         <nav className="nav-menu">
-            <ul id="nav-links" ref={menuRef} onClick={(e) => resetHamburger()}>
+            <ul id="nav-links" ref={menuRef} onClick={(e) => menuHandler(e)}>
                 {
                     // Generates menus list of links
                     routes.map((route, index) => {

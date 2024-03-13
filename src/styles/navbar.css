@@ -49,19 +49,19 @@ nav {
     height: 100%;
 }
 
-.auth-icon {
+.auth-btn {
     display: none;
 }
 
-.auth-icon:hover {
+.auth-btn:hover {
     opacity: 0.8;
 }
 
-.auth-icon a * {
+.auth-btn a * {
     pointer-events: none;
 }
 
-#auth-icon {
+#auth-btn {
     display: none;
 }
 

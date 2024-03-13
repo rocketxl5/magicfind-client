@@ -1,6 +1,6 @@
-import useNavbar from './contexthooks/useNavbar';
+import useNavButton from './useNavButton';
 import useSearch from './contexthooks/useSearch';
-import useViewport from './contexthooks/useViewport';
+import useNavbar from './contexthooks/useNavbar';
 /*****************************************/
 // Updates States and Refs on search input blur
 // @ catalog [searchbar] input
@@ -8,19 +8,19 @@ import useViewport from './contexthooks/useViewport';
 // @ archive input
 /*****************************************/
 const useBlur = () => {
-    const { isMobile } = useViewport();
-    const { displaySearchBar, setDisplaySearchBar, hamburgerRef } = useNavbar();
+    const { handleSearchBarBlur } = useNavButton();
+    const { displaySearchBar } = useNavbar();
     const { setMarker, setSearchTerm, setSearchInput, setCardNames } = useSearch();
 
     const updateBlur = (id) => {
+        // console.log(displaySearchBar)
         setMarker(-1);
         setSearchTerm('');
-        // If search input is Catalog 
+        // If input is Catalog 
         if (id === 'catalog') {
             // If Mobile
-            if (displaySearchBar && isMobile) {
-                // Hides searchbar @ NavbarContext
-                setDisplaySearchBar(false);
+            if (displaySearchBar) {
+                handleSearchBarBlur();
             }
             // Reinitialize input state if catalog 
             // Query is triggered each time search catalog has focus

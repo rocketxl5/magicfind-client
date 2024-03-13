@@ -1,18 +1,18 @@
 import Avatar from '../../../components/Avatar.js';
 import useAuth from '../../../hooks/contexthooks/useAuth.js';
-import useNavbar from '../../../hooks/contexthooks/useNavbar.js';
+import useNavButton from '../../../hooks/useNavButton.js';
 
 const AuthBtn = () => {
     const { isAuth, auth } = useAuth();
-    const { displayMenu, setDisplayMenu } = useNavbar();
+    const { navButtonHandler } = useNavButton()
 
     return (
         isAuth &&
         <Avatar
-            id={'auth-icon'}
-            classList={'nav-btn'}
+            id={'auth-btn'}
+            classList={'auth-btn nav-btn'}
             avatar={auth?.user.avatar}
-            handleClick={() => setDisplayMenu(!displayMenu)}
+            handleClick={(e) => navButtonHandler()}
         />
     )
 }

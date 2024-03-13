@@ -1,7 +1,7 @@
 import SearchBtn from './buttons/SearchBtn';
 import MailBtn from './buttons/MailBtn';
 import Hamburger from './Hamburger';
-import SignBtn from './buttons/SignBtn';
+import SignInBtn from './buttons/SignInBtn';
 import AuthBtn from './buttons/AuthBtn';
 import CartBtn from './buttons/CartBtn';
 import useAuth from '../../hooks/contexthooks/useAuth';
@@ -30,7 +30,7 @@ const NavBtns = () => {
                         {isAuth ? (
                             <MailBtn />
                         ) : (
-                                <SignBtn />
+                                <SignInBtn />
                         )}
                         <CartBtn />
                         <Hamburger />
@@ -45,7 +45,7 @@ const NavBtns = () => {
                             </>
                         ) : (
                             <>
-                                        <SignBtn />
+                                        <SignInBtn />
                                         <CartBtn />
                                 <Hamburger />
                             </>
