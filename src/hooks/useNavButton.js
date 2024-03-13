@@ -10,6 +10,8 @@ const useNavButton = () => {
         displayMenu,
         setDisplaySearchBar,
         displaySearchBar,
+        isSearchBar,
+        setIsSearchBar,
         hamburgerRef,
         searchBarRef,
         cartCountRef,
@@ -43,11 +45,13 @@ const useNavButton = () => {
     }
 
     const hamburgerHandler = () => {
-        if (!displayMenu) {
-            setDisplayMenu(true);
-        }
-        else {
-            setDisplayMenu(false);
+        if (!isSearchBar) {
+            if (!displayMenu) {
+                setDisplayMenu(true);
+            }
+            else {
+                setDisplayMenu(false);
+            }
         }
     }
 
@@ -72,6 +76,7 @@ const useNavButton = () => {
     }
 
     const handleBlur = () => {
+        hamburgerRef.current.disabled = false;
         setDisplaySearchBar(false);
     }
     /********** End Mobile only *********/
@@ -133,15 +138,17 @@ const useNavButton = () => {
             searchBarRef.current?.classList.add('d-searchbar');
             cartCountRef.current?.classList.add('d-none');
             hamburgerRef.current?.setAttribute('aria-expanded', 'true');
-            hamburgerRef.current.disabled = true;
+            setIsSearchBar(true);
+            // hamburgerRef.current.disabled = true;
         }
         else {
-            setTimeout(() => {
-                hamburgerRef.current.disabled = false;
-            }, 50);
+            // setTimeout(() => {
+            //     hamburgerRef.current.disabled = false;
+            // }, 50);
             hamburgerRef.current?.setAttribute('aria-expanded', 'false');
             searchBarRef.current?.classList.remove('d-searchbar');
             cartCountRef.current?.classList.remove('d-none');
+            setIsSearchBar(false);
         }
     }, [displaySearchBar])
 
