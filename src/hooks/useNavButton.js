@@ -75,19 +75,17 @@ const useNavButton = () => {
         catalogInputRef.current?.focus();
     }
 
-    const handleBlur = () => {
+    const blurHandler = () => {
         hamburgerRef.current.disabled = false;
         setDisplaySearchBar(false);
     }
     /********** End Mobile only *********/
-
 
     /********** Desktop only ************/
     const handleMenu = (e) => {
         if (!e.target.classList.contains('nav-link') &&
             !e.target.classList.contains('nav-btn') &&
             !e.target.classList.contains('logo')) {
-
             setDisplayMenu(false);
         }
     }
@@ -153,7 +151,7 @@ const useNavButton = () => {
     }, [displaySearchBar])
 
 
-    return { navButtonHandler, searchButtonHandler, hamburgerHandler, menuHandler, handleBlur }
+    return { navButtonHandler, searchButtonHandler, hamburgerHandler, menuHandler, blurHandler }
 }
 
 export default useNavButton
