@@ -1,17 +1,17 @@
 import { FiMail } from 'react-icons/fi';
 import useAuth from '../../../hooks/contexthooks/useAuth';
-import useHamburger from '../../../hooks/useHamburger';
-import useNavbar from '../../../hooks/contexthooks/useNavbar';
+import useNavButton from '../../../hooks/useNavButton';
 import styled from 'styled-components';
 
 const MailBtn = () => {
   const { unreadMail } = useAuth();
-  const { hamburgerRef } = useNavbar();
-  const { resetHamburger } = useHamburger(hamburgerRef);
+  const { navButtonHandler } = useNavButton();
 
   return (
     <button
-      id='mail-btn' className='nav-btn mail-btn' onClick={() => resetHamburger('me/mail')}>
+      id='mail-btn'
+      className='nav-btn mail-btn'
+      onClick={(e) => navButtonHandler('me/mail')}>
         {unreadMail > 0 && (
           <UnreadContainer>
             <Unread>{unreadMail}</Unread>

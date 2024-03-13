@@ -8,12 +8,13 @@ import { FiPlus } from "react-icons/fi";
 import useAuth from '../../../hooks/contexthooks/useAuth';
 import useCart from '../../../hooks/contexthooks/useCart';
 import useFetch from '../../../hooks/useFetch';
-import data from '../../../data/SEARCH.json';
+import * as data from '../../../data/SEARCH.json';
 
 // userName, country, avatar, rating, email
 
 const CatalogHandlers = ({ product, loading, setLoading }) => {
-    const { conditions, finish, languages } = data.product;
+    const productData = data.default;
+    const { finish, conditions, languages } = productData;
     const { set_name, price, quantity, language, condition, finishes, seller } = product;
     // const { userName, country, avatar, rating, email } = seller;
     console.log(product)
@@ -26,15 +27,15 @@ const CatalogHandlers = ({ product, loading, setLoading }) => {
         },
         {
             title: 'Finish:',
-            value: finish[product.finishes]
+            value: finish[finishes]
         },
         {
             title: 'Condition:',
-            value: conditions[product.condition]
+            value: conditions[condition]
         },
         {
             title: 'Language:',
-            value: languages[product.language]
+            value: languages[language]
         },
         {
             title: 'Price:',
@@ -55,7 +56,7 @@ const CatalogHandlers = ({ product, loading, setLoading }) => {
                 ) : (
                         <>
                             <Container>
-                                {/* {
+                                {
                                     specs &&
                                     specs.map((spec, i) => {
                                         return (
@@ -65,7 +66,7 @@ const CatalogHandlers = ({ product, loading, setLoading }) => {
 
                                         )
                                     })
-                                } */}
+                                }
 
                             </Container>
                             {/* <Container>

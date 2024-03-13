@@ -32,7 +32,6 @@ export const SearchProvider = ({ children }) => {
   const catalogInputRef = useRef(null);
   const collectionInputRef = useRef(null);
   const archiveInputRef = useRef(null);
-  // catalogInputRef.current?.focus();
 
   useEffect(() => {
     setUpdateCatalog(true);
