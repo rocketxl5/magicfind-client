@@ -71,7 +71,7 @@ const useNavButton = () => {
         catalogInputRef.current?.focus();
     }
 
-    const handleSearchBarBlur = () => {
+    const handleBlur = () => {
         setDisplaySearchBar(false);
     }
     /********** End Mobile only *********/
@@ -136,17 +136,17 @@ const useNavButton = () => {
             hamburgerRef.current.disabled = true;
         }
         else {
-            searchBarRef.current?.classList.remove('d-searchbar');
-            cartCountRef.current?.classList.remove('d-none');
-            hamburgerRef.current?.setAttribute('aria-expanded', 'false');
             setTimeout(() => {
                 hamburgerRef.current.disabled = false;
-            }, 100)
+            }, 50);
+            hamburgerRef.current?.setAttribute('aria-expanded', 'false');
+            searchBarRef.current?.classList.remove('d-searchbar');
+            cartCountRef.current?.classList.remove('d-none');
         }
     }, [displaySearchBar])
 
 
-    return { navButtonHandler, searchButtonHandler, hamburgerHandler, menuHandler, handleSearchBarBlur }
+    return { navButtonHandler, searchButtonHandler, hamburgerHandler, menuHandler, handleBlur }
 }
 
 export default useNavButton
