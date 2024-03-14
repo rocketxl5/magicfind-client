@@ -7,7 +7,6 @@ import { useNavigate } from 'react-router-dom';
 import Page from '../../components/Page';
 import Form from '../../components/Form';
 import SearchInput from './components/SearchInput'
-import Loading from '../../layout/Loading';
 import { api } from '../../api/resources';
 import useSearch from '../../hooks/contexthooks/useSearch';
 import useNavbar from '../../hooks/contexthooks/useNavbar.js';
@@ -167,35 +166,27 @@ const Search = () => {
                 });
 
         }
-    }, [data])
+    }, [data]);
 
     return (
-        <>
-            {
-                loading ? (
-                    <Loading />
-                ) : (
-                        <Page name={'archive'}>
-                            <main>
-                                <Form
-                                    id={'archive-form'}
-                                    classList={'search-form'}
-                                    handleSubmit={searchArchive}
-                                >
-                                    <SearchInput
-                                        id={'archive'}
-                                        className={'search-field'}
-                                        placeholder={'Search MTG Archive'}
-                                        searchCard={searchArchive}
-                                        isActive={isActive}
-                                        ref={archiveInputRef} />
-                                </Form>
-                            </main>
-                        </Page>
-                )
-            }
-        </>
-    );
-};
+        <Page name={'archive'} loading={loading}>
+            <main>
+                <Form
+                    id={'archive-form'}
+                    classList={'search-form'}
+                    handleSubmit={searchArchive}
+                >
+                    <SearchInput
+                        id={'archive'}
+                        className={'search-field'}
+                        placeholder={'Search MTG Archive'}
+                        searchCard={searchArchive}
+                        isActive={isActive}
+                        ref={archiveInputRef} />
+                </Form>
+            </main>
+        </Page>
+    )
+}
 
 export default Search;

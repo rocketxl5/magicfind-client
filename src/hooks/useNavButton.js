@@ -1,8 +1,9 @@
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import useNavbar from './contexthooks/useNavbar';
 import useSearch from './contexthooks/useSearch';
+import useAuth from './contexthooks/useAuth';
 import useViewport from './contexthooks/useViewport';
-import { useEffect } from 'react';
 
 const useNavButton = () => {
     const {
@@ -19,32 +20,20 @@ const useNavButton = () => {
         searchBtnRef } = useNavbar();
     const { catalogInputRef } = useSearch();
     const { isMobile } = useViewport();
+    const { isAuth } = useAuth();
 
     const navigate = useNavigate();
 
-    const openMenu = () => {
-
-    }
-
-    const closeMenu = () => {
-
-    }
-
-    const openSearchBar = () => {
-
-    }
-
-    const closeSearchBar = () => {
-
-    }
-
     const menuHandler = (e) => {
+        console.log(displayMenu)
         if (displayMenu) {
             setDisplayMenu(false);
         }
     }
 
+    // Display or hides Menu on click if search bar is hidden
     const hamburgerHandler = () => {
+        console.log('hamburger')
         if (!isSearchBar) {
             if (!displayMenu) {
                 setDisplayMenu(true);
@@ -55,6 +44,19 @@ const useNavButton = () => {
         }
     }
 
+    // Display or hides Menu on click [authButton is Desktop only]
+    const authButtonHandler = () => {
+        if (!displayMenu) {
+            setDisplayMenu(true);
+        }
+        else {
+            setDisplayMenu(false);
+        }
+    }
+
+    // @ CartBtn, Logo, MailBtn, SingInBtn ...
+    // Hides menu if menu is displayed
+    // Navigates to path if path defined
     const navButtonHandler = (path) => {
         if (displayMenu) {
             setDisplayMenu(false);
@@ -107,6 +109,7 @@ const useNavButton = () => {
     /********** End Desktop only *********/
 
     useEffect(() => {
+        console.log(displayMenu)
         // [mobile = screen-wide, desktop = 1/3 screen]
         const selector = isMobile ? 'd-mobile-menu' : 'd-desktop-menu';
 
@@ -123,7 +126,12 @@ const useNavButton = () => {
         else {
             // Hide menu
             menuRef.current?.classList.remove(selector);
-            hamburgerRef.current?.setAttribute('aria-expanded', 'false');
+
+            // Hamburger visible @ all size if unauthenticated view.
+            // Hamburger replaced by Avatar @ authenticated desktop view.
+            if (!isAuth || (isAuth && isMobile)) {
+                hamburgerRef.current?.setAttribute('aria-expanded', 'false');
+            }
             if (isMobile) {
                 // Display search button
                 searchBtnRef.current?.classList.remove('d-none');
@@ -151,7 +159,7 @@ const useNavButton = () => {
     }, [displaySearchBar])
 
 
-    return { navButtonHandler, searchButtonHandler, hamburgerHandler, menuHandler, blurHandler }
+    return { navButtonHandler, authButtonHandler, searchButtonHandler, hamburgerHandler, menuHandler, blurHandler }
 }
 
 export default useNavButton

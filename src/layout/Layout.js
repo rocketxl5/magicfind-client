@@ -1,7 +1,7 @@
 import { Outlet, useLocation } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import Banner from './Banner';
-import Loading from './Loading';
+import Loader from './Loader';
 import useSearch from '../hooks/contexthooks/useSearch';
 import data from '../data/BANNERS.json';
 
@@ -14,6 +14,9 @@ const Layout = () => {
 
         <div className="layout">
             {
+                loading ?
+                    <Loader />
+                    :
                 data[path] &&
                 <Banner
                         classList={data[path].styles.banner}
@@ -27,15 +30,9 @@ const Layout = () => {
             }
             {/* <Breadcrumbs />    */}
 
-            {
-                !loading ? (
                     <Outlet />
-                ) : (
-                    <div className="loading-content">
-                        <Loading />
-                    </div>
-                )
-            }
+
+
 
         </div>
 

@@ -4,15 +4,15 @@ import useNavButton from '../../../hooks/useNavButton.js';
 
 const AuthBtn = () => {
     const { isAuth, auth } = useAuth();
-    const { navButtonHandler } = useNavButton()
+    const { authButtonHandler } = useNavButton();
 
     return (
         isAuth &&
         <Avatar
             id={'auth-btn'}
             classList={'auth-btn nav-btn'}
-            avatar={auth?.user.avatar}
-            handleClick={(e) => navButtonHandler()}
+            avatar={auth.user.avatar}
+            handleClick={(e) => authButtonHandler()}
         />
     )
 }

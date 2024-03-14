@@ -25,30 +25,30 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  const checkUnreadMail = (id, token) => {
-    const headers = new Headers();
-    headers.append('Content-type', 'application/json');
-    headers.append('auth-token', token);
+  // const checkUnreadMail = (id, token) => {
+  //   const headers = new Headers();
+  //   headers.append('Content-type', 'application/json');
+  //   headers.append('auth-token', token);
 
-    const options = {
-      method: 'GET',
-      headers: headers,
-    };
+  //   const options = {
+  //     method: 'GET',
+  //     headers: headers,
+  //   };
 
-    fetch(`${api.serverURL}/api/messages/unread/${id}`, options)
-      .then((res) => res.json())
-      .then((data) => {
+  //   fetch(`${api.serverURL}/api/messages/unread/${id}`, options)
+  //     .then((res) => res.json())
+  //     .then((data) => {
 
-        if (data.data) {
-          const unreadMail = data.data.filter((message) => {
-            return !message.isRead && !message.isTrash;
-          });
-          // If unreadMail
-          setUnreadMail(unreadMail && unreadMail.length);
-        }
-      })
-      .catch((error) => console.log(error));
-  }
+  //       if (data.data) {
+  //         const unreadMail = data.data.filter((message) => {
+  //           return !message.isRead && !message.isTrash;
+  //         });
+  //         // If unreadMail
+  //         setUnreadMail(unreadMail && unreadMail.length);
+  //       }
+  //     })
+  //     .catch((error) => console.log(error));
+  // }
 
   useEffect(() => {
     if (auth) {
