@@ -200,8 +200,8 @@
     }
 
 
-    #auth-icon,
-    #signin-icon {
+    #auth-btn,
+    #signin-btn {
         display: block;
     }
     

@@ -1,18 +1,11 @@
-import { Navigate, Outlet } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
 import useAuth from '../hooks/contexthooks/useAuth';
 
 // Can't be accessed if authenticated
 const RestrictedRoutes = () => {
-    const { auth } = useAuth();
+    const { isAuth } = useAuth();
 
-    return (
-        <>
-            {
-
-                auth ? <Navigate to="/me" replace /> : <Outlet />
-            }
-        </>
-    )
+    return !isAuth && <Outlet />
 }
 
 export default RestrictedRoutes;

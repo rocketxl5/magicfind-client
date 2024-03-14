@@ -41,7 +41,7 @@ const NavBtns = () => {
                             <>
                                     <MailBtn />
                                     <CartBtn />
-                                    <AuthBtn auth={auth} />
+                                    <AuthBtn />
                             </>
                         ) : (
                             <>

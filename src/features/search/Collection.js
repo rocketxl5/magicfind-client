@@ -9,7 +9,7 @@ import Page from '../../components/Page';
 import Form from '../../components/Form';
 import SearchInput from './components/SearchInput';
 import Button from '../../components/Button';
-import Loading from '../../layout/Loading';
+import Loader from '../../layout/Loader';
 import useAuth from '../../hooks/contexthooks/useAuth';
 import useSearch from '../../hooks/contexthooks/useSearch';
 import useNavbar from '../../hooks/contexthooks/useNavbar.js';
@@ -169,7 +169,7 @@ const Collection = () => {
     }
 
     return (
-        <Page name={'collection'}>
+        <Page name={'collection'} loading={loading}>
             {
                 errorMessage?.title === 'no_cards' ? (
                     <div className="message">
@@ -187,11 +187,11 @@ const Collection = () => {
                         </section>
                     </div>
                 ) : (
-                    <main>
+                        <main className='inherit-height'>
                         {
-                                loading ? (
-                                    <Loading />
-                            ) : (
+                                //     loading ? (
+                                //         <Loader />
+                                // ) : (
                                         <Form id={'collection-form'} classList={'search-form'} handleSubmit={searchCollectionCard}>
                                             <SearchInput
                                                 id={'collection'}
@@ -208,7 +208,7 @@ const Collection = () => {
                                                 {'All Cards'}
                                             </Button>
                                         </Form>
-                            )
+                                // )
                         }
                     </main>
 

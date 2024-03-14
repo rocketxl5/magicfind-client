@@ -9,7 +9,7 @@ import RootLayout from './layout/RootLayout';
 import Layout from './layout/Layout';
 import AuthLayout from './layout/AuthLayout';
 
-
+// Routes
 import PrivateRoutes from './routes/PrivateRoutes';
 import PublicRoutes from './routes/PublicRoutes';
 import RestrictedRoutes from './routes/RestrictedRoutes';
@@ -37,6 +37,7 @@ import Inbox from './features/mail/Inbox';
 import Store from './pages/Store';
 import Product from './pages/Product';
 
+// CSS
 import './styles/reset.css';
 import './styles/utilities.css';
 import './styles/style.css';
@@ -50,26 +51,26 @@ const App = () => {
   return (
     <Routes>
       <Route path="/" element={<RootLayout />} >
-        {/* Authenticated routes */}
+        {/* Authenticated only routes */}
         <Route element={<PrivateRoutes />}>
           <Route element={<AuthLayout />} >
             {/* <Route index element={<AuthPage />} /> */}
             <Route path="/" element={<Navigate to="/me" replace />} />
             <Route path="me" element={<AuthPage />}>
-            <Route path="dashboard" element={<DashBoard />} />
-            <Route path="collection" element={<Collection />} />
+              <Route path="dashboard" element={<DashBoard />} />
+              <Route path="collection" element={<Collection />} />
               <Route path="collection/:query" element={<SearchResults />} />
               <Route path="archive" element={<Archive />} />
               <Route path="archive/:query" element={<SearchResults />} />
-            <Route path="store" element={<Store />} />
-            <Route path="settings" element={<Settings />} />
-            <Route path="profile" element={<Profile />} />
-            <Route path="checkout" element={<Checkout />} />
-            <Route path="mail" element={<Inbox />} />
-          </Route>
+              <Route path="store" element={<Store />} />
+              <Route path="settings" element={<Settings />} />
+              <Route path="profile" element={<Profile />} />
+              <Route path="checkout" element={<Checkout />} />
+              <Route path="mail" element={<Inbox />} />
+            </Route>
           </Route>
         </Route>
-        {/* Unauthenticated routes */}
+        {/* Unauthenticated only routes */}
         <Route element={<RestrictedRoutes />}>
           <Route element={<Layout />}>
             <Route index element={<Home />} />
@@ -79,6 +80,7 @@ const App = () => {
             <Route path="reset-password" element={<ResetPassword />} />
           </Route>
         </Route>
+        {/* Authenticated and Unauthenticated  */}
         <Route element={<PublicRoutes />} >
           <Route path="about" element={<About />} />
           <Route path="contact" element={<Contact />} />

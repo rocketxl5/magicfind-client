@@ -1455,13 +1455,13 @@ background-repeat: no-repeat;
   bottom: 0;
   left: 0;
   right: 0;
-  background: rgba(255, 255, 255, 0.8);
+  background: rgba(255, 255, 255, 1);
   display: flex;
   height: inherit;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  z-index: 8000;
+  z-index: 1000;
 }
 
 .item-seller {

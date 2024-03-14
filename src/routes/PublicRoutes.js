@@ -6,15 +6,9 @@ const PublicRoutes = () => {
     const { isAuth } = useAuth();
 
     return (
-        isAuth ? (
-            <div className="auth-layout">
-                <Outlet />
-            </div>
-        ) : (
-            <div className="layout">
-                <Outlet />
-            </div>
-        )
+        <div className={isAuth ? 'auth-layout' : 'layout'}>
+            <Outlet />
+        </div>
     )
 }
 

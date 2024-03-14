@@ -435,11 +435,11 @@
     -webkit-overflow-scrolling: touch;
 }
 
-.p-relative {
+.relative {
     position: relative;
 }
 
-.p-absolute {
+.absolute {
     position: absolute;
 }
 

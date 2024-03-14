@@ -8,7 +8,7 @@ import { FiPlus } from "react-icons/fi";
 import useAuth from '../../../hooks/contexthooks/useAuth';
 import useCart from '../../../hooks/contexthooks/useCart';
 import useFetch from '../../../hooks/useFetch';
-import data from '../../../data/SEARCH.json';
+import search from '../../../data/SEARCH.json';
 
 // userName, country, avatar, rating, email
 
@@ -16,8 +16,7 @@ const CatalogHandlers = ({ product, loading, setLoading }) => {
     // const { conditions, finish, languages } = data.product;
     const { set_name, price, quantity, language, condition, finishes, seller } = product;
     const { userName, country, avatar, rating, email } = seller;
-    console.log()
-    console.log(product)
+
     const { cartItems } = useCart();
     // const {data, loading, error } = useFetch 
     const specs = [
@@ -27,15 +26,15 @@ const CatalogHandlers = ({ product, loading, setLoading }) => {
         },
         {
             title: 'Finish:',
-            value: data.product.finish[finishes]
+            value: search.product.finish[finishes]
         },
         {
             title: 'Condition:',
-            value: data.product.conditions[condition]
+            value: search.product.conditions[condition]
         },
         {
             title: 'Language:',
-            value: data.product.languages[language]
+            value: search.product.languages[language]
         },
         {
             title: 'Price:',

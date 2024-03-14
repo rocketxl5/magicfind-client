@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
-import Loading from '../layout/Loading';
+import Loader from '../layout/Loader';
 import errorHandler from './helpers/authErrorHandler';
 import useAuth from '../hooks/contexthooks/useAuth';
 import { api } from '../api/resources';
@@ -162,7 +162,7 @@ const Login = () => {
       {
         loading ?
           (
-            <Loading />
+            <Loader />
           ) : (
 
             <div className="form-content">

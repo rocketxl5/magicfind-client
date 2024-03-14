@@ -3,10 +3,10 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import MediaElement from '../features/media/MediaElement.js';
 import Modal from '../features/modal/Modal.js';
-import { GoShieldCheck } from "react-icons/go";
 import data from '../data/HOME';
 import useExpandImages from '../hooks/useExpandImages';
 import useSlideShow from '../hooks/useSlideShow.js';
+import { GoShieldCheck } from "react-icons/go";
 import { api } from '../api/resources';
 
 const Home = () => {
