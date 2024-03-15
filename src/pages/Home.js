@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import Page from '../components/Page.js';
 import MediaElement from '../features/media/MediaElement.js';
 import Modal from '../features/modal/Modal.js';
 import data from '../data/HOME';
@@ -67,7 +68,7 @@ const Home = () => {
         {view.component}
       </Modal>
 
-      <>
+      <Page>
         <main className="main-content home">
           <section className="feature-section">
             <header className="section-header">
@@ -135,7 +136,7 @@ const Home = () => {
             </div>
           </section>
         </main>
-      </>
+      </Page>
     </>
   )
 }

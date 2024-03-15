@@ -37,6 +37,9 @@ import Inbox from './features/mail/Inbox';
 import Store from './pages/Store';
 import Product from './pages/Product';
 
+// Hooks
+import useAuth from './hooks/contexthooks/useAuth';
+
 // CSS
 import './styles/reset.css';
 import './styles/utilities.css';
@@ -47,6 +50,7 @@ import './styles/media-queries.css';
 // import './App.css';
 
 const App = () => {
+  const { isAuth } = useAuth();
 
   return (
     <Routes>
@@ -82,6 +86,7 @@ const App = () => {
         </Route>
         {/* Authenticated and Unauthenticated  */}
         <Route element={<PublicRoutes />} >
+          <Route element={!isAuth ? <Layout /> : <AuthLayout />}>
           <Route path="about" element={<About />} />
           <Route path="contact" element={<Contact />} />
           <Route path="catalog/:query" element={<SearchResults />} />
@@ -89,6 +94,7 @@ const App = () => {
           <Route path="store/:id" element={<Store />} />
           <Route path="shopping-cart" element={<ShoppingCart />} />
           <Route path="product/:id" element={<Product />} />
+        </Route>
         </Route>
         {/* Catch all */}
         <Route path="*" element={< PageNotFound />} />

@@ -18,9 +18,6 @@ const Page = ({ children, name, hasHeader = true, component, loading }) => {
                 </Header>
             }
             {
-                loading ?
-                    <Loader />
-                    :
                     children
             }
         </Container>

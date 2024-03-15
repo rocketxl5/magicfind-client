@@ -75,6 +75,29 @@ nav {
     pointer-events: none;
 }
 
+.cart-count {
+    /* position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center; */
+    top: -10px;
+    left: 17px;
+    background: var(--clr-primary);
+    width: 2rem;
+    height: 2rem;
+    border: 2px solid var(--clr-grey);
+    border-radius: 50%;
+    z-index: 10;
+}
+
+.cart-count span {
+    font-size: 1rem;
+    font-weight: 400;
+    color: var(--clr-light);
+    veritcal-align: middle
+}
+
 /* Avatar */
 .avatar-icon {
     min-width: 3.3rem;

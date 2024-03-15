@@ -17,20 +17,24 @@ const Layout = () => {
                 loading ?
                     <Loader />
                     :
-                data[path] &&
-                <Banner
-                        classList={data[path].styles.banner}
-                    >
-                        {data[path].link &&
-                            <Link className={data[path].styles.link} to={data[path].link}>
-                                {data[path].title}
-                            </Link>
+                    <>
+                        {
+                            data[path] &&
+                            <Banner
+                                classList={data[path].styles.banner}
+                            >
+                                {data[path].link &&
+                                    <Link className={data[path].styles.link} to={data[path].link}>
+                                        {data[path].title}
+                                    </Link>
+                                }
+                            </Banner>
                         }
-                    </Banner>
-            }
-            {/* <Breadcrumbs />    */}
+                        {/* <Breadcrumbs />    */}
 
-                    <Outlet />
+                        <Outlet />
+                    </>
+            }
 
 
 
