@@ -24,18 +24,18 @@ const CatalogHandlers = ({ product, loading, setLoading }) => {
             title: 'Edition:',
             value: set_name
         },
-        {
-            title: 'Finish:',
-            value: search.product.finish[finishes]
-        },
-        {
-            title: 'Condition:',
-            value: search.product.conditions[condition]
-        },
-        {
-            title: 'Language:',
-            value: search.product.languages[language]
-        },
+        // {
+        //     title: 'Finish:',
+        //     value: search.product.finish[finishes]
+        // },
+        // {
+        //     title: 'Condition:',
+        //     value: search.product.conditions[condition]
+        // },
+        // {
+        //     title: 'Language:',
+        //     value: search.product.languages[language]
+        // },
         {
             title: 'Price:',
             value: price
@@ -54,7 +54,7 @@ const CatalogHandlers = ({ product, loading, setLoading }) => {
                         <Loading />
                 ) : (
                         <>
-                            <Container>
+                            {/* <Container>
                                 {
                                     specs &&
                                     specs.map((spec, i) => {
@@ -67,7 +67,7 @@ const CatalogHandlers = ({ product, loading, setLoading }) => {
                                     })
                                 }
 
-                            </Container>
+                            </Container> */}
                             {/* <Container>
                                 <Avatar avatar={product.seller.avatar} handleClick={() => { console.log(seller) }} />
                             </Container> */}
