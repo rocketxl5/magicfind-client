@@ -8,7 +8,7 @@ import Image from '../../components/Image';
 import Avatar from '../../components/Avatar';
 import Loader from '../../layout/Loader';
 import useCart from '../../hooks/contexthooks/useCart';
-import data from '../../data/SEARCH.json';
+import search from '../../data/SEARCH.json';
 
 const Item = ({ index, item }) => {
   const [loading, setLoading] = useState(false);
@@ -17,7 +17,8 @@ const Item = ({ index, item }) => {
   const [price, setPrice] = useState(0);
   const { subTotal, cartItems, setCartItems } = useCart();
   const navigate = useNavigate();
-  const { conditions, languages, finish } = data.product;
+  const product = search.product;
+  // const { conditions, languages, finish } = product;
 
   useEffect(() => {
     const parsedPrice = parseFloat(item.selected.price)
@@ -40,15 +41,15 @@ const Item = ({ index, item }) => {
     //   style: 'item-detail item-shipping'
     // },
     {
-      text: `${conditions[item.selected.condition]}`,
+      text: `${product.conditions[item.selected.condition]}`,
       style: 'item-detail item-condition'
     },
     {
-      text: languages[item.selected.language],
+      text: product.languages[item.selected.language],
       style: 'item-detail item-language'
     },
     {
-      text: finish[item.selected.finishes],
+      text: product.finish[item.selected.finishes],
       style: 'item-detail item-finish'
     },
     {

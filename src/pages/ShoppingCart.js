@@ -1,5 +1,4 @@
 import { useNavigate, useLocation } from 'react-router-dom';
-
 import Page from '../components/Page';
 import List from '../components/List';
 import ListItem from '../components/ListItem';
@@ -25,8 +24,7 @@ function ShoppingCart() {
       id={'shopping-cart'}
       name={'shopping-cart'}
       hasHeader={false}
-      component={<Count count={itemsCount}
-        type={'Item'} />}
+      component={<Count count={itemsCount} type={'Item'} />}
     >
       <>
           {

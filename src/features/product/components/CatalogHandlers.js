@@ -8,7 +8,7 @@ import { FiPlus } from "react-icons/fi";
 import useAuth from '../../../hooks/contexthooks/useAuth';
 import useCart from '../../../hooks/contexthooks/useCart';
 import useFetch from '../../../hooks/useFetch';
-import search from '../../../data/SEARCH.json';
+import data from '../../../data/SEARCH.json';
 
 // userName, country, avatar, rating, email
 
@@ -24,18 +24,18 @@ const CatalogHandlers = ({ product, loading, setLoading }) => {
             title: 'Edition:',
             value: set_name
         },
-        // {
-        //     title: 'Finish:',
-        //     value: search.product.finish[finishes]
-        // },
-        // {
-        //     title: 'Condition:',
-        //     value: search.product.conditions[condition]
-        // },
-        // {
-        //     title: 'Language:',
-        //     value: search.product.languages[language]
-        // },
+        {
+            title: 'Finish:',
+            value: data.product.finish[finishes]
+        },
+        {
+            title: 'Condition:',
+            value: data.product.conditions[condition]
+        },
+        {
+            title: 'Language:',
+            value: data.product.languages[language]
+        },
         {
             title: 'Price:',
             value: price
@@ -54,7 +54,7 @@ const CatalogHandlers = ({ product, loading, setLoading }) => {
                         <Loading />
                 ) : (
                         <>
-                            {/* <Container>
+                            <Container>
                                 {
                                     specs &&
                                     specs.map((spec, i) => {
@@ -67,7 +67,7 @@ const CatalogHandlers = ({ product, loading, setLoading }) => {
                                     })
                                 }
 
-                            </Container> */}
+                            </Container>
                             {/* <Container>
                                 <Avatar avatar={product.seller.avatar} handleClick={() => { console.log(seller) }} />
                             </Container> */}
