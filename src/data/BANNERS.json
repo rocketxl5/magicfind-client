@@ -2,14 +2,9 @@
   "/": {
     "title": "Join Magic Find",
     "link": "/signup",
-    "styles": {
+    "classList": {
       "banner": "banner-content home-page-banner",
       "link": "banner-link"
     }
-  },
-  "/about": {
-    "classList": "banner-content about-page-banner",
-    "title": "Join Magic Find",
-    "link": "/signup"
   }
 }

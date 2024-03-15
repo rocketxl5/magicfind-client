@@ -9,6 +9,7 @@ const Layout = () => {
     const location = useLocation();
     const { loading } = useSearch();
     const path = location.pathname;
+    console.log(path)
 
     return (
 
@@ -19,12 +20,12 @@ const Layout = () => {
                     :
                     <>
                         {
-                            data[path] !== undefined &&
+                            data[path] &&
                             <Banner
-                                classList={data[path].styles.banner}
+                                    classList={data[path]?.classList.banner}
                             >
                                 {data[path].link &&
-                                    <Link className={data[path].styles.link} to={data[path].link}>
+                                        <Link className={data[path]?.classList.link} to={data[path]?.link}>
                                         {data[path].title}
                                     </Link>
                                 }
