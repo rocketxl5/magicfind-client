@@ -19,7 +19,7 @@ const Layout = () => {
                     :
                     <>
                         {
-                            data[path] &&
+                            data[path] !== undefined &&
                             <Banner
                                 classList={data[path].styles.banner}
                             >
