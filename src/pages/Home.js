@@ -68,7 +68,7 @@ const Home = () => {
         {view.component}
       </Modal>
 
-      <Page>
+
         <main className="main-content home">
           <section className="feature-section">
             <header className="section-header">
@@ -136,7 +136,7 @@ const Home = () => {
             </div>
           </section>
         </main>
-      </Page>
+
     </>
   )
 }
