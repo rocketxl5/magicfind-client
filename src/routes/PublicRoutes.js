@@ -1,7 +1,8 @@
 import { Outlet } from 'react-router-dom';
 
-// All access
+// Authenticated & Unauthenticated
 const PublicRoutes = () => {
+
     return <Outlet />
 }
 

@@ -1,7 +1,7 @@
 import { Navigate, Outlet } from 'react-router-dom';
 import useAuth from '../hooks/contexthooks/useAuth';
 
-// Requires authentication
+// Must be Authenticated
 const PrivateRoutes = () => {
     const { isAuth } = useAuth();
 

@@ -23,16 +23,12 @@ export const CartProvider = ({ children }) => {
     // Update ItemsCount state
     setItemsCount(items);
 
-
-    // console.log(cartItems.length)
     if (cartItems) {
       localStorage.setItem('cart', JSON.stringify(cartItems));
     }
     else {
       localStorage.removeItem('cart');
     }
-    //   setHasChanged(false)
-    // }
   }, [cartItems]);
 
 

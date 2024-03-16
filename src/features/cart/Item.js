@@ -111,7 +111,6 @@ const Item = ({ index, item }) => {
           }
         </Container>
       </Container>
-
       <Container classList={'item-btns three'}>
         <Button
           classList={'btn-small item-btn bg-danger'}
@@ -135,7 +134,6 @@ const Item = ({ index, item }) => {
         />
       </Container>
     </>
-
   )
 }
 
