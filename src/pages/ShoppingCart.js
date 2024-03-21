@@ -5,21 +5,22 @@ import List from '../components/List';
 import ListItem from '../components/ListItem';
 import Card from '../components/Card';
 // import CartItem from '../features/products/CartItem';
-import Item from '../features/cart/Item';
+import CartItem from '../features/cart/CartItem';
 import Button from '../components/Button';
 import Container from '../components/Container';
 import Aside from '../components/Aside';
 import Main from '../components/Main';
 // import useAuth from '../hooks/contexthooks/useAuth';
 import useCart from '../hooks/contexthooks/useCart';
-// import useCart from '../hooks/contexthooks/useCart';
 
 function ShoppingCart() {
 
   // Hooks
 
   const {
-    cartItems
+    cartItems,
+    subTotal,
+    itemsCount
   } = useCart();
 
   // const { auth } = useAuth();
@@ -42,7 +43,7 @@ function ShoppingCart() {
                   <Container classList="cart-total flex gap-1">
                     <p className="fw-500">Subtotal:</p>
                           <Container>
-                      {/* <p><strong>{`$ ${subTotal}`}</strong>{` (${itemsCount} ${itemsCount > 1 ? 'items' : 'item'})`}</p> */}
+                      <p><strong>{`$ ${subTotal}`}</strong>{` (${itemsCount} ${itemsCount > 1 ? 'items' : 'item'})`}</p>
                     </Container>
                   </Container>
                   <Container>
@@ -62,7 +63,7 @@ function ShoppingCart() {
                       return (  
                         <ListItem key={i}>
                           <Card classList={'cart-card'}>
-                            <Item item={item} index={i} />
+                            <CartItem item={item} index={i} />
                           </Card>
                         </ListItem>
                       )

@@ -2,16 +2,9 @@ import { createContext, useEffect, useReducer } from 'react';
 import { cartReducer } from '../features/cart/cartReducer';
 
 const initialState = {
-  isAvailable: false,
   error: null,
-  price: 0,
-  cartItem: null,
   itemsCount: 0,
-  index: null,
   cartItems: [],
-  quantityAvailable: 0,
-  quantitySelected: 0,
-  total: 0,
   subTotal: 0,
 }
 
@@ -21,16 +14,9 @@ export const CartProvider = ({ children }) => {
   const [state, dispatch] = useReducer(cartReducer, initialState);
 
   const {
-    index,
-    total,
-    price,
     subTotal,
     itemsCount,
-    cartItems,
-    isLoading,
-    isAvailable,
-    quantitySelected,
-    quantityAvailable
+    cartItems
   } = state || {};
 
   useEffect(() => {
@@ -76,16 +62,9 @@ export const CartProvider = ({ children }) => {
     <CartContext.Provider
       value={{
         dispatch,
-        index,
-        price,
-        total,
         subTotal,
         itemsCount,
-        cartItems,
-        isLoading,
-        isAvailable,
-        quantitySelected,
-        quantityAvailable
+        cartItems
       }}
     >
       {children}

@@ -3,7 +3,7 @@ import axios from 'axios';
 import useCart from './contexthooks/useCart';
 import { api } from '../api/resources';
 
-const useUpdateCart = (url, headers, product, index = undefined) => {
+const useUpdateCart = (url, headers, item, index = undefined) => {
     const [loading, setLoading] = useState(false);
     const { dispatch, cartItems } = useCart();
 
@@ -19,14 +19,13 @@ const useUpdateCart = (url, headers, product, index = undefined) => {
         }
         else {
             // Else add item in cart [new item]
-            items.push({ selected: product, quantity: quantity });
+            items.push({ selected: item, quantity: quantity });
         }
         // Update cart reducer @ CartContext
         dispatch({
             type: 'success',
             payload: {
-                quantitySelected: quantity,
-                cartItems: items
+                cartItems: items              
             }
         });
     }

@@ -1,12 +1,10 @@
-import { Link, NavLink, useNavigate } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import useAuth from '../../hooks/contexthooks/useAuth';
 import data from '../../data/ROUTES.json';
 import useNavbar from '../../hooks/contexthooks/useNavbar';
 import useNavButton from '../../hooks/useNavButton';
 
 function Menu() {
-
-    const navigate = useNavigate();
     const { isAuth, logoutAction } = useAuth();
     const { menuRef } = useNavbar();
     const { menuHandler } = useNavButton();

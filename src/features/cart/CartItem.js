@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Container from '../../components/Container';
 import Button from '../../components/Button';
@@ -11,20 +11,31 @@ import search from '../../data/SEARCH.json';
 import useCart from '../../hooks/contexthooks/useCart';
 import useUpdateCart from '../../hooks/useUpdateCart';
 
-const Item = ({ index, item }) => {
-    const [showCard, setShowCard] = useState(false);
+const CartItem = ({ index, item }) => {
+  const [showCard, setShowCard] = useState(false);
+  const [total, setTotal] = useState(0);
+  const [price, setPrice] = useState(0);
 
-    const navigate = useNavigate();
-    const product = search.product;
+  const navigate = useNavigate();
+  const product = search.product;
 
-    const url = `/api/catalog/${item.selected?.seller?.userID}/${item.selected._id}/`;
-    const headers = {
-        'Content-Type': 'application/json'
-    };
+  const url = `/api/catalog/${item.selected?.seller?.userID}/${item.selected._id}/`;
+  const headers = {
+    'Content-Type': 'application/json'
+  };
 
-    const { dispatch, total, price, cartItems } = useCart();
+  const { dispatch, cartItems } = useCart();
 
-    const { loading, updateCartHandler } = useUpdateCart(url, headers, item, index);
+  const { loading, updateCartHandler } = useUpdateCart(url, headers, item, index);
+
+  useEffect(() => {
+    console.log(item)
+    setPrice(parseFloat(item.selected.price));
+  }, []);
+
+  useEffect(() => {
+    setTotal(price * parseInt(cartItems[index].quantity));
+  }, [cartItems])
 
   const details = [
     {
@@ -60,21 +71,21 @@ const Item = ({ index, item }) => {
       style: 'item-detail item-price'
     },
     {
-        text: `Total: $${total.toFixed(2)} (${cartItems[index]?.quantity} ${cartItems[index]?.quantity > 1 ? 'items' : 'item'})`,
+      text: `Total: $${total.toFixed(2)} (${cartItems[index]?.quantity} ${cartItems[index]?.quantity > 1 ? 'items' : 'item'})`,
       style: 'item-detail item-quantity'
     },
   ]
 
-    const deleteItem = () => {
-        const items = [...cartItems]
-        items.splice(index, 1);
-        dispatch({
-            type: 'delete-item',
-            payload: items
-        })
-    };
+  const deleteItem = () => {
+    const items = [...cartItems]
+    items.splice(index, 1);
+    dispatch({
+      type: 'delete-item',
+      payload: items
+    })
+  };
 
-    return (
+  return (
     <>
       {
         // showCard &&
@@ -82,7 +93,7 @@ const Item = ({ index, item }) => {
         //   <h3>{item.selected.seller.userName}</h3>
         // </Card>
       }
-            {loading && <Loader />}
+      {loading && <Loader />}
       {/* <Avatar
           classList={'item-seller'}
           avatar={item.selected.seller.avatar}
@@ -115,7 +126,7 @@ const Item = ({ index, item }) => {
       <Container classList={'item-btns three'}>
         <Button
           classList={'btn-small item-btn bg-danger'}
-                    handleClick={() => deleteItem()}
+          handleClick={() => deleteItem()}
         >
           {'Remove'}
         </Button>
@@ -127,16 +138,16 @@ const Item = ({ index, item }) => {
           {'Wishlist'}
         </Button>
         <Select
-                    classList={'dropdown item-dropdown'}
-                    name={'cart-item'}
-                    quantitySelected={cartItems[index]?.quantity}
-                    quantityAvailable={item.selected.quantity}
-                    product={item.selected}
-                    handleChange={updateCartHandler}
+          classList={'dropdown item-dropdown'}
+          name={'cart-item'}
+          quantitySelected={cartItems[index]?.quantity}
+          quantityAvailable={item.selected.quantity}
+          product={item.selected}
+          handleChange={updateCartHandler}
         />
       </Container>
     </>
   )
 }
 
-export default Item;
+export default CartItem;

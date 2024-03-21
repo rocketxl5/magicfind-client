@@ -145,7 +145,6 @@ color: var(--clr-light);
   color: var(--clr-light);
 }
 
-
 .auth-layout {
   padding-top: var(--auth-header-height);
   background-color: var(--clr-light);
@@ -1540,6 +1539,11 @@ background-repeat: no-repeat;
   color: var(--clr-dark);
   margin-block-end: 2rem;
   border-bottom: 1px solid var(--clr-dark);
+}
+
+.layout .page-header {
+  color: var(--clr-light);
+  border-bottom: 1px solid var(--clr-light);
 }
 
 .page-title {
