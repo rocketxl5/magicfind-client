@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import ArchiveHandlers from './components/ArchiveHandlers';
-import CatalogHandlers from './components/CatalogHandlers'
+import CatalogItem from '../products/CatalogItem'
 import CollectionHandlers from './components/CollectionHandlers'
 
 const ProductHandlers = ({ id, product, active, search, handleClick }) => {
@@ -12,7 +12,7 @@ const ProductHandlers = ({ id, product, active, search, handleClick }) => {
             setLoading={value => setLoading(value)}
             product={product}
         />,
-        catalog: <CatalogHandlers
+        catalog: <CatalogItem
             loading={loading}
             setLoading={value => setLoading(value)}
             product={product}

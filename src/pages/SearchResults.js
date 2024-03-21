@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import ProductItem from '../features/product/ProductItem';
 import Modal from '../features/modal/Modal';
+import List from '../components/List';
 import Page from '../components/Page';
 import Count from '../features/search/components/Count';
 import SearchParameters from '../features/search/components/SearchParameters';
@@ -51,9 +52,10 @@ const SearchResults = () => {
                     {state.component}
                 </Modal>
             }
-            <Page name={'search-results'} component={<Count count={cards.length} type={'Result'} />}>
+            <Page id={'search-results'} name={'search-results'} component={<Count count={cards.length} type={'Result'} />}>
                 <SearchParameters setSearchFeatures={(value) => setSearchFeatures(value)} searchFeatures={searchFeatures} /> 
-                    <ul className="products">
+                <main>
+                    <List className="list">
                         {
                             cards &&
                             cards.map((card, i) => {
@@ -71,7 +73,8 @@ const SearchResults = () => {
                                 )
                             })
                         }
-                </ul>
+                    </List>
+                </main>
             </Page>
         </>
     )

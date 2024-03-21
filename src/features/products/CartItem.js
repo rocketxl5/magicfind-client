@@ -10,7 +10,7 @@ import useCart from '../../hooks/contexthooks/useCart';
 import search from '../../data/SEARCH.json';
 import Product from '../../components/Product';
 import Select from '../../components/Select';
-import { cartReducer } from './cartReducer';
+import { cartReducer } from '../product/services/cartReducer';
 import { cartState } from './cartState';
 
 const CartItem = ({ index, item }) => {
