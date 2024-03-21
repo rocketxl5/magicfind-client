@@ -1,27 +1,46 @@
-import { useEffect, useState } from 'react';
+import { useState, useReducer } from 'react';
 import axios from 'axios';
+import { cartState } from '../features/cart/cartState';
+import { cartReducer } from '../features/cart/cartReducer';
 
-const useFetch = ({ url, headers }) => {
-    const [data, setData] = useState(null);
-    const [error, setError] = useState(null);
-    const [loading, setLoading] = useState(false);
+const useFetch = () => {
+// const [data, setData] = useState(null);
+// const [error, setError] = useState(null);
+// const [loading, setLoading] = useState(false);
 
-    useEffect(() => {
-        setLoading(true);
-        axios
+
+    const [state, dispatch] = useReducer(cartReducer, cartState);
+
+    const fetchData = async (url, headers) => {
+        // setLoading(true);
+        dispatch({
+            type: 'loading'
+        })
+        await axios
             .get(url, headers)
             .then(res => {
-                setData(res.data);
+                console.log(res.data)
+                dispatch({
+                    type: 'loaded',
+                    payload: res.data.isAvailable,
+                })
+                // setData(res.data);
             })
             .catch((error) => {
-                setError(error)
+                dispatch({
+                    type: 'error',
+                    payload: {
+                        isLoading: false,
+                        error: error.message,
+                    }
+                })
             })
-            .finally(() => {
-                setLoading(false);
-            })
-    }, [url]);
+        // .finally(() => {
+        //     setLoading(false);
+        // })
+    }
 
-    return { data, loading, error }
+    return { fetchData }
 }
 
 export default useFetch

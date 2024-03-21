@@ -1,4 +1,4 @@
-import Loading from '../../../layout/Loading';
+import { useState, useEffect } from 'react';
 import Container from '../../../components/Container';
 import Label from '../../../components/Label';
 import Select from '../../../components/Select';
@@ -7,18 +7,26 @@ import Avatar from '../../../components/Avatar';
 import { FiPlus } from "react-icons/fi";
 import useAuth from '../../../hooks/contexthooks/useAuth';
 import useCart from '../../../hooks/contexthooks/useCart';
-import useFetch from '../../../hooks/useFetch';
+import Loader from '../../../layout/Loader';
+import useUpdateCart from '../../../hooks/useUpdateCart';
 import data from '../../../data/SEARCH.json';
 
-// userName, country, avatar, rating, email
-
-const CatalogHandlers = ({ product, loading, setLoading }) => {
-    // const { conditions, finish, languages } = data.product;
+const CatalogHandlers = ({ product }) => {
+    const [quantitySelected, setQuantitySelected] = useState(0);
+    const [cartIndex, setCartIndex] = useState(undefined);
     const { set_name, price, quantity, language, condition, finishes, seller } = product;
     const { userName, country, avatar, rating, email } = seller;
 
+    const url = `/api/catalog/${seller.userID}/${product._id}/`;
+    const headers = {
+        'Content-Type': 'application/json'
+    };
+
     const { cartItems } = useCart();
-    // const {data, loading, error } = useFetch 
+
+    const { loading, updateCartHandler } = useUpdateCart(url, headers, product, cartIndex);
+
+    // console.log(product)
     const specs = [
         {
             title: 'Edition:',
@@ -44,14 +52,25 @@ const CatalogHandlers = ({ product, loading, setLoading }) => {
             title: 'Quantity available:',
             value: quantity
         }
-    ]
+    ];
 
-    // console.log(cartItems)
+    useEffect(() => {
+        // Check for product match in cartItems 
+        const index = cartItems.findIndex((item) => {
+            return item.selected._id === product._id;
+        });
+        // If index >= 0: Product is already in cart
+        if (index > -1) {
+            setQuantitySelected(cartItems[index].quantity);
+            setCartIndex(index);
+        }
+    }, [cartItems]);
+
     return (
         <>
             {
                 loading ? (
-                        <Loading />
+                    <Loader />
                 ) : (
                         <>
                             <Container>
@@ -62,7 +81,6 @@ const CatalogHandlers = ({ product, loading, setLoading }) => {
                                             <Container key={i} classList={''}>
                                                 <p><span className="">{spec.title}</span>  <span className="">{spec.value}</span></p>
                                             </Container>
-
                                         )
                                     })
                                 }
@@ -79,12 +97,15 @@ const CatalogHandlers = ({ product, loading, setLoading }) => {
                                             htmlFor={'quantity-selector'}
                                             label={'Quantity Selected:'}
                                         >
-                                            <Select
-                                                    id={'quantity-selector'}
-                                                    classList={'catalog-item-quantity'}
+                                                <Select
+                                                    classList={'dropdown item-dropdown'}
+                                                    name={'catalog-item'}
+                                                    // Product already in cart have defined cartIndex
+                                                    quantitySelected={quantitySelected}
+                                                    quantityAvailable={quantity}
                                                     product={product}
-                                                    setLoading={(value) => setLoading(value)}
-                                            />
+                                                    handleChange={updateCartHandler}
+                                                />
                                     </Label>
                                         </Container>
                             }

@@ -1,6 +1,6 @@
 import { FiShoppingCart } from 'react-icons/fi';
-import Container from '../../../components/Container';
 import useNavButton from '../../../hooks/useNavButton';
+import Container from '../../../components/Container';
 import useCart from '../../../hooks/contexthooks/useCart';
 import useNavbar from '../../../hooks/contexthooks/useNavbar';
 
@@ -8,6 +8,7 @@ const CartBtn = () => {
   const { itemsCount } = useCart();
   const { cartCountRef } = useNavbar();
   const { navButtonHandler } = useNavButton()
+
 
   return (
     <button
@@ -27,5 +28,8 @@ const CartBtn = () => {
     </button>
   )
 }
+
+
+
 
 export default CartBtn

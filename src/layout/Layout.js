@@ -9,7 +9,6 @@ const Layout = () => {
     const location = useLocation();
     const { loading } = useSearch();
     const path = location.pathname;
-    console.log(path)
 
     return (
 

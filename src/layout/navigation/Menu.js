@@ -1,4 +1,4 @@
-import { NavLink, useNavigate } from 'react-router-dom';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
 import useAuth from '../../hooks/contexthooks/useAuth';
 import data from '../../data/ROUTES.json';
 import useNavbar from '../../hooks/contexthooks/useNavbar';
@@ -34,12 +34,13 @@ function Menu() {
                 {/* Adds logout list item if authenticated users */}
                 {isAuth &&
                     <li>
-                        <div className="nav-link" onClick={() => {
-                            logoutAction();
-                            navigate('/login');
-                        }}>
+                        <Link
+                            className="nav-link"
+                            to={'/login'}
+                            onClick={() => { logoutAction() }}
+                        >
                             Logout
-                        </div>
+                        </Link>
                     </li>
                 }
             </ul>

@@ -1,30 +1,37 @@
+import { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import Page from '../components/Page';
 import List from '../components/List';
 import ListItem from '../components/ListItem';
 import Card from '../components/Card';
+// import CartItem from '../features/products/CartItem';
 import Item from '../features/cart/Item';
 import Button from '../components/Button';
 import Container from '../components/Container';
 import Aside from '../components/Aside';
 import Main from '../components/Main';
-import Count from '../features/search/components/Count';
 // import useAuth from '../hooks/contexthooks/useAuth';
 import useCart from '../hooks/contexthooks/useCart';
+// import useCart from '../hooks/contexthooks/useCart';
 
 function ShoppingCart() {
+
   // Hooks
-  const { cartItems, itemsCount, subTotal } = useCart();
+
+  const {
+    cartItems
+  } = useCart();
+
   // const { auth } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
 
   return (
+
     <Page
       id={'shopping-cart'}
       name={'shopping-cart'}
       hasHeader={false}
-      component={<Count count={itemsCount} type={'Item'} />}
     >
       <>
           {
@@ -35,7 +42,7 @@ function ShoppingCart() {
                   <Container classList="cart-total flex gap-1">
                     <p className="fw-500">Subtotal:</p>
                           <Container>
-                      <p><strong>{`$ ${subTotal}`}</strong>{` (${itemsCount} ${itemsCount > 1 ? 'items' : 'item'})`}</p>
+                      {/* <p><strong>{`$ ${subTotal}`}</strong>{` (${itemsCount} ${itemsCount > 1 ? 'items' : 'item'})`}</p> */}
                     </Container>
                   </Container>
                   <Container>

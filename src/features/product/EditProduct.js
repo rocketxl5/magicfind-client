@@ -53,7 +53,6 @@ const EditProduct = (props) => {
                     state: result,
                 });
             localStorage.setItem('search-results', JSON.stringify(result));
-            setUpdateCatalog(true);
             btnRef.current?.click();
         }, 1500)
     }
@@ -99,6 +98,7 @@ const EditProduct = (props) => {
 
                     setLoading(false);
                     localStorage.setItem('search-results', JSON.stringify(result));
+                    setUpdateCatalog(true);
                     closeModal(result);
                 })
                 .catch((error) => {

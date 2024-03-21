@@ -7,13 +7,11 @@ const cartLoader = async (userID, productID, quantity, setLoading) => {
         method: 'GET',
         header: { 'Content-Type': 'application/json' },
     };
-
     return await fetch(
         `${api.serverURL}/api/catalog/${userID}/${productID}/${quantity}`,
         options
     )
         .then(res => res.json())
-
         .then((data) => {
             setLoading(false);
             return data;

@@ -1,5 +1,4 @@
 import { createContext, useState, useEffect } from 'react';
-import { api } from '../api/resources';
 
 export const AuthContext = createContext(null);
 
@@ -72,9 +71,9 @@ export const AuthProvider = ({ children }) => {
       } else if (auth) {
         // const user = JSON.parse(localStorage.getItem('user'));
         // const token = JSON.parse(localStorage.getItem('token'));
-        if (!localStorage.getItem('auth')) {
+        // if (!localStorage.getItem('auth')) {
           // localStorage.setItem('auth', JSON.stringify(auth));
-        }
+        // }
         setAuth(auth);
       }
     }

@@ -5,6 +5,7 @@ import useSearch from './contexthooks/useSearch';
 import useAuth from './contexthooks/useAuth';
 import useViewport from './contexthooks/useViewport';
 
+// Handles control of Navabar buttons @ MainHeader
 const useNavButton = () => {
     const {
         setDisplayMenu,
@@ -25,7 +26,6 @@ const useNavButton = () => {
     const navigate = useNavigate();
 
     const menuHandler = (e) => {
-        console.log(displayMenu)
         if (displayMenu) {
             setDisplayMenu(false);
         }
@@ -33,7 +33,6 @@ const useNavButton = () => {
 
     // Display or hides Menu on click if search bar is hidden
     const hamburgerHandler = () => {
-        console.log('hamburger')
         if (!isSearchBar) {
             if (!displayMenu) {
                 setDisplayMenu(true);
@@ -109,7 +108,6 @@ const useNavButton = () => {
     /********** End Desktop only *********/
 
     useEffect(() => {
-        console.log(displayMenu)
         // [mobile = screen-wide, desktop = 1/3 screen]
         const selector = isMobile ? 'd-mobile-menu' : 'd-desktop-menu';
 
