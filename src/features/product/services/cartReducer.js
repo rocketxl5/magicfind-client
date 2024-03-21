@@ -11,21 +11,6 @@ export const cartReducer = (state, action) => {
                 ...state,
                 error: action.payload
             }
-        case 'set-item':
-            return {
-                ...state,
-                index: action.payload.index,
-                price: action.payload.price,
-                quantitySelected: action.payload.quantitySelected,
-                quantityAvailable: action.payload.quantityAvailable,
-                total: action.payload.total,
-
-            }
-        case 'update-quantity':
-            return {
-                ...state,
-                quantitySelected: action.payload
-            }
         case 'update-item':
             return {
                 ...state,
@@ -42,17 +27,6 @@ export const cartReducer = (state, action) => {
                 ...state,
                 itemsCount: action.payload.itemsCount,
                 subTotal: action.payload.subTotal
-            }
-        case 'add-item':
-            return {
-                ...state,
-                cartItems: action.payload
-            }
-        case 'total':
-            return {
-                ...state,
-                price: action.payload.price,
-                total: action.payload.total
             }
         case 'delete-item':
             return {

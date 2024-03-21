@@ -12,11 +12,7 @@ import ProductOwner from './ProductOwner';
 import data from '../../data/PRODUCT.json';
 
 const ProductItem = forwardRef(function Product(props, ref) {
-    const { index, count, card, search, handleSlideView, handleProductForm } = props;
-
-    // const { header, title } = data['singles'];
-    // console.log(header)
-    // console.log(title)
+    const { card, search, handleProductForm } = props;
 
     return (
         <ListItem classList={'product-item'} ref={ref}>

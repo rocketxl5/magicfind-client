@@ -1,5 +1,5 @@
 import { createContext, useEffect, useReducer } from 'react';
-import { cartReducer } from '../features/cart/cartReducer';
+import { cartReducer } from '../features/product/services/cartReducer';
 
 const initialState = {
   error: null,
