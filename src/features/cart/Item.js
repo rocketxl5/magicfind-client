@@ -1,4 +1,4 @@
-import { useState, useEffect, useReducer } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Container from '../../components/Container';
 import Button from '../../components/Button';
@@ -22,12 +22,9 @@ const Item = ({ index, item }) => {
         'Content-Type': 'application/json'
     };
 
-
     const { dispatch, total, price, cartItems } = useCart();
 
     const { loading, updateCartHandler } = useUpdateCart(url, headers, item, index);
-
-    // console.log(cartItems[index])
 
   const details = [
     {
@@ -76,7 +73,6 @@ const Item = ({ index, item }) => {
             payload: items
         })
     };
-
 
     return (
     <>

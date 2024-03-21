@@ -26,7 +26,6 @@ const CatalogHandlers = ({ product }) => {
 
     const { loading, updateCartHandler } = useUpdateCart(url, headers, product, cartIndex);
 
-    // console.log(product)
     const specs = [
         {
             title: 'Edition:',
@@ -97,18 +96,18 @@ const CatalogHandlers = ({ product }) => {
                                             htmlFor={'quantity-selector'}
                                             label={'Quantity Selected:'}
                                         >
-                                                <Select
-                                                    classList={'dropdown item-dropdown'}
-                                                    name={'catalog-item'}
-                                                    // Product already in cart have defined cartIndex
-                                                    quantitySelected={quantitySelected}
-                                                    quantityAvailable={quantity}
-                                                    product={product}
-                                                    handleChange={updateCartHandler}
-                                                />
-                                    </Label>
-                                        </Container>
-                            }
+                                            <Select
+                                                classList={'dropdown item-dropdown'}
+                                                name={'catalog-item'}
+                                                // Product already in cart have defined cartIndex
+                                                quantitySelected={quantitySelected}
+                                                quantityAvailable={quantity}
+                                                product={product}
+                                                handleChange={updateCartHandler}
+                                            />
+                                        </Label>
+                                    </Container>
+                                }
                             </Container>
                             <Container>
                                 <Button>

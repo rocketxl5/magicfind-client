@@ -11,13 +11,17 @@ const useUpdateCart = (url, headers, product, index = undefined) => {
         // Clone cartItems array to trigger cartItems state change @ CartContext
         const items = [...cartItems];
 
+        // If index is defined [product is in cart]
         if (index !== undefined) {
             console.log(index)
+            // Update product quantity
             items[index].quantity = quantity;
         }
         else {
+            // Else add item in cart [new item]
             items.push({ selected: product, quantity: quantity });
         }
+        // Update cart reducer @ CartContext
         dispatch({
             type: 'success',
             payload: {
@@ -27,15 +31,21 @@ const useUpdateCart = (url, headers, product, index = undefined) => {
         });
     }
 
+    // Check if product quantity selected is available
     const updateCartHandler = (e) => {
         e.stopPropagation();
 
+        // Parse string value
         const quantitySelected = parseInt(e.target.value);
+        // If quantity is greater than zero
         if (quantitySelected > 0) {
+            // Set loader
             setLoading(true);
             axios.get(`${api.serverURL}${url}${quantitySelected}`, headers)
                 .then(res => {
+                    // If quantity selected is available
                     if (res.status === 200 && res.data.isAvailable) {
+                        // Update cart quantities
                         updateCart(quantitySelected);
                     }
                 })
