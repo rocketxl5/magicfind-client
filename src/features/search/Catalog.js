@@ -33,7 +33,7 @@ const Catalog = () => {
     } = useContext(SearchContext);
     // Hooks
     const { auth, isAuth } = useAuth();
-    const { setDisplaySearchBar, searchBarRef } = useNavbar();
+    const { searchBarRef } = useNavbar();
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -42,13 +42,13 @@ const Catalog = () => {
         } else if (isActive) {
             setIsActive(false);
         }
-    }, [searchInput]);
+    }, [searchInput, setIsActive, isActive]);
 
     useEffect(() => {
         if (isActive) {
             setCardNames(catalogCardNames)
         }
-    }, [isActive, catalogCardNames])
+    }, [isActive, catalogCardNames, setCardNames])
 
     const searchCatalogCard = (e = undefined, prediction = undefined) => {
         e?.preventDefault();
@@ -119,7 +119,14 @@ const Catalog = () => {
     return (
         <div id="search-catalog-form" ref={searchBarRef}>
             <Form id={'catalog-form'} classList={'search-form'} handleSubmit={searchCatalogCard}>
-                <SearchInput id={'catalog'} className={'search-catalog-field'} placeholder={'Search Magic Find'} searchCard={searchCatalogCard} isActive={isActive} ref={catalogInputRef} />
+                <SearchInput
+                    id={'catalog'}
+                    className={'search-catalog-field'}
+                    placeholder={'Search Magic Find'}
+                    searchCard={searchCatalogCard}
+                    isActive={isActive}
+                    ref={catalogInputRef}
+                />
             </Form>
         </div>
     );

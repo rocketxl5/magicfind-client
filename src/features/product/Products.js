@@ -3,10 +3,10 @@ import ArchiveHandlers from './components/ArchiveHandlers';
 import CatalogItem from '../products/CatalogItem'
 import CollectionHandlers from './components/CollectionHandlers'
 
-const ProductHandlers = ({ id, product, active, search, handleClick }) => {
+const Product = ({ id, product, active, search, handleClick }) => {
     const [loading, setLoading] = useState(false);
 
-    const handlers = {
+    const productType = {
         archive: <ArchiveHandlers
             loading={loading}
             setLoading={value => setLoading(value)}
@@ -24,15 +24,7 @@ const ProductHandlers = ({ id, product, active, search, handleClick }) => {
             handleClick={handleClick}
         />
     }
-    return (
-
-        <div className="product-handlers border-danger">
-                {
-                    handlers[search]
-                }
-            </div>
-
-    )
+    return productType[search];
 }
 
-export default ProductHandlers
+export default Product

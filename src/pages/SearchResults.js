@@ -1,13 +1,18 @@
 import { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import ProductItem from '../features/product/ProductItem';
+import ArchiveItem from '../features/products/ArchiveItem';
+import CollectionItem from '../features/products/CollectionItem';
+import CatalogItem from '../features/products/CatalogItem';
 import Modal from '../features/modal/Modal';
 import List from '../components/List';
+import ListItem from '../components/ListItem';
+import Card from '../components/Card';
 import Page from '../components/Page';
 import Count from '../features/search/components/Count';
 import SearchParameters from '../features/search/components/SearchParameters';
 import useProductForms from '../hooks/useProductForms';
 import useSlideView from '../hooks/useSlideView';
+import useImageLoader from '../hooks/useImageLoader';
 
 const SearchResults = () => {
     // States
@@ -25,6 +30,8 @@ const SearchResults = () => {
             navigate('/me/collection');
         }
     }, [location]);
+
+    const [imagesLoaded] = useImageLoader(cards);
 
     const [view, updateSlideView] = useSlideView(handleSlideView); 
 
@@ -52,30 +59,52 @@ const SearchResults = () => {
                     {state.component}
                 </Modal>
             }
+            {imagesLoaded &&
             <Page id={'search-results'} name={'search-results'} component={<Count count={cards.length} type={'Result'} />}>
                 <SearchParameters setSearchFeatures={(value) => setSearchFeatures(value)} searchFeatures={searchFeatures} /> 
                 <main>
-                    <List className="list">
+                        <List classList="list">
                         {
                             cards &&
                             cards.map((card, i) => {
                                 return (
-                                    <ProductItem
-                                        key={i}
-                                        index={i}
-                                        count={cards.length}
-                                        card={card}
-                                        search={search}
-                                        handleSlideView={handleSlideView}
-                                        handleProductForm={handleProductForm}
-                                    >
-                                    </ProductItem>
+                                    <ListItem key={i}>
+                                        <Card classList={'product-card'}>
+                                            {
+                                                search === 'catalog'
+                                                    ?
+                                                    <CatalogItem
+                                                        index={i}
+                                                        product={card}
+                                                        count={cards.length}
+                                                        handleSlideView={handleSlideView}
+                                                    />
+                                                    :
+                                                    search === 'collection'
+                                                        ?
+                                                        <CollectionItem
+                                                            index={i}
+                                                            product={card}
+                                                            count={cards.length}
+                                                            handleProductForm={handleProductForm} 
+                                                            handleSlideView={handleSlideView}
+                                                        />
+                                                        :
+                                                        <ArchiveItem
+                                                            index={i}
+                                                            product={card}
+                                                            count={cards.length}
+                                                            handleSlideView={handleSlideView}
+                                                        />
+                                            }
+                                        </Card>
+                                    </ListItem>
                                 )
                             })
                         }
                     </List>
                 </main>
-            </Page>
+                </Page>}
         </>
     )
 }

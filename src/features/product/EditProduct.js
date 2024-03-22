@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { useNavigate, useLocation, useParams } from 'react-router-dom';
-import Image from './ProductImage';
+import ProductImage from './components/ProductImage';
 import CollectionDetails from './components/CollectionDetails';
 import Success from './Success'
 import Loading from '../../layout/Loading';
@@ -184,7 +184,7 @@ const EditProduct = (props) => {
                                                 <section className="modal-section">
 
                                                     <div className="card-section">
-                                                        <Image product={product} />
+                                                            <ProductImage product={product} />
                                                     </div>
                                                     <div className="card-section">
                                                         <CollectionDetails product={product} />

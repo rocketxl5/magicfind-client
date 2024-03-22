@@ -26,7 +26,7 @@
     padding: 1rem;
 }
 
-.margin-block-start-1 {
+.margin-bs-1 {
     margin-block-start: var(--size-1);
 }
 
@@ -100,6 +100,14 @@
 
 .gap-1 {
     gap: 1rem;
+}
+
+.gap-2 {
+    gap: 2rem;
+}
+
+.gap-3 {
+    gap: 3rem;
 }
 
 .align-center {
@@ -253,7 +261,6 @@
     margin-top: var(--size-5);
 }
 
-
 /* MTG colors */
 .mtg-blue {
     background: #1F447E;
@@ -280,11 +287,19 @@
 }
 
 .border-light {
-    border: 2px solid var(--clr-light);
+    border: 2px solid var(--clr-light) !important;
+}
+
+.border-dark {
+    border: 2px solid var(--clr-dark) !important;
 }
 
 .border-primary {
     border: 2px solid var(--clr-primary);
+}
+
+.border-bottom {
+    border-bottom: 1px solid var(--clr-dark);
 }
 
 .border-none {
@@ -371,33 +386,48 @@
     font-size: var(--fs-150) !important;
 }
 
+.fs-175 {
+    font-size: var(--fs-175) !important;
+}
+
 .fs-200 {
     font-size: var(--fs-200) !important;
 }
+
 .fs-400 {
     font-size: var(--fs-400) !important;
 }
+
 .fs-500 {
     font-size: var(--fs-500) !important;
 }
 
 .fw-100 {
-    font-weight: 100 !important;
+    font-weight: var(--fw-100) !important;
 }
 
 .fw-400 {
-    font-weight: 400 !important;
+    font-weight: var(--fw-400) !important
 }
 
 .fw-500 {
-    font-weight: 500 !important;
+    font-weight:var(--fw-500) !important;
 }
 
 .fw-600 {
-    font-weight: 600 !important;
+    font-weight: var(--fw-600) !important;
 }
+
+.fw-700 {
+    font-weight: var(--fw-700) !important;
+}
+
 .fw-900 {
-    font-weight: 900 !important;
+    font-weight: var(--fw-900) !important
+}
+
+.stroke-width {
+    stroke-width: 1.5 !important;
 }
 
 .overflow-y {

@@ -1,11 +1,9 @@
-import { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import Page from '../components/Page';
 import List from '../components/List';
 import ListItem from '../components/ListItem';
 import Card from '../components/Card';
-// import CartItem from '../features/products/CartItem';
-import CartItem from '../features/cart/CartItem';
+import CartItem from '../features/products/CartItem';
 import Button from '../components/Button';
 import Container from '../components/Container';
 import Aside from '../components/Aside';

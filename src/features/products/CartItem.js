@@ -1,37 +1,43 @@
-import { useState, useEffect, useReducer } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Container from '../../components/Container';
+import ProductImage from '../product/components/ProductImage';
+import ProductDetails from '../product/components/ProductDetails';
+import ProductActions from '../product/components/ProductActions';
+import QuantitySelector from '../product/components/QuantitySelector';
 import Button from '../../components/Button';
 import Span from '../../components/Span';
 import Image from '../../components/Image';
 import Avatar from '../../components/Avatar';
 import Loader from '../../layout/Loader';
-import useCart from '../../hooks/contexthooks/useCart';
 import search from '../../data/SEARCH.json';
-import Product from '../../components/Product';
-import Select from '../../components/Select';
-import { cartReducer } from '../product/services/cartReducer';
-import { cartState } from './cartState';
+import useCart from '../../hooks/contexthooks/useCart';
+import useUpdateCart from '../../hooks/useUpdateCart';
 
 const CartItem = ({ index, item }) => {
-  const [state, dispatch] = useReducer(cartReducer, cartState);
-
-  const [loading, setLoading] = useState(false);
   const [showCard, setShowCard] = useState(false);
   const [total, setTotal] = useState(0);
   const [price, setPrice] = useState(0);
-  const { subTotal, cartItems, setCartItems } = useCart();
+
   const navigate = useNavigate();
   const product = search.product;
-  // const { conditions, languages, finish } = product;
+
+  const url = `/api/catalog/${item.selected?.seller?.userID}/${item.selected._id}/`;
+  const headers = {
+    'Content-Type': 'application/json'
+  };
+
+  const { dispatch, cartItems } = useCart();
+
+  const { loading, updateCartHandler } = useUpdateCart(url, headers, item, index);
 
   useEffect(() => {
-    const parsedPrice = parseFloat(item.selected.price);
-    setTotal(parseFloat(item.quantity * parsedPrice));
-    setPrice(parsedPrice);
-  }, [subTotal]);
+    setPrice(parseFloat(item.selected.price));
+  }, []);
 
-  // console.log(item)
+  useEffect(() => {
+    setTotal(price * parseInt(cartItems[index].quantity));
+  }, [cartItems, price])
+
   const details = [
     {
       text: item.selected.name,
@@ -47,38 +53,40 @@ const CartItem = ({ index, item }) => {
     // },
     {
       text: `${product.conditions[item.selected.condition]}`,
-      style: 'item-detail item-condition'
+      style: 'product-detail product-condition'
     },
     {
       text: product.languages[item.selected.language],
-      style: 'item-detail item-language'
+      style: 'product-detail product-language'
     },
     {
       text: product.finish[item.selected.finishes],
-      style: 'item-detail item-finish'
+      style: 'product-detail product-finish'
     },
     {
       text: `${item.selected.quantity}  in stock`,
-      style: 'item-detail item-quantity'
+      style: 'product-detail product-quantity'
     },
     {
       text: `Price $${price.toFixed(2)}`,
-      style: 'item-detail item-price'
+      style: 'product-detail product-price'
     },
     {
-      text: `Total: $${total.toFixed(2)} (${item.quantity} ${item.quantity > 1 ? 'items' : 'item'})`,
-      style: 'item-detail item-quantity'
+      text: `Total: $${total.toFixed(2)} (${cartItems[index]?.quantity} ${cartItems[index]?.quantity > 1 ? 'items' : 'item'})`,
+      style: 'product-detail product-quantity'
     },
   ]
 
   const deleteItem = () => {
     const items = [...cartItems]
     items.splice(index, 1);
-    setCartItems(items);
+    dispatch({
+      type: 'delete-item',
+      payload: items
+    })
   };
 
   return (
-
     <>
       {
         // showCard &&
@@ -86,24 +94,24 @@ const CartItem = ({ index, item }) => {
         //   <h3>{item.selected.seller.userName}</h3>
         // </Card>
       }
-      {loading && <Loader />}
       {/* <Avatar
           classList={'item-seller'}
-          avatar={item.selected.seller.avatar}
+          avatar={item.selected.seller.avatr}a
           handleClick={() => setShowCard(true)}
         /> */}
-      <Container id={'item-image'} classList={'item-image one'} >
+      {loading && <Loader />}
+      <ProductImage classList={'product-image one'}>
         <Image
           classList={'col-12'}
-          url={item.selected.image_uris?.small}
+          product={item.selected}
           handleClick={() => navigate(
             `/product/${item.selected._id}`,
             {
               state: { product: item.selected }
-            })} />
-      </Container>
-      <Container id={'item-details'} classList={'item-details two'}>
-        <Container classList={'flex flex-column'}>
+            })}
+        />
+      </ProductImage>
+      <ProductDetails classList={'product-details two'}>
           {
             details &&
             details.map((detail, i) => {
@@ -114,30 +122,31 @@ const CartItem = ({ index, item }) => {
               )
             })
           }
-        </Container>
-      </Container>
-      <Container classList={'item-btns three'}>
+
+      </ProductDetails>
+      <ProductActions classList={'product-actions three'}>
         <Button
-          classList={'btn-small item-btn bg-danger'}
+          classList={'btn-small product-btn bg-danger'}
           handleClick={() => deleteItem()}
         >
           {'Remove'}
         </Button>
         <Button
-          classList={'btn-small item-btn bg-primary'}
+          classList={'btn-small product-btn bg-primary'}
           title={'Add to wishlist'}
           handleClick={() => console.log('wishlist')}
         >
           {'Wishlist'}
         </Button>
-        <Select
-          classList={'dropdown item-dropdown'}
-          name={'item'}
+        <QuantitySelector
+          classList={'dropdown product-dropdown'}
+          name={'cart-item'}
+          quantitySelected={cartItems[index]?.quantity}
+          quantityAvailable={item.selected.quantity}
           product={item.selected}
-          quantity={item.quantity}
-          setLoading={(value) => setLoading(value)}
+          handleChange={updateCartHandler}
         />
-      </Container>
+      </ProductActions>
     </>
   )
 }
