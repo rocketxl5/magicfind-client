@@ -11,23 +11,34 @@ const useUpdateCart = (url, headers, item, index = undefined) => {
         // Clone cartItems array to trigger cartItems state change @ CartContext
         const items = [...cartItems];
 
-        // If index is defined [product is in cart]
-        if (index !== undefined) {
-            console.log(index)
-            // Update product quantity
-            items[index].quantity = quantity;
+        if (quantity === 0) {
+            items.splice(index, 1);
+
+            dispatch({
+                type: 'delete-item',
+                payload: items
+            })
         }
         else {
-            // Else add item in cart [new item]
-            items.push({ selected: item, quantity: quantity });
-        }
-        // Update cart reducer @ CartContext
-        dispatch({
-            type: 'success',
-            payload: {
-                cartItems: items              
+            // If index is defined [product is in cart]
+            if (index !== undefined) {
+                console.log(index)
+                // Update product quantity
+                items[index].quantity = quantity;
             }
-        });
+            else {
+                // Else add item in cart [new item]
+                items.push({ selected: item, quantity: quantity });
+            }
+            // Update cart reducer @ CartContext
+            dispatch({
+                type: 'success',
+                payload: {
+                    cartItems: items
+                }
+            });
+        }
+
     }
 
     // Check if product quantity selected is available
@@ -37,7 +48,7 @@ const useUpdateCart = (url, headers, item, index = undefined) => {
         // Parse string value
         const quantitySelected = parseInt(e.target.value);
         // If quantity is greater than zero
-        if (quantitySelected > 0) {
+        // if (quantitySelected > 0) {
             // Set loader
             setLoading(true);
             axios.get(`${api.serverURL}${url}${quantitySelected}`, headers)
@@ -59,7 +70,7 @@ const useUpdateCart = (url, headers, item, index = undefined) => {
                 .finally(() => {
                     setLoading(false);
                 })
-        }
+        // }
     }
     return { loading, updateCartHandler };
 }

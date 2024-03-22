@@ -3,7 +3,6 @@ export const cartReducer = (state, action) => {
         case 'success':
             return {
                 ...state,
-                quantitySelected: action.payload.quantitySelected,
                 cartItems: action.payload.cartItems
             }
         case 'error':

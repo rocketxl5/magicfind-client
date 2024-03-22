@@ -8,10 +8,8 @@ import ProductHeader from '../product/components/ProductHeader';
 import ProductDetails from '../product/components/ProductDetails';
 import ProductActions from '../product/components/ProductActions';
 import QuantitySelector from '../product/components/QuantitySelector';
-import Header from '../../components/Header';
 import Title from '../../components/Title';
 import CountDown from '../search/components/CountDown';
-import { FaRegCheckCircle } from "react-icons/fa";
 import Alert from '../product/components/Alert';
 import Button from '../../components/Button';
 import Avatar from '../../components/Avatar';
@@ -21,6 +19,7 @@ import useCart from '../../hooks/contexthooks/useCart';
 import useUpdateCart from '../../hooks/useUpdateCart';
 import useExpandImage from '../../hooks/useExpandImage';
 import data from '../../data/SEARCH.json';
+import { FaRegCheckCircle } from "react-icons/fa";
 import { FiPlus } from "react-icons/fi";
 
 const CatalogItem = ({ index, product, count, handleSlideView }) => {
@@ -125,7 +124,7 @@ const CatalogItem = ({ index, product, count, handleSlideView }) => {
             </ProductDetails>
             <ProductActions classList={'product-actions four'}>
                 {
-                    quantitySelected &&
+                    quantitySelected > 0 &&
                     <Alert classList={'flex align-center'}>
                         <p className='flex align-center gap-1 space-between '>
                             <span className='fs-125'>
