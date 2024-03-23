@@ -23,6 +23,7 @@ const SearchResults = () => {
 
     const { cards, search } = location.state?.result || JSON.parse(localStorage.getItem('search-results'));
 
+    // console.log(cards)
     useEffect(() => {
         // If cards is empty
         if (!cards.length) {
@@ -33,7 +34,7 @@ const SearchResults = () => {
 
     const [imagesLoaded] = useImageLoader(cards);
 
-    const [view, updateSlideView] = useSlideView(handleSlideView); 
+    const [view, updateSlideView] = useSlideView(handleSlideView);
 
     const [state, updateProductState] = useProductForms(search, handleProductForm);
 
@@ -59,7 +60,8 @@ const SearchResults = () => {
                     {state.component}
                 </Modal>
             }
-            {imagesLoaded &&
+            {
+                imagesLoaded &&
             <Page id={'search-results'} name={'search-results'} component={<Count count={cards.length} type={'Result'} />}>
                 <SearchParameters setSearchFeatures={(value) => setSearchFeatures(value)} searchFeatures={searchFeatures} /> 
                 <main>
@@ -86,7 +88,7 @@ const SearchResults = () => {
                                                             index={i}
                                                             product={card}
                                                             count={cards.length}
-                                                            handleProductForm={handleProductForm} 
+                                                            handleProductForm={handleProductForm}
                                                             handleSlideView={handleSlideView}
                                                         />
                                                         :

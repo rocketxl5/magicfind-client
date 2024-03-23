@@ -200,7 +200,7 @@
 }
 
 .bg-success {
-    background: var(--clr-success);
+    background: var(--clr-success) !important;
 }
 
 .bg-primary {
@@ -319,23 +319,15 @@
 }
 
 .color-light {
-    color: var(--clr-light)
+    color: var(--clr-light) !important;
 }
 
 .color-danger {
-    color: var(--clr-danger);
+    color: var(--clr-danger) !important;
 }
 
 .color-success {
     color: var(--clr-success) !important;
-}
-
-.color-green {
-    color: var(--clr-green);
-}
-
-.color-danger {
-    color: var(--clr-danger);
 }
 
 .color-primary {

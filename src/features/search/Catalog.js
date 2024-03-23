@@ -1,5 +1,4 @@
 import React, {
-    useRef,
     useState,
     useEffect,
     useContext
@@ -16,8 +15,7 @@ import setQueryString from '../../assets/utilities/setQueryString';
 const Catalog = () => {
     // States
     const [isActive, setIsActive] = useState(false);
-    // Ref
-    // const catalogInputRef = useRef(null);
+
     // Context
     const {
         searchInput,
@@ -90,7 +88,6 @@ const Catalog = () => {
                 if (res.status === 200) {
                     return res.json()
                         .then((data) => {
-                            console.log(data)
                             setLoading(false);
                             const result = {
                                 cards: data.cards,

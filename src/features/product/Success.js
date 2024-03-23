@@ -7,11 +7,11 @@ const Success = forwardRef(function Success(props, ref) {
         <div className="modal-message">
             <header className="modal-header bg-success">
                 <div className="modal-title">
-                    <h2 className="color-green fw-500">{response.message}</h2>
+                    <h2 className="clr-success fw-500">{response.message}</h2>
                 </div>
             </header>
             <section className="modal-check">
-                <FaRegCheckCircle className="color-green" />
+                <FaRegCheckCircle className="color-success" />
             </section>
             <footer className="card-footer">
                 <div className="btn-container hide">

@@ -11,9 +11,10 @@ const useUpdateCart = (url, headers, item, index = undefined) => {
         // Clone cartItems array to trigger cartItems state change @ CartContext
         const items = [...cartItems];
 
+        // If quantity is zero
         if (quantity === 0) {
             items.splice(index, 1);
-
+            // Remove item form cart
             dispatch({
                 type: 'delete-item',
                 payload: items
@@ -38,17 +39,12 @@ const useUpdateCart = (url, headers, item, index = undefined) => {
                 }
             });
         }
-
     }
 
     // Check if product quantity selected is available
     const updateCartHandler = (e) => {
-        e.stopPropagation();
-
         // Parse string value
         const quantitySelected = parseInt(e.target.value);
-        // If quantity is greater than zero
-        // if (quantitySelected > 0) {
             // Set loader
             setLoading(true);
             axios.get(`${api.serverURL}${url}${quantitySelected}`, headers)
@@ -70,7 +66,6 @@ const useUpdateCart = (url, headers, item, index = undefined) => {
                 .finally(() => {
                     setLoading(false);
                 })
-        // }
     }
     return { loading, updateCartHandler };
 }

@@ -53,6 +53,7 @@ const useModalProductForm = (search, callback) => {
     const [state, dispatch] = useReducer(reducer, INIT)
 
     const useProductForms = (id, product) => {
+        console.log(id)
         dispatch({
             type: id,
             payload: {

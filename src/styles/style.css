@@ -243,10 +243,6 @@ border-radius: var(--radius-1);
   opacity: 0.8;
 }
 
-.btn-container {
-  text-align: center;
-
-}
 
 .btn-collection {
   font-size: var(--fs-150);
@@ -652,9 +648,9 @@ height: 2rem;
 .modal {
   height: 100%;
   min-width: 37rem;
-  /* max-width: 50rem; */
+  max-width: 90%;
   margin-inline: auto;
-  /* margin-block-start: 11rem; */
+  margin-block-start: 5rem;
 }
 
 .modal-state {
@@ -1446,7 +1442,7 @@ background-repeat: no-repeat;
   z-index: 1000;
 }
 
-.item-seller {
+.product-seller {
   position: absolute;
   right: 0;
   z-index: 8001;

@@ -20,7 +20,6 @@ import useUpdateCart from '../../hooks/useUpdateCart';
 import useExpandImage from '../../hooks/useExpandImage';
 import data from '../../data/SEARCH.json';
 import { FaRegCheckCircle } from "react-icons/fa";
-import { FiPlus } from "react-icons/fi";
 
 const CatalogItem = ({ index, product, count, handleSlideView }) => {
     const [quantitySelected, setQuantitySelected] = useState(0);
@@ -32,8 +31,6 @@ const CatalogItem = ({ index, product, count, handleSlideView }) => {
     const headers = {
         'Content-Type': 'application/json'
     };
-
-    console.log(product)
 
     const navigate = useNavigate();
 

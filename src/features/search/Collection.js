@@ -1,5 +1,4 @@
 import React, {
-    useRef,
     useState,
     useEffect,
 } from 'react';
@@ -20,8 +19,6 @@ const Collection = () => {
     // States
     const [loading, setLoading] = useState(false);
     const [isActive, setIsActive] = useState(false);
-    // Ref
-    // const collectionInputRef = useRef(null);
     // Context
     const {
         errorMessage,
@@ -155,10 +152,10 @@ const Collection = () => {
                             setCardName('');
                             setSearchInput(null);
                             localStorage.setItem('search-results', JSON.stringify(result));
-                            navigate(`/me/collection/${setQueryString(query.toLowerCase(), '-')}`,
-                                {
-                                    state: result,
-                                });
+                            // navigate(`/me/collection/${setQueryString(query.toLowerCase(), '-')}`,
+                            //     {
+                            //         state: result,
+                            //     });
                         })
                 }
                 else if (res.status === 400) {

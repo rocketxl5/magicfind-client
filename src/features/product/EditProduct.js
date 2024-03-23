@@ -2,8 +2,10 @@ import { useState, useEffect, useRef } from 'react';
 import { useNavigate, useLocation, useParams } from 'react-router-dom';
 import ProductImage from './components/ProductImage';
 import CollectionDetails from './components/CollectionDetails';
+import Image from '../../components/Image';
 import Success from './Success'
 import Loading from '../../layout/Loading';
+import Loader from '../../layout/Loader';
 import Option from '../../components/Option';
 import data from '../../data/EDIT.json';
 import errorHandler from './services/editErrorHandler';
@@ -184,7 +186,17 @@ const EditProduct = (props) => {
                                                 <section className="modal-section">
 
                                                     <div className="card-section">
-                                                            <ProductImage product={product} />
+                                                            <ProductImage product={product}>
+                                                                <Image
+                                                                    classList={'col-12'}
+                                                                    product={product}
+                                                                    handleClick={() => navigate(
+                                                                        `/product/${product._id}`,
+                                                                        {
+                                                                            state: { product: product }
+                                                                        })}
+                                                                />
+                                                            </ProductImage>
                                                     </div>
                                                     <div className="card-section">
                                                         <CollectionDetails product={product} />
@@ -300,7 +312,7 @@ const EditProduct = (props) => {
                                                 </div>
                                             </div>
                                                 <footer className="modal-footer bg-primary-light">
-                                                <div className="btn-container">
+                                                    <div className="flex space-around">
                                                     < button
                                                             id="cancel"
                                                             className="btn bg-primary color-light"

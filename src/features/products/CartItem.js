@@ -41,16 +41,8 @@ const CartItem = ({ index, item }) => {
   const details = [
     {
       text: item.selected.name,
-      style: 'item-detail item-name'
+      style: 'product-detail product-name'
     },
-    // {
-    //   text: `Sold by ${item.selected.userName}`,
-    //   style: 'item-detail item-seller'
-    // },
-    // {
-    //   text: `Ships from ${item.selected?.country}`,
-    //   style: 'item-detail item-shipping'
-    // },
     {
       text: `${product.conditions[item.selected.condition]}`,
       style: 'product-detail product-condition'
@@ -64,7 +56,15 @@ const CartItem = ({ index, item }) => {
       style: 'product-detail product-finish'
     },
     {
-      text: `${item.selected.quantity}  in stock`,
+      text: `Sold by ${item.selected.seller.userName}`,
+      style: 'product-detail product-seller'
+    },
+    {
+      text: `Ships from ${item.selected.seller.country}`,
+      style: 'product-detail product-shipping'
+    },
+    {
+      text: `${item.selected.quantity} in stock`,
       style: 'product-detail product-quantity'
     },
     {
@@ -88,17 +88,6 @@ const CartItem = ({ index, item }) => {
 
   return (
     <>
-      {
-        // showCard &&
-        // <Card classList={'bg-danger user-card'} data={item.selected.seller} handleClick={() => setShowCard(false)}>
-        //   <h3>{item.selected.seller.userName}</h3>
-        // </Card>
-      }
-      {/* <Avatar
-          classList={'item-seller'}
-          avatar={item.selected.seller.avatr}a
-          handleClick={() => setShowCard(true)}
-        /> */}
       {loading && <Loader />}
       <ProductImage classList={'product-image one'}>
         <Image
@@ -116,13 +105,12 @@ const CartItem = ({ index, item }) => {
             details &&
             details.map((detail, i) => {
               return (
-                <Span key={i} classList={detail.style}>
+                <p key={i} classList={detail.style}>
                   {detail.text}
-                </Span>
+                </p>
               )
             })
-          }
-
+        }
       </ProductDetails>
       <ProductActions classList={'product-actions three'}>
         <Button
