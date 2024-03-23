@@ -1178,6 +1178,7 @@ background-color: var(--clr-primary);
 
 .rotate-icon {
  transform: rotate(-135deg);
+ -webkit-transform: rotate(-135deg);
 }
 
 .hide-btn {
@@ -1298,6 +1299,25 @@ padding-inline-start: 0.75rem;
 .product-image .lazy-load img {
   display: block;
   border-radius: 6px;
+}
+
+.drop-btn {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  width: 6rem;
+  height: 6rem;
+  font-size: 12px;
+  font-weight: var(--fw-700);
+  color: var(--clr-light);
+  border: 2px solid var(--clr-light);
+  border-radius: 50%;
+  transform: rotate(-10deg);
+  -webkit-transform: rotate(-10deg);
+}
+
+.in-store {
+  background: var(--clr-success);
 }
 
 .expand-btn  {

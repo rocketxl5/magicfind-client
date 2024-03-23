@@ -1,6 +1,7 @@
 import { useState, useRef } from 'react';
 import { useNavigate, useLocation, useParams } from 'react-router-dom';
 import ProductImage from './components/ProductImage';
+import Image from '../../components/Image';
 import CollectionDetails from './components/CollectionDetails';
 import Success from './Success';
 import Loading from '../../layout/Loading';
@@ -100,7 +101,7 @@ const DeleteProduct = (props) => {
 
     return (
         <div className="modal-state">
-            <div className={`modal-state-content ${loading ? 'border-light' : response.isDeleted ? 'border-success' : 'border-danger'}`}>
+            <div className={`modal-state-content`}>
                 {
                     loading ? (
                         <Loading />
@@ -109,7 +110,7 @@ const DeleteProduct = (props) => {
                             {
                                 !response.isDeleted ? (
                                     <>
-                                        <header className="modal-header bg-red">
+                                            <header className="modal-header bg-danger">
                                             <div className="modal-title">
                                                 <h2 className="fw-500">Delete Card</h2>
                                             </div>
@@ -117,10 +118,15 @@ const DeleteProduct = (props) => {
                                         <div className="modal-body">
                                             <section className="modal-section">
                                                 <div className="card-section">
-                                                        <ProductImage product={product} />
+                                                        <ProductImage classList={'product-image'}>
+                                                            <Image
+                                                                classList={'col-12'}
+                                                                product={product}
+                                                            />
+                                                        </ProductImage>
                                                 </div>
                                                 <div className="card-section">
-                                                    <CollectionDetails product={product} />
+                                                        {/* <CollectionDetails product={product} /> */}
                                                 </div>
                                             </section>
                                             <section className="modal-warning">
@@ -129,10 +135,25 @@ const DeleteProduct = (props) => {
                                                 </div>
                                             </section>
                                         </div>
-                                        <footer className="modal-footer bg-red-light">
-                                            <div className="btn-container">
-                                                    <button id="cancel" className="btn bg-primary color-light" type="button" onClick={handleClick}>Cancel </button>
-                                                    < button id="confirm-delete" className="btn bg-red color-light" type="button" onClick={handleClick} onMouseDown={deleteHandler} >Confirm </button>
+                                            <footer className="modal-footer">
+                                                <div className="flex space-around">
+                                                    <button
+                                                        id="cancel"
+                                                        className="btn color-light bg-primary"
+                                                        type="button"
+                                                        onClick={handleClick}
+                                                    >
+                                                        Cancel
+                                                    </button>
+                                                    < button
+                                                        id="confirm-delete"
+                                                        className="btn color-light bg-danger"
+                                                        type="button"
+                                                        onClick={handleClick}
+                                                        onMouseDown={deleteHandler}
+                                                    >
+                                                        Confirm
+                                                    </button>
 
                                             </div>
                                         </footer>

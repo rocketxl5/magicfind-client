@@ -1,7 +1,9 @@
+import { useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Container from '../../components/Container';
 import ProductImage from '../product/components/ProductImage';
 import ExpandImgBtn from '../product/components/ExpandImgBtn';
+import Drop from '../../components/Drop';
 import Image from '../../components/Image';
 import ProductHeader from '../product/components/ProductHeader';
 import ProductDetails from '../product/components/ProductDetails';
@@ -15,12 +17,14 @@ import { FaRegCheckCircle } from "react-icons/fa";
 
 import timestampConverter from '../../assets/utilities/timestampConverter';
 
-const CollectionItem = ({ index, product, count, handleProductForm }) => {
+const CollectionItem = ({ index, product, count, handleCollectionItem }) => {
     const { conditions, languages, finishes } = data.product;
     const { longDate } = timestampConverter;
     // const { name, set_name, price, quantity, language, condition, finishes, seller } = product;
 
     const navigate = useNavigate();
+
+    const editBtnRef = useRef();
 
     const details = [
         {
@@ -61,14 +65,21 @@ const CollectionItem = ({ index, product, count, handleProductForm }) => {
                             state: { product: product }
                         })}
                 />
+
+                {
+                    product._is_published &&
+                    <Drop classList={'in-store'} handleClick={console.log(editBtnRef?.current)}>
+                        <span>In Store</span>
+                    </Drop>
+                }
                 {/* <ExpandImgBtn handleClick={handleSlideView} cardLayout={product.layout} expandedImage={expandedImage} /> */}
             </ProductImage>
             <ProductDetails classList={'product-details three'}>
                 <Container>
-                    <p>Status: {product._id_published ? 'Published' : 'Unpublished'}</p>
+                    <p>Status: {product._is_published ? 'Published' : 'Unpublished'}</p>
                 </Container>
                 {
-                    (product._id_published) &&
+                    (product._is_published) &&
                     details.map((detail, i) => {
                         return (
                             <Container key={i} classList={''}>
@@ -79,12 +90,11 @@ const CollectionItem = ({ index, product, count, handleProductForm }) => {
                 }
             </ProductDetails>
             <ProductActions classList={'product-actions four'}>
-
                 <Button
                     id={'edit-product'}
                     classList={'btn-small product-btn bg-primary'}
                     title={'Add to wishlist'}
-                    handleClick={(e) => handleProductForm(e, product)}
+                    handleClick={(e) => handleCollectionItem(e, product)}
                 >
                     {'Edit'}
                 </Button>
@@ -92,7 +102,7 @@ const CollectionItem = ({ index, product, count, handleProductForm }) => {
                     id={'delete-product'}
                     classList={'btn-small product-btn bg-danger'}
                     title={'Add to wishlist'}
-                    handleClick={(e) => handleProductForm(e, product)}
+                    handleClick={(e) => handleCollectionItem(e, product)}
                 >
                     {'Delete'}
                 </Button>

@@ -2,7 +2,7 @@ import React from 'react';
 import useLazyLoader from '../hooks/useLazyLoader';
 import useAttributes from '../hooks/useAttributes';
 
-const Image = ({ classList = '', product, handleClick }) => {
+const Image = ({ classList = '', product }) => {
     const { attributes } = useAttributes(product);
     const { id, style, src, alt, placeholder } = attributes;
 

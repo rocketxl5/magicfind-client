@@ -14,14 +14,14 @@ const useUpdateCart = (url, headers, item, index = undefined) => {
         // If quantity is zero
         if (quantity === 0) {
             items.splice(index, 1);
-            // Remove item form cart
+            // Remove item form cart @ CartContext
             dispatch({
                 type: 'delete-item',
                 payload: items
             })
         }
         else {
-            // If index is defined [product is in cart]
+            // If index is defined [product already in cart]
             if (index !== undefined) {
                 console.log(index)
                 // Update product quantity
@@ -42,9 +42,12 @@ const useUpdateCart = (url, headers, item, index = undefined) => {
     }
 
     // Check if product quantity selected is available
-    const updateCartHandler = (e) => {
+    // Receives an integer as argument [quantitySelected]
+    // @ QuantitySelector component
+    // @ CollectionItem component [delete button]
+    const updateCartHandler = (quantitySelected) => {
         // Parse string value
-        const quantitySelected = parseInt(e.target.value);
+
             // Set loader
             setLoading(true);
             axios.get(`${api.serverURL}${url}${quantitySelected}`, headers)

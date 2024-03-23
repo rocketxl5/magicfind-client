@@ -115,17 +115,17 @@ const CartItem = ({ index, item }) => {
       <ProductActions classList={'product-actions three'}>
         <Button
           classList={'btn-small product-btn bg-danger'}
-          handleClick={() => deleteItem()}
+          handleClick={(e) => updateCartHandler(0)}
         >
-          {'Remove'}
+          {'Delete'}
         </Button>
-        <Button
+        {/* <Button
           classList={'btn-small product-btn bg-primary'}
           title={'Add to wishlist'}
           handleClick={() => console.log('wishlist')}
         >
           {'Wishlist'}
-        </Button>
+        </Button> */}
         <QuantitySelector
           classList={'dropdown product-dropdown'}
           name={'cart-item'}

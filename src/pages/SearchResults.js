@@ -10,7 +10,7 @@ import Card from '../components/Card';
 import Page from '../components/Page';
 import Count from '../features/search/components/Count';
 import SearchParameters from '../features/search/components/SearchParameters';
-import useProductForms from '../hooks/useProductForms';
+import useCollectionItem from '../hooks/useCollectionItem';
 import useSlideView from '../hooks/useSlideView';
 import useImageLoader from '../hooks/useImageLoader';
 
@@ -36,16 +36,16 @@ const SearchResults = () => {
 
     const [view, updateSlideView] = useSlideView(handleSlideView);
 
-    const [state, updateProductState] = useProductForms(search, handleProductForm);
+    const [state, updateCollectionItem] = useCollectionItem(search, handleCollectionItem);
 
     function handleSlideView(e, layout, expandedImage) {
         e.stopPropagation();
         updateSlideView(layout, expandedImage);
     }
 
-    function handleProductForm(e, card) {
+    function handleCollectionItem(e, card) {
         e.stopPropagation();
-        updateProductState(e.target.id, card);
+        updateCollectionItem(e.target.id, card);
     }
 
     return (
@@ -88,7 +88,7 @@ const SearchResults = () => {
                                                             index={i}
                                                             product={card}
                                                             count={cards.length}
-                                                            handleProductForm={handleProductForm}
+                                                            handleCollectionItem={handleCollectionItem}
                                                             handleSlideView={handleSlideView}
                                                         />
                                                         :

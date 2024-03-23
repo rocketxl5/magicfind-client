@@ -52,7 +52,7 @@ const useModalProductForm = (search, callback) => {
     }
     const [state, dispatch] = useReducer(reducer, INIT)
 
-    const useProductForms = (id, product) => {
+    const useCollectionItem = (id, product) => {
         console.log(id)
         dispatch({
             type: id,
@@ -69,7 +69,7 @@ const useModalProductForm = (search, callback) => {
         })
     }
 
-    return [state, useProductForms];
+    return [state, useCollectionItem];
 }
 
 export default useModalProductForm;

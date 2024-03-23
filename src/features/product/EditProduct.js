@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { useNavigate, useLocation, useParams } from 'react-router-dom';
 import ProductImage from './components/ProductImage';
-import CollectionDetails from './components/CollectionDetails';
+import ProductDetails from './components/ProductDetails';
 import Image from '../../components/Image';
 import Success from './Success'
 import Loading from '../../layout/Loading';
@@ -167,7 +167,7 @@ const EditProduct = (props) => {
 
     return (
         <div className="modal-state">
-            <div className={`modal-state-content ${loading ? 'border-light' : response.isUpdated ? 'border-success' : 'border-blue'}`}>
+            <div className={`modal-state-content`}>
                 {
                     loading ? (
                         <Loading />
@@ -186,20 +186,17 @@ const EditProduct = (props) => {
                                                 <section className="modal-section">
 
                                                     <div className="card-section">
-                                                            <ProductImage product={product}>
+                                                            <ProductImage classList={'product-image'}>
                                                                 <Image
                                                                     classList={'col-12'}
                                                                     product={product}
-                                                                    handleClick={() => navigate(
-                                                                        `/product/${product._id}`,
-                                                                        {
-                                                                            state: { product: product }
-                                                                        })}
                                                                 />
                                                             </ProductImage>
                                                     </div>
                                                     <div className="card-section">
-                                                        <CollectionDetails product={product} />
+                                                            {/* <ProductDetails>
+
+                                                            </ProductDetails> */}
                                                     </div>
                                                 </section>
                                                 <div className="edit-card">
@@ -311,7 +308,7 @@ const EditProduct = (props) => {
                                                     </form>
                                                 </div>
                                             </div>
-                                                <footer className="modal-footer bg-primary-light">
+                                                <footer className="modal-footer">
                                                     <div className="flex space-around">
                                                     < button
                                                             id="cancel"

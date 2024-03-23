@@ -1,4 +1,3 @@
-
 const Button = (props) => {
     const { children, id, type, classList = '', status, handleClick, title, style, active } = props;
 

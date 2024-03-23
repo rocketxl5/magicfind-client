@@ -12,7 +12,7 @@ import ProductOwner from './ProductOwner';
 import data from '../../data/PRODUCT.json';
 
 const ProductItem = forwardRef(function Product(props, ref) {
-    const { card, search, handleProductForm } = props;
+    const { card, search, handleCollectionItem } = props;
 
     return (
         <ListItem classList={'product-item'} ref={ref}>
@@ -21,7 +21,7 @@ const ProductItem = forwardRef(function Product(props, ref) {
                 <CountDown count={count} unit={index + 1} type={'Result'} />
             </Header> */}
             <Container classList={"product-wrapper"}>
-                <ProductHandlers product={card} search={search} handleClick={handleProductForm} />
+                <ProductHandlers product={card} search={search} handleClick={handleCollectionItem} />
             </Container>
         </ListItem>
     )

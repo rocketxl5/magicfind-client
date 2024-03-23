@@ -10,7 +10,7 @@ const QuantitySelector = (props) => {
             <select
                 name={name}
                 value={quantitySelected}
-                onChange={(e) => handleChange(e)}
+                    onChange={(e) => handleChange(parseInt(e.target.value))}
             >
                 {quantityAvailable && [...Array(quantityAvailable + 1).keys()].map((key) => {
                     return (
