@@ -133,13 +133,13 @@ const CatalogItem = ({ index, product, count, handleSlideView }) => {
                         </p>
                     </Alert>
                 }
-                <Button
+                {/* <Button
                     classList={'btn-small product-btn bg-primary'}
                     title={'Add to wishlist'}
                     handleClick={() => console.log('wishlist')}
                 >
                     {'Wishlist'}
-                </Button>
+                </Button> */}
                 <QuantitySelector
                     classList={'dropdown product-dropdown'}
                     name={'catalog-item'}

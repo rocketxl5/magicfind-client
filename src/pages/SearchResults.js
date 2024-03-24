@@ -10,7 +10,7 @@ import Card from '../components/Card';
 import Page from '../components/Page';
 import Count from '../features/search/components/Count';
 import SearchParameters from '../features/search/components/SearchParameters';
-import useCollectionItem from '../hooks/useCollectionItem';
+import useCollectionModal from '../hooks/useCollectionModal';
 import useSlideView from '../hooks/useSlideView';
 import useImageLoader from '../hooks/useImageLoader';
 
@@ -23,7 +23,7 @@ const SearchResults = () => {
 
     const { cards, search } = location.state?.result || JSON.parse(localStorage.getItem('search-results'));
 
-    // console.log(cards)
+    console.log(cards)
     useEffect(() => {
         // If cards is empty
         if (!cards.length) {
@@ -36,7 +36,7 @@ const SearchResults = () => {
 
     const [view, updateSlideView] = useSlideView(handleSlideView);
 
-    const [state, updateCollectionItem] = useCollectionItem(search, handleCollectionItem);
+    const [state, updateCollectionItem] = useCollectionModal(search, handleCollectionItem);
 
     function handleSlideView(e, layout, expandedImage) {
         e.stopPropagation();

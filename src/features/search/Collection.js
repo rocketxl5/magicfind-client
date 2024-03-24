@@ -100,7 +100,7 @@ const Collection = () => {
         if (isActive) {
             setCardNames(collectionCardNames);
         }
-    }, [isActive, collectionCardNames])
+    }, [isActive, setCardNames, collectionCardNames])
 
 
 
@@ -152,10 +152,10 @@ const Collection = () => {
                             setCardName('');
                             setSearchInput(null);
                             localStorage.setItem('search-results', JSON.stringify(result));
-                            // navigate(`/me/collection/${setQueryString(query.toLowerCase(), '-')}`,
-                            //     {
-                            //         state: result,
-                            //     });
+                            navigate(`/me/collection/${setQueryString(query.toLowerCase(), '-')}`,
+                                {
+                                    state: result,
+                                });
                         })
                 }
                 else if (res.status === 400) {
@@ -166,52 +166,49 @@ const Collection = () => {
     }
 
     return (
-        <Page name={'collection'} loading={loading}>
+        <>
+            <Page name={'collection'} >
+                {loading ? <Loader /> :
+                    <main>
             {
-                errorMessage?.title === 'no_cards' ? (
-                    <div className="message">
-                        <section className="message-section">
-                            <div className="message-body">
-                                {
-                                    errorMessage.body?.map((part, index) => {
-                                        return <p key={index}>{part}</p>
-                                    })
-                                }
-                            </div>
-                        </section>
-                        <section className="message-section">
-                            <Link className="message-link" to="/me/archive"> To MTG Archive <FiArrowRightCircle /></Link>
-                        </section>
-                    </div>
-                ) : (
-                        <main className='inherit-height'>
-                        {
-                                //     loading ? (
-                                //         <Loader />
-                                // ) : (
-                                        <Form id={'collection-form'} classList={'search-form'} handleSubmit={searchCollectionCard}>
-                                            <SearchInput
-                                                id={'collection'}
-                                                className={'search-field'}
-                                                placeholder={'Search Your Collection'}
-                                                searchCard={searchCollectionCard}
-                                                isActive={isActive}
-                                                ref={collectionInputRef} />
-                                            <Button
-                                                id={''}
-                                                classList='bg-success btn-collection'
-                                                handleClick={() => searchCollection('cards')}
-                                            >
-                                                {'All Cards'}
-                                            </Button>
-                                        </Form>
-                                // )
+                            errorMessage?.title === 'no_cards' ? (
+                                <div className="message">
+                                    <section className="message-section">
+                                        <div className="message-body">
+                                            {
+                                                errorMessage.body?.map((part, index) => {
+                                                    return <p key={index}>{part}</p>
+                                                })
+                                            }
+                                        </div>
+                                    </section>
+                                    <section className="message-section">
+                                        <Link className="message-link" to="/me/archive"> To MTG Archive <FiArrowRightCircle /></Link>
+                                    </section>
+                                </div>
+                            ) : (
+                                    <Form id={'collection-form'} classList={'search-form'} handleSubmit={searchCollectionCard}>
+                                        <SearchInput
+                                            id={'collection'}
+                                            className={'search-field'}
+                                            placeholder={'Search Your Collection'}
+                                            searchCard={searchCollectionCard}
+                                            isActive={isActive}
+                                            ref={collectionInputRef} />
+                                        <Button
+                                            id={''}
+                                            classList='bg-success btn-collection'
+                                            handleClick={() => searchCollection('cards')}
+                                        >
+                                            {'All Cards'}
+                                        </Button>
+                                    </Form>
+                                )
                         }
                     </main>
-
-                )
-            }
+                }
         </Page>
+        </>
     )
 }
 

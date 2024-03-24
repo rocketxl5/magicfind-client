@@ -4,7 +4,7 @@ import DeleteProduct from '../features/product/DeleteProduct';
 import cardBack from '../assets/img/mtg_card_back.jpg';
 
 // Edit and Delete product form
-const useModalProductForm = (search, callback) => {
+const useCollectionModal = (search, callback) => {
     const INIT = {
         open: false,
         component: null
@@ -72,4 +72,4 @@ const useModalProductForm = (search, callback) => {
     return [state, useCollectionItem];
 }
 
-export default useModalProductForm;
+export default useCollectionModal;
