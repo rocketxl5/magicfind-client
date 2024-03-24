@@ -26,7 +26,7 @@ const CartItem = ({ index, item }) => {
     'Content-Type': 'application/json'
   };
 
-  const { dispatch, cartItems } = useCart();
+  const { cartItems } = useCart();
 
   const { loading, updateCartHandler } = useUpdateCart(url, headers, item, index);
 
@@ -36,7 +36,7 @@ const CartItem = ({ index, item }) => {
 
   useEffect(() => {
     setTotal(price * parseInt(cartItems[index].quantity));
-  }, [cartItems, price])
+  }, [price, setTotal, cartItems, index])
 
   const details = [
     {
@@ -76,15 +76,6 @@ const CartItem = ({ index, item }) => {
       style: 'product-detail product-quantity'
     },
   ]
-
-  const deleteItem = () => {
-    const items = [...cartItems]
-    items.splice(index, 1);
-    dispatch({
-      type: 'delete-item',
-      payload: items
-    })
-  };
 
   return (
     <>

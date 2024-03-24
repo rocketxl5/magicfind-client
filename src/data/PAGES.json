@@ -26,8 +26,8 @@
     "classList": "page product"
   },
   "collection": {
-    "id": "collection relative",
-    "classList": "page collection p-rela",
+    "id": "collection",
+    "classList": "page collection relative",
     "header": {
       "classList": "page-header flex space-between align-center col-12 padding-block-1 margin-block-end-1"
     },

@@ -125,18 +125,9 @@
         min-height: calc(100vh - calc(var(--header-height)));
     }
 
-
-    .layout > .wrapper {
-        min-height: calc(100vh - var(--desktop));
-    }
-
     .auth-layout {
         padding-block-start: var(--auth-header-height-wide);
     }
-
-    /* .auth-layout .wrapper {
-        min-height: calc(100vh - var(--auth-desktop));
-    } */
     
     .search-count {
         top: var(--top-desktop);

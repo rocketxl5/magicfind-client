@@ -6,6 +6,7 @@ import React, {
 import { useNavigate } from 'react-router-dom';
 import Page from '../../components/Page';
 import Form from '../../components/Form';
+import Loader from '../../layout/Loader.js';
 import SearchInput from './components/SearchInput'
 import { api } from '../../api/resources';
 import useSearch from '../../hooks/contexthooks/useSearch';
@@ -145,7 +146,7 @@ const Search = () => {
                 });
             };
 
-            setLoading(false)
+            setLoading(false);
             setCardName('');
             setSearchInput(null);
             // If errorMessage is set ['...collection currently empty...']
@@ -169,23 +170,27 @@ const Search = () => {
     }, [data]);
 
     return (
-        <Page name={'archive'} loading={loading}>
-            <main>
-                <Form
-                    id={'archive-form'}
-                    classList={'search-form'}
-                    handleSubmit={searchArchive}
-                >
-                    <SearchInput
-                        id={'archive'}
-                        className={'search-field'}
-                        placeholder={'Search MTG Archive'}
-                        searchCard={searchArchive}
-                        isActive={isActive}
-                        ref={archiveInputRef} />
-                </Form>
-            </main>
-        </Page>
+        <>
+            <Page name={'archive'}>
+                {loading ? <Loader /> :
+                    <main>
+                        <Form
+                            id={'archive-form'}
+                            classList={'search-form'}
+                            handleSubmit={searchArchive}
+                        >
+                            <SearchInput
+                                id={'archive'}
+                                className={'search-field'}
+                                placeholder={'Search MTG Archive'}
+                                searchCard={searchArchive}
+                                isActive={isActive}
+                                ref={archiveInputRef} />
+                        </Form>
+                    </main>
+                }
+            </Page>
+        </>
     )
 }
 
