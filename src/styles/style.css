@@ -503,7 +503,6 @@ scroll-snap-align: start;
   position: relative;
   width: fit-content;
   margin-left: auto;
-  min-height: 3rem;
   margin-block-start: var(--size-1);
   background-color: var(--clr-primary);
   border-radius: var(--radius-1);
