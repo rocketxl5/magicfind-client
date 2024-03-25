@@ -212,14 +212,15 @@ border-bottom: 1px solid var(--clr-light)
 }
 
 .btn {
-display: inline-block;
 min-width: 13rem;
 padding-block: 0.5rem;
 padding-inline: var(--size-2);
+margin-block: auto;
 font-size: var(--fs-150);
 font-weight: 500;
 line-height: 1.5;
 text-align: center;
+background: var(--clr-light-grey);
 color: var(--clr-light);
 border-radius: var(--radius-1);
 }

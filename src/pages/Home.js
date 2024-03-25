@@ -104,8 +104,7 @@ const Home = () => {
                           }
                         </main>
                         <footer className="feature-footer">
-
-                          <button className="btn" type="button" onClick={() => navigate('/about')}>{feature.button}</button>
+                          {/* <button className="btn" type="button" onClick={() => navigate('/about')}>{feature.button}</button> */}
                         </footer>
                       </div>
                     </div>)

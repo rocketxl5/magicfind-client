@@ -166,19 +166,7 @@ input:-webkit-autofill:active{
     margin-block-start: 1rem;
 }
 
-.form-btn {
-    width: 40%;
-    padding-block: 1rem;
-    font-size: var(--fs-175);
-    font-weight: 500;
-    color: var(--clr-light);
-    background-color: var(--clr-green);
-    border-radius: 5px;
-    cursor: pointer;
-}
-
 .link {
-    /* align-self: center; */
     font-size: var(--fs-125);
     min-width: 13rem;
     text-align: center;
@@ -210,6 +198,7 @@ input:-webkit-autofill:active{
     text-align: center;
     font-weight: 400;
 }
+
 
 /* Signup requirements card */
 .form-element input + .requirements-container {
