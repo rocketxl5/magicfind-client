@@ -2,11 +2,11 @@ import React, {
     useState,
     useEffect,
 } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { FiArrowRightCircle } from "react-icons/fi";
+import { useNavigate } from 'react-router-dom';
 import Page from '../../components/Page';
 import Form from '../../components/Form';
 import SearchInput from './components/SearchInput';
+import Message from '../../components/Message.js';
 import Button from '../../components/Button';
 import Loader from '../../layout/Loader';
 import useAuth from '../../hooks/contexthooks/useAuth';
@@ -21,7 +21,7 @@ const Collection = () => {
     const [isActive, setIsActive] = useState(false);
     // Context
     const {
-        errorMessage,
+        isCollectionEmpty,
         searchInput,
         setSearchInput,
         searchTerm,
@@ -54,6 +54,7 @@ const Collection = () => {
             .then(res => res.json())
             .then((data) => {
                 const result = { cards: data.cards, search: searchInput?.id }
+                console.log(searchInput.id)
                 // Update local storage with search data
                 localStorage.setItem('search-results', JSON.stringify(result));
                 setLoading(false);
@@ -70,7 +71,7 @@ const Collection = () => {
     }
     useEffect(() => {
         // Update collection state on page load
-        setUpdateCollection(true);
+        // setUpdateCollection(true);
 
         collectionInputRef.current?.focus();
 
@@ -159,22 +160,10 @@ const Collection = () => {
             <Page name={'collection'} >
                 {loading ? <Loader /> :
                     <main>
-            {
-                            errorMessage.length ? (
-                                <div className="message">
-                                    <section className="message-section">
-                                        <div className="message-body">
-                                            {
-                                                errorMessage?.map((segement, index) => {
-                                                    return <p key={index}>{segement}</p>
-                                                })
-                                            }
-                                        </div>
-                                    </section>
-                                    <section className="message-section">
-                                        <Link className="message-link" to="/me/archive"> To MTG Archive <FiArrowRightCircle /></Link>
-                                    </section>
-                                </div>
+                        {
+                            isCollectionEmpty ? (
+                                <Message type={'collection'} />
+
                             ) : (
                                     <Form id={'collection-form'} classList={'search-form'} handleSubmit={searchCollectionCard}>
                                         <SearchInput

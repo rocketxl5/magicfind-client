@@ -646,8 +646,8 @@ height: 2rem;
 
 .modal {
   height: 100%;
-  min-width: 37rem;
-  max-width: 90%;
+  min-width: 35rem;
+  max-width: 80%;
   margin-inline: auto;
   margin-block-start: 5rem;
 }
@@ -662,6 +662,7 @@ height: 2rem;
 }
 
 .modal-state-content {
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: space-between;

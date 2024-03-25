@@ -4,7 +4,6 @@ import ProductImage from './components/ProductImage';
 import ProductDetails from './components/ProductDetails';
 import Image from '../../components/Image';
 import Success from './Success'
-import Loading from '../../layout/Loading';
 import Loader from '../../layout/Loader';
 import Option from '../../components/Option';
 import data from '../../data/EDIT.json';
@@ -173,7 +172,7 @@ const EditProduct = (props) => {
             <div className={`modal-state-content`}>
                 {
                     loading ? (
-                        <Loading />
+                        <Loader />
                     ) : (
                         <>
                             {

@@ -24,6 +24,7 @@ const SearchResults = () => {
     const { cards, search } = location.state?.result || JSON.parse(localStorage.getItem('search-results'));
 
     useEffect(() => {
+        console.log(location)
         // If cards is empty
         if (!cards.length) {
             // Send to collection view

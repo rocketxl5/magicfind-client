@@ -1,0 +1,12 @@
+{
+  "collection": {
+    "text": [
+      "Your collection is currently empty.",
+      "Go to the Add Card page to start adding cards to your collection."
+    ],
+    "link": {
+      "href": "/me/archive",
+      "value": "To MTG Archive"
+    }
+  }
+}

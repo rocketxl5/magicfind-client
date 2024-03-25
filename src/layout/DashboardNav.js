@@ -12,8 +12,9 @@ const DashboardNav = () => {
         setCollectionCardNames,
         setUpdateCollection,
         updateCollection,
-        errorMessage,
-        setErrorMessage
+        isCollectionEmpty,
+        setIsCollectionEmpty,
+        setError
     } = useSearch();
 
     const { auth } = useAuth();
@@ -63,13 +64,10 @@ const DashboardNav = () => {
 
                                 setCollectionCardNames(data.cardNames);
                                 if (!data.cards.length) {
-                                    setErrorMessage([
-                                        'Your collection is currently empty.',
-                                        'Go to the Add Card page to start adding cards to your collection.'
-                                    ]);
+                                    setIsCollectionEmpty(true);
                                 }
-                                else if (errorMessage.length > 0) {
-                                    setErrorMessage([]);
+                                else if (isCollectionEmpty) {
+                                    setIsCollectionEmpty(false);
                                 }
                                 // Reinitialize updateCollection to allow updates
                                 setUpdateCollection(false);
@@ -78,7 +76,7 @@ const DashboardNav = () => {
                     else if (res.status === 400) {
                         return res.json()
                             .then((error) => {
-                                setErrorMessage({ ...error.message });
+                                setError(error.message);
                             })
                     }
                 }

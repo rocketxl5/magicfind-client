@@ -4,7 +4,7 @@ import ProductImage from './components/ProductImage';
 import Image from '../../components/Image';
 import CollectionDetails from './components/CollectionDetails';
 import Success from './Success';
-import Loading from '../../layout/Loading';
+import Loader from '../../layout/Loader';
 import useAuth from '../../hooks/contexthooks/useAuth';
 import useSearch from '../../hooks/contexthooks/useSearch';
 import { api } from '../../api/resources';
@@ -29,21 +29,22 @@ const DeleteProduct = (props) => {
     const btnRef = useRef(null);
     // Hooks
     const { auth } = useAuth();
-    const { setUpdateCatalog, setUpdateCollection, catalogCardNames } = useSearch();
+    const { setUpdateCatalog, setUpdateCollection } = useSearch();
     const navigate = useNavigate();
     const location = useLocation();
     const { query } = useParams();
 
     // Triggers click event on button to close modal
     const closeModal = (result) => {
+        setUpdateCollection(true);
         setTimeout(() => {
+            localStorage.setItem('search-results', JSON.stringify(result));
+            product._is_published && setUpdateCatalog(true);
+            btnRef.current?.click();
             navigate(`${location.pathname}`,
                 {
                     state: result,
                 });
-            localStorage.setItem('search-results', JSON.stringify(result));
-            product._is_published && setUpdateCatalog(true);
-            btnRef.current?.click();
         }, 1500)
     }
 
@@ -100,7 +101,7 @@ const DeleteProduct = (props) => {
             <div className={`modal-state-content`}>
                 {
                     loading ? (
-                        <Loading />
+                        <Loader />
                     ) : (
                         <>
                             {
@@ -132,7 +133,7 @@ const DeleteProduct = (props) => {
                                             </section>
                                         </div>
                                             <footer className="modal-footer">
-                                                <div className="flex space-around">
+                                                <div className="flex space-between">
                                                     <button
                                                         id="cancel"
                                                         className="btn color-light bg-primary"

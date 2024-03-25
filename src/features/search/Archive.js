@@ -23,8 +23,6 @@ const Search = () => {
     const archiveInputRef = useRef(null);
     // Hooks
     const {
-        errorMessage,
-        setErrorMessage,
         searchInput,
         setSearchInput,
         searchTerm,
@@ -149,11 +147,6 @@ const Search = () => {
             setLoading(false);
             setCardName('');
             setSearchInput(null);
-            // If errorMessage is set ['...collection currently empty...']
-            if (errorMessage.length > 0) {
-                // Clear errorMessage
-                setErrorMessage([]);
-            }
             setUpdateCollection(true);
             // console.log(cards)
             const result = {

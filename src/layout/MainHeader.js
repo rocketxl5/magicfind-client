@@ -11,7 +11,12 @@ import useScroll from '../hooks/contexthooks/useScroll';
 const MainHeader = () => {
   const { headerRef } = useScroll();
   const { isAuth } = useAuth();
-  const { updateCatalog, setUpdateCatalog, setCatalogCardNames } = useSearch();
+  const {
+    updateCatalog,
+    setUpdateCatalog,
+    setUpdateCollection,
+    setCatalogCardNames
+  } = useSearch();
 
   // Setting catalog card names for autocomplete catalog search
   useEffect(() => {
@@ -28,12 +33,13 @@ const MainHeader = () => {
         .then((res) => res.json())
         .then((data) => {
           setCatalogCardNames(data);
+          setUpdateCollection(true);
           // Reinitialize updateCatalog to allow updates
           setUpdateCatalog(false);
         })
         .catch((error) => console.log(error));
     }
-  }, [updateCatalog, setCatalogCardNames, setUpdateCatalog]);
+  }, [updateCatalog, setCatalogCardNames, setUpdateCatalog, setUpdateCollection]);
 
   return (
     <header className="main-header" ref={headerRef}>
