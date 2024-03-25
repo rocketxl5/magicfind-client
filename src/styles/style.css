@@ -1306,8 +1306,6 @@ padding-inline-start: 0.75rem;
   left: 1rem;
   width: 6rem;
   height: 6rem;
-  font-size: 12px;
-  font-weight: var(--fw-700);
   color: var(--clr-light);
   border: 2px solid var(--clr-light);
   border-radius: 50%;
@@ -1315,9 +1313,6 @@ padding-inline-start: 0.75rem;
   -webkit-transform: rotate(-10deg);
 }
 
-.in-store {
-  background: var(--clr-success);
-}
 
 .expand-btn  {
   position: absolute;

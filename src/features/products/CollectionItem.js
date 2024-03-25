@@ -32,6 +32,10 @@ const CollectionItem = ({ index, product, count, handleCollectionItem }) => {
             value: longDate(product._date_published)
         },
         {
+            title: 'Finish:',
+            value: finishes[product.finishes]
+        },
+        {
             title: 'Condition:',
             value: conditions[product._condition]
         },
@@ -68,8 +72,8 @@ const CollectionItem = ({ index, product, count, handleCollectionItem }) => {
 
                 {
                     product._is_published &&
-                    <Drop classList={'in-store'} handleClick={console.log(editBtnRef?.current)}>
-                        <span>In Store</span>
+                    <Drop classList={'bg-success'} >
+                        <span className='fs-100 fw-700'>Published</span>
                     </Drop>
                 }
                 {/* <ExpandImgBtn handleClick={handleSlideView} cardLayout={product.layout} expandedImage={expandedImage} /> */}

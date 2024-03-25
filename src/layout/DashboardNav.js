@@ -12,6 +12,7 @@ const DashboardNav = () => {
         setCollectionCardNames,
         setUpdateCollection,
         updateCollection,
+        errorMessage,
         setErrorMessage
     } = useSearch();
 
@@ -48,7 +49,6 @@ const DashboardNav = () => {
     useEffect(() => {
         // If true
         if (updateCollection) {
-
             const headers = new Headers();
             headers.append('Content-Type', 'application/json');
             headers.append('auth-token', auth.token);
@@ -56,12 +56,22 @@ const DashboardNav = () => {
                 method: 'GET',
                 headers: headers,
             }
-            fetch(`${api.serverURL}/api/cards/${auth.user.id}/cardnames`, options)
+            fetch(`${api.serverURL}/api/cards/${auth.user.id}`, options)
                 .then(res => {
                     if (res.ok) {
                         return res.json()
                             .then((data) => {
-                                setCollectionCardNames(data);
+
+                                setCollectionCardNames(data.cardNames);
+                                if (!data.cards.length) {
+                                    setErrorMessage([
+                                        'Your collection is currently empty.',
+                                        'Go to the Add Card page to start adding cards to your collection.'
+                                    ]);
+                                }
+                                else if (errorMessage) {
+                                    setErrorMessage(null);
+                                }
                                 // Reinitialize updateCollection to allow updates
                                 setUpdateCollection(false);
                             })

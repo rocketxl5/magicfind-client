@@ -5,16 +5,13 @@ import Image from '../../components/Image';
 import CollectionDetails from './components/CollectionDetails';
 import Success from './Success';
 import Loading from '../../layout/Loading';
-// import { FaBan } from "react-icons/fa6";
 import useAuth from '../../hooks/contexthooks/useAuth';
 import useSearch from '../../hooks/contexthooks/useSearch';
 import { api } from '../../api/resources';
-import { FaChessKing } from 'react-icons/fa6';
 
 const DeleteProduct = (props) => {
     // Props
     const { product, search, handleClick } = props;
-
     // States
     const [response, setResponse] = useState({
         isDeleted: false,
@@ -32,11 +29,10 @@ const DeleteProduct = (props) => {
     const btnRef = useRef(null);
     // Hooks
     const { auth } = useAuth();
-    const { setUpdateCatalog } = useSearch();
+    const { setUpdateCatalog, setUpdateCollection, catalogCardNames } = useSearch();
     const navigate = useNavigate();
     const location = useLocation();
     const { query } = useParams();
-
 
     // Triggers click event on button to close modal
     const closeModal = (result) => {
@@ -46,7 +42,7 @@ const DeleteProduct = (props) => {
                     state: result,
                 });
             localStorage.setItem('search-results', JSON.stringify(result));
-            setUpdateCatalog(true);
+            product._is_published && setUpdateCatalog(true);
             btnRef.current?.click();
         }, 1500)
     }
@@ -58,7 +54,8 @@ const DeleteProduct = (props) => {
         headers.append('auth-token', auth.token);
 
         const input = {
-            cardID: product._id,
+            itemID: product._uuid,
+            productID: product._id,
             userID: auth.user.id,
         }
         const options = {
@@ -68,14 +65,13 @@ const DeleteProduct = (props) => {
         }
 
         fetch(`${api.serverURL}/api/cards/delete`, options)
-            .then((res) => {
+            .then(async (res) => {
                 if (res.ok) {
                     return res.json()
                 }
-                return res.json().then((data) => {
-                    setLoading(false)
-                    throw new Error(JSON.stringify(data))
-                })
+                const data = await res.json();
+                setLoading(false);
+                throw new Error(JSON.stringify(data));
             })
             .then((data) => {
                 const { cards, isDeleted, message } = data;

@@ -47,7 +47,7 @@ const CatalogItem = ({ index, product, count, handleSlideView }) => {
         },
         {
             title: 'Finish:',
-            value: data.product.finish[finishes]
+            value: data.product.finishes[finishes]
         },
         {
             title: 'Condition:',

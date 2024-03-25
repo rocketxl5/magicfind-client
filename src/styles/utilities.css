@@ -370,6 +370,10 @@
     border-radius: 25px;
 }
 
+.fs-100 {
+    font-size: var(--fs-100) !important;
+}
+
 .fs-125 {
     font-size: var(--fs-125) !important;
 }

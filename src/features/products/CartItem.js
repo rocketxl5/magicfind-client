@@ -52,7 +52,7 @@ const CartItem = ({ index, item }) => {
       style: 'product-detail product-language'
     },
     {
-      text: product.finish[item.selected.finishes],
+      text: product.finishes[item.selected.finishes],
       style: 'product-detail product-finish'
     },
     {
