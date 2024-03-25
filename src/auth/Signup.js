@@ -270,6 +270,7 @@ const Signup = () => {
   // Submit handler
   const handleSubmit = (e) => {
     e.preventDefault();
+
     const inputErrors = errorHandler(values, refs);
     setIsSubmit(true);
     setErrors(inputErrors);
@@ -291,7 +292,7 @@ const Signup = () => {
             <div className={message ? 'show-error-message' : 'hide'}>
               <p>{message.replace(/['"]+/g, '')}</p>
             </div>
-            <form className="auth-form" id="singup-form" name="singup-form" onSubmit={handleSubmit} noValidate>
+            <form className="auth-form flex column gap-2" id="singup-form" name="singup-form" onSubmit={handleSubmit} noValidate>
               {
                 // Map inputs array
                 inputs.map((input, index) => {
@@ -307,9 +308,9 @@ const Signup = () => {
                     ref={input.ref} />
                 })
               }
-              <div className="form-element form-submit">
+              <div className="flex space-between align-center margin-block-start-2">
                 <Link className="link" to="/login">Already a member?</Link>
-                <button className="form-btn" type="submit">Submit</button>
+                <button className="btn bg-success" type="submit">Submit</button>
               </div>
             </form>
           </div >

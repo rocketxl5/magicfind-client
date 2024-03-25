@@ -220,10 +220,10 @@ const Login = () => {
                     </button>
                   </div>
                 </div>
-                <div className="form-element flex align-center">
+                <div className="flex margin-block-start-2">
                   <Link className="link move-right" to="/reset-password">Forgot password?</Link>
                 </div>
-                <div className="form-element flex space-between align-center">
+                <div className="flex space-between align-center">
                   <Link className="link" to="/signup">Create account</Link>
                   <button className="btn bg-success" type="submit">Login</button>
                 </div>
