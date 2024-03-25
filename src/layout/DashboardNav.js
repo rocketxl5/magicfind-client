@@ -24,7 +24,6 @@ const DashboardNav = () => {
     // Setting archive card names for autocomplete archive search
     useEffect(() => {
         if (!archiveCardNames) {
-
             const headers = new Headers();
             headers.append('Content-Type', 'application/json');
             const options = {
