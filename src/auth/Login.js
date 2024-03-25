@@ -183,7 +183,7 @@ const Login = () => {
                 </div>
               )
               }
-              <form className="auth-form" id="signin-form" name="signin-form" onSubmit={handleSubmit} noValidate>
+              <form className="auth-form flex column gap-2" id="signin-form" name="signin-form" onSubmit={handleSubmit} noValidate>
                 <div className="form-element">
                   <label htmlFor="email" className={errors.email && 'color-danger'}>{errors.email ? errors.email : 'Email'}</label>
                   <input
@@ -220,12 +220,12 @@ const Login = () => {
                     </button>
                   </div>
                 </div>
-                <div className="form-element flex margin-block-start-2">
-                  <Link className="link" to="/reset-password">Forgot password?</Link>
+                <div className="form-element flex align-center">
+                  <Link className="link move-right" to="/reset-password">Forgot password?</Link>
                 </div>
-                <div className="form-element form-submit">
+                <div className="form-element flex space-between align-center">
                   <Link className="link" to="/signup">Create account</Link>
-                  <button className="login-btn form-btn" type="submit">Login</button>
+                  <button className="btn bg-success" type="submit">Login</button>
                 </div>
               </form>
             </div>

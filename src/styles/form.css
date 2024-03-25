@@ -55,10 +55,6 @@ input:-webkit-autofill:active{
     font-weight: 400;
 }
 
-.form-element {
-    padding-block-start: 1rem;
-}
-
 .form-element label,
 .form-element > p {
     display: block;
@@ -181,10 +177,10 @@ input:-webkit-autofill:active{
     cursor: pointer;
 }
 
-.form-element .link {
-    align-self: center;
+.link {
+    /* align-self: center; */
     font-size: var(--fs-125);
-    margin-inline-start: 1rem;
+    min-width: 13rem;
     text-align: center;
 }
 

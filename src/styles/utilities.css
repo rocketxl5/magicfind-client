@@ -70,11 +70,11 @@
     height: 100%;
 }
 
-.flex-row {
+.row {
     flex-direction: row;
 }
 
-.flex-column {
+.column {
     flex-direction: column;
 }
 
@@ -479,4 +479,7 @@
     font-weight: bold;
 }
 
+.move-right {
+    margin-left: auto;
+}
 
