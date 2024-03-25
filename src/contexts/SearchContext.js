@@ -18,7 +18,8 @@ export const SearchProvider = ({ children }) => {
   const [updateArchive, setUpdateArchive] = useState(false);
 
   // Mount state @ Collection initial fetch 
-  const [errorMessage, setErrorMessage] = useState([]);
+  const [error, setError] = useState('');
+  const [isCollectionEmpty, setIsCollectionEmpty] = useState(false);
   const [displayAutcomplete, setDisplayAutocomplete] = useState(false);
   const [predictions, setPredictions] = useState([]);
   const [cardNames, setCardNames] = useState([]);
@@ -58,8 +59,10 @@ export const SearchProvider = ({ children }) => {
   return (
     <SearchContext.Provider
       value={{
-        errorMessage,
-        setErrorMessage,
+        error,
+        setError,
+        isCollectionEmpty,
+        setIsCollectionEmpty,
         marker,
         setMarker,
         loading,

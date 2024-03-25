@@ -24,7 +24,7 @@ const ArchiveItem = ({ index, product, count, handleSlideView }) => {
   const query = `/api/cards/add/${user.id}/${product.id}`;
 
   const { postData, loading, result, error } = usePostData(product);
-  const { setUpdateCollection, errorMessage, setErrorMessage } = useSearch();
+  const { setUpdateCollection } = useSearch();
 
   useEffect(() => {
     // If card was successfully added
@@ -32,11 +32,6 @@ const ArchiveItem = ({ index, product, count, handleSlideView }) => {
       // Trigger update collection @layout/DashboardNav
       // to make new cardName available in search collection
       setUpdateCollection(true);
-      // If error message is not null 
-      if (errorMessage.length > 0) {
-        // Set error message to null
-        setErrorMessage([])
-      }
     }
     if (error) {
       console.log(error)
