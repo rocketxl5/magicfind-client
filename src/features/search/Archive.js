@@ -150,9 +150,9 @@ const Search = () => {
             setCardName('');
             setSearchInput(null);
             // If errorMessage is set ['...collection currently empty...']
-            if (errorMessage) {
+            if (errorMessage.length > 0) {
                 // Clear errorMessage
-                setErrorMessage(null);
+                setErrorMessage([]);
             }
             setUpdateCollection(true);
             // console.log(cards)

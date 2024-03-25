@@ -18,7 +18,7 @@ export const SearchProvider = ({ children }) => {
   const [updateArchive, setUpdateArchive] = useState(false);
 
   // Mount state @ Collection initial fetch 
-  const [errorMessage, setErrorMessage] = useState(null);
+  const [errorMessage, setErrorMessage] = useState([]);
   const [displayAutcomplete, setDisplayAutocomplete] = useState(false);
   const [predictions, setPredictions] = useState([]);
   const [cardNames, setCardNames] = useState([]);

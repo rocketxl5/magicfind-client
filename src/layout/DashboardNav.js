@@ -68,8 +68,8 @@ const DashboardNav = () => {
                                         'Go to the Add Card page to start adding cards to your collection.'
                                     ]);
                                 }
-                                else if (errorMessage) {
-                                    setErrorMessage(null);
+                                else if (errorMessage.length > 0) {
+                                    setErrorMessage([]);
                                 }
                                 // Reinitialize updateCollection to allow updates
                                 setUpdateCollection(false);
