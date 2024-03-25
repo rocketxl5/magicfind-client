@@ -160,7 +160,7 @@ const Collection = () => {
                 {loading ? <Loader /> :
                     <main>
             {
-                            errorMessage ? (
+                            errorMessage.length ? (
                                 <div className="message">
                                     <section className="message-section">
                                         <div className="message-body">
