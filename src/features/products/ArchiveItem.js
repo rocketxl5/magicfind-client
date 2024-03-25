@@ -14,6 +14,7 @@ import Drop from '../../components/Drop';
 import useExpandImage from '../../hooks/useExpandImage';
 import usePostData from '../../hooks/usePostData';
 import useAuth from '../../hooks/contexthooks/useAuth';
+import useSearch from '../../hooks/contexthooks/useSearch';
 import { FaRegCheckCircle } from "react-icons/fa";
 
 const ArchiveItem = ({ index, product, count, handleSlideView }) => {
@@ -23,10 +24,19 @@ const ArchiveItem = ({ index, product, count, handleSlideView }) => {
   const query = `/api/cards/add/${user.id}/${product.id}`;
 
   const { postData, loading, result, error } = usePostData(product);
+  const { setUpdateCollection, errorMessage, setErrorMessage } = useSearch();
 
   useEffect(() => {
-    if (result) {
-      console.log(result)
+    // If card was successfully added
+    if (result?.isCardAdded) {
+      // Trigger update collection @layout/DashboardNav
+      // to make new cardName available in search collection
+      setUpdateCollection(true);
+      // If error message is not null 
+      if (errorMessage) {
+        // Set error message to null
+        setErrorMessage(null)
+      }
     }
     if (error) {
       console.log(error)

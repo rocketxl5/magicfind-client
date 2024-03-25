@@ -22,7 +22,6 @@ const Collection = () => {
     // Context
     const {
         errorMessage,
-        setErrorMessage,
         searchInput,
         setSearchInput,
         searchTerm,
@@ -31,7 +30,8 @@ const Collection = () => {
         setCardNames,
         predictions,
         collectionCardNames,
-        collectionInputRef
+        collectionInputRef,
+        setUpdateCollection
     } = useSearch();
 
     const { displaySeachBar, setDisplaySearchBar } = useNavbar();
@@ -50,36 +50,28 @@ const Collection = () => {
             headers: headers,
         }
 
-        fetch(`${api.serverURL}/api/cards/${auth.user.id}/cards`, options)
-            .then(res => {
-                if (res.ok) {
-                    return res.json()
-                        .then((data) => {
-                            const result = { cards: data, search: searchInput?.id }
-                            // Update local storage with search data
-                            localStorage.setItem('search-results', JSON.stringify(result));
-                            setLoading(false);
+        fetch(`${api.serverURL}/api/cards/${auth.user.id}`, options)
+            .then(res => res.json())
+            .then((data) => {
+                const result = { cards: data.cards, search: searchInput?.id }
+                // Update local storage with search data
+                localStorage.setItem('search-results', JSON.stringify(result));
+                setLoading(false);
 
-                            navigate(`/me/collection/all-cards`,
-                                {
-                                    state: result,
+                navigate(`/me/collection/all-cards`,
+                    {
+                        state: result,
 
-                                });
-                        });
-                }
-                else if (res.status === 400 || res.status === 404) {
-                    return res.json()
-                        .then((error) => {
-                            setLoading(false);
-                            setErrorMessage({ ...error.message });
-                        })
-                }
+                    });
             })
             .catch((error) => {
                 console.log(error.message)
             })
     }
     useEffect(() => {
+        // Update collection state on page load
+        setUpdateCollection(true);
+
         collectionInputRef.current?.focus();
 
         if (displaySeachBar) {
@@ -88,7 +80,6 @@ const Collection = () => {
     }, []);
 
     useEffect(() => {
-        // console.log(collectionCardNames)
         if (searchInput?.id === 'collection') {
             setIsActive(true);
         } else {
@@ -101,8 +92,6 @@ const Collection = () => {
             setCardNames(collectionCardNames);
         }
     }, [isActive, setCardNames, collectionCardNames])
-
-
 
     // Instore single card request search field with
     const searchCollectionCard = (e = undefined, prediction = undefined) => {
@@ -171,13 +160,13 @@ const Collection = () => {
                 {loading ? <Loader /> :
                     <main>
             {
-                            errorMessage?.title === 'no_cards' ? (
+                            errorMessage ? (
                                 <div className="message">
                                     <section className="message-section">
                                         <div className="message-body">
                                             {
-                                                errorMessage.body?.map((part, index) => {
-                                                    return <p key={index}>{part}</p>
+                                                errorMessage?.map((segement, index) => {
+                                                    return <p key={index}>{segement}</p>
                                                 })
                                             }
                                         </div>

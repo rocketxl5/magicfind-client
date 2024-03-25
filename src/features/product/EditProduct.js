@@ -49,6 +49,7 @@ const EditProduct = (props) => {
 
     // Triggers click event on button to close modal
     const closeModal = (result) => {
+        !product._is_published && setUpdateCatalog(true);
         setTimeout(() => {
             navigate(`${location.pathname}`,
                 {
@@ -56,7 +57,8 @@ const EditProduct = (props) => {
                 });
             localStorage.setItem('search-results', JSON.stringify(result));
             btnRef.current?.click();
-        }, 1500)
+        }, 1500);
+
     }
 
     useEffect(() => {
@@ -72,6 +74,7 @@ const EditProduct = (props) => {
                 comment: values.comment?.trim(),
                 published: values.published,
                 datePublished: Date.now(),
+                itemID: product._uuid
             }
 
             const headers = new Headers();

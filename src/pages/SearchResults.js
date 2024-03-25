@@ -23,7 +23,6 @@ const SearchResults = () => {
 
     const { cards, search } = location.state?.result || JSON.parse(localStorage.getItem('search-results'));
 
-    console.log(cards)
     useEffect(() => {
         // If cards is empty
         if (!cards.length) {
@@ -62,7 +61,8 @@ const SearchResults = () => {
             }
             {
                 imagesLoaded &&
-            <Page id={'search-results'} name={'search-results'} component={<Count count={cards.length} type={'Result'} />}>
+                <Page id={'search-results'} name={'search-results'}>
+                    {/* <Page id={'search-results'} name={'search-results'} component={<Count count={cards.length} type={'Result'} />}> */}
                 <SearchParameters setSearchFeatures={(value) => setSearchFeatures(value)} searchFeatures={searchFeatures} /> 
                 <main>
                         <List classList="list">
