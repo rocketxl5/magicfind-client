@@ -311,7 +311,7 @@ const EditProduct = (props) => {
                                                 </div>
                                             </div>
                                                 <footer className="modal-footer">
-                                                    <div className="flex space-around">
+                                                    <div className="flex space-between">
                                                     < button
                                                             id="cancel"
                                                             className="btn bg-primary color-light"
