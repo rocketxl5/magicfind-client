@@ -646,9 +646,8 @@ height: 2rem;
 .modal {
   height: 100%;
   min-width: 35rem;
-  max-width: 80%;
   margin-inline: auto;
-  margin-block-start: 5rem;
+  /* margin-block-start: 2.5rem; */
 }
 
 .modal-state {
@@ -751,7 +750,7 @@ height: 2rem;
 
 .modal-image {
   display: block;
-  width: clamp(31rem, calc(80vw + 10px), 55rem);
+  width: clamp(31.5rem, calc(80vw + 10px), 55rem);
   max-width: 50rem;
   height: auto;
   margin: 0 auto;
