@@ -30,7 +30,7 @@ const SearchResults = () => {
             // Send to collection view
             navigate('/me/collection');
         }
-    }, [location]);
+    }, [location, cards, navigate]);
 
     const [imagesLoaded] = useImageLoader(cards);
 

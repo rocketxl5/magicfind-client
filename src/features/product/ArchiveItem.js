@@ -15,28 +15,37 @@ import useExpandImage from '../../hooks/useExpandImage';
 import usePostData from '../../hooks/usePostData';
 import useAuth from '../../hooks/contexthooks/useAuth';
 import useSearch from '../../hooks/contexthooks/useSearch';
+import useProductMatch from '../../hooks/useProductMatch';
 import { FaRegCheckCircle } from "react-icons/fa";
 
 const ArchiveItem = ({ index, product, count, handleSlideView }) => {
+  const [cardAdded, setCardAdded] = useState(false);
+
   const { auth } = useAuth();
   const { user, token } = auth;
-  const { expandedImage } = useExpandImage(product);
   const query = `/api/cards/add/${user.id}/${product.id}`;
 
   const { postData, loading, result, error } = usePostData(product);
   const { setUpdateCollection } = useSearch();
+  const { expandedImage } = useExpandImage(product);
+  const { isProductMatch, isMatch } = useProductMatch();
+
+  useEffect(() => {
+    isProductMatch(product);
+  }, []);
 
   useEffect(() => {
     // If card was successfully added
     if (result?.isCardAdded) {
       // Trigger update collection @layout/DashboardNav
       // to make new cardName available in search collection
+      setCardAdded(true);
       setUpdateCollection(true);
     }
     if (error) {
       console.log(error)
     }
-  }, [result])
+  }, [result, setUpdateCollection, error])
 
   return (
     <>
@@ -50,16 +59,19 @@ const ArchiveItem = ({ index, product, count, handleSlideView }) => {
           classList={'col-12'}
           product={product}
         />
-        <ExpandImgBtn handleClick={handleSlideView} cardLayout={product.layout} expandedImage={expandedImage} />
+        <ExpandImgBtn
+          handleClick={handleSlideView}
+          cardLayout={product.layout}
+          expandedImage={expandedImage}
+        />
+        {
+          (cardAdded || isMatch) &&
+          <Drop classList={'bg-success'} >
+            <span className='fs-100 fw-700'>Added</span>
+          </Drop>
+        }
       </ProductImage>
       <ProductDetails classList={'product-details three'}>
-        {/* <div className="seller">
-                    <p>Seller: <strong>{`${product.seller.userName}`}</strong></p>
-                    <p>Rating: {product.seller.rating}</p>
-                    <p>Seller Store:
-                        <Avatar avatar={product.seller.avatar} handleClick={() => { console.log(seller) }} />
-                    </p>
-                </div> */}
         {
           // details &&
           // details.map((detail, i) => {
@@ -72,14 +84,17 @@ const ArchiveItem = ({ index, product, count, handleSlideView }) => {
         }
       </ProductDetails >
       <ProductActions classList={'product-actions four'} >
-        <Button
-          id={'add-product'}
-          classList={'btn-small bg-primary'}
-          title={'Add to '}
-          handleClick={() => postData(token, query)}
-        >
-          {'Add to Collection'}
-        </Button>
+        {
+          (!cardAdded && !isMatch) &&
+          <Button
+            id={'add-product'}
+            classList={'btn-small bg-primary'}
+            title={'Add to '}
+            handleClick={() => postData(token, query)}
+          >
+            {'Add to Collection'}
+          </Button>
+        }
       </ProductActions>
     </>
   )

@@ -14,7 +14,8 @@ const DashboardNav = () => {
         updateCollection,
         isCollectionEmpty,
         setIsCollectionEmpty,
-        setError
+        setError,
+        setCardCollection
     } = useSearch();
 
     const { auth } = useAuth();
@@ -63,6 +64,8 @@ const DashboardNav = () => {
                             .then((data) => {
 
                                 setCollectionCardNames(data.cardNames);
+                                setCardCollection(data.cards);
+                                // If length is 0 
                                 if (!data.cards.length) {
                                     setIsCollectionEmpty(true);
                                 }
