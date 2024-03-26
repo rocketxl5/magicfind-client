@@ -63,11 +63,11 @@ const CollectionItem = ({ index, product, count, handleCollectionItem }) => {
                 <Image
                     classList={'col-12'}
                     product={product}
-                    handleClick={() => navigate(
-                        `/product/${product._id}`,
-                        {
-                            state: { product: product }
-                        })}
+                    // handleClick={() => navigate(
+                    //     `/product/${product._id}`,
+                    //     {
+                    //         state: { product: product }
+                    //     })}
                 />
 
                 {

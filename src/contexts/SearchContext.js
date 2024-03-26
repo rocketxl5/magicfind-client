@@ -7,6 +7,8 @@ export const SearchProvider = ({ children }) => {
   const [cardName, setCardName] = useState('');
   const [searchTerm, setSearchTerm] = useState('');
 
+  const [cardCollection, setCardCollection] = useState([]);
+
   const [archiveCardNames, setArchiveCardNames] = useState(null);
   const [collectionCardNames, setCollectionCardNames] = useState(null);
   const [catalogCardNames, setCatalogCardNames] = useState(null);
@@ -59,6 +61,8 @@ export const SearchProvider = ({ children }) => {
   return (
     <SearchContext.Provider
       value={{
+        cardCollection,
+        setCardCollection,
         error,
         setError,
         isCollectionEmpty,

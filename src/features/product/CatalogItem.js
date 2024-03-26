@@ -98,7 +98,11 @@ const CatalogItem = ({ index, product, count, handleSlideView }) => {
                             state: { product: product }
                         })}
                 />
-                <ExpandImgBtn handleClick={handleSlideView} cardLayout={product.layout} expandedImage={expandedImage} />
+                <ExpandImgBtn
+                    handleClick={handleSlideView}
+                    cardLayout={product.layout}
+                    expandedImage={expandedImage}
+                />
             </ProductImage>
             <ProductDetails classList={'product-details three'}>
                 {/* <div className="seller">

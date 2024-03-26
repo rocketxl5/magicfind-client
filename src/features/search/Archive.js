@@ -11,6 +11,7 @@ import SearchInput from './components/SearchInput'
 import { api } from '../../api/resources';
 import useSearch from '../../hooks/contexthooks/useSearch';
 import useNavbar from '../../hooks/contexthooks/useNavbar.js';
+// import useAuth from '../../hooks/contexthooks/useAuth.js';
 import setQueryString from '../../assets/utilities/setQueryString';
 
 const Search = () => {
@@ -31,7 +32,8 @@ const Search = () => {
         setCardName,
         setCardNames,
         archiveCardNames,
-        setUpdateCollection
+        setUpdateCollection,
+        collectionCardNames
     } = useSearch();
 
     const { displaySeachBar, setDisplaySearchBar } = useNavbar();
@@ -55,10 +57,11 @@ const Search = () => {
     }, [searchInput])
 
     useEffect(() => {
+        console.log(collectionCardNames)
         if (isActive) {
             setCardNames(archiveCardNames);
         }
-    }, [isActive, archiveCardNames])
+    }, [isActive, setCardNames, archiveCardNames, collectionCardNames])
 
 
     const searchArchive = (e = undefined, prediction = undefined) => {
@@ -105,7 +108,7 @@ const Search = () => {
             })
     };
 
-    // Fetch call triggered when oracleID state changes in fetchSingleCard function
+    // Fetch call triggered when oracleID state changes
     useEffect(() => {
         if (oracleID) {
             const headers = { method: 'GET' };
