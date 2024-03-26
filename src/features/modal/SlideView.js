@@ -5,9 +5,9 @@ import Container from '../../components/Container';
 const SlideView = ({ children, handleClick }) => {
     console.log(children)
     return (
-        <Container className={"slide-view"}>
-            <Container className={"slide-frame"}>
-                <CloseBtn style={`slide-close-btn close-btn card-btn`} name={'close-btn'} handleClick={handleClick} />
+        <Container classList={"slide-view"}>
+            <Container classList={"slide-frame"}>
+                <CloseBtn classList={`slide-close-btn close-btn card-btn`} name={'close-btn'} handleClick={handleClick} />
             </Container>
             <>
                 {children}
