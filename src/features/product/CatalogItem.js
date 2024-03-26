@@ -1,16 +1,16 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Container from '../../components/Container';
-import ProductImage from '../product/components/ProductImage';
-import ExpandImgBtn from '../product/components/ExpandImgBtn';
+import ProductImage from './components/ProductImage';
+import ExpandImgBtn from './components/ExpandImgBtn';
 import Image from '../../components/Image';
-import ProductHeader from '../product/components/ProductHeader';
-import ProductDetails from '../product/components/ProductDetails';
-import ProductActions from '../product/components/ProductActions';
-import QuantitySelector from '../product/components/QuantitySelector';
+import ProductHeader from './components/ProductHeader';
+import ProductDetails from './components/ProductDetails';
+import ProductActions from './components/ProductActions';
+import QuantitySelector from './components/QuantitySelector';
 import Title from '../../components/Title';
 import CountDown from '../search/components/CountDown';
-import Alert from '../product/components/Alert';
+import Alert from './components/Alert';
 import Button from '../../components/Button';
 import Avatar from '../../components/Avatar';
 import Loader from '../../layout/Loader';
@@ -80,7 +80,7 @@ const CatalogItem = ({ index, product, count, handleSlideView }) => {
     }, [cartItems]);
 
     return (
-        <>  
+        <>
             <ProductHeader classList={'flex align-center space-between one'}>
 
                 <Title classList={'product-title'} text={product.name} />

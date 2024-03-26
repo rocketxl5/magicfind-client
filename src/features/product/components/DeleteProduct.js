@@ -1,13 +1,13 @@
 import { useState, useRef } from 'react';
 import { useNavigate, useLocation, useParams } from 'react-router-dom';
-import ProductImage from './components/ProductImage';
-import Image from '../../components/Image';
-import CollectionDetails from './components/CollectionDetails';
+import ProductImage from './ProductImage';
+import Image from '../../../components/Image';
+import CollectionDetails from './CollectionDetails';
 import Success from './Success';
-import Loader from '../../layout/Loader';
-import useAuth from '../../hooks/contexthooks/useAuth';
-import useSearch from '../../hooks/contexthooks/useSearch';
-import { api } from '../../api/resources';
+import Loader from '../../../layout/Loader';
+import useAuth from '../../../hooks/contexthooks/useAuth';
+import useSearch from '../../../hooks/contexthooks/useSearch';
+import { api } from '../../../api/resources';
 
 const DeleteProduct = (props) => {
     // Props
@@ -107,7 +107,7 @@ const DeleteProduct = (props) => {
                             {
                                 !response.isDeleted ? (
                                     <>
-                                            <header className="modal-header bg-danger">
+                                        <header className="modal-header bg-danger">
                                             <div className="modal-title">
                                                 <h2 className="fw-500">Delete Card</h2>
                                             </div>
@@ -115,15 +115,15 @@ const DeleteProduct = (props) => {
                                         <div className="modal-body">
                                             <section className="modal-section">
                                                 <div className="card-section">
-                                                        <ProductImage classList={'product-image'}>
-                                                            <Image
-                                                                classList={'col-12'}
-                                                                product={product}
-                                                            />
-                                                        </ProductImage>
+                                                    <ProductImage classList={'product-image'}>
+                                                        <Image
+                                                            classList={'col-12'}
+                                                            product={product}
+                                                        />
+                                                    </ProductImage>
                                                 </div>
                                                 <div className="card-section">
-                                                        {/* <CollectionDetails product={product} /> */}
+                                                    {/* <CollectionDetails product={product} /> */}
                                                 </div>
                                             </section>
                                             <section className="modal-warning">
@@ -132,25 +132,25 @@ const DeleteProduct = (props) => {
                                                 </div>
                                             </section>
                                         </div>
-                                            <footer className="modal-footer">
-                                                <div className="flex space-between">
-                                                    <button
-                                                        id="cancel"
-                                                        className="btn color-light bg-primary"
-                                                        type="button"
-                                                        onClick={handleClick}
-                                                    >
-                                                        Cancel
-                                                    </button>
-                                                    < button
-                                                        id="confirm-delete"
-                                                        className="btn color-light bg-danger"
-                                                        type="button"
-                                                        onClick={handleClick}
-                                                        onMouseDown={deleteHandler}
-                                                    >
-                                                        Confirm
-                                                    </button>
+                                        <footer className="modal-footer">
+                                            <div className="flex space-between">
+                                                <button
+                                                    id="cancel"
+                                                    className="btn color-light bg-primary"
+                                                    type="button"
+                                                    onClick={handleClick}
+                                                >
+                                                    Cancel
+                                                </button>
+                                                < button
+                                                    id="confirm-delete"
+                                                    className="btn color-light bg-danger"
+                                                    type="button"
+                                                    onClick={handleClick}
+                                                    onMouseDown={deleteHandler}
+                                                >
+                                                    Confirm
+                                                </button>
 
                                             </div>
                                         </footer>

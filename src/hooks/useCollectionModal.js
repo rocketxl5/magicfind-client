@@ -1,6 +1,6 @@
 import { useReducer } from 'react';
-import EditProduct from '../features/product/EditProduct';
-import DeleteProduct from '../features/product/DeleteProduct';
+import EditProduct from '../features/product/components/EditProduct';
+import DeleteProduct from '../features/product/components/DeleteProduct';
 import cardBack from '../assets/img/mtg_card_back.jpg';
 
 // Edit and Delete product form

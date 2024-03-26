@@ -1,16 +1,16 @@
 import { useState, useEffect, useRef } from 'react';
 import { useNavigate, useLocation, useParams } from 'react-router-dom';
-import ProductImage from './components/ProductImage';
-import ProductDetails from './components/ProductDetails';
-import Image from '../../components/Image';
+import ProductImage from './ProductImage';
+import ProductDetails from './ProductDetails';
+import Image from '../../../components/Image';
 import Success from './Success'
-import Loader from '../../layout/Loader';
-import Option from '../../components/Option';
-import data from '../../data/EDIT.json';
-import errorHandler from './services/editErrorHandler';
-import useAuth from '../../hooks/contexthooks/useAuth';
-import useSearch from '../../hooks/contexthooks/useSearch';
-import { api } from '../../api/resources';
+import Loader from '../../../layout/Loader';
+import Option from '../../../components/Option';
+import data from '../../../data/EDIT.json';
+import errorHandler from '../services/editErrorHandler';
+import useAuth from '../../../hooks/contexthooks/useAuth';
+import useSearch from '../../../hooks/contexthooks/useSearch';
+import { api } from '../../../api/resources';
 
 
 const INIT = {
@@ -178,7 +178,7 @@ const EditProduct = (props) => {
                             {
                                 !response.isUpdated ? (
                                     <>
-                                            <header className="modal-header bg-primary">
+                                        <header className="modal-header bg-primary">
                                             <div className="modal-title">
                                                 <h2 className="fw-500">Edit Card</h2>
                                             </div>
@@ -188,15 +188,15 @@ const EditProduct = (props) => {
                                                 <section className="modal-section">
 
                                                     <div className="card-section">
-                                                            <ProductImage classList={'product-image'}>
-                                                                <Image
-                                                                    classList={'col-12'}
-                                                                    product={product}
-                                                                />
-                                                            </ProductImage>
+                                                        <ProductImage classList={'product-image'}>
+                                                            <Image
+                                                                classList={'col-12'}
+                                                                product={product}
+                                                            />
+                                                        </ProductImage>
                                                     </div>
                                                     <div className="card-section">
-                                                            {/* <ProductDetails>
+                                                        {/* <ProductDetails>
 
                                                             </ProductDetails> */}
                                                     </div>
@@ -212,7 +212,7 @@ const EditProduct = (props) => {
                                                                     type="number"
                                                                     name="price"
                                                                     value={values.price}
-                                                                        onChange={handleChange}
+                                                                    onChange={handleChange}
                                                                     onFocus={handleFocus}
                                                                     min="0.25"
                                                                     max="10000"
@@ -248,14 +248,14 @@ const EditProduct = (props) => {
                                                                 onFocus={handleFocus}
                                                             >
                                                                 {
-                                                                        conditions.map((condition, i) => {
-                                                                            return (
-                                                                                <Option key={i} value={condition.value}>
-                                                                                    {condition.text}
-                                                                                </Option>
-                                                                            )
-                                                                        }
+                                                                    conditions.map((condition, i) => {
+                                                                        return (
+                                                                            <Option key={i} value={condition.value}>
+                                                                                {condition.text}
+                                                                            </Option>
                                                                         )
+                                                                    }
+                                                                    )
                                                                 }
                                                             </select>
                                                         </div>
@@ -310,11 +310,11 @@ const EditProduct = (props) => {
                                                     </form>
                                                 </div>
                                             </div>
-                                                <footer className="modal-footer">
-                                                    <div className="flex space-between">
+                                            <footer className="modal-footer">
+                                                <div className="flex space-between">
                                                     < button
-                                                            id="cancel"
-                                                            className="btn bg-primary color-light"
+                                                        id="cancel"
+                                                        className="btn bg-primary color-light"
                                                         type="button"
                                                         onClick={handleClick}
                                                     >
@@ -322,7 +322,7 @@ const EditProduct = (props) => {
                                                     </button>
                                                     < button
                                                         id="confirm-publish"
-                                                            className="btn bg-success color-light"
+                                                        className="btn bg-success color-light"
                                                         type="button"
 
                                                         onClick={handleSubmit} >

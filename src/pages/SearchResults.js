@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import ArchiveItem from '../features/products/ArchiveItem';
-import CollectionItem from '../features/products/CollectionItem';
-import CatalogItem from '../features/products/CatalogItem';
+import ArchiveItem from '../features/product/ArchiveItem';
+import CollectionItem from '../features/product/CollectionItem';
+import CatalogItem from '../features/product/CatalogItem';
 import Modal from '../features/modal/Modal';
 import List from '../components/List';
 import ListItem from '../components/ListItem';
@@ -24,7 +24,7 @@ const SearchResults = () => {
     const { cards, search } = location.state?.result || JSON.parse(localStorage.getItem('search-results'));
 
     useEffect(() => {
-        console.log(location)
+        // console.log(location)
         // If cards is empty
         if (!cards.length) {
             // Send to collection view

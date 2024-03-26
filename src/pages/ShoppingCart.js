@@ -3,7 +3,7 @@ import Page from '../components/Page';
 import List from '../components/List';
 import ListItem from '../components/ListItem';
 import Card from '../components/Card';
-import CartItem from '../features/products/CartItem';
+import CartItem from '../features/product/CartItem';
 import Button from '../components/Button';
 import Container from '../components/Container';
 import Aside from '../components/Aside';
@@ -38,7 +38,7 @@ function ShoppingCart() {
             <>
               <Aside classList={'cart-aside'}>
                 <>
-                  <Container classList="cart-total flex gap-1">
+                  <Container classList={'cart-total flex gap-1'}>
                     <p className="fw-500">Subtotal:</p>
                           <Container>
                       <p><strong>{`$ ${subTotal}`}</strong>{` (${itemsCount} ${itemsCount > 1 ? 'items' : 'item'})`}</p>
