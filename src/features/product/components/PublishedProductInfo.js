@@ -2,7 +2,7 @@ import React from 'react'
 import data from '../../../data/SEARCH.json';
 import timestampConverter from '../../../assets/utilities/timestampConverter';
 
-const CollectionOwner = ({ product }) => {
+const PublishedProductInfo = ({ product }) => {
     const { conditions, languages, finishes } = data.product;
     const { longDate } = timestampConverter;
     return (
@@ -51,4 +51,4 @@ const CollectionOwner = ({ product }) => {
     )
 }
 
-export default CollectionOwner
+export default PublishedProductInfo

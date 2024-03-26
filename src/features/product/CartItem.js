@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import ProductImage from '../product/components/ProductImage';
-import ProductDetails from '../product/components/ProductDetails';
-import ProductActions from '../product/components/ProductActions';
-import QuantitySelector from '../product/components/QuantitySelector';
+import ProductImage from './components/ProductImage';
+import ProductDetails from './components/ProductDetails';
+import ProductActions from './components/ProductActions';
+import QuantitySelector from './components/QuantitySelector';
 import Button from '../../components/Button';
 import Span from '../../components/Span';
 import Image from '../../components/Image';
@@ -92,15 +92,15 @@ const CartItem = ({ index, item }) => {
         />
       </ProductImage>
       <ProductDetails classList={'product-details two'}>
-          {
-            details &&
-            details.map((detail, i) => {
-              return (
-                <p key={i} classList={detail.style}>
-                  {detail.text}
-                </p>
-              )
-            })
+        {
+          details &&
+          details.map((detail, i) => {
+            return (
+              <p key={i} classList={detail.style}>
+                {detail.text}
+              </p>
+            )
+          })
         }
       </ProductDetails>
       <ProductActions classList={'product-actions three'}>

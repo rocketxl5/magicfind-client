@@ -1,13 +1,13 @@
 import { useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Container from '../../components/Container';
-import ProductImage from '../product/components/ProductImage';
-import ExpandImgBtn from '../product/components/ExpandImgBtn';
+import ProductImage from './components/ProductImage';
+import ExpandImgBtn from './components/ExpandImgBtn';
 import Drop from '../../components/Drop';
 import Image from '../../components/Image';
-import ProductHeader from '../product/components/ProductHeader';
-import ProductDetails from '../product/components/ProductDetails';
-import ProductActions from '../product/components/ProductActions';
+import ProductHeader from './components/ProductHeader';
+import ProductDetails from './components/ProductDetails';
+import ProductActions from './components/ProductActions';
 import Title from '../../components/Title';
 import CountDown from '../search/components/CountDown';
 import Button from '../../components/Button';

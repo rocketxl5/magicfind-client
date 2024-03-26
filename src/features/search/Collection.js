@@ -30,8 +30,7 @@ const Collection = () => {
         setCardNames,
         predictions,
         collectionCardNames,
-        collectionInputRef,
-        setUpdateCollection
+        collectionInputRef
     } = useSearch();
 
     const { displaySeachBar, setDisplaySearchBar } = useNavbar();
@@ -54,7 +53,7 @@ const Collection = () => {
             .then(res => res.json())
             .then((data) => {
                 const result = { cards: data.cards, search: searchInput?.id }
-                console.log(searchInput.id)
+
                 // Update local storage with search data
                 localStorage.setItem('search-results', JSON.stringify(result));
                 setLoading(false);
@@ -70,9 +69,6 @@ const Collection = () => {
             })
     }
     useEffect(() => {
-        // Update collection state on page load
-        // setUpdateCollection(true);
-
         collectionInputRef.current?.focus();
 
         if (displaySeachBar) {

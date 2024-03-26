@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import useAuth from '../../../hooks/contexthooks/useAuth';
 
-const CatalogOwner = ({ product }) => {
+const ProductSellerInfo = ({ product }) => {
     const { isAuth } = useAuth();
     return (
         <div className="catalog-owner">
@@ -31,4 +31,4 @@ const CatalogOwner = ({ product }) => {
     )
 }
 
-export default CatalogOwner
+export default ProductSellerInfo
