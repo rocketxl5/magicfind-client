@@ -12,6 +12,7 @@ import Title from '../../components/Title';
 import CountDown from '../search/components/CountDown';
 import Alert from './components/Alert';
 import Button from '../../components/Button';
+import Drop from '../../components/Drop';
 import Avatar from '../../components/Avatar';
 import Loader from '../../layout/Loader';
 import useAuth from '../../hooks/contexthooks/useAuth';
@@ -22,7 +23,7 @@ import data from '../../data/SEARCH.json';
 import { FaRegCheckCircle } from "react-icons/fa";
 
 const CatalogItem = ({ index, product, count, handleSlideView }) => {
-    const [quantitySelected, setQuantitySelected] = useState(0);
+    // If defined, then item is in cart
     const [cartIndex, setCartIndex] = useState(undefined);
     const { name, set_name, price, quantity, language, condition, finishes, seller } = product;
     const { userName, country, avatar, rating, email } = seller;
@@ -68,16 +69,17 @@ const CatalogItem = ({ index, product, count, handleSlideView }) => {
     ];
 
     useEffect(() => {
-        // Check for product match in cartItems 
-        const index = cartItems.findIndex((item) => {
-            return item.selected._id === product._id;
-        });
+        if (cartItems.length) {
+            const foundIndex = cartItems.findIndex((item) => {
+                return item.selected._id === product._id;
+            });
         // If index >= 0: Product is already in cart
-        if (index > -1) {
-            setQuantitySelected(cartItems[index].quantity);
-            setCartIndex(index);
+            if (foundIndex > -1) {
+                // setQuantitySelected(cartItems[foundIndex].quantity);
+                setCartIndex(foundIndex);
+            }
         }
-    }, [cartItems]);
+    }, [cartItems])
 
     return (
         <>
@@ -103,8 +105,15 @@ const CatalogItem = ({ index, product, count, handleSlideView }) => {
                     cardLayout={product.layout}
                     expandedImage={expandedImage}
                 />
+                {
+                    cartItems[cartIndex] &&
+                    <Drop classList={'bg-yellow border-dark'} >
+                        <span className='fs-100 fw-700 color-dark'>In cart {cartItems[cartIndex].quantity}</span>
+                    </Drop>
+
+                }
             </ProductImage>
-            <ProductDetails classList={'product-details three'}>
+            <Container classList={'product-details flex column space-between three'}>
                 {/* <div className="seller">
                     <p>Seller: <strong>{`${product.seller.userName}`}</strong></p>
                     <p>Rating: {product.seller.rating}</p>
@@ -112,31 +121,46 @@ const CatalogItem = ({ index, product, count, handleSlideView }) => {
                         <Avatar avatar={product.seller.avatar} handleClick={() => { console.log(seller) }} />
                     </p>
                 </div> */}
+                <Container>
                 {
                     details &&
                     details.map((detail, i) => {
                         return (
-                            <Container key={i} classList={''}>
-                                <p><span className="">{detail.title}</span>  <span className="">{detail.value}</span></p>
-                            </Container>
+                            <p key={i}><span>{detail.title}</span>  <span>{detail.value}</span></p>
                         )
                     })
-                }
-            </ProductDetails>
-            <ProductActions classList={'product-actions four'}>
+                    }
+                </Container>
                 {
-                    quantitySelected > 0 &&
-                    <Alert classList={'flex align-center'}>
-                        <p className='flex align-center gap-1 space-between '>
-                            <span className='fs-125'>
-                                {quantitySelected} {quantitySelected > 1 ? 'copies' : 'copy'} in cart
-                            </span>
-                            <span>
-                                <FaRegCheckCircle className='d-block fs-175 stroke-width color-success' />
-                            </span>
-                        </p>
-                    </Alert>
+
+                    // <Alert classList={'flex align-center'}>
+                    //     <p className='flex align-center gap-1 space-between '>
+                    //         <span className='fs-125'>
+                    //             {quantitySelected} {quantitySelected > 1 ? 'copies' : 'copy'} in cart
+                    //         </span>
+                    //         <span>
+                    //             <FaRegCheckCircle className='d-block fs-175 stroke-width color-success' />
+                    //         </span>
+                    //     </p>
+                    // </Alert>
                 }
+                <Container classList={'col-12 align-right dropdown'}>
+                    <label className='strong' htmlFor={`item${index}`}>Quantity Selected </label>
+                    <QuantitySelector
+                        id={`item${index}`}
+                        name={'catalog-item'}
+                        classList={'col-8'}
+                        // Product already in cart have defined cartIndex
+                        quantitySelected={cartItems[cartIndex] ? cartItems[cartIndex].quantity : 0}
+                        quantityAvailable={quantity}
+                        product={product}
+                        handleChange={updateCartHandler}
+
+                    >
+                    </QuantitySelector>
+                </Container>
+            </Container>
+            <ProductActions classList={'product-actions four'}>
                 {/* <Button
                     classList={'btn-small product-btn bg-primary'}
                     title={'Add to wishlist'}
@@ -144,7 +168,7 @@ const CatalogItem = ({ index, product, count, handleSlideView }) => {
                 >
                     {'Wishlist'}
                 </Button> */}
-                <QuantitySelector
+                {/* <QuantitySelector
                     classList={'dropdown product-dropdown'}
                     name={'catalog-item'}
                     // Product already in cart have defined cartIndex
@@ -152,7 +176,7 @@ const CatalogItem = ({ index, product, count, handleSlideView }) => {
                     quantityAvailable={quantity}
                     product={product}
                     handleChange={updateCartHandler}
-                />
+                /> */}
 
             </ProductActions>
         </>
