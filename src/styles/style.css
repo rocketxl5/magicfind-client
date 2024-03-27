@@ -1522,7 +1522,7 @@ background-repeat: no-repeat;
 
 .product-card .three {
   grid-area: three;
-  padding: 1rem;
+  padding-inline: 1rem;
 }
 
 .product-card .four {

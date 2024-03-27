@@ -62,8 +62,8 @@ const SearchResults = () => {
             }
             {
                 imagesLoaded &&
-                <Page id={'search-results'} name={'search-results'}>
-                    {/* <Page id={'search-results'} name={'search-results'} component={<Count count={cards.length} type={'Result'} />}> */}
+                // <Page id={'search-results'} name={'search-results'} >
+                <Page id={'search-results'} name={'search-results'} component={<Count count={cards.length} type={'Result'} />}>
                 <SearchParameters setSearchFeatures={(value) => setSearchFeatures(value)} searchFeatures={searchFeatures} /> 
                 <main>
                         <List classList="list">

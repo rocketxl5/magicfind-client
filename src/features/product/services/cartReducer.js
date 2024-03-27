@@ -1,20 +1,9 @@
 export const cartReducer = (state, action) => {
     switch (action.type) {
-        case 'success':
-            return {
-                ...state,
-                cartItems: action.payload.cartItems
-            }
         case 'error':
             return {
                 ...state,
                 error: action.payload
-            }
-        case 'update-item':
-            return {
-                ...state,
-                quantitySelected: action.payload.quantitySelected,
-                total: action.payload.total
             }
         case 'set-cart':
             return {
@@ -33,6 +22,9 @@ export const cartReducer = (state, action) => {
                 cartItems: action.payload
             }
         default:
-            break;
+            return {
+                ...state,
+                itemsCount: 0
+            }
     }
 }

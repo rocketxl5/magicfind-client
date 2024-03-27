@@ -7,7 +7,7 @@
 }
 
 .padding-block-1 {
-    padding-block: var(--size-1);
+    padding-block: var(--size-1) !important;
 }
 
 .padding-block-2 {
@@ -31,7 +31,7 @@
 }
 
 .margin-block-end-1 {
-    margin-block-end: var(--size-1);
+    margin-block-end: var(--size-1) !important;
 }
 
 .margin-block-start-2 {
@@ -295,11 +295,11 @@
 }
 
 .border-primary {
-    border: 2px solid var(--clr-primary);
+    border: 2px solid var(--clr-primary) !important;
 }
 
 .border-bottom {
-    border-bottom: 1px solid var(--clr-dark);
+    border-bottom: 1px solid var(--clr-dark) ;
 }
 
 .border-none {
@@ -479,15 +479,24 @@
     display: grid;
 }
 
-.bold {
-    font-weight: bold;
+.strong {
+    font-weight: 700;
 }
 
 .move-right {
-    margin-left: auto;
+    margin-left: auto !important;
 }
 
 .move-left {
-    margin-right: auto;
+    margin-right: auto !important;
+}
+
+.svg-wide {
+    width: 3rem;
+    height: 3rem;
+}
+
+.align-right {
+    text-align: right;
 }
 

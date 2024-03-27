@@ -2,9 +2,9 @@ import { createContext, useEffect, useReducer } from 'react';
 import { cartReducer } from '../features/product/services/cartReducer';
 
 const initialState = {
+  cartItems: [],
   error: null,
   itemsCount: 0,
-  cartItems: [],
   subTotal: 0,
 }
 
@@ -33,8 +33,8 @@ export const CartProvider = ({ children }) => {
   }, []);
 
   useEffect(() => {
-    if (cartItems) {
-      const items = cartItems?.reduce((accumulator, currentItem) =>
+    if (cartItems.length) {
+      const items = cartItems.reduce((accumulator, currentItem) =>
         accumulator + currentItem.quantity
         , 0);
       const total = cartItems?.reduce((accumulator, currentItem) =>
@@ -49,12 +49,13 @@ export const CartProvider = ({ children }) => {
         }
       })
 
-      if (cartItems.length > 0) {
-        localStorage.setItem('cart', JSON.stringify(cartItems));
-      }
-      else {
-        localStorage.removeItem('cart');
-      }
+      localStorage.setItem('cart', JSON.stringify(cartItems));
+    }
+    else {
+      localStorage.removeItem('cart');
+      dispatch({
+        type: null
+      })
     }
   }, [cartItems])
 
@@ -64,7 +65,7 @@ export const CartProvider = ({ children }) => {
         dispatch,
         subTotal,
         itemsCount,
-        cartItems
+        cartItems,
       }}
     >
       {children}
