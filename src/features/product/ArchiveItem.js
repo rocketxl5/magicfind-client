@@ -3,6 +3,8 @@ import Container from '../../components/Container';
 import ProductHeader from './components/ProductHeader';
 import Title from '../../components/Title';
 import CountDown from '../search/components/CountDown';
+import List from '../../components/List';
+import ListItem from '../../components/ListItem';
 import ProductImage from './components/ProductImage';
 import Image from '../../components/Image';
 import ExpandImgBtn from './components/ExpandImgBtn';
@@ -172,17 +174,17 @@ const ArchiveItem = ({ index, product, search, count, handleSlideView }) => {
           </Drop>
         }
       </ProductImage>
-      <Container classList={'product-details flex column space-between three'}>
-        <div>
+      <Container classList={'flex column space-between three'}>
+        <List classList={'product-details'}>
           {details &&
             details.map((detail, i) => {
               return (
-                <Container key={i}>
-                  <p><span className="">{detail.title}</span>  <span className="">{detail.value}</span></p>
-                </Container>
+                <ListItem key={i}>
+                  <span className='strong'>{detail.title}</span>  <span className='color-symbols'>{detail.value}</span>
+                </ListItem>
               )
             })}
-        </div>
+        </List>
         {(!isCardAdded && !isMatchFound) ?
           <div>
           <Button

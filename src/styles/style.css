@@ -1241,6 +1241,7 @@ text-align: center;
 }
 
 .color-icon {
+  /* display: block; */
   align-self: center;
   display: inline;
   width: 1rem;
@@ -1463,8 +1464,17 @@ background-repeat: no-repeat;
   z-index: 8001;
 }
 
-.product-details {
+.product-details * {
   font-size: clamp(11.5px, calc(1vw + 5px), var(--fs-150));
+  line-height: 1.6;
+}
+
+.product-details .color-symbols {
+  vertical-align: middle;
+}
+
+.color-symbols img {
+  width: 1.2rem;
 }
 
 .card {

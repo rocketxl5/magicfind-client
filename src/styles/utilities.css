@@ -6,6 +6,10 @@
     padding-inline: var(--size-2);
 }
 
+.padding-block-half {
+    padding-block: 0.1rem !important;
+}
+
 .padding-block-1 {
     padding-block: var(--size-1) !important;
 }
@@ -553,6 +557,7 @@
     width: 12rem;
     height: 12rem;
 }
+
 
 
 
