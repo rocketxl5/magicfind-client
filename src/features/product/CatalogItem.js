@@ -24,7 +24,7 @@ import { FiShoppingCart } from "react-icons/fi";
 import data from '../../data/SEARCH.json';
 
 
-const CatalogItem = ({ index, product, search, count, handleSlideView }) => {
+const CatalogItem = ({ index, product, count, handleSlideView }) => {
     // If defined, then item is in cart
     // const [indexFound, setindexFound] = useState(undefined);
     const { name, set_name, price, quantity, language, condition, finishes, seller } = product;
@@ -76,7 +76,7 @@ const CatalogItem = ({ index, product, search, count, handleSlideView }) => {
 
     useEffect(() => {
         findIndex(product._id);
-    }, []);
+    }, [cartItems]);
 
     return (
         <>
