@@ -17,7 +17,7 @@ import { FaCommentsDollar } from "react-icons/fa";
 
 import timestampConverter from '../../assets/utilities/timestampConverter';
 
-const CollectionItem = ({ index, product, search, count, handleCollectionItem }) => {
+const CollectionItem = ({ index, product, count, handleCollectionItem }) => {
     const { conditions, languages, finishes } = data.product;
     const { longDate } = timestampConverter;
     // const { name, set_name, price, quantity, language, condition, finishes, seller } = product;

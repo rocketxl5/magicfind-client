@@ -79,7 +79,6 @@ const SearchResults = () => {
                                                     <CatalogItem
                                                         index={i}
                                                         product={card}
-                                                        search={search}
                                                         count={cards.length}
                                                         handleSlideView={handleSlideView}
                                                     />
@@ -89,7 +88,6 @@ const SearchResults = () => {
                                                         <CollectionItem
                                                             index={i}
                                                             product={card}
-                                                            search={search}
                                                             count={cards.length}
                                                             handleCollectionItem={handleCollectionItem}
                                                             handleSlideView={handleSlideView}
@@ -98,7 +96,6 @@ const SearchResults = () => {
                                                         <ArchiveItem
                                                             index={i}
                                                             product={card}
-                                                            search={search}
                                                             count={cards.length}
                                                             handleSlideView={handleSlideView}
                                                         />

@@ -24,7 +24,7 @@ import { GoStack } from "react-icons/go";
 
 import data from '../../data/SEARCH.json';
 
-const ArchiveItem = ({ index, product, search, count, handleSlideView }) => {
+const ArchiveItem = ({ index, product, count, handleSlideView }) => {
   const [isCardAdded, setIsCardAdded] = useState(false);
 
   const { auth } = useAuth();
@@ -72,7 +72,6 @@ const ArchiveItem = ({ index, product, search, count, handleSlideView }) => {
 
   useEffect(() => {
     findMatch(product);
-    console.log(isMatchFound)
   }, []);
 
   useEffect(() => {

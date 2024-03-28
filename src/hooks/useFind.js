@@ -14,12 +14,14 @@ const useFind = () => {
         // Returns boolean value
         // Returns true if product item is in collection
         // Returns false if it's not
-        const match = cardCollection.find((card) => {
-            return card.id === product.id;
-        })
+        if (cardCollection.length > 0) {
+            const match = cardCollection.find((card) => {
+                return card.id === product.id;
+            })
 
-        if (match) {
-            setIsMatchFound(true);
+            if (match) {
+                setIsMatchFound(true);
+            }
         }
     }
 
@@ -27,14 +29,15 @@ const useFind = () => {
     // Returns null if not
     // @ CatalogItem
     const findIndex = (product) => {
-        const index = cartItems.findIndex((item) => {
-            return item.selected.id === product.id;
-        });
-        // If index >= 0: Product is already in cart
-        if (index > -1) {
-            setIndexFound(index);
+        if (cartItems.length > 0) {
+            const index = cartItems.findIndex((item) => {
+                return item.selected.id === product.id;
+            });
+            // If index >= 0: Product is already in cart
+            if (index > -1) {
+                setIndexFound(index);
+            }
         }
-
     }
     return { findMatch, isMatchFound, findIndex, indexFound };
 }
