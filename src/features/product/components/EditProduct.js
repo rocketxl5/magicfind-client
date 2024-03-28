@@ -26,6 +26,7 @@ const EditProduct = (props) => {
     // States
     const [errors, setErrors] = useState(INIT);
     const [values, setValues] = useState(INIT);
+    const [isPublished, setIsPublished] = useState(false);
     const [loading, setLoading] = useState(false);
     const [isValidForm, setIsValidForm] = useState(false);
     const [isSubmit, setIsSubmit] = useState(false);
@@ -48,7 +49,8 @@ const EditProduct = (props) => {
 
     // Triggers click event on button to close modal
     const closeModal = (result) => {
-        !product._is_published && setUpdateCatalog(true);
+        // If publish state has changed, trigger catalog update to reflect product change
+        product._is_published !== isPublished && setUpdateCatalog(true);
         setTimeout(() => {
             navigate(`${location.pathname}`,
                 {
@@ -57,12 +59,13 @@ const EditProduct = (props) => {
             localStorage.setItem('search-results', JSON.stringify(result));
             btnRef.current?.click();
         }, 1500);
-
     }
 
     useEffect(() => {
         if (isValidForm) {
             setLoading(true);
+            // Set product current published state
+            setIsPublished(product._is_published);
             const price = parseFloat(values.price);
             const input = {
                 cardName: product.name?.trim(),

@@ -1,10 +1,10 @@
 import React from 'react'
 
-const Title = ({ classList = '', text }) => {
+const Title = ({ children, classList = '' }) => {
 
     return (
         <h2 className={classList}>
-            {text}
+            {children}
         </h2>
     )
 }

@@ -1,10 +1,9 @@
 import Loading from './Loading'
 
-const Loader = ({ children }) => {
+const Loader = () => {
     return (
         <div className="loader">
             <Loading />
-            {children}
         </div>
     )
 }

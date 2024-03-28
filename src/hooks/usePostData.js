@@ -6,9 +6,9 @@ const usePostData = (data) => {
     const [result, setResult] = useState(null);
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(false);
+    const [showConfirmation, setShowConfirmation] = useState(false)
 
     const postData = async (token, query) => {
-        console.log(data)
         setLoading(true);
 
         const config = {
@@ -21,8 +21,7 @@ const usePostData = (data) => {
         await axios
             .post(`${api.serverURL}${query}`, data, config)
             .then(res => {
-                console.log(res.data)
-
+                // console.log(res.data)
                 setResult(res.data);
             })
             .catch((error) => {
@@ -30,10 +29,14 @@ const usePostData = (data) => {
             })
             .finally(() => {
                 setLoading(false);
+                setShowConfirmation(true);
+                setTimeout(() => {
+                    setShowConfirmation(false);
+                }, 1500);
             })
     }
 
-    return { postData, loading, error, result }
+    return { postData, loading, showConfirmation, error, result }
 }
 
 export default usePostData
