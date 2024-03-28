@@ -109,10 +109,8 @@ const CatalogItem = ({ index, product, count, handleSlideView }) => {
                 />
                 {
                     cartItems[indexFound] &&
-                    <Drop classList={'bg-success absolute'} >
-                        {/* <div className='relative flex align-center justify-center square-size-2'> */}
+                    <Drop classList={'catalog-btn bg-success'} >
                         <FiShoppingCart />
-                        {/* </div> */}
                     </Drop>
                 }
             </ProductImage>

@@ -3,7 +3,6 @@ import CloseBtn from './buttons/CloseBtn';
 import Container from '../../components/Container';
 
 const SlideView = ({ children, handleClick }) => {
-    console.log(children)
     return (
         <Container classList={"slide-view"}>
             <Container classList={"slide-frame"}>

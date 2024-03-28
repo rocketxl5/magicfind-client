@@ -43,7 +43,6 @@ const useSlideView = (callback) => {
     const [view, dispatch] = useReducer(reducer, INIT)
 
     const updateProductView = (layout, expandedImage) => {
-        console.log(layout)
         switch (layout) {
             case 'flip':
                 dispatch({

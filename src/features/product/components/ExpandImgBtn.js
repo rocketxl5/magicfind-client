@@ -1,10 +1,10 @@
-import { FaExpand } from "react-icons/fa";
-import { IoIosExpand } from "react-icons/io";
 import { IoExpand } from "react-icons/io5";
-const ExpandImgBtn = ({ handleClick, cardLayout, expandedImage }) => {
 
+const ExpandImgBtn = (props) => {
+    const { handleSlideView, layout, image } = props;
     return (
-        <button className="expand-btn bg-primary" type="button" onClick={(e) => handleClick(e, cardLayout, expandedImage)}>
+
+        <button className="expand-btn color-light bg-primary border-light absolute flex align-center justify-center b-radius-50 drop-btn" type="button" onClick={(e) => handleSlideView(e, layout, image)}>
             <IoExpand />
         </button>
     )

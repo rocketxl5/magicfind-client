@@ -74,10 +74,6 @@
     min-height: inherit;
 }
 
-.height-100 {
-    height: 100%;
-}
-
 .row {
     flex-direction: row;
 }
@@ -119,7 +115,7 @@
 }
 
 .align-center {
-    align-items: center;
+    align-items: center !important;
 }
 
 .align-stretch {
@@ -127,7 +123,7 @@
 }
 
 .justify-center {
-    justify-content: center;
+    justify-content: center !important;
 }
 
 .space-between {
@@ -318,6 +314,8 @@
     border: none;
 }
 
+
+
 .color-light-grey {
     color: var(--clr-light-grey);
 }
@@ -380,6 +378,10 @@
 
 .b-radius-25 {
     border-radius: 25px;
+}
+
+.b-radius-50 {
+    border-radius: 50px;
 }
 
 .fs-100 {
@@ -514,6 +516,10 @@
 
 .height-85 {
     height: 85%;
+}
+
+.height-100 {
+    height: 100% !important;
 }
 
 .text-right {

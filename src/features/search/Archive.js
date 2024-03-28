@@ -57,7 +57,6 @@ const Search = () => {
     }, [searchInput])
 
     useEffect(() => {
-        console.log(collectionCardNames)
         if (isActive) {
             setCardNames(archiveCardNames);
         }
@@ -96,7 +95,7 @@ const Search = () => {
                     return res.json()
                         .then((data) => {
                             const { name, oracle_id } = data;
-                            localStorage.setItem('oracle', oracle_id);
+                            // localStorage.setItem('oracle', oracle_id);
                             setOracleID(oracle_id);
                             setCardName(name);
                         })
@@ -151,15 +150,17 @@ const Search = () => {
             setCardName('');
             setSearchInput(null);
             setUpdateCollection(true);
-            // console.log(cards)
-            const result = {
+
+            localStorage.setItem('search-results', JSON.stringify({
                 cards: cards,
                 search: searchInput.id
-            };
-            localStorage.setItem('search-results', JSON.stringify(result));
+            }));
             navigate(`/me/archive/${setQueryString(cardName, '-')}`,
                 {
-                    state: result,
+                    state: {
+                        cards: cards,
+                        search: searchInput.id
+                    }
                 });
 
         }
