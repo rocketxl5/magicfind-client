@@ -22,8 +22,8 @@
     padding-block: var(--size-5);
 }
 
-.padding-1 {
-    padding: 1rem;
+.padding-dot-5 {
+    padding: 0.5rem;
 }
 
 .margin-bs-1 {
@@ -114,12 +114,20 @@
     align-items: center;
 }
 
+.align-stretch {
+    align-items: stretch !important;
+}
+
 .justify-center {
     justify-content: center;
 }
 
 .space-between {
     justify-content: space-between;
+}
+
+.space-around {
+    justify-content: space-around;
 }
 
 .flex-end {
@@ -132,10 +140,6 @@
 
 .justify-self-center {
     justify-self: center;
-}
-
-.center {
-    text-align: center;
 }
 
 .inline-block {
@@ -496,7 +500,45 @@
     height: 3rem;
 }
 
-.align-right {
-    text-align: right;
+.height-15 {
+    height: 15%;
 }
+
+.height-85 {
+    height: 85%;
+}
+
+.align-right {
+    text-align: right !important;
+}
+
+.align-left {
+    text-align: left !important;
+}
+
+.center {
+    text-align: center;
+}
+
+.square-size-4 {
+    width: 4rem;
+    height: 4rem;
+}
+
+.square-size-5 {
+    width: 5rem;
+    height: 5rem;
+}
+
+.square-size-6 {
+    width: 6rem;
+    height: 6rem;
+}
+.square-size-12 {
+    width: 12rem;
+    height: 12rem;
+}
+
+
+
 

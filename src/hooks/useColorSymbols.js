@@ -45,7 +45,10 @@ const useColorSymbols = (card) => {
                 .catch(error => console.log('Imgage load has failded'));
         }
 
-        const costUrls = setUrls(card.mana_cost?.split(/\{([^}]+)\}/).filter(value => value));
+        // Set manaCost with mana_cost property value
+        // @reversible cards: mana_cost property is @ card_faces array
+        const manaCost = card.mana_cost ? card.mana_cost : card.card_faces[0].mana_cost;
+        const costUrls = setUrls(manaCost.split(/\{([^}]+)\}/).filter(value => value));
         const identityUrls = setUrls(card.color_identity);
         setIcons(costUrls, 'cost');
         setIcons(identityUrls, 'identity');

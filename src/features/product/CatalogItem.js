@@ -20,7 +20,7 @@ import useCart from '../../hooks/contexthooks/useCart';
 import useUpdateCart from '../../hooks/useUpdateCart';
 import useExpandImage from '../../hooks/useExpandImage';
 import data from '../../data/SEARCH.json';
-import { FaRegCheckCircle } from "react-icons/fa";
+
 
 const CatalogItem = ({ index, product, count, handleSlideView }) => {
     // If defined, then item is in cart
@@ -84,10 +84,8 @@ const CatalogItem = ({ index, product, count, handleSlideView }) => {
     return (
         <>
             <ProductHeader classList={'flex align-center space-between one'}>
-
                 <Title classList={'product-title'} text={product.name} />
                 <CountDown count={count} unit={index + 1} type={'Result'} />
-
             </ProductHeader>
             {loading && <Loader />}
             <ProductImage classList={'product-image two'}>

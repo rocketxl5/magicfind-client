@@ -27,7 +27,7 @@ const SearchResults = () => {
         // console.log(location)
         // If cards is empty
         if (!cards.length) {
-            // Send to collection view
+            // Send to collection page
             navigate('/me/collection');
         }
     }, [location, cards, navigate]);

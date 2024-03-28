@@ -33,7 +33,7 @@
     "finishes": {
       "nonfoil": "Non Foil",
       "foil": "Foil",
-      "eched": "Etched"
+      "etched": "Etched"
     }
   },
   "parameters": ["Price", "Condition", "Expansion", "Color", "Date", "Foil"]

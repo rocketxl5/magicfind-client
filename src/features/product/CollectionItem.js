@@ -13,7 +13,7 @@ import CountDown from '../search/components/CountDown';
 import Button from '../../components/Button';
 import useExpandImage from '../../hooks/useExpandImage';
 import data from '../../data/SEARCH.json';
-import { FaRegCheckCircle } from "react-icons/fa";
+import { FaStore } from "react-icons/fa6";
 
 import timestampConverter from '../../assets/utilities/timestampConverter';
 
@@ -23,8 +23,6 @@ const CollectionItem = ({ index, product, count, handleCollectionItem }) => {
     // const { name, set_name, price, quantity, language, condition, finishes, seller } = product;
 
     const navigate = useNavigate();
-
-    const editBtnRef = useRef();
 
     const details = [
         {
@@ -56,10 +54,12 @@ const CollectionItem = ({ index, product, count, handleCollectionItem }) => {
     return (
         <>
             <ProductHeader classList={'flex align-center space-between one'}>
-                <Title classList={'product-title'} text={product.name} />
+                <Title classList={'product-title'}>
+                    <span>{product.name}</span>
+                </Title>
                 <CountDown count={count} unit={index + 1} type={'Result'} />
             </ProductHeader>
-            <ProductImage classList={'product-image two'}>
+            <ProductImage classList={'relative col-12 flex flex-grow-1 flex-basis-0  product-image two'}>
                 <Image
                     classList={'col-12'}
                     product={product}
@@ -69,11 +69,10 @@ const CollectionItem = ({ index, product, count, handleCollectionItem }) => {
                     //         state: { product: product }
                     //     })}
                 />
-
                 {
                     product._is_published &&
-                    <Drop classList={'bg-success'} >
-                        <span className='fs-100 fw-700'>Published</span>
+                    <Drop classList={'bg-success absolute'}>
+                        <FaStore />
                     </Drop>
                 }
                 {/* <ExpandImgBtn handleClick={handleSlideView} cardLayout={product.layout} expandedImage={expandedImage} /> */}
@@ -87,7 +86,7 @@ const CollectionItem = ({ index, product, count, handleCollectionItem }) => {
                     details.map((detail, i) => {
                         return (
                             <Container key={i} classList={''}>
-                                <p><span className="">{detail.title}</span>  <span className="">{detail.value}</span></p>
+                                <p><span className="">{detail.title}</span><span className="">{detail.value}</span></p>
                             </Container>
                         )
                     })

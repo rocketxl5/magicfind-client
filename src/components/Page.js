@@ -13,7 +13,9 @@ const Page = ({ children, name, hasHeader = true, component }) => {
             {
                 hasHeader && 
                 <Header {...header}>
-                    <Title {...title} />
+                        <Title classList={title.classList}>
+                            {title.text}
+                        </Title>
                     {component}
                 </Header>
             }
