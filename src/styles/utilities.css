@@ -6,6 +6,10 @@
     padding-inline: var(--size-2);
 }
 
+.padding-block-half {
+    padding-block: 0.1rem !important;
+}
+
 .padding-block-1 {
     padding-block: var(--size-1) !important;
 }
@@ -24,6 +28,10 @@
 
 .padding-dot-5 {
     padding: 0.5rem;
+}
+
+.padding-bottom-1{
+    padding-block-end: 1rem;
 }
 
 .margin-bs-1 {
@@ -508,16 +516,26 @@
     height: 85%;
 }
 
-.align-right {
+.text-right {
     text-align: right !important;
 }
 
-.align-left {
+.text-left {
     text-align: left !important;
 }
 
-.center {
+.text-center {
     text-align: center;
+}
+
+.square-size-1 {
+    width: 1rem !important;
+    height: 1rem !important;
+}
+
+.square-size-2 {
+    width: 2rem !important;
+    height: 2rem !important;
 }
 
 .square-size-4 {
@@ -534,10 +552,12 @@
     width: 6rem;
     height: 6rem;
 }
+
 .square-size-12 {
     width: 12rem;
     height: 12rem;
 }
+
 
 
 

@@ -175,7 +175,7 @@ const Login = () => {
 
                   <h4 className="auth-message-title">{message.name ? <>{message.title} <strong>{message.name}</strong>!</> : message.title}</h4>
 
-                  <p className="auth-message-body center">{message.body}</p>
+                  <p className="auth-message-body text-center">{message.body}</p>
                 </div>
               ) : (
                 <div className="form-title">
@@ -202,7 +202,7 @@ const Login = () => {
                 </div>
                 <div className="form-element">
                   <label htmlFor="password" className={errors.password && 'color-danger'}>{errors.password ? errors.password : 'Password'}</label>
-                  <div className={`login-password-wrapper center content-height flex ${errors.password && 'border-danger'}`}>
+                  <div className={`login-password-wrapper text-center content-height flex ${errors.password && 'border-danger'}`}>
                     <input
                       id="password"
                       type="password"

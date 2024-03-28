@@ -55,10 +55,10 @@ const CartItem = ({ index, item }) => {
       text: product.finishes[item.selected.finishes],
       style: 'product-detail product-finish'
     },
-    {
-      text: `Sold by ${item.selected.seller.userName}`,
-      style: 'product-detail product-seller'
-    },
+    // {
+    //   text: `Sold by ${item.selected.seller.userName}`,
+    //   style: 'product-detail product-seller'
+    // },
     {
       text: `Ships from ${item.selected.seller.country}`,
       style: 'product-detail product-shipping'
@@ -96,7 +96,7 @@ const CartItem = ({ index, item }) => {
           details &&
           details.map((detail, i) => {
             return (
-              <p key={i} classList={detail.style}>
+              <p key={i} className={detail.style}>
                 {detail.text}
               </p>
             )

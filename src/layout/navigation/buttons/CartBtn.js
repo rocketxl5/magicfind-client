@@ -1,14 +1,13 @@
-import { FiShoppingCart } from 'react-icons/fi';
-import useNavButton from '../../../hooks/useNavButton';
 import Container from '../../../components/Container';
 import useCart from '../../../hooks/contexthooks/useCart';
 import useNavbar from '../../../hooks/contexthooks/useNavbar';
+import useNavButton from '../../../hooks/useNavButton';
+import { FiShoppingCart } from 'react-icons/fi';
 
 const CartBtn = () => {
   const { itemsCount } = useCart();
   const { cartCountRef } = useNavbar();
   const { navButtonHandler } = useNavButton()
-
 
   return (
     <button
@@ -19,7 +18,7 @@ const CartBtn = () => {
     >
       {itemsCount > 0 && (
         <Container classList={'cart-count absolute flex column justify-center align-center'} ref={cartCountRef}>
-            <span>
+          <span >
               {itemsCount}
             </span>
         </Container>
