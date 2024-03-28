@@ -89,16 +89,18 @@ const Catalog = () => {
                     return res.json()
                         .then((data) => {
                             setLoading(false);
-                            const result = {
-                                cards: data.cards,
-                                search: searchInput.id
-                            }
                             setCardName('');
                             setSearchInput(null);
-                            localStorage.setItem('search-results', JSON.stringify(result));
+                            localStorage.setItem('search-results', JSON.stringify({
+                                cards: data.cards,
+                                search: searchInput.id
+                            }));
                             navigate(`/catalog/${setQueryString(query.toLowerCase(), '-')}`,
                                 {
-                                    state: { result: result },
+                                    state: {
+                                        cards: data.cards,
+                                        search: searchInput.id
+                                    },
                                 });
                         })
                 }

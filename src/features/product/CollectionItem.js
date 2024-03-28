@@ -71,8 +71,8 @@ const CollectionItem = ({ index, product, count, handleCollectionItem }) => {
                 />
                 {
                     product._is_published &&
-                    <Drop classList={'bg-success absolute'}>
-                            <FaCommentsDollar />
+                    <Drop classList={'collection-btn color-light bg-success border-light'}>
+                        <FaCommentsDollar />
                     </Drop>
                 }
                 {/* <ExpandImgBtn handleClick={handleSlideView} cardLayout={product.layout} expandedImage={expandedImage} /> */}
@@ -85,7 +85,7 @@ const CollectionItem = ({ index, product, count, handleCollectionItem }) => {
                     (product._is_published) &&
                     details.map((detail, i) => {
                         return (
-                            <Container key={i} classList={''}>
+                            <Container key={i}>
                                 <p><span className="">{detail.title}</span><span className="">{detail.value}</span></p>
                             </Container>
                         )

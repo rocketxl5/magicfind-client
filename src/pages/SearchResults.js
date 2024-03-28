@@ -21,12 +21,12 @@ const SearchResults = () => {
     const location = useLocation();
     const navigate = useNavigate();
 
-    const { cards, search } = location.state?.result || JSON.parse(localStorage.getItem('search-results'));
+    const { cards, search } = location.state;
 
     useEffect(() => {
-        // console.log(location)
+        console.log(location)
         // If cards is empty
-        if (!cards.length) {
+        if (!cards?.length) {
             // Send to collection page
             navigate('/me/collection');
         }

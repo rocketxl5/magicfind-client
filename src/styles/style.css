@@ -1300,39 +1300,30 @@ padding-inline-start: 0.75rem;
   border-radius: 6px;
 }
 
-.drop-btn {
+.collection-btn,
+.catalog-btn,
+.archive-btn {
   top: 13%;
   right: 11%;
-  padding: 0.7rem;
-  color: var(--clr-light);
-  border: 2px solid var(--clr-light);
-  border-radius: 50%;
+}
+
+.expand-btn {
+  top: 38.5%;
+  right: 11%;
+}
+
+.drop-btn {  
+  width: 4.5rem;
+  height: 4.5rem;
+  padding: 5px;
 }
 
 .drop-btn svg {
-  vertical-align: middle;
-  width: 2rem;
-  height: 2rem;
-}
-
-
-.expand-btn  {
+  /* display: block; */
   position: absolute;
-  top: 38.5%;
-  right: 11%;
-  padding: 0.7rem;
-  color: var(--clr-light);
-  /* background-color: rgba(255, 255, 255, 0.5); */
-  /* border: 2px solid rgba(0, 0, 0, 0.8); */
-  border: 2px solid var(--clr-light);
-  border-radius: 50%;
-}
+width: 75%;
+height: auto;
 
-.expand-btn > svg {
-vertical-align: middle;
-  /* fill: rgba(0, 0, 0, 0.8); */
-  height: 2rem;
-  width: 2rem;
 }
 
 .show-details {

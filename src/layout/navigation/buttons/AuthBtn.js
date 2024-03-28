@@ -11,8 +11,8 @@ const AuthBtn = () => {
         <Avatar
             id={'auth-btn'}
             classList={'auth-btn nav-btn'}
-            avatar={auth.user.avatar}
-            handleClick={(e) => authButtonHandler()}
+            avatar={auth?.user?.avatar}
+            handleClick={() => authButtonHandler()}
         />
     )
 }

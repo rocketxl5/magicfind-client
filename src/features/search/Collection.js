@@ -52,15 +52,15 @@ const Collection = () => {
         fetch(`${api.serverURL}/api/cards/${auth.user.id}`, options)
             .then(res => res.json())
             .then((data) => {
-                const result = { cards: data.cards, search: searchInput?.id }
+
 
                 // Update local storage with search data
-                localStorage.setItem('search-results', JSON.stringify(result));
+                localStorage.setItem('search-results', JSON.stringify({ cards: data.cards, search: searchInput?.id }));
                 setLoading(false);
 
                 navigate(`/me/collection/all-cards`,
                     {
-                        state: result,
+                        state: { cards: data.cards, search: searchInput?.id }
 
                     });
             })
@@ -129,18 +129,19 @@ const Collection = () => {
                     return res.json()
                         .then((data) => {
                             setLoading(false);
-
-                            const result = {
+                            setCardName('');
+                            setSearchInput(null);
+                            localStorage.setItem('search-results', JSON.stringify({
                                 cards: data.cards,
                                 search: searchInput.id,
                             }
-
-                            setCardName('');
-                            setSearchInput(null);
-                            localStorage.setItem('search-results', JSON.stringify(result));
+                            ));
                             navigate(`/me/collection/${setQueryString(query.toLowerCase(), '-')}`,
                                 {
-                                    state: result,
+                                    state: {
+                                        cards: data.cards,
+                                        search: searchInput.id,
+                                    }
                                 });
                         })
                 }

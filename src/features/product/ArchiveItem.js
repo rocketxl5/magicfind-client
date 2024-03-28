@@ -162,13 +162,13 @@ const ArchiveItem = ({ index, product, count, handleSlideView }) => {
           product={product}
         />
         <ExpandImgBtn
-          handleClick={handleSlideView}
-          cardLayout={product.layout}
-          expandedImage={expandedImage}
+          handleSlideView={handleSlideView}
+          layout={product.layout}
+          image={expandedImage}
         />
         {
           (isCardAdded || isMatchFound) &&
-          <Drop classList={'bg-success absolute'} >
+          <Drop classList={'archive-btn bg-success'} >
               <GoStack />
           </Drop>
         }
