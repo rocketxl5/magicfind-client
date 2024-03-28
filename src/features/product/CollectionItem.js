@@ -13,11 +13,11 @@ import CountDown from '../search/components/CountDown';
 import Button from '../../components/Button';
 import useExpandImage from '../../hooks/useExpandImage';
 import data from '../../data/SEARCH.json';
-import { FaStore } from "react-icons/fa6";
+import { FaCommentsDollar } from "react-icons/fa";
 
 import timestampConverter from '../../assets/utilities/timestampConverter';
 
-const CollectionItem = ({ index, product, count, handleCollectionItem }) => {
+const CollectionItem = ({ index, product, search, count, handleCollectionItem }) => {
     const { conditions, languages, finishes } = data.product;
     const { longDate } = timestampConverter;
     // const { name, set_name, price, quantity, language, condition, finishes, seller } = product;
@@ -72,7 +72,7 @@ const CollectionItem = ({ index, product, count, handleCollectionItem }) => {
                 {
                     product._is_published &&
                     <Drop classList={'bg-success absolute'}>
-                        <FaStore />
+                            <FaCommentsDollar />
                     </Drop>
                 }
                 {/* <ExpandImgBtn handleClick={handleSlideView} cardLayout={product.layout} expandedImage={expandedImage} /> */}

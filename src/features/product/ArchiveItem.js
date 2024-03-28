@@ -16,13 +16,14 @@ import usePostData from '../../hooks/usePostData';
 import useViewport from '../../hooks/contexthooks/useViewport';
 import useAuth from '../../hooks/contexthooks/useAuth';
 import useSearch from '../../hooks/contexthooks/useSearch';
-import useProductMatch from '../../hooks/useProductMatch';
+import useFind from '../../hooks/useFind';
 import useColorSymbols from '../../hooks/useColorSymbols';
-import data from '../../data/SEARCH.json';
-import { TbCards } from "react-icons/tb";
+import { GoStack } from "react-icons/go";
 
-const ArchiveItem = ({ index, product, count, handleSlideView }) => {
-  const [cardAdded, setCardAdded] = useState(false);
+import data from '../../data/SEARCH.json';
+
+const ArchiveItem = ({ index, product, search, count, handleSlideView }) => {
+  const [isCardAdded, setIsCardAdded] = useState(false);
 
   const { auth } = useAuth();
   const { user, token } = auth;
@@ -42,7 +43,7 @@ const ArchiveItem = ({ index, product, count, handleSlideView }) => {
   const { setUpdateCollection } = useSearch();
   const { expandedImage } = useExpandImage(product);
   const { isMobile } = useViewport();
-  const { isProductMatch, isMatch } = useProductMatch();
+  const { findMatch, isMatchFound } = useFind();
 
   const query = `/api/cards/add/${user.id}/${product.id}`;
 
@@ -68,7 +69,8 @@ const ArchiveItem = ({ index, product, count, handleSlideView }) => {
   }
 
   useEffect(() => {
-    isProductMatch(product);
+    findMatch(product);
+    console.log(isMatchFound)
   }, []);
 
   useEffect(() => {
@@ -76,9 +78,8 @@ const ArchiveItem = ({ index, product, count, handleSlideView }) => {
     if (result?.isCardAdded) {
       // Trigger update collection @layout/DashboardNav
       // to make new cardName available in search collection
-      setCardAdded(true);
+      setIsCardAdded(true);
       setUpdateCollection(true);
-      // setShowConfimation(true);
     }
     if (error) {
       console.log(error)
@@ -153,7 +154,7 @@ const ArchiveItem = ({ index, product, count, handleSlideView }) => {
         <CountDown count={count} unit={index + 1} type={'Result'} />
       </ProductHeader>
       {loading && <Loader />}
-      {showConfirmation && <Confirmation message={!error ? 'Card Successfuly Added' : 'An Error Occured'} isAdded={!error ? true : false} />}
+      {showConfirmation && <Confirmation message={!error ? 'Card Successfuly Added' : 'An Error Occured'} isSuccess={!error ? true : false} />}
       <ProductImage classList={'product-image two'}>
         <Image
           classList={'col-12'}
@@ -165,9 +166,9 @@ const ArchiveItem = ({ index, product, count, handleSlideView }) => {
           expandedImage={expandedImage}
         />
         {
-          (cardAdded || isMatch) &&
+          (isCardAdded || isMatchFound) &&
           <Drop classList={'bg-success absolute'} >
-            <TbCards />
+              <GoStack />
           </Drop>
         }
       </ProductImage>
@@ -176,13 +177,13 @@ const ArchiveItem = ({ index, product, count, handleSlideView }) => {
           {details &&
             details.map((detail, i) => {
               return (
-                <Container key={i} classList={''}>
+                <Container key={i}>
                   <p><span className="">{detail.title}</span>  <span className="">{detail.value}</span></p>
                 </Container>
               )
             })}
         </div>
-        {(!cardAdded && !isMatch) ?
+        {(!isCardAdded && !isMatchFound) ?
           <div>
           <Button
             id={'add-product'}

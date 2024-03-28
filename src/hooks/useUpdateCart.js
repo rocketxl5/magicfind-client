@@ -1,10 +1,13 @@
-import { useState } from 'react';
 import axios from 'axios';
+import { useState } from 'react';
 import useCart from './contexthooks/useCart';
 import { api } from '../api/resources';
 
 const useUpdateCart = (url, headers, item, index = undefined) => {
+    const [error, setError] = useState(null);
     const [loading, setLoading] = useState(false);
+    const [showConfirmation, setShowConfirmation] = useState(false);
+
     const { dispatch, cartItems } = useCart();
 
     const updateCart = (quantity) => {
@@ -67,7 +70,7 @@ const useUpdateCart = (url, headers, item, index = undefined) => {
                     }
                 })
                 .catch((error) => {
-                    // setQuantitySelected(0);
+                    setError(error.message)
                     dispatch({
                         type: 'error',
                         payload: {
@@ -76,10 +79,14 @@ const useUpdateCart = (url, headers, item, index = undefined) => {
                     });
                 })
                 .finally(() => {
+                    setShowConfirmation(true);
+                    setTimeout(() => {
+                        setShowConfirmation(false);
+                    }, 1500);
                     setLoading(false);
                 })
     }
-    return { loading, updateCartHandler };
+    return { error, loading, updateCartHandler };
 }
 
 export default useUpdateCart
