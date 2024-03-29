@@ -162,7 +162,7 @@ const ArchiveItem = ({ index, product, count, handleSlideView }) => {
           product={product}
         />
         <ExpandImgBtn
-          handleSlideView={handleSlideView}
+          handleClick={handleSlideView}
           layout={product.layout}
           image={expandedImage}
         />
