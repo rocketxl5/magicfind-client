@@ -91,49 +91,52 @@ const ArchiveItem = ({ index, product, count, handleSlideView }) => {
 
   const details = [
     {
-      title: 'Edition:',
+      title: 'Edition: ',
       value: set_name
     },
     {
-      title: 'Year:',
+      title: 'Year: ',
       value: `${released_at?.split('-')[0]}`
     },
     {
-      title: 'Finish:',
+      title: 'Finish: ',
       value: data.product.finishes[finishes]
     },
     {
-      title: 'Rarity:',
+      title: 'Rarity: ',
       value: `${rarity.charAt(0).toUpperCase()}${rarity.substring(1)}`
     },
     {
-      title: 'Collector #:',
+      title: 'Collector #: ',
       value: collector_number
     },
     {
-      title: 'Price (US):',
+      title: 'Price (US): ',
       value: `$${setPrice(prices, finishes[0])}`
     },
     type_line ?
       {
-        title: 'Type:',
+        title: 'Type: ',
         value:
           !type_line?.includes('—') ? (
-            <td>{type_line}</td>
+            { type_line }
           ) : (
-            <td>{type_line?.split('—')[0]}</td>
+              type_line?.split('—')[0]
           )
       } : '',
     {
-      title: 'Identity:',
-      value: colorIdentity.length ? colorIdentity.map((color) => color) : 'Colorless'
+      title: 'Identity: ',
+      value: colorIdentity.length ?
+        colorIdentity.map((color) => color) : 'Colorless',
+      classList: 'color-symbols'
     },
     {
-      title: 'Cost:',
-      value: manaCost && manaCost.map((color) => color)
+      title: 'Cost: ',
+      value: manaCost && manaCost.map((color) => color),
+      classList: 'color-symbols'
     },
     {
-      title: !artist.includes('&') ? 'Artist:' : 'Artists:',
+      title: !artist.includes('&') ? 'Artist: ' : 'Artists: ',
       value: artist
     },
     // If card is two sided
@@ -183,8 +186,8 @@ const ArchiveItem = ({ index, product, count, handleSlideView }) => {
           {details &&
             details.map((detail, i) => {
               return (
-                <ListItem key={i}>
-                  <span className='strong'>{detail.title}</span>  <span className='color-symbols'>{detail.value}</span>
+                <ListItem key={i} classList='product-detail'>
+                  <span className='detail-title'>{detail.title}</span><span className={`${detail.classList ? detail.classList : 'detail-value'}`}>{detail.value}</span>
                 </ListItem>
               )
             })}

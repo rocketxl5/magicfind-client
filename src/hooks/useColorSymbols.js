@@ -28,8 +28,8 @@ const useColorSymbols = (card) => {
                         const imgs = data.map((url, i) => {
                             return createElement('img', {
                                 key: i,
-                                className: 'color-icon',
-                                name: 'color-icon',
+                                className: 'color-symbol',
+                                name: 'color-symbol',
                                 src: url,
                                 alt: 'Color Icon'
                             })
