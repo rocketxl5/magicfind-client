@@ -60,8 +60,12 @@ function ShoppingCart() {
                     cartItems.map((item, i) => {
                       return (  
                         <ListItem key={i}>
-                          <Card classList={'cart-card'}>
-                            <CartItem item={item} index={i} />
+                          <Card classList={'product-card'}>
+                            <CartItem
+                              index={i}
+                              count={cartItems.length}
+                              item={item}
+                            />
                           </Card>
                         </ListItem>
                       )

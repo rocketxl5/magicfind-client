@@ -21,6 +21,8 @@ import useSearch from '../../hooks/contexthooks/useSearch';
 import useFind from '../../hooks/useFind';
 import useColorSymbols from '../../hooks/useColorSymbols';
 import { GoStack } from "react-icons/go";
+import { FiPlus } from "react-icons/fi";
+import { GoPlus } from "react-icons/go";
 
 import data from '../../data/SEARCH.json';
 
@@ -168,12 +170,15 @@ const ArchiveItem = ({ index, product, count, handleSlideView }) => {
         />
         {
           (isCardAdded || isMatchFound) &&
-          <Drop classList={'archive-btn bg-success'} >
+          <Drop classList={'archive-btn color-light bg-success border-light'} >
               <GoStack />
           </Drop>
         }
       </ProductImage>
       <Container classList={'flex column space-between three'}>
+        {/* <Drop classList={'archive-btn bg-light color-dark border-dark'} >
+          <GoPlus />
+        </Drop> */}
         <List classList={'product-details'}>
           {details &&
             details.map((detail, i) => {
