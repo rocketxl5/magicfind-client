@@ -26,6 +26,10 @@ const CollectionItem = ({ index, product, count, handleCollectionItem }) => {
 
     const details = [
         {
+            title: 'Status:',
+            value: product._is_published ? 'Published' : 'Unpublished'
+        },
+        {
             title: 'Published On:',
             value: longDate(product._date_published)
         },
@@ -92,7 +96,7 @@ const CollectionItem = ({ index, product, count, handleCollectionItem }) => {
                     })
                 }
             </ProductDetails>
-            <ProductActions classList={'product-actions four'}>
+            {/* <ProductActions classList={'product-actions four'}>
                 <Button
                     id={'edit-product'}
                     classList={'btn-small product-btn bg-primary'}
@@ -109,7 +113,7 @@ const CollectionItem = ({ index, product, count, handleCollectionItem }) => {
                 >
                     {'Delete'}
                 </Button>
-            </ProductActions>
+            </ProductActions> */}
         </>
     )
 }

@@ -158,8 +158,8 @@
     display: none !important;
 }
 
-.d-flex {
-    display: flex !important;
+.d-inline {
+    display: inline !important;
 }
 
 .col-12 {
@@ -562,6 +562,10 @@
 .square-size-12 {
     width: 12rem;
     height: 12rem;
+}
+
+.vertical-align-middle {
+    vertical-align: middle !important;
 }
 
 
