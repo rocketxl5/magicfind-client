@@ -4,7 +4,7 @@ const Drop = ({ children, classList = '', handleClick }) => {
 
     return (
         <button
-            className={`${classList} absolute flex align-center justify-center b-radius-50 drop-btn`}
+            className={`${classList} absolute b-radius-50 drop-btn`}
             onClick={(e) => handleClick ? handleClick() : console.log(e.target)}
         >
             {children}

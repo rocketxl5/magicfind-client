@@ -1312,23 +1312,17 @@ padding-inline-start: 0.75rem;
 }
 
 .drop-btn {  
-  width: clamp(3rem, calc(5vw + 12px), 6rem) !important;
-  height: clamp(3rem, calc(5vw + 12px), 6rem) !important;
-  /* width: 3rem;
-  height: 3rem; */
-  /* padding: 5px; */
+  width: clamp(3.7rem, calc(5vw + 12px), 6rem) !important;
+  height: clamp(3.7rem, calc(5vw + 12px), 6rem) !important;
 }
 
 .drop-btn svg {
-  /* position: absolute; */
-  width: clamp(1rem, calc(4vw + 5px), 4rem);
-  height: clamp(1rem, calc(4vw + 5px), 4rem);
-  /* max-width: 2.6rem; */
-  /* min-width: 1.6rem; */
-  /* width: 2.6rem; */
-  /* height: auto; */
-}
+  display: block;
+  margin: 0 auto;
+  width: clamp(1.2rem, calc(3vw + 5px), 3.5rem);
+  height: clamp(1.2rem, calc(3vw + 5px), 3.5rem);
 
+}
 .show-details {
   height: 40rem;
 }
