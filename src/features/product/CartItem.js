@@ -1,19 +1,24 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import ProductImage from './components/ProductImage';
-import ProductDetails from './components/ProductDetails';
-import ProductActions from './components/ProductActions';
+import ProductHeader from './components/ProductHeader';
+import Title from '../../components/Title';
+import CountDown from '../search/components/CountDown';
+import Container from '../../components/Container';
 import QuantitySelector from './components/QuantitySelector';
 import Button from '../../components/Button';
-import Span from '../../components/Span';
+import List from '../../components/List';
+import ListItem from '../../components/ListItem';
 import Image from '../../components/Image';
 import Avatar from '../../components/Avatar';
 import Loader from '../../layout/Loader';
 import search from '../../data/SEARCH.json';
+import useViewport from '../../hooks/contexthooks/useViewport';
 import useCart from '../../hooks/contexthooks/useCart';
 import useUpdateCart from '../../hooks/useUpdateCart';
+import { AiOutlineDelete } from "react-icons/ai";
 
-const CartItem = ({ index, item }) => {
+const CartItem = ({ index, count, item }) => {
   const [showCard, setShowCard] = useState(false);
   const [total, setTotal] = useState(0);
   const [price, setPrice] = useState(0);
@@ -26,8 +31,8 @@ const CartItem = ({ index, item }) => {
     'Content-Type': 'application/json'
   };
 
+  const { isMobile } = useViewport();
   const { cartItems } = useCart();
-
   const { loading, updateCartHandler } = useUpdateCart(url, headers, item, index);
 
   useEffect(() => {
@@ -39,10 +44,6 @@ const CartItem = ({ index, item }) => {
   }, [price, setTotal, cartItems, index])
 
   const details = [
-    {
-      text: item.selected.name,
-      style: 'product-detail product-name'
-    },
     {
       text: `${product.conditions[item.selected.condition]}`,
       style: 'product-detail product-condition'
@@ -79,8 +80,18 @@ const CartItem = ({ index, item }) => {
 
   return (
     <>
+      <ProductHeader classList={'flex align-center space-between one'}>
+        <Title classList={'product-title'}>
+          {
+            !isMobile || item.selected.name.length < 35 ?
+              item.selected.name :
+              `${item.selected.name.substring(0, 30)}...`
+          }
+        </Title>
+        <CountDown count={count} unit={index + 1} type={'Result'} />
+      </ProductHeader>
       {loading && <Loader />}
-      <ProductImage classList={'product-image one'}>
+      <ProductImage classList={'product-image two'}>
         <Image
           classList={'col-12'}
           product={item.selected}
@@ -91,41 +102,42 @@ const CartItem = ({ index, item }) => {
             })}
         />
       </ProductImage>
-      <ProductDetails classList={'product-details two'}>
+      <Container classList={'flex column space-between three'}>
+        <List classList={'product-details'}>
         {
           details &&
           details.map((detail, i) => {
             return (
-              <p key={i} className={detail.style}>
+              <ListItem key={i} className={detail.style}>
                 {detail.text}
-              </p>
+              </ListItem>
             )
           })
         }
-      </ProductDetails>
-      <ProductActions classList={'product-actions three'}>
-        <Button
-          classList={'btn-small product-btn bg-danger'}
+        </List>
+        <div className='col-12 flex space-between'>
+          {/* <label className='strong col-9 fs-125 text-center move-right d-block padding-bottom-1' htmlFor={`item${index}`}>Quantity Selected </label> */}
+          <Button
+            classList={'btn-tiny bg-danger'}
           handleClick={(e) => updateCartHandler(0)}
         >
-          {'Delete'}
+            <AiOutlineDelete />
         </Button>
-        {/* <Button
-          classList={'btn-small product-btn bg-primary'}
-          title={'Add to wishlist'}
-          handleClick={() => console.log('wishlist')}
-        >
-          {'Wishlist'}
-        </Button> */}
+          <Container classList={'col-8 text-right dropdown'}>
         <QuantitySelector
-          classList={'dropdown product-dropdown'}
+              id={`item${index}`}
+              classList={'col-12 move-right'}
           name={'cart-item'}
           quantitySelected={cartItems[index]?.quantity}
           quantityAvailable={item.selected.quantity}
           product={item.selected}
           handleChange={updateCartHandler}
         />
-      </ProductActions>
+
+          </Container>
+        </div>
+
+      </Container>
     </>
   )
 }

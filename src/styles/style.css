@@ -237,6 +237,19 @@ border-radius: var(--radius-1);
   border-radius: var(--radius-1);
 }
 
+.btn-tiny {
+  min-width: 3rem;
+  padding-inline: 1rem;
+    color: var(--clr-light-grey);
+    border-radius: var(--radius-1);
+}
+
+.btn-tiny svg {
+  width: 2rem;
+  height: 2rem;
+
+  vertical-align: middle;
+}
 
 .btn:hover {
   opacity: 0.8;
@@ -1489,7 +1502,7 @@ background-repeat: no-repeat;
 
 .cart-card .two {
   grid-area: two;
-  padding: 1rem;
+  padding-inline: 0.5rem;
 }
 
 .cart-card .three {

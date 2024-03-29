@@ -143,8 +143,7 @@ const CatalogItem = ({ index, product, count, handleSlideView }) => {
                             quantitySelected={cartItems[indexFound] ? cartItems[indexFound].quantity : 0}
                         quantityAvailable={quantity}
                         product={product}
-                        handleChange={updateCartHandler}
-
+                            handleChange={updateCartHandler}
                     >
                     </QuantitySelector>
                 </Container>
