@@ -1319,11 +1319,9 @@ padding-inline-start: 0.75rem;
 }
 
 .drop-btn svg {
-  /* display: block; */
   position: absolute;
-width: 75%;
-height: auto;
-
+  width: 2.5rem;
+  height: auto;
 }
 
 .show-details {
