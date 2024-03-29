@@ -476,11 +476,11 @@
 }
 
 .relative {
-    position: relative;
+    position: relative !important;
 }
 
 .absolute {
-    position: absolute;
+    position: absolute !important;
 }
 
 .p-fixed {
