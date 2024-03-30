@@ -1,11 +1,9 @@
 import { Navigate, Outlet } from 'react-router-dom';
-import useAuth from '../hooks/contexthooks/useAuth';
 
 // Must be Authenticated
 const PrivateRoutes = () => {
-    const { isAuth } = useAuth();
-
-    return isAuth ? <Outlet /> : <Navigate to={'/login'} replace />
+    console.log(localStorage.getItem('auth'))
+    return !localStorage.getItem('auth') ? <Navigate to={'/login'} replace /> : <Outlet />
 }
 
 export default PrivateRoutes;

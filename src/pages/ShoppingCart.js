@@ -64,7 +64,7 @@ function ShoppingCart() {
                             <CartItem
                               index={i}
                               count={cartItems.length}
-                              item={item}
+                              product={item}
                             />
                           </Card>
                         </ListItem>
