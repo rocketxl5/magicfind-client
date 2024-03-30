@@ -12,31 +12,31 @@ import ListItem from '../../components/ListItem';
 import Image from '../../components/Image';
 import Avatar from '../../components/Avatar';
 import Loader from '../../layout/Loader';
-import search from '../../data/SEARCH.json';
+import data from '../../data/SEARCH.json';
 import useViewport from '../../hooks/contexthooks/useViewport';
 import useCart from '../../hooks/contexthooks/useCart';
 import useUpdateCart from '../../hooks/useUpdateCart';
 import { AiOutlineDelete } from "react-icons/ai";
 
-const CartItem = ({ index, count, item }) => {
+const CartItem = ({ index, count, product }) => {
   const [showCard, setShowCard] = useState(false);
   const [total, setTotal] = useState(0);
   const [price, setPrice] = useState(0);
 
   const navigate = useNavigate();
-  const product = search.product;
+  console.log(product)
 
-  const url = `/api/catalog/${item.selected?.seller?.userID}/${item.selected._id}/`;
+  const url = `/api/catalog/${product.selected?.seller?.userID}/${product.selected._id}/`;
   const headers = {
     'Content-Type': 'application/json'
   };
 
   const { isMobile } = useViewport();
   const { cartItems } = useCart();
-  const { loading, updateCartHandler } = useUpdateCart(url, headers, item, index);
+  const { loading, updateCartHandler } = useUpdateCart(url, headers, product, index);
 
   useEffect(() => {
-    setPrice(parseFloat(item.selected.price));
+    setPrice(parseFloat(product.selected.price));
   }, []);
 
   useEffect(() => {
@@ -45,27 +45,27 @@ const CartItem = ({ index, count, item }) => {
 
   const details = [
     {
-      text: `${product.conditions[item.selected.condition]}`,
+      text: `${data.product.conditions[product.selected.condition]}`,
       style: 'product-detail product-condition'
     },
     {
-      text: product.languages[item.selected.language],
+      text: data.product.languages[product.selected.language],
       style: 'product-detail product-language'
     },
     {
-      text: product.finishes[item.selected.finishes],
+      text: data.product.finishes[product.selected.finishes],
       style: 'product-detail product-finish'
     },
     // {
-    //   text: `Sold by ${item.selected.seller.userName}`,
+    //   text: `Sold by ${product.selected.seller.userName}`,
     //   style: 'product-detail product-seller'
     // },
     {
-      text: `Ships from ${item.selected.seller.country}`,
+      text: `Ships from ${product.selected.seller.country}`,
       style: 'product-detail product-shipping'
     },
     {
-      text: `${item.selected.quantity} in stock`,
+      text: `${product.selected.quantity} in stock`,
       style: 'product-detail product-quantity'
     },
     {
@@ -83,9 +83,9 @@ const CartItem = ({ index, count, item }) => {
       <ProductHeader classList={'flex align-center space-between one'}>
         <Title classList={'product-title'}>
           {
-            !isMobile || item.selected.name.length < 35 ?
-              item.selected.name :
-              `${item.selected.name.substring(0, 30)}...`
+            !isMobile || product.selected.name.length < 35 ?
+              product.selected.name :
+              `${product.selected.name.substring(0, 30)}...`
           }
         </Title>
         <CountDown count={count} unit={index + 1} type={'Result'} />
@@ -94,11 +94,11 @@ const CartItem = ({ index, count, item }) => {
       <ProductImage classList={'product-image two'}>
         <Image
           classList={'col-12'}
-          product={item.selected}
+          product={product.selected}
           handleClick={() => navigate(
-            `/product/${item.selected._id}`,
+            `/product/${product.selected._id}`,
             {
-              state: { product: item.selected }
+              state: { product: product.selected }
             })}
         />
       </ProductImage>
@@ -129,8 +129,8 @@ const CartItem = ({ index, count, item }) => {
               classList={'col-12'}
               name={'cart-item'}
               quantitySelected={cartItems[index]?.quantity}
-              quantityAvailable={item.selected.quantity}
-              product={item.selected}
+              quantityAvailable={product.selected.quantity}
+              product={product.selected}
               handleChange={updateCartHandler}
             />
           </Container>
