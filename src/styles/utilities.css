@@ -102,6 +102,10 @@
     flex-basis: 0;
 }
 
+.gap-dot-5 {
+    gap: 0.5rem;
+}
+
 .gap-1 {
     gap: 1rem;
 }
@@ -567,8 +571,3 @@
 .vertical-align-middle {
     vertical-align: middle !important;
 }
-
-
-
-
-

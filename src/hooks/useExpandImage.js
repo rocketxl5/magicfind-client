@@ -4,8 +4,9 @@ const useExpandImage = (card) => {
     const [expandedImage, setExpandedImage] = useState(false);
 
     useEffect(() => {
+        console.log(card)
         if (card) {
-            const image_uris = card.image_uris || card.card_faces[0].image_uris;
+            // const image_uris = card.image_uris || card.card_faces[0].image_uris;
             let image;
             // Single faced card
             if (

@@ -3,26 +3,32 @@ import { useNavigate } from 'react-router-dom';
 import Container from '../../components/Container';
 import ProductImage from './components/ProductImage';
 import ExpandImgBtn from './components/ExpandImgBtn';
+import List from '../../components/List';
+import ListItem from '../../components/ListItem';
 import Drop from '../../components/Drop';
 import Image from '../../components/Image';
 import ProductHeader from './components/ProductHeader';
-import ProductDetails from './components/ProductDetails';
-import ProductActions from './components/ProductActions';
 import Title from '../../components/Title';
 import CountDown from '../search/components/CountDown';
 import Button from '../../components/Button';
 import useExpandImage from '../../hooks/useExpandImage';
+import useViewport from '../../hooks/contexthooks/useViewport';
 import data from '../../data/SEARCH.json';
 import { FaCommentsDollar } from "react-icons/fa";
+import { AiOutlineDelete } from "react-icons/ai";
+import { AiOutlineEdit } from "react-icons/ai";
 
 import timestampConverter from '../../assets/utilities/timestampConverter';
 
-const CollectionItem = ({ index, product, count, handleCollectionItem }) => {
+const CollectionItem = ({ index, product, count, handleCollectionItem, handleSlideView }) => {
     const { conditions, languages, finishes } = data.product;
     const { longDate } = timestampConverter;
     // const { name, set_name, price, quantity, language, condition, finishes, seller } = product;
 
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
+
+    const { isMobile } = useViewport();
+    const { expandedImage } = useExpandImage(product);
 
     const details = [
         {
@@ -59,7 +65,11 @@ const CollectionItem = ({ index, product, count, handleCollectionItem }) => {
         <>
             <ProductHeader classList={'flex align-center space-between one'}>
                 <Title classList={'product-title'}>
-                    <span>{product.name}</span>
+                    {
+                        !isMobile || product.name.length < 35 ?
+                            product.name :
+                            `${product.name.substring(0, 30)}...`
+                    }
                 </Title>
                 <CountDown count={count} unit={index + 1} type={'Result'} />
             </ProductHeader>
@@ -73,6 +83,11 @@ const CollectionItem = ({ index, product, count, handleCollectionItem }) => {
                     //         state: { product: product }
                     //     })}
                 />
+                <ExpandImgBtn
+                    handleClick={handleSlideView}
+                    layout={product.layout}
+                    image={expandedImage}
+                />
                 {
                     product._is_published &&
                     <Drop classList={'collection-btn color-light bg-success border-light'}>
@@ -81,39 +96,38 @@ const CollectionItem = ({ index, product, count, handleCollectionItem }) => {
                 }
                 {/* <ExpandImgBtn handleClick={handleSlideView} cardLayout={product.layout} expandedImage={expandedImage} /> */}
             </ProductImage>
-            <ProductDetails classList={'product-details three'}>
-                <Container>
-                    <p>Status: {product._is_published ? 'Published' : 'Unpublished'}</p>
-                </Container>
+            <Container classList={'flex column space-between three'}>
+                <List classList={'product-details'}>
                 {
-                    (product._is_published) &&
+                        details &&
                     details.map((detail, i) => {
                         return (
-                            <Container key={i}>
-                                <p><span className="">{detail.title}</span><span className="">{detail.value}</span></p>
-                            </Container>
+                            <ListItem key={i} classList='product-detail'>
+                                <span className='detail-title'>{detail.title}</span><span className={`${detail.classList ? detail.classList : 'detail-value'}`}>{detail.value}</span>
+                            </ListItem>
                         )
                     })
-                }
-            </ProductDetails>
-            {/* <ProductActions classList={'product-actions four'}>
-                <Button
-                    id={'edit-product'}
-                    classList={'btn-small product-btn bg-primary'}
-                    title={'Add to wishlist'}
-                    handleClick={(e) => handleCollectionItem(e, product)}
-                >
-                    {'Edit'}
-                </Button>
-                <Button
-                    id={'delete-product'}
-                    classList={'btn-small product-btn bg-danger'}
-                    title={'Add to wishlist'}
-                    handleClick={(e) => handleCollectionItem(e, product)}
-                >
-                    {'Delete'}
-                </Button>
-            </ProductActions> */}
+                    }
+                </List>
+                <div className='col-12 flex flex-end gap-1'>
+                    {/* <label className='strong col-9 fs-125 text-center move-right d-block padding-bottom-1' htmlFor={`item${index}`}>Quantity Selected </label> */}
+                    <Button
+                        id={'delete-product'}
+                        classList={'btn-tiny bg-danger flex-grow-1'}
+                        handleClick={(e) => handleCollectionItem(e, product)}
+                    >
+                        <AiOutlineDelete />
+                    </Button>
+                    <Button
+                        id={'edit-product'}
+                        classList={'btn-tiny bg-success flex-grow-1'}
+                        handleClick={(e) => handleCollectionItem(e, product)}
+                    >
+                        <AiOutlineEdit />
+                    </Button>
+
+                </div>
+            </Container>
         </>
     )
 }

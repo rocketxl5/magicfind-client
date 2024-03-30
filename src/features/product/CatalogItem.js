@@ -1,18 +1,20 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Container from '../../components/Container';
 import ProductImage from './components/ProductImage';
-import ExpandImgBtn from './components/ExpandImgBtn';
-import Image from '../../components/Image';
 import ProductHeader from './components/ProductHeader';
-import QuantitySelector from './components/QuantitySelector';
+import Container from '../../components/Container';
+import List from '../../components/List';
+import ListItem from '../../components/ListItem';
 import Title from '../../components/Title';
-import CountDown from '../search/components/CountDown';
-import Alert from './components/Alert';
-import Confirmation from './components/Confirmation';
 import Drop from '../../components/Drop';
-import Avatar from '../../components/Avatar';
+import Image from '../../components/Image';
 import Loader from '../../layout/Loader';
+import CountDown from '../search/components/CountDown';
+import Confirmation from './components/Confirmation';
+import ExpandImgBtn from './components/ExpandImgBtn';
+import QuantitySelector from './components/QuantitySelector';
+import Alert from './components/Alert';
+import Avatar from '../../components/Avatar';
 import useAuth from '../../hooks/contexthooks/useAuth';
 import useCart from '../../hooks/contexthooks/useCart';
 import useExpandImage from '../../hooks/useExpandImage';
@@ -27,7 +29,16 @@ import data from '../../data/SEARCH.json';
 const CatalogItem = ({ index, product, count, handleSlideView }) => {
     // If defined, then item is in cart
     // const [indexFound, setindexFound] = useState(undefined);
-    const { name, set_name, price, quantity, language, condition, finishes, seller } = product;
+    const {
+        name,
+        set_name,
+        price,
+        quantity,
+        language,
+        condition,
+        finishes,
+        seller
+    } = product;
     const { userName, country, avatar, rating, email } = seller;
 
     const url = `/api/catalog/${seller.userID}/${product._id}/`;
@@ -104,13 +115,13 @@ const CatalogItem = ({ index, product, count, handleSlideView }) => {
                 />
                 <ExpandImgBtn
                     handleClick={handleSlideView}
-                    cardLayout={product.layout}
-                    expandedImage={expandedImage}
+                    layout={product.layout}
+                    image={expandedImage}
                 />
                 {
                     cartItems[indexFound] &&
-                    <Drop classList={'catalog-btn bg-success'} >
-                        <FiShoppingCart />
+                    <Drop classList={'catalog-btn color-light bg-success border-light bg-success'} >
+                        <FiShoppingCart className={'cart-svg'} />
                     </Drop>
                 }
             </ProductImage>
@@ -122,29 +133,31 @@ const CatalogItem = ({ index, product, count, handleSlideView }) => {
                         <Avatar avatar={product.seller.avatar} handleClick={() => { console.log(seller) }} />
                     </p>
                 </div> */}
-                <Container>
+                <List classList={'product-details'}>
                 {
                     details &&
                     details.map((detail, i) => {
                         return (
-                            <p key={i}><span>{detail.title}</span>  <span>{detail.value}</span></p>
+                            <ListItem key={i} classList='product-detail'>
+                                <span className='detail-title'>{detail.title}</span><span className={`${detail.classList ? detail.classList : 'detail-value'}`}>{detail.value}</span>
+                            </ListItem>
                         )
                     })
                     }
-                </Container>
-                <div className='col-12'>
-                    <label className='strong col-9 fs-125 text-center move-right d-block padding-bottom-1' htmlFor={`item${index}`}>Quantity Selected </label>
-                    <Container classList={'col-12 text-right dropdown'}>
-                    <QuantitySelector
-                        id={`item${index}`}
-                        name={'catalog-item'}
-                            classList={'col-9 move-right'}
+                </List>
+                <div className='col-12 flex flex-end gap-1'>
+                    <label className='strong col-9 fs-125 vertical-align-middle text-center align-self-center move-right d-block' htmlFor={`item${index}`}>Quantity: </label>
+                    <Container classList={'col-8 text-right dropdown'}>
+                        <QuantitySelector
+                            id={`item${index}`}
+                            classList={'col-12'}
+                            name={'catalog-item'}
                             // Product already in cart have defined indexFound
                             quantitySelected={cartItems[indexFound] ? cartItems[indexFound].quantity : 0}
-                        quantityAvailable={quantity}
-                        product={product}
+                            quantityAvailable={quantity}
+                            product={product}
                             handleChange={updateCartHandler}
-                    >
+                        >
                     </QuantitySelector>
                 </Container>
                 </div>
