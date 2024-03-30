@@ -21,7 +21,6 @@ import { AiOutlineEdit } from "react-icons/ai";
 import timestampConverter from '../../assets/utilities/timestampConverter';
 
 const CollectionItem = ({ index, product, count, handleCollectionItem, handleSlideView }) => {
-    const { conditions, languages, finishes } = data.product;
     const { longDate } = timestampConverter;
     // const { name, set_name, price, quantity, language, condition, finishes, seller } = product;
 
@@ -41,15 +40,15 @@ const CollectionItem = ({ index, product, count, handleCollectionItem, handleSli
         },
         {
             title: 'Finish:',
-            value: finishes[product.finishes]
+            value: data.product.finishes[product.finishes]
         },
         {
             title: 'Condition:',
-            value: conditions[product._condition]
+            value: data.product.conditions[product._condition]
         },
         {
             title: 'Language:',
-            value: languages[product._language]
+            value: data.product.languages[product._language]
         },
         {
             title: 'Price:',
