@@ -55,21 +55,21 @@ const App = () => {
   return (
     <Routes>
       <Route path="/" element={<RootLayout />} >
-        {/* Authenticated and Unauthenticated  */}
-        <Route element={<PublicRoutes />} >
+        {/* Unauthenticated only routes */}
+        <Route element={<RestrictedRoutes />}>
           <Route element={<Layout />}>
-            {/* <Route element={!isAuth ? <Layout /> : <AuthLayout />}> */}
-            <Route path="about" element={<About />} />
-            <Route path="contact" element={<Contact />} />
-            <Route path="catalog/:query" element={<SearchResults />} />
-            <Route path="not-found/:name" element={<CardNotFound />} />
-            <Route path="store/:id" element={<Store />} />
-            <Route path="shopping-cart" element={<ShoppingCart />} />
-            <Route path="product/:id" element={<Product />} />
+            <Route index element={<Home />} />
+            <Route path="home" element={<Navigate to="/" replace />} />
+            <Route path="login" element={<Login />} />
+            <Route path="signup" element={<Signup />} />
+            <Route path="reset-password" element={<ResetPassword />} />
           </Route>
+        </Route>
+
         {/* Authenticated only routes */}
-          <Route element={isAuth && <PrivateRoutes />}>
-            <Route element={<AuthLayout />} >
+        <Route element={<PrivateRoutes />}>
+          <Route element={<AuthLayout />} >
+            <Route path="/" element={<Navigate to="/me" replace />} />
             <Route path="me" element={<AuthPage />}>
               <Route path="dashboard" element={<DashBoard />} />
               <Route path="collection" element={<Collection />} />
@@ -84,19 +84,23 @@ const App = () => {
             </Route>
           </Route>
         </Route>
-        {/* Unauthenticated only routes */}
-        <Route element={<RestrictedRoutes />}>
-          <Route element={<Layout />}>
-            <Route index element={<Home />} />
-            <Route path="home" element={<Navigate to="/" replace />} />
-            <Route path="login" element={<Login />} />
-            <Route path="signup" element={<Signup />} />
-            <Route path="reset-password" element={<ResetPassword />} />
-          </Route>
+
+        {/* Authenticated and Unauthenticated  */}
+        <Route element={<PublicRoutes />} >
+          <Route element={!isAuth ? <Layout /> : <AuthLayout />}>
+            <Route path="about" element={<About />} />
+            <Route path="contact" element={<Contact />} />
+            <Route path="catalog/:query" element={<SearchResults />} />
+            <Route path="not-found/:name" element={<CardNotFound />} />
+            <Route path="store/:id" element={<Store />} />
+            <Route path="shopping-cart" element={<ShoppingCart />} />
+            <Route path="product/:id" element={<Product />} />
           </Route>
         </Route>
+
         {/* Catch all */}
         <Route path="*" element={< PageNotFound />} />
+
       </Route>
     </Routes>
   );
