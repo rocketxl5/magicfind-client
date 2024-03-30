@@ -55,11 +55,21 @@ const App = () => {
   return (
     <Routes>
       <Route path="/" element={<RootLayout />} >
+        {/* Authenticated and Unauthenticated  */}
+        <Route element={<PublicRoutes />} >
+          <Route element={<Layout />}>
+            {/* <Route element={!isAuth ? <Layout /> : <AuthLayout />}> */}
+            <Route path="about" element={<About />} />
+            <Route path="contact" element={<Contact />} />
+            <Route path="catalog/:query" element={<SearchResults />} />
+            <Route path="not-found/:name" element={<CardNotFound />} />
+            <Route path="store/:id" element={<Store />} />
+            <Route path="shopping-cart" element={<ShoppingCart />} />
+            <Route path="product/:id" element={<Product />} />
+          </Route>
         {/* Authenticated only routes */}
-        <Route element={<PrivateRoutes />}>
-          <Route element={<AuthLayout />} >
-            {/* <Route index element={<AuthPage />} /> */}
-            <Route path="/" element={<Navigate to="/me" replace />} />
+          <Route element={isAuth && <PrivateRoutes />}>
+            <Route element={<AuthLayout />} >
             <Route path="me" element={<AuthPage />}>
               <Route path="dashboard" element={<DashBoard />} />
               <Route path="collection" element={<Collection />} />
@@ -83,18 +93,7 @@ const App = () => {
             <Route path="signup" element={<Signup />} />
             <Route path="reset-password" element={<ResetPassword />} />
           </Route>
-        </Route>
-        {/* Authenticated and Unauthenticated  */}
-        <Route element={<PublicRoutes />} >
-          <Route element={!isAuth ? <Layout /> : <AuthLayout />}>
-          <Route path="about" element={<About />} />
-          <Route path="contact" element={<Contact />} />
-          <Route path="catalog/:query" element={<SearchResults />} />
-          <Route path="not-found/:name" element={<CardNotFound />} />
-          <Route path="store/:id" element={<Store />} />
-          <Route path="shopping-cart" element={<ShoppingCart />} />
-          <Route path="product/:id" element={<Product />} />
-        </Route>
+          </Route>
         </Route>
         {/* Catch all */}
         <Route path="*" element={< PageNotFound />} />
