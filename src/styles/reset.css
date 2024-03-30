@@ -43,6 +43,10 @@ select {
     border: none;
 }
 
+button * {
+    pointer-events: none;
+}
+
 /* Sourece @ https://www.htmlgoodies.com/cms/styling-select-css-html/ */
 /* styles reset, including removing the default dropdown arrow */
 select {

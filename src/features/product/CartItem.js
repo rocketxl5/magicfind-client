@@ -115,7 +115,7 @@ const CartItem = ({ index, count, item }) => {
           })
         }
         </List>
-        <div className='col-12 flex space-between'>
+        <div className='col-12 flex flex-end gap-1'>
           {/* <label className='strong col-9 fs-125 text-center move-right d-block padding-bottom-1' htmlFor={`item${index}`}>Quantity Selected </label> */}
           <Button
             classList={'btn-tiny bg-danger'}
@@ -124,16 +124,15 @@ const CartItem = ({ index, count, item }) => {
             <AiOutlineDelete />
         </Button>
           <Container classList={'col-8 text-right dropdown'}>
-        <QuantitySelector
+            <QuantitySelector
               id={`item${index}`}
-              classList={'col-12 move-right'}
-          name={'cart-item'}
-          quantitySelected={cartItems[index]?.quantity}
-          quantityAvailable={item.selected.quantity}
-          product={item.selected}
-          handleChange={updateCartHandler}
-        />
-
+              classList={'col-12'}
+              name={'cart-item'}
+              quantitySelected={cartItems[index]?.quantity}
+              quantityAvailable={item.selected.quantity}
+              product={item.selected}
+              handleChange={updateCartHandler}
+            />
           </Container>
         </div>
 
