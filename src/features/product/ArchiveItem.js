@@ -119,7 +119,7 @@ const ArchiveItem = ({ index, product, count, handleSlideView }) => {
         title: 'Type: ',
         value:
           !type_line?.includes('—') ? (
-            { type_line }
+            type_line 
           ) : (
               type_line?.split('—')[0]
           )

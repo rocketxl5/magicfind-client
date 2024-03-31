@@ -14,7 +14,7 @@ const Success = forwardRef(function Success(props, ref) {
                 <FaRegCheckCircle className="color-success" />
             </section>
             <footer className="card-footer">
-                <div className="btn-container hide">
+                <div className="hide">
                     <button
                         id="back-to-search"
                         type="button"
