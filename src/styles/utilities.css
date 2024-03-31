@@ -34,10 +34,6 @@
     padding-block-end: 1rem;
 }
 
-.margin-bs-1 {
-    margin-block-start: var(--size-1);
-}
-
 .margin-block-end-1 {
     margin-block-end: var(--size-1) !important;
 }
@@ -357,7 +353,7 @@
 }
 
 .hide {
-    visibility: hidden;
+    visibility: hidden !important;
 }
 
 .disabled {
@@ -501,12 +497,16 @@
     font-weight: 700;
 }
 
-.move-right {
+.push-right {
     margin-left: auto !important;
 }
 
-.move-left {
+.push-left {
     margin-right: auto !important;
+}
+
+.push-down {
+    margin-top: auto !important;
 }
 
 .svg-wide {

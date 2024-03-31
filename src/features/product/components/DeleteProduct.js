@@ -99,69 +99,58 @@ const DeleteProduct = (props) => {
     return (
         <div className="modal-state">
             <div className={`modal-state-content`}>
-                {
-                    loading ? (
-                        <Loader />
-                    ) : (
-                        <>
-                            {
-                                !response.isDeleted ? (
-                                    <>
-                                        <header className="modal-header bg-danger">
-                                            <div className="modal-title">
-                                                <h2 className="fw-500">Delete Card</h2>
-                                            </div>
-                                        </header>
-                                        <div className="modal-body">
-                                            <section className="modal-section">
-                                                <div className="card-section">
-                                                    <ProductImage classList={'product-image'}>
-                                                        <Image
-                                                            classList={'col-12'}
-                                                            product={product}
-                                                        />
-                                                    </ProductImage>
-                                                </div>
-                                                <div className="card-section">
-                                                    {/* <CollectionDetails product={product} /> */}
-                                                </div>
-                                            </section>
-                                            <section className="modal-warning">
-                                                <div className="warning-message">
-                                                    {response.message}
-                                                </div>
-                                            </section>
-                                        </div>
-                                        <footer className="modal-footer">
-                                            <div className="flex space-between">
-                                                <button
-                                                    id="cancel"
-                                                    className="btn color-light bg-primary"
-                                                    type="button"
-                                                    onClick={handleClick}
-                                                >
-                                                    Cancel
-                                                </button>
-                                                < button
-                                                    id="confirm-delete"
-                                                    className="btn color-light bg-danger"
-                                                    type="button"
-                                                    onClick={handleClick}
-                                                    onMouseDown={deleteHandler}
-                                                >
-                                                    Confirm
-                                                </button>
-
-                                            </div>
-                                        </footer>
-                                    </>
-                                ) : (
-                                    <Success response={response} handleClick={handleClick} ref={btnRef} />
-                                )
-                            }
-                        </>
-                    )
-                }
+                {loading && <Loader />}
+                {response.isDeleted && <Success response={response} handleClick={handleClick} ref={btnRef} />}
+                <>
+                    <header className="modal-header bg-danger">
+                        <div className="modal-title">
+                            <h2 className="fw-500">Delete Card</h2>
+                        </div>
+                    </header>
+                    <div className='scroll'>
+                        <div className="modal-body">
+                            <section className="modal-section">
+                                <div className="card-section">
+                                    {/* <ProductImage classList={'product-image'}>
+                                        <Image
+                                            classList={'col-12'}
+                                            product={product}
+                                        />
+                                    </ProductImage> */}
+                                </div>
+                                <div className="card-section">
+                                    {/* <CollectionDetails product={product} /> */}
+                                </div>
+                            </section>
+                            <section className="modal-warning">
+                                <div className="warning-message">
+                                    {response.message}
+                                </div>
+                            </section>
+                        </div>
+                        <footer className="modal-footer">
+                            <div className="flex space-between">
+                                <button
+                                    id="cancel"
+                                    className="btn color-light bg-primary"
+                                    type="button"
+                                    onClick={handleClick}
+                                >
+                                    Cancel
+                                </button>
+                                < button
+                                    id="confirm-delete"
+                                    className="btn color-light bg-danger"
+                                    type="button"
+                                    onClick={handleClick}
+                                    onMouseDown={deleteHandler}
+                                >
+                                    Confirm
+                                </button>
+                            </div>
+                        </footer>
+                    </div>
+                </>
             </div>
         </div>
     )

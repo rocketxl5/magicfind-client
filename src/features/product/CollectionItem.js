@@ -28,7 +28,7 @@ const CollectionItem = ({ index, product, count, handleCollectionItem, handleSli
 
     const { isMobile } = useViewport();
     const { expandedImage } = useExpandImage(product);
-
+    console.log(product)
     const details = [
         {
             title: 'Status:',
@@ -96,20 +96,23 @@ const CollectionItem = ({ index, product, count, handleCollectionItem, handleSli
                 {/* <ExpandImgBtn handleClick={handleSlideView} cardLayout={product.layout} expandedImage={expandedImage} /> */}
             </ProductImage>
             <Container classList={'flex column space-between three'}>
-                <List classList={'product-details'}>
                 {
-                        details &&
-                    details.map((detail, i) => {
-                        return (
-                            <ListItem key={i} classList='product-detail'>
-                                <span className='detail-title'>{detail.title}</span><span className={`${detail.classList ? detail.classList : 'detail-value'}`}>{detail.value}</span>
-                            </ListItem>
-                        )
-                    })
-                    }
-                </List>
-                <div className='col-12 flex flex-end gap-1'>
-                    {/* <label className='strong col-9 fs-125 text-center move-right d-block padding-bottom-1' htmlFor={`item${index}`}>Quantity Selected </label> */}
+                    product._is_published &&
+                    <List classList={'product-details'}>
+                        {
+                            details &&
+                            details.map((detail, i) => {
+                                return (
+                                    <ListItem key={i} classList='product-detail'>
+                                        <span className='detail-title'>{detail.title}</span><span className={`${detail.classList ? detail.classList : 'detail-value'}`}>{detail.value}</span>
+                                    </ListItem>
+                                )
+                            })
+                        }
+                    </List>
+                }
+                <div className={`${!product._is_published && 'push-down'} col-12 flex flex-end gap-1`}>
+                    {/* <label className='strong col-9 fs-125 text-center push-right d-block padding-bottom-1' htmlFor={`item${index}`}>Quantity Selected </label> */}
                     <Button
                         id={'delete-product'}
                         classList={'btn-tiny bg-danger flex-grow-1'}

@@ -146,7 +146,7 @@ const CatalogItem = ({ index, product, count, handleSlideView }) => {
                     }
                 </List>
                 <div className='col-12 flex flex-end gap-1'>
-                    <label className='strong col-9 fs-125 vertical-align-middle text-center align-self-center move-right d-block' htmlFor={`item${index}`}>Quantity: </label>
+                    <label className='strong col-9 fs-125 vertical-align-middle text-center align-self-center push-right d-block' htmlFor={`item${index}`}>Quantity: </label>
                     <Container classList={'col-8 text-right dropdown'}>
                         <QuantitySelector
                             id={`item${index}`}

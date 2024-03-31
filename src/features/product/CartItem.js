@@ -116,7 +116,7 @@ const CartItem = ({ index, count, product }) => {
         }
         </List>
         <div className='col-12 flex flex-end gap-1'>
-          {/* <label className='strong col-9 fs-125 text-center move-right d-block padding-bottom-1' htmlFor={`item${index}`}>Quantity Selected </label> */}
+          {/* <label className='strong col-9 fs-125 text-center push-right d-block padding-bottom-1' htmlFor={`item${index}`}>Quantity Selected </label> */}
           <Button
             classList={'btn-tiny bg-danger'}
           handleClick={(e) => updateCartHandler(0)}

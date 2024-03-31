@@ -221,7 +221,7 @@ const Login = () => {
                   </div>
                 </div>
                 <div className="flex margin-block-start-2">
-                  <Link className="link move-right" to="/reset-password">Forgot password?</Link>
+                  <Link className="link push-right" to="/reset-password">Forgot password?</Link>
                 </div>
                 <div className="flex space-between align-center">
                   <Link className="link" to="/signup">Create account</Link>
