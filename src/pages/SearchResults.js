@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import ArchiveItem from '../features/product/ArchiveItem';
-import CollectionItem from '../features/product/CollectionItem';
+import ArchiveItemNew from '../features/product/ArchiveItemNew';
+import CollectionItemNew from '../features/product/CollectionItemNew';
 import CatalogItem from '../features/product/CatalogItem';
 import Modal from '../features/modal/Modal';
 import List from '../components/List';
@@ -43,9 +44,9 @@ const SearchResults = () => {
         updateSlideView(layout, expandedImage);
     }
 
-    function handleCollectionItem(e, card) {
+    function handleCollectionItem(e, card, expandedImage) {
         e.stopPropagation();
-        updateCollectionItem(e.target.id, card);
+        updateCollectionItem(e.target.id, card, expandedImage);
     }
 
     return (
@@ -66,13 +67,13 @@ const SearchResults = () => {
                 <Page id={'search-results'} name={'search-results'} component={<Count count={cards.length} type={'Result'} />}>
                 <SearchParameters setSearchFeatures={(value) => setSearchFeatures(value)} searchFeatures={searchFeatures} /> 
                 <main>
-                        <List classList="list">
+                            <List classList="list align-center">
                         {
                             cards &&
                             cards.map((card, i) => {
                                 return (
                                     <ListItem key={i}>
-                                        <Card classList={'product-card'}>
+                                        <Card classList={''}>
                                             {
                                                 search === 'catalog'
                                                     ?
@@ -85,7 +86,7 @@ const SearchResults = () => {
                                                     :
                                                     search === 'collection'
                                                         ?
-                                                        <CollectionItem
+                                                        <CollectionItemNew
                                                             index={i}
                                                             product={card}
                                                             count={cards.length}
@@ -93,7 +94,7 @@ const SearchResults = () => {
                                                             handleSlideView={handleSlideView}
                                                         />
                                                         :
-                                                        <ArchiveItem
+                                                        <ArchiveItemNew
                                                             index={i}
                                                             product={card}
                                                             count={cards.length}

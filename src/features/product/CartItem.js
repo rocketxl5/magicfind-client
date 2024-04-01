@@ -9,7 +9,7 @@ import QuantitySelector from './components/QuantitySelector';
 import Button from '../../components/Button';
 import List from '../../components/List';
 import ListItem from '../../components/ListItem';
-import Image from '../../components/Image';
+import ImageNew from '../../components/Image';
 import Avatar from '../../components/Avatar';
 import Loader from '../../layout/Loader';
 import data from '../../data/SEARCH.json';
@@ -24,7 +24,6 @@ const CartItem = ({ index, count, product }) => {
   const [price, setPrice] = useState(0);
 
   const navigate = useNavigate();
-  console.log(product)
 
   const url = `/api/catalog/${product.selected?.seller?.userID}/${product.selected._id}/`;
   const headers = {
@@ -68,14 +67,6 @@ const CartItem = ({ index, count, product }) => {
       text: `${product.selected.quantity} in stock`,
       style: 'product-detail product-quantity'
     },
-    {
-      text: `Price $${price.toFixed(2)}`,
-      style: 'product-detail product-price'
-    },
-    {
-      text: `Total: $${total.toFixed(2)} (${cartItems[index]?.quantity} ${cartItems[index]?.quantity > 1 ? 'items' : 'item'})`,
-      style: 'product-detail product-quantity'
-    },
   ]
 
   return (
@@ -91,19 +82,23 @@ const CartItem = ({ index, count, product }) => {
         <CountDown count={count} unit={index + 1} type={'Result'} />
       </ProductHeader>
       {loading && <Loader />}
-      <ProductImage classList={'product-image two'}>
-        <Image
-          classList={'col-12'}
-          product={product.selected}
+
+      <ImageNew
+        product={product.selected}
+        classList='cart-item-image two'
+
+
           handleClick={() => navigate(
             `/product/${product.selected._id}`,
             {
               state: { product: product.selected }
             })}
-        />
-      </ProductImage>
-      <Container classList={'flex column space-between three'}>
-        <List classList={'product-details'}>
+      >
+
+      </ImageNew>
+
+      <Container classList={' three'}>
+        {/* <List classList={'product-details'}>
         {
           details &&
           details.map((detail, i) => {
@@ -114,8 +109,29 @@ const CartItem = ({ index, count, product }) => {
             )
           })
         }
-        </List>
-        <div className='col-12 flex flex-end gap-1'>
+        </List> */}
+
+      </Container>
+      <div className='four'>
+
+        <table className='cart-price'>
+          <tbody>
+            <tr>
+              <td className='col-9'>Price:</td>
+              <td className='fw-500'>${price.toFixed(2)}</td>
+            </tr>
+            <tr>
+              <td className='col-9'>Quantity: </td>
+              <td className='padding-left-7px border-bottom fw-500'>{cartItems[index]?.quantity}</td>
+            </tr>
+            <tr>
+              <td className='col-9'>Total:</td>
+              <td className='fw-500'>${total.toFixed(2)}</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div className='flex flex-end gap-1 margin-top-2'>
           {/* <label className='strong col-9 fs-125 text-center push-right d-block padding-bottom-1' htmlFor={`item${index}`}>Quantity Selected </label> */}
           <Button
             classList={'btn-tiny bg-danger'}
@@ -123,7 +139,7 @@ const CartItem = ({ index, count, product }) => {
         >
             <AiOutlineDelete />
         </Button>
-          <Container classList={'col-8 text-right dropdown'}>
+          <Container classList={'col-9 text-right dropdown'}>
             <QuantitySelector
               id={`item${index}`}
               classList={'col-12'}
@@ -135,8 +151,7 @@ const CartItem = ({ index, count, product }) => {
             />
           </Container>
         </div>
-
-      </Container>
+      </div>
     </>
   )
 }

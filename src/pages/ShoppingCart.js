@@ -60,7 +60,7 @@ function ShoppingCart() {
                     cartItems.map((item, i) => {
                       return (  
                         <ListItem key={i}>
-                          <Card classList={'product-card'}>
+                          <Card classList={'product-card grid'}>
                             <CartItem
                               index={i}
                               count={cartItems.length}

@@ -1,8 +1,6 @@
 import { useState, useRef } from 'react';
 import { useNavigate, useLocation, useParams } from 'react-router-dom';
-import ProductImage from './ProductImage';
 import Image from '../../../components/Image';
-import CollectionDetails from './CollectionDetails';
 import Success from './Success';
 import Loader from '../../../layout/Loader';
 import useAuth from '../../../hooks/contexthooks/useAuth';
@@ -11,7 +9,7 @@ import { api } from '../../../api/resources';
 
 const DeleteProduct = (props) => {
     // Props
-    const { product, search, handleClick } = props;
+    const { product, search, handleClick, cardImage } = props;
     // States
     const [response, setResponse] = useState({
         isDeleted: false,
@@ -109,18 +107,17 @@ const DeleteProduct = (props) => {
                     </header>
                     <div className='scroll'>
                         <div className="modal-body">
-                            <section className="modal-section">
-                                <div className="card-section">
-                                    {/* <ProductImage classList={'product-image'}>
-                                        <Image
+                            <section>
+                                {cardImage}
+                                {/* <Image
                                             classList={'col-12'}
-                                            product={product}
-                                        />
+                                            product={product} */}
+                                {/* /> */}
+                                {/* <ProductImage classList={'product-image'}>
+
                                     </ProductImage> */}
-                                </div>
-                                <div className="card-section">
-                                    {/* <CollectionDetails product={product} /> */}
-                                </div>
+
+
                             </section>
                             <section className="modal-warning">
                                 <div className="warning-message">
