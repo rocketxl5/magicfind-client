@@ -1624,7 +1624,7 @@ background-repeat: no-repeat;
 .product-legend {
   bottom: 0;
   top: 0;
-  right: -5.5rem;
+  right: -5rem;
 }
 
 .lazyload-wrapper {
@@ -1724,7 +1724,7 @@ background-repeat: no-repeat;
   position: absolute;
   font-size: var(--fs-125);
   top: 2rem;
-  right: -4.5rem;
+  right: -4rem;
   z-index: 2000;
   color: var(--clr-dark);
 }
