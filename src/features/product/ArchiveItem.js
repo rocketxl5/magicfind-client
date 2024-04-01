@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Container from '../../components/Container';
 import ProductHeader from './components/ProductHeader';
 import Title from '../../components/Title';
@@ -7,7 +8,7 @@ import List from '../../components/List';
 import ListItem from '../../components/ListItem';
 import ProductImage from './components/ProductImage';
 import Image from '../../components/Image';
-import ExpandImgBtn from './components/ExpandImgBtn';
+import ExpandImgBtn from './components/ExpandImage';
 import Button from '../../components/Button';
 import Loader from '../../layout/Loader';
 import Confirmation from './components/Confirmation';
@@ -22,7 +23,10 @@ import useFind from '../../hooks/useFind';
 import useColorSymbols from '../../hooks/useColorSymbols';
 import { GoStack } from "react-icons/go";
 import { FiPlus } from "react-icons/fi";
+import { FaPlus } from "react-icons/fa6";
 import { GoPlus } from "react-icons/go";
+import { FaExclamation } from "react-icons/fa6";
+import { FaCheck } from "react-icons/fa6";
 
 import data from '../../data/SEARCH.json';
 
@@ -48,6 +52,8 @@ const ArchiveItem = ({ index, product, count, handleSlideView }) => {
   const { expandedImage } = useExpandImage(product);
   const { isMobile } = useViewport();
   const { findMatch, isMatchFound } = useFind();
+
+  const navigate = useNavigate();
 
   const query = `/api/cards/add/${user.id}/${product.id}`;
 
@@ -159,8 +165,8 @@ const ArchiveItem = ({ index, product, count, handleSlideView }) => {
         </Title>
         <CountDown count={count} unit={index + 1} type={'Result'} />
       </ProductHeader>
-      {loading && <Loader />}
-      {showConfirmation && <Confirmation message={!error ? 'Card Successfuly Added' : 'An Error Occured'} isSuccess={!error ? true : false} />}
+      {/* {loading && <Loader />} */}
+      {/* {showConfirmation && <Confirmation message={!error ? 'Card Successfuly Added' : 'An Error Occured'} isSuccess={!error ? true : false} />} */}
       <ProductImage classList={'product-image two'}>
         <Image
           classList={'col-12'}
@@ -172,11 +178,27 @@ const ArchiveItem = ({ index, product, count, handleSlideView }) => {
           image={expandedImage}
         />
         {
-          (isCardAdded || isMatchFound) &&
-          <Drop classList={'archive-btn color-light bg-success border-light'} >
-              <GoStack />
-          </Drop>
+
         }
+        {
+          loading ?
+            <Drop classList={'color-light bg-light border-primary drop-top'} >
+              <Loader />
+            </Drop>
+            :
+            (isCardAdded || isMatchFound) ?
+              <Drop classList={'color-light bg-success border-light drop-top'} >
+                <FaCheck />
+              </Drop>
+              :
+              <Drop classList={'color-light bg-primary border-light drop-top'} handleClick={() => postData(token, query)}>
+                <FaPlus />
+              </Drop>
+        }
+        <Drop classList={'color-light bg-primary border-light drop-mid'} handleClick={() => navigate(`/product/${product.id}`)}>
+          <FaExclamation />
+        </Drop>
+
       </ProductImage>
       <Container classList={'flex column space-between three'}>
         {/* <Drop classList={'archive-btn bg-light color-dark border-dark'} >
@@ -194,14 +216,14 @@ const ArchiveItem = ({ index, product, count, handleSlideView }) => {
         </List>
         {(!isCardAdded && !isMatchFound) ?
           <div>
-          <Button
+            {/* <Button
             id={'add-product'}
               classList={'btn bg-success col-12'}
             title={'Add to '}
             handleClick={() => postData(token, query)}
           >
               {'Add'}
-          </Button>
+          </Button> */}
           </div>
           :
           <Alert>

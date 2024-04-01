@@ -3,7 +3,7 @@
     "id": "search-results",
     "classList": "page search-results",
     "header": {
-      "classList": "page-header flex space-between align-center col-12 padding-block-1 margin-block-end-1"
+      "classList": "page-header flex space-between align-center col-12 margin-bottom-1"
     },
     "title": {
       "classList": "page-title",
@@ -14,7 +14,7 @@
     "id": "shopping-cart",
     "classList": "page shopping-cart",
     "header": {
-      "classList": "page-header flex space-between align-center col-12 padding-block-1 margin-block-end-1"
+      "classList": "page-header flex space-between align-center col-12 padding-block-1 margin-bottom-1"
     },
     "title": {
       "classList": "page-title",
@@ -29,7 +29,7 @@
     "id": "collection",
     "classList": "page collection relative",
     "header": {
-      "classList": "page-header flex space-between align-center col-12 padding-block-1 margin-block-end-1"
+      "classList": "page-header flex space-between align-center col-12 padding-block-1 margin-bottom-1"
     },
     "title": {
       "classList": "page-title",
@@ -40,7 +40,7 @@
     "id": "archive",
     "classList": "page archive relative",
     "header": {
-      "classList": "page-header flex space-between align-center col-12 padding-block-1 margin-block-end-1"
+      "classList": "page-header flex space-between align-center col-12 padding-block-1 margin-bottom-1"
     },
     "title": {
       "classList": "page-title",
@@ -51,7 +51,7 @@
     "id": "store",
     "classList": "page store",
     "header": {
-      "classList": "page-header flex space-between align-center col-12 padding-block-1 margin-block-end-1"
+      "classList": "page-header flex space-between align-center col-12 padding-block-1 margin-bottom-1"
     },
     "title": {
       "classList": "page-title",
@@ -62,7 +62,7 @@
     "id": "dashboard",
     "classList": "page dashboard",
     "header": {
-      "classList": "page-header flex space-between align-center col-12 padding-block-1 margin-block-end-1"
+      "classList": "page-header flex space-between align-center col-12 padding-block-1 margin-bottom-1"
     },
     "title": {
       "classList": "page-title",
@@ -73,7 +73,7 @@
     "id": "not-found",
     "classList": "page not-found",
     "header": {
-      "classList": "flex justify-center align-center col-12 padding-block-1 margin-block-end-1"
+      "classList": "flex justify-center align-center col-12 padding-block-1 margin-bottom-1"
     },
     "title": {
       "classList": "page-title fs-500 fw-600",

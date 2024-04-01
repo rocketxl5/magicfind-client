@@ -7,6 +7,8 @@ const Breadcrumbs = () => {
     const location = useLocation();
     const path = location.pathname;
 
+    console.log(location)
+
     if (path.includes('catalog') || path === '/') {
         return null
     }
@@ -15,7 +17,7 @@ const Breadcrumbs = () => {
 
     const crumbs = path.split('/')
         .filter(crumb => crumb !== '')
-        .map(crumb => {
+        .map((crumb, i) => {
             currentLink += `/${crumb}`;
             return (
                 <span className="crumb" key={crumb}>

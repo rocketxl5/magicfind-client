@@ -27,6 +27,7 @@ const useCollectionModal = (search, callback) => {
                     component: <DeleteProduct
                         attributes={{ ...action.payload.attributes, id: 'confirm-delete' }}
                         search={search}
+                        cardImage={action.payload.cardImage}
                         product={action.payload.product}
                         handleClick={callback}
                     />
@@ -52,17 +53,17 @@ const useCollectionModal = (search, callback) => {
     }
     const [state, dispatch] = useReducer(reducer, INIT)
 
-    const useCollectionItem = (id, product) => {
-        console.log(id)
+    const useCollectionItem = (id, product, image) => {
         dispatch({
             type: id,
             payload: {
                 product: product,
+                cardImage: image,
                 attributes: {
                     id: 'expand-card',
                     style: 'card-image',
                     src: product?.image_uris?.small || product?.card_faces[0]?.image_uris?.small,
-                    alt: `${product?.name} image`,
+                    alt: `${product?.name}`,
                     placeholder: cardBack
                 },
             }

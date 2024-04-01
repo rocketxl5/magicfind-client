@@ -11,7 +11,7 @@ import Image from '../../components/Image';
 import Loader from '../../layout/Loader';
 import CountDown from '../search/components/CountDown';
 import Confirmation from './components/Confirmation';
-import ExpandImgBtn from './components/ExpandImgBtn';
+import ExpandImgBtn from './components/ExpandImage';
 import QuantitySelector from './components/QuantitySelector';
 import Alert from './components/Alert';
 import Avatar from '../../components/Avatar';

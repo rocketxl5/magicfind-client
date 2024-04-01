@@ -1,11 +1,12 @@
 import React from 'react'
 
-const Drop = ({ children, classList = '', handleClick }) => {
+const Drop = ({ children, id, classList = '', handleClick }) => {
 
     return (
         <button
-            className={`${classList} absolute b-radius-50 drop-btn`}
-            onClick={(e) => handleClick ? handleClick() : console.log(e.target)}
+            id={id}
+            className={`${classList} b-radius-5 drop-btn`}
+            onClick={handleClick}
         >
             {children}
         </button>

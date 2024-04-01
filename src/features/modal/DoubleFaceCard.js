@@ -6,8 +6,6 @@ const DoubleFaceCard = ({ children, motion }) => {
     const cardRef = useRef(null);
 
     useEffect(() => {
-        console.log(children)
-        console.log(motion)
         setIsMounted(true);
     }, [])
 

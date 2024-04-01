@@ -2,7 +2,7 @@ import { useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Container from '../../components/Container';
 import ProductImage from './components/ProductImage';
-import ExpandImgBtn from './components/ExpandImgBtn';
+import ExpandImgBtn from './components/ExpandImage';
 import List from '../../components/List';
 import ListItem from '../../components/ListItem';
 import Drop from '../../components/Drop';
@@ -28,7 +28,7 @@ const CollectionItem = ({ index, product, count, handleCollectionItem, handleSli
 
     const { isMobile } = useViewport();
     const { expandedImage } = useExpandImage(product);
-    console.log(product)
+
     const details = [
         {
             title: 'Status:',
