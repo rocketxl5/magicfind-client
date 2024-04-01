@@ -762,8 +762,7 @@ height: 2rem;
 
 .modal-image {
   display: block;
-  width: 100%;
-  max-width: 50rem;
+  width: clamp(31.5rem, calc(80vw + 10px), 55rem);
   height: auto;
   margin: 0 auto;
   border-radius: 1.7rem;
