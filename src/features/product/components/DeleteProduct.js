@@ -1,5 +1,6 @@
 import { useState, useRef } from 'react';
 import { useNavigate, useLocation, useParams } from 'react-router-dom';
+import ProductImage from './ProductImage';
 import Image from '../../../components/Image';
 import Success from './Success';
 import Loader from '../../../layout/Loader';
@@ -9,7 +10,7 @@ import { api } from '../../../api/resources';
 
 const DeleteProduct = (props) => {
     // Props
-    const { product, search, handleClick, cardImage } = props;
+    const { product, search, handleClick } = props;
     // States
     const [response, setResponse] = useState({
         isDeleted: false,
@@ -107,17 +108,18 @@ const DeleteProduct = (props) => {
                     </header>
                     <div className='scroll'>
                         <div className="modal-body">
-                            <section>
-                                {cardImage}
-                                {/* <Image
+                            <section className="modal-section">
+                                <div className="card-section">
+                                    <ProductImage classList={'product-image'}>
+                                        <Image
                                             classList={'col-12'}
-                                            product={product} */}
-                                {/* /> */}
-                                {/* <ProductImage classList={'product-image'}>
-
-                                    </ProductImage> */}
-
-
+                                            product={product}
+                                        />
+                                    </ProductImage>
+                                </div>
+                                <div className="card-section">
+                                    {/* <CollectionDetails product={product} /> */}
+                                </div>
                             </section>
                             <section className="modal-warning">
                                 <div className="warning-message">
