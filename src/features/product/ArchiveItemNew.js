@@ -136,7 +136,6 @@ const ArchiveItemNew = ({ index, product, count, handleSlideView }) => {
 
     const turnCard = () => {
         cardRef.current?.classList.toggle('rotate-y-180');
-
     }
 
     return (

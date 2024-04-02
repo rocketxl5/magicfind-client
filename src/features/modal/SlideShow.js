@@ -7,7 +7,6 @@ import DoubleFaceCard from './DoubleFaceCard'
 import SlideIndicators from './SlideIndicators';
 import Container from '../../components/Container';
 import ACTIONS from '../../data/ACTIONS';
-import { FaImages } from 'react-icons/fa6';
 
 const SlideShow = ({ slides, handleClick }) => {
     const { INTERVAL, RESET, LIMIT } = ACTIONS.SLIDE;
