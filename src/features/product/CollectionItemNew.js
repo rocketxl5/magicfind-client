@@ -6,6 +6,7 @@ import { AiOutlineDelete } from "react-icons/ai";
 import { AiOutlineEdit } from "react-icons/ai";
 import { IoExpand } from "react-icons/io5";
 import { AiOutlineInfoCircle } from "react-icons/ai";
+import { AiOutlineCloseCircle } from "react-icons/ai";
 import useExpandImage from '../../hooks/useExpandImage';
 import data from '../../data/SEARCH.json';
 
