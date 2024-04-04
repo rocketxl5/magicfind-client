@@ -150,7 +150,7 @@ color: var(--clr-light);
 .auth-layout {
   padding-top: var(--auth-header-height);
   background-color: var(--clr-light);
-  flex-basis: 100%;
+
 }
 
 .layout {
@@ -160,12 +160,11 @@ color: var(--clr-light);
 
 .layout,
 .auth-layout {
-  /* position: relative; */
-  /* min-height: calc(100vh - 17rem); */
-  width: 100%;
+  width: 100vw;
   min-width: 37rem;
   max-width: 135rem;
   margin: auto;
+  flex-basis: 100%;
 }
 
 .auth-layout .main-header {
@@ -654,10 +653,10 @@ height: 2rem;
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 100%;
   min-width: 37rem;
   min-height: var(--header-height);
   max-width: 1350px;
-  /* margin-block-start: 4rem; */
   color: var(--clr-grey);
   background-color: var(--clr-primary);
   font-size: var(--fs-100);
