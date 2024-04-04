@@ -1,9 +1,9 @@
 {
   "search-results": {
     "id": "search-results",
-    "classList": "page search-results",
+    "classList": "page relative",
     "header": {
-      "classList": "page-header flex space-between align-center col-12 margin-bottom-1"
+      "classList": "page-header flex space-between align-center col-12 padding-block-1 margin-bottom-1"
     },
     "title": {
       "classList": "page-title",

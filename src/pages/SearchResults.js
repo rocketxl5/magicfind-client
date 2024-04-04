@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import ArchiveItem from '../features/product/ArchiveItem';
 import ArchiveItemNew from '../features/product/ArchiveItemNew';
 import CollectionItemNew from '../features/product/CollectionItemNew';
 import CatalogItemNew from '../features/product/CatalogItemNew';
@@ -65,11 +64,10 @@ const SearchResults = () => {
                 </Modal>
             }
             {imagesLoaded &&
-                // <Page id={'search-results'} name={'search-results'} >
-                <Page id={'search-results'} name={'search-results'} component={<Count count={cards.length} type={'Result'} />}>
+                <Page id={'search-results'} classList={'padding-top-3'} name={'search-results'} component={<Count count={cards.length} type={'Result'} />}>
                 <SearchParameters setSearchFeatures={(value) => setSearchFeatures(value)} searchFeatures={searchFeatures} /> 
-                    {loading && <Loader />}
-                    <main>
+                    <main className='padding'>
+                        {loading && <Loader />}
                         <List classList="list align-center">
                         {
                             cards &&

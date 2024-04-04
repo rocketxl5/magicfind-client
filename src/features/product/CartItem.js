@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import ProductImage from './components/ProductImage';
 import ProductHeader from './components/ProductHeader';
 import Title from '../../components/Title';
 import CountDown from '../search/components/CountDown';

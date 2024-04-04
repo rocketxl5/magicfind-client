@@ -1,8 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
 import { useNavigate, useLocation, useParams } from 'react-router-dom';
-import ProductImage from './ProductImage';
-import ProductDetails from './ProductDetails';
-import Image from '../../../components/Image';
 import Success from './Success'
 import Loader from '../../../layout/Loader';
 import Option from '../../../components/Option';

@@ -1,6 +1,5 @@
 import { useState, useRef } from 'react';
 import { useNavigate, useLocation, useParams } from 'react-router-dom';
-import ProductImage from './ProductImage';
 import Image from '../../../components/Image';
 import Success from './Success';
 import Loader from '../../../layout/Loader';
@@ -110,12 +109,12 @@ const DeleteProduct = (props) => {
                         <div className="modal-body">
                             <section className="modal-section">
                                 <div className="card-section">
-                                    <ProductImage classList={'product-image'}>
+
                                         <Image
                                             classList={'col-12'}
                                             product={product}
                                         />
-                                    </ProductImage>
+
                                 </div>
                                 <div className="card-section">
                                     {/* <CollectionDetails product={product} /> */}

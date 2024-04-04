@@ -48,10 +48,10 @@ const MainHeader = () => {
         <Catalog />
         <Navbar />
       </div>
-      {/* {
+      {
         isAuth &&
         <DashboardNav />
-      } */}
+      }
     </header>
   )
 }

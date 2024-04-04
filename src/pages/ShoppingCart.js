@@ -29,11 +29,9 @@ function ShoppingCart() {
       id={'shopping-cart'}
       name={'shopping-cart'}
       hasHeader={false}
-    >
-      <>
-          {
-            cartItems?.length ? (
-            <>
+    >        
+      {cartItems.length > 0 &&
+        <>
               <Aside classList={'cart-aside'}>
                 <>
                   <Container classList={'cart-total flex gap-1'}>
@@ -71,13 +69,11 @@ function ShoppingCart() {
                   }
                 </List>
               </Main>
-            </>
-        ) : (
-              <Container>Your Cart is Empty</Container>
-          )}
       </>
+      }
     </Page>
-  );
+
+  )
 }
 
 export default ShoppingCart;
