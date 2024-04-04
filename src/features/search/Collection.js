@@ -17,7 +17,7 @@ import setQueryString from '../../assets/utilities/setQueryString';
 
 const Collection = () => {
     // States
-    const [loading, setLoading] = useState(false);
+    // const [loading, setLoading] = useState(false);
     const [isActive, setIsActive] = useState(false);
     // Context
     const {
@@ -29,6 +29,8 @@ const Collection = () => {
         setCardName,
         setCardNames,
         predictions,
+        setLoading,
+        loading,
         collectionCardNames,
         collectionInputRef
     } = useSearch();
@@ -155,33 +157,30 @@ const Collection = () => {
     return (
         <>
             <Page name={'collection'} >
-                {loading ? <Loader /> :
                     <main>
-                        {
-                            isCollectionEmpty ? (
-                                <Message type={'collection'} />
-
-                            ) : (
-                                    <Form id={'collection-form'} classList={'search-form'} handleSubmit={searchCollectionCard}>
-                                        <SearchInput
-                                            id={'collection'}
-                                            className={'search-field'}
-                                            placeholder={'Search Your Collection'}
-                                            searchCard={searchCollectionCard}
-                                            isActive={isActive}
-                                            ref={collectionInputRef} />
-                                        <Button
-                                            id={''}
-                                            classList='bg-success btn-collection'
-                                            handleClick={() => searchCollection('cards')}
-                                        >
-                                            {'All Cards'}
-                                        </Button>
-                                    </Form>
-                                )
-                        }
+                    {loading && <Loader />}
+                    {/* {
+                        isCollectionEmpty &&
+                        <Message type={'collection'} />
+                    } */}
+                    <Form id={'collection-form'} classList={'search-form'} handleSubmit={searchCollectionCard}>
+                        <SearchInput
+                            id={'collection'}
+                            className={'search-field'}
+                            placeholder={'Search Your Collection'}
+                            searchCard={searchCollectionCard}
+                            isActive={isActive}
+                            ref={collectionInputRef} />
+                        <Button
+                            id={''}
+                            classList='bg-success btn-collection'
+                            handleClick={() => searchCollection('cards')}
+                        >
+                            {'All Cards'}
+                        </Button>
+                    </Form>
                     </main>
-                }
+
         </Page>
         </>
     )

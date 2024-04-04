@@ -16,6 +16,7 @@ import data from '../../data/SEARCH.json';
 import useViewport from '../../hooks/contexthooks/useViewport';
 import useCart from '../../hooks/contexthooks/useCart';
 import useUpdateCart from '../../hooks/useUpdateCart';
+import useFetchData from '../../hooks/useFetchData';
 import { AiOutlineDelete } from "react-icons/ai";
 
 const CartItem = ({ index, count, product }) => {
@@ -32,9 +33,13 @@ const CartItem = ({ index, count, product }) => {
 
   const { isMobile } = useViewport();
   const { cartItems } = useCart();
+  // const {fetchData} = useFetchData();
   const { loading, updateCartHandler } = useUpdateCart(url, headers, product, index);
 
   useEffect(() => {
+    // console.log(cartItems);
+    // console.log(product)
+    // updateCartHandler(product.quantity)
     setPrice(parseFloat(product.selected.price));
   }, []);
 
@@ -135,10 +140,10 @@ const CartItem = ({ index, count, product }) => {
           {/* <label className='strong col-9 fs-125 text-center push-right d-block padding-bottom-1' htmlFor={`item${index}`}>Quantity Selected </label> */}
           <Button
             classList={'btn-tiny bg-danger'}
-          handleClick={(e) => updateCartHandler(0)}
-        >
+            handleClick={(e) => updateCartHandler(0)}
+          >
             <AiOutlineDelete />
-        </Button>
+          </Button>
           <Container classList={'col-9 text-right dropdown'}>
             <QuantitySelector
               id={`item${index}`}

@@ -3,7 +3,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import ArchiveItem from '../features/product/ArchiveItem';
 import ArchiveItemNew from '../features/product/ArchiveItemNew';
 import CollectionItemNew from '../features/product/CollectionItemNew';
-import CatalogItem from '../features/product/CatalogItem';
+import CatalogItemNew from '../features/product/CatalogItemNew';
 import Modal from '../features/modal/Modal';
 import List from '../components/List';
 import ListItem from '../components/ListItem';
@@ -14,6 +14,8 @@ import SearchParameters from '../features/search/components/SearchParameters';
 import useCollectionModal from '../hooks/useCollectionModal';
 import useSlideView from '../hooks/useSlideView';
 import useImageLoader from '../hooks/useImageLoader';
+import useSearch from '../hooks/contexthooks/useSearch';
+import Loader from '../layout/Loader';
 
 const SearchResults = () => {
     // States
@@ -23,15 +25,16 @@ const SearchResults = () => {
     const navigate = useNavigate();
 
     const { cards, search } = location.state;
+    const { loading } = useSearch();
+
 
     useEffect(() => {
-        // console.log(location)
         // If cards is empty
         if (!cards?.length) {
             // Send to collection page
             navigate('/me/collection');
         }
-    }, [location, cards, navigate]);
+    }, [location]);
 
     const [imagesLoaded] = useImageLoader(cards);
 
@@ -61,13 +64,13 @@ const SearchResults = () => {
                     {state.component}
                 </Modal>
             }
-            {
-                imagesLoaded &&
+            {imagesLoaded &&
                 // <Page id={'search-results'} name={'search-results'} >
                 <Page id={'search-results'} name={'search-results'} component={<Count count={cards.length} type={'Result'} />}>
                 <SearchParameters setSearchFeatures={(value) => setSearchFeatures(value)} searchFeatures={searchFeatures} /> 
-                <main>
-                            <List classList="list align-center">
+                    {loading && <Loader />}
+                    <main>
+                        <List classList="list align-center">
                         {
                             cards &&
                             cards.map((card, i) => {
@@ -77,7 +80,7 @@ const SearchResults = () => {
                                             {
                                                 search === 'catalog'
                                                     ?
-                                                    <CatalogItem
+                                                    <CatalogItemNew
                                                         index={i}
                                                         product={card}
                                                         count={cards.length}
@@ -106,8 +109,8 @@ const SearchResults = () => {
                                 )
                             })
                         }
-                    </List>
-                </main>
+                        </List>
+                    </main>
                 </Page>}
         </>
     )

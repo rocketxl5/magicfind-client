@@ -1,22 +1,20 @@
 import React, {
     useState,
     useEffect,
-    useContext
 } from 'react';
 import { useNavigate } from 'react-router-dom';
 import SearchInput from './components/SearchInput'
 import Form from '../../components/Form';
-import { SearchContext } from '../../contexts/SearchContext';
 import useAuth from '../../hooks/contexthooks/useAuth';
 import useNavbar from '../../hooks/contexthooks/useNavbar.js';
-import { api } from '../../api/resources';
+import useSearch from '../../hooks/contexthooks/useSearch.js';
 import setQueryString from '../../assets/utilities/setQueryString';
+import { api } from '../../api/resources';
 
 const Catalog = () => {
     // States
     const [isActive, setIsActive] = useState(false);
-
-    // Context
+    // Context hook
     const {
         searchInput,
         setLoading,
@@ -28,7 +26,7 @@ const Catalog = () => {
         predictions,
         catalogCardNames,
         catalogInputRef
-    } = useContext(SearchContext);
+    } = useSearch();
     // Hooks
     const { auth, isAuth } = useAuth();
     const { searchBarRef } = useNavbar();
@@ -65,15 +63,19 @@ const Catalog = () => {
         let query;
 
         if (prediction) {
+
             query = prediction;
         }
         else if (cardName) {
+
             query = cardName;
         }
         else if (predictions?.length === 1) {
+
             query = predictions[0];
         }
         else if (searchTerm) {
+
             query = searchTerm;
         }
 
@@ -96,6 +98,7 @@ const Catalog = () => {
                                 search: searchInput.id
                             }));
                             navigate(`/catalog/${setQueryString(query.toLowerCase(), '-')}`,
+
                                 {
                                     state: {
                                         cards: data.cards,
