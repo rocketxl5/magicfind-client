@@ -14,8 +14,8 @@ import useUpdateCart from '../../hooks/useUpdateCart';
 import useViewport from '../../hooks/contexthooks/useViewport';
 import useFind from '../../hooks/useFind';
 import { AiOutlineInfoCircle } from "react-icons/ai";
-import { FiShoppingCart } from "react-icons/fi";
 import { IoExpand } from "react-icons/io5";
+import { FaCheck } from "react-icons/fa6";
 
 import data from '../../data/SEARCH.json';
 
@@ -45,7 +45,7 @@ const CatalogItemNew = ({ index, product, count, cartIndex, handleSlideView }) =
 
     const { findIndex, indexFound } = useFind();
 
-    const { error, loading, showConfirmation, updateCartHandler } = useUpdateCart(url, headers, product, indexFound);
+    const { error, loading, updateCartHandler } = useUpdateCart(url, headers, product, indexFound);
 
     const { expandedImage } = useExpandImage(product);
 
@@ -97,10 +97,9 @@ const CatalogItemNew = ({ index, product, count, cartIndex, handleSlideView }) =
 
     return (
         <>
-            {loading && <Loader />}
-            {showConfirmation && <Confirmation message={!error ? 'Cart Successfuly Updated' : 'An Error Occured'} isSuccess={!error ? true : false} />}
             <div className='product-view'>
-                <div className="product-container">
+                <div className="product-container relative">
+                    {loading && <Loader classList={'bg-alpha'} />}
                     <div className="slide">
                         <div className="double-faced-card" ref={cardRef}>
                             <div className="double-faced-recto">
@@ -116,20 +115,11 @@ const CatalogItemNew = ({ index, product, count, cartIndex, handleSlideView }) =
                                     }
                                     <Drop
                                         id={'expand-image'}
-                                        classList={'drop-bottom absolute color-light bg-primary border-light'}
+                                        classList={'drop-bottom absolute color-light bg-primary border-light-2'}
                                         handleClick={(e) => handleSlideView(e, product.layout, expandedImage)}
                                     >
                                         <IoExpand />
                                     </Drop>
-                                    {
-                                        indexFound !== null ?
-                                            <Drop
-                                                id={'incart-product'}
-                                                classList={'drop-top absolute color-light bg-success border-light'}
-                                            >
-                                                <FiShoppingCart className={'cart-svg'} />
-                                            </Drop> : ''
-                                    }
                                 </ImageNew>
                             </div>
                             <div className="double-faced-verso">
@@ -165,20 +155,6 @@ const CatalogItemNew = ({ index, product, count, cartIndex, handleSlideView }) =
                         >
                             <AiOutlineInfoCircle />
                         </Drop>
-                        {/* <Drop
-                            id={'edit-product'}
-                            classList={'color-light bg-success border-success'}
-                            handleClick={(e) => handleCollectionItem(e, product, expandedImage)}
-                        >
-                            <AiOutlineEdit />
-                        </Drop>
-                        <Drop
-                            id={'delete-product'}
-                            classList={'color-light bg-danger border-danger'}
-                            handleClick={(e) => handleCollectionItem(e, product, expandedImage)}
-                        >
-                            <AiOutlineDelete />
-                        </Drop> */}
                     </div>
                 </div>
             </div>
@@ -202,21 +178,30 @@ const CatalogItemNew = ({ index, product, count, cartIndex, handleSlideView }) =
                         product.set_name
                     }
                 </span>
-                <div className='col-12 flex gap-1'>
-                    <label className='strong col-4 fs-125 vertical-align-middle text-center align-self-center d-block' htmlFor={`item${index}`}>Quantity: </label>
-                    <Container classList={'col-4 text-right dropdown'}>
+                <div className='col-12 relative'>
+                    {/* <label className='strong col-3 fs-125 vertical-align-middle text-center align-self-center d-block' htmlFor={`item${index}`}>Quantity</label> */}
+                    <Container classList={'col-5 text-right margin-auto dropdown'}>
                         <QuantitySelector
                             id={`item${index}`}
                             classList={'col-12'}
                             name={'catalog-item'}
                             // Product already in cart have defined indexFound
-                            quantitySelected={indexFound !== null ? cartItems[indexFound].quantity : 0}
+                            quantitySelected={indexFound !== null ? cartItems[indexFound]?.quantity : 0}
                             quantityAvailable={quantity}
                             product={product}
                             handleChange={updateCartHandler}
                         >
                         </QuantitySelector>
                     </Container>
+
+                    {
+                        indexFound !== null &&
+                        <span
+                            className='in-cart col-2 bg-success color-light box-size-3 border-light-2 b-radius-5 flex align-center justify-center'
+                        >
+                            <FaCheck className='box-size-2' />
+                        </span>
+                    }
                 </div>
             </div>
             <span className='product-count'>{index + 1} of {count}</span>

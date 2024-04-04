@@ -1,9 +1,11 @@
-import Loading from './Loading'
+import { ImSpinner2 } from "react-icons/im";
 
-const Loader = () => {
+const Loader = ({ classList = '' }) => {
     return (
-        <div className="loader">
-            <Loading />
+        <div className={`loader ${classList}`}>
+
+            <ImSpinner2 />
+
         </div>
     )
 }

@@ -4,7 +4,7 @@ import SideBar from './SideBar';
 import MailHeader from './MailHeader';
 import Mail from './Mail';
 import ComposeMessage from './ComposeMessage';
-import Loading from '../../layout/Loading';
+import Loader from '../../layout/Loader';
 import Message from './Message';
 import useAuth from '../../hooks/contexthooks/useAuth';
 import getPath from '../../assets/utilities/getPath';
@@ -160,7 +160,7 @@ const Inbox = () => {
               />
               <Messages>
                 {loading || !messages ? (
-                  <Loading />
+                    <Loader />
                 ) : (
                   messages.map((message, index) => {
                     return (

@@ -51,12 +51,14 @@ input:-webkit-autofill:active{
 }
 
 .form-title h2 {
+    color: var(--clr-dark);
     text-align: center;
     font-weight: 400;
 }
 
 .form-element label,
 .form-element > p {
+    color: var(--clr-dark);
     display: block;
 }
 
@@ -67,6 +69,7 @@ input:-webkit-autofill:active{
     width: 100%;
     padding: 1rem;
     background-color: #fff;
+    color: var(--clr-dark);
     border-radius: 5px;
     font-size: var(--fs-form);
     border: 1px solid var(--clr-grey);
