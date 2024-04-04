@@ -159,7 +159,7 @@ const ArchiveItemNew = ({ index, product, count, handleSlideView }) => {
                                     }
                                     <Drop
                                         id={'expand-image'}
-                                        classList={'drop-bottom absolute color-light bg-primary border-light'}
+                                        classList={'drop-bottom absolute color-light bg-primary border-light-2'}
                                         handleClick={(e) => handleSlideView(e, product.layout, expandedImage)}
                                     >
                                         <IoExpand />
@@ -171,11 +171,11 @@ const ArchiveItemNew = ({ index, product, count, handleSlideView }) => {
                                             </Drop>
                                             :
                                             (isCardAdded || isMatchFound) ?
-                                                <Drop classList={'absolute color-light bg-success border-light drop-top'} >
+                                                <Drop classList={'absolute color-light bg-success border-light-2 drop-top'} >
                                                     <FaCheck />
                                                 </Drop>
                                                 :
-                                                <Drop classList={'absolute color-light bg-primary border-light drop-top'} handleClick={() => postData(token, query)}>
+                                                <Drop classList={'absolute color-light bg-primary border-light-2 drop-top'} handleClick={() => postData(token, query)}>
                                                     <FaPlus />
                                                 </Drop>
                                     }

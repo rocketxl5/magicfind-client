@@ -173,6 +173,10 @@ color: var(--clr-light);
   background: var(--clr-dark);
 }
 
+.layout .shopping-cart .card {
+  background: var(--clr-light);
+}
+
 .layout .product-info *,
 .layout .dropdown * {
   color: var(--clr-dark);
@@ -213,7 +217,7 @@ cursor: pointer;
 }
 
 /* Loading Spinner Styling */
-.loading-content {
+/* .loading-content {
 display: flex;
 height: inherit;
 flex-direction: column;
@@ -225,9 +229,9 @@ align-items: center;
 display: flex;
 align-items: stretch;
 justify-content: center;
-}
+} */
 
-.loading-icon svg {
+.loader svg {
 display: block;
 width: 5rem;
 height: 5rem;
@@ -1445,9 +1449,9 @@ text-align: center;
 }
 
 .dropdown {
-  /* max-width: 10rem; */
   position: relative;
   overflow: hidden;
+  align-self: center;
 }
 
 .dropdown:before,
@@ -1481,6 +1485,12 @@ background-size:
 background-repeat: no-repeat;
 }
 
+.in-cart {
+  position: absolute;
+  right: 2rem;
+  top: 0;
+}
+
 .quantity {
   border-bottom: 1px solid var(--clr-light-grey);
   padding-block-start: 0.3rem;
@@ -1489,16 +1499,12 @@ background-repeat: no-repeat;
 .loader {
   position: absolute;
   display: flex;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  /* height: inherit; */
-  flex-direction: column;
   justify-content: center;
   align-items: center;
+  width: 100%;
+  height: 100%;
   background: var(--clr-light);
-  border-radius: 5px;
+  border-radius: 4.25%;
   z-index: 5000;
 }
 

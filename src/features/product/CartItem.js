@@ -85,21 +85,18 @@ const CartItem = ({ index, count, product }) => {
         </Title>
         <CountDown count={count} unit={index + 1} type={'Result'} />
       </ProductHeader>
-      {loading && <Loader />}
-
+      <div className='relative two'>
+        {loading && <Loader classList={'bg-alpha'} />}
       <ImageNew
         product={product.selected}
-        classList='cart-item-image two'
-
-
+          classList='relative cart-item-image '
           handleClick={() => navigate(
             `/product/${product.selected._id}`,
             {
               state: { product: product.selected }
             })}
-      >
-
-      </ImageNew>
+        />
+      </div>
 
       <Container classList={' three'}>
         {/* <List classList={'product-details'}>

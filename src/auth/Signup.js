@@ -1,6 +1,6 @@
 import React, { useRef, useState, useEffect, useReducer } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import Loading from '../layout/Loading';
+import Loader from '../layout/Loader';
 import FormInput from './components/FormInput';
 import reducer from './reducer/inputReducer';
 import errorHandler from './helpers/authErrorHandler';
@@ -280,7 +280,7 @@ const Signup = () => {
     <>
       {loading ?
         (
-          <Loading />
+          <Loader />
         ) : (
           <div className="form-content">
             <div className="form-logo">

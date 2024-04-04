@@ -38,7 +38,6 @@ const useUpdateCart = (url, headers, item, indexFound = undefined) => {
                 else {
                     // Else add item in cart [new item]
                     items.push({ selected: item, quantity: quantity });
-                    // console.log(items)
                 }
                 // Update cart reducer @ CartContext
                 dispatch({
@@ -83,10 +82,10 @@ const useUpdateCart = (url, headers, item, indexFound = undefined) => {
                     });
                 })
                 .finally(() => {
-                    setShowConfirmation(true);
-                    setTimeout(() => {
-                        setShowConfirmation(false);
-                    }, 1500);
+                    // setShowConfirmation(true);
+                    // setTimeout(() => {
+                    //     setShowConfirmation(false);
+                    // }, 1500);
                     setLoading(false);
                 })
     }

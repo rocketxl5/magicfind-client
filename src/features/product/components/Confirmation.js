@@ -14,8 +14,8 @@ const Confirmation = ({ message, isSuccess }) => {
                 <div className='flex column align-center justify-center bg-light height-85'>
                     {
                         isSuccess ?
-                            <FaRegCheckCircle className='color-success d-block square-size-12' /> :
-                            <FaRegTimesCircle className="color-danger d-block square-size-12" />
+                            <FaRegCheckCircle className='color-success d-block box-size-12' /> :
+                            <FaRegTimesCircle className="color-danger d-block box-size-12" />
                     }
                 </div>
             </div>
