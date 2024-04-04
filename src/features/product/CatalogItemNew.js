@@ -1,17 +1,10 @@
 import { useState, useEffect, useRef } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import ProductImage from './components/ProductImage';
-import ProductHeader from './components/ProductHeader';
 import Container from '../../components/Container';
-import List from '../../components/List';
-import ListItem from '../../components/ListItem';
-import Title from '../../components/Title';
 import Drop from '../../components/Drop';
 import ImageNew from '../../components/ImageNew';
 import Loader from '../../layout/Loader';
-import CountDown from '../search/components/CountDown';
 import Confirmation from './components/Confirmation';
-import ExpandImgBtn from './components/ExpandImage';
 import QuantitySelector from './components/QuantitySelector';
 import Avatar from '../../components/Avatar';
 import useAuth from '../../hooks/contexthooks/useAuth';
@@ -25,14 +18,8 @@ import { FiShoppingCart } from "react-icons/fi";
 import { IoExpand } from "react-icons/io5";
 
 import data from '../../data/SEARCH.json';
-// import { find } from '../../../../server/models/Card';
-
 
 const CatalogItemNew = ({ index, product, count, cartIndex, handleSlideView }) => {
-    // If defined, then item is in cart
-    // const [indexFound, setIndexFound] = useState(undefined);
-    // const [hasLoaded, setHasLoaded] = useState(false);
-    // const [isCart, setIsCart] = useState(false);
     const {
         name,
         set_name,
@@ -64,7 +51,7 @@ const CatalogItemNew = ({ index, product, count, cartIndex, handleSlideView }) =
 
     const details = [
         {
-            title: 'Edition:',
+            title: 'Set:',
             value: set_name
         },
         {
@@ -84,24 +71,21 @@ const CatalogItemNew = ({ index, product, count, cartIndex, handleSlideView }) =
             value: `$ ${price} `
         },
         {
-            title: 'Quantity available:',
+            title: 'Quantity:',
             value: quantity
         }
     ];
 
     useEffect(() => {
-        console.log(location)
-        // console.log(cartItems)
+        console.log(product)
         findIndex(product._id)
     }, [location])
 
 
 
     useEffect(() => {
-        // console.log(product)
-        // findIndex(product._id);
-        // Returns the index of product item if found
-        // Returns null if not
+        // Sets the index of product item if found in cart
+        // Set null if not
         // @ CatalogItem
         findIndex(product._id)
     }, [cartItems]);
@@ -151,7 +135,7 @@ const CatalogItemNew = ({ index, product, count, cartIndex, handleSlideView }) =
                             <div className="double-faced-verso">
                                 <div className='product-info'>
                                     <div>
-                                        <h2 className='text-center fs-150 fw-500 padding-bottom-dot-5'>Card Info</h2>
+                                        <h2 className='text-center fs-150 fw-500 padding-bottom-dot-5'>{product.name}</h2>
                                     </div>
                                     <table>
                                         <tbody>

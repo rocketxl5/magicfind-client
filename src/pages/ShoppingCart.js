@@ -25,8 +25,6 @@ function ShoppingCart() {
   const location = useLocation();
 
   return (
-
-
     <Page
       id={'shopping-cart'}
       name={'shopping-cart'}

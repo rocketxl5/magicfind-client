@@ -1,7 +1,7 @@
 {
   "search-results": {
     "id": "search-results",
-    "classList": "page relative padding-top-3",
+    "classList": "page relative",
     "header": {
       "classList": "page-header flex space-between align-center col-12 padding-block-1 margin-bottom-1"
     },

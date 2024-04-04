@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import ArchiveItem from '../features/product/ArchiveItem';
 import ArchiveItemNew from '../features/product/ArchiveItemNew';
 import CollectionItemNew from '../features/product/CollectionItemNew';
 import CatalogItemNew from '../features/product/CatalogItemNew';
