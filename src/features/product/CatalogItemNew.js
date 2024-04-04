@@ -1,31 +1,71 @@
-import { useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
+import ProductImage from './components/ProductImage';
+import ProductHeader from './components/ProductHeader';
+import Container from '../../components/Container';
+import List from '../../components/List';
+import ListItem from '../../components/ListItem';
+import Title from '../../components/Title';
 import Drop from '../../components/Drop';
 import ImageNew from '../../components/ImageNew';
-import { FaCommentsDollar } from "react-icons/fa";
-import { AiOutlineDelete } from "react-icons/ai";
-import { AiOutlineEdit } from "react-icons/ai";
-import { IoExpand } from "react-icons/io5";
-import { AiOutlineInfoCircle } from "react-icons/ai";
-// import { AiOutlineCloseCircle } from "react-icons/ai";
+import Loader from '../../layout/Loader';
+import CountDown from '../search/components/CountDown';
+import Confirmation from './components/Confirmation';
+import ExpandImgBtn from './components/ExpandImage';
+import QuantitySelector from './components/QuantitySelector';
+import Avatar from '../../components/Avatar';
+import useAuth from '../../hooks/contexthooks/useAuth';
+import useCart from '../../hooks/contexthooks/useCart';
 import useExpandImage from '../../hooks/useExpandImage';
+import useUpdateCart from '../../hooks/useUpdateCart';
+import useViewport from '../../hooks/contexthooks/useViewport';
+import useFind from '../../hooks/useFind';
+import { AiOutlineInfoCircle } from "react-icons/ai";
+import { FiShoppingCart } from "react-icons/fi";
+import { IoExpand } from "react-icons/io5";
+
 import data from '../../data/SEARCH.json';
+// import { find } from '../../../../server/models/Card';
 
-import timestampConverter from '../../assets/utilities/timestampConverter';
 
-const CollectionItem = ({ index, product, count, handleCollectionItem, handleSlideView }) => {
-    const { longDate } = timestampConverter;
+const CatalogItemNew = ({ index, product, count, cartIndex, handleSlideView }) => {
+    // If defined, then item is in cart
+    // const [indexFound, setIndexFound] = useState(undefined);
+    // const [hasLoaded, setHasLoaded] = useState(false);
+    // const [isCart, setIsCart] = useState(false);
+    const {
+        name,
+        set_name,
+        price,
+        quantity,
+        seller
+    } = product;
+    const { userName, country, avatar, rating, email } = seller;
+
+    const url = `/api/catalog/${seller.userID}/${product._id}/`;
+    const headers = {
+        'Content-Type': 'application/json'
+    };
+
+    const cardRef = useRef(null);
+
+    const navigate = useNavigate();
+    const location = useLocation();
+
+    const { isMobile } = useViewport();
+
+    const { cartItems } = useCart();
+
+    const { findIndex, indexFound } = useFind();
+
+    const { error, loading, showConfirmation, updateCartHandler } = useUpdateCart(url, headers, product, indexFound);
 
     const { expandedImage } = useExpandImage(product);
-    const cardRef = useRef(null);
 
     const details = [
         {
-            title: 'Status:',
-            value: product._is_published ? 'Published' : 'Unpublished'
-        },
-        {
-            title: 'Published On:',
-            value: longDate(product._date_published)
+            title: 'Edition:',
+            value: set_name
         },
         {
             title: 'Finish:',
@@ -33,25 +73,39 @@ const CollectionItem = ({ index, product, count, handleCollectionItem, handleSli
         },
         {
             title: 'Condition:',
-            value: data.product.conditions[product._condition]
+            value: data.product.conditions[product.condition]
         },
         {
             title: 'Language:',
-            value: data.product.languages[product._language]
+            value: data.product.languages[product.language]
         },
         {
             title: 'Price:',
-            value: `$ ${product._price}`
+            value: `$ ${price} `
         },
         {
-            title: 'Quantity:',
-            value: product._quantity
-        },
-        {
-            title: 'Comment:',
-            value: product._comment ? 'Yes' : 'None'
+            title: 'Quantity available:',
+            value: quantity
         }
     ];
+
+    useEffect(() => {
+        console.log(location)
+        // console.log(cartItems)
+        findIndex(product._id)
+    }, [location])
+
+
+
+    useEffect(() => {
+        // console.log(product)
+        // findIndex(product._id);
+        // Returns the index of product item if found
+        // Returns null if not
+        // @ CatalogItem
+        findIndex(product._id)
+    }, [cartItems]);
+
 
     const turnCard = () => {
         cardRef.current?.classList.toggle('rotate-y-180');
@@ -59,6 +113,8 @@ const CollectionItem = ({ index, product, count, handleCollectionItem, handleSli
 
     return (
         <>
+            {loading && <Loader />}
+            {showConfirmation && <Confirmation message={!error ? 'Cart Successfuly Updated' : 'An Error Occured'} isSuccess={!error ? true : false} />}
             <div className='product-view'>
                 <div className="product-container">
                     <div className="slide">
@@ -82,13 +138,13 @@ const CollectionItem = ({ index, product, count, handleCollectionItem, handleSli
                                         <IoExpand />
                                     </Drop>
                                     {
-                                        product._is_published &&
-                                        <Drop
-                                            id={'instore-product'}
-                                            classList={'drop-top absolute color-light bg-success border-light'}
-                                        >
-                                            <FaCommentsDollar />
-                                        </Drop>
+                                        indexFound !== null ?
+                                            <Drop
+                                                id={'incart-product'}
+                                                classList={'drop-top absolute color-light bg-success border-light'}
+                                            >
+                                                <FiShoppingCart className={'cart-svg'} />
+                                            </Drop> : ''
                                     }
                                 </ImageNew>
                             </div>
@@ -125,7 +181,7 @@ const CollectionItem = ({ index, product, count, handleCollectionItem, handleSli
                         >
                             <AiOutlineInfoCircle />
                         </Drop>
-                        <Drop
+                        {/* <Drop
                             id={'edit-product'}
                             classList={'color-light bg-success border-success'}
                             handleClick={(e) => handleCollectionItem(e, product, expandedImage)}
@@ -138,11 +194,18 @@ const CollectionItem = ({ index, product, count, handleCollectionItem, handleSli
                             handleClick={(e) => handleCollectionItem(e, product, expandedImage)}
                         >
                             <AiOutlineDelete />
-                        </Drop>
+                        </Drop> */}
                     </div>
-                </div >
-            </div >
+                </div>
+            </div>
             <div className="product-name-wrapper flex column">
+                {/* <div className="seller">
+                    <p>Seller: <strong>{`${product.seller.userName}`}</strong></p>
+                    <p>Rating: {product.seller.rating}</p>
+                    <p>Seller Store:
+                        <Avatar avatar={product.seller.avatar} handleClick={() => { console.log(seller) }} />
+                    </p>
+                </div> */}
                 <span className="product-name">
                     {
                         product.name.length < 35 ?
@@ -155,6 +218,22 @@ const CollectionItem = ({ index, product, count, handleCollectionItem, handleSli
                         product.set_name
                     }
                 </span>
+                <div className='col-12 flex flex-end gap-1'>
+                    <label className='strong col-9 fs-125 vertical-align-middle text-center align-self-center push-right d-block' htmlFor={`item${index}`}>Quantity: </label>
+                    <Container classList={'col-8 text-right dropdown'}>
+                        <QuantitySelector
+                            id={`item${index}`}
+                            classList={'col-12'}
+                            name={'catalog-item'}
+                            // Product already in cart have defined indexFound
+                            quantitySelected={indexFound !== null ? cartItems[indexFound].quantity : 0}
+                            quantityAvailable={quantity}
+                            product={product}
+                            handleChange={updateCartHandler}
+                        >
+                        </QuantitySelector>
+                    </Container>
+                </div>
             </div>
             <span className='product-count'>{index + 1} of {count}</span>
         </>
@@ -162,4 +241,4 @@ const CollectionItem = ({ index, product, count, handleCollectionItem, handleSli
 }
 
 
-export default CollectionItem
+export default CatalogItemNew

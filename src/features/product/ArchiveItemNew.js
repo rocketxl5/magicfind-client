@@ -44,6 +44,8 @@ const ArchiveItemNew = ({ index, product, count, handleSlideView }) => {
 
     const query = `/api/cards/add/${user.id}/${product.id}`;
 
+    // console.log(product)
+
     // Sets card price according to card finish
     const setPrice = (prices, finish) => {
         let price;

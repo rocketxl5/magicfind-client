@@ -7,8 +7,6 @@ const Breadcrumbs = () => {
     const location = useLocation();
     const path = location.pathname;
 
-    console.log(location)
-
     if (path.includes('catalog') || path === '/') {
         return null
     }
@@ -25,7 +23,6 @@ const Breadcrumbs = () => {
                     <Link to={currentLink}>{crumb === 'me' ? 'Home' : capitalizeString(crumb, true)}</Link>
                 </span>
             )
-
         })
 
     return (

@@ -18,9 +18,9 @@ const CartBtn = () => {
     >
       {itemsCount > 0 && (
         <Container classList={'cart-count absolute flex column justify-center align-center'} ref={cartCountRef}>
-          <span >
-              {itemsCount}
-            </span>
+          <span>
+            {itemsCount}
+          </span>
         </Container>
       )}
       <FiShoppingCart />

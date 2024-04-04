@@ -14,7 +14,6 @@ import useCart from '../hooks/contexthooks/useCart';
 function ShoppingCart() {
 
   // Hooks
-
   const {
     cartItems,
     subTotal,
@@ -26,7 +25,6 @@ function ShoppingCart() {
   const location = useLocation();
 
   return (
-
     <Page
       id={'shopping-cart'}
       name={'shopping-cart'}
