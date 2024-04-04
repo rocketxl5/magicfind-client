@@ -182,7 +182,7 @@ const CatalogItemNew = ({ index, product, count, cartIndex, handleSlideView }) =
                     </div>
                 </div>
             </div>
-            <div className="product-name-wrapper flex column">
+            <div className="col-12 flex column justify-center align-center gap-1">
                 {/* <div className="seller">
                     <p>Seller: <strong>{`${product.seller.userName}`}</strong></p>
                     <p>Rating: {product.seller.rating}</p>
@@ -202,9 +202,9 @@ const CatalogItemNew = ({ index, product, count, cartIndex, handleSlideView }) =
                         product.set_name
                     }
                 </span>
-                <div className='col-12 flex flex-end gap-1'>
-                    <label className='strong col-9 fs-125 vertical-align-middle text-center align-self-center push-right d-block' htmlFor={`item${index}`}>Quantity: </label>
-                    <Container classList={'col-8 text-right dropdown'}>
+                <div className='col-12 flex gap-1'>
+                    <label className='strong col-4 fs-125 vertical-align-middle text-center align-self-center d-block' htmlFor={`item${index}`}>Quantity: </label>
+                    <Container classList={'col-4 text-right dropdown'}>
                         <QuantitySelector
                             id={`item${index}`}
                             classList={'col-12'}
