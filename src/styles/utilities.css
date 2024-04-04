@@ -42,6 +42,10 @@
     padding-left: 0.7rem !important;
 }
 
+.padding-top-3 {
+    padding-block-start: 3rem !important;
+}
+
 .margin-bottom-1 {
     margin-block-end: var(--size-1) !important;
 }
@@ -266,18 +270,6 @@
 
 .bg-dark {
     background: var(--clr-dark);
-}
-
-.p-top-5 {
-    padding-top: var(--size-5);
-}
-
-.p-top-9 {
-    padding-top: var(--size-9);
-}
-
-.m-top-5 {
-    margin-top: var(--size-5);
 }
 
 /* MTG colors */
