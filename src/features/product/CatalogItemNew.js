@@ -13,7 +13,7 @@ import useExpandImage from '../../hooks/useExpandImage';
 import useUpdateCart from '../../hooks/useUpdateCart';
 import useViewport from '../../hooks/contexthooks/useViewport';
 import useFind from '../../hooks/useFind';
-import { AiOutlineInfoCircle } from "react-icons/ai";
+import { FiShoppingCart } from 'react-icons/fi';
 import { IoExpand } from "react-icons/io5";
 import { FaCheck } from "react-icons/fa6";
 
@@ -99,7 +99,7 @@ const CatalogItemNew = ({ index, product, count, cartIndex, handleSlideView }) =
         <>
             <div className='product-view'>
                 <div className="product-container relative">
-                    {loading && <Loader classList={'bg-alpha'} />}
+                    {loading && <Loader classList={'bg-alpha card-radius'} />}
                     <div className="slide">
                         <div className="double-faced-card" ref={cardRef}>
                             <div className="double-faced-recto">
@@ -150,12 +150,17 @@ const CatalogItemNew = ({ index, product, count, cartIndex, handleSlideView }) =
                     <div className="product-legend absolute flex column space gap-2 justify-center">
                         <Drop
                             id={'info-product'}
-                            classList={'color-light bg-primary border-primary'}
+                            classList={'bg-primary border-light-2'}
                             handleClick={(e) => turnCard(cardRef.current)}
                         >
-                            <AiOutlineInfoCircle />
+                            <svg className="svg" focusable="false" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+                                <path className="fill-light" d="M884.3,357.6c116.8,117.7,151.7,277-362.2,320V496.4L243.2,763.8L522,1031.3V860.8C828.8,839.4,1244.9,604.5,884.3,357.6z"></path>
+                                <path className="fill-grey" d="M557.8,288.2v138.4l230.8-213.4L557.8,0v142.8c-309.2,15.6-792.1,253.6-426.5,503.8C13.6,527.9,30,330.1,557.8,288.2z"></path>
+                            </svg>
+
                         </Drop>
                     </div>
+                    <span className='product-count'>{index + 1} of {count}</span>
                 </div>
             </div>
             <div className="col-12 flex column justify-center align-center gap-1">
@@ -178,9 +183,9 @@ const CatalogItemNew = ({ index, product, count, cartIndex, handleSlideView }) =
                         product.set_name
                     }
                 </span>
-                <div className='col-12 relative'>
+                <div className='col-3 relative'>
                     {/* <label className='strong col-3 fs-125 vertical-align-middle text-center align-self-center d-block' htmlFor={`item${index}`}>Quantity</label> */}
-                    <Container classList={'col-5 text-right margin-auto dropdown'}>
+                    <Container classList={'col-12 text-right margin-auto dropdown'}>
                         <QuantitySelector
                             id={`item${index}`}
                             classList={'col-12'}
@@ -196,15 +201,16 @@ const CatalogItemNew = ({ index, product, count, cartIndex, handleSlideView }) =
 
                     {
                         indexFound !== null &&
-                        <span
-                            className='in-cart col-2 bg-success color-light box-size-3 border-light-2 b-radius-5 flex align-center justify-center'
+                        <div
+                            className='cart-item absolute flex box-size-6 align-center justify-center'
                         >
-                            <FaCheck className='box-size-2' />
-                        </span>
+                                <FiShoppingCart className='box-size-5' />
+
+                            </div>
                     }
                 </div>
             </div>
-            <span className='product-count'>{index + 1} of {count}</span>
+
         </>
     )
 }

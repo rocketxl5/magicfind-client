@@ -181,8 +181,11 @@ input:-webkit-autofill:active{
     padding: 1rem;
     border: 1px solid var(--clr-danger);
     border-radius: 5px;
-    color: var(--clr-danger);
     background-color: rgba(220, 53, 69, 0.1);
+}
+
+.show-error-message * {
+    color: var(--clr-danger);
 }
 
 .show-success-message {
@@ -191,8 +194,11 @@ input:-webkit-autofill:active{
     padding: 1rem;
     border: 1px solid var(--clr-success);
     border-radius: 5px;
-    color: var(--clr-primary);
     background-color: rgba(34, 170, 68, 0.1);
+}
+
+.show-success-message * {
+    color: var(--clr-primary);
 }
 
 .auth-message-title {
