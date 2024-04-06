@@ -50,6 +50,10 @@
     margin-block-end: var(--size-1) !important;
 }
 
+.margin-bottom-2 {
+    margin-block-end: var(--size-2) !important;
+}
+
 .margin-block-start-2 {
     margin-block-start: var(--size-2);
 }
@@ -363,6 +367,10 @@
     pointer-events: none;
 }
 
+.card-radius {
+    border-radius: 4.25% !important;
+}
+
 .b-radius-5 {
     border-radius: 5px;
 }
@@ -385,6 +393,10 @@
 
 .b-radius-50 {
     border-radius: 50%;
+}
+
+.fs-075 {
+    font-size: var(--fs-075) !important;
 }
 
 .fs-100 {
@@ -552,23 +564,23 @@
 }
 
 .box-size-3 {
-    width: 3rem !important;
-    height: 3rem !important;
+    width: 1.5rem !important;
+    height: 1.5rem !important;
 }
 
 .box-size-4 {
-    width: 4rem;
-    height: 4rem;
+    width: 2rem;
+    height: 2rem;
 }
 
 .box-size-5 {
-    width: 5rem;
-    height: 5rem;
+    width: 2.5rem;
+    height: 2.5rem;
 }
 
 .box-size-6 {
-    width: 6rem;
-    height: 6rem;
+    width: 3rem;
+    height: 3rem;
 }
 
 .box-size-12 {
@@ -582,4 +594,15 @@
 
 .z-minus {
     z-index: -1;
+}
+
+.fill-light {
+    fill: var(--clr-light);
+}
+.fill-grey {
+    fill: var(--clr-grey);
+}
+
+.fill-success {
+    fill: var(--clr-success);
 }

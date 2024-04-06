@@ -66,7 +66,7 @@ const SearchResults = () => {
             {imagesLoaded &&
                 <Page id={'search-results'} classList={'padding-top-3'} name={'search-results'} component={<Count count={cards.length} type={'Result'} />}>
                 <SearchParameters setSearchFeatures={(value) => setSearchFeatures(value)} searchFeatures={searchFeatures} /> 
-                    <main className='padding'>
+                    <main>
                         {loading && <Loader />}
                         <List classList="list align-center">
                         {
