@@ -1,6 +1,6 @@
 import { useReducer } from 'react';
-import SingleFaceCard from '../features/modal/SingleFaceCard';
-import DoubleFaceCard from '../features/modal/DoubleFaceCard';
+import OneSidedSlide from '../features/modal/OneSidedSlide';
+import TwoSidedSlide from '../features/modal/TwoSidedSlide';
 import SlideView from '../features/modal/SlideView';
 
 const useSlideView = (callback) => {
@@ -20,9 +20,9 @@ const useSlideView = (callback) => {
                     open: true,
                     component:
                         <SlideView handleClick={callback}>
-                            <SingleFaceCard>
+                            <OneSidedSlide classList={{ container: 'modal-slide-container' }}>
                                 {action.payload.expandedImage}
-                            </SingleFaceCard>
+                            </OneSidedSlide>
                         </SlideView>
                 }
             case ACTIONS.DOUBLE:
@@ -30,9 +30,9 @@ const useSlideView = (callback) => {
                     open: true,
                     component:
                         <SlideView handleClick={callback}>
-                            <DoubleFaceCard>
+                            <TwoSidedSlide classList={{ container: 'modal-slide-container', btn: 'action-btn' }}>
                                 {action.payload.expandedImage}
-                            </DoubleFaceCard>
+                            </TwoSidedSlide>
                         </SlideView>
                 }
             default:
