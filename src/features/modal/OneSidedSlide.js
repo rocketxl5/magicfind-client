@@ -2,7 +2,7 @@ import { useRef, useState, useEffect } from 'react'
 import RotateBtn from './buttons/RotateBtn';
 import FlipBtn from './buttons/FlipBtn';
 
-const SingleFaceCard = ({ children }) => {
+const OneSidedSlide = ({ children, classList }) => {
     const [isMounted, setIsMounted] = useState(false);
     const cardRef = useRef(null);
     const motion = children?.props.motion;
@@ -11,18 +11,18 @@ const SingleFaceCard = ({ children }) => {
     }, [])
 
     return (
-        <div id={motion} className="slide-container" >
+        <div id={motion} className={classList.container} >
             <div className="slide">
-                    {
-                        isMounted &&
+                {
+                    isMounted &&
                         motion === 'flip' ? (
                         <FlipBtn target={cardRef?.current} />
                     ) : motion === 'rotate' ? (
                         <RotateBtn target={cardRef?.current} />
-                        ) : (
-                            <></>
-                            )
-                    }
+                    ) : (
+                        <></>
+                    )
+                }
                 <div className="single-faced-card" ref={cardRef}>
                     {children}
                 </div>
@@ -31,4 +31,4 @@ const SingleFaceCard = ({ children }) => {
     )
 }
 
-export default SingleFaceCard
+export default OneSidedSlide

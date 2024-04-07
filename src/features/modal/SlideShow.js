@@ -2,8 +2,8 @@ import { useRef, useState, useEffect } from 'react'
 import CloseBtn from './buttons/CloseBtn';
 import LeftBtn from './buttons/LeftBtn';
 import RightBtn from './buttons/RightBtn';
-import SingleFaceCard from './SingleFaceCard';
-import DoubleFaceCard from './DoubleFaceCard'
+import OneSidedSlide from './OneSidedSlide';
+import TwoSidedSlide from './TwoSidedSlide'
 import SlideIndicators from './SlideIndicators';
 import Container from '../../components/Container';
 import ACTIONS from '../../data/ACTIONS';
@@ -51,16 +51,16 @@ const SlideShow = ({ slides, handleClick }) => {
                         const motion = !slide.length ? slide.props.motion : slide[0].props.motion;
                         if (['static', 'flip', 'rotate'].includes(motion)) {
                             return (
-                                <SingleFaceCard key={i} motion={motion}>
+                                <OneSidedSlide key={i} classList={{ container: 'modal-slide-container' }} motion={motion}>
                                     {slide}
-                                </SingleFaceCard>
+                                </OneSidedSlide>
                             );
                         }
                         else {
                             return (
-                                <DoubleFaceCard key={i} motion={motion}>
+                                <TwoSidedSlide key={i} classList={{ container: 'modal-slide-container', btn: 'action-btn' }} motion={motion}>
                                     {slide}
-                                </DoubleFaceCard>
+                                </TwoSidedSlide>
                             );
                         }
                     })

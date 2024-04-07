@@ -1,7 +1,7 @@
 import { useRef, useState, useEffect } from 'react'
 import TurnBtn from './buttons/TurnBtn';
 
-const DoubleFaceCard = ({ children, motion }) => {
+const TwoSidedSlide = ({ children, classList, motion }) => {
     const [isMounted, setIsMounted] = useState(false);
     const cardRef = useRef(null);
 
@@ -10,9 +10,9 @@ const DoubleFaceCard = ({ children, motion }) => {
     }, [])
 
     return (
-        <div id={motion} className="slide-container" >
+        <div id={motion} className={classList.container} >
             <div className="slide">
-                {isMounted && <TurnBtn target={cardRef.current} />}
+                {isMounted && <TurnBtn classList={classList.btn} target={cardRef.current} />}
                 <div className="double-faced-card" ref={cardRef}>
                     <div className="double-faced-recto">
                         {children[0]}
@@ -26,4 +26,4 @@ const DoubleFaceCard = ({ children, motion }) => {
     )
 }
 
-export default DoubleFaceCard
+export default TwoSidedSlide
