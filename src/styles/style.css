@@ -1721,6 +1721,7 @@ text-align: center;
   padding: 1rem;
   min-height: 341px;
   min-width: 244px;
+  background: var(--clr-light);
   /* background: #80A9B0; */
   /* background:#576042; */
 }
