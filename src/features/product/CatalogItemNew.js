@@ -6,6 +6,7 @@ import ImageNew from '../../components/ImageNew';
 import Loader from '../../layout/Loader';
 import Confirmation from './components/Confirmation';
 import QuantitySelector from './components/QuantitySelector';
+import TwoSidedSlide from '../modal/TwoSidedSlide';
 import TurnBtn from '../modal/buttons/TurnBtn';
 import Avatar from '../../components/Avatar';
 import useAuth from '../../hooks/contexthooks/useAuth';
@@ -77,14 +78,13 @@ const CatalogItemNew = ({ index, product, count, cartIndex, handleSlideView }) =
         }
     ];
 
+    // Renders on load with location as trigger
     useEffect(() => {
-        console.log(product)
         findIndex(product._id)
     }, [location])
 
-
-
     useEffect(() => {
+        // Renders each time cartItems is updated
         // Sets the index of product item if found in cart
         // Set null if not
         // @ CatalogItem
@@ -96,10 +96,12 @@ const CatalogItemNew = ({ index, product, count, cartIndex, handleSlideView }) =
             <div className='product-view'>
                 <div className="product-container relative">
                     {loading && <Loader classList={'bg-alpha card-radius'} />}
-                    <div className='catalog-slide-container col-12'>
-                    <div className="slide">
-                        <div className="double-faced-card" ref={cardRef}>
-                            <div className="double-faced-recto">
+                    {/* Passing product image & product detail as an array of children @ TwoSidedSlide component */}
+                    {/* TwoSidedSlide contains @ TurnBtn which takes a classList argument to specify sizes and absolute coordinates  */}
+                    <TwoSidedSlide classList={{ container: 'catalog-slide-container col-12', btn: 'card-action-btn' }}>
+                        {
+                            // Product image (children[0])
+                            [
                                 <ImageNew
                                     product={product}
                                     classList='product-image'
@@ -112,14 +114,16 @@ const CatalogItemNew = ({ index, product, count, cartIndex, handleSlideView }) =
                                     }
                                     <Drop
                                         id={'expand-image'}
-                                        classList={'drop-bottom absolute color-light bg-primary border-light-2'}
+                                        classList={'drop-bottom absolute box-size-8 bg-light-alpha bg-surface-alpha border-light-grey-3 b-radius-50 '}
                                         handleClick={(e) => handleSlideView(e, product.layout, expandedImage)}
                                     >
-                                        <IoExpand />
+                                        <IoExpand className='expand-icon' />
                                     </Drop>
-                                </ImageNew>
-                            </div>
-                            <div className="double-faced-verso">
+                                    <span className='product-price absolute'>
+                                        {`$${price}`}
+                                    </span>
+                                </ImageNew>,
+                                // Product information (children[1])
                                 <div className='product-info'>
                                     <div>
                                         <h2 className='text-center fs-150 fw-500 padding-bottom-dot-5'>{product.name}</h2>
@@ -141,14 +145,9 @@ const CatalogItemNew = ({ index, product, count, cartIndex, handleSlideView }) =
                                         </tbody>
                                     </table>
                                 </div>
-                            </div>
-                        </div>
-                    </div>
-                    </div>
-                    <div className="product-legend absolute flex column space gap-2 justify-center">
-                        <TurnBtn classList={'card-action-btn'} target={cardRef.current} />
-
-                    </div>
+                            ]
+                        }
+                    </TwoSidedSlide>
                     <span className='product-count'>{index + 1} of {count}</span>
                 </div>
             </div>
@@ -173,7 +172,6 @@ const CatalogItemNew = ({ index, product, count, cartIndex, handleSlideView }) =
                     }
                 </span>
                 <div className='col-3 relative'>
-                    {/* <label className='strong col-3 fs-125 vertical-align-middle text-center align-self-center d-block' htmlFor={`item${index}`}>Quantity</label> */}
                     <Container classList={'col-12 text-right margin-auto dropdown'}>
                         <QuantitySelector
                             id={`item${index}`}

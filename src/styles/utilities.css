@@ -250,6 +250,10 @@
     background: var(--clr-surface);
 }
 
+.bg-surface-alpha {
+    background: rgba(80, 80, 80, 0.6) !important;
+}
+
 .bg-red {
     background: var(--clr-red);
 }
@@ -303,6 +307,18 @@
 
 .border-light-2 {
     border: 2px solid var(--clr-light) !important;
+}
+
+.border-light-3 {
+    border: 3px solid var(--clr-light) !important;
+}
+
+.border-light-grey-3 {
+    border: 3px solid var(--clr-light-grey) !important;
+}
+
+.border-surface-3 {
+    border: 3px solid var(--clr-surface) !important;
 }
 
 .border-dark {
@@ -583,6 +599,11 @@
     height: 3rem;
 }
 
+.box-size-8 {
+    width: 4rem !important;
+    height: 4rem !important;
+}
+
 .box-size-12 {
     width: 12rem;
     height: 12rem;
@@ -598,9 +619,6 @@
 
 .fill-light {
     fill: var(--clr-light);
-}
-.fill-grey {
-    fill: var(--clr-grey);
 }
 
 .fill-success {
