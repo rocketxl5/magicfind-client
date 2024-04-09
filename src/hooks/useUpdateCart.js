@@ -67,7 +67,6 @@ const useUpdateCart = (url, headers, item, indexFound = undefined) => {
                 .then(res => {
                     // If quantity selected is available
                     if (res.status === 200 && res.data.isAvailable) {
-                        console.log(res.data.isAvailable)
                         // Update cart quantities
                         updateCart(quantity);
                     }

@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import Container from '../../components/Container';
 import Drop from '../../components/Drop';
 import ImageNew from '../../components/ImageNew';
@@ -18,6 +18,8 @@ import useFind from '../../hooks/useFind';
 import { FiShoppingCart } from 'react-icons/fi';
 import { IoExpand } from "react-icons/io5";
 import { FaCheck } from "react-icons/fa6";
+import { MdStore } from "react-icons/md";
+import { MdOutlineEmail } from "react-icons/md";
 
 import data from '../../data/SEARCH.json';
 
@@ -29,17 +31,20 @@ const CatalogItemNew = ({ index, product, count, cartIndex, handleSlideView }) =
         quantity,
         seller
     } = product;
-    const { userName, country, avatar, rating, email } = seller;
 
     const url = `/api/catalog/${seller.userID}/${product._id}/`;
     const headers = {
         'Content-Type': 'application/json'
     };
 
+    console.log(product)
+
     const cardRef = useRef(null);
 
     const navigate = useNavigate();
     const location = useLocation();
+
+    const { isAuth } = useAuth();
 
     const { isMobile } = useViewport();
 
@@ -75,7 +80,12 @@ const CatalogItemNew = ({ index, product, count, cartIndex, handleSlideView }) =
         {
             title: 'Quantity:',
             value: quantity
-        }
+        },
+        {
+            title: 'Comment:',
+            value: product.comment ? product.comment : 'None'
+        },
+
     ];
 
     // Renders on load with location as trigger
@@ -112,65 +122,118 @@ const CatalogItemNew = ({ index, product, count, cartIndex, handleSlideView }) =
                                             <span className='foil'>{data.product.finishes[product.finishes]}</span>
                                         </div>
                                     }
-                                    <Drop
+                                    {/* <Drop
                                         id={'expand-image'}
-                                        classList={'drop-bottom absolute box-size-8 bg-light-alpha bg-surface-alpha border-light-grey-3 b-radius-50 '}
+                                        classList={'drop-bottom absolute box-size-8 bg-light-alpha bg-light-alpha border-eclipse-3 b-radius-50 '}
                                         handleClick={(e) => handleSlideView(e, product.layout, expandedImage)}
                                     >
                                         <IoExpand className='expand-icon' />
-                                    </Drop>
-                                    <span className='product-price absolute'>
-                                        {`$${price}`}
-                                    </span>
+                                    </Drop> */}
                                 </ImageNew>,
                                 // Product information (children[1])
-                                <div className='product-info'>
-                                    <div>
-                                        <h2 className='text-center fs-150 fw-500 padding-bottom-dot-5'>{product.name}</h2>
-                                    </div>
-                                    <table>
-                                        <tbody>
 
-                                            {
-                                                details &&
-                                                details.map((detail, i) => {
-                                                    return (
-                                                        <tr key={i} className='product-detail'>
-                                                            <td className='detail-title col-4'>{detail.title}</td>
-                                                            <td className={`detail-value col-8 ${detail.classList ? detail.classList : ''}`}>{detail.value}</td>
-                                                        </tr>
-                                                    )
-                                                })
-                                            }
-                                        </tbody>
-                                    </table>
+                                <div className='product-info flex column gap-1'>
+                                    <section>
+                                        <div className='product-specs'>
+                                            <div>
+                                                <h2 className='text-center fs-150 fw-500'>Negate</h2>
+                                            </div>
+                                            <div className='b-radius-5 border-surface-thin'>
+                                                <table>
+                                                    <tbody>
+
+                                                        {
+                                                            details &&
+                                                            details.map((detail, i) => {
+                                                                return (
+                                                                    <tr key={i} className='product-detail'>
+                                                                        <td className='detail-title col-4'>{detail.title}</td>
+                                                                        <td className={`detail-value col-8 ${detail.classList ? detail.classList : ''}`}>{detail.value}</td>
+                                                                    </tr>
+                                                                )
+                                                            })
+                                                        }
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </section>
+                                    <section className='product-seller flex column flex-1'>
+                                        {/* <div>
+                                            <h2 className='text-center fs-150 fw-500'>Seller</h2>
+                                        </div> */}
+                                        <div className="flex relative product-seller b-radius-5 border-surface-thin flex-1 d-inline">
+                                            <div className='col-8 flex column space-between height-100 padding-dot-5'>
+                                                <section className='flex gap-1 align-center'>
+                                                    <span className='inline-block'>Seller:</span>
+                                                    <span className='fs-125 fw-500'>
+                                                        {`${product.seller.userName}`}
+                                                    </span>
+
+                                                    <Avatar classList={'absolute'} avatar={product.seller.avatar} handleClick={() => navigate(`/store/${product.seller.userID}`, {
+                                                        state: {
+                                                            user: product.seller
+                                                        }
+                                                    })} />
+                                                </section>
+                                                <section className='flex gap-1 align-center'>
+                                                    <span className='inline-block'>Seller Rating:</span>
+                                                    <span className='inline-block'>{product.seller.rating}</span>
+                                                </section>
+                                                {/* <section>
+                                                    <Link className='flex align-center gap-1' to={`/store/${product.seller.userID}`} state={product.seller.userID}>
+
+                                                        <span className='inline-block'>
+                                                            Seller Store:
+                                                        </span>
+                                                        <span className='inline-block'>
+                                                            <div className='seller-icon'>
+                                                                <MdStore />
+                                                            </div>
+                                                        </span>
+                                                    </Link>
+                                                </section> */}
+                                                <section className='flex align-center gap-1'>
+                                                    <Link className='flex align-center gap-1' to={`/mail/${product.seller.userID}`} state={product.seller.userID}>
+                                                        <span className='inline-block'>Contact Seller:</span>
+                                                        <span className='inline-block'>
+                                                            <div className='seller-icon'>
+                                                                <MdOutlineEmail />
+                                                            </div>
+                                                        </span>
+                                                    </Link>
+                                                </section>
+                                                {
+                                                    // isAuth &&
+
+                                                }
+                                                {/* </div> */}
+                                            </div>
+                                        </div>
+
+                                    </section>
                                 </div>
+
                             ]
                         }
                     </TwoSidedSlide>
                     <span className='product-count'>{index + 1} of {count}</span>
                 </div>
             </div>
-            <div className="col-12 flex column justify-center align-center gap-1">
-                {/* <div className="seller">
-                    <p>Seller: <strong>{`${product.seller.userName}`}</strong></p>
-                    <p>Rating: {product.seller.rating}</p>
-                    <p>Seller Store:
-                        <Avatar avatar={product.seller.avatar} handleClick={() => { console.log(seller) }} />
-                    </p>
-                </div> */}
-                <span className="product-name">
+            <div className="col-12 relative flex column justify-center align-center gap-1">
+
+                {/* <span className="product-name absolute">
                     {
                         product.name.length < 35 ?
                             product.name :
                             `${product.name.substring(0, 30)}...`
                     }
                 </span>
-                <span className="product-edition">
+                <span className="product-edition absolute">
                     {
                         product.set_name
                     }
-                </span>
+                </span> */}
                 <div className='col-3 relative'>
                     <Container classList={'col-12 text-right margin-auto dropdown'}>
                         <QuantitySelector

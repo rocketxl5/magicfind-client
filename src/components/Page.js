@@ -4,7 +4,7 @@ import Title from './Title';
 import Container from './Container';
 import data from '../data/PAGES.json';
 
-const Page = ({ children, name, hasHeader = true, component }) => {
+const Page = ({ children, name, hasHeader = true, component, text }) => {
     const { id, classList, header, title } = data[name];
     return (
 
@@ -14,7 +14,11 @@ const Page = ({ children, name, hasHeader = true, component }) => {
                 hasHeader && 
                 <Header {...header}>
                         <Title classList={title.classList}>
-                            {title.text}
+                            {
+                                text?.length < 35 ?
+                                    text :
+                                    `${text?.substring(0, 30)}...`
+                            }
                         </Title>
                     {component}
                 </Header>

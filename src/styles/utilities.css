@@ -95,11 +95,15 @@
 }
 
 .flex {
-    display: flex;
+    display: flex !important;
 }
 
 .flex-grow-1 {
     flex-grow: 1 !important;
+}
+
+.flex-1 {
+    flex: 1 !important;
 }
 
 .flex-grow-2 {
@@ -272,8 +276,20 @@
     background: var(--clr-light);
 }
 
+.bg-light-alpha {
+    background: rgba(255, 255, 255, 0.6) !important;
+}
+
 .bg-dark {
     background: var(--clr-dark);
+}
+
+.bg-night {
+    background: var(--clr-night);
+}
+
+.bg-eclipse {
+    background: var(--clr-eclipse) !important;
 }
 
 /* MTG colors */
@@ -321,8 +337,20 @@
     border: 3px solid var(--clr-surface) !important;
 }
 
+.border-surface-thin {
+    border: 1px solid var(--clr-surface) !important;
+}
+
+.border-eclipse-3 {
+    border: 3px solid var(--clr-eclipse) !important;
+}
+
 .border-dark {
     border: 2px solid var(--clr-dark) !important;
+}
+
+.border-dark-thin {
+    border: 1px solid var(--clr-dark) !important;
 }
 
 .border-primary {
@@ -388,7 +416,7 @@
 }
 
 .b-radius-5 {
-    border-radius: 5px;
+    border-radius: 5px !important;
 }
 
 .b-radius-10 {
