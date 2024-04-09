@@ -23,11 +23,12 @@ const SearchResults = () => {
     const location = useLocation();
     const navigate = useNavigate();
 
-    const { cards, search } = location.state;
+    const { cards, search, query } = location.state;
     const { loading } = useSearch();
 
 
     useEffect(() => {
+        console.log(query)
         // If cards is empty
         if (!cards?.length) {
             // Send to collection page
@@ -68,8 +69,9 @@ const SearchResults = () => {
                     id={'search-results'}
                     classList={'padding-top-3'}
                     name={'search-results'}
-                    component={<Count count={cards.length}
-                        type={'Result'} />}
+                    text={query}
+                    // component={<Count count={cards.length}
+                    //     type={'Result'} />}
                 >
                     <SearchParameters
                         setSearchFeatures={(value) => setSearchFeatures(value)}

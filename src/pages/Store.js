@@ -1,10 +1,41 @@
-import Page from '../components/Page';
+import { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
+import Loader from '../layout/Loader';
+import useFetchData from '../hooks/useFetchData';
 
 const Store = () => {
-    return (
-        <Page name={'store'}>
+    const [hasLoaded, setHasLoaded] = useState(false);
+    const location = useLocation();
 
-        </Page>
+    const { fetchData, loading, showConfirmation, error, result } = useFetchData();
+
+    useEffect(() => {
+
+        fetchData(`/api/users/store/${location.state.user.userID}`)
+
+    }, [])
+
+    useEffect(() => {
+        if (result) {
+            setHasLoaded(true)
+            console.log(result)
+        }
+        else {
+            hasLoaded && setHasLoaded(false);
+        }
+    }, [result])
+
+    useEffect(() => {
+        if (error) {
+            console.log(error)
+        }
+    }, [error])
+
+    return (
+        <>
+            {loading && <Loader />}
+            {hasLoaded && <div>{result.name}</div>}
+        </>
     )
 }
 

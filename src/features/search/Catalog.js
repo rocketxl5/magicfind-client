@@ -102,7 +102,8 @@ const Catalog = () => {
                                 {
                                     state: {
                                         cards: data.cards,
-                                        search: searchInput.id
+                                        search: searchInput.id,
+                                        query: query
                                     },
                                 });
                         })

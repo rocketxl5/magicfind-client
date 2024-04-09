@@ -10,7 +10,7 @@ const RootLayout = () => {
     const path = location.pathname;
 
     return (
-        <div className={`root-layout ${isAuth || path === '/login' || path === '/signup' ? 'bg-light' : 'bg-dark'}`}>
+        <div className={`root-layout ${isAuth || path === '/login' || path === '/signup' ? 'bg-light' : 'bg-night'}`}>
 
             {
                 path === '/login' || path === '/signup' ? (
