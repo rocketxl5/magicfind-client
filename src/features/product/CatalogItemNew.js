@@ -37,8 +37,6 @@ const CatalogItemNew = ({ index, product, count, cartIndex, handleSlideView }) =
         'Content-Type': 'application/json'
     };
 
-    console.log(product)
-
     const cardRef = useRef(null);
 
     const navigate = useNavigate();
@@ -104,7 +102,7 @@ const CatalogItemNew = ({ index, product, count, cartIndex, handleSlideView }) =
     return (
         <>
             <div className='product-view'>
-                <div className="product-container relative">
+                <div className="product-container">
                     {loading && <Loader classList={'bg-alpha card-radius'} />}
                     {/* Passing product image & product detail as an array of children @ TwoSidedSlide component */}
                     {/* TwoSidedSlide contains @ TurnBtn which takes a classList argument to specify sizes and absolute coordinates  */}
@@ -146,7 +144,7 @@ const CatalogItemNew = ({ index, product, count, cartIndex, handleSlideView }) =
                                                             details &&
                                                             details.map((detail, i) => {
                                                                 return (
-                                                                    <tr key={i} className='product-detail'>
+                                                                    <tr key={1 + i} className='product-detail'>
                                                                         <td className='detail-title col-4'>{detail.title}</td>
                                                                         <td className={`detail-value col-8 ${detail.classList ? detail.classList : ''}`}>{detail.value}</td>
                                                                     </tr>
@@ -162,19 +160,18 @@ const CatalogItemNew = ({ index, product, count, cartIndex, handleSlideView }) =
                                         {/* <div>
                                             <h2 className='text-center fs-150 fw-500'>Seller</h2>
                                         </div> */}
-                                        <div className="flex relative product-seller b-radius-5 border-surface-thin flex-1 d-inline">
+                                        <div className="flex product-seller relative b-radius-5 border-surface-thin flex-1">
+                                            <Avatar classList={'absolute'} avatar={product.seller.avatar} handleClick={() => navigate(`/store/${product.seller.userID}`, {
+                                                state: {
+                                                    user: product.seller
+                                                }
+                                            })} />
                                             <div className='col-8 flex column space-between height-100 padding-dot-5'>
                                                 <section className='flex gap-1 align-center'>
                                                     <span className='inline-block'>Seller:</span>
                                                     <span className='fs-125 fw-500'>
                                                         {`${product.seller.userName}`}
                                                     </span>
-
-                                                    <Avatar classList={'absolute'} avatar={product.seller.avatar} handleClick={() => navigate(`/store/${product.seller.userID}`, {
-                                                        state: {
-                                                            user: product.seller
-                                                        }
-                                                    })} />
                                                 </section>
                                                 <section className='flex gap-1 align-center'>
                                                     <span className='inline-block'>Seller Rating:</span>

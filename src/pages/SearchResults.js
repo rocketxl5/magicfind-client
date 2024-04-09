@@ -28,7 +28,6 @@ const SearchResults = () => {
 
 
     useEffect(() => {
-        console.log(query)
         // If cards is empty
         if (!cards?.length) {
             // Send to collection page
