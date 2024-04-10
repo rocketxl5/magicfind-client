@@ -106,7 +106,7 @@ const CatalogItemNew = ({ index, product, count, cartIndex, handleSlideView }) =
                     {loading && <Loader classList={'bg-alpha card-radius'} />}
                     {/* Passing product image & product detail as an array of children @ TwoSidedSlide component */}
                     {/* TwoSidedSlide contains @ TurnBtn which takes a classList argument to specify sizes and absolute coordinates  */}
-                    <TwoSidedSlide classList={{ container: 'catalog-slide-container col-12', btn: 'card-action-btn' }}>
+                    <TwoSidedSlide classList={{ container: 'relative catalog-slide-container col-12', btn: 'card-action-btn' }}>
                         {
                             // Product image (children[0])
                             [
