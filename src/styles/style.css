@@ -938,7 +938,7 @@ height: 2rem;
   height: 100%;
   position: relative;
   transform-style: preserve-3d;
-  z-index: 5;
+  /* z-index: 5; */
 }
 
 .double-faced-card,
