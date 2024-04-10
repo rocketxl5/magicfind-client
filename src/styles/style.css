@@ -1676,7 +1676,7 @@ text-align: center;
   align-items: center;
   height: 340px;
   width: 244px;
-  margin: 1rem auto;
+  /* margin: 1rem auto; */
 }
 
 .product-container .product-image {
@@ -1719,7 +1719,7 @@ text-align: center;
   display: flex;
   flex-basis: 0;
   flex-grow: 1;
-  margin-inline: auto;
+  /* margin-inline: auto; */
 }
 
 .product-card {
