@@ -101,12 +101,13 @@ const CatalogItemNew = ({ index, product, count, cartIndex, handleSlideView }) =
 
     return (
         <>
-            <div className='product-view'>
-                <div className="product-container">
+            {/* <div className='product-view'> */}
+            {/* <div className="product-container"> */}
+            <>
                     {loading && <Loader classList={'bg-alpha card-radius'} />}
                     {/* Passing product image & product detail as an array of children @ TwoSidedSlide component */}
                     {/* TwoSidedSlide contains @ TurnBtn which takes a classList argument to specify sizes and absolute coordinates  */}
-                    <TwoSidedSlide classList={{ container: 'relative catalog-slide-container col-12', btn: 'card-action-btn' }}>
+                <TwoSidedSlide classList={{ container: '', btn: 'card-action-btn' }}>
                         {
                             // Product image (children[0])
                             [
@@ -130,9 +131,9 @@ const CatalogItemNew = ({ index, product, count, cartIndex, handleSlideView }) =
                                 </ImageNew>,
                                 // Product information (children[1])
 
-                                <div className='product-info flex column gap-1'>
-                                    <section>
-                                        <div className='product-specs'>
+                            <div className='product-info'>
+                                {/* <section>
+
                                             <div>
                                                 <h2 className='text-center fs-150 fw-500'>Negate</h2>
                                             </div>
@@ -153,21 +154,21 @@ const CatalogItemNew = ({ index, product, count, cartIndex, handleSlideView }) =
                                                         }
                                                     </tbody>
                                                 </table>
-                                            </div>
+
                                         </div>
-                                    </section>
-                                    <section className='product-seller flex column flex-1'>
+                                    </section> */}
+                                {/* <section className='product-seller flex column flex-1'> */}
                                         {/* <div>
                                             <h2 className='text-center fs-150 fw-500'>Seller</h2>
                                         </div> */}
-                                        <div className="flex product-seller relative b-radius-5 border-surface-thin flex-1">
-                                            <Avatar classList={'absolute'} avatar={product.seller.avatar} handleClick={() => navigate(`/store/${product.seller.userID}`, {
+                                {/* <div className="flex product-seller relative b-radius-5 border-surface-thin"> */}
+                                {/* <Avatar classList={'absolute'} avatar={product.seller.avatar} handleClick={() => navigate(`/store/${product.seller.userID}`, {
                                                 state: {
                                                     user: product.seller
                                                 }
-                                            })} />
-                                            <div className='col-8 flex column space-between height-100 padding-dot-5'>
-                                                <section className='flex gap-1 align-center'>
+                                            })} /> */}
+                                {/* <div className='col-8 flex column space-between height-100 padding-dot-5'> */}
+                                {/* <section className='flex gap-1 align-center'>
                                                     <span className='inline-block'>Seller:</span>
                                                     <span className='fs-125 fw-500'>
                                                         {`${product.seller.userName}`}
@@ -176,7 +177,7 @@ const CatalogItemNew = ({ index, product, count, cartIndex, handleSlideView }) =
                                                 <section className='flex gap-1 align-center'>
                                                     <span className='inline-block'>Seller Rating:</span>
                                                     <span className='inline-block'>{product.seller.rating}</span>
-                                                </section>
+                                                </section> */}
                                                 {/* <section>
                                                     <Link className='flex align-center gap-1' to={`/store/${product.seller.userID}`} state={product.seller.userID}>
 
@@ -190,7 +191,7 @@ const CatalogItemNew = ({ index, product, count, cartIndex, handleSlideView }) =
                                                         </span>
                                                     </Link>
                                                 </section> */}
-                                                <section className='flex align-center gap-1'>
+                                {/* <section className='flex align-center gap-1'>
                                                     <Link className='flex align-center gap-1' to={`/mail/${product.seller.userID}`} state={product.seller.userID}>
                                                         <span className='inline-block'>Contact Seller:</span>
                                                         <span className='inline-block'>
@@ -199,24 +200,25 @@ const CatalogItemNew = ({ index, product, count, cartIndex, handleSlideView }) =
                                                             </div>
                                                         </span>
                                                     </Link>
-                                                </section>
+                                                </section> */}
                                                 {
                                                     // isAuth &&
 
                                                 }
                                                 {/* </div> */}
-                                            </div>
-                                        </div>
+                                {/* </div> */}
+                                {/* </div>
 
-                                    </section>
+                                    </section> */}
                                 </div>
 
                             ]
                         }
                     </TwoSidedSlide>
                     <span className='product-count'>{index + 1} of {count}</span>
-                </div>
-            </div>
+            </>
+            {/* </div> */}
+            {/* </div> */}
             <div className="col-12 relative flex column justify-center align-center gap-1">
 
                 {/* <span className="product-name absolute">
@@ -231,7 +233,7 @@ const CatalogItemNew = ({ index, product, count, cartIndex, handleSlideView }) =
                         product.set_name
                     }
                 </span> */}
-                <div className='col-3 relative'>
+                {/* <div className='col-3 relative'>
                     <Container classList={'col-12 text-right margin-auto dropdown'}>
                         <QuantitySelector
                             id={`item${index}`}
@@ -255,7 +257,7 @@ const CatalogItemNew = ({ index, product, count, cartIndex, handleSlideView }) =
 
                             </div>
                     }
-                </div>
+                </div> */}
             </div>
 
         </>

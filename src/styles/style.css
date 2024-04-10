@@ -872,7 +872,7 @@ height: 2rem;
   width: clamp(5.2rem, calc(10vw + 5px), 6rem);
   height: clamp(5.2rem, calc(10vw + 5px), 6rem);
   fill: var(--clr-light);
-  top: min(calc(clamp(31rem, calc(80vw + 10px), 55rem) * 1.45), 72.5rem);
+  top: min(calc(clamp(35rem, calc(80vw + 10px), 55rem) * 1.45), 80rem);
   left: 0;
   right: 0;
   margin: auto;
@@ -917,7 +917,6 @@ height: 2rem;
   -webkit-transition: all 0.3s;
 }
 
-.action-btn:hover,
 .card-action-btn:hover {
   background: rgba(255, 255, 255);
 }
@@ -936,17 +935,17 @@ height: 2rem;
 }
 
 .double-faced-card {
+  height: 100%;
   position: relative;
   transform-style: preserve-3d;
-  transition: transform 0.3s;
-  -webkit-transition: transform 0.3s;
+  z-index: 5;
 }
 
+.double-faced-card,
 .single-faced-card {
-  transition: transform 0.3s;
-  -webkit-transition: transform 0.3s;
+  transition: transform 300ms, -webkit-transform 300ms, -o-transition 300ms;
 }
-  
+
 .double-faced-recto, 
 .double-faced-verso {
   position: absolute;
@@ -994,16 +993,14 @@ height: 2rem;
   min-height: calc(clamp(31rem, calc(80vw + 10px), 55rem) * 1.392);
 }
 
-.modal-slide-container {
+.modal-padding-top {
   padding-block-start: clamp(4rem, calc(7vh + 15px), 12rem);
 }
 
 .slide {
-  /* position: relative; */
-  perspective: 1500px;
   width: 100%;
   height: 100%;
-  min-height: inherit;
+  perspective: 150rem;
 }
 
 .slide-btn {
@@ -1677,15 +1674,15 @@ text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
-  min-height: 340px;
+  height: 340px;
   width: 244px;
-  margin-block: 1rem;
+  margin: 1rem auto;
 }
 
 .product-container .product-image {
   aspect-ratio: 1 / 1.4;
-  width: 244px;
-  height: 340px;
+  /* width: 244px;
+  height: 340px; */
 }
 
 .product-wrapper {
@@ -1704,15 +1701,15 @@ text-align: center;
   right: -4.7rem;
 }
 
-.lazyload-wrapper {
+/* .lazyload-wrapper {
   width: 244px;
   height: 34rem;
-}
+} */
 
-.image-container {
+/* .image-container {
   height: 340px;
   width: 244px;
-}
+} */
 
 
 .cart-item-image,
@@ -1758,14 +1755,13 @@ text-align: center;
 .product-image,
 .product-info {
   border-radius: 4.25%;
-  vertical-align: middle;
   box-shadow: 0 0.5rem 1rem rgba(0,0,0,.15);
 }
 
 .product-info {
-  padding: 1rem;
-  min-height: 340px;
-  min-width: 244px;
+  /* padding: 1rem; */
+  width: 100%;
+  height: 100%;
   background: var(--clr-light);
 }
 
