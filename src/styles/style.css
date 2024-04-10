@@ -834,7 +834,7 @@ height: 2rem;
 }
 
 .rotate-y-180 {
-  z-index: 1000;
+  /* z-index: 1000; */
   transform: rotateY(180deg);
   -webkit-transform: rotateY(180deg);
 }
@@ -872,13 +872,13 @@ height: 2rem;
   width: clamp(5.2rem, calc(10vw + 5px), 6rem);
   height: clamp(5.2rem, calc(10vw + 5px), 6rem);
   fill: var(--clr-light);
-  top: min(calc(clamp(35rem, calc(80vw + 10px), 55rem) * 1.45), 80rem);
+  top: min(calc(clamp(36rem, calc(80vw + 60px), 55rem) * 1.45), 80rem);
   left: 0;
   right: 0;
   margin: auto;
   background-color: rgba(0, 0, 0, 0);
   border-radius: 50%;
-  z-index: 2000;
+  z-index: 5000;
   transform: rotateY(180deg);
   -webkit-transform: rotateY(180deg);
   border: 3px solid var(--clr-light-grey);
@@ -954,6 +954,7 @@ height: 2rem;
   height: 100%;
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
+  z-index: -1;
 }
 
 .double-faced-verso {
