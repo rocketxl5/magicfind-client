@@ -12,7 +12,7 @@ const TwoSidedSlide = ({ children, classList, motion }) => {
     return (
         // <div id={motion} className={classList.container} >
         <>
-                {isMounted && <TurnBtn classList={classList.btn} target={cardRef.current} />}
+            {isMounted && <TurnBtn classList={classList.btn} target={cardRef.current} />}
             <div className={`slide ${classList.container}`}>
                 <div className="double-faced-card" ref={cardRef}>
                     <div className="double-faced-recto">
