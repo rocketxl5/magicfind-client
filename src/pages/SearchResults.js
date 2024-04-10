@@ -84,7 +84,7 @@ const SearchResults = () => {
                             cards.map((card, i) => {
                                 return (
                                     <ListItem key={i}>
-                                        <Card classList={''}>
+                                        <Card classList={'product-container'}>
                                             {
                                                 search === 'catalog'
                                                     ?
