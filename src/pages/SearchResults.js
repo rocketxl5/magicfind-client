@@ -83,7 +83,7 @@ const SearchResults = () => {
                             cards &&
                             cards.map((card, i) => {
                                 return (
-                                    <ListItem key={i}>
+                                    <ListItem key={i} classList={'flex justify-center'}>
                                         <Card classList={'product-container'}>
                                             {
                                                 search === 'catalog'
