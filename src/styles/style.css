@@ -1663,7 +1663,7 @@ text-align: center;
 
 .card {
   position: relative;
-  padding: 1rem;
+  /* padding: 1rem; */
   background: var(--clr-light);
 }
 
