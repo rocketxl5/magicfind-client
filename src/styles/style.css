@@ -881,7 +881,7 @@ height: 2rem;
   z-index: 5000;
   transform: rotateY(180deg);
   -webkit-transform: rotateY(180deg);
-  border: 3px solid var(--clr-light-grey);
+  border: 3px solid var(--clr-light-grey); 
   transition: all 0.3s;
   -webkit-transition: all 0.3s;
 }
@@ -902,19 +902,23 @@ height: 2rem;
 
 .card-action-btn {
   position: absolute;
+  display: block;
+  transform-style: flat;
   width: 4.2rem;
   height: 4.2rem;
   padding: 0.5rem;
   bottom: 5%;
   right: 7%;
-  background: rgba(255, 255, 255, 0.6);
-  border-radius: 50%;
+  background: rgba(255, 255, 255);
+  border-radius: 100%;
   z-index: 5000;
-  transform: rotateY(-180deg);
-  -webkit-transform: rotateY(-180deg);
+  /* transform: rotateY(-180deg); */
+  /* -webkit-transform: rotateY(-180deg); */
+  transform: translateZ(0.01px);
+  -webkit-transform: translateZ(0.01px);
   border: 2px solid rgb(0, 0, 0, 0.8);
-  transition: all 0.3s;
-  -webkit-transition: all 0.3s;
+  transition: all 300s;
+  -webkit-transition: all 300ms;
 }
 
 .card-action-btn:hover {
@@ -1663,10 +1667,6 @@ text-align: center;
   position: relative;
   padding: 1rem;
   background: var(--clr-light);
-}
-
-.product-container.card {
-  padding: 0;
 }
 
 .product-view {
