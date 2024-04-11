@@ -6,7 +6,7 @@ const TurnBtn = ({ classList, target }) => {
     const svgRef = useRef(null);
     const turnCard = () => {
         target.classList.toggle('rotate-y-180');
-        btnRef.current.classList.toggle('rotate-y-0');
+        // btnRef.current.classList.toggle('rotate-y-0');
     }
     return (
         <button className={classList} type="button" onClick={turnCard} ref={btnRef}>
