@@ -146,7 +146,7 @@ const ArchiveItemNew = ({ index, product, count, handleSlideView }) => {
                 <div className="product-container">
                     <div className="slide">
                         <div className="double-faced-card" ref={cardRef}>
-                            <div className="double-faced-recto">
+                            <div className="card-front">
                                 <ImageNew
                                     product={product}
                                     classList='product-image'
@@ -181,7 +181,7 @@ const ArchiveItemNew = ({ index, product, count, handleSlideView }) => {
                                     }
                                 </ImageNew>
                             </div>
-                            <div className="double-faced-verso">
+                            <div className="card-back">
                                 <div className='product-info'>
                                     <div>
                                         <h2 className='text-center fs-150 fw-500 padding-bottom-dot-5'>Card Info</h2>
