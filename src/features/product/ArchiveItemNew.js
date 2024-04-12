@@ -193,9 +193,9 @@ const ArchiveItemNew = ({ index, product, count, handleSlideView }) => {
                                                 details &&
                                                 details.map((detail, i) => {
                                                     return (
-                                                        <tr key={i} className='product-detail'>
-                                                            <td className='detail-title col-4'>{detail.title}</td>
-                                                            <td className={`detail-value col-8 ${detail.classList ? detail.classList : ''}`}>{detail.value}</td>
+                                                        <tr key={i} className='product-spec'>
+                                                            <td className='spec-title col-4'>{detail.title}</td>
+                                                            <td className={`spec-value col-8 ${detail.classList ? detail.classList : ''}`}>{detail.value}</td>
                                                         </tr>
                                                     )
                                                 })

@@ -454,7 +454,7 @@ input#archive:focus {
     background: var(--clr-light-grey) !important;
 }
 
-.card-selected .product-details {
+.card-selected .product-specs {
     border-radius: 5px !important;
     background: var(--clr-light-grey) !important;
     padding: 1rem;

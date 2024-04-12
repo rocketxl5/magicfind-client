@@ -49,27 +49,27 @@ const CartItem = ({ index, count, product }) => {
   const details = [
     {
       text: `${data.product.conditions[product.selected.condition]}`,
-      style: 'product-detail product-condition'
+      style: 'product-spec product-condition'
     },
     {
       text: data.product.languages[product.selected.language],
-      style: 'product-detail product-language'
+      style: 'product-spec product-language'
     },
     {
       text: data.product.finishes[product.selected.finishes],
-      style: 'product-detail product-finish'
+      style: 'product-spec product-finish'
     },
     // {
     //   text: `Sold by ${product.selected.seller.userName}`,
-    //   style: 'product-detail product-seller'
+    //   style: 'product-spec product-seller'
     // },
     {
       text: `Ships from ${product.selected.seller.country}`,
-      style: 'product-detail product-shipping'
+      style: 'product-spec product-shipping'
     },
     {
       text: `${product.selected.quantity} in stock`,
-      style: 'product-detail product-quantity'
+      style: 'product-spec product-quantity'
     },
   ]
 
@@ -99,7 +99,7 @@ const CartItem = ({ index, count, product }) => {
       </div>
 
       <Container classList={' three'}>
-        {/* <List classList={'product-details'}>
+        {/* <List classList={'product-specs'}>
         {
           details &&
           details.map((detail, i) => {
