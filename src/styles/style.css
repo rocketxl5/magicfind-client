@@ -920,8 +920,8 @@ height: 2rem;
   width: 4.2rem;
   height: 4.2rem;
   padding: 0.5rem;
-  bottom: 2rem;
-  right: 2rem;
+  bottom: 1.9rem;
+  right: 2.1rem;
   background: rgba(255, 255, 255, 0.5);
   border-radius: 100%;
   z-index: 9000 !important;
@@ -935,9 +935,8 @@ height: 2rem;
 }
 
 .card-action-btn:hover {
-  background: rgba(255, 255, 255);
+  opacity: 0.8;
 }
-
 
 .card-action-btn svg path:nth-of-type(1) {
   fill: rgba(0, 0, 0, 0.8);
@@ -1438,14 +1437,14 @@ text-align: center;
   left: 1rem;
 }
 
-.drop-btn-wrapper {
-
-}
-
 .drop-btn {  
   padding: 0.5rem;
   width: clamp(3.7rem, calc(5vw + 12px), 6rem);
   height: clamp(3.7rem, calc(5vw + 12px), 6rem);
+}
+
+.drop-btn:hover {
+  opacity: 0.8;
 }
 
 .drop-btn svg {

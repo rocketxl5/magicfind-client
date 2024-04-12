@@ -345,6 +345,10 @@
     border: 1px solid var(--clr-surface) !important;
 }
 
+.border-eclipse-2 {
+    border: 2px solid var(--clr-eclipse) !important;
+}
+
 .border-eclipse-3 {
     border: 3px solid var(--clr-eclipse) !important;
 }
@@ -632,8 +636,8 @@
 }
 
 .box-size-8 {
-    width: 4rem !important;
-    height: 4rem !important;
+    width: 4.2rem !important;
+    height: 4.2rem !important;
 }
 
 .box-size-12 {
