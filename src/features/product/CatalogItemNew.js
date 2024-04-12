@@ -145,9 +145,9 @@ const CatalogItemNew = ({ index, product, count, cartIndex, handleSlideView }) =
                                                             details &&
                                                             details.map((detail, i) => {
                                                                 return (
-                                                                    <tr key={1 + i} className='product-detail'>
-                                                                        <td className='detail-title col-4'>{detail.title}</td>
-                                                                        <td className={`detail-value col-8 ${detail.classList ? detail.classList : ''}`}>{detail.value}</td>
+                                                                    <tr key={1 + i}>
+                                                                        <td className='spec-title col-4'>{detail.title}</td>
+                                                                        <td className={`spec-value col-8 ${detail.classList ? detail.classList : ''}`}>{detail.value}</td>
                                                                     </tr>
                                                                 )
                                                             })
@@ -157,7 +157,7 @@ const CatalogItemNew = ({ index, product, count, cartIndex, handleSlideView }) =
 
                                         </div>
                                 </section>
-                                <section className='flex column flex-1 height-100 product-seller relative b-radius-5 border-surface-thin'>
+                                <section className='product-seller flex column gap-dot-5 height-100 relative b-radius-5 border-surface-thin'>
                                         {/* <div>
                                             <h2 className='text-center fs-150 fw-500'>Seller</h2>
                                         </div> */}
@@ -168,43 +168,56 @@ const CatalogItemNew = ({ index, product, count, cartIndex, handleSlideView }) =
                                                 }
                                     })} />
                                     <div className='col-8 flex column height-100 padding-dot-5'>
-                                        <section className='flex gap-1 align-center'>
-                                                    <span className='inline-block'>Seller:</span>
-                                                    <span className='fs-125 fw-500'>
+                                        <section className='flex gap-1'>
+                                            <span className='spec-title'>Seller:</span>
+                                            <span className='spec-value'>
                                                         {`${product.seller.userName}`}
-                                                    </span>
-                                                </section>
-                                                <section className='flex gap-1 align-center'>
-                                                    <span className='inline-block'>Seller Rating:</span>
-                                                    <span className='inline-block'>{product.seller.rating}</span>
+                                            </span>
+                                        </section>
+                                        <section className='flex gap-1'>
+                                            <div className='inline-block spec-title'>Seller Rating:</div>
+                                            <div className='inline-block spec-value'>{product.seller.rating}</div>
                                         </section>
                                         <section>
-                                                    <Link className='flex align-center gap-1' to={`/store/${product.seller.userID}`} state={product.seller.userID}>
-
-                                                        <span className='inline-block'>
+                                            <button className='flex align-center gap-1 bg-transparent'
+                                                type='button'
+                                                onClick={(e) => {
+                                                    navigate(`/store/${product.seller.userID}`, {
+                                                        state: {
+                                                            user: product.seller
+                                                        }
+                                                    })
+                                                }}
+                                            >
+                                                <div className='inline-block spec-title'>
                                                             Seller Store:
-                                                        </span>
-                                                        <span className='inline-block'>
+                                                </div>
+                                                <div className='inline-block spec-value'>
                                                             <div className='seller-icon'>
                                                                 <MdStore />
                                                             </div>
-                                                        </span>
-                                                    </Link>
+                                                </div>
+                                            </button>
                                         </section>
-                                        <section className='flex align-center gap-1'>
-                                                    <Link className='flex align-center gap-1' to={`/mail/${product.seller.userID}`} state={product.seller.userID}>
-                                                        <span className='inline-block'>Contact Seller:</span>
-                                                        <span className='inline-block'>
+                                        <section>
+                                            <button className='flex align-center gap-1 bg-transparent'
+                                                type='button'
+                                                onClick={() => navigate(`/mail/${product.seller.userID}`, {
+                                                    state: {
+                                                        user: product.seller
+                                                    }
+                                                })}
+                                            >
+                                                <div className='inline-block spec-title'>Contact Seller:</div>
+                                                <div className='inline-block spec-value'>
                                                             <div className='seller-icon'>
                                                                 <MdOutlineEmail />
                                                             </div>
-                                                        </span>
-                                                    </Link>
+                                                </div>
+                                            </button>
                                         </section>
-
-                                                {/* </div> */}
                                     </div>
-                                    {/* </div> */}
+
 
                                 </section>
                                 </div>
