@@ -19,7 +19,7 @@ import data from '../../data/SEARCH.json';
 
 const ArchiveItemNew = ({ index, product, count, handleSlideView }) => {
     const [isCardAdded, setIsCardAdded] = useState(false);
-
+    console.log(product)
     const { auth } = useAuth();
     const { user, token } = auth;
     const {
@@ -159,23 +159,23 @@ const ArchiveItemNew = ({ index, product, count, handleSlideView }) => {
                                     }
                                     <Drop
                                         id={'expand-image'}
-                                        classList={'drop-bottom absolute color-light bg-primary border-light-2'}
+                                        classList={'drop-bottom-rightabsolute color-light bg-primary border-light-2'}
                                         handleClick={(e) => handleSlideView(e, product.layout, expandedImage)}
                                     >
                                         <IoExpand />
                                     </Drop>
                                     {
                                         loading ?
-                                            <Drop classList={'absolute color-light bg-light border-primary drop-top'} >
+                                            <Drop classList={'absolute color-light bg-light border-primary drop-top-right'} >
                                                 <Loader />
                                             </Drop>
                                             :
                                             (isCardAdded || isMatchFound) ?
-                                                <Drop classList={'absolute color-light bg-success border-light-2 drop-top'} >
+                                                <Drop classList={'absolute color-light bg-success border-light-2 drop-top-right'} >
                                                     <FaCheck />
                                                 </Drop>
                                                 :
-                                                <Drop classList={'absolute color-light bg-primary border-light-2 drop-top'} handleClick={() => postData(token, query)}>
+                                                <Drop classList={'absolute color-light bg-primary border-light-2 drop-top-right'} handleClick={() => postData(token, query)}>
                                                     <FaPlus />
                                                 </Drop>
                                     }

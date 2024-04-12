@@ -37,6 +37,8 @@ const CatalogItemNew = ({ index, product, count, cartIndex, handleSlideView }) =
         'Content-Type': 'application/json'
     };
 
+    console.log(product)
+
     const cardRef = useRef(null);
 
     const navigate = useNavigate();
@@ -123,7 +125,7 @@ const CatalogItemNew = ({ index, product, count, cartIndex, handleSlideView }) =
                                     }
                                     {/* <Drop
                                         id={'expand-image'}
-                                        classList={'drop-bottom absolute box-size-8 bg-light-alpha bg-light-alpha border-eclipse-3 b-radius-50 '}
+                                        classList={'drop-bottom-rightabsolute box-size-8 bg-light-alpha bg-light-alpha border-eclipse-3 b-radius-100 '}
                                         handleClick={(e) => handleSlideView(e, product.layout, expandedImage)}
                                     >
                                         <IoExpand className='expand-icon' />
@@ -135,7 +137,7 @@ const CatalogItemNew = ({ index, product, count, cartIndex, handleSlideView }) =
                                 <section>
 
                                             <div>
-                                                <h2 className='text-center fs-150 fw-500'>Negate</h2>
+                                        <h2 className='text-center fs-150 fw-500'>Negate <span><img src={`https://svgs.scryfall.io/card-symbols/${product.set}.svg`} alt={`${product.set_name} Icon`} /></span></h2>
                                             </div>
                                             <div className='b-radius-5 border-surface-thin'>
                                                 <table>
@@ -146,7 +148,7 @@ const CatalogItemNew = ({ index, product, count, cartIndex, handleSlideView }) =
                                                             details.map((detail, i) => {
                                                                 return (
                                                                     <tr key={1 + i}>
-                                                                        <td className='spec-title col-4'>{detail.title}</td>
+                                                                        <td className='spec-title col-3'>{detail.title}</td>
                                                                         <td className={`spec-value col-8 ${detail.classList ? detail.classList : ''}`}>{detail.value}</td>
                                                                     </tr>
                                                                 )
@@ -158,70 +160,45 @@ const CatalogItemNew = ({ index, product, count, cartIndex, handleSlideView }) =
                                         </div>
                                 </section>
                                 <section className='product-seller flex column gap-dot-5 height-100 relative b-radius-5 border-surface-thin'>
-                                        {/* <div>
-                                            <h2 className='text-center fs-150 fw-500'>Seller</h2>
-                                        </div> */}
-                                    {/* <div className="flex product-seller relative b-radius-5 border-surface-thin"> */}
-                                    <Avatar classList={'absolute'} avatar={product.seller.avatar} handleClick={() => navigate(`/store/${product.seller.userID}`, {
+                                    <Avatar classList={'absolute box-size-8 drop-top-right border-surface-thin'} avatar={product.seller.avatar} handleClick={() => navigate(`/store/${product.seller.userID}`, {
                                                 state: {
                                                     user: product.seller
                                                 }
                                     })} />
-                                    <div className='col-8 flex column height-100 padding-dot-5'>
+
+                                    <Drop
+                                        classList={'drop-bottom-left absolute box-size-8 bg-light-alpha border-eclipse-3 b-radius-100 '}
+                                        handleClick={() => navigate(`/store/${product.seller.userID}`, {
+                                            state: {
+                                                user: product.seller
+                                            }
+                                        })}
+                                    >
+                                        <MdStore />
+                                    </Drop>
+                                    <Drop
+                                        classList={'drop-bottom-center absolute box-size-8 bg-light-alpha border-eclipse-3 b-radius-100 '}
+                                        handleClick={() => navigate(`/mail/${product.seller.userID}`, {
+                                            state: {
+                                                user: product.seller
+                                            }
+                                        })}
+                                    >
+                                        <MdOutlineEmail />
+                                    </Drop>
+                                    <div className='col-8 flex column height-100 padding-1'>
                                         <section className='flex gap-1'>
-                                            <span className='spec-title'>Seller:</span>
-                                            <span className='spec-value'>
-                                                        {`${product.seller.userName}`}
+                                            <span className=' fs-125 spec-title'>Seller:</span>
+                                            <span className=' fs-125 spec-value'>
+                                                {`${product.seller.userName}`}
                                             </span>
                                         </section>
-                                        <section className='flex gap-1'>
-                                            <div className='inline-block spec-title'>Seller Rating:</div>
-                                            <div className='inline-block spec-value'>{product.seller.rating}</div>
-                                        </section>
                                         <section>
-                                            <button className='flex align-center gap-1 bg-transparent'
-                                                type='button'
-                                                onClick={(e) => {
-                                                    navigate(`/store/${product.seller.userID}`, {
-                                                        state: {
-                                                            user: product.seller
-                                                        }
-                                                    })
-                                                }}
-                                            >
-                                                <div className='inline-block spec-title'>
-                                                            Seller Store:
-                                                </div>
-                                                <div className='inline-block spec-value'>
-                                                            <div className='seller-icon'>
-                                                                <MdStore />
-                                                            </div>
-                                                </div>
-                                            </button>
-                                        </section>
-                                        <section>
-                                            <button className='flex align-center gap-1 bg-transparent'
-                                                type='button'
-                                                onClick={() => navigate(`/mail/${product.seller.userID}`, {
-                                                    state: {
-                                                        user: product.seller
-                                                    }
-                                                })}
-                                            >
-                                                <div className='inline-block spec-title'>Contact Seller:</div>
-                                                <div className='inline-block spec-value'>
-                                                            <div className='seller-icon'>
-                                                                <MdOutlineEmail />
-                                                            </div>
-                                                </div>
-                                            </button>
+                                            <span className=' fs-125 inline-block rating'>{product.seller.rating}</span>
                                         </section>
                                     </div>
-
-
                                 </section>
-                                </div>
-
+                            </div>
                             ]
                         }
                     </TwoSidedSlide>

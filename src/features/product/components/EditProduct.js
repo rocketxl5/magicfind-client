@@ -95,9 +95,9 @@ const EditProduct = (props) => {
                     if (query !== 'all-cards') {
                         // filter for cards with cardName
                         const updatedCards = cards.filter(cardObj => cardObj.name.toLowerCase() === product.name.toLowerCase());
-                        result = { cards: updatedCards, search: search };
+                        result = { cards: updatedCards, search: search, query: product.name };
                     } else {
-                        result = { cards: cards, search: search };
+                        result = { cards: cards, search: search, query: product.name };
                     }
 
                     setLoading(false);

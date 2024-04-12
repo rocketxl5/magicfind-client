@@ -1,3 +1,7 @@
+.padding-1 {
+    padding: 1rem;
+}
+
 .padding-inline-1 {
     padding-inline: var(--size-1);
 }
@@ -435,8 +439,8 @@
     border-radius: 25px;
 }
 
-.b-radius-50 {
-    border-radius: 50%;
+.b-radius-100 {
+    border-radius: 100% !important;
 }
 
 .fs-075 {

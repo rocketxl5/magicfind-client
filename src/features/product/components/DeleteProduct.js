@@ -80,9 +80,9 @@ const DeleteProduct = (props) => {
                 if (query !== 'all-cards') {
                     // filter for cards with cardName
                     const updatedCards = cards.filter(cardObj => cardObj.name.toLowerCase() === product.name.toLowerCase());
-                    result = { cards: updatedCards, search };
+                    result = { cards: updatedCards, search, query: product.name };
                 } else {
-                    result = { cards: cards, search };
+                    result = { cards: cards, search, query: product.name };
                 }
                 setLoading(false);
                 localStorage.setItem('search-results', JSON.stringify(result));

@@ -20,9 +20,7 @@ const ImageNew = ({ children, product, classList }) => {
                     // </Link>
                 )
             }
-            {
-                children
-            }
+            {children}
         </div>
     )
 }

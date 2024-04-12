@@ -7,7 +7,6 @@ const useColorSymbols = (card) => {
     useEffect(() => {
         const setUrls = (symbols) => {
             if (symbols?.length) {
-
                 return symbols.map(symbol => `https://svgs.scryfall.io/card-symbols/${symbol}.svg`);
             }
         }

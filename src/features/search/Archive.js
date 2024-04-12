@@ -159,7 +159,8 @@ const Search = () => {
                 {
                     state: {
                         cards: cards,
-                        search: searchInput.id
+                        search: searchInput.id,
+                        query: cardName
                     }
                 });
 
@@ -168,7 +169,7 @@ const Search = () => {
 
     return (
         <>
-            <Page name={'archive'}>
+            <Page name={'archive'} text={'MTG Archive'}>
                 {loading ? <Loader /> :
                     <main>
                         <Form
