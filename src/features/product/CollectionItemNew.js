@@ -76,7 +76,7 @@ const CollectionItem = ({ index, product, count, handleCollectionItem, handleSli
                                     }
                                     <Drop
                                         id={'expand-image'}
-                                        classList={'drop-bottom absolute color-light bg-primary border-light-2'}
+                                        classList={'drop-bottom-rightabsolute color-light bg-primary border-light-2'}
                                         handleClick={(e) => handleSlideView(e, product.layout, expandedImage)}
                                     >
                                         <IoExpand />
@@ -85,7 +85,7 @@ const CollectionItem = ({ index, product, count, handleCollectionItem, handleSli
                                         product._is_published &&
                                         <Drop
                                             id={'instore-product'}
-                                                classList={'drop-top absolute color-light bg-success border-light-2'}
+                                                classList={'drop-top-right absolute color-light bg-success border-light-2'}
                                         >
                                             <FaCommentsDollar />
                                         </Drop>

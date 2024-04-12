@@ -62,7 +62,11 @@ const Collection = () => {
 
                 navigate(`/me/collection/all-cards`,
                     {
-                        state: { cards: data.cards, search: searchInput?.id }
+                        state: {
+                            cards: data.cards,
+                            search: searchInput?.id,
+                            query: 'All Cards'
+                        }
 
                     });
             })
@@ -143,6 +147,7 @@ const Collection = () => {
                                     state: {
                                         cards: data.cards,
                                         search: searchInput.id,
+                                        query: query
                                     }
                                 });
                         })
@@ -156,7 +161,7 @@ const Collection = () => {
 
     return (
         <>
-            <Page name={'collection'} >
+            <Page name={'collection'} text={'Collection'}>
                     <main>
                     {loading && <Loader />}
                     {/* {

@@ -27,6 +27,8 @@ const SearchResults = () => {
     const { loading } = useSearch();
 
 
+    console.log(location.state)
+
     useEffect(() => {
         // If cards is empty
         if (!cards?.length) {
