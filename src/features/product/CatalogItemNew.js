@@ -135,9 +135,9 @@ const CatalogItemNew = ({ index, product, count, cartIndex, handleSlideView }) =
 
                             <div className='product-info'>
                                 <section>
-
+                                    {/* {`https://svgs.scryfall.io/card-symbols/${product.set}.svg`} alt={`${product.set_name} Icon`} */}
                                             <div>
-                                        <h2 className='text-center fs-150 fw-500'>Negate <span><img src={`https://svgs.scryfall.io/card-symbols/${product.set}.svg`} alt={`${product.set_name} Icon`} /></span></h2>
+                                        <h2 className='text-center fs-150 fw-500'>Negate <span><img src='' /></span></h2>
                                             </div>
                                             <div className='b-radius-5 border-surface-thin'>
                                                 <table>
@@ -160,14 +160,14 @@ const CatalogItemNew = ({ index, product, count, cartIndex, handleSlideView }) =
                                         </div>
                                 </section>
                                 <section className='product-seller flex column gap-dot-5 height-100 relative b-radius-5 border-surface-thin'>
-                                    <Avatar classList={'absolute box-size-8 drop-top-right border-surface-thin'} avatar={product.seller.avatar} handleClick={() => navigate(`/store/${product.seller.userID}`, {
+                                    <Avatar classList={'absolute box-size-8 drop-top-right border-eclipse-2'} avatar={product.seller.avatar} handleClick={() => navigate(`/store/${product.seller.userID}`, {
                                                 state: {
                                                     user: product.seller
                                                 }
                                     })} />
 
                                     <Drop
-                                        classList={'drop-bottom-left absolute box-size-8 bg-light-alpha border-eclipse-3 b-radius-100 '}
+                                        classList={'drop-bottom-left absolute box-size-8 bg-transparent border-eclipse-2 b-radius-100 '}
                                         handleClick={() => navigate(`/store/${product.seller.userID}`, {
                                             state: {
                                                 user: product.seller
@@ -177,7 +177,7 @@ const CatalogItemNew = ({ index, product, count, cartIndex, handleSlideView }) =
                                         <MdStore />
                                     </Drop>
                                     <Drop
-                                        classList={'drop-bottom-center absolute box-size-8 bg-light-alpha border-eclipse-3 b-radius-100 '}
+                                        classList={'drop-bottom-center absolute box-size-8 bg-transparent border-eclipse-2 b-radius-100 '}
                                         handleClick={() => navigate(`/mail/${product.seller.userID}`, {
                                             state: {
                                                 user: product.seller
