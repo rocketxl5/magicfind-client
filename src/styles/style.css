@@ -1478,13 +1478,28 @@ text-align: center;
 /* ///////////////////// */
 /* /// Shopping Cart /// */
 /* ///////////////////// */
+.aside {
+  max-width: 40rem;
+  width: 100%;
+}
+
+.shopping-cart {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  grid-gap: 1rem;
+  background: var(--clr-secondary);
+}
+
+.shopping-cart .card {
+  padding: 1rem;
+}
 
 .cart-aside {
   display: flex;
   flex-direction: column;
   gap: 2rem;
   justify-content: space-between;
-  width: 100%;
   min-height: 8rem;
   padding: 1em;
   background: var(--clr-light);
@@ -1665,17 +1680,6 @@ text-align: center;
   text-align: center;
   font-size: var(--fs-250);
   font-weight: 300;
-}
-
-.shopping-cart {
-  display: flex;
-  flex-direction: column;
-  grid-gap: 1rem;
-  background: var(--clr-secondary);
-}
-
-.shopping-cart .card {
-  padding: 1rem;
 }
 
 .d-mobile-menu {

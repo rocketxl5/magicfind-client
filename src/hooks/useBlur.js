@@ -13,13 +13,13 @@ const useBlur = () => {
     const { setMarker, setSearchTerm, setSearchInput, setCardNames } = useSearch();
 
     const updateBlur = (id) => {
-        // console.log(displaySearchBar)
         setMarker(-1);
         setSearchTerm('');
         // If input is Catalog 
         if (id === 'catalog') {
-            // If Mobile
+            // If searchbar is displayed (mobile only)
             if (displaySearchBar) {
+                // hide searchbar
                 blurHandler();
             }
             // Reinitialize input state if catalog 

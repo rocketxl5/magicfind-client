@@ -226,7 +226,7 @@ const CatalogItemNew = ({ index, product, count, cartIndex, handleSlideView }) =
                         }
                     </span>
                 </div>
-                <div className='col-4 relative'>
+                <div className='col-6 relative'>
                     <Container classList={'col-12 text-right margin-auto dropdown'}>
                         <QuantitySelector
                             id={`item${index}`}
@@ -249,7 +249,7 @@ const CatalogItemNew = ({ index, product, count, cartIndex, handleSlideView }) =
                         box-size-6 
                         align-center 
                         justify-center'>
-                        {loading && <Loader classList={'bg-eclipse card-radius'} />}
+                        {loading && <Loader classList={'bg-eclipse color-light card-radius'} />}
                         {
                             cartItems[indexFound]?.quantity && !loading ?
                                 <FiShoppingCart className='box-size-5' /> :

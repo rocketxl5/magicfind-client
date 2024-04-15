@@ -1,10 +1,11 @@
-import React, {
-    forwardRef
-} from 'react';
+import { useEffect, forwardRef } from 'react';
+import { useLocation } from 'react-router-dom';
 import AutoComplete from './AutoComplete';
 import useBlur from '../../../hooks/useBlur';
 import useFocus from '../../../hooks/useFocus';
 import useSearch from '../../../hooks/contexthooks/useSearch';
+import useNavbar from '../../../hooks/contexthooks/useNavbar';
+import useNavButton from '../../../hooks/useNavButton';
 
 const SearchInput = forwardRef(function SearchInput(props, ref) {
     const {
@@ -26,8 +27,19 @@ const SearchInput = forwardRef(function SearchInput(props, ref) {
         setDisplayAutocomplete
     } = useSearch();
 
+    const location = useLocation();
+
     const { updateBlur } = useBlur();
     const { updateFocus } = useFocus();
+    const { displaySearchBar } = useNavbar();
+    const { blurHandler } = useNavButton();
+
+    useEffect(() => {
+        console.log(displaySearchBar)
+        if (displaySearchBar) {
+            blurHandler();
+        }
+    }, [location])
 
     const handleChange = (e) => {
 
@@ -41,7 +53,6 @@ const SearchInput = forwardRef(function SearchInput(props, ref) {
 
             !displayAutcomplete && setDisplayAutocomplete(true)
             setPredictions(filteredCardTitles);
-            // setCardName(e.target.value);
         }
         else {
             setDisplayAutocomplete(false);
