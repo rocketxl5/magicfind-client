@@ -23,7 +23,7 @@
       },
 
       {
-        "id": "product-info",
+        "id": "product",
         "style": "inactive",
         "type": "button",
         "value": "Info",
