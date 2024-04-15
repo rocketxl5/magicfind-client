@@ -208,25 +208,25 @@ const CatalogItemNew = ({ index, product, count, cartIndex, handleSlideView }) =
 
 
                 <div className='relative col-12 flex align-center justify-center gap-1'>
-                    <span className="">
+                    <span className='fw-200'>
                         {
                             data.product.conditions[product.condition]
                         }
                     </span>
                     <GoShieldCheck strokeWidth={'1px'} />
-                    <span className="">
+                    <span className='fw-200'>
                         {
                             data.product.languages[product.language]
                         }
                     </span>
                     <GoShieldCheck strokeWidth={'1px'} />
-                    <span className="">
+                    <span className='fw-300'>
                         {
                             `$${price} `
                         }
                     </span>
                 </div>
-                <div className='col-4 relative'>
+                <div className='col-6 relative'>
                     <Container classList={'col-12 text-right margin-auto dropdown'}>
                         <QuantitySelector
                             id={`item${index}`}
@@ -249,7 +249,7 @@ const CatalogItemNew = ({ index, product, count, cartIndex, handleSlideView }) =
                         box-size-6 
                         align-center 
                         justify-center'>
-                        {loading && <Loader classList={'bg-eclipse card-radius'} />}
+                        {loading && <Loader classList={'bg-eclipse color-light card-radius'} />}
                         {
                             cartItems[indexFound]?.quantity && !loading ?
                                 <FiShoppingCart className='box-size-5' /> :

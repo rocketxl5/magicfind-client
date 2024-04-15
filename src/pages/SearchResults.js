@@ -79,7 +79,7 @@ const SearchResults = () => {
                         searchFeatures={searchFeatures}
                     /> 
                     <main>
-                        {loading && <Loader />}
+                        {/* {loading && <Loader />} */}
                         <List classList="list align-center">
                         {
                             cards &&

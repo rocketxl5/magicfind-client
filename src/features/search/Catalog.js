@@ -1,10 +1,10 @@
-import React, {
+import {
     useState,
     useEffect,
 } from 'react';
 import { useNavigate } from 'react-router-dom';
-import SearchInput from './components/SearchInput'
-import Form from '../../components/Form';
+import SearchInput from './components/SearchInput';
+import Loader from '../../layout/Loader.js';
 import useAuth from '../../hooks/contexthooks/useAuth';
 import useNavbar from '../../hooks/contexthooks/useNavbar.js';
 import useSearch from '../../hooks/contexthooks/useSearch.js';
@@ -17,6 +17,7 @@ const Catalog = () => {
     // Context hook
     const {
         searchInput,
+        loading,
         setLoading,
         setSearchInput,
         searchTerm,
@@ -52,8 +53,6 @@ const Catalog = () => {
         if (searchTerm.length < 3) { return }
 
         setLoading(true);
-
-        catalogInputRef.current?.blur();
 
         const headers = {
             'Content-Type': 'application/json',
@@ -91,6 +90,7 @@ const Catalog = () => {
                     return res.json()
                         .then((data) => {
                             setLoading(false);
+                            catalogInputRef.current?.blur();
                             setCardName('');
                             setSearchInput(null);
                             localStorage.setItem('search-results', JSON.stringify({
@@ -110,8 +110,8 @@ const Catalog = () => {
                 }
                 else if (res.status === 400) {
                     return res.json().then((error) => {
-
                         setLoading(false);
+                        catalogInputRef.current?.blur();
                         navigate(`/not-found/${query}`);
                     })
                 }
@@ -121,16 +121,17 @@ const Catalog = () => {
 
     return (
         <div id="search-catalog-form" ref={searchBarRef}>
-            <Form id={'catalog-form'} classList={'search-form'} handleSubmit={searchCatalogCard}>
+            <form id={'catalog-form'} classList={'search-form'} onSubmit={searchCatalogCard}>
                 <SearchInput
                     id={'catalog'}
-                    className={'search-catalog-field'}
+                    classList={'search-catalog-input'}
                     placeholder={'Search Magic Find'}
                     searchCard={searchCatalogCard}
                     isActive={isActive}
                     ref={catalogInputRef}
                 />
-            </Form>
+                {loading && <Loader classList='box-size-6 right-1' />}
+            </form>
         </div>
     );
 };
