@@ -249,7 +249,7 @@ const CatalogItemNew = ({ index, product, count, cartIndex, handleSlideView }) =
                         box-size-6 
                         align-center 
                         justify-center'>
-                        {loading && <Loader classList={'bg-eclipse color-light card-radius'} />}
+                        {loading && <Loader classList={'bg-eclipse color-light'} />}
                         {
                             cartItems[indexFound]?.quantity && !loading ?
                                 <FiShoppingCart className='box-size-5' /> :
