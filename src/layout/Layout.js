@@ -13,10 +13,7 @@ const Layout = () => {
     return (
 
         <div className="layout">
-            {
-                loading ?
-                    <Loader />
-                    :
+
                     <>
                         {
                             data[path] &&
@@ -34,7 +31,7 @@ const Layout = () => {
 
                         <Outlet />
                     </>
-            }
+
 
 
 

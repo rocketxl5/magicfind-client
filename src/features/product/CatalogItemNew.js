@@ -208,19 +208,19 @@ const CatalogItemNew = ({ index, product, count, cartIndex, handleSlideView }) =
 
 
                 <div className='relative col-12 flex align-center justify-center gap-1'>
-                    <span className="">
+                    <span className='fw-200'>
                         {
                             data.product.conditions[product.condition]
                         }
                     </span>
                     <GoShieldCheck strokeWidth={'1px'} />
-                    <span className="">
+                    <span className='fw-200'>
                         {
                             data.product.languages[product.language]
                         }
                     </span>
                     <GoShieldCheck strokeWidth={'1px'} />
-                    <span className="">
+                    <span className='fw-300'>
                         {
                             `$${price} `
                         }

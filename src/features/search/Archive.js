@@ -179,7 +179,7 @@ const Search = () => {
                         >
                             <SearchInput
                                 id={'archive'}
-                                className={'search-field'}
+                                classList={'search-input'}
                                 placeholder={'Search MTG Archive'}
                                 searchCard={searchArchive}
                                 isActive={isActive}

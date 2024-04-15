@@ -76,7 +76,7 @@
       "classList": "flex justify-center align-center col-12 padding-block-1 margin-bottom-1"
     },
     "title": {
-      "classList": "page-title fs-500 fw-600",
+      "classList": "page-title fs-500",
       "text": "404"
     }
   }

@@ -1,5 +1,5 @@
 // Uniform Resource Locators
-const inProduction = true;
+const inProduction = false;
 
 export const api = {
   skryfallURL: 'https://api.scryfall.com',

@@ -10,7 +10,7 @@ import useNavButton from '../../../hooks/useNavButton';
 const SearchInput = forwardRef(function SearchInput(props, ref) {
     const {
         id,
-        className,
+        classList,
         placeholder,
         searchCard,
         isActive,
@@ -66,7 +66,7 @@ const SearchInput = forwardRef(function SearchInput(props, ref) {
             <input
                 id={id}
                 type="text"
-                className={className}
+                className={classList}
                 value={isActive ? searchTerm : ''}
                 onChange={handleChange}
                 onFocus={(e) => updateFocus(e.target)}

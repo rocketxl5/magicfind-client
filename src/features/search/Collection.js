@@ -171,7 +171,7 @@ const Collection = () => {
                     <Form id={'collection-form'} classList={'search-form'} handleSubmit={searchCollectionCard}>
                         <SearchInput
                             id={'collection'}
-                            className={'search-field'}
+                            classList={'search-input'}
                             placeholder={'Search Your Collection'}
                             searchCard={searchCollectionCard}
                             isActive={isActive}

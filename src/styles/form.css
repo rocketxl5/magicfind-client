@@ -292,6 +292,7 @@ input#collection {
 
 #catalog-form {
     display: flex;
+    justify-content: space-between;
     width: calc(100% - var(--size-1));
     min-height: var(--size-4);
     padding-block: 0.5rem;
@@ -300,8 +301,12 @@ input#collection {
     border-radius: 5px;
 }
 
+.catalog-input-spinner {
+    right: 1rem;
+}
 
-.search-catalog-field {
+
+.search-catalog-input {
     display: block;
     width: calc(100% - var(--size-1));
     margin-left: auto;
@@ -310,7 +315,7 @@ input#collection {
     font-size: var(--fs-form);
 }
 
-.search-field {  
+.search-input {  
     border-radius: 5px;
     color: var(--clr-dark);
     font-size: var(--fs-form);
@@ -322,7 +327,7 @@ input#archive:focus {
     border: 2px solid rgb(103, 152, 180, 0.7) !important;
 }
 
-.search-field::placeholder { 
+.search-input::placeholder { 
     font-size: var(--fs-150);
 }
 
