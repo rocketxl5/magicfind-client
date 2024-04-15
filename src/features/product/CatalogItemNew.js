@@ -16,10 +16,9 @@ import useUpdateCart from '../../hooks/useUpdateCart';
 import useViewport from '../../hooks/contexthooks/useViewport';
 import useFind from '../../hooks/useFind';
 import { FiShoppingCart } from 'react-icons/fi';
-import { IoExpand } from "react-icons/io5";
-import { FaCheck } from "react-icons/fa6";
 import { MdStore } from "react-icons/md";
 import { MdOutlineEmail } from "react-icons/md";
+import { GoShieldCheck } from "react-icons/go";
 
 import data from '../../data/SEARCH.json';
 
@@ -75,7 +74,7 @@ const CatalogItemNew = ({ index, product, count, cartIndex, handleSlideView }) =
         },
         {
             title: 'Price:',
-            value: `$ ${price} `
+            value: `$${price} `
         },
         {
             title: 'Quantity:',
@@ -106,7 +105,6 @@ const CatalogItemNew = ({ index, product, count, cartIndex, handleSlideView }) =
             {/* <div className='product-view'> */}
             {/* <div className="product-container"> */}
             <>
-                    {loading && <Loader classList={'bg-alpha card-radius'} />}
                     {/* Passing product image & product detail as an array of children @ TwoSidedSlide component */}
                     {/* TwoSidedSlide contains @ TurnBtn which takes a classList argument to specify sizes and absolute coordinates  */}
                 <TwoSidedSlide classList={{ container: '', btn: 'card-action-btn' }}>
@@ -133,7 +131,7 @@ const CatalogItemNew = ({ index, product, count, cartIndex, handleSlideView }) =
                                 </ImageNew>,
                                 // Product information (children[1])
 
-                            <div className='product-info'>
+                            <div className='product'>
                                 <section>
                                     {/* {`https://svgs.scryfall.io/card-symbols/${product.set}.svg`} alt={`${product.set_name} Icon`} */}
                                             <div>
@@ -160,11 +158,11 @@ const CatalogItemNew = ({ index, product, count, cartIndex, handleSlideView }) =
                                         </div>
                                 </section>
                                 <section className='product-seller flex column gap-dot-5 height-100 relative b-radius-5 border-surface-thin'>
-                                    <Avatar classList={'absolute box-size-8 drop-top-right border-eclipse-2'} avatar={product.seller.avatar} handleClick={() => navigate(`/store/${product.seller.userID}`, {
+                                    {/* <Avatar classList={'absolute box-size-8 drop-top-right border-eclipse-2'} avatar={product.seller.avatar} handleClick={() => navigate(`/store/${product.seller.userID}`, {
                                                 state: {
                                                     user: product.seller
                                                 }
-                                    })} />
+                                    })} /> */}
 
                                     <Drop
                                         classList={'drop-bottom-left absolute box-size-8 bg-transparent border-eclipse-2 b-radius-100 '}
@@ -208,26 +206,34 @@ const CatalogItemNew = ({ index, product, count, cartIndex, handleSlideView }) =
             {/* </div> */}
             <div className="col-12 relative flex column justify-center align-center gap-1">
 
-                {/* <span className="product-name absolute">
-                    {
-                        product.name.length < 35 ?
-                            product.name :
-                            `${product.name.substring(0, 30)}...`
-                    }
-                </span>
-                <span className="product-edition absolute">
-                    {
-                        product.set_name
-                    }
-                </span> */}
-                {/* <div className='col-3 relative'>
+
+                <div className='relative col-12 flex align-center justify-center gap-1'>
+                    <span className="">
+                        {
+                            data.product.conditions[product.condition]
+                        }
+                    </span>
+                    <GoShieldCheck strokeWidth={'1px'} />
+                    <span className="">
+                        {
+                            data.product.languages[product.language]
+                        }
+                    </span>
+                    <GoShieldCheck strokeWidth={'1px'} />
+                    <span className="">
+                        {
+                            `$${price} `
+                        }
+                    </span>
+                </div>
+                <div className='col-4 relative'>
                     <Container classList={'col-12 text-right margin-auto dropdown'}>
                         <QuantitySelector
                             id={`item${index}`}
                             classList={'col-12'}
                             name={'catalog-item'}
                             // Product already in cart have defined indexFound
-                            quantitySelected={indexFound !== null ? cartItems[indexFound]?.quantity : 0}
+                            quantitySelected={cartItems[indexFound]?.quantity || 0}
                             quantityAvailable={quantity}
                             product={product}
                             handleChange={updateCartHandler}
@@ -235,16 +241,22 @@ const CatalogItemNew = ({ index, product, count, cartIndex, handleSlideView }) =
                         </QuantitySelector>
                     </Container>
 
-                    {
-                        indexFound !== null &&
-                        <div
-                            className='cart-item absolute flex box-size-6 align-center justify-center'
-                        >
-                                <FiShoppingCart className='box-size-5' />
 
-                            </div>
-                    }
-                </div> */}
+                    <div className='
+                        cart-item 
+                        absolute 
+                        flex 
+                        box-size-6 
+                        align-center 
+                        justify-center'>
+                        {loading && <Loader classList={'bg-eclipse card-radius'} />}
+                        {
+                            cartItems[indexFound]?.quantity && !loading ?
+                                <FiShoppingCart className='box-size-5' /> :
+                                ''
+                        }
+                    </div>
+                </div>
             </div>
 
         </>

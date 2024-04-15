@@ -93,7 +93,7 @@ const CollectionItem = ({ index, product, count, handleCollectionItem, handleSli
                                 </ImageNew>
                             </div>
                             <div className="card-back">
-                                <div className='product-info'>
+                                <div className='product'>
                                     <div>
                                         <h2 className='text-center fs-150 fw-500 padding-bottom-dot-5'>Card Info</h2>
                                     </div>
