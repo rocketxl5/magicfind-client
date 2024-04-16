@@ -1478,7 +1478,6 @@ text-align: center;
 /* /// Shopping Cart /// */
 /* ///////////////////// */
 .aside {
-  max-width: 40rem;
   width: 100%;
 }
 
@@ -1489,10 +1488,11 @@ text-align: center;
   grid-gap: 1rem;
   padding-block: 1.5rem;
   background: var(--clr-secondary);
+  max-width: 40rem;
+  width: 100%;
 }
 
 .shopping-cart .list-item {
-  max-width: 40rem;
   width: 100%;
 }
 
