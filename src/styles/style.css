@@ -179,7 +179,6 @@ color: var(--clr-light);
 
 .layout .shopping-cart .card {
   background: var(--clr-light);
-  width: 100%;
 }
 
 .layout #search-results .card {
@@ -1492,7 +1491,6 @@ text-align: center;
 }
 
 .shopping-cart .card {
-  width: 100%;
   padding: 1rem;
 }
 
@@ -1648,7 +1646,7 @@ text-align: center;
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  width: 40rem;
+  max-width: 40rem;
   margin: 0 auto;
 }
 
