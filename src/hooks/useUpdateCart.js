@@ -60,7 +60,6 @@ const useUpdateCart = (url, headers, item, indexFound = undefined) => {
     // @ QuantitySelector component
     // @ CollectionItem component [delete button]
     const updateCartHandler = (quantity) => {
-        // console.log(item)
         setLoading(true);
 
         axios.get(`${api.serverURL}${url}${quantity}`, headers)
@@ -85,7 +84,7 @@ const useUpdateCart = (url, headers, item, indexFound = undefined) => {
                     // setTimeout(() => {
                     //     setShowConfirmation(false);
                     // }, 1500);
-                    setLoading(false);
+                    setLoading(false); 
                 })
     }
     return { error, loading, updateCartHandler };

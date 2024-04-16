@@ -26,7 +26,8 @@ const Catalog = () => {
         setCardNames,
         predictions,
         catalogCardNames,
-        catalogInputRef
+        catalogInputRef,
+        setPredictions
     } = useSearch();
     // Hooks
     const { auth, isAuth } = useAuth();
@@ -53,7 +54,7 @@ const Catalog = () => {
         if (searchTerm.length < 3) { return }
 
         setLoading(true);
-
+        // setSearchInput(null);
         const headers = {
             'Content-Type': 'application/json',
             'auth-token': isAuth && auth.token
@@ -78,6 +79,7 @@ const Catalog = () => {
             query = searchTerm;
         }
 
+        setPredictions([]);
         // Conditional query string won't return user cards if auth
         // Else returns all cards
         const queryString = isAuth ?

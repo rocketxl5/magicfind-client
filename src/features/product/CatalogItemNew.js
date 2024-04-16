@@ -36,7 +36,7 @@ const CatalogItemNew = ({ index, product, count, cartIndex, handleSlideView }) =
         'Content-Type': 'application/json'
     };
 
-    console.log(product)
+    // console.log(product)
 
     const cardRef = useRef(null);
 
@@ -102,111 +102,95 @@ const CatalogItemNew = ({ index, product, count, cartIndex, handleSlideView }) =
 
     return (
         <>
-            {/* <div className='product-view'> */}
-            {/* <div className="product-container"> */}
-            <>
-                    {/* Passing product image & product detail as an array of children @ TwoSidedSlide component */}
-                    {/* TwoSidedSlide contains @ TurnBtn which takes a classList argument to specify sizes and absolute coordinates  */}
-                <TwoSidedSlide classList={{ container: '', btn: 'card-action-btn' }}>
-                        {
-                            // Product image (children[0])
-                            [
-                                <ImageNew
-                                    product={product}
-                                    classList='product-image'
+            {/* Passing product image & product detail as an array of children @ TwoSidedSlide component */}
+            {/* TwoSidedSlide contains @ TurnBtn which takes a classList argument to specify sizes and absolute coordinates  */}
+            <TwoSidedSlide classList={{ container: '', btn: 'card-action-btn' }}>
+                {
+                    // Product image (children[0])
+                    [
+                        <ImageNew
+                            product={product}
+                            classList='product-image'
+                        >
+                            {
+                                (product.finishes[0] === 'foil') &&
+                                <div className="product-finish">
+                                    <span className='foil'>{data.product.finishes[product.finishes]}</span>
+                                </div>
+                            }
+                        </ImageNew>,
+                        // Product information (children[1])
+                        <div className='product'>
+                            <section>
+                                {/* {`https://svgs.scryfall.io/card-symbols/${product.set}.svg`} alt={`${product.set_name} Icon`} */}
+                                <div>
+                                    <h2 className='text-center fs-150 fw-500'>Negate <span><img src='' /></span></h2>
+                                </div>
+                                <div className='b-radius-5 border-surface-thin'>
+                                    <table>
+                                        <tbody>
+
+                                            {
+                                                details &&
+                                                details.map((detail, i) => {
+                                                    return (
+                                                        <tr key={1 + i}>
+                                                            <td className='spec-title col-3'>{detail.title}</td>
+                                                            <td className={`spec-value col-8 ${detail.classList ? detail.classList : ''}`}>{detail.value}</td>
+                                                        </tr>
+                                                    )
+                                                })
+                                            }
+                                        </tbody>
+                                    </table>
+
+                                </div>
+                            </section>
+                            <section className='product-seller flex column gap-dot-5 height-100 relative b-radius-5 border-surface-thin'>
+                                {/* <Avatar classList={'absolute box-size-8 drop-top-right border-eclipse-2'} avatar={product.seller.avatar} handleClick={() => navigate(`/store/${product.seller.userID}`, {
+                                        state: {
+                                            user: product.seller
+                                        }
+                            })} /> */}
+
+                                <Drop
+                                    classList={'drop-bottom-left absolute box-size-8 bg-transparent border-eclipse-2 b-radius-100 '}
+                                    handleClick={() => navigate(`/store/${product.seller.userID}`, {
+                                        state: {
+                                            user: product.seller
+                                        }
+                                    })}
                                 >
-                                    {
-                                        (product.finishes[0] === 'foil') &&
-                                        <div className="product-finish">
-                                            <span className='foil'>{data.product.finishes[product.finishes]}</span>
-                                        </div>
-                                    }
-                                    {/* <Drop
-                                        id={'expand-image'}
-                                        classList={'drop-bottom-rightabsolute box-size-8 bg-light-alpha bg-light-alpha border-eclipse-3 b-radius-100 '}
-                                        handleClick={(e) => handleSlideView(e, product.layout, expandedImage)}
-                                    >
-                                        <IoExpand className='expand-icon' />
-                                    </Drop> */}
-                                </ImageNew>,
-                                // Product information (children[1])
-
-                            <div className='product'>
-                                <section>
-                                    {/* {`https://svgs.scryfall.io/card-symbols/${product.set}.svg`} alt={`${product.set_name} Icon`} */}
-                                            <div>
-                                        <h2 className='text-center fs-150 fw-500'>Negate <span><img src='' /></span></h2>
-                                            </div>
-                                            <div className='b-radius-5 border-surface-thin'>
-                                                <table>
-                                                    <tbody>
-
-                                                        {
-                                                            details &&
-                                                            details.map((detail, i) => {
-                                                                return (
-                                                                    <tr key={1 + i}>
-                                                                        <td className='spec-title col-3'>{detail.title}</td>
-                                                                        <td className={`spec-value col-8 ${detail.classList ? detail.classList : ''}`}>{detail.value}</td>
-                                                                    </tr>
-                                                                )
-                                                            })
-                                                        }
-                                                    </tbody>
-                                                </table>
-
-                                        </div>
-                                </section>
-                                <section className='product-seller flex column gap-dot-5 height-100 relative b-radius-5 border-surface-thin'>
-                                    {/* <Avatar classList={'absolute box-size-8 drop-top-right border-eclipse-2'} avatar={product.seller.avatar} handleClick={() => navigate(`/store/${product.seller.userID}`, {
-                                                state: {
-                                                    user: product.seller
-                                                }
-                                    })} /> */}
-
-                                    <Drop
-                                        classList={'drop-bottom-left absolute box-size-8 bg-transparent border-eclipse-2 b-radius-100 '}
-                                        handleClick={() => navigate(`/store/${product.seller.userID}`, {
-                                            state: {
-                                                user: product.seller
-                                            }
-                                        })}
-                                    >
-                                        <MdStore />
-                                    </Drop>
-                                    <Drop
-                                        classList={'drop-bottom-center absolute box-size-8 bg-transparent border-eclipse-2 b-radius-100 '}
-                                        handleClick={() => navigate(`/mail/${product.seller.userID}`, {
-                                            state: {
-                                                user: product.seller
-                                            }
-                                        })}
-                                    >
-                                        <MdOutlineEmail />
-                                    </Drop>
-                                    <div className='col-8 flex column height-100 padding-1'>
-                                        <section className='flex gap-1'>
-                                            <span className=' fs-125 spec-title'>Seller:</span>
-                                            <span className=' fs-125 spec-value'>
-                                                {`${product.seller.userName}`}
-                                            </span>
-                                        </section>
-                                        <section>
-                                            <span className=' fs-125 inline-block rating'>{product.seller.rating}</span>
-                                        </section>
-                                    </div>
-                                </section>
-                            </div>
-                            ]
-                        }
-                    </TwoSidedSlide>
-                    <span className='product-count'>{index + 1} of {count}</span>
-            </>
-            {/* </div> */}
-            {/* </div> */}
+                                    <MdStore />
+                                </Drop>
+                                <Drop
+                                    classList={'drop-bottom-center absolute box-size-8 bg-transparent border-eclipse-2 b-radius-100 '}
+                                    handleClick={() => navigate(`/mail/${product.seller.userID}`, {
+                                        state: {
+                                            user: product.seller
+                                        }
+                                    })}
+                                >
+                                    <MdOutlineEmail />
+                                </Drop>
+                                <div className='col-8 flex column height-100 padding-1'>
+                                    <section className='flex gap-1'>
+                                        <span className=' fs-125 spec-title'>Seller:</span>
+                                        <span className=' fs-125 spec-value'>
+                                            {`${product.seller.userName}`}
+                                        </span>
+                                    </section>
+                                    <section>
+                                        <span className=' fs-125 inline-block rating'>{product.seller.rating}</span>
+                                    </section>
+                                </div>
+                            </section>
+                        </div>
+                    ]
+                }
+            </TwoSidedSlide>
+            <span className='product-count'>{index + 1} of {count}</span>
             <div className="col-12 relative flex column justify-center align-center gap-1">
-
-
                 <div className='relative col-12 flex align-center justify-center gap-1'>
                     <span className='fw-200'>
                         {
@@ -240,15 +224,7 @@ const CatalogItemNew = ({ index, product, count, cartIndex, handleSlideView }) =
                         >
                         </QuantitySelector>
                     </Container>
-
-
-                    <div className='
-                        cart-item 
-                        absolute 
-                        flex 
-                        box-size-6 
-                        align-center 
-                        justify-center'>
+                    <div className='box-size-6 absolute flex align-center justify-center top-0 right-negative-4'>
                         {loading && <Loader classList={'bg-eclipse color-light'} />}
                         {
                             cartItems[indexFound]?.quantity && !loading ?
@@ -258,7 +234,6 @@ const CatalogItemNew = ({ index, product, count, cartIndex, handleSlideView }) =
                     </div>
                 </div>
             </div>
-
         </>
     )
 }
