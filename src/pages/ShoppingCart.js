@@ -32,7 +32,7 @@ function ShoppingCart() {
     >        
       {cartItems.length > 0 &&
         <>
-              <Aside classList={'cart-aside'}>
+        <Aside>
                 <>
                   <Container classList={'cart-total flex gap-1'}>
                     <p className="fw-500">Subtotal:</p>
