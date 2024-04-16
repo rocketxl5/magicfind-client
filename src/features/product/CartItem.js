@@ -86,7 +86,6 @@ const CartItem = ({ index, count, product }) => {
         <CountDown count={count} unit={index + 1} type={'Result'} />
       </ProductHeader>
       <div className='relative two'>
-        {loading && <Loader classList={'bg-alpha'} />}
       <ImageNew
         product={product.selected}
           classList='relative cart-item-image '
@@ -134,12 +133,17 @@ const CartItem = ({ index, count, product }) => {
 
         <div className='flex flex-end gap-1 margin-top-2'>
           {/* <label className='strong col-9 fs-125 text-center push-right d-block padding-bottom-1' htmlFor={`item${index}`}>Quantity Selected </label> */}
-          <Button
-            classList={'btn-tiny bg-danger'}
-            handleClick={(e) => updateCartHandler(0)}
-          >
-            <AiOutlineDelete />
-          </Button>
+          {/* <div className=''> */}
+          {
+            loading ? <Loader classList={'cart-loader box-size-6 relative bg-transparent'} /> :
+              <Button
+                classList={'box-size-6 btn-tiny bg-danger color-light'}
+                handleClick={(e) => updateCartHandler(0)}
+              >
+                <AiOutlineDelete />
+              </Button>
+          }
+          {/* </div> */}
           <Container classList={'col-9 text-right dropdown'}>
             <QuantitySelector
               id={`item${index}`}

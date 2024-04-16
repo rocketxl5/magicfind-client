@@ -116,9 +116,6 @@ const DeleteProduct = (props) => {
                                         />
 
                                 </div>
-                                <div className="card-section">
-                                    {/* <CollectionDetails product={product} /> */}
-                                </div>
                             </section>
                             <section className="modal-warning">
                                 <div className="warning-message">

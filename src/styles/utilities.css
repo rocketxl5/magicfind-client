@@ -373,8 +373,6 @@
     border: none;
 }
 
-
-
 .color-light-grey {
     color: var(--clr-light-grey);
 }
@@ -385,6 +383,10 @@
 
 .color-surface {
     color: var(--clr-surface) !important;
+}
+
+.color-eclipse {
+    color: var(--clr-eclipse) !important;
 }
 
 .color-light {
@@ -669,3 +671,11 @@
 .right-1 {
     right: 1rem !important;
 } 
+
+.right-negative-4 {
+    right: -4rem;
+}
+
+.top-0 {
+    top: 0;
+}

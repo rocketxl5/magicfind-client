@@ -99,7 +99,7 @@ const Collection = () => {
     // Instore single card request search field with
     const searchCollectionCard = (e = undefined, prediction = undefined) => {
         e?.preventDefault();
-
+        // Cancel query if search term string has less than 3 characters
         if (searchTerm.length < 3) { return }
 
         setLoading(true);
