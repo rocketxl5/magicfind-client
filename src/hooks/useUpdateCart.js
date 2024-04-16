@@ -12,7 +12,6 @@ const useUpdateCart = (url, headers, item, indexFound = undefined) => {
     const { dispatch, cartItems } = useCart();
 
     const updateCart = (quantity) => {
-
         // Cart is not empty
         if (cartItems.length) {
             // Clone cartItems array
@@ -27,7 +26,6 @@ const useUpdateCart = (url, headers, item, indexFound = undefined) => {
                 })
             }
             else {
-
                 // If indexFound is defined [product already in cart]
                 if (indexFound !== null) {
 
