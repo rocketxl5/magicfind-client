@@ -21,7 +21,6 @@ const useUpdateCart = (url, headers, item, indexFound = undefined) => {
             // // If quantity is zero
             if (quantity === 0) {
                 items.splice(indexFound, 1);
-                console.log(items)
                 dispatch({
                     type: 'delete-item',
                     payload: items
