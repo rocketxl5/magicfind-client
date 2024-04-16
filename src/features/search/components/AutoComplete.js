@@ -1,9 +1,9 @@
-import React, { useState, useEffect, useContext, useRef } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import Prediction from './Prediction';
-import { SearchContext } from '../../../contexts/SearchContext';
+import useSearch from '../../../hooks/contexthooks/useSearch';
 const INIT = -200;
 
-const AutoComplete = ({ searchCard }) => {
+const AutoComplete = ({ searchCard, setInputValue }) => {
     const {
         marker,
         setMarker,
@@ -11,7 +11,7 @@ const AutoComplete = ({ searchCard }) => {
         predictions,
         setCardName,
         displayAutcomplete
-    } = useContext(SearchContext);
+    } = useSearch();
     const [position, setPosition] = useState(INIT);
     const ulRef = useRef(null)
 
@@ -33,7 +33,7 @@ const AutoComplete = ({ searchCard }) => {
     useEffect(() => {
         // If array of predictions is defined
         if (predictions) {
-
+            setInputValue(predictions[marker])
             setCardName(predictions[marker]);
         }
 
@@ -47,7 +47,7 @@ const AutoComplete = ({ searchCard }) => {
                 // console.log(marker)
                 if (marker < predictions.length - 1) {
                     setPosition(position + 40)
-                    setMarker(marker + 1);
+                    setMarker(marker => marker + 1);
                 }
             }
             if (e.key === 'ArrowUp') {
@@ -55,7 +55,7 @@ const AutoComplete = ({ searchCard }) => {
                 ulRef?.current?.scrollIntoView(true)
                 if (marker === predictions.length - 1 || marker >= 0) {
                     setPosition(position - 40);
-                    setMarker(marker - 1);
+                    setMarker(marker => marker - 1);
                 }
             }
         }
@@ -82,6 +82,7 @@ const AutoComplete = ({ searchCard }) => {
                                 index={index}
                                 marker={marker}
                                 prediction={prediction}
+                                setInputValue={setInputValue}
                             />
                         )
                     );

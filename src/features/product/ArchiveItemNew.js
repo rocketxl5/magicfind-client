@@ -19,7 +19,6 @@ import data from '../../data/SEARCH.json';
 
 const ArchiveItemNew = ({ index, product, count, handleSlideView }) => {
     const [isCardAdded, setIsCardAdded] = useState(false);
-    console.log(product)
     const { auth } = useAuth();
     const { user, token } = auth;
     const {
@@ -43,8 +42,6 @@ const ArchiveItemNew = ({ index, product, count, handleSlideView }) => {
     const navigate = useNavigate();
 
     const query = `/api/cards/add/${user.id}/${product.id}`;
-
-    // console.log(product)
 
     // Sets card price according to card finish
     const setPrice = (prices, finish) => {

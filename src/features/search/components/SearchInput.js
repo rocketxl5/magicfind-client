@@ -1,4 +1,4 @@
-import { useEffect, forwardRef } from 'react';
+import { useState, useEffect, forwardRef } from 'react';
 import { useLocation } from 'react-router-dom';
 import AutoComplete from './AutoComplete';
 import useBlur from '../../../hooks/useBlur';
@@ -15,6 +15,8 @@ const SearchInput = forwardRef(function SearchInput(props, ref) {
         searchCard,
         isActive,
     } = props;
+
+    const [inputValue, setInputValue] = useState('');
 
     const {
         setMarker,
@@ -40,14 +42,14 @@ const SearchInput = forwardRef(function SearchInput(props, ref) {
         }
     }, [location])
 
-    const handleChange = (e) => {
+    const handleChange = (value) => {
 
-        if (e.target.value.length >= 3) {
+        if (value.length >= 3) {
             // Reset Marker to initial value
             setMarker(-1);
 
             const filteredCardTitles = cardNames?.filter((title) => {
-                return title.toLowerCase().includes(e.target.value.toLowerCase());
+                return title.toLowerCase().includes(value.toLowerCase());
             });
 
             !displayAutcomplete && setDisplayAutocomplete(true)
@@ -57,7 +59,8 @@ const SearchInput = forwardRef(function SearchInput(props, ref) {
             setDisplayAutocomplete(false);
             setCardName('');
         }
-        setSearchTerm(e.target.value)
+        setSearchTerm(value);
+        setInputValue(value);
     };
 
     return (
@@ -66,15 +69,15 @@ const SearchInput = forwardRef(function SearchInput(props, ref) {
                 id={id}
                 type="text"
                 className={classList}
-                value={isActive ? searchTerm : ''}
-                onChange={handleChange}
+                value={isActive ? inputValue : ''}
+                onChange={(e) => handleChange(e.target.value)}
                 onFocus={(e) => updateFocus(e.target)}
                 onBlur={(e) => updateBlur(e.target.id)}
                 ref={ref}
                 placeholder={placeholder}
             />
             {(isActive && searchTerm) &&
-                <AutoComplete searchCard={searchCard} />
+                <AutoComplete searchCard={searchCard} setInputValue={value => setInputValue(value)} />
             }
         </>
     );

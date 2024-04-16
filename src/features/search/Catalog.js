@@ -54,7 +54,7 @@ const Catalog = () => {
         if (searchTerm.length < 3) { return }
 
         setLoading(true);
-        // setSearchInput(null);
+
         const headers = {
             'Content-Type': 'application/json',
             'auth-token': isAuth && auth.token
@@ -132,7 +132,7 @@ const Catalog = () => {
                     isActive={isActive}
                     ref={catalogInputRef}
                 />
-                {loading && <Loader classList='box-size-6 right-1' />}
+                {loading && <Loader classList={'box-size-6 right-1'} />}
             </form>
         </div>
     );
