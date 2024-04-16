@@ -35,7 +35,6 @@ const SearchInput = forwardRef(function SearchInput(props, ref) {
     const { blurHandler } = useNavButton();
 
     useEffect(() => {
-        console.log(displaySearchBar)
         if (displaySearchBar) {
             blurHandler();
         }
