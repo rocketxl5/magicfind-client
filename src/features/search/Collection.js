@@ -17,7 +17,7 @@ import setQueryString from '../../assets/utilities/setQueryString';
 
 const Collection = () => {
     // States
-    // const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(false);
     const [isActive, setIsActive] = useState(false);
     // Context
     const {
@@ -29,8 +29,6 @@ const Collection = () => {
         setCardName,
         setCardNames,
         predictions,
-        setLoading,
-        loading,
         collectionCardNames,
         collectionInputRef
     } = useSearch();
@@ -162,8 +160,7 @@ const Collection = () => {
     return (
         <>
             <Page name={'collection'} text={'Collection'}>
-                    <main>
-                    {loading && <Loader />}
+                <main>
                     {/* {
                         isCollectionEmpty &&
                         <Message type={'collection'} />
@@ -175,15 +172,17 @@ const Collection = () => {
                             placeholder={'Search Your Collection'}
                             searchCard={searchCollectionCard}
                             isActive={isActive}
-                            ref={collectionInputRef} />
+                            ref={collectionInputRef}
+                        />
+                        {loading && <Loader classList={'box-size-6 right-1'} />}
+                    </Form>
                         <Button
                             id={''}
-                            classList='bg-success btn-collection'
+                        classList='bg-success btn'
                             handleClick={() => searchCollection('cards')}
                         >
                             {'All Cards'}
-                        </Button>
-                    </Form>
+                    </Button>
                     </main>
 
         </Page>

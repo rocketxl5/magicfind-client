@@ -1,16 +1,17 @@
-import React, { useContext } from 'react';
-import { SearchContext } from '../../../contexts/SearchContext';
+import useSearch from '../../../hooks/contexthooks/useSearch';
 
 const Prediction = (props) => {
     const {
         prediction,
         index,
+        setInputValue
     } = props;
 
-    const { marker, searchTerm, setCardName } = useContext(SearchContext);
+    const { marker, searchTerm, setCardName } = useSearch();
 
     const handleMouseEnter = (e) => {
         e.target.classList.add('bg-grey');
+        setInputValue(prediction);
         // Set card name if form submitted
         setCardName(prediction);
     };

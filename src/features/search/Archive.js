@@ -33,7 +33,8 @@ const Search = () => {
         setCardNames,
         archiveCardNames,
         setUpdateCollection,
-        collectionCardNames
+        collectionCardNames,
+        setPredictions
     } = useSearch();
 
     const { displaySeachBar, setDisplaySearchBar } = useNavbar();
@@ -87,7 +88,7 @@ const Search = () => {
             query = `cards/named?fuzzy=${searchTerm}`;
         }
 
-        archiveInputRef.current.blur();
+        setPredictions([]);
 
         fetch(`${api.skryfallURL}/${query}`, headers)
             .then((res) => {
@@ -95,9 +96,10 @@ const Search = () => {
                     return res.json()
                         .then((data) => {
                             const { name, oracle_id } = data;
-                            // localStorage.setItem('oracle', oracle_id);
+                            archiveInputRef.current.blur();
                             setOracleID(oracle_id);
                             setCardName(name);
+                            // localStorage.setItem('oracle', oracle_id);
                         })
                 }
                 else if (res.status === 404) {
@@ -168,27 +170,25 @@ const Search = () => {
     }, [data]);
 
     return (
-        <>
-            <Page name={'archive'} text={'MTG Archive'}>
-                {loading ? <Loader /> :
-                    <main>
-                        <Form
-                            id={'archive-form'}
-                            classList={'search-form'}
-                            handleSubmit={searchArchive}
-                        >
-                            <SearchInput
-                                id={'archive'}
-                                classList={'search-input'}
-                                placeholder={'Search MTG Archive'}
-                                searchCard={searchArchive}
-                                isActive={isActive}
-                                ref={archiveInputRef} />
-                        </Form>
-                    </main>
-                }
-            </Page>
-        </>
+        <Page name={'archive'} text={'MTG Archive'}>
+            <main>
+                <Form
+                    id={'archive-form'}
+                    classList={'search-form'}
+                    handleSubmit={searchArchive}
+                >
+                    <SearchInput
+                        id={'archive'}
+                        classList={'search-input'}
+                        placeholder={'Search MTG Archive'}
+                        searchCard={searchArchive}
+                        isActive={isActive}
+                        ref={archiveInputRef}
+                    />
+                    {loading && <Loader classList={'box-size-6 right-1'} />}
+                </Form>
+            </main>
+        </Page>
     )
 }
 

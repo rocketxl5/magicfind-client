@@ -1,11 +1,13 @@
-import { Outlet } from 'react-router-dom';
+import { Outlet, useLocation } from 'react-router-dom';
 import Breadcrumbs from './Breadcrumbs';
 
 const AuthLayout = () => {
+    const { pathname } = useLocation();
 
     return (
         <div className="auth-layout">
-            <Breadcrumbs />
+            {/* No breadcrumbs @ shopping cart view */}
+            {!pathname.includes('shopping-cart') && < Breadcrumbs />}
             <Outlet />
         </div>
     )

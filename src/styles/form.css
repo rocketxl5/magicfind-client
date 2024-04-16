@@ -254,6 +254,9 @@ input:-webkit-autofill:active{
 #archive-form,
 #collection-form { 
     position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     height: 5rem;
     width: 100%;
     max-width: clamp(20rem, 100%, 60rem) !important;

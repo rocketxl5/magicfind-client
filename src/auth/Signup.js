@@ -277,46 +277,44 @@ const Signup = () => {
   }
 
   return (
-    <>
-      {loading ?
-        (
-          <Loader />
-        ) : (
-          <div className="form-content">
-            <div className="form-logo">
-              <Link to="/"><h1>Magic Find</h1></Link>
-            </div>
-            <div className="form-title">
-              <h2>Create your account</h2>
-            </div>
-            <div className={message ? 'show-error-message' : 'hide'}>
-              <p>{message.replace(/['"]+/g, '')}</p>
-            </div>
-            <form className="auth-form flex column gap-2" id="singup-form" name="singup-form" onSubmit={handleSubmit} noValidate>
-              {
-                // Map inputs array
-                inputs.map((input, index) => {
-                  return <FormInput
-                    key={index}
-                    id={index}
-                    {...input}
-                    inputState={inputStates[input.name]}
-                    onChange={handleChange}
-                    onFocus={handleFocus}
-                    onBlur={handleBlur}
-                    errors={errors}
-                    ref={input.ref} />
-                })
-              }
-              <div className="flex space-between align-center margin-block-start-2">
-                <Link className="link" to="/login">Already a member?</Link>
-                <button className="btn bg-success" type="submit">Submit</button>
-              </div>
-            </form>
-          </div >
-        )}
-    </>
-  );
+    <div className="form-content">
+      <div className="form-logo">
+        <Link to="/"><h1>Magic Find</h1></Link>
+      </div>
+      <div className="form-title">
+        <h2>Create your account</h2>
+      </div>
+      <div className={message ? 'show-error-message' : 'hide'}>
+        <p>{message.replace(/['"]+/g, '')}</p>
+      </div>
+      <form className="auth-form flex column gap-2" id="singup-form" name="singup-form" onSubmit={handleSubmit} noValidate>
+        {
+          // Map inputs array
+          inputs.map((input, index) => {
+            return <FormInput
+              key={index}
+              id={index}
+              {...input}
+              inputState={inputStates[input.name]}
+              onChange={handleChange}
+              onFocus={handleFocus}
+              onBlur={handleBlur}
+              errors={errors}
+              ref={input.ref} />
+          })
+        }
+        <div className="flex space-between align-center margin-block-start-2">
+          <Link className="link" to="/login">Already a member?</Link>
+          <button className="btn bg-success" type="submit">
+            {
+              !loading ? 'Submit' :
+                <Loader classList={'box-size-6 relative bg-transparent margin-auto'} />
+            }
+          </button>
+        </div>
+      </form>
+    </div >
+  )
 };
 
 export default Signup;
