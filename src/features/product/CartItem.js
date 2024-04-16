@@ -135,7 +135,7 @@ const CartItem = ({ index, count, product }) => {
           {/* <label className='strong col-9 fs-125 text-center push-right d-block padding-bottom-1' htmlFor={`item${index}`}>Quantity Selected </label> */}
           {/* <div className=''> */}
           {
-            loading ? <Loader classList={'cart-loader box-size-6 relative bg-transparent'} /> :
+            loading ? <Loader classList={'cart-loader relative box-size-6 bg-transparent'} /> :
               <Button
                 classList={'box-size-6 btn-tiny bg-danger color-light'}
                 handleClick={(e) => updateCartHandler(0)}

@@ -157,82 +157,87 @@ const Login = () => {
   }
 
   return (
+    <div className="form-content">
+      <div className="form-logo">
+        <Link to="/"><h1>Magic Find</h1></Link>
+      </div>
 
-    <>
-      {
-        loading ?
-          (
-            <Loader />
-          ) : (
-
-            <div className="form-content">
-              <div className="form-logo">
-                <Link to="/"><h1>Magic Find</h1></Link>
-              </div>
-
-              {message ? (
-                <div className={message.type === 'error' ? 'show-error-message' : message.type === 'success' ? 'show-success-message' : 'hide'}>
-
-                  <h4 className="auth-message-title">{message.name ? <>{message.title} <strong>{message.name}</strong>!</> : message.title}</h4>
-
-                  <p className="auth-message-body text-center">{message.body}</p>
-                </div>
-              ) : (
-                <div className="form-title">
-                  <h2>Log in to your account</h2>
-                </div>
-              )
-              }
-              <form className="auth-form flex column gap-2" id="signin-form" name="signin-form" onSubmit={handleSubmit} noValidate>
-                <div className="form-element">
-                  <label htmlFor="email" className={errors.email && 'color-danger'}>{errors.email ? errors.email : 'Email'}</label>
-                  <input
-                    className={errors.email && 'border-danger danger-padding'}
-                    id="email"
-                    type="email"
-                    name="email"
-                    value={values.email}
-                    onChange={handleChange}
-                    onFocus={handleFocus}
-                    onBlur={handleBlur}
-                    pattern="[a-zA-Z0-9._%+\-]{3,}@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}"
-                    placeholder="Email"
-                    ref={emailRef}
-                  />
-                </div>
-                <div className="form-element">
-                  <label htmlFor="password" className={errors.password && 'color-danger'}>{errors.password ? errors.password : 'Password'}</label>
-                  <div className={`login-password-wrapper text-center content-height flex ${errors.password && 'border-danger'}`}>
-                    <input
-                      id="password"
-                      type="password"
-                      name="password"
-                      value={values.password}
-                      onChange={handleChange}
-                      onFocus={handleFocus}
-                      onBlur={handleBlur}
-                      pattern="^(?!Enter Code$).*"
-                      placeholder='Password'
-                      ref={passwordRef}
-                    />
-                    <button className="password-btn flex align-center justify-center" type="button" onMouseDown={handleMouseDown}>
-                      <i className={!showPassword ? "fa-solid fa-eye" : "fa-solid fa-eye-slash"}></i>
-                    </button>
-                  </div>
-                </div>
-                <div className="flex margin-block-start-2">
-                  <Link className="link push-right" to="/reset-password">Forgot password?</Link>
-                </div>
-                <div className="flex space-between align-center">
-                  <Link className="link" to="/signup">Create account</Link>
-                  <button className="btn bg-success" type="submit">Login</button>
-                </div>
-              </form>
-            </div>
-          )
-
+      {message ? (
+        <div className={
+          message.type === 'error' ?
+            'show-error-message' :
+            message.type === 'success' ?
+              'show-success-message' :
+              'hide'
+        }>
+          <h4 className="auth-message-title">
+            {
+              message.name ?
+                <>
+                  {message.title} <strong>{message.name}</strong>!
+                </> :
+                message.title
+            }
+          </h4>
+          <p className="auth-message-body text-center">{message.body}</p>
+        </div>
+      ) : (
+        <div className="form-title">
+          <h2>Log in to your account</h2>
+        </div>
+      )
       }
-    </>
+      <form className="auth-form flex column gap-2" id="signin-form" name="signin-form" onSubmit={handleSubmit} noValidate>
+        <div className="form-element">
+          <label htmlFor="email" className={errors.email && 'color-danger'}>{errors.email ? errors.email : 'Email'}</label>
+          <input
+            className={errors.email && 'border-danger danger-padding'}
+            id="email"
+            type="email"
+            name="email"
+            value={values.email}
+            onChange={handleChange}
+            onFocus={handleFocus}
+            onBlur={handleBlur}
+            pattern="[a-zA-Z0-9._%+\-]{3,}@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}"
+            placeholder="Email"
+            ref={emailRef}
+          />
+        </div>
+        <div className="form-element">
+          <label htmlFor="password" className={errors.password && 'color-danger'}>{errors.password ? errors.password : 'Password'}</label>
+          <div className={`login-password-wrapper text-center content-height flex ${errors.password && 'border-danger'}`}>
+            <input
+              id="password"
+              type="password"
+              name="password"
+              value={values.password}
+              onChange={handleChange}
+              onFocus={handleFocus}
+              onBlur={handleBlur}
+              pattern="^(?!Enter Code$).*"
+              placeholder='Password'
+              ref={passwordRef}
+            />
+            <button className="password-btn flex align-center justify-center" type="button" onMouseDown={handleMouseDown}>
+              <i className={!showPassword ? "fa-solid fa-eye" : "fa-solid fa-eye-slash"}></i>
+            </button>
+          </div>
+        </div>
+        <div className="flex margin-block-start-2">
+          <Link className="link push-right" to="/reset-password">Forgot password?</Link>
+        </div>
+        <div className="flex space-between align-center">
+          <Link className="link" to="/signup">Create account</Link>
+          <button className="relative btn bg-success" type="submit">
+            {
+              !loading ? 'Login' :
+                <Loader classList='box-size-6 relative bg-transparent margin-auto' />
+            }
+          </button>
+        </div>
+      </form>
+    </div>
   )
 }
 
