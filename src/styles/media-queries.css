@@ -387,7 +387,7 @@
         grid-template-columns: repeat(3, 1fr);
     }
     
-    .section-header h2 {
+    .feature-header h2 {
         margin-inline: 0;
     }
     

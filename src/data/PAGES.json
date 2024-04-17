@@ -1,13 +1,22 @@
 {
+  "home": {
+    "id": "home",
+    "classList": "page relative",
+    "header": {
+      "classList": "page-header flex space-between align-center col-12 padding-block-1 margin-bottom-1 padding-top-3"
+    },
+    "title": {
+      "classList": "page-title"
+    }
+  },
   "search-results": {
     "id": "search-results",
     "classList": "page relative",
     "header": {
-      "classList": "page-header flex space-between align-center col-12 padding-block-1 margin-bottom-1"
+      "classList": "page-header flex space-between align-center col-12 padding-block-1 margin-bottom-1 padding-top-3"
     },
     "title": {
-      "classList": "page-title",
-      "text": "Search Results"
+      "classList": "page-title"
     }
   },
   "shopping-cart": {
@@ -56,6 +65,17 @@
     "title": {
       "classList": "page-title",
       "text": "Store"
+    }
+  },
+  "about": {
+    "id": "about",
+    "classList": "page about",
+    "header": {
+      "classList": "page-header flex space-between align-center col-12 padding-block-1 margin-bottom-1"
+    },
+    "title": {
+      "classList": "page-title",
+      "text": "About Magic Find"
     }
   },
   "dashboard": {
