@@ -162,7 +162,7 @@ const Collection = () => {
                         isCollectionEmpty ?
                             <Message type={'collection'} /> :
                             <>
-                                <form id={'collection-form'} className={'search-form'} handleSubmit={searchCollectionCard}>
+                                <form id={'collection-form'} className={'search-form'} onSubmit={searchCollectionCard}>
                                     <SearchInput
                                         id={'collection'}
                                         classList={'search-input'}

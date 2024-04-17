@@ -1515,6 +1515,11 @@ text-align: center;
 
 .shopping-cart .aside, 
 .shopping-cart .list {
+  /* max-width: 40rem; */
+  /* margin-inline: auto; */
+}
+
+.page main {
   max-width: 40rem;
   margin-inline: auto;
 }

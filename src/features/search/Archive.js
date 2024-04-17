@@ -175,7 +175,7 @@ const Search = () => {
                 <form
                     id={'archive-form'}
                     className={'search-form'}
-                    handleSubmit={searchArchive}
+                    onSubmit={searchArchive}
                 >
                     <SearchInput
                         id={'archive'}
