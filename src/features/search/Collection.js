@@ -41,6 +41,7 @@ const Collection = () => {
     const searchCollection = () => {
 
         setLoading(true);
+
         const headers = new Headers();
         headers.append('Content-Type', 'application/json');
         headers.append('auth-token', auth.token);
@@ -48,12 +49,9 @@ const Collection = () => {
             method: 'GET',
             headers: headers,
         }
-
         fetch(`${api.serverURL}/api/cards/${auth.user.id}`, options)
             .then(res => res.json())
             .then((data) => {
-
-
                 // Update local storage with search data
                 localStorage.setItem('search-results', JSON.stringify({ cards: data.cards, search: searchInput?.id }));
                 setLoading(false);
@@ -65,7 +63,6 @@ const Collection = () => {
                             search: searchInput?.id,
                             query: 'All Cards'
                         }
-
                     });
             })
             .catch((error) => {
@@ -161,30 +158,31 @@ const Collection = () => {
         <>
             <Page name={'collection'} text={'Collection'}>
                 <main>
-                    {/* {
-                        isCollectionEmpty &&
-                        <Message type={'collection'} />
-                    } */}
-                    <Form id={'collection-form'} classList={'search-form'} handleSubmit={searchCollectionCard}>
-                        <SearchInput
-                            id={'collection'}
-                            classList={'search-input'}
-                            placeholder={'Search Your Collection'}
-                            searchCard={searchCollectionCard}
-                            isActive={isActive}
-                            ref={collectionInputRef}
-                        />
-                        {loading && <Loader classList={'box-size-6 right-1'} />}
-                    </Form>
-                        <Button
-                            id={''}
-                        classList='bg-success btn'
-                            handleClick={() => searchCollection('cards')}
-                        >
-                            {'All Cards'}
-                    </Button>
-                    </main>
-
+                    {
+                        isCollectionEmpty ?
+                            <Message type={'collection'} /> :
+                            <>
+                                <form id={'collection-form'} className={'search-form'} handleSubmit={searchCollectionCard}>
+                                    <SearchInput
+                                        id={'collection'}
+                                        classList={'search-input'}
+                                        placeholder={'Search Your Collection'}
+                                        searchCard={searchCollectionCard}
+                                        isActive={isActive}
+                                        ref={collectionInputRef}
+                                    />
+                                    {loading && <Loader classList={'box-size-6 right-1'} />}
+                                </form>
+                                <Button
+                                    id={''}
+                                    classList='bg-success btn'
+                                    handleClick={() => searchCollection('cards')}
+                                >
+                                    {'All Cards'}
+                                </Button>
+                            </>
+                    }
+                </main>
         </Page>
         </>
     )

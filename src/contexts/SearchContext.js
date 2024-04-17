@@ -21,7 +21,7 @@ export const SearchProvider = ({ children }) => {
 
   // Mount state @ Collection initial fetch 
   const [error, setError] = useState('');
-  const [isCollectionEmpty, setIsCollectionEmpty] = useState(false);
+  const [isCollectionEmpty, setIsCollectionEmpty] = useState(true);
   const [displayAutcomplete, setDisplayAutocomplete] = useState(false);
   const [predictions, setPredictions] = useState([]);
   const [cardNames, setCardNames] = useState([]);

@@ -33,6 +33,7 @@ const AutoComplete = ({ searchCard, setInputValue }) => {
     useEffect(() => {
         // If array of predictions is defined
         if (predictions) {
+            // Sets prediction string as search input value when user moves (arrow) up or (arrow) down 
             setInputValue(predictions[marker])
             setCardName(predictions[marker]);
         }
