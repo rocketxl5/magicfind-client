@@ -69,6 +69,10 @@ const SearchInput = forwardRef(function SearchInput(props, ref) {
                 id={id}
                 type="text"
                 className={classList}
+                // Value changes 
+                // @ keyboard [SearchInput]
+                // @ arrowup/arrowdown [Autocomplete] 
+                // @ mousehover [Prediction]
                 value={isActive ? inputValue : ''}
                 onChange={(e) => handleChange(e.target.value)}
                 onFocus={(e) => updateFocus(e.target)}

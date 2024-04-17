@@ -172,9 +172,9 @@ const Search = () => {
     return (
         <Page name={'archive'} text={'MTG Archive'}>
             <main>
-                <Form
+                <form
                     id={'archive-form'}
-                    classList={'search-form'}
+                    className={'search-form'}
                     handleSubmit={searchArchive}
                 >
                     <SearchInput
@@ -186,7 +186,7 @@ const Search = () => {
                         ref={archiveInputRef}
                     />
                     {loading && <Loader classList={'box-size-6 right-1'} />}
-                </Form>
+                </form>
             </main>
         </Page>
     )

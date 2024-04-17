@@ -123,7 +123,7 @@ const Catalog = () => {
 
     return (
         <div id="search-catalog-form" ref={searchBarRef}>
-            <form id={'catalog-form'} classList={'search-form'} onSubmit={searchCatalogCard}>
+            <form id={'catalog-form'} className={'search-form'} onSubmit={searchCatalogCard}>
                 <SearchInput
                     id={'catalog'}
                     classList={'search-catalog-input'}
