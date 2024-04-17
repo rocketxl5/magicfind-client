@@ -1,21 +1,19 @@
 import React from 'react';
 import Header from './Header';
 import Title from './Title';
-import Container from './Container';
 import data from '../data/PAGES.json';
 
-const Page = ({ children, name, hasHeader = true, component, text }) => {
-    const { id, classList, header, title } = data[name];
+const Page = ({ children, classList, name, hasHeader = true, hasBanner = false, component, text }) => {
+    const { id, style, header, title, main } = data[name];
+
     return (
-
-        <Container id={id} classList={classList}>
-
+        <div id={id} className={style}>
             {
                 hasHeader && 
                 <Header {...header}>
-                        <Title classList={title.classList}>
+                        <Title classList={title.style}>
                             {
-                                text?.length < 35 ?
+                                title.text?.length < 35 ?
                                     text :
                                     `${text?.substring(0, 30)}...`
                             }
@@ -23,10 +21,10 @@ const Page = ({ children, name, hasHeader = true, component, text }) => {
                     {component}
                 </Header>
             }
-            {
-                    children
-            }
-        </Container>
+            <main className={`padding-inline-1 ${main && main.style}`}>
+                {children}
+            </main>
+        </div>
     )
 }
 

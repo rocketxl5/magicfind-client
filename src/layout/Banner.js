@@ -8,7 +8,6 @@ const Banner = ({ children, classList = '' }) => {
                 {children}
             </Container>
         </section>
-
     )
 }
 
