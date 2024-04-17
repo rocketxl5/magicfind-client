@@ -1,18 +1,17 @@
 import React from 'react';
 import Header from './Header';
 import Title from './Title';
-import Container from './Container';
 import data from '../data/PAGES.json';
 
-const Page = ({ children, name, hasHeader = true, hasBanner = false, component, text }) => {
-    const { id, classList, header, title } = data[name];
+const Page = ({ children, classList, name, hasHeader = true, hasBanner = false, component, text }) => {
+    const { id, style, header, title, main } = data[name];
 
     return (
-        <Container id={id} classList={classList}>
+        <div id={id} className={style}>
             {
                 hasHeader && 
                 <Header {...header}>
-                        <Title classList={title.classList}>
+                        <Title classList={title.style}>
                             {
                                 title.text?.length < 35 ?
                                     text :
@@ -22,10 +21,10 @@ const Page = ({ children, name, hasHeader = true, hasBanner = false, component, 
                     {component}
                 </Header>
             }
-            <main className='height-100'>
+            <main className={`padding-inline-1 ${main && main.style}`}>
                 {children}
             </main>
-        </Container>
+        </div>
     )
 }
 

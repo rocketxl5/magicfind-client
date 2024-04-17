@@ -17,7 +17,7 @@ const Home = () => {
 
   useEffect(() => {
     const cards = []
-    const promises = media.features.map(async (feature) => {
+    const promises = media.cards.map(async (feature) => {
       const response = await axios.get(`${api.skryfallURL}/cards/search?order=set&q=e%3Asld+${feature.query}&unique=cards`);
       return response;
     })
@@ -44,17 +44,17 @@ const Home = () => {
 
   useEffect(() => {
     if (expandedImages) {
-      const features = []
+      const cards = []
       expandedImages.forEach((collection, i) => {
-        const feature = media.features[i]
-        const cover = collection[feature.cover] || collection[feature.cover]
-        features.push({
-          title: feature.title,
+        const card = media.cards[i]
+        const cover = collection[card.cover] || collection[card.cover]
+        cards.push({
+          title: card.title,
           cover: !cover.length ? cover : cover[0],
           images: collection
         })
       })
-      setMediaFeatures(features)
+      setMediaFeatures(cards);
     }
   }, [expandedImages])
 
@@ -68,21 +68,22 @@ const Home = () => {
         hasHeader={false}
         hasBanner={true}
       >
-        <Feature classList={'features'} title={'Magic Find Features'}>
+        <Feature classList={''} title={'Magic Find Features'}>
+          <section className='feature-grid'>
               {
-                main.features.map((feature, index) => {
+              main.cards.map((card, index) => {
                   return (
-                    <div key={index + 1} className="feature">
-                      <div className="feature-content">
-                        <section className="feature-header">
-                          <h2 className="article-title">{feature.title}</h2>
-                          <article style={{ backgroundImage: `url(${feature.bgLink})` }} className="feature-image">
+                    <div key={index + 1} className="feature-card">
+                      <div className="flex column gap-1 padding-1 b-radius-5 feature-border">
+                        <section>
+                          <h2 className="feature-card-title">{card.title}</h2>
+                          <div style={{ backgroundImage: `url(${card.bgLink})` }} className="feature-card-image">
 
-                          </article>
+                          </div>
                         </section>
-                        <section className="feature-body">
+                        <section className="feature-card-content">
                           {
-                            feature.body.map((line, index) => {
+                            card.body.map((line, index) => {
                               return (
 
                                 <p key={index}>
@@ -101,16 +102,17 @@ const Home = () => {
                     </div>)
                 })
               }
+          </section>
         </Feature>
         <Feature classList={'media-feature'} title={'The Secret Lair Drop Artwork'}>
-            <div className="media-scroller snaps-inline">
+          <div className="media-scroller snaps-inline">
               {
                 mediaFeatures &&
-                mediaFeatures.map((feature, i) => {
+              mediaFeatures.map((card, i) => {
                   return (
                     <MediaElement key={i + 1} id={i} handleSlideShow={handleSlideShow}>
-                      {feature.cover}
-                      {feature.title}
+                      {card.cover}
+                      {card.title}
                     </MediaElement>
                   )
                 })

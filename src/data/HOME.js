@@ -5,7 +5,7 @@ const HOME = {
         link: '/signup'
     },
     main: {
-        features: [
+        cards: [
             {
                 bgLink: 'https://cards.scryfall.io/art_crop/front/6/7/673a67b2-fbb0-4be4-9edd-93946a583f23.jpg?1692938189',
                 body: [
@@ -58,7 +58,7 @@ const HOME = {
         ],
     },
     media: {
-        features: [
+        cards: [
             {
                 title: 'Absolute Annihilation',
                 query: 'cn≥1424+cn≤1427',

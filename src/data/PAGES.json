@@ -1,99 +1,105 @@
 {
   "home": {
     "id": "home",
-    "classList": "page relative",
+    "style": "page relative inherit-height",
     "header": {
-      "classList": "page-header flex space-between align-center col-12 padding-block-1 margin-bottom-1 padding-top-3"
+      "style": "page-header flex space-between align-center col-12 padding-block-1 margin-bottom-1 padding-top-3"
     },
     "title": {
-      "classList": "page-title"
+      "style": "page-title"
+    },
+    "main": {
+      "style": "padding-inline-none"
     }
   },
   "search-results": {
     "id": "search-results",
-    "classList": "page relative",
+    "style": "page relative",
     "header": {
-      "classList": "page-header flex space-between align-center col-12 padding-block-1 margin-bottom-1 padding-top-3"
+      "style": "page-header flex space-between align-center col-12 padding-block-1 margin-bottom-1 padding-top-3"
     },
     "title": {
-      "classList": "page-title"
+      "style": "page-title"
     }
   },
   "shopping-cart": {
     "id": "shopping-cart",
-    "classList": "page shopping-cart",
+    "style": "page bg-secondary",
     "header": {
-      "classList": "page-header flex space-between align-center col-12 padding-block-1 margin-bottom-1"
+      "style": "page-header flex space-between align-center col-12 padding-block-1 margin-bottom-1"
     },
     "title": {
-      "classList": "page-title",
+      "style": "page-title",
       "text": "Shopping Cart"
+    },
+    "main": {
+      "style": "shopping-cart"
     }
   },
   "product": {
     "id": "product",
-    "classList": "page product"
+    "style": "page product"
   },
   "collection": {
     "id": "collection",
-    "classList": "page collection relative",
+    "style": "page collection relative",
     "header": {
-      "classList": "page-header flex space-between align-center col-12 padding-block-1 margin-bottom-1"
+      "style": "page-header flex space-between align-center col-12 padding-block-1 margin-bottom-1"
     },
     "title": {
-      "classList": "page-title",
+      "style": "page-title",
       "text": "Collection Page"
     }
   },
   "archive": {
     "id": "archive",
-    "classList": "page archive relative",
+    "style": "page archive relative",
     "header": {
-      "classList": "page-header flex space-between align-center col-12 padding-block-1 margin-bottom-1"
+      "style": "page-header flex space-between align-center col-12 padding-block-1 margin-bottom-1"
     },
     "title": {
-      "classList": "page-title",
+      "style": "page-title",
       "text": "MTG Archive"
     }
   },
   "store": {
     "id": "store",
-    "classList": "page store",
+    "style": "page store",
     "header": {
-      "classList": "page-header flex space-between align-center col-12 padding-block-1 margin-bottom-1"
+      "style": "page-header flex space-between align-center col-12 padding-block-1 margin-bottom-1"
     },
     "title": {
-      "classList": "page-title",
+      "style": "page-title",
       "text": "Store"
     }
   },
   "about": {
     "id": "about",
-    "classList": "page about",
+    "style": "page about",
     "header": {
-      "classList": "page-header flex space-between align-center col-12 padding-block-1 margin-bottom-1"
+      "style": "page-header flex space-between align-center col-12 padding-block-1 margin-bottom-1"
     },
     "title": {
-      "classList": "page-title",
+      "style": "page-title",
       "text": "About Magic Find"
     }
   },
   "dashboard": {
     "id": "dashboard",
-    "classList": "page dashboard",
+    "style": "page dashboard",
     "header": {
-      "classList": "page-header flex space-between align-center col-12 padding-block-1 margin-bottom-1"
+      "style": "page-header flex space-between align-center col-12 padding-block-1 margin-bottom-1"
     },
     "title": {
-      "classList": "page-title",
+      "style": "page-title",
       "text": "Dashboard"
     }
   },
   "not-found": {
     "id": "not-found",
-    "classList": "page not-found",
+    "style": "page not-found",
     "header": {
-      "classList": "flex justify-center align-center col-12 padding-block-1 margin-bottom-1"
+      "style": "flex justify-center align-center col-12 padding-block-1 margin-bottom-1"
     },
     "title": {
       "classList": "page-title fs-500",

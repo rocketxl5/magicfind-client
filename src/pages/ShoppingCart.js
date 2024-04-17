@@ -33,42 +33,40 @@ function ShoppingCart() {
       {cartItems.length > 0 &&
         <>
         <Aside>
-                <>
-                  <Container classList={'cart-total flex gap-1'}>
-                    <p className="fw-500">Subtotal:</p>
-                          <Container>
-                      <p><strong>{`$ ${subTotal}`}</strong>{` (${itemsCount} ${itemsCount > 1 ? 'items' : 'item'})`}</p>
-                    </Container>
-                  </Container>
-                  <Container>
-                    <Button
-                      classList={'btn checkout-btn'}
-                      handleClick={() => navigate('/me/checkout', { state: { from: location } })}
-                  >
-                      Proceed to checkout 
-                    </Button>
-                  </Container>
-                </>
-              </Aside>
-              <Main>
-                <List classList={'list'}>
-                  {
-                    cartItems.map((item, i) => {
-                      return (  
-                        <ListItem key={i}>
-                          <Card classList={'product-card grid'}>
-                            <CartItem
-                              index={i}
-                              count={cartItems.length}
-                              product={item}
-                            />
-                          </Card>
-                        </ListItem>
-                      )
-                    })
-                  }
-                </List>
-              </Main>
+          <>
+            <Container classList={'cart-total flex gap-1'}>
+              <p className="fw-500">Subtotal:</p>
+              <Container>
+                <p><strong>{`$ ${subTotal}`}</strong>{` (${itemsCount} ${itemsCount > 1 ? 'items' : 'item'})`}</p>
+              </Container>
+            </Container>
+            <Container>
+              <Button
+                classList={'btn checkout-btn'}
+                handleClick={() => navigate('/me/checkout', { state: { from: location } })}
+              >
+                Proceed to checkout
+              </Button>
+            </Container>
+          </>
+        </Aside>
+        <ul className={'list'}>
+          {
+            cartItems.map((item, i) => {
+              return (
+                <ListItem key={i}>
+                  <Card classList={'product-card grid'}>
+                    <CartItem
+                      index={i}
+                      count={cartItems.length}
+                      product={item}
+                    />
+                  </Card>
+                </ListItem>
+              )
+            })
+          }
+        </ul>
       </>
       }
     </Page>
