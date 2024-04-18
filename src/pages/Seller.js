@@ -11,7 +11,7 @@ const Seller = () => {
 
     useEffect(() => {
         console.log(location)
-        // fetchData(`/api/users/store/${location.state.user.userID}`)
+        fetchData(`/api/users/store/${location.state?.user.userID}`)
 
     }, [])
 

@@ -5,9 +5,6 @@
     "header": {
       "style": "page-header flex space-between align-center col-12 padding-block-1 margin-bottom-1 padding-top-3"
     },
-    "title": {
-      "style": "page-title"
-    },
     "main": {
       "style": "padding-inline-none"
     }
@@ -17,9 +14,6 @@
     "style": "page relative",
     "header": {
       "style": "page-header flex space-between align-center col-12 padding-block-1 margin-bottom-1 padding-top-3"
-    },
-    "title": {
-      "style": "page-title"
     }
   },
   "shopping-cart": {
@@ -27,10 +21,6 @@
     "style": "page bg-secondary",
     "header": {
       "style": "page-header flex space-between align-center col-12 padding-block-1 margin-bottom-1"
-    },
-    "title": {
-      "style": "page-title",
-      "text": "Shopping Cart"
     },
     "main": {
       "style": "shopping-cart"
@@ -42,24 +32,9 @@
   },
   "collection": {
     "id": "collection",
-    "style": "page collection relative",
+    "style": "page relative",
     "header": {
       "style": "page-header flex space-between align-center col-12 padding-block-1 margin-bottom-1"
-    },
-    "title": {
-      "style": "page-title",
-      "text": "Collection Page"
-    }
-  },
-  "archive": {
-    "id": "archive",
-    "style": "page archive relative",
-    "header": {
-      "style": "page-header flex space-between align-center col-12 padding-block-1 margin-bottom-1"
-    },
-    "title": {
-      "style": "page-title",
-      "text": "MTG Archive"
     }
   },
   "store": {
@@ -67,15 +42,25 @@
     "style": "page store",
     "header": {
       "style": "page-header flex space-between align-center col-12 padding-block-1 margin-bottom-1"
-    },
-    "title": {
-      "style": "page-title",
-      "text": "Store"
+    }
+  },
+  "archive": {
+    "id": "archive",
+    "style": "page relative",
+    "header": {
+      "style": "page-header flex space-between align-center col-12 padding-block-1 margin-bottom-1"
+    }
+  },
+  "seller": {
+    "id": "seller",
+    "style": "page",
+    "header": {
+      "style": "page-header flex space-between align-center col-12 padding-block-1 margin-bottom-1"
     }
   },
   "about": {
     "id": "about",
-    "style": "page about",
+    "style": "page",
     "header": {
       "style": "page-header flex space-between align-center col-12 padding-block-1 margin-bottom-1"
     },
@@ -86,13 +71,16 @@
   },
   "dashboard": {
     "id": "dashboard",
-    "style": "page dashboard",
+    "style": "page",
     "header": {
       "style": "page-header flex space-between align-center col-12 padding-block-1 margin-bottom-1"
-    },
-    "title": {
-      "style": "page-title",
-      "text": "Dashboard"
+    }
+  },
+  "profile": {
+    "id": "profile",
+    "style": "page",
+    "header": {
+      "style": "page-header flex space-between align-center col-12 padding-block-1 margin-bottom-1"
     }
   },
   "not-found": {
@@ -100,10 +88,6 @@
     "style": "page not-found",
     "header": {
       "style": "flex justify-center align-center col-12 padding-block-1 margin-bottom-1"
-    },
-    "title": {
-      "classList": "page-title fs-500",
-      "text": "404"
     }
   }
 }

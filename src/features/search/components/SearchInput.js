@@ -76,7 +76,7 @@ const SearchInput = forwardRef(function SearchInput(props, ref) {
                 value={isActive ? inputValue : ''}
                 onChange={(e) => handleChange(e.target.value)}
                 onFocus={(e) => updateFocus(e.target)}
-                onBlur={(e) => updateBlur(e.target.id)}
+                onBlur={(e) => updateBlur(e.target.id, setInputValue)}
                 ref={ref}
                 placeholder={placeholder}
             />

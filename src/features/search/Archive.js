@@ -170,7 +170,7 @@ const Search = () => {
     }, [data]);
 
     return (
-        <Page name={'archive'} text={'MTG Archive'}>
+        <Page name={'archive'} title={'MTG Archive'}>
             <main>
                 <form
                     id={'archive-form'}

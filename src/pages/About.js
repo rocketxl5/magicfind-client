@@ -78,7 +78,7 @@ const About = () => {
   return (
     <Page
       name={'about'}
-      text={'About Magic Find'}
+      title={'About Magic Find'}
     >
       <main className='bg-eclipse border-surface-1 b-radius-5 grid-section'>
         {

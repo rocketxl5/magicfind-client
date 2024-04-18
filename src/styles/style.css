@@ -1617,7 +1617,7 @@ text-align: center;
 }
 
 .page-title {
-  text-align: center;
+  padding-inline: 1.5rem;
   font-size: var(--fs-250);
   font-weight: 300;
 }
