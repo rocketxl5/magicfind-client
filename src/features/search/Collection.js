@@ -49,7 +49,7 @@ const Collection = () => {
             method: 'GET',
             headers: headers,
         }
-        fetch(`${api.serverURL}/api/cards/${auth.user.id}`, options)
+        fetch(`${api.serverURL}/api/cards/collection/${auth.user.id}`, options)
             .then(res => res.json())
             .then((data) => {
                 // Update local storage with search data
