@@ -8,7 +8,7 @@ export const AuthProvider = ({ children }) => {
   const [unreadMail, setUnreadMail] = useState(null);
 
   const logoutAction = () => {
-    localStorage.removeItem('auth');
+    localStorage.clear();
     setAuth(null);
     setIsAuth(false);
   }

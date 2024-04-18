@@ -69,10 +69,12 @@ const Collection = () => {
                 console.log(error.message)
             })
     }
-    useEffect(() => {
-        console.log(collectionCardNames)
-        collectionInputRef.current?.focus();
 
+    useEffect(() => {
+        if (!isCollectionEmpty) {
+
+            collectionInputRef.current?.focus();
+        }
         if (displaySeachBar) {
             setDisplaySearchBar(false);
         }

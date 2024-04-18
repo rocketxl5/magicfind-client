@@ -33,7 +33,7 @@ const MainHeader = () => {
         .then((res) => res.json())
         .then((data) => {
           setCatalogCardNames(data);
-          isAuth && setUpdateCollection(true);
+          setUpdateCollection(true);
           // Reinitialize updateCatalog to allow updates
           setUpdateCatalog(false);
         })

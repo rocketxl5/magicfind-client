@@ -141,7 +141,7 @@ const Login = () => {
   }
 
   const handleBlur = (e) => {
-    // console.log(e.target)
+
   }
 
   // Submit handler
