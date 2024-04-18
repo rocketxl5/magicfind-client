@@ -46,50 +46,46 @@ const DashboardNav = () => {
     }, [])
 
 
-    // Setting collection card names of current user for autocomplete collection search
+    // Setting collection card names for autocomplete collection search
     useEffect(() => {
-        console.log(auth.user.id)
-        // If true
-        if (updateCollection) {
-            const headers = new Headers();
-            headers.append('Content-Type', 'application/json');
-            headers.append('auth-token', auth.token);
-            const options = {
-                method: 'GET',
-                headers: headers,
-            }
-            fetch(`${api.serverURL}/api/cards/${auth.user.id}`, options)
-                .then(res => {
-                    if (res.ok) {
-                        return res.json()
-                            .then((data) => {
-                                console.log(data.cards)
-                                // If no cards in user collection 
-                                setCollectionCardNames(data.cardNames);
-                                setCardCollection(data.cards);
-                                if (!data.cards.length) {
-                                    setIsCollectionEmpty(true);
-                                }
-                                else if (isCollectionEmpty) {
-                                    setIsCollectionEmpty(false);
-                                }
-                                // Reinitialize updateCollection to allow updates
-                                setUpdateCollection(false);
-                            })
-                    }
-                    else if (res.status === 400) {
-                        return res.json()
-                            .then((error) => {
-                                setError(error.message);
-                            })
-                    }
-                }
-                )
-                .catch((error) => {
-                    console.log(error)
-                });
+
+        const headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+        headers.append('auth-token', auth.token);
+        const options = {
+            method: 'GET',
+            headers: headers,
         }
 
+        fetch(`${api.serverURL}/api/cards/collection/${auth.user.id}`, options)
+            .then(res => {
+                if (res.ok) {
+                    return res.json()
+                        .then((data) => {
+                            setCollectionCardNames(data.cardNames);
+                            setCardCollection(data.cards);
+                            // If length is 0 
+                            if (!data.cards.length) {
+                                setIsCollectionEmpty(true);
+                            }
+                            else {
+                                setIsCollectionEmpty(false);
+                            }
+                            // Reinitialize updateCollection to allow updates
+                            setUpdateCollection(false);
+                        })
+                }
+                else if (res.status === 400) {
+                    return res.json()
+                        .then((error) => {
+                            setError(error.message);
+                        })
+                }
+            }
+            )
+            .catch((error) => {
+                console.log(error)
+            });
     }, [updateCollection])
 
     return (
