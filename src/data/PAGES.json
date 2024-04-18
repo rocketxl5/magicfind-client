@@ -28,7 +28,10 @@
   },
   "product": {
     "id": "product",
-    "style": "page product"
+    "style": "page product",
+    "header": {
+      "style": "page-header flex space-between align-center col-12 padding-block-1 margin-bottom-1"
+    }
   },
   "collection": {
     "id": "collection",

@@ -2,7 +2,9 @@ import capitalizeWord from '../../assets/utilities/capitalizeWord';
 // Sets and return error message object 
 const authErrorHandler = (values, inputs) => {
     const handles = Object.keys(values);
-    let errors = {}
+
+    let errors = {};
+
     handles.forEach((handle) => {
         // Empty input: required input
         if (!values[handle]) {

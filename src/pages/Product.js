@@ -6,7 +6,7 @@ const Product = () => {
     console.log(location.state)
 
     return (
-        <Page name={'product'} hasHeader={false}>
+        <Page name={'product'} title={location.state?.product.name}>
 
         </Page>
     )

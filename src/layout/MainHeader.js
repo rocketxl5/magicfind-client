@@ -33,13 +33,13 @@ const MainHeader = () => {
         .then((res) => res.json())
         .then((data) => {
           setCatalogCardNames(data);
-          setUpdateCollection(true);
+          isAuth && setUpdateCollection(true);
           // Reinitialize updateCatalog to allow updates
           setUpdateCatalog(false);
         })
         .catch((error) => console.log(error));
     }
-  }, [updateCatalog, setCatalogCardNames, setUpdateCatalog, setUpdateCollection]);
+  }, [updateCatalog]);
 
   return (
     <header className="main-header" ref={headerRef}>
