@@ -70,6 +70,7 @@ const Collection = () => {
             })
     }
     useEffect(() => {
+        console.log(collectionCardNames)
         collectionInputRef.current?.focus();
 
         if (displaySeachBar) {

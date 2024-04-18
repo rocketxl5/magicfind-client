@@ -46,8 +46,9 @@ const DashboardNav = () => {
     }, [])
 
 
-    // Setting collection card names for autocomplete collection search
+    // Setting collection card names of current user for autocomplete collection search
     useEffect(() => {
+        console.log(auth.user.id)
         // If true
         if (updateCollection) {
             const headers = new Headers();
@@ -62,10 +63,10 @@ const DashboardNav = () => {
                     if (res.ok) {
                         return res.json()
                             .then((data) => {
-
+                                console.log(data.cards)
+                                // If no cards in user collection 
                                 setCollectionCardNames(data.cardNames);
                                 setCardCollection(data.cards);
-                                // If length is 0 
                                 if (!data.cards.length) {
                                     setIsCollectionEmpty(true);
                                 }

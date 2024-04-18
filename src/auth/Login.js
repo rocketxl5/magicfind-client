@@ -44,6 +44,8 @@ const Login = () => {
 
   // On component load
   useEffect(() => {
+
+    // Triggers if redirected to login from singup
     if (location.state) {
       if (location.state.message) {
         setMessage({ ...location.state.message });
@@ -103,10 +105,10 @@ const Login = () => {
           })
           .catch((error) => {
             setMessage(JSON.parse(error.message));
-            inputs.email.setCustomValidity('invalid')
-            inputs.password.setCustomValidity('invalid')
-            setErrors(errorHandler(values, inputs))
-            setValues({ ...values, email: "", password: "" })
+            emailRef.current.blur();
+            passwordRef.current.blur();
+            setErrors(INIT);
+            setValues({ ...values, password: "" })
             setLoading(false);
             setIsValidForm(false);
           });
@@ -139,6 +141,7 @@ const Login = () => {
   }
 
   const handleBlur = (e) => {
+    // console.log(e.target)
   }
 
   // Submit handler

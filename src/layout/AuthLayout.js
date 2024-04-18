@@ -6,8 +6,8 @@ const AuthLayout = () => {
 
     return (
         <div className="auth-layout">
-            {/* No breadcrumbs @ shopping cart view */}
-            {!pathname.includes('shopping-cart') && < Breadcrumbs />}
+            {/* No breadcrumbs @ ShoppingCart &&  Product */}
+            {(!pathname.includes('shopping-cart') && !pathname.includes('product')) && < Breadcrumbs />}
             <Outlet />
         </div>
     )
