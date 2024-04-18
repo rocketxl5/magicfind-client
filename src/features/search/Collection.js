@@ -156,7 +156,7 @@ const Collection = () => {
 
     return (
         <>
-            <Page name={'collection'} text={'Collection'}>
+            <Page name={'collection'} title={'Collection'}>
                 <main>
                     {
                         isCollectionEmpty ?

@@ -10,11 +10,12 @@ import useNavbar from './contexthooks/useNavbar';
 const useBlur = () => {
     const { blurHandler } = useNavButton();
     const { displaySearchBar } = useNavbar();
-    const { setMarker, setSearchTerm, setSearchInput, setCardNames } = useSearch();
+    const { setCardName, setMarker, setSearchTerm, setSearchInput, searchInput, setCardNames } = useSearch();
 
-    const updateBlur = (id) => {
+    const updateBlur = (id, setInputValue) => {
         setMarker(-1);
         setSearchTerm('');
+        setInputValue('');
         // If input is Catalog 
         if (id === 'catalog') {
             // If searchbar is displayed (mobile only)
@@ -25,7 +26,9 @@ const useBlur = () => {
             // Reinitialize input state if catalog 
             // Query is triggered each time search catalog has focus
             // making sure search catalog cardnames is updated with latest results 
+            console.log(searchInput.value)
             setSearchInput(null);
+            setCardName('');
             setCardNames(null);
         }
     }

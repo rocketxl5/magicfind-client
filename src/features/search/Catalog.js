@@ -92,9 +92,9 @@ const Catalog = () => {
                     return res.json()
                         .then((data) => {
                             setLoading(false);
-                            catalogInputRef.current?.blur();
-                            setCardName('');
-                            setSearchInput(null);
+                            searchInput.blur();
+                            // setCardName('');
+                            // setSearchInput(null);
                             localStorage.setItem('search-results', JSON.stringify({
                                 cards: data.cards,
                                 search: searchInput.id

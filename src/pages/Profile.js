@@ -1,19 +1,16 @@
+import Page from '../components/Page';
+import Avatar from '../components/Avatar';
 import useAuth from '../hooks/contexthooks/useAuth';
 
 const Profile = () => {
   const { auth } = useAuth();
-
+  console.log(auth)
   return (
-    <main className="profile">
-      <header className="header">
-
-        <h2 className="title">Profile</h2>
-      </header>
-      <main className="main">
-        <p>Name: {auth.name}</p>
-        <p>Country: {auth.country}</p>
-      </main>
-    </main>
+    <Page name={'profile'} title={'Profile'}>
+      <p>Name: {auth.user.name}</p>
+      <p>Country: {auth.user.country}</p>
+      <Avatar classList={'box-size-8 drop-top-right'} avatar={auth.user.avatar} />
+    </Page>
   );
 };
 

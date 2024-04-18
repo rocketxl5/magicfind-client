@@ -100,7 +100,6 @@ nav {
     border-radius: 50%;
     font-size: var(--fs-200) !important;
     color: var(--clr-light) !important;
-    border: 1px solid var(--clr-grey);
 }
 
 .nav-menu {
