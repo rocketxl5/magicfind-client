@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import ArchiveItemNew from '../features/product/ArchiveItemNew';
-import CollectionItemNew from '../features/product/CollectionItemNew';
-import CatalogItemNew from '../features/product/CatalogItemNew';
+import ArchiveItem from '../features/product/ArchiveItem';
+import CollectionItem from '../features/product/CollectionItem';
+import CatalogItem from '../features/product/CatalogItem';
 import Modal from '../features/modal/Modal';
 import List from '../components/List';
 import ListItem from '../components/ListItem';
@@ -87,7 +87,7 @@ const SearchResults = () => {
                                             {
                                                 search === 'catalog'
                                                     ?
-                                                    <CatalogItemNew
+                                                    <CatalogItem
                                                         index={i}
                                                         product={card}
                                                         count={cards.length}
@@ -96,7 +96,7 @@ const SearchResults = () => {
                                                     :
                                                     search === 'collection'
                                                         ?
-                                                        <CollectionItemNew
+                                                        <CollectionItem
                                                             index={i}
                                                             product={card}
                                                             count={cards.length}
@@ -104,7 +104,7 @@ const SearchResults = () => {
                                                             handleSlideView={handleSlideView}
                                                         />
                                                         :
-                                                        <ArchiveItemNew
+                                                        <ArchiveItem
                                                             index={i}
                                                             product={card}
                                                             count={cards.length}

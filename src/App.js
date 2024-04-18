@@ -30,11 +30,12 @@ import CardNotFound from './pages/CardNotFound';
 import PageNotFound from './pages/PageNotFound';
 import ShoppingCart from './pages/ShoppingCart';
 import DashBoard from './pages/DashBoard';
-import Collection from './features/search/Collection'
-import Archive from './features/search/Archive'
+import Archive from './features/search/Archive';
+import Collection from './features/search/Collection';
+import Store from './features/search/Store';
 import Checkout from './pages/Checkout';
 import Inbox from './features/mail/Inbox';
-import Store from './pages/Store';
+import Seller from './pages/Seller';
 import Product from './pages/Product';
 
 // Hooks
@@ -92,7 +93,7 @@ const App = () => {
             <Route path="contact" element={<Contact />} />
             <Route path="catalog/:query" element={<SearchResults />} />
             <Route path="not-found/:name" element={<CardNotFound />} />
-            <Route path="store/:id" element={<Store />} />
+            <Route path="seller/:id" element={<Seller />} />
             <Route path="shopping-cart" element={<ShoppingCart />} />
             <Route path="product/:id" element={<Product />} />
           </Route>

@@ -3,15 +3,15 @@ import { useLocation } from 'react-router-dom';
 import Loader from '../layout/Loader';
 import useFetchData from '../hooks/useFetchData';
 
-const Store = () => {
+const Seller = () => {
     const [hasLoaded, setHasLoaded] = useState(false);
     const location = useLocation();
 
     const { fetchData, loading, showConfirmation, error, result } = useFetchData();
 
     useEffect(() => {
-
-        fetchData(`/api/users/store/${location.state.user.userID}`)
+        console.log(location)
+        // fetchData(`/api/users/store/${location.state.user.userID}`)
 
     }, [])
 
@@ -39,4 +39,4 @@ const Store = () => {
     )
 }
 
-export default Store;
+export default Seller;
