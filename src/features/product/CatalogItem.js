@@ -22,7 +22,7 @@ import { GoShieldCheck } from "react-icons/go";
 
 import data from '../../data/SEARCH.json';
 
-const CatalogItemNew = ({ index, product, count, cartIndex, handleSlideView }) => {
+const CatalogItem = ({ index, product, count, cartIndex, handleSlideView }) => {
     const {
         name,
         set_name,
@@ -124,7 +124,7 @@ const CatalogItemNew = ({ index, product, count, cartIndex, handleSlideView }) =
                             <section>
                                 {/* {`https://svgs.scryfall.io/card-symbols/${product.set}.svg`} alt={`${product.set_name} Icon`} */}
                                 <div>
-                                    <h2 className='text-center fs-150 fw-500'>Negate <span><img src='' /></span></h2>
+                                    <h2 className='text-center fs-150 fw-500'>Negate</h2>
                                 </div>
                                 <div className='b-radius-5 border-surface-thin'>
                                     <table>
@@ -155,7 +155,7 @@ const CatalogItemNew = ({ index, product, count, cartIndex, handleSlideView }) =
 
                                 <Drop
                                     classList={'drop-bottom-left absolute box-size-8 bg-transparent border-eclipse-2 b-radius-100 '}
-                                    handleClick={() => navigate(`/store/${product.seller.userID}`, {
+                                    handleClick={() => navigate(`/seller/${product.seller.userID}`, {
                                         state: {
                                             user: product.seller
                                         }
@@ -239,4 +239,4 @@ const CatalogItemNew = ({ index, product, count, cartIndex, handleSlideView }) =
 }
 
 
-export default CatalogItemNew
+export default CatalogItem

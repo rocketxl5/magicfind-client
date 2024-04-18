@@ -17,7 +17,7 @@ import { FaPlus } from "react-icons/fa6";
 
 import data from '../../data/SEARCH.json';
 
-const ArchiveItemNew = ({ index, product, count, handleSlideView }) => {
+const ArchiveItem = ({ index, product, count, handleSlideView }) => {
     const [isCardAdded, setIsCardAdded] = useState(false);
     const { auth } = useAuth();
     const { user, token } = auth;
@@ -233,4 +233,4 @@ const ArchiveItemNew = ({ index, product, count, handleSlideView }) => {
     )
 }
 
-export default ArchiveItemNew
+export default ArchiveItem
