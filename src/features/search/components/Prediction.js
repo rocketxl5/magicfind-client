@@ -3,8 +3,7 @@ import useSearch from '../../../hooks/contexthooks/useSearch';
 const Prediction = (props) => {
     const {
         prediction,
-        index,
-        setInputValue
+        index
     } = props;
 
     const { marker, searchTerm, setCardName } = useSearch();
@@ -12,7 +11,6 @@ const Prediction = (props) => {
     const handleMouseEnter = (e) => {
         e.target.classList.add('bg-grey');
         // Sets prediction as search input value when mouse hovers on it 
-        setInputValue(prediction);
         // Set card name if form submitted
         setCardName(prediction);
     };
