@@ -134,7 +134,7 @@ const CatalogItem = ({ index, product, count, cartIndex, handleSlideView }) => {
                                                 details &&
                                                 details.map((detail, i) => {
                                                     return (
-                                                        <tr key={1 + i}>
+                                                        <tr key={i}>
                                                             <td className='spec-title col-3'>{detail.title}</td>
                                                             <td className={`spec-value col-8 ${detail.classList ? detail.classList : ''}`}>{detail.value}</td>
                                                         </tr>

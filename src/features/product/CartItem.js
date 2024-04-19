@@ -15,11 +15,12 @@ import data from '../../data/SEARCH.json';
 import useViewport from '../../hooks/contexthooks/useViewport';
 import useCart from '../../hooks/contexthooks/useCart';
 import useUpdateCart from '../../hooks/useUpdateCart';
-import useFetchData from '../../hooks/useFetchData';
+// import useFetchData from '../../hooks/useFetchData';
 import { AiOutlineDelete } from "react-icons/ai";
 
 const CartItem = ({ index, count, product }) => {
   const [showCard, setShowCard] = useState(false);
+  const [currentUpdate, setCurrentUpdate] = useState(false)
   const [total, setTotal] = useState(0);
   const [price, setPrice] = useState(0);
 
@@ -33,14 +34,22 @@ const CartItem = ({ index, count, product }) => {
   const { isMobile } = useViewport();
   const { cartItems } = useCart();
   // const {fetchData} = useFetchData();
-  const { loading, updateCartHandler } = useUpdateCart(url, headers, product, index);
+  const { loading, quantityAvailable, currentStatus, updateCartHandler } = useUpdateCart(url, headers, product, index);
 
   useEffect(() => {
-    // console.log(cartItems);
-    // console.log(product)
-    // updateCartHandler(product.quantity)
+    updateCartHandler(product.quantity);
     setPrice(parseFloat(product.selected.price));
   }, []);
+
+  useEffect(() => {
+    if (currentStatus) {
+      console.log(currentStatus)
+      setCurrentUpdate(true);
+      setTimeout(() => {
+        setCurrentUpdate(false);
+      }, 5000)
+    }
+  }, [currentStatus])
 
   useEffect(() => {
     setTotal(price * parseInt(cartItems[index].quantity));
@@ -98,6 +107,10 @@ const CartItem = ({ index, count, product }) => {
       </div>
 
       <Container classList={' three'}>
+        {
+          currentUpdate &&
+          <p className='bg-primary color-light fs-100 text-center padding-block-1'>{currentStatus?.message}</p>
+        }
         {/* <List classList={'product-specs'}>
         {
           details &&
@@ -117,16 +130,16 @@ const CartItem = ({ index, count, product }) => {
         <table className='cart-price'>
           <tbody>
             <tr>
-              <td className='col-9'>Price:</td>
-              <td className='fw-500'>${price.toFixed(2)}</td>
+              <td>Price:</td>
+              <td>${price.toFixed(2)}</td>
             </tr>
             <tr>
-              <td className='col-9'>Quantity: </td>
-              <td className='padding-left-7px border-bottom fw-500'>{cartItems[index]?.quantity}</td>
+              <td>Quantity: </td>
+              <td>{cartItems[index]?.quantity}</td>
             </tr>
-            <tr>
-              <td className='col-9'>Total:</td>
-              <td className='fw-500'>${total.toFixed(2)}</td>
+            <tr className>
+              <td>Total:</td>
+              <td>${total.toFixed(2)}</td>
             </tr>
           </tbody>
         </table>
@@ -150,7 +163,7 @@ const CartItem = ({ index, count, product }) => {
               classList={'col-12'}
               name={'cart-item'}
               quantitySelected={cartItems[index]?.quantity}
-              quantityAvailable={product.selected.quantity}
+              quantityAvailable={quantityAvailable}
               product={product.selected}
               handleChange={updateCartHandler}
             />
