@@ -1,13 +1,12 @@
+import { useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import Page from '../components/Page';
-import List from '../components/List';
 import ListItem from '../components/ListItem';
 import Card from '../components/Card';
 import CartItem from '../features/product/CartItem';
 import Button from '../components/Button';
 import Container from '../components/Container';
 import Aside from '../components/Aside';
-import Main from '../components/Main';
 // import useAuth from '../hooks/contexthooks/useAuth';
 import useCart from '../hooks/contexthooks/useCart';
 
