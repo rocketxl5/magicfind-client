@@ -14,7 +14,7 @@ const Page = ({ children, classList, name, hasHeader = true, hasBanner = false, 
                             {
                                 title.length < 35 ?
                                     title :
-                                    `${title.substring(0, 30)}...`
+                                    `${title.substring(0, 25)}...`
                             }
                         </Title>
                     {component}

@@ -34,7 +34,8 @@ const Search = () => {
         archiveCardNames,
         setUpdateCollection,
         collectionCardNames,
-        setPredictions
+        setPredictions,
+        inputValue
     } = useSearch();
 
     const { displaySeachBar, setDisplaySearchBar } = useNavbar();
@@ -66,8 +67,9 @@ const Search = () => {
 
     const searchArchive = (e = undefined, prediction = undefined) => {
         e?.preventDefault();
-
-        if (searchTerm.length < 3) { return }
+        console.log(searchTerm)
+        console.log(inputValue)
+        if (inputValue.length < 3) { return }
 
         setLoading(true);
 
@@ -84,8 +86,8 @@ const Search = () => {
         else if (predictions.length === 1) {
             query = `cards/named?exact=${predictions[0]}`;
         }
-        else if (searchTerm) {
-            query = `cards/named?fuzzy=${searchTerm}`;
+        else if (inputValue) {
+            query = `cards/named?fuzzy=${inputValue}`;
         }
 
         setPredictions([]);
@@ -165,7 +167,6 @@ const Search = () => {
                         query: cardName
                     }
                 });
-
         }
     }, [data]);
 

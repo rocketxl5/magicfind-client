@@ -8,11 +8,14 @@ import useSearch from './contexthooks/useSearch';
 /*****************************************/
 const useFocus = () => {
     const { displaySearchBar, setDisplaySearchBar } = useNavbar();
-    const { searchInput, setSearchInput } = useSearch();
+    const { inputValue, setInputValue, searchInput, setSearchInput } = useSearch();
 
     const updateFocus = (target) => {
-
+        // If previous input is different from current one
         if (searchInput?.id !== target.id) {
+            // Clear search input
+            setInputValue('');
+            // Set searchInput with current one
             setSearchInput(target);
         }
         // If mobile searchbar is displayed

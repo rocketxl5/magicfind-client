@@ -16,14 +16,15 @@ const SearchInput = forwardRef(function SearchInput(props, ref) {
         isActive,
     } = props;
 
-    const [inputValue, setInputValue] = useState('');
-
     const {
+        inputValue,
+        setInputValue,
         setMarker,
         cardNames,
         setCardName,
         searchTerm,
         setSearchTerm,
+        searchInput,
         setPredictions,
         displayAutcomplete,
         setDisplayAutocomplete
@@ -36,13 +37,21 @@ const SearchInput = forwardRef(function SearchInput(props, ref) {
     const { displaySearchBar } = useNavbar();
     const { blurHandler } = useNavButton();
 
+    // If location changes reset search states
     useEffect(() => {
+        if (inputValue) {
+            setInputValue('');
+        }
+        if (displayAutcomplete) {
+            setDisplayAutocomplete(false);
+        }
         if (displaySearchBar) {
             blurHandler();
         }
     }, [location])
 
-    const handleChange = (value) => {
+    const handleChange = (e) => {
+        const value = e.target.value;
 
         if (value.length >= 3) {
             // Reset Marker to initial value
@@ -63,6 +72,10 @@ const SearchInput = forwardRef(function SearchInput(props, ref) {
         setInputValue(value);
     };
 
+    const handleBlur = (e) => {
+        updateBlur(e.target.id)
+    }
+
     return (
         <>
             <input
@@ -74,14 +87,14 @@ const SearchInput = forwardRef(function SearchInput(props, ref) {
                 // @ arrowup/arrowdown [Autocomplete] 
                 // @ mousehover [Prediction]
                 value={isActive ? inputValue : ''}
-                onChange={(e) => handleChange(e.target.value)}
+                onChange={handleChange}
                 onFocus={(e) => updateFocus(e.target)}
-                onBlur={(e) => updateBlur(e.target.id, setInputValue)}
+                onBlur={handleBlur}
                 ref={ref}
                 placeholder={placeholder}
             />
             {(isActive && searchTerm) &&
-                <AutoComplete searchCard={searchCard} setInputValue={value => setInputValue(value)} />
+                <AutoComplete searchCard={searchCard} />
             }
         </>
     );
