@@ -219,28 +219,13 @@ color: var(--clr-light);
 }
 
 .layout .product {
-    /* background:  #faf4e6 !important;
-    padding: 1rem; */
+    background:  #faf4e6 !important;
+    padding: 1rem;
 }
 
 .layout .product * {
-  /* font-size: 10px;
-  color: #19292c; */
-  /* font-weight: var(--fw-500); */
-  /* font-size: clamp(10px, calc(1.2vw + 5px), var(--fs-150)); */
-}
-
-.layout .product td {
-  /* color: #19292c;
-  font-weight: var(--fw-500); */
-}
-
-.layout .spec-title {
-  font-weight: var(--fw-600);
-  /* font-weight: 300; */
-}
-
-.layout .spec-value {
+  font-size: 10px;
+  color: var(--clr-eclipse);
   font-weight: var(--fw-500);
 }
 

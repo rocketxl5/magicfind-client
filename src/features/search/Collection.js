@@ -4,7 +4,6 @@ import React, {
 } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Page from '../../components/Page';
-import Form from '../../components/Form';
 import SearchInput from './components/SearchInput';
 import Message from '../../components/Message.js';
 import Button from '../../components/Button';
