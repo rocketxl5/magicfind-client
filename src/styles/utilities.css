@@ -54,6 +54,18 @@
     padding-block-start: 3rem !important;
 }
 
+.margin-top-1 {
+    margin-block-start: 1rem !important;
+}
+
+.margin-top-2 {
+    margin-block-start: 2rem !important;
+}
+
+.margin-top-3 {
+    margin-block-start: 3rem !important;
+}
+
 .margin-bottom-1 {
     margin-block-end: var(--size-1) !important;
 }

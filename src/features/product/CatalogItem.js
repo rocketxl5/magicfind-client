@@ -4,6 +4,7 @@ import Container from '../../components/Container';
 import Drop from '../../components/Drop';
 import ImageNew from '../../components/ImageNew';
 import Loader from '../../layout/Loader';
+import Card from '../../components/Card';
 import Confirmation from './components/Confirmation';
 import QuantitySelector from './components/QuantitySelector';
 import TwoSidedSlide from '../modal/TwoSidedSlide';
@@ -101,7 +102,7 @@ const CatalogItem = ({ index, product, count, cartIndex, handleSlideView }) => {
     }, [cartItems]);
 
     return (
-        <>
+        <Card classList='product-container'>
             {/* Passing product image & product detail as an array of children @ TwoSidedSlide component */}
             {/* TwoSidedSlide contains @ TurnBtn which takes a classList argument to specify sizes and absolute coordinates  */}
             <TwoSidedSlide classList={{ container: '', btn: 'card-action-btn' }}>
@@ -120,7 +121,7 @@ const CatalogItem = ({ index, product, count, cartIndex, handleSlideView }) => {
                             }
                         </ImageNew>,
                         // Product information (children[1])
-                        <div className='product'>
+                        <div className='product-details'>
                             <section>
                                 {/* {`https://svgs.scryfall.io/card-symbols/${product.set}.svg`} alt={`${product.set_name} Icon`} */}
                                 <div>
@@ -234,7 +235,7 @@ const CatalogItem = ({ index, product, count, cartIndex, handleSlideView }) => {
                     </div>
                 </div>
             </div>
-        </>
+        </Card>
     )
 }
 
