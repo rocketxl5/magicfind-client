@@ -6,8 +6,7 @@ import CountDown from '../search/components/CountDown';
 import Container from '../../components/Container';
 import QuantitySelector from './components/QuantitySelector';
 import Button from '../../components/Button';
-import List from '../../components/List';
-import ListItem from '../../components/ListItem';
+import Card from '../../components/Card';
 import ImageNew from '../../components/Image';
 import Avatar from '../../components/Avatar';
 import Loader from '../../layout/Loader';
@@ -83,7 +82,7 @@ const CartItem = ({ index, count, product }) => {
   ]
 
   return (
-    <>
+    <Card classList={'product-card grid'}>
       <ProductHeader classList={'flex align-center space-between one'}>
         <Title classList={'product-title'}>
           {
@@ -170,7 +169,7 @@ const CartItem = ({ index, count, product }) => {
           </Container>
         </div>
       </div>
-    </>
+    </Card>
   )
 }
 

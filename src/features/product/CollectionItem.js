@@ -1,6 +1,7 @@
 import { useRef } from 'react';
 import Drop from '../../components/Drop';
 import ImageNew from '../../components/ImageNew';
+import Card from '../../components/Card';
 import { FaCommentsDollar } from "react-icons/fa";
 import { AiOutlineDelete } from "react-icons/ai";
 import { AiOutlineEdit } from "react-icons/ai";
@@ -59,8 +60,8 @@ const CollectionItem = ({ index, product, count, handleCollectionItem, handleSli
 
     return (
         <>
-            <div className='product-view'>
-                <div className="product-container">
+            {/* <div className='product-view'> */}
+            <Card classList="product-container">
                     <div className="slide">
                         <div className="double-faced-card" ref={cardRef}>
                             <div className="card-front">
@@ -93,7 +94,7 @@ const CollectionItem = ({ index, product, count, handleCollectionItem, handleSli
                                 </ImageNew>
                             </div>
                             <div className="card-back">
-                                <div className='product'>
+                            <div className='product-details'>
                                     <div>
                                         <h2 className='text-center fs-150 fw-500 padding-bottom-dot-5'>Card Info</h2>
                                     </div>
@@ -140,8 +141,8 @@ const CollectionItem = ({ index, product, count, handleCollectionItem, handleSli
                             <AiOutlineDelete />
                         </Drop>
                     </div>
-                </div >
-            </div >
+            </Card >
+            {/* </div > */}
             <div className="product-name-wrapper flex column">
                 <span className="product-name">
                     {

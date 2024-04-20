@@ -9,7 +9,7 @@ const Page = ({ children, classList, name, hasHeader = true, hasBanner = false, 
         <div id={id} className={style}>
             {
                 hasHeader && 
-                <Header {...header}>
+                <header className={header.style}>
                         <Title classList='page-title'>
                             {
                                 title.length < 35 ?
@@ -18,7 +18,7 @@ const Page = ({ children, classList, name, hasHeader = true, hasBanner = false, 
                             }
                         </Title>
                     {component}
-                </Header>
+                    </header>
             }
             <main className={`padding-inline-1 ${main && main.style}`}>
                 {children}

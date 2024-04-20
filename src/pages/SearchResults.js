@@ -81,35 +81,33 @@ const SearchResults = () => {
                             cards.map((card, i) => {
                                 return (
                                     <ListItem key={i} classList={'flex justify-center'}>
-                                        <Card classList={'product-container'}>
-                                            {
-                                                search === 'catalog'
+                                        {
+                                            search === 'catalog'
+                                                ?
+                                                <CatalogItem
+                                                    index={i}
+                                                    product={card}
+                                                    count={cards.length}
+                                                    handleSlideView={handleSlideView}
+                                                />
+                                                :
+                                                search === 'collection'
                                                     ?
-                                                    <CatalogItem
+                                                    <CollectionItem
+                                                        index={i}
+                                                        product={card}
+                                                        count={cards.length}
+                                                        handleCollectionItem={handleCollectionItem}
+                                                        handleSlideView={handleSlideView}
+                                                    />
+                                                    :
+                                                    <ArchiveItem
                                                         index={i}
                                                         product={card}
                                                         count={cards.length}
                                                         handleSlideView={handleSlideView}
                                                     />
-                                                    :
-                                                    search === 'collection'
-                                                        ?
-                                                        <CollectionItem
-                                                            index={i}
-                                                            product={card}
-                                                            count={cards.length}
-                                                            handleCollectionItem={handleCollectionItem}
-                                                            handleSlideView={handleSlideView}
-                                                        />
-                                                        :
-                                                        <ArchiveItem
-                                                            index={i}
-                                                            product={card}
-                                                            count={cards.length}
-                                                            handleSlideView={handleSlideView}
-                                                        />
-                                            }
-                                        </Card>
+                                        }
                                     </ListItem>
                                 )
                             })

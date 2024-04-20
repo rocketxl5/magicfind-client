@@ -179,7 +179,7 @@ const ArchiveItem = ({ index, product, count, handleSlideView }) => {
                                 </ImageNew>
                             </div>
                             <div className="card-back">
-                                <div className='product'>
+                                {/* <div className='product'>
                                     <div>
                                         <h2 className='text-center fs-150 fw-500 padding-bottom-dot-5'>Card Info</h2>
                                     </div>
@@ -199,7 +199,7 @@ const ArchiveItem = ({ index, product, count, handleSlideView }) => {
                                             }
                                         </tbody>
                                     </table>
-                                </div>
+                                </div> */}
                             </div>
                         </div>
                     </div>
