@@ -90,7 +90,7 @@ const CatalogItem = ({ index, product, count, cartIndex, handleSlideView }) => {
 
     // Renders on load with location as trigger
     useEffect(() => {
-        findIndex(product._id)
+        findIndex(product)
     }, [location])
 
     useEffect(() => {
@@ -98,7 +98,7 @@ const CatalogItem = ({ index, product, count, cartIndex, handleSlideView }) => {
         // Sets the index of product item if found in cart
         // Set null if not
         // @ CatalogItem
-        findIndex(product._id)
+        findIndex(product)
     }, [cartItems]);
 
     return (
@@ -226,7 +226,7 @@ const CatalogItem = ({ index, product, count, cartIndex, handleSlideView }) => {
                         </QuantitySelector>
                     </Container>
                     <div className='box-size-6 absolute flex align-center justify-center top-0 right-negative-4'>
-                        {loading && <Loader classList={'bg-eclipse color-light'} />}
+                        {loading && <Loader />}
                         {
                             cartItems[indexFound]?.quantity && !loading ?
                                 <FiShoppingCart className='box-size-5' /> :

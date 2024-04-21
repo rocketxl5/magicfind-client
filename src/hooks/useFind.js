@@ -28,11 +28,11 @@ const useFind = () => {
     // Returns the index of product item if found
     // Returns null if not
     // @ CatalogItem
-    const findIndex = (id) => {
-
+    const findIndex = (product) => {
+        console.log(cartItems)
         if (cartItems.length > 0) {
             const index = cartItems.findIndex((item) => {
-                return item.selected._id === id;
+                return item.selected._id === product._id;
             });
 
             // If index >= 0: Product is already in cart
