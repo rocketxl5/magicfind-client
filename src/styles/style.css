@@ -240,15 +240,20 @@ cursor: pointer;
   width: 100%;
   height: inherit;
   /* height: 100%; */
+  color: var(--clr-eclipse);
   background: var(--clr-light);
   z-index: 5000;
+}
+
+.layout .loader {
+  background: var(--clr-eclipse);
+  color: var(--clr-light);
 }
 
 .loader svg {
 display: block;
 width: 5rem;
 height: 5rem;
-color: var(--clr-primary);
 animation: animate 0.5s linear infinite;
 }
 

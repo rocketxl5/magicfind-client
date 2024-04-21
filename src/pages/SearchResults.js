@@ -27,6 +27,7 @@ const SearchResults = () => {
     // const { loading } = useSearch();
 
     useEffect(() => {
+        console.log(cards)
         // If cards is empty
         if (!cards?.length) {
             // Send to collection page
