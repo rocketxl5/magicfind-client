@@ -64,7 +64,6 @@ const useUpdateCart = (url, headers, item, indexFound = undefined) => {
         axios.get(`${api.serverURL}${url}${quantity}`, headers)
                 .then(res => {
                     // If quantity selected is available
-                    console.log(res.data)
                     if (res.status === 200 && res.data.isAvailable) {
                         // Update cart quantities
                         updateCart(quantity);

@@ -687,6 +687,11 @@
     height: 12rem;
 }
 
+.box-size-100 {
+    width: 100% !important;
+    height: 100% !important;
+}
+
 .vertical-align-middle {
     vertical-align: middle !important;
 }

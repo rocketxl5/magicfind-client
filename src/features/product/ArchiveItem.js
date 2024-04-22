@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Loader from '../../layout/Loader';
 import Drop from '../../components/Drop';
@@ -38,8 +38,6 @@ const ArchiveItem = ({ index, product, count, handleSlideView }) => {
     const { setUpdateCollection } = useSearch();
     const { expandedImage } = useExpandImage(product);
     const { findMatch, isMatchFound } = useFind();
-
-    const cardRef = useRef(null);
 
     const navigate = useNavigate();
 
@@ -150,23 +148,23 @@ const ArchiveItem = ({ index, product, count, handleSlideView }) => {
                     }
                     <Drop
                         id={'expand-image'}
-                        classList={'drop-bottom-rightabsolute color-light bg-primary border-light-2'}
+                        classList={'product-btn absolute btn-center-right box-size-8 border-light-2 color-light bg-alpha b-radius-5'}
                         handleClick={(e) => handleSlideView(e, product.layout, expandedImage)}
                     >
-                        <IoExpand />
+                        <IoExpand className='expand-icon' />
                     </Drop>
                     {
                         loading ?
-                            <Drop classList={'absolute color-light bg-light border-primary drop-top-right'} >
-                                <Loader />
+                            <Drop classList={'product-btn absolute border-light-2 color-light bg-alpha btn-top-right b-radius-5'} >
+                                <Loader classList={'relative color-light bg-alpha'} />
                             </Drop>
                             :
                             (isCardAdded || isMatchFound) ?
-                                <Drop classList={'absolute color-light bg-success border-light-2 drop-top-right'} >
+                                <Drop classList={'product-btn absolute border-light-2 color-light bg-alpha btn-top-right disabled b-radius-5'} disabled={true}>
                                     <FaCheck />
                                 </Drop>
                                 :
-                                <Drop classList={'absolute color-light bg-primary border-light-2 drop-top-right'} handleClick={() => postData(token, query)}>
+                                <Drop classList={'product-btn absolute border-light-2 color-light bg-alpha btn-top-right b-radius-5'} handleClick={() => postData(token, query)}>
                                     <FaPlus />
                                 </Drop>
                     }
