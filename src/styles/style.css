@@ -237,8 +237,8 @@ cursor: pointer;
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: inherit;
-  /* height: 100%; */
+  /* height: inherit; */
+  height: 100%;
   color: var(--clr-eclipse);
   background: var(--clr-light);
   z-index: 5000;
