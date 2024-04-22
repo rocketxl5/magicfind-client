@@ -6,6 +6,7 @@ const Drop = ({ children, id, classList = '', handleClick }) => {
         <button
             id={id}
             className={`${classList} b-radius-5 drop-btn`}
+            type='button'
             onClick={handleClick}
         >
             {children}
