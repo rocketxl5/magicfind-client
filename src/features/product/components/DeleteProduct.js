@@ -11,17 +11,7 @@ const DeleteProduct = (props) => {
     // Props
     const { product, search, handleClick } = props;
     // States
-    const [response, setResponse] = useState({
-        isDeleted: false,
-        message: (() => {
-            return (
-                <>
-                    <p>You are about to delete <strong>{product.name}</strong> from your collection.</p>
-                    <p>This will remove all the information associated with this card.</p>
-                </>
-            )
-        })()
-    });
+    const [isDeleted, setIsDeleted] = useState(false);
     const [loading, setLoading] = useState(false);
     // Ref
     const btnRef = useRef(null);
@@ -73,9 +63,9 @@ const DeleteProduct = (props) => {
                 throw new Error(JSON.stringify(data));
             })
             .then((data) => {
-                const { cards, isDeleted, message } = data;
+                const { cards } = data;
                 let result;
-                setResponse({ isDeleted: isDeleted, message: message })
+                setIsDeleted(true)
                 // If cardName is set
                 if (query !== 'all-cards') {
                     // filter for cards with cardName
@@ -84,7 +74,7 @@ const DeleteProduct = (props) => {
                 } else {
                     result = { cards: cards, search, query: product.name };
                 }
-                setLoading(false);
+                // setLoading(false);
                 localStorage.setItem('search-results', JSON.stringify(result));
                 closeModal(result);
             })
@@ -98,7 +88,7 @@ const DeleteProduct = (props) => {
         <div className="modal-state">
             <div className={`modal-state-content`}>
                 {loading && <Loader />}
-                {response.isDeleted && <Success response={response} handleClick={handleClick} ref={btnRef} />}
+                {isDeleted && <Success message={'Card successfully deleted'} handleClick={handleClick} ref={btnRef} />}
                 <>
                     <header className="modal-header bg-danger">
                         <div className="modal-title">
@@ -107,19 +97,14 @@ const DeleteProduct = (props) => {
                     </header>
                     <div className='scroll'>
                         <div className="modal-body">
-                            <section className="modal-section">
-                                <div className="card-section">
-
-                                        <Image
-                                            classList={'col-12'}
-                                            product={product}
-                                        />
-
-                                </div>
-                            </section>
-                            <section className="modal-warning">
-                                <div className="warning-message">
-                                    {response.message}
+                            <section className="">
+                                <Image
+                                    classList={'col-6 margin-bottom-2'}
+                                    product={product}
+                                />
+                                <div className='padding-1 border-danger b-radius-5 margin-bottom-2'>
+                                    <p>You are about to delete <strong>{product.name}</strong> from your collection.</p>
+                                    <p>This will remove all the information associated with this card.</p>
                                 </div>
                             </section>
                         </div>
@@ -143,7 +128,7 @@ const DeleteProduct = (props) => {
                                     Confirm
                                 </button>
                             </div>
-                        </footer>
+                        </footer> 
                     </div>
                 </>
             </div>

@@ -99,7 +99,7 @@
 }
 
 .danger-padding {
-    padding: calc(var(--size-1) - 1px) !important;
+    padding: calc(0.5rem - 1px) calc(1rem - 1px) !important;
 }
 
 .inherit-height {
@@ -701,7 +701,11 @@
 }
 
 .fill-light {
-    fill: var(--clr-light);
+    fill: var(--clr-light) !important;
+}
+
+.stroke-light {
+    stroke: var(--clr-light) !important;
 }
 
 .fill-success {

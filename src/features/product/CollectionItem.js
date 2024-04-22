@@ -55,7 +55,7 @@ const CollectionItem = ({ index, product, count, handleCollectionItem, handleSli
 
     return (
         <Card classList={"product-container"}>
-            <TwoSidedSlide classList={{ container: '', btn: 'card-action-btn' }}>
+            <TwoSidedSlide classList={{ container: '', btn: 'card-action-btn b-radius-5 btn-bottom-right' }}>
                 <ImageNew
                     product={product}
                     classList='product-image'
@@ -82,17 +82,50 @@ const CollectionItem = ({ index, product, count, handleCollectionItem, handleSli
                             <FaCommentsDollar />
                         </Drop>
                     } */}
+                    {/* <Drop
+                        id={'edit-product'}
+                        classList={'card-action-btn btn-bottom-left b-radius-5 btn-bottom-right border-light-3 bg-success'}
+                        handleClick={(e) => handleCollectionItem(e, product, expandedImage)}
+                    >
+                        <AiOutlineEdit className='box-size-100 stroke-light fill-light' />
+                    </Drop>
+                    <Drop
+                        id={'delete-product'}
+                        classList={'card-action-btn btn-bottom-center b-radius-5 btn-bottom-right color-light'}
+                        handleClick={(e) => handleCollectionItem(e, product, expandedImage)}
+                    >
+                        <AiOutlineDelete className='box-size-100 ' />
+                    </Drop> */}
+                    <div className="product-legend">
+
+                        <Drop
+                            id={'edit-product'}
+                            classList={'drop-btn color-light bg-success border-success'}
+                            handleClick={(e) => handleCollectionItem(e, product, expandedImage)}
+                        >
+                            <AiOutlineEdit />
+                        </Drop>
+                        <Drop
+                            id={'delete-product'}
+                            classList={'drop-btn color-light bg-danger border-danger'}
+                            handleClick={(e) => handleCollectionItem(e, product, expandedImage)}
+                        >
+                            <AiOutlineDelete />
+                        </Drop>
+
+                    </div>
                 </ImageNew>
                 <div className='product-details'>
                     <section>
                         <div>
                             <h2 className='text-center fs-150 fw-500'>Card Info</h2>
                         </div>
+                        {
+                            product._is_published ?
                         <div className='b-radius-5 border-surface-thin'>
                             <table>
                                 <tbody>
-                                    {
-                                        details &&
+                                            {
                                         details.map((detail, i) => {
                                             return (
                                                 <tr key={i}>
@@ -104,10 +137,11 @@ const CollectionItem = ({ index, product, count, handleCollectionItem, handleSli
                                     }
                                 </tbody>
                             </table>
+                                </div> :
+                                <div>
+                                    This card is currently unpublished
                         </div>
-                    </section>
-                    <section>
-
+                        }
                     </section>
                 </div>
             </TwoSidedSlide>
@@ -126,23 +160,6 @@ const CollectionItem = ({ index, product, count, handleCollectionItem, handleSli
                 </div>
 
             </div>
-
-            <div className="product-legend absolute flex column space gap-2 justify-center">
-                <Drop
-                            id={'edit-product'}
-                            classList={'color-light bg-success border-success'}
-                            handleClick={(e) => handleCollectionItem(e, product, expandedImage)}
-                        >
-                            <AiOutlineEdit />
-                        </Drop>
-                        <Drop
-                            id={'delete-product'}
-                            classList={'color-light bg-danger border-danger'}
-                            handleClick={(e) => handleCollectionItem(e, product, expandedImage)}
-                        >
-                            <AiOutlineDelete />
-                        </Drop>
-                    </div>
         </Card >
     )
 }

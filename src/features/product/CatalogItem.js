@@ -140,7 +140,7 @@ const CatalogItem = ({ index, product, count, cartIndex, handleSlideView }) => {
 
                                 </div>
                             </section>
-                            <section className='product-seller flex column gap-dot-5 height-100 relative b-radius-5 border-surface-thin'>
+                            <section className='flex column gap-dot-5 height-100 relative b-radius-5 border-surface-thin'>
                                 {/* <Avatar classList={'absolute box-size-8 btn-top-right border-eclipse-2'} avatar={product.seller.avatar} handleClick={() => navigate(`/store/${product.seller.userID}`, {
                                         state: {
                                             user: product.seller
@@ -158,7 +158,7 @@ const CatalogItem = ({ index, product, count, cartIndex, handleSlideView }) => {
                                     <MdStore />
                                 </Drop>
                                 <Drop
-                                    classList={'btn-bottom-centerabsolute box-size-8 bg-transparent border-eclipse-2 b-radius-100 '}
+                                    classList={'btn-bottom-center absolute box-size-8 bg-transparent border-eclipse-2 b-radius-100 '}
                                     handleClick={() => navigate(`/mail/${product.seller.userID}`, {
                                         state: {
                                             user: product.seller
