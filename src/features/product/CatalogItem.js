@@ -99,7 +99,7 @@ const CatalogItem = ({ index, product, count, cartIndex, handleSlideView }) => {
         <Card classList='product-container'>
             {/* Passing product image & product detail as an array of children @ TwoSidedSlide component */}
             {/* TwoSidedSlide contains @ TurnBtn which takes a classList argument to specify sizes and absolute coordinates  */}
-            <TwoSidedSlide classList={{ container: '', btn: 'card-action-btn' }}>
+            <TwoSidedSlide classList={{ container: '', btn: 'card-action-btn btn-bottom-right' }}>
                 {
                     // Product image (children[0])
                     [
@@ -148,24 +148,24 @@ const CatalogItem = ({ index, product, count, cartIndex, handleSlideView }) => {
                             })} /> */}
 
                                 <Drop
-                                    classList={'drop-bottom-left absolute box-size-8 bg-transparent border-eclipse-2 b-radius-100 '}
+                                    classList={'card-action-btn btn-bottom-left'}
                                     handleClick={() => navigate(`/seller/${product.seller.userID}`, {
                                         state: {
                                             user: product.seller
                                         }
                                     })}
                                 >
-                                    <MdStore />
+                                    <MdStore className='box-size-100' />
                                 </Drop>
                                 <Drop
-                                    classList={'btn-bottom-center absolute box-size-8 bg-transparent border-eclipse-2 b-radius-100 '}
+                                    classList={'card-action-btn btn-bottom-center'}
                                     handleClick={() => navigate(`/mail/${product.seller.userID}`, {
                                         state: {
                                             user: product.seller
                                         }
                                     })}
                                 >
-                                    <MdOutlineEmail />
+                                    <MdOutlineEmail className='box-size-100' />
                                 </Drop>
                                 <div className='col-8 flex column height-100 padding-1'>
                                     <section className='flex gap-1'>
