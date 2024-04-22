@@ -130,7 +130,6 @@ const CatalogItem = ({ index, product, count, cartIndex, handleSlideView }) => {
                                 <div className='b-radius-5 border-surface-thin'>
                                     <table>
                                         <tbody>
-
                                             {
                                                 details &&
                                                 details.map((detail, i) => {

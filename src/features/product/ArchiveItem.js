@@ -2,6 +2,8 @@ import { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Loader from '../../layout/Loader';
 import Drop from '../../components/Drop';
+import Card from '../../components/Card';
+import TwoSidedSlide from '../modal/TwoSidedSlide';
 import ImageNew from '../../components/ImageNew';
 import useExpandImage from '../../hooks/useExpandImage';
 import usePostData from '../../hooks/usePostData';
@@ -133,103 +135,86 @@ const ArchiveItem = ({ index, product, count, handleSlideView }) => {
         }
     }, [result, setUpdateCollection, error]);
 
-    const turnCard = () => {
-        cardRef.current?.classList.toggle('rotate-y-180');
-    }
 
     return (
-        <>
-            <div className='product-view'>
-                <div className="product-container">
-                    <div className="slide">
-                        <div className="double-faced-card" ref={cardRef}>
-                            <div className="card-front">
-                                <ImageNew
-                                    product={product}
-                                    classList='product-image'
-                                >
-                                    {
-                                        (product.finishes[0] === 'foil') &&
-                                        <div className="product-finish">
-                                            <span className='foil'>{data.product.finishes[product.finishes]}</span>
-                                        </div>
-                                    }
-                                    <Drop
-                                        id={'expand-image'}
-                                        classList={'drop-bottom-rightabsolute color-light bg-primary border-light-2'}
-                                        handleClick={(e) => handleSlideView(e, product.layout, expandedImage)}
-                                    >
-                                        <IoExpand />
-                                    </Drop>
-                                    {
-                                        loading ?
-                                            <Drop classList={'absolute color-light bg-light border-primary drop-top-right'} >
-                                                <Loader />
-                                            </Drop>
-                                            :
-                                            (isCardAdded || isMatchFound) ?
-                                                <Drop classList={'absolute color-light bg-success border-light-2 drop-top-right'} >
-                                                    <FaCheck />
-                                                </Drop>
-                                                :
-                                                <Drop classList={'absolute color-light bg-primary border-light-2 drop-top-right'} handleClick={() => postData(token, query)}>
-                                                    <FaPlus />
-                                                </Drop>
-                                    }
-                                </ImageNew>
-                            </div>
-                            <div className="card-back">
-                                {/* <div className='product'>
-                                    <div>
-                                        <h2 className='text-center fs-150 fw-500 padding-bottom-dot-5'>Card Info</h2>
-                                    </div>
-                                    <table>
-                                        <tbody>
-
-                                            {
-                                                details &&
-                                                details.map((detail, i) => {
-                                                    return (
-                                                        <tr key={i} className='product-spec'>
-                                                            <td className='spec-title col-4'>{detail.title}</td>
-                                                            <td className={`spec-value col-8 ${detail.classList ? detail.classList : ''}`}>{detail.value}</td>
-                                                        </tr>
-                                                    )
-                                                })
-                                            }
-                                        </tbody>
-                                    </table>
-                                </div> */}
-                            </div>
-                        </div>
-                    </div>
-                    <div className="product-legend absolute flex column space gap-2 justify-center">
-                        <Drop
-                            id={'info-product'}
-                            classList={'color-light bg-primary border-primary'}
-                            handleClick={(e) => turnCard(cardRef.current)}
-                        >
-                            <AiOutlineInfoCircle />
-                        </Drop>
-                    </div>
-                </div>
-            </div>
-            <div className="product-name-wrapper flex column">
-                <span className="product-name">
+        <Card className="product-container">
+            <TwoSidedSlide classList={{ container: '', btn: 'card-action-btn' }}>
+                <ImageNew
+                    product={product}
+                    classList='product-image'
+                >
                     {
-                        product.name.length < 35 ?
-                            product.name :
-                            `${product.name.substring(0, 30)}...`
+                        (product.finishes[0] === 'foil') &&
+                        <div className="product-finish">
+                            <span className='foil'>{data.product.finishes[product.finishes]}</span>
+                        </div>
                     }
-                </span>
-                <span className="product-edition">
+                    <Drop
+                        id={'expand-image'}
+                        classList={'drop-bottom-rightabsolute color-light bg-primary border-light-2'}
+                        handleClick={(e) => handleSlideView(e, product.layout, expandedImage)}
+                    >
+                        <IoExpand />
+                    </Drop>
+                    {
+                        loading ?
+                            <Drop classList={'absolute color-light bg-light border-primary drop-top-right'} >
+                                <Loader />
+                            </Drop>
+                            :
+                            (isCardAdded || isMatchFound) ?
+                                <Drop classList={'absolute color-light bg-success border-light-2 drop-top-right'} >
+                                    <FaCheck />
+                                </Drop>
+                                :
+                                <Drop classList={'absolute color-light bg-primary border-light-2 drop-top-right'} handleClick={() => postData(token, query)}>
+                                    <FaPlus />
+                                </Drop>
+                    }
+                </ImageNew>
+                <div className='product-details'>
+                    <section>
+                        <div>
+                            <h2 className='text-center fs-150 fw-500'>Card Info</h2>
+                        </div>
+                        <div className='b-radius-5 border-surface-thin'>
+                            <table>
+                                <tbody>
+                                    {
+                                        details &&
+                                        details.map((detail, i) => {
+                                            return (
+                                                <tr key={i}>
+                                                    <td className='spec-title col-3'>{detail.title}</td>
+                                                    <td className={`spec-value col-8 ${detail.classList ? detail.classList : ''}`}>{detail.value}</td>
+                                                </tr>
+                                            )
+                                        })
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </section>
+                    <section>
+                    </section>
+                </div>
+            </TwoSidedSlide>
+            <span className='product-count'>{index + 1} of {count}</span>
+            <div className="col-12 relative flex column justify-center align-center gap-1">
+                <div>
+                    {
+                        product.name
+                    }
+                </div>
+
+                <div>
                     {
                         product.set_name
                     }
-                </span>
+                </div>
+
             </div>
-            <span className='product-count'>{index + 1} of {count}</span>
-        </>
+        </Card>
     )
 }
 

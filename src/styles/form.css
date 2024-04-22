@@ -76,7 +76,7 @@ input:-webkit-autofill:active{
 }
 
 .form-element textarea {
-    min-height: 10rem;
+    min-height: 5rem;
 }
 
 .form-element *::placeholder {
@@ -97,6 +97,18 @@ input:-webkit-autofill:active{
     display: flex;
     flex-direction: column;
     gap: 1rem;
+}
+
+.edit-form .form-element input,
+.edit-form .form-element textarea,
+.edit-form .form-element select { 
+    padding-inline: 1rem;
+    padding-block: 0.5rem
+}
+
+.edit-form .form-element *:focus {
+    padding: calc(0.5rem - 1px) calc(1rem - 1px) !important;
+    border: 2px solid rgb(103, 152, 180, 0.7) !important;
 }
 
 .edit-option {

@@ -2,6 +2,7 @@ import { useRef } from 'react';
 import Drop from '../../components/Drop';
 import ImageNew from '../../components/ImageNew';
 import Card from '../../components/Card';
+import TwoSidedSlide from '../modal/TwoSidedSlide';
 import { FaCommentsDollar } from "react-icons/fa";
 import { AiOutlineDelete } from "react-icons/ai";
 import { AiOutlineEdit } from "react-icons/ai";
@@ -25,7 +26,7 @@ const CollectionItem = ({ index, product, count, handleCollectionItem, handleSli
             value: product._is_published ? 'Published' : 'Unpublished'
         },
         {
-            title: 'Published On:',
+            title: 'Published:',
             value: longDate(product._date_published)
         },
         {
@@ -54,79 +55,82 @@ const CollectionItem = ({ index, product, count, handleCollectionItem, handleSli
         }
     ];
 
-    const turnCard = () => {
-        cardRef.current?.classList.toggle('rotate-y-180');
-    }
-
     return (
-        <>
-            {/* <div className='product-view'> */}
-            <Card classList="product-container">
-                    <div className="slide">
-                        <div className="double-faced-card" ref={cardRef}>
-                            <div className="card-front">
-                                <ImageNew
-                                    product={product}
-                                    classList='product-image'
-                                >
-                                    {
-                                        (product.finishes[0] === 'foil') &&
-                                        <div className="product-finish">
-                                            <span className='foil'>{data.product.finishes[product.finishes]}</span>
-                                        </div>
-                                    }
-                                    <Drop
-                                        id={'expand-image'}
-                                        classList={'drop-bottom-rightabsolute color-light bg-primary border-light-2'}
-                                        handleClick={(e) => handleSlideView(e, product.layout, expandedImage)}
-                                    >
-                                        <IoExpand />
-                                    </Drop>
-                                    {
-                                        product._is_published &&
-                                        <Drop
-                                            id={'instore-product'}
-                                                classList={'drop-top-right absolute color-light bg-success border-light-2'}
-                                        >
-                                            <FaCommentsDollar />
-                                        </Drop>
-                                    }
-                                </ImageNew>
-                            </div>
-                            <div className="card-back">
-                            <div className='product-details'>
-                                    <div>
-                                        <h2 className='text-center fs-150 fw-500 padding-bottom-dot-5'>Card Info</h2>
-                                    </div>
-                                    <table>
-                                        <tbody>
-
-                                            {
-                                                details &&
-                                                details.map((detail, i) => {
-                                                    return (
-                                                        <tr key={i} className='product-spec'>
-                                                            <td className='spec-title col-4'>{detail.title}</td>
-                                                            <td className={`spec-value col-8 ${detail.classList ? detail.classList : ''}`}>{detail.value}</td>
-                                                        </tr>
-                                                    )
-                                                })
-                                            }
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
+        <Card classList={"product-container"}>
+            <TwoSidedSlide classList={{ container: '', btn: 'card-action-btn' }}>
+                <ImageNew
+                    product={product}
+                    classList='product-image'
+                >
+                    {
+                        (product.finishes[0] === 'foil') &&
+                        <div className="product-finish">
+                            <span className='foil'>{data.product.finishes[product.finishes]}</span>
                         </div>
-                    </div>
-                    <div className="product-legend absolute flex column space gap-2 justify-center">
+                    }
+                    {/* <Drop
+                        id={'expand-image'}
+                        classList={'drop-bottom-rightabsolute color-light bg-primary border-light-2'}
+                        handleClick={(e) => handleSlideView(e, product.layout, expandedImage)}
+                    >
+                        <IoExpand />
+                    </Drop>
+                    {
+                        product._is_published &&
                         <Drop
-                            id={'info-product'}
-                            classList={'color-light bg-primary border-primary'}
-                            handleClick={(e) => turnCard(cardRef.current)}
+                            id={'instore-product'}
+                                classList={'drop-top-right absolute color-light bg-success border-light-2'}
                         >
-                            <AiOutlineInfoCircle />
+                            <FaCommentsDollar />
                         </Drop>
-                        <Drop
+                    } */}
+                </ImageNew>
+                <div className='product-details'>
+                    <section>
+                        <div>
+                            <h2 className='text-center fs-150 fw-500'>Card Info</h2>
+                        </div>
+                        <div className='b-radius-5 border-surface-thin'>
+                            <table>
+                                <tbody>
+                                    {
+                                        details &&
+                                        details.map((detail, i) => {
+                                            return (
+                                                <tr key={i}>
+                                                    <td className='spec-title col-3'>{detail.title}</td>
+                                                    <td className={`spec-value col-8 ${detail.classList ? detail.classList : ''}`}>{detail.value}</td>
+                                                </tr>
+                                            )
+                                        })
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </section>
+                    <section>
+
+                    </section>
+                </div>
+            </TwoSidedSlide>
+            <span className='product-count'>{index + 1} of {count}</span>
+            <div className="col-12 relative flex column justify-center align-center gap-1">
+                <div>
+                    {
+                        product.name
+                    }
+                </div>
+
+                <div>
+                    {
+                        product.set_name
+                    }
+                </div>
+
+            </div>
+
+            <div className="product-legend absolute flex column space gap-2 justify-center">
+                <Drop
                             id={'edit-product'}
                             classList={'color-light bg-success border-success'}
                             handleClick={(e) => handleCollectionItem(e, product, expandedImage)}
@@ -141,24 +145,7 @@ const CollectionItem = ({ index, product, count, handleCollectionItem, handleSli
                             <AiOutlineDelete />
                         </Drop>
                     </div>
-            </Card >
-            {/* </div > */}
-            <div className="product-name-wrapper flex column">
-                <span className="product-name">
-                    {
-                        product.name.length < 35 ?
-                            product.name :
-                            `${product.name.substring(0, 30)}...`
-                    }
-                </span>
-                <span className="product-edition">
-                    {
-                        product.set_name
-                    }
-                </span>
-            </div>
-            <span className='product-count'>{index + 1} of {count}</span>
-        </>
+        </Card >
     )
 }
 

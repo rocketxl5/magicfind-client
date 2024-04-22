@@ -13,7 +13,7 @@
     "id": "search-results",
     "style": "page relative",
     "header": {
-      "style": "page-header flex space-between align-center col-12 margin-bottom-1 margin-top-3"
+      "style": "page-header flex space-between align-center col-12 margin-bottom-1"
     }
   },
   "shopping-cart": {
@@ -37,7 +37,7 @@
     "id": "collection",
     "style": "page relative",
     "header": {
-      "style": "page-header flex space-between align-center col-12 padding-block-1 margin-bottom-1"
+      "style": "page-header flex space-between align-center col-12 margin-bottom-1"
     }
   },
   "store": {
