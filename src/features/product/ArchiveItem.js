@@ -135,9 +135,8 @@ const ArchiveItem = ({ index, product, count, handleSlideView }) => {
         }
     }, [result, setUpdateCollection, error]);
 
-
     return (
-        <Card className="product-container">
+        <Card classList={"product-container"}>
             <TwoSidedSlide classList={{ container: '', btn: 'card-action-btn' }}>
                 <ImageNew
                     product={product}
