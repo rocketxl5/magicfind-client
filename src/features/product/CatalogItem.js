@@ -1,14 +1,12 @@
-import { useEffect, useRef } from 'react';
-import { Link, useNavigate, useLocation } from 'react-router-dom';
+import { useEffect } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import Container from '../../components/Container';
 import Drop from '../../components/Drop';
 import ImageNew from '../../components/ImageNew';
 import Loader from '../../layout/Loader';
 import Card from '../../components/Card';
-import Confirmation from './components/Confirmation';
 import QuantitySelector from './components/QuantitySelector';
 import TwoSidedSlide from '../modal/TwoSidedSlide';
-import TurnBtn from '../modal/buttons/TurnBtn';
 import Avatar from '../../components/Avatar';
 import useAuth from '../../hooks/contexthooks/useAuth';
 import useCart from '../../hooks/contexthooks/useCart';
@@ -36,10 +34,6 @@ const CatalogItem = ({ index, product, count, cartIndex, handleSlideView }) => {
     const headers = {
         'Content-Type': 'application/json'
     };
-
-    // console.log(product)
-
-    const cardRef = useRef(null);
 
     const navigate = useNavigate();
     const location = useLocation();
@@ -147,7 +141,7 @@ const CatalogItem = ({ index, product, count, cartIndex, handleSlideView }) => {
                                 </div>
                             </section>
                             <section className='product-seller flex column gap-dot-5 height-100 relative b-radius-5 border-surface-thin'>
-                                {/* <Avatar classList={'absolute box-size-8 drop-top-right border-eclipse-2'} avatar={product.seller.avatar} handleClick={() => navigate(`/store/${product.seller.userID}`, {
+                                {/* <Avatar classList={'absolute box-size-8 btn-top-right border-eclipse-2'} avatar={product.seller.avatar} handleClick={() => navigate(`/store/${product.seller.userID}`, {
                                         state: {
                                             user: product.seller
                                         }
@@ -164,7 +158,7 @@ const CatalogItem = ({ index, product, count, cartIndex, handleSlideView }) => {
                                     <MdStore />
                                 </Drop>
                                 <Drop
-                                    classList={'drop-bottom-center absolute box-size-8 bg-transparent border-eclipse-2 b-radius-100 '}
+                                    classList={'btn-bottom-centerabsolute box-size-8 bg-transparent border-eclipse-2 b-radius-100 '}
                                     handleClick={() => navigate(`/mail/${product.seller.userID}`, {
                                         state: {
                                             user: product.seller

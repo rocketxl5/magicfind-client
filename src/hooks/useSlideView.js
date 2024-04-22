@@ -20,7 +20,7 @@ const useSlideView = (callback) => {
                     open: true,
                     component:
                         <SlideView handleClick={callback}>
-                            <OneSidedSlide classList={{ container: 'modal-slide-container' }}>
+                            <OneSidedSlide classList={{ container: 'modal-padding-top' }}>
                                 {action.payload.expandedImage}
                             </OneSidedSlide>
                         </SlideView>
@@ -30,7 +30,7 @@ const useSlideView = (callback) => {
                     open: true,
                     component:
                         <SlideView handleClick={callback}>
-                            <TwoSidedSlide classList={{ container: 'modal-slide-container', btn: 'action-btn' }}>
+                            <TwoSidedSlide classList={{ container: 'modal-padding-top', btn: 'action-btn' }}>
                                 {action.payload.expandedImage}
                             </TwoSidedSlide>
                         </SlideView>

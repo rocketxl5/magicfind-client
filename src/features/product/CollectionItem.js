@@ -1,4 +1,3 @@
-import { useRef } from 'react';
 import Drop from '../../components/Drop';
 import ImageNew from '../../components/ImageNew';
 import Card from '../../components/Card';
@@ -18,7 +17,6 @@ const CollectionItem = ({ index, product, count, handleCollectionItem, handleSli
     const { longDate } = timestampConverter;
 
     const { expandedImage } = useExpandImage(product);
-    const cardRef = useRef(null);
 
     const details = [
         {
@@ -79,7 +77,7 @@ const CollectionItem = ({ index, product, count, handleCollectionItem, handleSli
                         product._is_published &&
                         <Drop
                             id={'instore-product'}
-                                classList={'drop-top-right absolute color-light bg-success border-light-2'}
+                                classList={'btn-top-right absolute color-light bg-success border-light-2'}
                         >
                             <FaCommentsDollar />
                         </Drop>

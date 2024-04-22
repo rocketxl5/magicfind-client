@@ -42,7 +42,6 @@ const CartItem = ({ index, count, product }) => {
 
   useEffect(() => {
     if (currentStatus) {
-      console.log(currentStatus)
       setCurrentUpdate(true);
       setTimeout(() => {
         setCurrentUpdate(false);

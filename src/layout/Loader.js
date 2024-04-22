@@ -4,7 +4,7 @@ const Loader = ({ classList = '' }) => {
     return (
         <div className={`loader ${classList}`}>
 
-            <ImSpinner2 className='color-primary' />
+            <ImSpinner2 />
 
         </div>
     )

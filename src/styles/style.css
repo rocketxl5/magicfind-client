@@ -853,7 +853,7 @@ height: 2rem;
   /* -webkit-transform: rotateY(-180deg); */
   transform: translateZ(0.01px);
   -webkit-transform: translateZ(0.01px);
-  border: 2px solid rgb(0, 0, 0, 0.8);
+  border: 3px solid var(--clr-eclipse);
   transition: all 300s;
   -webkit-transition: all 300ms;
 }
@@ -863,11 +863,11 @@ height: 2rem;
 }
 
 .card-action-btn svg path:nth-of-type(1) {
-  fill: rgba(0, 0, 0, 0.8);
+  fill: var(--clr-eclipse);
 }
 
 .card-action-btn svg path:nth-of-type(2) {
-  fill: rgba(0, 0, 0, 0.8);
+  fill: var(--clr-eclipse);
 }
 
 .catalog-slide-container {
@@ -1334,52 +1334,62 @@ text-align: center;
   right: 11%;
 }
 
-.drop-top-right {
-  top: 7%;
-  right: 1rem;
+.btn-top-right {
+  top: 4.2rem;
+  right: 2.1rem;
 }
 
-.drop-center-right {
-  top: 38%;
-  right: 7%;
+.btn-center-right {
+  top: 14.2rem;
+  right: 2.1rem;
 }
 
-.drop-bottom-center {
+.btn-bottom-center{
   bottom: 7%;
   left: calc(50% - 2rem);
 }
 
-.drop-bottom-right{
-  bottom: 7%;
-  right: 7%;
+.btn-bottom-right {
+  bottom: 1.9rem;
+  right: 2.1rem;
 }
 
-.drop-bottom-left {
+.btn-bottom-left {
   bottom: 7%;
   left: 1rem;
 }
 
-.drop-btn {  
+.product-btn {  
   padding: 0.5rem;
-  width: clamp(3.7rem, calc(5vw + 12px), 6rem);
-  height: clamp(3.7rem, calc(5vw + 12px), 6rem);
+  width: 4.2rem;
+  height: 4.2rem;
+  color: var(--clr-eclipse);
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 100%;
+  border: 2px solid var(--clr-eclipse);
+  /* width: clamp(3.7rem, calc(5vw + 12px), 6rem);
+  height: clamp(3.7rem, calc(5vw + 12px), 6rem); */
 }
 
-.drop-btn * {
+.product-btn * {
   pointer-events: none;
 }
 
-.drop-btn:hover {
+.product-btn:hover {
   opacity: 0.8;
 }
 
-.drop-btn svg {
+.product-btn svg {
   width: 100%;
   height: 100%;  
 }
 
-.drop-btn .cart-svg {
+.product-btn .cart-svg {
   width: calc(100% - 0.2rem);
+}
+
+.disbled {
+  pointer-events: none;
 }
 
 .show-details {
@@ -1509,10 +1519,6 @@ text-align: center;
   width: 100%;
   justify-content: flex-end;
  }
-
-.product-btn {
-  width: 25%;
-}
 
 .product-dropdown {
   width: 25%;
@@ -1798,8 +1804,9 @@ text-align: center;
   box-shadow: var(--shadow-2);
 }
 
-.expand-icon * {
-  color: var(--clr-eclipse);
+.expand-icon path {
+  /* color: var(--clr-eclipse); */
+  stroke-width: 4rem;
 }
 
 .product-details .seller-icon {

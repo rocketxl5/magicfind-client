@@ -6,15 +6,11 @@ import CatalogItem from '../features/product/CatalogItem';
 import Modal from '../features/modal/Modal';
 import List from '../components/List';
 import ListItem from '../components/ListItem';
-import Card from '../components/Card';
 import Page from '../components/Page';
-// import Count from '../features/search/components/Count';
 import SearchParameters from '../features/search/components/SearchParameters';
 import useCollectionModal from '../hooks/useCollectionModal';
 import useSlideView from '../hooks/useSlideView';
 import useImageLoader from '../hooks/useImageLoader';
-// import useSearch from '../hooks/contexthooks/useSearch';
-// import Loader from '../layout/Loader';
 
 const SearchResults = () => {
     // States
@@ -24,7 +20,6 @@ const SearchResults = () => {
     const navigate = useNavigate();
 
     const { cards, search, query } = location.state;
-    // const { loading } = useSearch();
 
     useEffect(() => {
         // console.log(cards)

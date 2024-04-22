@@ -10,15 +10,12 @@ import useSearch from '../../../hooks/contexthooks/useSearch';
 import { api } from '../../../api/resources';
 import { v4 as uuidv4 } from 'uuid';
 
-
 const INIT = {
     quantity: '',
     price: '',
     condition: '',
     language: ''
 }
-
-const uuid = uuidv4();
 
 const EditProduct = (props) => {
     // Props
@@ -116,7 +113,6 @@ const EditProduct = (props) => {
     }, [isValidForm])
 
     useEffect(() => {
-        console.log(product)
         priceRef.current?.focus();
         const publishedID = product['_published_id'] ? product['_published_id'] : uuidv4();
         setValues({
