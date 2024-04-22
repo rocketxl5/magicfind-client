@@ -27,10 +27,7 @@ const EditProduct = (props) => {
     const [loading, setLoading] = useState(false);
     const [isValidForm, setIsValidForm] = useState(false);
     const [isSubmit, setIsSubmit] = useState(false);
-    const [response, setResponse] = useState({
-        isUpdated: false,
-        message: ''
-    });
+    const [isUpdated, setIsUpdated] = useState(false);
     // Refs
     const btnRef = useRef(null);
     const priceRef = useRef(null);
@@ -87,10 +84,10 @@ const EditProduct = (props) => {
             fetch(`${api.serverURL}/api/cards/edit/${product._id}/${auth.user.id}`, options)
                 .then((res) => res.json())
                 .then((data) => {
-                    const { cards, isUpdated, message } = data;
+                    const { cards } = data;
                     let result;
 
-                    setResponse({ isUpdated: isUpdated, message: message });
+                    setIsUpdated(true);
 
                     if (query !== 'all-cards') {
                         // filter for cards with cardName
@@ -173,7 +170,7 @@ const EditProduct = (props) => {
         <div className="modal-state">
             <div className={`modal-state-content`}>
                 {loading && <Loader />}
-                {response.isUpdated && <Success response={response} handleClick={handleClick} ref={btnRef} />}
+                {isUpdated && <Success message={'Card successfully updated'} handleClick={handleClick} ref={btnRef} />}
                 <>
                     <header className="modal-header bg-primary">
                         <div className="modal-title">
@@ -182,22 +179,6 @@ const EditProduct = (props) => {
                     </header>
                     <div className="scroll">
                         <div className="modal-body">
-                            <section className="modal-section">
-
-                                <div className="card-section">
-                                    {/* <ProductImage classList={'product-image'}>
-                                <Image
-                                    classList={'col-12'}
-                                    product={product}
-                                />
-                            </ProductImage> */}
-                                </div>
-                                <div className="card-section">
-                                    {/* <ProductDetails>
-
-                                </ProductDetails> */}
-                                </div>
-                            </section>
                             <div className="edit-card">
                                 <form className="edit-form" id="edit-form" name="edit-form" onSubmit={handleSubmit} noValidate>
                                     <div className="form-element flex gap-1">

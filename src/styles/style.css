@@ -701,7 +701,7 @@ height: 2rem;
 
 .modal-header {
   width: 100%;
-  padding-block: 1.5rem;
+  padding-block: 1rem;
 }
 
 .modal-title {
@@ -716,7 +716,7 @@ height: 2rem;
 
 .modal-body {
   width: 100%;
-  padding: 2rem;
+  padding: 1rem 2rem;
   flex-grow: 1;
   z-index: 0;
 }
@@ -730,7 +730,7 @@ height: 2rem;
 
 .modal-footer {
   padding-inline: 2rem;
-  padding-block: 1.5rem;
+  margin-block-end: 2rem;
  
 }
 
@@ -844,9 +844,9 @@ height: 2rem;
   width: 4.2rem;
   height: 4.2rem;
   padding: 0.5rem;
-  bottom: 1.9rem;
-  right: 2.1rem;
-  background: rgba(255, 255, 255, 0.5);
+  /* bottom: 1.9rem;
+  right: 2.1rem; */
+  background: rgba(255, 255, 255, 0.7);
   border-radius: 100%;
   z-index: 9000 !important;
   /* transform: rotateY(-180deg); */
@@ -863,12 +863,35 @@ height: 2rem;
 }
 
 .card-action-btn svg path:nth-of-type(1) {
-  fill: var(--clr-eclipse);
+  /* fill: var(--clr-eclipse); */
 }
 
 .card-action-btn svg path:nth-of-type(2) {
-  fill: var(--clr-eclipse);
+  /* fill: var(--clr-eclipse); */
 }
+
+.drop-btn {  
+  padding: 0.5rem;
+  /* width: clamp(3.7rem, calc(5vw + 12px), 6rem);
+  height: clamp(3.7rem, calc(5vw + 12px), 6rem); */
+  width: 4.2rem;
+  height: 4.2rem;
+  border-radius: 5px;
+}
+
+.drop-btn:hover {
+  opacity: 0.8;
+}
+
+.drop-btn svg {
+  width: 100%;
+  height: 100%;  
+}
+
+.drop-btn .cart-svg {
+  width: calc(100% - 0.2rem);
+}
+
 
 .catalog-slide-container {
   min-height: inherit;
@@ -1344,8 +1367,8 @@ text-align: center;
   right: 2.1rem;
 }
 
-.btn-bottom-center{
-  bottom: 7%;
+.btn-bottom-center {
+  bottom: 1.9rem;
   left: calc(50% - 2rem);
 }
 
@@ -1355,8 +1378,8 @@ text-align: center;
 }
 
 .btn-bottom-left {
-  bottom: 7%;
-  left: 1rem;
+  bottom: 1.9rem;
+  left: 2.1rem;
 }
 
 .product-btn {  
@@ -1596,8 +1619,10 @@ text-align: center;
   bottom: 0;
   left: 0;
   right: 0;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
+  flex-grow: 1;
   align-items: center;
   justify-content: space-between;
   background: var(--clr-light);
@@ -1697,9 +1722,14 @@ text-align: center;
 }
 
 .product-legend {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 2rem;
   bottom: 0;
   top: 0;
-  right: -4.7rem;
+  right: -5rem;
 }
 
 .cart-item-image,
