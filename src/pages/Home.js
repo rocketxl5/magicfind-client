@@ -86,14 +86,9 @@ const Home = () => {
                             card.body.map((line, index) => {
                               return (
 
-                                <p key={index}>
-                                  <span className="line-icon">
-                                    <GoShieldCheck strokeWidth={'1px'} />
-                                  </span>
-                                  <span>
-                                    {line}
-                                  </span>
-                                </p>
+                                <div key={index} className='flex gap-1'>
+                                  <span className='flex align-center'><GoShieldCheck strokeWidth={'1px'} /></span> <p>{line}</p>
+                                </div>
                               )
                             })
                           }

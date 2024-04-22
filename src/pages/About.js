@@ -80,17 +80,17 @@ const About = () => {
       name={'about'}
       title={'About Magic Find'}
     >
-      <main className='bg-eclipse border-surface-1 b-radius-5 grid-section'>
+      <main className='feature-wrapper bg-eclipse border-surface-1 b-radius-5 grid-section'>
         {
           sections.map((section, i) => {
             return (
-              <section key={i} className=''>
-                <div>
-                  <h2 className='fw-500'>{section.header}</h2>
-                </div>
+              <section key={i} className='feature-section'>
+
+                <h2 className='fw-400 fs-200'>{section.header}</h2>
+
                 {
                   section.paragraphs.map((paragraph, i) => {
-                    return <p key={i} className='fw-400'>{paragraph}</p>
+                    return <p key={i} className='fw-400 padding-1'>{paragraph}</p>
                   })
                 }
               </section>

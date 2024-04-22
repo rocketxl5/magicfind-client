@@ -10,18 +10,33 @@
 }
 
 @media screen and (width >= 500px) {
-
+    .feature-wrapper {
+        padding: 2rem;
+    }
     .product-grid {
         gap: 1rem;
       }
       
     .product-grid .image {
-        grid-column: span 2;
-       
+        grid-column: span 2;  
     }
+
+    
 }
 
 @media screen and (width >= 660px) {
+        /* About & Contact page */
+.feature-wrapper {
+    /* display: flex;
+    gap: 1rem;
+    padding: 1rem; */
+    padding-inline: 3rem;
+}
+
+.feature-section {
+    /* width: 80%; */
+    /* margin: 0 auto; */
+}
 
     .cart-main {
         flex-direction: row-reverse;
@@ -61,6 +76,20 @@
 }
 
 @media screen and (width >= 775px) {
+
+    /* About & Contact page */
+.feature-wrapper {
+    display: flex;
+    gap: 1rem;
+    padding: 2rem;
+}
+
+.feature-section {
+    width: 80%;
+    /* margin: 0 auto; */
+}
+
+
     .side-panel { 
         top: 6rem;
         min-height: calc(100vh - var(--header-height-wide)); 

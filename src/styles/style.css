@@ -483,6 +483,27 @@ scroll-snap-align: start;
   box-shadow: var(--shadow-1);
 }
 
+/* About & Contact page */
+.feature-wrapper {
+  padding: 2rem;
+}
+
+.feature-section {
+  margin-block-end: 2rem;
+}
+
+.feature-section h2 {
+  padding-block-end: 1rem;
+  margin-block-end: 2rem;
+  border-bottom: 1px solid var(--clr-light);
+}
+
+.feature-section p {
+  padding-inline: 1rem;
+  margin-block-end: 2rem;
+
+}
+
 .slide-show-btn *,
 .slide-view-btn * { 
   pointer-events: none;
@@ -528,19 +549,8 @@ scroll-snap-align: start;
   box-shadow: var(--shadow-1);
 }
 
-.feature-card-body p {
-  display: flex;
-  align-items: center;
-  font-size: clamp(1.25rem, 3vw, 1.75rem);
-  margin-bottom: 0.5rem;
-}
-.feature-card-body p:last-of-type { 
-  margin-bottom: 0;
-}
-
-.feature-card-body svg {
-  display: block;
-  size: 18;
+.feature-card-content p {
+  vertical-align: middle;
 }
 
 .line-icon {
@@ -678,6 +688,8 @@ height: 2rem;
 
 .modal-state {
   width: calc(100vw - 4rem);
+  max-width: 46rem;
+  min-width: 320px;
   height: 100%;
   margin: 0 auto;
   margin-block-start: 2rem;
@@ -1368,7 +1380,7 @@ text-align: center;
 }
 
 .btn-bottom-center {
-  bottom: 1.9rem;
+  bottom: 0.9rem;
   left: calc(50% - 2rem);
 }
 
@@ -1378,8 +1390,8 @@ text-align: center;
 }
 
 .btn-bottom-left {
-  bottom: 1.9rem;
-  left: 2.1rem;
+  bottom: 0.9rem;
+  left: 1.1rem;
 }
 
 .product-btn {  
