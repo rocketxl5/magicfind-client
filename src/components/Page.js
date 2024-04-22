@@ -9,7 +9,7 @@ const Page = ({ children, classList, name, hasHeader = true, hasBanner = false, 
         <div id={id} className={style}>
             {
                 hasHeader && 
-                <header className={header.style}>
+                <header className={'page-header'}>
                         <Title classList='page-title'>
                             {
                                 title.length < 35 ?
