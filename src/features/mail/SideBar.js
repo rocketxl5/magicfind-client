@@ -22,13 +22,11 @@ const SideBar = ({
   const links = data.mailLinks
   // Set path on location change
   useEffect(() => {
-    // console.log('path', path);
-    // console.log('location.pathname', getPath(location.pathname));
+
     if (pathname !== getPath(location.pathname)) {
       localStorage.removeItem('message');
     }
     setPathname(getPath(location.pathname));
-    // localStorage.removeItem('message');
   }, [location]);
 
   // Update isTrash status in database for checked messages
@@ -136,27 +134,6 @@ const SideBar = ({
             ''
           )}
       </div>
-      {/* 
-      <section className="dashboard-nav">
-
-        <ul className="mailbox-sidebar-options">
-          {links.map((link, index) => {
-            return (
-              <NavLink
-                key={index}
-                id={link.id}
-                to={`/me/${link.id}`}
-                className={({ isActive }) => {
-                  // If search param is defined, add active class else add inactive class 
-                  return (isActive && !query) ? 'active' : 'inactive'
-                }}
-              >
-                <span >{link.title}</span>
-              </NavLink>
-            )
-          })}
-        </ul>
-      </section> */}
 
       <ul className="mailbox-sidebar-options">
         {
@@ -164,7 +141,7 @@ const SideBar = ({
             return (
               <ListItem>
                 <NavLink
-                  key={i}
+                  key={i + 1}
                   id={link.id}
                   to={`/me/mail/${link.id}`}
                   className={({ isActive }) => {
@@ -178,54 +155,6 @@ const SideBar = ({
             )
           })
         }
-        {/* <ListItem>
-          <NavLink
-            id={'inbox'}
-              style={{
-                border:
-                  location.pathname.includes('inbox') && '1px solid #e1e8ed',
-              }}
-            to="/me/mail"
-            >
-              Inbox
-          </NavLink>
-          </ListItem>
-          <ListItem>
-          <NavLink
-            id={'unread'}
-              style={{
-                border:
-                  location.pathname.includes('unread') && '1px solid #e1e8ed',
-              }}
-            to="/me/mail/unread"
-            >
-              Unread
-          </NavLink>
-          </ListItem>
-          <ListItem>
-          <NavLink
-            id={'sent'}
-              style={{
-                border:
-                  location.pathname.includes('sent') && '1px solid #e1e8ed',
-              }}
-            to="/me/mail/sent"
-            >
-              Sent
-          </NavLink>
-          </ListItem>
-          <ListItem>
-          <NavLink
-            id={'trash'}
-              style={{
-                border:
-                  location.pathname.includes('trash') && '1px solid #e1e8ed',
-              }}
-            to="/me/mail/trash"
-            >
-              Trash
-          </NavLink>
-          </ListItem> */}
       </ul>
     </div>
   );

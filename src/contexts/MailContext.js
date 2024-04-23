@@ -1,30 +1,34 @@
 import React, { createContext, useState, useEffect } from 'react';
 import useAuth from '../hooks/contexthooks/useAuth';
+import useFetchData from '../hooks/useFetchData';
 
 export const MailContext = createContext(null);
-// Prevents access to add-card component if a card  hasen't been selected
-// previously. This means a search has been done in the api view
-// and a card was selected to be added to the user store
-export const MailProvider = ({ children }) => {
-  const { auth, isAuth } = useAuth();
-  const [sentMail, setSentMail] = useState([]);
-  const [receivedMail, setReceivedMail] = useState([]);
 
-  // Populates messages in every rendering (reload of page, etc.)
+export const MailProvider = ({ children }) => {
+  const [unreadCount, setUnreadCount] = useState(0);
+
+  const { auth, isAuth } = useAuth();
+  const { result, fetchData } = useFetchData();
+
   useEffect(() => {
+    // If user is authenticated
     if (isAuth) {
-      setSentMail(auth.messages?.sent);
-      setReceivedMail(auth.messages?.received);
+      // Get unread mail for unread count icon @ MailBtn
+      fetchData(`/api/mail/${auth.user.id}`, auth.token);
     }
   }, [isAuth]);
+
+  useEffect(() => {
+    // Update unreadCount state if unread mails > 0
+    if (result?.length > 0) {
+      setUnreadCount(result.length)
+    }
+  }, [result])
 
   return (
     <MailContext.Provider
       value={{
-        setSentMail,
-        sentMail,
-        setReceivedMail,
-        receivedMail
+        unreadCount
       }}
     >
       {children}
