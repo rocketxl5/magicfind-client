@@ -16,7 +16,7 @@ const CartBtn = () => {
       onClick={() => navButtonHandler('/shopping-cart')}
     >
       {itemsCount > 0 && (
-        <div classList={'cart-count absolute flex column justify-center align-center bg-primary'} ref={cartCountRef}>
+        <div className={'count-icon absolute flex column justify-center align-center bg-primary'} ref={cartCountRef}>
           <span>
             {itemsCount}
           </span>

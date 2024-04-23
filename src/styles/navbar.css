@@ -75,8 +75,7 @@ nav {
     pointer-events: none;
 }
 
-.cart-count {
-
+.count-icon {
     top: -10px;
     left: 17px;
     width: 2rem;
@@ -86,7 +85,7 @@ nav {
     z-index: 10;
 }
 
-.cart-count span {
+.count-icon span {
     font-size: 1rem;
     font-weight: 400;
     color: var(--clr-light);
