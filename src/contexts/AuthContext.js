@@ -40,8 +40,9 @@ export const AuthProvider = ({ children }) => {
   }, [auth])
 
   useEffect(() => {
-    console.log(result)
-    setUnreadMail(result)
+    if (result?.length > 0) {
+      setUnreadMail(result.length)
+    }
   }, [result])
 
   useEffect(() => {

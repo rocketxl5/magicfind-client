@@ -11,6 +11,7 @@ export const NavigationProvider = ({ children }) => {
     const hamburgerRef = useRef(null);
     const searchBarRef = useRef(null);
     const cartCountRef = useRef(null);
+    const mailCountRef = useRef(null);
     const searchBtnRef = useRef(null);
 
     return (
@@ -26,6 +27,7 @@ export const NavigationProvider = ({ children }) => {
                 hamburgerRef,
                 searchBarRef,
                 cartCountRef,
+                mailCountRef,
                 searchBtnRef,
             }}
         >

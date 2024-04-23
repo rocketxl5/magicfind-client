@@ -17,6 +17,7 @@ const useNavButton = () => {
         hamburgerRef,
         searchBarRef,
         cartCountRef,
+        mailCountRef,
         menuRef,
         searchBtnRef } = useNavbar();
     const { catalogInputRef } = useSearch();
@@ -53,7 +54,7 @@ const useNavButton = () => {
         }
     }
 
-    // @ CartBtn, Logo, MailBtn, SingInBtn ...
+    // @ CartBtn, MailBtn, Logo, SingInBtn ...
     // Hides menu if menu is displayed
     // Navigates to path if path defined
     const navButtonHandler = (path) => {
@@ -141,6 +142,7 @@ const useNavButton = () => {
         if (displaySearchBar) {
             searchBarRef.current?.classList.add('d-searchbar');
             cartCountRef.current?.classList.add('d-none');
+            mailCountRef.current?.classList.add('d-none');
             hamburgerRef.current?.setAttribute('aria-expanded', 'true');
             setIsSearchBar(true);
             // hamburgerRef.current.disabled = true;
@@ -152,6 +154,7 @@ const useNavButton = () => {
             hamburgerRef.current?.setAttribute('aria-expanded', 'false');
             searchBarRef.current?.classList.remove('d-searchbar');
             cartCountRef.current?.classList.remove('d-none');
+            mailCountRef.current?.classList.remove('d-none');
             setIsSearchBar(false);
         }
     }, [displaySearchBar])
