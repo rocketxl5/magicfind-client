@@ -1,5 +1,4 @@
 import { createContext, useState, useEffect } from 'react';
-import useRetrieveMail from '../hooks/useRetrieveMail';
 import useFetchData from '../hooks/useFetchData';
 
 
@@ -9,9 +8,6 @@ export const AuthProvider = ({ children }) => {
   const [auth, setAuth] = useState(localStorage.getItem('auth') ? JSON.parse(localStorage.getItem('auth')) : null);
   const [isAuth, setIsAuth] = useState(false);
   const [unreadMail, setUnreadMail] = useState(0);
-
-  // const { mailRetriever, result } = useRetrieveMail();
-
 
   const { result, fetchData } = useFetchData();
 
@@ -36,7 +32,7 @@ export const AuthProvider = ({ children }) => {
     if (auth) {
       setIsAuth(true);
       // checkUnreadMail(auth.user.id, auth.token)
-      fetchData(`/api/mail/${auth.user.id}`);
+      fetchData(`/api/mail/${auth.user.id}`, auth.token);
     }
     else {
       setIsAuth(false);
@@ -44,6 +40,7 @@ export const AuthProvider = ({ children }) => {
   }, [auth])
 
   useEffect(() => {
+    console.log(result)
     setUnreadMail(result)
   }, [result])
 

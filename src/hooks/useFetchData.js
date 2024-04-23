@@ -7,13 +7,16 @@ const useFetchData = () => {
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(false);
     const [showConfirmation, setShowConfirmation] = useState(false)
-    const fetchData = async (query) => {
+
+    const fetchData = async (query, token) => {
+
         const config = {
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'auth-token': token
             },
         }
-        console.log(`${api.serverURL}${query}`)
+
         await axios
             .get(`${api.serverURL}${query}`, config)
             .then(res => {
