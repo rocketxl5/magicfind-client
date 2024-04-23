@@ -1,4 +1,3 @@
-import Container from '../../../components/Container';
 import useCart from '../../../hooks/contexthooks/useCart';
 import useNavbar from '../../../hooks/contexthooks/useNavbar';
 import useNavButton from '../../../hooks/useNavButton';
@@ -14,14 +13,14 @@ const CartBtn = () => {
       id='cart-btn'
       className='nav-btn cart-btn relative'
       type='button'
-      onClick={(e) => navButtonHandler('/shopping-cart')}
+      onClick={() => navButtonHandler('/shopping-cart')}
     >
       {itemsCount > 0 && (
-        <Container classList={'cart-count absolute flex column justify-center align-center bg-primary'} ref={cartCountRef}>
+        <div classList={'cart-count absolute flex column justify-center align-center bg-primary'} ref={cartCountRef}>
           <span>
             {itemsCount}
           </span>
-        </Container>
+        </div>
       )}
       <FiShoppingCart />
     </button>

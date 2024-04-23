@@ -1,49 +1,28 @@
-import { useEffect } from 'react';
 import { FiMail } from 'react-icons/fi';
 import useAuth from '../../../hooks/contexthooks/useAuth';
 import useNavButton from '../../../hooks/useNavButton';
-import styled from 'styled-components';
+import useNavbar from '../../../hooks/contexthooks/useNavbar';
 
 const MailBtn = () => {
   const { unreadMail } = useAuth();
+  const { mailCountRef } = useNavbar();
   const { navButtonHandler } = useNavButton();
-  useEffect(() => {
-    console.log(unreadMail)
-  }, [unreadMail])
+
   return (
     <button
       id='mail-btn'
-      className='nav-btn mail-btn'
+      className='nav-btn mail-btn relative'
       onClick={(e) => navButtonHandler('/me/mail/inbox')}>
-        {unreadMail > 0 && (
-          <UnreadContainer>
-            <Unread>{unreadMail}</Unread>
-          </UnreadContainer>
-        )}
+      {/* {unreadMail > 0 && ( */}
+      <div className={'cart-count absolute flex column justify-center align-center bg-primary'} ref={mailCountRef}>
+        <span>
+          {unreadMail}
+        </span>
+      </div>
+      {/* )} */}
       <FiMail />
     </button>
   )
 }
-
-const UnreadContainer = styled.div`
-  position: absolute;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  top: -10px;
-  left: 17px;
-  background-color: #28a745;
-  width: 22px;
-  height: 22px;
-  border-radius: 50%;
-  z-index: 10;
-`;
-
-const Unread = styled.div`
-  text-align: center;
-  font-size: 0.8em;
-  font-weight: bold;
-  color: #fff;
-`;
 
 export default MailBtn;
