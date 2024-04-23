@@ -3,15 +3,19 @@
 }
 
 .padding-1 {
-    padding: 1rem;
+    padding: 1rem !important;
+}
+
+.padding-2 {
+    padding: 2rem !important;
 }
 
 .padding-inline-1 {
-    padding-inline: var(--size-1);
+    padding-inline: var(--size-1) !important;
 }
 
 .padding-inline-2 {
-    padding-inline: var(--size-2);
+    padding-inline: var(--size-2) !important;
 }
 
 .padding-block-half {

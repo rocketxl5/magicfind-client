@@ -13,11 +13,11 @@ const useFetchData = () => {
                 'Content-Type': 'application/json'
             },
         }
-
+        console.log(`${api.serverURL}${query}`)
         await axios
             .get(`${api.serverURL}${query}`, config)
             .then(res => {
-                // console.log(res.data)
+                console.log(res.data)
                 setResult(res.data);
             })
             .catch((error) => {

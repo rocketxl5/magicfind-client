@@ -26,8 +26,6 @@
   align-items: center;
   color: #fff;
 }
-
-
 .searchbar {
   position: absolute;
   /* display: none; */
@@ -41,8 +39,6 @@
   transform-origin: top;
   transition: transform 120ms ease-in-out;
 }
-
-
 
 .signout {
   color: #fff;
@@ -71,9 +67,6 @@
   display: flex;
   align-items: center;
 }
-
-
-
 /* Mail icon container */
 
 /* Icons */
@@ -116,9 +109,6 @@ button.warning,
 button.danger,
 button.secondary {
   color: var(--extra-light-color);
-  /* padding: 0.8em 0; */
-  /* margin-top: 1em; */
-  /* font-size: 1rem; */
   border: none;
 }
 
@@ -153,8 +143,6 @@ div.section--cart:hover {
   cursor: pointer;
   opacity: 0.8;
 }
-
-
 
 /* ********************* */
 /* Loged in Dropdown menu */
@@ -210,27 +198,6 @@ ul.auth-dropdown-content li .signout {
   opacity: 0.8;
 }
 
-
-
-
-
-
-/* .suggestion { */
-  /* @ views/Suggestions.js */
-
-  /* padding: 0.8em;
-  border-bottom: 1px solid #efefef;
-  color: #000;
-} */
-
-
-
-/* form.catalog {
-  width: 100%;
-  margin: 0 auto;
-  background: #fff;
-} */
-
 /* User Page section blocks */
 main.user-page {
   display: flex;
@@ -247,10 +214,6 @@ section.user-page {
 /* Send Message */
 /* Mail box     */
 /* ************ */
-main.content {
-  /* display: flex; */
-  /* justify-content: space-evenly; */
-}
 
 div.message-content {
   width: 100%;
@@ -274,16 +237,6 @@ aside .right-side {
   border: 1px solid var(--dark-color);
 }
 
-section.mail.box {
-}
-
-/* textarea {
-  margin: 10px 0;
-  padding: 10px;
-  border-style: solid;
-  border-width: 1px;
-} */
-
 section.message-form textarea {
   width: 100%;
   height: 30vh;
@@ -292,13 +245,7 @@ section.message-form textarea {
   font-size: 1rem;
   line-height: 1.6;
   resize: none;
-  /* border-color: var(--light-color); */
 }
-
-/* section.message-box textarea:focus {
-  border-color: #17a2bb;
-  outline-color: #17a2bb;
-} */
 
 section.message-form textarea:focus,
 section.message-form input[type='text']:focus {
@@ -311,27 +258,10 @@ section.message-form form {
   flex-direction: column;
 }
 
-/* section.card-info {
-  width: 40%;
-} */
-
 section.message-form footer {
   display: flex;
   justify-content: space-between;
 }
-
-/* div.error-msg {
-  height: 2vh;
-  color: var(--danger-color);
-  font-size: 1.1rem;
-}
-
-.empty-field {
-  border-color: var(--danger-color);
-}
-.error {
-  color: var(--danger-color);
-} */
 
 .search-header {
   display: flex;
@@ -393,14 +323,6 @@ section.message-form footer {
   padding: 1em;
 }
 
-.user-page-section article p {
-  font-size: 0.9rem;
-  /* padding: 0 1em; */
-}
-
-
-
-
 
 #item-order {
   /* @ views/CatalogItem.js */
@@ -426,19 +348,9 @@ section.message-form footer {
   border: 1px solid #e4e4e4;
 }
 
-/* Collection specific styles */
-.store-search-results{
-}
-.item-buttons {
-  /* display: flex;
-  justify-content: space-between;
-  margin-top: 1em; */
-}
-
 .column {
   flex-direction: column;
 }
-
 
 .catalog-items {
   display: flex;
@@ -504,12 +416,6 @@ section.message-form footer {
   width: 100%;
   margin-top: 1em;
   border: 1px solid #f5f8fa;
-}
-
-.mailbox-aside {
-  /* @views/mail/Inbox.js  */
-  /*  width: 20% @ widescreen */
-  width: 100%;
 }
 
 .mailbox-header {
@@ -590,28 +496,9 @@ section.message-form footer {
   padding-left: 3.5em;
 }
 
-.row-from {
-}
-
-.row-subject {
-  /* @ views/mail/MailHeader.js */
-  /* margin-left: 5em; */
-  /* padding-right: 8em; */
-  /* width: 70%; */
-}
 .row-sent {
   /* @ views/mail/MailHeader.js */
   width: 30%;
-}
-
-.mailbox-sidebar-container {
-  width: 100%;
-  border: 1px solid #f5f8fa;
-}
-
-.mailbox-sidebar {
-  display: flex;
-  flex-direction: column;
 }
 
 .mailbox-sidebar-header {
@@ -658,10 +545,6 @@ button.compose-message {
   border: 2px solid #28a745;
 }
 
-.message-container {
-  /* @ views/mail/Message */
-}
-
 .message-details {
   /* @ views/mail/Message */
   padding-left: 1em;
@@ -678,31 +561,12 @@ button.compose-message {
   word-wrap: break-word;
 }
 
-
 /* Media queries */
 @media (min-width: 500px) {
-  /* .form-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
-
-  .form {
-    max-width: 30em;
-  } */
+  
   .mail-message {
     border-left: 0.2em solid #f5f8fa;
   }
-
-  /* Catalog Search styles */
-  .item-container {
-    /* width: 48%; */
-  }
-
-  .item-info {
-    /* flex-direction: column; */
-  }
-
   
   .item-details {
     width: 100%;
@@ -714,10 +578,6 @@ button.compose-message {
   }
   .item-buttons {
     flex-direction: column;
-  }
-
-  .item-button {
-    /* width: 100%; */
   }
 
   .item-quantity {
@@ -746,30 +606,17 @@ button.compose-message {
     font-size: 1.2rem;
   }
 
-  .item-container {
-    /* width: 32%; */
-  }
-
   .catalog-items {
     gap: 2%;
   }
 }
-@media (min-width: 900px) {
-  body {
-    width: 80%;
-  }
-  .item-container {
-    /* width: 24%; */
-  }
 
+@media (min-width: 900px) {
   .catalog-items {
     gap: 1.3%;
   }
 }
 @media (min-width: 1100px) {
-  .item-container {
-    /* width: 19%; */
-  }
 
   .catalog-items {
     gap: 1.25%;
@@ -777,32 +624,12 @@ button.compose-message {
 }
 
 @media (min-width: 1400px) {
-  .item-container {
-    /* width: 15.5%; */
-  }
-
   .catalog-items {
     gap: 1.4%;
   }
 }
 
 @media (max-width: 375px) {
-  /* .store-item-buttons {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-  } */
-
-  .container {
-    /* margin-top: 57px;
-    font-size: 0.9rem; */
-    /* min-width: 400px; */
-  }
-
-  .item-button {
-    /* font-size: 0.8rem; */
-  }
-
   #catalog-cart-button {
     font-size: 0.9em;
     padding: 0.7em 0;
@@ -814,10 +641,6 @@ button.compose-message {
     padding: 0.7em 0;
   }
 
-  /* .item-image img {
-
-    width: 100%;
-  } */
   .full-width {
     width: 100%;
   }
@@ -831,20 +654,9 @@ button.compose-message {
   div.section--logo {
     padding-left: 4.5em;
   }
-/* 
-  .item-image {
-    width: 46%;
-  }
-  .item-image img {
-    height: 100%;
-    width: 100%;
-  } */
+
   .item-button {
     font-size: 0.8rem;
-  }
-
-  .item-container {
-    /* font-size: 0.7em; */
   }
 
   .footer {

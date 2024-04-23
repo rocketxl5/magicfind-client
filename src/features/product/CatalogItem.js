@@ -140,7 +140,7 @@ const CatalogItem = ({ index, product, count, cartIndex, handleSlideView }) => {
 
                                 </div>
                             </section>
-                            <section className='flex column gap-dot-5 height-100 relative b-radius-5 border-surface-thin'>
+                            <section className='flex column gap-dot-5 height-100 relative b-radius-5 border-surface-thin padding-dot-5'>
                                 {/* <Avatar classList={'absolute box-size-8 btn-top-right border-eclipse-2'} avatar={product.seller.avatar} handleClick={() => navigate(`/store/${product.seller.userID}`, {
                                         state: {
                                             user: product.seller
@@ -148,7 +148,7 @@ const CatalogItem = ({ index, product, count, cartIndex, handleSlideView }) => {
                             })} /> */}
 
                                 <Drop
-                                    classList={'card-action-btn btn-bottom-left'}
+                                    classList={'card-action-btn btn-bottom-left bg-transparent'}
                                     handleClick={() => navigate(`/seller/${product.seller.userID}`, {
                                         state: {
                                             user: product.seller
@@ -158,7 +158,7 @@ const CatalogItem = ({ index, product, count, cartIndex, handleSlideView }) => {
                                     <MdStore className='box-size-100' />
                                 </Drop>
                                 <Drop
-                                    classList={'card-action-btn btn-bottom-center'}
+                                    classList={'card-action-btn btn-bottom-center bg-transparent'}
                                     handleClick={() => navigate(`/mail/${product.seller.userID}`, {
                                         state: {
                                             user: product.seller

@@ -1,0 +1,14 @@
+{
+  "dashboardLinks": [
+    { "title": "Dashboard", "id": "dashboard" },
+    { "title": "Collection", "id": "collection" },
+    { "title": "Store", "id": "store" },
+    { "title": "Archive", "id": "archive" }
+  ],
+  "mailLinks": [
+    { "title": "Inbox", "id": "inbox" },
+    { "title": "Unread", "id": "unread" },
+    { "title": "Sent", "id": "sent" },
+    { "title": "Trash", "id": "trash" }
+  ]
+}

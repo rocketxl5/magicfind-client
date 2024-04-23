@@ -1,11 +1,19 @@
 import { createContext, useState, useEffect } from 'react';
+import useRetrieveMail from '../hooks/useRetrieveMail';
+import useFetchData from '../hooks/useFetchData';
+
 
 export const AuthContext = createContext(null);
 
 export const AuthProvider = ({ children }) => {
   const [auth, setAuth] = useState(localStorage.getItem('auth') ? JSON.parse(localStorage.getItem('auth')) : null);
   const [isAuth, setIsAuth] = useState(false);
-  const [unreadMail, setUnreadMail] = useState(null);
+  const [unreadMail, setUnreadMail] = useState(0);
+
+  // const { mailRetriever, result } = useRetrieveMail();
+
+
+  const { result, fetchData } = useFetchData();
 
   const logoutAction = () => {
     localStorage.clear();
@@ -24,40 +32,20 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  // const checkUnreadMail = (id, token) => {
-  //   const headers = new Headers();
-  //   headers.append('Content-type', 'application/json');
-  //   headers.append('auth-token', token);
-
-  //   const options = {
-  //     method: 'GET',
-  //     headers: headers,
-  //   };
-
-  //   fetch(`${api.serverURL}/api/messages/unread/${id}`, options)
-  //     .then((res) => res.json())
-  //     .then((data) => {
-
-  //       if (data.data) {
-  //         const unreadMail = data.data.filter((message) => {
-  //           return !message.isRead && !message.isTrash;
-  //         });
-  //         // If unreadMail
-  //         setUnreadMail(unreadMail && unreadMail.length);
-  //       }
-  //     })
-  //     .catch((error) => console.log(error));
-  // }
-
   useEffect(() => {
     if (auth) {
       setIsAuth(true);
       // checkUnreadMail(auth.user.id, auth.token)
+      fetchData(`/api/mail/${auth.user.id}`);
     }
     else {
       setIsAuth(false);
     }
   }, [auth])
+
+  useEffect(() => {
+    setUnreadMail(result)
+  }, [result])
 
   useEffect(() => {
 
