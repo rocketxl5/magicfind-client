@@ -1,10 +1,10 @@
 import { FiMail } from 'react-icons/fi';
-import useAuth from '../../../hooks/contexthooks/useAuth';
+import useMail from '../../../hooks/contexthooks/useMail';
 import useNavButton from '../../../hooks/useNavButton';
 import useNavbar from '../../../hooks/contexthooks/useNavbar';
 
 const MailBtn = () => {
-  const { unreadMail } = useAuth();
+  const { unreadCount } = useMail();
   const { mailCountRef } = useNavbar();
   const { navButtonHandler } = useNavButton();
 
@@ -13,10 +13,10 @@ const MailBtn = () => {
       id='mail-btn'
       className='nav-btn mail-btn relative'
       onClick={(e) => navButtonHandler('/me/mail/inbox')}>
-      {/* {unreadMail > 0 && ( */}
+      {/* {unreadCount > 0 && ( */}
       <div className={'cart-count absolute flex column justify-center align-center bg-primary'} ref={mailCountRef}>
         <span>
-          {unreadMail}
+          {unreadCount}
         </span>
       </div>
       {/* )} */}
