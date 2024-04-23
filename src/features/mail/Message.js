@@ -240,7 +240,7 @@ const Message = ({ currentMessage, setMessages, setLoading }) => {
     </div>
   );
 };
-const Main = styled.main``;
+
 
 const Detail = styled.p``;
 const Section = styled.section`

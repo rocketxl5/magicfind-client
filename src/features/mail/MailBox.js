@@ -126,9 +126,18 @@ const MailBox = () => {
     }
   };
   // console.log(path);
+
+  const Message = ({ children }) => {
+    return (
+      <div className='new-message col-12 flex-grow-1 border-dark'>
+        {children}
+      </div>
+    )
+  }
+
   return (
 
-    <div className="col-12 bg-grey height-100 padding-2">
+    <div className="col-12 bg-grey height-100 padding-inline-2 flex column">
 
       <SideBar
         isTrash={isTrash}
@@ -146,7 +155,9 @@ const MailBox = () => {
             location.pathname.includes('trash') ?
               <div>Trash</div> :
               location.pathname.includes('message') ?
-                <div>New Message</div> :
+                <Message>
+                  <h3>New Message</h3>
+                </Message> :
                 <div>Inbox</div>
       }
 

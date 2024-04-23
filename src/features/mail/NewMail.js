@@ -12,7 +12,7 @@ const Mail = ({
   index
 }) => {
   const { pathname } = useContext(PathContext);
-
+  console.log('message')
   return (
     <div
       className="mail-row"
