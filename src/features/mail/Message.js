@@ -41,7 +41,7 @@ const Message = ({ currentMessage, setMessages, setLoading }) => {
       headers: headers,
       body: JSON.stringify(updates),
     };
-    fetch(`${api.serverURL}/api/messages/read`, options)
+    fetch(`${api.serverURL}/api/mail/read`, options)
       .then((res) => res.json())
       .then((data) => {
         // Update path value to trigger useEffect in MailBox component to show updated list
@@ -50,7 +50,7 @@ const Message = ({ currentMessage, setMessages, setLoading }) => {
         setLoading(false);
         setPathname(getPath(location.pathname));
         if (currentMessage.isRead) {
-          navigate(`/mail/${pathname}`);
+          navigate(`/me/mail/${pathname}`);
         }
       })
       .catch((error) => console.log(error));
@@ -77,13 +77,13 @@ const Message = ({ currentMessage, setMessages, setLoading }) => {
       headers: headers,
       body: JSON.stringify(updates),
     };
-    fetch(`${api.serverURL}/api/messages/trash`, options)
+    fetch(`${api.serverURL}/api/mail/trash`, options)
       .then((res) => res.json())
       .then((data) => {
         setLoading(false);
         localStorage.removeItem('message');
         setPathname(getPath(location.pathname));
-        navigate(`/mail/${pathname}`);
+        navigate(`/me/mail/${pathname}`);
       })
       .catch((error) => console.log(error));
   };
@@ -107,14 +107,14 @@ const Message = ({ currentMessage, setMessages, setLoading }) => {
       body: JSON.stringify(updates),
     };
 
-    fetch(`${api.serverURL}/api/messages/delete`, options)
+    fetch(`${api.serverURL}/api/mail/delete`, options)
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
         setPathname(getPath(location.pathname));
         setMessages(data.data.length > 0 ? data.data : []);
         localStorage.removeItem('message');
-        navigate(`/mail/${pathname}`);
+        navigate(`/me/mail/${pathname}`);
       });
   };
 
@@ -132,7 +132,7 @@ const Message = ({ currentMessage, setMessages, setLoading }) => {
           className="cancel"
           onClick={() => {
             localStorage.removeItem('message');
-            navigate(`/mail/${pathname}`);
+            navigate(`/me/mail/${pathname}`);
           }}
         >
           <FiArrowLeftCircle />{' '}
@@ -166,7 +166,7 @@ const Message = ({ currentMessage, setMessages, setLoading }) => {
           className="item-button row-3 success"
           type="button"
           onClick={() => {
-            navigate({ pathname: '/mail/message', state: currentMessage });
+            navigate({ pathname: '/me/mail/message', state: currentMessage });
           }}
         >
           Reply
@@ -204,7 +204,7 @@ const Message = ({ currentMessage, setMessages, setLoading }) => {
               // localStorage.removeItem('message');
               setIsReadStatus(false);
               if (!currentMessage.isRead) {
-                navigate('/mail/inbox');
+                navigate('/inbox');
               } else {
                 localStorage.removeItem('message');
               }

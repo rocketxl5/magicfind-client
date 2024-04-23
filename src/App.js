@@ -34,7 +34,7 @@ import Archive from './features/search/Archive';
 import Collection from './features/search/Collection';
 import Store from './features/search/Store';
 import Checkout from './pages/Checkout';
-import Inbox from './features/mail/Inbox';
+import MailBox from './features/mail/MailBox';
 import Seller from './pages/Seller';
 import Product from './pages/Product';
 
@@ -48,7 +48,7 @@ import './styles/style.css';
 import './styles/navbar.css';
 import './styles/form.css';
 import './styles/media-queries.css';
-// import './App.css';
+import './App.css';
 
 const App = () => {
   const { isAuth } = useAuth();
@@ -81,7 +81,9 @@ const App = () => {
               <Route path="settings" element={<Settings />} />
               <Route path="profile" element={<Profile />} />
               <Route path="checkout" element={<Checkout />} />
-              <Route path="mail" element={<Inbox />} />
+              <Route path="mail" element={<MailBox />} >
+                <Route path="*" element={<MailBox />} />
+              </Route>
             </Route>
           </Route>
         </Route>

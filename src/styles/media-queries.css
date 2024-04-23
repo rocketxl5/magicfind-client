@@ -20,8 +20,6 @@
     .product-grid .image {
         grid-column: span 2;  
     }
-
-    
 }
 
 @media screen and (width >= 660px) {

@@ -6,25 +6,25 @@ export const MailContext = createContext(null);
 // previously. This means a search has been done in the api view
 // and a card was selected to be added to the user store
 export const MailProvider = ({ children }) => {
-  const { auth } = useAuth();
-  const [sentMessages, setSentMessages] = useState([]);
-  const [receivedMessages, setReceivedMessages] = useState([]);
+  const { auth, isAuth } = useAuth();
+  const [sentMail, setSentMail] = useState([]);
+  const [receivedMail, setReceivedMail] = useState([]);
 
   // Populates messages in every rendering (reload of page, etc.)
   useEffect(() => {
-    if (auth) {
-      setSentMessages(auth.messages?.sent);
-      setReceivedMessages(auth.messages?.received);
+    if (isAuth) {
+      setSentMail(auth.messages?.sent);
+      setReceivedMail(auth.messages?.received);
     }
-  }, [auth]);
+  }, [isAuth]);
 
   return (
     <MailContext.Provider
       value={{
-        setSentMessages,
-        sentMessages,
-        setReceivedMessages,
-        receivedMessages
+        setSentMail,
+        sentMail,
+        setReceivedMail,
+        receivedMail
       }}
     >
       {children}

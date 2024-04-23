@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { NavLink, useParams } from 'react-router-dom'
-import data from '../data/AUTH.json';
+import data from '../data/LINKS.json';
 import { api } from '../api/resources';
 import useAuth from '../hooks/contexthooks/useAuth';
 import useSearch from '../hooks/contexthooks/useSearch';
@@ -21,7 +21,7 @@ const DashboardNav = () => {
     const { auth } = useAuth();
     const { query } = useParams();
 
-    const { links } = data;
+    const links = data.dashboardLinks;
 
     // Setting archive card names for autocomplete archive search
     useEffect(() => {
@@ -91,10 +91,10 @@ const DashboardNav = () => {
     return (
         <section className="dashboard-nav">
             <div className="contextual-links">
-                {links.map((link, index) => {
+                {links.map((link, i) => {
                     return (
                         <NavLink
-                            key={index}
+                            key={i}
                             id={link.id}
                             to={`/me/${link.id}`}
                             className={({ isActive }) => {

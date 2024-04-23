@@ -1,20 +1,22 @@
-import React, { Fragment, useContext, useState, useEffect } from 'react';
+import { useContext, useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import Page from '../../components/Page';
+import Aside from '../../components/Aside';
 import SideBar from './SideBar';
 import MailHeader from './MailHeader';
-import Mail from './Mail';
+// import Mail from './Mail';
 import ComposeMessage from './ComposeMessage';
 import Loader from '../../layout/Loader';
 import Message from './Message';
 import useAuth from '../../hooks/contexthooks/useAuth';
-import getPath from '../../assets/utilities/getPath';
 import { PathContext } from '../../contexts/PathContext';
 import { api } from '../../api/resources';
 import styled from 'styled-components';
+import { mailReducer } from './services/mailReducer';
 
-const Inbox = () => {
+const MailBox = () => {
   const { auth, setUnreadMail } = useAuth();
-  const { pathname, setPathname } = useContext(PathContext);
+  // const { pathname, setPathname } = useContext(PathContext);
 
   const location = useLocation();
   const navigate = useNavigate();
@@ -30,50 +32,45 @@ const Inbox = () => {
   const [isTrash, setIsTrash] = useState(false);
   const [checkedState, setCheckedState] = useState([]);
 
-  // Set path on page load
   useEffect(() => {
-    console.log(location.pathname);
-  }, []);
 
-  useEffect(() => {
-    // console.log('path', path);
-    if (pathname !== 'message' && pathname) {
-      // console.log(path);
-      setLoading(true);
-      // setPath(location.pathname.split('/')[2]);
-      setChecked(false);
 
-      const headers = new Headers();
-      headers.append('Content-type', 'application/json');
-      headers.append('auth-token', auth.token);
+    // console.log(path);
+    setLoading(true);
+    // setPath(location.pathname.split('/')[2]);
+    setChecked(false);
 
-      const options = {
-        method: 'GET',
-        headers: headers,
-      };
+    const headers = new Headers();
+    headers.append('Content-type', 'application/json');
+    headers.append('auth-token', auth.token);
 
-      fetch(`${api.serverURL}/api/messages/${pathname}/${auth.user.id}`, options)
-        .then((res) => res.json())
-        .then((data) => {
-          if (data.data) {
-            // console.log(data.data);
-            if (pathname === 'inbox' || pathname === 'unread') {
-              const unreadMail = data.data.filter((message) => {
-                return !message.isRead && !message.isTrash;
-              });
+    const options = {
+      method: 'GET',
+      headers: headers,
+    };
 
-              setUnreadMail(unreadMail.length);
-            }
-            setMessages(data.data);
-          } else {
-            setMessages([]);
-          }
+    // fetch(`${api.serverURL}/api/mail/${auth.user.id}`, options)
+    //   .then((res) => res.json())
+    //   .then((data) => {
+    //     if (data.data) {
+    //       // console.log(data.data);
+    //       if (location.pathname.includes('inbox') || location.pathname.includes('unread')) {
+    //         const unreadMail = data.data.filter((message) => {
+    //           return !message.isRead && !message.isTrash;
+    //         });
 
-          setLoading(false);
-        })
-        .catch((error) => console.log(error));
-    }
-  }, [pathname]);
+    //         setUnreadMail(unreadMail.length);
+    //       }
+    //       setMessages(data.data);
+    //     } else {
+    //       setMessages([]);
+    //     }
+
+    //     setLoading(false);
+    //   })
+    //   .catch((error) => console.log(error));
+
+  }, [location]);
 
   // Populate checkedState on page reload/refresh
   useEffect(() => {
@@ -125,32 +122,40 @@ const Inbox = () => {
 
       setCheckedState(newCheckedState);
       localStorage.setItem('checkedState', JSON.stringify(newCheckedState));
-      navigate(`/mail/${location.pathname.split('/')[2]}`);
+      navigate(`/me/mail/${location.pathname.split('/')[2]}`);
     }
   };
   // console.log(path);
   return (
-    <div className="content inbox">
-      <header className="header">
-        <h2 className="title">Inbox</h2>
-      </header>
-      <main className="main">
-        <div className="mailbox-aside">
-          <SideBar
-            isTrash={isTrash}
-            checkedState={checkedState}
-            setMessages={setMessages}
-            setLoading={setLoading}
-            messages={messages}
-            user={auth}
-          />
-        </div>
-        <div className="mailbox-content">
+
+    <div className="col-12 bg-grey height-100 padding-2">
+
+      <SideBar
+        isTrash={isTrash}
+        checkedState={checkedState}
+        setMessages={setMessages}
+        setLoading={setLoading}
+        messages={messages}
+        user={auth}
+      />
+      {
+        location.pathname.includes('unread') ?
+          <div>Unread</div> :
+          location.pathname.includes('sent') ?
+            <div>Sent</div> :
+            location.pathname.includes('trash') ?
+              <div>Trash</div> :
+              location.pathname.includes('message') ?
+                <div>New Message</div> :
+                <div>Inbox</div>
+      }
+
+      {/*<div className="mailbox-content">
           {location.pathname === '/mail/inbox' ||
             location.pathname === '/mail/sent' ||
             location.pathname === '/mail/unread' ||
             location.pathname === '/mail/trash' ? (
-            <Fragment>
+              <>
               <MailHeader
                 handleChange={handleChange}
                 checked={checked}
@@ -177,7 +182,7 @@ const Inbox = () => {
                   })
                 )}
               </Messages>
-            </Fragment>
+              </>
           ) : pathname === 'message' ? (
             <ComposeMessage />
           ) : (
@@ -187,8 +192,8 @@ const Inbox = () => {
               setLoading={setLoading}
             />
           )}
-        </div>
-      </main>
+        </div>*/}
+
     </div>
   );
 };
@@ -214,4 +219,4 @@ const Side = styled.aside`
   width: 20%;
 `;
 
-export default Inbox;
+export default MailBox;

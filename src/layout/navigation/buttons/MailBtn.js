@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { FiMail } from 'react-icons/fi';
 import useAuth from '../../../hooks/contexthooks/useAuth';
 import useNavButton from '../../../hooks/useNavButton';
@@ -6,12 +7,14 @@ import styled from 'styled-components';
 const MailBtn = () => {
   const { unreadMail } = useAuth();
   const { navButtonHandler } = useNavButton();
-
+  useEffect(() => {
+    console.log(unreadMail)
+  }, [unreadMail])
   return (
     <button
       id='mail-btn'
       className='nav-btn mail-btn'
-      onClick={(e) => navButtonHandler('me/mail')}>
+      onClick={(e) => navButtonHandler('/me/mail/inbox')}>
         {unreadMail > 0 && (
           <UnreadContainer>
             <Unread>{unreadMail}</Unread>
@@ -21,7 +24,6 @@ const MailBtn = () => {
     </button>
   )
 }
-
 
 const UnreadContainer = styled.div`
   position: absolute;

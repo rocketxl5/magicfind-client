@@ -1,10 +1,11 @@
 import React, { useContext, useEffect } from 'react';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { NavLink, useLocation, useNavigate, } from 'react-router-dom';
 import { FiTrash } from 'react-icons/fi';
 import getPath from '../../assets/utilities/getPath'
 import { PathContext } from '../../contexts/PathContext';
 import { api } from '../../api/resources';
 import styled from 'styled-components';
+import data from '../../data/LINKS.json';
 
 const SideBar = ({
   isTrash,
@@ -18,6 +19,7 @@ const SideBar = ({
   const navigate = useNavigate();
   const { pathname, setPathname } = useContext(PathContext);
 
+  const links = data.mailLinks
   // Set path on location change
   useEffect(() => {
     // console.log('path', path);
@@ -61,14 +63,14 @@ const SideBar = ({
       body: JSON.stringify(updates),
     };
 
-    fetch(`${api.serverURL}/api/messages/`, options)
+    fetch(`${api.serverURL}/api/mail/`, options)
       .then((res) => res.json())
       .then((data) => {
         setLoading(false);
         localStorage.removeItem('message');
         setMessages(data.data);
         setPathname(getPath(location.pathname));
-        navigate(`/mail/${pathname}`);
+        navigate(`/me/mail/${pathname}`);
       });
   };
 
@@ -97,30 +99,30 @@ const SideBar = ({
       body: JSON.stringify(updates),
     };
 
-    fetch(`${api.serverURL}/api/messages/delete`, options)
+    fetch(`${api.serverURL}/api/mail/delete`, options)
       .then((res) => res.json())
       .then((data) => {
         // console.log(data);
         localStorage.removeItem('message');
         setMessages(data.data.length > 0 ? data.data : []);
         setPathname(getPath(location.pathname));
-        navigate(`/mail/${pathname}`);
+        navigate(`/me/mail/${pathname}`);
       });
   };
 
   return (
-    <div className=".mailbox-sidebar-container">
-      <div className="mailbox-sidebar">
+    <div className="col-12 bg-surface ">
+
         <div className="mailbox-sidebar-header">
           <button
             className="compose-message"
             type="button"
             onClick={() => {
               setPathname('message');
-              navigate('/mail/message');
+              navigate('/me/mail/message');
             }}
           >
-            Compose
+          New Message
           </button>
           {isTrash && location.pathname.includes('trash') ? (
             <button className="remove-message" type="button" onClick={handleDeleteClick}>
@@ -133,55 +135,98 @@ const SideBar = ({
           ) : (
             ''
           )}
-        </div>
+      </div>
+      {/* 
+      <section className="dashboard-nav">
 
         <ul className="mailbox-sidebar-options">
-          <ListItem>
-            <Link
+          {links.map((link, index) => {
+            return (
+              <NavLink
+                key={index}
+                id={link.id}
+                to={`/me/${link.id}`}
+                className={({ isActive }) => {
+                  // If search param is defined, add active class else add inactive class 
+                  return (isActive && !query) ? 'active' : 'inactive'
+                }}
+              >
+                <span >{link.title}</span>
+              </NavLink>
+            )
+          })}
+        </ul>
+      </section> */}
+
+      <ul className="mailbox-sidebar-options">
+        {
+          links.map((link, i) => {
+            return (
+              <ListItem>
+                <NavLink
+                  key={i}
+                  id={link.id}
+                  to={`/me/mail/${link.id}`}
+                  className={({ isActive }) => {
+                    // If search param is defined, add active class else add inactive class 
+                    return (isActive) ? 'active' : 'inactive'
+                  }}
+                >
+                  <span >{link.title}</span>
+                </NavLink>
+              </ListItem>
+            )
+          })
+        }
+        {/* <ListItem>
+          <NavLink
+            id={'inbox'}
               style={{
                 border:
                   location.pathname.includes('inbox') && '1px solid #e1e8ed',
               }}
-              to="/mail/inbox"
+            to="/me/mail"
             >
               Inbox
-            </Link>
+          </NavLink>
           </ListItem>
           <ListItem>
-            <Link
+          <NavLink
+            id={'unread'}
               style={{
                 border:
                   location.pathname.includes('unread') && '1px solid #e1e8ed',
               }}
-              to="/mail/unread"
+            to="/me/mail/unread"
             >
               Unread
-            </Link>
+          </NavLink>
           </ListItem>
           <ListItem>
-            <Link
+          <NavLink
+            id={'sent'}
               style={{
                 border:
                   location.pathname.includes('sent') && '1px solid #e1e8ed',
               }}
-              to="/mail/sent"
+            to="/me/mail/sent"
             >
               Sent
-            </Link>
+          </NavLink>
           </ListItem>
           <ListItem>
-            <Link
+          <NavLink
+            id={'trash'}
               style={{
                 border:
                   location.pathname.includes('trash') && '1px solid #e1e8ed',
               }}
-              to="/mail/trash"
+            to="/me/mail/trash"
             >
               Trash
-            </Link>
-          </ListItem>
-        </ul>
-      </div>
+          </NavLink>
+          </ListItem> */}
+      </ul>
     </div>
   );
 };

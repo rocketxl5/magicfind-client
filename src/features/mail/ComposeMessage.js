@@ -77,13 +77,13 @@ const Message = () => {
       }),
     };
 
-    fetch(`${api.serverURL}/api/messages`, options)
+    fetch(`${api.serverURL}/api/mail`, options)
       .then((res) => res.json())
       .then((data) => {
         // Reinitialize states
         setText('');
         setCount(0);
-        navigate('/mail/inbox');
+        navigate('/me/mail');
       })
       .catch((error) => console.log(error));
   }, [isValid]);
