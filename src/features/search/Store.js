@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import Loader from '../../layout/Loader';
 import Page from '../../components/Page';
-import useFetchData from '../../hooks/useFetchData';
+import useFetch from '../../hooks/useFetch';
 import useAuth from '../../hooks/contexthooks/useAuth';
 
 const Store = () => {
@@ -11,11 +11,11 @@ const Store = () => {
     const location = useLocation();
 
     const { auth } = useAuth();
-    const { fetchData, loading, showConfirmation, error, result } = useFetchData();
+    const { fetchOne, loading, showConfirmation, error, result } = useFetch();
 
     useEffect(() => {
-        fetchData(`/api/users/store/${auth.user.id}`)
-
+        const config = { headers: { 'Content-Type': 'application/json' } }
+        fetchOne(`/api/users/store/${auth.user.id}`, config)
     }, [])
 
     useEffect(() => {

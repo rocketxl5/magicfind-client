@@ -1,17 +1,17 @@
 import { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import Loader from '../layout/Loader';
-import useFetchData from '../hooks/useFetchData';
+import useFetch from '../hooks/useFetch';
 
 const Seller = () => {
     const [hasLoaded, setHasLoaded] = useState(false);
     const location = useLocation();
 
-    const { fetchData, loading, showConfirmation, error, result } = useFetchData();
+    const { fetchOne, loading, showConfirmation, error, result } = useFetch();
 
     useEffect(() => {
-        console.log(location)
-        fetchData(`/api/users/store/${location.state?.user.userID}`)
+        // console.log(location)
+        fetchOne(`/api/users/store/${location.state?.user.userID}`, { headers: { 'Content-Type': 'application/json' } })
 
     }, [])
 

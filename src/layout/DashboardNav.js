@@ -2,51 +2,71 @@ import { useEffect } from 'react';
 import { NavLink, useParams } from 'react-router-dom'
 import data from '../data/LINKS.json';
 import { api } from '../api/resources';
+import useFetch from '../hooks/useFetch';
 import useAuth from '../hooks/contexthooks/useAuth';
 import useSearch from '../hooks/contexthooks/useSearch';
+import useMail from '../hooks/contexthooks/useMail';
 
 const DashboardNav = () => {
     const {
-        archiveCardNames,
+        // archiveCardNames,
         setArchiveCardNames,
         setCollectionCardNames,
         setUpdateCollection,
         updateCollection,
-        isCollectionEmpty,
+        // isCollectionEmpty,
         setIsCollectionEmpty,
         setError,
         setCardCollection
     } = useSearch();
 
     const { auth } = useAuth();
+    const { setMailCount } = useMail();
+    const { result, fetchOne, fetchAll } = useFetch();
     const { query } = useParams();
 
     const links = data.dashboardLinks;
 
-    // Setting archive card names for autocomplete archive search
+    /* //////////////////////// Start /////////////////////////// */
+    /* Setting archive card names for autocomplete archive search */
     useEffect(() => {
-        if (!archiveCardNames) {
-            const headers = new Headers();
-            headers.append('Content-Type', 'application/json');
-            const options = {
-                method: 'GET',
-                headers: headers,
-            };
-
-            fetch(`${api.serverURL}/api/cards/mtg-cardnames`, options)
-                .then((res) => res.json())
-                .then((data) => {
-                    setArchiveCardNames(data);
+        fetchAll([
+            {
+                query: `/api/cards/mtg-cardnames`,
+                config: {
+                    // method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                },
+                setter: (value) => {
+                    setArchiveCardNames(value);
                     setUpdateCollection(true);
-                })
-                .catch((error) => {
-                    console.log(error)
-                });
-        }
+                }
+            },
+            {
+                query: `/api/mail/${auth.user.id}`,
+                config: {
+                    // method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'auth-token': auth.token
+                    }
+                },
+                setter: (value) => {
+                    console.log(value)
+                    if (value.length > 0) {
+                        setMailCount(value.length)
+                    }
+                }
+            }
+        ]).catch(console.error)
     }, [])
+    /* //////////////////////// End ///////////////////////////// */
 
 
-    // Setting collection card names for autocomplete collection search
+    /* ////////////////////////////// Start /////////////////////////// */
+    /* Setting collection card names for autocomplete collection search */
     useEffect(() => {
 
         const headers = new Headers();
@@ -87,6 +107,8 @@ const DashboardNav = () => {
                 console.log(error)
             });
     }, [updateCollection])
+    /* ////////////////////////////// End /////////////////////////// */
+
 
     return (
         <section className="dashboard-nav">

@@ -14,7 +14,7 @@ import data from '../../data/SEARCH.json';
 import useViewport from '../../hooks/contexthooks/useViewport';
 import useCart from '../../hooks/contexthooks/useCart';
 import useUpdateCart from '../../hooks/useUpdateCart';
-// import useFetchData from '../../hooks/useFetchData';
+// import useFetch from '../../hooks/useFetch';
 import { AiOutlineDelete } from "react-icons/ai";
 
 const CartItem = ({ index, count, product }) => {
@@ -32,7 +32,7 @@ const CartItem = ({ index, count, product }) => {
 
   const { isMobile } = useViewport();
   const { cartItems } = useCart();
-  // const {fetchData} = useFetchData();
+  // const {fetch} = useFetch();
   const { loading, quantityAvailable, currentStatus, updateCartHandler } = useUpdateCart(url, headers, product, index);
 
   useEffect(() => {

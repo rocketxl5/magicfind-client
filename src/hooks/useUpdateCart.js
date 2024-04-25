@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { useState } from 'react';
 import useCart from './contexthooks/useCart';
-// import useFetchData from './useFetchData';
+// import useFetch from './useFetch';
 import { api } from '../api/resources';
 
 const useUpdateCart = (url, headers, item, indexFound = undefined) => {
