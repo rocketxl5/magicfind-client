@@ -14,8 +14,8 @@ const MailBtn = () => {
       className='nav-btn mail-btn relative'
       onClick={(e) => navButtonHandler('/me/mail/inbox')}>
       {/* {unreadCount > 0 && ( */}
-      <div className={'count-icon absolute flex column justify-center align-center bg-primary'} ref={mailCountRef}>
-        <span>
+      <div className='count-icon absolute bg-primary' ref={mailCountRef}>
+        <span className='count'>
           {unreadCount}
         </span>
       </div>

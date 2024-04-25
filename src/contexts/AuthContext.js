@@ -3,7 +3,7 @@ import { createContext, useState, useEffect } from 'react';
 export const AuthContext = createContext(null);
 
 export const AuthProvider = ({ children }) => {
-  const [auth, setAuth] = useState(localStorage.getItem('auth') ? JSON.parse(localStorage.getItem('auth')) : null);
+  const [auth, setAuth] = useState(null);
   const [isAuth, setIsAuth] = useState(false);
 
   const logoutAction = () => {

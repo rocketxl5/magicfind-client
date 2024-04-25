@@ -1297,11 +1297,6 @@ text-align: center;
 /* /// Search-Results & Products /// */
 /* ///////////////////////////////// */
 
-
-.count {
-  font-size: var(--fs-150);
-}
-
 .search-results {   
 
   position: relative;
