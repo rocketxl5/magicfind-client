@@ -5,7 +5,7 @@ import useFetchData from '../hooks/useFetchData';
 export const MailContext = createContext(null);
 
 export const MailProvider = ({ children }) => {
-  const [unreadCount, setUnreadCount] = useState(0);
+  const [unreadCount, setUnreadCount] = useState(10);
 
   const { auth, isAuth } = useAuth();
   const { result, fetchData } = useFetchData();

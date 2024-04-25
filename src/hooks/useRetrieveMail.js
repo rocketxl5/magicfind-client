@@ -6,7 +6,7 @@ const useRetrieveMail = () => {
     const { auth } = useAuth();
 
     const mailRetriver = (type) => {
-        // fetchData(, )
+
 
     }
     return { mailRetriver, loading, result }
