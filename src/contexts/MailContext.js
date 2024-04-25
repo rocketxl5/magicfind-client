@@ -1,34 +1,15 @@
-import React, { createContext, useState, useEffect } from 'react';
-import useAuth from '../hooks/contexthooks/useAuth';
-import useFetchData from '../hooks/useFetchData';
+import React, { createContext, useState } from 'react';
 
 export const MailContext = createContext(null);
 
 export const MailProvider = ({ children }) => {
-  const [unreadCount, setUnreadCount] = useState(10);
-
-  const { auth, isAuth } = useAuth();
-  const { result, fetchData } = useFetchData();
-
-  useEffect(() => {
-    // If user is authenticated
-    if (isAuth) {
-      // Get unread mail for unread count icon @ MailBtn
-      fetchData(`/api/mail/${auth.user.id}`, auth.token);
-    }
-  }, [isAuth]);
-
-  useEffect(() => {
-    // Update unreadCount state if unread mails > 0
-    if (result?.length > 0) {
-      setUnreadCount(result.length)
-    }
-  }, [result])
+  const [mailCount, setMailCount] = useState(10);
 
   return (
     <MailContext.Provider
       value={{
-        unreadCount
+        setMailCount,
+        mailCount
       }}
     >
       {children}

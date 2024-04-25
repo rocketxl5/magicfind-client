@@ -1,8 +1,8 @@
-import useFetchData from './useFetchData'
+import useFetch from './useFetch'
 import useAuth from './contexthooks/useAuth';
 
 const useRetrieveMail = () => {
-    const { fetchData, loading, result } = useFetchData();
+    const { fetch, loading, result } = useFetch();
     const { auth } = useAuth();
 
     const mailRetriver = (type) => {

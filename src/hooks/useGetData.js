@@ -7,7 +7,7 @@ const useGetData = () => {
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(false);
 
-    const fetchData = async (url, headers) => {
+    const fetch = async (url, headers) => {
         setLoading(true);
         await axios
             .get(`${api.serverURL}${url}`, headers)
@@ -24,7 +24,7 @@ const useGetData = () => {
             })
     }
 
-    return { fetchData, loading, error, data }
+    return { fetch, loading, error, data }
 }
 
 export default useGetData
