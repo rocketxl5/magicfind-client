@@ -27,8 +27,11 @@ const DashboardNav = () => {
 
     const links = data.dashboardLinks;
 
-    /* //////////////////////// Start /////////////////////////// */
-    /* Setting archive card names for autocomplete archive search */
+    ////////////////////////////////////// Start ////////////////////////////////////////////////
+    // Fetch archive card names for autocomplete archive search                                //
+    // Source @ https://stackoverflow.com/questions/72617678/how-to-do-multiple-fetch-requests //
+    // Fetch unread messages from user account                                                 //
+    /////////////////////////////////////////////////////////////////////////////////////////////
     useEffect(() => {
         fetchAll([
             {
@@ -62,11 +65,12 @@ const DashboardNav = () => {
             }
         ]).catch(console.error)
     }, [])
-    /* //////////////////////// End ///////////////////////////// */
+    /* ///////////////////////////// End ////////////////////////////// */
 
 
-    /* ////////////////////////////// Start /////////////////////////// */
-    /* Setting collection card names for autocomplete collection search */
+    //////////////////////////////// Start ///////////////////////////////
+    // Setting collection card names for autocomplete collection search //
+    //////////////////////////////////////////////////////////////////////
     useEffect(() => {
 
         const headers = new Headers();

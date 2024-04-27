@@ -1,17 +1,25 @@
 import axios from 'axios';
-import { useState } from 'react';
+import { Children, useState } from 'react';
 import useCart from './contexthooks/useCart';
 // import useFetch from './useFetch';
+import { FaRegTimesCircle } from "react-icons/fa";
+import { BsExclamationCircle } from "react-icons/bs";
 import { api } from '../api/resources';
 
 const useUpdateCart = (url, headers, item, indexFound = undefined) => {
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(false);
-    const [currentStatus, setCurrentStatus] = useState(null);
+    // const [currentStatus, setCurrentStatus] = useState(null);
     const [quantityAvailable, setQuantityAvailable] = useState(0);
     // const [showConfirmation, setShowConfirmation] = useState(false);
 
-    const { dispatch, cartItems } = useCart();
+    const { dispatch, cartItems, setCartUpdate, cartUpdate } = useCart();
+
+    const Update = ({ children }) => {
+        return (
+            <>{children}</>
+        )
+    }
 
     const updateCart = (quantity) => {
         // Cart is not empty
@@ -59,32 +67,27 @@ const useUpdateCart = (url, headers, item, indexFound = undefined) => {
     // @ QuantitySelector component
     // @ CollectionItem component [delete button]
     const updateCartHandler = (quantity) => {
+
         setLoading(true);
 
         axios.get(`${api.serverURL}${url}${quantity}`, headers)
                 .then(res => {
+                    console.log(res)
                     // If quantity selected is available
-                    if (res.status === 200 && res.data.isAvailable) {
+                    if (res.data.isAvailable) {
                         // Update cart quantities
                         updateCart(quantity);
                         setQuantityAvailable(res.data.quantity);
                     }
-                    else if (!res.data.quantity) {
-                        // Pass zero to delete item
-                        updateCart(0);
-                        setCurrentStatus({
-                            isAvailable: false,
-                            message: `${item.selected.name} is not available anymore`
-                        });
+                    else if (!res.data.isAvailable && res.data.quantity > 0) {
+                        updateCart(res.data.quantity)
+                        setQuantityAvailable(res.data.quantity);
+                        setCartUpdate([...cartUpdate, <Update><p><span><BsExclamationCircle className='warning-icon' /></span> <span>{`${item.selected.name}`}</span></p></Update>])
                     }
                     else {
-                        updateCart(res.data.quantity);
-                        setCurrentStatus({
-                            isAvailable: true,
-                            message: `Quantities available have changed`
-                        });
-                        setQuantityAvailable(res.data.quantity);
-                    }
+                        updateCart(0);
+                        setCartUpdate([...cartUpdate, <Update><p><span><FaRegTimesCircle className='danger-icon' /></span> <span>{`${item.selected.name}`}</span> </p></Update >])
+                    } 
                 })
                 .catch((error) => {
                     setError(error.message)
@@ -103,7 +106,7 @@ const useUpdateCart = (url, headers, item, indexFound = undefined) => {
                     setLoading(false); 
                 })
     }
-    return { error, loading, quantityAvailable, currentStatus, updateCartHandler };
+    return { error, loading, quantityAvailable, updateCartHandler };
 }
 
 export default useUpdateCart

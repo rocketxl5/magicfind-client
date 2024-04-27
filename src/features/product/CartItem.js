@@ -31,23 +31,28 @@ const CartItem = ({ index, count, product }) => {
   };
 
   const { isMobile } = useViewport();
-  const { cartItems } = useCart();
+  const { cartItems, cartUpdate } = useCart();
   // const {fetch} = useFetch();
   const { loading, quantityAvailable, currentStatus, updateCartHandler } = useUpdateCart(url, headers, product, index);
 
   useEffect(() => {
-    updateCartHandler(product.quantity);
-    setPrice(parseFloat(product.selected.price));
-  }, []);
+    // console.log(cartUpdate)
+    if (!cartUpdate.length > 0) {
 
-  useEffect(() => {
-    if (currentStatus) {
-      setCurrentUpdate(true);
-      setTimeout(() => {
-        setCurrentUpdate(false);
-      }, 5000)
+      updateCartHandler(product.quantity);
+      setPrice(parseFloat(product.selected.price));
     }
-  }, [currentStatus])
+  }, [cartUpdate]);
+
+  // useEffect(() => {
+  //   console.log(currentStatus)
+  //   if (currentStatus) {
+  //     setCurrentUpdate(true);
+  //     setTimeout(() => {
+  //       setCurrentUpdate(false);
+  //     }, 5000)
+  //   }
+  // }, [currentStatus])
 
   useEffect(() => {
     setTotal(price * parseInt(cartItems[index].quantity));
@@ -105,10 +110,10 @@ const CartItem = ({ index, count, product }) => {
       </div>
 
       <Container classList={' three'}>
-        {
-          currentUpdate &&
+        {/* {
+          currentStatus &&
           <p className='bg-primary color-light fs-100 text-center padding-block-1'>{currentStatus?.message}</p>
-        }
+        } */}
         {/* <List classList={'product-specs'}>
         {
           details &&
@@ -135,7 +140,7 @@ const CartItem = ({ index, count, product }) => {
               <td>Quantity: </td>
               <td>{cartItems[index]?.quantity}</td>
             </tr>
-            <tr className>
+            <tr>
               <td>Total:</td>
               <td>${total.toFixed(2)}</td>
             </tr>

@@ -17,7 +17,7 @@ const CartBtn = () => {
     >
       {itemsCount > 0 && (
         <div className='count-icon absolute bg-primary' ref={cartCountRef}>
-          <span className='count'>
+          <span>
             {itemsCount}
           </span>
         </div>

@@ -10,12 +10,14 @@ const Store = () => {
     const [cards, setCards] = useState([])
     const location = useLocation();
 
-    const { auth } = useAuth();
+    const { isAuth, auth } = useAuth();
     const { fetchOne, loading, showConfirmation, error, result } = useFetch();
 
     useEffect(() => {
-        const config = { headers: { 'Content-Type': 'application/json' } }
-        fetchOne(`/api/users/store/${auth.user.id}`, config)
+        if (isAuth) {
+            const config = { headers: { 'Content-Type': 'application/json' } }
+            fetchOne(`/api/users/store/${auth.user.id}`, config)
+        }
     }, [])
 
     useEffect(() => {

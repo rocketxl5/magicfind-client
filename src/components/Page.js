@@ -2,11 +2,11 @@ import Header from './Header';
 import Title from './Title';
 import data from '../data/PAGES.json';
 
-const Page = ({ children, classList, name, hasHeader = true, hasBanner = false, component, title }) => {
+const Page = ({ children, classList = '', name, hasHeader = true, hasBanner = false, component, title }) => {
     const { id, style, header, main } = data[name];
 
     return (
-        <div id={id} className={style}>
+        <div id={id} className={`${style} ${classList ? classList : ''}`}>
             {
                 hasHeader && 
                 <header className={'page-header'}>
@@ -20,7 +20,7 @@ const Page = ({ children, classList, name, hasHeader = true, hasBanner = false, 
                     {component}
                     </header>
             }
-            <main className={`padding-inline-1 ${main && main.style}`}>
+            <main className={`padding-inline-1 ${main ? main.style : ''}`}>
                 {children}
             </main>
         </div>

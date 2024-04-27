@@ -62,15 +62,12 @@ const SearchResults = () => {
                 <Page
                     name={'search-results'}
                     title={query}
-                    // component={<Count count={cards.length}
-                    //     type={'Result'} />}
                 >
                     <SearchParameters
                         setSearchFeatures={(value) => setSearchFeatures(value)}
                         searchFeatures={searchFeatures}
                     /> 
-                    <main>
-                        {/* {loading && <Loader />} */}
+
                         <List classList="list align-center">
                         {
                             cards &&
@@ -108,8 +105,7 @@ const SearchResults = () => {
                                 )
                             })
                         }
-                        </List>
-                    </main>
+                    </List>
                 </Page>}
         </>
     )
