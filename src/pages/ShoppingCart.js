@@ -74,7 +74,7 @@ function ShoppingCart() {
           :
           <>
             {
-              // cartUpdate.length > 0 &&
+              cartUpdate.length > 0 &&
               <CartUpdate updates={cartUpdate} />
             }
             <CartEmpty />

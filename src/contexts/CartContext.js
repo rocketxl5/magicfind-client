@@ -25,8 +25,7 @@ export const CartProvider = ({ children }) => {
 
   useEffect(() => {
     if (cartUpdate.length > 0) {
-      console.log(updateRef.current)
-      updateRef.current.classList.add('show-cart-update')
+      updateRef.current?.classList.add('show-cart-update')
       setTimeout(() => {
         updateRef.current?.classList.remove('show-cart-update');
         setTimeout(() => {
