@@ -67,8 +67,7 @@ const Search = () => {
 
     const searchArchive = (e = undefined, prediction = undefined) => {
         e?.preventDefault();
-        console.log(searchTerm)
-        console.log(inputValue)
+
         if (inputValue.length < 3) { return }
 
         setLoading(true);

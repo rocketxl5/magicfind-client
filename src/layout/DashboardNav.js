@@ -37,7 +37,6 @@ const DashboardNav = () => {
             {
                 query: `/api/cards/mtg-cardnames`,
                 config: {
-                    // method: 'GET',
                     headers: {
                         'Content-Type': 'application/json'
                     }
@@ -50,14 +49,12 @@ const DashboardNav = () => {
             {
                 query: `/api/mail/${auth.user.id}`,
                 config: {
-                    // method: 'GET',
                     headers: {
                         'Content-Type': 'application/json',
                         'auth-token': auth.token
                     }
                 },
                 setter: (value) => {
-                    console.log(value)
                     if (value.length > 0) {
                         setMailCount(value.length)
                     }
