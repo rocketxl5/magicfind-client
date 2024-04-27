@@ -22,6 +22,8 @@ const SearchResults = () => {
     const { cards, search, query } = location.state;
 
     useEffect(() => {
+        console.log(search)
+        console.log(location)
         // console.log(cards)
         // If cards is empty
         if (!cards?.length) {
