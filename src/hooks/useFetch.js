@@ -48,11 +48,10 @@ const useFetch = () => {
         const results = await Promise.all(collection.map(({ query, config, setter }) => fetchJSON(query, config, setter)))
 
         setTimeout(() => {
-            results.forEach((res, i) => {
-                console.log(res)
+            results.forEach((res) => {
                 res.setter(res.data)
             })
-        }, [200])
+        }, 200)
     }
 
     return { fetchOne, fetchAll, loading, showConfirmation, error, result }

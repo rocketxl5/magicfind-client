@@ -87,14 +87,9 @@
         margin: 0;
         padding: 0;
     }
-    
-    .count-icon .count {
-        height: 100%;
-        margin: 0;
-        padding: 0;
+
+    .count-icon span {
         vertical-align: middle;
-        text-align: center;
-        font-size: 12px;
     }
 
     /* About & Contact page */
@@ -108,8 +103,6 @@
     width: 80%;
     /* margin: 0 auto; */
 }
-
-
     .side-panel { 
         top: 6rem;
         min-height: calc(100vh - var(--header-height-wide)); 

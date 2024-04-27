@@ -15,7 +15,7 @@ const MailBtn = () => {
       onClick={(e) => navButtonHandler('/me/mail/inbox')}>
       {/* {mailCount > 0 && ( */}
       <div className='count-icon absolute bg-primary' ref={mailCountRef}>
-        <span className='count'>
+        <span>
           {mailCount}
         </span>
       </div>

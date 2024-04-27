@@ -1,4 +1,4 @@
-import { createContext, useEffect, useReducer } from 'react';
+import { useState, useEffect, useReducer, useRef, createContext } from 'react';
 import { cartReducer } from '../features/product/services/cartReducer';
 
 const initialState = {
@@ -11,13 +11,38 @@ const initialState = {
 export const CartContext = createContext(null);
 
 export const CartProvider = ({ children }) => {
+  const [cartUpdate, setCartUpdate] = useState([]);
+
   const [state, dispatch] = useReducer(cartReducer, initialState);
+
+  const updateRef = useRef(null);
 
   const {
     subTotal,
     itemsCount,
     cartItems
   } = state || {};
+
+  useEffect(() => {
+    if (cartUpdate.length > 0) {
+      console.log(updateRef.current)
+      updateRef.current.classList.add('show-cart-update')
+      setTimeout(() => {
+        updateRef.current?.classList.remove('show-cart-update');
+        setTimeout(() => {
+
+          setCartUpdate([]);
+        }, 500)
+      }, 3000)
+    }
+    else {
+      // if (updateRef.current?.classList.contains('show-update')) {
+      //   updateRef.current?.classList.remove('show-update');
+      // }
+    }
+  }, [cartUpdate])
+
+
 
   useEffect(() => {
     // If cart is set in localStorage
@@ -66,6 +91,9 @@ export const CartProvider = ({ children }) => {
         subTotal,
         itemsCount,
         cartItems,
+        cartUpdate,
+        setCartUpdate,
+        updateRef
       }}
     >
       {children}
