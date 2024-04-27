@@ -557,6 +557,10 @@
     padding-block-start: var(--header-height-small);
 }
 
+.min-height-half {
+    min-height: 50%;
+}
+
 .fifth {
     min-height: 20rem;
     /* background-color: #3a8160; */
