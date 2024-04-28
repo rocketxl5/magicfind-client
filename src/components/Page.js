@@ -12,9 +12,9 @@ const Page = ({ children, classList = '', name, hasHeader = true, hasBanner = fa
                 <header className={'page-header'}>
                         <Title classList='page-title'>
                             {
-                                title.length < 35 ?
+                                title?.length < 35 ?
                                     title :
-                                    `${title.substring(0, 25)}...`
+                                    `${title?.substring(0, 25)}...`
                             }
                         </Title>
                     {component}

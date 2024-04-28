@@ -373,11 +373,13 @@ text-align: center;
 
 /* Not found search page */
 .not-found {
-margin-top: 9rem;
-min-height: 100%;
-display: flex;
-flex-direction: column;
-gap: 5rem;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  flex-grow: 1;
+  margin-top: 9rem;
+  height: calc(100% - 9rem);
+/* gap: 5rem; */
 }
 
 .not-found > main,
