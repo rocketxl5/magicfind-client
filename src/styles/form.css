@@ -71,7 +71,8 @@ input:-webkit-autofill:active{
     background-color: #fff;
     color: var(--clr-dark);
     border-radius: 5px;
-    font-size: var(--fs-form);
+    /* font-size: var(--fs-form); */
+    font-size: 14px;
     border: 1px solid var(--clr-grey);
 }
 

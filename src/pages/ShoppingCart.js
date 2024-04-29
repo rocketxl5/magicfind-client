@@ -19,8 +19,7 @@ function ShoppingCart() {
     cartItems,
     subTotal,
     itemsCount,
-    cartUpdate,
-    updateRef
+    cartUpdate
   } = useCart();
 
   const navigate = useNavigate();

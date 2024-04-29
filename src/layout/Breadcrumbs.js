@@ -7,7 +7,16 @@ const Breadcrumbs = () => {
     const location = useLocation();
     const path = location.pathname;
 
-    if (path.includes('catalog') || path === '/') {
+    ////////////////////////////////////////
+    // Exclude breadcrumbs 
+    // @ catalog search results / 
+    // @ 404
+    // @ home page
+    ////////////////////////////////////////
+    if (
+        path.includes('catalog') ||
+        path.includes('not-found') ||
+        path === '/') {
         return null
     }
 

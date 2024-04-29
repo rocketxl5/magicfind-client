@@ -561,23 +561,6 @@
     min-height: 50%;
 }
 
-.fifth {
-    min-height: 20rem;
-    /* background-color: #3a8160; */
-    border-radius: 10px;
-}
-.fifth {
-    min-height: 20rem;
-    /* background-color: #cf472e; */
-    border-radius: 10px;
-}
-.fifth-square {
-    min-height: 20rem;
-    min-width: 20rem;
-    /* background-color: #2579c7; */
-    border-radius: 10px;
-}
-
 .scroll {
     overflow-y: auto;
 }

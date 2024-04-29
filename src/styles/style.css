@@ -376,10 +376,11 @@ text-align: center;
   display: flex;
   justify-content: center;
   width: 100%;
-  flex-grow: 1;
-  margin-top: 9rem;
-  height: calc(100% - 9rem);
-/* gap: 5rem; */
+  height: 100%;
+}
+
+.layout .not-found * {
+  color: var(--clr-light) !important;
 }
 
 .not-found > main,
@@ -387,6 +388,7 @@ text-align: center;
 padding-inline: 2rem;
 text-align: center;
 }
+
 
 .not-found p,
 .not-found h2 {
@@ -402,7 +404,7 @@ font-size: var(--fs-250);
 
 .not-found p {
 font-size: var(--fs-175);
-font-weight: 600;
+font-weight: 500;
 }
 
 .not-found-btn {
@@ -704,7 +706,7 @@ height: 2rem;
 
 .modal-state {
   width: calc(100vw - 4rem);
-  max-width: 46rem;
+  max-width: 32rem;
   min-width: 320px;
   height: 100%;
   margin: 0 auto;
