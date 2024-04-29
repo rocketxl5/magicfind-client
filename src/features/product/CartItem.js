@@ -36,23 +36,11 @@ const CartItem = ({ index, count, product }) => {
   const { loading, quantityAvailable, currentStatus, updateCartHandler } = useUpdateCart(url, headers, product, index);
 
   useEffect(() => {
-    // console.log(cartUpdate)
     if (!cartUpdate.length > 0) {
-
       updateCartHandler(product.quantity);
       setPrice(parseFloat(product.selected.price));
     }
   }, [cartUpdate]);
-
-  // useEffect(() => {
-  //   console.log(currentStatus)
-  //   if (currentStatus) {
-  //     setCurrentUpdate(true);
-  //     setTimeout(() => {
-  //       setCurrentUpdate(false);
-  //     }, 5000)
-  //   }
-  // }, [currentStatus])
 
   useEffect(() => {
     setTotal(price * parseInt(cartItems[index].quantity));

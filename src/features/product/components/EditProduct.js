@@ -261,7 +261,7 @@ const EditProduct = (props) => {
                                     <div className="form-element">
                                         <label htmlFor="comment" className={errors.comment && 'color-danger'}>{errors.comment ? errors.comment : 'Additional Information'}</label>
                                         <textarea
-                                            className={errors.comment && 'border-danger danger-padding'}
+                                            className={`comment ${errors.comment && 'border-danger danger-padding'}`}
                                             id="comment"
                                             name="comment"
                                             value={values.comment}

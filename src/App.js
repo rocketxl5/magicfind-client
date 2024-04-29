@@ -1,4 +1,5 @@
 import {
+  useLocation,
   Route,
   Navigate,
   Routes
@@ -26,8 +27,7 @@ import About from './pages/About';
 import Profile from './pages/Profile';
 import SearchResults from './pages/SearchResults';
 
-import CardNotFound from './pages/CardNotFound';
-import PageNotFound from './pages/PageNotFound';
+import NotFound from './pages/NotFound';
 import ShoppingCart from './pages/ShoppingCart';
 import DashBoard from './pages/DashBoard';
 import Archive from './features/search/Archive';
@@ -52,6 +52,7 @@ import './App.css';
 
 const App = () => {
   const { isAuth } = useAuth();
+  const location = useLocation();
 
   return (
     <Routes>
@@ -94,15 +95,15 @@ const App = () => {
             <Route path="about" element={<About />} />
             <Route path="contact" element={<Contact />} />
             <Route path="catalog/:query" element={<SearchResults />} />
-            <Route path="not-found/:name" element={<CardNotFound />} />
             <Route path="seller/:id" element={<Seller />} />
             <Route path="shopping-cart" element={<ShoppingCart />} />
             <Route path="product/:id" element={<Product />} />
+            <Route path="not-found/:prefix" element={<NotFound />} />
           </Route>
         </Route>
 
         {/* Catch all */}
-        <Route path="*" element={< PageNotFound />} />
+        <Route path="*" element={<Navigate to='/not-found/page' state={{ from: location }} />} />
 
       </Route>
     </Routes>

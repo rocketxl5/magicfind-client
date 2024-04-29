@@ -105,7 +105,7 @@ const Search = () => {
                 }
                 else if (res.status === 404) {
                     setLoading(false);
-                    navigate(`/not-found/${searchTerm}`);
+                    navigate(`/not-found/${query}`);
                 }
             })
     };
