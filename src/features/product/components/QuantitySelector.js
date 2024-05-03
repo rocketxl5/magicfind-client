@@ -15,7 +15,7 @@ const QuantitySelector = (props) => {
             >
                 {quantityAvailable && [...Array(quantityAvailable + 1).keys()].map((key) => {
                     return (
-                        <Option key={key} value={key}>
+                        <Option key={parseInt(key + 2)} value={key}>
                             {key}
                         </Option>
                     )

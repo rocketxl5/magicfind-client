@@ -38,7 +38,7 @@ const Collection = () => {
     const navigate = useNavigate();
 
     const searchCollection = () => {
-
+        console.log('click')
         setLoading(true);
 
         const headers = new Headers();

@@ -9,6 +9,7 @@ const useFetch = () => {
     const [showConfirmation, setShowConfirmation] = useState(false);
 
     const fetchOne = async (query, config) => {
+        console.log(query)
         setLoading(true);
         // const config = {
         //     headers: {
@@ -20,6 +21,7 @@ const useFetch = () => {
         await axios
             .get(`${api.serverURL}${query}`, config)
             .then(res => {
+                console.log(res)
                 setResult(res.data);
             })
             .catch((error) => {
@@ -45,7 +47,7 @@ const useFetch = () => {
             return { data: res.data, setter }
         }
 
-        const results = await Promise.all(collection.map(({ query, config, setter }) => fetchJSON(query, config, setter)))
+        const results = await Promise.all(collection.map(({ query, config, setter }) => fetchJSON(query, config, setter)));
 
         setTimeout(() => {
             results.forEach((res) => {
@@ -53,6 +55,8 @@ const useFetch = () => {
             })
         }, 200)
     }
+
+
 
     return { fetchOne, fetchAll, loading, showConfirmation, error, result }
 }

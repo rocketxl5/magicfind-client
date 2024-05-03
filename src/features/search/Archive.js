@@ -26,7 +26,6 @@ const Search = () => {
     const {
         searchInput,
         setSearchInput,
-        searchTerm,
         predictions,
         cardName,
         setCardName,
@@ -88,6 +87,8 @@ const Search = () => {
         else if (inputValue) {
             query = `cards/named?fuzzy=${inputValue}`;
         }
+
+        console.log(query)
 
         setPredictions([]);
 
@@ -156,7 +157,8 @@ const Search = () => {
 
             localStorage.setItem('search-results', JSON.stringify({
                 cards: cards,
-                search: searchInput.id
+                search: searchInput.id,
+                query: cardName
             }));
             navigate(`/me/archive/${setQueryString(cardName, '-')}`,
                 {

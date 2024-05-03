@@ -21,7 +21,7 @@ const usePostData = (data) => {
         await axios
             .post(`${api.serverURL}${query}`, data, config)
             .then(res => {
-                // console.log(res.data)
+                console.log(res.data)
                 setResult(res.data);
             })
             .catch((error) => {

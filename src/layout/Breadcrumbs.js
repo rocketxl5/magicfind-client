@@ -16,6 +16,7 @@ const Breadcrumbs = () => {
     if (
         path.includes('catalog') ||
         path.includes('not-found') ||
+        path.includes('checkout') ||
         path === '/') {
         return null
     }

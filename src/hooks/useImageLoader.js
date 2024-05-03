@@ -10,6 +10,9 @@ const useImageLoader = (cards) => {
 
     // Set urls array from cards array
     useEffect(() => {
+        if (cards) {
+
+
         if (!urls) {
             let imgUrls = []
             cards.forEach(card => {
@@ -23,6 +26,7 @@ const useImageLoader = (cards) => {
                 }
             })
             setUrls(imgUrls);
+        }
         }
     }, [cards, urls])
 

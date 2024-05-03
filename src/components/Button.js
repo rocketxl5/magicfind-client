@@ -1,5 +1,5 @@
 const Button = (props) => {
-    const { children, id, type, classList = '', status, handleClick, title, style, active } = props;
+    const { children, id, type, classList = '', status = false, handleClick, title, style, active } = props;
 
     return (
         <button

@@ -1,5 +1,4 @@
 import {
-  useLocation,
   Route,
   Navigate,
   Routes
@@ -52,7 +51,6 @@ import './App.css';
 
 const App = () => {
   const { isAuth } = useAuth();
-  const location = useLocation();
 
   return (
     <Routes>
@@ -98,12 +96,11 @@ const App = () => {
             <Route path="seller/:id" element={<Seller />} />
             <Route path="shopping-cart" element={<ShoppingCart />} />
             <Route path="product/:id" element={<Product />} />
-            <Route path="not-found/:prefix" element={<NotFound />} />
           </Route>
         </Route>
 
         {/* Catch all */}
-        <Route path="*" element={<Navigate to='/not-found/page' state={{ from: location }} />} />
+        <Route path="*" element={< NotFound />} />
 
       </Route>
     </Routes>

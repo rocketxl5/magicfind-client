@@ -379,7 +379,7 @@ text-align: center;
   height: 100%;
 }
 
-.layout .not-found * {
+.layout .not-found  {
   color: var(--clr-light) !important;
 }
 
@@ -1735,6 +1735,10 @@ text-align: center;
   width: 100%;
   padding-inline: 1rem;
   color: var(--clr-dark) !important;
+}
+
+.layout .page {
+    /* color: var(--clr-dark) !important; */
 }
 
 .page-header  {
