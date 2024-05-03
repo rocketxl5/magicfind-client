@@ -24,10 +24,9 @@ function ShoppingCart() {
 
   const navigate = useNavigate();
   const location = useLocation();
-
+  // console.log(location)
   return (
     <Page
-      id={'shopping-cart'}
       name={'shopping-cart'}
       hasHeader={false}
     >        
@@ -35,21 +34,21 @@ function ShoppingCart() {
         cartItems.length > 0 ?
         <>
             <Aside>
-              <Container classList={'cart-total flex gap-1'}>
+              <Container className={'cart-total flex gap-1'}>
                 <p className="fw-500">Subtotal:</p>
                 <Container>
                   <p><strong>{`$ ${subTotal}`}</strong>{` (${itemsCount} ${itemsCount > 1 ? 'items' : 'item'})`}</p>
                 </Container>
               </Container>
               <Container>
-                <Button
-                  classList={'btn checkout-btn'}
-                  handleClick={() => navigate('/me/checkout', { state: { from: location } })}
+                <button
+                  className='btn checkout-btn'
+                  onClick={() => navigate('/login', { state: { from: `/me/checkout` } }, { replace: true })}
                 >
                   Proceed to checkout
-                </Button>
+                </button>
               </Container>
-        </Aside>
+            </Aside>
             {
               // cartUpdate.length > 0 &&
               <CartUpdate updates={cartUpdate} />

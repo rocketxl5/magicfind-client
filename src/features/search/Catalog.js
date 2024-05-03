@@ -2,7 +2,7 @@ import {
     useState,
     useEffect,
 } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import SearchInput from './components/SearchInput';
 import Loader from '../../layout/Loader.js';
 import useAuth from '../../hooks/contexthooks/useAuth';
@@ -32,7 +32,9 @@ const Catalog = () => {
     // Hooks
     const { auth, isAuth } = useAuth();
     const { searchBarRef } = useNavbar();
+
     const navigate = useNavigate();
+    const location = useLocation();
 
     useEffect(() => {
         if (searchInput?.id === 'catalog') {
@@ -78,6 +80,8 @@ const Catalog = () => {
 
             query = searchTerm;
         }
+        console.log(query)
+        console.log(`/api/cards/catalog/${encodeURIComponent(query)}`)
 
         setPredictions([]);
         // Conditional query string won't return user cards if auth
@@ -93,11 +97,10 @@ const Catalog = () => {
                         .then((data) => {
                             setLoading(false);
                             searchInput.blur();
-                            // setCardName('');
-                            // setSearchInput(null);
                             localStorage.setItem('search-results', JSON.stringify({
                                 cards: data.cards,
-                                search: searchInput.id
+                                search: searchInput.id,
+                                query: cardName
                             }));
                             navigate(`/catalog/${setQueryString(query.toLowerCase(), '-')}`,
 
@@ -114,7 +117,7 @@ const Catalog = () => {
                     return res.json().then((error) => {
                         setLoading(false);
                         catalogInputRef.current?.blur();
-                        navigate(`/not-found/${query}`);
+                        navigate(query, { state: { from: searchInput.id } });
                     })
                 }
 

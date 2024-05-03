@@ -13,6 +13,7 @@ const INIT = {
 const Login = () => {
 
   // States
+  const [redirectTo, setRedirectTo] = useState(null);
   const [values, setValues] = useState(INIT);
   const [errors, setErrors] = useState(INIT);
   const [loading, setLoading] = useState(false);
@@ -44,12 +45,14 @@ const Login = () => {
 
   // On component load
   useEffect(() => {
-
+    // console.log(location.state?.from)
+    // console.log(location.pathname)
+    // if (location.state?.from) {
+    //   setRedirectTo(location.state.from)
+    // }
     // Triggers if redirected to login from singup
-    if (location.state) {
-      if (location.state.message) {
-        setMessage({ ...location.state.message });
-      }
+    if (location.state?.message) {
+      setMessage({ ...location.state.message });
     }
     // Set focus on email input
     emailRef?.current.focus();
@@ -100,7 +103,7 @@ const Login = () => {
             localStorage.setItem('auth', JSON.stringify(auth))
             setAuth(auth);
             setLoading(false)
-            const destination = location.state?.from ? location.state.from.pathname : '/me';
+            const destination = location.state?.from ? location.state.from : '/me';
             navigate(destination, { replace: true });
           })
           .catch((error) => {

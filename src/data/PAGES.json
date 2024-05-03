@@ -89,6 +89,13 @@
       "style": "page-header flex space-between align-center col-12 padding-block-1 margin-bottom-1"
     }
   },
+  "checkout": {
+    "id": "checkout",
+    "style": "page",
+    "header": {
+      "style": "page-header flex space-between align-center col-12 padding-block-1 margin-bottom-1"
+    }
+  },
   "not-found": {
     "id": "not-found",
     "style": "page",
