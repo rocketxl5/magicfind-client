@@ -48,19 +48,19 @@ const Collection = () => {
             method: 'GET',
             headers: headers,
         }
-        fetch(`${api.serverURL}/api/cards/collection/${auth.user.id}`, options)
+        fetch(`${api.serverURL}/api/cards/collection/${auth.user.id}/all-cards`, options)
             .then(res => res.json())
             .then((data) => {
                 // Update local storage with search data
-                localStorage.setItem('search-results', JSON.stringify({ cards: data.cards, query: 'All Cards', search: searchInput?.id }));
+                localStorage.setItem('search-results', JSON.stringify({ cards: data.cards, query: data.query, search: data.search }));
                 setLoading(false);
 
                 navigate(`/me/collection/all-cards`,
                     {
                         state: {
                             cards: data.cards,
-                            search: searchInput?.id,
-                            query: 'All Cards'
+                            search: data.search,
+                            query: data.query
                         }
                     });
             })
@@ -138,16 +138,16 @@ const Collection = () => {
                             setSearchInput(null);
                             localStorage.setItem('search-results', JSON.stringify({
                                 cards: data.cards,
-                                search: searchInput.id,
-                                query: query
+                                search: data.search,
+                                query: data.query
                             }
                             ));
                             navigate(`/me/collection/${queryString}`,
                                 {
                                     state: {
                                         cards: data.cards,
-                                        search: searchInput.id,
-                                        query: query
+                                        search: data.search,
+                                        query: data.query
                                     }
                                 });
                         })
