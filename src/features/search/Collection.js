@@ -52,7 +52,7 @@ const Collection = () => {
             .then(res => res.json())
             .then((data) => {
                 // Update local storage with search data
-                localStorage.setItem('search-results', JSON.stringify({ cards: data.cards, search: searchInput?.id }));
+                localStorage.setItem('search-results', JSON.stringify({ cards: data.cards, query: 'All Cards', search: searchInput?.id }));
                 setLoading(false);
 
                 navigate(`/me/collection/all-cards`,
