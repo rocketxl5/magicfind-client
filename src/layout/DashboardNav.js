@@ -22,7 +22,7 @@ const DashboardNav = () => {
 
     const { auth } = useAuth();
     const { setMailCount } = useMail();
-    const { result, fetchOne, fetchAll } = useFetch();
+    const { fetchAll } = useFetch();
     const { query } = useParams();
 
     const links = data.dashboardLinks;

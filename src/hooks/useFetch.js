@@ -1,28 +1,24 @@
 import { useState } from 'react';
 import axios from 'axios';
+import useAuth from './contexthooks/useAuth';
 import { api } from '../api/resources';
 
 const useFetch = () => {
-    const [result, setResult] = useState(null);
+    const [response, setResponse] = useState(null);
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(false);
     const [showConfirmation, setShowConfirmation] = useState(false);
 
+    const { isAuth, auth } = useAuth()
+
     const fetchOne = async (query, config) => {
-        console.log(query)
         setLoading(true);
-        // const config = {
-        //     headers: {
-        //         'Content-Type': 'application/json',
-        //         'auth-token': token
-        //     },
-        // }
 
         await axios
             .get(`${api.serverURL}${query}`, config)
             .then(res => {
                 console.log(res)
-                setResult(res.data);
+                setResponse(res.data);
             })
             .catch((error) => {
                 setError(error.message);
@@ -56,9 +52,7 @@ const useFetch = () => {
         }, 200)
     }
 
-
-
-    return { fetchOne, fetchAll, loading, showConfirmation, error, result }
+    return { fetchOne, fetchAll, loading, showConfirmation, error, response }
 }
 
 export default useFetch

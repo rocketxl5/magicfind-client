@@ -2,13 +2,13 @@ import {
     useState,
     useEffect,
 } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import SearchInput from './components/SearchInput';
 import Loader from '../../layout/Loader.js';
 import useAuth from '../../hooks/contexthooks/useAuth';
 import useNavbar from '../../hooks/contexthooks/useNavbar.js';
 import useSearch from '../../hooks/contexthooks/useSearch.js';
-import setQueryString from '../../assets/utilities/setQueryString';
+import setQueryString from './services/setQueryString';
 import { api } from '../../api/resources';
 
 const Catalog = () => {
@@ -19,10 +19,8 @@ const Catalog = () => {
         searchInput,
         loading,
         setLoading,
-        setSearchInput,
         searchTerm,
         cardName,
-        setCardName,
         setCardNames,
         predictions,
         catalogCardNames,
@@ -34,7 +32,6 @@ const Catalog = () => {
     const { searchBarRef } = useNavbar();
 
     const navigate = useNavigate();
-    const location = useLocation();
 
     useEffect(() => {
         if (searchInput?.id === 'catalog') {
@@ -80,29 +77,27 @@ const Catalog = () => {
 
             query = searchTerm;
         }
-        console.log(query)
-        console.log(`/api/cards/catalog/${encodeURIComponent(query)}`)
 
         setPredictions([]);
         // Conditional query string won't return user cards if auth
         // Else returns all cards
-        const queryString = isAuth ?
-            `${api.serverURL}/api/cards/catalog/${encodeURIComponent(query)}/${auth.user.id}` :
-            `${api.serverURL}/api/cards/catalog/${encodeURIComponent(query)}`;
-
-        fetch(queryString, headers)
+        // const setQueryString(query, '-')
+        const queryString = setQueryString(query, '-')
+        console.log(queryString)
+        fetch(`${api.serverURL}/api/cards/catalog/${queryString}`, headers)
             .then((res) => {
                 if (res.status === 200) {
                     return res.json()
                         .then((data) => {
                             setLoading(false);
                             searchInput.blur();
+                            console.log(data)
                             localStorage.setItem('search-results', JSON.stringify({
                                 cards: data.cards,
                                 search: searchInput.id,
-                                query: cardName
+                                query: query
                             }));
-                            navigate(`/catalog/${setQueryString(query.toLowerCase(), '-')}`,
+                            navigate(`/catalog/${queryString}`,
 
                                 {
                                     state: {
@@ -113,9 +108,10 @@ const Catalog = () => {
                                 });
                         })
                 }
-                else if (res.status === 400) {
+                else {
                     return res.json().then((error) => {
                         setLoading(false);
+                        console.log(error)
                         catalogInputRef.current?.blur();
                         navigate(query, { state: { from: searchInput.id } });
                     })

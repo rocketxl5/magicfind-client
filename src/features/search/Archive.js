@@ -12,7 +12,7 @@ import { api } from '../../api/resources';
 import useSearch from '../../hooks/contexthooks/useSearch';
 import useNavbar from '../../hooks/contexthooks/useNavbar.js';
 // import useAuth from '../../hooks/contexthooks/useAuth.js';
-import setQueryString from '../../assets/utilities/setQueryString';
+import setQueryString from './services/setQueryString';
 
 const Search = () => {
     // States
@@ -164,8 +164,8 @@ const Search = () => {
                 {
                     state: {
                         cards: cards,
+                        query: cardName,
                         search: searchInput.id,
-                        query: cardName
                     }
                 });
         }

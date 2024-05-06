@@ -6,7 +6,7 @@ import capitalizeString from '../assets/utilities/capitalizeString';
 const Breadcrumbs = () => {
     const location = useLocation();
     const path = location.pathname;
-
+    console.log(path)
     ////////////////////////////////////////
     // Exclude breadcrumbs 
     // @ catalog search results / 

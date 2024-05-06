@@ -12,7 +12,7 @@ import useAuth from '../../hooks/contexthooks/useAuth';
 import useSearch from '../../hooks/contexthooks/useSearch';
 import useNavbar from '../../hooks/contexthooks/useNavbar.js';
 import { api } from '../../api/resources';
-import setQueryString from '../../assets/utilities/setQueryString';
+import setQueryString from './services/setQueryString';
 
 const Collection = () => {
     // States
@@ -125,8 +125,10 @@ const Collection = () => {
         else if (searchTerm) {
             query = searchTerm;
         }
+        console.log(query)
+        const queryString = setQueryString(query, '-');
 
-        fetch(`${api.serverURL}/api/cards/collection/${auth.user.id}/${encodeURIComponent(query)}`, options)
+        fetch(`${api.serverURL}/api/cards/collection/${auth.user.id}/${queryString}`, options)
             .then((res) => {
                 if (res.status === 200) {
                     return res.json()
@@ -137,9 +139,10 @@ const Collection = () => {
                             localStorage.setItem('search-results', JSON.stringify({
                                 cards: data.cards,
                                 search: searchInput.id,
+                                query: query
                             }
                             ));
-                            navigate(`/me/collection/${setQueryString(query.toLowerCase(), '-')}`,
+                            navigate(`/me/collection/${queryString}`,
                                 {
                                     state: {
                                         cards: data.cards,

@@ -7,7 +7,7 @@ const Seller = () => {
     const [hasLoaded, setHasLoaded] = useState(false);
     const location = useLocation();
 
-    const { fetchOne, loading, showConfirmation, error, result } = useFetch();
+    const { fetchOne, loading, showConfirmation, error, response } = useFetch();
 
     useEffect(() => {
         // console.log(location)
@@ -16,14 +16,14 @@ const Seller = () => {
     }, [])
 
     useEffect(() => {
-        if (result) {
+        if (response) {
             setHasLoaded(true)
-            console.log(result)
+            console.log(response)
         }
         else {
             hasLoaded && setHasLoaded(false);
         }
-    }, [result])
+    }, [response])
 
     useEffect(() => {
         if (error) {
@@ -34,7 +34,7 @@ const Seller = () => {
     return (
         <>
             {loading && <Loader />}
-            {hasLoaded && <div>{result.name}</div>}
+            {hasLoaded && <div>{response.name}</div>}
         </>
     )
 }

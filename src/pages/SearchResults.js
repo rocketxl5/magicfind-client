@@ -11,7 +11,6 @@ import SearchParameters from '../features/search/components/SearchParameters';
 import useCollectionModal from '../hooks/useCollectionModal';
 import useSlideView from '../hooks/useSlideView';
 import useImageLoader from '../hooks/useImageLoader';
-import useSearch from '../hooks/useSearch';
 
 const SearchResults = () => {
     // States
@@ -21,12 +20,6 @@ const SearchResults = () => {
     // Hooks
     const location = useLocation();
     const navigate = useNavigate();
-    const { fetchSearchResult, response, error } = useSearch();
-
-    // const { cards, search, query } =
-    //     location?.state ||
-    //     JSON.parse(localStorage.getItem('search-results')) |
-
 
     const [imagesLoaded] = useImageLoader(result?.cards);
 
@@ -35,30 +28,25 @@ const SearchResults = () => {
     const [state, updateCollectionItem] = useCollectionModal(result?.search, handleCollectionItem);
 
     useEffect(() => {
+        // If location.state is defined
+        // Search was sent through input submit 
         if (location.state) {
-            console.log(location.state)
+            // Set search result state
             setResult({ ...location.state })
         }
         else {
-            fetchSearchResult(location.pathname);
+            setResult({ ...JSON.parse(localStorage.getItem('search-results')) })
         }
-    }, [location])
+    }, []) 
 
+    // Validation for collection search result
     useEffect(() => {
-        if (response) {
-            console.log(response)
-            setResult({ ...response })
-        }
-        if (error) {
-            console.log(error)
-        }
-    }, [response, error])
-
-    useEffect(() => {
-        // If search is collection and card collection is empty
-        if (result?.search === 'collection' && result?.cards.length === 0) {
-            // Send to collection page
-            navigate('/me/collection');
+        if (result) {
+            // If search is collection and card collection is empty
+            if (result?.search === 'collection' && result?.cards.length === 0) {
+                // Send to collection page
+                navigate('/me/collection');
+            }
         }
     }, [result])
 
