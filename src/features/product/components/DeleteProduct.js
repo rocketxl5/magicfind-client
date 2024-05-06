@@ -17,7 +17,7 @@ const DeleteProduct = (props) => {
     const btnRef = useRef(null);
     // Hooks
     const { auth } = useAuth();
-    const { setUpdateCatalog, setUpdateCollection } = useSearch();
+    const { setUpdateCatalog, setUpdateCollection, setIsCollectionEmpty } = useSearch();
     const navigate = useNavigate();
     const location = useLocation();
     const { query } = useParams();
@@ -29,10 +29,6 @@ const DeleteProduct = (props) => {
             localStorage.setItem('search-results', JSON.stringify(result));
             product._is_published && setUpdateCatalog(true);
             btnRef.current?.click();
-            navigate(`${location.pathname}`,
-                {
-                    state: result,
-                });
         }, 1500)
     }
 
@@ -76,6 +72,21 @@ const DeleteProduct = (props) => {
                 }
                 // setLoading(false);
                 localStorage.setItem('search-results', JSON.stringify(result));
+                if (cards.length > 0) {
+                    navigate(`${location.pathname}`,
+                        {
+                            state: result,
+                        });
+                }
+                else {
+                    setTimeout(() => {
+                        setIsCollectionEmpty(true)
+                        navigate(`${location.pathname}`,
+                            {
+                                state: result,
+                            });
+                    }, 1300)
+                }
                 closeModal(result);
             })
             .catch((error) => {

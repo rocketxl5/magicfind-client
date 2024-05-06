@@ -16,7 +16,7 @@
       "style": "page-header flex space-between align-center col-12 margin-bottom-1"
     },
     "main": {
-      "style": "inner-container"
+      "style": "inner-container margin-bottom-2"
     }
   },
   "shopping-cart": {

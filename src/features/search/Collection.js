@@ -38,7 +38,6 @@ const Collection = () => {
     const navigate = useNavigate();
 
     const searchCollection = () => {
-        console.log('click')
         setLoading(true);
 
         const headers = new Headers();
@@ -125,7 +124,7 @@ const Collection = () => {
         else if (searchTerm) {
             query = searchTerm;
         }
-        console.log(query)
+
         const queryString = setQueryString(query, '-');
 
         fetch(`${api.serverURL}/api/cards/collection/${auth.user.id}/${queryString}`, options)

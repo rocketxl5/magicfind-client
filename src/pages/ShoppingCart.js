@@ -1,11 +1,9 @@
-import { useRef } from 'react';
-import { Link, useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import Page from '../components/Page';
 import ListItem from '../components/ListItem';
 import CartItem from '../features/product/CartItem';
 import CartUpdate from '../features/cart/CartUpdate';
 import CartEmpty from '../features/cart/CartEmpty';
-import Button from '../components/Button';
 import Container from '../components/Container';
 import Aside from '../components/Aside';
 
@@ -23,8 +21,7 @@ function ShoppingCart() {
   } = useCart();
 
   const navigate = useNavigate();
-  const location = useLocation();
-  // console.log(location)
+
   return (
     <Page
       name={'shopping-cart'}
