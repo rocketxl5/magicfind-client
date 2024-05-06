@@ -88,8 +88,6 @@ const Search = () => {
             query = `cards/named?fuzzy=${inputValue}`;
         }
 
-        console.log(query)
-
         setPredictions([]);
 
         fetch(`${api.skryfallURL}/${query}`, headers)

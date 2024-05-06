@@ -7,7 +7,6 @@ import TwoSidedSlide from '../modal/TwoSidedSlide';
 import ImageNew from '../../components/ImageNew';
 import useExpandImage from '../../hooks/useExpandImage';
 import usePostData from '../../hooks/usePostData';
-import useViewport from '../../hooks/contexthooks/useViewport';
 import useAuth from '../../hooks/contexthooks/useAuth';
 import useSearch from '../../hooks/contexthooks/useSearch';
 import useFind from '../../hooks/useFind';
@@ -42,6 +41,17 @@ const ArchiveItem = ({ index, product, count, handleSlideView }) => {
     const navigate = useNavigate();
 
     const query = `/api/cards/add/${user.id}/${product.id}`;
+
+    // Removes product name redundencies ex: Adrix and Nev, Twincasters reversible edition
+    const filterName = (name) => {
+        const sides = name.split('//').map(side => {
+            return side.trim();
+        })
+        if (sides[0] === sides[1]) {
+            return sides[0];
+        }
+        return name;
+    }
 
     // Sets card price according to card finish
     const setPrice = (prices, finish) => {
@@ -200,7 +210,7 @@ const ArchiveItem = ({ index, product, count, handleSlideView }) => {
             <div className="col-12 relative flex column justify-center align-center gap-1">
                 <div>
                     {
-                        product.name
+                        !product.name.includes('//') ? product.name : filterName(product.name)
                     }
                 </div>
 

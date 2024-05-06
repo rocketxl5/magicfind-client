@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import axios from 'axios';
-import useAuth from './contexthooks/useAuth';
 import { api } from '../api/resources';
 
 const useFetch = () => {
@@ -9,15 +8,13 @@ const useFetch = () => {
     const [loading, setLoading] = useState(false);
     const [showConfirmation, setShowConfirmation] = useState(false);
 
-    const { isAuth, auth } = useAuth()
-
     const fetchOne = async (query, config) => {
+
         setLoading(true);
 
         await axios
             .get(`${api.serverURL}${query}`, config)
             .then(res => {
-                console.log(res)
                 setResponse(res.data);
             })
             .catch((error) => {

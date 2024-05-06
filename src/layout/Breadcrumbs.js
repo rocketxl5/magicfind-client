@@ -6,7 +6,6 @@ import capitalizeString from '../assets/utilities/capitalizeString';
 const Breadcrumbs = () => {
     const location = useLocation();
     const path = location.pathname;
-    console.log(path)
     ////////////////////////////////////////
     // Exclude breadcrumbs 
     // @ catalog search results / 
@@ -17,6 +16,8 @@ const Breadcrumbs = () => {
         path.includes('catalog') ||
         path.includes('not-found') ||
         path.includes('checkout') ||
+        path.includes('shopping-cart') ||
+        path.includes('product') ||
         path === '/') {
         return null
     }

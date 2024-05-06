@@ -18,7 +18,7 @@ const Seller = () => {
     useEffect(() => {
         if (response) {
             setHasLoaded(true)
-            console.log(response)
+
         }
         else {
             hasLoaded && setHasLoaded(false);

@@ -11,6 +11,9 @@ import SearchParameters from '../features/search/components/SearchParameters';
 import useCollectionModal from '../hooks/useCollectionModal';
 import useSlideView from '../hooks/useSlideView';
 import useImageLoader from '../hooks/useImageLoader';
+import useFetch from '../hooks/useFetch';
+import useAuth from '../hooks/contexthooks/useAuth';
+import { setUrl } from '../features/search/services/setUrl';
 
 const SearchResults = () => {
     // States
@@ -20,6 +23,9 @@ const SearchResults = () => {
     // Hooks
     const location = useLocation();
     const navigate = useNavigate();
+
+    const { fetchOne, response } = useFetch();
+    const { isAuth, auth } = useAuth();
 
     const [imagesLoaded] = useImageLoader(result?.cards);
 
@@ -34,10 +40,32 @@ const SearchResults = () => {
             // Set search result state
             setResult({ ...location.state })
         }
+            // If localStorage is set, load it
+            // else if (localStorage.getItem('search-results')) {
+            //     setResult({ ...JSON.parse(localStorage.getItem('search-results')) })
+            // }
+            // else query db
         else {
-            setResult({ ...JSON.parse(localStorage.getItem('search-results')) })
+            const config = {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'auth-token': isAuth && auth.token
+                },
+            }
+            fetchOne(setUrl(location.pathname), config);
         }
     }, []) 
+
+    useEffect(() => {
+
+        // If response is defined
+        if (response) {
+            // Set result
+            setResult({ ...response })
+            // Set localStorage
+            localStorage.setItem('search-results', JSON.stringify(response))
+        }
+    }, [response])
 
     // Validation for collection search result
     useEffect(() => {

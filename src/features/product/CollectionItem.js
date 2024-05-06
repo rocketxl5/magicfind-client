@@ -17,7 +17,6 @@ const CollectionItem = ({ index, product, count, handleCollectionItem, handleSli
     const { longDate } = timestampConverter;
 
     const { expandedImage } = useExpandImage(product);
-    console.log(product)
 
     const details = [
         {

@@ -1,7 +1,5 @@
 import { Link } from 'react-router-dom';
 import Page from '../components/Page';
-import Feature from '../components/Feature';
-import data from '../data/PAGES.json';
 
 const About = () => {
   const sections = [

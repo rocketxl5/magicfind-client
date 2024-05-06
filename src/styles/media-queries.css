@@ -22,6 +22,12 @@
     }
 }
 
+@media screen and (width >= 600px) {
+    .feature-section {
+        padding: 2rem; 
+    }
+}
+
 @media screen and (width >= 660px) {
         /* About & Contact page */
 .feature-wrapper {
@@ -29,11 +35,6 @@
     gap: 1rem;
     padding: 1rem; */
     padding-inline: 3rem;
-}
-
-.feature-section {
-    /* width: 80%; */
-    /* margin: 0 auto; */
 }
 
     .cart-main {
@@ -101,8 +102,11 @@
 
 .feature-section {
     width: 80%;
+    margin-block-end: 0;
+    padding-inline: 0rem;
     /* margin: 0 auto; */
 }
+
     .side-panel { 
         top: 6rem;
         min-height: calc(100vh - var(--header-height-wide)); 

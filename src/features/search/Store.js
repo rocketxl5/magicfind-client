@@ -24,7 +24,7 @@ const Store = () => {
         if (result) {
             // setHasLoaded(true);
             // const publishedCards = result.cards.filter(card => card._is_published);
-            console.log(result)
+
             setCards(result);
         }
         else {

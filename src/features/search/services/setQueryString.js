@@ -1,7 +1,5 @@
 const setQueryString = (string, separator) => {
-    const res = string.toLowerCase().replaceAll(/["/,]/g, '').replace('  ', ' ').split(' ').join(separator);
-    console.log(res)
-    return res
+    return string.toLowerCase().replaceAll(/["/,]/g, '').replace('  ', ' ').split(' ').join(separator);
 }
 
 export default setQueryString;

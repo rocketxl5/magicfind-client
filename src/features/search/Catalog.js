@@ -79,11 +79,9 @@ const Catalog = () => {
         }
 
         setPredictions([]);
-        // Conditional query string won't return user cards if auth
-        // Else returns all cards
-        // const setQueryString(query, '-')
+
         const queryString = setQueryString(query, '-')
-        console.log(queryString)
+
         fetch(`${api.serverURL}/api/cards/catalog/${queryString}`, headers)
             .then((res) => {
                 if (res.status === 200) {
@@ -91,7 +89,6 @@ const Catalog = () => {
                         .then((data) => {
                             setLoading(false);
                             searchInput.blur();
-                            console.log(data)
                             localStorage.setItem('search-results', JSON.stringify({
                                 cards: data.cards,
                                 search: searchInput.id,

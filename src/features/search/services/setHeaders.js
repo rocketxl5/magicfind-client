@@ -1,5 +1,4 @@
 export const setHeaders = (token) => {
-    console.log(token)
     if (!token) {
         return { headers: { 'Content-Type': 'application/json' } }
     }
