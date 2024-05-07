@@ -1,12 +1,11 @@
 const Button = (props) => {
-    const { children, id, type, classList = '', status = false, handleClick, title, style, active } = props;
+    const { children, id, type, classList = '', status = false, handleClick, title, active } = props;
 
     return (
         <button
             id={id ? id : ''}
             // className={active === id ? 'active' : classList}
-            style={style}
-            className={classList}
+            className={`btn ${classList && classList}`}
             type={type ? type : 'button'}
             title={title}
             onClick={handleClick}
