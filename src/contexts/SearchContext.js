@@ -4,7 +4,6 @@ export const SearchContext = createContext(null);
 
 export const SearchProvider = ({ children }) => {
 
-  const [queryString, setQueryString] = useState('');
   const [searchInput, setSearchInput] = useState(null);
   const [inputValue, setInputValue] = useState('');
   const [cardName, setCardName] = useState('');

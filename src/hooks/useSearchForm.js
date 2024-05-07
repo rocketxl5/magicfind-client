@@ -19,26 +19,30 @@ const useSearchForm = (pathname) => {
     const searchProduct = (e = null, prediction = '') => {
         e && e.preventDefault();
 
+        setQuery('');
+
         let term;
 
         if (prediction) {
-            term = prediction
+            term = prediction;
         }
         else if (cardName) {
-            term = cardName
+            term = cardName;
         }
         else if (predictions.length === 1) {
             term = predictions[0];
         }
         else if (searchTerm) {
-            term = searchTerm
+            term = searchTerm;
         }
-        console.log(term)
-        setQuery(setQueryString(term, '-'));
+
+        setTimeout(() => {
+            setQuery(setQueryString(term, '-'));
+        }, 200)
     }
 
     useEffect(() => {
-        console.log(pathname)
+        console.log(query)
         if (query) {
             getUrl(`${pathname}/${query}`)
         }

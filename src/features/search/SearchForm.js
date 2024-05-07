@@ -12,7 +12,7 @@ import useSearch from '../../hooks/contexthooks/useSearch';
 import useSearchForm from '../../hooks/useSearchForm';
 import data from '../../data/SEARCH.json';
 
-const SearchForm = ({ children, type, pathname, placeholder, cardNames, inputRef }) => {
+const SearchForm = ({ children, classList, type, pathname, placeholder, cardNames, inputRef }) => {
     const [isActive, setIsActive] = useState(false);
     const location = useLocation();
     const {
@@ -38,7 +38,6 @@ const SearchForm = ({ children, type, pathname, placeholder, cardNames, inputRef
     const { searchProduct, loading } = useSearchForm(pathname);
 
     useEffect(() => {
-        // console.log(searchInput.id)
         if (searchInput?.id === type) {
             setIsActive(true);
         } else {
@@ -65,7 +64,6 @@ const SearchForm = ({ children, type, pathname, placeholder, cardNames, inputRef
     }, [location])
 
     const handleChange = (e) => {
-        // console.log(isActive)
         const value = e.target.value;
 
         if (value.length >= 3) {
@@ -95,18 +93,10 @@ const SearchForm = ({ children, type, pathname, placeholder, cardNames, inputRef
     return (
         <div id={`search-${type}-form`} ref={type === 'catalog' ? searchBarRef : null}>
             <form id={`${type}-form`} className='search-form' onSubmit={(e) => searchProduct(e)}>
-                {/* <SearchInput
-                    id={type}
-                    classList={`search-input`}
-                    placeholder={'Search Magic Find'}
-                    searchCard={searchProduct}
-                    isActive={isActive}
-                    ref={searchInputRef}
-                /> */}
                 <input
                     id={type}
                     type="text"
-                    className='search-input'
+                    className={classList}
                     // Value changes 
                     // @ keyboard [SearchInput]
                     // @ arrowup/arrowdown [Autocomplete] 

@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState } from 'react';
 
 const useUrl = () => {
     const [url, setUrl] = useState('');

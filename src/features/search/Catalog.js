@@ -50,13 +50,6 @@ const Catalog = () => {
         }
     }, [isActive, catalogCardNames, setCardNames])
 
-    // fetchOne(`/api/cards/catalog/${queryString}`, {
-    //     headers: {
-    //         'Content-Type': 'application/json',
-    //         'auth-token': isAuth && auth.token
-    //     },
-    // })
-
     const searchCatalogCard = (e = undefined, prediction = undefined) => {
         e?.preventDefault();
 

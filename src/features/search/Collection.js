@@ -41,6 +41,7 @@ const Collection = () => {
                             <>
                             <SearchForm
                                 type={'collection'}
+                                classList={'search-input'}
                                 pathname={location.pathname}
                                 placeholder={'Search Collection'}
                                 cardNames={collectionCardNames}
