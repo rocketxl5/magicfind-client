@@ -5,7 +5,6 @@ import useSearch from './contexthooks/useSearch';
 import useUrl from './useUrl';
 import useBlur from './useBlur';
 import setQueryString from '../features/search/services/setQueryString';
-import { setUrl } from '../features/search/services/setUrl';
 
 const useSearchForm = (pathname) => {
     const [query, setQuery] = useState('');
@@ -58,7 +57,6 @@ const useSearchForm = (pathname) => {
 
     useEffect(() => {
         if (response) {
-            // setLoading(false);
             updateBlur(response.search);
             localStorage.setItem('search-results', JSON.stringify({ ...response }));
             navigate(`${pathname}/${query}`, { state: { ...response } });

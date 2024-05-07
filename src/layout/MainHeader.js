@@ -1,5 +1,4 @@
 import { useEffect } from 'react';
-import Catalog from '../features/search/Catalog';
 import Navbar from './navigation/Navbar';
 import SearchForm from '../features/search/SearchForm';
 import DashboardNav from './DashboardNav';
