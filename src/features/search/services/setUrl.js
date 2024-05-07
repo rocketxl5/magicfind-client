@@ -1,6 +1,7 @@
 import setQueryString from './setQueryString';
 
 export const setUrl = (path) => {
+    console.log(path)
     // Catalog search
     const segments = path.substring(1).split('/');
     if (segments.length === 2) {

@@ -15,8 +15,8 @@ const useBlur = () => {
     const updateBlur = (id) => {
         setMarker(-1);
         setSearchTerm('');
-        // If input is Catalog 
-        if (id === 'catalog') {
+        // If input is Catalog
+        // if (id === 'catalog') {
             // If searchbar is displayed (mobile only)
             if (displaySearchBar) {
                 // hide searchbar
@@ -28,7 +28,7 @@ const useBlur = () => {
             setSearchInput(null);
             setCardName('');
             setCardNames(null);
-        }
+        // }
     }
     return { updateBlur }
 }

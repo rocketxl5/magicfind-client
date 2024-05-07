@@ -9,6 +9,7 @@ import useAuth from '../../hooks/contexthooks/useAuth';
 import useNavbar from '../../hooks/contexthooks/useNavbar.js';
 import useSearch from '../../hooks/contexthooks/useSearch.js';
 import setQueryString from './services/setQueryString';
+import useFetch from '../../hooks/useFetch.js';
 import { api } from '../../api/resources';
 
 const Catalog = () => {
@@ -17,7 +18,7 @@ const Catalog = () => {
     // Context hook
     const {
         searchInput,
-        loading,
+        // loading,
         setLoading,
         searchTerm,
         cardName,
@@ -30,6 +31,8 @@ const Catalog = () => {
     // Hooks
     const { auth, isAuth } = useAuth();
     const { searchBarRef } = useNavbar();
+
+    const { fetchOne, loading, response } = useFetch();
 
     const navigate = useNavigate();
 
@@ -46,6 +49,13 @@ const Catalog = () => {
             setCardNames(catalogCardNames)
         }
     }, [isActive, catalogCardNames, setCardNames])
+
+    // fetchOne(`/api/cards/catalog/${queryString}`, {
+    //     headers: {
+    //         'Content-Type': 'application/json',
+    //         'auth-token': isAuth && auth.token
+    //     },
+    // })
 
     const searchCatalogCard = (e = undefined, prediction = undefined) => {
         e?.preventDefault();

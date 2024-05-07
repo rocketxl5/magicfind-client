@@ -12,8 +12,8 @@ import useCollectionModal from '../hooks/useCollectionModal';
 import useSlideView from '../hooks/useSlideView';
 import useImageLoader from '../hooks/useImageLoader';
 import useFetch from '../hooks/useFetch';
+import useUrl from '../hooks/useUrl';
 import useAuth from '../hooks/contexthooks/useAuth';
-import { setUrl } from '../features/search/services/setUrl';
 
 const SearchResults = () => {
     // States
@@ -24,8 +24,12 @@ const SearchResults = () => {
     const location = useLocation();
     const navigate = useNavigate();
 
-    const { fetchOne, response } = useFetch();
     const { isAuth, auth } = useAuth();
+
+    const { fetchOne, response } = useFetch();
+
+    const { url, config, getUrl } = useUrl();
+
 
     const [imagesLoaded] = useImageLoader(result?.cards);
 
@@ -40,26 +44,21 @@ const SearchResults = () => {
             // Set search result state
             setResult({ ...location.state })
         }
-            // If localStorage is set, load it
-            // else if (localStorage.getItem('search-results')) {
-            //     setResult({ ...JSON.parse(localStorage.getItem('search-results')) })
-            // }
-            // else query db
         else {
-            const config = {
-                headers: {
-                    'Content-Type': 'application/json',
-                    'auth-token': isAuth && auth.token
-                },
-            }
-            fetchOne(setUrl(location.pathname), config);
+            getUrl(location.pathname)
         }
     }, []) 
 
     useEffect(() => {
+        if (url && config) {
+            fetchOne(url, config);
+        }
+    }, [url, config])
 
+    useEffect(() => {
         // If response is defined
         if (response) {
+            console.log(response)
             // Set result
             setResult({ ...response })
             // Set localStorage
