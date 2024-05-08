@@ -5,7 +5,6 @@ import Loader from '../../layout/Loader';
 import useBlur from '../../hooks/useBlur';
 import useFocus from '../../hooks/useFocus';
 import useNavbar from '../../hooks/contexthooks/useNavbar';
-import useNavButton from '../../hooks/useNavButton';
 import useSearch from '../../hooks/contexthooks/useSearch';
 import useSearchForm from '../../hooks/useSearchForm';
 
@@ -31,7 +30,6 @@ const SearchForm = ({ children, classList, type, pathname, placeholder, cardName
     const { updateBlur } = useBlur();
     const { updateFocus } = useFocus();
     const { displaySearchBar, searchBarRef } = useNavbar();
-    const { blurHandler } = useNavButton();
     const { searchProduct, loading } = useSearchForm(pathname);
 
     useEffect(() => {
@@ -56,7 +54,7 @@ const SearchForm = ({ children, classList, type, pathname, placeholder, cardName
             setDisplayAutocomplete(false);
         }
         if (displaySearchBar) {
-            blurHandler();
+            // blurHandler();
         }
     }, [location])
 
@@ -83,7 +81,7 @@ const SearchForm = ({ children, classList, type, pathname, placeholder, cardName
 
     const handleBlur = (e) => {
         // if (loading) {
-        updateBlur(e.target.id)
+        updateBlur()
         // }
     }
 

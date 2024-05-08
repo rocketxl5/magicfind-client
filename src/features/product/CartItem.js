@@ -46,32 +46,32 @@ const CartItem = ({ index, count, product }) => {
     setTotal(price * parseInt(cartItems[index].quantity));
   }, [price, setTotal, cartItems, index])
 
-  const details = [
-    {
-      text: `${data.product.conditions[product.selected.condition]}`,
-      style: 'product-spec product-condition'
-    },
-    {
-      text: data.product.languages[product.selected.language],
-      style: 'product-spec product-language'
-    },
-    {
-      text: data.product.finishes[product.selected.finishes],
-      style: 'product-spec product-finish'
-    },
-    // {
-    //   text: `Sold by ${product.selected.seller.userName}`,
-    //   style: 'product-spec product-seller'
-    // },
-    {
-      text: `Ships from ${product.selected.seller.country}`,
-      style: 'product-spec product-shipping'
-    },
-    {
-      text: `${product.selected.quantity} in stock`,
-      style: 'product-spec product-quantity'
-    },
-  ]
+  // const details = [
+  //   {
+  //     text: `${data.product.conditions[product.selected.condition]}`,
+  //     style: 'product-spec product-condition'
+  //   },
+  //   {
+  //     text: data.product.languages[product.selected.language],
+  //     style: 'product-spec product-language'
+  //   },
+  //   {
+  //     text: data.product.finishes[product.selected.finishes],
+  //     style: 'product-spec product-finish'
+  //   },
+  //   // {
+  //   //   text: `Sold by ${product.selected.seller.userName}`,
+  //   //   style: 'product-spec product-seller'
+  //   // },
+  //   {
+  //     text: `Ships from ${product.selected.seller.country}`,
+  //     style: 'product-spec product-shipping'
+  //   },
+  //   {
+  //     text: `${product.selected.quantity} in stock`,
+  //     style: 'product-spec product-quantity'
+  //   },
+  // ]
 
   return (
     <Card classList={'product-card grid'}>

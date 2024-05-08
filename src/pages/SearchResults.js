@@ -27,7 +27,6 @@ const SearchResults = () => {
 
     const { url, config, getUrl } = useUrl();
 
-
     const [imagesLoaded] = useImageLoader(result?.cards);
 
     const [view, updateSlideView] = useSlideView(handleSlideView);
@@ -42,7 +41,7 @@ const SearchResults = () => {
             setResult({ ...location.state })
         }
         else {
-            getUrl(location.pathname)
+            getUrl(location.pathname);
         }
     }, []) 
 

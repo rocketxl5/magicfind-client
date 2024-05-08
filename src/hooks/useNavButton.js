@@ -7,20 +7,21 @@ import useViewport from './contexthooks/useViewport';
 
 // Handles control of Navabar buttons @ MainHeader
 const useNavButton = () => {
+
     const {
         setDisplayMenu,
         displayMenu,
         setDisplaySearchBar,
         displaySearchBar,
-        isSearchBar,
-        setIsSearchBar,
+        isSearchBarDisplayed,
+        setIsSearchBarDisplayed,
         hamburgerRef,
         searchBarRef,
         cartCountRef,
         mailCountRef,
         menuRef,
         searchBtnRef } = useNavbar();
-    const { catalogInputRef } = useSearch();
+    const { catalogInputRef, setSearchInput } = useSearch();
     const { isMobile } = useViewport();
     const { isAuth } = useAuth();
 
@@ -34,11 +35,17 @@ const useNavButton = () => {
 
     // Display or hides Menu on click if search bar is hidden
     const hamburgerHandler = () => {
-        if (!isSearchBar) {
-            if (!displayMenu) {
-                setDisplayMenu(true);
+        if (isMobile) {
+            // console.log(isSearchBarDisplayed)
+            if (isSearchBarDisplayed) {
+                setIsSearchBarDisplayed(false)
             }
-            else {
+
+            if (!isSearchBarDisplayed) {
+                setDisplayMenu(true)
+            }
+
+            if (!isSearchBarDisplayed && displayMenu) {
                 setDisplayMenu(false);
             }
         }
@@ -46,7 +53,7 @@ const useNavButton = () => {
 
     // Display or hides Menu on click [authButton is Desktop only]
     const authButtonHandler = () => {
-        if (!displayMenu) {
+        if (!displayMenu || !displaySearchBar) {
             setDisplayMenu(true);
         }
         else {
@@ -78,12 +85,9 @@ const useNavButton = () => {
     }
 
     const blurHandler = () => {
-        setDisplaySearchBar(false);
+        displaySearchBar && setDisplaySearchBar(false);
         // Delaying hamburger button reactivation
         // Prevent menu from opening on click
-        setTimeout(() => {
-            hamburgerRef.current.disabled = false;
-        }, 200)
     }
     /********** End Mobile only *********/
 
@@ -130,7 +134,7 @@ const useNavButton = () => {
             // Hide menu
             menuRef.current?.classList.remove(selector);
 
-            // Hamburger visible @ all size if unauthenticated view.
+            // Hamburger visible @ all viewport sizes if unauthenticated view.
             // Hamburger replaced by Avatar @ authenticated desktop view.
             if (!isAuth || (isAuth && isMobile)) {
                 hamburgerRef.current?.setAttribute('aria-expanded', 'false');
@@ -148,15 +152,15 @@ const useNavButton = () => {
             cartCountRef.current?.classList.add('d-none');
             mailCountRef.current?.classList.add('d-none');
             hamburgerRef.current?.setAttribute('aria-expanded', 'true');
-            setIsSearchBar(true);
-            hamburgerRef.current.disabled = true;
+            isMobile && setIsSearchBarDisplayed(true);
         }
         else {
             hamburgerRef.current?.setAttribute('aria-expanded', 'false');
             searchBarRef.current?.classList.remove('d-searchbar');
             cartCountRef.current?.classList.remove('d-none');
             mailCountRef.current?.classList.remove('d-none');
-            setIsSearchBar(false);
+            // Clear search input
+            // setSearchInput(null);
         }
     }, [displaySearchBar])
 

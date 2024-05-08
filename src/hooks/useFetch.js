@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { api } from '../api/resources';
 
@@ -9,7 +9,9 @@ const useFetch = () => {
     const [showConfirmation, setShowConfirmation] = useState(false);
 
     const fetchOne = async (query, config) => {
-
+        if (error) {
+            setError(null)
+        }
         setLoading(true);
         await axios
             .get(`${api.serverURL}${query}`, config)
