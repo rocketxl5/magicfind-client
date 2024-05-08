@@ -13,7 +13,6 @@ import useSlideView from '../hooks/useSlideView';
 import useImageLoader from '../hooks/useImageLoader';
 import useFetch from '../hooks/useFetch';
 import useUrl from '../hooks/useUrl';
-import useAuth from '../hooks/contexthooks/useAuth';
 
 const SearchResults = () => {
     // States
@@ -23,8 +22,6 @@ const SearchResults = () => {
     // Hooks
     const location = useLocation();
     const navigate = useNavigate();
-
-    const { isAuth, auth } = useAuth();
 
     const { fetchOne, response } = useFetch();
 
@@ -58,7 +55,7 @@ const SearchResults = () => {
     useEffect(() => {
         // If response is defined
         if (response) {
-            console.log(response)
+            // console.log(response)
             // Set result
             setResult({ ...response })
             // Set localStorage

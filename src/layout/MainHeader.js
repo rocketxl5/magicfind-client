@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
-import Catalog from '../features/search/Catalog';
 import Navbar from './navigation/Navbar';
+import SearchForm from '../features/search/SearchForm';
 import DashboardNav from './DashboardNav';
 import Logo from './navigation/buttons/Logo';
 import { api } from '../api/resources';
@@ -15,7 +15,9 @@ const MainHeader = () => {
     updateCatalog,
     setUpdateCatalog,
     setUpdateCollection,
-    setCatalogCardNames
+    setCatalogCardNames,
+    catalogCardNames,
+    catalogInputRef
   } = useSearch();
 
   // Setting catalog card names for autocomplete catalog search
@@ -45,7 +47,14 @@ const MainHeader = () => {
     <header className="main-header" ref={headerRef}>
       <div className="header-container">
         <Logo />
-        <Catalog />
+        <SearchForm
+          type={'catalog'}
+          classList={'search-catalog-input'}
+          pathname={'/catalog'}
+          placeholder={'Search Magic Find'}
+          cardNames={catalogCardNames}
+          inputRef={catalogInputRef}
+        />
         <Navbar />
       </div>
       {

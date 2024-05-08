@@ -1,26 +1,22 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import AutoComplete from './components/AutoComplete';
-import SearchInput from './components/SearchInput';
 import Loader from '../../layout/Loader';
 import useBlur from '../../hooks/useBlur';
-import useFetch from '../../hooks/useFetch';
 import useFocus from '../../hooks/useFocus';
 import useNavbar from '../../hooks/contexthooks/useNavbar';
 import useNavButton from '../../hooks/useNavButton';
 import useSearch from '../../hooks/contexthooks/useSearch';
 import useSearchForm from '../../hooks/useSearchForm';
-import data from '../../data/SEARCH.json';
 
-const SearchForm = ({ children, type, pathname, placeholder, cardNames, inputRef }) => {
+const SearchForm = ({ children, classList, type, pathname, placeholder, cardNames, inputRef }) => {
     const [isActive, setIsActive] = useState(false);
+    const [oracleID, setOracleID] = useState(null);
     const location = useLocation();
     const {
         inputValue,
         setInputValue,
-        // setIsActive,
         setMarker,
-        // cardNames,
         setCardName,
         searchTerm,
         setSearchTerm,
@@ -28,7 +24,8 @@ const SearchForm = ({ children, type, pathname, placeholder, cardNames, inputRef
         setPredictions,
         setCardNames,
         displayAutcomplete,
-        setDisplayAutocomplete
+        setDisplayAutocomplete,
+        predictions
     } = useSearch();
 
     const { updateBlur } = useBlur();
@@ -38,7 +35,6 @@ const SearchForm = ({ children, type, pathname, placeholder, cardNames, inputRef
     const { searchProduct, loading } = useSearchForm(pathname);
 
     useEffect(() => {
-        // console.log(searchInput.id)
         if (searchInput?.id === type) {
             setIsActive(true);
         } else {
@@ -65,18 +61,15 @@ const SearchForm = ({ children, type, pathname, placeholder, cardNames, inputRef
     }, [location])
 
     const handleChange = (e) => {
-        // console.log(isActive)
         const value = e.target.value;
 
         if (value.length >= 3) {
-            // console.log(value)
             // Reset Marker to initial value
             setMarker(-1);
 
             const filteredCardTitles = cardNames?.filter((title) => {
                 return title.toLowerCase().includes(value.toLowerCase());
             });
-            // console.log(displayAutcomplete)
             !displayAutcomplete && setDisplayAutocomplete(true)
             setPredictions(filteredCardTitles);
         }
@@ -89,24 +82,28 @@ const SearchForm = ({ children, type, pathname, placeholder, cardNames, inputRef
     };
 
     const handleBlur = (e) => {
+        // if (loading) {
         updateBlur(e.target.id)
+        // }
+    }
+
+    const handleSubmit = (e) => {
+        console.log(predictions.length)
+        setCardName(predictions[0])
+        // If array of predictions has one prediction
+        if (predictions.length === 1) {
+            console.log(predictions[0])
+        }
+        searchProduct(predictions[0], e)
     }
 
     return (
         <div id={`search-${type}-form`} ref={type === 'catalog' ? searchBarRef : null}>
-            <form id={`${type}-form`} className='search-form' onSubmit={(e) => searchProduct(e)}>
-                {/* <SearchInput
-                    id={type}
-                    classList={`search-input`}
-                    placeholder={'Search Magic Find'}
-                    searchCard={searchProduct}
-                    isActive={isActive}
-                    ref={searchInputRef}
-                /> */}
+            <form id={`${type}-form`} className='search-form' onSubmit={(e) => handleSubmit(e)}>
                 <input
                     id={type}
                     type="text"
-                    className='search-input'
+                    className={classList}
                     // Value changes 
                     // @ keyboard [SearchInput]
                     // @ arrowup/arrowdown [Autocomplete] 
@@ -119,7 +116,7 @@ const SearchForm = ({ children, type, pathname, placeholder, cardNames, inputRef
                     placeholder={placeholder}
                 />
                 {(isActive && searchTerm) &&
-                    <AutoComplete searchCard={searchProduct} />
+                    <AutoComplete searchProduct={searchProduct} />
                 }
                 {loading && <Loader classList={'box-size-6 right-1'} />}
             </form>

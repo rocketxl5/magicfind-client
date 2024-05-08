@@ -78,8 +78,12 @@ const useNavButton = () => {
     }
 
     const blurHandler = () => {
-        hamburgerRef.current.disabled = false;
         setDisplaySearchBar(false);
+        // Delaying hamburger button reactivation
+        // Prevent menu from opening on click
+        setTimeout(() => {
+            hamburgerRef.current.disabled = false;
+        }, 200)
     }
     /********** End Mobile only *********/
 
@@ -145,12 +149,9 @@ const useNavButton = () => {
             mailCountRef.current?.classList.add('d-none');
             hamburgerRef.current?.setAttribute('aria-expanded', 'true');
             setIsSearchBar(true);
-            // hamburgerRef.current.disabled = true;
+            hamburgerRef.current.disabled = true;
         }
         else {
-            // setTimeout(() => {
-            //     hamburgerRef.current.disabled = false;
-            // }, 50);
             hamburgerRef.current?.setAttribute('aria-expanded', 'false');
             searchBarRef.current?.classList.remove('d-searchbar');
             cartCountRef.current?.classList.remove('d-none');
