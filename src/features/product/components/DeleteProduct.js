@@ -17,7 +17,7 @@ const DeleteProduct = (props) => {
     const btnRef = useRef(null);
     // Hooks
     const { auth } = useAuth();
-    const { setUpdateCatalog, setUpdateCollection, setIsCollectionEmpty } = useSearch();
+    const { setUpdateCatalog, setUpdateCollection } = useSearch();
     const navigate = useNavigate();
     const location = useLocation();
     const { query } = useParams();
@@ -63,29 +63,23 @@ const DeleteProduct = (props) => {
                 let result;
                 setIsDeleted(true)
                 // If cardName is set
+                console.log(search)
+                console.log(query)
                 if (query !== 'all-cards') {
                     // filter for cards with cardName
                     const updatedCards = cards.filter(cardObj => cardObj.name.toLowerCase() === product.name.toLowerCase());
-                    result = { cards: updatedCards, search, query: product.name };
+                    console.log(updatedCards)
+                    result = { cards: updatedCards, search: search, query: product.name };
                 } else {
-                    result = { cards: cards, search, query: product.name };
+                    result = { cards: cards, search: search, query: product.name };
                 }
                 // setLoading(false);
                 localStorage.setItem('search-results', JSON.stringify(result));
-                if (cards.length > 0) {
+                if (cards.lenght > 0) {
                     navigate(`${location.pathname}`,
                         {
-                            state: result,
+                            state: { ...result },
                         });
-                }
-                else {
-                    setTimeout(() => {
-                        setIsCollectionEmpty(true)
-                        navigate(`${location.pathname}`,
-                            {
-                                state: result,
-                            });
-                    }, 1300)
                 }
                 closeModal(result);
             })

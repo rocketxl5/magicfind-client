@@ -12,28 +12,40 @@ const useSearchForm = (pathname) => {
 
     const { updateBlur } = useBlur();
     const { fetchOne, error, response, loading } = useFetch();
-    const { cardName, predictions, searchTerm, setPredictions } = useSearch();
+    const { cardName, predictions, searchTerm, setPredictions, setInputValue } = useSearch();
     const { url, config, getUrl } = useUrl();
 
-    const searchProduct = (e = null, prediction = '') => {
+    const searchProduct = (prediction, e) => {
         e && e.preventDefault();
-
         setQuery('');
 
         let term;
-
+        setPredictions([]);
         if (prediction) {
+            setInputValue(prediction)
+            // click sur li
+            console.log('prediction', prediction)
             term = prediction;
         }
-        else if (cardName) {
-            term = cardName;
-        }
-        else if (predictions.length === 1) {
-            term = predictions[0];
-        }
+            // else if (cardName) {
+            //     // mouseup ou down dans la liste + submit
+            //     console.log('cardName')
+            //     term = cardName;
+            // }
+            // else if (predictions.length === 1) {
+            //     // submit avec 1 choix
+            //     console.log('predictions[0]')
+            //     term = predictions[0];
+            // }
         else if (searchTerm) {
+            // 404
+            console.log('searchTerm')
             term = searchTerm;
         }
+        // else {
+        //     console.log('inputValue')
+        //     term = inputValue;
+        // }
 
         setTimeout(() => {
             setQuery(setQueryString(term, '-'));
@@ -41,7 +53,7 @@ const useSearchForm = (pathname) => {
     }
 
     useEffect(() => {
-        console.log(query)
+        // console.log(query)
         if (query) {
             getUrl(`${pathname}/${query}`)
         }
@@ -49,13 +61,12 @@ const useSearchForm = (pathname) => {
 
     useEffect(() => {
         if (url && config) {
-            console.log(url)
-            setPredictions([]);
             fetchOne(url, config);
         }
     }, [url, config])
 
     useEffect(() => {
+        console.log(response)
         if (response) {
             updateBlur(response.search);
             localStorage.setItem('search-results', JSON.stringify({ ...response }));

@@ -1,8 +1,12 @@
 import { useState } from 'react';
+import useSearch from './contexthooks/useNavbar';
 
 const useUrl = () => {
     const [url, setUrl] = useState('');
     const [config, setConfig] = useState(null);
+
+    const { cardName, predictions, searchTerm, inputValue } = useSearch();
+
 
     const getUrl = (pathname) => {
         const parts = pathname.substring(1).split('/');
@@ -18,7 +22,7 @@ const useUrl = () => {
             )
             setUrl(`/api/cards/${search}/${query}`);
         }
-        if (parts.includes('collection')) {
+        else if (parts.includes('collection')) {
             const auth = JSON.parse(localStorage.getItem('auth'));
             const search = parts[1];
             const query = parts[2];

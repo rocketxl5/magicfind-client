@@ -3,7 +3,7 @@ import Title from './Title';
 import data from '../data/PAGES.json';
 
 const Page = ({ children, classList = '', name, hasHeader = true, hasBanner = false, component, title }) => {
-    const { id, style, header, main } = data[name];
+    const { id, style, main } = data[name];
 
     return (
         <div id={id} className={`${style} ${classList ? classList : ''}`}>

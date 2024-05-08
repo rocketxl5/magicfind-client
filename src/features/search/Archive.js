@@ -1,23 +1,16 @@
-import {
-    useRef,
-    useState,
-    useEffect
-} from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useRef, useState, useEffect } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import Page from '../../components/Page';
-import Form from '../../components/Form';
 import Loader from '../../layout/Loader.js';
-import SearchInput from './components/SearchInput'
-import { api } from '../../api/resources';
+import SearchForm from './SearchForm.js';
 import useSearch from '../../hooks/contexthooks/useSearch';
 import useNavbar from '../../hooks/contexthooks/useNavbar.js';
 // import useAuth from '../../hooks/contexthooks/useAuth.js';
 import setQueryString from './services/setQueryString';
+import { api } from '../../api/resources';
 
 const Search = () => {
     // States
-    const [loading, setLoading] = useState(false);
-    const [isActive, setIsActive] = useState(false);
     const [oracleID, setOracleID] = useState('');
     const [data, setData] = useState(null);
     // Ref
@@ -40,28 +33,11 @@ const Search = () => {
     const { displaySeachBar, setDisplaySearchBar } = useNavbar();
 
     const navigate = useNavigate();
-
+    const location = useLocation();
 
     useEffect(() => {
         archiveInputRef.current?.focus();
-        if (displaySeachBar) {
-            setDisplaySearchBar(false);
-        }
-    }, [])
-
-    useEffect(() => {
-        if (searchInput?.id === 'archive') {
-            setIsActive(true);
-        } else {
-            setIsActive(false);
-        }
-    }, [searchInput])
-
-    useEffect(() => {
-        if (isActive) {
-            setCardNames(archiveCardNames);
-        }
-    }, [isActive, setCardNames, archiveCardNames, collectionCardNames])
+    }, []);
 
 
     const searchArchive = (e = undefined, prediction = undefined) => {
@@ -69,7 +45,7 @@ const Search = () => {
 
         if (inputValue.length < 3) { return }
 
-        setLoading(true);
+
 
         const headers = { method: 'GET' };
 
@@ -103,7 +79,7 @@ const Search = () => {
                         })
                 }
                 else if (res.status === 404) {
-                    setLoading(false);
+                    // setLoading(false);
                     navigate(`/not-found/${query}`);
                 }
             })
@@ -148,14 +124,14 @@ const Search = () => {
                 });
             };
 
-            setLoading(false);
+            // setLoading(false);
             setCardName('');
             setSearchInput(null);
             setUpdateCollection(true);
 
             localStorage.setItem('search-results', JSON.stringify({
                 cards: cards,
-                search: searchInput.id,
+                search: 'archive',
                 query: cardName
             }));
             navigate(`/me/archive/${setQueryString(cardName, '-')}`,
@@ -163,7 +139,7 @@ const Search = () => {
                     state: {
                         cards: cards,
                         query: cardName,
-                        search: searchInput.id,
+                        search: 'archive'
                     }
                 });
         }
@@ -171,23 +147,15 @@ const Search = () => {
 
     return (
         <Page name={'archive'} title={'MTG Archive'}>
-            <main>
-                <form
-                    id={'archive-form'}
-                    className={'search-form'}
-                    onSubmit={searchArchive}
-                >
-                    <SearchInput
-                        id={'archive'}
-                        classList={'search-input'}
-                        placeholder={'Search MTG Archive'}
-                        searchCard={searchArchive}
-                        isActive={isActive}
-                        ref={archiveInputRef}
-                    />
-                    {loading && <Loader classList={'box-size-6 right-1'} />}
-                </form>
-            </main>
+            <SearchForm
+                type={'archive'}
+                classList={'search-input'}
+                pathname={location.pathname}
+                placeholder={'Search Archive'}
+                cardNames={archiveCardNames}
+                inputRef={archiveInputRef}
+            >
+            </SearchForm>
         </Page>
     )
 }

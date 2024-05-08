@@ -11,6 +11,7 @@ import useSearchForm from '../../hooks/useSearchForm';
 
 const SearchForm = ({ children, classList, type, pathname, placeholder, cardNames, inputRef }) => {
     const [isActive, setIsActive] = useState(false);
+    const [oracleID, setOracleID] = useState(null);
     const location = useLocation();
     const {
         inputValue,
@@ -23,7 +24,8 @@ const SearchForm = ({ children, classList, type, pathname, placeholder, cardName
         setPredictions,
         setCardNames,
         displayAutcomplete,
-        setDisplayAutocomplete
+        setDisplayAutocomplete,
+        predictions
     } = useSearch();
 
     const { updateBlur } = useBlur();
@@ -80,12 +82,24 @@ const SearchForm = ({ children, classList, type, pathname, placeholder, cardName
     };
 
     const handleBlur = (e) => {
+        // if (loading) {
         updateBlur(e.target.id)
+        // }
+    }
+
+    const handleSubmit = (e) => {
+        console.log(predictions.length)
+        setCardName(predictions[0])
+        // If array of predictions has one prediction
+        if (predictions.length === 1) {
+            console.log(predictions[0])
+        }
+        searchProduct(predictions[0], e)
     }
 
     return (
         <div id={`search-${type}-form`} ref={type === 'catalog' ? searchBarRef : null}>
-            <form id={`${type}-form`} className='search-form' onSubmit={(e) => searchProduct(e)}>
+            <form id={`${type}-form`} className='search-form' onSubmit={(e) => handleSubmit(e)}>
                 <input
                     id={type}
                     type="text"
@@ -102,7 +116,7 @@ const SearchForm = ({ children, classList, type, pathname, placeholder, cardName
                     placeholder={placeholder}
                 />
                 {(isActive && searchTerm) &&
-                    <AutoComplete searchCard={searchProduct} />
+                    <AutoComplete searchProduct={searchProduct} />
                 }
                 {loading && <Loader classList={'box-size-6 right-1'} />}
             </form>

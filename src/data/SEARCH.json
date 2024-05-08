@@ -36,10 +36,5 @@
       "etched": "Etched"
     }
   },
-  "parameters": ["Price", "Condition", "Expansion", "Color", "Date", "Foil"],
-  "search": {
-    "archive": {},
-    "catalog": {},
-    "collection": {}
-  }
+  "parameters": ["Price", "Condition", "Expansion", "Color", "Date", "Foil"]
 }
