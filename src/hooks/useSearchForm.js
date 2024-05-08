@@ -37,7 +37,7 @@ const useSearchForm = (pathname) => {
             //     console.log('predictions[0]')
             //     term = predictions[0];
             // }
-        else if (searchTerm) {
+        else {
             // 404
             console.log('searchTerm')
             term = searchTerm;
@@ -53,7 +53,6 @@ const useSearchForm = (pathname) => {
     }
 
     useEffect(() => {
-        // console.log(query)
         if (query) {
             getUrl(`${pathname}/${query}`)
         }
@@ -66,9 +65,9 @@ const useSearchForm = (pathname) => {
     }, [url, config])
 
     useEffect(() => {
-        console.log(response)
         if (response) {
-            updateBlur(response.search);
+            // Pass boolean flag to reset isSearchBarDisplayed state
+            updateBlur(true);
             localStorage.setItem('search-results', JSON.stringify({ ...response }));
             navigate(`${pathname}/${query}`, { state: { ...response } });
         }

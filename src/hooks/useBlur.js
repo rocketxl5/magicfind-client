@@ -1,4 +1,3 @@
-import useNavButton from './useNavButton';
 import useSearch from './contexthooks/useSearch';
 import useNavbar from './contexthooks/useNavbar';
 /*****************************************/
@@ -8,27 +7,26 @@ import useNavbar from './contexthooks/useNavbar';
 // @ archive input
 /*****************************************/
 const useBlur = () => {
-    const { blurHandler } = useNavButton();
-    const { displaySearchBar } = useNavbar();
-    const { setCardName, setMarker, setSearchTerm, setSearchInput, setCardNames } = useSearch();
+    const { displaySearchBar, setDisplaySearchBar, setIsSearchBarDisplayed } = useNavbar();
+    const { setCardName, setMarker, setSearchTerm, setCardNames, setSearchInput } = useSearch();
 
-    const updateBlur = (id) => {
+    const updateBlur = (isSubmit = false) => {
         setMarker(-1);
         setSearchTerm('');
-        // If input is Catalog
-        // if (id === 'catalog') {
-            // If searchbar is displayed (mobile only)
+        // If searchbar is displayed (mobile & catalog searhc only) 
             if (displaySearchBar) {
                 // hide searchbar
-                blurHandler();
+                setDisplaySearchBar(false);
+                if (isSubmit) {
+                    setIsSearchBarDisplayed(false);
+                }
             }
             // Reinitialize input state if catalog
             // Query is triggered each time search catalog has focus
             // making sure search catalog cardnames is updated with latest results 
-            // setSearchInput(null);
+        setSearchInput(null);
             setCardName('');
-            setCardNames(null);
-        // }
+        setCardNames(null);
     }
     return { updateBlur }
 }
