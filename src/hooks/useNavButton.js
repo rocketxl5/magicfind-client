@@ -36,9 +36,9 @@ const useNavButton = () => {
 
     // Display or hides Menu on click if search bar is hidden
     const hamburgerHandler = () => {
-        console.log('switchOn', switchOn)
-        console.log('displaySearchBar', displaySearchBar)
-        console.log('displayMenu', displayMenu)
+        // console.log('switchOn', switchOn)
+        // console.log('displaySearchBar', displaySearchBar)
+        // console.log('displayMenu', displayMenu)
         if (switchOn && !displayMenu) {
             setDisplayMenu(true)
         }

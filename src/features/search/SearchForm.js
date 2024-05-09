@@ -29,7 +29,7 @@ const SearchForm = ({ children, classList, type, pathname, placeholder, cardName
     const { updateBlur } = useBlur();
     const { updateFocus } = useFocus();
     const { searchBarRef } = useNavbar();
-    const { loading } = useSearchForm(pathname);
+    const { loading } = useSearchForm(pathname, type);
 
     useEffect(() => {
         if (searchInput?.id === type) {
@@ -44,18 +44,6 @@ const SearchForm = ({ children, classList, type, pathname, placeholder, cardName
             setCardNames(cardNames);
         }
     }, [isActive])
-
-    // useEffect(() => {
-    //     if (inputValue) {
-    //         setInputValue('');
-    //     }
-    //     if (displayAutcomplete) {
-    //         setDisplayAutocomplete(false);
-    //     }
-    //     if (displaySearchBar) {
-    //         // blurHandler();
-    //     }
-    // }, [location])
 
     const handleChange = (e) => {
         const value = e.target.value;

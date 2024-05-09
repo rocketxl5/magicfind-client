@@ -12,6 +12,7 @@ const useBlur = () => {
     const { setMarker, setSearchTerm, setCardNames, setSearchInput, searchInput } = useSearch();
 
     const updateBlur = (catalog) => {
+        console.log('blur')
     // Reinitialize input state if catalog
     // Query is triggered each time search catalog has focus
     // making sure search catalog cardnames is updated with latest results 
@@ -25,6 +26,7 @@ const useBlur = () => {
         setCardNames(null);
 
     }
+
     return { updateBlur }
 }
 

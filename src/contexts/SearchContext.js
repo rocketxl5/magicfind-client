@@ -1,5 +1,14 @@
-import { useRef, useState, useEffect, createContext } from 'react';
+import { useState, useEffect, useReducer, useRef, createContext } from 'react';
 import useAuth from '../hooks/contexthooks/useAuth';
+
+const initialState = {
+  searchTerm: '',
+  inputValue: '',
+  predictions: [],
+  cardNames: [],
+  marker: -1,
+}
+
 export const SearchContext = createContext(null);
 
 export const SearchProvider = ({ children }) => {
@@ -21,12 +30,10 @@ export const SearchProvider = ({ children }) => {
   const [updateArchive, setUpdateArchive] = useState(false);
 
   // Mount state @ Collection initial fetch 
-  const [error, setError] = useState('');
   const [isCollectionEmpty, setIsCollectionEmpty] = useState(true);
   const [displayAutcomplete, setDisplayAutocomplete] = useState(false);
   const [predictions, setPredictions] = useState([]);
   const [cardNames, setCardNames] = useState([]);
-  const [loading, setLoading] = useState(false);
   const [marker, setMarker] = useState(-1);
 
   const { auth } = useAuth();
@@ -35,6 +42,9 @@ export const SearchProvider = ({ children }) => {
   const catalogInputRef = useRef(null);
   const collectionInputRef = useRef(null);
   const archiveInputRef = useRef(null);
+
+  // *** New Code *** //
+  const inputRef = useRef(null);
 
   useEffect(() => {
     setUpdateCatalog(true);
@@ -66,14 +76,10 @@ export const SearchProvider = ({ children }) => {
         setInputValue,
         cardCollection,
         setCardCollection,
-        error,
-        setError,
         isCollectionEmpty,
         setIsCollectionEmpty,
         marker,
         setMarker,
-        loading,
-        setLoading,
         cardNames,
         setCardNames,
         archiveCardNames,
@@ -100,7 +106,10 @@ export const SearchProvider = ({ children }) => {
         setDisplayAutocomplete,
         catalogInputRef,
         collectionInputRef,
-        archiveInputRef
+        archiveInputRef,
+
+
+        inputRef
       }}
     >
       {children}

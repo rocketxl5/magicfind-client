@@ -10,13 +10,19 @@ const useFetch = () => {
 
     const fetchOne = async (query, config) => {
         if (error) {
-            setError(null)
+            setError(null);
         }
+        if (response) {
+            setResponse(null);
+        }
+
+        console.log('query', query)
+        console.log('config', config)
         setLoading(true);
         await axios
             .get(`${api.serverURL}${query}`, config)
             .then(res => {
-                console.log(res)
+                // console.log(res)
                 setResponse(res.data);
             })
             .catch((error) => {

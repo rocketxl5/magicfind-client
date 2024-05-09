@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import useSearch from './contexthooks/useNavbar';
 
 const useUrl = () => {
     const [url, setUrl] = useState('');
