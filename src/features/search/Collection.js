@@ -37,8 +37,6 @@ const Collection = () => {
 
     useEffect(() => {
         if (response) {
-            console.log(location.pathname)
-            console.log(response)
             navigate(`${location.pathname}/cards`, { state: { ...response } });
         }
     }, [response, error])

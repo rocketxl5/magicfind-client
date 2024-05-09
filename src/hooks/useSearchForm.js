@@ -12,7 +12,7 @@ const useSearchForm = (pathname, type) => {
 
     const { updateBlur } = useBlur();
     const { fetchOne, error, response, loading } = useFetch();
-    const { setPredictions, setInputValue, setSearchTerm, searchTerm } = useSearch();
+    const { dispatch, setPredictions, setInputValue, setSearchTerm, searchTerm } = useSearch();
     const { url, config, getUrl } = useUrl();
 
     useEffect(() => {

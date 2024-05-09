@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { Children, useState } from 'react';
+import { useState } from 'react';
 import useCart from './contexthooks/useCart';
 // import useFetch from './useFetch';
 import { FaRegTimesCircle } from "react-icons/fa";
@@ -9,9 +9,7 @@ import { api } from '../api/resources';
 const useUpdateCart = (url, headers, item, indexFound = undefined) => {
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(false);
-    // const [currentStatus, setCurrentStatus] = useState(null);
     const [quantityAvailable, setQuantityAvailable] = useState(0);
-    // const [showConfirmation, setShowConfirmation] = useState(false);
 
     const { dispatch, cartItems, setCartUpdate, cartUpdate } = useCart();
 
@@ -97,11 +95,7 @@ const useUpdateCart = (url, headers, item, indexFound = undefined) => {
                         }
                     });
                 })
-                .finally(() => {
-                    // setShowConfirmation(true);
-                    // setTimeout(() => {
-                    //     setShowConfirmation(false);
-                    // }, 1500);
+            .finally(() => {
                     setLoading(false); 
                 })
     }

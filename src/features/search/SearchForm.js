@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
 import AutoComplete from './components/AutoComplete';
 import Loader from '../../layout/Loader';
 import useBlur from '../../hooks/useBlur';
@@ -7,11 +6,21 @@ import useFocus from '../../hooks/useFocus';
 import useNavbar from '../../hooks/contexthooks/useNavbar';
 import useSearch from '../../hooks/contexthooks/useSearch';
 import useSearchForm from '../../hooks/useSearchForm';
+import { searchReducer } from './services/searchReducer';
 
-const SearchForm = ({ children, classList, type, pathname, placeholder, cardNames, inputRef }) => {
+// const initialState = {
+//     searchType: '',
+//     searchTerm: '',
+//     inputValue: '',
+//     searchResult: [],
+//     predictions: [],
+//     cardNames: [],
+//     marker: -1,
+//     searchInput: null
+// }
+const SearchForm = ({ children, classList, type, pathname, placeholder, cardNames }) => {
     const [isActive, setIsActive] = useState(false);
     const [oracleID, setOracleID] = useState(null);
-    const location = useLocation();
     const {
         inputValue,
         setInputValue,
@@ -23,13 +32,29 @@ const SearchForm = ({ children, classList, type, pathname, placeholder, cardName
         setCardNames,
         displayAutcomplete,
         setDisplayAutocomplete,
-        predictions
+        predictions,
+
+        dispatch,
+        marker,
+        inputRef
     } = useSearch();
 
     const { updateBlur } = useBlur();
     const { updateFocus } = useFocus();
     const { searchBarRef } = useNavbar();
     const { loading } = useSearchForm(pathname, type);
+
+    // const [state, dispatch] = useReducer(searchReducer, initialState);
+
+    // const {
+    //   searchTerm,
+    //   inputValue,
+    //   searchResult,
+    //   predictions,
+    //   cardNames,
+    //   marker,
+    //   searchInput
+    // } = state || {};
 
     useEffect(() => {
         if (searchInput?.id === type) {
@@ -51,6 +76,10 @@ const SearchForm = ({ children, classList, type, pathname, placeholder, cardName
         if (value.length >= 3) {
             // Reset Marker to initial value
             setMarker(-1);
+            dispatch({
+                type: 'update-value',
+                payload: marker
+            });
 
             const filteredCardTitles = cardNames?.filter((title) => {
                 return title.toLowerCase().includes(value.toLowerCase());
@@ -62,6 +91,10 @@ const SearchForm = ({ children, classList, type, pathname, placeholder, cardName
             setDisplayAutocomplete(false);
         }
         // setSearchTerm(value);
+        dispatch({
+            type: 'update-value',
+            payload: value
+        });
         setInputValue(value);
     };
 
@@ -73,7 +106,7 @@ const SearchForm = ({ children, classList, type, pathname, placeholder, cardName
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(predictions[0])
+        // console.log(predictions[0])
         setSearchTerm(predictions[0]);
     }
 
@@ -90,7 +123,18 @@ const SearchForm = ({ children, classList, type, pathname, placeholder, cardName
                     // @ mousehover [Prediction]
                     value={isActive ? inputValue : ''}
                     onChange={handleChange}
-                    onFocus={(e) => updateFocus(e.target)}
+                    onFocus={(e) => {
+                        dispatch({
+                            type: 'update-input',
+                            payload: {
+                                isActive: true,
+                                cardNames: cardNames,
+                                searchInput: e.target,
+                                searchType: e.target.id,
+                            }
+                        });
+                        updateFocus(e.target);
+                    }}
                     onBlur={handleBlur}
                     ref={inputRef}
                     placeholder={placeholder}

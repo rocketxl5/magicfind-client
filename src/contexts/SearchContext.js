@@ -1,17 +1,38 @@
 import { useState, useEffect, useReducer, useRef, createContext } from 'react';
+import { searchReducer } from '../features/search/services/searchReducer';
 import useAuth from '../hooks/contexthooks/useAuth';
 
 const initialState = {
-  searchTerm: '',
-  inputValue: '',
-  predictions: [],
   cardNames: [],
+  inputValue: '',
+  isActive: false,
   marker: -1,
+  predictions: [],
+  searchInput: null,
+  searchResult: [],
+  searchTerm: '',
+  searchType: '',
 }
 
 export const SearchContext = createContext(null);
 
 export const SearchProvider = ({ children }) => {
+
+  const [state, dispatch] = useReducer(searchReducer, initialState);
+
+  // const {
+  //   searchTerm,
+  //   inputValue,
+  //   searchResult,
+  //   predictions,
+  //   cardNames,
+  //   marker,
+  //   searchInput
+  // } = state || {};
+
+  // useEffect(() => {
+  //   if(searchResult.length)
+  // }, [searchResult])
 
   const [searchInput, setSearchInput] = useState(null);
   const [inputValue, setInputValue] = useState('');
@@ -108,7 +129,7 @@ export const SearchProvider = ({ children }) => {
         collectionInputRef,
         archiveInputRef,
 
-
+        dispatch,
         inputRef
       }}
     >
