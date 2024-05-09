@@ -20,8 +20,8 @@ const Search = () => {
         searchInput,
         setSearchInput,
         predictions,
-        cardName,
-        setCardName,
+        searchTerm,
+        setSearchTerm,
         setCardNames,
         archiveCardNames,
         setUpdateCollection,
@@ -54,8 +54,8 @@ const Search = () => {
         if (prediction) {
             query = `cards/named?exact=${prediction}`;
         }
-        else if (cardName) {
-            query = `cards/named?exact=${cardName}`;
+        else if (searchTerm) {
+            query = `cards/named?exact=${searchTerm}`;
         }
         else if (predictions.length === 1) {
             query = `cards/named?exact=${predictions[0]}`;
@@ -74,7 +74,7 @@ const Search = () => {
                             const { name, oracle_id } = data;
                             archiveInputRef.current.blur();
                             setOracleID(oracle_id);
-                            setCardName(name);
+                            setSearchTerm(name);
                             // localStorage.setItem('oracle', oracle_id);
                         })
                 }
@@ -125,20 +125,20 @@ const Search = () => {
             };
 
             // setLoading(false);
-            setCardName('');
+            setSearchTerm('');
             setSearchInput(null);
             setUpdateCollection(true);
 
             localStorage.setItem('search-results', JSON.stringify({
                 cards: cards,
                 search: 'archive',
-                query: cardName
+                query: searchTerm
             }));
-            navigate(`/me/archive/${setQueryString(cardName, '-')}`,
+            navigate(`/me/archive/${setQueryString(searchTerm, '-')}`,
                 {
                     state: {
                         cards: cards,
-                        query: cardName,
+                        query: searchTerm,
                         search: 'archive'
                     }
                 });

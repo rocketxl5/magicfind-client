@@ -5,9 +5,6 @@ const useUrl = () => {
     const [url, setUrl] = useState('');
     const [config, setConfig] = useState(null);
 
-    const { cardName, predictions, searchTerm, inputValue } = useSearch();
-
-
     const getUrl = (pathname) => {
         const parts = pathname.substring(1).split('/');
         if (parts.includes('catalog')) {

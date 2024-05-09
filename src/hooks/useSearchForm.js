@@ -12,47 +12,22 @@ const useSearchForm = (pathname) => {
 
     const { updateBlur } = useBlur();
     const { fetchOne, error, response, loading } = useFetch();
-    const { cardName, predictions, searchTerm, setPredictions, setInputValue } = useSearch();
+    const { setPredictions, setInputValue, searchTerm } = useSearch();
     const { url, config, getUrl } = useUrl();
 
-    const searchProduct = (prediction, e) => {
-        e && e.preventDefault();
-        setQuery('');
-
-        let term;
-        setPredictions([]);
-        if (prediction) {
-            setInputValue(prediction)
-            // click sur li
-            console.log('prediction', prediction)
-            term = prediction;
+    useEffect(() => {
+        // console.log(searchTerm)
+        if (searchTerm) {
+            setPredictions([]);
+            setInputValue(searchTerm);
+            setTimeout(() => {
+                setQuery(setQueryString(searchTerm, '-'));
+            }, 200)
         }
-            // else if (cardName) {
-            //     // mouseup ou down dans la liste + submit
-            //     console.log('cardName')
-            //     term = cardName;
-            // }
-            // else if (predictions.length === 1) {
-            //     // submit avec 1 choix
-            //     console.log('predictions[0]')
-            //     term = predictions[0];
-            // }
-        else {
-            // 404
-            console.log('searchTerm')
-            term = searchTerm;
-        }
-        // else {
-        //     console.log('inputValue')
-        //     term = inputValue;
-        // }
-
-        setTimeout(() => {
-            setQuery(setQueryString(term, '-'));
-        }, 200)
-    }
+    }, [searchTerm])
 
     useEffect(() => {
+        // console.log('query', query)
         if (query) {
             getUrl(`${pathname}/${query}`)
         }
@@ -66,8 +41,9 @@ const useSearchForm = (pathname) => {
 
     useEffect(() => {
         if (response) {
-            // Pass boolean flag to reset isSearchBarDisplayed state
-            updateBlur(true);
+            // Pass boolean flag to reset switchOn state
+            console.log(response)
+            updateBlur(response.search === 'catalog' ? true : false);
             localStorage.setItem('search-results', JSON.stringify({ ...response }));
             navigate(`${pathname}/${query}`, { state: { ...response } });
         }
@@ -78,7 +54,7 @@ const useSearchForm = (pathname) => {
 
     }, [error, response])
 
-    return { searchProduct, loading }
+    return { loading }
 }
 
 export default useSearchForm

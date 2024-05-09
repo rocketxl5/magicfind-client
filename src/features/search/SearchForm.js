@@ -16,7 +16,6 @@ const SearchForm = ({ children, classList, type, pathname, placeholder, cardName
         inputValue,
         setInputValue,
         setMarker,
-        setCardName,
         searchTerm,
         setSearchTerm,
         searchInput,
@@ -29,8 +28,8 @@ const SearchForm = ({ children, classList, type, pathname, placeholder, cardName
 
     const { updateBlur } = useBlur();
     const { updateFocus } = useFocus();
-    const { displaySearchBar, searchBarRef } = useNavbar();
-    const { searchProduct, loading } = useSearchForm(pathname);
+    const { searchBarRef } = useNavbar();
+    const { loading } = useSearchForm(pathname);
 
     useEffect(() => {
         if (searchInput?.id === type) {
@@ -46,17 +45,17 @@ const SearchForm = ({ children, classList, type, pathname, placeholder, cardName
         }
     }, [isActive])
 
-    useEffect(() => {
-        if (inputValue) {
-            setInputValue('');
-        }
-        if (displayAutcomplete) {
-            setDisplayAutocomplete(false);
-        }
-        if (displaySearchBar) {
-            // blurHandler();
-        }
-    }, [location])
+    // useEffect(() => {
+    //     if (inputValue) {
+    //         setInputValue('');
+    //     }
+    //     if (displayAutcomplete) {
+    //         setDisplayAutocomplete(false);
+    //     }
+    //     if (displaySearchBar) {
+    //         // blurHandler();
+    //     }
+    // }, [location])
 
     const handleChange = (e) => {
         const value = e.target.value;
@@ -73,26 +72,21 @@ const SearchForm = ({ children, classList, type, pathname, placeholder, cardName
         }
         else {
             setDisplayAutocomplete(false);
-            setCardName('');
         }
-        setSearchTerm(value);
+        // setSearchTerm(value);
         setInputValue(value);
     };
 
     const handleBlur = (e) => {
-        // if (loading) {
-        updateBlur()
-        // }
+        if (!searchTerm) {
+            updateBlur(type === 'catalog' ? true : false);
+        }
     }
 
     const handleSubmit = (e) => {
-        console.log(predictions.length)
-        setCardName(predictions[0])
-        // If array of predictions has one prediction
-        if (predictions.length === 1) {
-            console.log(predictions[0])
-        }
-        searchProduct(predictions[0], e)
+        e.preventDefault();
+        console.log(predictions[0])
+        setSearchTerm(predictions[0]);
     }
 
     return (
@@ -113,8 +107,8 @@ const SearchForm = ({ children, classList, type, pathname, placeholder, cardName
                     ref={inputRef}
                     placeholder={placeholder}
                 />
-                {(isActive && searchTerm) &&
-                    <AutoComplete searchProduct={searchProduct} />
+                {isActive &&
+                    <AutoComplete />
                 }
                 {loading && <Loader classList={'box-size-6 right-1'} />}
             </form>

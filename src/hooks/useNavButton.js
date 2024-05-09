@@ -13,15 +13,16 @@ const useNavButton = () => {
         displayMenu,
         setDisplaySearchBar,
         displaySearchBar,
-        isSearchBarDisplayed,
-        setIsSearchBarDisplayed,
+        switchOn,
+        setSwitchOn,
         hamburgerRef,
         searchBarRef,
         cartCountRef,
         mailCountRef,
         menuRef,
-        searchBtnRef } = useNavbar();
-    const { catalogInputRef, setSearchInput } = useSearch();
+        searchBtnRef
+    } = useNavbar();
+    const { catalogInputRef } = useSearch();
     const { isMobile } = useViewport();
     const { isAuth } = useAuth();
 
@@ -35,21 +36,32 @@ const useNavButton = () => {
 
     // Display or hides Menu on click if search bar is hidden
     const hamburgerHandler = () => {
-        if (isMobile) {
-            // console.log(isSearchBarDisplayed)
-            if (isSearchBarDisplayed) {
-                setIsSearchBarDisplayed(false)
-            }
-
-            if (!isSearchBarDisplayed) {
-                setDisplayMenu(true)
-            }
-
-            if (!isSearchBarDisplayed && displayMenu) {
-                setDisplayMenu(false);
-            }
+        console.log('switchOn', switchOn)
+        console.log('displaySearchBar', displaySearchBar)
+        console.log('displayMenu', displayMenu)
+        if (switchOn && !displayMenu) {
+            setDisplayMenu(true)
+        }
+        else if (switchOn && displayMenu) {
+            setDisplayMenu(false)
         }
     }
+
+    useEffect(() => {
+        if (!switchOn) {
+            if (displayMenu) {
+                setDisplayMenu(false);
+            }
+            if (displaySearchBar) {
+                setDisplaySearchBar(false);
+            }
+            // Reset switch
+            setTimeout(() => {
+
+                setSwitchOn(true);
+            }, 200)
+        }
+    }, [switchOn])
 
     // Display or hides Menu on click [authButton is Desktop only]
     const authButtonHandler = () => {
@@ -68,7 +80,6 @@ const useNavButton = () => {
         if (displayMenu) {
             setDisplayMenu(false);
         }
-
         if (path) {
             navigate(path);
         }
@@ -85,10 +96,9 @@ const useNavButton = () => {
     }
 
     const blurHandler = () => {
-        displaySearchBar && setDisplaySearchBar(false);
-        // Delaying hamburger button reactivation
-        // Prevent menu from opening on click
+        switchOn && setSwitchOn(false);
     }
+
     /********** End Mobile only *********/
 
     /********** Desktop only ************/
@@ -152,20 +162,16 @@ const useNavButton = () => {
             cartCountRef.current?.classList.add('d-none');
             mailCountRef.current?.classList.add('d-none');
             hamburgerRef.current?.setAttribute('aria-expanded', 'true');
-            isMobile && setIsSearchBarDisplayed(true);
         }
         else {
             hamburgerRef.current?.setAttribute('aria-expanded', 'false');
             searchBarRef.current?.classList.remove('d-searchbar');
             cartCountRef.current?.classList.remove('d-none');
             mailCountRef.current?.classList.remove('d-none');
-            // Clear search input
-            // setSearchInput(null);
         }
     }, [displaySearchBar])
 
-
-    return { navButtonHandler, authButtonHandler, searchButtonHandler, hamburgerHandler, menuHandler, blurHandler }
+    return { navButtonHandler, authButtonHandler, searchButtonHandler, hamburgerHandler, blurHandler, menuHandler }
 }
 
 export default useNavButton

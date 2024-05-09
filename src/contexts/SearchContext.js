@@ -6,7 +6,6 @@ export const SearchProvider = ({ children }) => {
 
   const [searchInput, setSearchInput] = useState(null);
   const [inputValue, setInputValue] = useState('');
-  const [cardName, setCardName] = useState('');
   const [searchTerm, setSearchTerm] = useState('');
 
   const [cardCollection, setCardCollection] = useState([]);
@@ -93,8 +92,6 @@ export const SearchProvider = ({ children }) => {
         setSearchInput,
         searchTerm,
         setSearchTerm,
-        cardName,
-        setCardName,
         predictions,
         setPredictions,
         filterUserCards,

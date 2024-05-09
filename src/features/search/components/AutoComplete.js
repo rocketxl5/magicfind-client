@@ -3,13 +3,13 @@ import Prediction from './Prediction';
 import useSearch from '../../../hooks/contexthooks/useSearch';
 const INIT = -200;
 
-const AutoComplete = ({ searchProduct }) => {
+const AutoComplete = () => {
     const {
         marker,
         setMarker,
         searchTerm,
         predictions,
-        setCardName,
+        setSearchTerm,
         displayAutcomplete
     } = useSearch();
     const [position, setPosition] = useState(INIT);
@@ -35,7 +35,7 @@ const AutoComplete = ({ searchProduct }) => {
         if (predictions) {
             // Sets prediction string as search input value when user moves (arrow) up or (arrow) down
             // setInputValue(predictions[marker]);
-            setCardName(predictions[marker]);
+            // setSearchTerm(predictions[marker]);
         }
 
         ulRef.current?.scrollTo({ top: position, behavior: 'smooth' })
@@ -63,9 +63,11 @@ const AutoComplete = ({ searchProduct }) => {
     };
 
     const handleMouseDown = (e) => {
+        console.log(e.target.value)
         // Set search input value to card name
         // Takes event and target li id set to prediction value @ Prediction
-        searchProduct(e.target.id);
+
+        setSearchTerm(predictions[e.target.value]);
     };
 
     return (

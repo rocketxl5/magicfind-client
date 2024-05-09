@@ -3,20 +3,18 @@ import { useLocation } from 'react-router-dom';
 import Page from '../../components/Page';
 import Message from '../../components/Message.js';
 import SearchForm from './SearchForm.js';
-import Loader from '../../layout/Loader.js';
 import Button from '../../components/Button';
 import useSearch from '../../hooks/contexthooks/useSearch';
-import useSearchForm from '../../hooks/useSearchForm.js';
 
 const Collection = () => {
     const {
         isCollectionEmpty,
         collectionCardNames,
-        collectionInputRef
+        collectionInputRef,
+        setSearchTerm
     } = useSearch();
 
     const location = useLocation();
-    const { searchProduct, loading } = useSearchForm(location.pathname);
 
     useEffect(() => {
         // if (!isCollectionEmpty) {
@@ -40,14 +38,9 @@ const Collection = () => {
                         <Button
                             id={'collection-btn'}
                             classList='bg-success'
-                            handleClick={(e) => searchProduct('All Cards')}
+                            handleClick={(e) => setSearchTerm('All Cards')}
                         >
-                            {
-                                !loading ?
-                                    'All Cards' :
-                                    <Loader classList='box-size-5 relative bg-transparent color-light margin-auto' />
-                            }
-
+                            All Cards
                         </Button>
                     </SearchForm>
             }

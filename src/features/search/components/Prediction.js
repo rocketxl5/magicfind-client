@@ -6,13 +6,13 @@ const Prediction = (props) => {
         index
     } = props;
 
-    const { marker, searchTerm, setCardName } = useSearch();
+    const { marker, searchTerm } = useSearch();
 
     const handleMouseEnter = (e) => {
         e.target.classList.add('bg-grey');
-        // Sets prediction as search input value when mouse hovers on it 
+        // Sets prediction as search input value when mouse hovers on it
         // Set card name if form submitted
-        setCardName(prediction);
+
     };
 
     const handleMouseOut = (e) => {
