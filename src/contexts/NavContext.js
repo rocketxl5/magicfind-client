@@ -1,8 +1,8 @@
 import { useState, useRef, createContext } from 'react';
 
-export const NavbarContext = createContext(null);
+export const NavContext = createContext(null);
 
-export const NavigationProvider = ({ children }) => {
+export const NavProvider = ({ children }) => {
     const [displayMenu, setDisplayMenu] = useState(false);
     const [displaySearchBar, setDisplaySearchBar] = useState(false);
     const [switchOn, setSwitchOn] = useState(true);
@@ -15,7 +15,7 @@ export const NavigationProvider = ({ children }) => {
     const searchBtnRef = useRef(null);
 
     return (
-        <NavbarContext.Provider
+        <NavContext.Provider
             value={{
                 displayMenu,
                 setDisplayMenu,
@@ -32,6 +32,6 @@ export const NavigationProvider = ({ children }) => {
             }}
         >
             {children}
-        </NavbarContext.Provider>
+        </NavContext.Provider>
     )
 }

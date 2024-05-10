@@ -1,13 +1,14 @@
 import { useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import Page from '../../components/Page';
-import Message from '../../components/Message.js';
-import SearchForm from './SearchForm.js';
-import Button from '../../components/Button';
-import useSearch from '../../hooks/contexthooks/useSearch';
-import useAuth from '../../hooks/contexthooks/useAuth.js';
-import useFetch from '../../hooks/useFetch.js';
-import useConfig from '../../hooks/useConfig.js';
+import Page from '../components/Page.js';
+import Message from '../components/Message.js';
+import SearchForm from '../features/search/SearchForm.js';
+import Button from '../components/Button.js';
+import useSearch from '../hooks/contexthooks/useSearch.js';
+import useAuth from '../hooks/contexthooks/useAuth.js';
+import useFetch from '../hooks/useFetch.js';
+import useConfig from '../hooks/useConfig.js';
+
 
 const Collection = () => {
     const {
@@ -20,13 +21,11 @@ const Collection = () => {
     const { fetchOne, response, error } = useFetch();
     const { config, getConfig } = useConfig();
 
-    const location = useLocation(); 
+    const location = useLocation();
     const navigate = useNavigate();
 
     useEffect(() => {
-        // if (!isCollectionEmpty) {
-            collectionInputRef.current?.focus();
-        // }
+        collectionInputRef.current?.focus();
     }, []);
 
     useEffect(() => {
@@ -45,7 +44,7 @@ const Collection = () => {
         <Page name={'collection'} title={'Collection'}>
             {
                 isCollectionEmpty ?
-                    <Message type={'collection'} /> :                   
+                    <Message type={'collection'} /> :
                     <SearchForm
                         type={'collection'}
                         classList={'search-input'}

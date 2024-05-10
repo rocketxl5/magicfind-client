@@ -1,38 +1,34 @@
+///////////////////////////////////////////////////////////////////////
+//    Updates search input & prediction list @ SearchForm            //
+//    Tracks mouse events & updates tracker position @ Autocomplete  //
+///////////////////////////////////////////////////////////////////////
 export const searchReducer = (state, action) => {
     switch (action.type) {
-        case 'update-input':
+        case 'set-search':
             return {
                 ...state,
-                cardNames: action.payload.cardNames,
-                isActive: action.payload.isActive,
-                searchInput: action.payload.searchInput,
-                searchType: action.payload.searchType,
+                ...action.payload
             }
-        case 'update-value':
+        case 'update-search':
             return {
                 ...state,
-                inputValue: action.payload
+                ...action.payload
             }
-        case 'update-marker':
+        case 'launch-search':
             return {
                 ...state,
-                marker: action.payload
+                searchTerm: action.payload
             }
-        // case 'update-cart':
-        //     return {
-        //         ...state,
-        //         itemsCount: action.payload.itemsCount,
-        //         subTotal: action.payload.subTotal
-        //     }
-        // case 'delete-item':
-        //     return {
-        //         ...state,
-        //         cartItems: action.payload
-        //     }
+        case 'track-scroll':
+            return {
+                ...state,
+                tracker: action.payload.tracker,
+                position: action.payload.position,
+            }
         default:
             return {
                 ...state,
-                // itemsCount: 0
-            }
+                    error: 'Oups! Something went wrong'
+                }
     }
 }

@@ -17,7 +17,8 @@ const MainHeader = () => {
     setUpdateCollection,
     setCatalogCardNames,
     catalogCardNames,
-    catalogInputRef
+    catalogInputRef,
+
   } = useSearch();
 
   // Setting catalog card names for autocomplete catalog search

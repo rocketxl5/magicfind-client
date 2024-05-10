@@ -1,18 +1,15 @@
 import useSearch from '../../../hooks/contexthooks/useSearch';
+import { useEffect } from 'react';
 
-const Prediction = (props) => {
-    const {
-        prediction,
-        index
-    } = props;
+const Prediction = ({ index, prediction }) => {
 
-    const { marker, searchTerm } = useSearch();
+    const { tracker, inputValue } = useSearch();
 
+    useEffect(() => {
+        console.log(inputValue)
+    }, [inputValue])
     const handleMouseEnter = (e) => {
         e.target.classList.add('bg-grey');
-        // Sets prediction as search input value when mouse hovers on it
-        // Set card name if form submitted
-
     };
 
     const handleMouseOut = (e) => {
@@ -20,11 +17,11 @@ const Prediction = (props) => {
     };
 
 
-    const Value = ({ prediction, searchTerm }) => {
+    const Value = ({ prediction, value }) => {
         // Gets the index of the first letter matching searchTerm in name string
-        const firstIndex = prediction.toLowerCase().indexOf(searchTerm.toLowerCase());
-        // Gets the index of the last letter matching searchTerm in name string
-        const lastIndex = firstIndex + searchTerm.length;
+        const firstIndex = prediction.toLowerCase().indexOf(value.toLowerCase());
+        // Gets the index of the last letter matching inputValue in name string
+        const lastIndex = firstIndex + value.length;
         const head = prediction.substring(0, firstIndex);
         const body = prediction.substring(firstIndex, lastIndex);
         const tail = prediction.substring(lastIndex, prediction.length);
@@ -36,11 +33,11 @@ const Prediction = (props) => {
     return (
         <li
             id={prediction}
-            className={index === marker ? 'prediction bg-grey' : 'prediction'}
+            className={index === tracker ? 'prediction bg-grey' : 'prediction'}
             onMouseEnter={handleMouseEnter}
             onMouseOut={handleMouseOut}
         >
-            {<Value searchTerm={searchTerm} prediction={prediction} />}
+            {<Value value={inputValue} prediction={prediction} />}
         </li>
     );
 };

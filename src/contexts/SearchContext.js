@@ -6,12 +6,14 @@ const initialState = {
   cardNames: [],
   inputValue: '',
   isActive: false,
-  marker: -1,
+  tracker: -1,
+  position: -200,
   predictions: [],
   searchInput: null,
   searchResult: [],
   searchTerm: '',
   searchType: '',
+  error: ''
 }
 
 export const SearchContext = createContext(null);
@@ -20,23 +22,19 @@ export const SearchProvider = ({ children }) => {
 
   const [state, dispatch] = useReducer(searchReducer, initialState);
 
-  // const {
-  //   searchTerm,
-  //   inputValue,
-  //   searchResult,
-  //   predictions,
-  //   cardNames,
-  //   marker,
-  //   searchInput
-  // } = state || {};
-
-  // useEffect(() => {
-  //   if(searchResult.length)
-  // }, [searchResult])
-
-  const [searchInput, setSearchInput] = useState(null);
-  const [inputValue, setInputValue] = useState('');
-  const [searchTerm, setSearchTerm] = useState('');
+  const {
+    cardNames,
+    inputValue,
+    isActive,
+    tracker,
+    position,
+    predictions,
+    searchInput,
+    searchResult,
+    searchTerm,
+    searchType,
+    error
+  } = state || {};
 
   const [cardCollection, setCardCollection] = useState([]);
 
@@ -52,10 +50,6 @@ export const SearchProvider = ({ children }) => {
 
   // Mount state @ Collection initial fetch 
   const [isCollectionEmpty, setIsCollectionEmpty] = useState(true);
-  const [displayAutcomplete, setDisplayAutocomplete] = useState(false);
-  const [predictions, setPredictions] = useState([]);
-  const [cardNames, setCardNames] = useState([]);
-  const [marker, setMarker] = useState(-1);
 
   const { auth } = useAuth();
 
@@ -63,9 +57,6 @@ export const SearchProvider = ({ children }) => {
   const catalogInputRef = useRef(null);
   const collectionInputRef = useRef(null);
   const archiveInputRef = useRef(null);
-
-  // *** New Code *** //
-  const inputRef = useRef(null);
 
   useEffect(() => {
     setUpdateCatalog(true);
@@ -93,16 +84,10 @@ export const SearchProvider = ({ children }) => {
   return (
     <SearchContext.Provider
       value={{
-        inputValue,
-        setInputValue,
         cardCollection,
         setCardCollection,
         isCollectionEmpty,
         setIsCollectionEmpty,
-        marker,
-        setMarker,
-        cardNames,
-        setCardNames,
         archiveCardNames,
         setArchiveCardNames,
         collectionCardNames,
@@ -115,22 +100,24 @@ export const SearchProvider = ({ children }) => {
         catalogCardNames,
         updateCatalog,
         setUpdateCatalog,
-        searchInput, 
-        setSearchInput,
-        searchTerm,
-        setSearchTerm,
-        predictions,
-        setPredictions,
         filterUserCards,
         filterCardNames,
-        displayAutcomplete,
-        setDisplayAutocomplete,
         catalogInputRef,
         collectionInputRef,
         archiveInputRef,
 
-        dispatch,
-        inputRef
+        cardNames,
+        inputValue,
+        isActive,
+        tracker,
+        position,
+        predictions,
+        searchInput,
+        searchResult,
+        searchTerm,
+        searchType,
+        error,
+        dispatch
       }}
     >
       {children}

@@ -1,8 +1,8 @@
 import { useContext } from 'react';
-import { NavbarContext } from '../../contexts/NavbarContext';
+import { NavContext } from '../../contexts/NavContext';
 
 const useSearch = () => {
-    return useContext(NavbarContext);
+    return useContext(NavContext);
 }
 
 export default useSearch;

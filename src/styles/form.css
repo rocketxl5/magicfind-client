@@ -369,7 +369,6 @@ input#archive:focus {
 
   .prediction {
     padding: 0.8em;
-    border-bottom: 1px solid var(--clr-light);
     color:  var(--clr-dark);
   }
 

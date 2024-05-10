@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import AutoComplete from './components/AutoComplete';
 import Loader from '../../layout/Loader';
 import useBlur from '../../hooks/useBlur';
@@ -6,108 +6,88 @@ import useFocus from '../../hooks/useFocus';
 import useNavbar from '../../hooks/contexthooks/useNavbar';
 import useSearch from '../../hooks/contexthooks/useSearch';
 import useSearchForm from '../../hooks/useSearchForm';
-import { searchReducer } from './services/searchReducer';
 
-// const initialState = {
-//     searchType: '',
-//     searchTerm: '',
-//     inputValue: '',
-//     searchResult: [],
-//     predictions: [],
-//     cardNames: [],
-//     marker: -1,
-//     searchInput: null
-// }
-const SearchForm = ({ children, classList, type, pathname, placeholder, cardNames }) => {
-    const [isActive, setIsActive] = useState(false);
-    const [oracleID, setOracleID] = useState(null);
-    const {
-        inputValue,
-        setInputValue,
-        setMarker,
-        searchTerm,
-        setSearchTerm,
-        searchInput,
-        setPredictions,
-        setCardNames,
-        displayAutcomplete,
-        setDisplayAutocomplete,
-        predictions,
-
-        dispatch,
-        marker,
-        inputRef
-    } = useSearch();
+const SearchForm = ({ children, classList, type, pathname, placeholder, cardNames, inputRef }) => {
+    // const [oracleID, setOracleID] = useState(null);
 
     const { updateBlur } = useBlur();
     const { updateFocus } = useFocus();
     const { searchBarRef } = useNavbar();
-    const { loading } = useSearchForm(pathname, type);
+    const { 
+        inputValue,
+        predictions,
+        isActive,
+        dispatch,
+        searchTerm
+    } = useSearch();
 
-    // const [state, dispatch] = useReducer(searchReducer, initialState);
-
-    // const {
-    //   searchTerm,
-    //   inputValue,
-    //   searchResult,
-    //   predictions,
-    //   cardNames,
-    //   marker,
-    //   searchInput
-    // } = state || {};
+    const { loading } = useSearchForm(pathname);
 
     useEffect(() => {
-        if (searchInput?.id === type) {
-            setIsActive(true);
-        } else {
-            setIsActive(false);
+        if (searchTerm) {
+            console.log(searchTerm)
         }
-    }, [searchInput]);
-
-    useEffect(() => {
-        if (isActive) {
-            setCardNames(cardNames);
-        }
-    }, [isActive])
+    }, [searchTerm]);
 
     const handleChange = (e) => {
         const value = e.target.value;
 
+        console.log(isActive)
+
         if (value.length >= 3) {
-            // Reset Marker to initial value
-            setMarker(-1);
+
             dispatch({
-                type: 'update-value',
-                payload: marker
+                type: 'update-search',
+                payload: {
+                    // tracker: -1,
+                    // isActive: inputRef.current === document.activeElement,
+                    inputValue: value,
+                    predictions: cardNames?.filter((title) => {
+                        return title.toLowerCase().includes(value.toLowerCase())
+                    }),
+                }
             });
 
-            const filteredCardTitles = cardNames?.filter((title) => {
-                return title.toLowerCase().includes(value.toLowerCase());
-            });
-            !displayAutcomplete && setDisplayAutocomplete(true)
-            setPredictions(filteredCardTitles);
         }
         else {
-            setDisplayAutocomplete(false);
+
+            dispatch({
+                type: 'update-search',
+                payload: {
+                    // isActive: inputRef.current === document.activeElement,
+                    inputValue: value,
+                    predictions: [],
+                }
+            });
         }
-        // setSearchTerm(value);
-        dispatch({
-            type: 'update-value',
-            payload: value
-        });
-        setInputValue(value);
     };
 
     const handleBlur = (e) => {
-        if (!searchTerm) {
-            updateBlur(type === 'catalog' ? true : false);
-        }
+
+        // updateBlur(type === 'catalog' ? true : false);
+
     }
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        // console.log(predictions[0])
-        setSearchTerm(predictions[0]);
+        dispatch({
+            type: 'launch-search',
+            payload: predictions[0]
+        });
+
+    }
+
+    const handleFocus = (e) => {
+        console.log(e.target === document.activeElement)
+        dispatch({
+            type: 'set-search',
+            payload: {
+                cardNames: cardNames,
+                isActive: e.target === document.activeElement,
+                searchInput: e.target,
+                searchType: e.target.id,
+            }
+        });
     }
 
     return (
@@ -117,31 +97,14 @@ const SearchForm = ({ children, classList, type, pathname, placeholder, cardName
                     id={type}
                     type="text"
                     className={classList}
-                    // Value changes 
-                    // @ keyboard [SearchInput]
-                    // @ arrowup/arrowdown [Autocomplete] 
-                    // @ mousehover [Prediction]
                     value={isActive ? inputValue : ''}
                     onChange={handleChange}
-                    onFocus={(e) => {
-                        dispatch({
-                            type: 'update-input',
-                            payload: {
-                                isActive: true,
-                                cardNames: cardNames,
-                                searchInput: e.target,
-                                searchType: e.target.id,
-                            }
-                        });
-                        updateFocus(e.target);
-                    }}
+                    onFocus={handleFocus}
                     onBlur={handleBlur}
-                    ref={inputRef}
                     placeholder={placeholder}
+                    ref={inputRef}
                 />
-                {isActive &&
-                    <AutoComplete />
-                }
+                {(predictions.length > 0 && isActive) && <AutoComplete />}
                 {loading && <Loader classList={'box-size-6 right-1'} />}
             </form>
             {children}

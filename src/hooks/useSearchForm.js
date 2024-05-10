@@ -7,13 +7,18 @@ import useBlur from './useBlur';
 import setQueryString from '../features/search/services/setQueryString';
 
 const useSearchForm = (pathname, type) => {
+
     const [query, setQuery] = useState('');
+
+    const { searchTerm, inputValue } = useSearch();
+
     const navigate = useNavigate();
 
     const { updateBlur } = useBlur();
     const { fetchOne, error, response, loading } = useFetch();
-    const { dispatch, setPredictions, setInputValue, setSearchTerm, searchTerm } = useSearch();
+
     const { url, config, getUrl } = useUrl();
+    useEffect(() => { console.log(inputValue) }, [inputValue])
 
     useEffect(() => {
         // console.log('searchTerm', searchTerm)
@@ -22,8 +27,8 @@ const useSearchForm = (pathname, type) => {
         // setPredictions([]);
         // setSearchTerm('');
         if (searchTerm) {
-            setPredictions([]);
-            setInputValue(searchTerm);
+            // setPredictions([]);
+            // setInputValue(searchTerm);
             setTimeout(() => {
                 // setQuery(setQueryString(searchTerm, '-'));
                 getUrl(`${pathname}/${setQueryString(searchTerm, '-')}`)
@@ -40,8 +45,8 @@ const useSearchForm = (pathname, type) => {
 
     useEffect(() => {
         if (url && config) {
-            setInputValue('')
-            setSearchTerm('');
+            // setInputValue('')
+            // setSearchTerm('');
             // console.log('url', url)
             fetchOne(url, config);
         }
