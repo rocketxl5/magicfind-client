@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
-import Loader from '../layout/Loader';
-import Page from '../components/Page';
-import useFetch from '../hooks/useFetch';
-import useAuth from '../hooks/contexthooks/useAuth';
+import Loader from '../../layout/Loader';
+import Page from '../../components/Page';
+import useFetch from '../../hooks/useFetch';
+import useAuth from '../../hooks/contexthooks/useAuth';
 
 const Store = () => {
     const [hasLoaded, setHasLoaded] = useState(false);

@@ -14,28 +14,29 @@ import PrivateRoutes from './routes/PrivateRoutes';
 import PublicRoutes from './routes/PublicRoutes';
 import RestrictedRoutes from './routes/RestrictedRoutes';
 
-// Views
+// Public pages
+import About from './pages/public/About';
+import Contact from './pages/public/Contact';
+import Home from './pages/public/Home';
 import Login from './auth/Login';
+import NotFound from './pages/public/NotFound';
+import Product from './pages/public/Product';
+import SearchResults from './pages/public/SearchResults';
+import Seller from './pages/public/Seller';
+import ShoppingCart from './pages/public/ShoppingCart';
 import Signup from './auth/Signup';
-import Settings from './auth/Settings';
-import ResetPassword from './auth/ResetPassword';
-import AuthPage from './pages/AuthPage';
-import Home from './pages/Home';
-import Contact from './pages/Contact';
-import About from './pages/About';
-import Profile from './pages/Profile';
-import SearchResults from './pages/SearchResults';
 
-import NotFound from './pages/NotFound';
-import ShoppingCart from './pages/ShoppingCart';
-import DashBoard from './pages/DashBoard';
-import Archive from './pages/Archive';
-import Collection from './pages/Collection';
-import Store from './pages/Store';
-import Checkout from './pages/Checkout';
-import MailBox from './features/mail/MailBox';
-import Seller from './pages/Seller';
-import Product from './pages/Product';
+// Private pages
+import Archive from './pages/private/Archive';
+import AuthPage from './pages/private/AuthPage';
+import Checkout from './pages/private/Checkout';
+import Collection from './pages/private/Collection';
+import DashBoard from './pages/private/DashBoard';
+import MailBox from './pages/private/MailBox';
+import Profile from './pages/private/Profile';
+import ResetPassword from './pages/private/ResetPassword';
+import Settings from './pages/private/Settings';
+import Store from './pages/private/Store';
 
 // Hooks
 import useAuth from './hooks/contexthooks/useAuth';

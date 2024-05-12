@@ -1,5 +1,5 @@
 import { useLocation } from 'react-router-dom';
-import Page from '../components/Page';
+import Page from '../../components/Page';
 
 const Product = () => {
     const location = useLocation();

@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
-import Loader from '../layout/Loader';
-import useFetch from '../hooks/useFetch';
+import Loader from '../../layout/Loader';
+import useFetch from '../../hooks/useFetch';
 
 const Seller = () => {
     const [hasLoaded, setHasLoaded] = useState(false);

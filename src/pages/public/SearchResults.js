@@ -1,18 +1,18 @@
 import { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import ArchiveItem from '../features/product/ArchiveItem';
-import CollectionItem from '../features/product/CollectionItem';
-import CatalogItem from '../features/product/CatalogItem';
-import Modal from '../features/modal/Modal';
-import List from '../components/List';
-import ListItem from '../components/ListItem';
-import Page from '../components/Page';
-import SearchParameters from '../features/search/components/SearchParameters';
-import useCollectionModal from '../hooks/useCollectionModal';
-import useSlideView from '../hooks/useSlideView';
-import useImageLoader from '../hooks/useImageLoader';
-import useFetch from '../hooks/useFetch';
-import useUrl from '../hooks/useUrl';
+import ArchiveItem from '../../features/product/ArchiveItem';
+import CollectionItem from '../../features/product/CollectionItem';
+import CatalogItem from '../../features/product/CatalogItem';
+import Modal from '../../features/modal/Modal';
+import List from '../../components/List';
+import ListItem from '../../components/ListItem';
+import Page from '../../components/Page';
+import SearchParameters from '../../features/search/components/SearchParameters';
+import useCollectionModal from '../../hooks/useCollectionModal';
+import useSlideView from '../../hooks/useSlideView';
+import useImageLoader from '../../hooks/useImageLoader';
+import useFetch from '../../hooks/useFetch';
+import useUrl from '../../hooks/useUrl';
 
 const SearchResults = () => {
     // States
@@ -44,7 +44,7 @@ const SearchResults = () => {
         else {
             // getUrl(location.pathname);
         }
-    }, []) 
+    }, [])
 
     // useEffect(() => {
     //     if (url && config) {
@@ -104,9 +104,9 @@ const SearchResults = () => {
                     <SearchParameters
                         setSearchFeatures={(value) => setSearchFeatures(value)}
                         searchFeatures={searchFeatures}
-                    /> 
+                    />
 
-                        <List classList="list align-center">
+                    <List classList="list align-center">
                         {
                             result?.cards &&
                             result.cards.map((card, i) => {

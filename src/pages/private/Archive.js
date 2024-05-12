@@ -1,13 +1,13 @@
 import { useRef, useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import Page from '../components/Page.js';
-import Loader from '../layout/Loader.js';
-import SearchForm from '../features/search/SearchForm.js';
-import useSearch from '../hooks/contexthooks/useSearch.js';
-import useNavbar from '../hooks/contexthooks/useNavbar.js';
+import Page from '../../components/Page.js';
+import Loader from '../../layout/Loader.js';
+import SearchForm from '../../features/search/SearchForm.js';
+import useSearch from '../../hooks/contexthooks/useSearch.js';
+import useNavbar from '../../hooks/contexthooks/useNavbar.js';
 // import useAuth from '../../hooks/contexthooks/useAuth.js';
-import setQueryString from '../features/search/services/setQueryString.js';
-import { api } from '../api/resources.js';
+import setQueryString from '../../features/search/services/setQueryString.js';
+import { api } from '../../api/resources.js';
 
 const Search = () => {
     // States
