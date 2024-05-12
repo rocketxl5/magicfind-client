@@ -5,15 +5,12 @@ import useAuth from '../hooks/contexthooks/useAuth';
 const initialState = {
   cardNames: [],
   inputValue: '',
-  isActive: false,
   tracker: -1,
   position: -200,
   predictions: [],
-  searchInput: null,
   searchResult: [],
   searchTerm: '',
-  searchType: '',
-  error: ''
+  searchType: ''
 }
 
 export const SearchContext = createContext(null);
@@ -25,15 +22,12 @@ export const SearchProvider = ({ children }) => {
   const {
     cardNames,
     inputValue,
-    isActive,
     tracker,
     position,
     predictions,
-    searchInput,
     searchResult,
     searchTerm,
-    searchType,
-    error
+    searchType
   } = state || {};
 
   const [cardCollection, setCardCollection] = useState([]);
@@ -107,16 +101,14 @@ export const SearchProvider = ({ children }) => {
         archiveInputRef,
 
         cardNames,
+        initialState,
         inputValue,
-        isActive,
+        searchType,
         tracker,
         position,
         predictions,
-        searchInput,
         searchResult,
         searchTerm,
-        searchType,
-        error,
         dispatch
       }}
     >

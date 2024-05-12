@@ -5,10 +5,8 @@ import useSearch from '../../../hooks/contexthooks/useSearch';
 const AutoComplete = () => {
     const {
         tracker,
-        searchTerm,
         position,
         predictions,
-        displayAutcomplete,
         dispatch
     } = useSearch();
 

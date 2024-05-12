@@ -1,73 +1,88 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import useAuth from './contexthooks/useAuth';
 import useFetch from './useFetch';
-import useSearch from './contexthooks/useSearch';
-import useUrl from './useUrl';
-import useBlur from './useBlur';
-import setQueryString from '../features/search/services/setQueryString';
 
-const useSearchForm = (pathname, type) => {
-
-    const [query, setQuery] = useState('');
-
-    const { searchTerm, inputValue } = useSearch();
+const useSearchForm = (type = null, clearSearch) => {
+    const [fetchParams, setFetchParams] = useState(null);
 
     const navigate = useNavigate();
 
-    const { updateBlur } = useBlur();
+    const { auth } = useAuth();
+
     const { fetchOne, error, response, loading } = useFetch();
 
-    const { url, config, getUrl } = useUrl();
-    useEffect(() => { console.log(inputValue) }, [inputValue])
+    const prefix = '/api/cards';
+
+    const params = {
+        archive: {
+            query: `${prefix}/archive/${auth?.user.id}`,
+            config: {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'auth-token': auth?.token
+                },
+            },
+            ref: `/me/archive`
+        },
+        catalog: {
+            query: `${prefix}/catalog`,
+            config: {
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            },
+            ref: '/catalog'
+        },
+        collection: {
+            query: `${prefix}/collection/${auth?.user.id}`,
+            config: {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'auth-token': auth?.token
+                },
+            },
+            ref: `/me/collection`
+        },
+    }
+
+    const search = (searchTerm) => {
+        const term = searchTerm.toLowerCase()
+            .replaceAll(/["/,]/g, '')
+            .split(' ')
+            .join('-');
+
+        setFetchParams({
+            url: `${params[type].query}/${term}`,
+            config: params[type].config,
+            target: `${params[type].ref}/${term}`,
+            term: term
+        });
+    }
 
     useEffect(() => {
-        // console.log('searchTerm', searchTerm)
-        // console.log('type', type)
-        // setInputValue(searchTerm);
-        // setPredictions([]);
-        // setSearchTerm('');
-        if (searchTerm) {
-            // setPredictions([]);
-            // setInputValue(searchTerm);
-            setTimeout(() => {
-                // setQuery(setQueryString(searchTerm, '-'));
-                getUrl(`${pathname}/${setQueryString(searchTerm, '-')}`)
-            }, 200)
-        }
-    }, [searchTerm])
-
-    // useEffect(() => {
-    //     if (query) {
-    //         console.log('query', query)
-    //         getUrl(`${pathname}/${query}`)
-    //     }
-    // }, [query])
-
-    useEffect(() => {
-        if (url && config) {
-            // setInputValue('')
-            // setSearchTerm('');
-            // console.log('url', url)
+        if (fetchParams) {
+            const { url, config } = fetchParams;
             fetchOne(url, config);
         }
-    }, [url, config])
+    }, [fetchParams])
 
     useEffect(() => {
         if (response) {
-            // Pass boolean flag to reset switchOn state
-            console.log(response)
-            // updateBlur(response.search === 'catalog' ? true : false);
-            // localStorage.setItem('search-results', JSON.stringify({ ...response }));
-            // navigate(`${pathname}/${query}`, { state: { ...response } });
+            const { target } = fetchParams;
+            localStorage.setItem('search-results', JSON.stringify({ ...response }));
+            navigate(target, { state: { ...response } });
         }
         if (error) {
+            const { term } = fetchParams;
+            navigate(`/not-found/${term}`);
             console.error(error)
-            // navigate(`/not-found/${query}`);
         }
 
+        clearSearch();
     }, [error, response])
 
-    return { loading }
+    return { search, loading }
 }
 
 export default useSearchForm

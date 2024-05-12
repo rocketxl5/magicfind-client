@@ -9,7 +9,6 @@ import useAuth from '../hooks/contexthooks/useAuth.js';
 import useFetch from '../hooks/useFetch.js';
 import useConfig from '../hooks/useConfig.js';
 
-
 const Collection = () => {
     const {
         isCollectionEmpty,
@@ -30,7 +29,7 @@ const Collection = () => {
 
     useEffect(() => {
         if (config) {
-            fetchOne(`/api/cards/collection/${auth.user.id}`, config)
+            fetchOne(`/api/cards/collection/${auth.user.id}`, config);
         }
     }, [config]);
 
@@ -48,7 +47,6 @@ const Collection = () => {
                     <SearchForm
                         type={'collection'}
                         classList={'search-input'}
-                        pathname={location.pathname}
                         placeholder={'Search Collection'}
                         cardNames={collectionCardNames}
                         inputRef={collectionInputRef}

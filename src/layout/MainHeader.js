@@ -53,7 +53,6 @@ const MainHeader = () => {
         <SearchForm
           type={'catalog'}
           classList={'search-catalog-input'}
-          pathname={'/catalog'}
           placeholder={'Search Magic Find'}
           cardNames={catalogCardNames}
           inputRef={catalogInputRef}

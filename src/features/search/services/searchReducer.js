@@ -19,6 +19,10 @@ export const searchReducer = (state, action) => {
                 ...state,
                 searchTerm: action.payload
             }
+        case 'clear-search':
+            return {
+                ...action.payload
+            }
         case 'track-scroll':
             return {
                 ...state,

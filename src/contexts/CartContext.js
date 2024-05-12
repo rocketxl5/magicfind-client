@@ -11,6 +11,7 @@ const initialState = {
 export const CartContext = createContext(null);
 
 export const CartProvider = ({ children }) => {
+
   const [cartUpdate, setCartUpdate] = useState([]);
 
   const [state, dispatch] = useReducer(cartReducer, initialState);

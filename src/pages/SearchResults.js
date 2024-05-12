@@ -27,6 +27,7 @@ const SearchResults = () => {
 
     const { url, config, getUrl } = useUrl();
 
+
     const [imagesLoaded] = useImageLoader(result?.cards);
 
     const [view, updateSlideView] = useSlideView(handleSlideView);
@@ -41,26 +42,26 @@ const SearchResults = () => {
             setResult({ ...location.state })
         }
         else {
-            getUrl(location.pathname);
+            // getUrl(location.pathname);
         }
     }, []) 
 
-    useEffect(() => {
-        if (url && config) {
-            fetchOne(url, config);
-        }
-    }, [url, config])
+    // useEffect(() => {
+    //     if (url && config) {
+    //         fetchOne(url, config);
+    //     }
+    // }, [url, config])
 
-    useEffect(() => {
-        // If response is defined
-        if (response) {
-            // console.log(response)
-            // Set result
-            setResult({ ...response })
-            // Set localStorage
-            localStorage.setItem('search-results', JSON.stringify(response))
-        }
-    }, [response])
+    // useEffect(() => {
+    //     // If response is defined
+    //     if (response) {
+    //         // console.log(response)
+    //         // Set result
+    //         setResult({ ...response })
+    //         // Set localStorage
+    //         localStorage.setItem('search-results', JSON.stringify(response))
+    //     }
+    // }, [response])
 
     // Validation for collection search result
     useEffect(() => {
