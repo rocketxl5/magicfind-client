@@ -17,7 +17,8 @@ export const searchReducer = (state, action) => {
         case 'launch-search':
             return {
                 ...state,
-                searchTerm: action.payload
+                searchTerm: action.payload,
+                inputValue: action.payload
             }
         case 'clear-search':
             return {

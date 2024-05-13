@@ -3,6 +3,7 @@ import { searchReducer } from '../features/search/services/searchReducer';
 import useAuth from '../hooks/contexthooks/useAuth';
 
 const initialState = {
+  blur: false,
   cardNames: [],
   inputValue: '',
   tracker: -1,

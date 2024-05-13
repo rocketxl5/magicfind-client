@@ -21,7 +21,7 @@ const Prediction = ({ index, prediction }) => {
         const body = prediction.substring(firstIndex, lastIndex);
         const tail = prediction.substring(lastIndex, prediction.length);
         return (
-            <span>{head}<strong>{body}</strong>{tail}</span>
+            <>{head}<strong>{body}</strong>{tail}</>
         );
     }
 

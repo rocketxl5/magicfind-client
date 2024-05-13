@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import useAuth from './contexthooks/useAuth';
 import useFetch from './useFetch';
+import useSearch from './contexthooks/useSearch';
 
 const useSearchForm = (inputRef) => {
     const [fetchParams, setFetchParams] = useState(null);
@@ -10,9 +11,55 @@ const useSearchForm = (inputRef) => {
 
     const { auth } = useAuth();
 
+    const {
+        dispatch,
+        initialState
+    } = useSearch();
+
     const { fetchOne, error, response, loading } = useFetch();
 
     const prefix = '/api/cards';
+
+    function setSearch(names, type) {
+        dispatch({
+            type: 'set-search',
+            payload: {
+                cardNames: names,
+                searchType: type,
+            }
+        });
+    }
+
+    function updateSearch(value, predictions) {
+        dispatch({
+            type: 'update-search',
+            payload: {
+                inputValue: value,
+                predictions: predictions
+            }
+        });
+    }
+
+    function updateValue(value) {
+        dispatch({
+            type: 'update-value',
+            payload: value
+        })
+    }
+
+    function clearSearch() {
+        dispatch({
+            type: 'clear-search',
+            payload: initialState
+        })
+    }
+
+    function launchSearch(term) {
+        dispatch({
+            type: 'launch-search',
+            payload: term
+        });
+    }
 
     const params = {
         archive: {
@@ -69,6 +116,7 @@ const useSearchForm = (inputRef) => {
 
     useEffect(() => {
         if (response) {
+            inputRef.current.blur();
             const { target } = fetchParams;
             localStorage.setItem('search-results', JSON.stringify({ ...response }));
             navigate(target, { state: { ...response } });
@@ -78,11 +126,9 @@ const useSearchForm = (inputRef) => {
             navigate(`/not-found/${term}`);
             console.error(error)
         }
-
-        inputRef.current?.blur();
     }, [error, response])
 
-    return { search, loading, response }
+    return { search, loading, setSearch, updateSearch, updateValue, launchSearch, clearSearch }
 }
 
 export default useSearchForm
