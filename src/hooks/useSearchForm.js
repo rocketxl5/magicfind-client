@@ -1,84 +1,88 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import useAuth from './contexthooks/useAuth';
 import useFetch from './useFetch';
-import useSearch from './contexthooks/useSearch';
-import useUrl from './useUrl';
-import useBlur from './useBlur';
-import setQueryString from '../features/search/services/setQueryString';
 
-const useSearchForm = (pathname) => {
-    const [query, setQuery] = useState('');
+const useSearchForm = (inputRef) => {
+    const [fetchParams, setFetchParams] = useState(null);
+
     const navigate = useNavigate();
 
-    const { updateBlur } = useBlur();
+    const { auth } = useAuth();
+
     const { fetchOne, error, response, loading } = useFetch();
-    const { cardName, predictions, searchTerm, setPredictions, setInputValue } = useSearch();
-    const { url, config, getUrl } = useUrl();
 
-    const searchProduct = (prediction, e) => {
-        e && e.preventDefault();
-        setQuery('');
+    const prefix = '/api/cards';
 
-        let term;
-        setPredictions([]);
-        if (prediction) {
-            setInputValue(prediction)
-            // click sur li
-            console.log('prediction', prediction)
-            term = prediction;
-        }
-            // else if (cardName) {
-            //     // mouseup ou down dans la liste + submit
-            //     console.log('cardName')
-            //     term = cardName;
-            // }
-            // else if (predictions.length === 1) {
-            //     // submit avec 1 choix
-            //     console.log('predictions[0]')
-            //     term = predictions[0];
-            // }
-        else {
-            // 404
-            console.log('searchTerm')
-            term = searchTerm;
-        }
-        // else {
-        //     console.log('inputValue')
-        //     term = inputValue;
-        // }
+    const params = {
+        archive: {
+            query: `${prefix}/archive/${auth?.user.id}`,
+            config: {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'auth-token': auth?.token
+                },
+            },
+            ref: `/me/archive`
+        },
+        catalog: {
+            query: `${prefix}/catalog`,
+            config: {
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            },
+            ref: '/catalog'
+        },
+        collection: {
+            query: `${prefix}/collection/${auth?.user.id}`,
+            config: {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'auth-token': auth?.token
+                },
+            },
+            ref: `/me/collection`
+        },
+    }
 
-        setTimeout(() => {
-            setQuery(setQueryString(term, '-'));
-        }, 200)
+    const search = (searchTerm, type) => {
+        const term = searchTerm.toLowerCase()
+            .replaceAll(/["/,]/g, '')
+            .split(' ')
+            .join('-');
+
+        setFetchParams({
+            url: `${params[type].query}/${term}`,
+            config: params[type].config,
+            target: `${params[type].ref}/${term}`,
+            term: term
+        });
     }
 
     useEffect(() => {
-        if (query) {
-            getUrl(`${pathname}/${query}`)
-        }
-    }, [query])
-
-    useEffect(() => {
-        if (url && config) {
+        if (fetchParams) {
+            const { url, config } = fetchParams;
             fetchOne(url, config);
         }
-    }, [url, config])
+    }, [fetchParams])
 
     useEffect(() => {
         if (response) {
-            // Pass boolean flag to reset isSearchBarDisplayed state
-            updateBlur(true);
+            const { target } = fetchParams;
             localStorage.setItem('search-results', JSON.stringify({ ...response }));
-            navigate(`${pathname}/${query}`, { state: { ...response } });
+            navigate(target, { state: { ...response } });
         }
         if (error) {
+            const { term } = fetchParams;
+            navigate(`/not-found/${term}`);
             console.error(error)
-            navigate(`/not-found/${query}`);
         }
 
+        inputRef.current?.blur();
     }, [error, response])
 
-    return { searchProduct, loading }
+    return { search, loading, response }
 }
 
 export default useSearchForm

@@ -14,9 +14,8 @@ const DashboardNav = () => {
         setCollectionCardNames,
         setUpdateCollection,
         updateCollection,
-        // isCollectionEmpty,
+        isCollectionEmpty,
         setIsCollectionEmpty,
-        setError,
         setCardCollection
     } = useSearch();
 
@@ -69,43 +68,52 @@ const DashboardNav = () => {
     // Setting collection card names for autocomplete collection search //
     //////////////////////////////////////////////////////////////////////
     useEffect(() => {
-        const headers = new Headers();
-        headers.append('Content-Type', 'application/json');
-        headers.append('auth-token', auth.token);
-        const options = {
-            method: 'GET',
-            headers: headers,
-        }
-
-        fetch(`${api.serverURL}/api/cards/collection/${auth.user.id}`, options)
-            .then(res => {
-                if (res.ok) {
-                    return res.json()
-                        .then((data) => {
-                            setCollectionCardNames(data.cardNames);
-                            setCardCollection(data.cards);
-                            // If length is 0 
-                            if (!data.cards.length) {
-                                setIsCollectionEmpty(true);
-                            }
-                            else {
-                                setIsCollectionEmpty(false);
-                            }
-                            // Reinitialize updateCollection to allow updates
-                            setUpdateCollection(false);
-                        })
-                }
-                else if (res.status === 400) {
-                    return res.json()
-                        .then((error) => {
-                            setError(error.message);
-                        })
-                }
+        if (updateCollection) {
+            const headers = new Headers();
+            headers.append('Content-Type', 'application/json');
+            headers.append('auth-token', auth.token);
+            headers.append('query', 'ids')
+            const options = {
+                method: 'GET',
+                headers: headers,
             }
-            )
-            .catch((error) => {
-                console.log(error)
-            });
+
+            fetch(`${api.serverURL}/api/cards/collection/${auth.user.id}`, options)
+                .then(res => {
+                    if (res.ok) {
+                        return res.json()
+                            .then((data) => {
+                                const ids = data.card.ids;
+                                const names = data.card.names;
+                                if (ids.length === 0 && names.length === 0) {
+                                    setIsCollectionEmpty(true);
+                                }
+                                else {
+                                    setCollectionCardNames(data.card.names);
+                                    setCardCollection(data.card.ids);
+                                    isCollectionEmpty && setIsCollectionEmpty(false)
+                                }
+                                setUpdateCollection(false)
+                            })
+                    }
+                    else if (res.status === 400) {
+                        return res.json()
+                            .then((error) => {
+                                console.log(error.message)
+                            })
+                    }
+                    else if (res.status === 500) {
+                        return res.json()
+                            .then((error) => {
+                                console.log(error.message)
+                            })
+                    }
+                }
+                )
+                .catch((error) => {
+                    console.log(error.message)
+                });
+        }
     }, [updateCollection])
     /* ////////////////////////////// End /////////////////////////// */
 

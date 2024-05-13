@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import useAuth from '../../hooks/contexthooks/useAuth';
+import useAuth from '../../../hooks/contexthooks/useAuth';
 
 const CartEmpty = () => {
     const { isAuth } = useAuth();

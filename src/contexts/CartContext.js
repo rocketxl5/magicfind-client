@@ -1,5 +1,5 @@
 import { useState, useEffect, useReducer, useRef, createContext } from 'react';
-import { cartReducer } from '../features/product/services/cartReducer';
+import { cartReducer } from '../features/cart/services/cartReducer';
 
 const initialState = {
   cartItems: [],
@@ -11,6 +11,7 @@ const initialState = {
 export const CartContext = createContext(null);
 
 export const CartProvider = ({ children }) => {
+
   const [cartUpdate, setCartUpdate] = useState([]);
 
   const [state, dispatch] = useReducer(cartReducer, initialState);

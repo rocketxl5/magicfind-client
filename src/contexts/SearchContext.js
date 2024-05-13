@@ -1,13 +1,34 @@
-import { useRef, useState, useEffect, createContext } from 'react';
+import { useState, useEffect, useReducer, useRef, createContext } from 'react';
+import { searchReducer } from '../features/search/services/searchReducer';
 import useAuth from '../hooks/contexthooks/useAuth';
+
+const initialState = {
+  cardNames: [],
+  inputValue: '',
+  tracker: -1,
+  position: -200,
+  predictions: [],
+  searchResult: [],
+  searchTerm: '',
+  searchType: ''
+}
+
 export const SearchContext = createContext(null);
 
 export const SearchProvider = ({ children }) => {
 
-  const [searchInput, setSearchInput] = useState(null);
-  const [inputValue, setInputValue] = useState('');
-  const [cardName, setCardName] = useState('');
-  const [searchTerm, setSearchTerm] = useState('');
+  const [state, dispatch] = useReducer(searchReducer, initialState);
+
+  const {
+    cardNames,
+    inputValue,
+    tracker,
+    position,
+    predictions,
+    searchResult,
+    searchTerm,
+    searchType
+  } = state || {};
 
   const [cardCollection, setCardCollection] = useState([]);
 
@@ -22,13 +43,7 @@ export const SearchProvider = ({ children }) => {
   const [updateArchive, setUpdateArchive] = useState(false);
 
   // Mount state @ Collection initial fetch 
-  const [error, setError] = useState('');
   const [isCollectionEmpty, setIsCollectionEmpty] = useState(true);
-  const [displayAutcomplete, setDisplayAutocomplete] = useState(false);
-  const [predictions, setPredictions] = useState([]);
-  const [cardNames, setCardNames] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [marker, setMarker] = useState(-1);
 
   const { auth } = useAuth();
 
@@ -63,20 +78,10 @@ export const SearchProvider = ({ children }) => {
   return (
     <SearchContext.Provider
       value={{
-        inputValue,
-        setInputValue,
         cardCollection,
         setCardCollection,
-        error,
-        setError,
         isCollectionEmpty,
         setIsCollectionEmpty,
-        marker,
-        setMarker,
-        loading,
-        setLoading,
-        cardNames,
-        setCardNames,
         archiveCardNames,
         setArchiveCardNames,
         collectionCardNames,
@@ -89,21 +94,22 @@ export const SearchProvider = ({ children }) => {
         catalogCardNames,
         updateCatalog,
         setUpdateCatalog,
-        searchInput, 
-        setSearchInput,
-        searchTerm,
-        setSearchTerm,
-        cardName,
-        setCardName,
-        predictions,
-        setPredictions,
         filterUserCards,
         filterCardNames,
-        displayAutcomplete,
-        setDisplayAutocomplete,
         catalogInputRef,
         collectionInputRef,
-        archiveInputRef
+        archiveInputRef,
+
+        cardNames,
+        initialState,
+        inputValue,
+        searchType,
+        tracker,
+        position,
+        predictions,
+        searchResult,
+        searchTerm,
+        dispatch
       }}
     >
       {children}

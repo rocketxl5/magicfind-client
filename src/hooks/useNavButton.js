@@ -1,171 +1,125 @@
 import { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import useNavbar from './contexthooks/useNavbar';
-import useSearch from './contexthooks/useSearch';
+import useNav from './contexthooks/useNavbar';
 import useAuth from './contexthooks/useAuth';
 import useViewport from './contexthooks/useViewport';
 
-// Handles control of Navabar buttons @ MainHeader
+// Handles control of Navbar buttons @ MainHeader
 const useNavButton = () => {
 
     const {
-        setDisplayMenu,
+        dispatch,
         displayMenu,
-        setDisplaySearchBar,
         displaySearchBar,
-        isSearchBarDisplayed,
-        setIsSearchBarDisplayed,
-        hamburgerRef,
-        searchBarRef,
-        cartCountRef,
-        mailCountRef,
-        menuRef,
-        searchBtnRef } = useNavbar();
-    const { catalogInputRef, setSearchInput } = useSearch();
+    } = useNav();
+
     const { isMobile } = useViewport();
     const { isAuth } = useAuth();
 
-    const navigate = useNavigate();
-
-    const menuHandler = (e) => {
-        if (displayMenu) {
-            setDisplayMenu(false);
+    function handleHamburger(open) {
+        if (!open && displaySearchBar) {
+            handleSearchBar(false);
+        }
+        if (open && !displayMenu) {
+            handleMenu(true);
+        }
+        if (!open && displayMenu) {
+            handleMenu(false);
         }
     }
 
-    // Display or hides Menu on click if search bar is hidden
-    const hamburgerHandler = () => {
-        if (isMobile) {
-            // console.log(isSearchBarDisplayed)
-            if (isSearchBarDisplayed) {
-                setIsSearchBarDisplayed(false)
-            }
-
-            if (!isSearchBarDisplayed) {
-                setDisplayMenu(true)
-            }
-
-            if (!isSearchBarDisplayed && displayMenu) {
-                setDisplayMenu(false);
-            }
-        }
-    }
-
-    // Display or hides Menu on click [authButton is Desktop only]
-    const authButtonHandler = () => {
-        if (!displayMenu || !displaySearchBar) {
-            setDisplayMenu(true);
+    function handleSearchBar(display) {
+        if (!display) {
+            setTimeout(() => {
+                dispatch({
+                    type: 'searchbar',
+                    payload: {
+                        openHamburger: false,
+                        displaySearchBar: false,
+                    }
+                });
+            }, 100);
         }
         else {
-            setDisplayMenu(false);
+            dispatch({
+                type: 'searchbar',
+                payload: {
+                    openHamburger: true,
+                    displaySearchBar: true,
+                }
+            });
         }
     }
 
-    // @ CartBtn, MailBtn, Logo, SingInBtn ...
-    // Hides menu if menu is displayed
-    // Navigates to path if path defined
-    const navButtonHandler = (path) => {
-        if (displayMenu) {
-            setDisplayMenu(false);
-        }
-
-        if (path) {
-            navigate(path);
-        }
-    }
-
-    /********** Mobile only ************/
-    // Diplays mobile search bar.
-    // Sets focus on search catalog input
-    const searchButtonHandler = () => {
-        // Trigger search bar display   
-        setDisplaySearchBar(true);
-        // Set focus on Catalog Search Input
-        catalogInputRef.current?.focus();
-    }
-
-    const blurHandler = () => {
-        displaySearchBar && setDisplaySearchBar(false);
-        // Delaying hamburger button reactivation
-        // Prevent menu from opening on click
-    }
-    /********** End Mobile only *********/
-
-    /********** Desktop only ************/
-    const handleMenu = (e) => {
-        if (!e.target.classList.contains('nav-link') &&
-            !e.target.classList.contains('nav-btn') &&
-            !e.target.classList.contains('logo')) {
-            setDisplayMenu(false);
-        }
-    }
-
-    // Sets event listener with handleMenu
-    useEffect(() => {
-        if (isMobile) {
-            return
-        }
-        else {
-            // Set click event listener on document
-            document.addEventListener('mousedown', handleMenu);
-
-            return () => {
-                document.removeEventListener('mousedown', handleMenu);
-            }
-        }
-    }, []);
-    /********** End Desktop only *********/
-
-    useEffect(() => {
-        // [mobile = screen-wide, desktop = 1/3 screen]
-        const selector = isMobile ? 'd-mobile-menu' : 'd-desktop-menu';
+    function handleMenu(displayMenu) {
 
         if (displayMenu) {
-            // Display menu
-            menuRef.current?.classList.add(selector);
-            hamburgerRef.current?.setAttribute('aria-expanded', 'true');
-
-            if (isMobile) {
-                // Hide search button
-                searchBtnRef.current?.classList.add('d-none');
-            }
+            dispatch({
+                type: 'menu',
+                payload: {
+                    displayMenu: true,
+                    openHamburger: true
+                }
+            });
         }
         else {
-            // Hide menu
-            menuRef.current?.classList.remove(selector);
-
-            // Hamburger visible @ all viewport sizes if unauthenticated view.
-            // Hamburger replaced by Avatar @ authenticated desktop view.
-            if (!isAuth || (isAuth && isMobile)) {
-                hamburgerRef.current?.setAttribute('aria-expanded', 'false');
-            }
-            if (isMobile) {
-                // Display search button
-                searchBtnRef.current?.classList.remove('d-none');
-            }
+            dispatch({
+                type: 'menu',
+                payload: {
+                    displayMenu: false,
+                    openHamburger: false
+                }
+            });
         }
-    }, [displayMenu]);
+    }
+
+    function handleAuthMenu(display) {
+        if (!display) {
+            dispatch({
+                type: 'auth-menu',
+                payload: false
+            })
+        }
+        else {
+            dispatch({
+                type: 'auth-menu',
+                payload: true
+            })
+        }
+    }
 
     useEffect(() => {
-        if (displaySearchBar) {
-            searchBarRef.current?.classList.add('d-searchbar');
-            cartCountRef.current?.classList.add('d-none');
-            mailCountRef.current?.classList.add('d-none');
-            hamburgerRef.current?.setAttribute('aria-expanded', 'true');
-            isMobile && setIsSearchBarDisplayed(true);
+        const navHandler = (e) => {
+
+            if (!isMobile && displayMenu) {
+                if (isAuth) {
+                    if (e.target.id !== 'auth-btn') {
+                        handleAuthMenu(false);
+                    }
+                }
+                else {
+                    if (e.target.id !== 'hamburger-btn') {
+                        handleMenu(false);
+                    }
+                }
+            }
+
+            if (isMobile && displayMenu) {
+                if (e.target.id !== 'hamburger-btn') {
+                    handleMenu(false);
+                }
+            }
         }
-        else {
-            hamburgerRef.current?.setAttribute('aria-expanded', 'false');
-            searchBarRef.current?.classList.remove('d-searchbar');
-            cartCountRef.current?.classList.remove('d-none');
-            mailCountRef.current?.classList.remove('d-none');
-            // Clear search input
-            // setSearchInput(null);
+
+        document.addEventListener('click', navHandler);
+
+        return () => {
+            document.removeEventListener('click', navHandler);
         }
-    }, [displaySearchBar])
+        // }
+    }, [displayMenu, displaySearchBar])
 
 
-    return { navButtonHandler, authButtonHandler, searchButtonHandler, hamburgerHandler, menuHandler, blurHandler }
+    return { handleMenu, handleSearchBar, handleHamburger, handleAuthMenu }
 }
 
 export default useNavButton

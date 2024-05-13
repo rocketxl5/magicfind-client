@@ -2,17 +2,17 @@ import { useContext, useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import Page from '../../components/Page';
 import Aside from '../../components/Aside';
-import SideBar from './SideBar';
-import MailHeader from './MailHeader';
+import SideBar from '../../features/mail/SideBar';
+import MailHeader from '../../features/mail/MailHeader';
 // import Mail from './Mail';
-import ComposeMessage from './ComposeMessage';
+import ComposeMessage from '../../features/mail/ComposeMessage';
 import Loader from '../../layout/Loader';
-import Message from './Message';
+import Message from '../../features/mail/Message';
 import useAuth from '../../hooks/contexthooks/useAuth';
 import { PathContext } from '../../contexts/PathContext';
 import { api } from '../../api/resources';
 import styled from 'styled-components';
-import { mailReducer } from './services/mailReducer';
+import { mailReducer } from '../../features/mail/services/mailReducer';
 
 const MailBox = () => {
   const { auth, setUnreadMail } = useAuth();

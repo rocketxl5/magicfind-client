@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import Page from '../components/Page';
-import Button from '../components/Button';
-import useAuth from '../hooks/contexthooks/useAuth';
+import Page from '../../components/Page';
+import Button from '../../components/Button';
+import useAuth from '../../hooks/contexthooks/useAuth';
 
 const NotFound = () => {
     const [style, setStyle] = useState(null);

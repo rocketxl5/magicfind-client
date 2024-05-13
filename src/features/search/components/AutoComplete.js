@@ -1,19 +1,34 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useEffect, useRef } from 'react'
 import Prediction from './Prediction';
 import useSearch from '../../../hooks/contexthooks/useSearch';
-const INIT = -200;
 
-const AutoComplete = ({ searchProduct }) => {
+const AutoComplete = () => {
     const {
-        marker,
-        setMarker,
-        searchTerm,
+        tracker,
+        position,
         predictions,
-        setCardName,
-        displayAutcomplete
+        dispatch
     } = useSearch();
-    const [position, setPosition] = useState(INIT);
-    const ulRef = useRef(null)
+
+    const ulRef = useRef(null);
+
+
+    const handleTrackSearch = (tracker, position) => {
+        dispatch({
+            type: 'track-scroll',
+            payload: {
+                tracker: tracker,
+                position: position
+            }
+        });
+    }
+
+    const handleLaunchSearch = (term) => {
+        dispatch({
+            type: 'launch-search',
+            payload: term
+        });
+    }
 
     // keydown event listener calls handleKeyDown function
     useEffect(() => {
@@ -21,52 +36,31 @@ const AutoComplete = ({ searchProduct }) => {
         return () => document.removeEventListener('keydown', handleKeyDown);
     });
 
-    // Reset position state to its initial value when searchterm state changes.
-    // Searchterm updates as user updates input entry
-    useEffect(() => {
-        setPosition(INIT)
-    }, [searchTerm])
-
-    // Update cardname state on marker change.
     // Updates scroll position of autocomplete list (ul).
-    // Marker's value updates on arrow key events (up or down).
+    // tracker's value updates on arrow key events (up or down).
     useEffect(() => {
-        // If array of predictions is defined
-        if (predictions) {
-            // Sets prediction string as search input value when user moves (arrow) up or (arrow) down
-            // setInputValue(predictions[marker]);
-            setCardName(predictions[marker]);
-        }
-
         ulRef.current?.scrollTo({ top: position, behavior: 'smooth' })
-    }, [marker])
+    }, [tracker])
 
     // Keyboard arrow up and down autocomplete list search function
     const handleKeyDown = (e) => {
-        if (predictions) {
             if (e.key === 'ArrowDown') {
-                // console.log(marker)
-                if (marker < predictions.length - 1) {
-                    setPosition(position + 40)
-                    setMarker(marker => marker + 1);
+                if (tracker < predictions.length - 1) {
+                    handleTrackSearch(tracker + 1, position + 40);
                 }
             }
-            if (e.key === 'ArrowUp') {
-                // console.log(predictions[marker])
+        if (e.key === 'ArrowUp') {
                 ulRef?.current?.scrollIntoView(true)
-                if (marker === predictions.length - 1 || marker >= 0) {
-                    setPosition(position - 40);
-                    setMarker(marker => marker - 1);
+            if (tracker === predictions.length - 1 || tracker >= 0) {
+                handleTrackSearch(tracker - 1, position - 40);
                 }
             }
-        }
-    };
+    }
 
     const handleMouseDown = (e) => {
-        // Set search input value to card name
-        // Takes event and target li id set to prediction value @ Prediction
-        searchProduct(e.target.id);
-    };
+        console.log(e.target)
+        handleLaunchSearch(predictions[e.target.value])
+    }
 
     return (
         <ul
@@ -75,14 +69,13 @@ const AutoComplete = ({ searchProduct }) => {
             onMouseDown={handleMouseDown}
             ref={ulRef}
         >
-            {displayAutcomplete &&
+            {
                 predictions?.map((prediction, index) => {
                     return (
                         (
                             <Prediction
                                 key={index}
                                 index={index}
-                                marker={marker}
                                 prediction={prediction}
                             />
                         )

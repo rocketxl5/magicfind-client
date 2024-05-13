@@ -1,14 +1,14 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import Page from '../components/Page.js';
-import MediaElement from '../features/media/MediaElement.js';
-import Modal from '../features/modal/Modal.js';
-import data from '../data/HOME';
-import useExpandImages from '../hooks/useExpandImages';
-import useSlideShow from '../hooks/useSlideShow.js';
-import Feature from '../components/Feature.js';
+import Page from '../../components/Page.js';
+import MediaElement from '../../features/media/MediaElement.js';
+import Modal from '../../features/modal/Modal.js';
+import data from '../../data/HOME.js';
+import useExpandImages from '../../hooks/useExpandImages.js';
+import useSlideShow from '../../hooks/useSlideShow.js';
+import Feature from '../../components/Feature.js';
 import { GoShieldCheck } from "react-icons/go";
-import { api } from '../api/resources';
+import { api } from '../../api/resources.js';
 
 const Home = () => {
   const [mediaFeatures, setMediaFeatures] = useState(null);
@@ -70,49 +70,49 @@ const Home = () => {
       >
         <Feature classList={''} title={'Magic Find Features'}>
           <section className='feature-grid'>
-              {
+            {
               main.cards.map((card, index) => {
-                  return (
-                    <div key={index + 1} className="feature-card">
-                      <div className="flex column gap-1 padding-1 b-radius-5 feature-border">
-                        <section>
-                          <h2 className="feature-card-title">{card.title}</h2>
-                          <div style={{ backgroundImage: `url(${card.bgLink})` }} className="feature-card-image">
+                return (
+                  <div key={index + 1} className="feature-card">
+                    <div className="flex column gap-1 padding-1 b-radius-5 feature-border">
+                      <section>
+                        <h2 className="feature-card-title">{card.title}</h2>
+                        <div style={{ backgroundImage: `url(${card.bgLink})` }} className="feature-card-image">
 
-                          </div>
-                        </section>
-                        <section className="feature-card-content">
-                          {
-                            card.body.map((line, index) => {
-                              return (
+                        </div>
+                      </section>
+                      <section className="feature-card-content">
+                        {
+                          card.body.map((line, index) => {
+                            return (
 
-                                <div key={index} className='flex gap-1'>
-                                  <span className='flex align-center'><GoShieldCheck strokeWidth={'1px'} /></span> <p>{line}</p>
-                                </div>
-                              )
-                            })
-                          }
-                        </section>
-                      </div>
-                    </div>)
-                })
-              }
+                              <div key={index} className='flex gap-1'>
+                                <span className='flex align-center'><GoShieldCheck strokeWidth={'1px'} /></span> <p>{line}</p>
+                              </div>
+                            )
+                          })
+                        }
+                      </section>
+                    </div>
+                  </div>)
+              })
+            }
           </section>
         </Feature>
         <Feature classList={'media-feature'} title={'The Secret Lair Drop Artwork'}>
           <div className="media-scroller snaps-inline">
-              {
-                mediaFeatures &&
+            {
+              mediaFeatures &&
               mediaFeatures.map((card, i) => {
-                  return (
-                    <MediaElement key={i + 1} id={i} handleSlideShow={handleSlideShow}>
-                      {card.cover}
-                      {card.title}
-                    </MediaElement>
-                  )
-                })
-              }
-            </div>
+                return (
+                  <MediaElement key={i + 1} id={i} handleSlideShow={handleSlideShow}>
+                    {card.cover}
+                    {card.title}
+                  </MediaElement>
+                )
+              })
+            }
+          </div>
         </Feature>
       </Page>
     </>

@@ -17,7 +17,8 @@ const MainHeader = () => {
     setUpdateCollection,
     setCatalogCardNames,
     catalogCardNames,
-    catalogInputRef
+    catalogInputRef,
+
   } = useSearch();
 
   // Setting catalog card names for autocomplete catalog search
@@ -35,7 +36,9 @@ const MainHeader = () => {
         .then((res) => res.json())
         .then((data) => {
           setCatalogCardNames(data);
-          setUpdateCollection(true);
+          if (isAuth) {
+            setUpdateCollection(true);
+          }
           // Reinitialize updateCatalog to allow updates
           setUpdateCatalog(false);
         })
@@ -50,7 +53,6 @@ const MainHeader = () => {
         <SearchForm
           type={'catalog'}
           classList={'search-catalog-input'}
-          pathname={'/catalog'}
           placeholder={'Search Magic Find'}
           cardNames={catalogCardNames}
           inputRef={catalogInputRef}

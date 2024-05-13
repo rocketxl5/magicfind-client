@@ -10,13 +10,9 @@ const useFind = () => {
     const { cardCollection } = useSearch();
 
     const findMatch = (product) => {
-        // @ArchiveItem @CollectionItem
-        // Returns boolean value
-        // Returns true if product item is in collection
-        // Returns false if it's not
         if (cardCollection.length > 0) {
-            const match = cardCollection.find((card) => {
-                return card.id === product.id;
+            const match = cardCollection.find((id) => {
+                return id === product.id;
             })
 
             if (match) {

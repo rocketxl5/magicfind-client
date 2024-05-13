@@ -1,12 +1,12 @@
+import { useNavigate } from 'react-router-dom';
 import { GiWaterBolt } from 'react-icons/gi';
 import useAuth from '../../../hooks/contexthooks/useAuth';
-import useNavButton from '../../../hooks/useNavButton';
 import styled from 'styled-components';
 
 const Logo = () => {
   const { isAuth } = useAuth();
 
-  const { navButtonHandler } = useNavButton();
+  const navigate = useNavigate();
 
   return (
     <button
@@ -14,7 +14,7 @@ const Logo = () => {
       className='logo bg-transparent'
       type='button'
       title='Magic Find logo'
-      onClick={(e) => navButtonHandler(isAuth ? 'me' : '/')}
+      onClick={() => navigate(isAuth ? 'me' : '/')}
     >
       <Anchor id={'logo-icon'}>
         <SVG>
@@ -29,12 +29,10 @@ const Logo = () => {
   )
 }
 
-
 const Anchor = styled.span`
 display: flex;
 align-items: center;
 `;
-
 
 const SVG = styled.div`
 display: inline-block;
@@ -43,7 +41,6 @@ svg {
   display: block;
 }
 `
-
 const Title = styled.div`
     display: flex;
     flex-direction: column;
@@ -66,40 +63,4 @@ const Text = styled.div`
   }
 `;
 
-
 export default Logo;
-// import { useNavigate } from 'react-router-dom';
-// import { GiWaterBolt } from 'react-icons/gi';
-// import styled from 'styled-components';
-// import useAuth from '../../hooks/contexthooks/useAuth';
-// import useNavbar from '../../hooks/contexthooks/useNavbar';
-
-// const Logo = () => {
-//   const navigate = useNavigate();
-
-//   const { auth } = useAuth();
-//   const { displayMenu, setDisplayMenu } = useNavbar();
-
-//   const handleClick = () => {
-//     if (displayMenu) {
-//       setDisplayMenu(false);
-//     }
-//     navigate(auth ? 'me' : '/')
-//   }
-
-
-// id='logo-btn'
-// className='nav-btn logo logo-btn'
-// type='button'
-// title='Magic Find logo'
-// onClick={handleClick}
-// >
-//   <Span id={'logo-icon'} className="logo-Span" to={auth ? 'me' : '/'} title="Magic Find logo">
-//     <SVG>"
-//       <GiWaterBolt />
-//     </SVG>
-//     <Title>
-//       <Text>Magic</Text>
-//       <Text>Find</Text>
-//     </Title>
-//   </Span>

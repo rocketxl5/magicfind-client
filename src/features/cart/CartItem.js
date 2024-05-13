@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import ProductHeader from './components/ProductHeader';
+import ProductHeader from '../product/components/ProductHeader';
 import Title from '../../components/Title';
 import CountDown from '../search/components/CountDown';
 import Container from '../../components/Container';
-import QuantitySelector from './components/QuantitySelector';
+import QuantitySelector from '../product/components/QuantitySelector';
 import Button from '../../components/Button';
 import Card from '../../components/Card';
 import ImageNew from '../../components/Image';
@@ -86,8 +86,8 @@ const CartItem = ({ index, count, product }) => {
         <CountDown count={count} unit={index + 1} type={'Result'} />
       </ProductHeader>
       <div className='relative two'>
-      <ImageNew
-        product={product.selected}
+        <ImageNew
+          product={product.selected}
           classList='relative cart-item-image '
           handleClick={() => navigate(
             `/product/${product.selected._id}`,

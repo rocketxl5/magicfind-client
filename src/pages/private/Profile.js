@@ -1,6 +1,6 @@
-import Page from '../components/Page';
-import Avatar from '../components/Avatar';
-import useAuth from '../hooks/contexthooks/useAuth';
+import Page from '../../components/Page';
+import Avatar from '../../components/Avatar';
+import useAuth from '../../hooks/contexthooks/useAuth';
 
 const Profile = () => {
   const { auth } = useAuth();

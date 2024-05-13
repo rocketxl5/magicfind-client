@@ -1,99 +1,98 @@
 import { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
 import AutoComplete from './components/AutoComplete';
 import Loader from '../../layout/Loader';
-import useBlur from '../../hooks/useBlur';
-import useFocus from '../../hooks/useFocus';
-import useNavbar from '../../hooks/contexthooks/useNavbar';
+import useNav from '../../hooks/contexthooks/useNavbar';
+import useNavButton from '../../hooks/useNavButton';
 import useSearch from '../../hooks/contexthooks/useSearch';
 import useSearchForm from '../../hooks/useSearchForm';
 
-const SearchForm = ({ children, classList, type, pathname, placeholder, cardNames, inputRef }) => {
+const SearchForm = ({ children, classList, type, placeholder, cardNames, inputRef }) => {
+    // const [oracleID, setOracleID] = useState(null);
     const [isActive, setIsActive] = useState(false);
-    const [oracleID, setOracleID] = useState(null);
-    const location = useLocation();
-    const {
+    const { searchBarRef, displaySearchBar } = useNav();
+    const {handleSearchBar} = useNavButton();
+
+    const { 
+        initialState,
         inputValue,
-        setInputValue,
-        setMarker,
-        setCardName,
+        predictions,
         searchTerm,
-        setSearchTerm,
-        searchInput,
-        setPredictions,
-        setCardNames,
-        displayAutcomplete,
-        setDisplayAutocomplete,
-        predictions
+        dispatch,
     } = useSearch();
 
-    const { updateBlur } = useBlur();
-    const { updateFocus } = useFocus();
-    const { displaySearchBar, searchBarRef } = useNavbar();
-    const { searchProduct, loading } = useSearchForm(pathname);
+    const { search, loading } = useSearchForm(inputRef);
 
-    useEffect(() => {
-        if (searchInput?.id === type) {
-            setIsActive(true);
-        } else {
-            setIsActive(false);
-        }
-    }, [searchInput]);
+    function setSearch(names, type) {
+        dispatch({
+            type: 'set-search',
+            payload: {
+                cardNames: names,
+                searchType: type,
+            }
+        });
+    }
 
-    useEffect(() => {
-        if (isActive) {
-            setCardNames(cardNames);
-        }
-    }, [isActive])
+    function updateSearch(value, predictions) {
+        dispatch({
+            type: 'update-search',
+            payload: {
+                inputValue: value,
+                predictions: predictions
+            }
+        });
+    }
 
-    useEffect(() => {
-        if (inputValue) {
-            setInputValue('');
-        }
-        if (displayAutcomplete) {
-            setDisplayAutocomplete(false);
-        }
-        if (displaySearchBar) {
-            // blurHandler();
-        }
-    }, [location])
+    function clearSearch() {
+        dispatch({
+            type: 'clear-search',
+            payload: initialState
+        })
+    }
+
+    function launchSearch(term) { 
+        dispatch({
+            type: 'launch-search',
+            payload: term
+        });
+    }
 
     const handleChange = (e) => {
         const value = e.target.value;
 
         if (value.length >= 3) {
-            // Reset Marker to initial value
-            setMarker(-1);
-
-            const filteredCardTitles = cardNames?.filter((title) => {
+            updateSearch(value, cardNames?.filter((title) => {
                 return title.toLowerCase().includes(value.toLowerCase());
-            });
-            !displayAutcomplete && setDisplayAutocomplete(true)
-            setPredictions(filteredCardTitles);
+            }))
+
         }
         else {
-            setDisplayAutocomplete(false);
-            setCardName('');
+            updateSearch(value, []);
         }
-        setSearchTerm(value);
-        setInputValue(value);
     };
 
-    const handleBlur = (e) => {
-        // if (loading) {
-        updateBlur()
-        // }
+    const handleBlur = () => {
+        setIsActive(false);
+        clearSearch();
+        if (displaySearchBar) {
+            handleSearchBar(false);
+        }
     }
 
     const handleSubmit = (e) => {
-        console.log(predictions.length)
-        setCardName(predictions[0])
-        // If array of predictions has one prediction
-        if (predictions.length === 1) {
-            console.log(predictions[0])
-        }
-        searchProduct(predictions[0], e)
+        e.preventDefault();
+        launchSearch(predictions[0]);
     }
+
+    const handleFocus = (e) => {
+        setIsActive(true);
+        setSearch(cardNames, e.target.id);
+    }
+
+    useEffect(() => {
+        if (searchTerm && isActive) {
+            search(searchTerm, type);
+        }
+    }, [searchTerm, isActive]);
 
     return (
         <div id={`search-${type}-form`} ref={type === 'catalog' ? searchBarRef : null}>
@@ -102,20 +101,14 @@ const SearchForm = ({ children, classList, type, pathname, placeholder, cardName
                     id={type}
                     type="text"
                     className={classList}
-                    // Value changes 
-                    // @ keyboard [SearchInput]
-                    // @ arrowup/arrowdown [Autocomplete] 
-                    // @ mousehover [Prediction]
                     value={isActive ? inputValue : ''}
                     onChange={handleChange}
-                    onFocus={(e) => updateFocus(e.target)}
+                    onFocus={handleFocus}
                     onBlur={handleBlur}
-                    ref={inputRef}
                     placeholder={placeholder}
+                    ref={inputRef}
                 />
-                {(isActive && searchTerm) &&
-                    <AutoComplete searchProduct={searchProduct} />
-                }
+                {(predictions.length > 0 && isActive) && <AutoComplete />}
                 {loading && <Loader classList={'box-size-6 right-1'} />}
             </form>
             {children}
