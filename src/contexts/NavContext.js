@@ -52,9 +52,15 @@ export const NavProvider = ({ children }) => {
                             'd-desktop-menu';
 
         if(displayMenu) {
+            if (isMobile) {
+                searchBtnRef.current?.classList.add('d-none');
+            }
             menuRef.current?.classList.add(selector);
         }
         else {
+            if (isMobile) {
+                searchBtnRef.current?.classList.remove('d-none');
+            }
             menuRef.current?.classList.remove(selector);
         }
     }, [displayMenu]);

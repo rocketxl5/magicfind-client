@@ -13,48 +13,14 @@ const SearchForm = ({ children, classList, type, placeholder, cardNames, inputRe
     const {handleSearchBar} = useNavButton();
 
     const { 
-        initialState,
         inputValue,
         predictions,
         searchTerm,
-        dispatch,
     } = useSearch();
 
-    const { search, loading } = useSearchForm(inputRef);
+    const { search, loading, setSearch, updateSearch, launchSearch, clearSearch, updateValue } = useSearchForm(inputRef);
 
-    function setSearch(names, type) {
-        dispatch({
-            type: 'set-search',
-            payload: {
-                cardNames: names,
-                searchType: type,
-            }
-        });
-    }
 
-    function updateSearch(value, predictions) {
-        dispatch({
-            type: 'update-search',
-            payload: {
-                inputValue: value,
-                predictions: predictions
-            }
-        });
-    }
-
-    function clearSearch() {
-        dispatch({
-            type: 'clear-search',
-            payload: initialState
-        })
-    }
-
-    function launchSearch(term) { 
-        dispatch({
-            type: 'launch-search',
-            payload: term
-        });
-    }
 
     const handleChange = (e) => {
         const value = e.target.value;
@@ -90,6 +56,7 @@ const SearchForm = ({ children, classList, type, placeholder, cardNames, inputRe
 
     useEffect(() => {
         if (searchTerm && isActive) {
+            updateValue(searchTerm);
             search(searchTerm, type);
         }
     }, [searchTerm, isActive]);

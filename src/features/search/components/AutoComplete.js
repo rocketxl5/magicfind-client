@@ -12,7 +12,6 @@ const AutoComplete = () => {
 
     const ulRef = useRef(null);
 
-
     const handleTrackSearch = (tracker, position) => {
         dispatch({
             type: 'track-scroll',
@@ -23,7 +22,7 @@ const AutoComplete = () => {
         });
     }
 
-    const handleLaunchSearch = (term) => {
+    const launchSearch = (term) => {
         dispatch({
             type: 'launch-search',
             payload: term
@@ -58,8 +57,9 @@ const AutoComplete = () => {
     }
 
     const handleMouseDown = (e) => {
-        console.log(e.target)
-        handleLaunchSearch(predictions[e.target.value])
+        // Prevents blur on search input
+        e.preventDefault();
+        launchSearch(predictions[e.target.value])
     }
 
     return (

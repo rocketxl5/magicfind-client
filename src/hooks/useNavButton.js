@@ -110,10 +110,10 @@ const useNavButton = () => {
             }
         }
 
-        document.addEventListener('click', navHandler);
+        document.body.addEventListener('click', navHandler);
 
         return () => {
-            document.removeEventListener('click', navHandler);
+            document.body.removeEventListener('click', navHandler);
         }
         // }
     }, [displayMenu, displaySearchBar])
