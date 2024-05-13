@@ -1,11 +1,11 @@
 import useMail from '../../../hooks/contexthooks/useMail';
 import useNavButton from '../../../hooks/useNavButton';
-import useNavbar from '../../../hooks/contexthooks/useNavbar';
+import useNav from '../../../hooks/contexthooks/useNavbar';
 import { FiMail } from 'react-icons/fi';
 
 const MailBtn = () => {
   const { mailCount } = useMail();
-  const { mailCountRef } = useNavbar();
+  const { mailCountRef } = useNav();
   const { navButtonHandler } = useNavButton();
 
   return (

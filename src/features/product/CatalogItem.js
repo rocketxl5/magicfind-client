@@ -96,7 +96,7 @@ const CatalogItem = ({ index, product, count, cartIndex, handleSlideView }) => {
     }, [cartItems]);
 
     return (
-        <Card classList='product-container'>
+        <Card key={index + 1} classList='product-container'>
             {/* Passing product image & product detail as an array of children @ TwoSidedSlide component */}
             {/* TwoSidedSlide contains @ TurnBtn which takes a classList argument to specify sizes and absolute coordinates  */}
             <TwoSidedSlide classList={{ container: '', btn: 'card-action-btn btn-bottom-right' }}>

@@ -28,21 +28,21 @@ const root = ReactDOM.createRoot(document.getElementById('root'))
 root.render(
   <StrictMode>
     <ViewportProvider>
-      <NavProvider>
-        <PathProvider>
-          <AuthProvider>
-            <MailProvider>
-              <SearchProvider>
+      <PathProvider>
+        <AuthProvider>
+          <SearchProvider>
+            <NavProvider>
+              <MailProvider>
                 <CartProvider>
                   <ScrollProvider>
                     <RouterProvider router={router} />
                   </ScrollProvider>
                 </CartProvider>
-              </SearchProvider>
-            </MailProvider>
-          </AuthProvider>
-        </PathProvider>
-      </NavProvider>
+              </MailProvider>
+            </NavProvider>
+          </SearchProvider>
+        </AuthProvider>
+      </PathProvider>
     </ViewportProvider>
   </StrictMode>
 );

@@ -11,8 +11,6 @@ import SearchParameters from '../../features/search/components/SearchParameters'
 import useCollectionModal from '../../hooks/useCollectionModal';
 import useSlideView from '../../hooks/useSlideView';
 import useImageLoader from '../../hooks/useImageLoader';
-import useFetch from '../../hooks/useFetch';
-import useUrl from '../../hooks/useUrl';
 
 const SearchResults = () => {
     // States
@@ -22,11 +20,6 @@ const SearchResults = () => {
     // Hooks
     const location = useLocation();
     const navigate = useNavigate();
-
-    const { fetchOne, response } = useFetch();
-
-    const { url, config, getUrl } = useUrl();
-
 
     const [imagesLoaded] = useImageLoader(result?.cards);
 

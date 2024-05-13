@@ -31,8 +31,7 @@ export const searchReducer = (state, action) => {
             }
         default:
             return {
-                ...state,
-                    error: 'Oups! Something went wrong'
-                }
+                ...state
+            }
     }
 }

@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom';
 import { FiArrowRightCircle } from "react-icons/fi";
 import message from '../data/MESSAGES.json';
-import useSearch from '../hooks/contexthooks/useNavbar';
 
 const Message = ({ type }) => {
 

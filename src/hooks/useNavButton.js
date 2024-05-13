@@ -1,177 +1,76 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import useNavbar from './contexthooks/useNavbar';
-import useSearch from './contexthooks/useSearch';
+import useNav from './contexthooks/useNavbar';
 import useAuth from './contexthooks/useAuth';
 import useViewport from './contexthooks/useViewport';
 
-// Handles control of Navabar buttons @ MainHeader
+// Handles control of Navbar buttons @ MainHeader
 const useNavButton = () => {
 
     const {
-        setDisplayMenu,
-        displayMenu,
-        setDisplaySearchBar,
-        displaySearchBar,
-        switchOn,
-        setSwitchOn,
-        hamburgerRef,
-        searchBarRef,
-        cartCountRef,
-        mailCountRef,
-        menuRef,
-        searchBtnRef
-    } = useNavbar();
-    const { catalogInputRef } = useSearch();
+        dispatch,
+        openHamburger,
+        displaySearchBar
+    } = useNav();
     const { isMobile } = useViewport();
     const { isAuth } = useAuth();
 
     const navigate = useNavigate();
 
-    const menuHandler = (e) => {
-        if (displayMenu) {
-            setDisplayMenu(false);
-        }
+    const handleHamburger = () => {
+        dispatch({
+            type: 'hamburger',
+            payload: !openHamburger
+        });
     }
 
-    // Display or hides Menu on click if search bar is hidden
-    const hamburgerHandler = () => {
-        // console.log('switchOn', switchOn)
-        // console.log('displaySearchBar', displaySearchBar)
-        // console.log('displayMenu', displayMenu)
-        if (switchOn && !displayMenu) {
-            setDisplayMenu(true)
-        }
-        else if (switchOn && displayMenu) {
-            setDisplayMenu(false)
-        }
+    const handleSearchBar = (display) => {
+            dispatch({
+                type: 'searchbar',
+                payload: display
+            });
     }
 
-    useEffect(() => {
-        if (!switchOn) {
-            if (displayMenu) {
-                setDisplayMenu(false);
-            }
-            if (displaySearchBar) {
-                setDisplaySearchBar(false);
-            }
-            // Reset switch
-            setTimeout(() => {
-
-                setSwitchOn(true);
-            }, 200)
+    // Takes boolean as argument.
+    // Calls dispatch with proper payload if authenticated or not.
+    // Unauthenticated users has HamburgerButton
+    // Authenticated has authButton instead of HamburgerButton
+    const handleMenu = (display) => {
+        if(isMobile || !isAuth) {
+            dispatch({
+                type: 'menu',
+                payload: {
+                    displayMenu: display,
+                    openHamburger: display
+                }
+            });
         }
-    }, [switchOn])
-
-    // Display or hides Menu on click [authButton is Desktop only]
-    const authButtonHandler = () => {
-        if (!displayMenu || !displaySearchBar) {
-            setDisplayMenu(true);
+        else{
+            dispatch({
+                type: 'menu',
+                payload: {
+                    displayMenu: display
+                }
+            });
         }
-        else {
-            setDisplayMenu(false);
-        }
+   
     }
 
-    // @ CartBtn, MailBtn, Logo, SingInBtn ...
-    // Hides menu if menu is displayed
-    // Navigates to path if path defined
-    const navButtonHandler = (path) => {
-        if (displayMenu) {
-            setDisplayMenu(false);
-        }
-        if (path) {
-            navigate(path);
-        }
+    const handleNavButton = () => {
+       if(displaySearchBar) {
+        
+       }
     }
 
     /********** Mobile only ************/
     // Diplays mobile search bar.
     // Sets focus on search catalog input
-    const searchButtonHandler = () => {
-        // Trigger search bar display   
-        setDisplaySearchBar(true);
+    const handleSearchButton = () => {
         // Set focus on Catalog Search Input
-        catalogInputRef.current?.focus();
+   
     }
 
-    const blurHandler = () => {
-        switchOn && setSwitchOn(false);
-    }
-
-    /********** End Mobile only *********/
-
-    /********** Desktop only ************/
-    const handleMenu = (e) => {
-        if (!e.target.classList.contains('nav-link') &&
-            !e.target.classList.contains('nav-btn') &&
-            !e.target.classList.contains('logo')) {
-            setDisplayMenu(false);
-        }
-    }
-
-    // Sets event listener with handleMenu
-    useEffect(() => {
-        if (isMobile) {
-            return
-        }
-        else {
-            // Set click event listener on document
-            document.addEventListener('mousedown', handleMenu);
-
-            return () => {
-                document.removeEventListener('mousedown', handleMenu);
-            }
-        }
-    }, []);
-    /********** End Desktop only *********/
-
-    useEffect(() => {
-        // [mobile = screen-wide, desktop = 1/3 screen]
-        const selector = isMobile ? 'd-mobile-menu' : 'd-desktop-menu';
-
-        if (displayMenu) {
-            // Display menu
-            menuRef.current?.classList.add(selector);
-            hamburgerRef.current?.setAttribute('aria-expanded', 'true');
-
-            if (isMobile) {
-                // Hide search button
-                searchBtnRef.current?.classList.add('d-none');
-            }
-        }
-        else {
-            // Hide menu
-            menuRef.current?.classList.remove(selector);
-
-            // Hamburger visible @ all viewport sizes if unauthenticated view.
-            // Hamburger replaced by Avatar @ authenticated desktop view.
-            if (!isAuth || (isAuth && isMobile)) {
-                hamburgerRef.current?.setAttribute('aria-expanded', 'false');
-            }
-            if (isMobile) {
-                // Display search button
-                searchBtnRef.current?.classList.remove('d-none');
-            }
-        }
-    }, [displayMenu]);
-
-    useEffect(() => {
-        if (displaySearchBar) {
-            searchBarRef.current?.classList.add('d-searchbar');
-            cartCountRef.current?.classList.add('d-none');
-            mailCountRef.current?.classList.add('d-none');
-            hamburgerRef.current?.setAttribute('aria-expanded', 'true');
-        }
-        else {
-            hamburgerRef.current?.setAttribute('aria-expanded', 'false');
-            searchBarRef.current?.classList.remove('d-searchbar');
-            cartCountRef.current?.classList.remove('d-none');
-            mailCountRef.current?.classList.remove('d-none');
-        }
-    }, [displaySearchBar])
-
-    return { navButtonHandler, authButtonHandler, searchButtonHandler, hamburgerHandler, blurHandler, menuHandler }
+    return { handleMenu, handleSearchBar, handleSearchButton, handleHamburger }
 }
 
 export default useNavButton

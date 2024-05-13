@@ -1,6 +1,6 @@
 import SearchBtn from './buttons/SearchBtn';
 import MailBtn from './buttons/MailBtn';
-import Hamburger from './Hamburger';
+import Hamburger from './buttons/Hamburger';
 import SignInBtn from './buttons/SignInBtn';
 import AuthBtn from './buttons/AuthBtn';
 import CartBtn from './buttons/CartBtn';
@@ -8,7 +8,7 @@ import useAuth from '../../hooks/contexthooks/useAuth';
 import useViewport from '../../hooks/contexthooks/useViewport';
 
 const NavBtns = () => {
-    const { isAuth, auth } = useAuth();
+    const { isAuth } = useAuth();
     const { isMobile } = useViewport();
 
     return (

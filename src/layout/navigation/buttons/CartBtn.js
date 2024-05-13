@@ -1,11 +1,11 @@
 import useCart from '../../../hooks/contexthooks/useCart';
-import useNavbar from '../../../hooks/contexthooks/useNavbar';
+import useNav from '../../../hooks/contexthooks/useNavbar';
 import useNavButton from '../../../hooks/useNavButton';
 import { FiShoppingCart } from 'react-icons/fi';
 
 const CartBtn = () => {
   const { itemsCount } = useCart();
-  const { cartCountRef } = useNavbar();
+  const { cartCountRef } = useNav();
   const { navButtonHandler } = useNavButton()
 
   return (

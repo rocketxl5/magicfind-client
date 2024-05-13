@@ -72,13 +72,13 @@ export default Logo;
 // import { GiWaterBolt } from 'react-icons/gi';
 // import styled from 'styled-components';
 // import useAuth from '../../hooks/contexthooks/useAuth';
-// import useNavbar from '../../hooks/contexthooks/useNavbar';
+// import useNav from '../../hooks/contexthooks/useNav';
 
 // const Logo = () => {
 //   const navigate = useNavigate();
 
 //   const { auth } = useAuth();
-//   const { displayMenu, setDisplayMenu } = useNavbar();
+//   const { displayMenu, setDisplayMenu } = useNav();
 
 //   const handleClick = () => {
 //     if (displayMenu) {
