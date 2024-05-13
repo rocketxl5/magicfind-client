@@ -2,20 +2,9 @@ import useNav from '../../../hooks/contexthooks/useNavbar';
 import useNavButton from '../../../hooks/useNavButton';
 
 const Hamburger = () => {
-    const { hamburgerRef,  displayMenu, displaySearchBar} = useNav();
-    const { handleMenu, handleSearchBar } = useNavButton();
+    const { hamburgerRef, openHamburger } = useNav();
+    const { handleHamburger } = useNavButton();
 
-    const handleClick = () => {
-        if(displaySearchBar) {
-            handleSearchBar(false);
-        }
-        else if(displayMenu) {
-            handleMenu(false);
-        }
-        else {
-            handleMenu(true);
-        }
-    }
 
     return (
         <button
@@ -24,7 +13,7 @@ const Hamburger = () => {
             type='button'
             aria-controls='navigation'
             aria-expanded='false'
-            onClick={handleClick}
+            onClick={() => handleHamburger(!openHamburger)}
             ref={hamburgerRef}
         >
             <svg className='hamburger' fill='var(--clr-grey)' viewBox='0 0 100 100' width='30'>

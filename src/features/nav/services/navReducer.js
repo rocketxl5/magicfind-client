@@ -1,4 +1,3 @@
-
 export const navReducer = (state, action) => {
     switch (action.type) {
         case 'hamburger':
@@ -9,20 +8,20 @@ export const navReducer = (state, action) => {
         case 'menu':
             return {
                 ...state,
-                ...action.payload
+                displayMenu: action.payload.displayMenu,
+                openHamburger: action.payload.openHamburger
+            }
+        case 'auth-menu':
+            return {
+                ...state,
+                displayMenu: action.payload
             }
         case 'searchbar':
             return {
                 ...state,
-                openHamburger: action.payload,
-                displaySearchBar: action.payload
+                openHamburger: action.payload.openHamburger,
+                displaySearchBar: action.payload.displaySearchBar,
             }
-        // case 'hide-searchbar':
-        //     return {
-        //         ...state,
-        //         displaySearchBar: action.payload,
-        //         openHamburger: action.payload
-        //     }
         default:
             return {
                 ...state

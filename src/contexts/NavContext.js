@@ -4,9 +4,9 @@ import useViewport from '../hooks/contexthooks/useViewport';
 import useSearch from '../hooks/contexthooks/useSearch';
 
 const initialState = {
-    openHamburger: false,
     displayMenu: false,
     displaySearchBar: false,
+    openHamburger: false,
 }
 
 export const NavContext = createContext(null);
@@ -26,7 +26,6 @@ export const NavProvider = ({ children }) => {
     useEffect(() => {
         if(displaySearchBar) {
             searchBarRef.current?.classList.add('d-searchbar');
-            hamburgerRef.current?.setAttribute('aria-expanded', 'true');
             catalogInputRef.current?.focus();
             setTimeout(() => {
                 cartCountRef.current?.classList.add('d-none');
@@ -34,7 +33,6 @@ export const NavProvider = ({ children }) => {
         }
         else {
             searchBarRef.current?.classList.remove('d-searchbar');
-            hamburgerRef.current?.setAttribute('aria-expanded', 'false');
             cartCountRef.current?.classList.remove('d-none');
         }
     }, [displaySearchBar]);
@@ -77,10 +75,9 @@ export const NavProvider = ({ children }) => {
                 cartCountRef,
                 mailCountRef,
                 searchBtnRef,
-
-                openHamburger,
                 displayMenu,
                 displaySearchBar,
+                openHamburger,
                 dispatch,
             }}
         >

@@ -1,19 +1,20 @@
+import { useNavigate } from 'react-router-dom';
 import useCart from '../../../hooks/contexthooks/useCart';
 import useNav from '../../../hooks/contexthooks/useNavbar';
-import useNavButton from '../../../hooks/useNavButton';
 import { FiShoppingCart } from 'react-icons/fi';
 
 const CartBtn = () => {
   const { itemsCount } = useCart();
   const { cartCountRef } = useNav();
-  const { navButtonHandler } = useNavButton()
+
+  const navigate = useNavigate();
 
   return (
     <button
       id='cart-btn'
       className='nav-btn cart-btn relative'
       type='button'
-      onClick={() => navButtonHandler('/shopping-cart')}
+      onClick={() => navigate('/shopping-cart')}
     >
       {itemsCount > 0 && (
         <div className='count-icon absolute bg-primary' ref={cartCountRef}>

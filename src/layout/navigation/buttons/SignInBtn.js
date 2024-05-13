@@ -1,8 +1,8 @@
+import { useNavigate } from 'react-router-dom';
 import { FaUserCircle } from 'react-icons/fa';
-import useNavButton from '../../../hooks/useNavButton';
 
 const SignInBtn = () => {
-    const { navButtonHandler } = useNavButton();
+    const navigate = useNavigate();
 
     return (
         <button
@@ -10,7 +10,7 @@ const SignInBtn = () => {
             className='nav-btn signin-btn'
             type='button'
             title='Login'
-            onClick={(e) => navButtonHandler('/login')}
+            onClick={() => navigate('/login')}
         >
             <FaUserCircle />
         </button>

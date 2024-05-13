@@ -1,5 +1,4 @@
 import { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
 import useNav from './contexthooks/useNavbar';
 import useAuth from './contexthooks/useAuth';
 import useViewport from './contexthooks/useViewport';
@@ -9,68 +8,118 @@ const useNavButton = () => {
 
     const {
         dispatch,
-        openHamburger,
-        displaySearchBar
+        displayMenu,
+        displaySearchBar,
     } = useNav();
+
     const { isMobile } = useViewport();
     const { isAuth } = useAuth();
 
-    const navigate = useNavigate();
-
-    const handleHamburger = () => {
-        dispatch({
-            type: 'hamburger',
-            payload: !openHamburger
-        });
+    function handleHamburger(open) {
+        if (!open && displaySearchBar) {
+            handleSearchBar(false);
+        }
+        if (open && !displayMenu) {
+            handleMenu(true);
+        }
+        if (!open && displayMenu) {
+            handleMenu(false);
+        }
     }
 
-    const handleSearchBar = (display) => {
+    function handleSearchBar(display) {
+        if (!display) {
+            setTimeout(() => {
+                dispatch({
+                    type: 'searchbar',
+                    payload: {
+                        openHamburger: false,
+                        displaySearchBar: false,
+                    }
+                });
+            }, 100);
+        }
+        else {
             dispatch({
                 type: 'searchbar',
-                payload: display
-            });
-    }
-
-    // Takes boolean as argument.
-    // Calls dispatch with proper payload if authenticated or not.
-    // Unauthenticated users has HamburgerButton
-    // Authenticated has authButton instead of HamburgerButton
-    const handleMenu = (display) => {
-        if(isMobile || !isAuth) {
-            dispatch({
-                type: 'menu',
                 payload: {
-                    displayMenu: display,
-                    openHamburger: display
+                    openHamburger: true,
+                    displaySearchBar: true,
                 }
             });
         }
-        else{
+    }
+
+    function handleMenu(displayMenu) {
+
+        if (displayMenu) {
             dispatch({
                 type: 'menu',
                 payload: {
-                    displayMenu: display
+                    displayMenu: true,
+                    openHamburger: true
                 }
             });
         }
-   
+        else {
+            dispatch({
+                type: 'menu',
+                payload: {
+                    displayMenu: false,
+                    openHamburger: false
+                }
+            });
+        }
     }
 
-    const handleNavButton = () => {
-       if(displaySearchBar) {
-        
-       }
+    function handleAuthMenu(display) {
+        if (!display) {
+            dispatch({
+                type: 'auth-menu',
+                payload: false
+            })
+        }
+        else {
+            dispatch({
+                type: 'auth-menu',
+                payload: true
+            })
+        }
     }
 
-    /********** Mobile only ************/
-    // Diplays mobile search bar.
-    // Sets focus on search catalog input
-    const handleSearchButton = () => {
-        // Set focus on Catalog Search Input
-   
-    }
+    useEffect(() => {
+        const navHandler = (e) => {
 
-    return { handleMenu, handleSearchBar, handleSearchButton, handleHamburger }
+            if (!isMobile && displayMenu) {
+                if (isAuth) {
+                    if (e.target.id !== 'auth-btn') {
+                        handleAuthMenu(false);
+                    }
+                }
+                else {
+                    if (e.target.id !== 'hamburger-btn') {
+                        handleMenu(false);
+                    }
+                }
+            }
+
+            if (isMobile && displayMenu) {
+                if (e.target.id !== 'hamburger-btn') {
+                    handleMenu(false);
+                }
+            }
+        }
+
+        document.addEventListener('click', navHandler);
+
+        return () => {
+            document.removeEventListener('click', navHandler);
+        }
+        // }
+    }, [displayMenu, displaySearchBar])
+
+
+    return { handleMenu, handleSearchBar, handleHamburger, handleAuthMenu }
 }
 
 export default useNavButton

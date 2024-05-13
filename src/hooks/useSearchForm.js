@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import useAuth from './contexthooks/useAuth';
 import useFetch from './useFetch';
 
-const useSearchForm = (type = null, clearSearch) => {
+const useSearchForm = (inputRef) => {
     const [fetchParams, setFetchParams] = useState(null);
 
     const navigate = useNavigate();
@@ -46,7 +46,7 @@ const useSearchForm = (type = null, clearSearch) => {
         },
     }
 
-    const search = (searchTerm) => {
+    const search = (searchTerm, type) => {
         const term = searchTerm.toLowerCase()
             .replaceAll(/["/,]/g, '')
             .split(' ')
@@ -79,10 +79,10 @@ const useSearchForm = (type = null, clearSearch) => {
             console.error(error)
         }
 
-        clearSearch();
+        inputRef.current?.blur();
     }, [error, response])
 
-    return { search, loading }
+    return { search, loading, response }
 }
 
 export default useSearchForm

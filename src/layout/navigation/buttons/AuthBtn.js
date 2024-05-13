@@ -6,7 +6,7 @@ import useNavButton from '../../../hooks/useNavButton.js';
 const AuthBtn = () => {
     const { isAuth, auth } = useAuth();
     const {displayMenu} = useNav();
-    const { handleMenu } = useNavButton();
+    const { handleAuthMenu } = useNavButton();
 
     return (
         isAuth &&
@@ -14,7 +14,7 @@ const AuthBtn = () => {
             id={'auth-btn'}
             classList={'auth-btn nav-btn'}
             avatar={auth?.user?.avatar}
-            handleClick={() => handleMenu(!displayMenu)}
+            handleClick={() => handleAuthMenu(!displayMenu)}
         />
     )
 }

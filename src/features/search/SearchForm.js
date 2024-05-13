@@ -9,10 +9,9 @@ import useSearchForm from '../../hooks/useSearchForm';
 const SearchForm = ({ children, classList, type, placeholder, cardNames, inputRef }) => {
     // const [oracleID, setOracleID] = useState(null);
     const [isActive, setIsActive] = useState(false);
-
-    const { searchBarRef } = useNav();
-    const {displaySearchBar} = useNav();
+    const { searchBarRef, displaySearchBar } = useNav();
     const {handleSearchBar} = useNavButton();
+
     const { 
         initialState,
         inputValue,
@@ -21,7 +20,7 @@ const SearchForm = ({ children, classList, type, placeholder, cardNames, inputRe
         dispatch,
     } = useSearch();
 
-    const { loading, search } = useSearchForm(type, clearSearch);
+    const { search, loading } = useSearchForm(inputRef);
 
     function setSearch(names, type) {
         dispatch({
@@ -74,7 +73,7 @@ const SearchForm = ({ children, classList, type, placeholder, cardNames, inputRe
     const handleBlur = () => {
         setIsActive(false);
         clearSearch();
-        if(displaySearchBar) {
+        if (displaySearchBar) {
             handleSearchBar(false);
         }
     }
@@ -89,12 +88,11 @@ const SearchForm = ({ children, classList, type, placeholder, cardNames, inputRe
         setSearch(cardNames, e.target.id);
     }
 
-
     useEffect(() => {
         if (searchTerm && isActive) {
-            search(searchTerm);
+            search(searchTerm, type);
         }
-    }, [searchTerm]);
+    }, [searchTerm, isActive]);
 
     return (
         <div id={`search-${type}-form`} ref={type === 'catalog' ? searchBarRef : null}>

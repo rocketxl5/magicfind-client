@@ -15,7 +15,7 @@ function Menu() {
     const routes = isAuth ? authRoutes : publicRoutes;
 
     return (
-        <nav className="nav-menu">
+        <nav className="nav-menu" onClick={(e) => console.log(e.currentTarget)}>
             <ul id="nav-links" ref={menuRef} onClick={(e) => handleMenu(e)}>
                 {
                     // Generates menus list of links
