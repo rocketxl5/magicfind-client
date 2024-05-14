@@ -40,13 +40,6 @@ const useSearchForm = (inputRef) => {
         });
     }
 
-    function updateValue(value) {
-        dispatch({
-            type: 'update-value',
-            payload: value
-        })
-    }
-
     function clearSearch() {
         dispatch({
             type: 'clear-search',
@@ -59,6 +52,13 @@ const useSearchForm = (inputRef) => {
             type: 'launch-search',
             payload: term
         });
+    }
+
+    function clearPredictions() {
+        dispatch({
+            type: 'clear-predictions',
+            payload: []
+        })
     }
 
     const params = {
@@ -110,13 +110,16 @@ const useSearchForm = (inputRef) => {
     useEffect(() => {
         if (fetchParams) {
             const { url, config } = fetchParams;
+            // Hide Autocomplete predictions list
+            clearPredictions();
             fetchOne(url, config);
+            setTimeout(() => clearPredictions(), 200)
         }
     }, [fetchParams])
 
     useEffect(() => {
         if (response) {
-            inputRef.current.blur();
+            inputRef.current?.blur();
             const { target } = fetchParams;
             localStorage.setItem('search-results', JSON.stringify({ ...response }));
             navigate(target, { state: { ...response } });
@@ -128,7 +131,7 @@ const useSearchForm = (inputRef) => {
         }
     }, [error, response])
 
-    return { search, loading, setSearch, updateSearch, updateValue, launchSearch, clearSearch }
+    return { search, loading, setSearch, updateSearch, launchSearch, clearSearch, clearPredictions }
 }
 
 export default useSearchForm
