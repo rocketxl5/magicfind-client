@@ -3,15 +3,15 @@ import { searchReducer } from '../features/search/services/searchReducer';
 import useAuth from '../hooks/contexthooks/useAuth';
 
 const initialState = {
-  blur: false,
   cardNames: [],
   inputValue: '',
-  tracker: -1,
+  loading: false,
   position: -200,
   predictions: [],
   searchResult: [],
   searchTerm: '',
-  searchType: ''
+  searchType: '',
+  tracker: -1,
 }
 
 export const SearchContext = createContext(null);
@@ -23,12 +23,13 @@ export const SearchProvider = ({ children }) => {
   const {
     cardNames,
     inputValue,
-    tracker,
+    loading,
     position,
     predictions,
     searchResult,
     searchTerm,
-    searchType
+    searchType,
+    tracker,
   } = state || {};
 
   const [cardCollection, setCardCollection] = useState([]);
@@ -102,15 +103,16 @@ export const SearchProvider = ({ children }) => {
         archiveInputRef,
 
         cardNames,
-        initialState,
         inputValue,
-        searchType,
-        tracker,
+        loading,
         position,
         predictions,
         searchResult,
+        searchType,
         searchTerm,
-        dispatch
+        tracker,
+        dispatch,
+        initialState,
       }}
     >
       {children}

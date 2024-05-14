@@ -60,24 +60,27 @@ export const NavProvider = ({ children }) => {
     }, [openHamburger]);
 
     useEffect(() => {
-        // Display site Menu
-        if(displayMenu) {
-            // @ mobile
+        if (displayMenu) {
+            // Display site Menu
             if (isMobile) {
                 // Hide SearchBtn
                 searchBtnRef.current?.classList.add('d-none');
                 menuRef.current?.classList.add('d-mobile-menu');
             }
-            menuRef.current?.classList.add('d-desktop-menu');
+            else {
+                menuRef.current?.classList.add('d-desktop-menu');
+            }
         }
-            // Hide site Menu
         else {
+            // Hide site Menu
             if (isMobile) {
                 // Display SearchBtn
                 searchBtnRef.current?.classList.remove('d-none');
                 menuRef.current?.classList.remove('d-mobile-menu');
             }
-            menuRef.current?.classList.remove('d-desktop-menu');
+            else {
+                menuRef.current?.classList.remove('d-desktop-menu');
+            }
         }
     }, [displayMenu]);
 

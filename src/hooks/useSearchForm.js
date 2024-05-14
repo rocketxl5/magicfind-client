@@ -6,6 +6,7 @@ import useSearch from './contexthooks/useSearch';
 
 const useSearchForm = (inputRef) => {
     const [fetchParams, setFetchParams] = useState(null);
+    const [isActive, setIsActive] = useState(false);
 
     const navigate = useNavigate();
 
@@ -19,6 +20,27 @@ const useSearchForm = (inputRef) => {
     const { fetchOne, error, response, loading } = useFetch();
 
     const prefix = '/api/cards';
+
+    function clearPredictions() {
+        dispatch({
+            type: 'clear-predictions',
+            payload: []
+        })
+    }
+
+    function clearSearch() {
+        dispatch({
+            type: 'clear-search',
+            payload: initialState
+        })
+    }
+
+    function launchSearch(term) {
+        dispatch({
+            type: 'launch-search',
+            payload: term
+        });
+    }
 
     function setSearch(names, type) {
         dispatch({
@@ -38,27 +60,6 @@ const useSearchForm = (inputRef) => {
                 predictions: predictions
             }
         });
-    }
-
-    function clearSearch() {
-        dispatch({
-            type: 'clear-search',
-            payload: initialState
-        })
-    }
-
-    function launchSearch(term) {
-        dispatch({
-            type: 'launch-search',
-            payload: term
-        });
-    }
-
-    function clearPredictions() {
-        dispatch({
-            type: 'clear-predictions',
-            payload: []
-        })
     }
 
     const params = {
@@ -113,13 +114,13 @@ const useSearchForm = (inputRef) => {
             // Hide Autocomplete predictions list
             clearPredictions();
             fetchOne(url, config);
-            setTimeout(() => clearPredictions(), 200)
+            // setTimeout(() => clearPredictions(), 200)
         }
     }, [fetchParams])
 
     useEffect(() => {
         if (response) {
-            inputRef.current?.blur();
+            inputRef?.current?.blur();
             const { target } = fetchParams;
             localStorage.setItem('search-results', JSON.stringify({ ...response }));
             navigate(target, { state: { ...response } });
@@ -131,7 +132,7 @@ const useSearchForm = (inputRef) => {
         }
     }, [error, response])
 
-    return { search, loading, setSearch, updateSearch, launchSearch, clearSearch, clearPredictions }
+    return { search, loading, isActive, setIsActive, setSearch, updateSearch, launchSearch, clearSearch, clearPredictions }
 }
 
 export default useSearchForm

@@ -4,22 +4,6 @@
 ///////////////////////////////////////////////////////////////////////
 export const searchReducer = (state, action) => {
     switch (action.type) {
-        case 'set-search':
-            return {
-                ...state,
-                ...action.payload
-            }
-        case 'update-search':
-            return {
-                ...state,
-                ...action.payload
-            }
-        case 'launch-search':
-            return {
-                ...state,
-                searchTerm: action.payload,
-                inputValue: action.payload
-            }
         case 'clear-search':
             return {
                 ...action.payload
@@ -29,11 +13,28 @@ export const searchReducer = (state, action) => {
                 ...state,
                 predictions: action.payload
             }
+        case 'launch-search':
+            return {
+                ...state,
+                searchTerm: action.payload,
+                inputValue: action.payload
+            }
+        case 'set-search':
+            return {
+                ...state,
+                cardNames: action.payload.cardNames,
+                searchType: action.payload.searchType,
+            }
         case 'track-scroll':
             return {
                 ...state,
                 tracker: action.payload.tracker,
                 position: action.payload.position,
+            }
+        case 'update-search':
+            return {
+                ...state,
+                ...action.payload
             }
         default:
             return {

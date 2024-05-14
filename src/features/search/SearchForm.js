@@ -8,17 +8,18 @@ import useSearchForm from '../../hooks/useSearchForm';
 
 const SearchForm = ({ children, classList, type, placeholder, cardNames, inputRef }) => {
     // const [oracleID, setOracleID] = useState(null);
-    const [isActive, setIsActive] = useState(false);
+
     const { searchBarRef, displaySearchBar } = useNav();
     const {handleSearchBar} = useNavButton();
 
     const { 
         inputValue,
+        // loading,
         predictions,
         searchTerm,
     } = useSearch();
 
-    const { search, loading, setSearch, updateSearch, launchSearch, clearSearch } = useSearchForm(inputRef);
+    const { search, setIsActive, isActive, loading, setSearch, updateSearch, launchSearch, clearSearch } = useSearchForm(inputRef);
 
     const handleChange = (e) => {
         const value = e.target.value;
@@ -71,8 +72,13 @@ const SearchForm = ({ children, classList, type, placeholder, cardNames, inputRe
                     placeholder={placeholder}
                     ref={inputRef}
                 />
-                {(predictions.length > 0 && isActive) && <AutoComplete />}
-                {loading && <Loader classList={'box-size-6 right-1'} />}
+                {
+                    isActive &&
+                    <>
+                        {predictions?.length > 0 && <AutoComplete />}
+                        {loading && <Loader classList={'box-size-6 right-1'} />}
+                    </>
+                }
             </form>
             {children}
         </div>

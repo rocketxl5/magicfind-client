@@ -1,13 +1,10 @@
 import { useEffect } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
 import Page from '../../components/Page.js';
 import Message from '../../components/Message.js';
 import SearchForm from '../../features/search/SearchForm.js';
 import Button from '../../components/Button.js';
 import useSearch from '../../hooks/contexthooks/useSearch.js';
-import useAuth from '../../hooks/contexthooks/useAuth.js';
-import useFetch from '../../hooks/useFetch.js';
-import useConfig from '../../hooks/useConfig.js';
+import useSearchForm from '../../hooks/useSearchForm.js';
 
 const Collection = () => {
     const {
@@ -16,28 +13,11 @@ const Collection = () => {
         collectionInputRef,
     } = useSearch();
 
-    const { auth } = useAuth();
-    const { fetchOne, response, error } = useFetch();
-    const { config, getConfig } = useConfig();
-
-    const location = useLocation();
-    const navigate = useNavigate();
+    const { search } = useSearchForm();
 
     useEffect(() => {
         collectionInputRef.current?.focus();
     }, []);
-
-    useEffect(() => {
-        if (config) {
-            fetchOne(`/api/cards/collection/${auth.user.id}`, config);
-        }
-    }, [config]);
-
-    useEffect(() => {
-        if (response) {
-            navigate(`${location.pathname}/cards`, { state: { ...response } });
-        }
-    }, [response, error])
 
     return (
         <Page name={'collection'} title={'Collection'}>
@@ -54,7 +34,7 @@ const Collection = () => {
                         <Button
                             id={'collection-btn'}
                             classList='bg-success'
-                            handleClick={() => getConfig('collection', auth.token, 'Collection Cards')}
+                            handleClick={() => search('All', 'collection')}
                         >
                             All Cards
                         </Button>
