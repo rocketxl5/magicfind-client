@@ -18,9 +18,7 @@ const SearchForm = ({ children, classList, type, placeholder, cardNames, inputRe
         searchTerm,
     } = useSearch();
 
-    const { search, loading, setSearch, updateSearch, launchSearch, clearSearch, updateValue } = useSearchForm(inputRef);
-
-
+    const { search, loading, setSearch, updateSearch, launchSearch, clearSearch } = useSearchForm(inputRef);
 
     const handleChange = (e) => {
         const value = e.target.value;
@@ -29,7 +27,6 @@ const SearchForm = ({ children, classList, type, placeholder, cardNames, inputRe
             updateSearch(value, cardNames?.filter((title) => {
                 return title.toLowerCase().includes(value.toLowerCase());
             }))
-
         }
         else {
             updateSearch(value, []);
@@ -56,7 +53,6 @@ const SearchForm = ({ children, classList, type, placeholder, cardNames, inputRe
 
     useEffect(() => {
         if (searchTerm && isActive) {
-            updateValue(searchTerm);
             search(searchTerm, type);
         }
     }, [searchTerm, isActive]);
