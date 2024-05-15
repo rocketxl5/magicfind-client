@@ -8,7 +8,8 @@ const useFetch = () => {
     const [loading, setLoading] = useState(false);
     const [showConfirmation, setShowConfirmation] = useState(false);
 
-    const fetchOne = async (query, config) => {
+    const fetch = async (endpoint, config, resource) => {
+
         if (error) {
             setError(null);
         }
@@ -16,13 +17,21 @@ const useFetch = () => {
             setResponse(null);
         }
 
-        console.log('query', query)
+        const query = {
+            'api': api.skryfallURL,
+            'server': api.serverURL
+        }
+
+        const url = `${query[resource]}${endpoint}`
+
+        console.log(endpoint)
+        console.log('query', url)
         console.log('config', config)
         setLoading(true);
         await axios
-            .get(`${api.serverURL}${query}`, config)
+            .get(url, config)
             .then(res => {
-                // console.log(res)
+                console.log(res)
                 setResponse(res.data);
             })
             .catch((error) => {
@@ -35,6 +44,10 @@ const useFetch = () => {
                     setShowConfirmation(false);
                 }, 1500);
             })
+    }
+
+    const fetchApi = () => {
+
     }
 
     const fetchAll = async (collection) => {
@@ -57,7 +70,7 @@ const useFetch = () => {
         }, 200)
     }
 
-    return { fetchOne, fetchAll, loading, showConfirmation, error, response }
+    return { fetch, fetchApi, fetchAll, loading, showConfirmation, error, response }
 }
 
 export default useFetch

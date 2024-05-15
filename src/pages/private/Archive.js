@@ -30,8 +30,6 @@ const Search = () => {
         inputValue
     } = useSearch();
 
-    const { displaySeachBar, setDisplaySearchBar } = useNav();
-
     const navigate = useNavigate();
     const location = useLocation();
 
@@ -52,16 +50,16 @@ const Search = () => {
         let query = ''
 
         if (prediction) {
-            query = `cards/named?exact=${prediction}`;
+            // query = `cards/named?exact=${prediction}`;
         }
         else if (searchTerm) {
             query = `cards/named?exact=${searchTerm}`;
         }
         else if (predictions.length === 1) {
-            query = `cards/named?exact=${predictions[0]}`;
+            // query = `cards/named?exact=${predictions[0]}`;
         }
         else if (inputValue) {
-            query = `cards/named?fuzzy=${inputValue}`;
+            // query = `cards/named?fuzzy=${inputValue}`;
         }
 
         setPredictions([]);

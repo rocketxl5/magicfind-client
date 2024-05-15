@@ -17,9 +17,7 @@ const useSearchForm = (inputRef) => {
         initialState
     } = useSearch();
 
-    const { fetchOne, error, response, loading } = useFetch();
-
-    const prefix = '/api/cards';
+    const { fetch, fetchApi, error, response, loading } = useFetch();
 
     function clearPredictions() {
         dispatch({
@@ -62,59 +60,85 @@ const useSearchForm = (inputRef) => {
         });
     }
 
+    const getParams = (query, type) => {
+        console.log(query)
+
     const params = {
         archive: {
-            query: `${prefix}/archive/${auth?.user.id}`,
+            endpoint: '/cards/named?exact=',
             config: {
                 headers: {
                     'Content-Type': 'application/json',
-                    'auth-token': auth?.token
                 },
             },
-            ref: `/me/archive`
+            ref: `/me/archive`,
+            resource: 'api'
         },
         catalog: {
-            query: `${prefix}/catalog`,
+            endpoint: '/api/cards/catalog',
             config: {
                 headers: {
                     'Content-Type': 'application/json',
                 },
             },
-            ref: '/catalog'
+            ref: '/catalog',
+            resource: 'server'
         },
         collection: {
-            query: `${prefix}/collection/${auth?.user.id}`,
+            endpoint: `/api/cards/collection/${auth?.user.id}`,
             config: {
                 headers: {
                     'Content-Type': 'application/json',
                     'auth-token': auth?.token
                 },
             },
-            ref: `/me/collection`
+            ref: `/me/collection`,
+            resource: 'server'
         },
     }
+        if (type !== 'archive') {
 
-    const search = (searchTerm, type) => {
-        const term = searchTerm.toLowerCase()
-            .replaceAll(/["/,]/g, '')
-            .split(' ')
-            .join('-');
+            const term = type !== 'archive'
+                ?
+                query.toLowerCase()
+                    .replaceAll(/["/,]/g, '')
+                    .replace('  ', ' ')
+                    .split(' ')
+                    .join('-')
+                :
+                query;
 
-        setFetchParams({
-            url: `${params[type].query}/${term}`,
-            config: params[type].config,
-            target: `${params[type].ref}/${term}`,
-            term: term
-        });
+            return {
+                endpoint: `${params[type].endpoint}/${term}`,
+                config: params[type].config,
+                target: `${params[type].ref}/${term}`,
+                resource: params[type].resource,
+                term: term,
+            }
+        }
+        else {
+            return {
+                endpoint: `${params[type].endpoint}${query}`,
+                config: params[type].config,
+                target: `${params[type].ref}/${query}`,
+                resource: params[type].resource,
+                term: query,
+            }
+        }
+
+    }
+
+    const getOracleId = (query) => {
+
     }
 
     useEffect(() => {
         if (fetchParams) {
-            const { url, config } = fetchParams;
+            console.log(fetchParams)
+            const { endpoint, config, resource } = fetchParams;
             // Hide Autocomplete predictions list
             clearPredictions();
-            fetchOne(url, config);
-            // setTimeout(() => clearPredictions(), 200)
+            fetch(endpoint, config, resource);
         }
     }, [fetchParams])
 
@@ -132,7 +156,7 @@ const useSearchForm = (inputRef) => {
         }
     }, [error, response])
 
-    return { search, loading, isActive, setIsActive, setSearch, updateSearch, launchSearch, clearSearch, clearPredictions }
+    return { getParams, getOracleId, setFetchParams, loading, isActive, setIsActive, setSearch, updateSearch, launchSearch, clearSearch, clearPredictions }
 }
 
 export default useSearchForm

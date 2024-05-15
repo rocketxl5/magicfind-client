@@ -41,7 +41,7 @@ const SearchResults = () => {
 
     // useEffect(() => {
     //     if (url && config) {
-    //         fetchOne(url, config);
+    //         fetch(url, config);
     //     }
     // }, [url, config])
 
