@@ -1,6 +1,5 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import axios from 'axios';
-import { api } from '../api/resources';
 
 const useFetch = () => {
     const [response, setResponse] = useState(null);
@@ -8,7 +7,7 @@ const useFetch = () => {
     const [loading, setLoading] = useState(false);
     const [showConfirmation, setShowConfirmation] = useState(false);
 
-    const fetch = async (endpoint, config, resource) => {
+    const fetch = async (url, config, origin) => {
 
         if (error) {
             setError(null);
@@ -17,22 +16,13 @@ const useFetch = () => {
             setResponse(null);
         }
 
-        const query = {
-            'api': api.skryfallURL,
-            'server': api.serverURL
-        }
-
-        const url = `${query[resource]}${endpoint}`
-
-        console.log(endpoint)
-        console.log('query', url)
-        console.log('config', config)
         setLoading(true);
         await axios
             .get(url, config)
             .then(res => {
                 console.log(res)
-                setResponse(res.data);
+                const data = res.data.data || res.data;
+                setResponse({ data: data, origin });
             })
             .catch((error) => {
                 setError(error.message);
@@ -46,14 +36,10 @@ const useFetch = () => {
             })
     }
 
-    const fetchApi = () => {
-
-    }
-
-    const fetchAll = async (collection) => {
-
+    const fetchAll = async (collection, api) => {
         const fetchJSON = async (query, config, setter) => {
-            const res = await axios.get(`${api.serverURL}${query}`, config);
+            const url = api + query;
+            const res = await axios.get(url, config);
             if (!res.status === 200) {
                 throw new Error(`Error ${res.status}`)
             }
@@ -70,7 +56,7 @@ const useFetch = () => {
         }, 200)
     }
 
-    return { fetch, fetchApi, fetchAll, loading, showConfirmation, error, response }
+    return { fetch, fetchAll, loading, showConfirmation, error, response }
 }
 
 export default useFetch

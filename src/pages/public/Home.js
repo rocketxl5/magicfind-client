@@ -18,7 +18,7 @@ const Home = () => {
   useEffect(() => {
     const cards = []
     const promises = media.cards.map(async (feature) => {
-      const response = await axios.get(`${api.skryfallURL}/cards/search?order=set&q=e%3Asld+${feature.query}&unique=cards`);
+      const response = await axios.get(`${api.scryfallURL}/cards/search?order=set&q=e%3Asld+${feature.query}&unique=cards`);
       return response;
     })
 

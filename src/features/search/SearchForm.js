@@ -56,6 +56,7 @@ const SearchForm = ({ children, classList, type, placeholder, cardNames, inputRe
     useEffect(() => {
         if (searchTerm && isActive) {
             const searchParams = getParams(searchTerm, type);
+            // console.log(searchParams)
             setFetchParams(searchParams);
         }
     }, [searchTerm, isActive]);

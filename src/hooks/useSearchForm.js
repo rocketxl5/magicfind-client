@@ -3,10 +3,12 @@ import { useNavigate } from 'react-router-dom';
 import useAuth from './contexthooks/useAuth';
 import useFetch from './useFetch';
 import useSearch from './contexthooks/useSearch';
+import { api } from '../api/resources';
 
 const useSearchForm = (inputRef) => {
     const [fetchParams, setFetchParams] = useState(null);
     const [isActive, setIsActive] = useState(false);
+    const [oracleId, setOracleId] = useState('');
 
     const navigate = useNavigate();
 
@@ -17,7 +19,7 @@ const useSearchForm = (inputRef) => {
         initialState
     } = useSearch();
 
-    const { fetch, fetchApi, error, response, loading } = useFetch();
+    const { fetch, error, response, loading } = useFetch();
 
     function clearPredictions() {
         dispatch({
@@ -60,103 +62,108 @@ const useSearchForm = (inputRef) => {
         });
     }
 
+    const setString = (str) => {
+        return str.toLowerCase()
+            .replaceAll(/["/,]/g, '')
+            .replace('  ', ' ')
+            .split(' ')
+            .join('-')
+    }
+
     const getParams = (query, type) => {
         console.log(query)
-
-    const params = {
-        archive: {
-            endpoint: '/cards/named?exact=',
-            config: {
-                headers: {
-                    'Content-Type': 'application/json',
-                },
+        console.log(type)
+        const params = {
+            archive: {
+                endpoint: '/cards/named?exact=',
+                config: {},
+                ref: `/me/archive`,
+                resource: api.scryfallURL,
+                origin: 'scryfall',
             },
-            ref: `/me/archive`,
-            resource: 'api'
-        },
-        catalog: {
-            endpoint: '/api/cards/catalog',
-            config: {
-                headers: {
-                    'Content-Type': 'application/json',
+            catalog: {
+                endpoint: '/api/cards/catalog/',
+                config: {
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
                 },
+                term: setString(query),
+                ref: '/catalog',
+                resource: api.serverURL,
+                origin: 'server',
             },
-            ref: '/catalog',
-            resource: 'server'
-        },
-        collection: {
-            endpoint: `/api/cards/collection/${auth?.user.id}`,
-            config: {
-                headers: {
-                    'Content-Type': 'application/json',
-                    'auth-token': auth?.token
+            collection: {
+                endpoint: `/api/cards/collection/${auth?.user.id}/`,
+                config: {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'auth-token': auth?.token
+                    },
                 },
+                term: setString(query),
+                ref: `/me/collection`,
+                resource: api.serverURL,
+                origin: 'server',
             },
-            ref: `/me/collection`,
-            resource: 'server'
-        },
-    }
-        if (type !== 'archive') {
-
-            const term = type !== 'archive'
-                ?
-                query.toLowerCase()
-                    .replaceAll(/["/,]/g, '')
-                    .replace('  ', ' ')
-                    .split(' ')
-                    .join('-')
-                :
-                query;
-
-            return {
-                endpoint: `${params[type].endpoint}/${term}`,
-                config: params[type].config,
-                target: `${params[type].ref}/${term}`,
-                resource: params[type].resource,
-                term: term,
-            }
-        }
-        else {
-            return {
-                endpoint: `${params[type].endpoint}${query}`,
-                config: params[type].config,
-                target: `${params[type].ref}/${query}`,
-                resource: params[type].resource,
-                term: query,
-            }
         }
 
-    }
+        return {
+            resource: params[type].resource,
+            endpoint: `${params[type].endpoint}${params[type].term || query}`,
+            config: params[type].config,
+            origin: params[type].origin,
 
-    const getOracleId = (query) => {
+            search: {
+                path: `${params[type].ref}/${params[type].term || setString(query)}`,
+                query: query,
+                type: type
+            }
 
+        }
     }
 
     useEffect(() => {
         if (fetchParams) {
-            console.log(fetchParams)
-            const { endpoint, config, resource } = fetchParams;
+            const { resource, endpoint, config, origin } = fetchParams;
             // Hide Autocomplete predictions list
             clearPredictions();
-            fetch(endpoint, config, resource);
+            const url = resource + endpoint;
+            fetch(url, config, origin);
         }
     }, [fetchParams])
 
     useEffect(() => {
+        if (oracleId) {
+            const url = `${api.scryfallURL}/cards/search?order=released&q=oracleid%3A${oracleId}&unique=prints`;
+            fetch(url);
+        }
+    }, [oracleId])
+
+    useEffect(() => {
         if (response) {
+            // console.log(response)
+            const { data, origin } = response;
+            if (origin === 'scryfall') {
+                setOracleId(data.oracle_id)
+            }
+            else {
+                console.log(fetchParams)
+                const { path, query, type } = fetchParams.search;
+                localStorage.setItem('search-results', JSON.stringify({ ...response.data }));
+                navigate(path, { state: { result: response.data, type, query } });
+            }
             inputRef?.current?.blur();
-            const { target } = fetchParams;
-            localStorage.setItem('search-results', JSON.stringify({ ...response }));
-            navigate(target, { state: { ...response } });
         }
         if (error) {
-            const { term } = fetchParams;
-            navigate(`/not-found/${term}`);
-            console.error(error)
+            console.log(error)
+            // const { term } = fetchParams;
+            // navigate(`/not-found/${term}`);
+            // console.error(error)
         }
     }, [error, response])
 
-    return { getParams, getOracleId, setFetchParams, loading, isActive, setIsActive, setSearch, updateSearch, launchSearch, clearSearch, clearPredictions }
+    return { getParams, setFetchParams, loading, isActive, setIsActive, setSearch, updateSearch, launchSearch, clearSearch, clearPredictions }
 }
 
 export default useSearchForm
