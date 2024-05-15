@@ -59,7 +59,7 @@ const DashboardNav = () => {
                     }
                 }
             }
-        ]).catch(console.error)
+        ], api.serverURL).catch(console.error)
     }, [])
     /* ///////////////////////////// End ////////////////////////////// */
 

@@ -7,11 +7,11 @@ const Seller = () => {
     const [hasLoaded, setHasLoaded] = useState(false);
     const location = useLocation();
 
-    const { fetchOne, loading, showConfirmation, error, response } = useFetch();
+    const { fetch, loading, showConfirmation, error, response } = useFetch();
 
     useEffect(() => {
         // console.log(location)
-        fetchOne(`/api/users/store/${location.state?.user.userID}`, { headers: { 'Content-Type': 'application/json' } })
+        fetch(`/api/users/store/${location.state?.user.userID}`, { headers: { 'Content-Type': 'application/json' } })
 
     }, [])
 

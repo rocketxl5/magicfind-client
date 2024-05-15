@@ -15,24 +15,24 @@ import useImageLoader from '../../hooks/useImageLoader';
 const SearchResults = () => {
     // States
     const [searchFeatures, setSearchFeatures] = useState(false);
-    const [result, setResult] = useState(null);
+    const [search, setSearch] = useState(null);
 
     // Hooks
     const location = useLocation();
     const navigate = useNavigate();
 
-    const [imagesLoaded] = useImageLoader(result?.cards);
+    const [imagesLoaded] = useImageLoader(search?.result);
 
     const [view, updateSlideView] = useSlideView(handleSlideView);
 
-    const [state, updateCollectionItem] = useCollectionModal(result?.search, handleCollectionItem);
+    const [state, updateCollectionItem] = useCollectionModal(search?.search, handleCollectionItem);
 
     useEffect(() => {
         // If location.state is defined
         // Search was sent through input submit 
         if (location.state) {
-            // Set search result state
-            setResult({ ...location.state })
+            // Set search search state
+            setSearch({ ...location.state })
         }
         else {
             // getUrl(location.pathname);
@@ -41,7 +41,7 @@ const SearchResults = () => {
 
     // useEffect(() => {
     //     if (url && config) {
-    //         fetchOne(url, config);
+    //         fetch(url, config);
     //     }
     // }, [url, config])
 
@@ -49,23 +49,24 @@ const SearchResults = () => {
     //     // If response is defined
     //     if (response) {
     //         // console.log(response)
-    //         // Set result
-    //         setResult({ ...response })
+    //         // Set search
+    //         setSearch({ ...response })
     //         // Set localStorage
-    //         localStorage.setItem('search-results', JSON.stringify(response))
+    //         localStorage.setItem('search-searchs', JSON.stringify(response))
     //     }
     // }, [response])
 
-    // Validation for collection search result
+    // Validation for collection search search
     useEffect(() => {
-        if (result) {
+        console.log(search)
+        if (search) {
             // If search is collection and card collection is empty
-            if (result?.search === 'collection' && result?.cards.length === 0) {
+            if (search?.search === 'collection' && search?.result.length === 0) {
                 // Send to collection page
                 navigate('/me/collection');
             }
         }
-    }, [result])
+    }, [search])
 
     function handleSlideView(e, layout, expandedImage) {
         e.stopPropagation();
@@ -92,7 +93,7 @@ const SearchResults = () => {
             {imagesLoaded &&
                 <Page
                     name={'search-results'}
-                    title={result?.query}
+                    title={search?.query}
                 >
                     <SearchParameters
                         setSearchFeatures={(value) => setSearchFeatures(value)}
@@ -101,26 +102,26 @@ const SearchResults = () => {
 
                     <List classList="list align-center">
                         {
-                            result?.cards &&
-                            result.cards.map((card, i) => {
+                            search?.result &&
+                            search.result.map((card, i) => {
                                 return (
                                     <ListItem key={i} classList={'flex justify-center'}>
                                         {
-                                            result.search === 'catalog'
+                                            search.type === 'catalog'
                                                 ?
                                                 <CatalogItem
                                                     index={i}
                                                     product={card}
-                                                    count={result.cards.length}
+                                                    count={search.result.length}
                                                     handleSlideView={handleSlideView}
                                                 />
                                                 :
-                                                result.search === 'collection'
+                                                search.type === 'collection'
                                                     ?
                                                     <CollectionItem
                                                         index={i}
                                                         product={card}
-                                                        count={result.cards.length}
+                                                        count={search.result.length}
                                                         handleCollectionItem={handleCollectionItem}
                                                         handleSlideView={handleSlideView}
                                                     />
@@ -128,7 +129,7 @@ const SearchResults = () => {
                                                     <ArchiveItem
                                                         index={i}
                                                         product={card}
-                                                        count={result.cards.length}
+                                                        count={search.result.length}
                                                         handleSlideView={handleSlideView}
                                                     />
                                         }

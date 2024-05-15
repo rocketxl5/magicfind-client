@@ -13,11 +13,16 @@ const Collection = () => {
         collectionInputRef,
     } = useSearch();
 
-    const { search } = useSearchForm();
+    const { getParams, setFetchParams } = useSearchForm();
 
     useEffect(() => {
         collectionInputRef.current?.focus();
     }, []);
+
+    const handleClick = () => {
+        const searchParams = getParams('All', 'collection');
+        setFetchParams(searchParams);
+    }
 
     return (
         <Page name={'collection'} title={'Collection'}>
@@ -34,7 +39,7 @@ const Collection = () => {
                         <Button
                             id={'collection-btn'}
                             classList='bg-success'
-                            handleClick={() => search('All', 'collection')}
+                            handleClick={handleClick}
                         >
                             All Cards
                         </Button>

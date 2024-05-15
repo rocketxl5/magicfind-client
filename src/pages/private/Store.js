@@ -11,12 +11,12 @@ const Store = () => {
     const location = useLocation();
 
     const { isAuth, auth } = useAuth();
-    const { fetchOne, loading, showConfirmation, error, result } = useFetch();
+    const { fetch, loading, showConfirmation, error, result } = useFetch();
 
     useEffect(() => {
         if (isAuth) {
             const config = { headers: { 'Content-Type': 'application/json' } }
-            fetchOne(`/api/users/store/${auth.user.id}`, config)
+            fetch(`/api/users/store/${auth.user.id}`, config)
         }
     }, [])
 
