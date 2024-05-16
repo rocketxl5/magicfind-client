@@ -1,18 +1,16 @@
 import { useNavigate } from 'react-router-dom';
 import Page from '../../components/Page';
+import Button from '../../components/Button';
 import ListItem from '../../components/ListItem';
 import CartItem from '../../features/cart/CartItem';
 import CartUpdate from '../../features/cart/components/CartUpdate';
 import CartEmpty from '../../features/cart/components/CartEmpty';
 import Container from '../../components/Container';
 import Aside from '../../components/Aside';
-
-
 import useCart from '../../hooks/contexthooks/useCart';
 
 function ShoppingCart() {
 
-  // Hooks
   const {
     cartItems,
     subTotal,
@@ -38,12 +36,14 @@ function ShoppingCart() {
                 </Container>
               </Container>
               <Container>
-                <button
-                  className='btn checkout-btn'
-                  onClick={() => navigate('/login', { state: { from: `/me/checkout` } }, { replace: true })}
+                <Button
+                  id={'checkout-btn'}
+                  classList={'btn checkout-btn'}
+                  title={'Check Out'}
+                  handleClick={() => navigate('/me/checkout')}
                 >
                   Proceed to checkout
-                </button>
+                </Button>
               </Container>
             </Aside>
             {

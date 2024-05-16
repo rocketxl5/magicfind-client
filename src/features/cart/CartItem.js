@@ -141,7 +141,7 @@ const CartItem = ({ index, count, product }) => {
           {
             loading ? <Loader classList={'cart-loader relative box-size-6 bg-transparent'} /> :
               <Button
-                classList={'box-size-6 btn-tiny bg-danger color-light'}
+                classList={'btn box-size-6 btn-tiny bg-danger color-light'}
                 handleClick={(e) => updateCartHandler(0)}
               >
                 <AiOutlineDelete />
