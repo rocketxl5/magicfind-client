@@ -5,19 +5,23 @@ import Page from '../../components/Page';
 const Checkout = () => {
     const navigate = useNavigate();
 
+    const handleClick = (e) => {
+        e.preventDefault();
+        navigate('/', { replace: true })
+    }
+
     return (
         <Page
             name={'checkout'}
-            hasHeader={false}
+            title={'Checkout'}
         >
             <div className='flex column align-center justify-center'>
                 <div className='col-12 min-height-half flex column align-center gap-2'>
-                    <h1 className='fs-200 fw-500 color-primary'>Checkout</h1>
-                    <p></p>
                     <Button
+                        id={'confirm-btn'}
+                        type={'submit'}
                         classList='btn color-light bg-success'
-                        handleClick={() => navigate('/', { replace: true })}
-                        status={false}
+                        handleClick={() => handleClick('/', { replace: true })}
                     >
                         {'Submit'}
                     </Button>

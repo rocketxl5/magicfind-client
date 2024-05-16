@@ -41,7 +41,6 @@ const AutoComplete = () => {
                 setTrackSearch(tracker - 1, position - 40);
             }
         }
-
     }
 
     return (

@@ -14,7 +14,7 @@ const FormInput = forwardRef((props, ref) => {
                 )
             }
             <input
-                className={errors[name] ? 'border-danger danger-padding' : ''}
+                className={errors[name] ? 'border-danger' : ''}
                 id={id}
                 name={name}
                 {...inputProps}

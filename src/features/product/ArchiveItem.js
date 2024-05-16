@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
 import Loader from '../../layout/Loader';
 import Drop from '../../components/Drop';
 import Card from '../../components/Card';
@@ -12,7 +11,6 @@ import useSearch from '../../hooks/contexthooks/useSearch';
 import useFind from '../../hooks/useFind';
 import useColorSymbols from '../../hooks/useColorSymbols';
 import { IoExpand } from "react-icons/io5";
-import { AiOutlineInfoCircle } from "react-icons/ai";
 import { FaCheck } from "react-icons/fa6";
 import { FaPlus } from "react-icons/fa6";
 
@@ -37,7 +35,6 @@ const ArchiveItem = ({ index, product, count, handleSlideView }) => {
     const { setUpdateCollection } = useSearch();
     const { expandedImage } = useExpandImage(product);
     const { findMatch, isMatchFound } = useFind();
-    const navigate = useNavigate();
 
     const query = `/api/cards/add/${user.id}/${product.id}`;
 

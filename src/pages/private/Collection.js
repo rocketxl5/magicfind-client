@@ -38,7 +38,7 @@ const Collection = () => {
                     >
                         <Button
                             id={'collection-btn'}
-                            classList='bg-success'
+                            classList='btn bg-success'
                             handleClick={handleClick}
                         >
                             All Cards

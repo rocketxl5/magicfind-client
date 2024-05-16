@@ -4,17 +4,23 @@ import useNav from '../../../hooks/contexthooks/useNavbar.js';
 import useNavButton from '../../../hooks/useNavButton.js';
 
 const AuthBtn = () => {
-    const { isAuth, auth } = useAuth();
+    const { auth } = useAuth();
     const {displayMenu} = useNav();
     const { handleAuthMenu } = useNavButton();
 
+    const { avatar } = auth.user;
+    const content = avatar.src ?
+        <img src={avatar.src} alt="Avatar" /> :
+        avatar.letter
     return (
-        isAuth &&
         <Avatar
             id={'auth-btn'}
-            classList={'auth-btn nav-btn'}
-            avatar={auth?.user?.avatar}
+            classList={'auth-btn nav-btn avatar-icon'}
+            style={
+                { backgroundColor: `#${avatar?.color}` }
+            }
             handleClick={() => handleAuthMenu(!displayMenu)}
+            content={content}
         />
     )
 }

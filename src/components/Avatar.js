@@ -1,23 +1,15 @@
 import Button from './Button.js';
 
-const Avatar = ({ id = '', classList = '', avatar, handleClick }) => {
+const Avatar = ({ id, classList, content, style, handleClick }) => {
 
     return (
         <Button
             id={id}
-            classList={`${classList} avatar-icon`}
-            style={
-                { backgroundColor: `#${avatar.color}` }
-            }
+            classList={classList}
+            style={style}
             handleClick={handleClick}
         >
-            {avatar?.src ? (
-                <img src={avatar.src} alt="Avatar" />
-            ) : (
-                <>
-                    {avatar.letter}
-                </>
-            )}
+            {content}
         </Button>
     )
 }

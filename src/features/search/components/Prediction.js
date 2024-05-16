@@ -6,7 +6,6 @@ const Prediction = ({ index, prediction }) => {
     const {
         tracker,
         inputValue,
-        predictions,
     } = useSearch();
 
     const { setSelection } = useSearchForm();
