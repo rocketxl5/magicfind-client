@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import AutoComplete from './components/AutoComplete';
 import Loader from '../../layout/Loader';
 import useNav from '../../hooks/contexthooks/useNavbar';
@@ -7,19 +7,27 @@ import useSearch from '../../hooks/contexthooks/useSearch';
 import useSearchForm from '../../hooks/useSearchForm';
 
 const SearchForm = ({ children, classList, type, placeholder, cardNames, inputRef }) => {
-    // const [oracleID, setOracleID] = useState(null);
-
     const { searchBarRef, displaySearchBar } = useNav();
     const {handleSearchBar} = useNavButton();
 
     const { 
         inputValue,
-        // loading,
         predictions,
         searchTerm,
+        selection
     } = useSearch();
 
-    const { getParams, setFetchParams, setIsActive, isActive, loading, setSearch, updateSearch, launchSearch, clearSearch } = useSearchForm(inputRef);
+    const {
+        getParams,
+        setFetchParams,
+        setIsActive,
+        isActive,
+        loading,
+        setSearch,
+        updateSearch,
+        launchSearch,
+        clearSearch
+    } = useSearchForm(inputRef);
 
     const handleChange = (e) => {
         const value = e.target.value;
@@ -45,7 +53,7 @@ const SearchForm = ({ children, classList, type, placeholder, cardNames, inputRe
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        launchSearch(predictions[0]);
+        launchSearch(selection);
     }
 
     const handleFocus = (e) => {
@@ -56,7 +64,6 @@ const SearchForm = ({ children, classList, type, placeholder, cardNames, inputRe
     useEffect(() => {
         if (searchTerm && isActive) {
             const searchParams = getParams(searchTerm, type);
-            // console.log(searchParams)
             setFetchParams(searchParams);
         }
     }, [searchTerm, isActive]);

@@ -62,6 +62,23 @@ const useSearchForm = (inputRef) => {
         });
     }
 
+    function setSelection(value) {
+        dispatch({
+            type: 'set-selection',
+            payload: value
+        })
+    }
+
+    function setTrackSearch(tracker, position) {
+        dispatch({
+            type: 'track-scroll',
+            payload: {
+                tracker: tracker,
+                position: position
+            }
+        });
+    }
+
     const setString = (str) => {
         return str.toLowerCase()
             .replaceAll(/["/,]/g, '')
@@ -70,9 +87,8 @@ const useSearchForm = (inputRef) => {
             .join('-')
     }
 
+
     const getParams = (query, type) => {
-        console.log(query)
-        console.log(type)
         const params = {
             archive: {
                 endpoint: '/cards/named?exact=',
@@ -119,7 +135,6 @@ const useSearchForm = (inputRef) => {
                 query: query,
                 type: type
             }
-
         }
     }
 
@@ -142,13 +157,11 @@ const useSearchForm = (inputRef) => {
 
     useEffect(() => {
         if (response) {
-            // console.log(response)
             const { data, origin } = response;
             if (origin === 'scryfall') {
                 setOracleId(data.oracle_id)
             }
             else {
-                console.log(fetchParams)
                 const { path, query, type } = fetchParams.search;
                 localStorage.setItem('search-results', JSON.stringify({ ...response.data }));
                 navigate(path, { state: { result: response.data, type, query } });
@@ -156,14 +169,25 @@ const useSearchForm = (inputRef) => {
             inputRef?.current?.blur();
         }
         if (error) {
-            console.log(error)
-            // const { term } = fetchParams;
-            // navigate(`/not-found/${term}`);
-            // console.error(error)
+            const { term } = fetchParams;
+            navigate(`/not-found/${term}`);
         }
     }, [error, response])
 
-    return { getParams, setFetchParams, loading, isActive, setIsActive, setSearch, updateSearch, launchSearch, clearSearch, clearPredictions }
+    return {
+        getParams,
+        setFetchParams,
+        loading,
+        isActive,
+        clearPredictions,
+        clearSearch,
+        launchSearch,
+        setIsActive,
+        setSearch,
+        setSelection,
+        setTrackSearch,
+        updateSearch,
+    }
 }
 
 export default useSearchForm

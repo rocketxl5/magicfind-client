@@ -11,6 +11,7 @@ const initialState = {
   searchResult: [],
   searchTerm: '',
   searchType: '',
+  selection: '',
   tracker: -1,
 }
 
@@ -29,6 +30,7 @@ export const SearchProvider = ({ children }) => {
     searchResult,
     searchTerm,
     searchType,
+    selection,
     tracker,
   } = state || {};
 
@@ -110,6 +112,7 @@ export const SearchProvider = ({ children }) => {
         searchResult,
         searchType,
         searchTerm,
+        selection,
         tracker,
         dispatch,
         initialState,

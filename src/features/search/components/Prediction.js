@@ -1,10 +1,18 @@
 import useSearch from '../../../hooks/contexthooks/useSearch';
+import useSearchForm from '../../../hooks/useSearchForm';
 
 const Prediction = ({ index, prediction }) => {
 
-    const { tracker, inputValue } = useSearch();
+    const {
+        tracker,
+        inputValue,
+        predictions,
+    } = useSearch();
+
+    const { setSelection } = useSearchForm();
 
     const handleMouseEnter = (e) => {
+        setSelection(predictions[index]);
         e.target.classList.add('bg-grey');
     };
 
@@ -31,6 +39,7 @@ const Prediction = ({ index, prediction }) => {
             className={index === tracker ? 'prediction bg-grey' : 'prediction'}
             onMouseEnter={handleMouseEnter}
             onMouseOut={handleMouseOut}
+            // onMouseOver={(e) => {}}
         >
             {<Value value={inputValue} prediction={prediction} />}
         </li>

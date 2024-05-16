@@ -1,33 +1,19 @@
-import React, { useEffect, useRef } from 'react'
+import { useEffect, useRef } from 'react'
 import Prediction from './Prediction';
 import useSearch from '../../../hooks/contexthooks/useSearch';
+import useSearchForm from '../../../hooks/useSearchForm';
 
 const AutoComplete = () => {
     const {
         tracker,
         position,
         predictions,
-        dispatch
+        selection
     } = useSearch();
 
+    const { launchSearch, setSelection, setTrackSearch } = useSearchForm();
+
     const ulRef = useRef(null);
-
-    const handleTrackSearch = (tracker, position) => {
-        dispatch({
-            type: 'track-scroll',
-            payload: {
-                tracker: tracker,
-                position: position
-            }
-        });
-    }
-
-    const launchSearch = (term) => {
-        dispatch({
-            type: 'launch-search',
-            payload: term
-        });
-    }
 
     // keydown event listener calls handleKeyDown function
     useEffect(() => {
@@ -38,35 +24,31 @@ const AutoComplete = () => {
     // Updates scroll position of autocomplete list (ul).
     // tracker's value updates on arrow key events (up or down).
     useEffect(() => {
+        tracker >= 0 && setSelection(predictions[tracker]);
         ulRef.current?.scrollTo({ top: position, behavior: 'smooth' })
     }, [tracker])
 
     // Keyboard arrow up and down autocomplete list search function
     const handleKeyDown = (e) => {
-            if (e.key === 'ArrowDown') {
-                if (tracker < predictions.length - 1) {
-                    handleTrackSearch(tracker + 1, position + 40);
-                }
+        if (e.key === 'ArrowDown') {
+            if (tracker < predictions.length - 1) {
+                setTrackSearch(tracker + 1, position + 40);
             }
+        }
         if (e.key === 'ArrowUp') {
                 ulRef?.current?.scrollIntoView(true)
             if (tracker === predictions.length - 1 || tracker >= 0) {
-                handleTrackSearch(tracker - 1, position - 40);
-                }
+                setTrackSearch(tracker - 1, position - 40);
             }
-    }
+        }
 
-    const handleMouseDown = (e) => {
-        // Prevents blur on search input
-        e.preventDefault();
-        launchSearch(predictions[e.target.value])
     }
 
     return (
         <ul
             id="autocomplete-list"
             className="autocomplete-list"
-            onMouseDown={handleMouseDown}
+            onMouseDown={() => launchSearch(selection)}
             ref={ulRef}
         >
             {
