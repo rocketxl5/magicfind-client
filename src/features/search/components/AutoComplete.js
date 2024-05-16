@@ -11,7 +11,7 @@ const AutoComplete = () => {
         selection
     } = useSearch();
 
-    const { launchSearch, setSelection, setTrackSearch } = useSearchForm();
+    const { searchFor, setSelection, setTrackSearch } = useSearchForm();
 
     const ulRef = useRef(null);
 
@@ -48,7 +48,7 @@ const AutoComplete = () => {
         <ul
             id="autocomplete-list"
             className="autocomplete-list"
-            onMouseDown={() => launchSearch(selection)}
+            onMouseDown={() => searchFor(selection)}
             ref={ulRef}
         >
             {

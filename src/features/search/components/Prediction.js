@@ -12,16 +12,17 @@ const Prediction = ({ index, prediction }) => {
     const { setSelection } = useSearchForm();
 
     const handleMouseEnter = (e) => {
-        setSelection(predictions[index]);
+        setSelection(e.target.id);
         e.target.classList.add('bg-grey');
     };
 
     const handleMouseOut = (e) => {
+        setSelection('');
         e.target.classList.remove('bg-grey');
     };
 
     const Value = ({ prediction, value }) => {
-        // Gets the index of the first letter matching searchTerm in name string
+        // Gets the index of the first letter matching prediction in name string
         const firstIndex = prediction.toLowerCase().indexOf(value.toLowerCase());
         // Gets the index of the last letter matching inputValue in name string
         const lastIndex = firstIndex + value.length;
@@ -39,7 +40,6 @@ const Prediction = ({ index, prediction }) => {
             className={index === tracker ? 'prediction bg-grey' : 'prediction'}
             onMouseEnter={handleMouseEnter}
             onMouseOut={handleMouseOut}
-            // onMouseOver={(e) => {}}
         >
             {<Value value={inputValue} prediction={prediction} />}
         </li>

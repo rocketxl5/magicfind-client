@@ -5,6 +5,7 @@ import useAuth from '../hooks/contexthooks/useAuth';
 const initialState = {
   cardNames: [],
   inputValue: '',
+  exact: true,
   loading: false,
   position: -200,
   predictions: [],
@@ -23,6 +24,7 @@ export const SearchProvider = ({ children }) => {
 
   const {
     cardNames,
+    exact,
     inputValue,
     loading,
     position,
@@ -105,6 +107,7 @@ export const SearchProvider = ({ children }) => {
         archiveInputRef,
 
         cardNames,
+        exact,
         inputValue,
         loading,
         position,

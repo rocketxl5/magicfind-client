@@ -25,7 +25,7 @@ const SearchForm = ({ children, classList, type, placeholder, cardNames, inputRe
         loading,
         setSearch,
         updateSearch,
-        launchSearch,
+        searchFor,
         clearSearch
     } = useSearchForm(inputRef);
 
@@ -44,16 +44,27 @@ const SearchForm = ({ children, classList, type, placeholder, cardNames, inputRe
     };
 
     const handleBlur = () => {
-        setIsActive(false);
-        clearSearch();
-        if (displaySearchBar) {
-            handleSearchBar(false);
+        if (!searchTerm) {
+            clearSearch();
+            setIsActive(false);
+            if (displaySearchBar) {
+                handleSearchBar(false);
+            }
         }
     }
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        launchSearch(selection);
+
+        if (selection) {
+            searchFor(selection);
+        }
+        else if (predictions.length === 1) {
+            searchFor(predictions[0]);
+        }
+        else {
+            searchFor(inputValue, false);
+        }
     }
 
     const handleFocus = (e) => {

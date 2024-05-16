@@ -25,7 +25,7 @@ const useFetch = () => {
                 setResponse({ data: data, origin });
             })
             .catch((error) => {
-                setError(error.message);
+                setError(error);
             })
             .finally(() => {
                 setLoading(false);

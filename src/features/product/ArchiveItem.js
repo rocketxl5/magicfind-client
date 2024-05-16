@@ -37,7 +37,6 @@ const ArchiveItem = ({ index, product, count, handleSlideView }) => {
     const { setUpdateCollection } = useSearch();
     const { expandedImage } = useExpandImage(product);
     const { findMatch, isMatchFound } = useFind();
-
     const navigate = useNavigate();
 
     const query = `/api/cards/add/${user.id}/${product.id}`;
@@ -112,12 +111,15 @@ const ArchiveItem = ({ index, product, count, handleSlideView }) => {
         {
             title: 'Identity: ',
             value: colorIdentity.length ?
-                colorIdentity.map((color) => color) : 'Colorless',
+                colorIdentity.map((color) => color)
+                : 'Colorless',
             classList: 'color-symbols'
         },
         {
             title: 'Cost: ',
-            value: manaCost && manaCost.map((color) => color),
+            value: manaCost.length ?
+                manaCost.map((color) => color)
+                : 'None',
             classList: 'color-symbols'
         },
         {
