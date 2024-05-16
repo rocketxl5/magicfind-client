@@ -25,6 +25,11 @@ export const searchReducer = (state, action) => {
                 cardNames: action.payload.cardNames,
                 searchType: action.payload.searchType,
             }
+        case 'set-selection':
+            return {
+                ...state,
+                selection: action.payload
+            }
         case 'track-scroll':
             return {
                 ...state,

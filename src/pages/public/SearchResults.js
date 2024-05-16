@@ -58,7 +58,6 @@ const SearchResults = () => {
 
     // Validation for collection search search
     useEffect(() => {
-        console.log(search)
         if (search) {
             // If search is collection and card collection is empty
             if (search?.search === 'collection' && search?.result.length === 0) {
