@@ -15,16 +15,20 @@ const useSearchForm = (inputRef) => {
     const { auth } = useAuth();
 
     const {
+        exact,
         dispatch,
         initialState
     } = useSearch();
 
     const { fetch, error, response, loading } = useFetch();
 
-    function clearPredictions() {
+    function clearSearchPreset() {
         dispatch({
-            type: 'clear-predictions',
-            payload: []
+            type: 'clear-preset',
+            payload: {
+                predictions: [],
+                searchTerm: ''
+            }
         })
     }
 
@@ -35,10 +39,13 @@ const useSearchForm = (inputRef) => {
         })
     }
 
-    function launchSearch(term) {
+    function searchFor(term, exact = true) {
         dispatch({
-            type: 'launch-search',
-            payload: term
+            type: 'search',
+            payload: {
+                term: term,
+                exact: exact
+            }
         });
     }
 
@@ -91,36 +98,39 @@ const useSearchForm = (inputRef) => {
     const getParams = (query, type) => {
         const params = {
             archive: {
-                endpoint: '/cards/named?exact=',
                 config: {},
+                endpoint: exact ? '/cards/named?exact=' : '/cards/named?fuzzy=',
+                origin: 'scryfall',
                 ref: `/me/archive`,
                 resource: api.scryfallURL,
-                origin: 'scryfall',
+                query: query
             },
             catalog: {
-                endpoint: '/api/cards/catalog/',
                 config: {
                     headers: {
                         'Content-Type': 'application/json',
                     },
                 },
-                term: setString(query),
+                endpoint: '/api/cards/catalog/',
+                origin: 'server',
+                query: query,
                 ref: '/catalog',
                 resource: api.serverURL,
-                origin: 'server',
+                term: setString(query),
             },
             collection: {
-                endpoint: `/api/cards/collection/${auth?.user.id}/`,
                 config: {
                     headers: {
                         'Content-Type': 'application/json',
                         'auth-token': auth?.token
                     },
                 },
-                term: setString(query),
+                endpoint: `/api/cards/collection/${auth?.user.id}/`,
+                origin: 'server',
+                query: query,
                 ref: `/me/collection`,
                 resource: api.serverURL,
-                origin: 'server',
+                term: setString(query),
             },
         }
 
@@ -129,7 +139,7 @@ const useSearchForm = (inputRef) => {
             endpoint: `${params[type].endpoint}${params[type].term || query}`,
             config: params[type].config,
             origin: params[type].origin,
-
+            query: params[type].query,
             search: {
                 path: `${params[type].ref}/${params[type].term || setString(query)}`,
                 query: query,
@@ -142,7 +152,7 @@ const useSearchForm = (inputRef) => {
         if (fetchParams) {
             const { resource, endpoint, config, origin } = fetchParams;
             // Hide Autocomplete predictions list
-            clearPredictions();
+            clearSearchPreset();
             const url = resource + endpoint;
             fetch(url, config, origin);
         }
@@ -166,12 +176,12 @@ const useSearchForm = (inputRef) => {
                 localStorage.setItem('search-results', JSON.stringify({ ...response.data }));
                 navigate(path, { state: { result: response.data, type, query } });
             }
-            inputRef?.current?.blur();
         }
         if (error) {
-            const { term } = fetchParams;
-            navigate(`/not-found/${term}`);
+            const { query } = fetchParams;
+            navigate(`/not-found/${query.split(' ').join('+')}`);
         }
+        inputRef?.current?.blur();
     }, [error, response])
 
     return {
@@ -179,9 +189,8 @@ const useSearchForm = (inputRef) => {
         setFetchParams,
         loading,
         isActive,
-        clearPredictions,
         clearSearch,
-        launchSearch,
+        searchFor,
         setIsActive,
         setSearch,
         setSelection,
