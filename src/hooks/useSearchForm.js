@@ -175,6 +175,7 @@ const useSearchForm = (inputRef) => {
                 const { path, query, type } = fetchParams.search;
                 localStorage.setItem('search-results', JSON.stringify({ ...response.data }));
                 navigate(path, { state: { result: response.data, type, query } });
+                clearSearch()
             }
         }
         if (error) {
