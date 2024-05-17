@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import useLazyLoader from '../hooks/useLazyLoader';
 import useAttributes from '../hooks/useAttributes';
 
-const ImageNew = ({ children, product, classList }) => {
+const Image = ({ children, product, classList }) => {
     const { attributes } = useAttributes(product);
     const { id, style, src, alt, placeholder } = attributes;
 
@@ -25,4 +25,4 @@ const ImageNew = ({ children, product, classList }) => {
     )
 }
 
-export default ImageNew
+export default Image

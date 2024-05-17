@@ -1,5 +1,5 @@
 import Drop from '../../components/Drop';
-import ImageNew from '../../components/ImageNew';
+import Image from '../../components/Image';
 import Card from '../../components/Card';
 import TwoSidedSlide from '../modal/TwoSidedSlide';
 import { FaCommentsDollar } from "react-icons/fa";
@@ -56,7 +56,7 @@ const CollectionItem = ({ index, product, count, handleCollectionItem, handleSli
     return (
         <Card classList={"product-container"}>
             <TwoSidedSlide classList={{ container: '', btn: 'card-action-btn b-radius-5 btn-bottom-right' }}>
-                <ImageNew
+                <Image
                     product={product}
                     classList='product-image'
                 >
@@ -114,7 +114,7 @@ const CollectionItem = ({ index, product, count, handleCollectionItem, handleSli
                         </Drop>
 
                     </div>
-                </ImageNew>
+                </Image>
                 <div className='product-details'>
                     <section>
                         <div>

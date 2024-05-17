@@ -24,6 +24,7 @@ const DeleteProduct = (props) => {
 
     // Triggers click event on button to close modal
     const closeModal = (result) => {
+        console.log(result)
         setUpdateCollection(true);
         setTimeout(() => {
             localStorage.setItem('search-results', JSON.stringify(result));
@@ -37,7 +38,7 @@ const DeleteProduct = (props) => {
         const headers = new Headers();
         headers.append('Content-Type', 'application/json');
         headers.append('auth-token', auth.token);
-
+        console.log(product)
         const input = {
             itemID: product._uuid,
             productID: product._id,
@@ -65,7 +66,7 @@ const DeleteProduct = (props) => {
                 // If cardName is set
                 console.log(search)
                 console.log(query)
-                if (query !== 'all-cards') {
+                if (query !== 'all') {
                     // filter for cards with cardName
                     const updatedCards = cards.filter(cardObj => cardObj.name.toLowerCase() === product.name.toLowerCase());
                     console.log(updatedCards)
@@ -73,9 +74,9 @@ const DeleteProduct = (props) => {
                 } else {
                     result = { cards: cards, search: search, query: product.name };
                 }
-                // setLoading(false);
+                setLoading(false);
                 localStorage.setItem('search-results', JSON.stringify(result));
-                if (cards.lenght > 0) {
+                if (cards.length > 0) {
                     navigate(`${location.pathname}`,
                         {
                             state: { ...result },

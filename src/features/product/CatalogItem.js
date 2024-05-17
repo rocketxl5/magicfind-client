@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import Container from '../../components/Container';
 import Drop from '../../components/Drop';
-import ImageNew from '../../components/ImageNew';
+import Image from '../../components/Image';
 import Loader from '../../layout/Loader';
 import Card from '../../components/Card';
 import QuantitySelector from './components/QuantitySelector';
@@ -103,7 +103,7 @@ const CatalogItem = ({ index, product, count, cartIndex, handleSlideView }) => {
                 {
                     // Product image (children[0])
                     [
-                        <ImageNew
+                        <Image
                             product={product}
                             classList='product-image'
                         >
@@ -113,7 +113,7 @@ const CatalogItem = ({ index, product, count, cartIndex, handleSlideView }) => {
                                     <span className='foil'>{data.product.finishes[product.finishes]}</span>
                                 </div>
                             }
-                        </ImageNew>,
+                        </Image>,
                         // Product information (children[1])
                         <div className='product-details'>
                             <section>

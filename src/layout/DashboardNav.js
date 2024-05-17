@@ -1,11 +1,11 @@
 import { useEffect } from 'react';
 import { NavLink, useParams } from 'react-router-dom'
-import data from '../data/LINKS.json';
-import { api } from '../api/resources';
-import useFetch from '../hooks/useFetch';
 import useAuth from '../hooks/contexthooks/useAuth';
+import useFetch from '../hooks/useFetch';
 import useSearch from '../hooks/contexthooks/useSearch';
 import useMail from '../hooks/contexthooks/useMail';
+import { api } from '../api/resources';
+import data from '../data/LINKS.json';
 
 const DashboardNav = () => {
     const {
@@ -69,6 +69,7 @@ const DashboardNav = () => {
     //////////////////////////////////////////////////////////////////////
     useEffect(() => {
         if (updateCollection) {
+            console.log(updateCollection)
             const headers = new Headers();
             headers.append('Content-Type', 'application/json');
             headers.append('auth-token', auth.token);
@@ -83,14 +84,15 @@ const DashboardNav = () => {
                     if (res.ok) {
                         return res.json()
                             .then((data) => {
-                                const ids = data.card.ids;
-                                const names = data.card.names;
+                                const { ids, names } = data.card
+                                console.log(ids)
+                                console.log(names)
                                 if (ids.length === 0 && names.length === 0) {
                                     setIsCollectionEmpty(true);
                                 }
                                 else {
-                                    setCollectionCardNames(data.card.names);
-                                    setCardCollection(data.card.ids);
+                                    setCollectionCardNames(names);
+                                    setCardCollection(ids);
                                     isCollectionEmpty && setIsCollectionEmpty(false)
                                 }
                                 setUpdateCollection(false)

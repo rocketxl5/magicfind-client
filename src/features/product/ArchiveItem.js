@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react';
 import Loader from '../../layout/Loader';
-import Drop from '../../components/Drop';
+import Button from '../../components/Button';
 import Card from '../../components/Card';
 import TwoSidedSlide from '../modal/TwoSidedSlide';
-import ImageNew from '../../components/ImageNew';
+import Image from '../../components/Image';
 import useExpandImage from '../../hooks/useExpandImage';
-import usePostData from '../../hooks/usePostData';
+import usePost from '../../hooks/usePost';
 import useAuth from '../../hooks/contexthooks/useAuth';
 import useSearch from '../../hooks/contexthooks/useSearch';
 import useFind from '../../hooks/useFind';
@@ -30,7 +30,7 @@ const ArchiveItem = ({ index, product, count, handleSlideView }) => {
         set_name,
         type_line,
     } = product;
-    const { postData, loading, result, error } = usePostData(product);
+    const { postData, loading, result, error } = usePost(product);
     const { colorIdentity, manaCost } = useColorSymbols(product);
     const { setUpdateCollection } = useSearch();
     const { expandedImage } = useExpandImage(product);
@@ -145,7 +145,7 @@ const ArchiveItem = ({ index, product, count, handleSlideView }) => {
     return (
         <Card classList={"product-container"}>
             <TwoSidedSlide classList={{ container: '', btn: 'card-action-btn b-radius-5 btn-bottom-right color-light' }}>
-                <ImageNew
+                <Image
                     product={product}
                     classList='product-image'
                 >
@@ -155,29 +155,30 @@ const ArchiveItem = ({ index, product, count, handleSlideView }) => {
                             <span className='foil'>{data.product.finishes[product.finishes]}</span>
                         </div>
                     }
-                    <Drop
+                    <Button
                         id={'expand-image'}
                         classList={'product-btn absolute btn-center-right box-size-8 border-light-2 color-light bg-alpha b-radius-5'}
                         handleClick={(e) => handleSlideView(e, product.layout, expandedImage)}
                     >
                         <IoExpand className='expand-icon' />
-                    </Drop>
+                    </Button>
                     {
                         loading ?
-                            <Drop classList={'product-btn absolute border-light-2 color-light bg-alpha btn-top-right b-radius-5'} >
+                            <Button classList={'product-btn absolute border-light-2 color-light bg-alpha btn-top-right b-radius-5'} >
                                 <Loader classList={'relative color-light bg-alpha'} />
-                            </Drop>
+                            </Button>
                             :
                             (isCardAdded || isMatchFound) ?
-                                <Drop classList={'product-btn absolute border-light-2 color-light bg-alpha btn-top-right disabled b-radius-5'} disabled={true}>
+                                <Button classList={'product-btn absolute border-light-2 color-light bg-alpha btn-top-right disabled b-radius-5'} disabled={true}>
                                     <FaCheck />
-                                </Drop>
+                                </Button>
                                 :
-                                <Drop classList={'product-btn absolute border-light-2 color-light bg-alpha btn-top-right b-radius-5'} handleClick={() => postData(token, query)}>
+                                <Button classList={'product-btn absolute border-light-2 color-light bg-alpha btn-top-right b-radius-5'}
+                                    handleClick={() => postData(token, query)}>
                                     <FaPlus />
-                                </Drop>
+                                </Button>
                     }
-                </ImageNew>
+                </Image>
                 <div className='product-details'>
                     <section>
                         <div>

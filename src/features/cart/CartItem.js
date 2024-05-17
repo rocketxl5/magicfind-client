@@ -7,7 +7,7 @@ import Container from '../../components/Container';
 import QuantitySelector from '../product/components/QuantitySelector';
 import Button from '../../components/Button';
 import Card from '../../components/Card';
-import ImageNew from '../../components/Image';
+import Image from '../../components/Image';
 import Avatar from '../../components/Avatar';
 import Loader from '../../layout/Loader';
 import data from '../../data/SEARCH.json';
@@ -86,7 +86,7 @@ const CartItem = ({ index, count, product }) => {
         <CountDown count={count} unit={index + 1} type={'Result'} />
       </ProductHeader>
       <div className='relative two'>
-        <ImageNew
+        <Image
           product={product.selected}
           classList='relative cart-item-image '
           handleClick={() => navigate(
