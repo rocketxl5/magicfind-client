@@ -2,7 +2,7 @@ import { useState } from 'react';
 import axios from 'axios';
 import { api } from '../api/resources';
 
-const usePostData = (data) => {
+const usePost = (data) => {
     const [result, setResult] = useState(null);
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(false);
@@ -39,4 +39,4 @@ const usePostData = (data) => {
     return { postData, loading, showConfirmation, error, result }
 }
 
-export default usePostData
+export default usePost
