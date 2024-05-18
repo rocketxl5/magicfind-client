@@ -33,7 +33,6 @@ export const AuthProvider = ({ children }) => {
   }, [auth])
 
   useEffect(() => {
-
     const auth = JSON.parse(localStorage.getItem('auth'));
     const jwt = auth?.token;
 

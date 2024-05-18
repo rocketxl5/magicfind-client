@@ -3,7 +3,9 @@ import useCart from './contexthooks/useCart';
 import useSearch from './contexthooks/useSearch';
 
 const useFind = () => {
+    // index || null
     const [indexFound, setIndexFound] = useState(null);
+    // true || false
     const [isMatchFound, setIsMatchFound] = useState(false);
 
     const { cartItems } = useCart();

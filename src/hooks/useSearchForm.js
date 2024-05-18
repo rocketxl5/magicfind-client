@@ -4,6 +4,7 @@ import useAuth from './contexthooks/useAuth';
 import useFetch from './useFetch';
 import useSearch from './contexthooks/useSearch';
 import { api } from '../api/resources';
+import trimProduct from '../features/product/services/trimProduct';
 
 const useSearchForm = (inputRef) => {
     const [fetchParams, setFetchParams] = useState(null);
@@ -100,7 +101,6 @@ const useSearchForm = (inputRef) => {
             archive: {
                 config: {},
                 endpoint: exact ? '/cards/named?exact=' : '/cards/named?fuzzy=',
-                origin: 'scryfall',
                 ref: `/me/archive`,
                 resource: api.scryfallURL,
                 query: query
@@ -112,7 +112,6 @@ const useSearchForm = (inputRef) => {
                     },
                 },
                 endpoint: '/api/cards/catalog/',
-                origin: 'server',
                 query: query,
                 ref: '/catalog',
                 resource: api.serverURL,
@@ -126,7 +125,6 @@ const useSearchForm = (inputRef) => {
                     },
                 },
                 endpoint: `/api/cards/collection/${auth?.user.id}/`,
-                origin: 'server',
                 query: query,
                 ref: `/me/collection`,
                 resource: api.serverURL,
@@ -138,7 +136,6 @@ const useSearchForm = (inputRef) => {
             resource: params[type].resource,
             endpoint: `${params[type].endpoint}${params[type].term || query}`,
             config: params[type].config,
-            origin: params[type].origin,
             query: params[type].query,
             search: {
                 path: `${params[type].ref}/${params[type].term || setString(query)}`,
@@ -150,16 +147,17 @@ const useSearchForm = (inputRef) => {
 
     useEffect(() => {
         if (fetchParams) {
-            const { resource, endpoint, config, origin } = fetchParams;
+            const { resource, endpoint, config } = fetchParams;
             // Hide Autocomplete predictions list
             clearSearchPreset();
             const url = resource + endpoint;
-            fetch(url, config, origin);
+            fetch(url, config);
         }
     }, [fetchParams])
 
     useEffect(() => {
         if (oracleId) {
+            console.log(oracleId)
             const url = `${api.scryfallURL}/cards/search?order=released&q=oracleid%3A${oracleId}&unique=prints`;
             fetch(url);
         }
@@ -167,14 +165,16 @@ const useSearchForm = (inputRef) => {
 
     useEffect(() => {
         if (response) {
-            const { data, origin } = response;
-            if (origin === 'scryfall') {
-                setOracleId(data.oracle_id)
+            const { data } = response;
+            const { path, query, type } = fetchParams.search;
+
+            if (type === 'archive' && !oracleId) {
+
+                setOracleId(data.oracle_id);
             }
             else {
-                const { path, query, type } = fetchParams.search;
-                localStorage.setItem('search-results', JSON.stringify({ ...response.data }));
-                navigate(path, { state: { result: response.data, type, query } });
+                localStorage.setItem('search-results', JSON.stringify({ ...data }));
+                navigate(path, { state: { result: data, type, query } });
                 clearSearch()
             }
         }

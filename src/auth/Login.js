@@ -99,6 +99,7 @@ const Login = () => {
             })
           })
           .then((data) => {
+            console.log(data)
             const auth = { user: data.payload.user, token: data.token }
             localStorage.setItem('auth', JSON.stringify(auth))
             setAuth(auth);
