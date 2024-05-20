@@ -1,5 +1,5 @@
 import { useReducer } from 'react';
-import SlideShow from '../features/modal/SlideShow';
+import SlideShow from '../features/modal/components/SlideShow';
 // import SingleShow from '../components/views/modal/SingleShow';
 
 const useSlideShow = (callback, expandedImages) => {

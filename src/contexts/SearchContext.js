@@ -4,9 +4,8 @@ import useAuth from '../hooks/contexthooks/useAuth';
 
 const initialState = {
   cardNames: [],
-  inputValue: '',
   exact: true,
-  loading: false,
+  inputValue: '',
   position: -200,
   predictions: [],
   searchResult: [],
@@ -26,7 +25,6 @@ export const SearchProvider = ({ children }) => {
     cardNames,
     exact,
     inputValue,
-    loading,
     position,
     predictions,
     searchResult,
@@ -109,7 +107,6 @@ export const SearchProvider = ({ children }) => {
         cardNames,
         exact,
         inputValue,
-        loading,
         position,
         predictions,
         searchResult,

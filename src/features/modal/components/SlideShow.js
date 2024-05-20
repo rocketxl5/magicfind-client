@@ -1,12 +1,12 @@
 import { useRef, useState, useEffect } from 'react'
-import CloseBtn from './buttons/CloseBtn';
-import LeftBtn from './buttons/LeftBtn';
-import RightBtn from './buttons/RightBtn';
+import CloseBtn from '../buttons/CloseBtn';
+import LeftBtn from '../buttons/LeftBtn';
+import RightBtn from '../buttons/RightBtn';
 import OneSidedSlide from './OneSidedSlide';
-import TwoSidedSlide from './TwoSidedSlide'
+import TwoSidedSlide from '../TwoSidedSlide'
 import SlideIndicators from './SlideIndicators';
-import Container from '../../components/Container';
-import ACTIONS from '../../data/ACTIONS';
+import Container from '../../../components/Container';
+import ACTIONS from '../../../data/ACTIONS';
 
 const SlideShow = ({ slides, handleClick }) => {
     const { INTERVAL, RESET, LIMIT } = ACTIONS.SLIDE;

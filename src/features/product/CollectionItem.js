@@ -1,9 +1,10 @@
-import Drop from '../../components/Drop';
 import Image from '../../components/Image';
 import Card from '../../components/Card';
 import TwoSidedSlide from '../modal/TwoSidedSlide';
+import Button from '../../components/Button';
 import { FaCommentsDollar } from "react-icons/fa";
 import { AiOutlineDelete } from "react-icons/ai";
+import { GoStack } from "react-icons/go";
 import { AiOutlineEdit } from "react-icons/ai";
 import { IoExpand } from "react-icons/io5";
 import { AiOutlineInfoCircle } from "react-icons/ai";
@@ -66,52 +67,61 @@ const CollectionItem = ({ index, product, count, handleCollectionItem, handleSli
                             <span className='foil'>{data.product.finishes[product.finishes]}</span>
                         </div>
                     }
-                    {/* <Drop
+                    {/* <Button
                         id={'expand-image'}
                         classList={'drop-bottom-rightabsolute color-light bg-primary border-light-2'}
                         handleClick={(e) => handleSlideView(e, product.layout, expandedImage)}
                     >
                         <IoExpand />
-                    </Drop>
+                    </Button>
                     {
                         product._is_published &&
-                        <Drop
+                        <Button
                             id={'instore-product'}
                                 classList={'btn-top-right absolute color-light bg-success border-light-2'}
                         >
                             <FaCommentsDollar />
-                        </Drop>
+                        </Button>
                     } */}
-                    {/* <Drop
-                        id={'edit-product'}
+                    {/* <Button
+                        id={'sell-product'}
                         classList={'card-action-btn btn-bottom-left b-radius-5 btn-bottom-right border-light-3 bg-success'}
                         handleClick={(e) => handleCollectionItem(e, product, expandedImage)}
                     >
                         <AiOutlineEdit className='box-size-100 stroke-light fill-light' />
-                    </Drop>
-                    <Drop
+                    </Button>
+                    <Button
                         id={'delete-product'}
                         classList={'card-action-btn btn-bottom-center b-radius-5 btn-bottom-right color-light'}
                         handleClick={(e) => handleCollectionItem(e, product, expandedImage)}
                     >
                         <AiOutlineDelete className='box-size-100 ' />
-                    </Drop> */}
+                    </Button> */}
                     <div className="product-legend">
-
-                        <Drop
-                            id={'edit-product'}
+                        <Button
+                            id={'sell-product'}
                             classList={'drop-btn color-light bg-success border-success'}
+                            title={'Sell card'}
                             handleClick={(e) => handleCollectionItem(e, product, expandedImage)}
                         >
-                            <AiOutlineEdit />
-                        </Drop>
-                        <Drop
+                            <FaCommentsDollar />
+                        </Button>
+                        <Button
+                            id={'deck-product'}
+                            classList={'drop-btn color-light bg-primary border-primary'}
+                            title={'Add to deck'}
+                            handleClick={(e) => handleCollectionItem(e, product, expandedImage)}
+                        >
+                            <GoStack />
+                        </Button>
+                        <Button
                             id={'delete-product'}
                             classList={'drop-btn color-light bg-danger border-danger'}
+                            title={'Delete card'}
                             handleClick={(e) => handleCollectionItem(e, product, expandedImage)}
                         >
                             <AiOutlineDelete />
-                        </Drop>
+                        </Button>
 
                     </div>
                 </Image>

@@ -20,7 +20,7 @@ const useFetch = () => {
         await axios
             .get(url, config)
             .then(res => {
-                // console.log(res)
+                console.log(res)
                 const data = res.data.data || res.data;
                 setResponse({ data: data });
             })

@@ -4,7 +4,6 @@ import useAuth from './contexthooks/useAuth';
 import useFetch from './useFetch';
 import useSearch from './contexthooks/useSearch';
 import { api } from '../api/resources';
-import trimProduct from '../features/product/services/trimProduct';
 
 const useSearchForm = (inputRef) => {
     const [fetchParams, setFetchParams] = useState(null);
@@ -18,17 +17,16 @@ const useSearchForm = (inputRef) => {
     const {
         exact,
         dispatch,
-        initialState
+        initialState,
     } = useSearch();
 
     const { fetch, error, response, loading } = useFetch();
 
-    function clearSearchPreset() {
+    function clearPredictions() {
         dispatch({
-            type: 'clear-preset',
+            type: 'clear-predictions',
             payload: {
                 predictions: [],
-                searchTerm: ''
             }
         })
     }
@@ -95,7 +93,6 @@ const useSearchForm = (inputRef) => {
             .join('-')
     }
 
-
     const getParams = (query, type) => {
         const params = {
             archive: {
@@ -149,7 +146,7 @@ const useSearchForm = (inputRef) => {
         if (fetchParams) {
             const { resource, endpoint, config } = fetchParams;
             // Hide Autocomplete predictions list
-            clearSearchPreset();
+            clearPredictions();
             const url = resource + endpoint;
             fetch(url, config);
         }
@@ -157,7 +154,6 @@ const useSearchForm = (inputRef) => {
 
     useEffect(() => {
         if (oracleId) {
-            console.log(oracleId)
             const url = `${api.scryfallURL}/cards/search?order=released&q=oracleid%3A${oracleId}&unique=prints`;
             fetch(url);
         }
@@ -173,16 +169,15 @@ const useSearchForm = (inputRef) => {
                 setOracleId(data.oracle_id);
             }
             else {
+                inputRef?.current?.blur();
                 localStorage.setItem('search-results', JSON.stringify({ ...data }));
                 navigate(path, { state: { result: data, type, query } });
-                clearSearch()
             }
         }
         if (error) {
             const { query } = fetchParams;
             navigate(`/not-found/${query.split(' ').join('+')}`);
         }
-        inputRef?.current?.blur();
     }, [error, response])
 
     return {

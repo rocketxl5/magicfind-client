@@ -8,11 +8,15 @@ export const searchReducer = (state, action) => {
             return {
                 ...action.payload
             }
-        case 'clear-preset':
+        case 'clear-predictions':
             return {
                 ...state,
-                predictions: action.payload.predictions,
-                searchTerm: action.payload.searchTerm
+                predictions: action.payload,
+            }
+        case 'clear-searchterm':
+            return {
+                ...state,
+                searchTerm: action.payload,
             }
         case 'search':
             return {

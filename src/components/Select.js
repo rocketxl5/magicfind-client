@@ -1,14 +1,38 @@
-const Select = ({ children, classList = '', name = '', value, handleChange }) => {
+import Option from './Option';
+
+const Select = (props) => {
+  const {
+    id,
+    classList = '',
+    type,
+    name,
+    value,
+    options,
+    handleChange,
+    handleFocus
+  } = props;
 
   return (
     <select
+      id={id}
       className={classList}
+      type={type}
       name={name}
       value={value}
-      onChange={(e) => handleChange(e)}
+      onChange={handleChange}
+      onFocus={handleFocus}
     >
-      {children}
+      {
+        options.map((option, i) => {
+          return (
+            <Option key={i} value={option.value}>
+              {option.text}
+            </Option>
+          )
+        })
+      }
     </select>
   )
 }
+
 export default Select

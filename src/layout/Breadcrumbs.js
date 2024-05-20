@@ -31,7 +31,7 @@ const Breadcrumbs = () => {
             return (
                 <span className="crumb" key={crumb}>
                     {/* Replace root prefix  of path to home */}
-                    <Link to={currentLink}>{crumb === 'me' ? 'Home' : capitalizeString(crumb, true)}</Link>
+                    <Link to={currentLink}>{crumb === 'me' ? 'Dashboard' : capitalizeString(crumb, true)}</Link>
                 </span>
             )
         })

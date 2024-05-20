@@ -28,10 +28,11 @@ import Signup from './auth/Signup';
 
 // Private pages
 import Archive from './pages/private/Archive';
-import AuthPage from './pages/private/AuthPage';
+// import AuthPage from './pages/private/AuthPage';
 import Checkout from './pages/private/Checkout';
 import Collection from './pages/private/Collection';
 import DashBoard from './pages/private/DashBoard';
+import Decks from './pages/private/Decks';
 import MailBox from './pages/private/MailBox';
 import Profile from './pages/private/Profile';
 import ResetPassword from './pages/private/ResetPassword';
@@ -71,8 +72,9 @@ const App = () => {
         <Route element={<PrivateRoutes />}>
           <Route element={<AuthLayout />} >
             <Route path="/" element={<Navigate to="/me" replace />} />
-            <Route path="me" element={<AuthPage />}>
-              <Route path="dashboard" element={<DashBoard />} />
+            <Route path="me" element={<DashBoard />}>
+              <Route path="decks" element={<Decks />} />
+              {/* <Route path="decks/:query" element={<Deck />} /> */}
               <Route path="collection" element={<Collection />} />
               <Route path="collection/:query" element={<SearchResults />} />
               <Route path="archive" element={<Archive />} />

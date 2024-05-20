@@ -7,7 +7,7 @@ import useAuth from '../../../hooks/contexthooks/useAuth';
 import useSearch from '../../../hooks/contexthooks/useSearch';
 import { api } from '../../../api/resources';
 
-const DeleteProduct = (props) => {
+const DeleteItem = (props) => {
     // Props
     const { product, search, handleClick } = props;
     // States
@@ -134,7 +134,7 @@ const DeleteProduct = (props) => {
                                     Confirm
                                 </button>
                             </div>
-                        </footer> 
+                        </footer>
                     </div>
                 </>
             </div>
@@ -142,4 +142,4 @@ const DeleteProduct = (props) => {
     )
 }
 
-export default DeleteProduct;
+export default DeleteItem;

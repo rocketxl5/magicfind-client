@@ -43,11 +43,16 @@ const AutoComplete = () => {
         }
     }
 
+    const handleMouseDown = (e) => {
+        e.preventDefault();
+        searchFor(selection);
+    }
+
     return (
         <ul
             id="autocomplete-list"
             className="autocomplete-list"
-            onMouseDown={() => searchFor(selection)}
+            onMouseDown={(e) => handleMouseDown(e)}
             ref={ulRef}
         >
             {
