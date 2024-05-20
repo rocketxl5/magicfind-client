@@ -1,5 +1,5 @@
 import { useRef, useState, useEffect } from 'react'
-import TurnBtn from './buttons/TurnBtn';
+import TurnBtn from '../buttons/TurnBtn';
 
 const TwoSidedSlide = ({ children, classList, motion }) => {
     const [isMounted, setIsMounted] = useState(false);

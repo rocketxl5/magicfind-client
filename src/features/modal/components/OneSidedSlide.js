@@ -1,6 +1,6 @@
 import { useRef, useState, useEffect } from 'react'
-import RotateBtn from './buttons/RotateBtn';
-import FlipBtn from './buttons/FlipBtn';
+import RotateBtn from '../buttons/RotateBtn';
+import FlipBtn from '../buttons/FlipBtn';
 
 const OneSidedSlide = ({ children, classList }) => {
     const [isMounted, setIsMounted] = useState(false);

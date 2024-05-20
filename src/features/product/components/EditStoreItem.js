@@ -26,6 +26,7 @@ const EditStoreItem = (props) => {
     const [errors, setErrors] = useState(INIT);
     const [values, setValues] = useState(INIT);
     const [isPublished, setIsPublished] = useState(false);
+    const [loading, setLoading] = useState(false);
     const [isValidForm, setIsValidForm] = useState(false);
     const [isSubmit, setIsSubmit] = useState(false);
     const [isUpdated, setIsUpdated] = useState(false);
@@ -44,8 +45,6 @@ const EditStoreItem = (props) => {
 
     const { languages, conditions } = data;
 
-    const { loading } = useModalForm('store-item');
-
     // Triggers click event on button to close modal
     const closeModal = (result) => {
         // If publish state has changed, trigger catalog update to reflect product change
@@ -62,7 +61,7 @@ const EditStoreItem = (props) => {
 
     useEffect(() => {
         if (isValidForm) {
-            // setLoading(true);
+            setLoading(true);
             // Set product current published state
             setIsPublished(product._is_published);
             const price = parseFloat(values.price);
@@ -102,13 +101,13 @@ const EditStoreItem = (props) => {
                         result = { cards: cards, search: search, query: product.name };
                     }
 
-                    // setLoading(false);
+                    setLoading(false);
                     localStorage.setItem('search-results', JSON.stringify(result));
                     setUpdateCatalog(true);
                     closeModal(result);
                 })
                 .catch((error) => {
-                    // setLoading(false);
+                    setLoading(false);
                     console.log('error', error)
                 });
         }
