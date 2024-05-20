@@ -10,7 +10,8 @@ const usePost = (data) => {
 
     const postData = async (token, query) => {
         setLoading(true);
-
+        console.log(query)
+        console.log(data)
         const config = {
             headers: {
                 'Content-Type': 'application/json',

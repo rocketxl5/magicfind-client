@@ -10,6 +10,7 @@ import useAuth from '../../hooks/contexthooks/useAuth';
 import useSearch from '../../hooks/contexthooks/useSearch';
 import useFind from '../../hooks/useFind';
 import useColorSymbols from '../../hooks/useColorSymbols';
+import trimProduct from './services/trimProduct';
 import { IoExpand } from "react-icons/io5";
 import { FaCheck } from "react-icons/fa6";
 import { FaPlus } from "react-icons/fa6";
@@ -30,7 +31,7 @@ const ArchiveItem = ({ index, product, count, handleSlideView }) => {
         set_name,
         type_line,
     } = product;
-    const { postData, loading, result, error } = usePost(product);
+    const { postData, loading, result, error } = usePost(trimProduct(product, 'archive'));
     const { colorIdentity, manaCost } = useColorSymbols(product);
     const { setUpdateCollection } = useSearch();
     const { expandedImage } = useExpandImage(product);
@@ -144,7 +145,12 @@ const ArchiveItem = ({ index, product, count, handleSlideView }) => {
 
     return (
         <Card classList={"product-container"}>
-            <TwoSidedSlide classList={{ container: '', btn: 'card-action-btn b-radius-5 btn-bottom-right color-light' }}>
+            <TwoSidedSlide classList={
+                {
+                    container: '',
+                    btn: 'card-action-btn b-radius-5 btn-bottom-right color-light'
+                }
+            }>
                 <Image
                     product={product}
                     classList='product-image'

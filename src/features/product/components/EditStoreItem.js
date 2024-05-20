@@ -1,36 +1,37 @@
 import { useState, useEffect, useRef } from 'react';
 import { useNavigate, useLocation, useParams } from 'react-router-dom';
+import Select from '../../../components/Select';
+import Input from '../../../components/Input';
 import Success from './Success'
 import Loader from '../../../layout/Loader';
-import Option from '../../../components/Option';
 import data from '../../../data/EDIT.json';
 import errorHandler from '../services/editErrorHandler';
 import useAuth from '../../../hooks/contexthooks/useAuth';
 import useSearch from '../../../hooks/contexthooks/useSearch';
 import { api } from '../../../api/resources';
 import { v4 as uuidv4 } from 'uuid';
+import useModalForm from '../../../hooks/useModalForm';
 
 const INIT = {
     quantity: '',
     price: '',
     condition: '',
-    language: ''
+    language: '',
 }
 
-const EditProduct = (props) => {
+const EditStoreItem = (props) => {
     // Props
     const { product, search, handleClick } = props;
     // States
     const [errors, setErrors] = useState(INIT);
     const [values, setValues] = useState(INIT);
     const [isPublished, setIsPublished] = useState(false);
-    const [loading, setLoading] = useState(false);
     const [isValidForm, setIsValidForm] = useState(false);
     const [isSubmit, setIsSubmit] = useState(false);
     const [isUpdated, setIsUpdated] = useState(false);
     // Refs
     const btnRef = useRef(null);
-    const priceRef = useRef(null);
+
 
     // Hooks
     const { auth } = useAuth();
@@ -39,7 +40,11 @@ const EditProduct = (props) => {
     const location = useLocation();
     const { query } = useParams();
 
+
+
     const { languages, conditions } = data;
+
+    const { loading } = useModalForm('store-item');
 
     // Triggers click event on button to close modal
     const closeModal = (result) => {
@@ -57,7 +62,7 @@ const EditProduct = (props) => {
 
     useEffect(() => {
         if (isValidForm) {
-            setLoading(true);
+            // setLoading(true);
             // Set product current published state
             setIsPublished(product._is_published);
             const price = parseFloat(values.price);
@@ -97,20 +102,20 @@ const EditProduct = (props) => {
                         result = { cards: cards, search: search, query: product.name };
                     }
 
-                    setLoading(false);
+                    // setLoading(false);
                     localStorage.setItem('search-results', JSON.stringify(result));
                     setUpdateCatalog(true);
                     closeModal(result);
                 })
                 .catch((error) => {
-                    setLoading(false);
+                    // setLoading(false);
                     console.log('error', error)
                 });
         }
     }, [isValidForm])
 
     useEffect(() => {
-        priceRef.current?.focus();
+        // priceRef.current?.focus();
         const publishedID = product['_published_id'] ? product['_published_id'] : uuidv4();
         setValues({
             price: product['_price'] ? product['_price'] : '',
@@ -149,6 +154,7 @@ const EditProduct = (props) => {
 
     // Focus handler
     const handleFocus = (e) => {
+        console.log(e.target)
         // Remove submit error prop if present
         if (errors[e.target.name]) {
             const cloneErrors = { ...errors }
@@ -184,79 +190,63 @@ const EditProduct = (props) => {
                                     <div className="form-element flex gap-1">
                                         <div className="edit-option">
                                             <label htmlFor="price" className={errors.price && 'color-danger'}>{errors.price ? errors.price : 'Price'}</label>
-                                            <input
-                                                className={errors.price ? 'border-danger danger-padding' : ''}
-                                                id="price"
-                                                type="number"
-                                                name="price"
+                                            <Input
+                                                classList={errors.price ? 'border-danger danger-padding' : ''}
+                                                id={'price'}
+                                                type={'number'}
+                                                name={'price'}
                                                 value={values.price}
-                                                onChange={handleChange}
-                                                onFocus={handleFocus}
-                                                min="0.25"
-                                                max="10000"
-                                                placeholder="Price"
-                                                ref={priceRef}
+                                                handleChange={handleChange}
+                                                handleFocus={handleFocus}
+                                                range={{
+                                                    min: '0.25',
+                                                    max: '10000'
+                                                }}
+                                                placeholder={'Price'}
                                             />
                                         </div>
                                         <div className="edit-option">
                                             <label htmlFor="quantity" className={errors.quantity && 'color-danger'}>{errors.quantity ? errors.quantity : 'Quantity'}</label>
-                                            <input
-                                                className={errors.quantity ? 'border-danger danger-padding' : ''}
-                                                id="quantity"
-                                                type="number"
-                                                name="quantity"
+                                            <Input
+                                                classList={errors.price ? 'border-danger danger-padding' : ''}
+                                                id={'quantity'}
+                                                type={'number'}
+                                                name={'quantity'}
                                                 value={values.quantity}
-                                                onChange={handleChange}
-                                                onFocus={handleFocus}
-                                                min="0"
-                                                max="1000"
-                                                placeholder="Quantity"
+                                                handleChange={handleChange}
+                                                handleFocus={handleFocus}
+                                                range={{
+                                                    min: '0',
+                                                    max: '1000'
+                                                }}
+                                                placeholder={'Quantity'}
                                             />
                                         </div>
                                     </div>
                                     <div className="form-element">
                                         <label htmlFor="condition" className={errors.condition && 'color-danger'}>{errors.condition ? errors.condition : 'Card Condition'}</label>
-                                        <select
-                                            className={errors.condition ? 'border-danger danger-padding' : ''}
-                                            id="condition"
-                                            type="text"
-                                            name="condition"
+                                        <Select
+                                            id={'condition'}
+                                            classList={errors.condition ? 'border-danger danger-padding' : ''}
+                                            name={'condition'}
                                             value={values.condition}
-                                            onChange={handleChange}
-                                            onFocus={handleFocus}
-                                        >
-                                            {
-                                                conditions.map((condition, i) => {
-                                                    return (
-                                                        <Option key={i} value={condition.value}>
-                                                            {condition.text}
-                                                        </Option>
-                                                    )
-                                                }
-                                                )
-                                            }
-                                        </select>
+                                            handleChange={handleChange}
+                                            handleFocus={handleFocus}
+                                            options={conditions}
+                                        />
                                     </div>
                                     <div className="form-element">
-                                        <label htmlFor="language" className={errors.language && 'color-danger'}>{errors.language ? errors.language : 'Card Condition'}</label>
-                                        <select
-                                            className={errors.language ? 'border-danger danger-padding' : ''}
-                                            id="language"
-                                            name="language"
+                                        <label htmlFor="language" className={errors.language && 'color-danger'}>{errors.language ? errors.language : 'Card Language'}</label>
+                                        <Select
+                                            id={'language'}
+                                            classList={errors.language ? 'border-danger danger-padding' : ''}
+                                            name={'language'}
                                             value={values.language}
-                                            onChange={handleChange}
-                                            onFocus={handleFocus}
-                                        >
-                                            {
-                                                languages.map((language, i) => {
-                                                    return (
-                                                        <Option key={i} value={language.value}>
-                                                            {language.text}
-                                                        </Option>
-                                                    )
-                                                })
-                                            }
-                                        </select>
+                                            handleChange={handleChange}
+                                            handleFocus={handleFocus}
+                                            options={languages}
+                                        />
+
                                     </div>
                                     <div className="form-element">
                                         <label htmlFor="comment" className={errors.comment && 'color-danger'}>{errors.comment ? errors.comment : 'Additional Information'}</label>
@@ -310,9 +300,9 @@ const EditProduct = (props) => {
                         </footer>
                     </div>
                 </>
-            </div>
+            </div >
         </div >
     )
 }
 
-export default EditProduct
+export default EditStoreItem

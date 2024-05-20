@@ -1,4 +1,3 @@
-import Container from '../../../components/Container';
 import Option from '../../../components/Option';
 
 const QuantitySelector = (props) => {
@@ -6,7 +5,7 @@ const QuantitySelector = (props) => {
 
     return (
         product?.quantity &&
-        <Container classList={classList}>
+        <div className={classList}>
             <select
                     id={id}
                     name={name}
@@ -21,7 +20,7 @@ const QuantitySelector = (props) => {
                     )
                 })}
             </select>
-        </Container>
+            </div>
     )
 }
 

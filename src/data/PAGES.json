@@ -43,6 +43,13 @@
       "style": "page-header flex space-between align-center col-12 margin-bottom-1"
     }
   },
+  "decks": {
+    "id": "decks",
+    "style": "page relative",
+    "header": {
+      "style": "page-header flex space-between align-center col-12 margin-bottom-1"
+    }
+  },
   "store": {
     "id": "store",
     "style": "page store",

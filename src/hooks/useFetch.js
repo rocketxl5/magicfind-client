@@ -7,7 +7,7 @@ const useFetch = () => {
     const [loading, setLoading] = useState(false);
     const [showConfirmation, setShowConfirmation] = useState(false);
 
-    const fetch = async (url, config, origin) => {
+    const fetch = async (url, config) => {
 
         if (error) {
             setError(null);
@@ -20,12 +20,12 @@ const useFetch = () => {
         await axios
             .get(url, config)
             .then(res => {
-                // console.log(res)
+                console.log(res)
                 const data = res.data.data || res.data;
-                setResponse({ data: data, origin });
+                setResponse({ data: data });
             })
             .catch((error) => {
-                setError(error);
+                setError(error.message);
             })
             .finally(() => {
                 setLoading(false);

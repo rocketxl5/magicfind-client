@@ -14,19 +14,19 @@ const SearchForm = ({ children, classList, type, placeholder, cardNames, inputRe
         inputValue,
         predictions,
         searchTerm,
-        selection
+        selection,
     } = useSearch();
 
     const {
         getParams,
-        setFetchParams,
         setIsActive,
         isActive,
-        loading,
+        setFetchParams,
         setSearch,
         updateSearch,
+        clearSearch,
         searchFor,
-        clearSearch
+        loading,
     } = useSearchForm(inputRef);
 
     const handleChange = (e) => {
@@ -43,13 +43,11 @@ const SearchForm = ({ children, classList, type, placeholder, cardNames, inputRe
         }
     };
 
-    const handleBlur = () => {
-        if (!searchTerm) {
-            clearSearch();
-            setIsActive(false);
-            if (displaySearchBar) {
-                handleSearchBar(false);
-            }
+    const handleBlur = (e) => {
+        clearSearch();
+        setIsActive(false);
+        if (displaySearchBar) {
+            handleSearchBar(false);
         }
     }
 

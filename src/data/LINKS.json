@@ -1,7 +1,7 @@
 {
   "dashboardLinks": [
-    { "title": "Dashboard", "id": "dashboard" },
     { "title": "Collection", "id": "collection" },
+    { "title": "Decks", "id": "decks" },
     { "title": "Store", "id": "store" },
     { "title": "Archive", "id": "archive" }
   ],

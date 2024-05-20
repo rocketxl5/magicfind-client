@@ -17,17 +17,16 @@ const useSearchForm = (inputRef) => {
     const {
         exact,
         dispatch,
-        initialState
+        initialState,
     } = useSearch();
 
     const { fetch, error, response, loading } = useFetch();
 
-    function clearSearchPreset() {
+    function clearPredictions() {
         dispatch({
-            type: 'clear-preset',
+            type: 'clear-predictions',
             payload: {
                 predictions: [],
-                searchTerm: ''
             }
         })
     }
@@ -94,13 +93,11 @@ const useSearchForm = (inputRef) => {
             .join('-')
     }
 
-
     const getParams = (query, type) => {
         const params = {
             archive: {
                 config: {},
                 endpoint: exact ? '/cards/named?exact=' : '/cards/named?fuzzy=',
-                origin: 'scryfall',
                 ref: `/me/archive`,
                 resource: api.scryfallURL,
                 query: query
@@ -112,7 +109,6 @@ const useSearchForm = (inputRef) => {
                     },
                 },
                 endpoint: '/api/cards/catalog/',
-                origin: 'server',
                 query: query,
                 ref: '/catalog',
                 resource: api.serverURL,
@@ -126,7 +122,6 @@ const useSearchForm = (inputRef) => {
                     },
                 },
                 endpoint: `/api/cards/collection/${auth?.user.id}/`,
-                origin: 'server',
                 query: query,
                 ref: `/me/collection`,
                 resource: api.serverURL,
@@ -138,7 +133,6 @@ const useSearchForm = (inputRef) => {
             resource: params[type].resource,
             endpoint: `${params[type].endpoint}${params[type].term || query}`,
             config: params[type].config,
-            origin: params[type].origin,
             query: params[type].query,
             search: {
                 path: `${params[type].ref}/${params[type].term || setString(query)}`,
@@ -150,11 +144,11 @@ const useSearchForm = (inputRef) => {
 
     useEffect(() => {
         if (fetchParams) {
-            const { resource, endpoint, config, origin } = fetchParams;
+            const { resource, endpoint, config } = fetchParams;
             // Hide Autocomplete predictions list
-            clearSearchPreset();
+            clearPredictions();
             const url = resource + endpoint;
-            fetch(url, config, origin);
+            fetch(url, config);
         }
     }, [fetchParams])
 
@@ -167,22 +161,23 @@ const useSearchForm = (inputRef) => {
 
     useEffect(() => {
         if (response) {
-            const { data, origin } = response;
-            if (origin === 'scryfall') {
-                setOracleId(data.oracle_id)
+            const { data } = response;
+            const { path, query, type } = fetchParams.search;
+
+            if (type === 'archive' && !oracleId) {
+
+                setOracleId(data.oracle_id);
             }
             else {
-                const { path, query, type } = fetchParams.search;
-                localStorage.setItem('search-results', JSON.stringify({ ...response.data }));
-                navigate(path, { state: { result: response.data, type, query } });
-                clearSearch()
+                inputRef?.current?.blur();
+                localStorage.setItem('search-results', JSON.stringify({ ...data }));
+                navigate(path, { state: { result: data, type, query } });
             }
         }
         if (error) {
             const { query } = fetchParams;
             navigate(`/not-found/${query.split(' ').join('+')}`);
         }
-        inputRef?.current?.blur();
     }, [error, response])
 
     return {

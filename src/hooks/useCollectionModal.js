@@ -1,6 +1,7 @@
 import { useReducer } from 'react';
-import EditProduct from '../features/product/components/EditProduct';
-import DeleteProduct from '../features/product/components/DeleteProduct';
+import EditStoreItem from '../features/product/components/EditStoreItem';
+import DeleteItem from '../features/product/components/DeleteItem';
+import DeckProduct from '../features/product/components/DeckProduct';
 import cardBack from '../assets/img/mtg_card_back.jpg';
 
 // Edit and Delete product form
@@ -13,7 +14,8 @@ const useCollectionModal = (search, callback) => {
         CONFIRM_DELETE: 'confirm-delete',
         DELETE_PRODUCT: 'delete-product',
         CANCEL: 'cancel',
-        EDIT_PRODUCT: 'edit-product',
+        SELL_PRODUCT: 'sell-product',
+        ADD_TO_DECK: 'deck-product',
         CLOSE_MODAL: 'close',
     }
 
@@ -24,20 +26,31 @@ const useCollectionModal = (search, callback) => {
             case ACTIONS.DELETE_PRODUCT:
                 return {
                     open: true,
-                    component: <DeleteProduct
+                    component: <DeleteItem
                         attributes={{ ...action.payload.attributes, id: 'confirm-delete' }}
                         search={search}
                         cardImage={action.payload.cardImage}
                         product={action.payload.product}
                         handleClick={callback}
                     />
-                };
-            case ACTIONS.EDIT_PRODUCT:
+                }
+            case ACTIONS.SELL_PRODUCT:
                 return {
                     open: true,
                     component:
-                        <EditProduct
+                        <EditStoreItem
                             attributes={{ ...action.payload.attributes, id: 'confirm-edit' }}
+                            search={search}
+                            product={action.payload.product}
+                            handleClick={callback}
+                        />
+                }
+            case ACTIONS.ADD_TO_DECK:
+                return {
+                    open: true,
+                    component:
+                        <DeckProduct
+                            attributes={{ ...action.payload.attributes, id: 'confirm-deck' }}
                             search={search}
                             product={action.payload.product}
                             handleClick={callback}
