@@ -13,8 +13,6 @@ const Input = (props) => {
         placeholder,
     } = props;
 
-
-
     const inputs = {
         text: () => {
             return (
