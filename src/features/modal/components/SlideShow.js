@@ -3,9 +3,8 @@ import CloseBtn from '../buttons/CloseBtn';
 import LeftBtn from '../buttons/LeftBtn';
 import RightBtn from '../buttons/RightBtn';
 import OneSidedSlide from './OneSidedSlide';
-import TwoSidedSlide from '../TwoSidedSlide'
+import TwoSidedSlide from './TwoSidedSlide'
 import SlideIndicators from './SlideIndicators';
-import Container from '../../../components/Container';
 import ACTIONS from '../../../data/ACTIONS';
 
 const SlideShow = ({ slides, handleClick }) => {
@@ -36,15 +35,15 @@ const SlideShow = ({ slides, handleClick }) => {
     }
 
     return (
-        <Container classList={"slide-show"}>
-            <Container classList={"slide-frame"}>
+        <div classList={"slide-show"}>
+            <div classList={"slide-frame"}>
                 <LeftBtn classList={`slide-btn slide-left-btn card-btn`} name={'left-btn'} handleClick={setSlideMotion} />
                 <RightBtn classList={`slide-btn slide-right-btn card-btn`} name={'right-btn'} handleClick={setSlideMotion} />
                 <CloseBtn classList={`slide-close-btn close-btn card-btn`} name={'close-btn'} handleClick={handleClick} />
                 <SlideIndicators items={slides.length} currentIndicator={currentIndicator} />
-            </Container>
+            </div>
 
-            <Container classList={"slide-track"} ref={trackRef}>
+            <div classList={"slide-track"} ref={trackRef}>
                 {
                     slides.map((slide, i) => {
 
@@ -65,8 +64,8 @@ const SlideShow = ({ slides, handleClick }) => {
                         }
                     })
                 }
-            </Container>
-        </Container>
+            </div>
+        </div>
     )
 }
 

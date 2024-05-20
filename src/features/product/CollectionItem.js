@@ -1,13 +1,13 @@
 import Image from '../../components/Image';
 import Card from '../../components/Card';
-import TwoSidedSlide from '../modal/TwoSidedSlide';
+import TwoSidedSlide from '../modal/components/TwoSidedSlide';
 import Button from '../../components/Button';
 import { FaCommentsDollar } from "react-icons/fa";
 import { AiOutlineDelete } from "react-icons/ai";
 import { GoStack } from "react-icons/go";
-import { AiOutlineEdit } from "react-icons/ai";
-import { IoExpand } from "react-icons/io5";
-import { AiOutlineInfoCircle } from "react-icons/ai";
+// import { AiOutlineEdit } from "react-icons/ai";
+// import { IoExpand } from "react-icons/io5";
+// import { AiOutlineInfoCircle } from "react-icons/ai";
 // import { AiOutlineCloseCircle } from "react-icons/ai";
 import useExpandImage from '../../hooks/useExpandImage';
 import data from '../../data/SEARCH.json';

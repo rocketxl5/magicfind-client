@@ -1,7 +1,7 @@
 import { useReducer } from 'react';
-import OneSidedSlide from '../features/modal/OneSidedSlide';
-import TwoSidedSlide from '../features/modal/TwoSidedSlide';
-import SlideView from '../features/modal/SlideView';
+import OneSidedSlide from '../features/modal/components/OneSidedSlide';
+import TwoSidedSlide from '../features/modal/components/TwoSidedSlide';
+import SlideView from '../features/modal/components/SlideView';
 
 const useSlideView = (callback) => {
     const INIT = {

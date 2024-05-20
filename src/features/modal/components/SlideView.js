@@ -1,17 +1,15 @@
-import React from 'react'
-import CloseBtn from './buttons/CloseBtn';
-import Container from '../../components/Container';
+import CloseBtn from '../buttons/CloseBtn';
 
 const SlideView = ({ children, handleClick }) => {
     return (
-        <Container classList={"slide-view"}>
-            <Container classList={"slide-frame"}>
+        <div classList={"slide-view"}>
+            <div classList={"slide-frame"}>
                 <CloseBtn classList={`slide-close-btn close-btn card-btn`} name={'close-btn'} handleClick={handleClick} />
-            </Container>
+            </div>
             <>
                 {children}
             </>
-        </Container>
+        </div>
     )
 }
 

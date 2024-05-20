@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import Loader from '../../layout/Loader';
 import Button from '../../components/Button';
 import Card from '../../components/Card';
-import TwoSidedSlide from '../modal/TwoSidedSlide';
+import TwoSidedSlide from '../modal/components/TwoSidedSlide';
 import Image from '../../components/Image';
 import useExpandImage from '../../hooks/useExpandImage';
 import usePost from '../../hooks/usePost';
