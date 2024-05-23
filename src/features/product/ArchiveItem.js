@@ -40,7 +40,7 @@ const ArchiveItem = ({ index, product, count, handleSlideView }) => {
         set_name,
         type_line,
     } = product;
-    const { fetch, post, response, error } = useAxios();
+    const { fetch, patch, post, response, error } = useAxios();
     const { colorIdentity, manaCost } = useColorSymbols(product);
     const { setUpdateCollection } = useSearch();
     const { expandedImage } = useExpandImage(product);
@@ -155,7 +155,7 @@ const ArchiveItem = ({ index, product, count, handleSlideView }) => {
         }
         else {
             // Add it to current user's collection
-            post(
+            patch(
                 auth.token,
                 `api/users/${user.id}/add/card`,
                 trimProduct(product, 'users')
@@ -164,9 +164,9 @@ const ArchiveItem = ({ index, product, count, handleSlideView }) => {
     }
     const handleCardsResponse = (response) => {
         const { product, isSet } = response;
-        // console.log(origin)
+
         if (isSet) {
-            post(
+            patch(
                 auth.token,
                 `api/users/${user.id}/add/card`,
                 trimProduct(product, 'users')
@@ -174,8 +174,20 @@ const ArchiveItem = ({ index, product, count, handleSlideView }) => {
         }
     }
     const handleUsersResponse = (response) => {
-        const { isSet, origin } = response;
-        console.log(origin)
+        const { isSet } = response;
+
+        if (isSet) {
+            patch(
+                auth.token,
+                `api/cards/modify/${product.id}`,
+                auth.user
+            );
+        }
+    }
+
+    const handleUpdate = (response) => {
+        const { isSet } = response;
+
         if (isSet) {
             setLoading(false);
             setIsCardAdded(true);
@@ -196,7 +208,7 @@ const ArchiveItem = ({ index, product, count, handleSlideView }) => {
                     handleUsersResponse(response)
                     break;
                 default:
-                    break;
+                    handleUpdate(response)
             }
         }
     }, [response, product]);

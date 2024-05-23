@@ -21,37 +21,37 @@ const CollectionItem = ({ index, product, count, handleCollectionItem, handleSli
     console.log(product)
     const details = [
         {
-            title: 'Status:',
-            value: product._is_published ? 'Published' : 'Unpublished'
+            title: 'Decks:',
+            value: product.isDeck ? `Card is in ${product.decks.length} deck(s)` : 'Not assigned to any decks'
         },
         {
-            title: 'Published:',
-            value: longDate(product._date_published)
+            title: 'Store:',
+            value: product.inStore ? `Card is in store` : 'Not in store'
         },
-        {
-            title: 'Finish:',
-            value: data.product.finishes[product.finishes]
-        },
-        {
-            title: 'Condition:',
-            value: data.product.conditions[product._condition]
-        },
-        {
-            title: 'Language:',
-            value: data.product.languages[product._language]
-        },
-        {
-            title: 'Price:',
-            value: `$ ${product._price}`
-        },
-        {
-            title: 'Quantity:',
-            value: product._quantity
-        },
-        {
-            title: 'Comment:',
-            value: product._comment ? 'Yes' : 'None'
-        }
+        // {
+        //     title: 'Finish:',
+        //     value: data.product.finishes[product.finishes]
+        // },
+        // {
+        //     title: 'Condition:',
+        //     value: data.product.conditions[product._condition]
+        // },
+        // {
+        //     title: 'Language:',
+        //     value: data.product.languages[product._language]
+        // },
+        // {
+        //     title: 'Price:',
+        //     value: `$ ${product._price}`
+        // },
+        // {
+        //     title: 'Quantity:',
+        //     value: product._quantity
+        // },
+        // {
+        //     title: 'Comment:',
+        //     value: product._comment ? 'Yes' : 'None'
+        // }
     ];
 
     return (
@@ -130,8 +130,6 @@ const CollectionItem = ({ index, product, count, handleCollectionItem, handleSli
                         <div>
                             <h2 className='text-center fs-150 fw-500'>Card Info</h2>
                         </div>
-                        {
-                            product._is_published ?
                         <div className='b-radius-5 border-surface-thin'>
                             <table>
                                 <tbody>
@@ -147,11 +145,7 @@ const CollectionItem = ({ index, product, count, handleCollectionItem, handleSli
                                     }
                                 </tbody>
                             </table>
-                                </div> :
-                                <div>
-                                    This card is currently unpublished
                         </div>
-                        }
                     </section>
                 </div>
             </TwoSidedSlide>
