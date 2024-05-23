@@ -1,13 +1,13 @@
 import { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import Loader from '../../layout/Loader';
-import useFetch from '../../hooks/useFetch';
+import useAxios from '../../hooks/useAxios';
 
 const Seller = () => {
     const [hasLoaded, setHasLoaded] = useState(false);
     const location = useLocation();
 
-    const { fetch, loading, showConfirmation, error, response } = useFetch();
+    const { fetch, loading, showConfirmation, error, response } = useAxios();
 
     useEffect(() => {
         // console.log(location)

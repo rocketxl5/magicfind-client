@@ -20,7 +20,7 @@ const Collection = () => {
     }, []);
 
     const handleClick = () => {
-        const searchParams = getParams('All', 'collection');
+        const searchParams = getParams('collection', 'All');
         setFetchParams(searchParams);
     }
 

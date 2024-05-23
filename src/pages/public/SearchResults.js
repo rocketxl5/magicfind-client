@@ -28,6 +28,7 @@ const SearchResults = () => {
     const [state, updateCollectionItem] = useCollectionModal(search?.search, handleCollectionItem);
 
     useEffect(() => {
+        console.log(location.state)
         // If location.state is defined
         // Search was sent through input submit 
         if (location.state) {
@@ -37,7 +38,7 @@ const SearchResults = () => {
         else {
             // getUrl(location.pathname);
         }
-    }, [])
+    }, [location])
 
     // useEffect(() => {
     //     if (url && config) {
@@ -57,15 +58,15 @@ const SearchResults = () => {
     // }, [response])
 
     // Validation for collection search search
-    useEffect(() => {
-        if (search) {
-            // If search is collection and card collection is empty
-            if (search?.search === 'collection' && search?.result.length === 0) {
-                // Send to collection page
-                navigate('/me/collection');
-            }
-        }
-    }, [search])
+    // useEffect(() => {
+    //     if (search) {
+    //         // If search is collection and card collection is empty
+    //         if (search?.search === 'collection' && search?.result.length === 0) {
+    //             // Send to collection page
+    //             navigate('/me/collection');
+    //         }
+    //     }
+    // }, [search])
 
     function handleSlideView(e, layout, expandedImage) {
         e.stopPropagation();

@@ -1,15 +1,17 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useReducer } from 'react';
 import Loader from '../../layout/Loader';
 import Button from '../../components/Button';
 import Card from '../../components/Card';
 import TwoSidedSlide from '../modal/components/TwoSidedSlide';
 import Image from '../../components/Image';
 import useExpandImage from '../../hooks/useExpandImage';
-import usePost from '../../hooks/usePost';
+import useAxios from '../../hooks/useAxios';
 import useAuth from '../../hooks/contexthooks/useAuth';
 import useSearch from '../../hooks/contexthooks/useSearch';
 import useFind from '../../hooks/useFind';
 import useColorSymbols from '../../hooks/useColorSymbols';
+import setProductName from './services/setProductName';
+import { api } from '../../api/resources';
 import trimProduct from './services/trimProduct';
 import { IoExpand } from "react-icons/io5";
 import { FaCheck } from "react-icons/fa6";
@@ -17,7 +19,14 @@ import { FaPlus } from "react-icons/fa6";
 
 import data from '../../data/SEARCH.json';
 
+const initialState = {
+    isSet: false,
+    isCollection: false,
+    isCatalog: false
+}
+
 const ArchiveItem = ({ index, product, count, handleSlideView }) => {
+    const [loading, setLoading] = useState(false);
     const [isCardAdded, setIsCardAdded] = useState(false);
     const { auth } = useAuth();
     const { user, token } = auth;
@@ -31,24 +40,13 @@ const ArchiveItem = ({ index, product, count, handleSlideView }) => {
         set_name,
         type_line,
     } = product;
-    const { postData, loading, result, error } = usePost(trimProduct(product, 'archive'));
+    const { fetch, post, response, error } = useAxios();
     const { colorIdentity, manaCost } = useColorSymbols(product);
     const { setUpdateCollection } = useSearch();
     const { expandedImage } = useExpandImage(product);
     const { findMatch, isMatchFound } = useFind();
 
-    const query = `/api/cards/add/${user.id}/${product.id}`;
-
     // Removes product name redundencies ex: Adrix and Nev, Twincasters reversible edition
-    const filterName = (name) => {
-        const sides = name.split('//').map(side => {
-            return side.trim();
-        })
-        if (sides[0] === sides[1]) {
-            return sides[0];
-        }
-        return name;
-    }
 
     // Sets card price according to card finish
     const setPrice = (prices, finish) => {
@@ -130,18 +128,85 @@ const ArchiveItem = ({ index, product, count, handleSlideView }) => {
         findMatch(product);
     }, []);
 
-    useEffect(() => {
-        // If card was successfully added
-        if (result?.isCardAdded) {
-            // Trigger update collection @layout/DashboardNav
-            // to make new cardName available in search collection
+
+    const handleClick = (e) => {
+        const query = `${api.serverURL}/api/catalog/product/id/${product.id}`;
+        const config = {
+            headers: {
+                'Content-Type': 'application/json',
+                'auth-token': token
+            },
+        }
+        setLoading(true);
+
+        fetch(query, config);
+    }
+
+    const handleCatalogResponse = (response, product) => {
+        const { isSet } = response;
+        // If product does not exist
+        if (!isSet) {
+            // Add it to site cards library
+            post(
+                auth.token,
+                '/api/cards/add/product',
+                trimProduct(product, 'cards')
+            );
+        }
+        else {
+            // Add it to current user's collection
+            post(
+                auth.token,
+                `api/users/${user.id}/add/card`,
+                trimProduct(product, 'users')
+            );
+        }
+    }
+    const handleCardsResponse = (response) => {
+        const { product, isSet } = response;
+        // console.log(origin)
+        if (isSet) {
+            post(
+                auth.token,
+                `api/users/${user.id}/add/card`,
+                trimProduct(product, 'users')
+            );
+        }
+    }
+    const handleUsersResponse = (response) => {
+        const { isSet, origin } = response;
+        console.log(origin)
+        if (isSet) {
+            setLoading(false);
             setIsCardAdded(true);
             setUpdateCollection(true);
         }
-        if (error) {
-            console.log(error)
+    }
+
+    useEffect(() => {
+        if (response) {
+            switch (response.origin) {
+                case 'catalog':
+                    handleCatalogResponse(response, product)
+                    break;
+                case 'cards':
+                    handleCardsResponse(response)
+                    break;
+                case 'users':
+                    handleUsersResponse(response)
+                    break;
+                default:
+                    break;
+            }
         }
-    }, [result, setUpdateCollection, error]);
+    }, [response, product]);
+
+    useEffect(() => {
+        if (error) {
+            setLoading(false);
+            console.log(error);
+        }
+    }, [error])
 
     return (
         <Card classList={"product-container"}>
@@ -180,7 +245,7 @@ const ArchiveItem = ({ index, product, count, handleSlideView }) => {
                                 </Button>
                                 :
                                 <Button classList={'product-btn absolute border-light-2 color-light bg-alpha btn-top-right b-radius-5'}
-                                    handleClick={() => postData(token, query)}>
+                                    handleClick={handleClick}>
                                     <FaPlus />
                                 </Button>
                     }
@@ -216,7 +281,7 @@ const ArchiveItem = ({ index, product, count, handleSlideView }) => {
             <div className="col-12 relative flex column justify-center align-center gap-1">
                 <div>
                     {
-                        !product.name.includes('//') ? product.name : filterName(product.name)
+                        !product.name.includes('//') ? product.name : setProductName(product).name
                     }
                 </div>
 

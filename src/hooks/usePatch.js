@@ -2,16 +2,16 @@ import { useState } from 'react';
 import axios from 'axios';
 import { api } from '../api/resources';
 
-const usePost = (data) => {
-    const [response, setResponse] = useState(null);
+const usePatch = () => {
+    const [result, setResult] = useState(null);
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(false);
     const [showConfirmation, setShowConfirmation] = useState(false)
 
-    const post = async (token, query) => {
-
+    const patch = async (token, data, query) => {
         setLoading(true);
-
+        // console.log(query)
+        // console.log(data)
         const config = {
             headers: {
                 'Content-Type': 'application/json',
@@ -20,10 +20,10 @@ const usePost = (data) => {
         }
 
         await axios
-            .post(`${api.serverURL}${query}`, data, config)
+            .patch(`${api.serverURL}${query}`, data, config)
             .then(res => {
-                const data = res.data.data || res.data;
-                setResponse(data);
+                console.log(res.data)
+                setResult(res.data);
             })
             .catch((error) => {
                 setError(error.message);
@@ -37,7 +37,7 @@ const usePost = (data) => {
             })
     }
 
-    return { post, loading, showConfirmation, error, response }
+    return { patch, loading, showConfirmation, error, result }
 }
 
-export default usePost
+export default usePatch

@@ -4,6 +4,7 @@ import SearchForm from '../features/search/SearchForm';
 import DashboardNav from './DashboardNav';
 import Logo from './navigation/buttons/Logo';
 import { api } from '../api/resources';
+import useAxios from '../hooks/useAxios';
 import useAuth from '../hooks/contexthooks/useAuth';
 import useSearch from '../hooks/contexthooks/useSearch';
 import useScroll from '../hooks/contexthooks/useScroll';
@@ -20,6 +21,7 @@ const MainHeader = () => {
     catalogInputRef,
 
   } = useSearch();
+  // const { fetch, error, loading, response } = useAxios();
 
   // Setting catalog card names for autocomplete catalog search
   useEffect(() => {
@@ -32,7 +34,7 @@ const MainHeader = () => {
         headers: headers,
       };
 
-      fetch(`${api.serverURL}/api/cards/catalog`, options)
+      fetch(`${api.serverURL}/api/catalog/product/names`, options)
         .then((res) => res.json())
         .then((data) => {
           setCatalogCardNames(data);

@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { useState } from 'react';
 import useCart from './contexthooks/useCart';
-// import useFetch from './useFetch';
+// import useAxios from './useAxios';
 import { FaRegTimesCircle } from "react-icons/fa";
 import { BsExclamationCircle } from "react-icons/bs";
 import { api } from '../api/resources';

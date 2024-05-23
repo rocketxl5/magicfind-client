@@ -22,10 +22,10 @@ const SearchForm = ({ children, classList, type, placeholder, cardNames, inputRe
         setIsActive,
         isActive,
         setFetchParams,
-        setSearch,
-        updateSearch,
-        clearSearch,
-        searchFor,
+        handleSetSearch,
+        handleUpdateSearch,
+        handleClearSearch,
+        handleSearch,
         loading,
     } = useSearchForm(inputRef);
 
@@ -33,18 +33,18 @@ const SearchForm = ({ children, classList, type, placeholder, cardNames, inputRe
         const value = e.target.value;
 
         if (value.length >= 3) {
-            updateSearch(
+            handleUpdateSearch(
                 value,
                 cardNames?.filter((title) => title.toLowerCase().includes(value.toLowerCase()))
             );
         }
         else {
-            updateSearch(value, []);
+            handleUpdateSearch(value, []);
         }
     };
 
     const handleBlur = (e) => {
-        clearSearch();
+        handleClearSearch();
         setIsActive(false);
         if (displaySearchBar) {
             handleSearchBar(false);
@@ -55,24 +55,24 @@ const SearchForm = ({ children, classList, type, placeholder, cardNames, inputRe
         e.preventDefault();
 
         if (selection) {
-            searchFor(selection);
+            handleSearch(selection);
         }
         else if (predictions.length === 1) {
-            searchFor(predictions[0]);
+            handleSearch(predictions[0]);
         }
         else {
-            searchFor(inputValue, false);
+            handleSearch(inputValue, false);
         }
     }
 
     const handleFocus = (e) => {
         setIsActive(true);
-        setSearch(cardNames, e.target.id);
+        handleSetSearch(cardNames, e.target.id);
     }
 
     useEffect(() => {
         if (searchTerm && isActive) {
-            const searchParams = getParams(searchTerm, type);
+            const searchParams = getParams(type, searchTerm);
             setFetchParams(searchParams);
         }
     }, [searchTerm, isActive]);

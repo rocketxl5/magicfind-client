@@ -9,6 +9,8 @@ const useFetch = () => {
 
     const fetch = async (url, config) => {
 
+        setLoading(true);
+
         if (error) {
             setError(null);
         }
@@ -16,13 +18,12 @@ const useFetch = () => {
             setResponse(null);
         }
 
-        setLoading(true);
         await axios
             .get(url, config)
             .then(res => {
                 console.log(res)
                 const data = res.data.data || res.data;
-                setResponse({ data: data });
+                setResponse(data);
             })
             .catch((error) => {
                 setError(error.message);

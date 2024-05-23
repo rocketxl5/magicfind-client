@@ -1,6 +1,8 @@
+import setProductName from './setProductName';
+
 const trimProduct = (product, type) => {
     const product_types = {
-        archive: (product) => {
+        cards: (product) => {
             const {
                 arena_id,
                 booster,
@@ -43,12 +45,40 @@ const trimProduct = (product, type) => {
                 uri,
                 variation,
                 watermark,
-                ...trimmed
+                ...trimmedProduct
             } = product;
-            return trimmed
+
+            // Remove produt name repetition if any
+            return !trimmedProduct.name.includes('//') ? trimmedProduct : setProductName(trimmedProduct);
+        },
+        users: (product) => {
+            // Remove unecessary properties
+            let {
+                artist_ids,
+                border_color,
+                frame,
+                legalities,
+                oracle_id,
+                prints_search_uri,
+                related_uris,
+                set_id,
+                owners,
+                catalog,
+                ...trimmedProduct
+            } = product;
+
+            // Add inStore, inDeck, decks, inventory properties and return
+            return {
+                ...trimmedProduct,
+                inStore: false,
+                inDeck: false,
+                decks: [],
+                inventory: [],
+                ref: product._id
+            }
         }
     }
-    return { ...product_types[type](product, type) }
+    return product_types[type](product, type)
 }
 
 export default trimProduct

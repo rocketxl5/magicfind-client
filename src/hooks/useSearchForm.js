@@ -22,23 +22,7 @@ const useSearchForm = (inputRef) => {
 
     const { fetch, error, response, loading } = useFetch();
 
-    function clearPredictions() {
-        dispatch({
-            type: 'clear-predictions',
-            payload: {
-                predictions: [],
-            }
-        })
-    }
-
-    function clearSearch() {
-        dispatch({
-            type: 'clear-search',
-            payload: initialState
-        })
-    }
-
-    function searchFor(term, exact = true) {
+    function handleSearch(term, exact = true) {
         dispatch({
             type: 'search',
             payload: {
@@ -48,7 +32,14 @@ const useSearchForm = (inputRef) => {
         });
     }
 
-    function setSearch(names, type) {
+    function handleClearSearch() {
+        dispatch({
+            type: 'clear-search',
+            payload: initialState
+        })
+    }
+
+    function handleSetSearch(names, type) {
         dispatch({
             type: 'set-search',
             payload: {
@@ -58,7 +49,7 @@ const useSearchForm = (inputRef) => {
         });
     }
 
-    function updateSearch(value, predictions) {
+    function handleUpdateSearch(value, predictions) {
         dispatch({
             type: 'update-search',
             payload: {
@@ -68,14 +59,24 @@ const useSearchForm = (inputRef) => {
         });
     }
 
-    function setSelection(value) {
+    function handleSelection(value) {
+        console.log(value)
         dispatch({
             type: 'set-selection',
             payload: value
         })
     }
 
-    function setTrackSearch(tracker, position) {
+    function handlePredictions(array) {
+        dispatch({
+            type: 'clear-predictions',
+            payload: {
+                predictions: array,
+            }
+        })
+    }
+
+    function handleTracker(tracker, position) {
         dispatch({
             type: 'track-scroll',
             payload: {
@@ -93,7 +94,8 @@ const useSearchForm = (inputRef) => {
             .join('-')
     }
 
-    const getParams = (query, type) => {
+    const getParams = (type, query = undefined) => {
+        console.log(query)
         const params = {
             archive: {
                 config: {},
@@ -121,11 +123,13 @@ const useSearchForm = (inputRef) => {
                         'auth-token': auth?.token
                     },
                 },
-                endpoint: `/api/cards/collection/${auth?.user.id}/`,
+                endpoint: `/api/users/collection/${auth?.user.id}/`,
                 query: query,
                 ref: `/me/collection`,
                 resource: api.serverURL,
-                term: setString(query),
+                // If (specific) query to collection is undefined, 
+                // query all @ Collection onClick event on all cards button
+                term: query ? setString(query) : 'all',
             },
         }
 
@@ -146,7 +150,7 @@ const useSearchForm = (inputRef) => {
         if (fetchParams) {
             const { resource, endpoint, config } = fetchParams;
             // Hide Autocomplete predictions list
-            clearPredictions();
+            handlePredictions([]);
             const url = resource + endpoint;
             fetch(url, config);
         }
@@ -161,17 +165,17 @@ const useSearchForm = (inputRef) => {
 
     useEffect(() => {
         if (response) {
-            const { data } = response;
+            const product = response;
             const { path, query, type } = fetchParams.search;
 
             if (type === 'archive' && !oracleId) {
-
-                setOracleId(data.oracle_id);
+                setOracleId(product.oracle_id);
             }
             else {
                 inputRef?.current?.blur();
-                localStorage.setItem('search-results', JSON.stringify({ ...data }));
-                navigate(path, { state: { result: data, type, query } });
+                console.log(product)
+                localStorage.setItem('search-results', JSON.stringify({ ...product }));
+                navigate(path, { state: { result: product, type, query } });
             }
         }
         if (error) {
@@ -185,13 +189,13 @@ const useSearchForm = (inputRef) => {
         setFetchParams,
         loading,
         isActive,
-        clearSearch,
-        searchFor,
+        handleClearSearch,
+        handleSearch,
         setIsActive,
-        setSearch,
-        setSelection,
-        setTrackSearch,
-        updateSearch,
+        handleSetSearch,
+        handleSelection,
+        handleTracker,
+        handleUpdateSearch,
     }
 }
 

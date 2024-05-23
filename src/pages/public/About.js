@@ -78,7 +78,7 @@ const About = () => {
       name={'about'}
       title={'About Magic Find'}
     >
-      <main className='feature-wrapper bg-eclipse border-surface-1 b-radius-5 grid-section'>
+      <div className='feature-wrapper bg-eclipse border-surface-1 b-radius-5 grid-section'>
         {
           sections.map((section, i) => {
             return (
@@ -95,7 +95,7 @@ const About = () => {
             )
           })
         }
-      </main>
+      </div>
     </Page>
   )
 };
