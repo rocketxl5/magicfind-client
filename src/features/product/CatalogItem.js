@@ -22,7 +22,7 @@ import data from '../../data/SEARCH.json';
 
 const CatalogItem = ({ index, product, count, cartIndex, handleSlideView }) => {
     const {
-        name,
+        // name,
         set_name,
         price,
         quantity,

@@ -69,6 +69,7 @@ const DashboardNav = () => {
     //////////////////////////////////////////////////////////////////////
     useEffect(() => {
         if (updateCollection) {
+            // console.log(auth.user.id)
             const config = {
                 headers: {
                     'Content-Type': 'application/json',

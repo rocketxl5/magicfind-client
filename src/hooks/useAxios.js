@@ -24,7 +24,7 @@ const useAxios = () => {
                 setResponse(data);
             })
             .catch((error) => {
-                setError(error.message);
+                setError(error);
             })
             .finally(() => {
                 setShowConfirmation(true);
@@ -70,7 +70,7 @@ const useAxios = () => {
                 setResponse(data);
             })
             .catch((error) => {
-                setError(error.message);
+                setError(error);
             })
             .finally(() => {
                 setShowConfirmation(true);
@@ -81,6 +81,7 @@ const useAxios = () => {
     }
 
     const patch = async (token, query, data) => {
+
         const config = {
             headers: {
                 'Content-Type': 'application/json',
@@ -95,7 +96,7 @@ const useAxios = () => {
                 setResponse(data);
             })
             .catch((error) => {
-                setError(error.message);
+                setError(error);
             })
             .finally(() => {
                 setShowConfirmation(true);

@@ -45,7 +45,6 @@ const AutoComplete = () => {
 
     const handleMouseDown = (e) => {
         e.preventDefault();
-        console.log(selection)
         handleSearch(selection);
     }
 

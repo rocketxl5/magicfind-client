@@ -60,7 +60,6 @@ const useSearchForm = (inputRef) => {
     }
 
     function handleSelection(value) {
-        console.log(value)
         dispatch({
             type: 'set-selection',
             payload: value
@@ -95,7 +94,6 @@ const useSearchForm = (inputRef) => {
     }
 
     const getParams = (type, query = undefined) => {
-        console.log(query)
         const params = {
             archive: {
                 config: {},
@@ -173,7 +171,6 @@ const useSearchForm = (inputRef) => {
             }
             else {
                 inputRef?.current?.blur();
-                console.log(product)
                 localStorage.setItem('search-results', JSON.stringify({ ...product }));
                 navigate(path, { state: { result: product, type, query } });
             }

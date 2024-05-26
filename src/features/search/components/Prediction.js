@@ -11,7 +11,6 @@ const Prediction = ({ index, prediction }) => {
     const { handleSelection } = useSearchForm();
 
     const handleMouseEnter = (e) => {
-        console.log(e.target.id)
         handleSelection(e.target.id);
         e.target.classList.add('bg-grey');
     };

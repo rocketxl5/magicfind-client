@@ -1,28 +1,14 @@
-import fields from './flieds';
-import data from '../../../ROUTES.json';
+import { useState, useEffect } from 'react';
+import useColorSymbols from './useColorSymbols';
+import setPrice from '../assets/utilities/setPrice';
+import data from '../data/ROUTES.json';
 
-const setFields = (product, type) => {
-    // Sets card price according to card finish
-    const setPrice = (prices, finish) => {
-        let price;
-        switch (finish) {
-            case 'foil':
-                price = prices.usd_foil;
-                break;
+const useField = (product, type) => {
+    const [fields, setFields] = useState(null);
+    const [fieldType, setFieldType] = useState(null);
+    const { colorIdentity, manaCost } = useColorSymbols(product);
 
-            case 'etched':
-                price = prices.usd_etched;
-                break;
-            case 'nonfoil':
-                price = prices.usd;
-                break;
-            default:
-                price = null
-        }
-
-        return price ? price : 'Unavailable';
-    }
-    const fields = {
+    const data = {
         archive:
             [
                 {
@@ -49,14 +35,14 @@ const setFields = (product, type) => {
                     title: 'Price (US): ',
                     value: `$${setPrice(product.prices, product.finishes[0])}`
                 },
-                type_line ?
+                product.type_line ?
                     {
                         title: 'Type: ',
                         value:
-                            !type_line?.includes('—') ? (
-                                type_line
+                            !product.type_line?.includes('—') ? (
+                                product.type_line
                             ) : (
-                                type_line?.split('—')[0]
+                                product.type_line?.split('—')[0]
                             )
                     } : '',
                 {
@@ -68,18 +54,19 @@ const setFields = (product, type) => {
                 },
                 {
                     title: 'Cost: ',
-                    value: manaCost.length ?
+                    value: product.manaCost.length ?
                         manaCost.map((color) => color)
                         : 'None',
                     classList: 'color-symbols'
                 },
                 {
-                    title: !artist.includes('&') ? 'Artist: ' : 'Artists: ',
-                    value: artist
+                    title: !product.artist.includes('&') ? 'Artist: ' : 'Artists: ',
+                    value: product.artist
                 },
             ],
     }
-    return fields[type]
+
+    return (fields, setFieldType)
 }
 
-export default setFields;
+export default useField

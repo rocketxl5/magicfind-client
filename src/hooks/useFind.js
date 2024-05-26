@@ -12,8 +12,8 @@ const useFind = () => {
     const { cardCollection } = useSearch();
 
     const findMatch = (product) => {
-        console.log(product)
-        console.log(cardCollection)
+        // console.log(product)
+        // console.log(cardCollection)
         if (cardCollection.length > 0) {
 
             const match = cardCollection.find((id) => {
