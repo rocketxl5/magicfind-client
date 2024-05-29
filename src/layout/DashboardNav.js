@@ -130,7 +130,7 @@ const DashboardNav = () => {
 
     useEffect(() => {
         if (response) {
-            console.log(response)
+            // console.log(response)
             const { ids, names } = response.card;
             if (ids.length === 0 && names.length === 0) {
                 setIsCollectionEmpty(true);

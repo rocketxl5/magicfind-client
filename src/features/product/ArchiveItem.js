@@ -1,133 +1,76 @@
-import { useState, useEffect } from 'react';
-import Loader from '../../layout/Loader';
+import { useEffect } from 'react';
 import Button from '../../components/Button';
 import Card from '../../components/Card';
-import TwoSidedSlide from '../modal/components/TwoSidedSlide';
+import Count from './components/Count';
 import Image from '../../components/Image';
-import useExpandImage from '../../hooks/useExpandImage';
-import useAxios from '../../hooks/useAxios';
+import Loader from '../../layout/Loader';
+import Table from '../../components/Table';
+import Tag from './components/Tag';
+import TwoSidedSlide from '../modal/components/TwoSidedSlide';
+import useResponseHandler from '../../hooks/useResponseHandler';
 import useAuth from '../../hooks/contexthooks/useAuth';
-import useSearch from '../../hooks/contexthooks/useSearch';
+import useExpandImage from '../../hooks/useExpandImage';
 import useFind from '../../hooks/useFind';
-import setProductName from './services/setProductName';
-import useField from '../../hooks/useField';
-import { api } from '../../api/resources';
-import trimProduct from './services/trimProduct';
+import useTable from '../../hooks/useTable';
 import { IoExpand } from "react-icons/io5";
 import { FaCheck } from "react-icons/fa6";
 import { FaPlus } from "react-icons/fa6";
-import data from '../../data/SEARCH.json';
 
 const ArchiveItem = ({ index, product, count, handleSlideView }) => {
-    const [loading, setLoading] = useState(false);
-    const [isCardAdded, setIsCardAdded] = useState(false);
-    const { auth } = useAuth();
-    const { user, token } = auth;
-    const { fetch, patch, post, response, error } = useAxios();
-    const { fields, setFieldType } = useField;
-    const { setUpdateCollection } = useSearch();
+    // Custom hooks
+    const {
+        handleGetResponse,
+        handlePatchResponse,
+        handlePostResponse,
+        handleUpdate,
+        handleFetch,
+        loading,
+        response,
+        error,
+        isCardAdded,
+    } = useResponseHandler();
     const { expandedImage } = useExpandImage(product);
     const { findMatch, isMatchFound } = useFind();
+    // const { setUpdateCollection } = useSearch();
+    const { rows, setTable } = useTable();
+    const { auth } = useAuth();
 
     useEffect(() => {
         findMatch(product);
-        // setFieldType('archive')
+        setTable({ type: 'archive', product });
     }, []);
-
-    const handleClick = (e) => {
-        const query = `${api.serverURL}/api/cards/product/${product.oracle_id}`;
-        const config = {
-            headers: {
-                'Content-Type': 'application/json',
-                'auth-token': token
-            },
-        }
-        setLoading(true);
-
-        fetch(query, config);
-    }
-
-    const handleGetResponse = (response, product) => {
-        const { isSet } = response;
-        // If product does not exist
-        if (!isSet) {
-            // Add it to site cards library
-            post(
-                token,
-                '/api/cards/add/product',
-                trimProduct(product, 'cards')
-            );
-        }
-        else {
-            // Add returned product from fetch to current user's collection
-            const { product } = response;
-            patch(
-                token,
-                `/api/users/${user.id}/add/card`,
-                trimProduct(product, 'users')
-            );
-        }
-    }
-
-    const handlePostResponse = (response) => {
-        const { isSet, product } = response;
-
-        if (isSet) {
-            patch(
-                token,
-                `/api/users/${user.id}/add/card`,
-                trimProduct(product, 'users')
-            );
-        }
-    }
-
-    const handlePatchResponse = (response) => {
-        const { isSet, product } = response;
-        if (isSet) {
-            patch(
-                token,
-                `/api/cards/modify/${product._id}`,
-                user
-            );
-        }
-    }
-
-    const handleUpdate = (response) => {
-        const { isSet } = response;
-
-        if (isSet) {
-            setLoading(false);
-            setIsCardAdded(true);
-            setUpdateCollection(true);
-        }
-    }
 
     useEffect(() => {
         if (response) {
             switch (response.method) {
                 case 'get':
-                    handleGetResponse(response, product)
+                    handleGetResponse(response, product, auth)
                     break;
                 case 'post':
-                    handlePostResponse(response)
+                    handlePostResponse(response, auth)
                     break;
                 case 'patch':
-                    handlePatchResponse(response)
+                    handlePatchResponse(response, auth)
                     break;
                 default:
                     handleUpdate(response)
             }
         }
-    }, [response, product]);
+    }, [response]);
 
     useEffect(() => {
         if (error) {
-            setLoading(false);
+            // setLoading(false);
+            console.log(error.message)
         }
     }, [error])
 
     return (
-        <Card classList={"product-container"}>
+        <Card
+            classList={"product-container"}
+            header={<Count unit={index + 1} total={count} />}
+            footer={[product.name, product.set_name]}
+        >
             <TwoSidedSlide classList={
                 {
                     container: '',
@@ -139,14 +82,12 @@ const ArchiveItem = ({ index, product, count, handleSlideView }) => {
                     classList='product-image'
                 >
                     {
-                        (product.finishes[0] === 'foil') &&
-                        <div className="product-finish">
-                            <span className='foil'>{data.product.finishes[product.finishes]}</span>
-                        </div>
+                        (product.finish.toLowerCase() === 'foil') &&
+                        <Tag classList={'card-finish'} content={<span>{product.finish}</span>} />
                     }
                     <Button
                         id={'expand-image'}
-                        classList={'product-btn absolute btn-center-right box-size-8 border-light-2 color-light bg-alpha b-radius-5'}
+                        classList={'product-btn absolute btn-center-right border-light-2 color-light bg-alpha b-radius-5'}
                         handleClick={(e) => handleSlideView(e, product.layout, expandedImage)}
                     >
                         <IoExpand className='expand-icon' />
@@ -163,53 +104,16 @@ const ArchiveItem = ({ index, product, count, handleSlideView }) => {
                                 </Button>
                                 :
                                 <Button classList={'product-btn absolute border-light-2 color-light bg-alpha btn-top-right b-radius-5'}
-                                    handleClick={handleClick}>
+                                    handleClick={handleFetch(product.oracle_id, auth.token)}>
                                     <FaPlus />
                                 </Button>
                     }
                 </Image>
-                <div className='product-details'>
-                    <section>
-                        <div>
-                            <h2 className='text-center fs-150 fw-500'>Card Info</h2>
-                        </div>
-                        <div className='b-radius-5 border-surface-thin'>
-                            <table>
-                                <tbody>
-                                    {
-                                        fields &&
-                                        fields.map((field, i) => {
-                                            return (
-                                                <tr key={i}>
-                                                    <td className='spec-title col-3'>{field.title}</td>
-                                                    <td className={`spec-value col-8 ${field.classList ? field.classList : ''}`}>{field.value}</td>
-                                                </tr>
-                                            )
-                                        })
-                                    }
-                                </tbody>
-                            </table>
-                        </div>
-                    </section>
-                    <section>
-                    </section>
-                </div>
+                {
+                    rows &&
+                    <Table classList={'product-info'} title={'Card Info'} rows={rows} />
+                }
             </TwoSidedSlide>
-            <span className='product-count'>{index + 1} of {count}</span>
-            <div className="col-12 relative flex column justify-center align-center gap-1">
-                <div>
-                    {
-                        !product.name.includes('//') ? product.name : setProductName(product).name
-                    }
-                </div>
-
-                <div>
-                    {
-                        product.set_name
-                    }
-                </div>
-
-            </div>
         </Card>
     )
 }

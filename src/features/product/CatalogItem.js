@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import Container from '../../components/Container';
-import Drop from '../../components/Drop';
+import Button from '../../components/Button';
 import Image from '../../components/Image';
 import Loader from '../../layout/Loader';
 import Card from '../../components/Card';
@@ -13,6 +13,7 @@ import useExpandImage from '../../hooks/useExpandImage';
 import useUpdateCart from '../../hooks/useUpdateCart';
 import useViewport from '../../hooks/contexthooks/useViewport';
 import useFind from '../../hooks/useFind';
+import useTable from '../../hooks/useTable';
 import { FiShoppingCart } from 'react-icons/fi';
 import { MdStore } from "react-icons/md";
 import { MdOutlineEmail } from "react-icons/md";
@@ -49,41 +50,12 @@ const CatalogItem = ({ index, product, count, cartIndex, handleSlideView }) => {
 
     const { expandedImage } = useExpandImage(product);
 
-    const details = [
-        {
-            title: 'Set:',
-            value: set_name
-        },
-        {
-            title: 'Finish:',
-            value: data.product.finishes[product.finishes]
-        },
-        {
-            title: 'Condition:',
-            value: data.product.conditions[product.condition]
-        },
-        {
-            title: 'Language:',
-            value: data.product.languages[product.language]
-        },
-        {
-            title: 'Price:',
-            value: `$${price} `
-        },
-        {
-            title: 'Quantity:',
-            value: quantity
-        },
-        {
-            title: 'Comment:',
-            value: product.comment ? product.comment : 'None'
-        },
-
-    ];
+    const { rows, setTable } = useTable();
 
     // Renders on load with location as trigger
     useEffect(() => {
-        findIndex(product)
+        findIndex(product);
+        setTable({ type: 'catalog', product });
     }, [location])
 
     useEffect(() => {
@@ -108,13 +80,13 @@ const CatalogItem = ({ index, product, count, cartIndex, handleSlideView }) => {
                         >
                             {
                                 (product.finishes[0] === 'foil') &&
-                                <div className="product-finish">
+                                <div className="card-finish">
                                     <span className='foil'>{data.product.finishes[product.finishes]}</span>
                                 </div>
                             }
                         </Image>,
                         // Product information (children[1])
-                        <div className='product-details'>
+                        <div className='product-info'>
                             <section>
                                 {/* {`https://svgs.scryfall.io/card-symbols/${product.set}.svg`} alt={`${product.set_name} Icon`} */}
                                 <div>
@@ -124,12 +96,16 @@ const CatalogItem = ({ index, product, count, cartIndex, handleSlideView }) => {
                                     <table>
                                         <tbody>
                                             {
-                                                details &&
-                                                details.map((detail, i) => {
+                                                rows &&
+                                                rows.map((row, i) => {
                                                     return (
                                                         <tr key={i + 1}>
-                                                            <td className='spec-title col-3'>{detail.title}</td>
-                                                            <td className={`spec-value col-8 ${detail.classList ? detail.classList : ''}`}>{detail.value}</td>
+                                                            <td className='spec-title col-3'>{row.title}</td>
+                                                            <td
+                                                                className={`spec-value col-8 ${row.classList ? row.classList : ''}`}
+                                                            >
+                                                                {row.value}
+                                                            </td>
                                                         </tr>
                                                     )
                                                 })
@@ -146,7 +122,7 @@ const CatalogItem = ({ index, product, count, cartIndex, handleSlideView }) => {
                                         }
                             })} /> */}
 
-                                <Drop
+                                <Button
                                     classList={'card-action-btn btn-bottom-left bg-transparent'}
                                     handleClick={() => navigate(`/seller/${product.seller.userID}`, {
                                         state: {
@@ -155,8 +131,8 @@ const CatalogItem = ({ index, product, count, cartIndex, handleSlideView }) => {
                                     })}
                                 >
                                     <MdStore className='box-size-100' />
-                                </Drop>
-                                <Drop
+                                </Button>
+                                <Button
                                     classList={'card-action-btn btn-bottom-center bg-transparent'}
                                     handleClick={() => navigate(`/mail/${product.seller.userID}`, {
                                         state: {
@@ -165,7 +141,7 @@ const CatalogItem = ({ index, product, count, cartIndex, handleSlideView }) => {
                                     })}
                                 >
                                     <MdOutlineEmail className='box-size-100' />
-                                </Drop>
+                                </Button>
                                 <div className='col-8 flex column height-100 padding-1'>
                                     <section className='flex gap-1'>
                                         <span className=' fs-125 spec-title'>Seller:</span>

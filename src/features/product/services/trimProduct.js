@@ -1,6 +1,6 @@
-import setProductName from './setProductName';
+import { setProductName } from './setProductName';
 
-const trimProduct = (product, type) => {
+export const trimProduct = (product, type) => {
     const product_types = {
         cards: (product) => {
             const {
@@ -56,14 +56,16 @@ const trimProduct = (product, type) => {
             let {
                 artist_ids,
                 border_color,
+                catalog,
+                finishes,
+                foil,
                 frame,
                 legalities,
                 oracle_id,
+                owners,
                 prints_search_uri,
                 related_uris,
                 set_id,
-                owners,
-                catalog,
                 ...trimmedProduct
             } = product;
 
@@ -80,5 +82,3 @@ const trimProduct = (product, type) => {
     }
     return product_types[type](product, type)
 }
-
-export default trimProduct

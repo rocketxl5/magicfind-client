@@ -1,12 +1,14 @@
-import Image from '../../components/Image';
-import Card from '../../components/Card';
-import TwoSidedSlide from '../modal/components/TwoSidedSlide';
 import Button from '../../components/Button';
+import Card from '../../components/Card';
+import Count from './components/Count';
+import Image from '../../components/Image';
+import Tag from './components/Tag';
+import TwoSidedSlide from '../modal/components/TwoSidedSlide';
 import { FaCommentsDollar } from "react-icons/fa";
 import { AiOutlineDelete } from "react-icons/ai";
 import { GoStack } from "react-icons/go";
 // import { AiOutlineEdit } from "react-icons/ai";
-// import { IoExpand } from "react-icons/io5";
+import { IoExpand } from "react-icons/io5";
 // import { AiOutlineInfoCircle } from "react-icons/ai";
 // import { AiOutlineCloseCircle } from "react-icons/ai";
 import useExpandImage from '../../hooks/useExpandImage';
@@ -28,34 +30,14 @@ const CollectionItem = ({ index, product, count, handleCollectionItem, handleSli
             title: 'Store:',
             value: product.inStore ? `Card is in store` : 'Not in store'
         },
-        // {
-        //     title: 'Finish:',
-        //     value: data.product.finishes[product.finishes]
-        // },
-        // {
-        //     title: 'Condition:',
-        //     value: data.product.conditions[product._condition]
-        // },
-        // {
-        //     title: 'Language:',
-        //     value: data.product.languages[product._language]
-        // },
-        // {
-        //     title: 'Price:',
-        //     value: `$ ${product._price}`
-        // },
-        // {
-        //     title: 'Quantity:',
-        //     value: product._quantity
-        // },
-        // {
-        //     title: 'Comment:',
-        //     value: product._comment ? 'Yes' : 'None'
-        // }
     ];
 
     return (
-        <Card classList={"product-container"}>
+        <Card
+            classList={"product-container"}
+            header={<Count unit={index + 1} total={count} />}
+            footer={[product.name, product.set_name]}
+        >
             <TwoSidedSlide classList={{ container: '', btn: 'card-action-btn b-radius-5 btn-bottom-right' }}>
                 <Image
                     product={product}
@@ -63,11 +45,11 @@ const CollectionItem = ({ index, product, count, handleCollectionItem, handleSli
                 >
                     {
                         (product.finishes[0] === 'foil') &&
-                        <div className="product-finish">
+                        <div className="card-finish">
                             <span className='foil'>{data.product.finishes[product.finishes]}</span>
                         </div>
                     }
-                    {/* <Button
+                    <Button
                         id={'expand-image'}
                         classList={'drop-bottom-rightabsolute color-light bg-primary border-light-2'}
                         handleClick={(e) => handleSlideView(e, product.layout, expandedImage)}
@@ -82,7 +64,7 @@ const CollectionItem = ({ index, product, count, handleCollectionItem, handleSli
                         >
                             <FaCommentsDollar />
                         </Button>
-                    } */}
+                    }
                     {/* <Button
                         id={'sell-product'}
                         classList={'card-action-btn btn-bottom-left b-radius-5 btn-bottom-right border-light-3 bg-success'}
@@ -125,7 +107,7 @@ const CollectionItem = ({ index, product, count, handleCollectionItem, handleSli
 
                     </div>
                 </Image>
-                <div className='product-details'>
+                <div className='product-info'>
                     <section>
                         <div>
                             <h2 className='text-center fs-150 fw-500'>Card Info</h2>
@@ -149,21 +131,6 @@ const CollectionItem = ({ index, product, count, handleCollectionItem, handleSli
                     </section>
                 </div>
             </TwoSidedSlide>
-            <span className='product-count'>{index + 1} of {count}</span>
-            <div className="col-12 relative flex column justify-center align-center gap-1">
-                <div>
-                    {
-                        product.name
-                    }
-                </div>
-
-                <div>
-                    {
-                        product.set_name
-                    }
-                </div>
-
-            </div>
         </Card >
     )
 }

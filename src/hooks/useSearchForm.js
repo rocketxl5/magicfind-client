@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import useAuth from './contexthooks/useAuth';
 import useFetch from './useFetch';
 import useSearch from './contexthooks/useSearch';
+import { capitalize } from '../assets/utilities/capitalize';
 import { api } from '../api/resources';
 
 const useSearchForm = (inputRef) => {
@@ -143,13 +144,30 @@ const useSearchForm = (inputRef) => {
             }
         }
     }
+    // Removes digital cards
+    // Modifies card objects with finish property or,
+    // Generates new card object if finishes property has more than one value : [nonfoil, foil, etched]
+    // Returns new array
+    const handleResponse = (cards) => {
+        return cards.filter(card => !card.digital)
+            .map((card) => {
+                return card.finishes.map(finish => {
+                    return { ...card, finish: capitalize(finish) }
+                })
+
+            })
+            // transform array arrays into single array of objects
+            .flat()
+    }
 
     useEffect(() => {
         if (fetchParams) {
             const { resource, endpoint, config } = fetchParams;
             // Hide Autocomplete predictions list
             handlePredictions([]);
+            // Set query url;
             const url = resource + endpoint;
+            // Launch search
             fetch(url, config);
         }
     }, [fetchParams])
@@ -163,17 +181,17 @@ const useSearchForm = (inputRef) => {
 
     useEffect(() => {
         if (response) {
-            const product = response;
             const { path, query, type } = fetchParams.search;
 
             if (type === 'archive' && !oracleId) {
-                setOracleId(product.oracle_id);
+                // set oracle id to fetch all versions
+                return setOracleId(response.oracle_id);
             }
-            else {
-                inputRef?.current?.blur();
-                localStorage.setItem('search-results', JSON.stringify({ ...product }));
-                navigate(path, { state: { result: product, type, query } });
-            }
+            const data = type === 'archive' ? handleResponse(response) : response;
+            inputRef?.current?.blur();
+            localStorage.setItem('search-results', JSON.stringify({ ...data }));
+            navigate(path, { state: { result: data, type, query } });
+
         }
         if (error) {
             const { query } = fetchParams;

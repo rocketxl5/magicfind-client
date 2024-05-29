@@ -1,4 +1,4 @@
-const setPrice = (prices, finish) => {
+export const setPrice = (prices, finish) => {
     let price;
     switch (finish) {
         case 'foil':
@@ -17,5 +17,3 @@ const setPrice = (prices, finish) => {
 
     return price ? price : 'Unavailable';
 }
-
-export default setPrice;

@@ -57,7 +57,7 @@ const CartItem = ({ index, count, product }) => {
   //   },
   //   {
   //     text: data.product.finishes[product.selected.finishes],
-  //     style: 'product-spec product-finish'
+  //     style: 'product-spec card-finish'
   //   },
   //   // {
   //   //   text: `Sold by ${product.selected.seller.userName}`,

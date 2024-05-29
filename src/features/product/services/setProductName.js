@@ -1,4 +1,4 @@
-const setProductName = (product) => {
+export const setProductName = (product) => {
     const sides = product.name.split('//').map(side => {
         return side.trim();
     })
@@ -9,5 +9,3 @@ const setProductName = (product) => {
 
     return product;
 }
-
-export default setProductName;
