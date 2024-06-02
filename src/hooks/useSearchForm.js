@@ -5,6 +5,7 @@ import useFetch from './useFetch';
 import useSearch from './contexthooks/useSearch';
 import { capitalize } from '../assets/utilities/capitalize';
 import { api } from '../api/resources';
+import { trimProduct } from '../features/product/services/trimProduct';
 
 const useSearchForm = (inputRef) => {
     const [fetchParams, setFetchParams] = useState(null);
@@ -151,8 +152,14 @@ const useSearchForm = (inputRef) => {
     const handleResponse = (cards) => {
         return cards.filter(card => !card.digital)
             .map((card) => {
-                return card.finishes.map(finish => {
-                    return { ...card, finish: capitalize(finish) }
+                const trimmed_card = trimProduct({ type: 'card', product: card });
+                return trimmed_card.finishes.map(finish => {
+                    console.log(card)
+                    return {
+                        ...trimmed_card,
+                        finish: capitalize(finish),
+                        card_id: trimmed_card.id + finish
+                    }
                 })
 
             })

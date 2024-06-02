@@ -1,26 +1,22 @@
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import card_back from '../assets/img/mtg_card_back.jpg';
 import useLazyLoader from '../hooks/useLazyLoader';
-import useAttributes from '../hooks/useAttributes';
 
-const Image = ({ children, product, classList }) => {
-    const { attributes } = useAttributes(product);
-    const { id, style, src, alt, placeholder } = attributes;
-
+const Image = ({ product }) => {
     const { hasLoaded } = useLazyLoader(product);
 
     return (
-        // <img className={classList} src={url} onClick={handleClick && handleClick} />
-        <div className='lazyload-wrapper relative'>
+        <div className='height-100'>
             {
                 !hasLoaded ? (
-                    <img id={id} className={style} src={placeholder} alt={alt} />
+                    <img id='expand-card' src={require('../assets/img/mtg_card_back.jpg')} alt='Magic back card' />
                 ) : (
                     // <Link to={`/product/${product.name}`}>
-                    <img id={id} className={classList} src={src} alt={alt} loading="lazy" />
+                        <img id='expand-card' className='card-image' src={product.image_uris?.normal || product.card_faces[0].image_uris?.normal} alt={`${product.name} card`} loading="lazy" />
                     // </Link>
                 )
             }
-            {children}
         </div>
     )
 }

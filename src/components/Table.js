@@ -1,11 +1,11 @@
 const Table = ({ classList, title, rows }) => {
     return (
-        <div className={`${classList}`}>
+        <div className=''>
             <header>
                 <h2 className='text-center fs-150 fw-500'>{title}</h2>
             </header>
             <div className='b-radius-5 border-surface-thin'>
-                <table>
+                <table className='product-table'>
                     <tbody>
                         {
                             rows.map((row, i) => {

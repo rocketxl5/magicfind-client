@@ -1,8 +1,10 @@
-import { setProductName } from './setProductName';
+import { sanitizeName } from './sanitizeName';
 
-export const trimProduct = (product, type) => {
+export const trimProduct = (params) => {
+    const { type, product } = params;
+
     const product_types = {
-        cards: (product) => {
+        card: (product) => {
             const {
                 arena_id,
                 booster,
@@ -16,7 +18,6 @@ export const trimProduct = (product, type) => {
                 highres_image,
                 illustration_id,
                 image_status,
-                layout,
                 multiverse_ids,
                 mtgo_foil_id,
                 mtgo_id,
@@ -48,18 +49,22 @@ export const trimProduct = (product, type) => {
                 ...trimmedProduct
             } = product;
 
-            // Remove produt name repetition if any
-            return !trimmedProduct.name.includes('//') ? trimmedProduct : setProductName(trimmedProduct);
+            // Return trimmed product object with sanitized name 
+            return {
+                ...trimmedProduct,
+                name: sanitizeName(trimmedProduct.name)
+            }
         },
-        users: (product) => {
+        user: (product) => {
             // Remove unecessary properties
-            let {
+            const {
                 artist_ids,
                 border_color,
                 catalog,
                 finishes,
                 foil,
                 frame,
+                _id,
                 legalities,
                 oracle_id,
                 owners,
@@ -75,10 +80,10 @@ export const trimProduct = (product, type) => {
                 inStore: false,
                 inDeck: false,
                 decks: [],
-                inventory: [],
+                store: [],
                 ref: product._id
             }
         }
     }
-    return product_types[type](product, type)
+    return product_types[type](product)
 }

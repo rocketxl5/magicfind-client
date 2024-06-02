@@ -13,12 +13,13 @@ const useTable = () => {
         if (table) {
             const { type, product } = table;
             const result = getRows(type, product)
+
             setRows(result)
         }
     }, [manaCost, colorIdentity, table]);
 
 
-    const getRows = (type, product) => {
+    function getRows(type, product) {
         switch (type) {
             case 'archive':
                 return [
@@ -65,7 +66,7 @@ const useTable = () => {
                     },
                     {
                         title: 'Cost: ',
-                        value: product?.mana_cost.length ?
+                        value: manaCost.length ?
                             manaCost.map((color) => color)
                             : 'None',
                         classList: 'color-symbols'
@@ -106,7 +107,17 @@ const useTable = () => {
                         value: product.comment ? product.comment : 'None'
                     },
                 ]
-
+            case 'collection':
+                return [
+                    {
+                        title: 'Decks:',
+                        value: product.isDeck ? `Card is in ${product.decks.length} deck(s)` : 'Not assigned to any decks'
+                    },
+                    {
+                        title: 'Store:',
+                        value: product.inStore ? `Card is in store` : 'Not in store'
+                    },
+                ]
             default:
                 break;
         }

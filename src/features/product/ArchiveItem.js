@@ -1,7 +1,9 @@
-import { useEffect } from 'react';
-import Button from '../../components/Button';
+import { useEffect, useRef } from 'react';
+import BackSide from './components/BackSide';
 import Card from '../../components/Card';
+import Controls from './components/Controls';
 import Count from './components/Count';
+import FrontSide from './components/FrontSide';
 import Image from '../../components/Image';
 import Loader from '../../layout/Loader';
 import Table from '../../components/Table';
@@ -15,6 +17,9 @@ import useTable from '../../hooks/useTable';
 import { IoExpand } from "react-icons/io5";
 import { FaCheck } from "react-icons/fa6";
 import { FaPlus } from "react-icons/fa6";
+import { Flip } from './components/icons/Flip';
+import { sanitizeName } from './services/sanitizeName';
+import { flipCard } from './services/flipCard';
 
 const ArchiveItem = ({ index, product, count, handleSlideView }) => {
     // Custom hooks
@@ -27,21 +32,27 @@ const ArchiveItem = ({ index, product, count, handleSlideView }) => {
         loading,
         response,
         error,
-        isCardAdded,
+        isAdded,
     } = useResponseHandler();
+
     const { expandedImage } = useExpandImage(product);
     const { findMatch, isMatchFound } = useFind();
-    // const { setUpdateCollection } = useSearch();
     const { rows, setTable } = useTable();
     const { auth } = useAuth();
 
+    const cardRef = useRef(null);
+    const frontSideRef = useRef(null);
+    const buttonRef = useRef(null);
+
     useEffect(() => {
-        findMatch(product);
+        console.log(product)
+        findMatch(product.card_id);
         setTable({ type: 'archive', product });
-    }, []);
+    }, [])
 
     useEffect(() => {
         if (response) {
+            console.log(response)
             switch (response.method) {
                 case 'get':
                     handleGetResponse(response, product, auth)
@@ -60,7 +71,6 @@ const ArchiveItem = ({ index, product, count, handleSlideView }) => {
 
     useEffect(() => {
         if (error) {
-            // setLoading(false);
             console.log(error.message)
         }
     }, [error])
@@ -69,50 +79,67 @@ const ArchiveItem = ({ index, product, count, handleSlideView }) => {
         <Card
             classList={"product-container"}
             header={<Count unit={index + 1} total={count} />}
-            footer={[product.name, product.set_name]}
+            footer={[sanitizeName(product.name), product.set_name]}
         >
-            <TwoSidedSlide classList={
-                {
-                    container: '',
-                    btn: 'card-action-btn b-radius-5 btn-bottom-right color-light'
-                }
-            }>
-                <Image
-                    product={product}
-                    classList='product-image'
-                >
+            <TwoSidedSlide card={cardRef} front={frontSideRef}>
+                <FrontSide>
+                    <Image product={product} />
                     {
                         (product.finish.toLowerCase() === 'foil') &&
                         <Tag classList={'card-finish'} content={<span>{product.finish}</span>} />
                     }
-                    <Button
-                        id={'expand-image'}
-                        classList={'product-btn absolute btn-center-right border-light-2 color-light bg-alpha b-radius-5'}
-                        handleClick={(e) => handleSlideView(e, product.layout, expandedImage)}
-                    >
-                        <IoExpand className='expand-icon' />
-                    </Button>
+                </FrontSide>
+                <BackSide classList={'product-info'}>
+
                     {
-                        loading ?
-                            <Button classList={'product-btn absolute border-light-2 color-light bg-alpha btn-top-right b-radius-5'} >
-                                <Loader classList={'relative color-light bg-alpha'} />
-                            </Button>
-                            :
-                            (isCardAdded || isMatchFound) ?
-                                <Button classList={'product-btn absolute border-light-2 color-light bg-alpha btn-top-right disabled b-radius-5'} disabled={true}>
-                                    <FaCheck />
-                                </Button>
-                                :
-                                <Button classList={'product-btn absolute border-light-2 color-light bg-alpha btn-top-right b-radius-5'}
-                                    handleClick={handleFetch(product.oracle_id, auth.token)}>
-                                    <FaPlus />
-                                </Button>
+                        rows &&
+                        <Table rows={rows} title={'Card Info'} />
                     }
-                </Image>
-                {
-                    rows &&
-                    <Table classList={'product-info'} title={'Card Info'} rows={rows} />
-                }
+                </BackSide>
+                <Controls
+                    type={'archive'}
+                    loading={loading}
+                    buttons={[
+                        loading ?
+                            {
+                                id: 'loader',
+                                classList: 'control-btn color-light primary disabled',
+                                title: 'Add to store',
+                                value: <Loader classList={'relative b-radius-5'} />,
+                                clickHandler: null
+                            } :
+                            isMatchFound || isAdded ?
+                                {
+                                    id: 'check',
+                                    classList: 'control-btn success disabled',
+                                    title: 'Add to store',
+                                    value: <FaCheck />,
+                                    clickHandler: null
+                                } :
+                                {
+                                    id: 'add-to-collection',
+                                    classList: 'control-btn primary',
+                                    title: 'Add to store',
+                                    value: <FaPlus />,
+                                    clickHandler: () => handleFetch(product.card_id, auth.token)
+                                },
+                        {
+                            id: 'expand-image',
+                            classList: 'control-btn dark',
+                            title: 'Expand image',
+                            value: <IoExpand />,
+                            clickHandler: (e) => handleSlideView(e, product.layout, expandedImage)
+                        },
+                        {
+                            id: 'flip-btn',
+                            classList: 'control-btn flip-btn eclipse',
+                            title: 'Flip card',
+                            value: <Flip />,
+                            clickHandler: () => flipCard({ card: cardRef, front: frontSideRef, button: buttonRef }),
+                            ref: buttonRef
+                        },
+                    ]}
+                />
             </TwoSidedSlide>
         </Card>
     )

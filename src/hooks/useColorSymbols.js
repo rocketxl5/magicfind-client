@@ -46,7 +46,6 @@ const useColorSymbols = (card) => {
     useEffect(() => {
         if (cardCost) {
             const urls = setUrls(cardCost.split(/\{([^}]+)\}/).filter(value => value));
-            console.log(urls)
             setIcons(urls, 'cost');
         }
     }, [cardCost]);

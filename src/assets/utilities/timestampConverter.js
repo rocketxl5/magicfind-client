@@ -1,4 +1,4 @@
-const timestampConverter = {
+export const timestampConverter = {
   longDate: (timestamp) => {
     const date = new Date(timestamp);
     const day = date.getDate();
@@ -65,5 +65,3 @@ const convertMonth = (num) => {
 
   return month;
 };
-
-export default timestampConverter;

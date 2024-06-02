@@ -174,7 +174,7 @@ const EditProduct = (props) => {
                 <>
                     <header className="modal-header bg-primary">
                         <div className="modal-title">
-                            <h2 className="fw-500">Edit Card</h2>
+                            <h2 className="fw-500">Add To Store</h2>
                         </div>
                     </header>
                     <div className="scroll">
