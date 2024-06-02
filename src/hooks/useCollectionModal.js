@@ -14,8 +14,8 @@ const useCollectionModal = (search, callback) => {
         CONFIRM_DELETE: 'confirm-delete',
         DELETE_PRODUCT: 'delete-product',
         CANCEL: 'cancel',
-        SELL_PRODUCT: 'sell-product',
-        ADD_TO_DECK: 'deck-product',
+        SELL_PRODUCT: 'add-to-store',
+        ADD_TO_DECK: 'add-to-deck',
         CLOSE_MODAL: 'close',
     }
 

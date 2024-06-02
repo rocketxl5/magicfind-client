@@ -1,9 +1,9 @@
-import { useRef, useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import TurnBtn from '../buttons/TurnBtn';
 
-const TwoSidedSlide = ({ children, classList, motion }) => {
+const TwoSidedSlide = ({ children, card, front }) => {
     const [isMounted, setIsMounted] = useState(false);
-    const cardRef = useRef(null);
+
 
     useEffect(() => {
         setIsMounted(true);
@@ -11,15 +11,18 @@ const TwoSidedSlide = ({ children, classList, motion }) => {
 
     return (
         // <div id={motion} className={classList.container} >
-        <div className={`slide ${classList.container}`}>
-            {isMounted && <TurnBtn classList={classList.btn} target={cardRef.current} />}
-            <div className="double-faced-card" ref={cardRef}>
-                <div className="card-front">
-                    {children[0]}
+        <div className={'slide relative'}>
+            {/* {isMounted && <TurnBtn classList={`${classList.btn}`} front={frontRef} inner={innerRef} />} */}
+            <div className="two-sided">
+                <div className="two-sided-inner card-radius" ref={card}>
+                    <div className="card-front card-radius" ref={front}>
+                        {children[0]}
+                    </div>
+                    <div className="card-back card-radius">
+                        {children[1]}
+                    </div>
                 </div>
-                <div className="card-back">
-                    {children[1]}
-                </div>
+                {children[2]}
             </div>
         </div>
         // </div>

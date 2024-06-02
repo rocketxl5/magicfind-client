@@ -1,4 +1,6 @@
-const Button = (props) => {
+import { forwardRef } from 'react';
+
+const Button = forwardRef(function Button(props, ref) {
     const { children, id, style, type, classList, handleClick, title, disabled } = props;
 
     return (
@@ -10,10 +12,11 @@ const Button = (props) => {
             title={title}
             onClick={handleClick}
             disabled={disabled ? disabled : false}
+            ref={ref}
         >
             {children}
         </button>
     )
-}
+})
 
 export default Button

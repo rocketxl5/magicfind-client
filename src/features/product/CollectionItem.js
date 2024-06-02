@@ -1,175 +1,102 @@
-import Image from '../../components/Image';
+import { useEffect, useRef } from 'react';
+import BackSide from './components/BackSide';
+import FrontSide from './components/FrontSide';
 import Card from '../../components/Card';
+import Controls from './components/Controls';
+import Count from './components/Count';
+import Image from '../../components/Image';
+import Table from '../../components/Table';
+import Tag from './components/Tag';
 import TwoSidedSlide from '../modal/components/TwoSidedSlide';
-import Button from '../../components/Button';
-import { FaCommentsDollar } from "react-icons/fa";
 import { AiOutlineDelete } from "react-icons/ai";
 import { GoStack } from "react-icons/go";
-// import { AiOutlineEdit } from "react-icons/ai";
-// import { IoExpand } from "react-icons/io5";
-// import { AiOutlineInfoCircle } from "react-icons/ai";
-// import { AiOutlineCloseCircle } from "react-icons/ai";
+import { AiOutlineDollar } from "react-icons/ai";
+import { IoExpand } from "react-icons/io5";
+import { Flip } from './components/icons/Flip';
+// import { Rotate } from './components/icons/Rotate';
 import useExpandImage from '../../hooks/useExpandImage';
-import data from '../../data/SEARCH.json';
-
-import timestampConverter from '../../assets/utilities/timestampConverter';
+import useTable from '../../hooks/useTable';
+import { timestampConverter } from '../../assets/utilities/timestampConverter';
+import { flipCard } from './services/flipCard';
 
 const CollectionItem = ({ index, product, count, handleCollectionItem, handleSlideView }) => {
-    const { longDate } = timestampConverter;
+    const cardRef = useRef(null);
+    const frontSideRef = useRef(null);
+    const buttonRef = useRef(null);
 
+    const { longDate } = timestampConverter;
     const { expandedImage } = useExpandImage(product);
-    console.log(product)
-    const details = [
-        {
-            title: 'Status:',
-            value: product._is_published ? 'Published' : 'Unpublished'
-        },
-        {
-            title: 'Published:',
-            value: longDate(product._date_published)
-        },
-        {
-            title: 'Finish:',
-            value: data.product.finishes[product.finishes]
-        },
-        {
-            title: 'Condition:',
-            value: data.product.conditions[product._condition]
-        },
-        {
-            title: 'Language:',
-            value: data.product.languages[product._language]
-        },
-        {
-            title: 'Price:',
-            value: `$ ${product._price}`
-        },
-        {
-            title: 'Quantity:',
-            value: product._quantity
-        },
-        {
-            title: 'Comment:',
-            value: product._comment ? 'Yes' : 'None'
-        }
-    ];
+    const { rows, setTable } = useTable()
+
+    useEffect(() => {
+        setTable({ type: 'collection', product })
+    }, []);
 
     return (
-        <Card classList={"product-container"}>
-            <TwoSidedSlide classList={{ container: '', btn: 'card-action-btn b-radius-5 btn-bottom-right' }}>
-                <Image
-                    product={product}
-                    classList='product-image'
-                >
+        <Card
+            classList={"product-container"}
+            header={<Count unit={index + 1} total={count} />}
+            footer={[product.name, product.set_name]}
+        >
+            <>
+                <TwoSidedSlide card={cardRef} front={frontSideRef}>
+                    <FrontSide>
+                        <Image product={product} />
                     {
-                        (product.finishes[0] === 'foil') &&
-                        <div className="product-finish">
-                            <span className='foil'>{data.product.finishes[product.finishes]}</span>
-                        </div>
-                    }
-                    {/* <Button
-                        id={'expand-image'}
-                        classList={'drop-bottom-rightabsolute color-light bg-primary border-light-2'}
-                        handleClick={(e) => handleSlideView(e, product.layout, expandedImage)}
-                    >
-                        <IoExpand />
-                    </Button>
-                    {
-                        product._is_published &&
-                        <Button
-                            id={'instore-product'}
-                                classList={'btn-top-right absolute color-light bg-success border-light-2'}
-                        >
-                            <FaCommentsDollar />
-                        </Button>
-                    } */}
-                    {/* <Button
-                        id={'sell-product'}
-                        classList={'card-action-btn btn-bottom-left b-radius-5 btn-bottom-right border-light-3 bg-success'}
-                        handleClick={(e) => handleCollectionItem(e, product, expandedImage)}
-                    >
-                        <AiOutlineEdit className='box-size-100 stroke-light fill-light' />
-                    </Button>
-                    <Button
-                        id={'delete-product'}
-                        classList={'card-action-btn btn-bottom-center b-radius-5 btn-bottom-right color-light'}
-                        handleClick={(e) => handleCollectionItem(e, product, expandedImage)}
-                    >
-                        <AiOutlineDelete className='box-size-100 ' />
-                    </Button> */}
-                    <div className="product-legend">
-                        <Button
-                            id={'sell-product'}
-                            classList={'drop-btn color-light bg-success border-success'}
-                            title={'Sell card'}
-                            handleClick={(e) => handleCollectionItem(e, product, expandedImage)}
-                        >
-                            <FaCommentsDollar />
-                        </Button>
-                        <Button
-                            id={'deck-product'}
-                            classList={'drop-btn color-light bg-primary border-primary'}
-                            title={'Add to deck'}
-                            handleClick={(e) => handleCollectionItem(e, product, expandedImage)}
-                        >
-                            <GoStack />
-                        </Button>
-                        <Button
-                            id={'delete-product'}
-                            classList={'drop-btn color-light bg-danger border-danger'}
-                            title={'Delete card'}
-                            handleClick={(e) => handleCollectionItem(e, product, expandedImage)}
-                        >
-                            <AiOutlineDelete />
-                        </Button>
-
-                    </div>
-                </Image>
-                <div className='product-details'>
-                    <section>
-                        <div>
-                            <h2 className='text-center fs-150 fw-500'>Card Info</h2>
-                        </div>
-                        {
-                            product._is_published ?
-                        <div className='b-radius-5 border-surface-thin'>
-                            <table>
-                                <tbody>
-                                            {
-                                        details.map((detail, i) => {
-                                            return (
-                                                <tr key={i}>
-                                                    <td className='spec-title col-3'>{detail.title}</td>
-                                                    <td className={`spec-value col-8 ${detail.classList ? detail.classList : ''}`}>{detail.value}</td>
-                                                </tr>
-                                            )
-                                        })
-                                    }
-                                </tbody>
-                            </table>
-                                </div> :
-                                <div>
-                                    This card is currently unpublished
-                        </div>
+                            (product.finish.toLowerCase() === 'foil') &&
+                            <Tag classList={'card-finish'} content={<span>{product.finish}</span>} />
                         }
-                    </section>
-                </div>
-            </TwoSidedSlide>
-            <span className='product-count'>{index + 1} of {count}</span>
-            <div className="col-12 relative flex column justify-center align-center gap-1">
-                <div>
-                    {
-                        product.name
-                    }
-                </div>
 
-                <div>
-                    {
-                        product.set_name
-                    }
-                </div>
-
-            </div>
+                    </FrontSide>
+                    <BackSide classList={'product-info'}>
+                        {
+                            rows &&
+                            <Table classList={'product-info'} rows={rows} title={'Status'} />
+                        }
+                    </BackSide>
+                    <Controls
+                        type={'collection'}
+                        buttons={[
+                            {
+                                id: 'add-to-store',
+                                classList: 'control-btn success fs-200',
+                                title: 'Add to store',
+                                value: <AiOutlineDollar />,
+                                clickHandler: (e) => handleCollectionItem(e, product, expandedImage)
+                            },
+                            {
+                                id: 'add-to-deck',
+                                classList: 'control-btn primary',
+                                title: 'Add to deck',
+                                value: <GoStack />,
+                                clickHandler: (e) => handleCollectionItem(e, product, expandedImage)
+                            },
+                            {
+                                id: 'delete-product',
+                                classList: 'control-btn danger',
+                                title: 'Delete product',
+                                value: <AiOutlineDelete />,
+                                clickHandler: (e) => handleCollectionItem(e, product, expandedImage)
+                            },
+                            {
+                                id: 'expand-image',
+                                classList: 'control-btn dark',
+                                title: 'Expand image',
+                                value: <IoExpand />,
+                                clickHandler: (e) => handleSlideView(e, product.layout, expandedImage)
+                            },
+                            {
+                                id: 'flip-btn',
+                                classList: 'control-btn flip-btn eclipse',
+                                title: 'Flip card',
+                                value: <Flip />,
+                                clickHandler: () => flipCard({ card: cardRef, front: frontSideRef, button: buttonRef }),
+                                ref: buttonRef
+                            },
+                        ]}
+                    />
+                </TwoSidedSlide>
+            </>
         </Card >
     )
 }

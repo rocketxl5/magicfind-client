@@ -50,14 +50,14 @@ const SlideShow = ({ slides, handleClick }) => {
                         const motion = !slide.length ? slide.props.motion : slide[0].props.motion;
                         if (['static', 'flip', 'rotate'].includes(motion)) {
                             return (
-                                <OneSidedSlide key={i} classList={{ container: 'modal-padding-top' }} motion={motion}>
+                                <OneSidedSlide key={i} motion={motion}>
                                     {slide}
                                 </OneSidedSlide>
                             );
                         }
                         else {
                             return (
-                                <TwoSidedSlide key={i} classList={{ container: 'modal-padding-top', btn: 'action-btn' }} motion={motion}>
+                                <TwoSidedSlide key={i} classList={{ btn: 'action-btn' }} motion={motion}>
                                     {slide}
                                 </TwoSidedSlide>
                             );

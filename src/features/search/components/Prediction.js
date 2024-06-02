@@ -8,15 +8,15 @@ const Prediction = ({ index, prediction }) => {
         inputValue,
     } = useSearch();
 
-    const { setSelection } = useSearchForm();
+    const { handleSelection } = useSearchForm();
 
     const handleMouseEnter = (e) => {
-        setSelection(e.target.id);
+        handleSelection(e.target.id);
         e.target.classList.add('bg-grey');
     };
 
     const handleMouseOut = (e) => {
-        setSelection('');
+        handleSelection('');
         e.target.classList.remove('bg-grey');
     };
 

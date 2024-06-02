@@ -11,7 +11,7 @@ const AutoComplete = () => {
         selection
     } = useSearch();
 
-    const { searchFor, setSelection, setTrackSearch } = useSearchForm();
+    const { handleSearch, handleSelection, handleTracker } = useSearchForm();
 
     const ulRef = useRef(null);
 
@@ -24,7 +24,7 @@ const AutoComplete = () => {
     // Updates scroll position of autocomplete list (ul).
     // tracker's value updates on arrow key events (up or down).
     useEffect(() => {
-        tracker >= 0 && setSelection(predictions[tracker]);
+        tracker >= 0 && handleSelection(predictions[tracker]);
         ulRef.current?.scrollTo({ top: position, behavior: 'smooth' })
     }, [tracker])
 
@@ -32,20 +32,20 @@ const AutoComplete = () => {
     const handleKeyDown = (e) => {
         if (e.key === 'ArrowDown') {
             if (tracker < predictions.length - 1) {
-                setTrackSearch(tracker + 1, position + 40);
+                handleTracker(tracker + 1, position + 40);
             }
         }
         if (e.key === 'ArrowUp') {
                 ulRef?.current?.scrollIntoView(true)
             if (tracker === predictions.length - 1 || tracker >= 0) {
-                setTrackSearch(tracker - 1, position - 40);
+                handleTracker(tracker - 1, position - 40);
             }
         }
     }
 
     const handleMouseDown = (e) => {
         e.preventDefault();
-        searchFor(selection);
+        handleSearch(selection);
     }
 
     return (

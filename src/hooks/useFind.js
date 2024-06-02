@@ -11,10 +11,13 @@ const useFind = () => {
     const { cartItems } = useCart();
     const { cardCollection } = useSearch();
 
-    const findMatch = (product) => {
+    const findMatch = (card_id) => {
+        // console.log(product)
+        // console.log(cardCollection)
         if (cardCollection.length > 0) {
+
             const match = cardCollection.find((id) => {
-                return id === product.id;
+                return id === card_id;
             })
 
             if (match) {

@@ -40,7 +40,7 @@ const DeleteItem = (props) => {
         headers.append('auth-token', auth.token);
         console.log(product)
         const input = {
-            itemID: product._uuid,
+            catalogId: product.catalogId,
             productID: product._id,
             userID: auth.user.id,
         }

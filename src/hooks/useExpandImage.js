@@ -24,7 +24,6 @@ const useExpandImage = (card) => {
                             alt: `${card.name} image`,
                         }))
                 })
-
             }
             else if (
                 card.layout === 'split' ||
@@ -37,7 +36,9 @@ const useExpandImage = (card) => {
                     alt: `${card.name} Card Image`,
                 })
             }
-            else if (card.layout === 'flip') {
+            else if (card.layout === 'flip' ||
+                card.layout === 'reversible_card'
+            ) {
                 image = createElement('img', {
                     className: 'modal-image',
                     name: 'modal-image',
@@ -51,7 +52,7 @@ const useExpandImage = (card) => {
                     className: 'modal-image',
                     name: 'modal-image',
                     motion: 'static',
-                    src: card.image_uris.normal,
+                    src: card.image_uris?.normal,
                     alt: `${card.name} Card Image`,
                 })
             }

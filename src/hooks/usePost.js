@@ -3,15 +3,15 @@ import axios from 'axios';
 import { api } from '../api/resources';
 
 const usePost = (data) => {
-    const [result, setResult] = useState(null);
+    const [response, setResponse] = useState(null);
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(false);
     const [showConfirmation, setShowConfirmation] = useState(false)
 
-    const postData = async (token, query) => {
+    const post = async (token, query) => {
+
         setLoading(true);
-        console.log(query)
-        console.log(data)
+
         const config = {
             headers: {
                 'Content-Type': 'application/json',
@@ -22,8 +22,8 @@ const usePost = (data) => {
         await axios
             .post(`${api.serverURL}${query}`, data, config)
             .then(res => {
-                console.log(res.data)
-                setResult(res.data);
+                const data = res.data.data || res.data;
+                setResponse(data);
             })
             .catch((error) => {
                 setError(error.message);
@@ -37,7 +37,7 @@ const usePost = (data) => {
             })
     }
 
-    return { postData, loading, showConfirmation, error, result }
+    return { post, loading, showConfirmation, error, response }
 }
 
 export default usePost

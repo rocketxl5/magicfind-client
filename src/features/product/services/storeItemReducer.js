@@ -1,40 +1,72 @@
 export const storeItemReducer = (state, action) => {
+
     switch (action.type) {
-        case 'set-quantity':
+        case 'set-form':
+            return {
+                state: action.payload
+            }
+        case 'new-product':
             return {
                 ...state,
-                quantity: action.payload,
+                ref: action.payload.ref,
+                catalogId: action.payload.catalogId,
+                isNewProduct: action.payload.isNewProduct
+
             }
-        case 'set-price':
+        case 'name':
+            return {
+                ...state,
+                name: action.payload,
+            }
+        case 'price':
             return {
                 ...state,
                 price: action.payload,
             }
-        case 'set-condition':
+        case 'quantity':
+            return {
+                ...state,
+                quantity: action.payload,
+            }
+        case 'condition':
             return {
                 ...state,
                 condition: action.payload,
             }
-        case 'set-language':
+        case 'language':
             return {
                 ...state,
                 language: action.payload,
             }
-        case 'set-selection':
+        case 'selection':
             return {
                 ...state,
                 selection: action.payload
             }
-        case 'track-scroll':
+        case 'comment':
             return {
                 ...state,
-                tracker: action.payload.tracker,
-                position: action.payload.position,
+                comment: action.payload
             }
-        case 'update-search':
+        case 'published':
             return {
                 ...state,
-                ...action.payload
+                isPublished: action.payload
+            }
+        case 'submit':
+            return {
+                ...state,
+                isSubmit: action.payload
+            }
+        case 'updated':
+            return {
+                ...state,
+                isUpdated: action.payload
+            }
+        case 'valid':
+            return {
+                ...state,
+                isValid: action.payload
             }
         default:
             return {

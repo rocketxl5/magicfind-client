@@ -13,7 +13,6 @@ const useColorSymbols = (card) => {
     }
 
     const setIcons = async (urls, type) => {
-
         const loadImage = (url) => {
             return new Promise((resolve, reject) => {
                 const image = new Image();
@@ -36,8 +35,8 @@ const useColorSymbols = (card) => {
                         })
                     })
                     if (imgs) {
-                        if (type === 'cost') setManaCost(imgs)
-                        else setColorIdentity(imgs)
+                        if (type === 'cost') { setManaCost(imgs) }
+                        if (type === 'identity') { setColorIdentity(imgs) }
                     }
                 }
             })
@@ -47,20 +46,14 @@ const useColorSymbols = (card) => {
     useEffect(() => {
         if (cardCost) {
             const urls = setUrls(cardCost.split(/\{([^}]+)\}/).filter(value => value));
-            const images = setIcons(urls, 'cost');
-            if (images) {
-                setManaCost(images);
-            }
+            setIcons(urls, 'cost');
         }
     }, [cardCost]);
 
     useEffect(() => {
         if (cardColor) {
             const urls = setUrls(card.color_identity);
-            const images = setIcons(urls, 'identity');
-            if (images) {
-                setColorIdentity(images);
-            }
+            setIcons(urls, 'identity');
         }
     }, [cardColor]);
 

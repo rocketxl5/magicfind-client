@@ -10,23 +10,21 @@ const useImageLoader = (cards) => {
 
     // Set urls array from cards array
     useEffect(() => {
-        if (cards) {
-
-
-        if (!urls) {
-            let imgUrls = []
-            cards.forEach(card => {
-                if (card.image_uris) {
-                    imgUrls.push(card.image_uris?.normal);
-                }
-                else if (card.card_faces) {
-                    card.card_faces.forEach(card_face => {
-                        imgUrls.push(card_face.image_uris?.normal);
-                    })
-                }
-            })
-            setUrls(imgUrls);
-        }
+        if (cards?.length) {
+            if (!urls) {
+                let imgUrls = []
+                cards.forEach(card => {
+                    if (card.image_uris) {
+                        imgUrls.push(card.image_uris?.normal);
+                    }
+                    else if (card.card_faces) {
+                        card.card_faces.forEach(card_face => {
+                            imgUrls.push(card_face.image_uris?.normal);
+                        })
+                    }
+                })
+                setUrls(imgUrls);
+            }
         }
     }, [cards, urls])
 

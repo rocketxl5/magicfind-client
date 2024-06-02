@@ -81,7 +81,7 @@
 }
 
 /* Cart icon color */
-.section--cart a svg {
+/* .section--cart a svg {
   color: #fff;
 }
 
@@ -93,31 +93,31 @@
 .register a {
   color: var(--light-color);
   padding: 8px 0;
-}
+} */
 
-.login a {
+/* .login a {
   background: var(--color-success);
 }
 
 .register a {
   background: var(--primary-color);
-}
+} */
 
-button.register,
+/* button.register,
 button.submit,
 button.warning,
 button.danger,
 button.secondary {
   color: var(--extra-light-color);
   border: none;
-}
+} */
 
 button.submit.message,
 button.register.cart {
   font-size: 0.9rem;
   padding: 15px 0;
 }
-
+/* 
 button.primary {
   background: var(--primary-color);
 }
@@ -131,11 +131,11 @@ button.warning {
 }
 button.danger {
   background: var(--danger-color);
-}
+} */
 
-button.secondary {
+/* button.secondary {
   background: var(--secondary-color);
-}
+} */
 
 /* button:hover, */
 div.section--mail:hover,

@@ -1,17 +1,16 @@
-import capitalizeWord from '../../../assets/utilities/capitalizeWord';
+import { capitalize } from '../../../assets/utilities/capitalize';
 
 // Sets and return error message object 
 const editErrorHandler = (values) => {
-    const handles = Object.keys(values)
+    const handles = Object.keys(values);
     let errors = {}
     handles.forEach((handle) => {
         // Empty input: required input
         if (!values[handle]) {
-            console.log(values[handle])
-            errors = { ...errors, [handle]: `${capitalizeWord(handle)} is required` }
+            errors = { ...errors, [handle]: `${capitalize(handle)} is required` }
         }
     })
-    return errors
+    return Object.keys(errors).length === 0 ? null : errors;
 }
 
 

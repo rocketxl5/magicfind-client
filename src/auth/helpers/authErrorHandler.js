@@ -1,4 +1,4 @@
-import capitalizeWord from '../../assets/utilities/capitalizeWord';
+import { capitalize } from '../../assets/utilities/capitalize';
 // Sets and return error message object 
 const authErrorHandler = (values, inputs) => {
     const handles = Object.keys(values);
@@ -12,8 +12,8 @@ const authErrorHandler = (values, inputs) => {
                 ...errors,
                 [handle]:
                     (handle === 'confirmPassword') ?
-                        `${capitalizeWord('password')} is required` :
-                        `${capitalizeWord(handle)} is required`
+                        `${capitalize('password')} is required` :
+                        `${capitalize(handle)} is required`
             }
             // inputs[handle].blur()
         }
@@ -24,7 +24,7 @@ const authErrorHandler = (values, inputs) => {
                 [handle]:
                     (handle === 'confirmPassword') ?
                         'Password doesn\'t match' :
-                        `Invalid ${capitalizeWord(handle)}`
+                        `Invalid ${capitalize(handle)}`
             }
             inputs[handle].blur()
         }
@@ -32,7 +32,7 @@ const authErrorHandler = (values, inputs) => {
         else if (!inputs[handle].checkValidity()) {
             errors = {
                 ...errors,
-                [handle]: `Invalid ${capitalizeWord(handle)}`
+                [handle]: `Invalid ${capitalize(handle)}`
             }
         }
     })

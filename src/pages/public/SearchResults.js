@@ -28,6 +28,7 @@ const SearchResults = () => {
     const [state, updateCollectionItem] = useCollectionModal(search?.search, handleCollectionItem);
 
     useEffect(() => {
+        console.log(location.state)
         // If location.state is defined
         // Search was sent through input submit 
         if (location.state) {
@@ -37,7 +38,7 @@ const SearchResults = () => {
         else {
             // getUrl(location.pathname);
         }
-    }, [])
+    }, [location])
 
     // useEffect(() => {
     //     if (url && config) {
@@ -57,15 +58,15 @@ const SearchResults = () => {
     // }, [response])
 
     // Validation for collection search search
-    useEffect(() => {
-        if (search) {
-            // If search is collection and card collection is empty
-            if (search?.search === 'collection' && search?.result.length === 0) {
-                // Send to collection page
-                navigate('/me/collection');
-            }
-        }
-    }, [search])
+    // useEffect(() => {
+    //     if (search) {
+    //         // If search is collection and card collection is empty
+    //         if (search?.search === 'collection' && search?.result.length === 0) {
+    //             // Send to collection page
+    //             navigate('/me/collection');
+    //         }
+    //     }
+    // }, [search])
 
     function handleSlideView(e, layout, expandedImage) {
         e.stopPropagation();
@@ -101,8 +102,8 @@ const SearchResults = () => {
 
                     <List classList="list align-center">
                         {
-                            search?.result &&
-                            search.result.map((card, i) => {
+                            imagesLoaded &&
+                            search.result.map((product, i) => {
                                 return (
                                     <ListItem key={i} classList={'flex justify-center'}>
                                         {
@@ -110,7 +111,7 @@ const SearchResults = () => {
                                                 ?
                                                 <CatalogItem
                                                     index={i}
-                                                    product={card}
+                                                    product={product}
                                                     count={search.result.length}
                                                     handleSlideView={handleSlideView}
                                                 />
@@ -119,7 +120,7 @@ const SearchResults = () => {
                                                     ?
                                                     <CollectionItem
                                                         index={i}
-                                                        product={card}
+                                                        product={product}
                                                         count={search.result.length}
                                                         handleCollectionItem={handleCollectionItem}
                                                         handleSlideView={handleSlideView}
@@ -127,7 +128,7 @@ const SearchResults = () => {
                                                     :
                                                     <ArchiveItem
                                                         index={i}
-                                                        product={card}
+                                                        product={product}
                                                         count={search.result.length}
                                                         handleSlideView={handleSlideView}
                                                     />

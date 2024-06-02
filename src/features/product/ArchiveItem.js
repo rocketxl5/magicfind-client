@@ -1,232 +1,146 @@
-import { useState, useEffect } from 'react';
-import Loader from '../../layout/Loader';
-import Button from '../../components/Button';
+import { useEffect, useRef } from 'react';
+import BackSide from './components/BackSide';
 import Card from '../../components/Card';
-import TwoSidedSlide from '../modal/components/TwoSidedSlide';
+import Controls from './components/Controls';
+import Count from './components/Count';
+import FrontSide from './components/FrontSide';
 import Image from '../../components/Image';
-import useExpandImage from '../../hooks/useExpandImage';
-import usePost from '../../hooks/usePost';
+import Loader from '../../layout/Loader';
+import Table from '../../components/Table';
+import Tag from './components/Tag';
+import TwoSidedSlide from '../modal/components/TwoSidedSlide';
+import useResponseHandler from '../../hooks/useResponseHandler';
 import useAuth from '../../hooks/contexthooks/useAuth';
-import useSearch from '../../hooks/contexthooks/useSearch';
+import useExpandImage from '../../hooks/useExpandImage';
 import useFind from '../../hooks/useFind';
-import useColorSymbols from '../../hooks/useColorSymbols';
-import trimProduct from './services/trimProduct';
+import useTable from '../../hooks/useTable';
 import { IoExpand } from "react-icons/io5";
 import { FaCheck } from "react-icons/fa6";
 import { FaPlus } from "react-icons/fa6";
-
-import data from '../../data/SEARCH.json';
+import { Flip } from './components/icons/Flip';
+import { sanitizeName } from './services/sanitizeName';
+import { flipCard } from './services/flipCard';
 
 const ArchiveItem = ({ index, product, count, handleSlideView }) => {
-    const [isCardAdded, setIsCardAdded] = useState(false);
-    const { auth } = useAuth();
-    const { user, token } = auth;
+    // Custom hooks
     const {
-        artist,
-        collector_number,
-        finishes,
-        prices,
-        rarity,
-        released_at,
-        set_name,
-        type_line,
-    } = product;
-    const { postData, loading, result, error } = usePost(trimProduct(product, 'archive'));
-    const { colorIdentity, manaCost } = useColorSymbols(product);
-    const { setUpdateCollection } = useSearch();
+        handleGetResponse,
+        handlePatchResponse,
+        handlePostResponse,
+        handleUpdate,
+        handleFetch,
+        loading,
+        response,
+        error,
+        isAdded,
+    } = useResponseHandler();
+
     const { expandedImage } = useExpandImage(product);
     const { findMatch, isMatchFound } = useFind();
+    const { rows, setTable } = useTable();
+    const { auth } = useAuth();
 
-    const query = `/api/cards/add/${user.id}/${product.id}`;
-
-    // Removes product name redundencies ex: Adrix and Nev, Twincasters reversible edition
-    const filterName = (name) => {
-        const sides = name.split('//').map(side => {
-            return side.trim();
-        })
-        if (sides[0] === sides[1]) {
-            return sides[0];
-        }
-        return name;
-    }
-
-    // Sets card price according to card finish
-    const setPrice = (prices, finish) => {
-        let price;
-        switch (finish) {
-            case 'foil':
-                price = prices.usd_foil;
-                break;
-
-            case 'etched':
-                price = prices.usd_etched;
-                break;
-            case 'nonfoil':
-                price = prices.usd;
-                break;
-            default:
-                price = null
-        }
-
-        return price ? price : 'Unavailable';
-    }
-
-    const details = [
-        {
-            title: 'Edition: ',
-            value: set_name
-        },
-        {
-            title: 'Year: ',
-            value: `${released_at?.split('-')[0]}`
-        },
-        {
-            title: 'Finish: ',
-            value: data.product.finishes[finishes]
-        },
-        {
-            title: 'Rarity: ',
-            value: `${rarity.charAt(0).toUpperCase()}${rarity.substring(1)}`
-        },
-        {
-            title: 'Collector #: ',
-            value: collector_number
-        },
-        {
-            title: 'Price (US): ',
-            value: `$${setPrice(prices, finishes[0])}`
-        },
-        type_line ?
-            {
-                title: 'Type: ',
-                value:
-                    !type_line?.includes('—') ? (
-                        type_line
-                    ) : (
-                        type_line?.split('—')[0]
-                    )
-            } : '',
-        {
-            title: 'Identity: ',
-            value: colorIdentity.length ?
-                colorIdentity.map((color) => color)
-                : 'Colorless',
-            classList: 'color-symbols'
-        },
-        {
-            title: 'Cost: ',
-            value: manaCost.length ?
-                manaCost.map((color) => color)
-                : 'None',
-            classList: 'color-symbols'
-        },
-        {
-            title: !artist.includes('&') ? 'Artist: ' : 'Artists: ',
-            value: artist
-        },
-    ];
+    const cardRef = useRef(null);
+    const frontSideRef = useRef(null);
+    const buttonRef = useRef(null);
 
     useEffect(() => {
-        findMatch(product);
-    }, []);
+        console.log(product)
+        findMatch(product.card_id);
+        setTable({ type: 'archive', product });
+    }, [])
 
     useEffect(() => {
-        // If card was successfully added
-        if (result?.isCardAdded) {
-            // Trigger update collection @layout/DashboardNav
-            // to make new cardName available in search collection
-            setIsCardAdded(true);
-            setUpdateCollection(true);
+        if (response) {
+            console.log(response)
+            switch (response.method) {
+                case 'get':
+                    handleGetResponse(response, product, auth)
+                    break;
+                case 'post':
+                    handlePostResponse(response, auth)
+                    break;
+                case 'patch':
+                    handlePatchResponse(response, auth)
+                    break;
+                default:
+                    handleUpdate(response)
+            }
         }
+    }, [response]);
+
+    useEffect(() => {
         if (error) {
-            console.log(error)
+            console.log(error.message)
         }
-    }, [result, setUpdateCollection, error]);
+    }, [error])
 
     return (
-        <Card classList={"product-container"}>
-            <TwoSidedSlide classList={
-                {
-                    container: '',
-                    btn: 'card-action-btn b-radius-5 btn-bottom-right color-light'
-                }
-            }>
-                <Image
-                    product={product}
-                    classList='product-image'
-                >
+        <Card
+            classList={"product-container"}
+            header={<Count unit={index + 1} total={count} />}
+            footer={[sanitizeName(product.name), product.set_name]}
+        >
+            <TwoSidedSlide card={cardRef} front={frontSideRef}>
+                <FrontSide>
+                    <Image product={product} />
                     {
-                        (product.finishes[0] === 'foil') &&
-                        <div className="product-finish">
-                            <span className='foil'>{data.product.finishes[product.finishes]}</span>
-                        </div>
+                        (product.finish.toLowerCase() === 'foil') &&
+                        <Tag classList={'card-finish'} content={<span>{product.finish}</span>} />
                     }
-                    <Button
-                        id={'expand-image'}
-                        classList={'product-btn absolute btn-center-right box-size-8 border-light-2 color-light bg-alpha b-radius-5'}
-                        handleClick={(e) => handleSlideView(e, product.layout, expandedImage)}
-                    >
-                        <IoExpand className='expand-icon' />
-                    </Button>
+                </FrontSide>
+                <BackSide classList={'product-info'}>
+
                     {
+                        rows &&
+                        <Table rows={rows} title={'Card Info'} />
+                    }
+                </BackSide>
+                <Controls
+                    type={'archive'}
+                    loading={loading}
+                    buttons={[
                         loading ?
-                            <Button classList={'product-btn absolute border-light-2 color-light bg-alpha btn-top-right b-radius-5'} >
-                                <Loader classList={'relative color-light bg-alpha'} />
-                            </Button>
-                            :
-                            (isCardAdded || isMatchFound) ?
-                                <Button classList={'product-btn absolute border-light-2 color-light bg-alpha btn-top-right disabled b-radius-5'} disabled={true}>
-                                    <FaCheck />
-                                </Button>
-                                :
-                                <Button classList={'product-btn absolute border-light-2 color-light bg-alpha btn-top-right b-radius-5'}
-                                    handleClick={() => postData(token, query)}>
-                                    <FaPlus />
-                                </Button>
-                    }
-                </Image>
-                <div className='product-details'>
-                    <section>
-                        <div>
-                            <h2 className='text-center fs-150 fw-500'>Card Info</h2>
-                        </div>
-                        <div className='b-radius-5 border-surface-thin'>
-                            <table>
-                                <tbody>
-                                    {
-                                        details &&
-                                        details.map((detail, i) => {
-                                            return (
-                                                <tr key={i}>
-                                                    <td className='spec-title col-3'>{detail.title}</td>
-                                                    <td className={`spec-value col-8 ${detail.classList ? detail.classList : ''}`}>{detail.value}</td>
-                                                </tr>
-                                            )
-                                        })
-                                    }
-                                </tbody>
-                            </table>
-                        </div>
-                    </section>
-                    <section>
-                    </section>
-                </div>
+                            {
+                                id: 'loader',
+                                classList: 'control-btn color-light primary disabled',
+                                title: 'Add to store',
+                                value: <Loader classList={'relative b-radius-5'} />,
+                                clickHandler: null
+                            } :
+                            isMatchFound || isAdded ?
+                                {
+                                    id: 'check',
+                                    classList: 'control-btn success disabled',
+                                    title: 'Add to store',
+                                    value: <FaCheck />,
+                                    clickHandler: null
+                                } :
+                                {
+                                    id: 'add-to-collection',
+                                    classList: 'control-btn primary',
+                                    title: 'Add to store',
+                                    value: <FaPlus />,
+                                    clickHandler: () => handleFetch(product.card_id, auth.token)
+                                },
+                        {
+                            id: 'expand-image',
+                            classList: 'control-btn dark',
+                            title: 'Expand image',
+                            value: <IoExpand />,
+                            clickHandler: (e) => handleSlideView(e, product.layout, expandedImage)
+                        },
+                        {
+                            id: 'flip-btn',
+                            classList: 'control-btn flip-btn eclipse',
+                            title: 'Flip card',
+                            value: <Flip />,
+                            clickHandler: () => flipCard({ card: cardRef, front: frontSideRef, button: buttonRef }),
+                            ref: buttonRef
+                        },
+                    ]}
+                />
             </TwoSidedSlide>
-            <span className='product-count'>{index + 1} of {count}</span>
-            <div className="col-12 relative flex column justify-center align-center gap-1">
-                <div>
-                    {
-                        !product.name.includes('//') ? product.name : filterName(product.name)
-                    }
-                </div>
-
-                <div>
-                    {
-                        product.set_name
-                    }
-                </div>
-
-            </div>
         </Card>
     )
 }

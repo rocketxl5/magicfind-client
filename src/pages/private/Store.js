@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import Loader from '../../layout/Loader';
 import Page from '../../components/Page';
-import useFetch from '../../hooks/useFetch';
+import useAxios from '../../hooks/useAxios';
 import useAuth from '../../hooks/contexthooks/useAuth';
 
 const Store = () => {
@@ -11,7 +11,7 @@ const Store = () => {
     const location = useLocation();
 
     const { isAuth, auth } = useAuth();
-    const { fetch, loading, showConfirmation, error, result } = useFetch();
+    const { fetch, loading, showConfirmation, error, result } = useAxios();
 
     useEffect(() => {
         if (isAuth) {

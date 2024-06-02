@@ -1,6 +1,10 @@
-const trimProduct = (product, type) => {
+import { sanitizeName } from './sanitizeName';
+
+export const trimProduct = (params) => {
+    const { type, product } = params;
+
     const product_types = {
-        archive: (product) => {
+        card: (product) => {
             const {
                 arena_id,
                 booster,
@@ -14,7 +18,6 @@ const trimProduct = (product, type) => {
                 highres_image,
                 illustration_id,
                 image_status,
-                layout,
                 multiverse_ids,
                 mtgo_foil_id,
                 mtgo_id,
@@ -43,12 +46,44 @@ const trimProduct = (product, type) => {
                 uri,
                 variation,
                 watermark,
-                ...trimmed
+                ...trimmedProduct
             } = product;
-            return trimmed
+
+            // Return trimmed product object with sanitized name 
+            return {
+                ...trimmedProduct,
+                name: sanitizeName(trimmedProduct.name)
+            }
+        },
+        user: (product) => {
+            // Remove unecessary properties
+            const {
+                artist_ids,
+                border_color,
+                catalog,
+                finishes,
+                foil,
+                frame,
+                _id,
+                legalities,
+                oracle_id,
+                owners,
+                prints_search_uri,
+                related_uris,
+                set_id,
+                ...trimmedProduct
+            } = product;
+
+            // Add inStore, inDeck, decks, inventory properties and return
+            return {
+                ...trimmedProduct,
+                inStore: false,
+                inDeck: false,
+                decks: [],
+                store: [],
+                ref: product._id
+            }
         }
     }
-    return { ...product_types[type](product, type) }
+    return product_types[type](product)
 }
-
-export default trimProduct
