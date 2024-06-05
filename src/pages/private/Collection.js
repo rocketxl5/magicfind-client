@@ -1,19 +1,25 @@
 import { useEffect } from 'react';
+import Button from '../../components/Button.js';
 import Page from '../../components/Page.js';
+import Loader from '../../layout/Loader.js';
 import Message from '../../components/Message.js';
 import SearchForm from '../../features/search/SearchForm.js';
-import Button from '../../components/Button.js';
 import useSearch from '../../hooks/contexthooks/useSearch.js';
 import useSearchForm from '../../hooks/useSearchForm.js';
 
 const Collection = () => {
+    // Search Context
     const {
         isCollectionEmpty,
         collectionCardNames,
         collectionInputRef,
     } = useSearch();
 
-    const { getParams, setFetchParams } = useSearchForm();
+    const {
+        getParams,
+        setFetchParams,
+        loading
+    } = useSearchForm();
 
     useEffect(() => {
         collectionInputRef.current?.focus();
@@ -41,7 +47,11 @@ const Collection = () => {
                             classList='btn bg-success'
                             handleClick={handleClick}
                         >
-                            All Cards
+                            {
+                                !loading ?
+                                    'All Cards' :
+                                    <Loader classList='box-size-6 relative bg-transparent margin-auto' />
+                            }
                         </Button>
                     </SearchForm>
             }

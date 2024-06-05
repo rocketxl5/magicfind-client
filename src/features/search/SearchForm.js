@@ -9,7 +9,7 @@ import useSearchForm from '../../hooks/useSearchForm';
 const SearchForm = ({ children, classList, type, placeholder, cardNames, inputRef }) => {
     const { searchBarRef, displaySearchBar } = useNav();
     const {handleSearchBar} = useNavButton();
-
+    // Search Context
     const { 
         inputValue,
         predictions,

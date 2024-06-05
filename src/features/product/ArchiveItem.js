@@ -7,7 +7,6 @@ import FrontSide from './components/FrontSide';
 import Image from '../../components/Image';
 import Loader from '../../layout/Loader';
 import Table from '../../components/Table';
-import Tag from './components/Tag';
 import TwoSidedSlide from '../modal/components/TwoSidedSlide';
 import useResponseHandler from '../../hooks/useResponseHandler';
 import useAuth from '../../hooks/contexthooks/useAuth';
@@ -18,7 +17,6 @@ import { IoExpand } from "react-icons/io5";
 import { FaCheck } from "react-icons/fa6";
 import { FaPlus } from "react-icons/fa6";
 import { Flip } from './components/icons/Flip';
-import { sanitizeName } from './services/sanitizeName';
 import { flipCard } from './services/flipCard';
 
 const ArchiveItem = ({ index, product, count, handleSlideView }) => {
@@ -45,14 +43,12 @@ const ArchiveItem = ({ index, product, count, handleSlideView }) => {
     const buttonRef = useRef(null);
 
     useEffect(() => {
-        console.log(product)
         findMatch(product.card_id);
         setTable({ type: 'archive', product });
     }, [])
 
     useEffect(() => {
         if (response) {
-            console.log(response)
             switch (response.method) {
                 case 'get':
                     handleGetResponse(response, product, auth)
@@ -71,7 +67,7 @@ const ArchiveItem = ({ index, product, count, handleSlideView }) => {
 
     useEffect(() => {
         if (error) {
-            console.log(error.message)
+            throw error
         }
     }, [error])
 
@@ -79,16 +75,13 @@ const ArchiveItem = ({ index, product, count, handleSlideView }) => {
         <Card
             classList={"product-container"}
             header={<Count unit={index + 1} total={count} />}
-            footer={[sanitizeName(product.name), product.set_name]}
+            // footer={[sanitizeName(product.name), product.set_name]}
+            footer={[product.set_name]}
         >
             <TwoSidedSlide card={cardRef} front={frontSideRef}>
-                <FrontSide>
-                    <Image product={product} />
-                    {
-                        (product.finish.toLowerCase() === 'foil') &&
-                        <Tag classList={'card-finish'} content={<span>{product.finish}</span>} />
-                    }
-                </FrontSide>
+                {/* <FrontSide> */}
+                <Image classList={'product-image'} product={product} />
+                {/* </FrontSide> */}
                 <BackSide classList={'product-info'}>
 
                     {

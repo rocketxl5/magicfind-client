@@ -92,6 +92,8 @@
 
   --card-width: 24.5rem;
   --card-height: 34rem;
+  --card-radius: 4.25%;
+
   font-size: 62.5%;
 
   /* Hamburger animation style */
@@ -191,7 +193,7 @@ color: var(--clr-light);
 
 .layout #search-results .card {
   background: var(--clr-eclipse);
-  border-radius: 4.25%;
+  border-radius: var(--card-radius);
 }
 
 .layout .dropdown * {
@@ -217,7 +219,7 @@ color: var(--clr-light);
 
 .card-image {
   /* aspect-ratio: 1 / 1.4; */
-  border-radius: 4.25%;
+  border-radius: var(--card-radius);
 }
 
 .layout .product-info {
@@ -1178,12 +1180,16 @@ height: 2rem;
 .dashboard-nav {
 width: 100%;
 min-width: 37rem;
+background: var(--clr-primary);
+border-top: 1px solid var(--clr-light-border);
 /* z-index: 1000; */
 }
 
 .contextual-links {
   display: flex;
   min-height: 4rem;
+  max-width: 135rem;
+  margin: auto;
 }
 
 .contextual-links > a {
@@ -1191,7 +1197,6 @@ display: flex;
 width: 100%;
 align-items: center;
 justify-content: center;
-border-top: 1px solid var(--clr-light-border);
 border-right: 1px solid var(--clr-light-border);
 }
 
@@ -1379,7 +1384,6 @@ text-align: center;
   color: var(--clr-primary);
 }
 
-
 /* ///////////////////////////////// */
 /* /// Search-Results & Products /// */
 /* ///////////////////////////////// */
@@ -1400,7 +1404,7 @@ text-align: center;
 }
 
 .product-info {
-  /* border-radius: 4.25%;
+  /* border-radius: var(--card-radius);
   box-shadow: 0 0.5rem 1rem rgba(0,0,0,.15); */
 }
 
@@ -1895,11 +1899,44 @@ text-align: center;
   min-height: inherit;
 }
 
-.product-container .product-image {
-  aspect-ratio: 1 / 1.4;
+.product-image {
+  /* aspect-ratio: 1 / 1.4;
+  width: 100%;
+  height: 100%; */
+  border-radius: var(--card-radius);
+}
+
+figure.product-view {
+  height: 100%;
+  width: 100%;
+}
+
+.product-view-container {
+  position: relative;
+  height: 100%;
+  width: 100%;
+}
+
+.is-foil::before {
+  content: '';
+  display: block;
   width: 100%;
   height: 100%;
-  border-radius: 4.25%;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: linear-gradient(
+    115deg, 
+    rgba(0, 255, 0, 0) 0, 
+    rgba(0, 255, 0, .25) 25%,
+    rgba(255, 255, 0, .3) 50%, 
+    rgba(255, 0, 0, .15) 75%, 
+    rgba(255, 0, 0, .3) 100%);
+  pointer-events: none;
+  border-radius: var(--card-radius);
+  z-index: 1;
 }
 
 .product-wrapper {

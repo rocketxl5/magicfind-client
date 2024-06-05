@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { NavLink, useParams } from 'react-router-dom'
 import useAuth from '../hooks/contexthooks/useAuth';
-import useAxios from '../hooks/useAxios';
+import useFetch from '../hooks/useFetch';
 import useSearch from '../hooks/contexthooks/useSearch';
 import useMail from '../hooks/contexthooks/useMail';
 import { api } from '../api/resources';
@@ -21,7 +21,7 @@ const DashboardNav = () => {
 
     const { auth } = useAuth();
     const { setMailCount } = useMail();
-    const { fetchAll, fetch, error, response } = useAxios();
+    const { fetchAll, fetch, error, response } = useFetch();
     const { query } = useParams();
 
     const links = data.dashboardLinks;
