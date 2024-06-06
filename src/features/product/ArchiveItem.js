@@ -12,6 +12,7 @@ import useResponseHandler from '../../hooks/useResponseHandler';
 import useAuth from '../../hooks/contexthooks/useAuth';
 import useExpandImage from '../../hooks/useExpandImage';
 import useFind from '../../hooks/useFind';
+import useSearch from '../../hooks/contexthooks/useSearch';
 import useTable from '../../hooks/useTable';
 import { IoExpand } from "react-icons/io5";
 import { FaCheck } from "react-icons/fa6";
@@ -37,12 +38,14 @@ const ArchiveItem = ({ index, product, count, handleSlideView }) => {
     const { findMatch, isMatchFound } = useFind();
     const { rows, setTable } = useTable();
     const { auth } = useAuth();
+    const { cardSets } = useSearch();
 
     const cardRef = useRef(null);
     const frontSideRef = useRef(null);
     const buttonRef = useRef(null);
 
     useEffect(() => {
+        // console.log(product.set_id)
         findMatch(product.card_id);
         setTable({ type: 'archive', product });
     }, [])
@@ -71,12 +74,29 @@ const ArchiveItem = ({ index, product, count, handleSlideView }) => {
         }
     }, [error])
 
+    const Set = () => {
+        return (
+            <>
+                <div className="product-header">
+                    <h2 className='set'>
+                        <span className='set-icon'>
+                            <img src={cardSets[product.set_id]?.icon_svg_uri} alt='Set icon' />
+                        </span>
+                        <span>{cardSets[product.set_id]?.name}</span>
+                    </h2>
+                </div>
+            </>
+        )
+    }
+
     return (
         <Card
             classList={"product-container"}
-            header={<Count unit={index + 1} total={count} />}
+            // header={<Count unit={index + 1} total={count} />}
+            header={<Set />}
             // footer={[sanitizeName(product.name), product.set_name]}
-            footer={[product.set_name]}
+            // footer={[product.set_name]}
+            footer={[]}
         >
             <TwoSidedSlide card={cardRef} front={frontSideRef}>
                 {/* <FrontSide> */}

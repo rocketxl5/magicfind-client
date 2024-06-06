@@ -20,7 +20,6 @@ const useResponseHandler = () => {
                 'auth-token': token
             },
         }
-
         setLoading(true);
         fetch(url, config);
     }

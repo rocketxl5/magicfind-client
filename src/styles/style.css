@@ -1389,23 +1389,7 @@ text-align: center;
 /* ///////////////////////////////// */
 
 .search-results {   
-
   position: relative;
-}
-
-.product-title {
-  font-size: clamp(13px, calc(1vw + 5px), var(--fs-200));
-  font-weight: 400;
-}
-
-.product-header p {
-  font-size: clamp(var(--fs-125), calc(1vw + 5px), var(--fs-150));
-  font-weight: 400;
-}
-
-.product-info {
-  /* border-radius: var(--card-radius);
-  box-shadow: 0 0.5rem 1rem rgba(0,0,0,.15); */
 }
 
 .back-side {
@@ -1418,6 +1402,45 @@ text-align: center;
   padding: 1rem;
 }
 
+.product-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 3rem;
+}
+
+.product-header h2 {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+  padding: 0.8rem 1rem;
+  border: 1px solid var(--clr-grey);
+  border-radius: 5px;
+  line-height: 1;
+}
+
+.product-header h2 span {
+  display: inline-block;
+  font-size: 1.6rem;
+  font-weight: 400;
+  vertical-align: middle;
+}
+
+.product-header .set-icon {
+  display: flex;
+  width: 3rem;
+  height: 3rem;
+}
+
+.set-icon img {
+  display: inline-block;
+  width: 100%;
+  max-height: 2.8rem;
+  margin-block: auto; 
+}
+
+
 .product-info {
   position: relative;
   display: flex;
@@ -1426,14 +1449,6 @@ text-align: center;
   width: 100%;
   height: 100%;
   padding: 1rem;
-}
-
-.product-info table {
-  /* width: 100%;
-  font-size: 9px;
-  border-left: 1px solid rgba(0, 0, 0, 0.1);
-  border-collapse: collapse;
-  border-radius: 5px; */
 }
 
 .product-table {
@@ -1584,7 +1599,7 @@ text-align: center;
   background: var(--clr-secondary);
 }
 
-.shopping-cart .list-item {
+.list-item {
   width: 100%;
 }
 
@@ -1889,6 +1904,7 @@ text-align: center;
   align-items: center;
   min-height: 340px;
   min-width: 244px;
+  width: 100%;
   padding-block: 3rem;
   gap: 1rem;
 }
@@ -1937,6 +1953,16 @@ figure.product-view {
   pointer-events: none;
   border-radius: var(--card-radius);
   z-index: 1;
+}
+
+.card-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* margin: auto; */
+  border: 1px solid var(--clr-grey);
+  border-radius: 5px;
+  padding: var(--size-1);
 }
 
 .product-wrapper {

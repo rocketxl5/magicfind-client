@@ -28,7 +28,7 @@ const SearchResults = () => {
     const [state, updateCollectionItem] = useCollectionModal(search?.search, handleCollectionItem);
 
     useEffect(() => {
-        // console.log(location.state)
+        console.log(location.state)
         // If location.state is defined
         // Search was sent through input submit 
         if (location.state) {
