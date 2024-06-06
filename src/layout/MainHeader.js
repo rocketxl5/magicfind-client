@@ -4,7 +4,7 @@ import SearchForm from '../features/search/SearchForm';
 import DashboardNav from './DashboardNav';
 import Logo from './navigation/buttons/Logo';
 import { api } from '../api/resources';
-import useAxios from '../hooks/useAxios';
+import useFetch from '../hooks/useFetch';
 import useAuth from '../hooks/contexthooks/useAuth';
 import useSearch from '../hooks/contexthooks/useSearch';
 import useScroll from '../hooks/contexthooks/useScroll';
@@ -21,32 +21,42 @@ const MainHeader = () => {
     catalogInputRef,
 
   } = useSearch();
-  // const { fetch, error, loading, response } = useAxios();
 
-  // Setting catalog card names for autocomplete catalog search
+  const { fetch, error, response } = useFetch();
+
+  // Fetch response handler
   useEffect(() => {
-    // If true
-    if (updateCatalog) {
-      const headers = new Headers();
-      headers.append('Content-Type', 'application/json');
-      const options = {
-        method: 'GET',
-        headers: headers,
-      };
-
-      fetch(`${api.serverURL}/api/catalog/product/names`, options)
-        .then((res) => res.json())
-        .then((data) => {
-          setCatalogCardNames(data);
-          if (isAuth) {
-            setUpdateCollection(true);
-          }
-          // Reinitialize updateCatalog to allow updates
-          setUpdateCatalog(false);
-        })
-        .catch((error) => console.log(error));
+    // Response from query catalog product names
+    if (response && updateCatalog) {
+      // Update state with response
+      setCatalogCardNames(response);
+      // Auth user
+      if (isAuth) {
+        // Change state to trigger collection update
+        setUpdateCollection(true);
+      }
+      // Reinitialize updateCatalog to allow updates
+      setUpdateCatalog(false);
     }
-  }, [updateCatalog]);
+  }, [response])
+
+  useEffect(() => {
+    if (updateCatalog) {
+      const config = {
+        headers: {
+          'Content-Type': 'application/json',
+        }
+      }
+      const url = `${api.serverURL}/api/catalog/product/names`;
+      fetch(url, config);
+    }
+  }, [updateCatalog])
+
+  useEffect(() => {
+    if (error) {
+      console.error(error)
+    }
+  }, [error])
 
   return (
     <header className="main-header" ref={headerRef}>

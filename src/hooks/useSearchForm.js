@@ -152,19 +152,21 @@ const useSearchForm = (inputRef) => {
     const handleResponse = (cards) => {
         return cards.filter(card => !card.digital)
             .map((card) => {
-                const trimmed_card = trimProduct({ type: 'card', product: card });
-                return trimmed_card.finishes.map(finish => {
-                    console.log(card)
-                    return {
-                        ...trimmed_card,
-                        finish: capitalize(finish),
-                        card_id: trimmed_card.id + finish
-                    }
-                })
+            console.log(card)
+            return trimProduct({ type: 'card', product: card });
+            // const trimmed_card = trimProduct({ type: 'card', product: card });
+            // return trimmed_card.finishes.map(finish => {
+            //     console.log(card)
+            //     return {
+            //         ...trimmed_card,
+            //         finish: capitalize(finish),
+            //         card_id: trimmed_card.id + finish
+            //     }
+            // })
 
             })
             // transform array arrays into single array of objects
-            .flat()
+        // .flat()
     }
 
     useEffect(() => {

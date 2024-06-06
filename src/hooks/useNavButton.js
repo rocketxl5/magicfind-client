@@ -29,6 +29,7 @@ const useNavButton = () => {
 
     function handleSearchBar(display) {
         if (!display) {
+            // Delays reaction time to prevent opening menu
             setTimeout(() => {
                 dispatch({
                     type: 'searchbar',
@@ -37,7 +38,7 @@ const useNavButton = () => {
                         displaySearchBar: false,
                     }
                 });
-            }, 200);
+            }, 100);
         }
         else {
             dispatch({

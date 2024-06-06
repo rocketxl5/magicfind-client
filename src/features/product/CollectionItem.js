@@ -38,14 +38,13 @@ const CollectionItem = ({ index, product, count, handleCollectionItem, handleSli
             header={<Count unit={index + 1} total={count} />}
             footer={[product.name, product.set_name]}
         >
-            <>
                 <TwoSidedSlide card={cardRef} front={frontSideRef}>
                     <FrontSide>
                         <Image product={product} />
-                    {
+                    {/* {
                             (product.finish.toLowerCase() === 'foil') &&
                             <Tag classList={'card-finish'} content={<span>{product.finish}</span>} />
-                        }
+                        } */}
 
                     </FrontSide>
                     <BackSide classList={'product-info'}>
@@ -95,8 +94,7 @@ const CollectionItem = ({ index, product, count, handleCollectionItem, handleSli
                             },
                         ]}
                     />
-                </TwoSidedSlide>
-            </>
+            </TwoSidedSlide>
         </Card >
     )
 }

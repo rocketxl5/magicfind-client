@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { NavLink, useParams } from 'react-router-dom'
 import useAuth from '../hooks/contexthooks/useAuth';
-import useAxios from '../hooks/useAxios';
+import useFetch from '../hooks/useFetch';
 import useSearch from '../hooks/contexthooks/useSearch';
 import useMail from '../hooks/contexthooks/useMail';
 import { api } from '../api/resources';
@@ -21,7 +21,7 @@ const DashboardNav = () => {
 
     const { auth } = useAuth();
     const { setMailCount } = useMail();
-    const { fetchAll, fetch, error, response } = useAxios();
+    const { fetchAll, fetch, error, response } = useFetch();
     const { query } = useParams();
 
     const links = data.dashboardLinks;
@@ -34,14 +34,14 @@ const DashboardNav = () => {
     useEffect(() => {
         fetchAll([
             {
-                query: `/api/cards/mtg-cardnames`,
+                query: `/api/cards/cardnames`,
                 config: {
                     headers: {
                         'Content-Type': 'application/json'
                     }
                 },
-                setter: (value) => {
-                    setArchiveCardNames(value);
+                setter: (data) => {
+                    setArchiveCardNames(data);
                     setUpdateCollection(true);
                 }
             },
@@ -53,9 +53,9 @@ const DashboardNav = () => {
                         'auth-token': auth.token
                     }
                 },
-                setter: (value) => {
-                    if (value.length > 0) {
-                        setMailCount(value.length)
+                setter: (data) => {
+                    if (data.length > 0) {
+                        setMailCount(data.length)
                     }
                 }
             }
@@ -69,17 +69,14 @@ const DashboardNav = () => {
     //////////////////////////////////////////////////////////////////////
     useEffect(() => {
         if (updateCollection) {
-            // console.log(auth.user.id)
             const config = {
                 headers: {
                     'Content-Type': 'application/json',
                     'auth-token': auth.token,
-                    'query': 'card_ids'
                 },
             };
             const url = `${api.serverURL}/api/users/collection/${auth.user.id}`;
-            const origin = 'collection'
-            fetch(url, config, origin);
+            fetch(url, config);
         }
         // if (updateCollection) {
         //     const headers = new Headers();

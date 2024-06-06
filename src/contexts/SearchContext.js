@@ -1,6 +1,8 @@
 import { useState, useEffect, useReducer, useRef, createContext } from 'react';
 import { searchReducer } from '../features/search/services/searchReducer';
 import useAuth from '../hooks/contexthooks/useAuth';
+import useFetch from '../hooks/useFetch';
+import { api } from '../api/resources';
 
 const initialState = {
   cardNames: [],
@@ -34,8 +36,8 @@ export const SearchProvider = ({ children }) => {
     tracker,
   } = state || {};
 
+  const [cardSets, setCardSets] = useState(null);
   const [cardCollection, setCardCollection] = useState([]);
-
   const [archiveCardNames, setArchiveCardNames] = useState(null);
   const [collectionCardNames, setCollectionCardNames] = useState(null);
   const [catalogCardNames, setCatalogCardNames] = useState(null);
@@ -43,13 +45,14 @@ export const SearchProvider = ({ children }) => {
   // State changes on delete and add card actions
   // Resets collectionCardNames state @ DashboardNav
   const [updateCollection, setUpdateCollection] = useState(false);
-  const [updateCatalog, setUpdateCatalog] = useState(false);
+  const [updateCatalog, setUpdateCatalog] = useState(true);
   const [updateArchive, setUpdateArchive] = useState(false);
 
   // Mount state @ Collection initial fetch 
   const [isCollectionEmpty, setIsCollectionEmpty] = useState(true);
 
   const { auth } = useAuth();
+  const { fetch, response, error } = useFetch();
 
   // Search field Refs
   const catalogInputRef = useRef(null);
@@ -57,8 +60,25 @@ export const SearchProvider = ({ children }) => {
   const archiveInputRef = useRef(null);
 
   useEffect(() => {
-    setUpdateCatalog(true);
+    if (!cardSets) {
+      const config = {
+        headers: {
+          'Content-Type': 'application/json',
+        }
+      }
+      const url = `${api.serverURL}/api/cards/sets`;
+      // Fetch card sets array of objects
+      fetch(url, config);
+    }
   }, [])
+
+  useEffect(() => {
+    if (response) {
+      console.log(response.includes('d909bcc0-dda6-4802-a5bc-a8e57ddd4dea'))
+      const sets = Object.assign({}, ...response)
+      setCardSets(sets);
+    }
+  }, [response])
 
   // Returns array of unique card names
   const filterCardNames = (cards) => {
@@ -86,6 +106,8 @@ export const SearchProvider = ({ children }) => {
         setCardCollection,
         isCollectionEmpty,
         setIsCollectionEmpty,
+        cardSets,
+        setCardSets,
         archiveCardNames,
         setArchiveCardNames,
         collectionCardNames,

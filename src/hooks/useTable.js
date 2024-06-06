@@ -31,10 +31,10 @@ const useTable = () => {
                         title: 'Year: ',
                         value: `${product?.released_at?.split('-')[0]}`
                     },
-                    {
-                        title: 'Finish: ',
-                        value: product?.finish
-                    },
+                    // {
+                    //     title: 'Finish: ',
+                    //     value: product?.finish
+                    // },
                     {
                         title: 'Rarity: ',
                         value: capitalize(product.rarity)
@@ -43,10 +43,10 @@ const useTable = () => {
                         title: 'Collector #: ',
                         value: product?.collector_number
                     },
-                    {
-                        title: 'Price (US): ',
-                        value: `$${setPrice(product.prices, product.finish.toLowerCase())}`
-                    },
+                    // {
+                    //     title: 'Price (US): ',
+                    //     value: `$${setPrice(product.prices, product.finish.toLowerCase())}`
+                    // },
                     product?.type_line ?
                         {
                             title: 'Type: ',

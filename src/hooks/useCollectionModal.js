@@ -73,7 +73,7 @@ const useCollectionModal = (search, callback) => {
                 product: product,
                 cardImage: image,
                 attributes: {
-                    id: 'expand-card',
+                    // id: 'expand-card',
                     style: 'card-image',
                     src: product?.image_uris?.small || product?.card_faces[0]?.image_uris?.small,
                     alt: `${product?.name}`,

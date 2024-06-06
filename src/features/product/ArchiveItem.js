@@ -7,18 +7,17 @@ import FrontSide from './components/FrontSide';
 import Image from '../../components/Image';
 import Loader from '../../layout/Loader';
 import Table from '../../components/Table';
-import Tag from './components/Tag';
 import TwoSidedSlide from '../modal/components/TwoSidedSlide';
 import useResponseHandler from '../../hooks/useResponseHandler';
 import useAuth from '../../hooks/contexthooks/useAuth';
 import useExpandImage from '../../hooks/useExpandImage';
 import useFind from '../../hooks/useFind';
+import useSearch from '../../hooks/contexthooks/useSearch';
 import useTable from '../../hooks/useTable';
 import { IoExpand } from "react-icons/io5";
 import { FaCheck } from "react-icons/fa6";
 import { FaPlus } from "react-icons/fa6";
 import { Flip } from './components/icons/Flip';
-import { sanitizeName } from './services/sanitizeName';
 import { flipCard } from './services/flipCard';
 
 const ArchiveItem = ({ index, product, count, handleSlideView }) => {
@@ -39,20 +38,20 @@ const ArchiveItem = ({ index, product, count, handleSlideView }) => {
     const { findMatch, isMatchFound } = useFind();
     const { rows, setTable } = useTable();
     const { auth } = useAuth();
+    const { cardSets } = useSearch();
 
     const cardRef = useRef(null);
     const frontSideRef = useRef(null);
     const buttonRef = useRef(null);
 
     useEffect(() => {
-        console.log(product)
+        // console.log(product.set_id)
         findMatch(product.card_id);
         setTable({ type: 'archive', product });
     }, [])
 
     useEffect(() => {
         if (response) {
-            console.log(response)
             switch (response.method) {
                 case 'get':
                     handleGetResponse(response, product, auth)
@@ -71,24 +70,38 @@ const ArchiveItem = ({ index, product, count, handleSlideView }) => {
 
     useEffect(() => {
         if (error) {
-            console.log(error.message)
+            throw error
         }
     }, [error])
+
+    const Set = () => {
+        return (
+            <>
+                <div className="product-header">
+                    <h2 className='set'>
+                        <span className='set-icon'>
+                            <img src={cardSets[product.set_id]?.icon_svg_uri} alt='Set icon' />
+                        </span>
+                        <span>{cardSets[product.set_id]?.name}</span>
+                    </h2>
+                </div>
+            </>
+        )
+    }
 
     return (
         <Card
             classList={"product-container"}
-            header={<Count unit={index + 1} total={count} />}
-            footer={[sanitizeName(product.name), product.set_name]}
+            // header={<Count unit={index + 1} total={count} />}
+            header={<Set />}
+            // footer={[sanitizeName(product.name), product.set_name]}
+            // footer={[product.set_name]}
+            footer={[]}
         >
             <TwoSidedSlide card={cardRef} front={frontSideRef}>
-                <FrontSide>
-                    <Image product={product} />
-                    {
-                        (product.finish.toLowerCase() === 'foil') &&
-                        <Tag classList={'card-finish'} content={<span>{product.finish}</span>} />
-                    }
-                </FrontSide>
+                {/* <FrontSide> */}
+                <Image classList={'product-image'} product={product} />
+                {/* </FrontSide> */}
                 <BackSide classList={'product-info'}>
 
                     {
