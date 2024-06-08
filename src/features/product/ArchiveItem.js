@@ -45,7 +45,6 @@ const ArchiveItem = ({ index, product, count, handleSlideView }) => {
     const buttonRef = useRef(null);
 
     useEffect(() => {
-        // console.log(product.set_id)
         findMatch(product.card_id);
         setTable({ type: 'archive', product });
     }, [])

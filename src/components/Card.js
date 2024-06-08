@@ -7,7 +7,7 @@ const Card = ({ children, classList, header, footer }) => {
             {children}
             <footer className='col-12 relative flex column justify-center align-center gap-1'>
                 {
-                    footer.map(element => <div>{element}</div>)
+                    footer?.map(element => <div>{element}</div>)
                 }
             </footer>
         </div>

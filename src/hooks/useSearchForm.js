@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Set from '../features/search/components/Set';
 import useAuth from './contexthooks/useAuth';
 import useFetch from './useFetch';
 import useSearch from './contexthooks/useSearch';
@@ -20,6 +21,7 @@ const useSearchForm = (inputRef) => {
         exact,
         dispatch,
         initialState,
+        cardSets
     } = useSearch();
 
     const { fetch, error, response, loading } = useFetch();
@@ -95,6 +97,8 @@ const useSearchForm = (inputRef) => {
             .join('-')
     }
 
+    // type ['archive' || 'catalog' || 'collection']
+    // query [input value]
     const getParams = (type, query = undefined) => {
         const params = {
             archive: {
@@ -150,23 +154,20 @@ const useSearchForm = (inputRef) => {
     // Generates new card object if finishes property has more than one value : [nonfoil, foil, etched]
     // Returns new array
     const handleResponse = (cards) => {
-        return cards.filter(card => !card.digital)
+        // Source @ https://stackoverflow.com/questions/63787449/javascript-group-array-of-objects-by-common-values-with-label
+        return Object.entries(cards.filter(card => !card.digital)
             .map((card) => {
-            console.log(card)
-            return trimProduct({ type: 'card', product: card });
-            // const trimmed_card = trimProduct({ type: 'card', product: card });
-            // return trimmed_card.finishes.map(finish => {
-            //     console.log(card)
-            //     return {
-            //         ...trimmed_card,
-            //         finish: capitalize(finish),
-            //         card_id: trimmed_card.id + finish
-            //     }
-            // })
-
+                // Return trimmed product object
+                return trimProduct({ type: 'card', product: card });
             })
-            // transform array arrays into single array of objects
-        // .flat()
+            .reduce((accumulator, { set_id, ...rest }) => {
+                if (!accumulator[set_id]) accumulator[set_id] = [];
+
+                accumulator[set_id].push({ set_id, ...rest });
+
+                return accumulator;
+            }, []))
+            .map(([set, prints]) => ({ set, prints }))
     }
 
     useEffect(() => {
@@ -194,12 +195,16 @@ const useSearchForm = (inputRef) => {
 
             if (type === 'archive' && !oracleId) {
                 // set oracle id to fetch all versions
-                return setOracleId(response.oracle_id);
+                setOracleId(response.oracle_id);
             }
-            const data = type === 'archive' ? handleResponse(response) : response;
-            inputRef?.current?.blur();
-            localStorage.setItem('search-results', JSON.stringify({ ...data }));
-            navigate(path, { state: { result: data, type, query } });
+            else {
+
+                const data = type === 'archive' ? handleResponse(response) : response;
+                inputRef?.current?.blur();
+                console.log(data)
+                // localStorage.setItem('search-results', JSON.stringify({ ...data }));
+                navigate(path, { state: { result: data, query, type } });
+            }
 
         }
         if (error) {
