@@ -47,7 +47,7 @@ const MainHeader = () => {
           'Content-Type': 'application/json',
         }
       }
-      const url = `${api.serverURL}/api/catalog/product/names`;
+      const url = `${api.serverURL}/api/catalog/product-names`;
       fetch(url, config);
     }
   }, [updateCatalog])

@@ -45,7 +45,6 @@ const ArchiveItem = ({ index, product, count, handleSlideView }) => {
     const buttonRef = useRef(null);
 
     useEffect(() => {
-        // console.log(product.set_id)
         findMatch(product.card_id);
         setTable({ type: 'archive', product });
     }, [])
@@ -77,7 +76,7 @@ const ArchiveItem = ({ index, product, count, handleSlideView }) => {
     const Set = () => {
         return (
             <>
-                <div className="product-header">
+                <div className="set-header">
                     <h2 className='set'>
                         <span className='set-icon'>
                             <img src={cardSets[product.set_id]?.icon_svg_uri} alt='Set icon' />

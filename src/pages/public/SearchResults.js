@@ -1,16 +1,18 @@
 import { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import ArchiveItem from '../../features/product/ArchiveItem';
-import CollectionItem from '../../features/product/CollectionItem';
-import CatalogItem from '../../features/product/CatalogItem';
+// import ArchiveItem from '../../features/product/ArchiveItem';
+// import CollectionItem from '../../features/product/CollectionItem';
+// import CatalogItem from '../../features/product/CatalogItem';
+import Card from '../../components/Card';
 import Modal from '../../features/modal/Modal';
-import List from '../../components/List';
-import ListItem from '../../components/ListItem';
+// import List from '../../components/List';
+// import ListItem from '../../components/ListItem';
 import Page from '../../components/Page';
 import SearchParameters from '../../features/search/components/SearchParameters';
 import useCollectionModal from '../../hooks/useCollectionModal';
 import useSlideView from '../../hooks/useSlideView';
 import useImageLoader from '../../hooks/useImageLoader';
+import useResult from '../../hooks/useResult';
 
 const SearchResults = () => {
     // States
@@ -21,11 +23,13 @@ const SearchResults = () => {
     const location = useLocation();
     const navigate = useNavigate();
 
-    const [imagesLoaded] = useImageLoader(search?.result);
+    // const [imagesLoaded] = useImageLoader(search?.data);
 
-    const [view, updateSlideView] = useSlideView(handleSlideView);
+    // const [view, updateSlideView] = useSlideView(handleSlideView);
 
-    const [state, updateCollectionItem] = useCollectionModal(search?.search, handleCollectionItem);
+    // const [state, updateCollectionItem] = useCollectionModal(search?.type, handleCollectionItem);
+
+    const { searchResult, state, view, imagesLoaded } = useResult(search);
 
     useEffect(() => {
         console.log(location.state)
@@ -33,7 +37,7 @@ const SearchResults = () => {
         // Search was sent through input submit 
         if (location.state) {
             // Set search search state
-            setSearch({ ...location.state })
+            setSearch({ ...location.state });
         }
         else {
             // getUrl(location.pathname);
@@ -68,15 +72,15 @@ const SearchResults = () => {
     //     }
     // }, [search])
 
-    function handleSlideView(e, layout, expandedImage) {
-        e.stopPropagation();
-        updateSlideView(layout, expandedImage);
-    }
+    // function handleSlideView(e, layout, expandedImage) {
+    //     e.stopPropagation();
+    //     updateSlideView(layout, expandedImage);
+    // }
 
-    function handleCollectionItem(e, card, expandedImage) {
-        e.stopPropagation();
-        updateCollectionItem(e.target.id, card, expandedImage);
-    }
+    // function handleCollectionItem(e, card, expandedImage) {
+    //     e.stopPropagation();
+    //     updateCollectionItem(e.target.id, card, expandedImage);
+    // }
 
     return (
         <>
@@ -93,51 +97,59 @@ const SearchResults = () => {
             {imagesLoaded &&
                 <Page
                     name={'search-results'}
-                    title={search?.query}
+                    title={search.query}
                 >
                     <SearchParameters
                         setSearchFeatures={(value) => setSearchFeatures(value)}
                         searchFeatures={searchFeatures}
                     />
 
-                    <List classList="list align-center">
+                    <div className="list">
                         {
-                            imagesLoaded &&
-                            search.result.map((product, i) => {
+                            searchResult &&
+                            searchResult.map((result, i) => {
                                 return (
-                                    <ListItem key={i} classList={'flex justify-center'}>
-                                        {
-                                            search.type === 'catalog'
-                                                ?
-                                                <CatalogItem
-                                                    index={i}
-                                                    product={product}
-                                                    count={search.result.length}
-                                                    handleSlideView={handleSlideView}
-                                                />
-                                                :
-                                                search.type === 'collection'
-                                                    ?
-                                                    <CollectionItem
-                                                        index={i}
-                                                        product={product}
-                                                        count={search.result.length}
-                                                        handleCollectionItem={handleCollectionItem}
-                                                        handleSlideView={handleSlideView}
-                                                    />
-                                                    :
-                                                    <ArchiveItem
-                                                        index={i}
-                                                        product={product}
-                                                        count={search.result.length}
-                                                        handleSlideView={handleSlideView}
-                                                    />
-                                        }
-                                    </ListItem>
+                                    result
+                                    // <Card
+                                    //     key={i}
+                                    //     classList={'product-container'}
+                                    //     header={result.header}
+                                    //     footer={result.footer}
+                                    // >
+                                    // </Card>
+                                    // <ListItem key={i} classList={'flex justify-center'}>
+                                    //     {
+                                    //         search.type === 'catalog'
+                                    //             ?
+                                    //             <CatalogItem
+                                    //                 index={i}
+                                    //                 product={product}
+                                    //                 count={search.result.length}
+                                    //                 handleSlideView={handleSlideView}
+                                    //             />
+                                    //             :
+                                    //             search.type === 'collection'
+                                    //                 ?
+                                    //                 <CollectionItem
+                                    //                     index={i}
+                                    //                     product={product}
+                                    //                     count={search.result.length}
+                                    //                     handleCollectionItem={handleCollectionItem}
+                                    //                     handleSlideView={handleSlideView}
+                                    //                 />
+                                    //                 :
+                                    //                 <ArchiveItem
+                                    //                     index={i}
+                                    //                     product={product}
+                                    //                     count={search.result.length}
+                                    //                     handleSlideView={handleSlideView}
+                                    //                 />
+                                    //     }
+                                    // </ListItem>
                                 )
                             })
                         }
-                    </List>
+                    </div>
                 </Page>}
         </>
     )

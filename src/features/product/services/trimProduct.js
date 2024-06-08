@@ -37,7 +37,7 @@ export const trimProduct = (params) => {
                 scryfall_uri,
                 security_stamp,
                 set_search_uri,
-                set_type,
+                // set_type,
                 set_uri,
                 story_spotlight,
                 tcgplayer_etched_id,
@@ -70,7 +70,7 @@ export const trimProduct = (params) => {
                 owners,
                 prints_search_uri,
                 related_uris,
-                set_id,
+                // set_id,
                 ...trimmedProduct
             } = product;
 

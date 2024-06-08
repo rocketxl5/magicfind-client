@@ -74,8 +74,9 @@ export const SearchProvider = ({ children }) => {
 
   useEffect(() => {
     if (response) {
-      console.log(response.includes('d909bcc0-dda6-4802-a5bc-a8e57ddd4dea'))
+      console.log(response)
       const sets = Object.assign({}, ...response)
+      console.log(sets)
       setCardSets(sets);
     }
   }, [response])
