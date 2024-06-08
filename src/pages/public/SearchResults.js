@@ -104,7 +104,7 @@ const SearchResults = () => {
                         searchFeatures={searchFeatures}
                     />
 
-                    <div className="list flex column gap-1 align-center">
+                    <div className="list">
                         {
                             searchResult &&
                             searchResult.map((result, i) => {

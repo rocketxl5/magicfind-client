@@ -44,8 +44,8 @@ const Print = ({ print }) => {
     //     }
     // }, [response]);
     return (
-        <div className='flex'>
-            <Image classList={'print-image col-3'} product={print} />
+        <div className='flex print'>
+            <Image classList={'print-image'} product={print} />
             <div className='col-9 flex'>
                 {
                     print.finishes.map((finish, i) => {
