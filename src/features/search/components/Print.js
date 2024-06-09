@@ -45,7 +45,13 @@ const Print = ({ print }) => {
     // }, [response]);
     return (
         <div className='flex print'>
-            <Image classList={'print-image'} product={print} />
+            <Image classList={'print-image'} src={print.image_uris?.small || print.card_faces[0].image_uris?.small} />
+            {/* <img
+                className='print-image'
+                src={print.image_uris.small}
+                alt={`${print.name} card`}
+                loading="lazy"
+            /> */}
             <div className='col-9 flex'>
                 {
                     print.finishes.map((finish, i) => {

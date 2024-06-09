@@ -29,7 +29,7 @@ const SearchResults = () => {
 
     // const [state, updateCollectionItem] = useCollectionModal(search?.type, handleCollectionItem);
 
-    const { searchResult, state, view, imagesLoaded } = useResult(search);
+    const { results, state, view } = useResult(search);
 
     useEffect(() => {
         console.log(location.state)
@@ -94,10 +94,9 @@ const SearchResults = () => {
                     {state.component}
                 </Modal>
             }
-            {imagesLoaded &&
                 <Page
                     name={'search-results'}
-                    title={search.query}
+                title={search?.query}
                 >
                     <SearchParameters
                         setSearchFeatures={(value) => setSearchFeatures(value)}
@@ -106,8 +105,8 @@ const SearchResults = () => {
 
                     <div className="list">
                         {
-                            searchResult &&
-                            searchResult.map((result, i) => {
+                        results &&
+                        results.map((result, i) => {
                                 return (
                                     result
                                     // <Card
@@ -150,7 +149,7 @@ const SearchResults = () => {
                             })
                         }
                     </div>
-                </Page>}
+            </Page>
         </>
     )
 }

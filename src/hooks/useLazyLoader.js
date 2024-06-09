@@ -1,14 +1,17 @@
 import { useState, useEffect } from 'react';
 
-const useLazyLoader = (product) => {
+const useLazyLoader = (src) => {
     const [hasLoaded, setHasLoaded] = useState(false);
     useEffect(() => {
-        const img = new Image();
-        img.src = product?.image_uris?.normal || product?.card_faces[0]?.image_uris?.normal;
-        img.onload = () => {
-            setHasLoaded(true);
+        if (src) {
+
+            const img = new Image();
+            img.src = <source media="(min-width: )" srcset="" />;
+            img.onload = () => {
+                setHasLoaded(true);
+            }
         }
-    }, [product]);
+    }, [src]);
 
     return { hasLoaded }
 }
