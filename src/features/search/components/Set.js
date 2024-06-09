@@ -3,13 +3,13 @@ import Print from './Print';
 import useImageLoader from '../../../hooks/useImageLoader';
 import useSearch from '../../../hooks/contexthooks/useSearch'
 
-const Set = ({ collection }) => {
+const Set = ({ set }) => {
     const [hasLoaded, setHasLoaded] = useState(false);
     const { cardSets } = useSearch();
 
-    console.log(cardSets[collection.id])
+    console.log(cardSets[set.id])
 
-    const [imagesLoaded] = useImageLoader(collection.prints);
+    const [imagesLoaded] = useImageLoader(set.prints);
 
     return (
         <div className="set">
@@ -17,17 +17,17 @@ const Set = ({ collection }) => {
                 <h2>
                     {
                         // imagesLoaded &&
-                        <span className='set-icon' style={{ maskImage: `url(${cardSets[collection.id]?.icon_svg_uri})`, WebkitMaskImage: `url(${cardSets[collection.id]?.icon_svg_uri})` }}>
+                        <span className='set-icon' style={{ maskImage: `url(${cardSets[set.id]?.icon_svg_uri})`, WebkitMaskImage: `url(${cardSets[set.id]?.icon_svg_uri})` }}>
 
-                            {/* <img className='icon' src={`${cardSets[collection.set]?.icon_svg_uri}`} style={{ fill: 'red' }} onload='SVGInject(this)' alt='Set icon' /> */}
-                    </span>
+                            {/* <img className='icon' src={`${cardSets[set.set]?.icon_svg_uri}`} style={{ fill: 'red' }} onload='SVGInject(this)' alt='Set icon' /> */}
+                        </span>
                     }
-                    <span className='set-name'>{cardSets[collection.id]?.name}</span>
+                    <span className='set-name'>{cardSets[set.id]?.name}</span>
                 </h2>
             </div>
             <div className='set-prints'>
                 {
-                    collection?.prints.map((print, i) => {
+                    set?.prints.map((print, i) => {
                         return <Print key={i} print={print} />
                     })
                 }
