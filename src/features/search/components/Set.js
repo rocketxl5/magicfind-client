@@ -1,27 +1,24 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import Print from './Print';
 import useImageLoader from '../../../hooks/useImageLoader';
 import useSearch from '../../../hooks/contexthooks/useSearch'
-
 const Set = ({ set }) => {
-    const [hasLoaded, setHasLoaded] = useState(false);
+
     const { cardSets } = useSearch();
 
-    // console.log(cardSets[set.id])
+    const { imagesLoaded, setUris } = useImageLoader(set.prints); 
 
-    // const [imagesLoaded] = useImageLoader(set.prints);
-
-    // useEffect(() => {
-    //     if (imagesLoaded.length > 0) {
-    //         console.log(imagesLoaded)
-    //     }
-    // })
+    useEffect(() => {
+        const uris = set.prints.map(print => print.image_uris ? print.image_uris.normal : print.card_face.image_uris.normal)
+        setUris(uris)
+    }, [])
 
     return (
         <div className="set">
             <div className="set-header">
                 <h2>
                     {
+                        imagesLoaded &&
                         <span className='set-icon' style={{ maskImage: `url(${cardSets[set.id]?.icon_svg_uri})`, WebkitMaskImage: `url(${cardSets[set.id]?.icon_svg_uri})` }}>
                         </span>
                     }

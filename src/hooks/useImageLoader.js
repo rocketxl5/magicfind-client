@@ -11,7 +11,7 @@ const useImageLoader = () => {
     // Fetch & load images from uris array
     useEffect(() => {
         if (uris) {
-        // console.log(uris)
+
         const loadImage = url => {
             return new Promise((resolve, reject) => {
                 const image = new Image();
