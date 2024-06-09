@@ -52,7 +52,7 @@ const useResult = (search) => {
 
         console.log(result)
 
-        setSearchResult(result.map((collection, i) => <Set key={i} collection={collection} />))
+        setSearchResult(result.map((set, i) => <Set key={i} set={set} />))
 
     }
     function handleCatalog(query, result) { }
