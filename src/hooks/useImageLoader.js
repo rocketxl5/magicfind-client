@@ -8,27 +8,6 @@ const useImageLoader = () => {
     const [imagesLoaded, setImagesLoaded] = useState(false);
     const [uris, setUris] = useState(null);
 
-    // Set uris array from cards array
-    // useEffect(() => {
-    //     if (loadImages.length > 0) {
-    //     // if (!uris) {
-    //             let imguris = []
-    //         loadImages.forEach(el => {
-    //             if (el.image_uris) {
-    //                 imguris.push(el.image_uris?.normal);
-    //                 }
-    //             else if (el.card_faces) {
-    //                 el.card_faces.forEach(card_face => {
-    //                         imguris.push(card_face.image_uris?.normal);
-    //                     })
-    //                 }
-    //             })
-    //         // console.log(imguris)
-    //             seturis(imguris);
-    //         // }
-    //     }
-    // }, [loadImages])
-
     // Fetch & load images from uris array
     useEffect(() => {
         if (uris) {
@@ -37,7 +16,7 @@ const useImageLoader = () => {
             return new Promise((resolve, reject) => {
                 const image = new Image();
                 image.src = url;
-                image.alt = 'Magic Card Image'
+                image.alt = 'MTG Image'
                 image.onload = () => resolve(image);
                 image.onerror = error => reject(error);
             });
