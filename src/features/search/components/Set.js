@@ -16,7 +16,7 @@ const Set = ({ collection }) => {
             <div className="set-header">
                 <h2>
                     {
-                        imagesLoaded &&
+                        // imagesLoaded &&
                         <span className='set-icon' style={{ maskImage: `url(${cardSets[collection.id]?.icon_svg_uri})`, WebkitMaskImage: `url(${cardSets[collection.id]?.icon_svg_uri})` }}>
 
                             {/* <img className='icon' src={`${cardSets[collection.set]?.icon_svg_uri}`} style={{ fill: 'red' }} onload='SVGInject(this)' alt='Set icon' /> */}

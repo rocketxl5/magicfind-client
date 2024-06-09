@@ -1893,7 +1893,7 @@ text-align: center;
   display: flex;
   justify-content: center;
   align-items: center;
-  /* min-height: 3rem; */
+  min-height: 3.5rem;
   background: var(--clr-eclipse);
   border-radius: 5px;
 }
@@ -1910,15 +1910,16 @@ text-align: center;
 
 .set-header .set-name {
   /* display: inline-block; */
-  font-size: 1.6rem;
+  font-size: 1.3rem;
   font-weight: 400;
   color: var(--clr-light);
   vertical-align: middle;
 }
 /* Source @ https://dev.to/hasantezcan/how-to-colorize-svg-image-1kc8 */
 .set-header .set-icon {
-  width: 2.8rem;
-  height: 2.8rem;
+  display: block;
+  width: 2.2rem;
+  height: 2.2rem;
   /* mask-size: 100%; */
   -webkit-mask-repeat: no-repeat;
   mask-repeat: no-repeat;
