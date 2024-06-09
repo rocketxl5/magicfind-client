@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import Set from '../features/search/components/Set';
 import useImageLoader from './useImageLoader';
+import useSearch from './contexthooks/useSearch';
 import useSlideView from './useSlideView';
 import useCollectionModal from './useCollectionModal';
 
@@ -12,6 +13,8 @@ const useResult = (search) => {
     const [view, updateSlideView] = useSlideView(handleSlideView);
 
     const [state, updateCollectionItem] = useCollectionModal(search?.type, handleCollectionItem);
+
+    const { cardSets } = useSearch();
 
     function handleSlideView(e, layout, expandedImage) {
         e.stopPropagation();
@@ -46,9 +49,11 @@ const useResult = (search) => {
     }, [search]);
 
     function handleArchive(query, result) {
-        // (result.map())
+
         console.log(result)
+
         setSearchResult(result.map((collection, i) => <Set key={i} collection={collection} />))
+
     }
     function handleCatalog(query, result) { }
     function handleCollection(query, result) { }

@@ -167,7 +167,7 @@ const useSearchForm = (inputRef) => {
 
                 return accumulator;
             }, []))
-            .map(([set, prints]) => ({ set, prints }))
+            .map(([id, prints]) => ({ id, prints }))
     }
 
     useEffect(() => {

@@ -26,7 +26,7 @@ const useImageLoader = (cards) => {
                 setUrls(imgUrls);
             }
         }
-    }, [cards, urls])
+    }, [cards])
 
     // Fetch & load images from urls array
     useEffect(() => {
