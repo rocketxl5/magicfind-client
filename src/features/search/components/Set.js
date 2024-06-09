@@ -7,19 +7,22 @@ const Set = ({ set }) => {
     const [hasLoaded, setHasLoaded] = useState(false);
     const { cardSets } = useSearch();
 
-    console.log(cardSets[set.id])
+    // console.log(cardSets[set.id])
 
-    const [imagesLoaded] = useImageLoader(set.prints);
+    // const [imagesLoaded] = useImageLoader(set.prints);
+
+    // useEffect(() => {
+    //     if (imagesLoaded.length > 0) {
+    //         console.log(imagesLoaded)
+    //     }
+    // })
 
     return (
         <div className="set">
             <div className="set-header">
                 <h2>
                     {
-                        // imagesLoaded &&
                         <span className='set-icon' style={{ maskImage: `url(${cardSets[set.id]?.icon_svg_uri})`, WebkitMaskImage: `url(${cardSets[set.id]?.icon_svg_uri})` }}>
-
-                            {/* <img className='icon' src={`${cardSets[set.set]?.icon_svg_uri}`} style={{ fill: 'red' }} onload='SVGInject(this)' alt='Set icon' /> */}
                         </span>
                     }
                     <span className='set-name'>{cardSets[set.id]?.name}</span>

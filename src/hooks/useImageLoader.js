@@ -4,43 +4,45 @@
 
 import { useState, useEffect } from 'react';
 
-const useImageLoader = (cards) => {
+const useImageLoader = () => {
     const [imagesLoaded, setImagesLoaded] = useState(false);
-    const [urls, setUrls] = useState(null)
+    const [uris, setUris] = useState(null);
 
-    // Set urls array from cards array
-    useEffect(() => {
-        if (cards?.length) {
-            if (!urls) {
-                let imgUrls = []
-                cards.forEach(card => {
-                    if (card.image_uris) {
-                        imgUrls.push(card.image_uris?.normal);
-                    }
-                    else if (card.card_faces) {
-                        card.card_faces.forEach(card_face => {
-                            imgUrls.push(card_face.image_uris?.normal);
-                        })
-                    }
-                })
-                setUrls(imgUrls);
-            }
-        }
-    }, [cards])
+    // Set uris array from cards array
+    // useEffect(() => {
+    //     if (loadImages.length > 0) {
+    //     // if (!uris) {
+    //             let imguris = []
+    //         loadImages.forEach(el => {
+    //             if (el.image_uris) {
+    //                 imguris.push(el.image_uris?.normal);
+    //                 }
+    //             else if (el.card_faces) {
+    //                 el.card_faces.forEach(card_face => {
+    //                         imguris.push(card_face.image_uris?.normal);
+    //                     })
+    //                 }
+    //             })
+    //         // console.log(imguris)
+    //             seturis(imguris);
+    //         // }
+    //     }
+    // }, [loadImages])
 
-    // Fetch & load images from urls array
+    // Fetch & load images from uris array
     useEffect(() => {
-        if (urls) {
+        if (uris) {
+        // console.log(uris)
         const loadImage = url => {
             return new Promise((resolve, reject) => {
                 const image = new Image();
                 image.src = url;
                 image.alt = 'Magic Card Image'
-                image.onload = () => resolve(url);
+                image.onload = () => resolve(image);
                 image.onerror = error => reject(error);
             });
         }
-        Promise.all(urls.map(url => loadImage(url)))
+            Promise.all(uris.map(url => loadImage(url)))
             .then((data) => {
                 if (data) {
                     setImagesLoaded(true);
@@ -48,9 +50,9 @@ const useImageLoader = (cards) => {
             })
             .catch(error => console.log('Image load has failed', error))
         }
-    }, [urls])
+    }, [uris])
 
-    return [imagesLoaded]
+    return { imagesLoaded, setUris }
 }
 
 export default useImageLoader

@@ -203,7 +203,7 @@ const useSearchForm = (inputRef) => {
                 inputRef?.current?.blur();
                 console.log(data)
                 // localStorage.setItem('search-results', JSON.stringify({ ...data }));
-                navigate(path, { state: { result: data, query, type } });
+                navigate(path, { state: { results: data, query, type } });
             }
 
         }
