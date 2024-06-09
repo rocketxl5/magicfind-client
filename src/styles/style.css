@@ -1155,7 +1155,7 @@ height: 2rem;
   align-items: center;
   max-width: 135rem;
   margin-inline: auto;
-  padding-inline: 2rem;
+  padding-inline: 1rem;
   min-height: 3rem;
   width: 100%;
 }
@@ -1825,7 +1825,7 @@ text-align: center;
 
 .page-header  {
   color: var(--clr-dark);
-  padding: 1rem;
+  /* padding: 1rem; */
    margin-bottom: 1rem;
 }
 
@@ -1893,7 +1893,7 @@ text-align: center;
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 3.5rem;
+  min-height: 3.7rem;
   background: var(--clr-eclipse);
   border-radius: 5px;
 }

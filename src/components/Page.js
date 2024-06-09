@@ -20,7 +20,7 @@ const Page = ({ children, classList = '', name, hasHeader = true, hasBanner = fa
                     {component}
                     </header>
             }
-            <main className={`padding-inline-1 ${main ? main.style : ''}`}>
+            <main className={`${main ? main.style : ''}`}>
                 {children}
             </main>
         </div>
