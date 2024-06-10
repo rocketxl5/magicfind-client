@@ -9,7 +9,7 @@ const Set = ({ set }) => {
     const { imagesLoaded, setUris } = useImageLoader(); 
 
     useEffect(() => {
-        setUris(set.prints.map(print => print.image_uris ? print.image_uris.normal : print.card_face.image_uris.normal))
+        setUris(set.prints.map(print => print?.image_uris ? print?.image_uris.normal : print?.card_faces[0].image_uris.normal))
     }, [])
 
     return (
