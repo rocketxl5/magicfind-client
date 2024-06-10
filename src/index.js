@@ -6,13 +6,14 @@ import {
   createRoutesFromElements,
   RouterProvider,
 } from 'react-router-dom';
-import { PathProvider } from './contexts/PathContext';
 import { AuthProvider } from './contexts/AuthContext';
-import { NavProvider } from './contexts/NavContext';
-import { MailProvider } from './contexts/MailContext';
-import { SearchProvider } from './contexts/SearchContext';
 import { CartProvider } from './contexts/CartContext';
+import { MailProvider } from './contexts/MailContext';
+import { NavProvider } from './contexts/NavContext';
+import { ModalProvider } from './contexts/ModalContext';
+import { PathProvider } from './contexts/PathContext';
 import { ScrollProvider } from './contexts/ScrollContext';
+import { SearchProvider } from './contexts/SearchContext';
 import { ViewportProvider } from './contexts/ViewportContext';
 
 import App from './App';
@@ -35,7 +36,9 @@ root.render(
               <MailProvider>
                 <CartProvider>
                   <ScrollProvider>
-                    <RouterProvider router={router} />
+                    <ModalProvider>
+                      <RouterProvider router={router} />
+                    </ModalProvider>
                   </ScrollProvider>
                 </CartProvider>
               </MailProvider>

@@ -12,16 +12,18 @@ import SearchParameters from '../../features/search/components/SearchParameters'
 import useCollectionModal from '../../hooks/useCollectionModal';
 import useSlideView from '../../hooks/useSlideView';
 import useImageLoader from '../../hooks/useImageLoader';
-import useResult from '../../hooks/useResult';
+// import useResult from '../../hooks/useResult';
+import useSearch from '../../hooks/contexthooks/useSearch';
 
 const SearchResults = () => {
     // States
     const [searchFeatures, setSearchFeatures] = useState(false);
-    const [search, setSearch] = useState(null);
 
     // Hooks
     const location = useLocation();
     const navigate = useNavigate();
+
+    const { results } = useSearch();
 
     // const [imagesLoaded] = useImageLoader(search?.data);
 
@@ -29,20 +31,9 @@ const SearchResults = () => {
 
     // const [state, updateCollectionItem] = useCollectionModal(search?.type, handleCollectionItem);
 
-    const { results, state, view } = useResult(search);
+    // const { results } = useResult(search);
 
-    useEffect(() => {
-        console.log(location.state)
-        // If location.state is defined
-        // Search was sent through input submit 
-        if (location.state) {
-            // Set search search state
-            setSearch({ ...location.state });
-        }
-        else {
-            // getUrl(location.pathname);
-        }
-    }, [location])
+
 
     // useEffect(() => {
     //     if (url && config) {
@@ -84,19 +75,19 @@ const SearchResults = () => {
 
     return (
         <>
-            {
+            {/* {
                 <Modal open={view.open}>
                     {view.component}
                 </Modal>
-            }
-            {
+            } */}
+            {/* {
                 <Modal open={state.open}>
                     {state.component}
                 </Modal>
-            }
+            } */}
                 <Page
                     name={'search-results'}
-                title={search?.query}
+                title={location.state?.query}
                 >
                     <SearchParameters
                         setSearchFeatures={(value) => setSearchFeatures(value)}

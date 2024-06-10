@@ -10,7 +10,7 @@ const initialState = {
   inputValue: '',
   position: -200,
   predictions: [],
-  searchResult: [],
+  results: [],
   searchTerm: '',
   searchType: '',
   selection: '',
@@ -29,7 +29,7 @@ export const SearchProvider = ({ children }) => {
     inputValue,
     position,
     predictions,
-    searchResult,
+    results,
     searchTerm,
     searchType,
     selection,
@@ -74,9 +74,9 @@ export const SearchProvider = ({ children }) => {
 
   useEffect(() => {
     if (response) {
-      console.log(response)
+      // console.log(response)
       const sets = Object.assign({}, ...response)
-      console.log(sets)
+      // console.log(sets)
       setCardSets(sets);
     }
   }, [response])
@@ -132,7 +132,7 @@ export const SearchProvider = ({ children }) => {
         inputValue,
         position,
         predictions,
-        searchResult,
+        results,
         searchType,
         searchTerm,
         selection,

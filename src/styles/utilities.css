@@ -454,7 +454,11 @@
 }
 
 .card-radius {
-    border-radius: 4% !important;
+    border-radius: var(--card-radius) !important;
+}
+
+.print-radius {
+    border-radius: var(--print-radius) !important;
 }
 
 .b-radius-5 {

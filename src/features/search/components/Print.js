@@ -5,7 +5,7 @@ import useAuth from '../../../hooks/contexthooks/useAuth';
 import useFind from '../../../hooks/useFind';
 import useResponseHandler from '../../../hooks/useResponseHandler';
 
-const Print = ({ print }) => {
+const Print = ({ print, ModalImage }) => {
     const {
         handleGetResponse,
         handlePatchResponse,
@@ -17,6 +17,7 @@ const Print = ({ print }) => {
         error,
         isAdded,
     } = useResponseHandler();
+    console.log(ModalImage)
 
     const { auth } = useAuth();
 
@@ -46,12 +47,6 @@ const Print = ({ print }) => {
     return (
         <div className='flex print'>
             <Image classList={'print-image'} src={print.image_uris?.small || print.card_faces[0].image_uris?.small} />
-            {/* <img
-                className='print-image'
-                src={print.image_uris.small}
-                alt={`${print.name} card`}
-                loading="lazy"
-            /> */}
             <div className='col-9 flex'>
                 {
                     print.finishes.map((finish, i) => {

@@ -1,11 +1,12 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Set from '../features/search/components/Set';
+// import Set from '../features/search/components/Set';
 import useAuth from './contexthooks/useAuth';
 import useFetch from './useFetch';
 import useSearch from './contexthooks/useSearch';
-import { capitalize } from '../assets/utilities/capitalize';
+import useResults from './useResults';
 import { api } from '../api/resources';
+// import { capitalize } from '../assets/utilities/capitalize';
 import { trimProduct } from '../features/product/services/trimProduct';
 
 const useSearchForm = (inputRef) => {
@@ -24,6 +25,8 @@ const useSearchForm = (inputRef) => {
         cardSets
     } = useSearch();
 
+    const { handleSearchResults, searchResults } = useResults();
+
     const { fetch, error, response, loading } = useFetch();
 
     function handleSearch(term, exact = true) {
@@ -35,6 +38,7 @@ const useSearchForm = (inputRef) => {
             }
         });
     }
+
 
     function handleClearSearch() {
         dispatch({
@@ -51,6 +55,13 @@ const useSearchForm = (inputRef) => {
                 searchType: type,
             }
         });
+    }
+
+    function handleResults(results) {
+        dispatch({
+            type: 'results',
+            payload: results
+        })
     }
 
     function handleUpdateSearch(value, predictions) {
@@ -154,8 +165,9 @@ const useSearchForm = (inputRef) => {
     // Generates new card object if finishes property has more than one value : [nonfoil, foil, etched]
     // Returns new array
     const handleResponse = (cards) => {
+        console.log(cards)
         // Source @ https://stackoverflow.com/questions/63787449/javascript-group-array-of-objects-by-common-values-with-label
-        return Object.entries(cards.filter(card => !card.digital)
+        return Object.entries(cards?.filter(card => !card.digital)
             .map((card) => {
                 // Return trimmed product object
                 return trimProduct({ type: 'card', product: card });
@@ -191,19 +203,22 @@ const useSearchForm = (inputRef) => {
 
     useEffect(() => {
         if (response) {
-            const { path, query, type } = fetchParams.search;
-
+            const { type } = fetchParams.search;
+            // console.log('response')
             if (type === 'archive' && !oracleId) {
                 // set oracle id to fetch all versions
                 setOracleId(response.oracle_id);
             }
-            else {
-
+            else {  
+                console.log(response.length)
+                console.log(response)
+                // console.log(response.forEach(res => console.log(res)))
                 const data = type === 'archive' ? handleResponse(response) : response;
-                inputRef?.current?.blur();
                 console.log(data)
+
+                data && handleSearchResults(data, type)
+                // console.log(data)
                 // localStorage.setItem('search-results', JSON.stringify({ ...data }));
-                navigate(path, { state: { results: data, query, type } });
             }
 
         }
@@ -211,7 +226,19 @@ const useSearchForm = (inputRef) => {
             const { query } = fetchParams;
             navigate(`/not-found/${query.split(' ').join('+')}`);
         }
-    }, [error, response])
+    }, [error, response]);
+
+    useEffect(() => {
+        if (searchResults) {
+            const { path, query } = fetchParams.search;
+            // console.log('results', results)
+            inputRef?.current?.blur();
+            handleResults(searchResults);
+            // const { type, query, path } = fetchParams?.search;
+
+            navigate(path, { state: { query: query } });
+        }
+    }, [searchResults])
 
     return {
         getParams,
@@ -220,6 +247,7 @@ const useSearchForm = (inputRef) => {
         isActive,
         handleClearSearch,
         handleSearch,
+        handleResults,
         setIsActive,
         handleSetSearch,
         handleSelection,

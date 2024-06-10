@@ -2,12 +2,16 @@
 import { Outlet, useLocation } from 'react-router-dom';
 import MainHeader from './MainHeader';
 import MainFooter from './MainFooter'
+import Modal from '../features/modal/Modal';
 import useAuth from '../hooks/contexthooks/useAuth';
+import useModal from '../hooks/contexthooks/useModal';
 
 const RootLayout = () => {
     const location = useLocation();
-    const { isAuth } = useAuth();
     const path = location.pathname;
+
+    const { isAuth } = useAuth();
+    const { open, content } = useModal();
 
     return (
         <div className={`root-layout ${isAuth || path === '/login' || path === '/signup' ? 'bg-light' : 'bg-night'}`}>
@@ -18,10 +22,19 @@ const RootLayout = () => {
                     <Outlet />
 
                 ) : (
-                    <>
-                            <MainHeader />
-                            <Outlet />
-                            <MainFooter />
+                        <>      
+                            {
+                                !open ?
+                                    <>
+                                        <MainHeader />
+                                        <Outlet />
+                                        <MainFooter />
+                                    </>
+                                    :
+                                    <Modal open={open}>
+                                        {content}
+                                    </Modal>
+                            }
                     </>
                 )
             }

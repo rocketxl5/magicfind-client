@@ -36,7 +36,7 @@ const SlideShow = ({ slides, handleClick }) => {
 
     return (
         <div className={"slide-show"}>
-            <div className={"slide-frame"}>
+            <div className={"modal-frame"}>
                 <LeftBtn classList={`slide-btn slide-left-btn card-btn`} name={'left-btn'} handleClick={setSlideMotion} />
                 <RightBtn classList={`slide-btn slide-right-btn card-btn`} name={'right-btn'} handleClick={setSlideMotion} />
                 <CloseBtn classList={`slide-close-btn close-btn card-btn`} name={'close-btn'} handleClick={handleClick} />
