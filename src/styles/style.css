@@ -8,7 +8,8 @@
   --clr-secondary: rgb(225, 232, 237);
   --clr-surface:  rgb(80, 80, 80);
   --clr-eclipse: rgb(41, 46, 51);
-  --clr-alloy: rgb(65, 78, 87);
+  --clr-alloy: rgb(75, 79, 83);
+  /* --clr-alloy: rgb(51, 61, 68); */
   --clr-ternary: rgb(250, 250, 211);
   --clr-dark: #2C2C2C;
   --clr-night: rgb(34, 36, 40);
@@ -1830,8 +1831,8 @@ text-align: center;
 }
 
 .page-title {
-  font-size: var(--fs-250);
-  font-weight: 300;
+  font-size: var(--fs-200);
+  font-weight: 400;
   border-bottom: 1px solid var(--clr-eclipse);
 }
 
@@ -1938,9 +1939,10 @@ text-align: center;
 
 .print {
   padding: 0.5rem;
-  background: var(--clr-light-grey);
+  background: var(--clr-alloy);
   /* border: 1px solid var(--clr-eclipse); */
   border-radius: 5px;
+  color: var(--clr-light);
   box-shadow: var(--print-shadow);
 }
 
