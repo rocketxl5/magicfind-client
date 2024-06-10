@@ -6,11 +6,10 @@ const Set = ({ set }) => {
 
     const { cardSets } = useSearch();
 
-    const { imagesLoaded, setUris } = useImageLoader(set.prints); 
+    const { imagesLoaded, setUris } = useImageLoader(); 
 
     useEffect(() => {
-        const uris = set.prints.map(print => print.image_uris ? print.image_uris.normal : print.card_face.image_uris.normal)
-        setUris(uris)
+        setUris(set.prints.map(print => print.image_uris ? print.image_uris.normal : print.card_face.image_uris.normal))
     }, [])
 
     return (
