@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import Set from '../features/search/components/Set';
-import useSearch from './contexthooks/useSearch';
 import useSlideView from './useSlideView';
 import useCollectionModal from './useCollectionModal';
 
