@@ -17,7 +17,7 @@ const Print = ({ print, ModalImage }) => {
         error,
         isAdded,
     } = useResponseHandler();
-    console.log(ModalImage)
+    // console.log(ModalImage)
 
     const { auth } = useAuth();
 

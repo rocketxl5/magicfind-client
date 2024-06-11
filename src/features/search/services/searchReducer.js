@@ -25,11 +25,6 @@ export const searchReducer = (state, action) => {
                 inputValue: action.payload.term,
                 exact: action.payload.exact
             }
-        case 'results':
-            return {
-                ...state,
-                results: action.payload
-            }
         case 'set-search':
             return {
                 ...state,

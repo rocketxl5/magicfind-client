@@ -68,7 +68,7 @@ const SearchForm = ({ children, classList, type, placeholder, cardNames, inputRe
 
     const handleFocus = (e) => {
         setIsActive(true);
-        handleSetSearch(cardNames, e.target.id);
+        handleSetSearch(e, cardNames);
     }
 
     useEffect(() => {

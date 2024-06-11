@@ -12,8 +12,9 @@ import SearchParameters from '../../features/search/components/SearchParameters'
 import useCollectionModal from '../../hooks/useCollectionModal';
 import useSlideView from '../../hooks/useSlideView';
 import useImageLoader from '../../hooks/useImageLoader';
-// import useResult from '../../hooks/useResult';
+import useResults from '../../hooks/useResults';
 import useSearch from '../../hooks/contexthooks/useSearch';
+import useSearchForm from '../../hooks/useSearchForm';
 
 const SearchResults = () => {
     // States
@@ -24,6 +25,18 @@ const SearchResults = () => {
     const navigate = useNavigate();
 
     const { results } = useSearch();
+    const { handleSearchResults } = useResults();
+
+    useEffect(() => {
+        if (!results && localStorage.getItem('search-results')) {
+            const { data, props } = JSON.parse(localStorage.getItem('search-results'))
+            handleSearchResults(data, props);
+        }
+    }, [])
+
+    // useEffect(() => {
+    //     console.log(results)
+    // }, [results])
 
     // const [imagesLoaded] = useImageLoader(search?.data);
 
@@ -32,8 +45,6 @@ const SearchResults = () => {
     // const [state, updateCollectionItem] = useCollectionModal(search?.type, handleCollectionItem);
 
     // const { results } = useResult(search);
-
-
 
     // useEffect(() => {
     //     if (url && config) {
@@ -96,8 +107,7 @@ const SearchResults = () => {
 
                     <div className="list">
                         {
-                        results &&
-                        results.map((result, i) => {
+                        results?.map((result, i) => {
                                 return (
                                     result
                                     // <Card
