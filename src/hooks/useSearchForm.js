@@ -1,12 +1,10 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-// import Set from '../features/search/components/Set';
 import useAuth from './contexthooks/useAuth';
 import useFetch from './useFetch';
 import useSearch from './contexthooks/useSearch';
 import useResults from './useResults';
 import { api } from '../api/resources';
-// import { capitalize } from '../assets/utilities/capitalize';
 import { trimProduct } from '../features/product/services/trimProduct';
 
 const useSearchForm = (inputRef) => {
@@ -21,11 +19,10 @@ const useSearchForm = (inputRef) => {
     const {
         exact,
         dispatch,
-        initialState,
-        cardSets
+        initialState
     } = useSearch();
 
-    const { handleSearchResults, searchResults } = useResults();
+    const { handleSearchResults } = useResults(inputRef);
 
     const { fetch, error, response, loading } = useFetch();
 
@@ -39,7 +36,6 @@ const useSearchForm = (inputRef) => {
         });
     }
 
-
     function handleClearSearch() {
         dispatch({
             type: 'clear-search',
@@ -47,21 +43,14 @@ const useSearchForm = (inputRef) => {
         })
     }
 
-    function handleSetSearch(names, type) {
+    function handleSetSearch(event, names) {
         dispatch({
             type: 'set-search',
             payload: {
                 cardNames: names,
-                searchType: type,
+                searchType: event.target.id,
             }
         });
-    }
-
-    function handleResults(results) {
-        dispatch({
-            type: 'results',
-            payload: results
-        })
     }
 
     function handleUpdateSearch(value, predictions) {
@@ -101,11 +90,12 @@ const useSearchForm = (inputRef) => {
     }
 
     const setString = (str) => {
+        console.log(str)
         return str.toLowerCase()
             .replaceAll(/["/,]/g, '')
             .replace('  ', ' ')
             .split(' ')
-            .join('-')
+            .join('-');
     }
 
     // type ['archive' || 'catalog' || 'collection']
@@ -165,21 +155,22 @@ const useSearchForm = (inputRef) => {
     // Generates new card object if finishes property has more than one value : [nonfoil, foil, etched]
     // Returns new array
     const handleResponse = (cards) => {
-        console.log(cards)
         // Source @ https://stackoverflow.com/questions/63787449/javascript-group-array-of-objects-by-common-values-with-label
-        return Object.entries(cards?.filter(card => !card.digital)
-            .map((card) => {
-                // Return trimmed product object
-                return trimProduct({ type: 'card', product: card });
-            })
-            .reduce((accumulator, { set_id, ...rest }) => {
-                if (!accumulator[set_id]) accumulator[set_id] = [];
+        if (cards) {
+            return Object.entries(cards?.filter(card => !card.digital)
+                .map((card) => {
+                    // Return trimmed product object
+                    return trimProduct({ type: 'card', product: card });
+                })
+                .reduce((accumulator, { set_id, ...rest }) => {
+                    if (!accumulator[set_id]) accumulator[set_id] = [];
 
-                accumulator[set_id].push({ set_id, ...rest });
+                    accumulator[set_id].push({ set_id, ...rest });
 
-                return accumulator;
-            }, []))
-            .map(([id, prints]) => ({ id, prints }))
+                    return accumulator;
+                }, []))
+                .map(([id, prints]) => ({ id, prints }))
+        }
     }
 
     useEffect(() => {
@@ -203,42 +194,22 @@ const useSearchForm = (inputRef) => {
 
     useEffect(() => {
         if (response) {
-            const { type } = fetchParams.search;
-            // console.log('response')
+            const { path, query, type } = fetchParams.search;
             if (type === 'archive' && !oracleId) {
                 // set oracle id to fetch all versions
                 setOracleId(response.oracle_id);
             }
             else {  
-                console.log(response.length)
-                console.log(response)
-                // console.log(response.forEach(res => console.log(res)))
                 const data = type === 'archive' ? handleResponse(response) : response;
-                console.log(data)
-
-                data && handleSearchResults(data, type)
-                // console.log(data)
-                // localStorage.setItem('search-results', JSON.stringify({ ...data }));
+                data && handleSearchResults(data, { path, query, type });
+                inputRef?.current.blur();
             }
-
         }
         if (error) {
             const { query } = fetchParams;
             navigate(`/not-found/${query.split(' ').join('+')}`);
         }
     }, [error, response]);
-
-    useEffect(() => {
-        if (searchResults) {
-            const { path, query } = fetchParams.search;
-            // console.log('results', results)
-            inputRef?.current?.blur();
-            handleResults(searchResults);
-            // const { type, query, path } = fetchParams?.search;
-
-            navigate(path, { state: { query: query } });
-        }
-    }, [searchResults])
 
     return {
         getParams,
@@ -247,7 +218,6 @@ const useSearchForm = (inputRef) => {
         isActive,
         handleClearSearch,
         handleSearch,
-        handleResults,
         setIsActive,
         handleSetSearch,
         handleSelection,

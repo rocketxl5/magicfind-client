@@ -5,7 +5,7 @@ import capitalizeString from '../assets/utilities/capitalizeString';
 
 const Breadcrumbs = () => {
     const location = useLocation();
-    const path = location.pathname;
+    const path = decodeURI(location.pathname);
     ////////////////////////////////////////
     // Exclude breadcrumbs 
     // @ catalog search results / 
@@ -25,7 +25,9 @@ const Breadcrumbs = () => {
     let currentLink = ''
 
     const crumbs = path.split('/')
-        .filter(crumb => crumb !== '')
+        .filter(crumb => {
+            return crumb !== ''
+        })
         .map((crumb, i) => {
             currentLink += `/${crumb}`;
             return (

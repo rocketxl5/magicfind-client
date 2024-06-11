@@ -10,7 +10,6 @@ const initialState = {
   inputValue: '',
   position: -200,
   predictions: [],
-  results: [],
   searchTerm: '',
   searchType: '',
   selection: '',
@@ -29,13 +28,13 @@ export const SearchProvider = ({ children }) => {
     inputValue,
     position,
     predictions,
-    results,
     searchTerm,
     searchType,
     selection,
     tracker,
   } = state || {};
 
+  const [results, setResults] = useState(null)
   const [cardSets, setCardSets] = useState(null);
   const [cardCollection, setCardCollection] = useState([]);
   const [archiveCardNames, setArchiveCardNames] = useState(null);
@@ -70,7 +69,7 @@ export const SearchProvider = ({ children }) => {
       // Fetch card sets array of objects
       fetch(url, config);
     }
-  }, [])
+  }, []);
 
   useEffect(() => {
     if (response) {
@@ -79,7 +78,14 @@ export const SearchProvider = ({ children }) => {
       // console.log(sets)
       setCardSets(sets);
     }
-  }, [response])
+  }, [response]);
+
+  // useEffect(() => {
+  //   if (results) {
+  //     console.log(results);
+  //     localStorage.setItem('search-results', JSON.stringify(results));
+  //   }
+  // }, [results])
 
   // Returns array of unique card names
   const filterCardNames = (cards) => {
@@ -107,6 +113,8 @@ export const SearchProvider = ({ children }) => {
         setCardCollection,
         isCollectionEmpty,
         setIsCollectionEmpty,
+        results,
+        setResults,
         cardSets,
         setCardSets,
         archiveCardNames,
@@ -132,7 +140,6 @@ export const SearchProvider = ({ children }) => {
         inputValue,
         position,
         predictions,
-        results,
         searchType,
         searchTerm,
         selection,
