@@ -6,26 +6,26 @@ const Image = ({ classList, src }) => {
     const { setModal } = useShowModal();
 
     return (
+        
         <figure className='product-view'>
-            <div className={`product-view-container`}>
-                {/* <div className={`product-view-container ${product.finishes?.includes('foil') && 'is-foil'}`}> */}
-                {
-                    !hasLoaded ? (
-                        <img className='print-radius' src={require('../assets/img/mtg_card_back.jpg')} alt='Magic back card' />
-                    ) : (
-                        // <Link to={`/product/${product.name}`}>
-                        <img
-                            className={classList}
-                                src={src}
-                                alt={`Card`}
-                                onClick={() => setModal({ type: 'caroussel', content: 'Image of me' })}
-                            loading="lazy"
-                        />
-                        // </Link>
-                        )
-                }
-            </div>
+           { !hasLoaded ? (
+                <img className='print-radius' src={require('../assets/img/mtg_card_back.jpg')} alt='Magic back card' />
+            ) : (
+                // <Link to={`/product/${product.name}`}>
+                <img
+                    className={classList}
+                        src={src}
+                        alt={`Card`}
+                        onClick={() => setModal({ type: 'caroussel', content: 'Image of me' })}
+                    loading="lazy"
+                />
+                // </Link>
+                )}
         </figure>
+            // <div className={`product-view-container`}>
+                //  <div className={`product-view-container ${product.finishes?.includes('foil') && 'is-foil'}`}> 
+                // 
+        //     </div>
     )
 }
 

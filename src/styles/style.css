@@ -1943,7 +1943,9 @@ text-align: center;
 }
 
 .print {
-  padding: 0.5rem;
+  display: flex;
+  gap: 1rem;
+  padding: 0.75rem;
   background: var(--clr-alloy);
   /* border: 1px solid var(--clr-eclipse); */
   border-radius: 5px;
@@ -1951,6 +1953,20 @@ text-align: center;
   font-size: var(--fs-125);
   font-weight: 400;
   box-shadow: var(--print-shadow);
+}
+
+.finishes {
+  display: flex;
+  width: 70%;
+  gap: 1rem;
+}
+
+.finish {
+  flex-grow: 1;
+  /* margin: auto; */
+  text-align: center;
+  padding: 0.5rem;
+  /* border: 1px solid white; */
 }
 
 figure.product-view {
