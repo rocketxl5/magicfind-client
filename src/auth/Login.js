@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import Loader from '../layout/Loader';
 import errorHandler from './helpers/authErrorHandler';
-import useAuth from '../hooks/contexthooks/useAuth';
+import useAuthContext from '../hooks/contexthooks/useAuthContext';
 import { api } from '../api/resources';
 
 const INIT = {
@@ -31,7 +31,7 @@ const Login = () => {
   const passwordRef = useRef(null);
 
   // Custom Hooks
-  const { setAuth } = useAuth();
+  const { setAuth } = useAuthContext();
 
   const inputs = {
     email: emailRef.current,

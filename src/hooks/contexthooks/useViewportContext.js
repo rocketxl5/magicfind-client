@@ -1,8 +1,8 @@
 import { useContext } from 'react';
 import { ViewportContext } from '../../contexts/ViewportContext';
 
-const useViewport = () => {
+const useViewportContext = () => {
     return useContext(ViewportContext);
 }
 
-export default useViewport;
+export default useViewportContext;

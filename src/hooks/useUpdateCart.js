@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { useState } from 'react';
-import useCart from './contexthooks/useCart';
+import useCartContext from './contexthooks/useCartContext';
 // import useAxios from './useAxios';
 import { FaRegTimesCircle } from "react-icons/fa";
 import { BsExclamationCircle } from "react-icons/bs";
@@ -11,7 +11,7 @@ const useUpdateCart = (url, headers, item, indexFound = undefined) => {
     const [loading, setLoading] = useState(false);
     const [quantityAvailable, setQuantityAvailable] = useState(0);
 
-    const { dispatch, cartItems, setCartUpdate, cartUpdate } = useCart();
+    const { dispatch, cartItems, setCartUpdate, cartUpdate } = useCartContext();
 
     const Update = ({ children }) => {
         return (

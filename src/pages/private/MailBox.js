@@ -8,14 +8,14 @@ import MailHeader from '../../features/mail/MailHeader';
 import ComposeMessage from '../../features/mail/ComposeMessage';
 import Loader from '../../layout/Loader';
 import Message from '../../features/mail/Message';
-import useAuth from '../../hooks/contexthooks/useAuth';
+import useAuthContext from '../../hooks/contexthooks/useAuthContext';
 import { PathContext } from '../../contexts/PathContext';
 import { api } from '../../api/resources';
 import styled from 'styled-components';
 import { mailReducer } from '../../features/mail/services/mailReducer';
 
 const MailBox = () => {
-  const { auth, setUnreadMail } = useAuth();
+  const { auth, setUnreadMail } = useAuthContext();
   // const { pathname, setPathname } = useContext(PathContext);
 
   const location = useLocation();

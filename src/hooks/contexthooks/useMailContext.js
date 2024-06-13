@@ -1,8 +1,8 @@
 import { useContext } from 'react';
 import { MailContext } from '../../contexts/MailContext';
 
-const useInbox = () => {
+const useMailContext = () => {
     return useContext(MailContext);
 }
 
-export default useInbox;
+export default useMailContext;

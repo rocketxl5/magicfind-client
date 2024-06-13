@@ -4,7 +4,7 @@ import Page from '../../components/Page.js';
 import Loader from '../../layout/Loader.js';
 import Message from '../../components/Message.js';
 import SearchForm from '../../features/search/SearchForm.js';
-import useSearch from '../../hooks/contexthooks/useSearch.js';
+import useSearchContext from '../../hooks/contexthooks/useSearchContext.js';
 import useSearchForm from '../../hooks/useSearchForm.js';
 
 const Collection = () => {
@@ -13,7 +13,7 @@ const Collection = () => {
         isCollectionEmpty,
         collectionCardNames,
         collectionInputRef,
-    } = useSearch();
+    } = useSearchContext();
 
     const {
         getParams,

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import useAxios from './useAxios';
-import useSearch from './contexthooks/useSearch';
+import useSearchContext from './contexthooks/useSearchContext';
 import { trimProduct } from '../features/product/services/trimProduct';
 import { api } from '../api/resources';
 
@@ -8,7 +8,7 @@ const useResponseHandler = () => {
     const [loading, setLoading] = useState(false);
     const [isAdded, setIsCardAdded] = useState(false);
 
-    const { setUpdateCollection } = useSearch();
+    const { setUpdateCollection } = useSearchContext();
     const { fetch, patch, post, response, error } = useAxios();
 
     const handleFetch = (id, token) => {

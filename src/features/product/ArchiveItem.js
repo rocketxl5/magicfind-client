@@ -9,10 +9,10 @@ import Loader from '../../layout/Loader';
 import Table from '../../components/Table';
 import TwoSidedSlide from '../modal/components/TwoSidedSlide';
 import useResponseHandler from '../../hooks/useResponseHandler';
-import useAuth from '../../hooks/contexthooks/useAuth';
+import useAuthContext from '../../hooks/contexthooks/useAuthContext';
 import useExpandImage from '../../hooks/useExpandImage';
 import useFind from '../../hooks/useFind';
-import useSearch from '../../hooks/contexthooks/useSearch';
+import useSearchContext from '../../hooks/contexthooks/useSearchContext';
 import useTable from '../../hooks/useTable';
 import { IoExpand } from "react-icons/io5";
 import { FaCheck } from "react-icons/fa6";
@@ -37,8 +37,8 @@ const ArchiveItem = ({ index, product, count, handleSlideView }) => {
     const { expandedImage } = useExpandImage(product);
     const { findMatch, isMatchFound } = useFind();
     const { rows, setTable } = useTable();
-    const { auth } = useAuth();
-    const { cardSets } = useSearch();
+    const { auth } = useAuthContext();
+    const { cardSets } = useSearchContext();
 
     const cardRef = useRef(null);
     const frontSideRef = useRef(null);

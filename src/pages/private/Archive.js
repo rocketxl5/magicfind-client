@@ -2,11 +2,11 @@ import { useRef, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import Page from '../../components/Page.js';
 import SearchForm from '../../features/search/SearchForm.js';
-import useSearch from '../../hooks/contexthooks/useSearch.js';
+import useSearchContext from '../../hooks/contexthooks/useSearchContext.js';
 
 const Search = () => {
     const archiveInputRef = useRef(null);
-    const { archiveCardNames } = useSearch();
+    const { archiveCardNames } = useSearchContext();
     const location = useLocation();
 
     useEffect(() => {

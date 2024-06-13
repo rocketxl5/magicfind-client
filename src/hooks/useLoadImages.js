@@ -4,14 +4,11 @@
 
 import { useState, useEffect, createElement } from 'react';
 
-const useImageLoader = () => {
-    const [imagesLoaded, setImagesLoaded] = useState(false);
+const useLoadImages = () => {
     const [images, setImages] = useState(null);
-    const [uris, setUris] = useState(null);
 
     // Fetch & load images from uris array
-    useEffect(() => {
-        if (uris) {
+    const loadImages = (uris) => {
 
         const loadImage = url => {
             return new Promise((resolve, reject) => {
@@ -22,7 +19,7 @@ const useImageLoader = () => {
                 image.onerror = error => reject(error);
             });
         }
-            Promise.all(uris.map(url => loadImage(url)))
+        Promise.all(uris.map(url => loadImage(url)))
             .then((data) => {
                 if (data) {
                     // console.log(data)
@@ -36,14 +33,12 @@ const useImageLoader = () => {
                             alt: 'MTG product image'
                         })
                     }))
-                    // setImagesLoaded(true);
                 }
             })
             .catch(error => console.log('Image load has failed', error))
-        }
-    }, [uris])
+    }
 
-    return { imagesLoaded, setUris, images }
+    return { images, loadImages }
 }
 
-export default useImageLoader
+export default useLoadImages

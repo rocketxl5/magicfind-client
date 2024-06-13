@@ -11,8 +11,8 @@ import Image from '../../components/Image';
 import Avatar from '../../components/Avatar';
 import Loader from '../../layout/Loader';
 import data from '../../data/SEARCH.json';
-import useViewport from '../../hooks/contexthooks/useViewport';
-import useCart from '../../hooks/contexthooks/useCart';
+import useViewportContext from '../../hooks/contexthooks/useViewportContext';
+import useCartContext from '../../hooks/contexthooks/useCartContext';
 import useUpdateCart from '../../hooks/useUpdateCart';
 // import useAxios from '../../hooks/useAxios';
 import { AiOutlineDelete } from "react-icons/ai";
@@ -30,8 +30,8 @@ const CartItem = ({ index, count, product }) => {
     'Content-Type': 'application/json'
   };
 
-  const { isMobile } = useViewport();
-  const { cartItems, cartUpdate } = useCart();
+  const { isMobile } = useViewportContext();
+  const { cartItems, cartUpdate } = useCartContext();
   // const {fetch} = useAxios();
   const { loading, quantityAvailable, currentStatus, updateCartHandler } = useUpdateCart(url, headers, product, index);
 

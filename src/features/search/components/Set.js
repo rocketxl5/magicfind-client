@@ -1,15 +1,17 @@
 import { useEffect } from 'react';
 import Print from './Print';
-import useImageLoader from '../../../hooks/useImageLoader';
-import useSearch from '../../../hooks/contexthooks/useSearch'
+// import useLoadImages from '../../../hooks/useLoadImages';
+import useSearchContext from '../../../hooks/contexthooks/useSearchContext';
+import useModal from '../../../hooks/useModal';
+
 const Set = ({ set }) => {
 
-    const { cardSets } = useSearch();
+    const { cardSets } = useSearchContext();
 
-    const { setUris, images } = useImageLoader(); 
+    const { handleModalImageUris } = useModal();
 
     useEffect(() => {
-        setUris(set.prints.map(print => print?.image_uris ? print?.image_uris.normal : print?.card_faces[0].image_uris.normal))
+        handleModalImageUris(set.prints.map(print => print?.image_uris ? print?.image_uris.normal : print?.card_faces[0].image_uris.normal))
     }, []);
 
     return (
@@ -28,9 +30,8 @@ const Set = ({ set }) => {
                     </div>
                     <div className='set-prints'>
                         {
-                            images &&
                             set?.prints.map((print, i) => {
-                                return <Print key={i} print={print} ModalImage={() => <img {...images[i].props} alt={images[i].props.alt} />} />
+                                return <Print key={i} index={i} print={print} />
                             })
                         }
                     </div>

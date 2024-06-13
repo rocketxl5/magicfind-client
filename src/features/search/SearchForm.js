@@ -1,13 +1,13 @@
 import { useEffect } from 'react';
 import AutoComplete from './components/AutoComplete';
 import Loader from '../../layout/Loader';
-import useNav from '../../hooks/contexthooks/useNavbar';
+import useNavContext from '../../hooks/contexthooks/useNavContext';
 import useNavButton from '../../hooks/useNavButton';
-import useSearch from '../../hooks/contexthooks/useSearch';
+import useSearchContext from '../../hooks/contexthooks/useSearchContext';
 import useSearchForm from '../../hooks/useSearchForm';
 
 const SearchForm = ({ children, classList, type, placeholder, cardNames, inputRef }) => {
-    const { searchBarRef, displaySearchBar } = useNav();
+    const { searchBarRef, displaySearchBar } = useNavContext();
     const {handleSearchBar} = useNavButton();
     // Search Context
     const { 
@@ -15,7 +15,7 @@ const SearchForm = ({ children, classList, type, placeholder, cardNames, inputRe
         predictions,
         searchTerm,
         selection,
-    } = useSearch();
+    } = useSearchContext();
 
     const {
         getParams,

@@ -1,9 +1,9 @@
 import { FiSearch } from 'react-icons/fi';
-import useNav from '../../../hooks/contexthooks/useNavbar';
+import useNavContext from '../../../hooks/contexthooks/useNavContext';
 import useNavButton from '../../../hooks/useNavButton';
 
 const SearchBtn = () => {
-    const { searchBtnRef } = useNav();
+    const { searchBtnRef } = useNavContext();
     const { handleSearchBar } = useNavButton();
 
     return (

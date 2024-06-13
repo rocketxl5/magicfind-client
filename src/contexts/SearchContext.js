@@ -1,6 +1,6 @@
 import { useState, useEffect, useReducer, useRef, createContext } from 'react';
 import { searchReducer } from '../features/search/services/searchReducer';
-import useAuth from '../hooks/contexthooks/useAuth';
+import useAuthContext from '../hooks/contexthooks/useAuthContext';
 import useFetch from '../hooks/useFetch';
 import { api } from '../api/resources';
 
@@ -50,7 +50,7 @@ export const SearchProvider = ({ children }) => {
   // Mount state @ Collection initial fetch 
   const [isCollectionEmpty, setIsCollectionEmpty] = useState(true);
 
-  const { auth } = useAuth();
+  const { auth } = useAuthContext();
   const { fetch, response, error } = useFetch();
 
   // Search field Refs

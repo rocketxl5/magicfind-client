@@ -4,12 +4,12 @@ import Hamburger from './buttons/Hamburger';
 import SignInBtn from './buttons/SignInBtn';
 import AuthBtn from './buttons/AuthBtn';
 import CartBtn from './buttons/CartBtn';
-import useAuth from '../../hooks/contexthooks/useAuth';
-import useViewport from '../../hooks/contexthooks/useViewport';
+import useAuthContext from '../../hooks/contexthooks/useAuthContext';
+import useViewportContext from '../../hooks/contexthooks/useViewportContext';
 
 const NavBtns = () => {
-    const { isAuth } = useAuth();
-    const { isMobile } = useViewport();
+    const { isAuth } = useAuthContext();
+    const { isMobile } = useViewportContext();
 
     return (
         <div className="nav-btns" >

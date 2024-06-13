@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import useAuth from './contexthooks/useAuth';
+import useAuthContext from './contexthooks/useAuthContext';
 import useFetch from './useFetch';
-import useSearch from './contexthooks/useSearch';
+import useSearchContext from './contexthooks/useSearchContext';
 import useResults from './useResults';
 import { api } from '../api/resources';
 import { trimProduct } from '../features/product/services/trimProduct';
@@ -14,13 +14,13 @@ const useSearchForm = (inputRef) => {
 
     const navigate = useNavigate();
 
-    const { auth } = useAuth();
+    const { auth } = useAuthContext();
 
     const {
         exact,
         dispatch,
         initialState
-    } = useSearch();
+    } = useSearchContext();
 
     const { handleSearchResults } = useResults(inputRef);
 

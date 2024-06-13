@@ -3,14 +3,14 @@ import { useLocation } from 'react-router-dom';
 import Loader from '../../layout/Loader';
 import Page from '../../components/Page';
 import useAxios from '../../hooks/useAxios';
-import useAuth from '../../hooks/contexthooks/useAuth';
+import useAuthContext from '../../hooks/contexthooks/useAuthContext';
 
 const Store = () => {
     const [hasLoaded, setHasLoaded] = useState(false);
     const [cards, setCards] = useState([])
     const location = useLocation();
 
-    const { isAuth, auth } = useAuth();
+    const { isAuth, auth } = useAuthContext();
     const { fetch, loading, showConfirmation, error, result } = useAxios();
 
     useEffect(() => {

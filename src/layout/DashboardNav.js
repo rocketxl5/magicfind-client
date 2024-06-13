@@ -1,9 +1,9 @@
 import { useEffect } from 'react';
 import { NavLink, useParams } from 'react-router-dom'
-import useAuth from '../hooks/contexthooks/useAuth';
+import useAuthContext from '../hooks/contexthooks/useAuthContext';
 import useFetch from '../hooks/useFetch';
-import useSearch from '../hooks/contexthooks/useSearch';
-import useMail from '../hooks/contexthooks/useMail';
+import useSearchContext from '../hooks/contexthooks/useSearchContext';
+import useMailContext from '../hooks/contexthooks/useMailContext';
 import { api } from '../api/resources';
 import data from '../data/LINKS.json';
 
@@ -17,10 +17,10 @@ const DashboardNav = () => {
         isCollectionEmpty,
         setIsCollectionEmpty,
         setCardCollection
-    } = useSearch();
+    } = useSearchContext();
 
-    const { auth } = useAuth();
-    const { setMailCount } = useMail();
+    const { auth } = useAuthContext();
+    const { setMailCount } = useMailContext();
     const { fetchAll, fetch, error, response } = useFetch();
     const { query } = useParams();
 
