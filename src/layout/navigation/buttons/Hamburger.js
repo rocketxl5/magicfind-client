@@ -1,8 +1,8 @@
-import useNav from '../../../hooks/contexthooks/useNavbar';
+import useNavContext from '../../../hooks/contexthooks/useNavContext';
 import useNavButton from '../../../hooks/useNavButton';
 
 const Hamburger = () => {
-    const { hamburgerRef, openHamburger } = useNav();
+    const { hamburgerRef, openHamburger } = useNavContext();
     const { handleHamburger } = useNavButton();
 
 

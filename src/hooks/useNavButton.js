@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
-import useNav from './contexthooks/useNavbar';
-import useAuth from './contexthooks/useAuth';
-import useViewport from './contexthooks/useViewport';
+import useNavContext from './contexthooks/useNavContext';
+import useAuthContext from './contexthooks/useAuthContext';
+import useViewportContext from './contexthooks/useViewportContext';
 
 // Handles control of Navbar buttons @ MainHeader
 const useNavButton = () => {
@@ -10,10 +10,10 @@ const useNavButton = () => {
         dispatch,
         displayMenu,
         displaySearchBar,
-    } = useNav();
+    } = useNavContext();
 
-    const { isMobile } = useViewport();
-    const { isAuth } = useAuth();
+    const { isMobile } = useViewportContext();
+    const { isAuth } = useAuthContext();
 
     function handleHamburger(open) {
         if (!open && displaySearchBar) {

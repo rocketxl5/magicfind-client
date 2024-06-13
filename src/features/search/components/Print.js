@@ -1,11 +1,11 @@
 import { useEffect, useRef } from 'react';
 import Finish from './Finish';
 import Image from '../../../components/Image';
-import useAuth from '../../../hooks/contexthooks/useAuth';
+import useAuthContext from '../../../hooks/contexthooks/useAuthContext';
 import useFind from '../../../hooks/useFind';
 import useResponseHandler from '../../../hooks/useResponseHandler';
 
-const Print = ({ print, ModalImage }) => {
+const Print = ({ index, print }) => {
     const {
         handleGetResponse,
         handlePatchResponse,
@@ -17,9 +17,8 @@ const Print = ({ print, ModalImage }) => {
         error,
         isAdded,
     } = useResponseHandler();
-    console.log(print)
 
-    const { auth } = useAuth();
+    const { auth } = useAuthContext();
 
     // const { findMatch, isMatchFound } = useFind();
 
@@ -46,7 +45,7 @@ const Print = ({ print, ModalImage }) => {
     // }, [response]);
     return (
         <div className='flex print'>
-            <Image classList={'image-print'} src={print.image_uris?.small || print.card_faces[0].image_uris?.small} />
+            <Image classList={'image-print'} src={print.image_uris?.small || print.card_faces[0].image_uris?.small} index={index} />
             <div className='finishes'>
                 {
                     print.finishes.map((finish, i) => {

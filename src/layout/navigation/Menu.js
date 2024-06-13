@@ -1,12 +1,12 @@
 import { Link, NavLink } from 'react-router-dom';
-import useAuth from '../../hooks/contexthooks/useAuth';
+import useAuthContext from '../../hooks/contexthooks/useAuthContext';
 import data from '../../data/ROUTES.json';
-import useNav from '../../hooks/contexthooks/useNavbar';
+import useNavContext from '../../hooks/contexthooks/useNavContext';
 import useNavButton from '../../hooks/useNavButton';
 
 function Menu() {
-    const { isAuth, logoutAction } = useAuth();
-    const { menuRef } = useNav();
+    const { isAuth, logoutAction } = useAuthContext();
+    const { menuRef } = useNavContext();
     const { handleMenu } = useNavButton();
 
     // Declares menus related variables

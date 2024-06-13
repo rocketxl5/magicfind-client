@@ -11,9 +11,9 @@ import Page from '../../components/Page';
 import SearchParameters from '../../features/search/components/SearchParameters';
 import useCollectionModal from '../../hooks/useCollectionModal';
 import useSlideView from '../../hooks/useSlideView';
-import useImageLoader from '../../hooks/useImageLoader';
+import useLoadImages from '../../hooks/useLoadImages';
 import useResults from '../../hooks/useResults';
-import useSearch from '../../hooks/contexthooks/useSearch';
+import useSearchContext from '../../hooks/contexthooks/useSearchContext';
 import useSearchForm from '../../hooks/useSearchForm';
 
 const SearchResults = () => {
@@ -24,7 +24,7 @@ const SearchResults = () => {
     const location = useLocation();
     const navigate = useNavigate();
 
-    const { results } = useSearch();
+    const { results } = useSearchContext();
     const { handleSearchResults } = useResults();
 
     useEffect(() => {
@@ -38,7 +38,7 @@ const SearchResults = () => {
     //     console.log(results)
     // }, [results])
 
-    // const [imagesLoaded] = useImageLoader(search?.data);
+    // const [imagesLoaded] = useLoadImages(search?.data);
 
     // const [view, updateSlideView] = useSlideView(handleSlideView);
 

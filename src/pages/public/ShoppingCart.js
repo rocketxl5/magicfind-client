@@ -7,7 +7,7 @@ import CartUpdate from '../../features/cart/components/CartUpdate';
 import CartEmpty from '../../features/cart/components/CartEmpty';
 import Container from '../../components/Container';
 import Aside from '../../components/Aside';
-import useCart from '../../hooks/contexthooks/useCart';
+import useCartContext from '../../hooks/contexthooks/useCartContext';
 
 function ShoppingCart() {
 
@@ -16,7 +16,7 @@ function ShoppingCart() {
     subTotal,
     itemsCount,
     cartUpdate
-  } = useCart();
+  } = useCartContext();
 
   const navigate = useNavigate();
 

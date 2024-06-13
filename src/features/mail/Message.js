@@ -4,7 +4,7 @@ import { FiArrowLeftCircle } from 'react-icons/fi';
 import { timestampConverter } from '../../assets/utilities/timestampConverter';
 import getPath from '../../assets/utilities/getPath';
 import { PathContext } from '../../contexts/PathContext';
-import useAuth from '../../hooks/contexthooks/useAuth';
+import useAuthContext from '../../hooks/contexthooks/useAuthContext';
 import { api } from '../../api/resources';
 import styled from 'styled-components';
 
@@ -12,7 +12,7 @@ const Message = ({ currentMessage, setMessages, setLoading }) => {
   const navigate = useNavigate();
   const location = useLocation();
   const { pathname, setPathname } = useContext(PathContext);
-  const { auth } = useAuth();
+  const { auth } = useAuthContext();
 
   useEffect(() => {
     if (!currentMessage) {

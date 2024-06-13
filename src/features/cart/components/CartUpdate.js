@@ -1,7 +1,7 @@
-import useCart from '../../../hooks/contexthooks/useCart'
+import useCartContext from '../../../hooks/contexthooks/useCartContext'
 
 const CartUpdate = ({ updates }) => {
-    const { updateRef } = useCart();
+    const { updateRef } = useCartContext();
 
     return (
         <div className='cart-update-wrapper' ref={updateRef}>

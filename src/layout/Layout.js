@@ -2,12 +2,12 @@ import { Outlet, useLocation } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import Banner from './Banner';
 import Loader from './Loader';
-import useSearch from '../hooks/contexthooks/useSearch';
+import useSearchContext from '../hooks/contexthooks/useSearchContext';
 import data from '../data/BANNERS.json';
 
 const Layout = () => {
     const location = useLocation();
-    const { loading } = useSearch();
+    const { loading } = useSearchContext();
     const path = location.pathname;
 
     return (

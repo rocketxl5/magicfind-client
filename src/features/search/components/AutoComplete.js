@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react'
 import Prediction from './Prediction';
-import useSearch from '../../../hooks/contexthooks/useSearch';
+import useSearchContext from '../../../hooks/contexthooks/useSearchContext';
 import useSearchForm from '../../../hooks/useSearchForm';
 
 const AutoComplete = () => {
@@ -9,7 +9,7 @@ const AutoComplete = () => {
         position,
         predictions,
         selection
-    } = useSearch();
+    } = useSearchContext();
 
     const { handleSearch, handleSelection, handleTracker } = useSearchForm();
 

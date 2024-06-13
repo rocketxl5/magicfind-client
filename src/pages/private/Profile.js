@@ -1,9 +1,9 @@
 import Page from '../../components/Page';
 import Avatar from '../../components/Avatar';
-import useAuth from '../../hooks/contexthooks/useAuth';
+import useAuthContext from '../../hooks/contexthooks/useAuthContext';
 
 const Profile = () => {
-  const { auth } = useAuth();
+  const { auth } = useAuthContext();
   return (
     <Page name={'profile'} title={'Profile'}>
       <p>Name: {auth.user.name}</p>

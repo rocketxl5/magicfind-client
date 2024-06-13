@@ -1,4 +1,4 @@
-import useSearch from '../../../hooks/contexthooks/useSearch';
+import useSearchContext from '../../../hooks/contexthooks/useSearchContext';
 import useSearchForm from '../../../hooks/useSearchForm';
 
 const Prediction = ({ index, prediction }) => {
@@ -6,7 +6,7 @@ const Prediction = ({ index, prediction }) => {
     const {
         tracker,
         inputValue,
-    } = useSearch();
+    } = useSearchContext();
 
     const { handleSelection } = useSearchForm();
 

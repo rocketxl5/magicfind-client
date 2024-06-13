@@ -3,8 +3,8 @@ import { useNavigate, useLocation, useParams } from 'react-router-dom';
 import Image from '../../../components/Image';
 import Success from './Success';
 import Loader from '../../../layout/Loader';
-import useAuth from '../../../hooks/contexthooks/useAuth';
-import useSearch from '../../../hooks/contexthooks/useSearch';
+import useAuthContext from '../../../hooks/contexthooks/useAuthContext';
+import useSearchContext from '../../../hooks/contexthooks/useSearchContext';
 import { api } from '../../../api/resources';
 
 const DeleteItem = (props) => {
@@ -16,8 +16,8 @@ const DeleteItem = (props) => {
     // Ref
     const btnRef = useRef(null);
     // Hooks
-    const { auth } = useAuth();
-    const { setUpdateCatalog, setUpdateCollection } = useSearch();
+    const { auth } = useAuthContext();
+    const { setUpdateCatalog, setUpdateCollection } = useSearchContext();
     const navigate = useNavigate();
     const location = useLocation();
     const { query } = useParams();

@@ -9,8 +9,8 @@
 ////////////////////////////////////////////////////
 import { useEffect, useReducer, useRef, createContext } from 'react';
 import { navReducer } from '../features/nav/services/navReducer';
-import useViewport from '../hooks/contexthooks/useViewport';
-import useSearch from '../hooks/contexthooks/useSearch';
+import useViewportContext from '../hooks/contexthooks/useViewportContext';
+import useSearchContext from '../hooks/contexthooks/useSearchContext';
 
 const initialState = {
     displayMenu: false,
@@ -22,8 +22,8 @@ export const NavContext = createContext(null);
 
 export const NavProvider = ({ children }) => {
 
-    const {isMobile} = useViewport();
-    const {catalogInputRef} = useSearch();
+    const { isMobile } = useViewportContext();
+    const { catalogInputRef } = useSearchContext();
     const [state, dispatch] = useReducer(navReducer, initialState);
 
     const {

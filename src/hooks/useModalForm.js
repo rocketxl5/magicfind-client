@@ -2,7 +2,7 @@ import { useEffect, useReducer, useRef } from 'react';
 import { storeItemReducer } from '../features/product/services/storeItemReducer';
 import { deckItemReducer } from '../features/product/services/deckItemReducer';
 import useAxios from './useAxios';
-import useAuth from './contexthooks/useAuth';
+import useAuthContext from './contexthooks/useAuthContext';
 import { v4 as uuidv4 } from 'uuid';
 
 const initialState = {
@@ -27,7 +27,7 @@ const initialState = {
 const useModalForm = (product) => {
     const [state, dispatch] = useReducer(storeItemReducer, initialState);
 
-    const { auth } = useAuth();
+    const { auth } = useAuthContext();
 
     const { post, patch, error, loading, response } = useAxios();
 

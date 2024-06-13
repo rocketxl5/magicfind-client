@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect, useRef } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { PathContext } from '../../contexts/PathContext';
-import useAuth from '../../hooks/contexthooks/useAuth';
+import useAuthContext from '../../hooks/contexthooks/useAuthContext';
 import validate from '../../assets/utilities/validateMessage';
 import getPath from '../../assets/utilities/getPath';
 import useMessage from '../../hooks/useMessage';
@@ -11,7 +11,7 @@ const Message = () => {
   const MAXCHARS = 500;
   const navigate = useNavigate();
   const location = useLocation();
-  const { auth } = useAuth();
+  const { auth } = useAuthContext();
   const { setPathname } = useContext(PathContext);
   // When writing to a seller set recipient name to seller name
   const [recipientName, setRecipientName] = useState(

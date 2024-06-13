@@ -5,8 +5,8 @@ import Loader from '../../../layout/Loader';
 import Option from '../../../components/Option';
 import data from '../../../data/EDIT.json';
 import errorHandler from '../services/editErrorHandler';
-import useAuth from '../../../hooks/contexthooks/useAuth';
-import useSearch from '../../../hooks/contexthooks/useSearch';
+import useAuthContext from '../../../hooks/contexthooks/useAuthContext';
+import useSearchContext from '../../../hooks/contexthooks/useSearchContext';
 import { api } from '../../../api/resources';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -33,8 +33,8 @@ const EditProduct = (props) => {
     const priceRef = useRef(null);
 
     // Hooks
-    const { auth } = useAuth();
-    const { setUpdateCatalog } = useSearch();
+    const { auth } = useAuthContext();
+    const { setUpdateCatalog } = useSearchContext();
     const navigate = useNavigate();
     const location = useLocation();
     const { query } = useParams();

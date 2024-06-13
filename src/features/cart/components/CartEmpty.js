@@ -1,8 +1,8 @@
 import { Link } from 'react-router-dom';
-import useAuth from '../../../hooks/contexthooks/useAuth';
+import useAuthContext from '../../../hooks/contexthooks/useAuthContext';
 
 const CartEmpty = () => {
-    const { isAuth } = useAuth();
+    const { isAuth } = useAuthContext();
 
     return (
         <div className='padding-1 bg-light flex column gap-3'>

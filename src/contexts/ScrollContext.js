@@ -1,11 +1,11 @@
 import React, { createContext, useState, useEffect, useRef } from 'react';
-import useAuth from '../hooks/contexthooks/useAuth';
+import useAuthContext from '../hooks/contexthooks/useAuthContext';
 
 export const ScrollContext = createContext();
 
 export const ScrollProvider = ({ children }) => {
     const [offset, setOffset] = useState(0);
-    const { isAuth } = useAuth();
+    const { isAuth } = useAuthContext();
 
     const headerRef = useRef(null);
     const btnRef = useRef(null);

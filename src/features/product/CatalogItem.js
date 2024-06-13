@@ -7,11 +7,11 @@ import Loader from '../../layout/Loader';
 import Card from '../../components/Card';
 import QuantitySelector from './components/QuantitySelector';
 import TwoSidedSlide from '../modal/components/TwoSidedSlide';
-import useAuth from '../../hooks/contexthooks/useAuth';
-import useCart from '../../hooks/contexthooks/useCart';
+import useAuthContext from '../../hooks/contexthooks/useAuthContext';
+import useCartContext from '../../hooks/contexthooks/useCartContext';
 import useExpandImage from '../../hooks/useExpandImage';
 import useUpdateCart from '../../hooks/useUpdateCart';
-import useViewport from '../../hooks/contexthooks/useViewport';
+import useViewportContext from '../../hooks/contexthooks/useViewportContext';
 import useFind from '../../hooks/useFind';
 import useTable from '../../hooks/useTable';
 import { FiShoppingCart } from 'react-icons/fi';
@@ -38,11 +38,11 @@ const CatalogItem = ({ index, product, count, cartIndex, handleSlideView }) => {
     const navigate = useNavigate();
     const location = useLocation();
 
-    const { isAuth } = useAuth();
+    const { isAuth } = useAuthContext();
 
-    const { isMobile } = useViewport();
+    const { isMobile } = useViewportContext();
 
-    const { cartItems } = useCart();
+    const { cartItems } = useCartContext();
 
     const { findIndex, indexFound } = useFind();
 

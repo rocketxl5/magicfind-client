@@ -1,10 +1,10 @@
 import { useNavigate } from 'react-router-dom';
 import { GiWaterBolt } from 'react-icons/gi';
-import useAuth from '../../../hooks/contexthooks/useAuth';
+import useAuthContext from '../../../hooks/contexthooks/useAuthContext';
 import styled from 'styled-components';
 
 const Logo = () => {
-  const { isAuth } = useAuth();
+  const { isAuth } = useAuthContext();
 
   const navigate = useNavigate();
 

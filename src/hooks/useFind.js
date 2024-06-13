@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import useCart from './contexthooks/useCart';
-import useSearch from './contexthooks/useSearch';
+import useCartContext from './contexthooks/useCartContext';
+import useSearchContext from './contexthooks/useSearchContext';
 
 const useFind = () => {
     // index || null
@@ -8,8 +8,8 @@ const useFind = () => {
     // true || false
     const [isMatchFound, setIsMatchFound] = useState(false);
 
-    const { cartItems } = useCart();
-    const { cardCollection } = useSearch();
+    const { cartItems } = useCartContext();
+    const { cardCollection } = useSearchContext();
 
     const findMatch = (card_id) => {
         // console.log(product)

@@ -1,11 +1,11 @@
 import { useNavigate } from 'react-router-dom';
-import useMail from '../../../hooks/contexthooks/useMail';
-import useNav from '../../../hooks/contexthooks/useNavbar';
+import useMailContext from '../../../hooks/contexthooks/useMailContext';
+import useNavContext from '../../../hooks/contexthooks/useNavContext';
 import { FiMail } from 'react-icons/fi';
 
 const MailBtn = () => {
-  const { mailCount } = useMail();
-  const { mailCountRef } = useNav();
+  const { mailCount } = useMailContext();
+  const { mailCountRef } = useNavContext();
 
   const navigate = useNavigate();
 

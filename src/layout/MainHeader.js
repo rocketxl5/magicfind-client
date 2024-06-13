@@ -5,13 +5,13 @@ import DashboardNav from './DashboardNav';
 import Logo from './navigation/buttons/Logo';
 import { api } from '../api/resources';
 import useFetch from '../hooks/useFetch';
-import useAuth from '../hooks/contexthooks/useAuth';
-import useSearch from '../hooks/contexthooks/useSearch';
-import useScroll from '../hooks/contexthooks/useScroll';
+import useAuthContext from '../hooks/contexthooks/useAuthContext';
+import useSearchContext from '../hooks/contexthooks/useSearchContext';
+import useScrollContext from '../hooks/contexthooks/useScrollContext';
 
 const MainHeader = () => {
-  const { headerRef } = useScroll();
-  const { isAuth } = useAuth();
+  const { headerRef } = useScrollContext();
+  const { isAuth } = useAuthContext();
   const {
     updateCatalog,
     setUpdateCatalog,
@@ -20,7 +20,7 @@ const MainHeader = () => {
     catalogCardNames,
     catalogInputRef,
 
-  } = useSearch();
+  } = useSearchContext();
 
   const { fetch, error, response } = useFetch();
 

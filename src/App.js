@@ -40,7 +40,7 @@ import Settings from './pages/private/Settings';
 import Store from './pages/private/Store';
 
 // Hooks
-import useAuth from './hooks/contexthooks/useAuth';
+import useAuthContext from './hooks/contexthooks/useAuthContext';
 
 // CSS
 import './styles/reset.css';
@@ -52,7 +52,7 @@ import './styles/media-queries.css';
 import './App.css';
 
 const App = () => {
-  const { isAuth } = useAuth();
+  const { isAuth } = useAuthContext();
 
   return (
     <Routes>

@@ -6,8 +6,8 @@ import Success from './Success'
 import Loader from '../../../layout/Loader';
 import data from '../../../data/EDIT.json';
 import errorHandler from '../services/editErrorHandler';
-import useAuth from '../../../hooks/contexthooks/useAuth';
-import useSearch from '../../../hooks/contexthooks/useSearch';
+import useAuthContext from '../../../hooks/contexthooks/useAuthContext';
+import useSearchContext from '../../../hooks/contexthooks/useSearchContext';
 import useModalForm from '../../../hooks/useModalForm';
 
 const INIT = {
@@ -44,13 +44,13 @@ const EditStoreItem = (props) => {
         isValidated,
     } = state;
 
-    const { auth, token } = useAuth();
+    const { auth, token } = useAuthContext();
 
     // States
     const [errors, setErrors] = useState(INIT);
 
     // Hooks
-    const { setUpdateCatalog } = useSearch();
+    const { setUpdateCatalog } = useSearchContext();
     const navigate = useNavigate();
     const location = useLocation();
     const { query } = useParams();

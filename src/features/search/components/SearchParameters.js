@@ -1,12 +1,12 @@
 import { forwardRef, useRef, useEffect } from 'react'
 import { FiPlus } from "react-icons/fi";
-import useScroll from '../../../hooks/contexthooks/useScroll';
+import useScrollContext from '../../../hooks/contexthooks/useScrollContext';
 
 const SearchParameters = forwardRef(function SearchParameters(props, ref) {
     const { setSearchFeatures, searchFeatures } = props;
     const iconRef = useRef(null);
     const panelRef = useRef(null);
-    const { btnRef } = useScroll();
+    const { btnRef } = useScrollContext();
 
     useEffect(() => {
         //     if (searchFeatures) {

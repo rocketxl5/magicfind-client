@@ -1,11 +1,11 @@
 import { useNavigate } from 'react-router-dom';
-import useCart from '../../../hooks/contexthooks/useCart';
-import useNav from '../../../hooks/contexthooks/useNavbar';
+import useCartContext from '../../../hooks/contexthooks/useCartContext';
+import useNavContext from '../../../hooks/contexthooks/useNavContext';
 import { FiShoppingCart } from 'react-icons/fi';
 
 const CartBtn = () => {
-  const { itemsCount } = useCart();
-  const { cartCountRef } = useNav();
+  const { itemsCount } = useCartContext();
+  const { cartCountRef } = useNavContext();
 
   const navigate = useNavigate();
 

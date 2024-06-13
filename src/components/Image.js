@@ -1,10 +1,9 @@
 import useLazyLoader from '../hooks/useLazyLoader';
-import useShowModal from '../hooks/useShowModal';
+import useModal from '../hooks/useModal';
 
-const Image = ({ classList, src }) => {
+const Image = ({ classList, src, index }) => {
     const { hasLoaded } = useLazyLoader(src);
-    const { setModal } = useShowModal();
-
+    const { handleSetModal } = useModal();
     return (
         
         <figure className='product-view'>
@@ -16,7 +15,7 @@ const Image = ({ classList, src }) => {
                     className={classList}
                         src={src}
                         alt={`Card`}
-                        onClick={() => setModal({ type: 'caroussel', content: 'Image of me' })}
+                        onClick={() => handleSetModal({ type: 'slide', content: index })}
                     loading="lazy"
                 />
                 // </Link>

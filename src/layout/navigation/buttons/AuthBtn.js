@@ -1,11 +1,11 @@
 import Avatar from '../../../components/Avatar.js';
-import useAuth from '../../../hooks/contexthooks/useAuth.js';
-import useNav from '../../../hooks/contexthooks/useNavbar.js';
+import useAuthContext from '../../../hooks/contexthooks/useAuthContext.js';
+import useNavContext from '../../../hooks/contexthooks/useNavContext.js';
 import useNavButton from '../../../hooks/useNavButton.js';
 
 const AuthBtn = () => {
-    const { auth } = useAuth();
-    const {displayMenu} = useNav();
+    const { auth } = useAuthContext();
+    const { displayMenu } = useNavContext();
     const { handleAuthMenu } = useNavButton();
 
     const { avatar } = auth.user;
