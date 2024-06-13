@@ -46,7 +46,7 @@ const Print = ({ print, ModalImage }) => {
     // }, [response]);
     return (
         <div className='flex print'>
-            <Image classList={'print-image'} src={print.image_uris?.small || print.card_faces[0].image_uris?.small} />
+            <Image classList={'image-print'} src={print.image_uris?.small || print.card_faces[0].image_uris?.small} />
             <div className='finishes'>
                 {
                     print.finishes.map((finish, i) => {

@@ -20,7 +20,8 @@
   --clr-success: #49A078;
   --clr-danger: rgb(220, 53, 69);
   --clr-warning: #f5cc15;
-  --clr-warning-2: #ff6e34;
+  --clr-foil: #ff6e34;
+  --clr-etched: rgb(145, 216, 145);
   --clr-teal: #3598d1;
 
   
@@ -106,6 +107,8 @@
 
   --rotation-after: 0deg;
   --translation-after: 0px 0px;
+
+  --opacity-hover: 0.8;
 
   --opacity-between: 1;
 }
@@ -1969,6 +1972,15 @@ text-align: center;
   /* border: 1px solid white; */
 }
 
+.finish.foil {
+  color: var(--clr-foil);
+}
+
+
+.finish.etched {
+  /* color: var(--clr-etched); */
+}
+
 figure.product-view {
   height: 100%;
   width: 30%;
@@ -1982,9 +1994,14 @@ figure.product-view {
   border-radius: var(--print-radius);
 }
 
-.print-image {
+.image-print {
   width: 100%;
   border-radius: var(--print-radius);
+}
+
+.image-print:hover {
+  cursor: pointer;
+  opacity: var(--opacity-hover);
 }
 
 .is-foil::before {
