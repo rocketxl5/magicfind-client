@@ -1,9 +1,9 @@
+import finishes from '../../../data/FINISHES.json';
 
-
-const Finish = () => {
+const Finish = ({ finish }) => {
     return (
-        <div>
-            Finish
+        <div className='finish'>
+            {finishes.type[finish]}
         </div>
     )
 }

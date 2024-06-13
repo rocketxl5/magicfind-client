@@ -1,0 +1,7 @@
+{
+  "type": {
+    "nonfoil": "Normal",
+    "foil": "Foil",
+    "etched": "Etched"
+  }
+}

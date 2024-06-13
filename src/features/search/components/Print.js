@@ -17,7 +17,7 @@ const Print = ({ print, ModalImage }) => {
         error,
         isAdded,
     } = useResponseHandler();
-    // console.log(ModalImage)
+    console.log(print)
 
     const { auth } = useAuth();
 
@@ -47,10 +47,10 @@ const Print = ({ print, ModalImage }) => {
     return (
         <div className='flex print'>
             <Image classList={'print-image'} src={print.image_uris?.small || print.card_faces[0].image_uris?.small} />
-            <div className='col-9 flex'>
+            <div className='finishes'>
                 {
                     print.finishes.map((finish, i) => {
-                        return <Finish key={i} />
+                        return <Finish key={i} finish={finish} />
                     })
                 }
             </div>

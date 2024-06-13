@@ -54,7 +54,7 @@ const MainHeader = () => {
 
   useEffect(() => {
     if (error) {
-      console.error(error)
+      throw error
     }
   }, [error])
 
