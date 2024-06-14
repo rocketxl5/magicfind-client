@@ -90,7 +90,6 @@ const useSearchForm = (inputRef) => {
     }
 
     const setString = (str) => {
-        console.log(str)
         return str.toLowerCase()
             .replaceAll(/["/,]/g, '')
             .replace('  ', ' ')
@@ -153,7 +152,7 @@ const useSearchForm = (inputRef) => {
     // Removes digital cards
     // Modifies card objects with finish property or,
     // Generates new card object if finishes property has more than one value : [nonfoil, foil, etched]
-    // Returns new array
+    // Returns new array of card objects
     const handleResponse = (cards) => {
         // Source @ https://stackoverflow.com/questions/63787449/javascript-group-array-of-objects-by-common-values-with-label
         if (cards) {
@@ -208,6 +207,7 @@ const useSearchForm = (inputRef) => {
         if (error) {
             const { query } = fetchParams;
             navigate(`/not-found/${query.split(' ').join('+')}`);
+            inputRef?.current.blur();
         }
     }, [error, response]);
 

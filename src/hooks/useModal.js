@@ -1,58 +1,45 @@
-// import { useState, useEffect } from 'react'
-import useModalContext from './contexthooks/useModalContext'
+import { useEffect } from 'react';
+import useModalForm from './useModalForm';
+import useModalSlide from './useModalSlide';
+import useModalSlideShow from './useModalSlideShow';
+import useModalContext from './contexthooks/useModalContext';
 
 const useModal = () => {
+    const { content, open, props, handleOpenModal } = useModalContext()
 
-    const {
-        dispatch,
-        initialState
-    } = useModalContext();
+    const { setModalForm } = useModalForm();
+    const { setModalSlide } = useModalSlide();
+    const { setModalSlideShow } = useModalSlideShow();
 
-    const handleSetModal = (type, content) => {
-        dispatch({
-            type: 'set-modal',
-            payload: {
-                type: type,
-                content: content
+    useEffect(() => {
+        if (props) {
+            const { type, ...rest } = props;
+            switch (type) {
+                case 'form':
+                    setModalForm(rest)
+                    break;
+                case 'slide':
+                    setModalSlide(rest)
+                    break;
+                case 'slide-show':
+                    setModalSlideShow(rest)
+                    break;
+
+                default:
+                    break;
             }
-        })
-    }
+        }
+    }, [props]);
 
-    const handleModalImageUris = (uris) => {
-        dispatch({
-            type: 'set-uris',
-            payload: uris
-        })
-    }
+    useEffect(() => {
+        // console.log(content)
+        // Open modal if content is set
+        if (content) {
+            handleOpenModal(true);
+        }
+    }, [content])
 
-    const handleOpenModal = (bool) => {
-        dispatch({
-            type: 'open',
-            payload: bool
-        })
-    }
-
-    // const handleModalContent = (content) => {
-    //     dispatch({
-    //         type: 'set-content',
-    //         content: content
-    //     })
-    // }
-
-    const handleClearModal = () => {
-        dispatch({
-            type: 'clear-modal',
-            payload: initialState
-        })
-    }
-
-    return {
-        handleSetModal,
-        handleOpenModal,
-        handleModalImageUris,
-        // handleModalContent,
-        handleClearModal
-    }
+    return { open, content }
 }
 
 export default useModal

@@ -5,6 +5,8 @@ import useAuthContext from '../../../hooks/contexthooks/useAuthContext';
 import useFind from '../../../hooks/useFind';
 import useResponseHandler from '../../../hooks/useResponseHandler';
 
+import useModalContext from '../../../hooks/contexthooks/useModalContext';
+
 const Print = ({ index, print }) => {
     const {
         handleGetResponse,
@@ -20,6 +22,7 @@ const Print = ({ index, print }) => {
 
     const { auth } = useAuthContext();
 
+    const { uris } = useModalContext();
     // const { findMatch, isMatchFound } = useFind();
 
     // useEffect(() => {
@@ -45,7 +48,13 @@ const Print = ({ index, print }) => {
     // }, [response]);
     return (
         <div className='flex print'>
-            <Image classList={'image-print'} src={print.image_uris?.small || print.card_faces[0].image_uris?.small} index={index} />
+            <Image
+                classList={'image-print'}
+                // Set index reference 
+                index={uris.findIndex(uri => uri === print.image_uris.normal)}
+                src={print.image_uris?.small || print.card_faces[0].image_uris?.small}
+                layout={print.layout}
+            />
             <div className='finishes'>
                 {
                     print.finishes.map((finish, i) => {

@@ -1,4 +1,4 @@
-import { useEffect, useReducer, useRef } from 'react';
+import { useState, useEffect, useReducer, useRef } from 'react';
 import { storeItemReducer } from '../features/product/services/storeItemReducer';
 import { deckItemReducer } from '../features/product/services/deckItemReducer';
 import useAxios from './useAxios';
@@ -25,44 +25,45 @@ const initialState = {
 }
 
 const useModalForm = (product) => {
+    const [modalForm, setModalForm] = useState(null);
     const [state, dispatch] = useReducer(storeItemReducer, initialState);
 
     const { auth } = useAuthContext();
 
     const { post, patch, error, loading, response } = useAxios();
 
-    useEffect(() => {
-        console.log(product)
-        // Product already exists. 
-        // Set state values.
-        if (product.catalogId) {
-            dispatch({
-                type: 'set-form',
-                payload: { ...product }
-            })
-        }
-        else {
-            // Set isNewProduct state to true.
-            // Set reference to product id.
-            // Set catalogId
-            handleNewProduct(true, product.card_id, product.name);
-        }
-    }, [product])
+    // useEffect(() => {
+    //     console.log(product)
+    //     // Product already exists. 
+    //     // Set state values.
+    //     if (product.catalogId) {
+    //         dispatch({
+    //             type: 'set-form',
+    //             payload: { ...product }
+    //         })
+    //     }
+    //     else {
+    //         // Set isNewProduct state to true.
+    //         // Set reference to product id.
+    //         // Set catalogId
+    //         handleNewProduct(true, product.card_id, product.name);
+    //     }
+    // }, [product])
 
-    useEffect(() => {
-        if (state.isValid) {
-            // Remove unnecessary props
-            const { isSubmit, isUpdated, isValid, isNewProduct, ...rest } = state;
-            if (state.isNewProduct) {
-                console.log('new product')
-                post(auth.token, `/api/users/store/${auth.user.id}`, rest);
-            }
-            else {
-                console.log('existing product')
-                patch(auth.token, `/api/users/store/${auth.user.id}/${rest.catalogId}`, rest);
-            }
-        }
-    }, [state.isValid])
+    // useEffect(() => {
+    //     if (state.isValid) {
+    //         // Remove unnecessary props
+    //         const { isSubmit, isUpdated, isValid, isNewProduct, ...rest } = state;
+    //         if (state.isNewProduct) {
+    //             console.log('new product')
+    //             post(auth.token, `/api/users/store/${auth.user.id}`, rest);
+    //         }
+    //         else {
+    //             console.log('existing product')
+    //             patch(auth.token, `/api/users/store/${auth.user.id}/${rest.catalogId}`, rest);
+    //         }
+    //     }
+    // }, [state.isValid])
 
     const btnRef = useRef(null);
 
@@ -143,6 +144,7 @@ const useModalForm = (product) => {
     }
 
     return {
+        setModalForm,
         handlePrice,
         handleQuantity,
         handleCondition,

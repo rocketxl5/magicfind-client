@@ -5,6 +5,7 @@ import useCollectionModal from './useCollectionModal';
 import useSlideView from './useSlideView';
 import useSearchContext from './contexthooks/useSearchContext';
 import useLoadImages from './useLoadImages';
+import useModalContext from './contexthooks/useModalContext';
 
 const useResults = (inputRef) => {
     const navigate = useNavigate();
@@ -14,6 +15,7 @@ const useResults = (inputRef) => {
     // const [state, updateCollectionItem] = useCollectionModal(search?.type, handleCollectionItem);
 
     const { setResults } = useSearchContext();
+    const { handleModalUris } = useModalContext();
 
     // function handleSlideView(e, layout, expandedImage) {
     //     e.stopPropagation();
@@ -24,13 +26,37 @@ const useResults = (inputRef) => {
     //     e.stopPropagation();
     //     updateCollectionItem(e.target.id, card, expandedImage);
     // }
+    const handleArchive = (data) => {
 
+        const results = new Map([
+            [
+                'uris',
+                data.map(set => set.prints).flat()
+                    .map(print => print?.image_uris ?
+                        print?.image_uris.normal :
+                        print?.card_faces[0].image_uris.normal)
+            ],
+            [
+                'sets',
+                data.map((set, i) => <Set key={i} id={set.id} prints={set.prints} />)
+            ]
+        ]);
+    // console.log(results.get('uris'))
+    // console.log(results.get('sets'))
+
+        // Passing imgages uris to reducer function @ ModalContext,
+        // updates uris reducer state which triggers loadImages custom hook function @ useLoadImages.
+        // useLoadImages preloads and creates normal size images component modal ready if needed. 
+        handleModalUris(results.get('uris'));
+        setResults(results.get('sets'));
+    }
 
     const handleSearchResults = (data, props) => {
+        console.log(data)
         const { path, query, type } = props;
         switch (type) {
             case 'archive':
-                setResults(data.map((set, i) => <Set key={i} set={set} />))
+                handleArchive(data);
                 break;
             case 'catalog':
                 handleCatalog(data);

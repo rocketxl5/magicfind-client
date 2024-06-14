@@ -5,12 +5,9 @@ import { modalReducer } from '../features/modal/services/modalReducer';
 const initialState = {
     content: null,
     open: false,
-    type: '',
+    props: null,
     uris: null
 }
-
-// Modal type: slide, carrousel, form
-
 
 export const ModalContext = createContext(null);
 
@@ -21,7 +18,7 @@ export const ModalProvider = ({ children }) => {
     const {
         content,
         open,
-        type,
+        props,
         uris,
     } = state || {}
 
@@ -31,18 +28,51 @@ export const ModalProvider = ({ children }) => {
         if (uris) {
             loadImages(uris);
         }
-    }, [uris])
+    }, [uris]);
 
+    function handleModalUris(uris) {
+        dispatch({
+            type: 'set-uris',
+            payload: uris,
+        })
+    }
+
+    function handleOpenModal(open) {
+        dispatch({
+            type: 'open-modal',
+            payload: open
+        })
+    }
+
+    function handleModalProps(props) {
+        // console.log(props)
+        dispatch({
+            type: 'set-props',
+            payload: props
+        })
+    }
+
+    function handleModalContent(content) {
+        dispatch({
+            type: 'set-content',
+            payload: content
+        })
+    }
 
     return (
         <ModalContext.Provider
             value={{
+                images,
+
                 content,
                 open,
-                type,
+                props,
                 uris,
-                dispatch,
-                initialState
+
+                handleModalContent,
+                handleModalProps,
+                handleModalUris,
+                handleOpenModal
             }}
         >
             {children}
