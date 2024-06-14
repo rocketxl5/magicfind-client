@@ -48,8 +48,6 @@ export const searchReducer = (state, action) => {
                 ...action.payload
             }
         default:
-            return {
-                ...state
-            }
+            return null;
     }
 }

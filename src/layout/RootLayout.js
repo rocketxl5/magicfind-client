@@ -4,14 +4,14 @@ import MainHeader from './MainHeader';
 import MainFooter from './MainFooter'
 import Modal from '../features/modal/Modal';
 import useAuthContext from '../hooks/contexthooks/useAuthContext';
-import useModalContext from '../hooks/contexthooks/useModalContext';
+import useModal from '../hooks/useModal';
 
 const RootLayout = () => {
     const location = useLocation();
     const path = location.pathname;
 
     const { isAuth } = useAuthContext();
-    const { open, content } = useModalContext();
+    const { open, content } = useModal();
 
     return (
         <div className={`root-layout ${isAuth || path === '/login' || path === '/signup' ? 'bg-light' : 'bg-night'}`}>
@@ -22,20 +22,16 @@ const RootLayout = () => {
                     <Outlet />
 
                 ) : (
-                        <>      
+                        <>   
                             {
-                                !open ?
-                                    <>
-                                        <MainHeader />
-                                        <Outlet />
-                                        <MainFooter />
-                                    </>
-                                    :
-                                    <Modal open={open}>
-                                        {content}
-                                    </Modal>
+                                <Modal open={open}>
+                                    {content}
+                                </Modal>
                             }
-                    </>
+                            <MainHeader />
+                            <Outlet />
+                            <MainFooter />                   
+                        </>
                 )
             }
         </div>
