@@ -19,13 +19,27 @@ const useLoadImages = () => {
                 image.onerror = error => reject(error);
             });
         }
-        Promise.all(uris.map(url => loadImage(url)))
+        Promise.all(uris.map(url => {
+            return typeof url === 'string' ?
+                loadImage(url) :
+                Promise.all(url.map(locator => {
+                    return loadImage(locator);
+                })).then(data => data)
+        }))
             .then((data) => {
                 if (data) {
-                    // console.log(data)
                     setImages(data.map((img, i) => {
-                        // console.log(img)
-                        return createElement('img', {
+                        return img.length ?
+                            img.map(image => {
+                                return createElement('img', {
+                                    key: i,
+                                    className: 'modal-image',
+                                    name: 'modal-image',
+                                    src: image.src,
+                                    alt: 'MTG product image'
+                                })
+                            }) :
+                            createElement('img', {
                             key: i,
                             className: 'modal-image',
                             name: 'modal-image',
@@ -37,7 +51,6 @@ const useLoadImages = () => {
             })
             .catch(error => console.log('Image load has failed', error))
     }
-
     return { images, loadImages }
 }
 

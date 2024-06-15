@@ -37,43 +37,21 @@ const useModalSlide = () => {
 
   useEffect(() => {
     if (modalSlide) {
-      // console.log(modalSlide)
+      console.log(images)
+      console.log(modalSlide)
       const { layout, index } = modalSlide;
       switch (layout) {
         case 'flip':
           handleFlip(images[index]);
           break;
         case 'split':
-        case 'planar':
           handleSplit(images[index]);
           break;
-        case 'transform':
-        case 'modal_dfc':
-        case 'reversible_card':
-        case 'double_faced_token':
-        case 'art_series':
+        case 'reversible':
           handleReversible(images[index]);
           break;
-        case 'normal':
-        case 'leveler':
-        case 'class':
-        case 'saga':
-        case 'meld':
-        case 'adventure':
-        case 'mutate':
-        case 'prototype':
-        case 'scheme':
-        case 'token':
-        case 'emblem':
-        case 'augment':
-        case 'host':
-        case 'vanguard':
-          handleNormal(images[index]);
-          break;
         default:
-          // dispatch({
-          //   type: null,
-          // })
+          handleNormal(images[index]);
           break;
       }
     }
