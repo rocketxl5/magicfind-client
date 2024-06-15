@@ -1,14 +1,44 @@
-import CloseBtn from '../buttons/CloseBtn';
+import { useEffect } from 'react';
+import useModalFrame from '../../../hooks/useModalFrame';
 import useModalContext from '../../../hooks/contexthooks/useModalContext';
 
-const Slide = ({ children }) => {
-    const { handleOpenModal } = useModalContext();
+const Slide = ({ layout, index }) => {
+    const { images } = useModalContext();
+    const { setLayout, Frame, cardRef, frontRef } = useModalFrame();
+
+    useEffect(() => {
+        // console.log(images[index])
+        if (layout) {
+            setLayout(layout)
+        }
+    }, [layout]);
+
     return (
         <div className={"slide-view"}>
-            <div className={"modal-frame"}>
-                <CloseBtn classList={`slide-close-btn close-btn card-btn`} name={'close-btn'} handleClick={() => handleOpenModal(false)} />
+            <Frame />
+            <div className="slide">
+                {
+                    layout === 'reversible' ?
+                        (
+                            <div className={layout}>
+                                <div className="reversible-inner" ref={cardRef}>
+                                    <div className="card-front card-radius" ref={frontRef}>
+                                        {images[index][0]}
+                                    </div>
+                                    <div className="card-back card-radius">
+                                        {images[index][1]}
+                                    </div>
+                                </div>
+                            </div>
+                        ) :
+                        (
+                            <div classname={layout}>
+                                {images[index]}
+                            </div>
+                        )
+                }
+
             </div>
-            {children}
         </div>
     )
 }

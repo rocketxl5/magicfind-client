@@ -52,7 +52,7 @@ export const ModalProvider = ({ children }) => {
         })
     }
 
-    function handleModalContent(content) {
+    function setModalContent(content) {
         dispatch({
             type: 'set-content',
             payload: content
@@ -69,7 +69,7 @@ export const ModalProvider = ({ children }) => {
                 props,
                 uris,
 
-                handleModalContent,
+                setModalContent,
                 handleModalProps,
                 handleModalUris,
                 handleOpenModal

@@ -1,14 +1,13 @@
 import { useEffect } from 'react';
+import Slide from '../features/modal/components/Slide';
 import useModalForm from './useModalForm';
-import useModalSlide from './useModalSlide';
 import useModalSlideShow from './useModalSlideShow';
 import useModalContext from './contexthooks/useModalContext';
 
 const useModal = () => {
-    const { content, open, props, handleOpenModal } = useModalContext()
+    const { content, open, props, handleOpenModal, setModalContent } = useModalContext()
 
     const { setModalForm } = useModalForm();
-    const { setModalSlide } = useModalSlide();
     const { setModalSlideShow } = useModalSlideShow();
 
     useEffect(() => {
@@ -19,7 +18,7 @@ const useModal = () => {
                     setModalForm(rest)
                     break;
                 case 'slide':
-                    setModalSlide(rest)
+                    setModalContent(<Slide {...rest} />)
                     break;
                 case 'slide-show':
                     setModalSlideShow(rest)
