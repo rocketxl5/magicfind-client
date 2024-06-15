@@ -22,7 +22,7 @@ const Set = ({ id, prints }) => {
                     <div className='set-prints'>
                         {
                             prints.map((print, i) => {
-                                return <Print key={i} index={i} print={print} />
+                                return <Print key={i} print={print} />
                             })
                         }
                     </div>

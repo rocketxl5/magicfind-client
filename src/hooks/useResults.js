@@ -27,14 +27,13 @@ const useResults = (inputRef) => {
     //     updateCollectionItem(e.target.id, card, expandedImage);
     // }
     const handleArchive = (data) => {
-
         const results = new Map([
             [
                 'uris',
                 data.map(set => set.prints).flat()
                     .map(print => print?.image_uris ?
                         print?.image_uris.normal :
-                        print?.card_faces[0].image_uris.normal)
+                        print?.card_faces.map(face => face.image_uris.normal))
             ],
             [
                 'sets',

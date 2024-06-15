@@ -1,4 +1,4 @@
-import { useEffect, useReducer, createContext } from 'react';
+import { useState, useEffect, useReducer, createContext } from 'react';
 import useLoadImages from '../hooks/useLoadImages';
 import { modalReducer } from '../features/modal/services/modalReducer';
 
