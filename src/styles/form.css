@@ -421,7 +421,7 @@ input#archive:focus {
     border-radius: 5px;
 }
 
-.card-btns {
+.slide-btns {
     width: 100%;
     display: flex;
     flex-direction: column;

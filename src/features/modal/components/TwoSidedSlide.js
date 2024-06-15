@@ -13,8 +13,8 @@ const TwoSidedSlide = ({ children, card, front }) => {
         // <div id={motion} className={classList.container} >
         <div className={'slide relative'}>
             {/* {isMounted && <TurnBtn classList={`${classList.btn}`} front={frontRef} inner={innerRef} />} */}
-            <div className="two-sided">
-                <div className="two-sided-inner card-radius" ref={card}>
+            <div className="reversible">
+                <div className="reversible-inner card-radius" ref={card}>
                     <div className="card-front card-radius" ref={front}>
                         {children[0]}
                     </div>

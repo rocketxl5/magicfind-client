@@ -974,14 +974,14 @@ height: 2rem;
   min-height: inherit;
 }
 
-.two-sided {
+.reversible {
   width: 100%;
   height: 100%;
   perspective: 1500px;
   background: transparent;
 }
 
-.two-sided-inner {
+.reversible-inner {
   position: relative;
   width: 100%;
   height: 100%;
@@ -1062,12 +1062,17 @@ height: 2rem;
 
 .modal-frame {
   position: absolute;
-  top: clamp(4rem, calc(7vh + 15px), 12rem);
+  /* top: clamp(4rem, calc(7vh + 15px), 12rem); */
   left: 0;
   right: 0;
   margin: 0 auto;
   width: clamp(31rem, calc(80vw + 10px), 55rem);
   min-height: calc(clamp(31rem, calc(80vw + 10px), 55rem) * 1.392);
+}
+
+.modal-btns {
+  position: relative;
+  min-height: inherit;
 }
 
 /* .modal-padding-top {
@@ -1085,7 +1090,7 @@ height: 2rem;
 }
 
 .slide-btn {
-  top: calc((calc(clamp(31rem, calc(80vw + 10px), 55rem) * 1.3) - 7rem) / 2) ;
+  /* top: calc((calc(clamp(31rem, calc(80vw + 10px), 55rem) * 1.3) - 7rem) / 2) ; */
 }
 
 .slide-left-btn {
@@ -1095,12 +1100,19 @@ height: 2rem;
   right: -5rem;
 }
 
-.slide-close-btn {
+.close-btn {
   top: -6rem;
-  right: -2rem;
+  right: -4rem;
 }
 
-.card-btn {
+.flip-btn,
+.rotate-btn {
+  left: calc(50% - 3.5rem);
+  bottom: -8rem;
+}
+
+
+.slide-btn {
   height: 7rem;
   width: 7rem;
   position: absolute;
@@ -1112,21 +1124,21 @@ height: 2rem;
   z-index: 3000;
 }
 
-.card-btn > svg {
+.slide-btn > svg {
   width: 50%;
   height: 50%;
 }
 
-.card-btn svg,
+.slide-btn svg,
 .indicator svg {
-  color: var(--clr-light) !important;
+  fill: var(--clr-light);
 }
 
-.card-btn * {
+.slide-btn * {
   pointer-events: none;
 }
  
-.card-btn:hover { 
+.slide-btn:hover { 
   cursor: pointer;
 }
 

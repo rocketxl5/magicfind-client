@@ -1,15 +1,14 @@
 // source @ https://codesandbox.io/p/sandbox/react-image-preload-ptosn?file=%2Fsrc%2FApp.js
 
-//Loads regular size images used @ Modal slide view as ExpandedImage
-
-import { useState, useEffect, createElement } from 'react';
+//Loads regular size image elements.
+// Sets array of modal ready image components with image elements. 
+import { useState, createElement } from 'react';
 
 const useLoadImages = () => {
     const [images, setImages] = useState(null);
 
     // Fetch & load images from uris array
     const loadImages = (uris) => {
-
         const loadImage = url => {
             return new Promise((resolve, reject) => {
                 const image = new Image();
@@ -21,14 +20,18 @@ const useLoadImages = () => {
         }
         Promise.all(uris.map(url => {
             return typeof url === 'string' ?
+                // String url [single faced cards]
                 loadImage(url) :
+                // Array of url [reversible cards]
                 Promise.all(url.map(locator => {
                     return loadImage(locator);
                 })).then(data => data)
         }))
             .then((data) => {
                 if (data) {
+                    // Create image element
                     setImages(data.map((img, i) => {
+                        // Array of image components [reversible cards]
                         return img.length ?
                             img.map(image => {
                                 return createElement('img', {
@@ -39,13 +42,14 @@ const useLoadImages = () => {
                                     alt: 'MTG product image'
                                 })
                             }) :
+                            // Single image component [single faced cards]
                             createElement('img', {
-                            key: i,
-                            className: 'modal-image',
-                            name: 'modal-image',
-                            src: img.src,
-                            alt: 'MTG product image'
-                        })
+                                key: i,
+                                className: 'modal-image',
+                                name: 'modal-image',
+                                src: img.src,
+                                alt: 'MTG product image'
+                            })
                     }))
                 }
             })
