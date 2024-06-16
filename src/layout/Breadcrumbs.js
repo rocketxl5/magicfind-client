@@ -22,18 +22,20 @@ const Breadcrumbs = () => {
         return null
     }
 
-    let currentLink = ''
+    const crumbs = path.split('/').filter(name => name !== '')
 
-    const crumbs = path.split('/')
-        .filter(crumb => {
-            return crumb !== ''
-        })
-        .map((crumb, i) => {
-            currentLink += `/${crumb}`;
+    let currentCrumb = ''
+
+    const breadcrumbs = crumbs.map((crumb, i) => {
+        currentCrumb += `/${crumb}`;
             return (
                 <span className="crumb" key={crumb}>
-                    {/* Replace root prefix  of path to home */}
-                    <Link to={currentLink}>{crumb === 'me' ? 'Dashboard' : capitalizeString(crumb, true)}</Link>
+                    {
+                        i < crumbs.length - 1 ?
+                            <Link to={currentCrumb}>{crumb === 'me' ? 'Dashboard' : capitalizeString(crumb, true)}</Link> :
+                            // If last crumb, exclude from link
+                            capitalizeString(crumbs[i], true)
+                    }
                 </span>
             )
         })
@@ -41,7 +43,7 @@ const Breadcrumbs = () => {
     return (
         <div className="breadcrumbs">
             <div className="crumbs">
-                {crumbs}
+                {breadcrumbs}
             </div>
         </div>
     )

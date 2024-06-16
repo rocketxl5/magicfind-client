@@ -22,8 +22,6 @@ const Rotate = () => {
     )
 }
 
-
-
 export const buttons = {
     normal: [
         {
