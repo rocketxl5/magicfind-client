@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import Slide from '../features/modal/components/Slide';
 import useModalForm from './useModalForm';
 import useModalSlideShow from './useModalSlideShow';
@@ -9,6 +10,8 @@ const useModal = () => {
 
     const { setModalForm } = useModalForm();
     const { setModalSlideShow } = useModalSlideShow();
+
+    const pathname = useLocation();
 
     useEffect(() => {
         if (props) {
@@ -29,6 +32,15 @@ const useModal = () => {
             }
         }
     }, [props]);
+
+    useEffect(() => {
+        // If modal is open and pathname changes 
+        // [click event on browser's back or forward arrows]
+        if (pathname && open) {
+            // Close modal
+            handleOpenModal(false);
+        }
+    }, [pathname])
 
     useEffect(() => {
         // console.log(content)
