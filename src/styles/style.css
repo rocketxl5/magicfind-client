@@ -789,7 +789,6 @@ height: 2rem;
 .slide-image {
   display: block;
   width: var(--slide-width);
-  min-height: var(--slide-heigth);
   height: 100%;
   margin: 0 auto;
   border-radius: 1.7rem;
@@ -1055,7 +1054,11 @@ height: 2rem;
 .slide {
   width: 100%;
   perspective: 150rem;
-  min-height: calc(clamp(31rem, calc(80vw + 10px), 55rem) * 1.392);
+  min-height: var(--slide-heigth);
+}
+
+.slide * {
+  min-height: inherit;
 }
 
 
