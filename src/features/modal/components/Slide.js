@@ -14,25 +14,25 @@ const Slide = ({ layout, index }) => {
     }, [layout]);
 
     return (
-        <div className={"slide-view"}>
+        <div className='slide-view'>
             <Frame />
-            <div className="slide">
+            <div className='slide'>
                 {
                     layout === 'reversible' ?
                         (
                             <div className={layout}>
-                                <div className="reversible-inner" ref={cardRef}>
-                                    <div className="card-front card-radius" ref={frontRef}>
+                                <div className='reversible-inner' ref={cardRef}>
+                                    <div className='card-front card-radius' ref={frontRef}>
                                         {images[index][0]}
                                     </div>
-                                    <div className="card-back card-radius">
+                                    <div className='card-back card-radius'>
                                         {images[index][1]}
                                     </div>
                                 </div>
                             </div>
                         ) :
                         (
-                            <div classname={layout}>
+                            <div className={layout}>
                                 {images[index]}
                             </div>
                         )

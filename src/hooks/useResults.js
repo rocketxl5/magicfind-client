@@ -1,31 +1,14 @@
-import { useState, useEffect } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import Set from '../features/search/components/Set';
-import useCollectionModal from './useCollectionModal';
-import useSlideView from './useSlideView';
 import useSearchContext from './contexthooks/useSearchContext';
-import useLoadImages from './useLoadImages';
 import useModalContext from './contexthooks/useModalContext';
 
-const useResults = (inputRef) => {
+const useResults = () => {
     const navigate = useNavigate();
-    const location = useLocation();
-    // const [view, updateSlideView] = useSlideView(handleSlideView);
-
-    // const [state, updateCollectionItem] = useCollectionModal(search?.type, handleCollectionItem);
 
     const { setResults } = useSearchContext();
     const { handleModalUris } = useModalContext();
 
-    // function handleSlideView(e, layout, expandedImage) {
-    //     e.stopPropagation();
-    //     updateSlideView(layout, expandedImage);
-    // }
-
-    // function handleCollectionItem(e, card, expandedImage) {
-    //     e.stopPropagation();
-    //     updateCollectionItem(e.target.id, card, expandedImage);
-    // }
     const handleArchive = (data) => {
         const results = new Map([
             [
@@ -40,8 +23,6 @@ const useResults = (inputRef) => {
                 data.map((set, i) => <Set key={i} id={set.id} prints={set.prints} />)
             ]
         ]);
-    // console.log(results.get('uris'))
-    // console.log(results.get('sets'))
 
         // Passing imgages uris to reducer function @ ModalContext,
         // updates uris reducer state which triggers loadImages custom hook function @ useLoadImages.
@@ -51,7 +32,7 @@ const useResults = (inputRef) => {
     }
 
     const handleSearchResults = (data, props) => {
-        console.log(data)
+        // console.log(data)
         const { path, query, type } = props;
         switch (type) {
             case 'archive':

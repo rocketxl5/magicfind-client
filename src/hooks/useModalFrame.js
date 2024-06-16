@@ -1,6 +1,7 @@
 import { useState, useRef } from 'react';
 import useModalContext from './contexthooks/useModalContext';
 import { buttons } from '../features/modal/services/modalBtns';
+
 const useModalFrame = () => {
     const [layout, setLayout] = useState(null);
 
@@ -36,7 +37,7 @@ const useModalFrame = () => {
 
     const Frame = () => {
         return (
-            <div className={"modal-frame"}>
+            <div className='slide-frame'>
                 <div>
                     {
                         buttons[layout]?.map((btn, i) => {
