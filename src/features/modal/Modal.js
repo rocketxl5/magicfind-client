@@ -10,8 +10,8 @@ const Modal = ({ open, children }) => {
     document.body.classList.add('scroll-none');
 
     return createPortal(
-        <div className="overlay">
-            <div className="modal">
+        <div className='overlay'>
+            <div className='modal'>
             {children}
             </div>
         </div>,

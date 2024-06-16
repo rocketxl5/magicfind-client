@@ -36,8 +36,8 @@ const useLoadImages = () => {
                             img.map(image => {
                                 return createElement('img', {
                                     key: i,
-                                    className: 'modal-image',
-                                    name: 'modal-image',
+                                    className: 'slide-image',
+                                    name: 'slide-image',
                                     src: image.src,
                                     alt: 'MTG product image'
                                 })
@@ -45,8 +45,8 @@ const useLoadImages = () => {
                             // Single image component [single faced cards]
                             createElement('img', {
                                 key: i,
-                                className: 'modal-image',
-                                name: 'modal-image',
+                                className: 'slide-image',
+                                name: 'slide-image',
                                 src: img.src,
                                 alt: 'MTG product image'
                             })

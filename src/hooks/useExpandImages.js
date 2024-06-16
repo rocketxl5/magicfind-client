@@ -21,8 +21,8 @@ const useExpandImages = (collections) => {
                         const element = card.card_faces.map((card_face, i) => {
                             return createElement('img', {
                                 key: { i },
-                                className: 'modal-image',
-                                name: 'modal-image',
+                                className: 'slide-image',
+                                name: 'slide-image',
                                 motion: 'turn',
                                 src: card_face.image_uris.normal,
                                 alt: `${card.name} image`,
@@ -33,8 +33,8 @@ const useExpandImages = (collections) => {
                     else if (card.layout === 'split' ||
                         card.layout === 'planar') {
                         const element = createElement('img', {
-                            className: 'modal-image',
-                            name: 'modal-image',
+                            className: 'slide-image',
+                            name: 'slide-image',
                             motion: 'rotate',
                             src: card.image_uris.normal,
                             alt: `${card.name} Card Image`,
@@ -45,8 +45,8 @@ const useExpandImages = (collections) => {
                     }
                     else if (card.layout === 'flip') {
                         const element = createElement('img', {
-                            className: 'modal-image',
-                            name: 'modal-image',
+                            className: 'slide-image',
+                            name: 'slide-image',
                             motion: 'flip',
                             src: card.image_uris.normal,
                             alt: `${card.name} Card Image`,
@@ -58,8 +58,8 @@ const useExpandImages = (collections) => {
                     else {
                         // Single faced card
                         const element = createElement('img', {
-                            className: 'modal-image',
-                            name: 'modal-image',
+                            className: 'slide-image',
+                            name: 'slide-image',
                             motion: 'static',
                             src: card.image_uris.normal,
                             alt: `${card.name} Card Image`,

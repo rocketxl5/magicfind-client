@@ -18,7 +18,7 @@ const useExpandImage = (card) => {
                 image = card.card_faces.map((card_face) => {
                     return (
                         createElement('img', {
-                            className: 'modal-image',
+                            className: 'slide-image',
                             motion: 'turn',
                             src: card_face.image_uris?.normal,
                             alt: `${card.name} image`,
@@ -29,8 +29,8 @@ const useExpandImage = (card) => {
                 card.layout === 'split' ||
                 card.layout === 'planar') {
                 image = createElement('img', {
-                    className: 'modal-image',
-                    name: 'modal-image',
+                    className: 'slide-image',
+                    name: 'slide-image',
                     motion: 'rotate',
                     src: card.image_uris.normal,
                     alt: `${card.name} Card Image`,
@@ -40,8 +40,8 @@ const useExpandImage = (card) => {
                 card.layout === 'reversible_card'
             ) {
                 image = createElement('img', {
-                    className: 'modal-image',
-                    name: 'modal-image',
+                    className: 'slide-image',
+                    name: 'slide-image',
                     motion: 'flip',
                     src: card.image_uris.normal,
                     alt: `${card.name} Card Image`,
@@ -49,8 +49,8 @@ const useExpandImage = (card) => {
             }
             else {
                 image = createElement('img', {
-                    className: 'modal-image',
-                    name: 'modal-image',
+                    className: 'slide-image',
+                    name: 'slide-image',
                     motion: 'static',
                     src: card.image_uris?.normal,
                     alt: `${card.name} Card Image`,

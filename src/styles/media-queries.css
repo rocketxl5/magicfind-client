@@ -128,7 +128,7 @@
         min-height: calc(100vh - calc(var(--footer-height) + var(--header-height-wide))); 
     }
 
-    .modal-image { 
+    .slide-image { 
         border-radius: 4.2%;
     }
 
