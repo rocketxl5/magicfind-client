@@ -17,7 +17,7 @@ const useModalFrame = () => {
             () => handleClearModal(),
             () => {
                 cardRef.current?.classList.toggle('rotate-y-180');
-                frontRef.current?.classList.toggle('hide');
+                // frontRef.current?.classList.toggle('hide');
                 btnRef.current?.classList.toggle('rotate-y-0');
             }
         ],
