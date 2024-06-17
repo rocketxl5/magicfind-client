@@ -15,6 +15,7 @@ import { PathProvider } from './contexts/PathContext';
 import { ScrollProvider } from './contexts/ScrollContext';
 import { SearchProvider } from './contexts/SearchContext';
 import { ViewportProvider } from './contexts/ViewportContext';
+import { IconProvider } from './contexts/IconContext';
 
 import App from './App';
 
@@ -32,17 +33,19 @@ root.render(
       <PathProvider>
         <AuthProvider>
           <SearchProvider>
-            <NavProvider>
-              <MailProvider>
-                <CartProvider>
-                  <ScrollProvider>
-                    <ModalProvider>
-                      <RouterProvider router={router} />
-                    </ModalProvider>
-                  </ScrollProvider>
-                </CartProvider>
-              </MailProvider>
-            </NavProvider>
+            <IconProvider>
+              <NavProvider>
+                <MailProvider>
+                  <CartProvider>
+                    <ScrollProvider>
+                      <ModalProvider>
+                        <RouterProvider router={router} />
+                      </ModalProvider>
+                    </ScrollProvider>
+                  </CartProvider>
+                </MailProvider>
+              </NavProvider>
+            </IconProvider>
           </SearchProvider>
         </AuthProvider>
       </PathProvider>

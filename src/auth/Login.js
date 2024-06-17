@@ -3,6 +3,8 @@ import { Link, useNavigate, useLocation } from 'react-router-dom';
 import Loader from '../layout/Loader';
 import errorHandler from './helpers/authErrorHandler';
 import useAuthContext from '../hooks/contexthooks/useAuthContext';
+import { FaEye } from "react-icons/fa";
+import { FaEyeSlash } from "react-icons/fa";
 import { api } from '../api/resources';
 
 const INIT = {
@@ -160,7 +162,8 @@ const Login = () => {
   const handleMouseDown = (e) => {
     // Prevents firing form
     e.preventDefault();
-    !showPassword ? setShowPassword(true) : setShowPassword(false);
+    setShowPassword(!showPassword)
+    // !showPassword ? setShowPassword(true) : setShowPassword(false);
   }
 
   return (
@@ -198,7 +201,7 @@ const Login = () => {
         <div className="form-element">
           <label htmlFor="email" className={errors.email && 'color-danger'}>{errors.email ? errors.email : 'Email'}</label>
           <input
-            className={errors.email && 'border-danger danger-padding'}
+            className={errors.email && 'border-danger'}
             id="email"
             type="email"
             name="email"
@@ -213,7 +216,7 @@ const Login = () => {
         </div>
         <div className="form-element">
           <label htmlFor="password" className={errors.password && 'color-danger'}>{errors.password ? errors.password : 'Password'}</label>
-          <div className={`login-password-wrapper text-center content-height flex ${errors.password && 'border-danger'}`}>
+          <div className={`login-password-wrapper text-center content-height flex relative col-12 ${errors.password && 'border-danger'}`}>
             <input
               id="password"
               type="password"
@@ -226,8 +229,9 @@ const Login = () => {
               placeholder='Password'
               ref={passwordRef}
             />
-            <button className="password-btn flex align-center justify-center" type="button" onMouseDown={handleMouseDown}>
-              <i className={!showPassword ? "fa-solid fa-eye" : "fa-solid fa-eye-slash"}></i>
+            <button className="show-password" type="button" onMouseDown={handleMouseDown}>
+              {/* <i className={!showPassword ? "fa-solid fa-eye" : "fa-solid fa-eye-slash"}></i> */}
+              {!showPassword ? <FaEye className='show-icon' /> : <FaEyeSlash className='hide-icon' />}
             </button>
           </div>
         </div>

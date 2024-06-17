@@ -1,4 +1,5 @@
 import { FaXmark } from "react-icons/fa6";
+import { IoCloseOutline } from "react-icons/io5";
 
 const Flip = () => {
     return (
@@ -28,7 +29,7 @@ export const buttons = {
             id: 'close-btn',
             type: 'button',
             className: 'close-btn slide-btn',
-            icon: <FaXmark />,
+            icon: <IoCloseOutline />,
         }
     ],
     reversible: [
@@ -36,7 +37,7 @@ export const buttons = {
             id: 'close-btn',
             type: 'button',
             className: 'close-btn slide-btn',
-            icon: <FaXmark />,
+            icon: <IoCloseOutline />,
         },
         {
             id: 'flip-btn',
@@ -50,7 +51,7 @@ export const buttons = {
             id: 'close-btn',
             type: 'button',
             className: 'close-btn slide-btn',
-            icon: <FaXmark />,
+            icon: <IoCloseOutline />,
         },
         {
             id: 'flip-btn',
@@ -64,7 +65,7 @@ export const buttons = {
             id: 'close-btn',
             type: 'button',
             className: 'close-btn slide-btn',
-            icon: <FaXmark />,
+            icon: <IoCloseOutline />,
         },
         {
             id: 'split-btn',

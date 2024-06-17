@@ -29,6 +29,8 @@
   /* font sizes */
   --fs-500: 5rem;
   --fs-400: 4rem;
+  --fs-375: 4rem;
+  --fs-350: 3.5rem;
   --fs-300: 3rem;
   --fs-275: 2.75rem;
   --fs-250: 2.5rem;
@@ -46,6 +48,7 @@
   --fw-100: 100;
   --fw-200: 200;
   --fw-300: 300;
+  --fw-350: 350;
   --fw-400: 400;
   --fw-500: 500;
   --fw-700: 700;
@@ -1056,13 +1059,18 @@ height: 2rem;
 .slide-left-btn {
   left: -5rem;
 }
+
 .slide-right-btn {
   right: -5rem;
 }
 
 .close-btn {
   top: -6rem;
-  right: -4rem;
+  right: -3rem;
+}
+
+.close-btn svg {
+  padding: 1rem;
 }
 
 .flip-btn {
@@ -1076,7 +1084,9 @@ height: 2rem;
 .flip-btn,
 .rotate-btn {
   left: calc(50% - 3.5rem);
-  bottom: -8rem;
+  bottom: -7rem;
+  fill: var(--clr-grey);
+  padding: 1.5rem
 }
 
 .slide-btn {
@@ -1087,16 +1097,13 @@ height: 2rem;
   align-items: center;
   justify-content: center; */
   background-color: rgba(0, 0, 0, 0);
-  /* border-radius: 50px; */
   z-index: 3000;
 }
 
-.slide-btn > svg {
-  width: 100% !important;
-  height: 100% !important;
-  margin: 0 !important;
-  padding: 0 !important;
-  fill: var(--clr-light);
+
+.slide-btn svg,
+.indicator svg {
+  /* fill: var(--clr-light); */
 }
 
 .slide-btn * {
