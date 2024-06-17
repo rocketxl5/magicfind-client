@@ -11,9 +11,7 @@ const Modal = ({ open, children }) => {
 
     return createPortal(
         <div className='overlay'>
-            <div className='modal'>
             {children}
-            </div>
         </div>,
         document.body
     )

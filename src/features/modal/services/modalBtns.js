@@ -42,7 +42,7 @@ export const buttons = {
         {
             id: 'flip-btn',
             type: 'button',
-            className: 'flip-btn slide-btn',
+            className: 'action-btn',
             icon: <Flip />,
         }
     ],
