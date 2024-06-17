@@ -38,7 +38,7 @@ const useNavButton = () => {
                         displaySearchBar: false,
                     }
                 });
-            }, 100);
+            }, 200);
         }
         else {
             dispatch({

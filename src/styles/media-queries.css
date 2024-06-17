@@ -467,7 +467,6 @@
     .feature-list p .bullet {
         width: clamp(1rem, 1vw, 1.25rem);
         height: clamp(1rem, 1vw, 1.25rem);
-        /* font-size: clamp(1rem, 1vw, 1.25rem); */
     }
 
     .banner-content {
