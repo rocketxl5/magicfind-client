@@ -22,6 +22,22 @@
     .feature-section {
         padding: 2rem; 
     }
+    .feature-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .feature-list p .line {
+        font-size: clamp(1rem, 1.75vw, 1.5rem);
+    } 
+    
+    /* .feature-list p .line {
+        font-size: clamp(0.8rem, 1vw, 1.25rem);
+    } */
+
+    .feature-list p .bullet {
+        width: clamp(1rem, 1.75vw, 1.5rem);
+        height: clamp(1rem, 1.75vw, 1.5rem);
+    }
 }
 
 @media screen and (width >= 660px) {
@@ -52,14 +68,6 @@
     .product-grid .image {
         grid-column: span 3;
        
-    }
-    
-    .feature-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-    .feature-list p {
-        font-size: clamp(1rem, 1.75vw, 1.5rem);
     }
 
     .close-btn {
@@ -447,9 +455,19 @@
     .feature-card-header h2 {
         margin-inline: 0;
     }
+
+    .feature-list p {
+        margin-bottom: 7px;
+    }
     
-    .feature-list > p {
-        font-size: clamp(1rem, 2vw, 1.25rem);
+    .feature-list p .line {
+        font-size: clamp(1rem, 1vw, 1.25rem);
+    }
+
+    .feature-list p .bullet {
+        width: clamp(1rem, 1vw, 1.25rem);
+        height: clamp(1rem, 1vw, 1.25rem);
+        /* font-size: clamp(1rem, 1vw, 1.25rem); */
     }
 
     .banner-content {
@@ -463,8 +481,6 @@
     .about-page-banner.banner {
         background-position: 100%  50%!important;
     }
-
-
 
     .parameters-list {
         position: static;
