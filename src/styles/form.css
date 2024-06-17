@@ -56,6 +56,10 @@ input:-webkit-autofill:active{
     font-weight: 400;
 }
 
+.form-element {
+    width: 29.5rem;
+}
+
 .form-element label,
 .form-element > p {
     color: var(--clr-dark);
@@ -153,9 +157,6 @@ input:-webkit-autofill:active{
 
 .login-password-wrapper #password  {
     border: none;
-    border-radius: none;
-    border-top-left-radius: 5px;
-    border-bottom-left-radius: 5px;
 }
 
 /* Login password error handling */
@@ -167,17 +168,32 @@ input:-webkit-autofill:active{
     padding: calc(var(--size-1) - 1px) !important;
 }
 
-.login-password-wrapper .password-btn {
-    width: 15%;
-    margin: 2px;
+.password-outer {
+    border: 1px solid transparent;
+    border-radius: 5px;
+}
+
+.login-password-wrapper:focus-within button * {
+    padding-block: 7px;
+}
+
+.show-password {
+    width: 40px;
     background-color: #fff;
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
-    cursor: pointer;
 }
 
-.login-password-wrapper .password-btn:active {
-    -webkit-tap-highlight-color: rgba(0,0,0,0);
+input#password {
+    width: 255px;
+}
+
+.show-icon,
+.hide-icon {
+ 
+    padding: 8px;
+    fill: rgb(219, 219, 219);
+    width: max-content !important;
 }
 
 .login-password-wrapper i {
