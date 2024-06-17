@@ -7,14 +7,46 @@
     min-height: var(--header-height);
     background-color: var(--clr-primary);
     }
-    
-.logo {
+
+.home {
     margin-right: auto;
+    display: flex;
+    align-items: center;
+    height: 3.8rem;
     min-width: 5rem;
 }
 
-.logo * {
+.home * {
     color: var(--clr-grey);
+}
+
+.logo {
+    width: 3.4rem;
+    height: 3.4rem;
+    display: inline-block;
+}
+
+.logo svg {
+    display: flex;
+}
+
+h1.site-name {
+    display: inline-block;
+    font-family: 'Young Serif', serif;
+    font-size: var(--fs-175);
+    font-weight: 400;
+    line-height: 1;
+    margin-inline-start: 5px;
+    overflow: hidden;
+}
+
+.site-name span {
+    display: block;
+    line-height: 0.8;
+}
+
+.site-name span:nth-of-type(1) {
+    margin-block-end: 5px;
 }
 
 .navbar {
@@ -37,6 +69,9 @@ nav {
     background: transparent;
     width: 3rem;
     height: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .nav-btn:hover {
