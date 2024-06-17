@@ -600,9 +600,14 @@ scroll-snap-align: start;
   /* font-size: 12.5px; */
 }
 
-.feature-list p .bullet {
+/* .feature-list p .bullet {
   width: 1.25rem;
   height: 1.25rem;
+} */
+
+.feature-list p .bullet {
+  width: clamp(1.25rem, 3vw, 2rem);
+  height: clamp(1.25rem, 3vw, 1.5rem);
 }
 
 .bullet svg {
@@ -610,8 +615,7 @@ scroll-snap-align: start;
 }
 
 .feature-list p .line {
-  /* display: inline-block; */
-  /* line-height: 1; */
+  font-size: clamp(1.25rem, 3vw, 2rem);
 }
 
 .line-icon {
