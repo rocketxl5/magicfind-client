@@ -967,7 +967,7 @@ height: 2rem;
   -o-transition all 300ms;
   transform-style: preserve-3d;
   -webkit-transform-style: preserve-3d;
-  box-shadow: 0 0.5rem 1rem rgba(0,0,0,.15);
+  /* box-shadow: 0 0.5rem 1rem rgba(0,0,0,.15); */
 }
 
 .card-front {

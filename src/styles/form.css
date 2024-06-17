@@ -174,8 +174,8 @@ input:-webkit-autofill:active{
     border-radius: 5px;
 }
 
-.login-password-wrapper:focus-within button * {
-    /* padding-block: 6px; */
+.login-password-wrapper .password-btn:active {
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
 }
 
 .show-password {
