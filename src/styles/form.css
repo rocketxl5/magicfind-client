@@ -146,6 +146,7 @@ input:-webkit-autofill:active{
 }
 
 .login-password-wrapper  {
+    display: flex;
     background-color: #fff;
     border: 1px solid var(--clr-grey);
     border-radius: 5px;
@@ -174,26 +175,30 @@ input:-webkit-autofill:active{
 }
 
 .login-password-wrapper:focus-within button * {
-    padding-block: 7px;
+    /* padding-block: 6px; */
 }
 
 .show-password {
-    width: 40px;
+    width:  42px;
+    text-align: center;
     background-color: #fff;
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
+    display: inline-block;
 }
 
 input#password {
-    width: 255px;
+    display: inline-block;
+    width: 250px;
 }
 
 .show-icon,
 .hide-icon {
- 
-    padding: 8px;
+    width: 30px !important;
+    /* padding: 7px; */
+    margin: auto;
     fill: rgb(219, 219, 219);
-    width: max-content !important;
+    /* padding: 8px; */
 }
 
 .login-password-wrapper i {

@@ -216,7 +216,7 @@ const Login = () => {
         </div>
         <div className="form-element">
           <label htmlFor="password" className={errors.password && 'color-danger'}>{errors.password ? errors.password : 'Password'}</label>
-          <div className={`login-password-wrapper text-center content-height flex relative col-12 ${errors.password && 'border-danger'}`}>
+          <div className={`login-password-wrapper text-center content-height col-12 ${errors.password && 'border-danger'}`}>
             <input
               id="password"
               type="password"
