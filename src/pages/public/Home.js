@@ -79,21 +79,25 @@ const Home = () => {
                         <h2 className="feature-card-title">{card.title}</h2>
                         <div style={{ backgroundImage: `url(${card.bgLink})` }} className="feature-card-image"></div>
                       </section>
-                      <section className="feature-card-content">
+                      <ul className="feature-list">
                         {
                           card.body.map((line, index) => {
                             return (
 
-                              <div key={index} className='flex gap-1 align-center'>
-                                <span className='bullet'>
+                              <li key={index} >
+                                <p>
+                                  <span className='bullet'>
                                   <GoShieldCheck strokeWidth={'1px'} />
                                 </span>
-                                <p>{line}</p>
-                              </div>
+                                  <span className='line'>
+                                    {line}
+                                  </span>
+                                </p>
+                              </li>
                             )
                           })
                         }
-                      </section>
+                      </ul>
                     </div>
                   </div>)
               })

@@ -574,7 +574,7 @@ scroll-snap-align: start;
   box-shadow: var(--shadow-1);
 }
 
-.feature-card-content {
+.feature-list {
   color: var(--clr-light-grey);
   padding: max(0.5vw, 1rem);
   background-color: var(--clr-primary);
@@ -582,13 +582,36 @@ scroll-snap-align: start;
   box-shadow: var(--shadow-1);
 }
 
-.feature-card-content p {
-  vertical-align: middle;
+.feature-list li {
+  /* padding-block: 1px; */
+
+  /* min-height: 20px; */
 }
 
-.feature-card-content .bullet {
+
+
+.feature-list p  {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  line-height: 1.25;
+  margin-bottom: 5px;
+  /* height: 12.5px; */
+  /* font-size: 12.5px; */
+}
+
+.feature-list p .bullet {
   width: 1.25rem;
   height: 1.25rem;
+}
+
+.bullet svg {
+  vertical-align: super;
+}
+
+.feature-list p .line {
+  /* display: inline-block; */
+  /* line-height: 1; */
 }
 
 .line-icon {
