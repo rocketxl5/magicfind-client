@@ -1009,7 +1009,7 @@ height: 2rem;
 }
 
 .card-back {
-  transform: rotateY(180deg);
+  transform: rotateY(180deg) translateZ(1px);
   -webkit-transform: rotateY(180deg) translateZ(1px);
   -moz-transform: rotateY(180deg) translateZ(1px); 
   /* z-index: 1; */
@@ -1118,7 +1118,7 @@ height: 2rem;
   align-items: center;
   justify-content: center; */
   background-color: rgba(0, 0, 0, 0);
-  z-index: 3000;
+  z-index: 4000;
 }
 
 
