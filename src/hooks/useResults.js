@@ -7,7 +7,7 @@ const useResults = () => {
     const navigate = useNavigate();
 
     const { setResults } = useSearchContext();
-    const { handleModalUris } = useModalContext();
+    const { setUris } = useModalContext();
 
     const handleArchive = (data) => {
         const results = new Map([
@@ -27,7 +27,7 @@ const useResults = () => {
         // Passing imgages uris to reducer function @ ModalContext,
         // updates uris reducer state which triggers loadImages custom hook function @ useLoadImages.
         // useLoadImages preloads and creates normal size images component modal ready if needed. 
-        handleModalUris(results.get('uris'));
+        setUris(results.get('uris'));
         setResults(results.get('sets'));
     }
 

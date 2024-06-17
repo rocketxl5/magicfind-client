@@ -1,4 +1,4 @@
-import { useEffect, useReducer, createContext } from 'react';
+import { useEffect, useState, useReducer, createContext } from 'react';
 import useLoadImages from '../hooks/useLoadImages';
 import { modalReducer } from '../features/modal/services/modalReducer';
 
@@ -6,20 +6,18 @@ const initialState = {
     content: null,
     open: false,
     props: null,
-    uris: null
 }
 
 export const ModalContext = createContext(null);
 
 export const ModalProvider = ({ children }) => {
-
+    const [uris, setUris] = useState(null);
     const [state, dispatch] = useReducer(modalReducer, initialState);
 
     const {
         content,
         open,
         props,
-        uris,
     } = state || {}
 
     const { loadImages, images } = useLoadImages();
@@ -30,17 +28,17 @@ export const ModalProvider = ({ children }) => {
         }
     }, [uris]);
 
-    function handleModalUris(uris) {
-        dispatch({
-            type: 'set-uris',
-            payload: uris,
-        })
-    }
-
     function handleOpenModal(open) {
         dispatch({
             type: 'open-modal',
             payload: open
+        })
+    }
+
+    function handleClearModal() {
+        dispatch({
+            type: 'clear-modal',
+            payload: initialState
         })
     }
 
@@ -68,10 +66,10 @@ export const ModalProvider = ({ children }) => {
                 open,
                 props,
                 uris,
-
+                setUris, 
                 setModalContent,
+                handleClearModal,
                 handleModalProps,
-                handleModalUris,
                 handleOpenModal
             }}
         >
