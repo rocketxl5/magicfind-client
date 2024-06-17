@@ -58,7 +58,7 @@
         grid-template-columns: repeat(2, 1fr);
     }
 
-    .feature-card-content p {
+    .feature-list p {
         font-size: clamp(1rem, 1.75vw, 1.5rem);
     }
 
@@ -448,7 +448,7 @@
         margin-inline: 0;
     }
     
-    .feature-card-content > p {
+    .feature-list > p {
         font-size: clamp(1rem, 2vw, 1.25rem);
     }
 
