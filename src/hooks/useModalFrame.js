@@ -38,7 +38,6 @@ const useModalFrame = () => {
     const Frame = () => {
         return (
             <div className='slide-frame'>
-                <div>
                     {
                         buttons[layout]?.map((btn, i) => {
                             const { icon, ...props } = btn;
@@ -48,8 +47,7 @@ const useModalFrame = () => {
                                 </button>
                             )
                         })
-                    }
-                </div>
+                }
             </div>
         )
     }
