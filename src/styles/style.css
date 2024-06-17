@@ -156,7 +156,7 @@ color: var(--clr-light);
   width: 100%;
   min-width: 37rem;
   transition: top 0.2s ease-in;
-  z-index: 2000;
+  z-index: 1;
 }
 
 .root-layout {
@@ -730,7 +730,7 @@ height: 2rem;
   min-width: 37rem;
   width: 100vw;
   background-color: rgba(0, 0, 0, 0.7);
-  z-index: 3000;
+  z-index: 2;
 }
 
 .modal {
@@ -1016,6 +1016,7 @@ height: 2rem;
   margin: 0 auto;
   width: var(--slide-width);
   min-height: var(--slide-heigth);
+  z-index: 3000;
 }
 
 .slide {
@@ -1066,6 +1067,7 @@ height: 2rem;
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
   -moz-backface-visibility: hidden; /* Safari */
+  z-index: 5;
 }
 
 .card-back {
