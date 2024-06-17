@@ -535,7 +535,6 @@ scroll-snap-align: start;
 .feature-section p {
   padding-inline-start: 1.5rem;
   margin-block-end: 1.5rem;
-
 }
 
 .slide-show-btn *,
@@ -585,6 +584,11 @@ scroll-snap-align: start;
 
 .feature-card-content p {
   vertical-align: middle;
+}
+
+.feature-card-content .bullet {
+  width: 1.25rem;
+  height: 1.25rem;
 }
 
 .line-icon {
@@ -649,6 +653,8 @@ background-image: url('https://cards.scryfall.io/art_crop/front/5/9/597a8a8f-84f
 .message-section {
 margin-block-start: var(--size-2);
 }
+
+
 
 
 /* //////////////// */
@@ -925,7 +931,6 @@ height: 2rem;
 .eclipse > svg path:nth-of-type(2) {
   fill: var(--clr-surface) !important;
 }
-
 
 .control-btn svg {
   /* position: absolute; */

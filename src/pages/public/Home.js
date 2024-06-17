@@ -77,17 +77,18 @@ const Home = () => {
                     <div className="flex column gap-1 padding-1 b-radius-5 feature-border">
                       <section>
                         <h2 className="feature-card-title">{card.title}</h2>
-                        <div style={{ backgroundImage: `url(${card.bgLink})` }} className="feature-card-image">
-
-                        </div>
+                        <div style={{ backgroundImage: `url(${card.bgLink})` }} className="feature-card-image"></div>
                       </section>
                       <section className="feature-card-content">
                         {
                           card.body.map((line, index) => {
                             return (
 
-                              <div key={index} className='flex gap-1'>
-                                <span className='flex align-center'><GoShieldCheck strokeWidth={'1px'} /></span> <p>{line}</p>
+                              <div key={index} className='flex gap-1 align-center'>
+                                <span className='bullet'>
+                                  <GoShieldCheck strokeWidth={'1px'} />
+                                </span>
+                                <p>{line}</p>
                               </div>
                             )
                           })
