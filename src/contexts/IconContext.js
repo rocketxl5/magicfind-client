@@ -10,7 +10,7 @@ export const IconProvider = ({ children }) => {
         <IconContext.Provider
             value={{
                 style: {
-                    verticalAlign: 'middle',
+                    // verticalAlign: 'middle',
                     stroke: 'rgb(219, 219, 219)',
 
                     width: '100%',
