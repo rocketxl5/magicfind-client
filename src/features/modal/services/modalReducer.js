@@ -5,6 +5,10 @@ export const modalReducer = (state, action) => {
                 ...state,
                 open: action.payload
             }
+        case 'clear-modal':
+            return {
+                ...action.payload
+            }
         case 'set-content':
             return {
                 ...state,

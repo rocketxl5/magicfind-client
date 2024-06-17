@@ -9,12 +9,12 @@ const useModalFrame = () => {
     const frontRef = useRef(null);
     const btnRef = useRef(null);
 
-    const { handleOpenModal } = useModalContext();
+    const { handleClearModal } = useModalContext();
 
     const handlers = {
-        normal: [() => handleOpenModal(false)],
+        normal: [() => handleClearModal()],
         reversible: [
-            () => handleOpenModal(false),
+            () => handleClearModal(),
             () => {
                 cardRef.current?.classList.toggle('rotate-y-180');
                 frontRef.current?.classList.toggle('hide');
@@ -22,13 +22,13 @@ const useModalFrame = () => {
             }
         ],
         flip: [
-            () => handleOpenModal(false),
+            () => handleClearModal(),
             () => {
                 cardRef.current?.classList.toggle('rotate-180');
             }
         ],
         split: [
-            () => handleOpenModal(false),
+            () => handleClearModal(),
             () => {
                 cardRef.current?.classList.toggle('rotate-90');
             }

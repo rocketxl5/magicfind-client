@@ -6,7 +6,14 @@ import useModalSlideShow from './useModalSlideShow';
 import useModalContext from './contexthooks/useModalContext';
 
 const useModal = () => {
-    const { content, open, props, handleOpenModal, setModalContent } = useModalContext()
+    const {
+        content,
+        open,
+        props,
+        setModalContent,
+        handleClearModal,
+        handleOpenModal,
+    } = useModalContext()
 
     const { setModalForm } = useModalForm();
     const { setModalSlideShow } = useModalSlideShow();
@@ -38,7 +45,7 @@ const useModal = () => {
         // [click event on browser's back or forward arrows]
         if (pathname && open) {
             // Close modal
-            handleOpenModal(false);
+            handleClearModal();
         }
     }, [pathname])
 
