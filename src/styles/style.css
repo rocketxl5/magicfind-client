@@ -825,36 +825,56 @@ height: 2rem;
   width: clamp(5.2rem, calc(10vw + 5px), 6rem);
   height: clamp(5.2rem, calc(10vw + 5px), 6rem);
   /* fill: var(--clr-light-grey); */
-  top: min(calc(clamp(31rem, calc(80vw + 10px), 55rem)* 1.44), 72.5rem);
+  /* top: min(calc(clamp(31rem, calc(80vw + 10px), 55rem)* 1.44), 72.5rem); */
   /* bottom: max(calc(clamp(6rem, calc(2vw + 1px), 9rem) * 0.5), 7rem); */
   /* bottom: max(calc(clamp(6rem, calc(2vw + 1px), 9rem) * 0.5), 7rem); */
   /* bottom: clamp(5.2rem, calc(10vw + 5px), 6rem); */
   /* bottom: clamp(-6rem, calc(3vw + 5px), -20rem); */
-  left: 0;
-  right: 0;
+  /* left: 0; */
+  /* top: 100%;
+  bottom: 100%; */
+  right: clamp(3rem, calc(7vw + 5px), 5rem);;
+  bottom: 50%;
   margin: auto;
-  background: transparent;
+  background: rgba(0, 0, 0, 0.3);
   border-radius: 50%;
   z-index: 5000;
   transform: rotateY(180deg);
   -webkit-transform: rotateY(180deg);
-  border: 3px solid var(--clr-light-grey); 
+  border: 2px solid rgba(255, 255, 255, 0.9); 
   transition: all 300ms;
   -webkit-transition: all 300ms;
 }
 
-
 .action-btn svg {
   width: clamp(3rem, calc(7vw + 1px), 4rem) !important;
   height: clamp(3rem, calc(7vw + 1px), 4rem) !important;
+/* stroke: var(--clr-alloy);
+stroke-width: 2.5rem; */
+fill: var(--clr-light);
+transform: fill;
+transition: all 300ms;
+-webkit-transition: all 300ms;
 }
 
-.action-btn svg path { 
-  fill: var(--clr-light-grey);
+/* source @ https://forum.blocsapp.com/t/css-backface-visibility-issue-solved/20229/4 */
+.rotate-y-180 {
+  transform: rotateY(180deg);
+  -webkit-transform: rotateY(180deg);
+  -moz-transform: rotateY(180deg);
+  z-index: 8000;
 }
 
-.action-btn svg path:nth-of-type(2) {
-  fill: rgba(255, 255, 255, 0.5) !important;
+.rotate-y-0 {
+  transform: rotateY(0deg);
+  -webkit-transform: rotateY(0deg);
+  -moz-transform: rotateY(0deg);
+  background: rgba(255, 255, 255, 0.5);
+  border: 2px solid var(--clr-dark); 
+}
+
+.rotate-y-0.action-btn svg {
+  fill: var(--clr-dark);
 }
 
 .card-action-btn {
@@ -962,22 +982,6 @@ height: 2rem;
   min-height: inherit;
 }
 
-
-/* source @ https://forum.blocsapp.com/t/css-backface-visibility-issue-solved/20229/4 */
-.rotate-y-180 {
-  transform: rotateY(180deg);
-  -webkit-transform: rotateY(180deg);
-  -moz-transform: rotateY(180deg);
-  z-index: 8000;
-}
-
-.rotate-y-0 {
-  transform: rotateY(0deg);
-  -webkit-transform: rotateY(0deg);
-  -moz-transform: rotateY(0deg);
-  
-}
-
 .one-sided {
   transition: transform 300ms, -webkit-transform 300ms, -o-transition 300ms ease-in-out;
 }
@@ -1012,11 +1016,13 @@ height: 2rem;
 .slide-frame {
   position: absolute;
   /* top: clamp(4rem, calc(7vh + 15px), 12rem); */
+
   right: 0;
   left: 0;
   margin: 0 auto;
   width: var(--slide-width);
-  height: var(--slide-heigth);
+  /* height: var(--slide-heigth); */
+  aspect-ratio: 1 / 1.4;
   z-index: 3000;
 }
 
