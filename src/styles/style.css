@@ -117,7 +117,8 @@
 
   /* Modal */
   --slide-width: clamp(31.5rem, calc(80vw + 10px), 50rem);
-  --slide-heigth: calc(clamp(31.5rem, calc(80vw + 10px), 55rem) * 1.4); 
+  --slide-heigth: auto;
+  /* --slide-heigth: calc(clamp(31.5rem, calc(80vw + 10px), 55rem) * 1.4);  */
 }
 
 .check-icon {
@@ -823,16 +824,16 @@ height: 2rem;
   justify-content: center;
   width: clamp(5.2rem, calc(10vw + 5px), 6rem);
   height: clamp(5.2rem, calc(10vw + 5px), 6rem);
-  fill: var(--clr-light);
-  /* top: min(calc(clamp(36rem, calc(80vw + 60px), 55rem) * 1.45), 80rem); */
-  /* bottom: max(calc(clamp(6rem, calc(2vw + 1px), 9rem) * 0.5), 7rem); */
+  /* fill: var(--clr-light-grey); */
+  top: min(calc(clamp(32.5rem, calc(73vw + 50px), 57rem) * 1.47), 80rem);
+  bottom: max(calc(clamp(6rem, calc(2vw + 1px), 9rem) * 0.5), 7rem);
   /* bottom: max(calc(clamp(6rem, calc(2vw + 1px), 9rem) * 0.5), 7rem); */
   /* bottom: clamp(5.2rem, calc(10vw + 5px), 6rem); */
-  bottom: clamp(-8rem, calc(3vh + 5px), -20rem);
+  /* bottom: clamp(-6rem, calc(3vw + 5px), -20rem); */
   left: 0;
   right: 0;
   margin: auto;
-  background: rgba(0, 0, 0, 0);
+  background: transparent;
   border-radius: 50%;
   z-index: 5000;
   transform: rotateY(180deg);
@@ -1096,7 +1097,7 @@ height: 2rem;
 
 .close-btn {
   top: -6rem;
-  right: -3rem;
+  left: -1.5rem;
 }
 
 .close-btn svg {

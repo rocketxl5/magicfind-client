@@ -3,6 +3,10 @@
     .form-content {
         width: 380px;
     }
+
+    .slide-image {
+        border-radius: 1.8rem;
+    }
 }
 
 @media screen and (width >= 500px) {
@@ -15,6 +19,10 @@
       
     .product-grid .image {
         grid-column: span 2;  
+    }
+
+    .slide-image {
+        border-radius: 2.5rem;
     }
 }
 
