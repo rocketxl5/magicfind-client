@@ -1015,7 +1015,7 @@ height: 2rem;
   left: 0;
   margin: 0 auto;
   width: var(--slide-width);
-  min-height: var(--slide-heigth);
+  height: var(--slide-heigth);
   z-index: 3000;
 }
 
