@@ -106,6 +106,7 @@ const useSearchForm = (inputRef) => {
                 endpoint: exact ? '/cards/named?exact=' : '/cards/named?fuzzy=',
                 ref: `/me/archive`,
                 resource: api.scryfallURL,
+                // If exact if false, retun null else query
                 query: query
             },
             catalog: {
@@ -143,7 +144,8 @@ const useSearchForm = (inputRef) => {
             config: params[type].config,
             query: params[type].query,
             search: {
-                path: `${params[type].ref}/${params[type].term || setString(query)}`,
+                // If archive search, return path prefix only, else return path
+                path: type === 'archive' ? `${params[type].ref}/` : `${params[type].ref}/${params[type].term}`,
                 query: query,
                 type: type
             }
@@ -153,7 +155,7 @@ const useSearchForm = (inputRef) => {
     // Modifies card objects with finish property or,
     // Generates new card object if finishes property has more than one value : [nonfoil, foil, etched]
     // Returns new array of card objects
-    const handleResponse = (cards) => {
+    const handleApiResponse = (cards) => {
         // Source @ https://stackoverflow.com/questions/63787449/javascript-group-array-of-objects-by-common-values-with-label
         if (cards) {
             return Object.entries(cards?.filter(card => !card.digital)
@@ -194,19 +196,32 @@ const useSearchForm = (inputRef) => {
     useEffect(() => {
         if (response) {
             const { path, query, type } = fetchParams.search;
+
             if (type === 'archive' && !oracleId) {
+
                 // set oracle id to fetch all versions
                 setOracleId(response.oracle_id);
             }
             else {  
-                const data = type === 'archive' ? handleResponse(response) : response;
-                data && handleSearchResults(data, { path, query, type });
+                const data = type === 'archive' ? handleApiResponse(response) : response;
+
+                handleSearchResults(
+                    data,
+                    {
+                        // If archive search, complete path string with first card name, else return path
+                        path: type === 'archive' ? path + setString(data[0]?.prints[0].name) : path,
+                        // If false, search is scryfall api fuzzy search,
+                        // set query with first card name, else return query
+                        query: !exact ? data[0]?.prints[0].name : query,
+                        type: type
+                    }
+                );
                 inputRef?.current.blur();
             }
         }
         if (error) {
             const { query } = fetchParams;
-            navigate(`/not-found/${query.split(' ').join('+')}`);
+            navigate(`/not-found/${query?.split(' ').join('+')}`);
             inputRef?.current.blur();
         }
     }, [error, response]);
