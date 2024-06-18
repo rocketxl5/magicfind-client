@@ -4,7 +4,7 @@ import useModalContext from '../../../hooks/contexthooks/useModalContext';
 
 const Slide = ({ layout, index }) => {
     const { images } = useModalContext();
-    const { setLayout, Frame, cardRef, frontRef } = useModalFrame();
+    const { setLayout, Frame, cardRef } = useModalFrame();
 
     useEffect(() => {
         // console.log(images[index])
@@ -22,7 +22,7 @@ const Slide = ({ layout, index }) => {
                         (
                             <div className={layout}>
                                 <div className='reversible-inner' ref={cardRef}>
-                                    <div className='card-front card-radius' ref={frontRef}>
+                                    <div className='card-front card-radius'>
                                         {images[index][0]}
                                     </div>
                                     <div className='card-back card-radius'>

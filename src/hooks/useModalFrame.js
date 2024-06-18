@@ -6,7 +6,6 @@ const useModalFrame = () => {
     const [layout, setLayout] = useState(null);
 
     const cardRef = useRef(null);
-    const frontRef = useRef(null);
     const btnRef = useRef(null);
 
     const { handleClearModal } = useModalContext();
@@ -17,7 +16,6 @@ const useModalFrame = () => {
             () => handleClearModal(),
             () => {
                 cardRef.current?.classList.toggle('rotate-y-180');
-                // frontRef.current?.classList.toggle('hide');
                 btnRef.current?.classList.toggle('rotate-y-0');
             }
         ],
@@ -51,7 +49,7 @@ const useModalFrame = () => {
             </div>
         )
     }
-    return { setLayout, Frame, cardRef, frontRef }
+    return { setLayout, Frame, cardRef }
 }
 
 export default useModalFrame
