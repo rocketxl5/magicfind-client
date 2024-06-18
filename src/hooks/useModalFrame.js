@@ -38,6 +38,7 @@ const useModalFrame = () => {
     const Frame = () => {
         return (
             <div className='slide-frame'>
+                {/* <div className='relative inherit-height'> */}
                     {
                         buttons[layout]?.map((btn, i) => {
                             const { icon, ...props } = btn;
@@ -48,6 +49,7 @@ const useModalFrame = () => {
                             )
                         })
                 }
+                {/* </div> */}
             </div>
         )
     }
