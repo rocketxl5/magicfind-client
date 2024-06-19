@@ -1,6 +1,10 @@
 import { createPortal } from 'react-dom';
+import useModalContext from '../../hooks/contexthooks/useModalContext';
+import { IoCloseOutline } from "react-icons/io5";
 
 const Modal = ({ open, children }) => {
+    const { handleClearModal } = useModalContext();
+
     if (!open) {
         // Allow scrollimg
         document.body.classList.remove('scroll-none');
@@ -11,7 +15,17 @@ const Modal = ({ open, children }) => {
 
     return createPortal(
         <div className='overlay'>
+            <div className='modal'>
+                <button
+                    id='close-modal'
+                    className='close-modal'
+                    type='button'
+                    onClick={handleClearModal}
+                >
+                    <IoCloseOutline />
+                </button>
             {children}
+            </div>
         </div>,
         document.body
     )

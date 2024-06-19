@@ -1,5 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
-import Button from '../../../components/Button';
+import { useEffect, useRef } from 'react';
 import useSlideBtn from '../../../hooks/useSlideBtn';
 import useModalContext from '../../../hooks/contexthooks/useModalContext';
 
@@ -15,38 +14,35 @@ const Slide = ({ layout, index }) => {
     }, [])
 
     return (
-        <div className='slide-view'>
-            <div className='slide'>
-                {
-                    slideBtn &&
-                    <button ref={btnRef} onClick={slideBtn.handler} {...slideBtn.props}>
-                        {slideBtn.icon}
-                    </button>
-                }
-                {
-                    layout === 'reversible' ?
-                        (
-                            <div className={layout}>
-                                <div className='slide-inner' ref={cardRef}>
-                                    <div className='card-front card-radius'>
-                                        {images[index][0]}
-                                    </div>
-                                    <div className='card-back card-radius'>
-                                        {images[index][1]}
-                                    </div>
+        <div className='slide'>
+            {
+                slideBtn &&
+                <button ref={btnRef} onClick={slideBtn.handler} {...slideBtn.props}>
+                    {slideBtn.icon}
+                </button>
+            }
+            {
+                layout === 'reversible' ?
+                    (
+                        <div className={layout}>
+                            <div className='slide-inner' ref={cardRef}>
+                                <div className='card-front card-radius'>
+                                    {images[index][0]}
+                                </div>
+                                <div className='card-back card-radius'>
+                                    {images[index][1]}
                                 </div>
                             </div>
-                        ) :
-                        (
-                            <div className={layout}>
-                                <div className="slide-inner" ref={cardRef}>
+                        </div>
+                    ) :
+                    (
+                        <div className={layout}>
+                            <div className="slide-inner" ref={cardRef}>
                                 {images[index]}
-                                </div>
                             </div>
-                        )
-                }
-
-            </div>
+                        </div>
+                    )
+            }
         </div>
     )
 }
