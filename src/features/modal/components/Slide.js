@@ -1,27 +1,33 @@
-import { useEffect } from 'react';
-import useModalFrame from '../../../hooks/useModalFrame';
+import { useState, useEffect, useRef } from 'react';
+import Button from '../../../components/Button';
+import useSlideBtn from '../../../hooks/useSlideBtn';
 import useModalContext from '../../../hooks/contexthooks/useModalContext';
 
 const Slide = ({ layout, index }) => {
     const { images } = useModalContext();
-    const { setLayout, Frame, cardRef } = useModalFrame();
+    const cardRef = useRef(null);
+    const btnRef = useRef(null);
+
+    const { setSlideRefs, slideBtn } = useSlideBtn();
 
     useEffect(() => {
-        // console.log(images[index])
-        if (layout) {
-            setLayout(layout)
-        }
-    }, [layout]);
+        setSlideRefs({ layout: layout, btnRef: btnRef, cardRef: cardRef })
+    }, [])
 
     return (
         <div className='slide-view'>
-            <Frame />
             <div className='slide'>
+                {
+                    slideBtn &&
+                    <button ref={btnRef} onClick={slideBtn.handler} {...slideBtn.props}>
+                        {slideBtn.icon}
+                    </button>
+                }
                 {
                     layout === 'reversible' ?
                         (
                             <div className={layout}>
-                                <div className='reversible-inner' ref={cardRef}>
+                                <div className='slide-inner' ref={cardRef}>
                                     <div className='card-front card-radius'>
                                         {images[index][0]}
                                     </div>
@@ -33,7 +39,9 @@ const Slide = ({ layout, index }) => {
                         ) :
                         (
                             <div className={layout}>
+                                <div className="slide-inner" ref={cardRef}>
                                 {images[index]}
+                                </div>
                             </div>
                         )
                 }
