@@ -46,6 +46,7 @@ import useAuthContext from './hooks/contexthooks/useAuthContext';
 import './styles/reset.css';
 import './styles/utilities.css';
 import './styles/style.css';
+import './styles/modal.css';
 import './styles/navbar.css';
 import './styles/form.css';
 import './styles/media-queries.css';
