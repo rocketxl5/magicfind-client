@@ -33,8 +33,8 @@ const useSlideBtn = () => {
                 case 'reversible':
                     setSlideBtn({
                         handler: () => {
-                            cardRef.current?.classList.toggle('rotate-y-180');
-                            btnRef.current?.classList.toggle('rotate-y-0');
+                            cardRef.current?.classList.toggle('animate-reversible');
+                            btnRef.current?.classList.toggle('rotate-y');
                         },
                         icon: <Flip />,
                         props: {
@@ -47,8 +47,8 @@ const useSlideBtn = () => {
                 case 'flip':
                     setSlideBtn({
                         handler: () => {
-                            cardRef?.current?.classList.toggle('rotate-180');
-                            btnRef.current?.classList.toggle('rotate-x-180');
+                            cardRef?.current?.classList.toggle('animate-flip');
+                            btnRef.current?.classList.toggle('rotate-x');
                         },
                         icon: <Rotate />,
                         props: {
@@ -61,8 +61,8 @@ const useSlideBtn = () => {
                 case 'split':
                     setSlideBtn({
                         handler: () => {
-                            cardRef?.current?.classList.toggle('rotate-90');
-                            btnRef.current?.classList.toggle('rotate-x-180');
+                            cardRef?.current?.classList.toggle('animate-split');
+                            btnRef.current?.classList.toggle('rotate-translate-x');
                         },
                         icon: <Rotate />,
                         props: {
