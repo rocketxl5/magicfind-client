@@ -14,13 +14,17 @@ const Slide = ({ layout, index }) => {
     }, [])
 
     return (
-        <div className='slide'>
+        <>
+            <div className="slide-btn">
+
             {
                 slideBtn &&
                 <button ref={btnRef} onClick={slideBtn.handler} {...slideBtn.props}>
                     {slideBtn.icon}
                 </button>
             }
+            </div>
+            <div className='slide'>
             {
                 layout === 'reversible' ?
                     (
@@ -44,6 +48,7 @@ const Slide = ({ layout, index }) => {
                     )
             }
         </div>
+        </>
     )
 }
 
