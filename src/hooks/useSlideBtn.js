@@ -1,11 +1,8 @@
 import { useState, useEffect } from 'react';
-import useModalContext from './contexthooks/useModalContext';
 
 const useSlideBtn = () => {
     const [slideRefs, setSlideRefs] = useState(null);
     const [slideBtn, setSlideBtn] = useState(null);
-
-    // const { handleClearModal } = useModalContext();
 
     const Flip = () => {
         return (
