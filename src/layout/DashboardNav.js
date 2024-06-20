@@ -21,7 +21,7 @@ const DashboardNav = () => {
 
     const { auth } = useAuthContext();
     const { setMailCount } = useMailContext();
-    const { fetchAll, fetch, error, response } = useFetch();
+    const { fetchAllServer, fetch, error, response } = useFetch();
     const { query } = useParams();
 
     const links = data.dashboardLinks;
@@ -32,7 +32,7 @@ const DashboardNav = () => {
     // Fetch unread messages from user account                                                 //
     /////////////////////////////////////////////////////////////////////////////////////////////
     useEffect(() => {
-        fetchAll([
+        fetchAllServer([
             {
                 query: `/api/cards/cardnames`,
                 config: {
@@ -142,6 +142,11 @@ const DashboardNav = () => {
     }, [response])
     /* ////////////////////////////// End /////////////////////////// */
 
+    useEffect(() => {
+        if (error) {
+            throw error
+        }
+    }, [error])
 
     return (
         <section className="dashboard-nav">

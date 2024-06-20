@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import axios from 'axios';
+import { api } from '../api/resources';
 
 const useFetch = () => {
     const [response, setResponse] = useState(null);
@@ -37,11 +38,11 @@ const useFetch = () => {
             })
     }
 
-    const fetchAll = async (collection, api) => {
+    const fetchAllServer = async (collection) => {
         const fetchJSON = async (query, config, setter) => {
-            const url = api + query;
+            const url = api.serverURL + query;
             const res = await axios.get(url, config);
-            if (!res.status === 200) {
+            if (res.status !== 200) {
                 throw new Error(`Error ${res.status}`)
             }
 
@@ -57,7 +58,23 @@ const useFetch = () => {
         }, 200)
     }
 
-    return { fetch, fetchAll, loading, showConfirmation, error, response }
+    const fetchAllAPI = async (queries) => {
+        const fetchApi = async (query) => {
+            const url = api.scryfallURL + query;
+            return new Promise((resolve, reject) => {
+                resolve(axios.get(url))
+                reject(() => 'Something went wrong @ fetchAllAPI')
+            })
+
+        }
+        Promise.all(queries.map(query => fetchApi(query)))
+            .then(res => {
+                setResponse(res.map(result => result.data.data))
+            })
+            .catch(error => { throw error })
+    }
+
+    return { fetch, fetchAllServer, fetchAllAPI, loading, showConfirmation, error, response }
 }
 
 export default useFetch

@@ -1,24 +1,27 @@
+// Standardized layout strings
+// Takes and array of layouts
 import { useState, useEffect } from 'react'
 
-const useCardLayout = (cardLayout) => {
-    const [layout, setLayout] = useState('');
+const useCardLayout = () => {
+    const [cardLayouts, setCardLayouts] = useState(null);
+    const [cardLayout, setCardLayout] = useState(null);
+    const [layout, setLayout] = useState(null);
+    const [layouts, setLayouts] = useState(null);
+
 
     const handleLayout = (layout) => {
         switch (layout) {
             case 'flip':
-                setLayout('flip');
-                break;
+                return 'flip';
             case 'split':
             case 'planar':
-                setLayout('split');
-                break;
+                return 'split';
             case 'transform':
             case 'modal_dfc':
             case 'reversible_card':
             case 'double_faced_token':
             case 'art_series':
-                setLayout('reversible');
-                break;
+                return 'reversible';
             default:
                 //   case 'normal':
                 //   case 'leveler':
@@ -34,20 +37,24 @@ const useCardLayout = (cardLayout) => {
                 //   case 'augment':
                 //   case 'host':
                 //   case 'vanguard':
-                setLayout('normal');
-                break;
+                return 'normal'
         }
     }
 
-
     useEffect(() => {
-        if (cardLayout) {
-            handleLayout(cardLayout)
+        if (cardLayouts) {
+            // console.log(cardLayouts)
+            setLayouts(
+                cardLayouts.map(cardLayout => handleLayout(cardLayout))
+            )
         }
-    }, [cardLayout])
+        if (cardLayout) {
+            setLayout(handleLayout(cardLayout))
+        }
+    }, [cardLayouts, cardLayout])
 
 
-    return { layout }
+    return { layout, layouts, setCardLayouts, setCardLayout }
 }
 
 export default useCardLayout

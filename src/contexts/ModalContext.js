@@ -24,6 +24,7 @@ export const ModalProvider = ({ children }) => {
 
     useEffect(() => {
         if (uris) {
+            // console.log(uris)
             loadImages(uris);
         }
     }, [uris]);
@@ -50,7 +51,7 @@ export const ModalProvider = ({ children }) => {
         })
     }
 
-    function setModalContent(content) {
+    function setModalSlide(content) {
         dispatch({
             type: 'set-content',
             payload: content
@@ -67,7 +68,7 @@ export const ModalProvider = ({ children }) => {
                 props,
                 uris,
                 setUris, 
-                setModalContent,
+                setModalSlide,
                 handleClearModal,
                 handleModalProps,
                 handleOpenModal

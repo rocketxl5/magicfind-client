@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-const useSlideBtn = () => {
+const useSlideButton = () => {
     const [slideRefs, setSlideRefs] = useState(null);
     const [slideBtn, setSlideBtn] = useState(null);
 
@@ -81,4 +81,4 @@ const useSlideBtn = () => {
     return { setSlideRefs, slideBtn }
 }
 
-export default useSlideBtn
+export default useSlideButton

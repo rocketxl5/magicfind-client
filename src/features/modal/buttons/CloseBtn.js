@@ -6,7 +6,7 @@ const CloseBtn = () => {
     return (
         <button
             id='close-btn'
-            className={`slide-close-btn slide-btn`}
+            className={`slide-close-btn slide-btn-container`}
             type="button"
             onClick={() => handleClearModal()}>
             <FaXmark />

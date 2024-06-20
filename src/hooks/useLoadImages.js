@@ -9,7 +9,9 @@ const useLoadImages = () => {
 
     // Fetch & load images from uris array
     const loadImages = (uris) => {
+        // console.log(uris)
         const loadImage = url => {
+            // console.log(url)
             return new Promise((resolve, reject) => {
                 const image = new Image();
                 image.src = url;

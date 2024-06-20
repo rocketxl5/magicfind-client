@@ -442,13 +442,6 @@ input#archive:focus {
     border-radius: 5px;
 }
 
-.slide-btns {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-}
-
 .card-quantity {
     width: 6rem;
     border: 1px solid black;

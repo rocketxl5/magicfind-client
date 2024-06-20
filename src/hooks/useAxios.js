@@ -34,7 +34,7 @@ const useAxios = () => {
             })
     }
 
-    const fetchAll = async (collection, api) => {
+    const fetchAllServer = async (collection, api) => {
         const fetchJSON = async (query, config, setter) => {
             const url = api + query;
             const res = await axios.get(url, config);
@@ -106,7 +106,7 @@ const useAxios = () => {
             })
     }
 
-    return { fetch, fetchAll, post, patch, showConfirmation, error, response }
+    return { fetch, fetchAllServer, post, patch, showConfirmation, error, response }
 }
 
 export default useAxios

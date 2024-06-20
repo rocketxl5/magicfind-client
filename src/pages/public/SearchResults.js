@@ -1,20 +1,9 @@
 import { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-// import ArchiveItem from '../../features/product/ArchiveItem';
-// import CollectionItem from '../../features/product/CollectionItem';
-// import CatalogItem from '../../features/product/CatalogItem';
-import Card from '../../components/Card';
-import Modal from '../../features/modal/Modal';
-// import List from '../../components/List';
-// import ListItem from '../../components/ListItem';
 import Page from '../../components/Page';
 import SearchParameters from '../../features/search/components/SearchParameters';
-import useCollectionModal from '../../hooks/useCollectionModal';
-import useSlideView from '../../hooks/useSlideView';
-import useLoadImages from '../../hooks/useLoadImages';
 import useResults from '../../hooks/useResults';
 import useSearchContext from '../../hooks/contexthooks/useSearchContext';
-import useSearchForm from '../../hooks/useSearchForm';
 
 const SearchResults = () => {
     // States
@@ -22,7 +11,6 @@ const SearchResults = () => {
 
     // Hooks
     const location = useLocation();
-    const navigate = useNavigate();
 
     const { results } = useSearchContext();
     const { handleSearchResults } = useResults();
@@ -33,14 +21,6 @@ const SearchResults = () => {
             handleSearchResults(data, props);
         }
     }, [])
-
-    // useEffect(() => {
-    //     console.log(results)
-    // }, [results])
-
-    // const [imagesLoaded] = useLoadImages(search?.data);
-
-    // const [view, updateSlideView] = useSlideView(handleSlideView);
 
     // const [state, updateCollectionItem] = useCollectionModal(search?.type, handleCollectionItem);
 
@@ -85,17 +65,7 @@ const SearchResults = () => {
     // }
 
     return (
-        <>
-            {/* {
-                <Modal open={view.open}>
-                    {view.component}
-                </Modal>
-            } */}
-            {/* {
-                <Modal open={state.open}>
-                    {state.component}
-                </Modal>
-            } */}
+
                 <Page
                     name={'search-results'}
                 title={location.state?.query}
@@ -151,7 +121,7 @@ const SearchResults = () => {
                         }
                     </div>
             </Page>
-        </>
+
     )
 }
 
