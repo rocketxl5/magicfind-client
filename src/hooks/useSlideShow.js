@@ -1,58 +1,37 @@
-import { useReducer } from 'react';
-import SlideShow from '../features/modal/components/SlideShow';
-// import SingleShow from '../components/views/modal/SingleShow';
+import { useState, useEffect } from 'react';
+import useCardLayout from './useCardLayout';
+import useModalContext from './contexthooks/useModalContext';
 
-const useSlideShow = (callback, expandedImages) => {
-    const ACTIONS = {
-        SLIDE_SHOW: 'slide-show',
-        CLOSE: 'close',
-    }
+const useSlideShow = () => {
+    const [modalSlides, setModalSlides] = useState(null);
 
-    const INIT = {
-        open: false,
-        component: null,
-    }
+    const { setUris } = useModalContext();
 
-    const reducer = (view, action) => {
-        switch (action.type) {
-            case ACTIONS.SLIDE_SHOW:
-                return {
-                    open: true,
-                    component:
-                        <SlideShow handleClick={callback} slides={action.payload.images} />
-                }
-            case ACTIONS.CLOSE:
-                return INIT;
-            default:
-                return INIT;
+    const { layouts, setCardLayouts } = useCardLayout();
+
+    useEffect(() => {
+        if (modalSlides) {
+            const results = new Map([
+                [
+                    'layouts',
+                    modalSlides.map(collection => collection.map(card => card.layout))
+                ],
+                [
+                    'uris',
+                    modalSlides.map(collection => collection.map(card => card.image_uris ?
+                        card.image_uris.normal :
+                        card.card_faces.map(face => face.image_uris.normal)))
+                ]
+            ]);
+
+            setUris(results.get('uris'));
+            setCardLayouts(results.get('layouts'));
+            // console.log(results.get('uris'))
+            // console.log(results.get('layouts'))
         }
-    }
+    }, [modalSlides])
 
-    const [view, dispatch] = useReducer(reducer, INIT)
-
-    const updateSlideShow = (name, id) => {
-        switch (name) {
-            case 'slide-show-btn':
-                dispatch({
-                    type: 'slide-show',
-                    payload: {
-                        images: expandedImages[parseInt(id)],
-                    }
-                })
-                break;
-            case 'close-btn':
-                dispatch({
-                    type: 'close',
-                })
-                break;
-            default:
-                dispatch({
-                    type: undefined
-                })
-        }
-    }
-
-    return [view, updateSlideShow]
+    return { setModalSlides }
 }
 
 export default useSlideShow

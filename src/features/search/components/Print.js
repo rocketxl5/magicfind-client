@@ -26,7 +26,12 @@ const Print = ({ print }) => {
 
     const { uris } = useModalContext();
 
-    const { layout } = useCardLayout(print.layout);
+    const { layout, setCardLayout } = useCardLayout();
+
+    useEffect(() => {
+        setCardLayout(print.layout)
+    }, [])
+
     // const { findMatch, isMatchFound } = useFind();
 
     // useEffect(() => {

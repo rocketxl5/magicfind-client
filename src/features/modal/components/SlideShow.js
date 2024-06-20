@@ -22,24 +22,24 @@ const SlideShow = ({ slides, handleClick }) => {
         setCurrentIndicator(Math.abs(coordinate / INTERVAL));
     }, [coordinate])
 
-    const setSlideMotion = (e) => {
-        e.stopPropagation();
-        if (e.target.name === 'right-btn') {
-            if (coordinate > LIMIT.MIN)
-                setCoordinate(coordinate - INTERVAL)
-        }
-        else if (e.target.name === 'left-btn') {
-            if (coordinate < LIMIT.MAX)
-                setCoordinate(coordinate + INTERVAL)
-        }
-    }
+    // const setSlideMotion = (e) => {
+    //     e.stopPropagation();
+    //     if (e.target.name === 'right-btn') {
+    //         if (coordinate > LIMIT.MIN)
+    //             setCoordinate(coordinate - INTERVAL)
+    //     }
+    //     else if (e.target.name === 'left-btn') {
+    //         if (coordinate < LIMIT.MAX)
+    //             setCoordinate(coordinate + INTERVAL)
+    //     }
+    // }
 
     return (
         <div className={"slide-show"}>
-            <div className={"slide-btn"}>
-                <LeftBtn classList={`slide-btn slide-left-btn slide-btn`} name={'left-btn'} handleClick={setSlideMotion} />
-                <RightBtn classList={`slide-btn slide-right-btn slide-btn`} name={'right-btn'} handleClick={setSlideMotion} />
-                <CloseBtn classList={`slide-close-btn close-btn slide-btn`} name={'close-btn'} handleClick={handleClick} />
+            <div className={"slide-btn-container"}>
+                {/* <LeftBtn classList={`slide-btn-container slide-left-btn slide-btn-container`} name={'left-btn'} handleClick={setSlideMotion} />
+                <RightBtn classList={`slide-btn-container slide-right-btn slide-btn-container`} name={'right-btn'} handleClick={setSlideMotion} />
+                <CloseBtn classList={`slide-close-btn close-btn slide-btn-container`} name={'close-btn'} handleClick={handleClick} /> */}
                 <SlideIndicators items={slides.length} currentIndicator={currentIndicator} />
             </div>
 

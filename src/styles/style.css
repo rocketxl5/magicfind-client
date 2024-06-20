@@ -745,7 +745,7 @@ height: 2rem;
 }
 
 .slide,
-.slide-btn {
+.slide-btn-container {
   position: absolute;
   /* top: clamp(4rem, calc(7vh + 15px), 12rem); */
   right: 0;
@@ -755,7 +755,7 @@ height: 2rem;
   aspect-ratio: 1 / 1.4;
 }
 
-.slide-btn {
+.slide-btn-container {
   z-index: 3000;
 }
 
@@ -832,25 +832,6 @@ height: 2rem;
   right: -5rem;
 }
 
-/* .slide-btn {
-  height: 7rem;
-  width: 7rem;
-  position: absolute;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: transparent;
-  z-index: 6000;
-}
-
-.slide-btn * {
-  pointer-events: none;
-}
- 
-.slide-btn:hover { 
-  cursor: pointer;
-} */
-
 .indicators {
   position: absolute;
   left: 0;
@@ -903,7 +884,6 @@ height: 2rem;
   margin-inline-start: 0.3rem;
   vertical-align: middle;
   font-size: clamp(var(--fs-100), calc(0.5vw + 5px), var(--fs-150));
-
 }
 
 .breadcrumbs .crumb:last-child::after {

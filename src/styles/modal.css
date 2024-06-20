@@ -27,9 +27,9 @@
     width: clamp(5.2rem, calc(10vw + 5px), 6rem);
     height: clamp(5.2rem, calc(10vw + 5px), 6rem);
     /* top: min(calc(clamp(31rem, calc(80vw + 10px), 55rem)* 1.45), 72.5rem); */
-    right: clamp(3rem, calc(7vw + 5px), 5rem);
-    top: 0;
-    bottom: 0;
+    right: clamp(2rem, calc(7vw + 5px), 5rem);
+    top: 37%;
+    /* bottom: 0; */
     margin: auto;
     background: rgba(0, 0, 0, 0.3);
     border-radius: 50%;

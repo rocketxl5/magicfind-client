@@ -1,68 +1,44 @@
-import { useState, useEffect } from 'react';
-import axios from 'axios';
+import { useEffect } from 'react';
 import Page from '../../components/Page.js';
 import MediaElement from '../../features/media/MediaElement.js';
-import Modal from '../../features/modal/Modal.js';
-import data from '../../data/HOME.js';
-import useExpandImages from '../../hooks/useExpandImages.js';
+import home from '../../data/HOME.json';
+import mediaFeatures from '../../data/MEDIA_FEATURES.json';
 import useSlideShow from '../../hooks/useSlideShow.js';
 import Feature from '../../components/Feature.js';
 import { GoShieldCheck } from "react-icons/go";
-import { api } from '../../api/resources.js';
+
+import useModalContext from '../../hooks/contexthooks/useModalContext.js';
+import useFetch from '../../hooks/useFetch.js';
 
 const Home = () => {
-  const [mediaFeatures, setMediaFeatures] = useState(null);
-  const [cardCollections, setCardCollections] = useState(null);
-  const { main, media } = data;
+  const { main } = home;
+  const { features } = mediaFeatures;
+
+  const { images } = useModalContext();
+  const { fetchAllAPI, error, response } = useFetch();
+  const { setModalSlides } = useSlideShow();
 
   useEffect(() => {
-    const cards = []
-    const promises = media.cards.map(async (feature) => {
-      const response = await axios.get(`${api.scryfallURL}/cards/search?order=set&q=e%3Asld+${feature.query}&unique=cards`);
-      return response;
-    })
-
-    Promise.all(promises)
-      .then(responses => {
-        responses.forEach((res, i) => {
-          cards.push(res.data.data);
-        })
-        setCardCollections(cards);
-      })
-      .catch((error) => { throw new Error(error) })
-
+    fetchAllAPI(features.map(feature => {
+      return `/cards/search?order=set&q=e%3Asld+${feature.query}&unique=cards`
+    }))
   }, [])
 
-  const { expandedImages } = useExpandImages(cardCollections);
-
-  const [view, updateSlideShow] = useSlideShow(handleSlideShow, expandedImages)
-
-  function handleSlideShow(e, id) {
-    e.stopPropagation();
-    updateSlideShow(e.target.name, id)
-  }
+  useEffect(() => {
+    if (response) {
+      setModalSlides(response);
+    }
+  }, [response])
 
   useEffect(() => {
-    if (expandedImages) {
-      const cards = []
-      expandedImages.forEach((collection, i) => {
-        const card = media.cards[i]
-        const cover = collection[card.cover] || collection[card.cover]
-        cards.push({
-          title: card.title,
-          cover: !cover.length ? cover : cover[0],
-          images: collection
-        })
-      })
-      setMediaFeatures(cards);
+    if (error) {
+      throw error
     }
-  }, [expandedImages])
+  }, [error])
+
 
   return (
     <>
-      <Modal open={view.open}>
-        {view.component}
-      </Modal>
       <Page
         name={'home'}
         hasHeader={false}
@@ -107,13 +83,10 @@ const Home = () => {
         <Feature classList={'media-feature'} title={'The Secret Lair Drop Artwork'}>
           <div className="media-scroller snaps-inline">
             {
-              mediaFeatures &&
-              mediaFeatures.map((card, i) => {
+              images &&
+              features.map((feature, i) => {
                 return (
-                  <MediaElement key={i + 1} id={i} handleSlideShow={handleSlideShow}>
-                    {card.cover}
-                    {card.title}
-                  </MediaElement>
+                  <MediaElement key={i} title={feature.title} image={images[i][feature.cover]} />
                 )
               })
             }

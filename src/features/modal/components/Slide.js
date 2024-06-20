@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react';
-import useSlideBtn from '../../../hooks/useSlideBtn';
+import useSlideButton from '../../../hooks/useSlideButton';
 import useModalContext from '../../../hooks/contexthooks/useModalContext';
 
 const Slide = ({ layout, index }) => {
@@ -7,7 +7,7 @@ const Slide = ({ layout, index }) => {
     const cardRef = useRef(null);
     const btnRef = useRef(null);
 
-    const { setSlideRefs, slideBtn } = useSlideBtn();
+    const { setSlideRefs, slideBtn } = useSlideButton();
 
     useEffect(() => {
         setSlideRefs({ layout: layout, btnRef: btnRef, cardRef: cardRef })
@@ -15,15 +15,18 @@ const Slide = ({ layout, index }) => {
 
     return (
         <>
-            <div className="slide-btn">
-
             {
                 slideBtn &&
-                <button ref={btnRef} onClick={slideBtn.handler} {...slideBtn.props}>
-                    {slideBtn.icon}
-                </button>
+                <div className="slide-btn-container">
+                    <button
+                        ref={btnRef}
+                        onClick={slideBtn.handler}
+                        {...slideBtn.props}
+                    >
+                        {slideBtn.icon}
+                    </button>
+                    </div>
             }
-            </div>
             <div className='slide'>
             {
                 layout === 'reversible' ?
