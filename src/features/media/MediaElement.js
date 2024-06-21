@@ -1,3 +1,4 @@
+import useModalContext from '../../hooks/contexthooks/useModalContext'
 
 const MediaElement = ({ image, index, title }) => {
 

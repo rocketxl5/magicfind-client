@@ -78,23 +78,6 @@ const Print = ({ print }) => {
     //     // index={uris.findIndex(uri => uri === print.image_uris.normal)}
 
     // }
-    // useEffect(() => {
-    //     console.log(layout)
-    //     if (layout === 'reversible') {
-    //         const i = uris.findIndex(uri => uri.includes(print.card_faces[0].image_uris?.normal))
-    //         console.log(i)
-    //         setIndex(i)
-    //         // setSlideIndex(uris.findIndex(uri => uri.includes(print.card_faces[0].image_uris?.normal)));
-    //     }
-    //     else {
-    //         const i = uris.findIndex(uri => uri === print.image_uris?.normal)
-    //         console.log(i)
-    //         setIndex(i)
-    //     }
-    //     // else {
-    //     //     setSlideIndex(uris.findIndex(uri => uri === print.image_uris?.normal))
-    //     // }
-    // }, [layout])
 
     return (
         <>

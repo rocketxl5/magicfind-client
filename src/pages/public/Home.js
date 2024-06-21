@@ -9,6 +9,7 @@ import { GoShieldCheck } from "react-icons/go";
 
 import useModalContext from '../../hooks/contexthooks/useModalContext.js';
 import useFetch from '../../hooks/useFetch.js';
+import useCardLayout from '../../hooks/useCardLayout.js';
 
 const Home = () => {
   const { main } = home;
@@ -20,21 +21,21 @@ const Home = () => {
 
   useEffect(() => {
     fetchAllAPI(features.map(feature => {
-      return `/cards/search?order=set&q=e%3Asld+${feature.query}&unique=cards`
-    }))
-  }, [])
+      return `/cards/search?order=set&q=e%3Asld+${feature.query}&unique=cards`;
+    }));
+  }, []);
 
   useEffect(() => {
     if (response) {
       setSlides(response);
     }
-  }, [response])
+  }, [response]);
 
   useEffect(() => {
     if (error) {
-      throw error
+      throw error;
     }
-  }, [error])
+  }, [error]);
 
   return (
     <>
