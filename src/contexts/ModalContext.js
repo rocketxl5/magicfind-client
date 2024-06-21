@@ -12,6 +12,7 @@ export const ModalContext = createContext(null);
 
 export const ModalProvider = ({ children }) => {
     const [uris, setUris] = useState(null);
+    const [layouts, setLayouts] = useState(null);
     const [state, dispatch] = useReducer(modalReducer, initialState);
 
     const {
@@ -24,10 +25,17 @@ export const ModalProvider = ({ children }) => {
 
     useEffect(() => {
         if (uris) {
-            // console.log(uris)
+            console.log(uris)
             loadImages(uris);
         }
     }, [uris]);
+
+
+    useEffect(() => {
+        if (layouts) {
+            console.log(layouts)
+        }
+    }, [layouts])
 
     function handleOpenModal(open) {
         dispatch({
@@ -68,6 +76,7 @@ export const ModalProvider = ({ children }) => {
                 props,
                 uris,
                 setUris, 
+                setLayouts,
                 setModalSlide,
                 handleClearModal,
                 handleModalProps,

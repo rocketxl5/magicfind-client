@@ -629,7 +629,6 @@ border-radius: 100%;
   background-size: 110%;
   background-position: 50% 25%;
   background-color: var(--clr-primary);
-  z-index: 1000;
   aspect-ratio: 16 / 9;
   }
   

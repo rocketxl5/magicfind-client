@@ -5,11 +5,15 @@ import useAuthContext from '../../../hooks/contexthooks/useAuthContext';
 import useFind from '../../../hooks/useFind';
 import useResponseHandler from '../../../hooks/useResponseHandler';
 import useCardLayout from '../../../hooks/useCardLayout';
+import { formatLayout } from '../../modal/services/formatLayout';
 
 import useModalContext from '../../../hooks/contexthooks/useModalContext';
 
 const Print = ({ print }) => {
 // const [index, setIndex] = useState(undefined);
+    const [layout, setLayout] = useState('');
+    const [index, setIndex] = useState(null);
+
     const {
         handleGetResponse,
         handlePatchResponse,
@@ -26,11 +30,21 @@ const Print = ({ print }) => {
 
     const { uris } = useModalContext();
 
-    const { layout, setCardLayout } = useCardLayout();
+    // const { layout, setCardLayout } = useCardLayout();
 
     useEffect(() => {
-        setCardLayout(print.layout)
+        setLayout(formatLayout(print.layout));
     }, [])
+
+    useEffect(() => {
+        if (layout) {
+            const index = layout === 'reversible' ?
+                uris.findIndex(uri => uri.includes(print.card_faces[0]?.image_uris?.normal)) :
+                uris.findIndex(uri => uri === print?.image_uris?.normal);
+
+            setIndex(index);
+        }
+    }, [layout])
 
     // const { findMatch, isMatchFound } = useFind();
 
@@ -82,31 +96,12 @@ const Print = ({ print }) => {
     //     // }
     // }, [layout])
 
-
-    const setIndex = (layout, print) => {
-        // console.log(uris)
-        if (layout === 'reversible') {
-            // console.log(uris)
-            const i = uris.findIndex(uri => uri.includes(print.card_faces[0]?.image_uris?.normal))
-            // console.log(i)
-            // setIndex(i)
-            // setSlideIndex(uris.findIndex(uri => uri.includes(print.card_faces[0].image_uris?.normal)));
-            return i;
-        }
-        else {
-            const i = uris.findIndex(uri => uri === print?.image_uris?.normal)
-            // console.log(i)
-            // setIndex(i)
-            return i;
-        }
-    }
     return (
         <>
-            {
-                layout &&
+            { 
                 <div className='flex print'>
                     <Image
-                            index={setIndex(layout, print)}
+                        index={index}
                             // index={uris.findIndex(uri => uri === print.image_uris.normal || uri[print.card_faces[0].image_uris.normal)}
                             src={print.image_uris?.small || print.card_faces[0].image_uris?.small}
                             classList={'image-print'}

@@ -31,23 +31,23 @@ root.render(
   <StrictMode>
     <ViewportProvider>
       <PathProvider>
-        <AuthProvider>
-          <SearchProvider>
-            <IconProvider>
-              <NavProvider>
-                <MailProvider>
-                  <CartProvider>
-                    <ScrollProvider>
-                      <ModalProvider>
+        <ModalProvider>
+          <AuthProvider>
+            <SearchProvider>
+              <IconProvider>
+                <NavProvider>
+                  <MailProvider>
+                    <CartProvider>
+                      <ScrollProvider>
                         <RouterProvider router={router} />
-                      </ModalProvider>
-                    </ScrollProvider>
-                  </CartProvider>
-                </MailProvider>
-              </NavProvider>
-            </IconProvider>
-          </SearchProvider>
-        </AuthProvider>
+                      </ScrollProvider>
+                    </CartProvider>
+                  </MailProvider>
+                </NavProvider>
+              </IconProvider>
+            </SearchProvider>
+          </AuthProvider>
+        </ModalProvider>
       </PathProvider>
     </ViewportProvider>
   </StrictMode>
