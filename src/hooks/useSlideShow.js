@@ -1,33 +1,34 @@
 import { useState, useEffect } from 'react';
 import useCardLayout from './useCardLayout';
-import useModalContext from './contexthooks/useModalContext'; 
+import useModalContext from './contexthooks/useModalContext';
+import { formatLayout } from '../features/modal/services/formatLayout';
 
 const useSlideShow = () => {
-    const [modalSlides, setModalSlides] = useState(null);
-
-    const { setUris } = useModalContext();
-    const { setCardLayouts } = useCardLayout();
+    const [slides, setSlides] = useState(null);
+    const { setUris, setLayouts } = useModalContext();
 
     useEffect(() => {
-        if (modalSlides) {
+        if (slides) {
             const results = new Map([
                 [
                     'layouts',
-                    modalSlides.map(collection => collection.map(card => card.layout))
+                    slides.map(collection => collection.map(card => formatLayout(card.layout)))
                 ],
                 [
                     'uris',
-                    modalSlides.map(collection => collection.map(card => card.image_uris ?
+                    slides.map(collection => collection.map(card => card.image_uris ?
                         card.image_uris.normal :
                         card.card_faces.map(face => face.image_uris.normal)))
                 ]
             ]);
-            setCardLayouts(results.get('layouts'));
-            setUris(results.get('uris'));
-        }
-    }, [modalSlides])
 
-    return { setModalSlides }
+            setUris(results.get('uris'));
+            setLayouts(results.get('layouts'));
+        }
+    }, [slides]);
+
+
+    return { setSlides }
 }
 
 export default useSlideShow

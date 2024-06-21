@@ -17,9 +17,7 @@ const Home = () => {
 
   const { images } = useModalContext();
   const { fetchAllAPI, error, response } = useFetch();
-  const { setModalSlides } = useSlideShow();
-  const { layouts, layout } = useCardLayout();
-
+  const { setSlides } = useSlideShow();
 
   useEffect(() => {
     fetchAllAPI(features.map(feature => {
@@ -29,7 +27,7 @@ const Home = () => {
 
   useEffect(() => {
     if (response) {
-      setModalSlides(response);
+      setSlides(response);
     }
   }, [response]);
 
@@ -38,12 +36,6 @@ const Home = () => {
       throw error;
     }
   }, [error]);
-
-  useEffect(() => {
-    if (layouts) {
-      console.log(layouts)
-    }
-  }, [layouts])
 
   return (
     <>
