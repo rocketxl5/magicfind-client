@@ -1,13 +1,12 @@
 import { useState, useEffect } from 'react';
 import useCardLayout from './useCardLayout';
-import useModalContext from './contexthooks/useModalContext';
+import useModalContext from './contexthooks/useModalContext'; 
 
 const useSlideShow = () => {
     const [modalSlides, setModalSlides] = useState(null);
 
     const { setUris } = useModalContext();
-
-    const { layouts, setCardLayouts } = useCardLayout();
+    const { setCardLayouts } = useCardLayout();
 
     useEffect(() => {
         if (modalSlides) {
@@ -23,11 +22,8 @@ const useSlideShow = () => {
                         card.card_faces.map(face => face.image_uris.normal)))
                 ]
             ]);
-
-            setUris(results.get('uris'));
             setCardLayouts(results.get('layouts'));
-            // console.log(results.get('uris'))
-            // console.log(results.get('layouts'))
+            setUris(results.get('uris'));
         }
     }, [modalSlides])
 

@@ -9,6 +9,7 @@ import { GoShieldCheck } from "react-icons/go";
 
 import useModalContext from '../../hooks/contexthooks/useModalContext.js';
 import useFetch from '../../hooks/useFetch.js';
+import useCardLayout from '../../hooks/useCardLayout.js';
 
 const Home = () => {
   const { main } = home;
@@ -17,25 +18,32 @@ const Home = () => {
   const { images } = useModalContext();
   const { fetchAllAPI, error, response } = useFetch();
   const { setModalSlides } = useSlideShow();
+  const { layouts, layout } = useCardLayout();
+
 
   useEffect(() => {
     fetchAllAPI(features.map(feature => {
-      return `/cards/search?order=set&q=e%3Asld+${feature.query}&unique=cards`
-    }))
-  }, [])
+      return `/cards/search?order=set&q=e%3Asld+${feature.query}&unique=cards`;
+    }));
+  }, []);
 
   useEffect(() => {
     if (response) {
       setModalSlides(response);
     }
-  }, [response])
+  }, [response]);
 
   useEffect(() => {
     if (error) {
-      throw error
+      throw error;
     }
-  }, [error])
+  }, [error]);
 
+  useEffect(() => {
+    if (layouts) {
+      console.log(layouts)
+    }
+  }, [layouts])
 
   return (
     <>

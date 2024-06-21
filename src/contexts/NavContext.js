@@ -61,6 +61,9 @@ export const NavProvider = ({ children }) => {
 
     useEffect(() => {
         if (displayMenu) {
+
+            // Prevent scrolling
+            document.body.classList.add('scroll-none');
             // Display site Menu
             if (isMobile) {
                 // Hide SearchBtn
@@ -72,6 +75,8 @@ export const NavProvider = ({ children }) => {
             }
         }
         else {
+            // Allow scrollimg
+            document.body.classList.remove('scroll-none');
             // Hide site Menu
             if (isMobile) {
                 // Display SearchBtn
