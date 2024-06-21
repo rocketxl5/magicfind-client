@@ -624,12 +624,10 @@ border-radius: 100%;
 
 .banner-content {
   position: relative;
-  top: 0;
   background-repeat: no-repeat;
   background-size: 110%;
   background-position: 50% 25%;
   background-color: var(--clr-primary);
-  z-index: 1000;
   aspect-ratio: 16 / 9;
   }
   
