@@ -70,7 +70,7 @@ const CatalogItem = ({ index, product, count, cartIndex, handleSlideView }) => {
         <Card key={index + 1} classList='product-container'>
             {/* Passing product image & product detail as an array of children @ TwoSidedSlide component */}
             {/* TwoSidedSlide contains @ TurnBtn which takes a classList argument to specify sizes and absolute coordinates  */}
-            <TwoSidedSlide classList={{ container: '', btn: 'card-action-btn btn-bottom-right' }}>
+            <TwoSidedSlide classList={{ container: '', btn: 'card-slide-btn btn-bottom-right' }}>
                 {
                     // Product image (children[0])
                     [
@@ -123,7 +123,7 @@ const CatalogItem = ({ index, product, count, cartIndex, handleSlideView }) => {
                             })} /> */}
 
                                 <Button
-                                    classList={'card-action-btn btn-bottom-left bg-transparent'}
+                                    classList={'card-slide-btn btn-bottom-left bg-transparent'}
                                     handleClick={() => navigate(`/seller/${product.seller.userID}`, {
                                         state: {
                                             user: product.seller
@@ -133,7 +133,7 @@ const CatalogItem = ({ index, product, count, cartIndex, handleSlideView }) => {
                                     <MdStore className='box-size-100' />
                                 </Button>
                                 <Button
-                                    classList={'card-action-btn btn-bottom-center bg-transparent'}
+                                    classList={'card-slide-btn btn-bottom-center bg-transparent'}
                                     handleClick={() => navigate(`/mail/${product.seller.userID}`, {
                                         state: {
                                             user: product.seller

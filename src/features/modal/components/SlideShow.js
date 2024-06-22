@@ -57,7 +57,7 @@ const SlideShow = ({ slides, handleClick }) => {
                         }
                         else {
                             return (
-                                <TwoSidedSlide key={i} classList={{ btn: 'action-btn' }} motion={motion}>
+                                <TwoSidedSlide key={i} classList={{ btn: 'slide-btn' }} motion={motion}>
                                     {slide}
                                 </TwoSidedSlide>
                             );
