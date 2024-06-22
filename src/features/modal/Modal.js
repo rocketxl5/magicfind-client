@@ -16,14 +16,17 @@ const Modal = ({ open, children }) => {
     return createPortal(
         <div className='overlay'>
             <div className='modal'>
+                <div className="modal-inner">
                 <button
                     id='close-modal'
-                    className='close-modal'
+                        className='modal-btn close-modal'
                     type='button'
                     onClick={handleClearModal}
                 >
                     <IoCloseOutline />
                 </button>
+
+                </div>
             {children}
             </div>
         </div>,

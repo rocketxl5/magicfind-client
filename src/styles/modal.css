@@ -13,115 +13,24 @@
     background-color: rgba(0, 0, 0, 0.7);
     z-index: 2;
   }
-  
+
   .modal {
+    position: relative;
+    margin-top: clamp(4rem, calc(7vh + 15px), 12rem);
     height: 100%;
+    min-width: 37rem;
+    
+  }
+
+  .modal-inner {
+    position: absolute;
+    left: 0;
+    right: 0;
+    width: var(--slide-width);
     margin-inline: auto;
   }
 
-  .slide-btn {
-    position: absolute;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: clamp(5.2rem, calc(10vw + 5px), 6rem);
-    height: clamp(5.2rem, calc(10vw + 5px), 6rem);
-    /* top: min(calc(clamp(31rem, calc(80vw + 10px), 55rem)* 1.45), 72.5rem); */
-    right: clamp(2rem, calc(7vw + 5px), 5rem);
-    top: 37%;
-    /* bottom: 0; */
-    margin: auto;
-    background: rgba(0, 0, 0, 0.3);
-    border-radius: 50%;
-    z-index: 5000;
-    border: 3px solid rgba(255, 255, 255, 0.9); 
-    transition: all 300ms;
-    -webkit-transition: all 300ms;
-  }
-  
-  .reversible-btn {
-    transform: rotateY(180deg);
-    -webkit-transform: rotateY(180deg);
-  }
-  
-  .flip-btn {
-    transform: rotateX(0deg);
-    -webkit-transform: rotateX(0deg);
-  }
-  
-  .close-modal {
-    position: absolute;
-    top: -5rem;
-    left: 2.5rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 5rem;
-    width: 5rem; 
-    background: transparent;  
-  }
-  
-  .slide-btn svg {
-    width: clamp(3rem, calc(7vw + 1px), 4rem) !important;
-    height: clamp(3rem, calc(7vw + 1px), 4rem) !important;
-    fill: var(--clr-light);
-    transition: all 300ms;
-    -webkit-transition: all 300ms;
-  }
-  
-  /* Slide buttons transition selectors */
-  .rotate-y,
-  .rotate-x,
-  .rotate-translate-x { 
-  background: rgba(255, 255, 255, 0.5);
-  border: 3px solid var(--clr-dark); 
-  }
-  
-  .rotate-y {
-    transform: rotateY(0deg);
-    -webkit-transform: rotateY(0deg);
-    -moz-transform: rotateY(0deg);
-  }
-  
-  .rotate-x {
-    transform: rotateX(180deg);
-    -webkit-transform: rotateX(180deg);
-    -moz-transform: rotateX(180deg);
-  }
-  
-  .rotate-translate-x {
-    transform: rotateX(180deg) translateX(2rem);
-    -webkit-transform: rotateX(180deg) translateX(2rem);
-    -moz-transform: rotateX(180deg) translateX(2rem);
-  }
-  
-  .rotate-translate-x.slide-btn svg,
-  .rotate-y.slide-btn svg,
-  .rotate-x.slide-btn svg {
-    fill: var(--clr-dark);
-  }
-  
-  /* source @ https://forum.blocsapp.com/t/css-backface-visibility-issue-solved/20229/4 */
-  .animate-reversible {
-    transform: rotateY(180deg);
-    -webkit-transform: rotateY(180deg);
-    -moz-transform: rotateY(180deg);
-  }
-  
-  .animate-flip {
-    transform: rotate(180deg);
-    -webkit-transform: rotate(180deg);
-    -moz-transform: rotate(180deg);
-  }
-  .animate-split {
-    transform: rotate(90deg) scale(0.8);
-    -webkit-transform: rotate(90deg) scale(0.8);
-  }
-
-
-
 /* Forms */
-
 .card-slide-btn {
     position: absolute;
     display: block;
@@ -292,3 +201,255 @@
     height: 14rem;
   }
   
+
+/* ///////////// */
+/* /// Slide /// */
+/* ///////////// */
+
+.slide-track {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 100%;
+  transition: left 0.4s ease;
+  padding-block-start: clamp(4rem, calc(7vh + 15px), 12rem);
+}
+  
+  .slide {
+    display: block;
+    position: relative;
+    margin-inline: auto;
+    width: var(--slide-width);
+    aspect-ratio: 1 / 1.4;
+    perspective: 2000px;
+  }
+  
+  .slide .flip,
+  .slide .split,
+  .slide .reversible {
+    width: 100%;
+    height: 100%;
+  }
+
+/* //////////////// */
+/* Reversible cards */
+/* //////////////// */
+.card-faces {
+  display: block;
+  position: absolute;
+  top:0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transition: transform 300ms, -webkit-transform 300ms, -o-transform 300ms;
+  transform-style: preserve-3d;
+  -webkit-transform-style: preserve-3d;
+  z-index: 5;
+  /* box-shadow: 0 0.5rem 1rem rgba(0,0,0,.15); */
+}
+
+.card-front, 
+.card-back {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  -moz-backface-visibility: hidden; /* Safari */
+  transform-style: preserve-3d;
+  -webkit-transform-style: preserve-3d;
+  z-index: 5;
+}
+
+.card-face {
+  transition: transform 300ms, -webkit-transform 300ms, -o-transform 300ms;
+  transform-style: preserve-3d;
+  -webkit-transform-style: preserve-3d;
+}
+
+.reversible {
+  perspective: 2000px;
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.card-back {
+  transform: rotateY(180deg);
+  -webkit-transform: rotateY(180deg);
+  -moz-transform: rotateY(180deg); 
+}
+
+/* /////////////// */
+/* One sided cards */
+/* layouts: ///////*/
+/* normal /////////*/
+/* flip ///////////*/
+/* split ///////// */
+/* /////////////// */
+.slide-image {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0 auto; 
+  border-radius: 1.7rem;
+  box-shadow: var(--shadow-3);
+}
+
+.normal .flip .split {
+  position: absolute;
+  transition: transform 300ms, -webkit-transform 300ms, -o-transform 300ms;
+}
+
+.slide-left-btn {
+  left: -5rem;
+}
+
+.slide-right-btn {
+  right: -5rem;
+}
+
+/* //////////////// */
+/* Slide Indicators */
+/* //////////////// */
+
+.indicators {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: min(calc(clamp(31rem, calc(80vw + 10px), 55rem) * 1.7), 81rem);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.5rem;
+  min-height: 3rem;
+  z-index: 6001;
+}
+
+.indicator svg {
+  width: clamp(1.4rem, calc(3vw + 3px), 2rem) !important;
+  height: clamp(1.4rem, calc(3vw + 3px), 2rem) !important;
+  stroke-width: 0.8;
+  vertical-align: middle;
+}
+
+.current-indicator svg {
+  display: block;
+  height: 2rem;
+  width: 2rem;
+}
+
+
+/* ///////////// */
+/* Slide Buttons */
+/* ///////////// */
+
+.slide-btn,
+.modal-btn {
+  position: absolute;
+  /* display: flex;
+  align-items: center;
+  justify-content: center; */
+  width: var(--modal-btn-width);
+  height: var(--modal-btn-height);
+  margin: auto;
+}
+
+.slide-btn {
+  right: clamp(2rem, calc(7vw + 5px), 5rem);
+  top: 37%;
+  padding: 7px;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 100%;
+  z-index: 1000;
+  /* transform-style: flat; */
+  border: 3px solid rgba(255, 255, 255, 0.9); 
+  transition: all 300ms;
+  -webkit-transition: all 300ms;
+}
+
+.slide-btn svg {
+  width: clamp(3rem, calc(7vw + 1px), 4rem) !important;
+  height: clamp(3rem, calc(7vw + 1px), 4rem) !important;
+  fill: var(--clr-light);
+  transition: all 300ms;
+  -webkit-transition: all 300ms;
+}
+
+.close-modal {
+  top: -5rem;
+  left: -1rem;
+  background: transparent;  
+}
+
+.reversible-btn {
+  transform: rotateY(180deg);
+  -webkit-transform: rotateY(180deg);
+}
+
+.flip-btn {
+  transform: rotateX(0deg);
+  -webkit-transform: rotateX(0deg);
+}
+
+
+/* Slide buttons transition selectors */
+.rotate-y,
+.rotate-x,
+.rotate-translate-x { 
+background: rgba(255, 255, 255, 0.5);
+border: 3px solid var(--clr-dark); 
+}
+
+.rotate-y {
+  transform: rotateY(0deg);
+  -webkit-transform: rotateY(0deg);
+  -moz-transform: rotateY(0deg);
+}
+
+.rotate-x {
+  transform: rotateX(180deg);
+  -webkit-transform: rotateX(180deg);
+  -moz-transform: rotateX(180deg);
+}
+
+.rotate-translate-x {
+  transform: rotateX(180deg) translateX(2rem);
+  -webkit-transform: rotateX(180deg) translateX(2rem);
+  -moz-transform: rotateX(180deg) translateX(2rem);
+}
+
+.rotate-translate-x.slide-btn svg,
+.rotate-y.slide-btn svg,
+.rotate-x.slide-btn svg {
+  fill: var(--clr-dark);
+}
+
+/* source @ https://forum.blocsapp.com/t/css-backface-visibility-issue-solved/20229/4 */
+.animate-reversible {
+  transform: rotateY(180deg);
+  -webkit-transform: rotateY(180deg);
+  -moz-transform: rotateY(180deg);
+}
+
+.animate-flip {
+  transform: rotate(180deg);
+  -webkit-transform: rotate(180deg);
+  -moz-transform: rotate(180deg);
+}
+.animate-split {
+  transform: rotate(90deg) scale(0.8);
+  -webkit-transform: rotate(90deg) scale(0.8);
+}
+
+
+
