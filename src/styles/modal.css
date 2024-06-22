@@ -220,12 +220,12 @@
 }
   
 .slide {
-  display: block;
   position: relative;
   margin-inline: auto;
   width: var(--slide-width);
-  aspect-ratio: 1 / 1.4;
-  perspective: 2000px;
+  /* height: 100%; */
+  /* min-width: 37rem; */
+  /* aspect-ratio: 1 / 1.4; */
 }
 
 .slide-inner {
@@ -236,19 +236,25 @@
   width: var(--slide-width);
   aspect-ratio: 1 / 1.4;
   z-index: 3000;
-  perspective: 2000px;
+  /* perspective: 2000px; */
 }
 
 /* //////////////// */
 /* Reversible cards */
 /* //////////////// */
+.reversible-slide {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  perspective: 2000px;
+}
 .card-faces {
   display: block;
   position: relative;
   top:0;
   left: 0;
   width: 100%;
-  height: 100%;
+  /* height: 100%; */
   transition: transform 300ms, -webkit-transform 300ms, -o-transform 300ms;
   transform-style: preserve-3d;
   -webkit-transform-style: preserve-3d;
@@ -305,7 +311,7 @@
   top: 0;
   left: 0;
   width: 100%;
-  height: 100%;
+  aspect-ratio: 1 / 1.4;
   margin: 0 auto; 
   border-radius: 1.7rem;
   box-shadow: var(--shadow-3);

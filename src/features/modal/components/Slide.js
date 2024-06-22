@@ -35,14 +35,16 @@ const Slide = ({ image, layout }) => {
             {
                 layout === 'reversible' ?
                         (
-                            <div className={`card-faces`} ref={cardRef}>
-                                <div className='card-front card-radius'>
-                                    {image[0]}
+                            <div className="reversible-slide">
+                                <div className={`card-faces`} ref={cardRef}>
+                                    <div className='card-front card-radius'>
+                                        {image[0]}
+                                    </div>
+                                    <div className='card-back card-radius'>
+                                        {image[1]}
+                                    </div>
                                 </div>
-                                <div className='card-back card-radius'>
-                                    {image[1]}
                             </div>
-                        </div>
                         ) :
                         (
                             <div className={`card-face ${layout}`} ref={cardRef}>
