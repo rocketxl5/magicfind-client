@@ -11,6 +11,7 @@ const Slide = ({ image, layout }) => {
     const { uris } = useModalContext();
 
     useEffect(() => {
+        console.log(layout)
         // console.log(uris)
         // console.log(image)
         setSlideRefs({ layout: layout, btnRef: btnRef, cardRef: cardRef })
@@ -35,7 +36,7 @@ const Slide = ({ image, layout }) => {
             {
                 layout === 'reversible' ?
                         (
-                            <div className="reversible-slide">
+                            <div className="two-sided-slide">
                                 <div className={`card-faces`} ref={cardRef}>
                                     <div className='card-front card-radius'>
                                         {image[0]}
@@ -47,10 +48,10 @@ const Slide = ({ image, layout }) => {
                             </div>
                         ) :
                         (
-                            <div className={`card-face ${layout}`} ref={cardRef}>
-                                {/* <div className="card-face" > */}
-                                {image}
-                                {/* </div> */}
+                            <div className={layout}>
+                                <div className="one-sided-slide" ref={cardRef}>
+                                    {image}
+                                </div>
                             </div>
                         )
                 }
