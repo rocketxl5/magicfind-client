@@ -116,8 +116,10 @@
   --opacity-between: 1;
 
   /* Modal */
+  --modal-btn-width: clamp(5.2rem, calc(10vw + 5px), 6rem);
+  --modal-btn-height: clamp(5.2rem, calc(10vw + 5px), 6rem);
   --slide-width: clamp(31.5rem, calc(80vw + 10px), 50rem);
-  --slide-heigth: auto;
+  --slide-height: auto;
   /* --slide-heigth: calc(clamp(31.5rem, calc(80vw + 10px), 55rem) * 1.4);  */
 }
 
@@ -464,6 +466,7 @@ box-shadow: var(--shadow-3);
 .media-element > button {
   border-radius: var(--radius-2);
   background-color: var(--clr-surface);
+  pointer-events: none;
 }
 
 .media-element img {
@@ -536,11 +539,6 @@ scroll-snap-align: start;
 .feature-section p {
   padding-inline-start: 1.5rem;
   margin-block-end: 1.5rem;
-}
-
-.slide-show-btn *,
-.modal-btn * { 
-  pointer-events: none;
 }
 
 .feature-header {
@@ -716,154 +714,6 @@ height: 2rem;
 
 .footer p {
   padding-block: var(--size-1);
-}
-
-/* ////////////////// */
-/* /// Slide Show /// */
-/* ////////////////// */
-.slide-track {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  display: grid;
-  grid-auto-flow: column;
-  grid-auto-columns: 100%;
-  transition: left 0.4s ease;
-  padding-block-start: clamp(4rem, calc(7vh + 15px), 12rem);
-}
-
-.modal {
-  position: relative;
-  margin-top: clamp(4rem, calc(7vh + 15px), 12rem);
-  height: 100%;
-  min-width: 37rem;
-  
-}
-
-.slide {
-  /* position: absolute; */
-  /* top: clamp(4rem, calc(7vh + 15px), 12rem); */
-  /* right: 0;
-  left: 0; */
-  /* margin: 0 auto;
-  width: var(--slide-width);
-  aspect-ratio: 1 / 1.4;
-  border-radius: var(--card-radius); */
-}
-
-.slide div:first-of-type {
-  position: absolute;
-  /* top: clamp(4rem, calc(7vh + 15px), 12rem); */
-  right: 0;
-  left: 0;
-  margin: 0 auto;
-  width: var(--slide-width);
-  aspect-ratio: 1 / 1.4;
-  border-radius: var(--card-radius);
-  overflow: inherit;
-  background: transparent;
-  /* z-index: 5000; */
-}
-
-.slide .flip,
-.slide .split,
-.slide .reversible {
-  width: 100%;
-  height: 100%;
-}
-
-/* //////////////// */
-/* Reversible cards */
-/* //////////////// */
-.reversible {
-  perspective: 2000px;
-  position: relative;
-  width: 100%;
-  height: 100%;
-}
-
-.slide-inner {
-  position: relative;
-  transition: transform .3s;
-  -webkit-transition: transform .3s;
-  transform-style: preserve-3d;
-  -webkit-transform-style: preserve-3d;
-  /* box-shadow: 0 0.5rem 1rem rgba(0,0,0,.15); */
-}
-
-.card-front, 
-.card-back {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
-  -moz-backface-visibility: hidden; /* Safari */
-  z-index: 5;
-}
-
-.card-back {
-  transform: rotateY(180deg);
-  -webkit-transform: rotateY(180deg);
-  -moz-transform: rotateY(180deg); 
-}
-
-/* /////////////// */
-/* One sided cards */
-/* layouts: ///////*/
-/* normal /////////*/
-/* flip ///////////*/
-/* split ///////// */
-/* /////////////// */
-.slide-image {
-  display: block;
-  width: var(--slide-width);
-  height: var(--slide-heigth);
-  margin: 0 auto; 
-  border-radius: 1.7rem;
-  box-shadow: var(--shadow-3);
-}
-
-.normal .flip .split {
-  position: absolute;
-  transition: transform .3s;
-  -webkit-transition: transform .3s;
-}
-
-.slide-left-btn {
-  left: -5rem;
-}
-
-.slide-right-btn {
-  right: -5rem;
-}
-
-.indicators {
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: min(calc(clamp(31rem, calc(80vw + 10px), 55rem) * 1.7), 81rem);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 1.5rem;
-  min-height: 3rem;
-  z-index: 6001;
-}
-
-.indicator svg {
-  width: clamp(1.4rem, calc(3vw + 3px), 2rem) !important;
-  height: clamp(1.4rem, calc(3vw + 3px), 2rem) !important;
-  stroke-width: 0.8;
-  vertical-align: middle;
-}
-
-.current-indicator svg {
-  display: block;
-  height: 2rem;
-  width: 2rem;
 }
 
 /* ////////////////////////// */

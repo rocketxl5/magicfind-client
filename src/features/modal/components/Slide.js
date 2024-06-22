@@ -8,8 +8,11 @@ const Slide = ({ image, layout }) => {
     const btnRef = useRef(null);
 
     const { setSlideRefs, slideBtn } = useSlideButton();
+    const { uris } = useModalContext();
 
     useEffect(() => {
+        // console.log(uris)
+        // console.log(image)
         setSlideRefs({ layout: layout, btnRef: btnRef, cardRef: cardRef })
     }, [])
 
@@ -18,8 +21,7 @@ const Slide = ({ image, layout }) => {
             <div className="slide">
             {
                     slideBtn &&
-                    <div>
-
+                    // <div>
                     <button
                         ref={btnRef}
                         onClick={slideBtn.handler}
@@ -27,32 +29,29 @@ const Slide = ({ image, layout }) => {
                     >
                         {slideBtn.icon}
                     </button>
-                        </div>
+                    // </div>
             }
-                <div className='slide-view'>
+
             {
                 layout === 'reversible' ?
-                    (
-                        <div className={layout}>
-                            <div className='slide-inner' ref={cardRef}>
+                        (
+                            <div className={`card-faces`} ref={cardRef}>
                                 <div className='card-front card-radius'>
-                                            {image[0]}
+                                    {image[0]}
                                 </div>
                                 <div className='card-back card-radius'>
-                                            {image[1]}
-                                </div>
+                                    {image[1]}
                             </div>
                         </div>
-                    ) :
-                    (
-                        <div className={layout}>
-                            <div className="slide-inner" ref={cardRef}>
-                                        {image[0]}
+                        ) :
+                        (
+                            <div className={`card-face ${layout}`} ref={cardRef}>
+                                {/* <div className="card-face" > */}
+                                {image}
+                                {/* </div> */}
                             </div>
-                        </div>
-                    )
-            }
-        </div>
+                        )
+                }
             </div>
         </>
     )
