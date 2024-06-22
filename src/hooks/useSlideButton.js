@@ -54,7 +54,7 @@ const useSlideButton = () => {
                         props: {
                             id: 'flip-btn',
                             type: 'button',
-                            className: 'slide-btn',
+                            className: 'slide-btn flip-btn',
                         }
                     });
                     break;
@@ -68,7 +68,7 @@ const useSlideButton = () => {
                         props: {
                             id: 'split-btn',
                             type: 'button',
-                            className: 'slide-btn',
+                            className: 'slide-btn flip-btn',
                         }
                     });
                     break;
