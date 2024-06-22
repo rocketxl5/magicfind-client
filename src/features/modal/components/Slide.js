@@ -18,6 +18,9 @@ const Slide = ({ image, layout }) => {
             <div className="slide">
             {
                     slideBtn &&
+                    // <div className="slide-btn">
+                        
+                    // </div>
                     <button
                         ref={btnRef}
                         onClick={slideBtn.handler}
