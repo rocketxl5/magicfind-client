@@ -223,9 +223,6 @@
   position: relative;
   margin-inline: auto;
   width: var(--slide-width);
-  /* height: 100%; */
-  /* min-width: 37rem; */
-  /* aspect-ratio: 1 / 1.4; */
 }
 
 .slide-inner {
@@ -253,12 +250,10 @@
   top:0;
   left: 0;
   width: 100%;
-  /* height: 100%; */
   transition: transform 300ms, -webkit-transform 300ms, -o-transform 300ms;
   transform-style: preserve-3d;
   -webkit-transform-style: preserve-3d;
   z-index: 5;
-  /* box-shadow: 0 0.5rem 1rem rgba(0,0,0,.15); */
 }
 
 .card-front, 

@@ -19,6 +19,7 @@ const Home = () => {
   const { setSlides } = useSlideShow();
 
   useEffect(() => {
+    console.log(features)
     fetchAllAPI(features.map(feature => {
       return `/cards/search?order=set&q=e%3Asld+${feature.query}&unique=cards`;
     }));
