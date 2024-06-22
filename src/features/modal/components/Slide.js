@@ -26,7 +26,7 @@ const Slide = ({ image, layout }) => {
                         {slideBtn.icon}
                     </button>
             }
-                <div className='slide-image'>
+                <div className='slide-view'>
             {
                 layout === 'reversible' ?
                     (
