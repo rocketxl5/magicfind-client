@@ -11,7 +11,8 @@ const useModal = () => {
         content,
         open,
         props,
-        setModalSlide,
+        images,
+        handleModalContent,
         handleClearModal,
         handleOpenModal,
     } = useModalContext();
@@ -23,16 +24,16 @@ const useModal = () => {
 
     useEffect(() => {
         if (props) {
-            const { type, ...rest } = props;
+            const { type, index, layout } = props;
             switch (type) {
                 case 'form':
-                    setModalForm(rest);
+                    setModalForm();
                     break;
                 case 'slide':
-                    setModalSlide(<Slide {...rest} />);
+                    handleModalContent(<Slide image={images[index]} layout={layout} />);
                     break;
                 case 'slide-show':
-                    setModalSlideShow(<SlideShow2 {...rest} />);
+                    setModalSlideShow(<SlideShow2 />);
                     break;
                 default:
                     break;

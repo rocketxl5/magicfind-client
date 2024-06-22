@@ -742,18 +742,28 @@ height: 2rem;
   
 }
 
-.slide,
-.slide-btn-container {
-  position: absolute;
-  /* top: clamp(4rem, calc(7vh + 15px), 12rem); */
-  right: 0;
-  left: 0;
-  margin: 0 auto;
+.slide {
+  position: relative;
   width: var(--slide-width);
   aspect-ratio: 1 / 1.4;
 }
 
-.slide-btn-container {
+.slide-image {
+  width: 100%;
+  height: auto;
+}
+
+.slide-btn {
+  position: absolute;
+  /* top: clamp(4rem, calc(7vh + 15px), 12rem); */
+  right: 0;
+  left: 0;
+  /* margin: 0 auto;
+  width: var(--slide-width); */
+  /* aspect-ratio: 1 / 1.4; */
+}
+
+.slide-btn {
   z-index: 3000;
 }
 

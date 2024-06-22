@@ -2,8 +2,8 @@ import { useEffect, useRef } from 'react';
 import useSlideButton from '../../../hooks/useSlideButton';
 import useModalContext from '../../../hooks/contexthooks/useModalContext';
 
-const Slide = ({ layout, index }) => {
-    const { images } = useModalContext();
+const Slide = ({ image, layout }) => {
+// const { image } = useModalContext();
     const cardRef = useRef(null);
     const btnRef = useRef(null);
 
@@ -15,9 +15,9 @@ const Slide = ({ layout, index }) => {
 
     return (
         <>
+            <div className="slide">
             {
-                slideBtn &&
-                <div className="slide-btn-container">
+                    slideBtn &&
                     <button
                         ref={btnRef}
                         onClick={slideBtn.handler}
@@ -25,19 +25,18 @@ const Slide = ({ layout, index }) => {
                     >
                         {slideBtn.icon}
                     </button>
-                    </div>
             }
-            <div className='slide'>
+                <div className='slide-image'>
             {
                 layout === 'reversible' ?
                     (
                         <div className={layout}>
                             <div className='slide-inner' ref={cardRef}>
                                 <div className='card-front card-radius'>
-                                    {images[index][0]}
+                                            {image[0]}
                                 </div>
                                 <div className='card-back card-radius'>
-                                    {images[index][1]}
+                                            {image[1]}
                                 </div>
                             </div>
                         </div>
@@ -45,12 +44,13 @@ const Slide = ({ layout, index }) => {
                     (
                         <div className={layout}>
                             <div className="slide-inner" ref={cardRef}>
-                                {images[index]}
+                                        {image[0]}
                             </div>
                         </div>
                     )
             }
         </div>
+            </div>
         </>
     )
 }

@@ -1,11 +1,13 @@
 import { useState, useEffect } from 'react';
-import useCardLayout from './useCardLayout';
 import useModalContext from './contexthooks/useModalContext';
 import { formatLayout } from '../features/modal/services/formatLayout';
 
 const useSlideShow = () => {
     const [slides, setSlides] = useState(null);
-    const { setUris, setLayouts } = useModalContext();
+    // Receives index as indicator
+    const [slideShowIndex, setSlideShowIndex] = useState(null);
+
+    const { setUris, setLayouts, layouts, images, uris } = useModalContext();
 
     useEffect(() => {
         if (slides) {
@@ -27,8 +29,17 @@ const useSlideShow = () => {
         }
     }, [slides]);
 
+    useEffect(() => {
+        if (slideShowIndex !== null) {
+            // console.log(slideShowIndex)
+            console.log(images[slideShowIndex])
+            console.log(layouts)
+            console.log(uris)
+        }
+    }, [slideShowIndex])
 
-    return { setSlides }
+
+    return { setSlides, setSlideShowIndex }
 }
 
 export default useSlideShow
