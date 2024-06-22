@@ -21,7 +21,7 @@ const Slide = ({ image, layout }) => {
             <div className="slide">
             {
                     slideBtn &&
-                    // <div>
+                    <div className='slide-inner'>
                     <button
                         ref={btnRef}
                         onClick={slideBtn.handler}
@@ -29,7 +29,7 @@ const Slide = ({ image, layout }) => {
                     >
                         {slideBtn.icon}
                     </button>
-                    // </div>
+                        </div>
             }
 
             {
