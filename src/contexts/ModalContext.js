@@ -25,7 +25,7 @@ export const ModalProvider = ({ children }) => {
 
     useEffect(() => {
         if (uris) {
-            console.log(uris)
+            // console.log(uris)
             loadImages(uris);
         }
     }, [uris]);
@@ -33,7 +33,7 @@ export const ModalProvider = ({ children }) => {
 
     useEffect(() => {
         if (layouts) {
-            console.log(layouts)
+            // console.log(layouts)
         }
     }, [layouts])
 
@@ -58,8 +58,15 @@ export const ModalProvider = ({ children }) => {
             payload: props
         })
     }
+    // form, slide, slide show,
+    function handleContentType(contentType) {
+        dispatch({
+            type: 'content-type',
+            payload: contentType
+        })
+    }
 
-    function setModalSlide(content) {
+    function handleModalContent(content) {
         dispatch({
             type: 'set-content',
             payload: content
@@ -75,12 +82,14 @@ export const ModalProvider = ({ children }) => {
                 open,
                 props,
                 uris,
+                layouts, 
                 setUris, 
                 setLayouts,
-                setModalSlide,
+                handleModalContent,
                 handleClearModal,
+                handleContentType,
                 handleModalProps,
-                handleOpenModal
+                handleOpenModal,
             }}
         >
             {children}

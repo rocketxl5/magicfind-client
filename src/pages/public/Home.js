@@ -9,7 +9,6 @@ import { GoShieldCheck } from "react-icons/go";
 
 import useModalContext from '../../hooks/contexthooks/useModalContext.js';
 import useFetch from '../../hooks/useFetch.js';
-import useCardLayout from '../../hooks/useCardLayout.js';
 
 const Home = () => {
   const { main } = home;
@@ -86,7 +85,7 @@ const Home = () => {
               images &&
               features.map((feature, i) => {
                 return (
-                  <MediaElement key={i} title={feature.title} image={images[i][feature.cover]} />
+                  <MediaElement key={i} title={feature.title} image={images[i][feature.cover]} index={i} />
                 )
               })
             }
