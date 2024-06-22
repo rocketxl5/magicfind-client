@@ -323,37 +323,6 @@
   right: -5rem;
 }
 
-/* //////////////// */
-/* Slide Indicators */
-/* //////////////// */
-
-.indicators {
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: min(calc(clamp(31rem, calc(80vw + 10px), 55rem) * 1.7), 81rem);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 1.5rem;
-  min-height: 3rem;
-  z-index: 6001;
-}
-
-.indicator svg {
-  width: clamp(1.4rem, calc(3vw + 3px), 2rem) !important;
-  height: clamp(1.4rem, calc(3vw + 3px), 2rem) !important;
-  stroke-width: 0.8;
-  vertical-align: middle;
-}
-
-.current-indicator svg {
-  display: block;
-  height: 2rem;
-  width: 2rem;
-}
-
-
 /* ///////////// */
 /* Slide Buttons */
 /* ///////////// */
@@ -369,10 +338,9 @@
 .slide-btn {
   right: clamp(2rem, calc(7vw + 5px), 5rem);
   top: 37%;
-  padding: 7px;
   display: flex;
-  /* align-items: center;
-  justify-content: center; */
+  align-items: center;
+  justify-content: center;
   background: rgba(0, 0, 0, 0.3);
   border-radius: 100%;
   margin: auto;
@@ -457,6 +425,36 @@ border: 3px solid var(--clr-dark);
 .animate-split {
   transform: rotate(90deg) scale(0.8);
   -webkit-transform: rotate(90deg) scale(0.8);
+}
+
+/* //////////////// */
+/* Slide Indicators */
+/* //////////////// */
+
+.indicators {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: min(calc(clamp(31rem, calc(80vw + 10px), 55rem) * 1.7), 81rem);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.5rem;
+  min-height: 3rem;
+  z-index: 6001;
+}
+
+.indicator svg {
+  width: clamp(1.4rem, calc(3vw + 3px), 2rem) !important;
+  height: clamp(1.4rem, calc(3vw + 3px), 2rem) !important;
+  stroke-width: 0.8;
+  vertical-align: middle;
+}
+
+.current-indicator svg {
+  display: block;
+  height: 2rem;
+  width: 2rem;
 }
 
 
