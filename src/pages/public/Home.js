@@ -19,7 +19,6 @@ const Home = () => {
   const { setSlides } = useSlideShow();
 
   useEffect(() => {
-    console.log(features)
     fetchAllAPI(features.map(feature => {
       return `/cards/search?order=set&q=e%3Asld+${feature.query}&unique=cards`;
     }));
@@ -36,6 +35,13 @@ const Home = () => {
       throw error;
     }
   }, [error]);
+
+
+  useEffect(() => {
+    if (images) {
+      console.log(images)
+    }
+  }, [images])
 
   return (
     <>
@@ -80,18 +86,20 @@ const Home = () => {
             }
           </section>
         </Feature>
-        <Feature classList={'media-feature'} title={'The Secret Lair Drop Artwork'}>
-          <div className="media-scroller snaps-inline">
-            {
-              images &&
-              features.map((feature, i) => {
-                return (
-                  <MediaElement key={i} title={feature.title} image={images[i][feature.cover]} index={i} />
-                )
-              })
-            }
-          </div>
-        </Feature>
+        {images &&
+          <Feature classList={'media-feature'} title={'The Secret Lair Drop Artwork'}>
+            <div className="media-scroller snaps-inline">
+
+              {
+                features.map((feature, i) => {
+                  return (
+                    <MediaElement key={i} title={feature.title} image={images[i][feature.cover]} index={i} />
+                  )
+                })}
+
+            </div>
+          </Feature>
+        }
       </Page>
     </>
   )

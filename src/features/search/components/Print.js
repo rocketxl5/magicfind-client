@@ -29,7 +29,9 @@ const Print = ({ print }) => {
     const { uris } = useModalContext();
 
     useEffect(() => {
-        setImageLayout(formatLayout(print.layout));
+        if (uris) {
+            setImageLayout(formatLayout(print.layout))
+        }
     }, [])
 
     useEffect(() => {

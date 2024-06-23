@@ -15,7 +15,7 @@ const Image = ({ classList, index, src, layout }) => {
                     className={classList}
                         src={src}
                         alt={`Card`}
-                        onClick={() => handleModalProps({ type: 'slide', index: index, layout: layout })}
+                        onClick={(e) => handleModalProps({ type: 'slide', index: index, layout: layout })}
                     loading="lazy"
                     />
                 )}

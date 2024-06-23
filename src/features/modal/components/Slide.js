@@ -1,19 +1,13 @@
 import { useEffect, useRef } from 'react';
 import useSlideButton from '../../../hooks/useSlideButton';
-import useModalContext from '../../../hooks/contexthooks/useModalContext';
 
 const Slide = ({ image, layout }) => {
-// const { image } = useModalContext();
     const cardRef = useRef(null);
     const btnRef = useRef(null);
 
     const { setSlideRefs, slideBtn } = useSlideButton();
-    const { uris } = useModalContext();
 
     useEffect(() => {
-        console.log(layout)
-        // console.log(uris)
-        // console.log(image)
         setSlideRefs({ layout: layout, btnRef: btnRef, cardRef: cardRef })
     }, [])
 
@@ -23,13 +17,13 @@ const Slide = ({ image, layout }) => {
             {
                     slideBtn &&
                     <div className='slide-inner'>
-                    <button
-                        ref={btnRef}
-                        onClick={slideBtn.handler}
-                        {...slideBtn.props}
-                    >
-                        {slideBtn.icon}
-                    </button>
+                            <button
+                                ref={btnRef}
+                                onClick={slideBtn.handler}
+                                {...slideBtn.props}
+                            >
+                                {slideBtn.icon}
+                            </button>
                         </div>
             }
 

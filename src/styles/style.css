@@ -463,9 +463,17 @@ border-radius: var(--radius-1);
 box-shadow: var(--shadow-3);
 }
 
-.media-element > button {
+.media-element button {
   border-radius: var(--radius-2);
   background-color: var(--clr-surface);
+}
+
+.media-element button:hover {
+  cursor: pointer;
+  opacity: 0.8;
+}
+
+.media-element button * {
   pointer-events: none;
 }
 

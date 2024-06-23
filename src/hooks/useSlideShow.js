@@ -5,9 +5,8 @@ import { formatLayout } from '../features/modal/services/formatLayout';
 const useSlideShow = () => {
     const [slides, setSlides] = useState(null);
     // Receives index as indicator
-    const [slideShowIndex, setSlideShowIndex] = useState(null);
 
-    const { setUris, setLayouts, layouts, images, uris } = useModalContext();
+    const { handleModalImageUris, handleModalImageLayouts } = useModalContext();
 
     useEffect(() => {
         if (slides) {
@@ -23,23 +22,15 @@ const useSlideShow = () => {
                         card.card_faces.map(face => face.image_uris.normal)))
                 ]
             ]);
-
-            setUris(results.get('uris'));
-            setLayouts(results.get('layouts'));
+            console.log(results.get('layouts'))
+            handleModalImageUris(results.get('uris'));
+            handleModalImageLayouts(results.get('layouts'));
         }
     }, [slides]);
 
-    useEffect(() => {
-        if (slideShowIndex !== null) {
-            // console.log(slideShowIndex)
-            console.log(images[slideShowIndex])
-            console.log(layouts)
-            console.log(uris)
-        }
-    }, [slideShowIndex])
 
 
-    return { setSlides, setSlideShowIndex }
+    return { setSlides }
 }
 
 export default useSlideShow

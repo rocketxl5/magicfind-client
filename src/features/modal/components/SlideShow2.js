@@ -2,7 +2,6 @@ import { useEffect, useReducer, useRef } from 'react';
 import Slide from './Slide';
 import SlideIndicators from './SlideIndicators';
 import { slideShowReducer } from '../services/slideShowReducer';
-import useModalContext from '../../../hooks/contexthooks/useModalContext';
 
 const initialState = {
     min: 0,
@@ -12,12 +11,10 @@ const initialState = {
     indicator: 0
 }
 
-const SlideShow2 = (slides) => {
+const SlideShow2 = ({ images, layouts }) => {
     const [state, dispatch] = useReducer(slideShowReducer, initialState);
 
     const trackRef = useRef(null);
-
-    const { layouts, handleModalContent } = useModalContext();
 
     const {
         coordinate,
@@ -29,7 +26,7 @@ const SlideShow2 = (slides) => {
     } = state;
 
     useEffect(() => {
-        const limit = (slides.length - 1) * - interval
+        const limit = (images.length - 1) * - interval
         handleMinimalLimit(limit)
     }, [])
 
@@ -58,11 +55,11 @@ const SlideShow2 = (slides) => {
     return (
         <div className={"slide-show"}>
             <div className="modal-frame">
-                <SlideIndicators items={slides.length} currentIndicator={indicator} />
+                <SlideIndicators items={images.length} currentIndicator={indicator} />
             </div>
             <div className={"slide-track"} ref={trackRef}>
                 {
-                    slides.map((slide, i) => <Slide index={i} layout={slide.layout} />)
+                    images.map((image, i) => <Slide image={image} layout={layouts[i]} />)
                 }
             </div>
         </div>

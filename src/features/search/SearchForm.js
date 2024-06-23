@@ -44,11 +44,14 @@ const SearchForm = ({ children, classList, type, placeholder, cardNames, inputRe
     };
 
     const handleBlur = (e) => {
-        handleClearSearch();
-        setIsActive(false);
-        // Close search bar if open
-        if (displaySearchBar) {
-            handleSearchBar(false);
+        if (!loading) {
+
+            handleClearSearch();
+            setIsActive(false);
+            // Close search bar if open
+            if (displaySearchBar) {
+                handleSearchBar(false);
+            }
         }
     }
 

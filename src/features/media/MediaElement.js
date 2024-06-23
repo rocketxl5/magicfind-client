@@ -1,17 +1,15 @@
 import useModalContext from '../../hooks/contexthooks/useModalContext'
-import useSlideShow from '../../hooks/useSlideShow'
 
 const MediaElement = ({ image, index, title }) => {
-    const { setSlideShowIndex } = useSlideShow();
-
+    const { handleModalProps, layouts } = useModalContext();
 
     return (
         <div className="media-element">
             <button
-                className="slide-show-btn"
+                className="media-element-btn"
                 type="button"
-                name="slide-show-btn"
-                onClick={() => setSlideShowIndex(index)}
+                name="media-element-btn"
+                onClick={() => handleModalProps({ type: 'slide-show', index: index, layouts: layouts[index] })}
             >
                 {image}
             </button>
