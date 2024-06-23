@@ -4,11 +4,11 @@
 // Sets array of modal ready image components with image elements. 
 import { useState, createElement } from 'react';
 
-const useLoadImages = () => {
-    const [images, setImages] = useState(null);
+const usePreloadImage = () => {
+    const [preloaded, setPreloaded] = useState(null);
 
     // Fetch & load images from uris array
-    const loadImages = (uris) => {
+    const preloadImages = (uris) => {
         // console.log(uris)
         const loadImage = url => {
             // console.log(url)
@@ -32,7 +32,7 @@ const useLoadImages = () => {
             .then((data) => {
                 if (data) {
                     // Create image element
-                    setImages(data.map((img, i) => {
+                    setPreloaded(data.map((img, i) => {
                         // Array of image components [reversible cards]
                         return img.length ?
                             img.map(image => {
@@ -57,7 +57,7 @@ const useLoadImages = () => {
             })
             .catch(error => console.log('Image load has failed', error))
     }
-    return { images, loadImages }
+    return { preloaded, preloadImages }
 }
 
-export default useLoadImages
+export default usePreloadImage

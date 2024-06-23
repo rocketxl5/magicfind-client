@@ -12,34 +12,40 @@ const useModal = () => {
         open,
         props,
         images,
+        layouts,
         handleModalContent,
         handleClearModal,
         handleOpenModal,
     } = useModalContext();
 
-    const { setModalForm } = useModalForm();
-    const { setModalSlideShow } = useSlideShow();
-
     const pathname = useLocation();
 
     useEffect(() => {
         if (props) {
-            const { type, index, layout } = props;
-            switch (type) {
-                case 'form':
-                    setModalForm();
+            const { index, layout, type } = props;
+            // console.log(props)
+            // console.log(images)
+            // console.log(layouts)
+            if (images) {
+                // console.log(images)
+                switch (type) {
+                    case 'form':
+                        // handleModalContent('form')
+                        break;
+                    case 'slide':
+
+                        handleModalContent(<Slide image={images[index]} layout={layout} />);
+                        break;
+                    case 'slide-show': 
+
+                        // handleModalContent(<SlideShow2 images={images[index]} layouts={layouts} />);
                     break;
-                case 'slide':
-                    handleModalContent(<Slide image={images[index]} layout={layout} />);
-                    break;
-                case 'slide-show':
-                    setModalSlideShow(<SlideShow2 />);
-                    break;
-                default:
-                    break;
+                    default:
+                        break;
+                }
             }
         }
-    }, [props]);
+    }, [props, images]);
 
     useEffect(() => {
         // If modal is open and pathname changes 

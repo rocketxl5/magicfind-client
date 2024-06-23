@@ -2,12 +2,14 @@ import { useNavigate } from 'react-router-dom';
 import Set from '../features/search/components/Set';
 import useSearchContext from './contexthooks/useSearchContext';
 import useModalContext from './contexthooks/useModalContext';
+import usePreloadImage from './usePreloadImage';
+import { useEffect } from 'react';
 
 const useResults = () => {
     const navigate = useNavigate();
 
     const { setResults } = useSearchContext();
-    const { setUris } = useModalContext();
+    const { handleModalImageUris, handleModalImage, uris } = useModalContext();
 
     const handleArchive = (data) => {
         const results = new Map([
@@ -25,9 +27,9 @@ const useResults = () => {
         ]);
 
         // Passing imgages uris to reducer function @ ModalContext,
-        // updates uris reducer state which triggers loadImages custom hook function @ useLoadImages.
-        // useLoadImages preloads and creates normal size images component modal ready if needed. 
-        setUris(results.get('uris'));
+        // updates uris reducer state which triggers loadImages custom hook function @ usePreloadImage.
+        // usePreloadImage preloads and creates normal size images component modal ready if needed. 
+        handleModalImageUris(results.get('uris'));
         setResults(results.get('sets'));
     }
 

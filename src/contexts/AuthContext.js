@@ -12,7 +12,7 @@ export const AuthProvider = ({ children }) => {
   const logoutAction = () => {
     localStorage.clear();
     setAuth(null);
-    setIsAuth(false);
+    // setIsAuth(false);
   }
 
   const parseJwt = (token) => {
@@ -31,11 +31,9 @@ export const AuthProvider = ({ children }) => {
       setIsAuth(true);
     }
     else {
+      handleClearModal();
       setIsAuth(false);
     }
-
-    // Clear modal on login and logout
-    handleClearModal();
   }, [auth])
 
   useEffect(() => {
