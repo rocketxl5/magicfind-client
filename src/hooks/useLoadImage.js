@@ -6,6 +6,7 @@ import { useState, createElement } from 'react';
 
 const useLoadImage = () => {
     const [images, setImages] = useState(null);
+    const [featureImages, setFeatureImages] = useState(null);
 
     const loadImage = url => {
         // console.log(url)
@@ -79,7 +80,7 @@ const useLoadImage = () => {
         }))
             .then((data) => {
                 if (data) {
-                    setImages(data.map((img, i) => {
+                    setFeatureImages(data.map((img, i) => {
                         return img.map(image => {
                             if (!Array.isArray(image)) {
 
@@ -111,7 +112,7 @@ const useLoadImage = () => {
     }
 
 
-    return { images, preloadImages, preloadFeatureImages }
+    return { images, featureImages, preloadImages, preloadFeatureImages }
 }
 
 export default useLoadImage
