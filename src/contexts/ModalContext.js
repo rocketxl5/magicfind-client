@@ -27,14 +27,20 @@ export const ModalProvider = ({ children }) => {
     useEffect(() => {
         if (modal) {
             console.log(modal)
-            const { type, props } = modal;
+            const { type, data } = modal;
             if (type === 'feature') {
-                preloadFeatureImages(props.get('uris'));
+
+                const uris = data.map(res => res
+                    .map(obj => obj.card_faces ?
+                        obj.card_faces
+                            .map(face => face.image_uris.normal) :
+                        obj.image_uris.normal))
+                preloadFeatureImages(uris);
             }
             else {
 
                 // console.log(uris)
-                preloadImages(props)
+                preloadImages(data)
             }
         }
     }, [modal]);

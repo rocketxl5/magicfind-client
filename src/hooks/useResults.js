@@ -21,7 +21,7 @@ const useResults = () => {
 
         if (uris) {
             console.log(uris)
-            handleSetModal({ type: 'search-results', props: uris });
+            handleSetModal({ type: 'search-results', data: uris });
         }
 
         switch (type) {

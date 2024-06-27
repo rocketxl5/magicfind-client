@@ -1,11 +1,6 @@
 {
   "features": [
     {
-      "title": "Absolute Annihilation",
-      "query": "cn≥1424+cn≤1427",
-      "cover": 1
-    },
-    {
       "title": "Now on VHS",
       "query": "cn≥1368+cn≤1371",
       "cover": 1
