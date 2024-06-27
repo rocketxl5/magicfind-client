@@ -2,11 +2,22 @@ import React from 'react';
 import { FaRegCircle } from "react-icons/fa6";
 import { FaRegCircleDot } from "react-icons/fa6";
 
-const Indicator = ({ index = 0, currentIndicator }) => {
+const Indicator = (props) => {
+    const { index, currentIndicator, handleClick } = props;
+
     return (
-        <span key={index} className="indicator">
-            {currentIndicator === index ? <FaRegCircleDot /> : <FaRegCircle />}
-        </span>
+        <button
+            id={index}
+            name='indicator'
+            key={index}
+            className="indicator"
+            onClick={handleClick}>
+            {
+                currentIndicator === index ?
+                    <FaRegCircleDot /> :
+                    <FaRegCircle />
+            }
+        </button>
     )
 }
 

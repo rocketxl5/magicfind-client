@@ -120,6 +120,7 @@
   --modal-btn-height: clamp(5.2rem, calc(10vw + 5px), 6rem);
   --slide-width: clamp(31.5rem, calc(80vw + 10px), 50rem);
   --slide-height: auto;
+  --card-ratio: 1 / 1.4;
   /* --slide-heigth: calc(clamp(31.5rem, calc(80vw + 10px), 55rem) * 1.4);  */
 }
 

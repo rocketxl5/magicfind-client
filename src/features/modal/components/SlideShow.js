@@ -1,72 +1,103 @@
-import { useRef, useState, useEffect } from 'react'
-import CloseBtn from '../buttons/CloseBtn';
-import LeftBtn from '../buttons/LeftBtn';
-import RightBtn from '../buttons/RightBtn';
-import OneSidedSlide from './OneSidedSlide';
-import TwoSidedSlide from './TwoSidedSlide'
+import { useEffect, useReducer, useRef } from 'react';
+import LeftBtn from './LeftBtn';
+import RightBtn from './RightBtn';
+import Slide from './Slide';
+import SlideFrame from './SlideFrame';
 import SlideIndicators from './SlideIndicators';
-import ACTIONS from '../../../data/ACTIONS';
+import { slideShowReducer } from '../services/slideShowReducer';
 
-const SlideShow = ({ slides, handleClick }) => {
-    const { INTERVAL, RESET, LIMIT } = ACTIONS.SLIDE;
-    const [coordinate, setCoordinate] = useState(RESET);
-    const [currentIndicator, setCurrentIndicator] = useState(RESET);
+const initialState = {
+    min: 0,
+    max: 0,
+    interval: 100,
+    coordinate: 0,
+    indicator: 0
+}
+
+const SlideShow2 = ({ images, layouts }) => {
+    const [state, dispatch] = useReducer(slideShowReducer, initialState);
+
+    const {
+        coordinate,
+        indicator,
+        interval,
+        min,
+        max,
+    } = state;
+
     const trackRef = useRef(null);
 
     useEffect(() => {
-        LIMIT.MIN = (slides.length - 1) * -INTERVAL;
+        handleLimit((images.length - 1) * -interval)
     }, [])
 
     useEffect(() => {
         trackRef.current.style.left = `${coordinate}vw`;
-        setCurrentIndicator(Math.abs(coordinate / INTERVAL));
+        handleIndicator(Math.abs(coordinate / interval));
     }, [coordinate])
 
-    // const setSlideMotion = (e) => {
-    //     e.stopPropagation();
-    //     if (e.target.name === 'right-btn') {
-    //         if (coordinate > LIMIT.MIN)
-    //             setCoordinate(coordinate - INTERVAL)
-    //     }
-    //     else if (e.target.name === 'left-btn') {
-    //         if (coordinate < LIMIT.MAX)
-    //             setCoordinate(coordinate + INTERVAL)
-    //     }
-    // }
+    function handleLimit(value) {
+        dispatch({
+            type: 'set-limit',
+            payload: value
+        })
+    }
+
+    function handleCoordinate(value) {
+        dispatch({
+            type: 'set-coordinate',
+            payload: value
+        })
+    }
+
+    function handleIndicator(value) {
+        dispatch({
+            type: 'set-indicator',
+            payload: value
+        })
+    }
+
+    const setSlideMotion = (e) => {
+        e.stopPropagation();
+
+        if (e.target.name === 'slide-right') {
+
+            if (coordinate > min) {
+                handleCoordinate(coordinate - interval)
+            }
+        }
+        else if (e.target.name === 'slide-left') {
+
+            if (coordinate < max) {
+                handleCoordinate(coordinate + interval)
+            }
+        }
+        else if (e.target.name === 'indicator') {
+            const indicatorIndex = parseInt(e.target.id)
+            const coordinateIndex = Math.abs(coordinate / 100)
+            const move = (coordinateIndex - indicatorIndex) * 100
+            handleCoordinate(coordinate + move);
+        }
+    }
 
     return (
-        <div className={"slide-show"}>
-            <div className={"slide-btn"}>
-                {/* <LeftBtn classList={`slide-btn slide-left-btn slide-btn`} name={'left-btn'} handleClick={setSlideMotion} />
-                <RightBtn classList={`slide-btn slide-right-btn slide-btn`} name={'right-btn'} handleClick={setSlideMotion} />
-                <CloseBtn classList={`slide-close-btn close-btn slide-btn`} name={'close-btn'} handleClick={handleClick} /> */}
-                <SlideIndicators items={slides.length} currentIndicator={currentIndicator} />
-            </div>
-
+        <>
+            <SlideFrame>
+                <SlideIndicators
+                    items={images.length}
+                    currentIndicator={indicator}
+                    handleClick={setSlideMotion}
+                />
+                <LeftBtn handleClick={setSlideMotion} />
+                <RightBtn handleClick={setSlideMotion} />
+            </SlideFrame>
             <div className={"slide-track"} ref={trackRef}>
                 {
-                    slides.map((slide, i) => {
-
-                        const motion = !slide.length ? slide.props.motion : slide[0].props.motion;
-                        if (['static', 'flip', 'rotate'].includes(motion)) {
-                            return (
-                                <OneSidedSlide key={i} motion={motion}>
-                                    {slide}
-                                </OneSidedSlide>
-                            );
-                        }
-                        else {
-                            return (
-                                <TwoSidedSlide key={i} classList={{ btn: 'slide-btn' }} motion={motion}>
-                                    {slide}
-                                </TwoSidedSlide>
-                            );
-                        }
-                    })
+                    images?.map((image, i) => <Slide key={i} image={image} layout={layouts[i]} />)
                 }
             </div>
-        </div>
+        </>
     )
 }
 
-export default SlideShow
+export default SlideShow2

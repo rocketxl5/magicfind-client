@@ -1,4 +1,4 @@
-import CloseBtn from './CloseBtn'
+import CloseBtn from './CloseBtn';
 
 const SlideFrame = ({ children }) => {
     return (

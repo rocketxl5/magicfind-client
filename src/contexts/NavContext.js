@@ -8,7 +8,7 @@
 //  Custom hooks: @ useNavButtons
 ////////////////////////////////////////////////////
 import { useEffect, useReducer, useRef, createContext } from 'react';
-import { navReducer } from '../features/nav/services/navReducer';
+import { navReducer } from '../layout/navigation/services/navReducer';
 import useViewportContext from '../hooks/contexthooks/useViewportContext';
 import useSearchContext from '../hooks/contexthooks/useSearchContext';
 

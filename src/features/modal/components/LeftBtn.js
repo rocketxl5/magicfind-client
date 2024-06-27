@@ -1,9 +1,9 @@
-import { FaChevronLeft } from "react-icons/fa6";
+import { TfiAngleLeft } from "react-icons/tfi";
 
-const LeftBtn = ({ classList = '', name, handleClick }) => {
+const LeftBtn = ({ handleClick }) => {
     return (
-        <button className={classList} name={name} type="button" onClick={(e) => handleClick(e)}>
-            <FaChevronLeft />
+        <button name='slide-left' className='modal-btn slide-left' type="button" onClick={(e) => handleClick(e)}>
+            <TfiAngleLeft />
         </button>
     )
 }
