@@ -22,7 +22,7 @@ export const ModalProvider = ({ children }) => {
         modal
     } = state || {};
 
-    const { images, preloadImages, preloadFeatureImages } = useLoadImage();
+    const { images, featureImages, preloadImages, preloadFeatureImages } = useLoadImage();
 
     useEffect(() => {
         if (modal) {
@@ -78,6 +78,7 @@ export const ModalProvider = ({ children }) => {
             value={{
                 content,
                 images,
+                featureImages,
                 open,
                 modal,
                 dispatch,

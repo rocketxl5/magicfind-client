@@ -20,7 +20,7 @@ const Home = () => {
   const { fetchAllAPI, error, response } = useFetch();
   // const { setFeatureSlides } = useSlideShow();
 
-  const { images, handleSetModal } = useModalContext();
+  const { featureImages, handleSetModal } = useModalContext();
 
   useEffect(() => {
     const queries = features.map(feature => `/cards/search?order=set&q=e%3Asld+${feature.query}&unique=cards`);
@@ -53,13 +53,13 @@ const Home = () => {
     }
   }, [response]);
 
-  useEffect(() => {
-    if (images) {
-      setCovers(
-        images.map((image, i) => image[features[i].cover][0] || images[i][features[i].cover])
-      )
-    }
-  }, [images])
+  // useEffect(() => {
+  //   if (images) {
+  //     setCovers(
+  //       images.map((image, i) => image[features[i].cover][0] || images[i][features[i].cover])
+  //     )
+  //   }
+  // }, [images])
 
   useEffect(() => {
     if (error) {
@@ -113,13 +113,13 @@ const Home = () => {
           <Feature classList={'media-feature'} title={'The Secret Lair Drop Artwork'}>
           <div className="media-scroller snaps-inline">
             {
-              covers &&
-              covers.map((cover, i) => {
+              featureImages &&
+              features.map((feature, i) => {
                 return (
                   <MediaElement
                     key={i}
-                    title={features[i].title}
-                    image={cover}
+                    title={feature.title}
+                    image={featureImages[i][feature.cover][0] || featureImages[i][feature.cover]}
                   />
                 )
               })
