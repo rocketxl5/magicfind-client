@@ -22,7 +22,7 @@
     
   }
 
-  .modal-inner {
+  .modal-frame {
     position: absolute;
     left: 0;
     right: 0;
@@ -355,7 +355,7 @@
   -webkit-transition: all 300ms;
 }
 
-.close-modal {
+.close-modal-btn {
   top: -5rem;
   left: -1rem;
   background: transparent;  

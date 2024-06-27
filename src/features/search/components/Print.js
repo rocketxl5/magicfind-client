@@ -1,17 +1,17 @@
 import { useState, useEffect, useRef } from 'react';
 import Finish from './Finish';
 import Image from '../../../components/Image';
-import useAuthContext from '../../../hooks/contexthooks/useAuthContext';
 import useFind from '../../../hooks/useFind';
 import useResponseHandler from '../../../hooks/useResponseHandler';
-import { formatLayout } from '../../modal/services/formatLayout';
-
+import useAuthContext from '../../../hooks/contexthooks/useAuthContext';
 import useModalContext from '../../../hooks/contexthooks/useModalContext';
+import { formatLayout } from '../../modal/services/formatLayout';
 
 const Print = ({ print }) => {
     // const [index, setImageIndex] = useState(undefined);
     const [imageLayout, setImageLayout] = useState('');
     const [imageIndex, setImageIndex] = useState(null);
+    const [props, setProps] = useState(null)
 
     const {
         handleGetResponse,
@@ -26,23 +26,19 @@ const Print = ({ print }) => {
     } = useResponseHandler();
 
     const { auth } = useAuthContext();
-    const { uris } = useModalContext();
+
+    const { images } = useModalContext();
 
     useEffect(() => {
-        if (uris) {
-            setImageLayout(formatLayout(print.layout))
-        }
-    }, [])
+        const layout = formatLayout(print.layout);
+        if (images) {
+            const index = layout === 'reversible' ?
+                images.findIndex((image) => image[0]?.props?.src.includes(print.card_faces[0].image_uris.normal)) :
+                images.findIndex((image) => image?.props?.src === print.image_uris.normal)
 
-    useEffect(() => {
-        if (imageLayout) {
-            const index = imageLayout === 'reversible' ?
-                uris.findIndex(uri => uri.includes(print.card_faces[0]?.image_uris?.normal)) :
-                uris.findIndex(uri => uri === print?.image_uris?.normal);
-
-            setImageIndex(index);
+            setProps({ layout: layout, image: images[index] });
         }
-    }, [imageLayout])
+    }, [images])
 
     // const { findMatch, isMatchFound } = useFind();
 
@@ -76,25 +72,28 @@ const Print = ({ print }) => {
     //     // index={uris.findIndex(uri => uri === print.image_uris.normal)}
 
     // }
-
     return (
         <>
             { 
                 <div className='flex print'>
-                    <Image
-                        index={imageIndex}
-                            // index={uris.findIndex(uri => uri === print.image_uris.normal || uri[print.card_faces[0].image_uris.normal)}
-                            src={print.image_uris?.small || print.card_faces[0].image_uris?.small}
-                            classList={'image-print'}
-                        layout={imageLayout}
-                        />
-                        <div className='finishes'>
-                            {
-                                print.finishes.map((finish, i) => {
-                                    return <Finish key={i} finish={finish} />
-                                })
-                            }
-                        </div>
+                    {
+                        props &&
+                        <>
+                            <Image
+                                classList={'image-print'}
+                                image={props.image}
+                                layout={props.layout}
+                                src={print.image_uris?.small || print.card_faces[0].image_uris?.small}
+                            />
+                            <div className='finishes'>
+                                {
+                                    print.finishes.map((finish, i) => {
+                                        return <Finish key={i} finish={finish} />
+                                    })
+                                }
+                            </div>
+                        </>
+                    }
                     </div>
             }
         </>

@@ -1,32 +1,55 @@
 import { useEffect } from 'react';
 import Page from '../../components/Page.js';
-import MediaElement from '../../features/media/MediaElement.js';
+import MediaElement from '../../features/modal/components/MediaElement.js';
 import home from '../../data/HOME.json';
 import mediaFeatures from '../../data/MEDIA_FEATURES.json';
 import useSlideShow from '../../hooks/useSlideShow.js';
 import Feature from '../../components/Feature.js';
-import { GoShieldCheck } from "react-icons/go";
-
+import useModal from '../../hooks/useModal.js';
 import useModalContext from '../../hooks/contexthooks/useModalContext.js';
 import useFetch from '../../hooks/useFetch.js';
+import { formatLayout } from '../../features/modal/services/formatLayout.js';
+import { GoShieldCheck } from "react-icons/go";
+
 
 const Home = () => {
   const { main } = home;
   const { features } = mediaFeatures;
 
-  const { images } = useModalContext();
+  // const { images } = useModalContext();
   const { fetchAllAPI, error, response } = useFetch();
-  const { setSlides } = useSlideShow();
+  // const { setFeatureSlides } = useSlideShow();
+
+  const { images, handleSetModal } = useModalContext();
 
   useEffect(() => {
-    fetchAllAPI(features.map(feature => {
-      return `/cards/search?order=set&q=e%3Asld+${feature.query}&unique=cards`;
-    }));
+    const queries = features.map(feature => `/cards/search?order=set&q=e%3Asld+${feature.query}&unique=cards`);
+    fetchAllAPI(queries);
   }, []);
 
   useEffect(() => {
     if (response) {
-      setSlides(response);
+      const props = new Map([
+        [
+          'layouts',
+          response.map(res => res.map(obj => formatLayout(obj.layout)))
+        ],
+        [
+          'uris',
+          response
+            .map(res => res
+              .map(obj => obj.card_faces ?
+                obj.card_faces
+                  .map(face => face.image_uris.normal) :
+                obj.image_uris.normal))
+        ]
+      ]);
+      if (props) {
+        handleSetModal({
+          type: 'feature',
+          props: props
+        })
+      }
     }
   }, [response]);
 
@@ -35,13 +58,6 @@ const Home = () => {
       throw error;
     }
   }, [error]);
-
-
-  useEffect(() => {
-    if (images) {
-      console.log(images)
-    }
-  }, [images])
 
   return (
     <>
@@ -93,7 +109,14 @@ const Home = () => {
               {
                 features.map((feature, i) => {
                   return (
-                    <MediaElement key={i} title={feature.title} image={images[i][feature.cover]} index={i} />
+                    <MediaElement
+                      key={i}
+                      title={feature.title}
+                      image={
+                        !Array.isArray(images[i][feature.cover]) ?
+                          images[i][feature.cover] :
+                          images[i][feature.cover][0]} index={i}
+                    />
                   )
                 })}
 

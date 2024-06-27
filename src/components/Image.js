@@ -1,9 +1,10 @@
 import useLazyLoader from '../hooks/useLazyLoader';
-import useModalContext from '../hooks/contexthooks/useModalContext';
+import useModal from '../hooks/useModal';
 
-const Image = ({ classList, index, src, layout }) => {
+const Image = (props) => {
+    const { classList, src, ...rest } = props; 
     const { hasLoaded } = useLazyLoader(src);
-    const { handleModalProps } = useModalContext();
+    const { setShowModal } = useModal();
 
     return (
         
@@ -11,12 +12,12 @@ const Image = ({ classList, index, src, layout }) => {
            { !hasLoaded ? (
                 <img className='print-radius' src={require('../assets/img/mtg_card_back.jpg')} alt='Magic back card' />
             ) : (
-                <img
-                    className={classList}
+                    <img
+                        className={classList}
                         src={src}
-                        alt={`Card`}
-                        onClick={(e) => handleModalProps({ type: 'slide', index: index, layout: layout })}
-                    loading="lazy"
+                        alt={`MTG card`}
+                        onClick={() => setShowModal({ type: 'slide', ...rest })}
+                        loading="lazy"
                     />
                 )}
         </figure>
