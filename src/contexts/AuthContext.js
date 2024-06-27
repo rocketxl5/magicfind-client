@@ -1,13 +1,10 @@
 import { createContext, useState, useEffect } from 'react';
-import useModalContext from '../hooks/contexthooks/useModalContext';
 
 export const AuthContext = createContext(null);
 
 export const AuthProvider = ({ children }) => {
   const [auth, setAuth] = useState(null);
   const [isAuth, setIsAuth] = useState(false);
-
-  const { handleClearModal } = useModalContext();
 
   const logoutAction = () => {
     localStorage.clear();
@@ -31,7 +28,6 @@ export const AuthProvider = ({ children }) => {
       setIsAuth(true);
     }
     else {
-      handleClearModal();
       setIsAuth(false);
     }
   }, [auth])

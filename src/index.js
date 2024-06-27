@@ -31,9 +31,9 @@ root.render(
   <StrictMode>
     <ViewportProvider>
       <PathProvider>
-        <ModalProvider>
-          <AuthProvider>
-            <SearchProvider>
+        <AuthProvider>
+          <SearchProvider>
+            <ModalProvider>
               <IconProvider>
                 <NavProvider>
                   <MailProvider>
@@ -45,9 +45,9 @@ root.render(
                   </MailProvider>
                 </NavProvider>
               </IconProvider>
-            </SearchProvider>
-          </AuthProvider>
-        </ModalProvider>
+            </ModalProvider>
+          </SearchProvider>
+        </AuthProvider>
       </PathProvider>
     </ViewportProvider>
   </StrictMode>

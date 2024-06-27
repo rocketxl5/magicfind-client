@@ -1,14 +1,15 @@
 import { useEffect, useReducer, createContext } from 'react';
+import useSearchContext from '../hooks/contexthooks/useSearchContext';
+import useLoadImage from '../hooks/useLoadImage';
 import { modalReducer } from '../features/modal/services/modalReducer';
-import usePreloadImage from '../hooks/usePreloadImage';
 
 const initialState = {
     content: null,
-    images: null,
+    // images: null,
     layouts: null,
     open: false,
     props: null,
-    uris: null
+    modal: null
 }
 
 export const ModalContext = createContext(null);
@@ -17,43 +18,38 @@ export const ModalProvider = ({ children }) => {
     const [state, dispatch] = useReducer(modalReducer, initialState);
     const {
         content,
-        images,
-        layouts,
         open,
-        props,
-        uris
+        modal
     } = state || {};
 
-    const { preloaded, preloadImages } = usePreloadImage();
+    const { images, preloadImages, preloadFeatureImages } = useLoadImage();
 
     useEffect(() => {
-        if (uris) {
-            preloadImages(uris)
+        if (modal) {
+            console.log(modal)
+            const { type, props } = modal;
+            if (type === 'feature') {
+                preloadFeatureImages(props.get('uris'));
+            }
+            else {
+
+                // console.log(uris)
+                preloadImages(props)
+            }
         }
-    }, [uris])
+    }, [modal]);
 
-    useEffect(() => {
-        if (preloaded) {
-            handleModalImage(preloaded);
-        }
-    }, [preloaded])
 
-    useEffect(() => {
-        console.log('clearing modal')
-        handleClearModal();
-    }, []);
-
-    function handleOpenModal(open) {
+    function handleOpenModal() {
         dispatch({
-            type: 'open-modal',
-            payload: open
+            type: 'open-modal'
         })
     }
 
-    function handleCloseModal(close) {
+    function handleSetModal(modal) {
         dispatch({
-            type: 'close-modal',
-            payload: close
+            type: 'set-modal',
+            payload: modal
         })
     }
 
@@ -64,58 +60,25 @@ export const ModalProvider = ({ children }) => {
         })
     }
 
-    function handleModalImageUris(uris) {
-        dispatch({
-            type: 'set-uris',
-            payload: uris
-        })
-    }
-
-    function handleModalImageLayouts(layouts) {
-        dispatch({
-            type: 'set-layouts',
-            payload: layouts
-        })
-    }
-
-    function handleModalImage(images) {
-        dispatch({
-            type: 'set-image',
-            payload: images
-        })
-    }
-
-    function handleModalProps(props) {
-        // console.log(props)
-        dispatch({
-            type: 'set-props',
-            payload: props
-        })
-    }
-    // form, slide, slide show,
+    // // form, slide, slide show,
     function handleModalContent(content) {
         dispatch({
             type: 'set-content',
             payload: content
         })
     }
-
     return (
         <ModalContext.Provider
             value={{
                 content,
                 images,
-                layouts,
                 open,
-                props,
-                uris,
+                modal,
+                dispatch,
+                initialState,
                 handleClearModal,
-                handleCloseModal,
                 handleModalContent,
-                handleModalProps,
-                handleModalImage,
-                handleModalImageLayouts,
-                handleModalImageUris,
+                handleSetModal,
                 handleOpenModal,
             }}
         >

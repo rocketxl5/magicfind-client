@@ -1,5 +1,4 @@
 import { createPortal } from 'react-dom';
-import CloseBtn from './components/CloseBtn';
 
 const Modal = ({ open, children }) => {
     if (!open) {
@@ -13,10 +12,7 @@ const Modal = ({ open, children }) => {
     return createPortal(
         <div className='overlay'>
             <div className='modal'>
-                <div className="modal-inner">
-                    <CloseBtn />
-                </div>
-            {children}
+                {children}
             </div>
         </div>,
         document.body

@@ -2,14 +2,16 @@ import useModalContext from '../../../hooks/contexthooks/useModalContext';
 import { IoCloseOutline } from "react-icons/io5";
 
 const CloseBtn = () => {
-    const { handleCloseModal } = useModalContext();
+    const { handleClearModal } = useModalContext();
     return (
         <button
             id='close-modal'
-            className='modal-btn close-modal'
+            className='modal-btn close-modal-btn'
             type='button'
             // Close modal reducer function resets open, content and props
-            onClick={() => handleCloseModal()}
+            onClick={() => {
+                handleClearModal()
+            }}
         >
             <IoCloseOutline />
         </button>

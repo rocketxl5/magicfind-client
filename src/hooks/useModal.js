@@ -1,70 +1,64 @@
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import Slide from '../features/modal/components/Slide';
+import SlideFrame from '../features/modal/components/SlideFrame';
 import SlideShow2 from '../features/modal/components/SlideShow2';
-import useModalForm from './useModalForm';
-import useSlideShow from './useSlideShow';
 import useModalContext from './contexthooks/useModalContext';
+import useSearchContext from './contexthooks/useSearchContext';
 
 const useModal = () => {
+    const [showModal, setShowModal] = useState(null);
+
+    const { images } = useSearchContext();
     const {
-        content,
-        open,
-        props,
-        images,
-        layouts,
-        handleModalContent,
+        content, 
+        modal,
+        handleModalContent, 
         handleClearModal,
         handleOpenModal,
     } = useModalContext();
 
-    const pathname = useLocation();
+    const { pathname } = useLocation();
 
     useEffect(() => {
-        if (props) {
-            const { index, layout, type } = props;
-            // console.log(props)
-            // console.log(images)
-            // console.log(layouts)
-            if (images) {
-                // console.log(images)
-                switch (type) {
-                    case 'form':
-                        // handleModalContent('form')
-                        break;
-                    case 'slide':
-
-                        handleModalContent(<Slide image={images[index]} layout={layout} />);
-                        break;
-                    case 'slide-show': 
-
-                        // handleModalContent(<SlideShow2 images={images[index]} layouts={layouts} />);
+        if (showModal) {
+            // slide // slide-show // form
+            const { type, ...rest } = showModal;
+            switch (type) {
+                case 'slide':
+                    return handleModalContent(
+                        <>
+                            <SlideFrame />
+                            <Slide {...rest} />
+                        </>
+                    );
+                case 'slide-show':
+                    return handleModalContent(
+                        <SlideShow2 images={rest} />
+                    )
+                case 'feature':
+                    return console.log(type)
+                default:
                     break;
-                    default:
-                        break;
-                }
             }
         }
-    }, [props, images]);
+    }, [showModal])
 
     useEffect(() => {
-        // If modal is open and pathname changes 
-        // [click event on browser's back or forward arrows]
-        if (pathname && open) {
-            // Close modal
+        if (content) {
+            handleOpenModal()
+        }
+    }, [content]);
+
+    useEffect(() => {
+        // if modal and modal is set
+        if (pathname && modal) {
+            // clear modal
             handleClearModal();
         }
-    }, [pathname])
+    }, [pathname]);
 
-    useEffect(() => {
-        // console.log(content)
-        // Open modal if content is set
-        if (content) {
-            handleOpenModal(true);
-        }
-    }, [content])
-
-    return { open, content }
+    return { images, setShowModal }
 }
 
 export default useModal

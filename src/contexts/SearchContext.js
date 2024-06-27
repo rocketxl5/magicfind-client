@@ -2,6 +2,7 @@ import { useState, useEffect, useReducer, useRef, createContext } from 'react';
 import { searchReducer } from '../features/search/services/searchReducer';
 import useAuthContext from '../hooks/contexthooks/useAuthContext';
 import useFetch from '../hooks/useFetch';
+import useLoadImage from '../hooks/useLoadImage';
 import { api } from '../api/resources';
 
 const initialState = {
@@ -34,7 +35,9 @@ export const SearchProvider = ({ children }) => {
     tracker,
   } = state || {};
 
-  const [results, setResults] = useState(null)
+  const [results, setResults] = useState(null);
+  // const [modal, setModal] = useState(null);
+  // const [uris, setUris] = useState(null);
   const [cardSets, setCardSets] = useState(null);
   const [cardCollection, setCardCollection] = useState([]);
   const [archiveCardNames, setArchiveCardNames] = useState(null);
@@ -51,6 +54,7 @@ export const SearchProvider = ({ children }) => {
   const [isCollectionEmpty, setIsCollectionEmpty] = useState(true);
 
   const { auth } = useAuthContext();
+  // const { images, loadSlidesImage, loadSlideShowImages } = useLoadImage();
   const { fetch, response, error } = useFetch();
 
   // Search field Refs
@@ -71,6 +75,18 @@ export const SearchProvider = ({ children }) => {
     }
   }, []);
 
+  // useEffect(() => {
+  //   if (modal) {
+  //     const { type, uris } = modal;
+  //     if (type === 'feature') {
+  //       loadSlideShowImages(uris);
+  //     }
+  //     else {
+  //       loadSlidesImage(uris)
+  //     }
+  //   }
+  // }, [modal])
+
   useEffect(() => {
     if (response) {
       // console.log(response)
@@ -80,12 +96,11 @@ export const SearchProvider = ({ children }) => {
     }
   }, [response]);
 
-  // useEffect(() => {
-  //   if (results) {
-  //     console.log(results);
-  //     localStorage.setItem('search-results', JSON.stringify(results));
-  //   }
-  // }, [results])
+  useEffect(() => {
+    if (error) {
+      throw error
+    }
+  }, [error])
 
   // Returns array of unique card names
   const filterCardNames = (cards) => {
@@ -115,6 +130,10 @@ export const SearchProvider = ({ children }) => {
         setIsCollectionEmpty,
         results,
         setResults,
+        // setUris,
+        // uris,
+        // setModal,
+        // images,
         cardSets,
         setCardSets,
         archiveCardNames,

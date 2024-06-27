@@ -3,14 +3,7 @@ export const modalReducer = (state, action) => {
         case 'open-modal':
             return {
                 ...state,
-                open: action.payload
-            }
-        case 'close-modal':
-            return {
-                ...state,
-                open: false,
-                content: null,
-                props: null
+                open: true
             }
         case 'clear-modal':
             return {
@@ -21,12 +14,12 @@ export const modalReducer = (state, action) => {
                 ...state,
                 content: action.payload
             }
-        case 'set-uris':
+        case 'set-modal':
             return {
                 ...state,
-                uris: action.payload
+                modal: action.payload
             }
-        case 'set-image':
+        case 'set-images':
             return {
                 ...state,
                 images: action.payload
@@ -35,11 +28,6 @@ export const modalReducer = (state, action) => {
             return {
                 ...state,
                 layouts: action.payload
-            }
-        case 'set-props':
-            return {
-                ...state,
-                props: action.payload
             }
         default:
             return null;

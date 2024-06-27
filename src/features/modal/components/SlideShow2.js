@@ -1,5 +1,7 @@
 import { useEffect, useReducer, useRef } from 'react';
+import CloseBtn from './CloseBtn';
 import Slide from './Slide';
+import SlideFrame from './SlideFrame';
 import SlideIndicators from './SlideIndicators';
 import { slideShowReducer } from '../services/slideShowReducer';
 
@@ -11,10 +13,16 @@ const initialState = {
     indicator: 0
 }
 
-const SlideShow2 = ({ images, layouts }) => {
+const SlideShow2 = ({ images }) => {
     const [state, dispatch] = useReducer(slideShowReducer, initialState);
 
     const trackRef = useRef(null);
+
+    useEffect(() => {
+        if (images) {
+            console.log(images)
+        }
+    }, [images])
 
     const {
         coordinate,
@@ -53,16 +61,16 @@ const SlideShow2 = ({ images, layouts }) => {
 
 
     return (
-        <div className={"slide-show"}>
-            <div className="modal-frame">
+        <>
+            <SlideFrame>
                 <SlideIndicators items={images.length} currentIndicator={indicator} />
-            </div>
+            </SlideFrame>
             <div className={"slide-track"} ref={trackRef}>
                 {
-                    images.map((image, i) => <Slide image={image} layout={layouts[i]} />)
+                    // images?.map((image, i) => <Slide key={i} image={image} layout={layouts[i]} />)
                 }
             </div>
-        </div>
+        </>
     )
 }
 
