@@ -8,14 +8,15 @@ import {
 } from 'react-router-dom';
 import { AuthProvider } from './contexts/AuthContext';
 import { CartProvider } from './contexts/CartContext';
+import { FeatureProvider } from './contexts/FeatureContext';
+import { IconProvider } from './contexts/IconContext';
 import { MailProvider } from './contexts/MailContext';
-import { NavProvider } from './contexts/NavContext';
 import { ModalProvider } from './contexts/ModalContext';
+import { NavProvider } from './contexts/NavContext';
 import { PathProvider } from './contexts/PathContext';
 import { ScrollProvider } from './contexts/ScrollContext';
 import { SearchProvider } from './contexts/SearchContext';
 import { ViewportProvider } from './contexts/ViewportContext';
-import { IconProvider } from './contexts/IconContext';
 
 import App from './App';
 
@@ -34,17 +35,19 @@ root.render(
         <AuthProvider>
           <SearchProvider>
             <ModalProvider>
-              <IconProvider>
-                <NavProvider>
-                  <MailProvider>
-                    <CartProvider>
-                      <ScrollProvider>
-                        <RouterProvider router={router} />
-                      </ScrollProvider>
-                    </CartProvider>
-                  </MailProvider>
-                </NavProvider>
-              </IconProvider>
+              <FeatureProvider>
+                <IconProvider>
+                  <NavProvider>
+                    <MailProvider>
+                      <CartProvider>
+                        <ScrollProvider>
+                          <RouterProvider router={router} />
+                        </ScrollProvider>
+                      </CartProvider>
+                    </MailProvider>
+                  </NavProvider>
+                </IconProvider>
+              </FeatureProvider>
             </ModalProvider>
           </SearchProvider>
         </AuthProvider>

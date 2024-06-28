@@ -19,16 +19,6 @@ export const modalReducer = (state, action) => {
                 ...state,
                 modal: action.payload
             }
-        case 'set-images':
-            return {
-                ...state,
-                images: action.payload
-            }
-        case 'set-layouts':
-            return {
-                ...state,
-                layouts: action.payload
-            }
         default:
             return null;
     }

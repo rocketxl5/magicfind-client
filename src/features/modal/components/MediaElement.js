@@ -1,10 +1,7 @@
-
-import useModalContext from '../../../hooks/contexthooks/useModalContext';
 import useModal from '../../../hooks/useModal';
 
-const MediaElement = ({ image, index, title }) => {
-
-    const { images, layouts } = useModalContext();
+const MediaElement = (props) => {
+    const { cover, title, ...rest } = props
     const { setShowModal } = useModal();
 
     return (
@@ -13,9 +10,9 @@ const MediaElement = ({ image, index, title }) => {
                 className="media-element-btn"
                 type="button"
                 name="media-element-btn"
-            // onClick={() => setShowModal({ type: 'slide-show', images: images[index], layouts: layouts[index] })}
+                onClick={() => setShowModal({ type: 'slide-show', ...rest })}
             >
-                {image}
+                {cover}
             </button>
             <p>{title}</p>
         </div>

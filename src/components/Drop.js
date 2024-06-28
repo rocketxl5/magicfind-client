@@ -1,5 +1,3 @@
-import React from 'react'
-
 const Drop = ({ children, id, classList = '', handleClick, disabled = false }) => {
 
     return (

@@ -102,6 +102,14 @@
         vertical-align: middle;
     }
 
+    .feature {
+        margin-block-end: 4rem;
+    }
+
+    .feature-header {
+        padding: 0;
+    }
+
     /* About & Contact page */
     .feature-wrapper {
         display: flex;
@@ -160,10 +168,8 @@
         grid-template-columns: repeat(4, calc(20% - 1.6rem));
     }
 
-
     .product-grid .image {
         grid-column: span 1;
-       
     }
 
     .product-grid .section {
@@ -362,32 +368,81 @@
         font-size: var(--fs-125);
     }
 
+    /* Modal */
+    .modal-btn svg {
+        fill: var(--clr-modal);
+    }
+
+    .modal-btn:hover > svg {
+        fill: var(--clr-light);
+    }
+
+    .close-modal {
+        top: -6rem;
+        left: 110%; 
+      }
+
+    .slide-left {
+        left: -10rem;
+    }
+
+    .slide-right {
+        right: -10rem;
+    }
+
     /* Feature Section Style & Media Element */
     .media-scroller {
-        padding: 2rem;
+        padding-block: 2rem;
+        padding-inline: 0;
         gap: var(--size-2);
-      }
-      
-      .media-element {
+        overflow: hidden;
+    }
+
+    .snaps-inline {
+        scroll-snap-type: inline mandatory ;
+        scroll-padding-inline: 1rem;
+        }
+    
+    .media-element {
         gap: var(--size-1);
         padding: var(--size-1);
         border-radius: var(--radius-1);
-      }
-      
-      .media-element h3 {
+    }
+
+    .media-frame {
+        position: absolute;
+        left: 0;
+        right: 0;
+        display: flex;
+        top: 53%;
+        width: 95%;
+        margin-inline: auto;
+        z-index: 1;
+        /* bottom: 0; */
+    }
+
+    .media-btn {
+        background-color: red;
+        border-radius: 100%;
+        position: absolute;
+        width: var(--modal-btn-width);
+        height: var(--modal-btn-height);
+        margin: auto;
+    }
+    
+    .media-element h3 {
         color: white;
         text-align: center;
         font-weight: 400;
         font-size: var(--fs-125);
-      }
-           
-      .img-container {
+    }
+        
+    .img-container {
         border-radius: 100%;
-      }
-        .img-container img { 
-      
-          margin: 0 auto;
-        }  
+    }
+    .img-container img { 
+        margin: 0 auto;
+    }  
 }
 
 @media screen and (width >= 960px) {

@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import Slide from '../features/modal/components/Slide';
 import SlideFrame from '../features/modal/components/SlideFrame';
-import SlideShow2 from '../features/modal/components/SlideShow2';
+import SlideShow from '../features/modal/components/SlideShow';
 import useModalContext from './contexthooks/useModalContext';
 import useSearchContext from './contexthooks/useSearchContext';
 
@@ -34,7 +34,7 @@ const useModal = () => {
                     );
                 case 'slide-show':
                     return handleModalContent(
-                        <SlideShow2 images={rest} />
+                        <SlideShow {...rest} />
                     )
                 case 'feature':
                     return console.log(type)

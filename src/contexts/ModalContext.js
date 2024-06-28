@@ -1,14 +1,10 @@
 import { useEffect, useReducer, createContext } from 'react';
-import useSearchContext from '../hooks/contexthooks/useSearchContext';
 import useLoadImage from '../hooks/useLoadImage';
 import { modalReducer } from '../features/modal/services/modalReducer';
 
 const initialState = {
     content: null,
-    // images: null,
-    layouts: null,
     open: false,
-    props: null,
     modal: null
 }
 
@@ -22,26 +18,12 @@ export const ModalProvider = ({ children }) => {
         modal
     } = state || {};
 
-    const { images, featureImages, preloadImages, preloadFeatureImages } = useLoadImage();
+    const { images, preloadImages } = useLoadImage();
 
     useEffect(() => {
         if (modal) {
-            console.log(modal)
-            const { type, data } = modal;
-            if (type === 'feature') {
-
-                const uris = data.map(res => res
-                    .map(obj => obj.card_faces ?
-                        obj.card_faces
-                            .map(face => face.image_uris.normal) :
-                        obj.image_uris.normal))
-                preloadFeatureImages(uris);
-            }
-            else {
-
-                // console.log(uris)
-                preloadImages(data)
-            }
+            const { data } = modal;
+            preloadImages(data)
         }
     }, [modal]);
 
@@ -78,7 +60,6 @@ export const ModalProvider = ({ children }) => {
             value={{
                 content,
                 images,
-                featureImages,
                 open,
                 modal,
                 dispatch,

@@ -11,7 +11,7 @@ const useResults = () => {
 
 
     const handleSearchResults = (data, props) => {
-        // console.log(data)
+
         const { path, query, type } = props;
 
         const uris = data.map(set => set.prints).flat()
@@ -20,7 +20,7 @@ const useResults = () => {
                 print?.card_faces.map(face => face.image_uris.normal));
 
         if (uris) {
-            console.log(uris)
+
             handleSetModal({ type: 'search-results', data: uris });
         }
 

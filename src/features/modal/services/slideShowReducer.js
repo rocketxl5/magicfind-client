@@ -10,15 +10,15 @@ export const slideShowReducer = (state, action) => {
                 ...state,
                 indicator: action.payload
             }
-        case 'internal':
+        case 'set-interval':
             return {
                 ...state,
-                content: action.payload
+                interval: action.payload
             }
-        case 'minimal-limit':
+        case 'set-limit':
             return {
                 ...state,
-                props: action.payload
+                min: action.payload
             }
         case 'maximal-limit':
             return {
