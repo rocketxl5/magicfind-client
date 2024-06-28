@@ -1,8 +1,17 @@
 import { TfiAngleLeft } from "react-icons/tfi";
 
-const LeftBtn = ({ handleClick }) => {
+const LeftBtn = ({ type, handleClick }) => {
+    const style = {
+        modal: 'modal-btn slide-left',
+        media: 'media-btn snap-left'
+    }
+
+    const name = {
+        modal: 'slide-right',
+        media: 'snap-right'
+    }
     return (
-        <button name='slide-left' className='modal-btn slide-left' type="button" onClick={(e) => handleClick(e)}>
+        <button name={name[type]} className={style[type]} type="button" onClick={(e) => handleClick(e)}>
             <TfiAngleLeft />
         </button>
     )

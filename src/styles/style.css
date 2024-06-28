@@ -14,7 +14,8 @@
   --clr-dark: #2C2C2C;
   --clr-night: rgb(34, 36, 40);
   --clr-grey: rgb(219, 219, 219);
-  --clr-light-border: rgba(255, 255, 255, 0.3);
+  --clr-modal: rgb(164, 166, 173);
+  --clr-modal-light: rgb(225, 227, 235);
   --clr-light-grey: #F7F7F7;
   --clr-light: rgb(252, 252, 252);
   --clr-success: #49A078;
@@ -116,12 +117,16 @@
   --opacity-between: 1;
 
   /* Modal */
-  --modal-btn-width: clamp(5.2rem, calc(10vw + 5px), 6rem);
-  --modal-btn-height: clamp(5.2rem, calc(10vw + 5px), 6rem);
+  /* --slide-btn-width: clamp(4rem, calc(10vw + 5px), 6rem);
+  --slide-btn-height: clamp(4rem, calc(10vw + 5px), 6rem); */
+  --modal-btn-width: clamp(3.5rem, calc(9vw + 5px), 6rem);
+  --modal-btn-height: clamp(3.5rem, calc(9vw + 5px), 6rem);
+  --slide-btn-width: clamp(5.2rem, calc(10vw + 5px), 6.5rem);
+  --slide-btn-height: clamp(5.2rem, calc(10vw + 5px), 6.5rem);
   --slide-width: clamp(31.5rem, calc(80vw + 10px), 50rem);
   --slide-height: auto;
   --card-ratio: 1 / 1.4;
-  /* --slide-heigth: calc(clamp(31.5rem, calc(80vw + 10px), 55rem) * 1.4);  */
+  /* --slide-heigth: calc(clamp(31.5rem , calc(80vw + 10px), 55rem) * 1.4);  */
 }
 
 .check-icon {
@@ -444,6 +449,7 @@ border-radius: 5px;
 
 /* ************************************************************ */
 .media-scroller {
+position: relative;
 --spacer: 1.4rem;
 display: grid;
 gap: var(--size-2);
@@ -491,6 +497,10 @@ font-weight: 400;
 font-size: var(--fs-125);
 }
 
+.media-frame {
+  display: none;
+}
+
 .snaps-inline {
 scroll-snap-type: inline mandatory ;
 scroll-padding-inline: var(--spacer, 1.5rem);
@@ -501,6 +511,7 @@ scroll-snap-align: start;
 }
 
 .feature {
+  position: relative;
   margin-block-end: 2rem;
 }
 

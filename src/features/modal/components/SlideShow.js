@@ -88,8 +88,8 @@ const SlideShow2 = ({ images, layouts }) => {
                     currentIndicator={indicator}
                     handleClick={setSlideMotion}
                 />
-                <LeftBtn handleClick={setSlideMotion} />
-                <RightBtn handleClick={setSlideMotion} />
+                <LeftBtn type={'modal'} handleClick={setSlideMotion} />
+                <RightBtn type={'modal'} handleClick={setSlideMotion} />
             </SlideFrame>
             <div className={"slide-track"} ref={trackRef}>
                 {

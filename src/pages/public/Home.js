@@ -3,6 +3,9 @@ import Page from '../../components/Page.js';
 import MediaElement from '../../features/modal/components/MediaElement.js';
 import Feature from '../../components/Feature.js';
 import useFeatureContext from '../../hooks/contexthooks/useFeatureContext.js';
+import LeftBtn from '../../features/modal/components/LeftBtn.js';
+import RightBtn from '../../features/modal/components/RightBtn.js';
+import useViewportContext from '../../hooks/contexthooks/useFeatureContext.js';
 import home from '../../data/HOME.json';
 import { GoShieldCheck } from "react-icons/go";
 
@@ -61,6 +64,13 @@ const Home = () => {
           </section>
         </Feature>
         <Feature classList={'media-feature'} title={'The Secret Lair Drop Artwork'}>
+          {/* <div className="media-scroller-inner">
+          </div> */}
+          {/* <div className="media-frame">
+            <LeftBtn type={'media'} />
+            <RightBtn type={'media'} />
+
+          </div> */}
           <div className="media-scroller snaps-inline">
             {
               featureProps &&
