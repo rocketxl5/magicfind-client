@@ -1,4 +1,3 @@
-import Header from './Header';
 import Title from './Title';
 import data from '../data/PAGES.json';
 

@@ -22,7 +22,6 @@ export const ModalProvider = ({ children }) => {
 
     useEffect(() => {
         if (modal) {
-            console.log(modal)
             const { data } = modal;
             preloadImages(data)
         }

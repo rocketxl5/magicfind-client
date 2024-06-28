@@ -1,5 +1,3 @@
-import React from 'react'
-
 const ListItem = ({ children, classList = '' }) => {
     return (
         <li className={`list-item ${classList}`}>

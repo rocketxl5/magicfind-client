@@ -73,9 +73,9 @@ const SlideShow2 = ({ images, layouts }) => {
             }
         }
         else if (e.target.name === 'indicator') {
-            const indicatorIndex = parseInt(e.target.id)
-            const coordinateIndex = Math.abs(coordinate / 100)
-            const move = (coordinateIndex - indicatorIndex) * 100
+            const indicatorIndex = parseInt(e.target.id);
+            const coordinateIndex = Math.abs(coordinate / 100);
+            const move = (coordinateIndex - indicatorIndex) * 100;
             handleCoordinate(coordinate + move);
         }
     }

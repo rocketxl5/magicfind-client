@@ -1,5 +1,3 @@
-import React from 'react'
-
 const Feature = ({ children, classList, title }) => {
     return (
         <>
