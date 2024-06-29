@@ -119,10 +119,10 @@
   /* Modal */
   /* --slide-btn-width: clamp(4rem, calc(10vw + 5px), 6rem);
   --slide-btn-height: clamp(4rem, calc(10vw + 5px), 6rem); */
-  --modal-btn-width: clamp(3.5rem, calc(9vw + 5px), 6rem);
-  --modal-btn-height: clamp(3.5rem, calc(9vw + 5px), 6rem);
-  --slide-btn-width: clamp(5.2rem, calc(10vw + 5px), 6.5rem);
-  --slide-btn-height: clamp(5.2rem, calc(10vw + 5px), 6.5rem);
+  --modal-btn-width: clamp(3rem, calc(7vw + 5px), 6rem);
+  --modal-btn-height: clamp(3rem, calc(7vw + 5px), 6rem);
+  --slide-btn-width: clamp(6rem, calc(9vw + 5px), 6.5rem);
+  --slide-btn-height: clamp(6rem, calc(9vw + 5px), 6.5rem);
   --slide-width: clamp(31.5rem, calc(80vw + 10px), 50rem);
   --slide-height: auto;
   --card-ratio: 1 / 1.4;

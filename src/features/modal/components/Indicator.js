@@ -14,7 +14,7 @@ const Indicator = (props) => {
             onClick={handleClick}>
             {
                 currentIndicator === index ?
-                    <FaRegCircleDot /> :
+                    <FaRegCircleDot style={{ fill: 'var(--clr-light)' }} /> :
                     <FaRegCircle />
             }
         </button>

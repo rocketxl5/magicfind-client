@@ -389,6 +389,24 @@
     .slide-right {
         right: -10rem;
     }
+    .slide-btn {
+        padding: 2%;
+    }
+
+    .indicators {
+        bottom: -8.5rem;
+    }
+
+    .indicator svg {
+        vertical-align: middle;
+        fill: var(--clr-modal);
+    }
+
+    .indicator:hover > svg {
+        cursor: pointer;
+        fill: var(--clr-light);
+      }
+      
 
     /* Feature Section Style & Media Element */
     .media-scroller {
