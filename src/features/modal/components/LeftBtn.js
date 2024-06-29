@@ -7,9 +7,10 @@ const LeftBtn = ({ type, handleClick }) => {
     }
 
     const name = {
-        modal: 'slide-right',
-        media: 'snap-right'
+        modal: 'slide-left',
+        media: 'snap-left'
     }
+
     return (
         <button name={name[type]} className={style[type]} type="button" onClick={(e) => handleClick(e)}>
             <TfiAngleLeft />

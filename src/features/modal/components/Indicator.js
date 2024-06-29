@@ -1,4 +1,3 @@
-import React from 'react';
 import { FaRegCircle } from "react-icons/fa6";
 import { FaRegCircleDot } from "react-icons/fa6";
 
