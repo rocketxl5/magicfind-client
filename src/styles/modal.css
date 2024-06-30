@@ -379,6 +379,8 @@
 }
 
 .slide-btn:hover > svg {
+  width: 100%;
+  height: 100%;
   fill: var(--clr-light);
 }
 
