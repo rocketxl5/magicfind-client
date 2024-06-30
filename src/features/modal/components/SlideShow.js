@@ -91,7 +91,7 @@ const SlideShow2 = ({ images, layouts }) => {
                 <LeftBtn type={'modal'} handleClick={moveSlide} />
                 <RightBtn type={'modal'} handleClick={moveSlide} />
             </SlideFrame>
-            <div className={"slide-track"} ref={trackRef}>
+            <div className={"slide-track slide-show-scroller"} ref={trackRef}>
                 {
                     images?.map((image, i) => <Slide key={i} image={image} layout={layouts[i]} />)
                 }

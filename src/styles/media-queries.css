@@ -369,6 +369,10 @@
     }
 
     /* Modal */
+    .modal-frame {
+        top: 0;
+    }
+    
     .modal-btn svg {
         fill: var(--clr-modal);
     }
@@ -377,16 +381,22 @@
         fill: var(--clr-light);
     }
 
+    .slide-show-scroller {
+        display: none;
+    }
+
     .close-modal {
         top: -6rem;
         left: 110%; 
       }
 
     .slide-left {
+        display: block;
         left: -10rem;
     }
 
     .slide-right {
+        display: block;
         right: -10rem;
     }
     .slide-btn {
