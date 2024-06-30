@@ -11,7 +11,7 @@ export const IconProvider = ({ children }) => {
             value={{
                 style: {
                     // verticalAlign: 'middle',
-                    stroke: 'rgb(219, 219, 219)',
+                    // stroke: 'rgb(219, 219, 219)',
 
                     width: '100%',
                     height: '100%'

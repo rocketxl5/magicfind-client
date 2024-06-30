@@ -57,7 +57,7 @@ const SlideShow2 = ({ images, layouts }) => {
         })
     }
 
-    const setSlideMotion = (e) => {
+    const moveSlide = (e) => {
         e.stopPropagation();
 
         if (e.target.name === 'slide-right') {
@@ -86,10 +86,10 @@ const SlideShow2 = ({ images, layouts }) => {
                 <SlideIndicators
                     items={images.length}
                     currentIndicator={indicator}
-                    handleClick={setSlideMotion}
+                    handleClick={moveSlide}
                 />
-                <LeftBtn type={'modal'} handleClick={setSlideMotion} />
-                <RightBtn type={'modal'} handleClick={setSlideMotion} />
+                <LeftBtn type={'modal'} handleClick={moveSlide} />
+                <RightBtn type={'modal'} handleClick={moveSlide} />
             </SlideFrame>
             <div className={"slide-track"} ref={trackRef}>
                 {
