@@ -123,8 +123,8 @@
   --modal-btn-height: clamp(3rem, calc(7vw + 5px), 6rem);
   --slide-btn-width: clamp(6rem, calc(9vw + 5px), 6.5rem);
   --slide-btn-height: clamp(6rem, calc(9vw + 5px), 6.5rem);
-  --slide-width: clamp(31.5rem, calc(80vw + 10px), 50rem);
-  --slide-height: auto;
+  --slide-width: clamp(31rem, calc(80vw + 10px), 50rem);
+  --slide-height: calc(var(--slide-width) * 1.4);
   --card-ratio: 1 / 1.4;
   /* --slide-heigth: calc(clamp(31.5rem , calc(80vw + 10px), 55rem) * 1.4);  */
 }
