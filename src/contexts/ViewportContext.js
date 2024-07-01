@@ -26,7 +26,8 @@ export const ViewportProvider = ({ children }) => {
 
     return (
         <ViewportContext.Provider value={{
-            isMobile
+            isMobile,
+            viewportWidth
         }}>
             {children}
         </ViewportContext.Provider>

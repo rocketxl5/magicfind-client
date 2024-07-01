@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 import useSlideButton from '../../../hooks/useSlideButton';
 
-const Slide = ({ image, layout }) => {
+const Slide = ({ image, index, layout, handleTouch }) => {
     const cardRef = useRef(null);
     const btnRef = useRef(null);
 
@@ -13,7 +13,7 @@ const Slide = ({ image, layout }) => {
 
     return (
         <>
-            <div className="slide">
+            <div id={index} className="slide" onTouchStart={handleTouch}>
             {
                     slideBtn &&
                     <div className='slide-inner'>
