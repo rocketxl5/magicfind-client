@@ -20,10 +20,15 @@ export const slideShowReducer = (state, action) => {
                 ...state,
                 min: action.payload
             }
-        case 'maximal-limit':
+        case 'set-timeout':
             return {
                 ...state,
-                contentType: action.payload
+                scrollTimeout: action.payload
+            }
+        case 'set-swipe':
+            return {
+                ...state,
+                swipe: action.payload
             }
         default:
             return null;
