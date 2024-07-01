@@ -17,7 +17,7 @@ const initialState = {
     scrollTimeout: undefined
 }
 
-const SlideShow2 = ({ images, layouts }) => {
+const SlideShow = ({ images, layouts }) => {
     const [state, dispatch] = useReducer(slideShowReducer, initialState);
 
     const {
@@ -119,8 +119,6 @@ const SlideShow2 = ({ images, layouts }) => {
         }
     }
 
-
-
     return (
         <>
             <SlideFrame>
@@ -132,13 +130,13 @@ const SlideShow2 = ({ images, layouts }) => {
                 <LeftBtn type={'modal'} handleClick={moveSlide} />
                 <RightBtn type={'modal'} handleClick={moveSlide} />
             </SlideFrame>
-            <div className={"slide-track slide-show-scroller"} onScroll={isMobile && handleScroll} ref={trackRef}>
+            <div className={`slide-track ${isMobile ? 'slide-show-scroller' : ''}`} onScroll={(e) => isMobile && handleScroll(e)} ref={trackRef}>
                 {
-                    images?.map((image, i) => <Slide key={i} image={image} index={i} layout={layouts[i]} handleTouch={moveSlide} />)
+                    images?.map((image, i) => <Slide key={i} image={image} index={i} layout={layouts[i]} handleTouch={(e) => isMobile && moveSlide(e)} />)
                 }
             </div>
         </>
     )
 }
 
-export default SlideShow2
+export default SlideShow
