@@ -1,26 +1,21 @@
-import { useEffect, useReducer, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import LeftBtn from './LeftBtn';
 import RightBtn from './RightBtn';
 import Slide from './Slide';
 import SlideFrame from './SlideFrame';
 import SlideIndicators from './SlideIndicators';
 import useViewportContext from '../../../hooks/contexthooks/useViewportContext';
-import { slideShowReducer } from '../services/slideShowReducer';
-
-const initialState = {
-    min: 0,
-    max: 0,
-    interval: 100,
-    swipe: true,
-    coordinate: 0,
-    indicator: 0,
-    scrollTimeout: undefined
-}
+import useSlideShow from '../../../hooks/useSlideShow';
 
 const SlideShow = ({ images, layouts }) => {
-    const [state, dispatch] = useReducer(slideShowReducer, initialState);
 
     const {
+        handleCoordinate,
+        handleIndicator,
+        handleSetSlideShow,
+        handleScrollTimeout,
+        handleSwipe,
+        handleSlide,
         coordinate,
         indicator,
         interval,
@@ -28,14 +23,20 @@ const SlideShow = ({ images, layouts }) => {
         min,
         max,
         scrollTimeout,
-    } = state;
+        slideIndex,
+        slide
+    } = useSlideShow();
 
     const trackRef = useRef(null);
+    const slideRefs = useRef([]);
 
     const { isMobile, viewportWidth } = useViewportContext();
 
     useEffect(() => {
-        handleLimit((images.length - 1) * -interval);
+        const min = (images.length - 1) * -interval;
+        const swipe = !isMobile ? false : true;
+
+        handleSetSlideShow(min, swipe);
     }, [])
 
     useEffect(() => {
@@ -43,39 +44,6 @@ const SlideShow = ({ images, layouts }) => {
         handleIndicator(Math.abs(coordinate / interval));
     }, [coordinate])
 
-    function handleLimit(value) {
-        dispatch({
-            type: 'set-limit',
-            payload: value
-        })
-    }
-
-    function handleCoordinate(value) {
-        dispatch({
-            type: 'set-coordinate',
-            payload: value
-        })
-    }
-
-    function handleIndicator(value) {
-        dispatch({
-            type: 'set-indicator',
-            payload: value
-        })
-    }
-    function handleScrollTimeout(value) {
-        dispatch({
-            type: 'set-timeout',
-            payload: value
-        })
-    }
-
-    function handleSwipe(swipe) {
-        dispatch({
-            type: 'set-swipe',
-            payload: swipe
-        })
-    }
 
     const moveSlide = (e) => {
         e.stopPropagation();
@@ -93,7 +61,7 @@ const SlideShow = ({ images, layouts }) => {
             }
         }
         else if (e.target.name === 'indicator') {
-            handleSwipe(false);
+            swipe && handleSwipe(false);
             const indicatorIndex = parseInt(e.target.id);
             const coordinateIndex = Math.abs(coordinate / 100);
             const move = (coordinateIndex - indicatorIndex) * 100;
@@ -104,8 +72,6 @@ const SlideShow = ({ images, layouts }) => {
                 document.querySelectorAll('.slide')[indicatorIndex].scrollIntoView({ behavior: "smooth", block: "start", inline: "center" });
                 handleIndicator(Math.abs(coordinate + move / interval));
             }
-
-            handleSwipe(true)
         }
     }
 
@@ -118,6 +84,17 @@ const SlideShow = ({ images, layouts }) => {
             }, 50));
         }
     }
+    const handleTouchStart = (e) => {
+        !swipe && handleSwipe(true)
+
+
+    }
+
+    const handleTouchEnd = (e) => {
+
+
+
+    }
 
     return (
         <>
@@ -127,12 +104,29 @@ const SlideShow = ({ images, layouts }) => {
                     currentIndicator={indicator}
                     handleClick={moveSlide}
                 />
+                {/* CSS display none Side arrows  */}
                 <LeftBtn type={'modal'} handleClick={moveSlide} />
                 <RightBtn type={'modal'} handleClick={moveSlide} />
             </SlideFrame>
-            <div className={`slide-track ${isMobile ? 'slide-show-scroller' : ''}`} onScroll={(e) => isMobile && handleScroll(e)} ref={trackRef}>
+            <div
+                className={`slide-track ${isMobile ? 'slide-show-scroller' : ''}`}
+                data-slide-show
+                onScroll={(e) => isMobile && handleScroll(e)}
+                ref={trackRef}
+            >
                 {
-                    images?.map((image, i) => <Slide key={i} image={image} index={i} layout={layouts[i]} handleTouch={(e) => isMobile && moveSlide(e)} />)
+                    images?.map((image, i) => {
+
+                        return <Slide
+                            key={i}
+                            image={image}
+                            index={i}
+                            layout={layouts[i]}
+                            handleTouchEnd={handleTouchEnd}
+                            handleTouchStart={handleTouchStart}
+                            slideRef={(slide) => (slideRefs.current[i] = slide)}
+                        />
+                    })
                 }
             </div>
         </>
