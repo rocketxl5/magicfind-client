@@ -15,20 +15,26 @@ export const slideShowReducer = (state, action) => {
                 ...state,
                 interval: action.payload
             }
-        case 'set-limit':
+        case 'set-slide-show':
             return {
                 ...state,
-                min: action.payload
+                min: action.payload.min,
+                swipe: action.payload.swipe
             }
-        case 'set-timeout':
+        case 'set-slide':
             return {
                 ...state,
-                scrollTimeout: action.payload
+                slide: action.payload
             }
         case 'set-swipe':
             return {
                 ...state,
                 swipe: action.payload
+            }
+        case 'set-timeout':
+            return {
+                ...state,
+                scrollTimeout: action.payload
             }
         default:
             return null;
