@@ -75,9 +75,13 @@ input:-webkit-autofill:active{
     background-color: #fff;
     color: var(--clr-dark);
     border-radius: 5px;
-    /* font-size: var(--fs-form); */
+    /* font-size: var(--input-text); */
     font-size: 14px;
     border: 1px solid var(--clr-grey);
+}
+
+.form-element input[type=text] {
+    font-size: 16px;
 }
 
 .form-element textarea {
@@ -355,13 +359,13 @@ input#collection {
     margin-left: auto;
     border-radius: 5px;
     color: var(--clr-dark);
-    font-size: var(--fs-form);
+    font-size: var(--input-text);
 }
 
 .search-input {  
     border-radius: 5px;
     color: var(--clr-dark);
-    font-size: var(--fs-form);
+    font-size: var(--input-text);
 }
 
 input#collection:focus,

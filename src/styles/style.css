@@ -43,7 +43,6 @@
   --fs-100: 1rem;
   --fs-075: 0.75rem;
   --fs-050: 0.5rem;
-  --fs-form: 1.6rem;
 
   /* font weight */
   --fw-100: 100;
@@ -63,6 +62,8 @@
   --size-5: 5rem;
   --size-6: 6rem;
   --size-9: 9rem;
+
+  --input-text: 16px;
 
   /* header heights */
   --header-height: 5rem;
