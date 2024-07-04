@@ -79,10 +79,10 @@ input:-webkit-autofill:active{
     font-size: 14px;
     border: 1px solid var(--clr-grey);
 }
-
-.form-element input[type=text] {
-    font-size: 16px;
-}
+/* 
+.form-element input {
+    font-size: var(--input-text);
+} */
 
 .form-element textarea {
     min-height: 5rem;
