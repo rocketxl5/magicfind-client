@@ -144,6 +144,9 @@ const Login = () => {
       delete cloneErrors[e.target.name]
       setErrors(cloneErrors)
     }
+
+    window.scrollTo(0, 0);
+    document.body.scrollTop = 0;
   }
 
   const handleBlur = (e) => {
