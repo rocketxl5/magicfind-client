@@ -452,7 +452,6 @@ border-radius: 5px;
 /* ************************************************************ */
 
 .media-scroller {
-position: relative;
 --spacer: 1.4rem;
 display: grid;
 gap: var(--size-2);

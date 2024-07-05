@@ -5,7 +5,7 @@ import Feature from '../../components/Feature.js';
 import useFeatureContext from '../../hooks/contexthooks/useFeatureContext.js';
 import LeftBtn from '../../features/modal/components/LeftBtn.js';
 import RightBtn from '../../features/modal/components/RightBtn.js';
-import useViewportContext from '../../hooks/contexthooks/useFeatureContext.js';
+import useViewportContext from '../../hooks/contexthooks/useViewportContext.js';
 import useSlider from '../../hooks/useSlider.js';
 import home from '../../data/HOME.json';
 import { GoShieldCheck } from "react-icons/go";
@@ -14,7 +14,7 @@ const Home = () => {
   const { main } = home;
 
   const { feature, setFeature, featureProps } = useFeatureContext();
-  const { isMobile, viewportWidth } = useViewportContext();
+  const { isMobile } = useViewportContext();
   const {
     handleOffset,
     setSlider,
@@ -27,9 +27,11 @@ const Home = () => {
   const scrollerRef = useRef(null);
 
   useEffect(() => {
+    console.log(isMobile)
     if (!feature) {
       setFeature(true);
     }
+    console.log(isMobile)
     // Initialization,
     // min : the left most offset coordinate as min
     // interval : the width covered by each slide [100 : 100vw]
@@ -41,30 +43,28 @@ const Home = () => {
   }, []);
 
   useEffect(() => {
-    if (featureProps) {
+    console.log(isMobile)
+    if (featureProps && !isMobile) {
       console.log(Math.round(scrollerRef.current?.scrollWidth / featureProps.length))
       setSlider({
         min: scrollerRef.current?.scrollWidth,
         interval: Math.round(scrollerRef.current?.scrollWidth / featureProps.length),
       });
     }
-  }, [featureProps])
+  }, [featureProps, isMobile])
+
 
   useEffect(() => {
-
-  }, [viewportWidth])
-
-  useEffect(() => {
-    console.log(offset)
+    // console.log(offset)
     scrollerRef.current.style.left = `${offset}px`;
   }, [offset])
 
   const moveSlide = (e) => {
     if (e.target.name === 'snap-left') {
-      console.log(offset)
-      console.log(interval)
-      console.log(min)
-      console.log(max)
+      // console.log(offset)
+      // console.log(interval)
+      // console.log(min)
+      // console.log(max)
       if (offset < min) {
         handleOffset(offset - interval)
       }
@@ -121,14 +121,11 @@ const Home = () => {
           </section>
         </Feature>
         <Feature classList={'media-feature'} title={'The Secret Lair Drop Artwork'}>
-          {/* <div className="media-scroller-inner">
-          </div> */}
           <div className="media-frame">
             <LeftBtn type={'media'} handleClick={moveSlide} />
             <RightBtn type={'media'} handleClick={moveSlide} />
-
           </div>
-          <div className={`media-scroller ${isMobile ? 'snaps-inline' : ''}`} ref={scrollerRef}>
+          <div className={isMobile ? 'media-scroller snaps-inline' : 'media-scroller'} ref={scrollerRef}>
             {
               featureProps &&
               featureProps.map((feature, i) => {
