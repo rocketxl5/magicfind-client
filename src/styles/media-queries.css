@@ -390,15 +390,20 @@
         left: 110%; 
       }
 
-    .slide-left {
+      .slide-left {
         display: block;
         left: -10rem;
-    }
-
-    .slide-right {
+        top:0;
+        bottom: 0;
+      }
+      
+      .slide-right {
         display: block;
         right: -10rem;
-    }
+        top: 0;
+        bottom: 0;
+      }
+
     .slide-btn {
         padding: 2%;
     }
@@ -420,10 +425,16 @@
 
     /* Feature Section Style & Media Element */
     .media-scroller {
+        width: fit-content;
         padding-block: 2rem;
         padding-inline: 0;
         gap: var(--size-2);
         overflow: hidden;
+        transition: left 300ms;
+        /* grid-auto-columns: clamp(27rem, calc(29vw + 15px), 29rem); */
+        /* grid-auto-columns: repeat(3, 1fr); */
+        /* overscroll-behavior-inline: none; */
+
     }
 
     .snaps-inline {

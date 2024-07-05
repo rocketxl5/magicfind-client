@@ -566,7 +566,7 @@
 }
 
 .scroll-none {
-    overflow: hidden;
+    overflow: hidden !important;
     touch-action: none;
     -webkit-overflow-scrolling: touch;
 }

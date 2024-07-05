@@ -145,6 +145,7 @@ body {
   font-size: var(--fs-125);
   font-weight: var(--fw-500);
   line-height: 1.5;
+  overflow: auto;
   scrollbar-gutter: stable both-edges;
   background-color: var(--clr-light);
 }
@@ -457,10 +458,21 @@ display: grid;
 gap: var(--size-2);
 grid-auto-flow: column;
 grid-auto-columns: clamp(27rem, calc(29vw + 15px), 29rem);
-padding-inline: var(--size-2);
+/* padding-inline: var(--size-2); */
 overflow-x: auto;
 overscroll-behavior-inline: contain;
 }
+
+/* .media-scroller::-webkit-scrollbar {
+  height: 0.5rem;
+  width: 0.5rem;
+  background: var(--clr-grey);
+  border-radius: 3px;
+}
+.media-scroller::-webkit-scrollbar-thumb:horizontal{
+  background: var(--clr-alloy);
+  border-radius: 3px;
+}  */
 
 .media-element {
 display: grid;
