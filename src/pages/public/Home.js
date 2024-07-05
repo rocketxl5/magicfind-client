@@ -66,11 +66,11 @@ const Home = () => {
         <Feature classList={'media-feature'} title={'The Secret Lair Drop Artwork'}>
           {/* <div className="media-scroller-inner">
           </div> */}
-          {/* <div className="media-frame">
+          <div className="media-frame">
             <LeftBtn type={'media'} />
             <RightBtn type={'media'} />
 
-          </div> */}
+          </div>
           <div className="media-scroller snaps-inline">
             {
               featureProps &&
