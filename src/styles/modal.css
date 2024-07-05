@@ -216,13 +216,19 @@
   display: grid;
   grid-auto-flow: column;
   grid-auto-columns: 100%;
-  transition: left 0.3s;
+  transition: left 300ms;
 }
 
 .slide-show-scroller {
   scroll-snap-type: inline mandatory;
-  overflow-x: scroll;
+  overflow-x: auto;
   overscroll-behavior-inline: contain;
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+.slide-show-scroller::-webkit-scrollbar {
+  display: none;
 }
   
 .slide {
@@ -343,16 +349,9 @@
   max-height: 4.5rem;
 }
 
-.slide-left {
-  left: -6rem;
-  top:0;
-  bottom: 0;
-}
-
+.slide-left,
 .slide-right {
-  right: -6rem;
-  top: 0;
-  bottom: 0;
+  display: none;
 }
 
 .snap-left {

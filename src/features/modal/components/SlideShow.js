@@ -15,7 +15,6 @@ const SlideShow = ({ images, layouts }) => {
         setSlider,
         handleScrollTimeout,
         handleSwipe,
-        handleSlide,
         offset,
         indicator,
         interval,
@@ -23,8 +22,6 @@ const SlideShow = ({ images, layouts }) => {
         min,
         max,
         scrollTimeout,
-        slideIndex,
-        slide
     } = useSlider();
 
     const trackRef = useRef(null);
@@ -107,7 +104,7 @@ const SlideShow = ({ images, layouts }) => {
                 <RightBtn type={'modal'} handleClick={moveSlide} />
             </SlideFrame>
             <div
-                className={`slide-track ${isMobile ? 'slide-show-scroller' : ''}`}
+                className={`slide-track ${isMobile ? 'slide-show-scroller' : 'hide-scroll-bar'}`}
                 data-slide-show
                 onScroll={(e) => isMobile && handleScroll(e)}
                 ref={trackRef}

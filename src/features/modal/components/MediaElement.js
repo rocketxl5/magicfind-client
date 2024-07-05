@@ -5,7 +5,7 @@ const MediaElement = (props) => {
     const { setShowModal } = useModal();
 
     return (
-        <div className="media-element">
+        <div className="media-element" data-media-element>
             <button
                 className="media-element-btn"
                 type="button"
