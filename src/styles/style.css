@@ -458,7 +458,7 @@ display: grid;
 gap: var(--size-2);
 grid-auto-flow: column;
 grid-auto-columns: clamp(27rem, calc(29vw + 15px), 29rem);
-/* padding-inline: var(--size-2); */
+padding-inline: var(--size-2);
 overflow-x: auto;
 overscroll-behavior-inline: contain;
 }
