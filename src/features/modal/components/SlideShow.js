@@ -27,7 +27,7 @@ const SlideShow = ({ images, layouts }) => {
     const trackRef = useRef(null);
     const slideRefs = useRef([]);
 
-    const { isMobile, viewportWidth } = useViewportContext();
+    const { isMobile } = useViewportContext();
 
     useEffect(() => {
         // Initialization, 
@@ -82,7 +82,7 @@ const SlideShow = ({ images, layouts }) => {
             handleScrollTimeout(clearTimeout(scrollTimeout));
 
             handleScrollTimeout(setTimeout(() => {
-                handleIndicator(e.target.scrollLeft / viewportWidth);
+                handleIndicator(e.target.scrollLeft / window.innerWidth);
             }, 50));
         }
     }
