@@ -1,9 +1,9 @@
-export const slideShowReducer = (state, action) => {
+export const sliderReducer = (state, action) => {
     switch (action.type) {
-        case 'set-coordinate':
+        case 'set-offset':
             return {
                 ...state,
-                coordinate: action.payload
+                offset: action.payload
             }
         case 'set-indicator':
             return {
@@ -15,11 +15,10 @@ export const slideShowReducer = (state, action) => {
                 ...state,
                 interval: action.payload
             }
-        case 'set-slide-show':
+        case 'set-slider':
             return {
                 ...state,
-                min: action.payload.min,
-                swipe: action.payload.swipe
+                ...action.payload
             }
         case 'set-slide':
             return {

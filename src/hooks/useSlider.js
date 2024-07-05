@@ -1,23 +1,23 @@
-import { useEffect, useReducer } from 'react';
-import { slideShowReducer } from '../features/modal/services/slideShowReducer';
+import { useReducer } from 'react';
+import { sliderReducer } from '../features/modal/services/sliderReducer';
 
 const initialState = {
     min: 0,
     max: 0,
-    interval: 100,
+    interval: 0,
     swipe: undefined,
-    coordinate: 0,
+    offset: 0,
     indicator: 0,
     slideIndex: undefined,
     scrollTimeout: null,
     slide: null
 }
 
-const useSlideShow = () => {
-    const [state, dispatch] = useReducer(slideShowReducer, initialState);
+const useSlider = () => {
+    const [state, dispatch] = useReducer(sliderReducer, initialState);
 
     const {
-        coordinate,
+        offset,
         indicator,
         interval,
         swipe,
@@ -28,19 +28,16 @@ const useSlideShow = () => {
         slide
     } = state;
 
-    function handleSetSlideShow(min, swipe) {
+    function setSlider(values) {
         dispatch({
-            type: 'set-slide-show',
-            payload: {
-                min: min,
-                swipe: swipe
-            }
+            type: 'set-slider',
+            payload: { ...values }
         })
     }
 
-    function handleCoordinate(value) {
+    function handleOffset(value) {
         dispatch({
-            type: 'set-coordinate',
+            type: 'set-offset',
             payload: value
         })
     }
@@ -74,13 +71,13 @@ const useSlideShow = () => {
     }
 
     return {
-        handleCoordinate,
+        handleOffset,
         handleIndicator,
-        handleSetSlideShow,
+        setSlider,
         handleScrollTimeout,
         handleSlide,
         handleSwipe,
-        coordinate,
+        offset,
         indicator,
         interval,
         swipe,
@@ -92,4 +89,4 @@ const useSlideShow = () => {
     }
 }
 
-export default useSlideShow
+export default useSlider

@@ -5,18 +5,18 @@ import Slide from './Slide';
 import SlideFrame from './SlideFrame';
 import SlideIndicators from './SlideIndicators';
 import useViewportContext from '../../../hooks/contexthooks/useViewportContext';
-import useSlideShow from '../../../hooks/useSlideShow';
+import useSlider from '../../../hooks/useSlider';
 
 const SlideShow = ({ images, layouts }) => {
 
     const {
-        handleCoordinate,
+        handleOffset,
         handleIndicator,
-        handleSetSlideShow,
+        setSlider,
         handleScrollTimeout,
         handleSwipe,
         handleSlide,
-        coordinate,
+        offset,
         indicator,
         interval,
         swipe,
@@ -25,7 +25,7 @@ const SlideShow = ({ images, layouts }) => {
         scrollTimeout,
         slideIndex,
         slide
-    } = useSlideShow();
+    } = useSlider();
 
     const trackRef = useRef(null);
     const slideRefs = useRef([]);
@@ -33,16 +33,21 @@ const SlideShow = ({ images, layouts }) => {
     const { isMobile, viewportWidth } = useViewportContext();
 
     useEffect(() => {
-        const min = (images.length - 1) * -interval;
-        const swipe = !isMobile ? false : true;
-
-        handleSetSlideShow(min, swipe);
+        // Initialization, 
+        // min : the left most offset coordinate as min
+        // interval : the width covered by each slide [100 : 100vw]
+        // swipe: abled if mobile else false
+        setSlider({
+            min: (images.length - 1) * -100,
+            interval: 100,
+            swipe: !isMobile ? false : true
+        });
     }, [])
 
     useEffect(() => {
-        trackRef.current.style.left = `${coordinate}vw`;
-        handleIndicator(Math.abs(coordinate / interval));
-    }, [coordinate])
+        trackRef.current.style.left = `${offset}vw`;
+        handleIndicator(Math.abs(offset / interval));
+    }, [offset])
 
 
     const moveSlide = (e) => {
@@ -50,27 +55,27 @@ const SlideShow = ({ images, layouts }) => {
 
         if (e.target.name === 'slide-right') {
 
-            if (coordinate > min) {
-                handleCoordinate(coordinate - interval)
+            if (offset > min) {
+                handleOffset(offset - interval)
             }
         }
         else if (e.target.name === 'slide-left') {
 
-            if (coordinate < max) {
-                handleCoordinate(coordinate + interval)
+            if (offset < max) {
+                handleOffset(offset + interval)
             }
         }
         else if (e.target.name === 'indicator') {
             swipe && handleSwipe(false);
             const indicatorIndex = parseInt(e.target.id);
-            const coordinateIndex = Math.abs(coordinate / 100);
+            const coordinateIndex = Math.abs(offset / 100);
             const move = (coordinateIndex - indicatorIndex) * 100;
             if (!isMobile) {
-                handleCoordinate(coordinate + move);
+                handleOffset(offset + move);
             }
             else {
                 document.querySelectorAll('.slide')[indicatorIndex].scrollIntoView({ behavior: "smooth", block: "start", inline: "center" });
-                handleIndicator(Math.abs(coordinate + move / interval));
+                handleIndicator(Math.abs(offset + move / interval));
             }
         }
     }
@@ -85,16 +90,10 @@ const SlideShow = ({ images, layouts }) => {
         }
     }
     const handleTouchStart = (e) => {
-        !swipe && handleSwipe(true)
-
-
+        !swipe && handleSwipe(true);
     }
 
-    const handleTouchEnd = (e) => {
-
-
-
-    }
+    const handleTouchEnd = (e) => { }
 
     return (
         <>
@@ -104,7 +103,6 @@ const SlideShow = ({ images, layouts }) => {
                     currentIndicator={indicator}
                     handleClick={moveSlide}
                 />
-                {/* CSS display none Side arrows  */}
                 <LeftBtn type={'modal'} handleClick={moveSlide} />
                 <RightBtn type={'modal'} handleClick={moveSlide} />
             </SlideFrame>

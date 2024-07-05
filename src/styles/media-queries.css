@@ -450,12 +450,25 @@
     }
 
     .media-btn {
-        background-color: red;
         border-radius: 100%;
         position: absolute;
-        width: var(--modal-btn-width);
-        height: var(--modal-btn-height);
+        width: 7rem;
+        height: 7rem;
+        padding: 1rem;
         margin: auto;
+        background: rgba(0,0,0, 0.4);
+    }
+
+    .media-btn svg {
+        fill: var(--clr-grey);
+    }
+
+    .media-btn:hover {
+        background-color: rgba(0,0,0, 0.6);
+    }
+
+    .media-btn:hover > svg {
+        fill: var(--clr-light);
     }
     
     .media-element h3 {
