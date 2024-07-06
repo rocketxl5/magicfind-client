@@ -232,10 +232,10 @@ const Login = () => {
               placeholder='Password'
               ref={passwordRef}
             />
-            <button className="show-password" type="button" onMouseDown={handleMouseDown}>
+            <span className="show-password" onMouseDown={handleMouseDown}>
               {/* <i className={!showPassword ? "fa-solid fa-eye" : "fa-solid fa-eye-slash"}></i> */}
               {!showPassword ? <FaEye className='show-icon' /> : <FaEyeSlash className='hide-icon' />}
-            </button>
+            </span>
           </div>
         </div>
         <div className="flex margin-block-start-2">
