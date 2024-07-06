@@ -25,13 +25,13 @@ const Home = () => {
   } = useSlider();
 
   const scrollerRef = useRef(null);
+  const featureRef = useRef(null);
 
   useEffect(() => {
-    console.log(isMobile)
     if (!feature) {
       setFeature(true);
     }
-    console.log(isMobile)
+
     // Initialization,
     // min : the left most offset coordinate as min
     // interval : the width covered by each slide [100 : 100vw]
@@ -39,34 +39,32 @@ const Home = () => {
     // console.log(featureProps.length)
     // console.log(document.querySelector('[data-media-element]').offsetWidth)
 
-
   }, []);
 
   useEffect(() => {
-    console.log(isMobile)
     if (featureProps && !isMobile) {
-      console.log(Math.round(scrollerRef.current?.scrollWidth / featureProps.length))
+      // console.log(Math.round(scrollerRef.current?.scrollWidth / featureProps.length))
       setSlider({
         min: scrollerRef.current?.scrollWidth,
-        interval: Math.round(scrollerRef.current?.scrollWidth / featureProps.length),
+        interval: scrollerRef.current?.scrollWidth / featureProps.length,
       });
     }
   }, [featureProps, isMobile])
 
 
   useEffect(() => {
-    // console.log(offset)
+    console.log(Math.abs(offset))
     scrollerRef.current.style.left = `${offset}px`;
   }, [offset])
 
   const moveSlide = (e) => {
     if (e.target.name === 'snap-left') {
-      // console.log(offset)
-      // console.log(interval)
-      // console.log(min)
+      console.log(scrollerRef?.current.offsetWidth)
+      console.log(interval)
+      console.log(min)
       // console.log(max)
       if (offset < min) {
-        handleOffset(offset - interval)
+        // handleOffset(offset - scrollerRef?.current.offsetWidth)
       }
     }
     else if (e.target.name === 'snap-right') {
@@ -120,12 +118,12 @@ const Home = () => {
             }
           </section>
         </Feature>
-        <Feature classList={'media-feature'} title={'The Secret Lair Drop Artwork'}>
+        <Feature classList={'media-feature'} data-feature title={'The Secret Lair Drop Artwork'}>
           <div className="media-frame">
             <LeftBtn type={'media'} handleClick={moveSlide} />
             <RightBtn type={'media'} handleClick={moveSlide} />
           </div>
-          <div className={isMobile ? 'media-scroller snaps-inline' : 'media-scroller'} ref={scrollerRef}>
+          <div className={isMobile ? 'media-scroller snaps-inline' : 'media-scroller snaps-inline'} ref={scrollerRef}>
             {
               featureProps &&
               featureProps.map((feature, i) => {
