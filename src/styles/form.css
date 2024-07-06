@@ -79,10 +79,10 @@ input:-webkit-autofill:active{
     font-size: 14px;
     border: 1px solid var(--clr-grey);
 }
-/* 
+
 .form-element input {
     font-size: var(--input-text);
-} */
+}
 
 .form-element textarea {
     min-height: 5rem;
@@ -189,6 +189,10 @@ input:-webkit-autofill:active{
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
     display: inline-block;
+}
+
+.show-password:hover {
+    cursor: pointer;
 }
 
 input#password {
