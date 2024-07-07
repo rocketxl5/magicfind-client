@@ -207,16 +207,19 @@
 /* /// Slide /// */
 /* ///////////// */
 
-.slide-track {
+.slider {
   position: relative;
   top: 0;
   left: 0;
   width: 100%;
-  height: var(--slide-height);
   display: grid;
   grid-auto-flow: column;
   grid-auto-columns: 100%;
   transition: left 300ms;
+}
+
+.modal-slider {
+  height: var(--slide-height);
 }
 
 .slide-show-scroller {

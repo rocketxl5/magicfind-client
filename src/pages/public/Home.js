@@ -42,6 +42,7 @@ const Home = () => {
   }, []);
 
   useEffect(() => {
+    console.log(isMobile)
     if (featureProps && !isMobile) {
       // console.log(Math.round(scrollerRef.current?.scrollWidth / featureProps.length))
       setSlider({
@@ -123,7 +124,8 @@ const Home = () => {
             <LeftBtn type={'media'} handleClick={moveSlide} />
             <RightBtn type={'media'} handleClick={moveSlide} />
           </div>
-          <div className={isMobile ? 'media-scroller snaps-inline' : 'media-scroller snaps-inline'} ref={scrollerRef}>
+          {/* <div className={!isMobile ? 'slider media-slider' : ''}> */}
+          <div className={isMobile ? 'media-scroller snaps-inline' : 'media-scroller'} ref={scrollerRef}>
             {
               featureProps &&
               featureProps.map((feature, i) => {
@@ -134,11 +136,13 @@ const Home = () => {
                     images={feature.images}
                     layouts={feature.layouts}
                     title={feature.title}
+                    parent={scrollerRef.current}
                   />
                 )
               })
             }
             </div>
+          {/* </div> */}
         </Feature>
       </Page>
     </>

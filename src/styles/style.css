@@ -173,7 +173,6 @@ color: var(--clr-light);
 
 .root-layout {
   width: 100%;
-  /* height: 100%; */
   display: flex;
   flex-direction: column;
 }
@@ -453,6 +452,7 @@ border-radius: 5px;
 /* ************************************************************ */
 
 .media-scroller {
+  position: relative;
 --spacer: 1.4rem;
 display: grid;
 gap: var(--size-2);
@@ -461,16 +461,30 @@ grid-auto-columns: clamp(27rem, calc(29vw + 15px), 29rem);
 padding-inline: var(--size-2);
 overflow-x: auto;
 overscroll-behavior-inline: contain;
+-ms-overflow-style: none;  /* IE and Edge */
+scrollbar-width: none;  /* Firefox */
+background-image: url("https://cards.scryfall.io/png/front/8/1/817f782f-7e62-44b3-9bb2-3a57d34dfe67.png?1682690866");
+}
+
+
+.media-scroller::-webkit-scrollbar {
+  display: none;
 }
 
 .media-element {
+  position: relative;
 display: grid;
 grid-template-rows: min-content;
 gap: var(--spacer);
 padding: var(--spacer);
+overflow: visible;
 background-color: var(--clr-surface);
 border-radius: var(--radius-1);
 box-shadow: var(--shadow-3);
+}
+
+.media-element:hover {
+  cursor: grab;
 }
 
 .media-element button {

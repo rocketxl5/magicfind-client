@@ -421,43 +421,35 @@
         cursor: pointer;
         fill: var(--clr-light);
       }
-      
+
+    .media-track {
+        display: block !important;
+        background-color: red;
+        height: clamp(25rem, calc(29vw + 10px), 29rem)t;
+    }
 
     /* Feature Section Style & Media Element */
     .media-scroller {
-        position: relative;
+        position: absolute;
         width: fit-content;
         padding-block: 2rem;
-        padding-inline: 0;
-        gap: 1.5rem;
+        padding-inline: 2rem;
+        gap: 2rem;
         overflow-x: auto;
         transition: left 300ms;
-        grid-auto-columns: clamp(25rem, calc(29vw + 10px), 29rem);
-        -ms-overflow-style: none;  /* IE and Edge */
-        scrollbar-width: none;  /* Firefox */
-        /* grid-auto-columns: repeat(3, 1fr); */
-        overscroll-behavior-inline: contain;
+        margin: auto;
+        /* grid-auto-columns: round(clamp(25rem, calc(29vw + 10px), 29rem)); */
+
+
     }
 
-    .media-scroller::-webkit-scrollbar {
-        display: none;
-    }
 
-    
-.snaps-inline {
-scroll-snap-type: inline mandatory ;
-scroll-padding-inline: var(--spacer, 1.5rem);
-}
-
-.snaps-inline > * {
-scroll-snap-align: start;
-}
     
     .media-element {
         width: 100%;
-        /* width: 30%; */
+        /* max-height: 400px; */
         gap: var(--size-1);
-        padding: var(--size-1);
+        /* padding: 1.5rem; */
         border-radius: var(--radius-1);
     }
 
