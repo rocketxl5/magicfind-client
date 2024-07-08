@@ -1,15 +1,9 @@
-import { useEffect } from 'react';
 import useModal from '../../../hooks/useModal';
-import useViewportContext from '../../../hooks/contexthooks/useViewportContext';
 
 const MediaElement = (props) => {
     const { cover, title, parent, ...rest } = props;
 
     const { setShowModal } = useModal();
-
-    const { isMobile } = useViewportContext();
-
-
 
     return (
         <div className="media-element" data-media-element>
