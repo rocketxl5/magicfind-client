@@ -42,8 +42,10 @@ const SlideShow = ({ images, layouts }) => {
     }, [])
 
     useEffect(() => {
+        if (interval) {
         trackRef.current.style.left = `${offset}vw`;
         handleIndicator(Math.abs(offset / interval));
+        }
     }, [offset])
 
 
@@ -79,13 +81,10 @@ const SlideShow = ({ images, layouts }) => {
 
     const handleScroll = (e) => {
         if (swipe) {
-            handleScrollTimeout(clearTimeout(scrollTimeout));
-
-            handleScrollTimeout(setTimeout(() => {
-                handleIndicator(e.target.scrollLeft / window.innerWidth);
-            }, 50));
+            handleIndicator(Math.round(e.target.scrollLeft / window.innerWidth));
         }
     }
+
     const handleTouchStart = (e) => {
         !swipe && handleSwipe(true);
     }
