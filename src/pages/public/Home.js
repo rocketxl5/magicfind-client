@@ -14,7 +14,7 @@ const Home = () => {
   const { main } = home;
 
   const { feature, setFeature, featureProps } = useFeatureContext();
-  const { isMobile } = useViewportContext();
+  const { isMobile, isTouch } = useViewportContext();
   const {
     handleOffset,
     setSlider,
@@ -27,24 +27,15 @@ const Home = () => {
   const scrollerRef = useRef(null);
   const featureRef = useRef(null);
 
+
   useEffect(() => {
     if (!feature) {
       setFeature(true);
     }
-
-    // Initialization,
-    // min : the left most offset coordinate as min
-    // interval : the width covered by each slide [100 : 100vw]
-    // swipe: abled if mobile else false
-    // console.log(featureProps.length)
-    // console.log(document.querySelector('[data-media-element]').offsetWidth)
-
   }, []);
 
   useEffect(() => {
-    console.log(isMobile)
-    if (featureProps && !isMobile) {
-      // console.log(Math.round(scrollerRef.current?.scrollWidth / featureProps.length))
+    if (featureProps) {
       setSlider({
         min: scrollerRef.current?.scrollWidth,
         interval: scrollerRef.current?.scrollWidth / featureProps.length,
@@ -54,15 +45,14 @@ const Home = () => {
 
 
   useEffect(() => {
-    console.log(Math.abs(offset))
     scrollerRef.current.style.left = `${offset}px`;
   }, [offset])
 
   const moveSlide = (e) => {
     if (e.target.name === 'snap-left') {
-      console.log(scrollerRef?.current.offsetWidth)
-      console.log(interval)
-      console.log(min)
+      // console.log(scrollerRef?.current.offsetWidth)
+      // console.log(interval)
+      // console.log(min)
       // console.log(max)
       if (offset < min) {
         // handleOffset(offset - scrollerRef?.current.offsetWidth)
@@ -125,7 +115,15 @@ const Home = () => {
             <RightBtn type={'media'} handleClick={moveSlide} />
           </div>
           {/* <div className={!isMobile ? 'slider media-slider' : ''}> */}
-          <div className={isMobile ? 'media-scroller snaps-inline' : 'media-scroller'} ref={scrollerRef}>
+          <div className={
+            // viewport < 775px && touch abled device
+            (isMobile && isTouch) ?
+              'media-scroller snaps-inline' :
+              // viewport < 775px 
+              (isMobile && !isTouch) ? 'media-scroller-clone snaps-inline' :
+                // viewport > 775px
+                'media-scroller'
+          } ref={scrollerRef}>
             {
               featureProps &&
               featureProps.map((feature, i) => {

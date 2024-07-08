@@ -423,14 +423,13 @@
       }
 
     .media-track {
-        display: block !important;
-        background-color: red;
-        height: clamp(25rem, calc(29vw + 10px), 29rem)t;
+        position: relative;
+    /* height: fit-content; */
     }
 
     /* Feature Section Style & Media Element */
-    .media-scroller {
-        position: absolute;
+    /* .media-scroller {
+        position: relative;
         width: fit-content;
         padding-block: 2rem;
         padding-inline: 2rem;
@@ -438,11 +437,7 @@
         overflow-x: auto;
         transition: left 300ms;
         margin: auto;
-        /* grid-auto-columns: round(clamp(25rem, calc(29vw + 10px), 29rem)); */
-
-
-    }
-
+    } */
 
     
     .media-element {
