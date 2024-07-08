@@ -173,7 +173,6 @@ color: var(--clr-light);
 
 .root-layout {
   width: 100%;
-  /* height: 100%; */
   display: flex;
   flex-direction: column;
 }
@@ -452,6 +451,7 @@ border-radius: 5px;
 
 /* ************************************************************ */
 
+/* touch devices and large viewport */
 .media-scroller {
 --spacer: 1.4rem;
 display: grid;
@@ -461,16 +461,66 @@ grid-auto-columns: clamp(27rem, calc(29vw + 15px), 29rem);
 padding-inline: var(--size-2);
 overflow-x: auto;
 overscroll-behavior-inline: contain;
+-ms-overflow-style: none;  /* IE and Edge */
+scrollbar-width: none;  /* Firefox */
 }
 
-.media-element {
+.media-scroller::-webkit-scrollbar {
+  display: none;
+}
+
+/* !touch devices and small viewport */
+.media-scroller-clone {
+--spacer: 1.4rem;
 display: grid;
-grid-template-rows: min-content;
-gap: var(--spacer);
-padding: var(--spacer);
-background-color: var(--clr-surface);
-border-radius: var(--radius-1);
-box-shadow: var(--shadow-3);
+gap: var(--size-2);
+grid-auto-flow: column;
+grid-auto-columns: clamp(27rem, calc(29vw + 15px), 29rem);
+margin-inline: 2rem;
+padding-inline-start: 0.5rem;
+padding-block-end: 2rem;
+overflow-x: auto;
+overscroll-behavior-inline: contain;
+}
+
+.media-scroller-clone::-webkit-scrollbar {
+  height: 1.5rem;
+  width: 1.5rem;
+  background: var(--clr-grey);
+  border-radius: 3px;
+}
+
+.media-scroller-clone::-webkit-scrollbar-thumb {
+  background:rgba(80, 80, 80);
+  border-radius: 3px;
+} 
+.media-scroller-clone::-webkit-scrollbar-thumb:hover {
+  background: rgba(80, 80, 80, 0.8);
+  cursor: pointer;
+} 
+
+.media-scroller-clone::-webkit-scrollbar-button {
+  display: none;
+}
+
+.media-scroller-clone.snaps-inline {
+  scroll-snap-type: inline proximity;
+  scroll-padding-inline: 0.5rem;
+}
+
+
+.media-element {
+  display: grid;
+  grid-template-rows: min-content;
+  gap: var(--spacer);
+  padding: var(--spacer);
+  background-color: var(--clr-surface);
+  border-radius: var(--radius-1);
+  box-shadow: var(--shadow-3);
+}
+
+.media-element:hover {
+  cursor: grab;
 }
 
 .media-element button {
@@ -505,8 +555,8 @@ font-size: var(--fs-125);
 }
 
 .snaps-inline {
-scroll-snap-type: inline mandatory ;
-scroll-padding-inline: var(--spacer, 1.5rem);
+  scroll-snap-type: inline mandatory ;
+  scroll-padding-inline: var(--spacer, 1.5rem);
 }
 
 .snaps-inline > * {

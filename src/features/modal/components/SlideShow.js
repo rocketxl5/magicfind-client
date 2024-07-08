@@ -104,7 +104,7 @@ const SlideShow = ({ images, layouts }) => {
                 <RightBtn type={'modal'} handleClick={moveSlide} />
             </SlideFrame>
             <div
-                className={`slide-track ${isMobile ? 'slide-show-scroller' : 'hide-scroll-bar'}`}
+                className={`slider modal-slider ${isMobile ? 'slide-show-scroller' : 'hide-scroll-bar'}`}
                 data-slide-show
                 onScroll={(e) => isMobile && handleScroll(e)}
                 ref={trackRef}
