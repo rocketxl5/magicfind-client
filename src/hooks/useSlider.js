@@ -9,7 +9,6 @@ const initialState = {
     offset: 0,
     indicator: 0,
     slideIndex: undefined,
-    scrollTimeout: null,
     slide: null
 }
 
@@ -23,7 +22,6 @@ const useSlider = () => {
         swipe,
         min,
         max,
-        scrollTimeout,
         slideIndex,
         slide
     } = state;
@@ -49,13 +47,6 @@ const useSlider = () => {
         })
     }
 
-    function handleScrollTimeout(value) {
-        dispatch({
-            type: 'set-timeout',
-            payload: value
-        })
-    }
-
     function handleSwipe(swipe) {
         dispatch({
             type: 'set-swipe',
@@ -74,7 +65,6 @@ const useSlider = () => {
         handleOffset,
         handleIndicator,
         setSlider,
-        handleScrollTimeout,
         handleSlide,
         handleSwipe,
         offset,
@@ -83,7 +73,6 @@ const useSlider = () => {
         swipe,
         min,
         max,
-        scrollTimeout,
         slideIndex,
         slide
     }

@@ -1,8 +1,21 @@
-const List = ({ children, classList = '' }) => {
+import Card from '../components/Card';
+
+const List = (props) => {
+    const { listType, itemType, items } = props;
     return (
-        <ul className={classList}>
-            {children}
-        </ul>
+
+        listType === 'card-list' ?
+            <div className='grid-list'>
+                {
+                    items.map((item, i) => {
+                        return <Card
+                            item={item}
+                            type={itemType}
+                        />
+                    })
+                }
+            </div> : ''
+
     )
 }
 

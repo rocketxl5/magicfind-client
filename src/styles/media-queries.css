@@ -30,7 +30,7 @@
     .feature-section {
         padding: 2rem; 
     }
-    .feature-grid {
+    .grid-list {
         grid-template-columns: repeat(2, 1fr);
     }
 
@@ -428,16 +428,41 @@
     }
 
     /* Feature Section Style & Media Element */
-    /* .media-scroller {
+    .media-scroller-wrapper {
         position: relative;
-        width: fit-content;
+        width: 100%;
+        min-height: 46.5rem;
+        overflow: hidden;
+    }
+
+    .media-frame {
+        position: absolute;
+        left: 0;
+        right: 0;
+        display: flex;
+        top: 50%;
+        width: 95%;
+        margin-inline: auto;
+        z-index: 1;
+    }
+
+    .wide-media-scroller {
+        position: absolute;
+        grid-auto-columns: clamp(29rem, calc(29vw + 15px), 29rem);
         padding-block: 2rem;
         padding-inline: 2rem;
         gap: 2rem;
+        white-space: nowrap;
+        --spacer: 1.4rem;
+        display: grid;
+        grid-auto-flow: column;
+        /* padding-inline: var(--size-2); */
         overflow-x: auto;
         transition: left 300ms;
-        margin: auto;
-    } */
+        overscroll-behavior-inline: contain;
+        -ms-overflow-style: none;  /* IE and Edge */
+        scrollbar-width: none;  /* Firefox */
+    }
 
     
     .media-element {
@@ -446,18 +471,6 @@
         gap: var(--size-1);
         /* padding: 1.5rem; */
         border-radius: var(--radius-1);
-    }
-
-    .media-frame {
-        position: absolute;
-        left: 0;
-        right: 0;
-        display: flex;
-        top: 53%;
-        width: 95%;
-        margin-inline: auto;
-        z-index: 1;
-        /* bottom: 0; */
     }
 
     .media-btn {
@@ -558,7 +571,7 @@
         grid-gap: 3rem;
       }
     
-    .feature-grid {
+    .grid-list {
         grid-template-columns: repeat(4, 1fr);
         padding-inline: 1rem;
     }
@@ -571,15 +584,15 @@
         margin-inline: 0;
     }
 
-    .feature-list p {
+    .feature-list {
         margin-bottom: 7px;
     }
     
-    .feature-list p .line {
+    .feature-list .text {
         font-size: clamp(1rem, 1vw, 1.25rem);
     }
 
-    .feature-list p .bullet {
+    .feature-list .bullet {
         width: clamp(1rem, 1vw, 1.25rem);
         height: clamp(1rem, 1vw, 1.25rem);
     }

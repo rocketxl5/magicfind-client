@@ -13,7 +13,6 @@ const SlideShow = ({ images, layouts }) => {
         handleOffset,
         handleIndicator,
         setSlider,
-        handleScrollTimeout,
         handleSwipe,
         offset,
         indicator,
@@ -21,7 +20,6 @@ const SlideShow = ({ images, layouts }) => {
         swipe,
         min,
         max,
-        scrollTimeout,
     } = useSlider();
 
     const trackRef = useRef(null);

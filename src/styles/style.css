@@ -451,26 +451,27 @@ border-radius: 5px;
 
 /* ************************************************************ */
 
-/* touch devices and large viewport */
-.media-scroller {
---spacer: 1.4rem;
-display: grid;
-gap: var(--size-2);
-grid-auto-flow: column;
-grid-auto-columns: clamp(27rem, calc(29vw + 15px), 29rem);
-padding-inline: var(--size-2);
-overflow-x: auto;
-overscroll-behavior-inline: contain;
--ms-overflow-style: none;  /* IE and Edge */
-scrollbar-width: none;  /* Firefox */
+/* touch devices */
+.touch-media-scroller {
+  position: relative;
+  --spacer: 1.4rem;
+  display: grid;
+  gap: var(--size-2);
+  grid-auto-flow: column;
+  grid-auto-columns: clamp(27rem, calc(29vw + 15px), 29rem);
+  padding-inline: var(--size-2);
+  overflow-x: auto;
+  overscroll-behavior-inline: contain;
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
 }
 
-.media-scroller::-webkit-scrollbar {
+.touch-media-scroller::-webkit-scrollbar {
   display: none;
 }
 
 /* !touch devices and small viewport */
-.media-scroller-clone {
+.mobile-media-scroller {
 --spacer: 1.4rem;
 display: grid;
 gap: var(--size-2);
@@ -483,27 +484,26 @@ overflow-x: auto;
 overscroll-behavior-inline: contain;
 }
 
-.media-scroller-clone::-webkit-scrollbar {
-  height: 1.5rem;
-  width: 1.5rem;
+.mobile-media-scroller::-webkit-scrollbar {
+  height: 1rem;
   background: var(--clr-grey);
-  border-radius: 3px;
+  border-radius: 5px;
 }
 
-.media-scroller-clone::-webkit-scrollbar-thumb {
+.mobile-media-scroller::-webkit-scrollbar-thumb {
   background:rgba(80, 80, 80);
   border-radius: 3px;
 } 
-.media-scroller-clone::-webkit-scrollbar-thumb:hover {
+.mobile-media-scroller::-webkit-scrollbar-thumb:hover {
   background: rgba(80, 80, 80, 0.8);
   cursor: pointer;
 } 
 
-.media-scroller-clone::-webkit-scrollbar-button {
+.mobile-media-scroller::-webkit-scrollbar-button {
   display: none;
 }
 
-.media-scroller-clone.snaps-inline {
+.mobile-media-scroller.snaps-inline {
   scroll-snap-type: inline proximity;
   scroll-padding-inline: 0.5rem;
 }
@@ -574,11 +574,12 @@ scroll-snap-align: start;
   font-size: clamp(var(--fs-175), 4vw, var(--fs-300));
   font-weight: 500;
   padding-block-end: 1rem;
+  margin-block-end: 2rem;
   color: var(--clr-light-grey);
   border-bottom: 1px solid var(--clr-light-grey);
 }
 
-.feature-grid {
+.grid-list {
   display: grid;
   grid-gap: 2rem;
   border-radius: var(--radius-1);
@@ -587,9 +588,7 @@ scroll-snap-align: start;
 }
 
 .feature-card {
-  padding: 1rem;
   background-color: rgb(29, 57, 81);
-  border-radius: 5px;
   box-shadow: var(--shadow-1);
 }
 
@@ -649,12 +648,12 @@ scroll-snap-align: start;
 .feature-list {
   color: var(--clr-light-grey);
   padding: max(0.5vw, 1rem);
-  background-color: var(--clr-primary);
+  /* background-color: var(--clr-primary); */
   border-radius: var(--radius-1);
   box-shadow: var(--shadow-1);
 }
 
-.feature-list p  {
+.feature-list li  {
   display: flex;
   align-items: center;
   gap: 1rem;
@@ -662,7 +661,8 @@ scroll-snap-align: start;
   margin-bottom: 5px;
 }
 
-.feature-list p .bullet {
+.feature-list .bullet {
+
   width: clamp(1.25rem, 3vw, 2rem);
   height: clamp(1.25rem, 3vw, 1.5rem);
 }
@@ -671,7 +671,7 @@ scroll-snap-align: start;
   vertical-align: super;
 }
 
-.feature-list p .line {
+.feature-list .text {
   font-size: clamp(1.25rem, 3vw, 2rem);
 }
 
@@ -1494,7 +1494,9 @@ text-align: center;
 
 .card {
   position: relative;
-  background: var(--clr-light);
+  /* background: var(--clr-light); */
+  padding: 1rem;
+  border-radius: 5px;
 }
 
 .product-container {

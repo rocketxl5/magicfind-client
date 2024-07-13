@@ -139,19 +139,33 @@ const SideBar = ({
         {
           links.map((link, i) => {
             return (
-              <ListItem>
-                <NavLink
-                  key={i + 1}
+              
+                <ListItem 
+                  key={i}
                   id={link.id}
-                  to={`/me/mail/${link.id}`}
-                  className={({ isActive }) => {
-                    // If search param is defined, add active class else add inactive class 
-                    return (isActive) ? 'active' : 'inactive'
-                  }}
-                >
-                  <span >{link.title}</span>
-                </NavLink>
-              </ListItem>
+                  link={{
+                    destination: `/me/mail/${link.id}`, 
+                    style: ({ isActive }) => {
+                      // If search param is defined, add active class else add inactive class 
+                      return (isActive) ? 'active' : 'inactive'
+                      }
+                      }}
+                  text={link.text}
+                />
+              
+              // <ListItem>
+              //   <NavLink
+              //     key={i + 1}
+              //     id={link.id}
+              //     to={`/me/mail/${link.id}`}
+              //     className={({ isActive }) => {
+              //       // If search param is defined, add active class else add inactive class 
+              //       return (isActive) ? 'active' : 'inactive'
+              //     }}
+              //   >
+              //     <span >{link.title}</span>
+              //   </NavLink>
+              // </ListItem>
             )
           })
         }

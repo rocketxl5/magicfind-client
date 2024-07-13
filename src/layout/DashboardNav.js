@@ -162,7 +162,7 @@ const DashboardNav = () => {
                                 return (isActive && !query) ? 'active' : 'inactive'
                             }}
                         >
-                            <span >{link.title}</span>
+                            <span >{link.text}</span>
                         </NavLink>
                     )
                 })}
