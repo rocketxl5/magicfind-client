@@ -30,11 +30,6 @@ export const sliderReducer = (state, action) => {
                 ...state,
                 swipe: action.payload
             }
-        case 'set-timeout':
-            return {
-                ...state,
-                scrollTimeout: action.payload
-            }
         default:
             return null;
     }

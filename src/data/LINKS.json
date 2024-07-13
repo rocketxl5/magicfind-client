@@ -1,14 +1,14 @@
 {
   "dashboardLinks": [
-    { "title": "Collection", "id": "collection" },
-    { "title": "Decks", "id": "decks" },
-    { "title": "Store", "id": "store" },
-    { "title": "Archive", "id": "archive" }
+    { "text": "Collection", "id": "collection" },
+    { "text": "Decks", "id": "decks" },
+    { "text": "Store", "id": "store" },
+    { "text": "Archive", "id": "archive" }
   ],
   "mailLinks": [
-    { "title": "Inbox", "id": "inbox" },
-    { "title": "Unread", "id": "unread" },
-    { "title": "Sent", "id": "sent" },
-    { "title": "Trash", "id": "trash" }
+    { "text": "Inbox", "id": "inbox" },
+    { "text": "Unread", "id": "unread" },
+    { "text": "Sent", "id": "sent" },
+    { "text": "Trash", "id": "trash" }
   ]
 }
